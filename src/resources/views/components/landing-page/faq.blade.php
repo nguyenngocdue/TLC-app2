@@ -1,4 +1,4 @@
-<section class="pb-20 lg:pb-40">
+<section id="FAQs" class="pb-20 lg:pb-40">
 <ul class="max-w-5xl mx-10 md:mx-auto space-y-1">
     @foreach($dataSource as $faq)
     <li class="p-2 border rounded-lg">

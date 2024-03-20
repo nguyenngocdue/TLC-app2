@@ -1,4 +1,4 @@
-<section id="default-carousel" class="relative w-full" data-carousel="slide">
+<section id="Projects" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative min-h-[50vh] sm:min-h-[60vh] overflow-hidden md:min-h-[100vh]">
         @foreach($dataSource as $image)

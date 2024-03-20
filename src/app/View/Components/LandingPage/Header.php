@@ -11,7 +11,9 @@ class Header extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        private $dataSource = null,
+    )
     {
         //
     }
@@ -23,6 +25,9 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.landing-page.header');
+        return view('components.landing-page.header',
+    [
+        "dataSource" => $this->dataSource
+    ]);
     }
 }

@@ -40,30 +40,16 @@ class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to
                 class="absolute right-4 top-full w-full max-w-[250px] rounded-lg lg:bg-transparent bg-white px-6 py-2 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent"
               >
                 <ul class="block lg:flex">
-                  <li>
-                    <a
-                      href="javascript:void(0)"
-                      class="flex py-2 text-base font-medium text-gray-500 hover:text-slate-800 dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
-                    >
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="javascript:void(0)"
-                      class="flex py-2 text-base font-medium text-gray-500 hover:text-slate-800 dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
-                    >
-                      Payment
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="javascript:void(0)"
-                      class="flex py-2 text-base font-medium text-gray-500 hover:text-slate-800 dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
-                    >
-                      Features
-                    </a>
-                  </li>
+                  @foreach($dataSource as $item)
+                    <li>
+                      <a
+                        href="#{{$item}}"
+                        class="flex py-2 text-base font-medium text-gray-500 hover:text-slate-800 dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                      >
+                        {{$item}}
+                      </a>
+                    </li>
+                  @endforeach
                 </ul>
               </nav>
             </div>

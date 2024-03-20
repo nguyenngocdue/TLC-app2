@@ -29,6 +29,7 @@ class LandingPageController extends Controller
     private function getDataSource()
     {
         return [
+            "header" => $this->dataHeader(),
             "video" => $this->dataVideo(),
             "carousel" => $this->dataCarousel(),
             "testimonial" => $this->dataTestimonial(),
@@ -86,6 +87,17 @@ class LandingPageController extends Controller
             }, $files);
         }
         return [];
+    }
+    private function dataHeader(){
+        return [
+            "Overview",
+            "Projects",
+            "What u get",
+            "Process",
+            "Clients",
+            "FAQs",
+            "Testimonials",
+        ];
     }
     private function dataFAQ(){
         return [

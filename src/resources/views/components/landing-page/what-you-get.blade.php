@@ -1,4 +1,4 @@
-<section class="items-center py-20 lg:py-40">
+<section id="What u get" class="items-center py-20 lg:py-40">
     <div class="flex items-center justify-center">
         <h2 class="text-4xl md:text-6xl font-bold">What you Get</h2>
     </div>
