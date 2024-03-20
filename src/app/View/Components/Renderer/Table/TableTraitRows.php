@@ -157,7 +157,9 @@ trait TableTraitRows
             if ($cellHref) $td .= "</a>";
             $td .= "</td>";
 
-            $tds[] = Str::removeDuplicateSpaces($td);
+            //Remove duplicate spaces can cause issue with the attachment file name has multiple spaces
+            // $tds[] = Str::removeDuplicateSpaces($td); 
+            $tds[] = $td;
 
             if (!isset($this->timeElapse[$columnName])) $this->timeElapse[$columnName] = 0;
             $this->timeElapse[$columnName] += Timer::getTimeElapseFromLastAccess();
