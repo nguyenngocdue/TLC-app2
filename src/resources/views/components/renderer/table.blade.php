@@ -28,7 +28,7 @@ var tableObjectIndexedColumns = {};
                 </div>
                 @endif
                 @if($showPaginationTop)
-                <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t-lg bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                     <span class='lg:col-span-4 md:col-span-12 flex gap-1'>{!! Blade::render( $topLeftControl) !!}</span>
                     <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-center">{!! Blade::render($topCenterControl) !!}</span>
                     <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-end">
@@ -73,7 +73,7 @@ var tableObjectIndexedColumns = {};
                     </table>
                 </div>
                 @if($showPaginationBottom)
-                <div class='w-full grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 px-4 py-1.5 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 px-4 py-1.5 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                     <span class='lg:col-span-4 md:col-span-12 flex gap-1'>{!! Blade::render($bottomLeftControl) !!}</span>
                     <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-center">{!! Blade::render($bottomCenterControl) !!}</span>
                     <div class="lg:col-span-4 md:col-span-12 flex gap-1 justify-end">
@@ -84,7 +84,7 @@ var tableObjectIndexedColumns = {};
                 </div>
                 @endif
                 @if ($footer)
-                <div class='grid1 border-t rounded-b-lg bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                <div class='grid1 border-t rounded-b bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
                     {!! $footer !!}
                 </div>
                 @endif

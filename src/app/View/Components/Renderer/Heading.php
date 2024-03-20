@@ -44,10 +44,17 @@ class Heading extends Component
                 $font = "font-medium";
             }
 
-            $theClass = " $font leading-tight text-{$textSize}  my-2 text-{$this->xalign} dark:text-gray-300 $this->class";
+            $theClass = " leading-tight my-2 dark:text-gray-300 $font text-{$textSize} text-{$this->xalign} $this->class";
             $slot = $data['slot'];
             $slot = htmlspecialchars_decode($slot);
-            return "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: {$this->scrollMarginTop}px;'> $slot <p class='text-sm font-light italic' >$labelExtra</p></$h>";
+
+            $result = "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: {$this->scrollMarginTop}px;'>";
+            $result .= $slot;
+            $result .= "<p class='text-sm font-light italic' >";
+            $result .= $labelExtra;
+            $result .= "</p>";
+            $result .= "</$h>";
+            return  $result;
         };
         // return view('components.renderer.heading');
     }
