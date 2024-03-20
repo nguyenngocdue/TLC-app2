@@ -2,7 +2,6 @@
     <x-renderer.button id="go-to-top-button" onClick="goToTopFunction()" size="md" type="info">
         <i class="fa-solid fa-arrow-up"></i>
     </x-renderer.button>
-   
 </div>
 <div class="fixed right-5 bottom-5 no-print z-20">
     <x-renderer.button id="go-to-bottom-button" onClick="goToBottomFunction()" size="md" type="info">

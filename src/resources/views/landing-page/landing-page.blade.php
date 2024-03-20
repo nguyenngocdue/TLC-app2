@@ -7,10 +7,10 @@
 <x-landing-page.what-you-get/>
 <x-landing-page.process />
 <x-landing-page.team :dataSource="$team"/>
+<x-landing-page.faq :dataSource="$faq"/>
 <x-landing-page.testimonial :dataSource="$testimonial"/>
 <x-landing-page.footer/>
-
-
+<x-renderer.button-scroll />
 @endsection
 
 
