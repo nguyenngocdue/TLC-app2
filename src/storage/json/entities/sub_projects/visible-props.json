@@ -107,6 +107,18 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_qr_plate_style_id": {
+        "name": "_qr_plate_style_id",
+        "column_name": "qr_plate_style_id",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_getProdRoutingsOfSubProject()": {
         "name": "_getProdRoutingsOfSubProject()",
         "column_name": "getProdRoutingsOfSubProject()",

@@ -8,7 +8,7 @@ class Sub_project extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "description", "slug", "status", "project_id",
-        "owner_id", 'lod_id', "client_id"
+        "qr_plate_style_id", "owner_id", 'lod_id', "client_id"
     ];
 
     public static $eloquentParams = [
@@ -16,6 +16,7 @@ class Sub_project extends ModelExtended
         "getProdOrders" => ['hasMany', Prod_order::class],
         "getLod" => ['belongsTo', Term::class, "lod_id"],
         "getClient" => ["belongsTo", User_company::class, "client_id"],
+        "getQrPlateStyle" => ["belongsTo", Term::class, "qr_plate_style_id"],
 
         "attachment_subproject_homeowner_manual" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_subproject_project_plans" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
@@ -73,6 +74,12 @@ class Sub_project extends ModelExtended
     // }
 
     public function getProdOrders()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1]);
+    }
+
+    public function getQrPlateStyle()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1]);
