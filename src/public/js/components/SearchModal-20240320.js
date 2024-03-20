@@ -76,6 +76,163 @@ const matchIconForAction = (action) => {
     return icon;
 
 }
+const renderTopDrawerHtmlV2 = (buttonTabs,recentDoc, appsRender) => {
+    dataTopDrawer.innerHTML = ``;
+    let htmlButtons = ``;
+    let indexButtonTabs = 1;
+    buttonTabs.forEach((button) => {
+        const nameButton = capitalize(button) + 's';
+        htmlButtons += 
+            `<li>
+                <button data-dropdown-toggle="dropdown-${indexButtonTabs}" data-dropdown-placement="right-start" 
+                class="navigation-button flex items-center font-semibold rounded-lg justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    ${nameButton} 
+                </button>
+            </li>`
+        indexButtonTabs++;
+    })
+    var htmlButtonTabs = `<ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                ${htmlButtons}
+                         </ul>`
+    let htmlProperty = ``;
+    const lastIndexButtonRecent = buttonTabs.length;
+    for (const property in recentDoc) {
+        const subPackage = property
+        let html = ``
+        recentDoc[property].forEach((item) => {
+            const entityIdHtml = item.entity_id
+                        ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${item.entity_id}</span>`
+                        : ''
+            const iconAction = matchIconForAction(item.action_recent);
+            const actionHtml = item.action_recent ?  `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
+            : '';
+            html += `<li>
+                        <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                                <a href="${item.href_recent}" class="flex flex-1 px-2 items-center ">
+                                ${item.icon ??"<i class='fa-light fa-file'></i>"}
+                            <span class="flex-1 ml-3 whitespace-nowrap">${item.title}</span>
+                            ${actionHtml}
+                            ${entityIdHtml}
+                                </a>
+                        </div>
+                    </li>`;
+        })
+        htmlProperty += `<li>
+                            <button data-dropdown-toggle="dropdown2-${subPackage}" data-dropdown-placement="right-start" 
+                                    class="navigation-button flex items-center font-medium rounded-lg text-left justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        ${subPackage} 
+                            </button>
+                        </li>
+                        <div id="dropdown2-${subPackage}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow min-w-56 p-2 dark:bg-gray-700">
+                            <ul class="space-y-1">
+                                ${html}
+                            </ul>
+                        </div>
+                        `
+    }
+    var htmlRecentDoc = `<div id="dropdown-${lastIndexButtonRecent}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow min-w-56 dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                            ${htmlProperty}
+                            </ul>
+                        </div>`
+    let resultHtmlTopDrawer = ``
+    let indexTabs = 1;
+    for (const app_index in appsRender) {
+        let resultHtml = ``
+        const apps = appsRender[app_index]
+        for (const property in apps) {
+            const lengthGroup = Object.keys(apps[property]).length
+            let totalPackage = 0
+            const package = property
+            let html = ``
+            let htmlGroup = ``
+            for (const value in apps[property]) {
+                let htmlTopDrawer = ``
+                const sub_package = value
+                let total = 0
+                apps[property][value].forEach((app,index) => {
+                    total += app.click_count ? app.click_count : 0
+                    const status = capitalize(app.status ?? '')
+                    const isBookmark = app.bookmark
+                        ? 'text-blue-500'
+                        : 'text-gray-300'
+                    const isCreate = app.href_create
+                        ? `<a href="${app.href_create}" class="flex flex-1 items-center text-orange-400">
+                        <i class="fa-light fa-circle-plus"></i>
+                    </a>`
+                        : ''
+                    const click_count = app.click_count
+                        ? `<span class="inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${app.click_count}</span>`
+                        : ''
+                    const statusHtml = status
+                        ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${status}</span>`
+                        : ''
+                    htmlTopDrawer += `
+                    <li>
+                        <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
+                            <button tabIndex=-1 id='bookmark_${app.name}' onclick="bookmarkSearchModal('${app.name}','${url}')" class='px-2 text-base ${isBookmark}'>
+                                <i class="fa-solid fa-bookmark"></i>
+                            </button>
+                            <a href="${app.href}" class="flex flex-1 px-2 items-center ">
+                            ${app.icon ??"<i class='fa-light fa-file'></i>"}
+                                    <span class="flex-1 ml-3 whitespace-nowrap">${app.title}</span>
+                                    ${statusHtml}
+                            </a>
+                            ${click_count}
+                            ${isCreate}
+                            
+                        </div>
+                    </li>`
+                })
+                totalPackage += total
+                const totalHtml = total
+                    ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${total}</span>`
+                    : ''
+                html += `<li class='px-2'>
+                            <button data-dropdown-toggle="dropdown3-${package}-${sub_package}" data-dropdown-placement="right-start" 
+                            class="navigation-button flex items-center font-medium text-left rounded-lg justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                ${sub_package} ${totalHtml}
+                            </button>
+                        </li>
+                        <div id="dropdown3-${package}-${sub_package}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow min-w-72 p-2 dark:bg-gray-700">
+                            <ul>
+                            ${htmlTopDrawer}
+                            </ul>
+                        </div>
+                        `
+            }
+            const totalPackageHtml = totalPackage
+                ? `<span class="ml-2 inline-flex items-center justify-center px-2 mr-2 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${totalPackage}</span>`
+                : ''
+            
+            htmlGroup = `<div id="dropdown2-${indexTabs}-${package}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow min-w-56 dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                ${html}
+                            </ul>
+                        </div>`
+                 
+            resultHtml += `<li class='px-2'>
+                                <button data-dropdown-toggle="dropdown2-${indexTabs}-${package}" data-dropdown-placement="right-start" 
+                                    class="navigation-button flex items-center font-medium rounded-lg text-left justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    ${package} ${totalPackageHtml}
+                                </button>
+                                ${htmlGroup}
+                            </li>`
+        }
+        resultHtmlTopDrawer += `<div id="dropdown-${indexTabs}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow min-w-56 dark:bg-gray-700" >
+                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-400">
+                                    ${resultHtml}
+                                    </ul>
+                                </div>
+                                `;
+        indexTabs++;
+    }
+    dataTopDrawer.innerHTML += `
+                                ${htmlButtonTabs}
+                                ${htmlRecentDoc}
+                                ${resultHtmlTopDrawer} 
+                                `;
+}
 const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
         dataTopDrawer.innerHTML = ``;
         let htmlButtons = ``;
@@ -146,7 +303,7 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                     const sub_package = value
                     let total = 0
                     apps[property][value].forEach((app,index) => {
-                        console.log(index);
+                        // console.log(index);
                         total += app.click_count ? app.click_count : 0
                         const status = capitalize(app.status ?? '')
                         const isBookmark = app.bookmark
@@ -321,7 +478,8 @@ function renderTopDrawer(buttonTabs,recentDoc,value, url) {
         'sub_package_rendered'
     )
     recentDoc = groupByFil(recentDoc, 'sub_package_rendered');
-    renderTopDrawerHtml(buttonTabs,recentDoc, appsTopDrawer, url)
+    renderTopDrawerHtmlV2(buttonTabs,recentDoc, appsTopDrawer, url);
+    activeButtons();
 }
 function matchRegex(valueSearch, app) {
     const formatText = valueSearch.replaceAll(' ', '.*')
@@ -369,6 +527,16 @@ function visible(id){
     }else{
         ul.classList.add('hidden');
     }
+}
+function activeButtons(){
+    const buttons = document.querySelectorAll('.navigation-button')
+    buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // Remove active class on all buttons
+        buttons.forEach((b) => b.classList.remove('text-blue-500'));
+        button.classList.add('text-blue-500');
+    });
+    });
 }
 function bookmarkSearchModal(entity, url) {
     $.ajax({

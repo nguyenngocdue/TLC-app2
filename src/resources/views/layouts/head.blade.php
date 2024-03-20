@@ -65,7 +65,7 @@
 
     <script src="{{ asset('js/components/Diginet-20240307.js') }}"></script>
 
-    <script src="{{ asset('js/components/SearchModal.js') }}"></script>
+    <script src="{{ asset('js/components/SearchModal-20240320.js') }}"></script>
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>

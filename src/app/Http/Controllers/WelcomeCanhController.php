@@ -37,7 +37,7 @@ class WelcomeCanhController extends Controller
     }
     public function index(Request $request)
     {
-        ConvertDataUserPosition::handle();
+        // ConvertDataUserPosition::handle();
         // dd((new LoggerAccessRecent)(CurrentUser::id()));
         // dd(Thumbnail::createThumbnailByOptions('input','output'));
         // $devManager = (new DeveloperManager())->takeInterView();
