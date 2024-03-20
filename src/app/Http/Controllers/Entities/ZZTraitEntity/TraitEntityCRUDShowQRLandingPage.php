@@ -116,7 +116,7 @@ trait TraitEntityCRUDShowQRLandingPage
 	}
 	private function getDataRenderLinkDownloads($item, $func = 'attachment_subproject_homeowner_manual'){
 		$subProject = $item->getSubProject;
-		$attachments = $subProject->{'attachment_subproject_homeowner_manual'} ?? [];
+		$attachments = $subProject->{$func} ?? [];
 		return $attachments;
 	}
 }
