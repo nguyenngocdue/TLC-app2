@@ -196,7 +196,7 @@
         "max_file_size": "30",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "30",
+        "max_file_count": "50",
         "allowed_file_types": "only_images"
     },
     "_attachment_mir_material_test_certificate": {
