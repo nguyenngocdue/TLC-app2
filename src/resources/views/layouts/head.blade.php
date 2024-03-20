@@ -1,5 +1,5 @@
 <head>
-    <script src="{{ asset('windmill_assets/js/init-alpine2023-05-11.js') }}"></script>
+    <script src="{{ asset('windmill_assets/js/init-alpine20240320.js') }}"></script>
     <script src="{{ asset('js/alpine.min.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="The master layout G4T">

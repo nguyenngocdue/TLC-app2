@@ -52,7 +52,7 @@
 <body class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <div id="loading-animation" class="w-full h-screen justify-center items-center flex text-5xl" style="display: none">
             <i class="fa-duotone fa-spinner fa-spin text-green-500"></i>
-            <span class="text-lg ml-2 text-green-500">Updating to the newer version</span>
+            <span class="text-lg ml-2 text-green-500">Updating to the latest version</span>
         </div>
         <div id="content-app" :class="{ 'overflow-hidden': isSideMenuOpen }">
             <div class="flex flex-col flex-1 w-full">

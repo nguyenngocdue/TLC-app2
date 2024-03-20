@@ -26,7 +26,6 @@
             $style = $subProject->qr_plate_style_id;
             $client = $subProject->getClient;
             if($client){
-                // dump($client);
                 $clientName = $client->name;
             }
             $project = $subProject->getProject;
@@ -36,8 +35,8 @@
             } 
         }
 
-        //Using nginx redirect
         // $route = route($routeName, $item->slug);
+        //Using nginx redirect
         $route = "https://app.tlcmodular.com/modular/".$item->slug;
         $length = $item->length;
         $width = $item->width;
@@ -53,6 +52,8 @@
                 clientName="{!! $clientName !!}" red="{!! $red !!}" 
                 projectName="{{$projectName}}" :item="$item" route="{{$route}}" 
                 comLogo="{{$com_logo}}" comWebsite="{{$com_website}}" comName="{{$com_name}}"
+                length="{{$length}}" width="{{$width}}" height="{{$height}}" weight="{{$weight}}" 
+                manufacturedYear="{{$manufactured_year}}" plotNumber="{{$plot_number}}"
             />
             @break
             @default
@@ -61,6 +62,8 @@
                 clientName="{!! $clientName !!}" red="{!! $red !!}" 
                 projectName="{{$projectName}}" :item="$item" route="{{$route}}" 
                 comLogo="{{$com_logo}}" comWebsite="{{$com_website}}" comName="{{$com_name}}"
+                length="{{$length}}" width="{{$width}}" height="{{$height}}" weight="{{$weight}}" 
+                manufacturedYear="{{$manufactured_year}}" plotNumber="{{$plot_number}}"
             />
             @break
             @endswitch

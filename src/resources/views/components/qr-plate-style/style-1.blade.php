@@ -6,8 +6,8 @@
                 <div class="grid grid-cols-12 mr-4 w-full">
                     <div class="col-span-5 text-right mr-4 font-semibold">CLIENT</div><div class="col-span-7 uppercase">{!! $clientName !!}</div>
                     <div class="col-span-5 text-right mr-4 font-semibold">PROJECT</div><div class="col-span-7 uppercase">{!! $projectName !!}</div>
-                    <div class="col-span-5 text-right mr-4 font-semibold">MFG YEAR</div><div class="col-span-7 uppercase">{!!$manufactured_year?? $red!!}</div>
-                    <div class="col-span-5 text-right mr-4 font-semibold">PLOT NUMBER</div><div class="col-span-7 uppercase">{!!$plot_number?? $red!!}</div>
+                    <div class="col-span-5 text-right mr-4 font-semibold">MFG YEAR</div><div class="col-span-7 uppercase">{!!$manufacturedYear?? $red!!}</div>
+                    <div class="col-span-5 text-right mr-4 font-semibold">PLOT NUMBER</div><div class="col-span-7 uppercase">{!!$plotNumber?? $red!!}</div>
                     <div class="col-span-5 text-right mr-4 font-semibold">SERIAL NUMBER</div><div class="col-span-7 uppercase">{{$item["name"]}}</div>
                     <div class="col-span-5 text-right mr-4 font-semibold">SIZE</div><div class="col-span-7 uppercase">{!! $length ?? $red !!}M × {!!$width?? $red!!}M × {!!$height?? $red!!}M</div>
                     <div class="col-span-5 text-right mr-4 font-semibold">WEIGHT</div><div class="col-span-7 uppercase">{!!$weight?? $red!!} TONS</div>
