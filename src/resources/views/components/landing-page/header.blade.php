@@ -57,7 +57,7 @@ class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to
             @auth
                 <a
                     href="/dashboard"
-                    class="px-7 py-3 text-base font-medium text-slate-600 hover:text-blue-800 dark:text-white"
+                    class="rounded-md bg-blue-600 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
                 >
                     Dashboard
                 </a>
