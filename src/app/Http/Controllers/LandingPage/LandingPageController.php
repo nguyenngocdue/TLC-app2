@@ -88,22 +88,24 @@ class LandingPageController extends Controller
         }
         return [];
     }
-    private function dataHeader(){
+    private function dataHeader()
+    {
         return [
             "Overview",
             "Projects",
             "What u get",
             "Process",
             "Clients",
-            "FAQs",
             "Testimonials",
+            "FAQs",
         ];
     }
-    private function dataFAQ(){
+    private function dataFAQ()
+    {
         return [
             [
-                "title" => "1. What is ".env("APP_NAME")." and how does it help in construction management?",
-                "content" => "".env("APP_NAME")." is a comprehensive modular construction software designed to streamline and optimize every phase of construction project management. It offers a suite of modules including QA/QC, Project Management, Production, Travel Claim, ESG, and HSE, facilitating better planning, execution, and monitoring of construction projects.",
+                "title" => "1. What is " . env("APP_NAME") . " and how does it help in construction management?",
+                "content" => "" . env("APP_NAME") . " is a comprehensive modular construction software designed to streamline and optimize every phase of construction project management. It offers a suite of modules including QA/QC, Project Management, Production, Travel Claim, ESG, and HSE, facilitating better planning, execution, and monitoring of construction projects.",
             ],
             [
                 "title" => "2. Can I customize the software to fit the specific needs of my project?",
@@ -121,7 +123,7 @@ class LandingPageController extends Controller
 
             [
                 "title" => "5. Is the software suitable for managing large-scale construction projects?",
-                "content" => "Absolutely. ".env("APP_NAME")." is designed to scale with your projects, from small builds to large-scale developments. Its robust architecture and comprehensive feature set make it ideal for managing complex construction projects efficiently."
+                "content" => "Absolutely. " . env("APP_NAME") . " is designed to scale with your projects, from small builds to large-scale developments. Its robust architecture and comprehensive feature set make it ideal for managing complex construction projects efficiently."
             ],
 
             [
@@ -135,17 +137,17 @@ class LandingPageController extends Controller
             ],
 
             [
-                "title" => "8. How secure is the data in ".env("APP_NAME")."?",
+                "title" => "8. How secure is the data in " . env("APP_NAME") . "?",
                 "content" => "Data security is a top priority for us. Our software employs advanced encryption, secure data storage solutions, and regular security updates to protect your data and ensure that it is accessible only to authorized users."
             ],
 
             [
                 "title" => "9. Can the software integrate with other tools and systems?",
-                "content" => "Yes, ".env("APP_NAME")." is designed with integration in mind. It can seamlessly connect with various external tools and systems, enhancing your workflow and ensuring smooth data exchange across your project management ecosystem."
+                "content" => "Yes, " . env("APP_NAME") . " is designed with integration in mind. It can seamlessly connect with various external tools and systems, enhancing your workflow and ensuring smooth data exchange across your project management ecosystem."
             ],
 
             [
-                "title" => "10. How do I get started with ".env("APP_NAME")."?",
+                "title" => "10. How do I get started with " . env("APP_NAME") . "?",
                 "content" => "Getting started is easy! Contact us to schedule a demo or sign up directly through our website. Our team will guide you through the setup process, help you select and customize the modules you need, and provide training to ensure you get the most out of your software."
             ],
 
@@ -156,7 +158,7 @@ class LandingPageController extends Controller
         return [
             [
                 "title" => "Transforming Our Projects from Day One",
-                "content" => "From the moment we integrated ".env("APP_NAME")."into our operations, we saw a dramatic shift in how we manage projects. The real-time insights and comprehensive modules have made us more efficient and proactive. A game-changer for the industry!",
+                "content" => "From the moment we integrated " . env("APP_NAME") . "into our operations, we saw a dramatic shift in how we manage projects. The real-time insights and comprehensive modules have made us more efficient and proactive. A game-changer for the industry!",
                 "owner" => "Alex Johnson, Project Manager, BuildRight Construction",
                 "rating" => 5,
             ],
@@ -168,7 +170,7 @@ class LandingPageController extends Controller
             ],
             [
                 "title" => "Every Detail at Your Fingertips",
-                "content" => "Managing travel claims and expenses used to be a nightmare. ".env("APP_NAME")." has not only simplified the process but also brought transparency and accountability to our expense management. It's impressive how much easier our lives have become.",
+                "content" => "Managing travel claims and expenses used to be a nightmare. " . env("APP_NAME") . " has not only simplified the process but also brought transparency and accountability to our expense management. It's impressive how much easier our lives have become.",
                 "owner" => "Mike Rodriguez, Operations Director, HighRise Solutions",
                 "rating" => 5,
             ],
@@ -180,13 +182,13 @@ class LandingPageController extends Controller
             ],
             [
                 "title" => "Safety First, Always",
-                "content" => "Health, safety, and environment are non-negotiable for us. ".env("APP_NAME")."'s HSE module ensures that we're always compliant with regulations and our safety standards. The peace of mind it brings is invaluable.",
+                "content" => "Health, safety, and environment are non-negotiable for us. " . env("APP_NAME") . "'s HSE module ensures that we're always compliant with regulations and our safety standards. The peace of mind it brings is invaluable.",
                 "owner" => "Carlos Espinoza, HSE Manager, SafeBuild Ventures",
                 "rating" => 5,
             ],
             [
                 "title" => "A Partner in Project Success",
-                "content" => "This software has become more than just a tool; it's a partner in our project's success. The Project Management module has streamlined our workflows, ensuring that every project is delivered on time and within budget. ".env("APP_NAME")." is the future of construction management.",
+                "content" => "This software has become more than just a tool; it's a partner in our project's success. The Project Management module has streamlined our workflows, ensuring that every project is delivered on time and within budget. " . env("APP_NAME") . " is the future of construction management.",
                 "owner" => "Emily Wang, CEO, Urban Innovations",
                 "rating" => 5,
             ],
