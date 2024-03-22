@@ -39,9 +39,10 @@ class LandingPageController extends Controller
     }
     private function dataVideo()
     {
+        $link = "https://www.youtube.com/embed/pV1HMCfL5t8";
         return [
             "title" => "Click on the video for an overview",
-            "iframe" => '<iframe width="1154" height="649" src="https://www.youtube.com/embed/xyYl0XRhUSg" title="Northcote Elevation Apartments, Auckland NZ. Modular Installtion by TLC Modular" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+            "iframe" => '<iframe width="1154" height="649" src="' . $link . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
         ];
     }
 
