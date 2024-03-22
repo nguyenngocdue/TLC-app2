@@ -484,7 +484,7 @@ const renderTopDrawerHtmlV3 = (buttonTabs,recentDoc, appsRender, url) => {
                                     class="hidden" 
                                     role="tabpanel" 
                                     aria-labelledby="vertical-tab2-item-${key}">
-                                    <ul>
+                                    <ul class="space-y-1">
                                     ${html}
                                     </ul>
                             </div>
