@@ -1,6 +1,6 @@
 @php
     $cu = auth()->user();
-    $settings = $cu->settings;
+    $settings = $cu?->settings;
     $themeBg = $settings['global']['theme-bg'] ?? 'gray-100';
     $themeText = $settings['global']['theme-text'] ?? 'gray-900';
 
