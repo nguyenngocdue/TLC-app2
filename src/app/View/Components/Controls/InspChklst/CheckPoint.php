@@ -23,6 +23,7 @@ class CheckPoint extends Component
         private $checkPointIds = [],
         private $sheet = null,
         private $readOnly = false,
+        private $index = 0,
     ) {
         //
         // dump($readOnly);
@@ -49,6 +50,7 @@ class CheckPoint extends Component
             'type' => $this->type,
             'props' => $props,
             'readOnly' => $this->readOnly,
+            'index' => $this->index,
         ]);
     }
 }

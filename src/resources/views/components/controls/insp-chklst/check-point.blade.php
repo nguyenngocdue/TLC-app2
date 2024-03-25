@@ -1,8 +1,13 @@
 {{-- @dump($readOnly) --}}
 <x-renderer.card class="border my-1 mt-2 bg-white p-0">
-    <div class="bg-gray-300 rounded-t p-2">
-        <p title="#{{$line->id}}">{{$line->name}}</p>
-        <p title="Vietnamese"><i>{{$line->description}}</i></p>
+    <div class="bg-gray-300 rounded-t flex gap-2">
+        <div class="flex items-center font-bold bg-gray-700 text-white rounded-tl px-3 " >
+            {{$index}}
+        </div>
+        <div class="p-1">
+            <p title="#{{$line->id}}">{{$line->name}}</p>
+            <p title="Vietnamese"><i>{{$line->description}}</i></p>
+        </div>
     </div>
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}">
 

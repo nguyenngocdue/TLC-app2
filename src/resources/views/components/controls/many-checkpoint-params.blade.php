@@ -7,14 +7,15 @@
 <hr/>
 
 <input type="hidden" name="tableNames[{{$table01Name}}]" value="{{$lineType}}"/>
-@php $index = 0; @endphp
+@php $index = 0; $cpIndex=0; @endphp
 @foreach($groupedCheckpoints as $groupId => $group)    
     @php
         $slug = Str::slug($group['name']);
     @endphp
     <x-renderer.heading id="{{$slug}}" title="#{{$groupId}}" level=5>{{$group['name']}}</x-renderer.heading>
     
-    @foreach($group['items'] as $rowIndex => $checkpoint)
+
+    @foreach($group['items'] as $rowIndex => $checkpoint)    
         <x-controls.insp-chklst.check-point 
         :line="$checkpoint" 
         :checkPointIds="$checkPointIds" 
@@ -22,6 +23,7 @@
         :rowIndex="$rowIndex" 
         type="{{$lineType}}"
         readOnly="{{$readOnly}}"
+        index="{{++$cpIndex}}"
         />
     @endforeach
     @if($index++ < sizeof($groupedCheckpoints )-1)
