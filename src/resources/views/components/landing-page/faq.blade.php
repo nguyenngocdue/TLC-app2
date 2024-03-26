@@ -1,4 +1,4 @@
-<section id="FAQs" class="p-12">
+<section id="faqs" class="p-12">
     
 <h1 class="font-bold text-4xl text-center my-5">Frequent Asked Questions</h1>
 <ul class="max-w-5xl mx-auto w-full md:mx-auto space-y-2">

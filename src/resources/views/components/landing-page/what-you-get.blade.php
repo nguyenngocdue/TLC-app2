@@ -1,6 +1,6 @@
-<section id="What u get" class="items-center py-20 lg:py-30">
+<section id="what-you-get" class="items-center py-20 lg:py-30">
     <div class="flex items-center justify-center my-16">
-        <h2 class="text-4xl md:text-6xl font-bold">What you Get</h2>
+        <h2 class="text-4xl md:text-6xl font-bold">What You Get</h2>
     </div>
     <div class="mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         <div >

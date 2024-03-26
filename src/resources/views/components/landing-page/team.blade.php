@@ -1,4 +1,4 @@
-<section id="Clients" class="items-center py-20 lg:py-30">
+<section id="who-use-it" class="items-center py-20 lg:py-30">
     <div class="flex items-center justify-center">
         <h2 class="text-4xl md:text-6xl font-bold">WHO USES {{env('APP_NAME')}}</h2>
     </div>

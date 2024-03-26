@@ -94,9 +94,9 @@ class LandingPageController extends Controller
         return [
             "Overview",
             "Projects",
-            "What u get",
-            "Process",
-            "Clients",
+            "What You Get",
+            "Why It's Cool",
+            "Who Use It",
             "Testimonials",
             "FAQs",
         ];

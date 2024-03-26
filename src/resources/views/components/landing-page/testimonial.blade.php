@@ -1,4 +1,4 @@
-<section id="Testimonials" class="items-center bg-black ">
+<section id="testimonials" class="items-center bg-black ">
     <div class="flex items-center justify-center">
         <h2 class="text-4xl md:text-6xl font-bold text-yellow-600 py-5 lg:py-14">We help solve problems in real time</h2>
     </div>
