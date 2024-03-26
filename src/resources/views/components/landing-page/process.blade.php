@@ -5,9 +5,7 @@
     <div class="mx-10 grid grid-cols-1 md:grid-cols-3 gap-3">
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1603853813611-9T5ERN3ZHGZLM4RHE0EQ/Inspect+online_{{env('APP_NAME')}}.jpg" alt=""
-                        class="w-80 h-2/4 object-cover"
-                >
+                <img src="/images/landing-page-res/SimpleToImplement.webp" alt="" class="w-80 h-2/4 object-cover rounded-2xl">
             </div>
             <div>
                 <div >
@@ -23,9 +21,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
         </div>
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1619672558737-OVWYJFDBV7BUNC3H3PXW/Improve+Customers+Satisfaction-{{env('APP_NAME')}}" alt=""
-                        class="w-80 h-2/4 object-cover"
-                >
+                <img src="/images/landing-page-res/EasyToUse.webp" alt="" class="w-80 h-2/4 object-cover rounded-2xl">
             </div>
             <div>
                 <div >
@@ -43,8 +39,8 @@ Keep everyone on the same page.
         </div>
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="https://images.squarespace-cdn.com/content/v1/5e83b42ef0669f63b02eb98f/1603856231801-UQCAM1BUFP5J90VW04JE/Remote-Inspection-Technology.jpg" alt=""
-                        class="w-80 h-2/4 object-cover"
+                <img src="/images/landing-page-res/SercuredInfo.webp" alt=""
+                        class="w-80 h-2/4 object-cover rounded-2xl"
                 >
             </div>
             <div>
