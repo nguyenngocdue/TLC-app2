@@ -51,20 +51,30 @@ class HomeWebPageController extends Controller
         // $x = app()->backgroundImage();
         $x = $this->getUrlImages('/images/homepage-what-it-does');
         $contents = [
-            "1. Production of Modular Houses
-            Streamlined Design and Fabrication: Begin with our intuitive platform to design your modular units. Our system integrates seamlessly with manufacturing workflows, ensuring that your designs are efficiently transformed into high-quality prefabricated modules.
-            Real-Time Production Tracking: Monitor the production status of your modules in real-time, with updates on manufacturing progress, ensuring your project stays on schedule.",
-            "2. QAQC and Inspection Checklist
-            Comprehensive Quality Control: Leverage our detailed QAQC (Quality Assurance and Quality Control) checklists to maintain high standards throughout the production process. Each checklist is customizable to fit your project's specific needs.
-            Inspection Schedules and Reports: Schedule inspections and generate reports directly through the app, ensuring that every module meets the highest quality standards before leaving the factory.",
-            "3. HSE of Factory
-            Health, Safety, and Environment (HSE) Compliance: Our app includes dedicated features to manage HSE compliance in the factory setting. Track safety incidents, manage risk assessments, and ensure environmental regulations are met, all within a centralized platform.",
-            "4. ESG of the Company
-            Environmental, Social, and Governance (ESG) Reporting: Showcase your company’s commitment to sustainability and governance with our ESG reporting tools. Track your environmental impact, social contributions, and governance practices, enhancing transparency and accountability.",
-            "5. Shipping Management
-            Efficient Logistics and Tracking: Organize and monitor the shipping of your modular units from factory to site. Our shipping management tools provide you with detailed logistics planning, real-time tracking, and notifications to ensure a smooth delivery process.",
-            "6. Onsite Construction
-            Seamless On-Site Assembly: Once the modules arrive on-site, our app guides you through the assembly process. Access detailed assembly instructions, manage your on-site workforce, and update project timelines, all designed to expedite construction and reduce time to occupancy.",
+            [
+                "title" => "Production of Modules",
+                "description" => "Begin with our intuitive platform to design your modular units. Our system integrates seamlessly with manufacturing workflows, ensuring that your designs are efficiently transformed into high-quality prefabricated modules."
+            ],
+            [
+                "title" => "Comprehensive Quality Assurance and Control",
+                "description" => "Leverage our detailed QAQC checklists to maintain high standards throughout the production process. Each checklist is customizable to fit your project's specific needs."
+            ],
+            [
+                "title" => "Health, Safety, and Environment (HSE) Compliance",
+                "description" => "Our app includes dedicated features to manage HSE compliance in the factory setting. Track safety incidents, manage risk assessments, and ensure environmental regulations are met, all within a centralized platform."
+            ],
+            [
+                "title" => "Environmental, Social, and Governance (ESG) Reporting",
+                "description" => "Showcase your company’s commitment to sustainability and governance with our ESG reporting tools. Track your environmental impact, social contributions, and governance practices, enhancing transparency and accountability."
+            ],
+            [
+                "title" => "Efficient Logistics and Tracking",
+                "description" => "Organize and monitor the shipping of your modular units from factory to site. Our shipping management tools provide you with detailed logistics planning, real-time tracking, and notifications to ensure a smooth delivery process."
+            ],
+            [
+                "title" => "Seamless On-Site Assembly",
+                "description" => "Once the modules arrive on-site, our app guides you through the assembly process. Access detailed assembly instructions, manage your on-site workforce, and update project timelines, all designed to expedite construction and reduce time to occupancy."
+            ],
         ];
         return [
             "images" => $x,

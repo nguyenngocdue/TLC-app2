@@ -338,3 +338,7 @@ div.scroll-to-month {
 .page-break-after {
     page-break-after: always !important;
 }
+
+.box-shadow-1 {
+    box-shadow: 1px 1px 10px #000;
+}

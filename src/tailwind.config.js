@@ -34,6 +34,11 @@ module.exports = {
     ],
     theme: {
         extend: {
+            boxShadow: {
+                custom: '1px 1px 10px #000', // Custom box shadow
+              },
+        },
+        extend: {
             // Adding custom text shadow utilities
             textShadow: {
               // Define your custom text shadow styles here
