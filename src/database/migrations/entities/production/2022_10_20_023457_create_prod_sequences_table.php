@@ -49,6 +49,7 @@ return new class extends Migration
             $table->unsignedInteger('total_days_have_ts')->nullable();
             $table->integer('total_discrepancy_days')->nullable();
 
+            $table->closable();
             $table->appendCommonFields();
 
             $table->unique(['prod_order_id', 'prod_routing_link_id']);

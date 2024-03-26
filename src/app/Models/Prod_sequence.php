@@ -17,6 +17,7 @@ class Prod_sequence extends ModelExtended
         "total_uom", "uom_input", "uom_agg",
         "erp_prod_order_name",
         "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
+        "closed_at",
     ];
 
     public static $nameless = true;
