@@ -1,18 +1,18 @@
 <section id="testimonials" class="items-center bg-black py-12">
     <div class="flex items-center justify-center">
-        <h2 class="text-4xl md:text-6xl font-bold text-yellow-600 py-5 lg:py-14">We help solve problems in real time</h2>
+        <h2 class="text-4xl text-center md:text-6xl font-bold text-yellow-600 py-5 lg:py-14">We help solve problems in real time</h2>
     </div>
     <div id="controls-carousel" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
-        <div class="relative h-60 overflow-hidden rounded-lg md:h-72">
+        <div class="relative h-72 overflow-hidden rounded-lg">
             @foreach($dataSource as $item)
                 <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
                     <div class="flex justify-center items-center h-full">
-                        <div class="text-white text-center mx-80">
+                        <div class="text-white text-center mx-10 md:mx-80">
                             <x-home-web-page.rating rating="{{$item['rating']}}"/>
-                            <h4 class="py-2 text-xl font-bold">{{$item["title"]}}</h4>
-                            <p class="text-base">{{$item["content"]}}</p>
-                            <span class="py-2 text-lg font-bold">{{$item["owner"]}}</span>
+                            <h4 class="py-2 text-base md:text-xl font-bold">{{$item["title"]}}</h4>
+                            <p class="text-sm md:text-base">{{$item["content"]}}</p>
+                            <span class="py-2 text-base md:text-xl font-bold">{{$item["owner"]}}</span>
                         </div>
                     </div>
                 </div>
