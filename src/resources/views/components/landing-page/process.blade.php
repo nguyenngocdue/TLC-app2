@@ -28,11 +28,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
                     <h4 class="text-center text-2xl mb-9 font-bold text-yellow-600">
                     Easy to use.
                     </h4>
-                    <p class="text-left text-base text-white whitespace-pre-wrap">Either party can share their camera and see each other pointing on screen to identify clearly what needs to be seen and from where. 
-
-You can record video footage, screen shares, and audio, all saved for future reference.
-
-Keep everyone on the same page.
+                    <p class="text-left text-base text-white whitespace-pre-wrap">Matrix Mode provides a comprehensive overview of entire project progress, ensuring all team members are aligned and informed.
                     </p>
                 </div>
             </div>
@@ -48,9 +44,9 @@ Keep everyone on the same page.
                     <h4 class="text-center text-2xl mb-9 font-bold text-yellow-600">
                     Keep information secure.
                     </h4>
-                    <p class="text-left text-base text-white whitespace-pre-wrap">All collateral is stored in the cloud for your later retrieval and can be uploaded to your system. API available for Enterprise customers.
+                    <p class="text-left text-base text-white whitespace-pre-wrap">Your resources are safely housed in the cloud, ready for future access and system integration, with API access available for our Enterprise-level customers.
 
-All communication and collateral collection is permission based and secure. No one can see into the other person’s device, trawl their contacts list, see webpage history or passwords. 
+Our approach guarantees that all exchanges and the gathering of resources are both consensual and secure, ensuring no unauthorized access to another’s device, contact list, browsing history, or passwords.
                     </p>
                 </div>
             </div>

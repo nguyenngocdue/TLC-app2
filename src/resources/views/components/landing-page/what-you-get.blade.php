@@ -15,7 +15,7 @@
                         Save Time and Money.
                     </h4>
                     <p class="text-center text-base">
-                    Reduce your travel costs. No more overruns or time wasted. Remote inspection technology is made to keep your business operating efficiently.
+                        By leveraging the app's dynamic scheduling features and automated task assignments, project planners can significantly reduce construction timelines and cut costs, ensuring that modular house projects are completed efficiently and within budget.
                     </p>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     Reduce Carbon Footprint.
                     </h4>
                     <p class="text-center text-base">
-                    Make your own contribution to positive environmental impact. Let’s follow carbon zero bill suggestions.
+                        The app aids construction managers in selecting sustainable materials, showcasing its commitment to environmental responsibility by facilitating the use of recycled steel and eco-friendly insulation, thus minimizing the carbon footprint of modular house construction.
                     </p>
                 </div>
             </div>
@@ -49,8 +49,7 @@
                     Stay Safe.
                     </h4>
                     <p class="text-center text-base">
-                    Now you can work together from anywhere. Either it is to inspect, to assist or to collaborate. Virtual site visits keep you safe.
-                    </p>
+                        The app elevates safety standards in modular house construction by offering comprehensive digital checklists and hazard alerts, ensuring adherence to rigorous safety protocols and safeguarding worker well-being.</p>
                 </div>
             </div>
         </div>
@@ -66,8 +65,7 @@
                     Go above and beyond.
                     </h4>
                     <p class="text-center text-base">
-                    Your customers benefit from faster services, reduced costs, and minimise delays. Remote video assistance software allows you to visit your customer without travelling there.
-                    </p>
+                        The app exceeds typical management tools by enhancing stakeholder engagement with real-time updates and interactive feedback, elevating modular housing projects beyond standard expectations.</p>
                 </div>
             </div>
         </div>
