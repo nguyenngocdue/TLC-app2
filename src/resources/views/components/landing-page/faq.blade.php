@@ -1,6 +1,6 @@
-<section id="FAQs" class="pb-20 lg:pb-40">
+<section id="FAQs" class="p-12">
     
-<h1 class="font-bold text-4xl text-center mt-10 mb-4">Frequent Asked Questions</h1>
+<h1 class="font-bold text-4xl text-center my-5">Frequent Asked Questions</h1>
 <ul class="max-w-5xl mx-auto w-full md:mx-auto space-y-2">
     @foreach($dataSource as $faq)
     <li class="border 1rounded-lg">
