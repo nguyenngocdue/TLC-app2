@@ -22,7 +22,7 @@
         </div>
         <div >
             <div class="w-full flex justify-center items-center">
-                <img src="/images/landing-page-res/ReduceCarbonFootprint.webp" alt=""
+                <img src="/images/landing-page-res/ReduceCarbonFootprint0.webp" alt=""
                         class="w-56 h-2/4 object-cover rounded-2xl" 
                 >
             </div>
