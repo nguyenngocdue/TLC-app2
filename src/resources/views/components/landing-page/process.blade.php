@@ -5,7 +5,7 @@
     <div class="mx-10 grid grid-cols-1 md:grid-cols-3 gap-3">
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="/images/landing-page-res/SimpleToImplement.webp" alt="" class="w-80 h-2/4 object-cover rounded-2xl">
+                <img src="/images/homepage-why-its-cool/SimpleToImplement.webp" alt="" class="w-80 h-2/4 object-cover rounded-2xl">
             </div>
             <div>
                 <div >
@@ -21,7 +21,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
         </div>
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="/images/landing-page-res/EasyToUse.webp" alt="" class="w-80 h-2/4 object-cover rounded-2xl">
+                <img src="/images/homepage-why-its-cool/EasyToUse.webp" alt="" class="w-80 h-2/4 object-cover rounded-2xl">
             </div>
             <div>
                 <div >
@@ -35,7 +35,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
         </div>
         <div >
             <div class="w-full flex justify-center items-center py-5 lg:py-10">
-                <img src="/images/landing-page-res/SercuredInfo.webp" alt=""
+                <img src="/images/homepage-why-its-cool/SercuredInfo.webp" alt=""
                         class="w-80 h-2/4 object-cover rounded-2xl"
                 >
             </div>

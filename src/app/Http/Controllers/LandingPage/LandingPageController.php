@@ -48,11 +48,14 @@ class LandingPageController extends Controller
 
     private function dataCarousel()
     {
-        return app()->backgroundImage();
+        // $x = app()->backgroundImage();
+        $x = $this->getUrlImages('/images/homepage-what-it-does');
+        // dump($x);
+        return $x;
     }
     private function dataTeam()
     {
-        $images = $this->getUrlImages();
+        $images = $this->getUrlImages('/images/homepage-who-use-it');
         $arrayText = [
             'HSE Manager',
             'Production Manager',
@@ -77,10 +80,10 @@ class LandingPageController extends Controller
         return $results;
     }
 
-    private function getUrlImages()
+    private function getUrlImages($path)
     {
-        $directory = public_path('/images/landing-page');
-        $path = asset('/images/landing-page');
+        $directory = public_path($path);
+        $path = asset($path);
         if (File::isDirectory($directory)) {
             $files = File::files($directory);
             return array_map(function ($file) use ($path) {
@@ -93,7 +96,7 @@ class LandingPageController extends Controller
     {
         return [
             "Overview",
-            "Projects",
+            "What It Does",
             "What You Get",
             "Why It's Cool",
             "Who Use It",

@@ -1,9 +1,12 @@
-<section id="projects" class="relative w-full" data-carousel="slide">
+<section id="what-it-does" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative min-h-[50vh] sm:min-h-[60vh] overflow-hidden md:min-h-[100vh]">
         @foreach($dataSource as $image)
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="{{$image}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+            <div class="z-40">
+                AHAHA
+                <img src="{{$image}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                AHIHI</div>
         </div>
         @endforeach
     </div>

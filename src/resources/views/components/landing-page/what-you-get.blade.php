@@ -5,7 +5,7 @@
     <div class="mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         <div >
             <div class="w-full flex justify-center items-center">
-                <img src="/images/landing-page-res/SaveTimeAndMoney.webp" alt=""
+                <img src="/images/homepage-what-you-get/SaveTimeAndMoney.webp" alt=""
                         class="w-56 h-2/4 object-cover rounded-2xl"
                 >
             </div>
@@ -22,7 +22,7 @@
         </div>
         <div >
             <div class="w-full flex justify-center items-center">
-                <img src="/images/landing-page-res/ReduceCarbonFootprint0.webp" alt=""
+                <img src="/images/homepage-what-you-get/ReduceCarbonFootprint0.webp" alt=""
                         class="w-56 h-2/4 object-cover rounded-2xl" 
                 >
             </div>
@@ -39,7 +39,7 @@
         </div>
         <div >
             <div class="w-full flex justify-center items-center">
-                <img src="/images/landing-page-res/StaySafe.webp" alt=""
+                <img src="/images/homepage-what-you-get/StaySafe.webp" alt=""
                         class="w-56 h-2/4 object-cover rounded-2xl"
                 >
             </div>
@@ -55,7 +55,7 @@
         </div>
         <div >
             <div class="w-full flex justify-center items-center">
-                <img src="/images/landing-page-res/AboveAndBeyond.webp" alt=""
+                <img src="/images/homepage-what-you-get/AboveAndBeyond.webp" alt=""
                         class="w-56 h-2/4 object-cover rounded-2xl"
                 >
             </div>
