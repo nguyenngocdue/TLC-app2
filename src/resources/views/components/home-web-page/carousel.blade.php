@@ -1,18 +1,20 @@
 <section id="what-it-does" class="relative w-full" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative min-h-[50vh] sm:min-h-[60vh] overflow-hidden md:min-h-[100vh]">
-        @foreach($dataSource as $image)
+        @foreach($images as $key => $image)
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <div class="z-40">
-                AHAHA
                 <img src="{{$image}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                AHIHI</div>
+                <div class="absolute border border-red-600 rounded-lg top-[80%] mx-56 p-2 bg-gray-100">
+                    <p class="text-red-500 text-center">{{$contents[$key]}}</p>
+                </div>
+            </div>
         </div>
         @endforeach
     </div>
     <!-- Slider indicators -->
     <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        @foreach($dataSource as $key => $image)
+        @foreach($images as $key => $image)
             @if($key == 0)
             <button type="button" class="w-3 h-3 rounded-full bg-slate-400" aria-current="true" aria-label="Slide {{$key}}" data-carousel-slide-to="{{$key}}"></button>
             @else

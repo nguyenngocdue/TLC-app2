@@ -24,8 +24,10 @@ class Carousel extends Component
      */
     public function render()
     {
+        $dataSource = $this->dataSource;
         return view('components.home-web-page.carousel', [
-            "dataSource" => $this->dataSource
+            "images" => $dataSource['images'],
+            "contents" => $dataSource['contents'],
         ]);
     }
 }
