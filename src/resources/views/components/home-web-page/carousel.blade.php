@@ -5,11 +5,11 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <div class="z-40">
                 <img src="{{$image}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                <div class="text-blue-900 absolute border-3 rounded-lg top-[80%] left-1/4 w-1/2 mx-auto p-2 bg-gray-100 bg-opacity-80"
+                <div class="text-blue-900 absolute border-3 rounded-lg top-[80%] ml-[1%] w-[98%] xl:left-1/4 xl:w-1/2 p-2 bg-gray-100 bg-opacity-80"
                     style="box-shadow: 1px 1px 10px #000;"
                 >
                     <p class="text-xl font-bold text-shadow-md">{{$contents[$key]["title"]}}</p>
-                    <p class="">{{$contents[$key]["description"]}}</p>
+                    <p class="hidden md:block">{{$contents[$key]["description"]}}</p>
                 </div>
             </div>
         </div>

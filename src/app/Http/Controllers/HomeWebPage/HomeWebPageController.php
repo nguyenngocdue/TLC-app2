@@ -60,11 +60,11 @@ class HomeWebPageController extends Controller
                 "description" => "Leverage our detailed QAQC checklists to maintain high standards throughout the production process. Each checklist is customizable to fit your project's specific needs."
             ],
             [
-                "title" => "Health, Safety, and Environment (HSE) Compliance",
+                "title" => "Health, Safety, and Environment (HSE)",
                 "description" => "Our app includes dedicated features to manage HSE compliance in the factory setting. Track safety incidents, manage risk assessments, and ensure environmental regulations are met, all within a centralized platform."
             ],
             [
-                "title" => "Environmental, Social, and Governance (ESG) Reporting",
+                "title" => "Environmental, Social, and Governance (ESG)",
                 "description" => "Showcase your company’s commitment to sustainability and governance with our ESG reporting tools. Track your environmental impact, social contributions, and governance practices, enhancing transparency and accountability."
             ],
             [
