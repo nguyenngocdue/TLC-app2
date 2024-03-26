@@ -1,5 +1,5 @@
 <footer
-      class="relative z-10 bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px] bg-gradient-to-r from-cyan-200 via-blue-200 to-blue-300"
+      class="relative z-10 text-white text-shadow-md pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px] bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900"
     >
       <div class="container mx-auto">
         <div class="-mx-4 flex flex-wrap">
@@ -10,12 +10,12 @@
                 class="mb-6 inline-block max-w-[160px]"
               >
                 <img
-                  src="{{ asset('logo/tlc.png') }}"
+                  src="{{ asset('logo/tlc-white.svg') }}"
                   alt="logo"
                   class="max-w-full dark:hidden"
                 />
                 <img
-                  src="{{ asset('logo/tlc.png') }}"
+                  src="{{ asset('logo/tlc-white.svg') }}"
                   alt="logo"
                   class="hidden max-w-full dark:block"
                 />

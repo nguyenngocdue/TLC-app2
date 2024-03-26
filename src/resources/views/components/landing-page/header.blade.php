@@ -1,16 +1,16 @@
 <header x-data="{navbarOpen: false}"
-class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to-r from-cyan-200 via-blue-200 to-blue-300 border-b">
+class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900 border-b">
       <div class="container mx-auto">
         <div class="relative -mx-4 flex items-center justify-between">
           <div class="w-60 max-w-full px-4">
             <a href="javascript:void(0)" class="block w-full">
               <img
-                src="{{ asset('logo/tlc.png') }}"
+                src="{{ asset('logo/tlc-white.svg') }}"
                 alt="logo"
                 class="dark:hidden h-10 object-cover"
               />
               <img
-                src="{{ asset('logo/tlc.png') }}"
+                src="{{ asset('logo/tlc-white.svg') }}"
                 alt="logo"
                 class="hidden dark:block h-1 object-cover"
               />
@@ -44,7 +44,7 @@ class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to
                     <li>
                       <a
                         href="#{{Str::slug($item)}}"
-                        class="flex py-2 text-base font-medium text-gray-500 hover:text-slate-800 dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                        class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         {{$item}}
                       </a>
@@ -53,11 +53,11 @@ class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to
                 </ul>
               </nav>
             </div>
-            <div class="hidden justify-end pr-16 sm:flex lg:pr-0">
+            <div class="hidden justify-end pr-16 sm:flex lg:pr-0 gap-1">
             @auth
                 <a
                     href="/dashboard"
-                    class="rounded-md bg-blue-600 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
+                    class="rounded-md bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
                 >
                     Dashboard
                 </a>
@@ -65,13 +65,14 @@ class="fixed z-50 flex w-full items-center bg-white dark:bg-black bg-gradient-to
             @guest
                 <a
                     href="/login"
-                    class="px-7 py-3 text-base font-medium text-slate-600 hover:text-blue-800 dark:text-white"
+                    {{-- class="px-7 py-3 text-base font-medium text-white hover:text-blue-800 dark:text-white" --}}
+                    class="rounded-md bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
                 >
                     Login
                 </a>
                 <a
                     href="/register"
-                    class="rounded-md bg-blue-600 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
+                    class="rounded-md bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
                 >
                     Sign Up
                 </a>
