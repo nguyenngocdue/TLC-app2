@@ -3,7 +3,7 @@
 use App\Events\Test;
 use App\Events\WssDemoChannel;
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
-use App\Http\Controllers\LandingPage\LandingPageController;
+use App\Http\Controllers\HomeWebPage\HomeWebPageController;
 use App\Http\Controllers\RedisController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
@@ -11,14 +11,12 @@ use App\Http\Controllers\WelcomeDueController;
 use App\Http\Controllers\WelcomeFortuneController;
 use App\Jobs\TestLogToFileJob;
 use App\Mail\MailTest;
-use App\Warehouse\Wh_report_data_1s;
-use App\Warehouse\Wh_user_sub_project_task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-Route::get('/',[LandingPageController::class,'index'])->name('landing-page.index');
+Route::get('/', [HomeWebPageController::class, 'index'])->name('home-web-page.index');
 
 Route::group(['middleware' =>  ['auth', 'impersonate'],], function () {
     Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');
