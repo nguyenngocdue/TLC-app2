@@ -479,7 +479,24 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
         }
     }
 }
-
+const handleStr = (str) => {
+    return str.replace(/['"&<>]/g, function(match) {
+        switch(match) {
+            case "'":
+                return "&#39;";
+            case '"':
+                return "&quot;";
+            case "&":
+                return "&amp;";
+            case "<":
+                return "&lt;";
+            case ">":
+                return "&gt;";
+            default:
+                return match;
+        }
+    });
+}
 const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     // console.log("reloadDataToDropdown4", id, dataSource.length, table01Name, selected)
     // console.log(table01Name, id, selected)
@@ -496,7 +513,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes4(item.id, selected) ? "selected" : "")
         // console.log("During making option list", item.id, item.name, "================================", selectedStr)
         const title = item.description || makeId(item.id)
-        option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + " >"
+        option = `<option value='${item.id}' title='${handleStr(title)}' ${selectedStr}>`
         option += item.name || "Nameless #" + item.id
         option += "</option>"
         options.push(option)
