@@ -220,6 +220,12 @@
         "editable-table": "qaqc_cars",
         "button_add_a_new_line": "true"
     },
+    "qaqc_punchlist_01": {
+        "name": "qaqc_punchlist_01",
+        "entity-type": "qaqc_punchlists",
+        "editable-table": "qaqc_punchlist_lines",
+        "button_add_a_new_line": "true"
+    },
     "qaqc_wirs_01": {
         "name": "qaqc_wirs_01",
         "entity-type": "qaqc_wirs",

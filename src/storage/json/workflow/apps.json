@@ -1917,6 +1917,37 @@
         "disallowed_direct_creation": "true",
         "show_in_my_view": "true"
     },
+    "qaqc_punchlist": {
+        "name": "qaqc_punchlist",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "quality_control",
+        "title": "QAQA Punchlists",
+        "nickname": "pl",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>"
+    },
+    "qaqc_punchlist_line": {
+        "name": "qaqc_punchlist_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "quality_control",
+        "title": "QAQC Punchlist Lines",
+        "nickname": "pll",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
+    },
     "qaqc_wir": {
         "name": "qaqc_wir",
         "package_tab": "application",

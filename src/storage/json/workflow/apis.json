@@ -41,6 +41,9 @@
     "comments": {
         "name": "comments"
     },
+    "conqa_archives": {
+        "name": "conqa_archives"
+    },
     "control_types": {
         "name": "control_types"
     },
@@ -53,6 +56,27 @@
     },
     "departments": {
         "name": "departments"
+    },
+    "diginet_business_trip_lines": {
+        "name": "diginet_business_trip_lines"
+    },
+    "diginet_business_trip_sheets": {
+        "name": "diginet_business_trip_sheets"
+    },
+    "diginet_employee_hours": {
+        "name": "diginet_employee_hours"
+    },
+    "diginet_employee_leave_lines": {
+        "name": "diginet_employee_leave_lines"
+    },
+    "diginet_employee_leave_sheets": {
+        "name": "diginet_employee_leave_sheets"
+    },
+    "diginet_employee_overtime_lines": {
+        "name": "diginet_employee_overtime_lines"
+    },
+    "diginet_employee_overtime_sheets": {
+        "name": "diginet_employee_overtime_sheets"
     },
     "eco_effectiveness_lines": {
         "name": "eco_effectiveness_lines",
@@ -389,6 +413,13 @@
     "qaqc_ncrs": {
         "name": "qaqc_ncrs",
         "renderTableForPopupModals": "true"
+    },
+    "qaqc_punchlist_lines": {
+        "name": "qaqc_punchlist_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "qaqc_punchlists": {
+        "name": "qaqc_punchlists"
     },
     "qaqc_wir_lines": {
         "name": "qaqc_wir_lines",

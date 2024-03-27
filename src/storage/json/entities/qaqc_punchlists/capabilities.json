@@ -1,0 +1,415 @@
+{
+    "acct_manager": {
+        "name": "acct_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "acct_manager_nz": {
+        "name": "acct_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "acct_member": {
+        "name": "acct_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "acct_member_nz": {
+        "name": "acct_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "admin": {
+        "name": "admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "bd_manager": {
+        "name": "bd_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "bd_member": {
+        "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "cpl_manager_nz": {
+        "name": "cpl_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "cpl_member": {
+        "name": "cpl_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "dc_ho": {
+        "name": "dc_ho",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "dc_manager": {
+        "name": "dc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "dc_ws": {
+        "name": "dc_ws",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "des_manager": {
+        "name": "des_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "des_member": {
+        "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "dir": {
+        "name": "dir",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "dir_nz": {
+        "name": "dir_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "fac_admin": {
+        "name": "fac_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "fin_member_nz": {
+        "name": "fin_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "guest": {
+        "name": "guest",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "hr_manager": {
+        "name": "hr_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "hr_member": {
+        "name": "hr_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "hr_member_nz": {
+        "name": "hr_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "hse_manager": {
+        "name": "hse_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "hse_member": {
+        "name": "hse_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "it_manager": {
+        "name": "it_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "it_member": {
+        "name": "it_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "mgr_asst_nz": {
+        "name": "mgr_asst_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "newcomer": {
+        "name": "newcomer",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "pln_admin": {
+        "name": "pln_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proc_manager": {
+        "name": "proc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proc_member": {
+        "name": "proc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proc_member_nz": {
+        "name": "proc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "prod_manager": {
+        "name": "prod_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "prod_manager_nz": {
+        "name": "prod_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "prod_member": {
+        "name": "prod_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "prod_member_nz": {
+        "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proj_manager": {
+        "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proj_manager_nz": {
+        "name": "proj_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proj_member": {
+        "name": "proj_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proj_member_nz": {
+        "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "qaqc_manager": {
+        "name": "qaqc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "qaqc_member": {
+        "name": "qaqc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "qs_manager": {
+        "name": "qs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "qs_member": {
+        "name": "qs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "qs_member_nz": {
+        "name": "qs_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "supreme_manage": {
+        "name": "supreme_manage",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "whs_manager": {
+        "name": "whs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "whs_member": {
+        "name": "whs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    },
+    "worker": {
+        "name": "worker",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "closed": "true"
+    }
+}
