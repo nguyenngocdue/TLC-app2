@@ -217,7 +217,11 @@ const duplicateLineEditableTable = (params) => {
             name = "hidden_" + name
             // console.log("Get from hidden filed", name)
         }
-        const value = getValueById(name, column['renderer'])
+        let value = getValueById(name, column['renderer'])
+        // console.log(column, value)
+        if(column['renderer'] == 'toggle4')
+            value = value == 'on' ? 1 : 0
+        
         valuesOfOrigin[column['dataIndex']] = value
     }
     // console.log(valuesOfOrigin)
