@@ -39,6 +39,26 @@
         "closed": "true",
         "not_applicable": ""
     },
+    "_ncr_status_unique_value": {
+        "name": "_ncr_status_unique_value",
+        "column_name": "ncr_status_unique_value",
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
+    },
+    "_ncr_all_closed": {
+        "name": "_ncr_all_closed",
+        "column_name": "ncr_all_closed",
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
+        "rejected": "",
+        "closed": "",
+        "not_applicable": ""
+    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
