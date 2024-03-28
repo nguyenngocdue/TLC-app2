@@ -12,7 +12,7 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                        Save Time and Money.
+                        Save Time and Money
                     </h4>
                     <p class="text-center text-base">
                         By leveraging the app's dynamic scheduling features and automated task assignments, project planners can significantly reduce construction timelines and cut costs, ensuring that modular house projects are completed efficiently and within budget.
@@ -29,7 +29,7 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                    Reduce Carbon Footprint.
+                    Reduce Carbon Footprint
                     </h4>
                     <p class="text-center text-base">
                         The app aids construction managers in selecting sustainable materials, showcasing its commitment to environmental responsibility by facilitating the use of recycled steel and eco-friendly insulation, thus minimizing the carbon footprint of modular house construction.
@@ -46,7 +46,7 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                    Stay Safe.
+                    Stay Safe
                     </h4>
                     <p class="text-center text-base">
                         The app elevates safety standards in modular house construction by offering comprehensive digital checklists and hazard alerts, ensuring adherence to rigorous safety protocols and safeguarding worker well-being.</p>
@@ -62,7 +62,7 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                    Go above and beyond.
+                    Go above and beyond
                     </h4>
                     <p class="text-center text-base">
                         The app exceeds typical management tools by enhancing stakeholder engagement with real-time updates and interactive feedback, elevating modular housing projects beyond standard expectations.</p>

@@ -10,7 +10,7 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl font-bold mb-9 text-yellow-600">
-                    Simple to implement.
+                    Simple to implement
                     </h4>
                     <p class="text-left text-base text-white whitespace-pre-wrap">Only you need {{env('APP_NAME')}}. There’s nothing for your guest to download!
 
@@ -26,7 +26,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
             <div>
                 <div >
                     <h4 class="text-center text-2xl mb-9 font-bold text-yellow-600">
-                    Easy to use.
+                    Easy to use
                     </h4>
                     <p class="text-left text-base text-white whitespace-pre-wrap">Matrix Mode provides a comprehensive overview of entire project progress, ensuring all team members are aligned and informed.
                     </p>
@@ -42,7 +42,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
             <div>
                 <div >
                     <h4 class="text-center text-2xl mb-9 font-bold text-yellow-600">
-                    Keep information secure.
+                    Keep information secure
                     </h4>
                     <p class="text-left text-base text-white whitespace-pre-wrap">Your resources are safely housed in the cloud, ready for future access and system integration, with API access available for our Enterprise-level customers.
 
