@@ -168,6 +168,14 @@
         "top_title": "QC Acceptance Report",
         "title": "QC Acceptance Report"
     },
+    "document-qaqc_wir_030": {
+        "name": "document-qaqc_wir_030",
+        "package_tab": "report",
+        "package": "project_management",
+        "breadcrumb-group": null,
+        "top_title": "QC Acceptance Report for Each Project",
+        "title": "QC Acceptance Report for Each Project"
+    },
     "register-prod_sequence_010": {
         "name": "register-prod_sequence_010",
         "package_tab": "report",

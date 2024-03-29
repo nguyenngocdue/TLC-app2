@@ -49,7 +49,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
                                 FROM many_to_many mtm
                                 WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
                                 AND mtm.term_id = 346
-                            ) standarPr ON tb1.prod_routing_id IN (standarPr.doc_id) 
+                            ) standardPr ON tb1.prod_routing_id IN (standardPr.doc_id) 
                         LEFT JOIN (SELECT
                             qaqcwir.sub_project_id AS sub_project_id,
                             qaqcwir.project_id AS project_id,

@@ -118,4 +118,29 @@ class ArrayReport
             return $carry ? self::sumValuesOfArray($carry, $item) : $item;
         }, []);
     }
+
+    public static function summaryArrayByKeys($data, $keys)
+    {
+        $totals = [];
+        foreach ($data as $value) {
+            foreach ($keys as $key) {
+                if (!isset($totals[$key])) $totals[$key] = 0;
+                if (isset($value[$key])) {
+                    $totals[$key] += round($value[$key], 2);
+                }
+            }
+        }
+        return $totals;
+    }
+
+    public static function averageArrayByKeys($data, $keys)
+    {
+        $summaryValues = ArrayReport::summaryArrayByKeys($data, $keys);
+        $avgValues = array_map(function ($value) use ($data) {
+            $count = count($data);
+            return round($value / $count, 2);
+        }, $summaryValues);
+
+        return $avgValues;
+    }
 }
