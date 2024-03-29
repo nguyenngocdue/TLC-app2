@@ -83,12 +83,12 @@
                         <h2 class="text-red-400">{{"Control of this $columnName has not been set"}}</h2>
                         @endif
                         {{-- Invisible anchor for scrolling when users click on validation fail message --}}
-                        @if(($control == 'status') && ($valueControl && ($valueControl[0])))
+                        {{-- @if(($control == 'status') && ($valueControl && ($valueControl[0])))
                         @else
-                            <div class="truncate" title={{$columnName}}>
-                                <label for={{$columnName}} class="ml-1 text-gray-900 dark:text-gray-300 text-sm font-normal" >{{$label}}</label>
-                            </div>
-                        @endif
+                        @endif --}}
+                        <div class="truncate" title={{$columnName}}>
+                            <label for={{$columnName}} class="ml-1 text-gray-900 dark:text-gray-300 text-sm font-normal" >{{$label}}</label>
+                        </div>
                         @switch ($control)
                         @case('picker_time')
                         <x-advanced-filter.picker-time3  :name="$columnName" :value="$valueControl"/>
