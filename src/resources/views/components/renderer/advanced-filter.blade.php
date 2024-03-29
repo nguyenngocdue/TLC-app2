@@ -149,7 +149,7 @@
                             <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                         @break
                         @case('status')
-                        @if(!$valueControl || !$valueControl[0] || count($valueControl) > 1)
+                        {{--@if(!$valueControl || !$valueControl[0] || count($valueControl) > 1) --}}
                             @php
                             $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
                             @endphp
@@ -167,7 +167,7 @@
                                         , templateResult: select2FormatState
                                     });
                             </script>
-                        @endif
+                        {{--@endif--}}
                             
                         @break
                         @case('parent_type')
