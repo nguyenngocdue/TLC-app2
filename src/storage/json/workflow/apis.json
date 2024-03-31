@@ -419,7 +419,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "qaqc_punchlists": {
-        "name": "qaqc_punchlists"
+        "name": "qaqc_punchlists",
+        "storeEmpty_and_updateShort": "true"
     },
     "qaqc_wir_lines": {
         "name": "qaqc_wir_lines",

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
@@ -29,6 +30,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $headerTop = 40;
     protected $groupBy = null;
     protected $apiToCallWhenCreateNew = 'cloneTemplate';
+
+    private static $punchlistStatuses = null;
     // protected $mode = 'status_only';
     /**
      * Create a new component instance.
@@ -43,6 +46,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $this->subProject = $this->subProject ? $this->subProject : 21;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
         $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : null;
+
+        static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
     }
 
     private function getUserSettings()
@@ -64,8 +69,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             ->where('sub_project_id', $this->subProject)
             // ->where('prod_routing_id', $this->prodRouting)
             ->with('getProdOrder')
+            ->with('getPunchlist')
             ->orderBy('name')
             ->get();
+        // dump($yAxis[0]);
         return $yAxis;
     }
 
@@ -138,8 +145,26 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
-        $status_object = $this->makeStatus($y, false);
-        $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
+        if (isset($y->getPunchlist[0])) {
+            $route = route("qaqc_punchlists.edit", $y->getPunchlist[0]->id);
+            $status_object = $this->makeStatus($y, false, $route, static::$punchlistStatuses);
+        } else {
+            $apiToCallWhenCreateNew = "storeEmpty";
+            $api_url = route("qaqc_punchlists." . $apiToCallWhenCreateNew);
+            $line = [];
+            $this->makeCreateButton($xAxis, $y, [], $line, $api_url, $apiToCallWhenCreateNew);
+            dump($line);
+            // $route = route("qaqc_punchlists.create");
+            // $status_object = (object) [
+            //     'value' => '<i class="fa-duotone fa-circle-plus"></i>',
+            //     'cell_href' => $route,
+            //     'cell_class' => "text-center text-blue-800",
+            //     'cell_title' => "Create a new document",
+            // ];
+        }
+
+        // $status_object->cell_href = route("qaqc_punchlists" . ".edit", $y->id);
+
         $compliance_name = $y->getProdOrder->compliance_name ?: "";
         $print_link = route("qaqc_insp_chklsts.show", $y->id);
         $result = [
@@ -149,8 +174,16 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             ],
             'progress' => $y->progress ?: 0,
             'print' => "<a href='$print_link'><i class='fa-duotone fa-print text-blue-600'/></a>",
+            'final_punchlist' =>  '$status_object',
         ];
 
         return $result;
+    }
+
+    function getRightMetaColumns()
+    {
+        return [
+            ['dataIndex' => 'final_punchlist',],
+        ];
     }
 }

@@ -21,7 +21,14 @@ class Qaqc_insp_chklst extends ModelExtended
 
         "getSheets" => ["hasMany", Qaqc_insp_chklst_sht::class, "qaqc_insp_chklst_id"],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
+        "getPunchlist" => ["hasMany", Qaqc_punchlist::class, "qaqc_insp_chklst_id"],
     ];
+
+    public function getPunchlist()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getProdOrder()
     {

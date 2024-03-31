@@ -120,33 +120,35 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $value ? $value : '';
     }
 
-    protected function makeStatus($document, $forExcel, $route = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null)
     {
-        $status = $this->statuses[$document->status] ?? null;
-        if (is_null($route)) {
-            $route = route($this->type . ".edit", $document->id);
+        if (is_null($statuses)) $statuses = $this->statuses;
+        $status = $statuses[$document->status] ?? null;
+        if (is_null($editRoute)) {
+            $editRoute = route($this->type . ".edit", $document->id);
         }
         if (!is_null($status)) {
             $value = $this->getValueToRender($status, $document, $forExcel);
-            [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
+            [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document, $statuses);
             $item = [
                 'value' => $value,
                 'cell_title' => 'Open this document (' . $status['title'] . ')',
                 'cell_class' => "$bgColor $textColor",
-                'cell_href' => $route,
+                'cell_href' => $editRoute,
             ];
             return (object) $item;
         } else {
             // dump("Status not found: " . $document->status . " #" . $document->id);
             return (object)[
                 'value' => "unknown status [" . $document->status . "] ???",
-                'cell_href' => $route,
+                'cell_href' => $editRoute,
             ];
         }
     }
-    protected function getBackgroundColorAndTextColor($document)
+    protected function getBackgroundColorAndTextColor($document, $statuses = null)
     {
-        $status = $this->statuses[$document->status] ?? null;
+        if (is_null($statuses)) $statuses = $this->statuses;
+        $status = $statuses[$document->status] ?? null;
         return ['bg-' . $status['bg_color'], 'text-' . $status['text_color']];
     }
 
@@ -224,6 +226,44 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
+    function makeCreateButton($xAxis, $y, $extraColumns, &$line, $api_url, $apiToCallWhenCreateNew)
+    {
+        $meta['caller'] = 'view-all-matrix';
+        $api_meta = json_encode($meta);
+        foreach ($xAxis as $x) {
+            if (isset($x['isExtra']) && $x['isExtra']) continue;
+            $xId = $x['dataIndex'];
+            $xClass = $x['column_class'] ?? "";
+            $api_params = $this->getCreateNewParams($x, $y);
+
+            if (isset($api_params['name'])) {
+                //prod_order name CB01' => CB01`
+                $api_params['name'] = str_replace("'", "`", $api_params['name']);
+            }
+
+            $api_params = (json_encode($api_params));
+            // dump($api_params);
+            $api_callback = $this->apiCallback;
+            // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
+            $api = "callApi" . ucfirst($apiToCallWhenCreateNew);
+            $cell_href = "javascript:$api(\"$api_url\",[$api_params], $api_meta, $api_callback)";
+            // dump($cell_href);
+            $line[$xId] = (object)[
+                'value' => '<i class="fa-duotone fa-circle-plus"></i>',
+                'cell_href' => $cell_href,
+                'cell_class' => "text-center text-blue-800 $xClass",
+                'cell_title' => "Create a new document",
+                'cell_onclick' => "$(this).hide()",
+            ];
+            if ($this->mode == 'detail') {
+                foreach ($extraColumns as $column) {
+                    //<<create empty cell in excel file
+                    $line[$xId . "_" . $column] = "";
+                }
+            }
+        }
+    }
+
     function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel)
     {
         // dump($xAxis);
@@ -245,40 +285,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_div_class' => 'whitespace-nowrap',
             ];
             if ($this->allowCreation) {
-                $meta['caller'] = 'view-all-matrix';
-                $api_meta = json_encode($meta);
-                foreach ($xAxis as $x) {
-                    if (isset($x['isExtra']) && $x['isExtra']) continue;
-                    $xId = $x['dataIndex'];
-                    $xClass = $x['column_class'] ?? "";
-                    $api_params = $this->getCreateNewParams($x, $y);
-
-                    if (isset($api_params['name'])) {
-                        //prod_order name CB01' => CB01`
-                        $api_params['name'] = str_replace("'", "`", $api_params['name']);
-                    }
-
-                    $api_params = (json_encode($api_params));
-                    // dump($api_params);
-                    $api_callback = $this->apiCallback;
-                    // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
-                    $api = "callApi" . ucfirst($this->apiToCallWhenCreateNew);
-                    $cell_href = "javascript:$api(\"$api_url\",[$api_params], $api_meta, $api_callback)";
-                    // dump($cell_href);
-                    $line[$xId] = (object)[
-                        'value' => '<i class="fa-duotone fa-circle-plus"></i>',
-                        'cell_href' => $cell_href,
-                        'cell_class' => "text-center text-blue-800 $xClass",
-                        'cell_title' => "Create a new document",
-                        'cell_onclick' => "$(this).hide()",
-                    ];
-                    if ($this->mode == 'detail') {
-                        foreach ($extraColumns as $column) {
-                            //<<create empty cell in excel file
-                            $line[$xId . "_" . $column] = "";
-                        }
-                    }
-                }
+                $this->makeCreateButton($xAxis, $y, $extraColumns, $line, $api_url, $this->apiToCallWhenCreateNew);
             } else {
                 foreach ($xAxis as $x) {
                     if (isset($x['isExtra']) && $x['isExtra']) continue;

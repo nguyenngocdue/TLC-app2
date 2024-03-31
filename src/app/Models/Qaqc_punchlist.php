@@ -12,7 +12,7 @@ class Qaqc_punchlist extends ModelExtended
 
     public static $eloquentParams = [
         "getLines" => ["hasMany", Qaqc_punchlist_line::class, 'qaqc_punchlist_id'],
-        "getChecklist" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
+        "getQaqcInspChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
     ];
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
@@ -23,7 +23,7 @@ class Qaqc_punchlist extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getChecklist()
+    public function getQaqcInspChklst()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

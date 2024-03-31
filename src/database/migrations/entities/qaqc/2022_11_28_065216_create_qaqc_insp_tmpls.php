@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('short_name')->nullable();
-            // $table->string('slug')->unique();
+            $table->boolean('has_punchlist')->default(false);
 
             // $table->unsignedBigInteger('prod_routing_id');
             $table->appendCommonFields();

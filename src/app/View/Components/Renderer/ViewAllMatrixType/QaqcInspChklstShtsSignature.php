@@ -89,7 +89,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         // return count($nominatedUsers) . " " . count($signatures);
     }
 
-    protected function makeStatus($document, $forExcel, $route = null)
+    protected function makeStatus($document, $forExcel, $route = null, $statuses = null)
     {
         // dd($document);
         if (is_null($route)) {

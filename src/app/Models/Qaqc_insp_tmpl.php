@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_tmpl extends ModelExtended
 {
-    protected $fillable = ["id", "name", "description", "short_name", "owner_id"];
+    protected $fillable = [
+        "id", "name", "description", "short_name", "owner_id",
+        "has_punchlist",
+    ];
     public static $statusless = true;
 
     public static $eloquentParams = [

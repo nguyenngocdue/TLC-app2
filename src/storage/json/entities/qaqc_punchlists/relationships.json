@@ -1,6 +1,6 @@
 {
-    "_getChecklist": {
-        "name": "_getChecklist",
+    "_getQaqcInspChklst": {
+        "name": "_getQaqcInspChklst",
         "relationship": "belongsTo",
         "control_name": "qaqc_insp_chklst_id",
         "renderer_view_all": "column",
