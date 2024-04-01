@@ -12,7 +12,7 @@ class Qaqc_punchlist extends ModelExtended
 
     public static $eloquentParams = [
         "getLines" => ["hasMany", Qaqc_punchlist_line::class, 'qaqc_punchlist_id'],
-        "getQaqcInspChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
+        "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         'signature_qaqc_punchlist' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
     ];
     public static $oracyParams = [
@@ -25,7 +25,7 @@ class Qaqc_punchlist extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getQaqcInspChklst()
+    public function getChklst()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
