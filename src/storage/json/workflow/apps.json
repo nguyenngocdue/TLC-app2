@@ -1922,14 +1922,15 @@
         "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
-        "title": "QAQA Punchlists",
+        "title": "QAQC Punchlists",
         "nickname": "pl",
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": null,
         "show_renderer": null,
         "tutorial_link": null,
-        "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>"
+        "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
+        "disallowed_direct_creation": "true"
     },
     "qaqc_punchlist_line": {
         "name": "qaqc_punchlist_line",

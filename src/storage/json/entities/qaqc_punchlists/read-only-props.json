@@ -3,84 +3,84 @@
         "name": "_id",
         "column_name": "id",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "not_applicable": "",
+        "closed": "true"
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "not_applicable": "",
+        "closed": "true"
     },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
         "new": "",
-        "inspected": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "closed": ""
     }
 }

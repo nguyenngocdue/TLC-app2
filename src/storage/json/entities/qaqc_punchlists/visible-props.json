@@ -3,72 +3,84 @@
         "name": "_id",
         "column_name": "id",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
         "new": "true",
-        "inspected": "true"
+        "inspected": "true",
+        "not_applicable": "true"
     }
 }

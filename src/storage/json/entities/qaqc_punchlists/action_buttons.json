@@ -1,0 +1,20 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "inspected": {
+        "name": "inspected",
+        "label": "Inspect",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "label": "Set as N\/A",
+        "tooltip": "",
+        "change_status_multiple": ""
+    }
+}
