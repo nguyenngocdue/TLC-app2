@@ -158,17 +158,29 @@ class Breadcrumb extends Component
     }
     private function showButtonViewAll($type)
     {
-        if ($type === 'esg_sheets') $type = 'esg_master_sheets';
-        if ($type === 'qaqc_punchlists') $type = 'qaqc_insp_chklst_shts';
 
-        $currentRouteName = CurrentRoute::getName();
         // dump($currentRouteName);
         if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {
             if (CurrentUser::get()->isExternalInspector()) return;
             if (CurrentUser::get()->isProjectClient()) return;
         }
+
+        $currentRouteName = CurrentRoute::getName();
         if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
-        $this->links[] = ['href' => route($type . '.index'), 'title' => 'View All', 'icon' => '<i class="fa-solid fa-table-cells"></i>'];
+
+        if ($type === 'esg_sheets') $type = 'esg_master_sheets';
+        if ($type === 'qaqc_punchlists') $type = 'qaqc_insp_chklst_shts';
+
+        // $matrixApps = JsonControls::getAppsHaveViewAllMatrix();
+        // if(in_array($this->type, $matrixApps)){
+
+        // }
+
+        $this->links[] = [
+            'href' => route($type . '.index'),
+            'title' => 'View All',
+            'icon' => '<i class="fa-solid fa-table-cells"></i>',
+        ];
     }
     private function showButtonAddNew($type)
     {

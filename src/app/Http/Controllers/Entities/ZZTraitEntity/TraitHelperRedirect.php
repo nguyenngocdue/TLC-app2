@@ -18,8 +18,13 @@ trait TraitHelperRedirect
 				return redirect()->back();
 			case 'index':
 				$type = $this->type;
-				if ($this->type == 'esg_sheet') {
-					$type = 'esg_master_sheet';
+				switch ($this->type) {
+					case 'esg_sheet':
+						$type = 'esg_master_sheet';
+						break;
+					case 'qaqc_punchlist':
+						$type = 'qaqc_insp_chklst_sht';
+						break;
 				}
 				$urlRedirect = route(Str::plural($type) . ".index");
 				break;
