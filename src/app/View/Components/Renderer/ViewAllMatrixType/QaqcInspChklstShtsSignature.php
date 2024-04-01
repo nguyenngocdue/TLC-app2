@@ -36,7 +36,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         return $result;
     }
 
-    private function renderer($nominatedUsers, $signatures, $sheetId)
+    private function renderer($nominatedUsers, $signatures, $sheetTable, $sheetId)
     {
         $result = collect();
         $signaturesIndexed = $signatures->keyBy('user_id');
@@ -71,7 +71,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
                     $tooltip = "Request sent to $name on " . substr($signature->created_at, 0, 10);
                     break;
                 default:
-                    $onClick = "sendManyRequest($nominatedUser->id, $sheetId)";
+                    $onClick = "sendManyRequest($nominatedUser->id, \"$sheetTable\", $sheetId)";
                     break;
             }
 
@@ -80,7 +80,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
             $item .= "<div id='divFace_{$nominatedUser->id}_{$sheetId}' onclick='$onClick' class='$bg flex w-12 items-center border1 rounded-full gap-1 p-1 mb-0.5 cursor-pointer' title='$tooltip'>";
             $item .= $avatar;
             // $item .= $text;
-            $item .= "<i id='divCheck_{$nominatedUser->id}_{$sheetId}' style='left:-35px' class='hidden fa-duotone fa-check text-green-400 w-10 h-10 text-3xl 1rounded-full 1bg-opacity-20 1bg-green-500'></i>";
+            $item .= "<i id='divCheck_{$nominatedUser->id}_{$sheetTable}_{$sheetId}' style='left:-35px' class='hidden fa-duotone fa-check text-green-400 w-10 h-10 text-3xl 1rounded-full 1bg-opacity-20 1bg-green-500'></i>";
             $item .= "</div>";
             $result->push($item);
         }
@@ -119,7 +119,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
 
         if (count($nominatedUserIds) == 0) return (object)[];
         $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
-        $renderer = $this->renderer($nominatedUsers, $signatures, $document->id);
+        $renderer = $this->renderer($nominatedUsers, $signatures, $document->getTable(), $document->id);
 
         $openSheet = "<div class='mt-2'><a href='$editRoute' class='bg-blue-600 text-white rounded p-2'>Open</a></div>";
         // [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);

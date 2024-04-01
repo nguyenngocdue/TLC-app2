@@ -52,10 +52,10 @@ function intersectionArraysOfArrays(arrays) {
 }
 
 const sendManyRequestCache = {}
-const sendManyRequest = (uid, sheetId) => {
-    // console.log(uid, sheetId)
-    const key = `${uid}_${sheetId}`
-    const divCheckId = `divCheck_${uid}_${sheetId}`
+const sendManyRequest = (uid, sheetTable, sheetId) => {
+    // console.log(uid, sheetTable, sheetId)
+    const key = `${uid}|${sheetTable}|${sheetId}`
+    const divCheckId = `divCheck_${uid}_${sheetTable}_${sheetId}`
     if(sendManyRequestCache[key] === undefined ) {
         sendManyRequestCache[key] = true
         $(`#${divCheckId}`).show()
@@ -76,21 +76,32 @@ const sendManyRequest = (uid, sheetId) => {
         button.type='button'
         button.addEventListener('click', ()=>{
 
-            const splitted = Object.keys(sendManyRequestCache).map(key=>key.split("_"))
+            const splitted = Object.keys(sendManyRequestCache).map(key=>key.split("|"))
             // console.log("Sending ", sendManyRequestCache, splitted  )
-            const result = {}
-            splitted.forEach(line=>{
-                if(result[line[1]] === undefined)  result[line[1]] = []
-                result[line[1]].push(line[0] * 1)
+            const results = {}
+            splitted.forEach(term=>{
+                const docUnique = term[1]+'|'+term[2]
+                if(results[docUnique] === undefined)  results[docUnique] = []
+                results[docUnique].push(+term[0])
             })
-            // console.log(result)
+            // console.log("Results", results)
 
-            Object.keys(result).forEach(signableId=>{
+            Object.keys(results).forEach(docUnique=>{
+                let category = ''
+                const [tableName, signableId] = docUnique.split("|")
+                switch(tableName) {
+                    case 'qaqc_insp_chklst_shts':
+                        category = "signature_qaqc_chklst_3rd_party"
+                        break;
+                    case 'qaqc_punchlists':
+                        category = "signature_qaqc_punchlist"
+                        break;
+                }
                 const data = { 
-                    tableName: `qaqc_insp_chklst_shts`,
+                    tableName,
                     signableId,
-                    uids: result[signableId],
-                    category: 'signature_qaqc_chklst_3rd_party',
+                    uids: results[docUnique],
+                    category,
                     wsClientId,
                 }
                 // console.log(data)

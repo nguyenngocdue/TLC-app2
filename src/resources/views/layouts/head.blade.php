@@ -61,7 +61,7 @@
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20230102.js') }}"></script>
     <script src="{{ asset('js/components/Footer4-20231219.js') }}"></script>
     
-    <script src="{{ asset('js/components/ViewAllMatrix-20240123.js') }}"></script>
+    <script src="{{ asset('js/components/ViewAllMatrix-20240401.js') }}"></script>
 
     <script src="{{ asset('js/components/Diginet-20240307.js') }}"></script>
 
