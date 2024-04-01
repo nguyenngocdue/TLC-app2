@@ -216,7 +216,9 @@
                 </a>
               </div>
               <p class="text-base text-body-color dark:text-dark-6">
-                &copy; 2024 All rights reserved.
+                {{-- Hide this until company get copyright --}}
+                {{-- &copy; 2024 All rights reserved. --}}
+                Version {{config("version.app_version")}}
               </p>
             </div>
           </div>

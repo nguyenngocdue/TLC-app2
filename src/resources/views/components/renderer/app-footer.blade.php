@@ -2,7 +2,8 @@
      title="Developed with love and care by Fortune Truong">
     <x-elapse />
     <x-elapse total=1/>
-    TLC Modular App ©2017-{{date("Y")}}. All rights reserved. Version {{config("version.app_version")}}
+    {{-- TLC Modular App ©2017-{{date("Y")}}. All rights reserved. --}}
+    Version {{config("version.app_version")}}
 </div>
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
