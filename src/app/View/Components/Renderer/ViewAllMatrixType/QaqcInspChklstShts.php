@@ -164,13 +164,18 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         ];
     }
 
+    protected function getCreateNewButton($y)
+    {
+        $line = [];
+        $fakeXAxis = [['dataIndex' => "punchlistColumn"]];
+        $this->makeCreateButton($fakeXAxis, $y, [], $line, $this->fakeQaqcPunchlistObj);
+        return $line['punchlistColumn'];
+    }
+
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
     {
         if (!isset($y->getPunchlist[0])) {
-            $line = [];
-            $fakeXAxis = [['dataIndex' => "punchlistColumn"]];
-            $this->makeCreateButton($fakeXAxis, $y, [], $line, $this->fakeQaqcPunchlistObj);
-            $status_object = $line['punchlistColumn'];
+            $status_object = $this->getCreateNewButton($y);
         } else {
             $document = $y->getPunchlist[0];
             $route = route($this->fakeQaqcPunchlistObj->type . ".edit", $document->id);

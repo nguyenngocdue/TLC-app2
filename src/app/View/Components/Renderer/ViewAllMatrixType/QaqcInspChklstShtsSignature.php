@@ -130,4 +130,10 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
             'cell_class' => "cursor-pointer1 w-10",
         ];
     }
+
+    protected function getCreateNewButton($y)
+    {
+        //Do not offer Create New button
+        return "";
+    }
 }
