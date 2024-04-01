@@ -38,4 +38,7 @@ class LibStatuses extends AbstractLibForForm
         }
         return $data;
     }
+
+    public static $finishedArray = ['closed', 'finished', 'approved'];
+    public static $naArray = ['not_applicable', 'cancelled'];
 }
