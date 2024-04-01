@@ -42,7 +42,7 @@ Your client will instantly connect to {{env('APP_NAME')}} on their phone’s web
             <div>
                 <div >
                     <h4 class="text-center text-2xl mb-9 font-bold text-yellow-600">
-                    Keep information secure
+                    Keep confidential
                     </h4>
                     <p class="text-left text-base text-white whitespace-pre-wrap">Your resources are safely housed in the cloud, ready for future access and system integration, with API access available for our Enterprise-level customers.
 
@@ -51,17 +51,5 @@ Our approach guarantees that all exchanges and the gathering of resources are bo
                 </div>
             </div>
         </div>
-    </div>
-    <div class="flex justify-between py-10 lg:py-20 mx-20 lg:mx-28">
-        <div>
-            <h3 class="whitespace-pre-wrap text-white text-3xl">{{env('APP_NAME')}} is used by many different industries to connect people instantly - no matter where they are.</h3>
-        </div>
-        <div >
-            <x-home-web-page.button>User Cases</x-home-web-page.button>
-            <div class="py-2"></div>
-            <x-home-web-page.button>Try for free</x-home-web-page.button>
-            
-        </div>
-        
-    </div>
+    </div>    
 </section>

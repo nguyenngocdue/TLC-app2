@@ -4,8 +4,8 @@
         @foreach($images as $key => $image)
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <div class="z-40">
-                <img src="{{$image}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-                <div class="text-blue-900 absolute border-3 rounded-lg top-[80%] ml-[1%] w-[98%] xl:left-1/4 xl:w-1/2 p-2 bg-gray-100 bg-opacity-80"
+                <img src="{{$image}}" class="absolute block w-full lg:w-4/5 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                <div class="text-lg text-blue-900 absolute border-3 rounded-lg top-[80%] ml-[1%] w-[98%] xl:left-1/4 xl:w-1/2 p-2 bg-white bg-opacity-90"
                     style="box-shadow: 1px 1px 10px #000;"
                 >
                     <p class="text-xl font-bold text-shadow-md">{{$contents[$key]["title"]}}</p>

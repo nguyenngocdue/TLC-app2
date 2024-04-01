@@ -37,6 +37,6 @@
         </button>
     </div>
     <div class="flex justify-center py-5 lg:py-10">
-        <x-home-web-page.button>Start now your 7-day FREE trial</x-home-web-page.button>
+        <x-home-web-page.button>Book a Demo</x-home-web-page.button>
     </div>
 </section>

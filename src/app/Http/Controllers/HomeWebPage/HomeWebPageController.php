@@ -85,18 +85,18 @@ class HomeWebPageController extends Controller
     {
         $images = $this->getUrlImages('/images/homepage-who-use-it');
         $arrayText = [
-            'HSE Manager',
-            'Production Manager',
-            'QAQC Manager',
-            'Construction Inspector',
-            'Production Admin',
-            'HR Manager',
-            'Design Manager',
-            'Finance Manager',
-            'Administrator Manager',
-            'Compliance Manager',
-            'Vendor',
-            'Contractor',
+            'Health and Safety',
+            'Manufacturing',
+            'Quality Control',
+            'Construction Site',
+            'Document Control',
+            'HR and Admin',
+            'Technical',
+            'Finance',
+            'Project Management',
+            'Supply Chain',
+            'Compliance',
+            'Consultant',
         ];
         $results = [];
         foreach ($images as $key => $value) {

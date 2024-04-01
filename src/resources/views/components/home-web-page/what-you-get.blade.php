@@ -12,10 +12,10 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                        Save Time and Money
+                        Cost Efficiency
                     </h4>
                     <p class="text-center text-base">
-                        By leveraging the app's dynamic scheduling features and automated task assignments, project planners can significantly reduce construction timelines and cut costs, ensuring that modular house projects are completed efficiently and within budget.
+                        Our web app minimizes construction costs with efficient project tracking and resource management, making quality housing more affordable.
                     </p>
                 </div>
             </div>
@@ -29,27 +29,28 @@
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                    Reduce Carbon Footprint
+                    Support Green
                     </h4>
                     <p class="text-center text-base">
-                        The app aids construction managers in selecting sustainable materials, showcasing its commitment to environmental responsibility by facilitating the use of recycled steel and eco-friendly insulation, thus minimizing the carbon footprint of modular house construction.
+                        Contribute positively to the environment by implementing the recommendations of the carbon zero bill.
                     </p>
                 </div>
             </div>
         </div>
         <div >
             <div class="w-full flex justify-center items-center">
-                <img src="/images/homepage-what-you-get/StaySafe.webp" alt=""
+                <img src="/images/homepage-what-you-get/Convenience.webp" alt=""
                         class="w-56 h-2/4 object-cover rounded-2xl"
                 >
             </div>
             <div>
                 <div >
                     <h4 class="text-center text-2xl my-5">
-                    Stay Safe
+                    Convenience
                     </h4>
                     <p class="text-center text-base">
-                        The app elevates safety standards in modular house construction by offering comprehensive digital checklists and hazard alerts, ensuring adherence to rigorous safety protocols and safeguarding worker well-being.</p>
+                        Enhance project management with our app's easy access to scheduling, documents, and collaboration tools, all in one place.
+                    </p>
                 </div>
             </div>
         </div>
@@ -65,7 +66,7 @@
                     Go above and beyond
                     </h4>
                     <p class="text-center text-base">
-                        The app exceeds typical management tools by enhancing stakeholder engagement with real-time updates and interactive feedback, elevating modular housing projects beyond standard expectations.</p>
+                        With real-time updates and interactive feedback, elevating modular housing projects beyond standard expectations.</p>
                 </div>
             </div>
         </div>
