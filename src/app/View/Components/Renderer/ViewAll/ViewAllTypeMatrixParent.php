@@ -138,7 +138,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             $item = [
                 'value' => $value,
                 'cell_title' => 'Open this document (' . $status['title'] . ')',
-                'cell_class' => "$bgColor $textColor",
+                'cell_class' => "$bgColor $textColor text-center",
                 'cell_href' => $editRoute,
             ];
             return (object) $item;
@@ -276,7 +276,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         // dd($yAxis);
         $dataSource = $this->reIndexDataSource($dataSource);
         $result = [];
-        $api_url = route($this->type . '.' . $this->apiToCallWhenCreateNew);
+        // $api_url = route($this->type . '.' . $this->apiToCallWhenCreateNew);
         $extraColumns = $this->getXAxisExtraColumns();
 
         foreach ($yAxis as $y) {

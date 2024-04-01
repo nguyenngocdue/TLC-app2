@@ -115,6 +115,11 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
             ];
         }
+        $QAQC_DISCIPLINE_ID = 7;
+        $result = [
+            ...$result,
+            ['dataIndex' => 'final_punchlist', 'prod_discipline_id' => $QAQC_DISCIPLINE_ID],
+        ];
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
         return $result;
     }
@@ -131,10 +136,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         return [
             'project_id' => $this->project,
-            'qaqc_insp_tmpl_id' => $this->qaqcInspTmpl,
             'sub_project_id' => $this->subProject,
             'prod_routing_id' => $this->prodRouting,
-            'prod_discipline_id' => $this->prodDiscipline,
+            'qaqc_insp_tmpl_id' => $this->qaqcInspTmpl,
+            // 'prod_discipline_id' => $this->prodDiscipline,
         ];
     }
 
@@ -186,12 +191,5 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         ];
 
         return $result;
-    }
-
-    function getRightMetaColumns()
-    {
-        return [
-            ['dataIndex' => 'final_punchlist',],
-        ];
     }
 }
