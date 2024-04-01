@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('erp_name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('quantity')->nullable();
+            $table->float('prod_sequence_progress')->nullable();
+
             $table->unsignedBigInteger('sub_project_id');
             $table->unsignedBigInteger('prod_routing_id')->nullable();
             $table->unsignedBigInteger('room_type_id')->nullable();

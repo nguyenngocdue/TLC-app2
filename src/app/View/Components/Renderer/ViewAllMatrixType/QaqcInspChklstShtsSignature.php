@@ -89,11 +89,11 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         // return count($nominatedUsers) . " " . count($signatures);
     }
 
-    protected function makeStatus($document, $forExcel, $route = null, $statuses = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null)
     {
         // dd($document);
-        if (is_null($route)) {
-            $route = route($this->type . ".edit", $document->id);
+        if (is_null($editRoute)) {
+            $editRoute = route($this->type . ".edit", $document->id);
         }
 
         $signatures = $document->signature_qaqc_chklst_3rd_party ?: collect();
@@ -102,12 +102,12 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
         $renderer = $this->renderer($nominatedUsers, $signatures, $document->id);
 
-        $openSheet = "<div class='mt-2'><a href='$route' class='bg-blue-600 text-white rounded p-2'>Open</a></div>";
+        $openSheet = "<div class='mt-2'><a href='$editRoute' class='bg-blue-600 text-white rounded p-2'>Open</a></div>";
         // [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
 
         return (object)[
             'value' => $renderer . $openSheet,
-            // 'cell_href' => $route,
+            // 'cell_href' => $editRoute,
             'cell_class' => "cursor-pointer1 w-10",
         ];
     }

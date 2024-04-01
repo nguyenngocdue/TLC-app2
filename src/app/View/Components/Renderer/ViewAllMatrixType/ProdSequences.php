@@ -194,6 +194,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $columns = [
             ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
+            ['dataIndex' => 'prod_sequence_progress',  'title' => "Progress (%)", 'width' => 300, 'fixed' => 'left',],
             ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left-no-bg', "title" => "Summary", 'colspan' => 4],
             ['dataIndex' => 'room_type',  'align' => 'center', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
@@ -230,6 +231,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
+            'prod_sequence_progress' => (object)[
+                'cell_div_class' => 'text-right',
+                'value' => ($v = $y->prod_sequence_progress) ? number_format($v, 2) : ""
+            ],
             'production_name' => (object)[
                 'cell_div_class' => 'whitespace-nowrap',
                 'value' => $y->production_name

@@ -12,6 +12,7 @@ class Prod_order extends ModelExtended
         "started_at", "finished_at", "total_hours", "total_man_hours", "room_type_id",
         "production_name", "compliance_name", "erp_name", "sheet_count",
         "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
+        "prod_sequence_progress",
     ];
 
     public static $eloquentParams = [

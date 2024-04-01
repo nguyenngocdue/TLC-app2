@@ -19,6 +19,21 @@ class ProdSequenceToProdOrderService
             ->find($id);
     }
 
+    protected $finishedArray = ['closed', 'finished', 'approved'];
+    protected $naArray = ['not_applicable', 'cancelled'];
+    private function getProdSequenceProgress($allProdSequences)
+    {
+        $finishedCount = 0;
+        $total = 0;
+        foreach ($allProdSequences as $prodSequence) {
+            $status = $prodSequence->status;
+            if (in_array($status, $this->finishedArray)) $finishedCount++;
+            if (!in_array($status, $this->naArray)) $total++;
+        }
+
+        return round(100 * $finishedCount / $total, 2);
+    }
+
     public function update($id)
     {
         $prodOrder = $this->getProdSequence($id)->getProdOrder;
@@ -46,12 +61,8 @@ class ProdSequenceToProdOrderService
             'sheet_count' => $sheet_count,
         ];
         $dataUpdated += $the6Metric;
-
-        if ($isFinished) {
-            $dataUpdated['status'] = 'finished';
-        } else {
-            $dataUpdated['status'] = 'in_progress';
-        }
+        $dataUpdated['prod_sequence_progress'] = $this->getProdSequenceProgress($allProdSequences);
+        $dataUpdated['status'] =  ($isFinished) ? 'finished' : 'in_progress';
         $prodOrder->update($dataUpdated);
     }
 }

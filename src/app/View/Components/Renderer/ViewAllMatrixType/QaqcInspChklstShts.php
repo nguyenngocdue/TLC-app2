@@ -153,7 +153,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $api_url = route("qaqc_punchlists." . $apiToCallWhenCreateNew);
             $line = [];
             $this->makeCreateButton($xAxis, $y, [], $line, $api_url, $apiToCallWhenCreateNew);
-            dump($line);
+            // dump($line);
             // $route = route("qaqc_punchlists.create");
             // $status_object = (object) [
             //     'value' => '<i class="fa-duotone fa-circle-plus"></i>',
@@ -183,7 +183,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     function getRightMetaColumns()
     {
         return [
-            ['dataIndex' => 'final_punchlist',],
+            // ['dataIndex' => 'final_punchlist',],
         ];
     }
 }

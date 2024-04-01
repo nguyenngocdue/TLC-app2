@@ -105,7 +105,7 @@ class ProdSequences extends MatrixForReportParent
         $columns = [
             ['dataIndex' => 'production_name', 'fixed' => 'left',],
             ['dataIndex' => 'quantity', "title" => "QTY", 'fixed' => 'left', 'width' => 100],
-            ['dataIndex' => 'progress', 'fixed' => 'left',],
+            ['dataIndex' => 'progress', 'title' => 'Progress (%)',  'fixed' => 'left',],
         ];
 
         return [...$result, ...$columns];
@@ -121,6 +121,10 @@ class ProdSequences extends MatrixForReportParent
             ];
             $result[$y->id]['quantity'] = (object)[
                 'value' => $y->quantity,
+                'cell_class' => "whitespace-nowrap text-right",
+            ];
+            $result[$y->id]['progress'] = (object)[
+                'value' => number_format($y->prod_sequence_progress, 2),
                 'cell_class' => "whitespace-nowrap text-right",
             ];
         }
