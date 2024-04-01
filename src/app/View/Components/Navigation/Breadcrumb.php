@@ -131,7 +131,7 @@ class Breadcrumb extends Component
                 if (in_array($type, ['qaqc_insp_chklsts'])) {
                     if (CurrentUser::get()->isProjectClient()) break;
                 }
-                if($app['show_renderer'] == "qr-app-renderer") {
+                if ($app['show_renderer'] == "qr-app-renderer") {
                     $id = $modelPath::where('slug', $id)->first()->id ?? $id;
                 }
                 $this->links[] = ['href' => route($type . '.edit', $id), 'title' => 'Edit Mode', 'icon' => '<i class="fa-duotone fa-pen-to-square"></i>'];
@@ -147,7 +147,7 @@ class Breadcrumb extends Component
                 break;
             case 'edit':
                 [$title, $icon] = $this->getTitleAndIconForPrintButton($app['show_renderer']);
-                if($app['show_renderer'] == "qr-app-renderer") {
+                if ($app['show_renderer'] == "qr-app-renderer") {
                     $id = $modelPath::findOrFail($id)->slug ?? $id;
                 }
                 $this->links[] = ['href' => route($type . '.show', $id), 'title' => $title, 'icon' => "<i class='$icon'></i>"];
@@ -159,6 +159,8 @@ class Breadcrumb extends Component
     private function showButtonViewAll($type)
     {
         if ($type === 'esg_sheets') $type = 'esg_master_sheets';
+        if ($type === 'qaqc_punchlists') $type = 'qaqc_insp_chklst_shts';
+
         $currentRouteName = CurrentRoute::getName();
         // dump($currentRouteName);
         if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {

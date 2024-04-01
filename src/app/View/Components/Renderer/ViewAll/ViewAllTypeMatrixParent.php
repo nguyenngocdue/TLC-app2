@@ -107,28 +107,33 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $result;
     }
 
-    protected function getValueToRender($status, $document, $forExcel)
+    protected function getValueToRender($status, $document, $forExcel, $objectToGet)
     {
-        if ($this->attOfCellToRender == 'status') {
+        $objectToGet = (is_null($objectToGet) ? $this : $objectToGet);
+        if ($objectToGet->attOfCellToRender == 'status') {
             $value = $status['icon'] ? $status['icon'] : $document->status;
             if ($forExcel) $value = $document->status;
             return $value;
         }
-        $value = $document->{$this->attOfCellToRender};
+        $value = $document->{$objectToGet->attOfCellToRender};
         if (is_numeric($value)) $value = number_format($value, 2);
         // dump($value);
         return $value ? $value : '';
     }
 
-    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null)
     {
         if (is_null($statuses)) $statuses = $this->statuses;
         $status = $statuses[$document->status] ?? null;
+        // if ($objectToGet) {
+        //     dump($status);
+        //     dump($statuses);
+        // }
         if (is_null($editRoute)) {
             $editRoute = route($this->type . ".edit", $document->id);
         }
         if (!is_null($status)) {
-            $value = $this->getValueToRender($status, $document, $forExcel);
+            $value = $this->getValueToRender($status, $document, $forExcel, $objectToGet);
             [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document, $statuses);
             $item = [
                 'value' => $value,
@@ -226,15 +231,16 @@ abstract class ViewAllTypeMatrixParent extends Component
     {
         return [];
     }
-    function makeCreateButton($xAxis, $y, $extraColumns, &$line, $api_url, $apiToCallWhenCreateNew)
+    function makeCreateButton($xAxis, $y, $extraColumns, &$line, $objectToGetCreateNewParams)
     {
+        $api_url = route($objectToGetCreateNewParams->type . '.' . $objectToGetCreateNewParams->apiToCallWhenCreateNew);
         $meta['caller'] = 'view-all-matrix';
         $api_meta = json_encode($meta);
         foreach ($xAxis as $x) {
             if (isset($x['isExtra']) && $x['isExtra']) continue;
             $xId = $x['dataIndex'];
             $xClass = $x['column_class'] ?? "";
-            $api_params = $this->getCreateNewParams($x, $y);
+            $api_params = $objectToGetCreateNewParams->getCreateNewParams($x, $y);
 
             if (isset($api_params['name'])) {
                 //prod_order name CB01' => CB01`
@@ -245,7 +251,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             // dump($api_params);
             $api_callback = $this->apiCallback;
             // [{team_id:' . $yId . ', ts_date:"' . $xId . '", assignee_1:' . $y->def_assignee . '}]
-            $api = "callApi" . ucfirst($apiToCallWhenCreateNew);
+            $api = "callApi" . ucfirst($objectToGetCreateNewParams->apiToCallWhenCreateNew);
             $cell_href = "javascript:$api(\"$api_url\",[$api_params], $api_meta, $api_callback)";
             // dump($cell_href);
             $line[$xId] = (object)[
@@ -285,7 +291,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_div_class' => 'whitespace-nowrap',
             ];
             if ($this->allowCreation) {
-                $this->makeCreateButton($xAxis, $y, $extraColumns, $line, $api_url, $this->apiToCallWhenCreateNew);
+                $this->makeCreateButton($xAxis, $y, $extraColumns, $line, $this);
             } else {
                 foreach ($xAxis as $x) {
                     if (isset($x['isExtra']) && $x['isExtra']) continue;
