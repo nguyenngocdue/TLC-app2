@@ -92,12 +92,31 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null,  $objectToGet = null)
     {
         // dd($document);
+        // dump($document->getTable());
         if (is_null($editRoute)) {
             $editRoute = route($this->type . ".edit", $document->id);
         }
 
-        $signatures = $document->signature_qaqc_chklst_3rd_party ?: collect();
-        $nominatedUserIds = $document->{"signature_qaqc_chklst_3rd_party_list()"} ?: collect();
+        $nominatedUserIds = collect();
+        $signatures = collect();
+        switch ($document->getTable()) {
+            case "qaqc_insp_chklst_shts":
+                $signaturesFn = "signature_qaqc_chklst_3rd_party";
+                $nominatedFn = $signaturesFn . "_list";
+                break;
+            case "qaqc_punchlists":
+                $signaturesFn = "signature_qaqc_punchlist";
+                $nominatedFn = $signaturesFn . "_list";
+                break;
+            default:
+                dump("Unsupported table: " . $document->getTable());
+                break;
+        }
+
+        $nominatedUserIds = $document->{$nominatedFn}();
+        $nominatedUserIds = $nominatedUserIds->pluck('id');
+        $signatures = $document->{$signaturesFn};
+
         if (count($nominatedUserIds) == 0) return (object)[];
         $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
         $renderer = $this->renderer($nominatedUsers, $signatures, $document->id);
