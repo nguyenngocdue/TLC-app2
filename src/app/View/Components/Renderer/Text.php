@@ -12,8 +12,9 @@ class Text extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(
+        private $truncate = true,
+    ) {
         //
     }
 
@@ -26,7 +27,9 @@ class Text extends Component
     {
         return function (array $data) {
             $str = $data['slot'];
-            $str = Str::limitWords($str, 10);
+            if ($this->truncate) {
+                $str = Str::limitWords($str, 10);
+            }
             return "<p class='p-2'>" . $str . "</p>";
         };
     }

@@ -67,6 +67,12 @@ trait TableTraitApplyRender
         $attributes = "$name $attributeRender $propertyRender $typeRender $cbbDataSourceRender ";
         $attributes .= "$dataLineRender $columnRender $cellRender $rendererParam $formatterName $onChange ";
         $attributes .= "$sortByRender $rowIndexRender $rowReadOnly";
+
+        //This to make sure in print mode, comment will be displayed in full
+        if ($renderer === 'text' && $this->noCss) {
+            $attributes .= " truncate=0 ";
+        }
+
         if (env("CONTROL_TRUE_WIDTH")) {
             $styleRender = isset($column['width']) ? 'style="width: ' . $column['width'] . 'px;"' : '';
             $attributes .= "$styleRender ";
