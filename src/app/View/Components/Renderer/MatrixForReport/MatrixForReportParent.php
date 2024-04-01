@@ -19,8 +19,8 @@ abstract class MatrixForReportParent extends Component
 
     protected $statuses;
 
-    protected $finishedArray = ['closed', 'finished', 'approved'];
-    protected $naArray = ['not_applicable', 'cancelled'];
+    protected $finishedArray = LibStatuses::$finishedArray;
+    protected $naArray = LibStatuses::$naArray;
 
     protected $groupBy = null;
     protected $groupByLength = null;

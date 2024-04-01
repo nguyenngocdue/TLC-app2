@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_sequence;
 
 class ProdSequenceToProdOrderService
@@ -19,16 +20,14 @@ class ProdSequenceToProdOrderService
             ->find($id);
     }
 
-    protected $finishedArray = ['closed', 'finished', 'approved'];
-    protected $naArray = ['not_applicable', 'cancelled'];
     private function getProdSequenceProgress($allProdSequences)
     {
         $finishedCount = 0;
         $total = 0;
         foreach ($allProdSequences as $prodSequence) {
             $status = $prodSequence->status;
-            if (in_array($status, $this->finishedArray)) $finishedCount++;
-            if (!in_array($status, $this->naArray)) $total++;
+            if (in_array($status, LibStatuses::$finishedArray)) $finishedCount++;
+            if (!in_array($status, LibStatuses::$naArray)) $total++;
         }
 
         return round(100 * $finishedCount / $total, 2);
