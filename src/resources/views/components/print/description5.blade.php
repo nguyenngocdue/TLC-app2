@@ -1,4 +1,4 @@
-@if($content instanceof \Illuminate\Support\Collection)
+@if($content instanceof \Illuminate\Support\Collection || is_array($content))
     <div class='col-span-{{$colSpan}} grid gap-0'>
         <div class='grid grid-row-1'>
             <div class='grid grid-cols-12 text-right'>

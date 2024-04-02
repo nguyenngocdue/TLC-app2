@@ -1,5 +1,10 @@
 @php
-    $value = $content->toArray();
+    if($content instanceof \Illuminate\Support\Collection){
+        $value = $content->toArray();
+    }else {
+        $value = $content['signature_multi']->toArray();
+        $dataSource = $content;
+    }
 @endphp
 @if (!(sizeof($value) == 0 && ($control == 'attachment')) && !$hiddenLabel)
     <label class='p-2 h-full w-full border border-gray-600 text-base font-medium flex {{$valueColSpan[0]}} items-center {{$newLine ? 'justify-start' : 'justify-end'}} col-start-1'>{{$label}}</label>
@@ -45,9 +50,7 @@
             @break
         @case('signature_multi')
             <div class='p-2  border border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
-                @foreach($value as $signature)
-                    <x-print.signature5 :relationships="$relationships" :dataSource="$value" />
-                @endforeach
+                <x-print.signature-multiple5 :relationships="$relationships" :dataSource="$dataSource" : />
             </div>
             @break
         @case('signature')
