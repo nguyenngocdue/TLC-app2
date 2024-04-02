@@ -86,7 +86,9 @@ class AttachmentName
             + The file extension must match the name of the uploaded file
         */
 
-        /* names were uploaded */
+        /* 
+            + names were uploaded 
+        */
         //$fileName = 'file.jpg'; //case: 1, 2, 2.1, 2.2, 3
         // $fileName = 'file-1.jpg'; //case: 4, 4.1, 4.2, 5
         // $fileName = 'file-1-1.png'; //case: 4.3
@@ -99,11 +101,15 @@ class AttachmentName
 
 
 
-        /* types of extension that exist in database */
+        /* 
+            + types of extension that exist in database 
+        */
         // $extensionFile = 'jpg';
         // $extensionFile = 'png';
 
-        /*names of media that exist in database */
+        /*
+            + names of media that exist in database 
+        */
         // $mediaNames = ['file.jpg']; //case 1 (OK)
         // $mediaNames = ['file.jpg', 'file-1.jpg']; //case 2 (OK)
         // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-10.jpg']; //case 2.1 (OK)
