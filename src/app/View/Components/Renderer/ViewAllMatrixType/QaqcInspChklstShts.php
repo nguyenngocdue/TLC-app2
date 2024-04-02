@@ -70,7 +70,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $this->fakeQaqcPunchlistObj = new FakeQaqcPunchlist();
 
         $template = Qaqc_insp_tmpl::find($this->qaqcInspTmpl);
-        $this->hasPunchlist = $template->has_punchlist;
+        $this->hasPunchlist = $template?->has_punchlist;
     }
 
     private function getUserSettings()
