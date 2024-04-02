@@ -10,7 +10,7 @@ class AttachmentName
     private static function isValueInData($needle, $hayStack, $strSearch, $extension)
     {
         foreach ($needle as $key => $value) {
-            if (str_contains($value, $strSearch) && str_contains($hayStack[$key], $extension)) {
+            if (in_array($needle, [$strSearch]) && str_contains($value, $strSearch) && str_contains($hayStack[$key], $extension)) {
                 return true;
             }
         }
@@ -79,6 +79,8 @@ class AttachmentName
         $baseName = basename($fileName, '.' . $extensionFile);
 
         $isValueInData = self::isValueInData($mediaNames, $extensionsDB, $baseName, $extensionFile);
+        // dump($isValueInData, $extensionsDB, $baseName, $mediaNames);
+
         if (in_array($fileName, $mediaNames) || $isValueInData) {
             // $tempMediaNames = array_column($tempMedia, 'filename');
             $tempData =  $mediaNames;
@@ -92,58 +94,89 @@ class AttachmentName
         return $fileName;
     }
 
-
+    private static function extractExtensions($fileNames)
+    {
+        return array_map(function ($fileName) {
+            return pathinfo($fileName, PATHINFO_EXTENSION);
+        }, $fileNames);
+    }
     public static function testCasesUploadMedia()
     {
-        $extension = 'png';
-        $nameUploaded = [
-            'file.' . $extension,
-            'file-1.' . $extension,
-            'file-c-2.' . $extension,
-            'file-1-c-2.' . $extension,
-            'file-1-2-3-4-5.' . $extension,
-            'file-1-2-3-4-5-a.' . $extension,
+        $testCases = [
+            [
+                'haystack' =>  ['file.png'],
+                'needle' => 'file.png',
+                'expect' => 'file-1.png',
+            ],
+            [
+                'haystack' => ['file.png', 'file-1.png'],
+                'needle' => 'file.png',
+                'expect' => 'file-2.png',
+            ],
+            [
+                'haystack' => ['file.png', 'file-2.png', 'file-3.png'],
+                'needle' => 'file.png',
+                'expect' => 'file-4.png',
+            ],
+            [
+                'haystack' => ['file-1.png'],
+                'needle' => 'file.png',
+                'expect' => 'file.png',
+            ],
+            [
+                'haystack' =>   ['file.png', 'file-1.png'],
+                'needle' => 'file.png',
+                'expect' => 'file-2.png',
+            ],
+            [
+                'haystack' => ['file.png', 'file-1.png'],
+                'needle' => 'file-1.png',
+                'expect' => 'file-1-1.png',
+            ],
+            [
+                'haystack' =>  ['file-c-2.png'],
+                'needle' => 'file-c-2.png',
+                'expect' => 'file-c-2-1.png',
+            ],
+            [
+                'haystack' =>  ['file-c-2-1.png'],
+                'needle' => 'file-c-2.png',
+                'expect' => 'file-c-2.png',
+            ],
+            [
+                'haystack' =>  ['file-c-2-1.png', 'file-c-2-10.png'],
+                'needle' => 'file-c-2.png',
+                'expect' => 'file-c-2.png',
+            ],
+            [
+                'haystack' =>  ['file-c-2.png', 'file-c-2-10.png'],
+                'needle' => 'file-c-2.png',
+                'expect' => 'file-c-2-11.png',
+            ],
+            [
+                'haystack' =>  ['file-c-1-2-3-4a.png'],
+                'needle' => 'file-c-1-2-3-4a.png',
+                'expect' => 'file-c-1-2-3-4a-1.png',
+            ],
+            [
+                'haystack' =>  ['file-c-1-2-3-4a.png', 'file-c-1-2-3-4a-1.png'],
+                'needle' => 'file-c-1-2-3-4a.png',
+                'expect' => 'file-c-1-2-3-4a-2.png',
+            ]
         ];
 
-        // Assuming this is data represent records in the 'attachments' table
-        $namesHaveInDB = [
-            ['case_1' => 'file.png'],
-            ['case_2' => 'file.png', 'file-1.png'],
-            ['case_3' => 'file.png', 'file-2.png', 'file-3.png'],
-            ['case_4' => 'file-1.png'],
-            ['case_5' => 'file-2.png'],
-            ['case_6' => 'file-c-2.png'],
-            ['case_7' => 'file-1-c-2.png'],
-            ['case_8' => 'file-1-2-3-4-5.png'],
-            ['case_9' => 'file-1-2-3-4-5-a.png'],
-            ['case_10' => 'file-1-2-3-4-5-a.png', 'file-1-2-3-4-5-a-1.png'],
-            ['case_11' => 'file-1-2-3-4-5-a.png', 'file-1-2-3-4-5-a-1.png', 'file-1-2-3-4-5-a-10.png'],
-            ['case_12' => 'file-1.png', 'file-2.png', 'file-3.png']
-        ];
-
-        $extensionInDB = [
-            ['png'],
-            ['png', 'png'],
-            ['png', 'png', 'png'],
-            ['png'],
-            ['png'],
-            ['png'],
-            ['png'],
-            ['png'],
-            ['png'],
-            ['png', 'png'],
-            ['png', 'png', 'png'],
-            ['png', 'png', 'png']
-        ];
 
         $result = [];
-        foreach ($nameUploaded as $nameUp) {
-            foreach ($namesHaveInDB as $key => $namesDB) {
-                $k = key($namesDB);
-                $namesDB = array_values($namesDB);
-                $_extensionInDB =  $extensionInDB[$key];
-                $newFileName = AttachmentName::slugifyImageName($nameUp, $namesDB, $_extensionInDB);
-                $result[$nameUp][$k] = $newFileName;
+        foreach ($testCases as $key => $cases) {
+            $haystack = $cases['haystack'];
+            $needle = $cases['needle'];
+            $expect = $cases['expect'];
+            $extensionDB = AttachmentName::extractExtensions($haystack);
+            $newFileName = AttachmentName::slugifyImageName($needle, $haystack, $extensionDB);
+            if ($expect === $newFileName) {
+                $result['key=' . $key + 1 . ': ' . $needle] = 'PASS';
+            } else {
+                $result['key=' . $key + 1 . ': ' . $needle] = 'FAILED' . ' (expect: ' . $expect . ' !== output:' . $newFileName . ')';
             }
         }
         dd($result);
