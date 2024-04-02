@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Http\Services\MatrixFilterParamService;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -13,23 +15,30 @@ trait TraitHelperRedirect
 		if ($request->input('redirect_back_to_last_page')) $routeView = 'back';
 		if ($request->input('saveAndClose') == 'true') $routeView = 'index';
 		$urlRedirect = '';
+		$pluralType = Str::plural($this->type);
 		switch ($routeView) {
 			case 'back':
 				return redirect()->back();
 			case 'index':
-				$type = $this->type;
-				switch ($this->type) {
-					case 'esg_sheet':
-						$type = 'esg_master_sheet';
+				$matrixApps = JsonControls::getAppsHaveViewAllMatrix();
+				$params = [];
+				if (in_array($pluralType, $matrixApps)) {
+					$params = MatrixFilterParamService::get($pluralType);
+				}
+				$paramStr = sizeof($params) > 0 ? '?' . http_build_query($params, '', '&') : '';
+
+				switch ($pluralType) {
+					case 'esg_sheets':
+						$pluralType = 'esg_master_sheets';
 						break;
-					case 'qaqc_punchlist':
-						$type = 'qaqc_insp_chklst_sht';
+					case 'qaqc_punchlists':
+						$pluralType = 'qaqc_insp_chklst_shts';
 						break;
 				}
-				$urlRedirect = route(Str::plural($type) . ".index");
+				$urlRedirect = route($pluralType . ".index") . $paramStr;
 				break;
 			case 'edit':
-				$urlRedirect = route(Str::plural($this->type) . ".edit", $theRow->id);
+				$urlRedirect = route($pluralType . ".edit", $theRow->id);
 				break;
 			default:
 				# code...
