@@ -8,7 +8,7 @@
             $updateAt = $signature->update_at ?? $signature['updated_at'];
             $dateTime = \App\Utils\Support\DateTimeConcern::convertForLoading('picker_datetime', $updateAt) ?? "";
         @endphp
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-4">
         <x-controls.signature.signature2a name={{$name}} value={{$value}} signatureId={{$userId}} readOnly=1 />                            
         <x-renderer.avatar-user size="xlarge" uid="{{$userId}}" showCompany=1 content={{$dateTime}}/>
         </div>
