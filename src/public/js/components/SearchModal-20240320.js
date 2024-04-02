@@ -709,7 +709,7 @@ function changeTab(evt, index,level = 1,) {
         }
     });
     evt.target.classList.add("text-blue-500")
-    console.log(evt.target.classList)
+    // console.log(evt.target.classList)
     document.getElementById(`vertical-tab${level}-${index}`).classList.remove("hidden")
   }
 function visible(id){

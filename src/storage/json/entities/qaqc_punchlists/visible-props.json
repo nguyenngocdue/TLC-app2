@@ -34,6 +34,13 @@
         "inspected": "true",
         "not_applicable": "true"
     },
+    "_production_name": {
+        "name": "_production_name",
+        "column_name": "production_name",
+        "new": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",

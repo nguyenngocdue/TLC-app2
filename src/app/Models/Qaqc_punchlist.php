@@ -8,7 +8,7 @@ class Qaqc_punchlist extends ModelExtended
 {
     protected $fillable = [
         "name", "description", "qaqc_insp_chklst_id", "owner_id", "status",
-        "project_id", "sub_project_id",
+        "project_id", "sub_project_id", "production_name",
     ];
 
     public static $eloquentParams = [
