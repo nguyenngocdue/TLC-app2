@@ -62,7 +62,7 @@ class ViewAllTypeMatrix extends Component
             case "exam_sheets":
                 return Blade::render("<x-renderer.view-all-matrix-type.ExamSheets/>");
             default:
-                return "Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).";
+                return "<div class='w-full p-4 border rounded mt-4 bg-gray-100 text-center'>Unknown how to render matrix view for " . $this->type . " (ViewAllTypeMatrix).<br/>Please use List View.</div>";
         }
     }
 }
