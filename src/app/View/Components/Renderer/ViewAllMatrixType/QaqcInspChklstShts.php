@@ -24,7 +24,8 @@ class FakeQaqcPunchlist
             'project_id' => $y->getProject->id,
             'sub_project_id' => $y->sub_project_id,
             'status' => 'new',
-            'qaqc_insp_chklst_id' => $y->id
+            'qaqc_insp_chklst_id' => $y->id,
+            'production_name' => $y->getProdOrder->production_name,
         ];
     }
 }
