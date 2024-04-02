@@ -4,6 +4,7 @@ namespace App\View\Components\Navigation;
 
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\Workflow\LibApps;
+use App\Http\Services\MatrixFilterParamService;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
@@ -168,16 +169,21 @@ class Breadcrumb extends Component
         $currentRouteName = CurrentRoute::getName();
         if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
 
+        $matrixApps = JsonControls::getAppsHaveViewAllMatrix();
+
+        $params = [];
+        if (in_array($type, $matrixApps) && CurrentRoute::getControllerAction() == 'edit') {
+            $params = MatrixFilterParamService::get($type);
+        }
+
+        // dump($params);
         if ($type === 'esg_sheets') $type = 'esg_master_sheets';
         if ($type === 'qaqc_punchlists') $type = 'qaqc_insp_chklst_shts';
 
-        // $matrixApps = JsonControls::getAppsHaveViewAllMatrix();
-        // if(in_array($this->type, $matrixApps)){
-
-        // }
+        $paramStr = sizeof($params) > 0 ? '?' . http_build_query($params, '', '&') : '';
 
         $this->links[] = [
-            'href' => route($type . '.index'),
+            'href' => route($type . '.index') . $paramStr,
             'title' => 'View All',
             'icon' => '<i class="fa-solid fa-table-cells"></i>',
         ];
