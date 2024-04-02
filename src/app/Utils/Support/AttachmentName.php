@@ -102,7 +102,6 @@ class AttachmentName
     }
     public static function testCasesUploadMedia()
     {
-        // Assuming this is data represent records in the 'attachments' table
         $testCases = [
             [
                 'haystack' =>  ['file.png'],
