@@ -101,7 +101,6 @@ class UploadService2
                         toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
                     } else {
                         $fileName =  $file->getClientOriginalName();
-                        // $extensionFile = $file->getClientOriginalExtension();
                         $mediaNames = Attachment::get()->pluck('filename')->toArray();
                         $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
                         // dd($fileName); //to test case
