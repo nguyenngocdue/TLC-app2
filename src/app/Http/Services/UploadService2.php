@@ -89,16 +89,21 @@ class UploadService2
                 $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
+
                 $request->validate([
                     $nameValidate => 'array|max:' . $fileUploadRemainingCount,
                     $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
                 ]);
+
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
                     if (!$file->getClientOriginalExtension()) {
                         toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
                     } else {
-                        $fileName = AttachmentName::slugifyImageName($file, $attachmentRows);
+                        $fileName =  $file->getClientOriginalName();
+                        // $extensionFile = $file->getClientOriginalExtension();
+                        $mediaNames = Attachment::get()->pluck('filename')->toArray();
+                        $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
                         // dd($fileName); //to test case
                         $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);

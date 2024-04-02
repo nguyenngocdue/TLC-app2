@@ -72,72 +72,17 @@ class AttachmentName
         return [$baseName, $maxNumber];
     }
 
-    public static function slugifyImageName($file, $tempMedia)
+    public static function slugifyImageName($fileName, $mediaNames, $extensionsDB = [])
     {
-        $fileName =  $file->getClientOriginalName();
-        $extensionFile = $file->getClientOriginalExtension();
-        $mediaNames = Attachment::get()->pluck('filename')->toArray();
-
-        $extensions = Attachment::get()->pluck('extension')->toArray();
+        $extensionFile = substr($fileName, strrpos($fileName, '.') + 1);
+        $extensionsDB = $extensionsDB ? $extensionsDB : Attachment::get()->pluck('extension')->toArray();
         $baseName = basename($fileName, '.' . $extensionFile);
 
-        /*
-            + You have to select a specific case for each corresponding situation. [case 1 <=> case 1]
-            + The file extension must match the name of the uploaded file
-        */
-
-        /* 
-            + names were uploaded 
-        */
-        //$fileName = 'file.jpg'; //case: 1, 2, 2.1, 2.2, 3
-        // $fileName = 'file-1.jpg'; //case: 4, 4.1, 4.2, 5
-        // $fileName = 'file-1-1.png'; //case: 4.3
-        // $fileName = 'file-c-2.jpg'; //case 6
-        // $fileName = 'file-1-c-2.jpg'; //case 7
-        // $fileName = 'file-1-2-3-4-5.jpg'; //case 8
-        // $fileName = 'file-1-2-3-4-5-a.jpg'; //case: 9, 10, 11
-
-        // $fileName = 'FILE-1.png'; // case: 12
-
-
-
-        /* 
-            + types of extension that exist in database 
-        */
-        // $extensionFile = 'jpg';
-        // $extensionFile = 'png';
-
-        /*
-            + names of media that exist in database 
-        */
-        // $mediaNames = ['file.jpg']; //case 1 (OK)
-        // $mediaNames = ['file.jpg', 'file-1.jpg']; //case 2 (OK)
-        // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-10.jpg']; //case 2.1 (OK)
-        // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-100.jpg']; //case 2.2 (OK)
-
-        // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-3.jpg']; //case 3 (OK)
-
-        // $mediaNames = ['file-1.jpg', 'file-2.jpg']; //case 4 (OK) 
-        // $mediaNames = ['file-1.jpg', 'file-1-1.jpg']; //case 4.1 (OK)
-        // $mediaNames = ['file-1.jpg', 'file-1-1.jpg', 'file-1-1.png']; //case 4.2, 4.3 (OK)
-
-        // $mediaNames = ['file-2.jpg']; //case 5 => current out = file.jpg (NO)
-        // $mediaNames = ['file-c-2.jpg']; //case 6 (OK)
-        // $mediaNames = ['file-1-c-2.jpg']; //case 7 (OK)
-        // $mediaNames = ['file-1-2-3-4-5.jpg']; //case 8 (OK)
-        // $mediaNames = ['file-1-2-3-4-5-a.jpg']; //case 9 (OK)
-        // $mediaNames = ['file-1-2-3-4-5-a-1.jpg', 'file-1-2-3-4-5-a.jpg']; //case 10 (OK)
-        // $mediaNames = ['file-1-2-3-4-5-a-1.jpg', 'file-1-2-3-4-5-a.jpg', 'file-1-2-3-4-5-a-10.jpg']; //case 11 (OK)
-
-        // $mediaNames = ['FILE.png', 'FILE-1.png', 'FILE-1-1.png', 'FILE-1-2.png', 'FILE-1-3.png']; //case 12 (OK)
-
-        $isValueInData = self::isValueInData($mediaNames, $extensions, $baseName, $extensionFile);
-
+        $isValueInData = self::isValueInData($mediaNames, $extensionsDB, $baseName, $extensionFile);
         if (in_array($fileName, $mediaNames) || $isValueInData) {
-            $tempMediaNames = array_column($tempMedia, 'filename');
-            $tempData =  array_merge($mediaNames, $tempMediaNames);
+            // $tempMediaNames = array_column($tempMedia, 'filename');
+            $tempData =  $mediaNames;
             [$baseName,  $maxNumber] =  self::getMaxNumberMediaName($tempData, $fileName, $extensionFile);
-            // dump($baseName,  $maxNumber);
             $fileName =  $baseName . '-' . $maxNumber + 1 . '.' . $extensionFile;
             if (in_array($fileName, $mediaNames)) {
                 Log::info("Duplicate " . $fileName . "in attachments table.");
@@ -145,5 +90,62 @@ class AttachmentName
             return $fileName;
         }
         return $fileName;
+    }
+
+
+    public static function testCasesUploadMedia()
+    {
+        $extension = 'png';
+        $nameUploaded = [
+            'file.' . $extension,
+            'file-1.' . $extension,
+            'file-c-2.' . $extension,
+            'file-1-c-2.' . $extension,
+            'file-1-2-3-4-5.' . $extension,
+            'file-1-2-3-4-5-a.' . $extension,
+        ];
+
+        // Assuming this is data represent records in the 'attachments' table
+        $namesHaveInDB = [
+            ['case_1' => 'file.png'],
+            ['case_2' => 'file.png', 'file-1.png'],
+            ['case_3' => 'file.png', 'file-2.png', 'file-3.png'],
+            ['case_4' => 'file-1.png'],
+            ['case_5' => 'file-2.png'],
+            ['case_6' => 'file-c-2.png'],
+            ['case_7' => 'file-1-c-2.png'],
+            ['case_8' => 'file-1-2-3-4-5.png'],
+            ['case_9' => 'file-1-2-3-4-5-a.png'],
+            ['case_10' => 'file-1-2-3-4-5-a.png', 'file-1-2-3-4-5-a-1.png'],
+            ['case_11' => 'file-1-2-3-4-5-a.png', 'file-1-2-3-4-5-a-1.png', 'file-1-2-3-4-5-a-10.png'],
+            ['case_12' => 'file-1.png', 'file-2.png', 'file-3.png']
+        ];
+
+        $extensionInDB = [
+            ['png'],
+            ['png', 'png'],
+            ['png', 'png', 'png'],
+            ['png'],
+            ['png'],
+            ['png'],
+            ['png'],
+            ['png'],
+            ['png'],
+            ['png', 'png'],
+            ['png', 'png', 'png'],
+            ['png', 'png', 'png']
+        ];
+
+        $result = [];
+        foreach ($nameUploaded as $nameUp) {
+            foreach ($namesHaveInDB as $key => $namesDB) {
+                $k = key($namesDB);
+                $namesDB = array_values($namesDB);
+                $_extensionInDB =  $extensionInDB[$key];
+                $newFileName = AttachmentName::slugifyImageName($nameUp, $namesDB, $_extensionInDB);
+                $result[$nameUp][$k] = $newFileName;
+            }
+        }
+        dd($result);
     }
 }
