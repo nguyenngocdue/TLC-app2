@@ -93,13 +93,13 @@ class UploadService2
                     $nameValidate => 'array|max:' . $fileUploadRemainingCount,
                     $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
                 ]);
-                // dd($files);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $file) {
                     if (!$file->getClientOriginalExtension()) {
                         toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
                     } else {
                         $fileName = AttachmentName::slugifyImageName($file, $attachmentRows);
+                        // dd($fileName); //to test case
                         $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
                         $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
                         $mimeType = $file->getMimeType();
