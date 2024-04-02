@@ -2,7 +2,7 @@
 {{-- @dump($isInNominatedList) --}}
 {{-- @dump($needToRecall) --}}
     <div component="signature-group2a-loading" class="signature-group2a-loading">Loading wsClient...</div>
-    <div component="signature-group2a" class="hidden signature-group2a">
+    <div component="signature-group2a" class="hidden signature-group2a min-h-[135px]">
         @if(!$isExternalInspector && !$readOnly)
         <x-controls.signature.signature-group2a-need-to-recall 
             isInNominatedList="{{$isInNominatedList}}"

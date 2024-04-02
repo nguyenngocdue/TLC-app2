@@ -4,7 +4,7 @@
 @endphp
 @if(count($nominatedList) > 0)            
     <div class="text-right">
-        @if(count($nominatedList) > 1 && count($needToRequest) > 0)
+        @if(count($needToRequest) > 1)
             <x-renderer.button 
                 id="btnRequest_NeedToRequest" 
                 type="secondary" 
