@@ -177,7 +177,7 @@ class AttachmentName
             if ($expect === $newFileName) {
                 $result['key=' . $key + 1 . ': ' . $needle] = 'PASS';
             } else {
-                $result['key=' . $key + 1 . ': ' . $needle] = 'FAIL' . ' (expect: ' . $expect . ' !== output:' . $newFileName . ')';
+                $result['key=' . $key + 1 . ': ' . $needle] = 'FAILED' . ' (expect: ' . $expect . ' !== output:' . $newFileName . ')';
             }
         }
         dd($result);
