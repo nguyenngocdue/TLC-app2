@@ -14,10 +14,6 @@
             />
         @endif
 
-        @if(sizeof($signatures) == 0)
-        No nominated person to sign off.
-        @endif
-
         @foreach($signatures as $index => $user)
         @php
             $as = $user->attached_signature;
