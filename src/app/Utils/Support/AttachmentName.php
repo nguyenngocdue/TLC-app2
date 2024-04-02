@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Models\Attachment;
+use Illuminate\Support\Facades\Log;
 
 class AttachmentName
 {
@@ -37,40 +38,37 @@ class AttachmentName
         }
     }
 
-    private static function getMaxNumberMediaName($tempData, $fileName, $extension = '')
+    private static function getMaxNumberMediaName($tempData, $fileNameUp, $extension = '')
     {
-        $idx = self::indexCharacterInString('.', $fileName);
-        $baseName = basename($fileName, '.' . $extension);
+        $idx = self::indexCharacterInString('.', $fileNameUp);
+        $baseName = basename($fileNameUp, '.' . $extension);
         $maxNumber = 0;
-        foreach ($tempData as $value) {
-            $dot = self::indexCharacterInString('.', $value);
-            $n = substr($value, 0, $dot);
-            $e = substr($value, $dot + 1, strlen($value) - $dot);
+        foreach ($tempData as $nameDB) {
+            $dot = self::indexCharacterInString('.', $nameDB);
+            $n = substr($nameDB, 0, $dot);
+            $e = substr($nameDB, $dot + 1, strlen($nameDB) - $dot);
             if ($extension !== $e) continue;
 
-            $hyphenInxFile = self::indexCharacterInString('-', $fileName);
-            $hyphenInx  = self::indexCharacterInString('-', $value);
-            $hyphenName = substr($fileName, 0, $hyphenInxFile) . '-';
+            $hyphenInxFileUp = self::indexCharacterInString('-', $fileNameUp);
+            $hyphenInxDB  = self::indexCharacterInString('-', $nameDB);
+
+            $hyphenNameUp = substr($fileNameUp, 0, $hyphenInxFileUp + 1) . '-';
+
             // update names have tail(-01, -02..) which similar values in data : "hlc-003-1-1"
-            if (str_contains($n, $hyphenName) && $hyphenInxFile === $hyphenInx && $dot === $idx) {
-                $num = str_replace($hyphenName, '', $n);
+            if (str_contains($n, $hyphenNameUp) && $hyphenInxFileUp === $hyphenInxDB && $dot === $idx) {
+                $num = str_replace($hyphenNameUp, '', $n);
                 $maxNumber < $num ? $maxNumber = $num : $maxNumber;
-                $baseName = substr($fileName, 0, $hyphenInxFile);
+                $baseName = substr($fileNameUp, 0, $hyphenInxFileUp);
             }
             // update names have similar values in data, not tail (-01, -02): "hlc-003-2"
-            $aliasName = substr($fileName, 0, $idx) . '-';
+            $aliasName = substr($fileNameUp, 0, $idx) . '-';
             if (str_contains($n, $aliasName)) {
                 $num = str_replace($aliasName, '', $n);
                 $maxNumber < $num ? $maxNumber = $num : $maxNumber;
             }
-            // update names have tail similar a value in data
-            if ($fileName === $value) {
-                $maxNumber = 0;
-                $baseName = $n;
-            }
         }
         $maxNumber = self::getLastNumberInString($maxNumber);
-        // dd("-----------", $fileName, $tempData, $maxNumber);
+        // dd("-----------", $fileNameUp, $tempData, $maxNumber);
         return [$baseName, $maxNumber];
     }
 
@@ -79,16 +77,71 @@ class AttachmentName
         $fileName =  $file->getClientOriginalName();
         $extensionFile = $file->getClientOriginalExtension();
         $mediaNames = Attachment::get()->pluck('filename')->toArray();
+
         $extensions = Attachment::get()->pluck('extension')->toArray();
         $baseName = basename($fileName, '.' . $extensionFile);
 
+        /*
+            + You have to select a specific case for each corresponding situation. [case 1 <=> case 1]
+            + The file extension must match the name of the uploaded file
+        */
+
+        /* 
+            + names were uploaded 
+        */
+        //$fileName = 'file.jpg'; //case: 1, 2, 2.1, 2.2, 3
+        // $fileName = 'file-1.jpg'; //case: 4, 4.1, 4.2, 5
+        // $fileName = 'file-1-1.png'; //case: 4.3
+        // $fileName = 'file-c-2.jpg'; //case 6
+        // $fileName = 'file-1-c-2.jpg'; //case 7
+        // $fileName = 'file-1-2-3-4-5.jpg'; //case 8
+        // $fileName = 'file-1-2-3-4-5-a.jpg'; //case: 9, 10, 11
+
+        // $fileName = 'FILE-1.png'; // case: 12
+
+
+
+        /* 
+            + types of extension that exist in database 
+        */
+        // $extensionFile = 'jpg';
+        // $extensionFile = 'png';
+
+        /*
+            + names of media that exist in database 
+        */
+        // $mediaNames = ['file.jpg']; //case 1 (OK)
+        // $mediaNames = ['file.jpg', 'file-1.jpg']; //case 2 (OK)
+        // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-10.jpg']; //case 2.1 (OK)
+        // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-100.jpg']; //case 2.2 (OK)
+
+        // $mediaNames = ['file.jpg', 'file-1.jpg', 'file-3.jpg']; //case 3 (OK)
+
+        // $mediaNames = ['file-1.jpg', 'file-2.jpg']; //case 4 (OK) 
+        // $mediaNames = ['file-1.jpg', 'file-1-1.jpg']; //case 4.1 (OK)
+        // $mediaNames = ['file-1.jpg', 'file-1-1.jpg', 'file-1-1.png']; //case 4.2, 4.3 (OK)
+
+        // $mediaNames = ['file-2.jpg']; //case 5 => current out = file.jpg (NO)
+        // $mediaNames = ['file-c-2.jpg']; //case 6 (OK)
+        // $mediaNames = ['file-1-c-2.jpg']; //case 7 (OK)
+        // $mediaNames = ['file-1-2-3-4-5.jpg']; //case 8 (OK)
+        // $mediaNames = ['file-1-2-3-4-5-a.jpg']; //case 9 (OK)
+        // $mediaNames = ['file-1-2-3-4-5-a-1.jpg', 'file-1-2-3-4-5-a.jpg']; //case 10 (OK)
+        // $mediaNames = ['file-1-2-3-4-5-a-1.jpg', 'file-1-2-3-4-5-a.jpg', 'file-1-2-3-4-5-a-10.jpg']; //case 11 (OK)
+
+        // $mediaNames = ['FILE.png', 'FILE-1.png', 'FILE-1-1.png', 'FILE-1-2.png', 'FILE-1-3.png']; //case 12 (OK)
+
         $isValueInData = self::isValueInData($mediaNames, $extensions, $baseName, $extensionFile);
+
         if (in_array($fileName, $mediaNames) || $isValueInData) {
             $tempMediaNames = array_column($tempMedia, 'filename');
             $tempData =  array_merge($mediaNames, $tempMediaNames);
             [$baseName,  $maxNumber] =  self::getMaxNumberMediaName($tempData, $fileName, $extensionFile);
-            // dump($maxNumber);
+            // dump($baseName,  $maxNumber);
             $fileName =  $baseName . '-' . $maxNumber + 1 . '.' . $extensionFile;
+            if (in_array($fileName, $mediaNames)) {
+                Log::info("Duplicate " . $fileName . "in attachments table.");
+            }
             return $fileName;
         }
         return $fileName;
