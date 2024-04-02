@@ -49,6 +49,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
+    private $hasPunchlist = false;
     // protected $mode = 'status_only';
     /**
      * Create a new component instance.
@@ -66,6 +67,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
         $this->fakeQaqcPunchlistObj = new FakeQaqcPunchlist();
+
+        $template = Qaqc_insp_tmpl::find($this->qaqcInspTmpl);
+        $this->hasPunchlist = $template->has_punchlist;
     }
 
     private function getUserSettings()
@@ -117,11 +121,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
             ];
         }
-        $QAQC_DISCIPLINE_ID = 7;
-        $result = [
-            ...$result,
-            ['dataIndex' => 'final_punchlist', 'prod_discipline_id' => $QAQC_DISCIPLINE_ID],
-        ];
+
+        if ($this->hasPunchlist) {
+            $QAQC_DISCIPLINE_ID = 7;
+            $result = [
+                ...$result,
+                ['dataIndex' => 'final_punchlist', 'prod_discipline_id' => $QAQC_DISCIPLINE_ID],
+            ];
+        }
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
         return $result;
     }
