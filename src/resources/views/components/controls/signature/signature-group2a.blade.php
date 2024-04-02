@@ -157,11 +157,19 @@ const recallSignOff = (tableName, signableId, requestedArray, signatureIds) => {
 </script>
 @endonce
 
+{{-- If there are 2 sign off box, it will run twice and toggle twice, and Loading... will always shown --}}
+@once
 <script>
-function show(){
+    function show(){
     if(wsClientId) {
+        console.log("wsClient is ready")
         $(".signature-group2a").toggle()
         $(".signature-group2a-loading").toggle()
-    } else setTimeout(() => show(), 100);        
-}show()
+    } else {
+        console.log("waiting for wsClient...")
+        setTimeout(() => show(), 500)
+    };
+}
+show()
 </script>
+@endonce

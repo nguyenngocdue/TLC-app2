@@ -13,6 +13,20 @@
         "inspected": "true",
         "not_applicable": "true"
     },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
@@ -20,9 +34,30 @@
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "new": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "new": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_list()": {
+        "name": "_signature_qaqc_punchlist_list()",
+        "column_name": "signature_qaqc_punchlist_list()",
+        "new": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist": {
+        "name": "_signature_qaqc_punchlist",
+        "column_name": "signature_qaqc_punchlist",
         "new": "",
         "inspected": "",
         "not_applicable": ""
@@ -30,6 +65,13 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "new": "",
         "inspected": "",
         "not_applicable": ""
@@ -58,20 +100,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "",
-        "inspected": "",
-        "not_applicable": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "new": "",
-        "inspected": "",
-        "not_applicable": ""
-    },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
         "new": "",
         "inspected": "",
         "not_applicable": ""

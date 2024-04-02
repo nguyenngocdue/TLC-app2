@@ -13,6 +13,20 @@
         "inspected": "true",
         "not_applicable": "true"
     },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
@@ -27,6 +41,13 @@
         "inspected": "true",
         "not_applicable": "true"
     },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "new": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
     "_signature_qaqc_punchlist_list()": {
         "name": "_signature_qaqc_punchlist_list()",
         "column_name": "signature_qaqc_punchlist_list()",
@@ -37,13 +58,6 @@
     "_signature_qaqc_punchlist": {
         "name": "_signature_qaqc_punchlist",
         "column_name": "signature_qaqc_punchlist",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
         "new": "true",
         "inspected": "true",
         "not_applicable": "true"
