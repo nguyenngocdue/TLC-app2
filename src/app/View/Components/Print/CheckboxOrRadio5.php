@@ -25,7 +25,7 @@ class CheckboxOrRadio5 extends Component
      */
     public function render()
     {
-        $columnRender = $this->relationships['renderer_view_all_param'];
+        $columnRender = $this->relationships['renderer_view_all_param'] ?: 'name';
         $colSpan = $this->relationships['radio_checkbox_colspan'];
         $dataSource = array_column($this->value, $columnRender);
         return view('components.print.checkbox-or-radio5', [
