@@ -4,7 +4,7 @@
 @endphp
 @if(count($nominatedList) > 0)            
     <div class="text-right">
-        @if(count($needToRequest) > 0)
+        @if(count($nominatedList) > 1 && count($needToRequest) > 0)
             <x-renderer.button 
                 id="btnRequest_NeedToRequest" 
                 type="secondary" 
@@ -13,7 +13,7 @@
             >Send Request to {{count($needToRequest)}} Participant(s).</x-renderer.button>
         @endif
         
-        @if(!$isInNominatedList && count($notYetSigned) > 0)
+        @if(!$isInNominatedList && count($notYetSigned) > 1)
         <x-renderer.button 
             id="btnRecall_NeedToRecall" 
             type="warning"

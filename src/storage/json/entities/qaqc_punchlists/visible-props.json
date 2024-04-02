@@ -79,6 +79,70 @@
         "inspected": "true",
         "not_applicable": "true"
     },
+    "_signature_qaqc_punchlist_qaqc_list()": {
+        "name": "_signature_qaqc_punchlist_qaqc_list()",
+        "column_name": "signature_qaqc_punchlist_qaqc_list()",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_qaqc": {
+        "name": "_signature_qaqc_punchlist_qaqc",
+        "column_name": "signature_qaqc_punchlist_qaqc",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_production_list()": {
+        "name": "_signature_qaqc_punchlist_production_list()",
+        "column_name": "signature_qaqc_punchlist_production_list()",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_production": {
+        "name": "_signature_qaqc_punchlist_production",
+        "column_name": "signature_qaqc_punchlist_production",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_project_list()": {
+        "name": "_signature_qaqc_punchlist_project_list()",
+        "column_name": "signature_qaqc_punchlist_project_list()",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_project": {
+        "name": "_signature_qaqc_punchlist_project",
+        "column_name": "signature_qaqc_punchlist_project",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_factory_list()": {
+        "name": "_signature_qaqc_punchlist_factory_list()",
+        "column_name": "signature_qaqc_punchlist_factory_list()",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
+    "_signature_qaqc_punchlist_factory": {
+        "name": "_signature_qaqc_punchlist_factory",
+        "column_name": "signature_qaqc_punchlist_factory",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
