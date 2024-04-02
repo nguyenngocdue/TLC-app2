@@ -1,0 +1,30 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "inspected": {
+        "name": "inspected",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    }
+}

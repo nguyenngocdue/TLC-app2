@@ -41,10 +41,12 @@ class Signature2a extends Component
      */
     public function render()
     {
+        // dump($this->signatureId);
         // dump("Debug: " . $this->debug);
         // dump("ReadOnly: " . $this->readOnly);
         // dump("Count: " . static::$count);
-        $value_decoded = (htmlspecialchars_decode($this->value));
+        $value_decoded = (htmlspecialchars_decode($this->value ?? ''));
+        // dump($this->value);
         // $mine_signature = CurrentUser::id() == $this->signatureUserId;
 
         $readOnly = $this->readOnly; //|| (!$mine_signature);

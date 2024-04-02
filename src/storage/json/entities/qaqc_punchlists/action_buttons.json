@@ -5,6 +5,12 @@
         "tooltip": "",
         "change_status_multiple": ""
     },
+    "pending_approval": {
+        "name": "pending_approval",
+        "label": "Request for Approval",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
     "inspected": {
         "name": "inspected",
         "label": "Inspect",

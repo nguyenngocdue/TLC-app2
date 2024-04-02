@@ -93,14 +93,16 @@ class PrintProps extends Component
 				}
 			}
 		}
+		$this->handleDataSourceOfControlSignatureMulti($propsTemp,$dataSource);
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($dataModelCurrent, $props);
 		$status = $dataSource['status'] ?? null;
 		[$actionButtons, $buttonSave, $propsIntermediate] = $this->getConfigActionButtons($superProps, $status);
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$typePlural = Str::plural($this->type);
+		$propsTree = $this->formatPropTree(array_values($node));
 		$params =  [
-			'propsTree' => $this->formatPropTree(array_values($node)),
+			'propsTree' => $propsTree,
 			'dataSource' => $dataSource,
 			'showId' => $this->id,
 			'typePlural' => $typePlural,
@@ -128,7 +130,18 @@ class PrintProps extends Component
 		];
 		return view('components.print.print-props', $params);
 	}
-
+	private function handleDataSourceOfControlSignatureMulti($props,&$dataSource){
+		$propSignatureMulti = array_filter($props,function ($value) {
+			return $value['control'] == 'signature_multi';
+		});
+		foreach ($propSignatureMulti as $key => $value) {
+			$tmp = substr($key,1);
+			$dataSource[$tmp] = [
+				"signature_multi" => $dataSource[$tmp],
+				"parent" => $dataSource[$tmp."_list()"]
+			];
+		}
+	}
 	private function getConfigActionButtons($superProps, $status)
 	{
 		$tmp = WorkflowFields::resolveSuperProps($superProps, $status, $this->type, true, CurrentUser::id());

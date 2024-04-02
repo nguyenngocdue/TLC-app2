@@ -1,5 +1,6 @@
 [
     "new",
+    "pending_approval",
     "inspected",
     "not_applicable"
 ]
