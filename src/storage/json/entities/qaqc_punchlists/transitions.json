@@ -3,21 +3,32 @@
         "name": "new",
         "location": "-170.00 -70.00",
         "new": "",
-        "inspected": "true",
+        "pending_approval": "true",
+        "inspected": "",
         "not_applicable": "true"
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "location": "59.08 14.80",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "true",
+        "not_applicable": ""
     },
     "inspected": {
         "name": "inspected",
         "location": "10.00 -120.00",
         "new": "",
+        "pending_approval": "true",
         "inspected": "",
-        "not_applicable": "true"
+        "not_applicable": ""
     },
     "not_applicable": {
         "name": "not_applicable",
         "location": "-30.00 20.00",
-        "new": "",
-        "inspected": "true",
+        "new": "true",
+        "pending_approval": "",
+        "inspected": "",
         "not_applicable": ""
     }
 }

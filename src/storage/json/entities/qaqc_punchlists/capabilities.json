@@ -3,39 +3,44 @@
         "name": "acct_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "acct_member": {
         "name": "acct_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "admin": {
         "name": "admin",
         "name_rendered": "",
         "toggle": "",
         "new": "true",
+        "pending_approval": "true",
         "inspected": "true",
         "not_applicable": "true"
     },
@@ -43,39 +48,44 @@
         "name": "apartment_owner",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "bd_member": {
         "name": "bd_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "client": {
         "name": "client",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "consultant": {
         "name": "consultant",
         "name_rendered": "",
         "toggle": "",
         "new": "",
+        "pending_approval": "",
         "inspected": "",
         "not_applicable": ""
     },
@@ -84,6 +94,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
+        "pending_approval": "",
         "inspected": "",
         "not_applicable": ""
     },
@@ -91,320 +102,360 @@
         "name": "cpl_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "cpl_member": {
         "name": "cpl_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "dc_ho": {
         "name": "dc_ho",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "dc_manager": {
         "name": "dc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "dc_ws": {
         "name": "dc_ws",
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "inspected": "true",
+        "pending_approval": "true",
+        "inspected": "",
         "not_applicable": "true"
     },
     "des_manager": {
         "name": "des_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "des_member": {
         "name": "des_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "dir": {
         "name": "dir",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "dir_nz": {
         "name": "dir_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "external_inspector": {
         "name": "external_inspector",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "fac_admin": {
         "name": "fac_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "guest": {
         "name": "guest",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "hr_manager": {
         "name": "hr_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "hr_member": {
         "name": "hr_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "hse_manager": {
         "name": "hse_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "hse_member": {
         "name": "hse_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "it_manager": {
         "name": "it_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "it_member": {
         "name": "it_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "newcomer": {
         "name": "newcomer",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "pln_admin": {
         "name": "pln_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "ppc_admin": {
         "name": "ppc_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "ppc_manager": {
         "name": "ppc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "ppc_member": {
         "name": "ppc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proc_member": {
         "name": "proc_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "prod_manager": {
         "name": "prod_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "",
+        "not_applicable": ""
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "prod_member": {
         "name": "prod_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proj_admin": {
         "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proj_member": {
         "name": "proj_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "proj_supervisor_nz": {
         "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "inspected": "true",
+        "pending_approval": "true",
+        "inspected": "",
         "not_applicable": "true"
     },
     "qaqc_member": {
@@ -412,54 +463,61 @@
         "name_rendered": "",
         "toggle": "",
         "new": "true",
-        "inspected": "true",
+        "pending_approval": "true",
+        "inspected": "",
         "not_applicable": "true"
     },
     "qaqc_member_nz": {
         "name": "qaqc_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "qs_manager": {
         "name": "qs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "qs_member": {
         "name": "qs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "shipping_agent": {
         "name": "shipping_agent",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
         "new": "true",
+        "pending_approval": "true",
         "inspected": "true",
         "not_applicable": "true"
     },
@@ -468,6 +526,7 @@
         "name_rendered": "",
         "toggle": "",
         "new": "",
+        "pending_approval": "",
         "inspected": "",
         "not_applicable": ""
     },
@@ -475,24 +534,27 @@
         "name": "whs_manager",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "whs_member": {
         "name": "whs_member",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "worker": {
         "name": "worker",
         "name_rendered": "",
         "toggle": "",
-        "new": "true",
-        "inspected": "true",
-        "not_applicable": "true"
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     }
 }
