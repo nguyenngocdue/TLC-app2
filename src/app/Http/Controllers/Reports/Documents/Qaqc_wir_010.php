@@ -35,18 +35,19 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         };
         $previousMonth = str_pad($m - 1, '2', '0', STR_PAD_LEFT);
         $previousDate = $y . "-" . $previousMonth . "-25";
-        
+
         $latestDate = $month . '-' . "25";
         /// Please check here
         // if ($latestDate > date("Y-m-d")) {
-            //     $latestDate = date("Y-m-d");
-            //     $previousDate = date("Y-m", strtotime($latestDate . " -1 month")) . "-25";
-            // }
+        //     $latestDate = date("Y-m-d");
+        //     $previousDate = date("Y-m", strtotime($latestDate . " -1 month")) . "-25";
+        // }
         // dd($month, $previousDate, $latestDate);
         return [$previousDate, $latestDate];
     }
 
-    public function getDate($params){
+    public function getDate($params)
+    {
         if ($params['children_mode'] === 'filter_by_week') {
             [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
         } else {
@@ -60,7 +61,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         try {
             $year = $params['year'];
             $weeksData = DateReport::getWeeksInYear($year);
-            $indexDates = isset($weeksData[$params['weeks_of_year']]) ? $weeksData[$params['weeks_of_year']]: $weeksData[intval($params['weeks_of_year'])];
+            $indexDates = isset($weeksData[$params['weeks_of_year']]) ? $weeksData[$params['weeks_of_year']] : $weeksData[intval($params['weeks_of_year'])];
             $previousDate = $indexDates['start_date'];
             $latestDate = $indexDates['end_date'];
             return [$previousDate, $latestDate];
@@ -91,13 +92,15 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                 -- Calculate after period
                                 FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
                             
-                                ,NULL) AS latest_acceptance_percent
+                                ,NULL) AS latest_qaqc_percent
                                 
                             ,IF(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description),
                                 -- Calculate before period
                                 FORMAT(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description), 2)
 
-                                ,NULL) AS previous_acceptance_percent,
+                                ,NULL) AS previous_qaqc_percent,
+                                -- NULL latest_finished_prod_percent,
+                                -- NULL previous_finished_prod_percent,
                                 count_wir_description,
                                 total_prod_order_have_wir_before,
                                 total_prod_order_have_wir,
@@ -115,7 +118,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                 tb_count_order.prod_order_qty AS total_prod_order_on_sub_project,
                                 tb_count_order.prod_order_in_wir AS prod_order_in_wir
                                     FROM sub_projects sp
-                                        JOIN prod_orders po ON po.sub_project_id = sp.id
+                                        JOIN prod_orders po ON po.sub_project_id = sp.id AND sp.id IS NOT NULL
                                         LEFT JOIN (
                                                     SELECT 
                                                         DISTINCT mtm1.term_id AS prod_routing_id,
@@ -138,7 +141,8 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                         LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id AND wir.deleted_by IS NULL
                                                                 AND wir.deleted_by IS NULL
                                                                 AND wir.prod_routing_id = pr.prod_routing_id
-                                                                AND wir.sub_project_id = sp.id";
+                                                                AND wir.sub_project_id = sp.id
+                                                                AND sp.id IS NOT NULL";
 
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
@@ -154,9 +158,10 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                                                               FROM prod_orders po, sub_projects sp, prod_routings pr
                                                                 WHERE 1 = 1
                                                                     AND pr.id IN ( $strIdsRoutings)
-                                                                    AND po.sub_project_id = sp.id
+                                                                    AND po.sub_project_id = sp.id AND po.id IS NOT NULL
                                                                     AND pr.id = po.prod_routing_id
                                                                     AND pr.name != '-- available'
+                                                                    AND sp.id IS NOT NULL
                                                                     ";
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND pr.id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND sp.id IN ({$valOfParams['sub_project_id']})";
@@ -209,6 +214,8 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $sql .= "\n GROUP BY wir_prod_routing_id,project_id, sub_project_id
                                                 ) AS count_prod_order_have_wir 
                                                 ON tb1.prod_routing_id = count_prod_order_have_wir.wir_prod_routing_id AND tb1.sub_project_id = count_prod_order_have_wir.sub_project_id
+                                                WHERE 1 = 1
+                                                AND count_prod_order_have_wir.sub_project_id IS NOT NULL
                                                 ORDER BY sub_project_name, prod_routing_name";
         return $sql;
     }
@@ -267,49 +274,47 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             [
                 'title' => 'Production Routing',
                 'dataIndex' => 'prod_routing_name',
+            ],
+            [
+                'title' => 'QTY',
+                'dataIndex' => 'total_prod_order',
+            ],
+            [
+                'title' => 'Apartment Q.ty',
+                'dataIndex' => 'total_prod_order',
+            ],
+            [
+                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
+                'title' => 'Last Week Production Completion (%)',
+                'dataIndex' => 'total_prod_order_on_sub_project',
                 'width' => 200,
             ],
             [
-                'title' => 'Module QTY',
+                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
+                'title' => 'Last Week QC Acceptance (%)',
                 'dataIndex' => 'total_prod_order_on_sub_project',
                 'align' => 'right',
                 'width' => 180,
-                // 'footer' => 'agg_sum',
             ],
             [
-                'title' =>  Arr::get($params, 'previous_month', '') . '<br/>QC Acceptance (%)',
-                'dataIndex' => 'previous_acceptance_percent',
+                // 'title' =>  Arr::get($params, 'latest_month', '') . '<br/>Production Completion (%)',
+                'title' =>  'This Week Production Completion (%)',
+                'dataIndex' => 'previous_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
-                // 'footer' => 'agg_sum',
             ],
             [
-                'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
-                'dataIndex' => 'latest_acceptance_percent',
+                // 'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
+                'title' => 'This Week QC Acceptance (%)',
+                'dataIndex' => 'latest_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
-                // 'footer' => 'agg_sum',
             ],
             [
                 'title' => 'Status',
                 'dataIndex' => 'percent_status',
                 'align' => 'center',
             ],
-            // [
-            //     'dataIndex' => 'count_wir_description'
-            // ],
-            // [
-            //     'dataIndex' => 'total_prod_order_have_wir_before'
-            // ],
-            // [
-            //     'dataIndex' => 'total_prod_order_have_wir'
-            // ],
-            // [
-            //     'dataIndex' => 'total_prod_order_on_sub_project'
-            // ],
-            // [
-            //     'dataIndex' => 'prod_order_in_wir'
-            // ]
         ];
     }
 
@@ -351,7 +356,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         if ($params['children_mode'] === 'filter_by_week') {
             $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
             $previousWeek = str_pad(date('W') - 1, 2, '0', STR_PAD_LEFT);
-            
+
             $params['weeks_of_year'] = $currentWeek;
             [$start_date, $end_date] = $this->generateStartAndDayOfWeek($params);
             $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
@@ -380,7 +385,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         if ($params['children_mode'] === 'filter_by_week') {
             $params = $this->updateParamsForFilterByWeek($params);
         }
-        if($params['children_mode'] === 'filter_by_month') {
+        if ($params['children_mode'] === 'filter_by_month') {
             $params = $this->updateParamsForMonths($params);
         }
         // dd($params);
@@ -393,7 +398,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $year = $params['year'];
         [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
 
-        $previousM = intval($currentWeek) === 1 ? 12 : str_pad($currentWeek - 1, 2, '0', STR_PAD_LEFT); 
+        $previousM = intval($currentWeek) === 1 ? 12 : str_pad($currentWeek - 1, 2, '0', STR_PAD_LEFT);
         $year = $previousM === 12 ? $year - 1 : $year;
 
         $params['previous_month'] = 'W' . ($previousM) . '/' . $year . '(' . $previousDate . ')';
@@ -408,16 +413,15 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
         $params['previous_month'] = substr($previousDate, 0, 7);
         $params['latest_month'] = substr($latestDate, 0, 7);
-        
         return $params;
     }
 
 
     public function changeDataSource($dataSource, $params)
     {
-        // set status for each routing by "latest_acceptance_percent"
+        // set status for each routing by "latest_qaqc_percent"
         foreach ($dataSource as $values) {
-            $value = (int)$values->latest_acceptance_percent;
+            $value = (int)$values->latest_qaqc_percent;
             if ($value === 100) {
                 $values->percent_status = 'Finished';
             } elseif ($value > 0 and $value < 100) {
