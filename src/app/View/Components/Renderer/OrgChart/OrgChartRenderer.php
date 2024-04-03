@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 class OrgChartRenderer extends Component
 {
     const ARRAY_RESIGNED = [0, 1];
+    const DPM_BOD = 2;
 
     function __construct(
         private $id,
@@ -75,6 +76,7 @@ class OrgChartRenderer extends Component
     private function setTreeByDepartment(&$tree, $departmentId, $isApprovalView)
     {
         if ($departmentId) {
+            $departmentId = $departmentId == "null" ? $this::DPM_BOD : $departmentId;
             $department = Department::findFromCache($departmentId);
             $headOfDepartmentId = $department->head_of_department;
             if ($headOfDepartmentId) {
@@ -139,6 +141,7 @@ class OrgChartRenderer extends Component
 
     public function render()
     {
+        // dd($this->departmentId);
         $tree = $this->getTreeByDepartment($this->departmentId, $this->options, $this->isApprovalView);
         // dump($this->zoomToFit);
         return view("components.renderer.org-chart.org-chart-renderer", [
