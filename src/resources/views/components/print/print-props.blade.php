@@ -10,22 +10,23 @@
         listenersOfDropdown4s = @json($listeners4);
         filtersOfDropdown4s = @json($filters4);
         </script>   
-    <div class="flex justify-center ">
-        <div class="overflow-x-auto md:overflow-hidden items-center">
+    <div class="flex justify-center">
+        <div class="overflow-x-auto print:overflow-x-hidden items-center">
             <div class="bg-white box-border p-8 items-center" style="{{$layout}}"> 
-                <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
-                <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
-                @foreach($propsTree as $propTree)
-                <x-print.description-group5 type={{$type}} modelPath={{$modelPath}}
-                :propTree="$propTree" :dataSource="$dataSource" :item="$item"
-                numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}" />
-                @endforeach
+                    <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
+                    <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
+                    @foreach($propsTree as $propTree)
+                    <x-print.description-group5 type={{$type}} modelPath={{$modelPath}}
+                    :propTree="$propTree" :dataSource="$dataSource" :item="$item"
+                    numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}" />
+                    @endforeach
 
-                {{-- <div class="fixed top-52 right-0 no-print">
-                    <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" action="edit" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
-                </div> --}}
+                    {{-- <div class="fixed top-52 right-0 no-print">
+                        <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" action="edit" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate"/>
+                    </div> --}}
             </div>
         </div>
+            
     </div>
     <div class="no-print">
         {{-- <form action="{{$routeUpdate}}" id="form-upload" method="POST" enctype="multipart/form-data">
