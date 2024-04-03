@@ -19,8 +19,8 @@ abstract class MatrixForReportParent extends Component
 
     protected $statuses;
 
-    protected $finishedArray = LibStatuses::$finishedArray;
-    protected $naArray = LibStatuses::$naArray;
+    protected $finishedArray = null;
+    protected $naArray = null;
 
     protected $groupBy = null;
     protected $groupByLength = null;
@@ -31,6 +31,8 @@ abstract class MatrixForReportParent extends Component
         // private $dateToCompare = '2023-10-01',
     ) {
         $this->statuses = LibStatuses::getFor($type);
+        $this->finishedArray = LibStatuses::$finishedArray;
+        $this->naArray = LibStatuses::$naArray;
     }
 
     abstract function getXAxis();
