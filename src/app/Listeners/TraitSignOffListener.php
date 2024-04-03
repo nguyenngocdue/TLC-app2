@@ -41,6 +41,24 @@ trait TraitSignOffListener
         ];
     }
 
+    private function getMetaOfEcoSheets($tableName, $signableId, $sheet)
+    {
+        // Log::info($sheet);
+        $project = $sheet->getProject;
+        // Log::info($project);
+        $subProjects = $sheet->getSubProjectsOfEco();
+        // Log::info($subProjects);
+
+        return [
+            'projectName' => $project->name,
+            'subProjectName' => $subProjects->pluck('name')->join(', '),
+            'moduleName' => "N/A",
+            'disciplineName' => "N/A",
+            'checksheetName' => $sheet->name,
+            'url' => route($tableName . ".edit", $signableId),
+        ];
+    }
+
     private function getMeta($tableName, $signableId)
     {
         // Log::info($data);
@@ -55,8 +73,10 @@ trait TraitSignOffListener
                 return $this->getMetaOfInspChklstSht($tableName, $signableId, $sheet);
             case 'qaqc_punchlists':
                 return $this->getMetaOfQaqcPunchlists($tableName, $signableId, $sheet);
+            case 'eco_sheets':
+                return $this->getMetaOfEcoSheets($tableName, $signableId, $sheet);
             default:
-                Log::error("$tableName not found in TraitSignOffListener.php");
+                Log::error("[$tableName] not found in TraitSignOffListener.php");
                 return [];
         }
     }

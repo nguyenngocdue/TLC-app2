@@ -7,9 +7,9 @@ This is an automated reminder sent every 48 hours if you haven't made any decisi
 + Project: **{{$projectName}}/{{$subProjectName}}**  
 + Module: **{{$moduleName}}** 
 + Discipline: **{{$disciplineName}}**  
-+ Checksheet: **{{$checksheetName}}**  
++ Document: **{{$checksheetName}}**  
 
-*Please open the checksheet and sign it off by clicking this button:*
+*Please open this document and sign it off by clicking this button:*
 <x-mail::button :url="$url">
 Sign off now
 </x-mail::button>

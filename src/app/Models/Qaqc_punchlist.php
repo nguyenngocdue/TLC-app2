@@ -16,11 +16,17 @@ class Qaqc_punchlist extends ModelExtended
         "getChklst" => ["belongsTo", Qaqc_insp_chklst::class, 'qaqc_insp_chklst_id'],
         "getProject" => ["belongsTo", Project::class, 'project_id'],
         "getSubProject" => ["belongsTo", Sub_project::class, 'sub_project_id'],
-        'signature_qaqc_punchlist' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+        'signature_qaqc_punchlist_qaqc' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+        'signature_qaqc_punchlist_production' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+        'signature_qaqc_punchlist_project' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+        'signature_qaqc_punchlist_factory' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
     ];
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
-        "signature_qaqc_punchlist_list()"  => ["getCheckedByField", User::class],
+        "signature_qaqc_punchlist_qaqc_list()"  => ["getCheckedByField", User::class],
+        "signature_qaqc_punchlist_production_list()"  => ["getCheckedByField", User::class],
+        "signature_qaqc_punchlist_project_list()"  => ["getCheckedByField", User::class],
+        "signature_qaqc_punchlist_factory_list()"  => ["getCheckedByField", User::class],
     ];
 
     public function getLines()
@@ -44,7 +50,51 @@ class Qaqc_punchlist extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public function signature_qaqc_punchlist_list()
+    // public function signature_qaqc_punchlist_list()
+    // {
+    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
+    public function signature_qaqc_punchlist_qaqc()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function signature_qaqc_punchlist_qaqc_list()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function signature_qaqc_punchlist_production()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function signature_qaqc_punchlist_production_list()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function signature_qaqc_punchlist_project()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function signature_qaqc_punchlist_project_list()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function signature_qaqc_punchlist_factory()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function signature_qaqc_punchlist_factory_list()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

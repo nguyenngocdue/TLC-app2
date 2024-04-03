@@ -9,7 +9,7 @@
         <x-renderer.button 
             type="warning"
             title='{!! "Recall:\n".$title_need_to_recall !!}'
-            onClick="this.disabled=true;recallSignOff('{{$tableName}}', {{$signableId}}, [{{$needToRecall->map(fn($i, $uid)=>$uid)->join(',')}}], [{{$needToRecallSignatures->join(',')}}])"
+            onClick="this.disabled=true;recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$needToRecall->map(fn($i, $uid)=>$uid)->join(',')}}], [{{$needToRecallSignatures->join(',')}}])"
         >Recall {{count($needToRecall)}} Request(s).</x-renderer.button>
     </div>
     <div class="flex">

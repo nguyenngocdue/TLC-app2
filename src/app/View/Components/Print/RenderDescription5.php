@@ -38,8 +38,8 @@ class RenderDescription5 extends Component
     public function render()
     {
         $colSpan = $this->colSpan;
-        $valueColSpan = $this->newLine ? $this->formatColSpanByNewLine([$colSpan, $colSpan, $colSpan])
-            : $this->formatColSpan([24 / $colSpan, 24 / $colSpan + 1, 12 - 24 / $colSpan]);
+        $valueColSpan = $this->newLine ? $this->formatColSpanByNewLine([12, 12, 12])
+        : $this->formatColSpan([24 / $colSpan, 24 / $colSpan + 1, 12 - 24 / $colSpan]);
         $params = [
             "label" => $this->label,
             "newLine" => $this->newLine,

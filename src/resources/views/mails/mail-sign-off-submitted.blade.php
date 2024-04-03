@@ -5,14 +5,14 @@ Hi **{{$monitorNames}}**,
 + Project: **{{$projectName}}/{{$subProjectName}}**  
 + Module: **{{$moduleName}}** 
 + Discipline: **{{$disciplineName}}**  
-+ Checksheet: **{{$checksheetName}}**  
++ Document: **{{$checksheetName}}**  
 
 <x-mail::button :url="$url">
-Open the Check Sheet
+Open the Document
 </x-mail::button>
 
-+ Inspector Decision: <x-mail::status>{{$signature_decision}}</x-mail::status>
-+ Inspector Comment: **{{$signature_comment ?? "(none)"}}**  
++ Decision: <x-mail::status>{{$signature_decision}}</x-mail::status>
++ Comment: **{{$signature_comment ?? "(none)"}}**  
 
 Thanks,<br>
 {{ config('app.name') }}

@@ -41,8 +41,8 @@ class Eco_sheet extends ModelExtended
         "getSubProjectsOfEco()" => ["getCheckedByField", Sub_project::class],
         "getTypesOfChangeOfEco()" => ["getCheckedByField", Term::class],
 
-        "signature_eco_peers_list()" => ["getCheckedByField", Term::class],
-        "signature_eco_managers_list()" => ["getCheckedByField", Term::class],
+        "signature_eco_peers_list()" => ["getCheckedByField", User::class],
+        "signature_eco_managers_list()" => ["getCheckedByField", User::class],
     ];
     public function signature_eco_peers()
     {

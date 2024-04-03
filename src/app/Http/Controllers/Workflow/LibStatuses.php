@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Log;
 class LibStatuses extends AbstractLibForForm
 {
     protected static $key = "statuses";
+    public static $finishedArray = ['closed', 'finished', 'approved'];
+    public static $naArray = ['not_applicable', 'cancelled'];
 
     public static function getAll()
     {
@@ -38,7 +40,4 @@ class LibStatuses extends AbstractLibForForm
         }
         return $data;
     }
-
-    public static $finishedArray = ['closed', 'finished', 'approved'];
-    public static $naArray = ['not_applicable', 'cancelled'];
 }

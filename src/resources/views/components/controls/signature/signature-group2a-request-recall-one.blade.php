@@ -7,7 +7,7 @@
                 <x-renderer.button 
                     id="btnRecall_{{$signatureUserId}}"
                     type="warning"
-                    onClick="recallSignOff('{{$tableName}}', {{$signableId}}, [{{$signatureUserId}}], [{{$signatureId}}])"
+                    onClick="recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}], [{{$signatureId}}])"
                     >
                     Recall this request
                 </x-renderer.button>

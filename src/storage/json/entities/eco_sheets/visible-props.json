@@ -545,6 +545,19 @@
         "pending_ack": "true",
         "active": "true"
     },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "active": "true"
+    },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
@@ -610,9 +623,22 @@
         "pending_ack": "",
         "active": ""
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
+    "_signature_eco_peers_list()": {
+        "name": "_signature_eco_peers_list()",
+        "column_name": "signature_eco_peers_list()",
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "active": "true"
+    },
+    "_signature_eco_managers_list()": {
+        "name": "_signature_eco_managers_list()",
+        "column_name": "signature_eco_managers_list()",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
