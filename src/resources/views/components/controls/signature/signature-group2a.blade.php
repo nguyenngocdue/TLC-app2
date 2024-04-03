@@ -11,6 +11,7 @@
 
             :needToRecall="$needToRecall"
             :needToRecallSignatures="$needToRecallSignatures"
+            category="{{$category}}"
             />
         @endif
 
