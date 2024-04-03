@@ -19,11 +19,12 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
                 style="touch-action: none; user-select: none;" ></canvas>
     </div>
     <input type="{{$input_or_hidden}}" class="border rounded w-full border-gray-200" name="{{$name}}" id="{{$name}}" value="{!! $value !!}" />
-    @if($showCommentBox && $commentValue)
-        Comment:
-        @if($readOnly)
+    @if($showCommentBox )
+        @if($readOnly && $commentValue)
+            Comment:
             <div class="text-gray-500">{!! $commentValue ?: "(no comment)" !!}</div>
         @else
+        Comment:
         <textarea class="border border-gray-200 rounded w-full" rows="3" name="{{$commentName}}" id="{{$commentName}}" placeholder="Comment here...">{!! $commentValue !!}</textarea>
         @endif
     @endif
