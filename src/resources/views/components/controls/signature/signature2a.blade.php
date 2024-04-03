@@ -1,10 +1,10 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php 
-$w=338; $h=138; /* ORI 220 x 90*/ 
+$w=248; $h=138; /* ORI 220 x 90*/ 
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
-<div class=" w-[340px]">
+<div style="width:{{$w+2}}px;">
     <div title="{{$title}}">Signature here:</div>
     <div id="div1{{$name}}" class="relative border rounded h-[140px]">
         @if(!$readOnly)
@@ -36,9 +36,9 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
     $selected = $decisionValue;
     @endphp
-    <div class="flex gap-2">
-        <div class="grid w-full grid-cols-2 space-x-2 rounded-xl bg-gray-200 p-2">
-            @foreach(['approved'=>'Approve', 'rejected'=>'Reject'] as $decisionId => $option)
+    <div class="flex gap-2 items-center">
+        <div class="grid w-full text-sm grid-cols-2 space-x-2 rounded-xl border-2 border-gray-300 bg-gray-200 p-2">
+            @foreach(['approved'=>'APPROVE', 'rejected'=>'REJECT'] as $decisionId => $option)
                 <div>
                     <input type="radio" 
                         name="{{$decisionName}}" 
@@ -50,7 +50,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
                         onclick="$('#actionButton_{{$signatureId}}').prop('disabled', false).addClass('bg-purple-700')"
                     />
                     <label for="{{$decisionName}}_{{$decisionId}}" 
-                        class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
+                        class="{{$class[$decisionId]}} {{$cursor}} block select-none rounded-lg p-2 text-center peer-checked:font-bold 1peer-checked:text-white"
                         title="#{{$decisionId}}"
                         {{-- onclick="console.log(222)" --}}
                         >
@@ -60,15 +60,25 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
             @endforeach
         </div>
         {{-- {{$readOnly?'disabled':'no-disabled'}} --}}
-        <input 
+        {{-- <input 
             type="submit" 
             id="actionButton_{{$signatureId}}"
             name="actionButton" 
             value="SUBMIT" 
-            {{-- @disabled($readOnly) --}}
             disabled
             class="rounded-xl font-bold bg-purple-200 text-white p-4 cursor-pointer disabled:cursor-not-allowed 1disabled:bg-purple-200"
-        />
+        /> --}}
+        <div class="py-1">
+            <button 
+                id="actionButton_{{$signatureId}}"
+                name="actionButton" 
+                value="SUBMIT" 
+                disabled
+                class="rounded-xl h-9 font-bold border-2 border-purple-400 bg-purple-300 text-white px-2 py-1 cursor-pointer disabled:cursor-not-allowed"
+            >
+                <i class="fa-light fa-paper-plane"></i>
+            </button>
+        </div>
         {{-- <x-renderer.button name="actionButton" value="btnSubmitASignature" htmlType="submit" type="primary" class="rounded-xl" disabled="{{$readOnly}}" >SUBMIT</x-renderer.button> --}}
     </div>
     @endif

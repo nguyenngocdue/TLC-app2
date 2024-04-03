@@ -119,54 +119,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_list()": {
-        "name": "_signature_qaqc_punchlist_list()",
-        "column_name": "signature_qaqc_punchlist_list()",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_signature_qaqc_punchlist": {
-        "name": "_signature_qaqc_punchlist",
-        "column_name": "signature_qaqc_punchlist",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_signature_qaqc_punchlist_qaqc_list()": {
         "name": "_signature_qaqc_punchlist_qaqc_list()",
         "column_name": "signature_qaqc_punchlist_qaqc_list()",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_signature_qaqc_punchlist_qaqc": {
-        "name": "_signature_qaqc_punchlist_qaqc",
-        "column_name": "signature_qaqc_punchlist_qaqc",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -194,21 +149,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_production": {
-        "name": "_signature_qaqc_punchlist_production",
-        "column_name": "signature_qaqc_punchlist_production",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_signature_qaqc_punchlist_project_list()": {
         "name": "_signature_qaqc_punchlist_project_list()",
         "column_name": "signature_qaqc_punchlist_project_list()",
@@ -224,9 +164,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_project": {
-        "name": "_signature_qaqc_punchlist_project",
-        "column_name": "signature_qaqc_punchlist_project",
+    "_signature_qaqc_punchlist_factory_list()": {
+        "name": "_signature_qaqc_punchlist_factory_list()",
+        "column_name": "signature_qaqc_punchlist_factory_list()",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -239,9 +179,39 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_factory_list()": {
-        "name": "_signature_qaqc_punchlist_factory_list()",
-        "column_name": "signature_qaqc_punchlist_factory_list()",
+    "_signature_qaqc_punchlist_qaqc": {
+        "name": "_signature_qaqc_punchlist_qaqc",
+        "column_name": "signature_qaqc_punchlist_qaqc",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_signature_qaqc_punchlist_production": {
+        "name": "_signature_qaqc_punchlist_production",
+        "column_name": "signature_qaqc_punchlist_production",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_signature_qaqc_punchlist_project": {
+        "name": "_signature_qaqc_punchlist_project",
+        "column_name": "signature_qaqc_punchlist_project",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
