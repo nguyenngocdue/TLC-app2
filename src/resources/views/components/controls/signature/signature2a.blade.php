@@ -1,6 +1,6 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php 
-$w=248; $h=138; /* ORI 220 x 90*/ 
+$w=210; $h=138; /* ORI 220 x 90*/ 
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
@@ -19,7 +19,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
                 style="touch-action: none; user-select: none;" ></canvas>
     </div>
     <input type="{{$input_or_hidden}}" class="border rounded w-full border-gray-200" name="{{$name}}" id="{{$name}}" value="{!! $value !!}" />
-    @if($showCommentBox)
+    @if($showCommentBox && $commentValue)
         Comment:
         @if($readOnly)
             <div class="text-gray-500">{!! $commentValue ?: "(no comment)" !!}</div>
@@ -36,8 +36,8 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";
     $selected = $decisionValue;
     @endphp
-    <div class="flex gap-2 items-center">
-        <div class="grid w-full text-sm grid-cols-2 space-x-2 rounded-xl border-2 border-gray-300 bg-gray-200 p-2">
+    <div class="flex gap-1 items-center">
+        <div class="grid w-full text-xs grid-cols-2 space-x-2 rounded-xl border-2 border-gray-300 bg-gray-200 p-1 mt-1">
             @foreach(['approved'=>'APPROVE', 'rejected'=>'REJECT'] as $decisionId => $option)
                 <div>
                     <input type="radio" 
@@ -74,7 +74,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
                 name="actionButton" 
                 value="SUBMIT" 
                 disabled
-                class="rounded-xl h-9 font-bold border-2 border-purple-400 bg-purple-300 text-white px-2 py-1 cursor-pointer disabled:cursor-not-allowed"
+                class="rounded-xl h-8 font-bold border-2 border-purple-400 bg-purple-300 text-white px-2 cursor-pointer disabled:cursor-not-allowed"
             >
                 <i class="fa-light fa-paper-plane"></i>
             </button>
