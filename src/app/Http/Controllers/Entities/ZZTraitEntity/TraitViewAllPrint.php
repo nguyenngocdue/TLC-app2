@@ -68,10 +68,10 @@ trait TraitViewAllPrint
                     $name = $item->name . '.pdf';
                     pdf()->view('dashboards.pages.entity-show-props', $params)
                         ->withBrowsershot(function (Browsershot $browsershot) {
-                            $browsershot->scale(0.8);
+                            $browsershot->scale(0.7);
                         })
                         ->format('a4')
-                        ->margins(0, 75, 0, 75, Unit::Millimeter)
+                        ->margins(0, 75, 0, 35, Unit::Millimeter)
                         ->save($name);
                     $file = public_path($name);
                     $fileTmp[] = $file;

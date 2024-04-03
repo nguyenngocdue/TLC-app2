@@ -2,7 +2,8 @@
     if($content instanceof \Illuminate\Support\Collection){
         $value = $content->toArray();
     }else {
-        $value = $content['signature_multi']->toArray();
+        $tmp = $content['signature_multi'] ?? $content;
+        $value = $tmp->toArray();
         $dataSource = $content;
     }
 @endphp
