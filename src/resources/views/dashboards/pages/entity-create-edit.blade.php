@@ -69,7 +69,14 @@ $formWidth = "md:w-1/2";
                 <x-renderer.item-render-props width='{{$formWidth}}' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
                 @if(!$hasReadOnly)
                     <div class="fixed right-0">
-                        <x-controls.action-buttons isFloatingOnRightSide="true" :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
+                        <x-controls.action-buttons 
+                            isFloatingOnRightSide="true" 
+                            :buttonSave="$buttonSave" 
+                            :action="$action" 
+                            :actionButtons="$actionButtons" 
+                            :propsIntermediate="$propsIntermediate" 
+                            type={{$type}} 
+                            />
                     </div>
                 @endif
             </div>
