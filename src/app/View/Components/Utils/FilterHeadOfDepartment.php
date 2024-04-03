@@ -34,9 +34,9 @@ class FilterHeadOfDepartment extends Component
         $departments =  Department::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();
-        $a = $departments[1];
-        $a->name = '--All Company --';
-        $departments->forget(1);
+        $a = clone $departments[0];
+        $a->name = 'All Company';
+        $a->id = null;
         $departments = $departments->prepend($a);
         return $departments;
     }
