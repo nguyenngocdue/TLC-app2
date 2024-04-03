@@ -441,6 +441,19 @@
         "pending_ack": "true",
         "active": "true"
     },
+    "_signature_eco_peers_list()": {
+        "name": "_signature_eco_peers_list()",
+        "column_name": "signature_eco_peers_list()",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "_signature_eco_peers": {
         "name": "_signature_eco_peers",
         "column_name": "signature_eco_peers",
@@ -493,6 +506,19 @@
         "pending_ack": "true",
         "active": "true"
     },
+    "_signature_eco_managers_list()": {
+        "name": "_signature_eco_managers_list()",
+        "column_name": "signature_eco_managers_list()",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "_signature_eco_managers": {
         "name": "_signature_eco_managers",
         "column_name": "signature_eco_managers",
@@ -501,10 +527,10 @@
         "endorsement_rejected": "",
         "pending_review": "",
         "review_rejected": "",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
     },
     "_assignee_3": {
         "name": "_assignee_3",
@@ -543,6 +569,19 @@
         "pending_approval": "",
         "approval_rejected": "",
         "pending_ack": "",
+        "active": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
         "active": "true"
     },
     "_created_at": {
@@ -609,18 +648,5 @@
         "approval_rejected": "",
         "pending_ack": "",
         "active": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true",
-        "pending_endorsement": "true",
-        "endorsement_rejected": "true",
-        "pending_review": "true",
-        "review_rejected": "true",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
     }
 }

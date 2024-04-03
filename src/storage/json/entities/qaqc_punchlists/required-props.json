@@ -34,10 +34,10 @@
     "_production_name": {
         "name": "_production_name",
         "column_name": "production_name",
-        "new": "",
-        "pending_approval": "",
-        "inspected": "",
-        "not_applicable": ""
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
@@ -63,17 +63,65 @@
         "inspected": "",
         "not_applicable": ""
     },
-    "_signature_qaqc_punchlist_list()": {
-        "name": "_signature_qaqc_punchlist_list()",
-        "column_name": "signature_qaqc_punchlist_list()",
+    "_signature_qaqc_punchlist_qaqc_list()": {
+        "name": "_signature_qaqc_punchlist_qaqc_list()",
+        "column_name": "signature_qaqc_punchlist_qaqc_list()",
         "new": "",
         "pending_approval": "",
         "inspected": "",
         "not_applicable": ""
     },
-    "_signature_qaqc_punchlist": {
-        "name": "_signature_qaqc_punchlist",
-        "column_name": "signature_qaqc_punchlist",
+    "_signature_qaqc_punchlist_production_list()": {
+        "name": "_signature_qaqc_punchlist_production_list()",
+        "column_name": "signature_qaqc_punchlist_production_list()",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_project_list()": {
+        "name": "_signature_qaqc_punchlist_project_list()",
+        "column_name": "signature_qaqc_punchlist_project_list()",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_factory_list()": {
+        "name": "_signature_qaqc_punchlist_factory_list()",
+        "column_name": "signature_qaqc_punchlist_factory_list()",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_qaqc": {
+        "name": "_signature_qaqc_punchlist_qaqc",
+        "column_name": "signature_qaqc_punchlist_qaqc",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_production": {
+        "name": "_signature_qaqc_punchlist_production",
+        "column_name": "signature_qaqc_punchlist_production",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_project": {
+        "name": "_signature_qaqc_punchlist_project",
+        "column_name": "signature_qaqc_punchlist_project",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_factory": {
+        "name": "_signature_qaqc_punchlist_factory",
+        "column_name": "signature_qaqc_punchlist_factory",
         "new": "",
         "pending_approval": "",
         "inspected": "",
