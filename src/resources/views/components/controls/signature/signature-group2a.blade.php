@@ -97,7 +97,7 @@
 const requestSignOff = (tableName, signableId, category, requestedArray) => {
     console.log(tableName, signableId, requestedArray)
     requestedArray.forEach(person2request =>$("#btnRequest_" + person2request).prop('disabled', true))
-    $("#btnRequest_NeedToRequest").prop('disabled', true)
+    $("#btnRequest_NeedToRequest_" + category).prop('disabled', true)
 
     const data = {
         tableName, 
@@ -120,15 +120,15 @@ const requestSignOff = (tableName, signableId, category, requestedArray) => {
             // console.log(response)
             toastr.error(response.responseJSON.message, "Send emails failed.")
             requestedArray.forEach(person2request =>$("#btnRequest_" + person2request).prop('disabled', false))            
-            $("#btnRequest_NeedToRequest").prop('disabled', false)
+            $("#btnRequest_NeedToRequest_" + category).prop('disabled', false)
         }
     })
 }
 
-const recallSignOff = (tableName, signableId, requestedArray, signatureIds) => {
+const recallSignOff = (tableName, signableId, category, requestedArray, signatureIds) => {
     // console.log( requestedArray, signatureIds)
     requestedArray.forEach(person2request =>$("#btnRecall_" + person2request).prop('disabled', true))
-    $("#btnRecall_NeedToRecall").prop('disabled', true)
+    $("#btnRecall_NeedToRecall_" + category).prop('disabled', true)
 
     const data = {
         tableName, 
@@ -150,7 +150,7 @@ const recallSignOff = (tableName, signableId, requestedArray, signatureIds) => {
             // console.log(response)
             toastr.error(response.responseJSON.message, "Send emails failed.")
             requestedArray.forEach(person2request =>$("#btnRecall_" + person2request).prop('disabled', false))            
-            $("#btnRecall_NeedToRecall").prop('disabled', false)
+            $("#btnRecall_NeedToRecall_" + category).prop('disabled', false)
         }
     })
 }

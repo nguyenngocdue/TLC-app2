@@ -44,8 +44,8 @@ trait TraitSignOffListener
     private function getMetaOfEcoSheets($tableName, $signableId, $sheet)
     {
         // Log::info($sheet);
-        // $prodOrder = $sheet->getProdOrder;
         $project = $sheet->getProject;
+        // Log::info($project);
         $subProjects = $sheet->getSubProjectsOfEco();
         // Log::info($subProjects);
 
