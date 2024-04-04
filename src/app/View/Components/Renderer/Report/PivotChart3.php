@@ -32,15 +32,16 @@ class PivotChart3 extends Component
 		return array_merge($params, $widgets['dimensions'] ?? []);;
 	}
 
-	private function makeLabels($data, $widgets){
+	private function makeLabels($data, $widgets)
+	{
 		$params = $widgets['params'];
-		if (isset($params['map_labels'])){
+		if (isset($params['map_labels'])) {
 			$fields = $params['map_labels'];
-			$array = array_map(function($items) use ($fields) {
-				$newLabel = implode('.', array_map(function($field) use ($items) {
+			$array = array_map(function ($items) use ($fields) {
+				$newLabel = implode('.', array_map(function ($field) use ($items) {
 					return is_object($items[$field]) ? $items[$field]->value : $items[$field];
 				}, $fields));
-				$newLabel = preg_replace('/\./', ' (', $newLabel, 1) .')';
+				$newLabel = preg_replace('/\./', ' (', $newLabel, 1) . ')';
 				return $newLabel;
 			}, $data);
 			return StringReport::arrayToJsonWithSingleQuotes($array);
@@ -55,11 +56,16 @@ class PivotChart3 extends Component
 		$allWidgets = LibWidgets::getAll();
 		$widgets = $allWidgets[$key];
 		$widgets =  $this->makeObject($widgets);
-		
-		if($this->optionPrint === 'portrait') {
-			$widgets['dimensions']['width'] = $widgets['dimensions']['width']*0.6; 
-        }
 
+		if ($this->optionPrint === 'portrait') {
+			$widgets['dimensions']['width'] = $widgets['dimensions']['width'] * 0.6;
+		}
+		/*
+			+ if you want to change name of data source to displayed chart's legend on frontend: 
+				in the Params Column : overrideDataName1: "the filed name you want to set for the datasource (meta_data_1, meta_data_2) '
+			+ map_label: to create label under each column (ex: STW1(PPR Guide Plate))
+
+		*/
 		if ($widgets['chart_type'] === 'bar_two_columns') {
 			// dd($paramFilters,$widgets, $dataSource);
 			$paramLeftCol = $widgets['params']['meta_data_1'];
@@ -83,7 +89,7 @@ class PivotChart3 extends Component
 			];
 			$meta['labels'] = $labels;
 			$meta['count'] = count($latestAcceptances);
-			$meta['max'] = empty($latestAcceptances) ? 0 :max($latestAcceptances);
+			$meta['max'] = empty($latestAcceptances) ? 0 : max($latestAcceptances);
 			$metric = [];
 		} else {
 			$labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($dataSource));
@@ -124,6 +130,7 @@ class PivotChart3 extends Component
 			'titleChart' => '',
 			'dimensions' => $widgets['dimensions'],
 		];
+		// dd($widgetData);
 		return $widgetData;
 	}
 
@@ -134,7 +141,7 @@ class PivotChart3 extends Component
 		// dd($this->paramFilters);
 		return view("components.renderer.report.pivot-chart3", [
 			'dataWidgets' => $dataWidgets,
-			'key'=>$this->key,
+			'key' => $this->key,
 			'optionPrint' => $this->optionPrint
 		]);
 	}

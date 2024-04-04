@@ -53,7 +53,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
             <div class="pt-4"></>
             <div class="p-4 border">
                 <x-renderer.report.pivot-chart3 
-                    key="qaqc_wir_overall_complete_status" 
+                    key="qaqc_wir_overall_complete_status_all_projects" 
                     :data="$tableDataSource"
                     optionPrint="{{$optionPrint}}"
                     :paramFilters="$params"
