@@ -27,7 +27,7 @@
 	var scales = {};
 	var lessThen100 =  {!! json_encode($dimensions['lessThen100'] ?? false)  !!}
 	var meta = {!! json_encode($meta) !!}
-		if ('{{$chartType}}' === 'bar_two_columns' || '{{$chartType}}' === 'horizontal_bar') {
+		if ('{{$chartType}}' === 'bar_two_columns' || '{{$chartType}}' === 'horizontal_bar' || '{{$chartType}}' === 'bar_many_columns') {
 			datasets = {!! json_encode($meta['numbers']) !!};
 			chartType = 'bar';
 			indexAxis = 'x';  

@@ -103,7 +103,7 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
                         WHERE 1 = 1
                         AND sequ.status NOT IN ($naStr) ";
 
-        if (Report::checkValueOfField($paramsFormat, 'prod_routing_id')) $sqlStr .= "\n AND pr.id IN ({$paramsFormat['prod_routing_id']})";
+        if (Report::checkValueOfField($paramsFormat, 'prod_routing_id')) $sqlStr .= "\n AND sequ.prod_routing_id IN ({$paramsFormat['prod_routing_id']})";
         if (Report::checkValueOfField($paramsFormat, 'sub_project_id')) $sqlStr .= "\n AND sequ.sub_project_id IN ({$paramsFormat['sub_project_id']})";
 
 
@@ -113,7 +113,6 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
                     LEFT JOIN prod_orders po ON po.prod_routing_id = pr.id AND tb1.prod_routing_id = po.prod_routing_id
                     GROUP BY sub_project_id, prod_routing_id";
         $sqlData = DB::select($sqlStr);
-        // dd($sqlStr);
         return collect($sqlData);
     }
 
