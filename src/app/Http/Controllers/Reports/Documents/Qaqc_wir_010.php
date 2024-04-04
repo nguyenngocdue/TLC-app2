@@ -178,6 +178,14 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
         ];
     }
 
+    protected function basicInfoWidgetReport()
+    {
+        return [
+            'key' => 'qaqc_wir_overall_complete_status',
+            'title_report' => "QC Acceptance Report"
+        ];
+    }
+
 
     private function getWeightOfWirDescriptionByRouting()
     {

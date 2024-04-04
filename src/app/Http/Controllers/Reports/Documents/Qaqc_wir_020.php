@@ -10,8 +10,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
 {
 
     protected $mode = '020';
-    protected $viewName = 'document-wir-020';
-
+    protected $viewName = 'document-wir-010';
 
     public function getDataSource($params)
     {
@@ -19,6 +18,14 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         $dataSource = $ins->getDataSource($params);
         $dataSource = $ins->changeDataSource($dataSource, $params);
         return $dataSource;
+    }
+
+    protected function basicInfoWidgetReport()
+    {
+        return [
+            'key' => 'qaqc_wir_overall_complete_status_all_projects',
+            'title_report' => "The All Projects Acceptance Report",
+        ];
     }
 
     protected function getTableColumns($params, $dataSource)

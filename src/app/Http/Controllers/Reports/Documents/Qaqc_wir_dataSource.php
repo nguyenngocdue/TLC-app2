@@ -15,8 +15,6 @@ use Illuminate\Support\Arr;
 class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
 {
 
-    protected $mode = '010';
-    protected $viewName = 'document-wir-010';
     protected $tableTrueWidth = true;
     protected $projectId = 8;
     protected $subProjectId = 107;
@@ -218,11 +216,6 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
     protected function getParamColumns($dataSource, $modeType)
     {
         return [
-            /*  [
-                'title' => 'Month',
-                'dataIndex' => 'month',
-                "firstHidden" => true,
-            ], */
             [
                 'title' => 'Year',
                 'dataIndex' => 'year',
