@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Utils\Support\ArrayReport;
+use App\Http\Controllers\Workflow\LibStatuses;
+use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -70,36 +71,49 @@ class Qaqc_wir_020 extends Qaqc_wir_010
 
     private function getProductionsData($params)
     {
+        $finishedStr = str_replace(['[', ']'], ['', ''], json_encode(LibStatuses::$finishedArray));
+        $naStr = str_replace(['[', ']'], ['', ''], json_encode(LibStatuses::$naArray));
+        [$previousDate, $latestDate] = $this->getDate($params);
+        $paramsFormat = ParameterReport::formatValueParams($params);
+
         $sqlStr = "SELECT 
                     tb1.*,
                     sp.name AS sub_project_name,
                     pr.name AS prod_routing_name,
-                    ROUND(count_prl_previous_finished * 100/ total_prod_routing_link, 2) previous_finished_prod_percent,
-                    ROUND(count_prl_latest_finished * 100/ total_prod_routing_link, 2) latest_finished_prod_percent,
-                    -- NULL latest_qaqc_percent,
-                    -- NULL previous_qaqc_percent,
+                    IF(ROUND(count_prl_previous_finished * 100/ total_prod_routing_link, 2) = '0.00', NULL,
+                    ROUND(count_prl_previous_finished * 100/ total_prod_routing_link, 2))
+                     previous_finished_prod_percent,
+                    IF(ROUND(count_prl_latest_finished * 100/ total_prod_routing_link, 2) = '0.00', NULL,
+                        ROUND(count_prl_latest_finished * 100/ total_prod_routing_link, 2))
+                        latest_finished_prod_percent,
                     COUNT(po.id) AS count_prod_orders
                     FROM(SELECT
                         sequ.sub_project_id AS sub_project_id,
                         sequ.prod_routing_id AS prod_routing_id,
                         COUNT(sequ.prod_routing_link_id) AS total_prod_routing_link,
                         SUM(CASE WHEN 
-                            sequ.status IN ('closed', 'finished', 'approved')
-                            AND sequ.closed_at <= '2023-12-03'
+                            sequ.status IN ($finishedStr)
+                            AND sequ.closed_at <= '$previousDate'
                                 THEN 1 ELSE 0 END) count_prl_previous_finished,
                         SUM(CASE WHEN 
-                            sequ.status IN ('closed', 'finished', 'approved')
-                            AND sequ.closed_at <= '2024-10-03'
+                            sequ.status IN ($finishedStr)
+                            AND sequ.closed_at <= '$latestDate'
                                 THEN 1 ELSE 0 END) count_prl_latest_finished
                         FROM prod_sequences sequ 
                         WHERE 1 = 1
-                        AND sequ.status NOT IN ('not_applicable', 'cancelled')
-                        GROUP BY sub_project_id, prod_routing_id ) tb1
+                        AND sequ.status NOT IN ($naStr) ";
+
+        if (Report::checkValueOfField($paramsFormat, 'prod_routing_id')) $sqlStr .= "\n AND pr.id IN ({$paramsFormat['prod_routing_id']})";
+        if (Report::checkValueOfField($paramsFormat, 'sub_project_id')) $sqlStr .= "\n AND sequ.sub_project_id IN ({$paramsFormat['sub_project_id']})";
+
+
+        $sqlStr .= "\n GROUP BY sub_project_id, prod_routing_id ) tb1
                     LEFT JOIN sub_projects sp ON sp.id = tb1.sub_project_id AND sp.id IS NOT NULL
                     LEFT JOIN prod_routings pr ON pr.id = tb1.prod_routing_id
                     LEFT JOIN prod_orders po ON po.prod_routing_id = pr.id AND tb1.prod_routing_id = po.prod_routing_id
                     GROUP BY sub_project_id, prod_routing_id";
         $sqlData = DB::select($sqlStr);
+        // dd($sqlStr);
         return collect($sqlData);
     }
 
@@ -118,17 +132,20 @@ class Qaqc_wir_020 extends Qaqc_wir_010
             ],
             [
                 'title' => 'QTY',
-                'dataIndex' => 'total_prod_order',
+                'dataIndex' => 'number_of_prod_orders',
+                'align' => 'right',
             ],
-            // [
-            //     'title' => 'Apartment Q.ty',
-            //     'dataIndex' => 'total_prod_order',
-            // ],
+            [
+                'title' => 'Apartment Q.ty',
+                'dataIndex' => 'total_prod_order',
+                'align' => 'right',
+            ],
             [
                 // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
                 'title' => 'Last Week Production Completion (%)',
                 'dataIndex' => 'previous_finished_prod_percent',
                 'width' => 200,
+                'align' => 'right',
             ],
             [
                 // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
@@ -136,6 +153,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
                 'dataIndex' => 'previous_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
+                'align' => 'right',
             ],
             [
                 // 'title' =>  Arr::get($params, 'latest_month', '') . '<br/>Production Completion (%)',
@@ -143,6 +161,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
                 'dataIndex' => 'latest_finished_prod_percent',
                 'align' => 'right',
                 'width' => 180,
+                'align' => 'right',
             ],
             [
                 // 'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
@@ -150,6 +169,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
                 'dataIndex' => 'latest_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
+                'align' => 'right',
             ],
             [
                 'title' => 'Status',
@@ -206,7 +226,6 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         $sqlData = DB::select($sql);
         return collect($sqlData);
     }
-
 
     private function generateDataSourceByDate($params)
     {
@@ -360,9 +379,9 @@ class Qaqc_wir_020 extends Qaqc_wir_010
 
     private function mapItemsFromQaqcAndProductions($qaqcData, $productionData)
     {
+        // dd($qaqcData, $productionData);
         // Combine and deduplicate keys from both QAQC and production data.
-        $idProdRoutings = array_unique(array_merge(array_keys($qaqcData), array_keys($productionData)));
-        $result = [];
+        $idProdRoutings = array_merge(array_keys($qaqcData), array_keys($productionData));
         $idProdRoutings = array_merge(array_keys($qaqcData), array_keys($productionData));
         $result = [];
         foreach ($idProdRoutings as $prodRoutingId) {
@@ -380,6 +399,13 @@ class Qaqc_wir_020 extends Qaqc_wir_010
             $valueMergedChildren = array_values(array_map(fn ($item) => array_merge(...$item), $groupBySubProject));
             $result = array_merge($result, $valueMergedChildren);
         }
+        // set Status
+        $result = array_map(function ($item) {
+            if (!isset($item['percent_status']) || is_null($item['percent_status'])) {
+                $item['percent_status'] = 'Not Yet';
+            };
+            return $item;
+        }, $result);
         return $result;
     }
 
@@ -404,7 +430,6 @@ class Qaqc_wir_020 extends Qaqc_wir_010
             $weightWIRs =  Report::getItemsFromDataSource($weightWIRs);
             $groupWeightByProdRouting = Report::groupArrayByKey($weightWIRs, 'mtm_prod_routing_id');
 
-
             // get NA of WIRs
             $dataWIRsNa =  Report::getItemsFromDataSource($WIRsNa);
             $groupNaWIRsByProdRouting = Report::groupArrayByKey($dataWIRsNa, 'qaqc_wir_prod_routing_id');
@@ -427,9 +452,8 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         $indexData = $this->indexPercentByWeight($dataSourceQaqcWir010, $dataByDate)->toArray();
 
         $indexData = array_map(fn ($item) => (array)$item, $indexData);
-        $groupProdRoutingsForQaqc = Report::groupArrayByKey($indexData, 'project_id');
-
         $groupProdRoutingsForQaqc = Report::groupArrayByKey($indexData, 'prod_routing_id');
+        // dd($groupProdRoutingsForQaqc);
 
         // Productions
         $productionsData = $dataSource['productions'];
@@ -437,14 +461,15 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         $groupProdRoutingsForProd = Report::groupArrayByKey($productionsData, 'prod_routing_id');
 
         $result = $this->mapItemsFromQaqcAndProductions($groupProdRoutingsForQaqc, $groupProdRoutingsForProd);
-
-
         //add number of prod_orders
         $numberOfProdOrders = $this->filterNumberOfProdOrders()->pluck('count_prod_orders', 'id')->toArray();
         $result = array_map(function ($item) use ($numberOfProdOrders) {
             $item['number_of_prod_orders'] = isset($numberOfProdOrders[$item['prod_routing_id']]) ? $numberOfProdOrders[$item['prod_routing_id']] : null;
+            // set status for productions
             return $item;
         }, $result);
+
+
         return collect($result);
     }
 }

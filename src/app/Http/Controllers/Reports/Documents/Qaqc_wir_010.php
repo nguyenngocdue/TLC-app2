@@ -25,7 +25,6 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
 
     use TraitFilterProdRoutingShowsOnScreen;
 
-
     private function generateCurrentAndPreviousDate($month)
     {
         [$y, $m] = explode('-', $month);
@@ -33,16 +32,12 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $y = $y - 1;
             $m = 13;
         };
+        $lastDayOfMonth = substr(date("Y-m-t", strtotime("$month-01")), -2);
+        $previousMonth = $y . '-' . sprintf('%02d', (int)$m - 1);
+        $previousDayOfMonth = substr(date("Y-m-t", strtotime("-01")), -2);
         $previousMonth = str_pad($m - 1, '2', '0', STR_PAD_LEFT);
-        $previousDate = $y . "-" . $previousMonth . "-25";
-
-        $latestDate = $month . '-' . "25";
-        /// Please check here
-        // if ($latestDate > date("Y-m-d")) {
-        //     $latestDate = date("Y-m-d");
-        //     $previousDate = date("Y-m", strtotime($latestDate . " -1 month")) . "-25";
-        // }
-        // dd($month, $previousDate, $latestDate);
+        $previousDate = $y . "-" . $previousMonth . "-" . $previousDayOfMonth;
+        $latestDate = $month . '-' . $lastDayOfMonth;
         return [$previousDate, $latestDate];
     }
 
@@ -78,6 +73,7 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
         $strIdsRoutings = implode(',', $idsRoutings);
 
         [$previousDate, $latestDate] = $this->getDate($params);
+
         $valOfParams = $this->generateValuesFromParamsReport($params);
 
         if ((isset($params['sub_project_id']) && !is_numeric($x = $params['sub_project_id']) && is_null(last($x)))  || !isset($x)
@@ -86,63 +82,62 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
             $valOfParams['sub_project_id'] = $strIdsSubProjects;
         }
         // dd($params);
-
         $sql = " SELECT *
-                            ,IF(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
-                                -- Calculate after period
-                                FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
-                            
-                                ,NULL) AS latest_qaqc_percent
-                                
-                            ,IF(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description),
-                                -- Calculate before period
-                                FORMAT(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description), 2)
+            ,IF(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
+                -- Calculate after period
+                FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
+            
+                ,NULL) AS latest_qaqc_percent
+                
+            ,IF(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description),
+                -- Calculate before period
+                FORMAT(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description), 2)
 
-                                ,NULL) AS previous_qaqc_percent,
-                                -- NULL latest_finished_prod_percent,
-                                -- NULL previous_finished_prod_percent,
-                                count_wir_description,
-                                total_prod_order_have_wir_before,
-                                total_prod_order_have_wir,
-                                total_prod_order_on_sub_project,
-                                prod_order_in_wir,
-                                total_prod_order_have_wir
-                            FROM (SELECT
-                                sp.project_id AS project_id,
-                                sp.status AS sub_project_status,
-                                pj.name AS project_name,
-                                sp.id AS sub_project_id,
-                                sp.name AS sub_project_name,
-                                pr.prod_routing_id AS prod_routing_id,
-                                pr.prod_routing_name AS prod_routing_name,
-                                tb_count_order.prod_order_qty AS total_prod_order_on_sub_project,
-                                tb_count_order.prod_order_in_wir AS prod_order_in_wir
-                                    FROM sub_projects sp
-                                        JOIN prod_orders po ON po.sub_project_id = sp.id AND sp.id IS NOT NULL
+                ,NULL) AS previous_qaqc_percent,
+                -- NULL latest_finished_prod_percent,
+                -- NULL previous_finished_prod_percent,
+                count_wir_description,
+                total_prod_order_have_wir_before,
+                total_prod_order_have_wir,
+                total_prod_order_on_sub_project,
+                prod_order_in_wir,
+                total_prod_order_have_wir
+            FROM (SELECT
+                sp.project_id AS project_id,
+                sp.status AS sub_project_status,
+                pj.name AS project_name,
+                sp.id AS sub_project_id,
+                sp.name AS sub_project_name,
+                pr.prod_routing_id AS prod_routing_id,
+                pr.prod_routing_name AS prod_routing_name,
+                tb_count_order.prod_order_qty AS total_prod_order_on_sub_project,
+                tb_count_order.prod_order_in_wir AS prod_order_in_wir
+                    FROM sub_projects sp
+                        JOIN prod_orders po ON po.sub_project_id = sp.id AND sp.id IS NOT NULL
+                        LEFT JOIN (
+                                    SELECT 
+                                        DISTINCT mtm1.term_id AS prod_routing_id,
+                                        _pr.name AS prod_routing_name
+                                        FROM (
+                                            SELECT mtm.term_id
+                                            FROM many_to_many mtm
+                                            WHERE mtm.doc_type = 'App\\\Models\\\Wir_description'
+                                            AND mtm.term_type = 'App\\\Models\\\Prod_routing'
+                                        ) AS mtm1
                                         LEFT JOIN (
-                                                    SELECT 
-                                                        DISTINCT mtm1.term_id AS prod_routing_id,
-                                                        _pr.name AS prod_routing_name
-                                                        FROM (
-                                                            SELECT mtm.term_id
-                                                            FROM many_to_many mtm
-                                                            WHERE mtm.doc_type = 'App\\\Models\\\Wir_description'
-                                                            AND mtm.term_type = 'App\\\Models\\\Prod_routing'
-                                                        ) AS mtm1
-                                                        LEFT JOIN (
-                                                            SELECT mtm.doc_id
-                                                            FROM many_to_many mtm
-                                                            WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
-                                                            AND mtm.term_id = 346
-                                                        ) AS mtm2 ON mtm1.term_id = mtm2.doc_id
-                                                        LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id AND _pr.id IN ( $strIdsRoutings )
-                                        ) pr ON pr.prod_routing_id = po.prod_routing_id
-                                        LEFT JOIN projects pj ON sp.project_id = pj.id
-                                        LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id AND wir.deleted_by IS NULL
-                                                                AND wir.deleted_by IS NULL
-                                                                AND wir.prod_routing_id = pr.prod_routing_id
-                                                                AND wir.sub_project_id = sp.id
-                                                                AND sp.id IS NOT NULL";
+                                            SELECT mtm.doc_id
+                                            FROM many_to_many mtm
+                                            WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
+                                            AND mtm.term_id = 346
+                                        ) AS mtm2 ON mtm1.term_id = mtm2.doc_id
+                                        LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id AND _pr.id IN ( $strIdsRoutings )
+                        ) pr ON pr.prod_routing_id = po.prod_routing_id
+                        LEFT JOIN projects pj ON sp.project_id = pj.id
+                        LEFT JOIN qaqc_wirs wir ON wir.prod_order_id = po.id AND wir.deleted_by IS NULL
+                                                AND wir.deleted_by IS NULL
+                                                AND wir.prod_routing_id = pr.prod_routing_id
+                                                AND wir.sub_project_id = sp.id
+                                                AND sp.id IS NOT NULL";
 
         if (Report::checkValueOfField($valOfParams, 'prod_routing_id')) $sql .= "\n AND wir.prod_routing_id IN ({$valOfParams['prod_routing_id']})";
         if (Report::checkValueOfField($valOfParams, 'sub_project_id')) $sql .= "\n AND wir.sub_project_id IN ({$valOfParams['sub_project_id']})";
@@ -284,27 +279,24 @@ class Qaqc_wir_010 extends Report_ParentDocument2Controller
                 'dataIndex' => 'total_prod_order',
             ],
             [
-                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
-                'title' => 'Last Week Production Completion (%)',
+                'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
                 'dataIndex' => 'total_prod_order_on_sub_project',
                 'width' => 200,
             ],
             [
-                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
-                'title' => 'Last Week QC Acceptance (%)',
+                'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
                 'dataIndex' => 'total_prod_order_on_sub_project',
                 'align' => 'right',
                 'width' => 180,
             ],
             [
-                // 'title' =>  Arr::get($params, 'latest_month', '') . '<br/>Production Completion (%)',
-                'title' =>  'This Week Production Completion (%)',
+                'title' =>  Arr::get($params, 'latest_month', '') . '<br/>Production Completion (%)',
                 'dataIndex' => 'previous_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
             ],
             [
-                // 'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
+                'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
                 'title' => 'This Week QC Acceptance (%)',
                 'dataIndex' => 'latest_qaqc_percent',
                 'align' => 'right',

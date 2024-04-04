@@ -51,9 +51,9 @@ abstract class Report_Parent2Controller extends Controller
         return $this->getTable();
     }
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $sql = $this->getSql($modeParams);
+        $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
         $sqlData = DB::select($sql);
         $collection = collect($sqlData);

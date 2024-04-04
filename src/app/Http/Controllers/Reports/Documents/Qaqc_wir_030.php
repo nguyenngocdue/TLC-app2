@@ -18,7 +18,6 @@ class Qaqc_wir_030 extends Qaqc_wir_020
         $ins = new Qaqc_wir_020();
         $dataSource = $ins->getDataSource($params);
         $dataSource = $ins->changeDataSource($dataSource, $params);
-        // dd($params);
         return $dataSource;
     }
 
@@ -76,6 +75,7 @@ class Qaqc_wir_030 extends Qaqc_wir_020
 
     private function getProductionsData($params)
     {
+
         $sqlStr = "SELECT 
                         tb1.*,
                         sp.name AS sub_project_name,
