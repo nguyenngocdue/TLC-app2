@@ -8,7 +8,7 @@ use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\View\Component;
 
-class PivotChart3 extends Component
+class PivotChartManyColumns extends Component
 {
 
 
@@ -61,65 +61,51 @@ class PivotChart3 extends Component
 			$widgets['dimensions']['width'] = $widgets['dimensions']['width'] * 0.6;
 		}
 		/*
-			+ if you want to change name of data source to displayed chart's legend on frontend: 
-				in the Params Column : overrideDataName1: "the filed name you want to set for the datasource (meta_data_1, meta_data_2) '
 			+ map_label: to create label under each column (ex: STW1(PPR Guide Plate))
-
+			+ override_meta_name...: 
+					1. override the legend name to be equal to the value of a filed input from the admin
+					2. You can set any sequence you want
 		*/
-		if ($widgets['chart_type'] === 'bar_two_columns') {
+		if ($widgets['chart_type'] === 'bar_many_columns') {
 			// dd($paramFilters,$widgets, $dataSource);
-			$paramLeftCol = $widgets['params']['meta_data_1'];
-			$paramRightCol = $widgets['params']['meta_data_2'];
-			$dataName1 = $widgets['dimensions']['dataName1'];
-			$dataName2 = $widgets['dimensions']['dataName2'];
+			$itemsInParams = $widgets['params'];
+			$lenItemsInParams = count($itemsInParams);
 
 			$items = Report::convertToType($dataSource);
-			$previousAcceptances = array_column($items, $paramLeftCol);
-			$latestAcceptances = array_column($items, $paramRightCol);
+
+			$dataOfParamsCol = [];
+			$count = 0;
+			$max = 0;
+			for ($i = 0; $i < $lenItemsInParams; $i++) {
+				if (isset($itemsInParams['meta_data_' . $i])) {
+					$fieldMeta = $widgets['params']['meta_data_' . $i];
+					$dataOfParamsCol[$fieldMeta]['data'] =  array_column($items, $fieldMeta);
+					$x = $dataOfParamsCol[$fieldMeta]['data'];
+					// count
+					$c = count($x);
+					if ($c > $count) $count = $c;
+					// max 
+					$m = max($x);
+					if ($m > $max) $max = $m;
+
+					$_field = 'override_meta_name' . $i;
+					if (isset($itemsInParams[$_field]) && isset($paramFilters[$itemsInParams[$_field]])) {
+						$dataOfParamsCol[$fieldMeta]['label'] = $paramFilters[$itemsInParams[$_field]];
+					} else {
+						$dataOfParamsCol[$fieldMeta]['label'] = $itemsInParams[$_field];
+					}
+					$dataOfParamsCol[$fieldMeta] = (object)$dataOfParamsCol[$fieldMeta];
+				}
+			}
+
 			$labels = $this->makeLabels($items, $widgets);
-			$meta['numbers'] = [
-				(object)[
-					'label' => $paramFilters[$widgets['params']['overrideDataName1']] ?? $dataName1,
-					'data' => $latestAcceptances
-				],
-				(object)[
-					'label' => $paramFilters[$widgets['params']['overrideDataName2']] ?? $dataName2,
-					'data' => $previousAcceptances
-				]
-			];
+			$meta['numbers'] = array_values($dataOfParamsCol);
+
 			$meta['labels'] = $labels;
-			$meta['count'] = count($latestAcceptances);
-			$meta['max'] = empty($latestAcceptances) ? 0 : max($latestAcceptances);
+			$meta['count'] = $count;
+			$meta['max'] = $max;
 			$metric = [];
-		} else {
-			$labels = StringReport::arrayToJsonWithSingleQuotes(array_keys($dataSource));
-			$numbers = StringReport::arrayToJsonWithSingleQuotes(array_values($dataSource));
-			$max = max(array_values($dataSource));
-			$count = count($dataSource);
-			$meta = [
-				'numbers' => $numbers,
-				'labels' => $labels,
-				'max' => $max,
-				'count' => $count
-			];
-			// information for metric data
-			$metric = [];
-			array_walk($dataSource, function ($value, $key) use (&$metric) {
-				return $metric[] = (object) [
-					'meter_id' => $key,
-					'metric_name' => $value
-				];
-			});
-			// related to dimensions AxisX and AxisY
-			$params = [
-				'height' => $max / 2 * 30,
-				'scaleMaxX' => $max * 2,
-				'scaleMaxY' => $max * 2,
-			];
-			$widgets = $this->generateValueSForDimensions($widgets, $params);
 		}
-
-
 		// Set data for widget
 		$widgetData =  [
 			"title_a" => "title_a" . $key,
@@ -139,7 +125,7 @@ class PivotChart3 extends Component
 	{
 		$dataWidgets = $this->makeDataSource($this->data, $this->key, $this->paramFilters);
 		// dd($this->paramFilters);
-		return view("components.renderer.report.pivot-chart3", [
+		return view("components.renderer.report.pivot-chart-many-columns", [
 			'dataWidgets' => $dataWidgets,
 			'key' => $this->key,
 			'optionPrint' => $this->optionPrint

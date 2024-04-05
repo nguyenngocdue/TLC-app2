@@ -55,11 +55,11 @@ class ManageWidgetsController extends AbstractManageLibController
                 'dataIndex' => "chart_type",
                 "renderer"  => 'dropdown',
                 'editable' => true,
-                'cbbDataSource' => ['', 'line', 'bar', 'horizontal_bar','bar_two_columns', 'pie', 'doughnut'],
+                'cbbDataSource' => ['', 'line', 'bar', 'horizontal_bar', 'bar_two_columns', 'bar_many_columns', 'pie', 'doughnut'],
                 'sortBy' => 'value',
                 "width" => 100,
             ],
-           
+
             // [
             //     'dataIndex' => "fn",
             //     'renderer' => 'dropdown',

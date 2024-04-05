@@ -51,9 +51,9 @@ abstract class Report_Parent2Controller extends Controller
         return $this->getTable();
     }
 
-    public function getDataSource($modeParams)
+    public function getDataSource($params)
     {
-        $sql = $this->getSql($modeParams);
+        $sql = $this->getSql($params);
         if (is_null($sql) || !$sql) return collect();
         $sqlData = DB::select($sql);
         $collection = collect($sqlData);
@@ -64,6 +64,11 @@ abstract class Report_Parent2Controller extends Controller
         $x = 'picker_date';
         $params[$x] = DateReport::defaultPickerDate();
         return $params;
+    }
+
+    protected function basicInfoWidgetReport()
+    {
+        return [];
     }
 
     protected function getTable()
@@ -211,7 +216,6 @@ abstract class Report_Parent2Controller extends Controller
 
     public function index(Request $request)
     {
-
         $input = $request->input();
         // Check Validations
         if ($input) {
@@ -265,7 +269,6 @@ abstract class Report_Parent2Controller extends Controller
                 'basicInfoData' => $basicInfoData,
             ];
         }
-
         $emptyItems = $this->filterEmptyItems($dataSource, $basicInfoData);
         $settingComplexTable  = $this->createInfoToRenderTable($dataSource);
         $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
@@ -304,6 +307,7 @@ abstract class Report_Parent2Controller extends Controller
             'type' => $this->getType(),
             'dataGrafana' => $dataGrafana,
             'paramsGrafana' => $paramsGrafana,
+            'basicInfoWidgetReport' => $this->basicInfoWidgetReport(),
         ] + $dataRenderDocReport);
     }
 

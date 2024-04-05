@@ -253,8 +253,18 @@
         "name": "qaqc_wir_overall_complete_status",
         "report_name": "document-qaqc_wir_010",
         "hidden": null,
-        "chart_type": "bar_two_columns",
-        "params": "{\"label_meta_data_1\":\"prod_routing_name\",\r\n\"meta_data_1\":\"latest_acceptance_percent\",\r\n\"meta_data_2\":\"previous_acceptance_percent\",\r\n\"map_labels\":\"sub_project_name.prod_routing_name\",\r\n\"overrideDataName1\":\"previous_month\",\r\n\"overrideDataName2\":\"latest_month\"\r\n}",
+        "chart_type": "bar_many_columns",
+        "params": "{\"label_meta_data_1\":\"prod_routing_name\",\r\n\"meta_data_1\":\"latest_qaqc_percent\",\r\n\"meta_data_2\":\"previous_qaqc_percent\",\r\n\"meta_data_3\":\"previous_finished_prod_percent\",\r\n\"meta_data_4\":\"latest_finished_prod_percent\",\r\n\"map_labels\":\"sub_project_name.prod_routing_name\",\r\n\"override_meta_name1\":\"This week QC Acceptance (%)\",\r\n\"override_meta_name2\":\"Last week QC Acceptance (%)\",\r\n\"override_meta_name3\":\"Last Week Production Completion (%)\",\r\n\"override_meta_name4\":\"This week Production Completion (%)\"\r\n}",
+        "param_meta": null,
+        "line_series": null,
+        "dimensions": "{\r\n\"width\": 1200,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\": 110,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
+    },
+    "qaqc_wir_overall_complete_status_all_projects": {
+        "name": "qaqc_wir_overall_complete_status_all_projects",
+        "report_name": "document-qaqc_wir_020",
+        "hidden": null,
+        "chart_type": "bar_many_columns",
+        "params": "{\"label_meta_data_1\":\"sub_project_name\",\r\n\"meta_data_1\":\"latest_qaqc_percent\",\r\n\"meta_data_2\":\"previous_qaqc_percent\",\r\n\"meta_data_3\":\"previous_finished_prod_percent\",\r\n\"meta_data_4\":\"latest_finished_prod_percent\",\r\n\"labels\":\"sub_project_name\",\r\n\"override_meta_name1\":\"This week QC Acceptance (%)\",\r\n\"override_meta_name2\":\"Last week QC Acceptance (%)\",\r\n\"override_meta_name3\":\"Last Week Production Completion (%)\",\r\n\"override_meta_name4\":\"This week Production Completion (%)\"\r\n}",
         "param_meta": null,
         "line_series": null,
         "dimensions": "{\r\n\"width\": 1200,\r\n\"height\":500,\r\n\"scaleMaxX\": 100,\r\n\"scaleMaxY\": 110,\r\n\"fontSize\":14,\r\n\"indexAxis\":\"x\",\r\n\"displayTitleX\": 0,\r\n\"titleChart\": \"OVERALL COMPLETE STATUS\",\r\n\"displayTitleChart\":0,\r\n\"positionTitleChart\":\"top\",\r\n\"dataLabelAlign\":\"end\",\r\n\"dataLabelOffset\" : 10,\r\n\"displayTitleOnTopCol\": 1,\r\n\"tooltipLabel\": \"QC Acceptance (%)\",\r\n\"dataLabelRotation\":0,\r\n\"dataLabelOffset\":-30,\r\n\"dataName1\": \"Last month QC Acceptance (%)\",\r\n\"dataName2\": \"This month QC Acceptance (%)\",\r\n\"resetZoom\": 1,\r\n\"zoomWheelEnabled\":1,\r\n\"zoomPinchEnabled\":1,\r\n\"zoomMode\":\"x\",\r\n\"legendY\": 1 ,\r\n\"lessThen100\":1,\r\n\"stepSizeY\":10\r\n}"
