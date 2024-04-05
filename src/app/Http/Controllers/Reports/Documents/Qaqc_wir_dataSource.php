@@ -285,7 +285,7 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
     {
         $params['sub_project_id'] = $this->subProjectId;
         $params['year'] = date('Y');
-        $params['children_mode'] = empty($params) ? 'filter_by_month' : $params['children_mode'];
+        $params['children_mode'] = isset($params['children_mode']) && $params['children_mode'] ? $params['children_mode'] : 'filter_by_month';
         $params['month'] = date("Y-m");
         $params['only_month'] = (string)intval(date("m"));
         if ($params['children_mode'] === 'filter_by_week') {

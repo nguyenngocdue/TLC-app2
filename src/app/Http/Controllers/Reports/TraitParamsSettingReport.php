@@ -30,8 +30,8 @@ trait TraitParamsSettingReport
             $params = $settings[$entity][$typeReport][$currentMode];
 
             $params = self::removeNullItems($params);
+            // dd($params);
             $defaultParams = $this->getDefaultValueParams($params, $request);
-            // dd($defaultParams);
             $diffFields = array_diff(array_keys($defaultParams), array_keys($params));
             // dd($params, $defaultParams, $diffFields);
 

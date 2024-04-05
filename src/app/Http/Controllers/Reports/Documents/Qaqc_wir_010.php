@@ -6,6 +6,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\SortData;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir_010 extends Qaqc_wir_dataSource
@@ -118,6 +119,9 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
 
     protected function getTableColumns($params, $dataSource)
     {
+        $typeDate = isset($params['children_mode']) && $params['children_mode'] === "filter_by_month" ?
+            "Month" : 'Week';
+        dump($params);
         return [
             [
                 'title' => 'Sub Project',
@@ -140,31 +144,27 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
                 'align' => 'right',
             ],
             [
-                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
-                'title' => 'Last Week Production Completion (%)',
+                'title' => 'Last ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
                 'dataIndex' => 'previous_finished_prod_percent',
                 'width' => 200,
                 'align' => 'right',
             ],
             [
-                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
-                'title' => 'Last Week QC Acceptance (%)',
+                'title' => 'Last ' . $typeDate . ' QC Acceptance (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
                 'dataIndex' => 'previous_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
                 'align' => 'right',
             ],
             [
-                // 'title' =>  Arr::get($params, 'latest_month', '') . '<br/>Production Completion (%)',
-                'title' =>  'This Week Production Completion (%)',
+                'title' => 'This ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'latest_month', '') . ')',
                 'dataIndex' => 'latest_finished_prod_percent',
                 'align' => 'right',
                 'width' => 180,
                 'align' => 'right',
             ],
             [
-                // 'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
-                'title' => 'This Week QC Acceptance (%)',
+                'title' => 'This ' . $typeDate . ' QC Acceptance (%)</br>(' . Arr::get($params, 'latest_month', '') . ')',
                 'dataIndex' => 'latest_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
