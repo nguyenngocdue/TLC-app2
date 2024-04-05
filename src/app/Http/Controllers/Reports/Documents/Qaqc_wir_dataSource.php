@@ -266,8 +266,8 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        if (!$this->hasChildrenMode($params) || empty($params)) {
-            $params = $this->getDefaultParamsForFilterByMonth();
+        if (!$this->hasChildrenMode($params) || empty($params) || isset($params['children_mode'])) {
+            $params = $this->getDefaultParamsForFilterByMonth($params);
         } elseif (Report::checkValueOfField($params, 'children_mode')) {
             $params = $this->getParamsFromUserSettings($params, $request);
         }
@@ -281,11 +281,11 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
     }
 
 
-    protected function getDefaultParamsForFilterByMonth()
+    protected function getDefaultParamsForFilterByMonth($params)
     {
         $params['sub_project_id'] = $this->subProjectId;
         $params['year'] = date('Y');
-        $params['children_mode'] = 'filter_by_month';
+        $params['children_mode'] = empty($params) ? 'filter_by_month' : $params['children_mode'];
         $params['month'] = date("Y-m");
         $params['only_month'] = (string)intval(date("m"));
         if ($params['children_mode'] === 'filter_by_week') {

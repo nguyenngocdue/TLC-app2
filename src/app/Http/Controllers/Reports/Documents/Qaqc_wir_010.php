@@ -107,7 +107,6 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
         if (Report::checkValueOfField($paramsFormat, 'prod_routing_id')) $sqlStr .= "\n AND sequ.prod_routing_id IN ({$paramsFormat['prod_routing_id']})";
         if (Report::checkValueOfField($paramsFormat, 'sub_project_id')) $sqlStr .= "\n AND sequ.sub_project_id IN ({$paramsFormat['sub_project_id']})";
 
-
         $sqlStr .= "\n GROUP BY sub_project_id, prod_routing_id ) tb1
                     LEFT JOIN sub_projects sp ON sp.id = tb1.sub_project_id AND sp.id IS NOT NULL
                     LEFT JOIN prod_routings pr ON pr.id = tb1.prod_routing_id
