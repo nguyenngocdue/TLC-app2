@@ -76,6 +76,7 @@ $formWidth = "md:w-1/2";
                             :actionButtons="$actionButtons" 
                             :propsIntermediate="$propsIntermediate" 
                             type={{$type}} 
+                            :item="$item"
                             />
                     </div>
                 @endif
@@ -103,7 +104,14 @@ $formWidth = "md:w-1/2";
         @if(!$hasReadOnly)
         <div class="px-2 flex justify-center">
             <div class="bg-white rounded-lg mt-2 w-full md:w-3/4">
-                <x-controls.action-buttons :buttonSave="$buttonSave" :action="$action" :actionButtons="$actionButtons" :propsIntermediate="$propsIntermediate" type={{$type}} />
+                <x-controls.action-buttons 
+                    :buttonSave="$buttonSave" 
+                    :action="$action" 
+                    :actionButtons="$actionButtons" 
+                    :propsIntermediate="$propsIntermediate" 
+                    type={{$type}} 
+                    :item="$item"
+                    />
             </div>
         </div>
         @endif
