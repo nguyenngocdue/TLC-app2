@@ -14,7 +14,7 @@
         <div class="overflow-x-auto print:overflow-x-hidden items-center">
             <div class="bg-white box-border p-8 items-center" style="{{$layout}}"> 
                     <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
-                    <x-renderer.heading level=3 xalign='center'>{{$topTitle}}</x-renderer.heading>
+                    <x-renderer.heading level=3 xalign='center'>{{Str::singular($topTitle)}}</x-renderer.heading>
                     @foreach($propsTree as $propTree)
                     <x-print.description-group5 type={{$type}} modelPath={{$modelPath}}
                     :propTree="$propTree" :dataSource="$dataSource" :item="$item"
