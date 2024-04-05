@@ -10,7 +10,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
 {
 
     protected $mode = '020';
-    protected $viewName = 'document-wir-010';
+    protected $viewName = 'document-qaqc-wir-010';
 
     public function getDataSource($params)
     {

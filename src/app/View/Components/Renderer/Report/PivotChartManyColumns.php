@@ -72,6 +72,7 @@ class PivotChartManyColumns extends Component
 			$lenItemsInParams = count($itemsInParams);
 
 			$items = Report::convertToType($dataSource);
+			if (empty($items)) return [];
 
 			$dataOfParamsCol = [];
 			$count = 0;

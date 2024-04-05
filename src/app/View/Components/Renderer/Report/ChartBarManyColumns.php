@@ -34,6 +34,7 @@ class ChartBarManyColumns extends Component
     {
         $metric = $this->metric;
         $meta = $this->meta;
+        dd($meta);
         $count = $meta['count'];
         if ($count == 0) return "<x-renderer.emptiness />";
         $titleTooltip = CurrentUser::isAdmin() ? $this->key : null;
