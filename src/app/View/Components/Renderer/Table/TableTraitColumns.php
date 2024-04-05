@@ -76,7 +76,7 @@ trait TableTraitColumns
         $rotate45Height = $this->rotate45Height ?: (($this->rotate45Width) ? $rotate45Width - 100 : false);
 
         $thStyleStr = $this->getStyleStr([
-            'a' => 1,
+            'aString753' => 1,
             'width' => ($column['width'] ?? 100) . "px",
             'height' => $rotate45Height . "px",
         ]);
@@ -93,7 +93,7 @@ trait TableTraitColumns
         $tinyText = $this->noCss ? "text-xs" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
-        $borderColor = $this->borderColor;
+        $borderColor = $this->noCss ? "border-gray-400" : $this->borderColor;
         $th = "";
         $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $thStyleStr ";
         $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b $borderColor $borderRight $classTh45 $hiddenStr' ";

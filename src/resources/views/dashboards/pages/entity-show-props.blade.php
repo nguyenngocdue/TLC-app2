@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topTitle', $topTitle)
-@section('title', "Show" )
+@section('title', "Print" )
 
 @section('content')
 <style>
