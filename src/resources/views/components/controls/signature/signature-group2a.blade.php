@@ -162,6 +162,8 @@ const recallSignOff = (tableName, signableId, category, requestedArray, signatur
 @once
 <script>
 function show(){
+    //wsClientId has nothing to do with the logic of this form,
+    //Only to make sure the form slower after document ready
     if(wsClientId) {
         console.log("wsClient is ready:", wsClientId)
         // console.log($(".signature-group2a"))

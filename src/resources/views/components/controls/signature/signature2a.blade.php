@@ -5,7 +5,9 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
 <div style="width:{{$w+2}}px;">
+    @if(!$readOnly)
     <div title="{{$title}}">Signature here:</div>
+    @endif
     <div id="div1{{$name}}" class="relative border rounded h-[140px]">
         @if(!$readOnly)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
@@ -20,9 +22,11 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
     </div>
     <input type="{{$input_or_hidden}}" class="border rounded w-full border-gray-200" name="{{$name}}" id="{{$name}}" value="{!! $value !!}" />
     @if($showCommentBox )
-        @if($readOnly && $commentValue)
+        @if($readOnly /*&& $commentValue*/)
+            @if($commentValue)
             Comment:
-            <div class="text-gray-500">{!! $commentValue ?: "(no comment)" !!}</div>
+            <div class="text-gray-500">{!! $commentValue !!}</div>
+            @endif
         @else
         Comment:
         <textarea class="border border-gray-200 rounded w-full" rows="3" name="{{$commentName}}" id="{{$commentName}}" placeholder="Comment here...">{!! $commentValue !!}</textarea>

@@ -12,7 +12,11 @@
             <div class="flex justify-center">
                 <x-controls.signature.signature2a name={{$name}} value={{$value}} signatureId={{$userId}} readOnly=1 showCommentBox={{true}} commentName="comment_{{$userId}}" />                            
             </div>
+            @if(isset($signature->signature_comment))
+            <div class='border rounded bg-gray-100 p-1 m-1'>
+                {{$signature->signature_comment}}
+            </div>
+            @endif
             <x-renderer.avatar-user size="xlarge" uid="{{$userId}}" showCompany=1 content={{$dateTime}}/>
-            {{$signature->signature_comment ?? null}}
         </div>
    @endforeach
