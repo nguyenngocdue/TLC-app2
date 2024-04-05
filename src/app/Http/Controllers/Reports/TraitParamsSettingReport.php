@@ -31,6 +31,7 @@ trait TraitParamsSettingReport
 
             $params = self::removeNullItems($params);
             $defaultParams = $this->getDefaultValueParams($params, $request);
+            // dd($defaultParams);
             $diffFields = array_diff(array_keys($defaultParams), array_keys($params));
             // dd($params, $defaultParams, $diffFields);
 
@@ -41,7 +42,6 @@ trait TraitParamsSettingReport
                         $childrenMode = $params['children_mode'] ?? $value;
                         if (isset($settings[$entity][$typeReport][$currentMode][$childrenMode])) {
                             $params = array_merge($params, $settings[$entity][$typeReport][$currentMode][$childrenMode]);
-                            // dd($params);
                         }
                     };
                     if (!isset($params[$key]) || !$params[$key]) {

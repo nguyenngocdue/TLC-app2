@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\SortData;
 use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir_010 extends Qaqc_wir_dataSource
@@ -475,7 +476,30 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
             return $item;
         }, $result);
 
+        $fields = ['sub_project_name', 'prod_routing_name'];
+        $result = SortData::sortArrayByKeys($result, $fields);
 
+
+        //add number of prod_orders
+        $numberOfProdOrders = $this->filterNumberOfProdOrders()->pluck('count_prod_orders', 'id')->toArray();
+        $result = array_map(function ($item) use ($numberOfProdOrders) {
+            $item['number_of_prod_orders'] = isset($numberOfProdOrders[$item['prod_routing_id']]) ? $numberOfProdOrders[$item['prod_routing_id']] : null;
+            return $item;
+        }, $result);
+
+        $apartments = $this->getApartmentsEachProdRouting($params);
+        $groupProdRoutingsForApart = Report::groupArrayByKey($apartments, 'sub_project_id');
+        $groupProdRoutingsForApart = array_map(fn ($item) => Report::groupArrayByKey($item, 'prod_routing_id'), $groupProdRoutingsForApart);
+
+        // add apartments to datasource
+        foreach ($result as $key => &$values) {
+            $subProjectId = $values['sub_project_id'];
+            $prodRoutingId = $values['prod_routing_id'];
+            if (isset($groupProdRoutingsForApart[$subProjectId]) && isset($groupProdRoutingsForApart[$subProjectId][$prodRoutingId])) {
+                $apartValues = current($groupProdRoutingsForApart[$subProjectId][$prodRoutingId]);
+                $values['number_of_apartments'] = $apartValues['number_of_pj_units'];
+            }
+        }
         return collect($result);
     }
 }
