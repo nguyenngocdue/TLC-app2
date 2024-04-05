@@ -93,7 +93,7 @@ class PrintProps extends Component
 				}
 			}
 		}
-		$this->handleDataSourceOfControlSignatureMulti($propsTemp,$dataSource);
+		// $this->handleDataSourceOfControlSignatureMulti($propsTemp,$dataSource);
 		$values = (object) $this->loadValueOfOracyPropsAndAttachments($dataModelCurrent, $props);
 		$status = $dataSource['status'] ?? null;
 		[$actionButtons, $buttonSave, $propsIntermediate] = $this->getConfigActionButtons($superProps, $status);
@@ -134,6 +134,7 @@ class PrintProps extends Component
 		$propSignatureMulti = array_filter($props,function ($value) {
 			return $value['control'] == 'signature_multi';
 		});
+		// dd($propSignatureMulti);
 		foreach ($propSignatureMulti as $key => $value) {
 			$tmp = substr($key,1);
 			$dataSource[$tmp] = [
