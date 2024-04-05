@@ -8,7 +8,7 @@
     //}
 @endphp
 @if (!(sizeof($value) == 0 && ($control == 'attachment')) && !$hiddenLabel)
-    <label class='p-2 border-b border-gray-600 text-base font-medium flex {{$valueColSpan[0]}} items-center {{$newLine ? 'justify-start' : 'justify-end'}} col-start-1'>{{$label}}</label>
+    <label class='p-2 border-b border-gray-600 border-r text-base font-medium flex {{$valueColSpan[0]}} items-center {{$newLine ? 'justify-start' : 'justify-end'}} col-start-1'>{{$label}}</label>
 @endif
 @if(sizeof($value) > 0)
     @switch($control)
@@ -76,18 +76,20 @@
     @if($printMode == 'template')
         @switch($control)
             @case('relationship_renderer')
-                        <div class='p1-2  bor1der bord1r-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
-                            <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} :item="$item" numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
-                        </div>
-                    @break
+                <div class='p1-2  bor1der bord1r-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
+                    <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} :item="$item" numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
+                </div>
+            @break
             @default
+            @break
         @endswitch
     @else
-        @if($control !== 'attachment')
-            <div class='p-2 bord1er bord1er-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left flex items-center'>
+        <div class='p-2 bord1er bord1er-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left flex items-center'>
+            @if(!in_array($control, ['attachment', 'signature_multi']))
+                {{-- @dump($control) --}}
                 (None)
-            </div>
-        @endif
+            @endif
+        </div>
     @endif
 
 @endif
