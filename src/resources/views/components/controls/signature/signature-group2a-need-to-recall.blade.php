@@ -1,8 +1,8 @@
 {{-- {{$isInNominatedList}} --}}
 {{-- {{count($needToRecall)}} --}}
 {{-- If not in the norminated list (probably an DC admin) --}}
-@if(!$isInNominatedList && count($needToRecall)>0)
-<div class="bg-red-600 text-white  rounded p-2">
+@if(count($needToRecall)>0)
+<div class="bg-red-600 text-white  rounded p-2 mt-2">
     @php $title_need_to_recall = $needToRecall->join(", "); @endphp
     <div class="font-bold flex items-center gap-2" title="You have sent request but you have removed them from norminated list.">
         Need to recall: 
@@ -10,7 +10,7 @@
             type="warning"
             title='{!! "Recall:\n".$title_need_to_recall !!}'
             onClick="this.disabled=true;recallSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$needToRecall->map(fn($i, $uid)=>$uid)->join(',')}}], [{{$needToRecallSignatures->join(',')}}])"
-        >Recall {{count($needToRecall)}} Request(s).</x-renderer.button>
+        >Recall {{count($needToRecall)}} Request{{count($needToRecall)>1?"s":""}}.</x-renderer.button>
     </div>
     <div class="flex">
         @foreach($needToRecall as $uid => $a)
