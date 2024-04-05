@@ -121,7 +121,7 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
     {
         $typeDate = isset($params['children_mode']) && $params['children_mode'] === "filter_by_month" ?
             "Month" : 'Week';
-        dump($params);
+        // dump($params);
         return [
             [
                 'title' => 'Sub Project',
