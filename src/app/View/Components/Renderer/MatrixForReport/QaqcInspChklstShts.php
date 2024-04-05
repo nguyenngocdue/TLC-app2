@@ -11,6 +11,8 @@ class QaqcInspChklstShts extends MatrixForReportParent
 {
     protected $dataIndexX = "qaqc_insp_tmpl_sht_id";
     protected $dataIndexY = "qaqc_insp_chklst_id";
+    protected $rotate45Width = 200;
+    protected $rotate45Height = 150;
 
     private $dataSource;
 
