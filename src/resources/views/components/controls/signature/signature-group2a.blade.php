@@ -164,6 +164,8 @@ const recallSignOff = (tableName, signableId, category, requestedArray, signatur
     function show(){
     if(wsClientId) {
         console.log("wsClient is ready:", wsClientId)
+        console.log($(".signature-group2a"))
+        console.log($(".signature-group2a-loading"))
         $(".signature-group2a").toggle()
         $(".signature-group2a-loading").toggle()
     } else {
