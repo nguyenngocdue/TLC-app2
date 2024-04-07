@@ -47,6 +47,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $headerTop = 40;
     protected $groupBy = null;
     protected $apiToCallWhenCreateNew = 'cloneTemplate';
+    protected $maxH = 60;
 
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
