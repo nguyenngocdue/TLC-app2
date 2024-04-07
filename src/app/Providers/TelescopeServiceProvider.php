@@ -32,7 +32,6 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
                 return;
             }
 
-            Log::info("Prod ENV");
             //Form here is production ENV:
 
             return true; //<<Fortune: no filter anything, 
