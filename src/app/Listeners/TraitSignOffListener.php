@@ -67,17 +67,24 @@ trait TraitSignOffListener
 
         $modelPath = Str::modelPathFrom($tableName);
         $sheet = $modelPath::find($signableId);
+        $meta = [];
 
         switch ($tableName) {
             case 'qaqc_insp_chklst_shts':
-                return $this->getMetaOfInspChklstSht($tableName, $signableId, $sheet);
+                $meta = $this->getMetaOfInspChklstSht($tableName, $signableId, $sheet);
+                break;
             case 'qaqc_punchlists':
-                return $this->getMetaOfQaqcPunchlists($tableName, $signableId, $sheet);
+                $meta = $this->getMetaOfQaqcPunchlists($tableName, $signableId, $sheet);
+                break;
             case 'eco_sheets':
-                return $this->getMetaOfEcoSheets($tableName, $signableId, $sheet);
+                $meta =  $this->getMetaOfEcoSheets($tableName, $signableId, $sheet);
+                break;
             default:
                 Log::error("[$tableName] not found in TraitSignOffListener.php");
-                return [];
+                break;
         }
+        // Log::info($meta);
+
+        return $meta;
     }
 }
