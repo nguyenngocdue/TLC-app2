@@ -69,7 +69,7 @@ trait TraitSignOffListener
         $sheet = $modelPath::find($signableId);
 
         switch ($tableName) {
-            case 'insp_chklst_shts':
+            case 'qaqc_insp_chklst_shts':
                 return $this->getMetaOfInspChklstSht($tableName, $signableId, $sheet);
             case 'qaqc_punchlists':
                 return $this->getMetaOfQaqcPunchlists($tableName, $signableId, $sheet);
