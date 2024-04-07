@@ -11,6 +11,7 @@ use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
 {
@@ -265,8 +266,8 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        if (!$this->hasChildrenMode($params) || empty($params)) {
-            $params = $this->getDefaultParamsForFilterByMonth();
+        if (!$this->hasChildrenMode($params) || empty($params) || isset($params['children_mode'])) {
+            $params = $this->getDefaultParamsForFilterByMonth($params);
         } elseif (Report::checkValueOfField($params, 'children_mode')) {
             $params = $this->getParamsFromUserSettings($params, $request);
         }
@@ -280,11 +281,11 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
     }
 
 
-    protected function getDefaultParamsForFilterByMonth()
+    protected function getDefaultParamsForFilterByMonth($params)
     {
         $params['sub_project_id'] = $this->subProjectId;
         $params['year'] = date('Y');
-        $params['children_mode'] = 'filter_by_month';
+        $params['children_mode'] = isset($params['children_mode']) && $params['children_mode'] ? $params['children_mode'] : 'filter_by_month';
         $params['month'] = date("Y-m");
         $params['only_month'] = (string)intval(date("m"));
         if ($params['children_mode'] === 'filter_by_week') {
@@ -366,5 +367,27 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
         }
         // dd($dataSource);
         return collect($dataSource);
+    }
+
+    protected function getApartmentsEachProdRouting($params)
+    {
+        $paramsFormat = ParameterReport::formatValueParams($params);
+        $sqlStr = "SELECT
+                        sp.id AS sub_project_id,
+                        pr.id AS prod_routing_id,
+                        COUNT(DISTINCT pjun.id) AS number_of_pj_units
+                        FROM sub_projects sp
+                        LEFT JOIN prod_orders po ON po.sub_project_id = sp.id 
+                        LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id  
+                        LEFT JOIN pj_modules pjmo ON pjmo.pj_unit_id = po.meta_id
+                        LEFT JOIN pj_units pjun ON pjun.id = pjmo.pj_unit_id
+                        WHERE 1 = 1
+                        AND pjmo.id IS NOT NULL
+                        AND pr.id IS NOT NULL";
+        if (Report::checkValueOfField($paramsFormat, 'prod_routing_id')) $sqlStr .= "\n AND pr.id IN ({$paramsFormat['prod_routing_id']})";
+        if (Report::checkValueOfField($paramsFormat, 'sub_project_id')) $sqlStr .= "\n AND sp.id IN ({$paramsFormat['sub_project_id']})";
+        $sqlStr .= "\n GROUP BY sp.id, pr.id";
+        $sqlData = DB::select($sqlStr);
+        return $sqlData;
     }
 }
