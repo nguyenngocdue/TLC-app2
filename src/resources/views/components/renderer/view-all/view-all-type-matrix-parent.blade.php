@@ -21,6 +21,7 @@
             rotate45Height="{{$rotate45Height}}"
             tableTrueWidth="{{$tableTrueWidth}}"
             headerTop="{{$headerTop}}"
+            maxH="{{$maxH}}"
             />
 </form>
 
