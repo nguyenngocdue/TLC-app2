@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\IncomingEntry;
 use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
@@ -22,8 +23,16 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
         Telescope::filter(function (IncomingEntry $entry) {
             if ($this->app->environment('local')) {
+                // Log::info("Local ENV");
                 return true;
             }
+
+            if ($this->app->environment('testing')) {
+                // Log::info("Beta ENV");
+                return;
+            }
+
+            //Form here is production ENV:
 
             return true; //<<Fortune: no filter anything, 
             //<<Fortune: use telescope logging to log on production during the development state

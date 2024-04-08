@@ -28,6 +28,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     protected $groupBy = null;
     protected $tableTrueWidth = true;
     protected $headerTop = "310px";
+    protected $maxH = 60;
     /**
      * Create a new component instance.
      *
