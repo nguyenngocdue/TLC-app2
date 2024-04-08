@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\TraitFilterProdRoutingShowsOnScreen;
+use App\Models\Sub_project;
 use App\Utils\Support\CurrentPathInfo;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
@@ -17,9 +18,8 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
 {
 
     protected $tableTrueWidth = true;
-    protected $projectId = 8;
-    protected $subProjectId = 107;
-    protected $prodRoutingId = 49;
+    // protected $projectId = 8;
+    // protected $subProjectId = 107;
     protected $pageLimit = 100000;
 
     use TraitFilterProdRoutingShowsOnScreen;
@@ -262,48 +262,50 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
             [
                 'title' => 'Sub Project',
                 'dataIndex' => 'sub_project_name',
-                'width' => 150,
+                'width' => 180,
             ],
-            ($this->mode == '010'  ? [
+            [
                 'title' => 'Production Routing',
                 'dataIndex' => 'prod_routing_name',
-                'width' => 200,
-            ] : null),
+                'width' => 300,
+            ],
             [
                 'title' => 'QTY',
                 'dataIndex' => 'number_of_prod_orders',
                 'align' => 'right',
+                'width' => 150,
             ],
             [
                 'title' => 'Apartment Q.ty',
                 'dataIndex' => 'total_prod_order',
                 'align' => 'right',
+                'width' => 150,
             ],
             [
                 'title' => 'Last ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
                 'dataIndex' => 'previous_finished_prod_percent',
-                'width' => 200,
+                'width' => 150,
                 'align' => 'right',
             ],
             [
                 'title' => 'Last ' . $typeDate . ' QC Acceptance (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
                 'dataIndex' => 'previous_qaqc_percent',
                 'align' => 'right',
-                'width' => 180,
+                'width' => 150,
                 'align' => 'right',
             ],
             [
                 'title' => 'This ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'latest_month', '') . ')',
                 'dataIndex' => 'latest_finished_prod_percent',
                 'align' => 'right',
-                'width' => 180,
+                'width' => 150,
                 'align' => 'right',
             ],
             [
                 'title' => 'This ' . $typeDate . ' QC Acceptance (%)</br>(' . Arr::get($params, 'latest_month', '') . ')',
                 'dataIndex' => 'latest_qaqc_percent',
                 'align' => 'right',
-                'width' => 180,
+                'width' => 150,
                 'align' => 'right',
             ],
             [
@@ -351,7 +353,7 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
                 $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
             }
         }
-        $params['sub_project_id'] = isset($params['sub_project_id']) ? $params['sub_project_id'] : $this->subProjectId;
+        $params['sub_project_id'] = isset($params['sub_project_id']) ? $params['sub_project_id'] : null;
         $params['year'] = isset($params['year'])  ? $params['year'] : date('Y');
         $params['children_mode'] = isset($params['children_mode']) && $params['children_mode'] ? $params['children_mode'] : 'filter_by_month';
         $params['only_month'] = isset($params['only_month']) ? $params['only_month'] : (string)intval(date("m"));
