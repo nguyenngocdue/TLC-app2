@@ -1,5 +1,8 @@
 @if($content instanceof \Illuminate\Support\Collection || is_array($content))
-    <div class='col-span-{{$colSpan}} border border-gray-600'>
+    @php
+        $border = (sizeof($content) > 0) ? 'border border-gray-600' : '';
+    @endphp
+    <div class='col-span-{{$colSpan}} {{$border}}'>
         <div class='grid grid-row-1'>
             <div class='grid grid-cols-12 text-right'>
                 <x-print.render-description5
