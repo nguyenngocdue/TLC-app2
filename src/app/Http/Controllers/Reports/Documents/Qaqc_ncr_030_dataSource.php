@@ -111,7 +111,10 @@ class Qaqc_ncr_030_dataSource extends Controller
                                 CASE
                                     WHEN ncr.status = 'resolved' THEN 1 ELSE 0 END 
                             ) AS count_resolved,
-                            
+                            SUM(
+                                CASE
+                                    WHEN ncr.status = 'assigned' THEN 1 ELSE 0 END 
+                            ) AS count_assigned,
                             SUM(
                                     CASE
                                         WHEN ncr.status = 'closed' THEN 1 ELSE 0 END 
@@ -124,7 +127,11 @@ class Qaqc_ncr_030_dataSource extends Controller
                             ) + SUM(
                                 CASE
                                     WHEN ncr.status = 'resolved' THEN 1 ELSE 0 END 
-                            ) AS total
+                            ) + SUM(
+                                CASE
+                                    WHEN ncr.status = 'assigned' THEN 1 ELSE 0 END 
+                            ) 
+                            AS total
                             FROM qaqc_ncrs ncr
                             WHERE 1 = 1 
                                 AND ncr.deleted_by IS NULL

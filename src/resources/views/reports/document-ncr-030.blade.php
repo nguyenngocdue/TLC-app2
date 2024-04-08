@@ -20,7 +20,7 @@ $tr = "
 {{-- Parameters for Charts --}}
 @php
     $width = "100%";
-    $heigh = 300;
+    $height = 300;
     $year = $paramsGrafana['year'];
     $centerURL = $paramsGrafana['prams_url_str'];
     $subUrl = "https://grafana.tlcmodular.com/d-solo/ea031cad-a2b2-455b-adf8-ed50d990bfae/ncr?orgId=1&".$centerURL;
@@ -149,7 +149,7 @@ $tr = "
                    <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues' Statuses</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="990px" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=5" width="{{$width}}" height="{{$height}}" frameborder="1">
                             </iframe>
                             <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_STATUS']" :dataSource="$tableDataSource['ISSUES_STATUS']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
@@ -167,7 +167,7 @@ $tr = "
                     <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly NCR/DR Quantity</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=2" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=2" width="{{$width}}" height="{{$height}}" frameborder="1">
                             </iframe>
                             <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['NCR_DR']" :dataSource="$tableDataSource['NCR_DR']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
@@ -186,7 +186,7 @@ $tr = "
                      <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Issues Source</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=6" width="{{$width}}" height="{{$height}}" frameborder="1">
                             </iframe>
                             <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['ISSUES_SOURCE']" :dataSource="$tableDataSource['ISSUES_SOURCE']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
@@ -204,7 +204,7 @@ $tr = "
                     <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Average Closed Days by Monthly Issues</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=4" width="{{$width}}" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=4" width="{{$width}}" height="{{$height}}" frameborder="1">
                             </iframe>
                             <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['AVERAGE_CLOSED_ISSUES']" :dataSource="$tableDataSource['AVERAGE_CLOSED_ISSUES']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />
@@ -223,7 +223,7 @@ $tr = "
                     <div class='col-span-12'>
                         <x-renderer.heading level=4 class='text-center'>Monthly Responsible Team's Issues</x-renderer.heading>
                         <div class="flex flex-col text-center">
-                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="990px" height="{{$heigh}}" frameborder="1">
+                            <iframe class="self-center border-2 border-gray-600 p-1" src="{{$subUrl}}&from=1708395847141&to=1708417447141&theme=light&&panelId=3" width="{{$width}}" height="{{$height}}" frameborder="1">
                             </iframe>
                             <div class='pt-4 px-2'>
                                 <x-renderer.report.pivot-table showNo={{true}} :tableColumns="$tableColumns['RESPONSIBLE_TEAM']" :dataSource="$tableDataSource['RESPONSIBLE_TEAM']" maxH='{{$maxH}}' page-limit="{{$pageLimit}}" tableTrueWidth={{$tableTrueWidth?1:0}} />

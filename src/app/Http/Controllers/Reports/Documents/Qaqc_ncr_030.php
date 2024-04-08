@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers\Reports\Documents;
 
-use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource as DocumentsQaqc_ncr_030_dataSource;
 use App\Http\Controllers\Reports\Report_ParentDocument2Controller;
 use App\Http\Controllers\Reports\Documents\Qaqc_ncr_030_dataSource;
 use App\Http\Controllers\Reports\TraitCreateChartFromGrafana;
 use App\Http\Controllers\Reports\TraitParamURLGrafana;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
-use App\Models\Prod_discipline;
-use App\Models\Prod_routing;
-use App\Models\Project;
-use App\Models\Sub_project;
-use App\Utils\Support\ArrayReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
@@ -223,23 +217,34 @@ class Qaqc_ncr_030 extends Report_ParentDocument2Controller
                 [
                     'title' => 'Closed',
                     'dataIndex' => 'count_closed',
-                    'align' => 'right'
+                    'align' => 'right',
+                    'footer' => 'agg_sum'
                 ],
                 [
                     'title' => 'New',
                     'dataIndex' => 'count_new',
-                    'align' => 'right'
+                    'align' => 'right',
+                    'footer' => 'agg_sum'
                 ],
                 [
                     'title' => 'Rejected',
                     'dataIndex' => 'count_rejected',
-                    'align' => 'right'
+                    'align' => 'right',
+                    'footer' => 'agg_sum'
                 ],
                 [
                     'title' => 'Resolved',
                     'dataIndex' => 'count_resolved',
-                    'align' => 'right'
-                ]
+                    'align' => 'right',
+                    'footer' => 'agg_sum'
+                ],
+                [
+                    'title' => 'Assigned',
+                    'dataIndex' => 'count_assigned',
+                    'align' => 'right',
+                    'footer' => 'agg_sum'
+                ],
+
             ],
             "ISSUES_SOURCE" => [
                 [
