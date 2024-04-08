@@ -1,9 +1,9 @@
 @if($value =='' && $signatureId)            
     <div title="#{{$signatureId}}">Request sent on {{$sentDate}}</div>
     {{-- @dump($readOnly, $isInNominatedList) --}}
-    @if(!$isExternalInspector && !$isProjectClient)
+    {{-- @if(!$isExternalInspector && !$isProjectClient) --}}
         @if(!$readOnly)
-            @if(!$isInNominatedList)
+            @if($isSignOffAdmin)
                 <x-renderer.button 
                     id="btnRecall_{{$signatureUserId}}"
                     type="warning"
@@ -13,11 +13,9 @@
                 </x-renderer.button>
             @endif
         @endif
-    @endif
+    {{-- @endif --}}
 @else
-    @if($isExternalInspector || $isProjectClient)
-        Request not yet sent
-    @else
+    @if($isSignOffAdmin)
         <x-renderer.button 
             id="btnRequest_{{$signatureUserId}}" 
             type="secondary" 
@@ -26,5 +24,7 @@
             onClick="requestSignOff('{{$tableName}}', {{$signableId}}, '{{$category}}', [{{$signatureUserId}}])">
             Request to Sign Off
         </x-renderer.button>
+    @else
+        Request not yet sent
     @endif
 @endif

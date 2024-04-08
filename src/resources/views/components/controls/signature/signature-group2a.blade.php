@@ -1,17 +1,18 @@
 <div class="border px-4 py-2">
+{{-- @dump($isSignOffAdmin) --}}
 {{-- @dump($isInNominatedList) --}}
 {{-- @dump($needToRecall) --}}
     <div component="signature-group2a-loading" class="signature-group2a-loading">Loading wsClient...</div>
     <div component="signature-group2a" class="hidden signature-group2a min-h-[135px]">
-        @if(!$isExternalInspector && !$readOnly)
+        @if($isSignOffAdmin && !$readOnly)
         <x-controls.signature.signature-group2a-need-to-recall 
-            isInNominatedList="{{$isInNominatedList}}"
+            {{-- isInNominatedList="{{$isInNominatedList}}" --}}
             tableName="{{$tableName}}"
             signableId="{{$signableId}}"
 
             :needToRecall="$needToRecall"
             :needToRecallSignatures="$needToRecallSignatures"
-            category="{{$category}}"
+            category="{{$category}}"            
             />
         @endif
 
@@ -53,22 +54,24 @@
                         showDecisionBox=1
                         decisionName="signatures[{{$category}}_{{$index}}][signature_decision]"
                         decisionValue="{{$decision}}"
+                        isSignOffAdmin="{{$isSignOffAdmin}}"
                         />
                     </div>
                 @else
                     <x-controls.signature.signature-group2a-request-recall-one
                         value="{{$value}}"
                         signatureId="{{$signatureId}}"
-                        isExternalInspector="{{$isExternalInspector}}"
-                        isProjectClient="{{$isProjectClient}}"
+                        {{-- isExternalInspector="{{$isExternalInspector}}" --}}
+                        {{-- isProjectClient="{{$isProjectClient}}" --}}
                         signatureUserId="{{$signatureUserId}}"
                         readOnly="{{$readOnly}}"
                         tableName="{{$tableName}}"
                         signableId="{{$signableId}}"
                         category="{{$category}}"
                         sentDate="{{$sentDate}}"
-                        isInNominatedList="{{$isInNominatedList}}"
+                        {{-- isInNominatedList="{{$isInNominatedList}}" --}}
                         readOnly="{{$readOnly}}"
+                        isSignOffAdmin="{{$isSignOffAdmin}}"
                     />
                 @endif
             </div>
@@ -76,7 +79,7 @@
         </div>
         @endforeach
         
-        @if(!$isExternalInspector && !$isProjectClient && !$readOnly)
+        @if($isSignOffAdmin && !$readOnly)
             <x-controls.signature.signature-group2a-request-recall-many
                 :needToRequest="$needToRequest"
                 :nominatedList="$nominatedList"
@@ -87,7 +90,8 @@
                 tableName="{{$tableName}}"
                 signableId="{{$signableId}}"
                 category="{{$category}}"
-                isInNominatedList="{{$isInNominatedList}}"
+                {{-- isInNominatedList="{{$isInNominatedList}}" --}}
+                isSignOffAdmin="{{$isSignOffAdmin}}"
             />
         @endif
     </div>

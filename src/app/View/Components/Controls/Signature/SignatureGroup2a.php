@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 
 class SignatureGroup2a extends Component
 {
+    private $signOffAdminIds = null;
     /**
      * Create a new component instance.
      *
@@ -21,10 +22,13 @@ class SignatureGroup2a extends Component
         private $debug = !true,
         private $title = "Sign Off",
         private $signOffOracy = null,
+        private $signOfAdminFn = 'getMonitors1',
 
     ) {
         if (is_null($signOffOracy)) $this->signOffOracy = $category . "_list";
         // dump($this->signOffOracy);
+        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}()->pluck('id');
+        // dump($this->signOffAdminIds);
         // dump($category);
         // dump($item);
         // dump($signableType, $signableId);
@@ -56,7 +60,7 @@ class SignatureGroup2a extends Component
                 return "<x-feedback.result type='warning' title='Permission Denied' message='You are not permitted to view this check sheet.<br/>If you believe this is a mistake, please contact our admin.' />";
             }
         }
-        $isProjectClient = CurrentUser::get()->isProjectClient();
+        // $isProjectClient = CurrentUser::get()->isProjectClient();
 
         $nominatedList = $this->item->{$this->signOffOracy}();
         // dump($nominatedList);
@@ -88,6 +92,10 @@ class SignatureGroup2a extends Component
         $allowed = \App\Utils\Support\Json\SuperWorkflows::isAllowed($this->item->status, $this->type);
         // echo $allowed ? "ALLOWED" : "403";
 
+        $isSignOffAdmin = false;
+        if (CurrentUser::isAdmin()) $isSignOffAdmin = true;
+        if ($this->signOffAdminIds->contains($cuid)) $isSignOffAdmin = true;
+
         $params = [
             'category' => $this->category,
             'signatures' => $signatures,
@@ -102,18 +110,19 @@ class SignatureGroup2a extends Component
             'needToRecall' => $needToRecall,
             'needToRecallSignatures' => $needToRecallSignatures,
 
-            'isInNominatedList' => $nominatedList->contains('id', $cuid),
+            // 'isInNominatedList' => $nominatedList->contains('id', $cuid),
 
             'debug' => $this->debug,
             'input_or_hidden' => $this->debug ? "text" : "hidden",
 
             'cuid' => $cuid,
-            'isExternalInspector' => $isExternalInspector,
-            'isProjectClient' => $isProjectClient,
+            // 'isExternalInspector' => $isExternalInspector,
+            // 'isProjectClient' => $isProjectClient,
 
             'tableName' => $this->type,
             'signableId' => $this->signableId,
             'readOnly' => $this->readOnly || !$allowed,
+            'isSignOffAdmin' => $isSignOffAdmin,
         ];
 
 

@@ -10,7 +10,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
 {
 
     protected $mode = '020';
-    protected $viewName = 'document-wir-010';
+    protected $viewName = 'document-qaqc-wir-010';
 
     public function getDataSource($params)
     {
@@ -28,58 +28,58 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         ];
     }
 
-    protected function getTableColumns($params, $dataSource)
-    {
-        return [
-            [
-                'title' => 'Sub Project',
-                'dataIndex' => 'sub_project_name',
-                'width' => 150,
-            ],
-            [
-                'title' => 'QTY',
-                'dataIndex' => 'number_of_prod_orders',
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Apartment Q.ty',
-                'dataIndex' => 'total_prod_order',
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Last Week Production Completion (%)',
-                'dataIndex' => 'previous_finished_prod_percent',
-                'width' => 200,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Last Week QC Acceptance (%)',
-                'dataIndex' => 'previous_qaqc_percent',
-                'align' => 'right',
-                'width' => 180,
-                'align' => 'right',
-            ],
-            [
-                'title' =>  'This Week Production Completion (%)',
-                'dataIndex' => 'latest_finished_prod_percent',
-                'align' => 'right',
-                'width' => 180,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'This Week QC Acceptance (%)',
-                'dataIndex' => 'latest_qaqc_percent',
-                'align' => 'right',
-                'width' => 180,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Status',
-                'dataIndex' => 'percent_status',
-                'align' => 'center',
-            ],
-        ];
-    }
+    // protected function getTableColumns($params, $dataSource)
+    // {
+    //     return [
+    //         [
+    //             'title' => 'Sub Project',
+    //             'dataIndex' => 'sub_project_name',
+    //             'width' => 150,
+    //         ],
+    //         [
+    //             'title' => 'QTY',
+    //             'dataIndex' => 'number_of_prod_orders',
+    //             'align' => 'right',
+    //         ],
+    //         [
+    //             'title' => 'Apartment Q.ty',
+    //             'dataIndex' => 'total_prod_order',
+    //             'align' => 'right',
+    //         ],
+    //         [
+    //             'title' => 'Last Week Production Completion (%)',
+    //             'dataIndex' => 'previous_finished_prod_percent',
+    //             'width' => 200,
+    //             'align' => 'right',
+    //         ],
+    //         [
+    //             'title' => 'Last Week QC Acceptance (%)',
+    //             'dataIndex' => 'previous_qaqc_percent',
+    //             'align' => 'right',
+    //             'width' => 180,
+    //             'align' => 'right',
+    //         ],
+    //         [
+    //             'title' =>  'This Week Production Completion (%)',
+    //             'dataIndex' => 'latest_finished_prod_percent',
+    //             'align' => 'right',
+    //             'width' => 180,
+    //             'align' => 'right',
+    //         ],
+    //         [
+    //             'title' => 'This Week QC Acceptance (%)',
+    //             'dataIndex' => 'latest_qaqc_percent',
+    //             'align' => 'right',
+    //             'width' => 180,
+    //             'align' => 'right',
+    //         ],
+    //         [
+    //             'title' => 'Status',
+    //             'dataIndex' => 'percent_status',
+    //             'align' => 'center',
+    //         ],
+    //     ];
+    // }
 
     public function changeDataSource($dataSource, $params)
     {

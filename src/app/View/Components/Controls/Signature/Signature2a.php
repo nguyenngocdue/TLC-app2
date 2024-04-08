@@ -29,6 +29,7 @@ class Signature2a extends Component
         private $decisionValue = '',
         private $signatureId = null,
         // private $signatureUserId = null,
+        private $isSignOffAdmin = null,
     ) {
         static::$count++;
         $this->debug = !!$debug;
@@ -74,6 +75,7 @@ class Signature2a extends Component
                 'showDecisionBox' => $this->showDecisionBox,
                 'decisionName' => $this->decisionName,
                 'decisionValue' => $this->decisionValue,
+                'isSignOffAdmin' => $this->isSignOffAdmin,
             ]
         );
     }

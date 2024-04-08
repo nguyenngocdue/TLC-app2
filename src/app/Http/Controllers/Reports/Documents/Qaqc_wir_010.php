@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Reports\Documents;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\ParameterReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\SortData;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir_010 extends Qaqc_wir_dataSource
 {
 
     protected $mode = '010';
-    protected $viewName = 'document-wir-010';
+    protected $viewName = 'document-qaqc-wir-010';
 
     public function getSqlStr($params)
     {
@@ -106,7 +108,6 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
         if (Report::checkValueOfField($paramsFormat, 'prod_routing_id')) $sqlStr .= "\n AND sequ.prod_routing_id IN ({$paramsFormat['prod_routing_id']})";
         if (Report::checkValueOfField($paramsFormat, 'sub_project_id')) $sqlStr .= "\n AND sequ.sub_project_id IN ({$paramsFormat['sub_project_id']})";
 
-
         $sqlStr .= "\n GROUP BY sub_project_id, prod_routing_id ) tb1
                     LEFT JOIN sub_projects sp ON sp.id = tb1.sub_project_id AND sp.id IS NOT NULL
                     LEFT JOIN prod_routings pr ON pr.id = tb1.prod_routing_id
@@ -118,6 +119,9 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
 
     protected function getTableColumns($params, $dataSource)
     {
+        $typeDate = isset($params['children_mode']) && $params['children_mode'] === "filter_by_month" ?
+            "Month" : 'Week';
+        // dump($params);
         return [
             [
                 'title' => 'Sub Project',
@@ -140,31 +144,27 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
                 'align' => 'right',
             ],
             [
-                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
-                'title' => 'Last Week Production Completion (%)',
+                'title' => 'Last ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
                 'dataIndex' => 'previous_finished_prod_percent',
                 'width' => 200,
                 'align' => 'right',
             ],
             [
-                // 'title' => Arr::get($params, 'previous_month', '') . 'Production Completion (%)',
-                'title' => 'Last Week QC Acceptance (%)',
+                'title' => 'Last ' . $typeDate . ' QC Acceptance (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
                 'dataIndex' => 'previous_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
                 'align' => 'right',
             ],
             [
-                // 'title' =>  Arr::get($params, 'latest_month', '') . '<br/>Production Completion (%)',
-                'title' =>  'This Week Production Completion (%)',
+                'title' => 'This ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'latest_month', '') . ')',
                 'dataIndex' => 'latest_finished_prod_percent',
                 'align' => 'right',
                 'width' => 180,
                 'align' => 'right',
             ],
             [
-                // 'title' => Arr::get($params, 'latest_month', '') . '<br/>QC Acceptance (%)',
-                'title' => 'This Week QC Acceptance (%)',
+                'title' => 'This ' . $typeDate . ' QC Acceptance (%)</br>(' . Arr::get($params, 'latest_month', '') . ')',
                 'dataIndex' => 'latest_qaqc_percent',
                 'align' => 'right',
                 'width' => 180,
@@ -475,7 +475,30 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
             return $item;
         }, $result);
 
+        $fields = ['sub_project_name', 'prod_routing_name'];
+        $result = SortData::sortArrayByKeys($result, $fields);
 
+
+        //add number of prod_orders
+        $numberOfProdOrders = $this->filterNumberOfProdOrders()->pluck('count_prod_orders', 'id')->toArray();
+        $result = array_map(function ($item) use ($numberOfProdOrders) {
+            $item['number_of_prod_orders'] = isset($numberOfProdOrders[$item['prod_routing_id']]) ? $numberOfProdOrders[$item['prod_routing_id']] : null;
+            return $item;
+        }, $result);
+
+        $apartments = $this->getApartmentsEachProdRouting($params);
+        $groupProdRoutingsForApart = Report::groupArrayByKey($apartments, 'sub_project_id');
+        $groupProdRoutingsForApart = array_map(fn ($item) => Report::groupArrayByKey($item, 'prod_routing_id'), $groupProdRoutingsForApart);
+
+        // add apartments to datasource
+        foreach ($result as $key => &$values) {
+            $subProjectId = $values['sub_project_id'];
+            $prodRoutingId = $values['prod_routing_id'];
+            if (isset($groupProdRoutingsForApart[$subProjectId]) && isset($groupProdRoutingsForApart[$subProjectId][$prodRoutingId])) {
+                $apartValues = current($groupProdRoutingsForApart[$subProjectId][$prodRoutingId]);
+                $values['number_of_apartments'] = $apartValues['number_of_pj_units'];
+            }
+        }
         return collect($result);
     }
 }

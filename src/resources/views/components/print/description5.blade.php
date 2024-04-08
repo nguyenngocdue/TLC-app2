@@ -61,25 +61,25 @@
                     <label class='p-2 text-base font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'parent_link')
-                <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
-                    <x-print.parent-link5 :dataSource="$content"/>
-                </span>
+                    <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
+                        <x-print.parent-link5 :dataSource="$content"/>
+                    </span>
                 @else
-                <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
-                    (None)
-                </span>
+                    <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
+                        (None)
+                    </span>
                 @endif
             @else
                 @if(!$hiddenLabel)
                     <label class='p-2 border-r border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'parent_link')
-                <span class='p-2 bord1er bord1er-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                    <x-print.parent-link5 :dataSource="$content"/>
-                </span>
+                    <span class='p-2 bord1er bord1er-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                        <x-print.parent-link5 :dataSource="$content"/>
+                    </span>
                 @else
-                <span class='p-2 bord1er bor1der-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
-                </span>
+                    <span class='p-2 bord1er bor1der-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                    </span>
                 @endif
             @endif
         </div>

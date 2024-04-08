@@ -1,6 +1,6 @@
 @extends('layouts.app')
+@section('title', 'Print')
 @section('topTitle', $topTitle)
-@section('title', '')
 @section('content')
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 

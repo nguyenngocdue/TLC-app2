@@ -5,6 +5,7 @@ namespace App\View\Components\Print;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\User;
 use App\Models\Workplace;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class Header5 extends Component
@@ -99,7 +100,7 @@ class Header5 extends Component
         return view('components.print.header5', [
             'qrId' => $dataSource->id,
             'type' => $this->type,
-            'title' => $app['title'],
+            'title' => Str::singular($app['title']),
             'dataSource' => config("company.letter_head"),
             'contentHeader' => $contentHeader,
         ]);

@@ -41,6 +41,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $apiCallback = 'null'; //<<JS String
     protected $nameColumnFixed = 'left';
     protected $cellAgg = null;
+    protected $maxH = null;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -479,6 +480,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'tableTopCenterControl' => $this->tableTopCenterControl,
                 'route' => $this->getRouteAfterSubmit(),
                 'showLegend' => $this->showLegend,
+                'maxH' => $this->maxH,
             ],
         );
     }
