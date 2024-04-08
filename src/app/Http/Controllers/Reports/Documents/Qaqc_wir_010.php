@@ -119,67 +119,6 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
         return collect($sqlData);
     }
 
-    protected function getTableColumns($params, $dataSource)
-    {
-        $typeDate = isset($params['children_mode']) && $params['children_mode'] === "filter_by_month" ?
-            "Month" : 'Week';
-        // dump($params);
-        return [
-            [
-                'title' => 'Sub Project',
-                'dataIndex' => 'sub_project_name',
-                'width' => 150,
-            ],
-            [
-                'title' => 'Production Routing',
-                'dataIndex' => 'prod_routing_name',
-                'width' => 200,
-            ],
-            [
-                'title' => 'QTY',
-                'dataIndex' => 'number_of_prod_orders',
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Apartment Q.ty',
-                'dataIndex' => 'total_prod_order',
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Last ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
-                'dataIndex' => 'previous_finished_prod_percent',
-                'width' => 200,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Last ' . $typeDate . ' QC Acceptance (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
-                'dataIndex' => 'previous_qaqc_percent',
-                'align' => 'right',
-                'width' => 180,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'This ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'latest_month', '') . ')',
-                'dataIndex' => 'latest_finished_prod_percent',
-                'align' => 'right',
-                'width' => 180,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'This ' . $typeDate . ' QC Acceptance (%)</br>(' . Arr::get($params, 'latest_month', '') . ')',
-                'dataIndex' => 'latest_qaqc_percent',
-                'align' => 'right',
-                'width' => 180,
-                'align' => 'right',
-            ],
-            [
-                'title' => 'Status',
-                'dataIndex' => 'percent_status',
-                'align' => 'center',
-            ],
-        ];
-    }
-
     protected function basicInfoWidgetReport()
     {
         return [
