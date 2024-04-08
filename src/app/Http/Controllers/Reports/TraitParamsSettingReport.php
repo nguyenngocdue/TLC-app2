@@ -38,6 +38,7 @@ trait TraitParamsSettingReport
                         $childrenMode = $params['children_mode'] ?? $value;
                         if (isset($settings[$entity][$typeReport][$currentMode][$childrenMode])) {
                             $params = array_merge($params, $settings[$entity][$typeReport][$currentMode][$childrenMode]);
+                            $params['optionPrintLayout'] = $settings[$entity][$typeReport][$currentMode]['optionPrintLayout'];
                         }
                     };
                     if (!isset($params[$key]) || !$params[$key]) {

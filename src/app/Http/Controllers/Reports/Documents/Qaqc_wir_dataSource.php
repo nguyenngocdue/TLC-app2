@@ -345,12 +345,13 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
 
     protected function getDefaultParamsForFilterByMonth($params, $request)
     {
-        if ($params) {
+        if ($params && isset($params['children_mode'])) {
             $settings = CurrentUser::getSettings();
             $indexMode = $params['children_mode'];
             $typeReport = CurrentPathInfo::getTypeReport2($request);
             if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
                 $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
+                $params['optionPrintLayout'] = $settings[$this->getTable()][$typeReport][$this->mode]['optionPrintLayout'];
             }
         }
         $params['sub_project_id'] = isset($params['sub_project_id']) ? $params['sub_project_id'] : null;
@@ -394,7 +395,6 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
         if ($params['children_mode'] === 'filter_by_month') {
             $params = $this->updateParamsForMonths($params);
         }
-        // dd($params);
         return $params;
     }
 
