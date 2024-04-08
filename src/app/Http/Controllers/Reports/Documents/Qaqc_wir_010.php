@@ -18,6 +18,8 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
     public function getSqlStr($params)
     {
         $dateIndex = $params['date_index'];
+        // dd($dateIndex);
+
         $sql = "SELECT tb3.*
                 FROM(SELECT 
                             tb1.project_id,

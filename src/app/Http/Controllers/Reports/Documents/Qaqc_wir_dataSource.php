@@ -45,7 +45,8 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
         if ($params['children_mode'] === 'filter_by_week') {
             [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
         } else {
-            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+
+            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['year_month']);
         }
         return [$previousDate, $latestDate];
     }
@@ -267,11 +268,10 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
     protected function getDefaultValueParams($params, $request)
     {
         if (!$this->hasChildrenMode($params) || empty($params) || isset($params['children_mode'])) {
-            $params = $this->getDefaultParamsForFilterByMonth($params);
+            $params = $this->getDefaultParamsForFilterByMonth($params, $request);
         } elseif (Report::checkValueOfField($params, 'children_mode')) {
             $params = $this->getParamsFromUserSettings($params, $request);
         }
-        // dd($params);
         return $params;
     }
 
@@ -281,13 +281,22 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
     }
 
 
-    protected function getDefaultParamsForFilterByMonth($params)
+    protected function getDefaultParamsForFilterByMonth($params, $request)
     {
-        $params['sub_project_id'] = $this->subProjectId;
-        $params['year'] = date('Y');
+        if ($params) {
+            $settings = CurrentUser::getSettings();
+            $indexMode = $params['children_mode'];
+            $typeReport = CurrentPathInfo::getTypeReport2($request);
+            if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
+                $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
+            }
+        }
+        $params['sub_project_id'] = isset($params['sub_project_id']) ? $params['sub_project_id'] : $this->subProjectId;
+        $params['year'] = isset($params['year'])  ? $params['year'] : date('Y');
         $params['children_mode'] = isset($params['children_mode']) && $params['children_mode'] ? $params['children_mode'] : 'filter_by_month';
-        $params['month'] = date("Y-m");
-        $params['only_month'] = (string)intval(date("m"));
+        $params['only_month'] = isset($params['only_month']) ? $params['only_month'] : (string)intval(date("m"));
+        $params['year_month'] = isset($params['year_month']) ? $params['year_month'] : $params['year'] . '-' . sprintf('%02d', $params['only_month']);
+
         if ($params['children_mode'] === 'filter_by_week') {
             $currentWeek = str_pad(date('W'), 2, '0', STR_PAD_LEFT);
             $previousWeek = str_pad(date('W') - 1, 2, '0', STR_PAD_LEFT);
@@ -297,7 +306,7 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
             $params['previous_month'] = 'W' . $previousWeek . '-' . substr(date('Y'), -2) . ' (' . $start_date . ')';
             $params['latest_month'] = 'W' . $currentWeek . '-' . substr(date('Y'), -2) . ' (' . $end_date . ')';
         } else {
-            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['month']);
+            [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['year_month']);
             $params['previous_month'] = substr($previousDate, 0, 7);
             $params['latest_month'] = substr($latestDate, 0, 7);
         }
@@ -314,7 +323,7 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
             $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
         } else {
             //Set default when params is empty
-            $params = $this->getDefaultParamsForFilterByMonth();
+            $params = $this->getDefaultParamsForFilterByMonth($params, $request);
         }
         // update prams into user setting
         if ($params['children_mode'] === 'filter_by_week') {
