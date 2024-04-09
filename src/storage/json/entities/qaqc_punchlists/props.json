@@ -127,7 +127,7 @@
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
-        "hidden_print": "",
+        "hidden_print": "true",
         "hidden_template_print": "",
         "read_only": "true",
         "save_on_change": "",
