@@ -507,6 +507,12 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     let options = ["<option value=''></option>"]
     // console.log("Loading dataSource for", id, selected, dataSource)
     dataSource = filterDropdown4(id, dataSource, table01Name)
+    if(dataSource?.[0].name){
+        // console.log(id, dataSource)
+        dataSource = dataSource
+                // .filter((item) => !item.name.includes("(RESIGNED)"))
+                .sort((a, b) => a.name.localeCompare(b.name))
+    }
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
