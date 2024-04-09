@@ -23,6 +23,7 @@ class Qaqc_punchlist extends ModelExtended
     ];
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors2()" => ["getCheckedByField", User::class],
         "signature_qaqc_punchlist_qaqc_list()"  => ["getCheckedByField", User::class],
         "signature_qaqc_punchlist_production_list()"  => ["getCheckedByField", User::class],
         "signature_qaqc_punchlist_project_list()"  => ["getCheckedByField", User::class],
@@ -40,6 +41,11 @@ class Qaqc_punchlist extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMonitors1()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+    public function getMonitors2()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
