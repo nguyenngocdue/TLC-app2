@@ -3,84 +3,192 @@
         "name": "_id",
         "column_name": "id",
         "new": "",
-        "not_applicable": "",
-        "closed": ""
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
         "new": "",
-        "not_applicable": "",
-        "closed": "true"
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": ""
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_production_name": {
+        "name": "_production_name",
+        "column_name": "production_name",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
         "new": "",
-        "not_applicable": "",
-        "closed": "true"
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
-    },
-    "_getLines": {
-        "name": "_getLines",
-        "column_name": "getLines",
-        "new": "",
-        "not_applicable": "",
-        "closed": ""
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
         "new": "",
-        "not_applicable": "",
-        "closed": "true"
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": ""
+    },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": ""
+    },
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_qaqc_list()": {
+        "name": "_signature_qaqc_punchlist_qaqc_list()",
+        "column_name": "signature_qaqc_punchlist_qaqc_list()",
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_production_list()": {
+        "name": "_signature_qaqc_punchlist_production_list()",
+        "column_name": "signature_qaqc_punchlist_production_list()",
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_project_list()": {
+        "name": "_signature_qaqc_punchlist_project_list()",
+        "column_name": "signature_qaqc_punchlist_project_list()",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_factory_list()": {
+        "name": "_signature_qaqc_punchlist_factory_list()",
+        "column_name": "signature_qaqc_punchlist_factory_list()",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_qaqc": {
+        "name": "_signature_qaqc_punchlist_qaqc",
+        "column_name": "signature_qaqc_punchlist_qaqc",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_production": {
+        "name": "_signature_qaqc_punchlist_production",
+        "column_name": "signature_qaqc_punchlist_production",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_project": {
+        "name": "_signature_qaqc_punchlist_project",
+        "column_name": "signature_qaqc_punchlist_project",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_signature_qaqc_punchlist_factory": {
+        "name": "_signature_qaqc_punchlist_factory",
+        "column_name": "signature_qaqc_punchlist_factory",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
         "new": "",
-        "not_applicable": "",
-        "closed": ""
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
     }
 }

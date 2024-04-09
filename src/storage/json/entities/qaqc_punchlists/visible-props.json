@@ -55,6 +55,14 @@
         "inspected": "true",
         "not_applicable": "true"
     },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "true",
+        "pending_approval": "true",
+        "inspected": "true",
+        "not_applicable": "true"
+    },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",

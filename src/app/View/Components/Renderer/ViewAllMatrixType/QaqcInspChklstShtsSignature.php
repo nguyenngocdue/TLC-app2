@@ -105,7 +105,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
                 $nominatedFn = $signaturesFn . "_list";
                 break;
             case "qaqc_punchlists":
-                $signaturesFn = "signature_qaqc_punchlist";
+                $signaturesFn = "signature_qaqc_punchlist_qaqc";
                 $nominatedFn = $signaturesFn . "_list";
                 break;
             default:

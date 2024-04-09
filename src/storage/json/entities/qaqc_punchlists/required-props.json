@@ -50,7 +50,15 @@
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
-        "new": "",
+        "new": "true",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "column_name": "getMonitors2()",
+        "new": "true",
         "pending_approval": "",
         "inspected": "",
         "not_applicable": ""

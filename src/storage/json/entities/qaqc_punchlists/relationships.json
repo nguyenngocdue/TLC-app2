@@ -95,6 +95,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getMonitors2()": {
+        "name": "_getMonitors2()",
+        "relationship": "getCheckedByField",
+        "control_name": "getMonitors2()",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_signature_qaqc_punchlist_qaqc_list()": {
         "name": "_signature_qaqc_punchlist_qaqc_list()",
         "relationship": "getCheckedByField",

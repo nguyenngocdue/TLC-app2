@@ -9,14 +9,14 @@
     "pending_approval": {
         "name": "pending_approval",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors2()",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors2()",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },

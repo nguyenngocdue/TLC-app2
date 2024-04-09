@@ -553,6 +553,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
 
     let options = []
     dataSource = filterDropdown2(id, dataSource)
+    if(dataSource?.[0].name){
+        // console.log(id, dataSource)
+        dataSource = dataSource
+                // .filter((item) => !item.name.includes("(RESIGNED)"))
+                .sort((a, b) => a.name.localeCompare(b.name))
+    }
+
     if (debugListener) console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
     // console.log(selected)
 
