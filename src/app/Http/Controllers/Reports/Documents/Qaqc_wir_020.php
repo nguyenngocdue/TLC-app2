@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports\Documents;
 
 use App\Utils\Support\ArrayReport;
 use App\Utils\Support\Report;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class Qaqc_wir_020 extends Qaqc_wir_010
@@ -28,58 +29,60 @@ class Qaqc_wir_020 extends Qaqc_wir_010
         ];
     }
 
-    // protected function getTableColumns($params, $dataSource)
-    // {
-    //     return [
-    //         [
-    //             'title' => 'Sub Project',
-    //             'dataIndex' => 'sub_project_name',
-    //             'width' => 150,
-    //         ],
-    //         [
-    //             'title' => 'QTY',
-    //             'dataIndex' => 'number_of_prod_orders',
-    //             'align' => 'right',
-    //         ],
-    //         [
-    //             'title' => 'Apartment Q.ty',
-    //             'dataIndex' => 'total_prod_order',
-    //             'align' => 'right',
-    //         ],
-    //         [
-    //             'title' => 'Last Week Production Completion (%)',
-    //             'dataIndex' => 'previous_finished_prod_percent',
-    //             'width' => 200,
-    //             'align' => 'right',
-    //         ],
-    //         [
-    //             'title' => 'Last Week QC Acceptance (%)',
-    //             'dataIndex' => 'previous_qaqc_percent',
-    //             'align' => 'right',
-    //             'width' => 180,
-    //             'align' => 'right',
-    //         ],
-    //         [
-    //             'title' =>  'This Week Production Completion (%)',
-    //             'dataIndex' => 'latest_finished_prod_percent',
-    //             'align' => 'right',
-    //             'width' => 180,
-    //             'align' => 'right',
-    //         ],
-    //         [
-    //             'title' => 'This Week QC Acceptance (%)',
-    //             'dataIndex' => 'latest_qaqc_percent',
-    //             'align' => 'right',
-    //             'width' => 180,
-    //             'align' => 'right',
-    //         ],
-    //         [
-    //             'title' => 'Status',
-    //             'dataIndex' => 'percent_status',
-    //             'align' => 'center',
-    //         ],
-    //     ];
-    // }
+    protected function getTableColumns($params, $dataSource)
+    {
+        $typeDate = isset($params['children_mode']) && $params['children_mode'] === "filter_by_month" ?
+            "Month" : 'Week';
+        return [
+            [
+                'title' => 'Sub Project',
+                'dataIndex' => 'sub_project_name',
+                'width' => 150,
+            ],
+            [
+                'title' => 'QTY',
+                'dataIndex' => 'number_of_prod_orders',
+                'align' => 'right',
+            ],
+            [
+                'title' => 'Apartment Q.ty',
+                'dataIndex' => 'total_prod_order',
+                'align' => 'right',
+            ],
+            [
+                'title' => 'Last ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
+                'dataIndex' => 'previous_finished_prod_percent',
+                'width' => 200,
+                'align' => 'right',
+            ],
+            [
+                'title' => 'Last ' . $typeDate . ' QC Acceptance (%) </br>(' . Arr::get($params, 'previous_month', '') . ')',
+                'dataIndex' => 'previous_qaqc_percent',
+                'align' => 'right',
+                'width' => 180,
+                'align' => 'right',
+            ],
+            [
+                'title' => 'This ' . $typeDate . ' Production Completion (%) </br>(' . Arr::get($params, 'latest_month', '') . ')',
+                'dataIndex' => 'latest_finished_prod_percent',
+                'align' => 'right',
+                'width' => 180,
+                'align' => 'right',
+            ],
+            [
+                'title' => 'This ' . $typeDate . ' QC Acceptance (%)</br>(' . Arr::get($params, 'latest_month', '') . ')',
+                'dataIndex' => 'latest_qaqc_percent',
+                'align' => 'right',
+                'width' => 180,
+                'align' => 'right',
+            ],
+            [
+                'title' => 'Status',
+                'dataIndex' => 'percent_status',
+                'align' => 'center',
+            ],
+        ];
+    }
 
     public function changeDataSource($dataSource, $params)
     {

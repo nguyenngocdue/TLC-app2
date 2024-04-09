@@ -28,13 +28,9 @@ trait TraitParamsSettingReport
 
         if (isset($settings[$entity][$typeReport][$currentMode])) {
             $params = $settings[$entity][$typeReport][$currentMode];
-
             $params = self::removeNullItems($params);
-            // dd($params);
             $defaultParams = $this->getDefaultValueParams($params, $request);
             $diffFields = array_diff(array_keys($defaultParams), array_keys($params));
-            // dd($params, $defaultParams, $diffFields);
-
             if (Report::isNullParams($params) || empty($params) || count($params) === 1 || count($diffFields) > 0) {
                 foreach ($defaultParams as $key => $value) {
                     // Customize for Mode on Parameter
@@ -42,13 +38,13 @@ trait TraitParamsSettingReport
                         $childrenMode = $params['children_mode'] ?? $value;
                         if (isset($settings[$entity][$typeReport][$currentMode][$childrenMode])) {
                             $params = array_merge($params, $settings[$entity][$typeReport][$currentMode][$childrenMode]);
+                            $params['optionPrintLayout'] = $settings[$entity][$typeReport][$currentMode]['optionPrintLayout'];
                         }
                     };
                     if (!isset($params[$key]) || !$params[$key]) {
                         $params[$key] = $value;
                     }
                 }
-                // dump($params);
                 return $params;
             }
             return $params;

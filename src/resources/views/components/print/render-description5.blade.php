@@ -7,13 +7,13 @@
     //$dataSource = $content;
     //}
 @endphp
-@if (!(sizeof($value) == 0 && ($control == 'attachment')) && !$hiddenLabel)
-    <label class='p-2 border-b border-gray-600 border-r text-base font-medium flex {{$valueColSpan[0]}} items-center {{$newLine ? 'justify-start' : 'justify-end'}} col-start-1'>{{$label}}</label>
+@if(sizeof($value) > 0 && !$hiddenLabel)
+    <label class='p-2 border-r border-gray-600 text-base font-medium flex {{$valueColSpan[0]}} items-center {{$newLine ? 'justify-start' : 'justify-end'}} col-start-1'>{{$label}}</label>
 @endif
 @if(sizeof($value) > 0)
     @switch($control)
         @case('attachment')
-            <div class='flex p-0 border text-left border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
+            <div class='flex p-0 bord1er text-left bor1der-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
                 {{-- @php
                     $isRenderSimple = $content->every(function($item){
                         return in_array($item->extension,App\Utils\Constant::ARRAY_ONLY_NONE_MEDIA);
@@ -83,13 +83,5 @@
             @default
             @break
         @endswitch
-    @else
-        <div class='p-2 bord1er bord1er-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left flex items-center'>
-            @if(!in_array($control, ['attachment', 'signature_multi']))
-                {{-- @dump($control) --}}
-                (None)
-            @endif
-        </div>
     @endif
-
 @endif

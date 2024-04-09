@@ -291,6 +291,7 @@ class UpdateUserSettings extends Controller
     private function updateOptionPrintReport($request, $settings)
     {
         $inputValue = $request->all();
+
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $settingUser = CurrentUser::getSettings();

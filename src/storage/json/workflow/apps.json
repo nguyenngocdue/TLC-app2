@@ -1890,7 +1890,7 @@
         "name": "qaqc_mir",
         "package_tab": "application",
         "package": "project_management",
-        "sub_package": "warehouse",
+        "sub_package": "quality_control",
         "title": "Material Inspection Requests",
         "nickname": "mir",
         "doc_id_format_column": "sub_project_id",

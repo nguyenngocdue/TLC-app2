@@ -67,7 +67,6 @@ class PivotChartManyColumns extends Component
 					2. You can set any sequence you want
 		*/
 		if ($widgets['chart_type'] === 'bar_many_columns') {
-			// dd($paramFilters,$widgets, $dataSource);
 			$itemsInParams = $widgets['params'];
 			$lenItemsInParams = count($itemsInParams);
 
@@ -82,10 +81,8 @@ class PivotChartManyColumns extends Component
 					$fieldMeta = $widgets['params']['meta_data_' . $i];
 					$dataOfParamsCol[$fieldMeta]['data'] =  array_column($items, $fieldMeta);
 					$x = $dataOfParamsCol[$fieldMeta]['data'];
-					// count
 					$c = count($x);
 					if ($c > $count) $count = $c;
-					// max 
 					$m = max($x);
 					if ($m > $max) $max = $m;
 
@@ -125,7 +122,6 @@ class PivotChartManyColumns extends Component
 	public function render()
 	{
 		$dataWidgets = $this->makeDataSource($this->data, $this->key, $this->paramFilters);
-		// dd($this->paramFilters);
 		return view("components.renderer.report.pivot-chart-many-columns", [
 			'dataWidgets' => $dataWidgets,
 			'key' => $this->key,
