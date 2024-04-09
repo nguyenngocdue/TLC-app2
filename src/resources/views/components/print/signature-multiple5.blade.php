@@ -17,6 +17,10 @@
                 {{$signature->signature_comment}}
             </div>
             @endif
-            <x-renderer.avatar-user size="xlarge" uid="{{$userId}}" showCompany=1 content={{$dateTime}}/>
+            <div class='mt-2 flex justify-center'>
+                <div>
+                    <x-renderer.avatar-user size="xlarge" uid="{{$userId}}" showCompany=1 content={{$dateTime}}/>
+                </div>
+            </div>
         </div>
    @endforeach
