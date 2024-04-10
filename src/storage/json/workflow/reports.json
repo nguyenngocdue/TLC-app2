@@ -156,9 +156,8 @@
         "package_tab": "report",
         "package": "project_management",
         "breadcrumb-group": null,
-        "top_title": "Routings Acceptance Report",
-        "title": "Routings  Acceptance Report",
-        "hidden": "true"
+        "top_title": "Routing Acceptance Report",
+        "title": "Routing  Acceptance Report"
     },
     "document-qaqc_wir_020": {
         "name": "document-qaqc_wir_020",

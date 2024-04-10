@@ -351,7 +351,9 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
             $typeReport = CurrentPathInfo::getTypeReport2($request);
             if (isset($settings[$this->getTable()][$typeReport][$this->mode][$indexMode])) {
                 $params = $settings[$this->getTable()][$typeReport][$this->mode][$indexMode];
-                $params['optionPrintLayout'] = $settings[$this->getTable()][$typeReport][$this->mode]['optionPrintLayout'];
+                if (isset($settings[$this->getTable()][$typeReport][$this->mode]['optionPrintLayout'])) {
+                    $params['optionPrintLayout'] = $settings[$this->getTable()][$typeReport][$this->mode]['optionPrintLayout'];
+                }
             }
         }
         $params['sub_project_id'] = isset($params['sub_project_id']) ? $params['sub_project_id'] : null;

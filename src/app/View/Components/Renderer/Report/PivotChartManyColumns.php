@@ -82,8 +82,10 @@ class PivotChartManyColumns extends Component
 					$dataOfParamsCol[$fieldMeta]['data'] =  array_column($items, $fieldMeta);
 					$x = $dataOfParamsCol[$fieldMeta]['data'];
 					$c = count($x);
+
 					if ($c > $count) $count = $c;
-					$m = max($x);
+
+					$m = $x ? max($x) : 0;
 					if ($m > $max) $max = $m;
 
 					$_field = 'override_meta_name' . $i;
