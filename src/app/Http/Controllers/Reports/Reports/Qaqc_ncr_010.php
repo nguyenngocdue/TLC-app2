@@ -108,6 +108,18 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "width" => 80,
             ],
             [
+                "title" => "Source ID",
+                "dataIndex" => "parent_type_id",
+                "align" => "left",
+                "width" => 80,
+            ],
+            [
+                "title" => "Source Name",
+                "dataIndex" => "source_name",
+                "align" => "left",
+                "width" => 80,
+            ],
+            [
                 "title" => "Doc ID",
                 "dataIndex" => "doc_type",
                 "align" => "left",

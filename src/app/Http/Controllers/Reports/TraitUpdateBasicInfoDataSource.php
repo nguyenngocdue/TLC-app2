@@ -85,7 +85,6 @@ trait TraitUpdateBasicInfoDataSource
             'esg_metric_type_name',
 
             'ncr_id',
-
             'sheet_name',
             'sheet_status',
             'sheet_id',

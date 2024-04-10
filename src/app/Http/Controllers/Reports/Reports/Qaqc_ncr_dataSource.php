@@ -31,7 +31,16 @@ class Qaqc_ncr_dataSource extends Controller
                     term_report_type.name AS report_type_name,
                     term_inter_subcon.name AS inter_subcon_name,
                     LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '\\\', 1)) AS parent_type,
-                    tb1.parent_type AS _parent_type,
+                    tb1.parent_id AS parent_type_id, 
+                    
+                    IF (LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '\\\', 1)) = 'qaqc_wir', 
+                        (SELECT wir.name FROM qaqc_wirs wir WHERE tb1.parent_id = wir.id),
+                        IF (LOWER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '\\\', 1)) = 'qaqc_mir',
+                            (SELECT mir.name FROM qaqc_mirs mir WHERE tb1.parent_id = mir.id),
+                            (SELECT cll.name FROM qaqc_insp_chklst_lines cll WHERE tb1.parent_id = cll.id)
+                           )
+                    ) AS source_name,
+
                     CONCAT('TLC-',sp.name,'-',IF(term_report_type.name = 'NCR' OR term_report_type.name = 'Defect','NCR',term_report_type.name),'-',
                         LPAD(tb1.doc_id, 4, '0')) AS doc_type 
                     FROM (SELECT
