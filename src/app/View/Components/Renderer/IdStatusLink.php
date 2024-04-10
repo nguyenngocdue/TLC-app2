@@ -14,8 +14,8 @@ class IdStatusLink extends Component
      * @return void
      */
     public function __construct(
-        private $dataLine,
-        private $column,
+        private $dataLine = null,
+        private $column = null,
         private $rendererParam = '',
     ) {
     }
@@ -27,6 +27,7 @@ class IdStatusLink extends Component
      */
     public function render()
     {
+        if (!$this->dataLine) return "reference value";
         // if ($this->rendererParam === '') return "renderer_param ?";
         // $rendererParam = $this->rendererParam;
         $result = [];
