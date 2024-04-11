@@ -97,8 +97,8 @@ trait TraitUpdateBasicInfoDataSource
             'esg_metric_type_name',
 
             'parent_type_id',
-
             'ncr_id',
+
             'sheet_name',
             'sheet_status',
             'sheet_id',

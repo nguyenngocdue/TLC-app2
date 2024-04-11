@@ -7,6 +7,7 @@ class SortData
     public static function sortArrayByKeys($data, $fields)
     {
         usort($data, function ($a, $b) use ($fields) {
+            if (!is_array($fields)) $fields = array($fields);
             foreach ($fields as $field) {
                 $a = (array)$a;
                 $b = (array)$b;

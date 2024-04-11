@@ -45,13 +45,13 @@ trait TraitChangeDataPivotTable2
             }
             // add link for values
             $newData = $lines;
-            if(!empty($columnInsert)){
+            if (!empty($columnInsert)) {
                 foreach ($columnInsert as $keyColumn => $column) {
-                    if(isset($column->href_from_field) && isset($column->route_name)){
-                        $newData[$keyColumn] =(object) [
-                            'value' =>  is_numeric($lines[$keyColumn]) ? '#'. $lines[$keyColumn] : $lines[$keyColumn],
-                            'cell_href' =>  $column->route_name ||$column->href_from_field ? route($column->route_name, $lines[$column->href_from_field]) : "",
-                            'cell_class' => 'text-blue-800',
+                    if (isset($column->href_from_field) && isset($column->route_name) && isset($lines[$keyColumn])) {
+                        $newData[$keyColumn] = (object) [
+                            'value' =>  is_numeric($lines[$keyColumn]) ? '#' . $lines[$keyColumn] : $lines[$keyColumn],
+                            'cell_href' =>  $column->route_name || $column->href_from_field ? route($column->route_name, $lines[$column->href_from_field]) : "",
+                            'cell_class' => 'text-blue-500',
                         ];
                     }
                 }
@@ -70,8 +70,8 @@ trait TraitChangeDataPivotTable2
             $f1 = $dataReduce[$endRowField];
             foreach ($linesData as $line) {
                 if ($line->$endRowField === $f1 && $line->$k1 === $valDateInDB) {
-                        $href = route($valColFields->route_name, $line->$hrefToField);
-                        break;
+                    $href = route($valColFields->route_name, $line->$hrefToField);
+                    break;
                 }
             }
         }
@@ -128,18 +128,18 @@ trait TraitChangeDataPivotTable2
             foreach ($data as $values) {
                 foreach ($values as $key => $value) {
                     // Add link for DataField'columns
-                    if(isset($fieldsHaveHref[$key])) {
-                        $str = $fieldsHaveHref[$key] ->href_regex;
-                        $routeName = $fieldsHaveHref[$key] ->route_name;
+                    if (isset($fieldsHaveHref[$key])) {
+                        $str = $fieldsHaveHref[$key]->href_regex;
+                        $routeName = $fieldsHaveHref[$key]->route_name;
                         $fields = StringPivotTable::extractFields($str)[1];
                         $valueOfFields = array_intersect_key($values, array_flip($fields));
-                        if (in_array('picker_date',array_keys($params)) && in_array('picker_date',array_values($fields))){
-                            $valueOfFields = array_merge($valueOfFields,['picker_date' => $params['picker_date']]);
+                        if (in_array('picker_date', array_keys($params)) && in_array('picker_date', array_values($fields))) {
+                            $valueOfFields = array_merge($valueOfFields, ['picker_date' => $params['picker_date']]);
                         }
                         try {
-                            $url = route($routeName). StringPivotTable::replaceValuesWithPlaceholders($valueOfFields, $str);
+                            $url = route($routeName) . StringPivotTable::replaceValuesWithPlaceholders($valueOfFields, $str);
                         } catch (\Exception $e) {
-                            dd('Oops, Please check the name of route for the "'.$this->modeType.'" key in Manage Pivot!');
+                            dd('Oops, Please check the name of route for the "' . $this->modeType . '" key in Manage Pivot!');
                         }
                         $values[$key] = (object)[
                             'value' => $value,

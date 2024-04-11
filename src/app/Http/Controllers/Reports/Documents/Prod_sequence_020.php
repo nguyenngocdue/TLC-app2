@@ -451,8 +451,6 @@ class Prod_sequence_020 extends Report_ParentDocument2Controller
     //     return $prodRoutingLinks;
     // }   
 
-
-
     public function changeDataSource($dataSource, $params)
     {
         foreach ($dataSource as $k => $values) $dataSource[$k] = $this->addTooltip($values);

@@ -273,7 +273,6 @@ abstract class Report_Parent2Controller extends Controller
         $optionPrint = $params['optionPrintLayout'] ?? $this->optionPrint;
         $tableTrueWidth = $this->overTableTrueWidth && $optionPrint === 'landscape' ? 0 : $this->tableTrueWidth;
         // dump($dataSource);
-
         $dataGrafana = $this->getDataGrafana($params);
         $paramsGrafana = $this->getParamsGrafana($params);
 
