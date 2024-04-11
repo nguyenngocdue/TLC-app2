@@ -20,7 +20,6 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
         $primaryData = new Qaqc_ncr_dataSource();
         $_primaryData = $primaryData->getDataSource($params);
         $primaryData = $primaryData->changeDataSource($_primaryData, $params);
-        // dump($primaryData);
         return $primaryData;
     }
 
@@ -98,20 +97,20 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
             [
                 "title" => "Create Date",
                 "dataIndex" => "create_date",
-                "align" => "right",
-                "width" => 100,
+                "align" => "center",
+                "width" => 110,
             ],
             [
                 "title" => "Source Form",
                 "dataIndex" => "parent_type",
                 "align" => "left",
-                "width" => 80,
+                "width" => 120,
             ],
             [
                 "title" => "Source ID",
                 "dataIndex" => "parent_type_id",
-                "align" => "left",
-                "width" => 80,
+                "align" => "center",
+                "width" => 110,
             ],
             [
                 "title" => "Source Name",
@@ -262,7 +261,14 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 'ncr_id' => [
                     'route_name' => 'qaqc_ncrs.edit',
                     'renderer' => 'id',
+                ],
+                'parent_type_id' => [
+                    #'route_name' => 'qaqc_ncrs.edit', if using route_name_reference, don't  route_name
+                    'route_name_reference' => 'parent_type_route', // select a field name in data source with the value as qaqc_wirs or qaqc_mirs
+                    'method' => 'edit',
+                    'renderer' => 'id',
                 ]
+
             ]
         ];
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Str;
 
 trait TraitUpdateBasicInfoDataSource
 {
@@ -36,7 +37,16 @@ trait TraitUpdateBasicInfoDataSource
                     $editedValue = $typeRender === 'id' ? '#000.' . $values[$field] : '';
                     $info = $attrib[$field];
                     $id = $values[str_replace('name', 'id', $field)];
-                    $cellHref =  isset($info['route_name']) ? route($info['route_name'], $id) : $cellHref;
+                    // set cellHref attribute
+                    if (isset($info['route_name'])) {
+                        $cellHref = route($info['route_name'], $id);
+                    } else {
+                        if (isset($info['route_name_reference']) && isset($info['method'])) {
+                            $cellHref = route(Str::plural($values[$info['route_name_reference']]) . '.' . $info['method'], $id);
+                        } else {
+                            $cellHref = "";
+                        }
+                    }
                     $cellClass = $cellHref ? 'text-blue-500' : '';
                 }
 
@@ -69,6 +79,8 @@ trait TraitUpdateBasicInfoDataSource
             'sub_project_status',
             'prod_order_status',
             'ncr_status',
+            // 'source_name_status',
+
             'ghg_sheet_name',
             'ghg_metric_type_name',
             'ghg_metric_type_1_name',
@@ -84,6 +96,8 @@ trait TraitUpdateBasicInfoDataSource
             'esg_tmpl_name',
             'esg_metric_type_name',
 
+            'parent_type_id',
+
             'ncr_id',
             'sheet_name',
             'sheet_status',
@@ -96,9 +110,7 @@ trait TraitUpdateBasicInfoDataSource
         ] + $fieldInputs;
         $attrib = [];
         foreach ($dataSource as $key => &$values) {
-            // if($key === 'tableDataSource') {
             if (isset($dataHref[$key])) $attrib = $dataHref[$key];
-            // dd($attrib);
             if (($values instanceof Collection)) {
                 foreach ($values as $k => &$item) {
                     $item = self::updateFieldsStatusAndValues($item, $fields, $attrib, $fieldsHref);
@@ -109,7 +121,6 @@ trait TraitUpdateBasicInfoDataSource
             }
             $dataSource[$key] = $values;
         }
-        // dd($dataHref, $dataSource);
         return $dataSource;
     }
 
