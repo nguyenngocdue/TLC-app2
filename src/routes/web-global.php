@@ -18,6 +18,7 @@ use App\Http\Controllers\UpdateUserSettingsApi;
 use App\Http\Controllers\Utils\DepartmentMatrixController;
 use App\Http\Controllers\Utils\MyCompanyController;
 use App\Http\Controllers\Utils\OrphanManyToManyController;
+use App\Http\Controllers\Utils\TestCronJobController;
 use App\Http\Controllers\Utils\ThumbnailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -48,6 +49,9 @@ Route::group([
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
     Route::get('system/notificationsRender', [SystemNotificationsController::class, 'notificationsRender']);
+
+    Route::get('utils/test-cron-job', [TestCronJobController::class, 'index'])->name('test-cron-job.index');
+
     Route::get('utils/createThumbnail', [ThumbnailController::class, 'index'])->name('createThumbnail.index');
     Route::post('utils/createThumbnail', [ThumbnailController::class, 'create'])->name('createThumbnail.create');
 

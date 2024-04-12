@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Http\Controllers\Workflow\LibApps;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class MailUtility

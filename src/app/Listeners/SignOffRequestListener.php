@@ -38,7 +38,7 @@ class SignOffRequestListener implements ShouldQueue
     public function handle(SignOffRequestEvent $event)
     {
         $data = $event->data;
-        $signableType = $data['tableName'];
+        $tableName = $data['tableName'];
         $signableId = $data['signableId'];
         [$requester, $receivers, $category_id] = $this->getUsers($data);
 
@@ -46,11 +46,11 @@ class SignOffRequestListener implements ShouldQueue
             // Log::info($receiver);
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-                $params += $this->getMeta($signableType, $signableId);
+                $params += $this->getMeta($tableName, $signableId);
                 $mail = new MailSignOffRequest($params);
 
                 // $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
-                $subject = MailUtility::getMailTitle($signableType, $signableId, 'Request Sign Off');
+                $subject = MailUtility::getMailTitle($tableName, $signableId, 'Request Sign Off');
 
                 $mail->subject($subject);
                 Mail::to($receiver->email)
