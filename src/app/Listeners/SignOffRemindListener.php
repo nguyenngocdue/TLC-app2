@@ -28,9 +28,8 @@ class SignOffRemindListener //implements ShouldQueue
         //
     }
 
-    public function handle(SignOffRemindEvent $event)
+    public function handle()
     {
-        // $signableType = 'qaqc_insp_chklst_shts';
         $signatures = Signature::query()
             // ->where('signable_type', Qaqc_insp_chklst_sht::class)
             ->where('signature_decision', null)
@@ -50,11 +49,12 @@ class SignOffRemindListener //implements ShouldQueue
             $signableType = $signature->signable_type;
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-                $params += $this->getMeta($signableType, $signableId);
+                $tableName = $signableType::getTableName();
+                $params += $this->getMeta($tableName, $signableId);
                 $mail = new MailSignOffRemind($params);
 
                 // $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
-                $subject = MailUtility::getMailTitle($signableType, $signableId, 'Request Sign Off');
+                $subject = MailUtility::getMailTitle($tableName, $signableId, 'Request Sign Off');
 
                 $mail->subject($subject);
                 Mail::to($receiver->email)
