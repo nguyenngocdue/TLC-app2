@@ -8,6 +8,7 @@ use App\Http\Controllers\Reports\TraitForwardModeReport;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Utils\Support\DateReport;
+use App\Utils\Support\SortData;
 use Illuminate\Support\Facades\DB;
 
 class Prod_sequence_020 extends Report_ParentReport2Controller
@@ -106,7 +107,8 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
     {
         return [
             'report-prod_sequence_020' => 'Production Routing Links were created',
-            'report-prod_sequence_070' => 'Production Routing Links weren\'t created'
+            'report-prod_sequence_070' => 'Production Routing Links weren\'t created',
+            'all' => 'All'
         ];
     }
 
@@ -121,6 +123,9 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
                     break;
                 case 'report-prod_sequence_070':
                     $primaryData = (new Prod_sequence_070())->getDataSource($params);
+                    break;
+                case 'all':
+                    $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);
                     break;
                 default:
                     dump("Check your route name");
@@ -137,9 +142,20 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
 
     public function changeDataSource($dataSource, $params)
     {
-        if ($params['forward_to_mode'] === 'report-prod_sequences') {
-            foreach ($dataSource as &$values) {
-                $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+        if (isset($params['forward_to_mode'])) {
+            if ($params['forward_to_mode'] === 'report-prod_sequences') {
+                foreach ($dataSource as &$values) {
+                    $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+                }
+            }
+            if ($params['forward_to_mode'] === 'all') {
+                foreach ($dataSource as &$values) {
+                    $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+                }
+                $dataSource = $dataSource->toArray();
+                $prodOrdersNotRoutingLink = $this->filterProdOrdersNotProdRoutingLink($params);
+                $dataSource = array_merge($dataSource, $prodOrdersNotRoutingLink);
+                $dataSource = SortData::sortArrayByKeys($dataSource, ['sub_project_name', 'prod_order_name']);
             }
         }
         return collect($dataSource);
