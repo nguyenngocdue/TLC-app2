@@ -1,77 +1,71 @@
 {
     "php_admin": {
         "name": "php_admin",
-        "group": "internal",
+        "group": "data_admin",
         "title": "PhpMyAdmin",
         "href": "http:\/\/{phpMyAdmin}\/",
         "icon_fa": "fa-duotone fa-database"
     },
     "php_admin_table": {
         "name": "php_admin_table",
-        "group": "internal",
+        "group": "data_admin",
         "title": "PhpMyAdmin -> Table",
         "href": "http:\/\/{phpMyAdminTable}\/",
         "icon_fa": "fa-duotone fa-database"
     },
     "component": {
         "name": "component",
-        "group": "internal",
+        "group": "dev_tools",
         "title": "Components Demo",
         "href": "\/components",
         "icon_fa": "fa-brands fa-elementor"
     },
-    "php_info": {
-        "name": "php_info",
-        "group": "internal",
-        "title": "PHP INFO",
-        "href": "\/php_info",
-        "icon_fa": "fa-brands fa-elementor"
-    },
+  
     "database_summary": {
         "name": "database_summary",
-        "group": "internal",
+        "group": "data_admin",
         "title": "Database Summary",
         "href": "\/database\/summary",
         "icon_fa": "fa-duotone fa-table"
     },
     "database_diagrams": {
         "name": "database_diagrams",
-        "group": "internal",
+        "group": "data_admin",
         "title": "Database Diagrams",
         "href": "\/database\/diagrams",
         "icon_fa": "fa-duotone fa-table"
     },
     "my_company": {
         "name": "my_company",
-        "group": "internal",
+        "group": "dev_tools",
         "title": "My Company Tree",
         "href": "\/my-company",
         "icon_fa": "fa-duotone fa-folder-tree"
     },
     "department-matrix": {
         "name": "department-matrix",
-        "group": "internal",
+        "group": "data_admin",
         "title": "Department Matrix",
         "href": "\/department-matrix",
         "icon_fa": "fa-duotone fa-folder-tree"
     },
     "diginet-data": {
         "name": "diginet-data",
-        "group": "internal",
+        "group": "data_admin",
         "title": "Diginet Data",
         "href": "\/diginet\/transfer-diginet-data",
         "icon_fa": "fa-solid fa-snowflake"
     },
     "serializeParser": {
         "name": "serializeParser",
-        "group": "external",
+        "group": "dev_tools",
         "title": "Serialize Parser",
         "href": "\/utils\/parser",
         "icon_fa": "fa-duotone fa-brackets-curly"
     },
     "createThumbnail": {
         "name": "createThumbnail",
-        "group": "external",
+        "group": "dev_tools",
         "title": "Create Thumbnails",
         "href": "\/utils\/createThumbnail",
         "icon_fa": "fa-sharp fa-light fa-image"
@@ -113,14 +107,14 @@
     },
     "windmill": {
         "name": "windmill",
-        "group": "3rd_party",
+        "group": "third_party",
         "title": "Windmill Dashboard",
         "href": "https:\/\/windmill-dashboard.vercel.app\/",
         "icon_fa": "fa-duotone fa-gauge"
     },
     "font": {
         "name": "font",
-        "group": "3rd_party",
+        "group": "third_party",
         "title": "Font Awesome 6 Pro",
         "href": "https:\/\/fontawesome.com\/icons",
         "icon_fa": "fa-duotone fa-font-awesome"
@@ -138,5 +132,12 @@
         "title": "Permission Matrix",
         "href": "\/dashboard\/admin\/permissions_matrix",
         "icon_fa": "fa-duotone fa-gauge"
+    },
+    "php_info": {
+        "name": "php_info",
+        "group": "dev_tools",
+        "title": "PHP INFO",
+        "href": "\/php_info",
+        "icon_fa": "fa-brands fa-php"
     }
 }
