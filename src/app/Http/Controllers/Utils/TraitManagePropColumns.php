@@ -107,13 +107,13 @@ trait TraitManagePropColumns
                 "renderer" => "checkbox",
                 'width' => 10,
             ],
-            [
-                "dataIndex" => "hidden_template_print",
-                "align" => "center",
-                "editable" => true,
-                "renderer" => "checkbox",
-                'width' => 10,
-            ],
+            // [
+            //     "dataIndex" => "hidden_template_print",
+            //     "align" => "center",
+            //     "editable" => true,
+            //     "renderer" => "checkbox",
+            //     'width' => 10,
+            // ],
             [
                 "dataIndex" => "read_only",
                 "align" => "center",
