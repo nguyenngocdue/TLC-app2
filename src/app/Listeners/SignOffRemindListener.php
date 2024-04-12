@@ -30,12 +30,13 @@ class SignOffRemindListener //implements ShouldQueue
 
     public function handle(SignOffRemindEvent $event)
     {
-        $tableName = 'qaqc_insp_chklst_shts';
+        // $signableType = 'qaqc_insp_chklst_shts';
         $signatures = Signature::query()
-            ->where('signable_type', Qaqc_insp_chklst_sht::class)
+            // ->where('signable_type', Qaqc_insp_chklst_sht::class)
             ->where('signature_decision', null)
             ->with(['getUser'])
             ->get();
+
         foreach ($signatures as $signature) {
             if (is_null($signature->signable)) {
                 Log::info("Signature #" . $signature->id . " - signable [" . $signature->signable_id . "] not found.");
@@ -43,15 +44,18 @@ class SignOffRemindListener //implements ShouldQueue
             }
             if ($signature->signable->status != 'pending_audit') continue;
 
-
             $requester = User::findFromCache($signature->owner_id);
             $receiver = $signature->getUser;
             $signableId = $signature->signable_id;
+            $signableType = $signature->signable_type;
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-                $params += $this->getMeta($tableName, $signableId);
+                $params += $this->getMeta($signableType, $signableId);
                 $mail = new MailSignOffRemind($params);
-                $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+
+                // $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+                $subject = MailUtility::getMailTitle($signableType, $signableId, 'Request Sign Off');
+
                 $mail->subject($subject);
                 Mail::to($receiver->email)
                     ->cc($requester->email)

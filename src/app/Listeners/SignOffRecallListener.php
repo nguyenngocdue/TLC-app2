@@ -7,12 +7,10 @@ use App\Events\WssToastrMessageChannel;
 use App\Mail\MailSignOffRecall;
 use App\Models\Signature;
 use App\Models\User;
-use Database\Seeders\FieldSeeder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class SignOffRecallListener implements ShouldQueue
 {
@@ -30,6 +28,7 @@ class SignOffRecallListener implements ShouldQueue
     public function handle(SignOffRecallEvent $event)
     {
         $data = $event->data;
+        $signableType = $data['tableName'];
         $signableId = $data['signableId'];
         $requester = User::find($data['requesterId']);
         $signatureIds = $data['signatureIds'];
@@ -42,9 +41,11 @@ class SignOffRecallListener implements ShouldQueue
             $receiver = User::find($sig->user_id);
             try {
                 $params = ['receiverName' => $receiver->name, 'requesterName' => $requester->name,];
-                $params += $this->getMeta($data['tableName'], $data['signableId']);
+                $params += $this->getMeta($signableType, $signableId);
                 $mail = new MailSignOffRecall($params);
-                $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+                // $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+                $subject = MailUtility::getMailTitle($signableType, $signableId, 'Request Sign Off');
+
                 $mail->subject($subject);
                 Mail::to($receiver->email)
                     ->cc($requester->email)

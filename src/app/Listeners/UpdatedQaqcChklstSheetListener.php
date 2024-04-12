@@ -2,17 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\SignOffSubmittedEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\WssToastrMessageChannel;
-use App\Mail\MailSignOffSubmitted;
 use App\Models\Qaqc_insp_chklst_sht;
-use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
 {
@@ -78,16 +74,12 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
     {
         // if (CurrentRoute::getTypeSingular() !== 'qaqc_insp_chklst_sht') return false;
         $sheetId = $event->sheet;
-        $mailContent = $event->mailContent;
         $newSignOffList = $event->newSignOffList;
         $nominatedListFn = $event->nominatedListFn;
         $sheet = Qaqc_insp_chklst_sht::find($sheetId);
 
         $this->updateProgress($sheet);
         $this->updateStatusAccordingToSignOff($sheet, $nominatedListFn);
-
-        //Send mail
-        if ($mailContent) event(new SignOffSubmittedEvent($mailContent, $sheetId, 'qaqc_insp_chklst_shts'));
 
         // Log::info("Elaborate updated event to Checklist...");
         event(new UpdatedQaqcChklstEvent($sheet, $newSignOffList, $nominatedListFn . "_list"));

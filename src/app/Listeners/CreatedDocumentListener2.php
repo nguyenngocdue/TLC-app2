@@ -28,9 +28,11 @@ class CreatedDocumentListener2 implements ShouldQueue
         $app = LibApps::getFor($type);
         if ($app['do_not_send_notification_mails'] ?? false) return;
 
-        $nickname = strtoupper($app['nickname'] ?: $app['name']);
-        $appTitle = $app['title'];
-        $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
+        // $nickname = strtoupper($app['nickname'] ?: $app['name']);
+        // $appTitle = $app['title'];
+        // $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
+
+        $subject = MailUtility::getMailTitle($type, $id);
 
         $creator = $item->getOwner;
         $mail = new MailCreateNew([
