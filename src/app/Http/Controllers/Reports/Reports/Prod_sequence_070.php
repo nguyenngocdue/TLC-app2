@@ -105,25 +105,25 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
             [
                 'title' => 'Production Routing Link',
                 'dataIndex' => 'prod_routing_link_id',
-                // 'hasListenTo' => true,
+                'hasListenTo' => true,
                 'multiple' => true,
             ],
             [
                 'title' => 'ERP Routing Link',
                 'dataIndex' => 'erp_routing_link_id',
-                // 'hasListenTo' => true,
+                'hasListenTo' => true,
                 'multiple' => true,
             ],
             [
                 'title' => 'Production Order',
                 'dataIndex' => 'prod_order_id',
-                #     'hasListenTo' => true,
+                'hasListenTo' => true,
                 'multiple' => true,
             ],
             [
                 'title' => 'Status',
                 'dataIndex' => 'status',
-                #    'allowClear' => true,
+                'allowClear' => true,
                 'multiple' => true,
             ],
         ];
