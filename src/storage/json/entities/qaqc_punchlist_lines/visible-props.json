@@ -1,0 +1,104 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_qaqc_punchlist_id": {
+        "name": "_qaqc_punchlist_id",
+        "column_name": "qaqc_punchlist_id",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_getMonitors1()": {
+        "name": "_getMonitors1()",
+        "column_name": "getMonitors1()",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_material_supply": {
+        "name": "_material_supply",
+        "column_name": "material_supply",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_scope": {
+        "name": "_scope",
+        "column_name": "scope",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_is_original_scope": {
+        "name": "_is_original_scope",
+        "column_name": "is_original_scope",
+        "opened": "true",
+        "closed": "true"
+    },
+    "_punchlist_photos": {
+        "name": "_punchlist_photos",
+        "column_name": "punchlist_photos",
+        "opened": "true",
+        "closed": "true"
+    }
+}
