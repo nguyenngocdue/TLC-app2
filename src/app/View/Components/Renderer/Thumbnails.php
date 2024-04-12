@@ -27,7 +27,7 @@ class Thumbnails extends Component
     {
         // $cell = json_decode($this->cell);
         return function (array $data) {
-            $max = 3;
+            $max = 100;
             // dump($data['slot']);
             $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
             $cell = json_decode($data['slot']);
@@ -43,12 +43,19 @@ class Thumbnails extends Component
                 'url_media' => $path . $item->url_media,
                 'filename' => $item->filename,
             ], $cell);
-            $imgs = array_map(fn ($item) => "<x-renderer.image class='rounded' title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
+            // $imgs = array_map(fn ($item) => "<x-renderer.image class='rounded' title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
+            $imgs = [];
+            for ($i = 0; $i < sizeof($result); $i++) {
+                $item = $result[$i];
+                $imgs[] = "<x-renderer.image class='rounded' title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>";
+                // $img = $imgs[$i];
+                // if ($i % 5 == 0) $imgs[] = "<br/>";
+            }
             $imgStr = join(" ", $imgs);
             if ($remain) {
                 $imgStr .= "<x-renderer.tag color='sky'>+$remain more</x-renderer.tag>";
             }
-            return "<div class='flex flex-row' component='thumbnails'>$imgStr</div> ";
+            return "<div class='grid grid-cols-5 w-52 gap-0.5' component='thumbnails'>$imgStr</div> ";
         };
     }
 }

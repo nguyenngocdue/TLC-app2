@@ -338,5 +338,15 @@
         "hide_upload_date": "",
         "max_file_count": "100",
         "allowed_file_types": "all_supported"
+    },
+    "_punchlist_photos": {
+        "name": "_punchlist_photos",
+        "field_id": "236",
+        "field_name": "punchlist_photos",
+        "max_file_size": "10",
+        "hide_uploader": "",
+        "hide_upload_date": "",
+        "max_file_count": "100",
+        "allowed_file_types": "only_images"
     }
 }
