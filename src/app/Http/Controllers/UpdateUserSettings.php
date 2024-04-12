@@ -283,15 +283,19 @@ class UpdateUserSettings extends Controller
             $settings[$entity][$typeReport][$modeName]['children_mode'] = $inputValue['children_mode'];
             $settings[$entity][$typeReport][$modeName][$modeSelect] = $parameter;
         } else {
+            $settingUser = CurrentUser::getSettings();
+            if (isset($settingUser[$entity][$typeReport][$modeName])) {
+                $parameter['forward_to_mode'] = $settingUser[$entity][$typeReport][$modeName]['forward_to_mode'];
+            }
             $settings[$entity][$typeReport][$modeName] = $parameter;
         }
+        // dd($settings);
         return $settings;
     }
 
     private function updateOptionPrintReport($request, $settings)
     {
         $inputValue = $request->all();
-
         $entity = $request->input("_entity");
         $typeReport = strtolower($request->input("type_report"));
         $settingUser = CurrentUser::getSettings();
@@ -301,6 +305,7 @@ class UpdateUserSettings extends Controller
             $paramsReset['optionPrintLayout'] = $inputValue['optionPrintLayout'];
             $settings[$entity][$typeReport][$modeOption] = $paramsReset;
         } else {
+            // dd($inputValue);
             $settings = $this->updateParamsReportForFirstSubmit($inputValue, $settings);
         }
         return $settings;
@@ -316,6 +321,18 @@ class UpdateUserSettings extends Controller
             $modeSelect = $inputValue['children_mode'];
             $settings[$entity][$typeReport][$modeOption]['children_mode'] = $modeSelect;
         }
+        if (isset($inputValue['forward_to_mode'])) {
+            $settingUser = CurrentUser::getSettings();
+            if (!isset($settingUser[$entity])) {
+                $settings[$entity][$typeReport][$modeOption]['forward_to_mode'] = $inputValue['forward_to_mode'];
+            }
+            if (isset($settingUser[$entity][$typeReport][$modeOption])) {
+                $paramsReset = $settingUser[$entity][$typeReport][$modeOption];
+                $paramsReset['forward_to_mode'] = $inputValue['forward_to_mode'];
+                $settings[$entity][$typeReport][$modeOption] = $paramsReset;
+            }
+        }
+        // dd($settings);
         return $settings;
     }
 

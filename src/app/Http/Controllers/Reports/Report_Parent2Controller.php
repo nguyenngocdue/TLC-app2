@@ -45,6 +45,7 @@ abstract class Report_Parent2Controller extends Controller
     protected $type = ''; // can be removed
     protected $optionPrint = 'landscape';
     protected $overTableTrueWidth = false;
+    protected $showModeOnParam = false;
 
     public function getType()
     {
@@ -214,6 +215,11 @@ abstract class Report_Parent2Controller extends Controller
         return [];
     }
 
+    protected function getModeParamDataSource()
+    {
+        return [];
+    }
+
     public function index(Request $request)
     {
         $input = $request->input();
@@ -306,6 +312,8 @@ abstract class Report_Parent2Controller extends Controller
             'dataGrafana' => $dataGrafana,
             'paramsGrafana' => $paramsGrafana,
             'basicInfoWidgetReport' => $this->basicInfoWidgetReport(),
+            'showModeOnParam' => $this->showModeOnParam,
+            'modeParamDataSource' => $this->getModeParamDataSource()
         ] + $dataRenderDocReport);
     }
 

@@ -4,7 +4,7 @@ namespace App\View\Components\Reports;
 
 use Illuminate\View\Component;
 
-class Dropdown6 extends Component
+class Dropdown8 extends Component
 {
 
     public function __construct(
@@ -18,6 +18,7 @@ class Dropdown6 extends Component
         private $entity = '',
         private $routeName = '',
         private $modeOption = '',
+        private $forwardToMode = '',
 
     ) {
     }
@@ -26,7 +27,7 @@ class Dropdown6 extends Component
     public function render()
     {
         // dd($this->name);
-        return view('components.reports.dropdown6', [
+        return view('components.reports.dropdown8', [
             'dataSource' =>  $this->dataSource,
             'name' => $this->name,
             'itemsSelected' => $this->itemsSelected,
@@ -37,7 +38,7 @@ class Dropdown6 extends Component
             'typeReport' => $this->typeReport,
             'routeName' => $this->routeName,
             'modeOption' => $this->modeOption,
-            'entity' => $this->entity
+            'entity' => $this->entity,
         ]);
     }
 }

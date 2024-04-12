@@ -4,9 +4,40 @@
 @section('tooltip', Str::ucfirst($typeReport)." ".$mode)
 @section('content')
 
-{{-- @dd($tableDataSource) --}}
+@if ($showModeOnParam)
+<div class="grid grid-cols-12 gap-1">
+        <div class="col-span-2">
+            <div class="no-print justify-end pl-4 pt-5">
+                <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
+                    <x-reports.dropdown8    
+                        title="Mode" 
+                        name="forward_to_mode" 
+                        routeName="{{$routeName}}"
+                        :allowClear="false"
+                        :dataSource="$modeParamDataSource"
+                        typeReport='{{$typeReport}}'
+                        entity='{{$entity}}'
+                        modeOption='{{$mode}}'
+                        :itemsSelected="$params" 
+                        />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-10">
+            <div class="px-4">
+                @include('components.reports.shared-parameter')
+                @include('components.reports.show-layout2')
+            </div>
+        </div>
+</div>
+@endif
+
 <div class="px-4">
-    @include('components.reports.shared-parameter')
+    @if (!$showModeOnParam)
+        @include('components.reports.shared-parameter')
+    @endif
+
     @if(!empty($legendColors))
     <x-renderer.card class="mb-5">
         <x-reports.color-legend-report :dataSource="$legendColors" />
