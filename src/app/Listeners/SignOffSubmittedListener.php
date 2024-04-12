@@ -7,7 +7,6 @@ use App\Events\WssToastrMessageChannel;
 use App\Listeners\TraitSignOffListener;
 use App\Mail\MailSignOffSubmitted;
 use App\Models\User;
-use Database\Seeders\FieldSeeder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -43,7 +42,10 @@ class SignOffSubmittedListener implements ShouldQueue
             ];
             $param += $this->getMeta($tableName, $signableId);
             $mail = new MailSignOffSubmitted($param);
-            $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+
+            // $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
+            $subject = MailUtility::getMailTitle($tableName, $signableId, 'Request Sign Off');
+
             $mail->subject($subject);
             Mail::to($monitors)
                 ->cc($inspector)

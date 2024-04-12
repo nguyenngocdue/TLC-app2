@@ -128,8 +128,14 @@
     @break
 
     @case('signature_multi')
-    <x-controls.signature.signature-group2a :item="$item" signableId={{$id}} type="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}}  />
-    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+        @if($action === "create")
+            <div title="[{{$prop['label']}}] table will appear after this document is created">
+                <i class="fa-duotone fa-square-question text-yellow-800"></i>
+            </div>
+        @else
+            <x-controls.signature.signature-group2a :item="$item" signableId={{$id}} type="{{$type}}" category="{{$columnName}}" readOnly={{$readOnly}}  />
+            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+        @endif
     @break
 
     @case('relationship_renderer')

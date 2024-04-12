@@ -104,9 +104,10 @@ class UpdatedDocumentListener2 implements ShouldQueue
             return;
         }
 
-        $nickname = strtoupper($app['nickname']);
-        $appTitle = $app['title'];
-        $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
+        // $nickname = strtoupper($app['nickname']);
+        // $appTitle = $app['title'];
+        // $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
+        $subject = MailUtility::getMailTitle($type, $id);
 
         $receiver = User::find($currentValue['bic_assignee_uid']);
         $mail = new MailUpdatedDocument([
