@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Utils\Support\DateReport;
@@ -18,6 +19,7 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
     use TraitMenuTitle;
     use TraitParamsSettingReport;
     use TraitUpdateBasicInfoDataSource;
+    use TraitLibPivotTableDataFields2;
 
     protected $mode = '020';
     protected $modeType = 'prod_sequence_020';
@@ -108,9 +110,19 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
         return [
             'report-prod_sequence_020' => 'Production Routing Links were created',
             'report-prod_sequence_070' => 'Production Routing Links weren\'t created',
-            'all' => 'All'
         ];
     }
+
+    // public function getTableColumns($params, $dataSource)
+    // {
+    //     if ($params['forward_to_mode'] === 'report-prod_sequence_070') {
+    //         $modeType = 'prod_sequence_070';
+    //         $tableColumnByModeType = $this->getTableColumnsFromManagePivot($modeType);
+    //     } else {
+    //         // $tableColumnByModeType = $this->getTableColumnsFromManagePivot($this->modeType);
+    //     }
+    //     return true;
+    // }
 
     private function forwardToTargetMode($params)
     {

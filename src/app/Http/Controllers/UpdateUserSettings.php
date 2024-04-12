@@ -284,7 +284,7 @@ class UpdateUserSettings extends Controller
             $settings[$entity][$typeReport][$modeName][$modeSelect] = $parameter;
         } else {
             $settingUser = CurrentUser::getSettings();
-            if (isset($settingUser[$entity][$typeReport][$modeName])) {
+            if (isset($settingUser[$entity][$typeReport][$modeName]) && isset($parameter['forward_to_mode'])) {
                 $parameter['forward_to_mode'] = $settingUser[$entity][$typeReport][$modeName]['forward_to_mode'];
             }
             $settings[$entity][$typeReport][$modeName] = $parameter;
