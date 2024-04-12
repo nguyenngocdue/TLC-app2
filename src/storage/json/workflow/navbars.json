@@ -133,6 +133,13 @@
         "href": "\/dashboard\/admin\/permissions_matrix",
         "icon_fa": "fa-duotone fa-gauge"
     },
+    "test_cron_job": {
+        "name": "test_cron_job",
+        "group": "dev_tools",
+        "title": "Test Cron Job",
+        "href": "\/utils\/test-cron-job",
+        "icon_fa": "fa-solid fa-vial"
+    },
     "php_info": {
         "name": "php_info",
         "group": "dev_tools",
