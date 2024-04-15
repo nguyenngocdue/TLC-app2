@@ -29,7 +29,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
             if ($this->app->environment('testing')) {
                 // Log::info("Beta ENV");
-                return;
+                return true;
             }
 
             //Form here is production ENV:
