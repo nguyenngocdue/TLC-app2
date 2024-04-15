@@ -74,10 +74,11 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
             class="rounded-xl font-bold bg-purple-200 text-white p-4 cursor-pointer disabled:cursor-not-allowed 1disabled:bg-purple-200"
         /> --}}
         <div class="py-1">
+            <input type="hidden" value="SUBMIT" name="actionButton" />
             <button 
                 id="actionButton_{{$signatureId}}"
-                name="actionButton" 
-                value="SUBMIT" 
+                {{-- name="actionButton" 
+                value="SUBMIT"  --}}
                 disabled
                 class="rounded-xl h-8 font-bold border-2 border-purple-400 bg-purple-300 text-white px-2 cursor-pointer disabled:cursor-not-allowed"
             >

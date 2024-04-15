@@ -47,8 +47,9 @@ class PrintProps extends Component
 		$blackList = ['z_divider', 'z_page_break'];
 		$superProps = SuperProps::getFor($this->type);
 		$props = $superProps['props'];
-        if(isset($props['_doc_id'])) $propsDocId = $props['_doc_id'];
-		$hiddenPrintMode = $this->printMode == 'template' ? 'hidden_template_print' : 'hidden_print';
+		if (isset($props['_doc_id'])) $propsDocId = $props['_doc_id'];
+		// $hiddenPrintMode = $this->printMode == 'template' ? 'hidden_template_print' : 'hidden_print';
+		$hiddenPrintMode = 'hidden_print';
 		$props = array_filter($props, fn ($item) => ($item[$hiddenPrintMode] ?? false) != true);
 		$node = [];
 		$nodeCount = 0;
@@ -72,8 +73,8 @@ class PrintProps extends Component
 		}
 		$dataSource = [];
 		$dataModelCurrent = $this->trashed ? ($this->modelPath)::onlyTrashed()->findOrFail($this->id) : ($this->modelPath)::findOrFail($this->id);
-        $propsTemp = $props;
-        if(isset($propsDocId) && !isset($propsTemp['_doc_id'])) $propsTemp['_doc_id'] = $propsDocId;
+		$propsTemp = $props;
+		if (isset($propsDocId) && !isset($propsTemp['_doc_id'])) $propsTemp['_doc_id'] = $propsDocId;
 		foreach ($propsTemp as $key => $prop) {
 			if ($prop['column_type'] !== 'static') {
 				if (empty($prop['relationships'])) {
@@ -130,16 +131,17 @@ class PrintProps extends Component
 		];
 		return view('components.print.print-props', $params);
 	}
-	private function handleDataSourceOfControlSignatureMulti($props,&$dataSource){
-		$propSignatureMulti = array_filter($props,function ($value) {
+	private function handleDataSourceOfControlSignatureMulti($props, &$dataSource)
+	{
+		$propSignatureMulti = array_filter($props, function ($value) {
 			return $value['control'] == 'signature_multi';
 		});
 		// dd($propSignatureMulti);
 		foreach ($propSignatureMulti as $key => $value) {
-			$tmp = substr($key,1);
+			$tmp = substr($key, 1);
 			$dataSource[$tmp] = [
 				"signature_multi" => $dataSource[$tmp],
-				"parent" => $dataSource[$tmp."_list()"]
+				"parent" => $dataSource[$tmp . "_list()"]
 			];
 		}
 	}

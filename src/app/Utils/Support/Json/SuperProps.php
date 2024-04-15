@@ -138,7 +138,7 @@ class SuperProps
                 "hidden_label" => '',
                 "hidden_filter" => '',
                 "hidden_print" => '',
-                "hidden_template_print" => '',
+                // "hidden_template_print" => '',
                 "read_only" => '',
                 "save_on_change" => '',
                 "duplicatable" => '',

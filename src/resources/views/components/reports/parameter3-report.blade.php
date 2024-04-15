@@ -1,6 +1,6 @@
 @php
 $route = $routeName ? route($routeName) : "";
-//dump($modeSelect)
+//dump($modeOption)
 @endphp
 <form action="{{$route}}" id="{{$entity}}" method="GET">
     <div class="grid grid-row-1 w-full">
@@ -13,6 +13,8 @@ $route = $routeName ? route($routeName) : "";
             <input type="hidden" name='optionPrintLayout' value="{{$optionPrint}}">
             {{-- set value when param has slect mode --}}
             <input type="hidden" name='children_mode' value="{{$childrenMode}}">
+            <input type="hidden" name='forward_to_mode' value="{{$forwardToMode}}">
+
             
             @if (!reset($columns))
             <div class="col-span-12">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports\Reports;
 use App\BigThink\TraitMenuTitle;
 use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Http\Controllers\Reports\TraitLibPivotTableDataFields2;
 use App\Http\Controllers\Reports\TraitParamsSettingReport;
 use App\Http\Controllers\Reports\TraitUpdateBasicInfoDataSource;
 use App\Utils\Support\DateReport;
@@ -18,6 +19,7 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
     use TraitMenuTitle;
     use TraitParamsSettingReport;
     use TraitUpdateBasicInfoDataSource;
+    use TraitLibPivotTableDataFields2;
 
     protected $mode = '020';
     protected $modeType = 'prod_sequence_020';
@@ -25,12 +27,7 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
     protected $pageLimit = 10;
     protected $tableTrueWidth = true;
     protected $maxH = 30;
-
-    public function getDataSource($params)
-    {
-        $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);
-        return collect($primaryData);
-    }
+    protected $showModeOnParam = true;
 
     private function filterProdOrdersNotProdRoutingLink($params)
     {
@@ -108,20 +105,77 @@ class Prod_sequence_020 extends Report_ParentReport2Controller
         return $data;
     }
 
+    protected function getModeParamDataSource()
+    {
+        return [
+            'report-prod_sequence_020' => 'Production Routing Links were created',
+            'report-prod_sequence_070' => 'Production Routing Links weren\'t created',
+        ];
+    }
+
+    // public function getTableColumns($params, $dataSource)
+    // {
+    //     if ($params['forward_to_mode'] === 'report-prod_sequence_070') {
+    //         $modeType = 'prod_sequence_070';
+    //         $tableColumnByModeType = $this->getTableColumnsFromManagePivot($modeType);
+    //     } else {
+    //         // $tableColumnByModeType = $this->getTableColumnsFromManagePivot($this->modeType);
+    //     }
+    //     return true;
+    // }
+
+    private function forwardToTargetMode($params)
+    {
+        if (isset($params['forward_to_mode'])) {
+            $routeName = $params['forward_to_mode'];
+            $primaryData = collect();
+            switch ($routeName) {
+                case 'report-prod_sequence_020':
+                    $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);
+                    break;
+                case 'report-prod_sequence_070':
+                    $primaryData = (new Prod_sequence_070())->getDataSource($params);
+                    break;
+                case 'all':
+                    $primaryData = (new Prod_sequence_dataSource())->getDataSource($params);
+                    break;
+                default:
+                    dump("Check your route name");
+            }
+        }
+        return $primaryData;
+    }
+
+    public function getDataSource($params)
+    {
+        $primaryData = $this->forwardToTargetMode($params);
+        return collect($primaryData);
+    }
+
     public function changeDataSource($dataSource, $params)
     {
-        foreach ($dataSource as &$values) {
-            $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+        if (isset($params['forward_to_mode'])) {
+            if ($params['forward_to_mode'] === 'report-prod_sequences') {
+                foreach ($dataSource as &$values) {
+                    $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+                }
+            }
+            if ($params['forward_to_mode'] === 'all') {
+                foreach ($dataSource as &$values) {
+                    $values->content_comment = str_replace(",", "<br/>", $values->content_comment);
+                }
+                $dataSource = $dataSource->toArray();
+                $prodOrdersNotRoutingLink = $this->filterProdOrdersNotProdRoutingLink($params);
+                $dataSource = array_merge($dataSource, $prodOrdersNotRoutingLink);
+                $dataSource = SortData::sortArrayByKeys($dataSource, ['sub_project_name', 'prod_order_name']);
+            }
         }
-        $dataSource = $dataSource->toArray();
-        $prodOrdersNotRoutingLink = $this->filterProdOrdersNotProdRoutingLink($params);
-        $dataSource = array_merge($dataSource, $prodOrdersNotRoutingLink);
-        $dataSource = SortData::sortArrayByKeys($dataSource, ['sub_project_name', 'prod_order_name']);
         return collect($dataSource);
     }
 
     protected function getDefaultValueParams($params, $request)
     {
+        $params['forward_to_mode'] = 'report-prod_sequence_020';
         $params['picker_date'] = DateReport::defaultPickerDate('-2 months');
         return $params;
     }

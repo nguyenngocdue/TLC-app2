@@ -10,7 +10,7 @@ var tableObjectIndexedColumns = {};
         $tr_td = preg_replace('/<tr class=\'.*?\'/', "<tr class='border border-gray-400 h-10'", $tr_td);
     @endphp
     <table class="w-full min-w-full max-w-full">
-        <thead><tr class="text-center 456">{!! $columnsRendered !!}</tr></thead>
+        <thead><tr class="text-center border-t border-gray-400 456">{!! $columnsRendered !!}</tr></thead>
         <tbody>{!! $tr_td !!}</tbody>
         @isset($footerRendered)
         <tfoot>

@@ -19,7 +19,6 @@ class UpdatedQaqcChklstSheetEvent
      */
     public function __construct(
         public $sheet,
-        public $mailContent,
         public $newSignOffList,
         public $nominatedListFn,
     ) {

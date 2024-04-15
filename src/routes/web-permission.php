@@ -1,14 +1,6 @@
 <?php
 
-use App\Models\User;
-use App\Utils\Support\Entities;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
-use LdapRecord\Laravel\LdapUserRepository;
-use Illuminate\Http\Request;
-use Illuminate\Contracts\Support\Arrayable;
-
-
 
 Route::group([
     'middleware' => ['auth', 'impersonate',]
@@ -27,23 +19,5 @@ Route::group([
         Route::resource('setrolesets', App\Http\Controllers\Admin\AdminSetRoleSetController::class);
         Route::post('setrolesets/syncrolesets', [App\Http\Controllers\Admin\AdminSetRoleSetController::class, 'store2'])->name('setrolesets.store2');
         Route::get('permissions_matrix', [App\Http\Controllers\Admin\AdminPermissionMatrixController::class, 'index'])->name('permissions_matrix');
-
-        // Route::resource('permissions2', App\Http\Controllers\Permission\Permission::class);
-
-        Route::get('ldap-check-email',function(Request $request){
-            $emails = User::query()->where('email','LIKE','%@tlcmodular.com')->pluck('email');
-            $query = (new LdapUserRepository('LdapRecord\Models\ActiveDirectory\User'))->query();
-            $emailsNotFound = [];
-            foreach ($emails as $value) {
-                // check faild password
-                $query->where('userprincipalname', $value);
-                if (is_null($query->first())) {
-                    $emailsNotFound[] = $value;
-                }
-            }
-            return response()->json([
-                'Email Not Found' => $emailsNotFound,
-            ]);
-        });
     });
 });

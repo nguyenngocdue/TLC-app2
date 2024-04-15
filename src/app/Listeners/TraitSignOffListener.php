@@ -64,7 +64,7 @@ trait TraitSignOffListener
         // Log::info($data);
         // $tableName = $data['tableName'];
         // $signableId = $data['signableId'];
-
+        // $tableName = Str::plural($type);
         $modelPath = Str::modelPathFrom($tableName);
         $sheet = $modelPath::find($signableId);
         $meta = [];

@@ -29,7 +29,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
 
             if ($this->app->environment('testing')) {
                 // Log::info("Beta ENV");
-                return;
+                return true;
             }
 
             //Form here is production ENV:
@@ -77,6 +77,7 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
         Gate::define('viewTelescope', function ($user) {
             return in_array($user->email, [
                 'admin@tlc.com',
+                "thucvo@tlcmodular.com",
             ]);
         });
     }

@@ -120,6 +120,10 @@ trait TraitEntityCRUDStoreUpdate2
 			$values = $item->getMonitors1()->pluck('id')->toArray();
 			$array['getMonitors1()'] = $values;
 		}
+		if (method_exists($item, "getMonitors2")) {
+			$values = $item->getMonitors2()->pluck('id')->toArray();
+			$array['getMonitors2()'] = $values;
+		}
 	}
 
 	public function update(Request $request, $id)
