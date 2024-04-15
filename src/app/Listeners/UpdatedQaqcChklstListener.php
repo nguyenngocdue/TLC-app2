@@ -63,6 +63,7 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         // Log::info("TmplId " . $book->qaqc_insp_tmpl_id);
         // Log::info("ProdOrderId " . $book->getProdOrder->prod_routing_id);
         // Log::info($nominatedListFn);
+        // dd($nominatedListFn);
 
         $this->subProjectService->update($book->sub_project_id, $newSignOffList, $nominatedListFn);
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newSignOffList, $nominatedListFn);
