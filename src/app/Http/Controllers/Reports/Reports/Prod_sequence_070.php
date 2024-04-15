@@ -97,7 +97,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                                             AND tb2.prod_routing_id = tb3.prod_routing_id
                             WHERE tb3.prod_sequence_id IS NULL
                                 AND tb1.prod_order_id IS NOT NULL";
-        ($sql);
+        // dump($sql);
 
         return $sql;
     }
