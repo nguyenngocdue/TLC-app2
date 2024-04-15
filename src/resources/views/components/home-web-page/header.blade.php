@@ -51,6 +51,36 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     </li>
                   @endforeach
                 </ul>
+                <ul class="block lg:hidden border-t">
+                    @auth
+                        <li>
+                            <a
+                                href="/dashboard"
+                                class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                            >
+                                Dashboard
+                            </a>
+                        </li>
+                    @endauth
+                    @guest
+                    <li>
+                        <a
+                            href="/login"
+                            class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                        >
+                            Login
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/register"
+                            class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                        >
+                            Sign Up
+                        </a>
+                    </li>
+                    @endguest
+                </ul>
               </nav>
             </div>
             <div class="hidden justify-end pr-16 sm:flex lg:pr-0 gap-1">
@@ -76,9 +106,9 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                 >
                     Sign Up
                 </a>
-                @endguest
+            @endguest
             </div>
-            
+
           </div>
         </div>
       </div>
