@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class User_type extends ModelExtended
 {
-    protected $fillable = ["name", "description", "slug"];
+    protected $fillable = [
+        "name", "description", "slug",
+        "erp_code",
+    ];
 
     public static $statusless = true;
 
