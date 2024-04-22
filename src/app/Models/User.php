@@ -39,13 +39,14 @@ class User extends ModelExtended implements
     protected $fillable = [
         "name0", "full_name", "name_suffix", "employeeid", "first_name",
         "last_name", "gender", "address", "phone", "time_keeping_type", "user_type",
-        "workplace", "current_workplace",
-        "category", "date_of_birth", "first_date", "last_date", "title",
-        "position",
-        "discipline", "department", "show_on_beta",
+        "workplace", "current_workplace", "category", "erp_sub_cat",
+        "date_of_birth", "first_date", "last_date", "leave_effective_date",
+        "title", "position", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
         "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
         "is_bod", "org_chart", "standard_signature",
+
+        "erp_site", "erp_cashflow",
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -93,6 +94,10 @@ class User extends ModelExtended implements
         "getUserCompany" => ['belongsTo', User_company::class, 'company'],
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
         "getPosition" => ['belongsTo', User_position::class, 'position'],
+
+        "getUserErpSubCat" => ['belongsTo', Term::class, 'erp_sub_cat'],
+        "getUserErpSite" => ['belongsTo', Term::class, 'erp_site'],
+        "getUserErpCashflow" => ['belongsTo', Term::class, 'erp_cashflow'],
 
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
         "getUserOrgChart" => ['belongsTo', User_org_chart::class, 'org_chart'],

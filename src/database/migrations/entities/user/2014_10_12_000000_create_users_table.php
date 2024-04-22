@@ -42,12 +42,18 @@ return new class extends Migration
             $table->date("date_of_birth")->nullable();
             $table->date("first_date")->nullable();
             $table->date("last_date")->nullable();
+            $table->date("leave_effective_date")->nullable();
             $table->string("title")->nullable();
 
             $table->unsignedBigInteger('position')->nullable();
             $table->unsignedBigInteger("discipline")->nullable();
             $table->unsignedBigInteger("org_chart")->nullable();
             $table->unsignedBigInteger("department")->nullable();
+
+            $table->unsignedBigInteger("erp_sub_cat")->nullable();
+            $table->unsignedBigInteger("erp_site")->nullable();
+            $table->unsignedBigInteger("erp_cashflow")->nullable();
+
             $table->boolean("show_on_beta")->nullable();
             $table->boolean("is_bod")->nullable();
             $table->boolean("resigned")->nullable();
