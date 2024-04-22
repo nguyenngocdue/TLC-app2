@@ -212,6 +212,21 @@ class User extends ModelExtended implements
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getUserErpSubCat()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserErpSite()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserErpCashflow()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getPosition()
     {
         $p = static::$eloquentParams[__FUNCTION__];
