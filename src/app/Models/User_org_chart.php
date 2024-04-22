@@ -11,7 +11,7 @@ class User_org_chart extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'org_chart', 'id'],
+        "getUsers" => ['hasMany', User::class, 'org_chart'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
     ];
 

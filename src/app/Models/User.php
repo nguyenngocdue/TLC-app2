@@ -105,7 +105,7 @@ class User extends ModelExtended implements
         "getUserDepartment" => ['belongsTo', Department::class, 'department'],
         "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
 
-        "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
+        "getPosts" => ['hasMany', Post::class, 'owner_id'],
 
         "getRoleSet" => ['morphToMany', Role_set::class, 'model', 'model_has_role_sets'],
         //This line is for ParentType to load,

@@ -11,7 +11,7 @@ class User_position3 extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'position_3', 'id'],
+        "getUsers" => ['hasMany', User::class, 'position_3'],
     ];
 
     public function getUsers()
