@@ -118,7 +118,7 @@
         "align": "",
         "col_span": "",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "true",
         "hidden_label": "",
         "hidden_filter": "",

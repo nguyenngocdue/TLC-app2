@@ -11,6 +11,9 @@ class Field extends ModelExtended
 
     public static $eloquentParams = [
         'getTerms' => ['hasMany', Term::class, 'field_id'],
+
+        //__FUNCTION__ is not dynamic
+        // "getAttachments" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function getTerms()
@@ -18,4 +21,10 @@ class Field extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    // public function getAttachments()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    // }
 }
