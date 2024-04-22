@@ -21,7 +21,7 @@ return new class extends Migration
 
         $schema->create('fields', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('reversed_name')->nullable();
             $table->text('description')->nullable();
             // $table->string('slug')->unique(); //<<Very annoying
