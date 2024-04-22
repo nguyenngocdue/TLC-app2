@@ -19,16 +19,13 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('qaqc_insp_tmpl_lines', function (BlueprintExtended $table) {
+        $schema->create('user_sub_cats', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->text('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('control_type_id')->nullable();
-            $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
-            $table->unsignedBigInteger('qaqc_insp_group_id')->nullable();
-            $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
 
-            $table->orderable();
+            $table->foreignId('user_type_id')->constrained();
+            $table->foreignId('user_category_id')->constrained();
             $table->appendCommonFields();
         });
     }
@@ -40,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('qaqc_insp_tmpl_lines');
+        Schema::dropIfExists('user_sub_cats');
     }
 };

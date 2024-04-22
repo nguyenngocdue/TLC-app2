@@ -29,17 +29,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_team_ot_id')->nullable();
             $table->appendCommonFields();
         });
-        // Schema::create('hr_overtime_requests', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->unsignedBigInteger("workplace_id");
-        //     $table->string("name")->nullable();
-        //     $table->unsignedBigInteger('assignee_1');
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->string('status')->nullable();
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

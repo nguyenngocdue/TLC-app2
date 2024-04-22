@@ -34,23 +34,6 @@ return new class extends Migration
             $table->orderable();
             $table->appendCommonFields();
         });
-        // Schema::create('qaqc_insp_chklst_lines', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->unsignedBigInteger('control_type_id');
-        //     $table->text('value')->nullable();
-        //     $table->text('value_on_hold')->nullable();
-        //     $table->unsignedBigInteger('qaqc_insp_chklst_sht_id');
-        //     $table->unsignedBigInteger('qaqc_insp_group_id');
-        //     $table->unsignedBigInteger('qaqc_insp_control_value_id')->nullable();
-        //     $table->unsignedBigInteger('qaqc_insp_control_group_id');
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->unsignedBigInteger('inspector_id')->nullable();
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**
