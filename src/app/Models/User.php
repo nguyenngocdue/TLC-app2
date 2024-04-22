@@ -2,51 +2,34 @@
 
 namespace App\Models;
 
-use App\BigThink\HasAttachments;
 use App\BigThink\HasCachedAvatar;
-use App\BigThink\HasCheckbox;
-use App\BigThink\HasStatus;
-use App\BigThink\SoftDeletesWithDeletedBy;
-use App\BigThink\TraitMenuTitle;
-use App\BigThink\TraitMetaForChart;
-use App\BigThink\TraitModelExtended;
-use App\BigThink\TraitMorphManyByFieldName;
-use App\Utils\PermissionTraits\CheckPermissionEntities;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use App\BigThink\ModelExtended;
 use Laravel\Sanctum\HasApiTokens;
 use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
 use LdapRecord\Laravel\Auth\HasLdapUser;
-use Laravel\Scout\Searchable;
 use Ndc\SpatieCustom\Traits\HasRoleSets;
 
-class User extends Authenticatable implements LdapAuthenticatable
-{
-    use Searchable;
-    use Notifiable;
-    use AuthenticatesWithLdap;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 
+class User extends ModelExtended implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract,
+    LdapAuthenticatable
+{
+    use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
+    use AuthenticatesWithLdap;
     use HasLdapUser;
-    use HasFactory;
     use HasRoleSets;
     use HasApiTokens;
-
-    use Searchable;
-    use CheckPermissionEntities;
-    use TraitMetaForChart;
-    use TraitMenuTitle;
-    use TraitMorphManyByFieldName;
-    use TraitModelExtended;
-    use SoftDeletesWithDeletedBy;
-
-    use HasAttachments;
     use HasCachedAvatar;
-    use HasStatus;
-    use HasCheckbox;
 
     /**
      * The attributes that are mass assignable.
@@ -114,8 +97,6 @@ class User extends Authenticatable implements LdapAuthenticatable
 
         "getUserDepartment" => ['belongsTo', Department::class, 'department'],
         "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
-        "getOwner" =>  ["belongsTo", User::class, "owner_id"],
-        "getDeletedBy" =>  ["belongsTo", User::class, "deleted_by"],
 
         "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
 
@@ -255,22 +236,6 @@ class User extends Authenticatable implements LdapAuthenticatable
     {
         return Department::findFromCache($this->department)->name ?? '';
     }
-    public static function isStatusless()
-    {
-        return static::$statusless;
-    }
-    function getOwner()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
-    function getDeletedBy()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
-
     public function getManyIconParams()
     {
         return [
@@ -315,58 +280,8 @@ class User extends Authenticatable implements LdapAuthenticatable
 
     public static function findFromCache($id)
     {
-        // if(!isset(static::getCollection()[$id]))
         return static::getCollection()[$id] ?? null;
     }
-
-    // public static function getTotalWorkingHoursOfYear($uids, $year)
-    // {
-    //     // dump(join(",", $uids->toArray()));
-    //     $uidsArray = join(",", $uids->toArray());
-    //     $sql = "SELECT line.user_id, left(tsw.ts_date,7) month0, sum(line.duration_in_min)/60 working_hours
-    //     FROM
-    //         `hr_timesheet_lines` line,
-    //         `hr_timesheet_workers` tsw
-    //     WHERE 1=1
-    //         AND tsw.id = line.timesheetable_id
-    //         AND timesheetable_type='App\\\\Models\\\\Hr_timesheet_worker'
-    //         AND tsw.deleted_at IS NULL
-    //         AND line.deleted_at IS NULL
-    //         AND LEFT(tsw.ts_date,4) = '$year'
-    //         AND user_id IN ($uidsArray)
-    //     GROUP BY month0, line.user_id
-    //     ORDER BY working_hours DESC
-    //     ";
-    //     $rows = DB::select($sql);
-    //     // Log::info($sql);
-    //     $result = [];
-    //     foreach ($rows as $row) {
-    //         $result[$row->user_id . "_" . $row->month0] = $row;
-    //     }
-    //     return $result;
-    // }
-
-    // public static function getTotalOvertimeHoursOfYear($uids, $year)
-    // {
-    //     // dump(join(",", $uids->toArray()));
-    //     $uidsArray = join(",", $uids->toArray());
-    //     $sql = "SELECT line.user_id, left(line.ot_date,7) month0, sum(line.total_time) ot_hours
-    //     FROM `hr_overtime_request_lines` line
-    //     WHERE 1=1
-    //         AND line.deleted_at IS NULL
-    //         AND line.user_id IN ($uidsArray)
-    //         AND LEFT(line.ot_date, 4) = '$year'
-    //     GROUP BY month0, line.user_id
-    //     ORDER BY ot_hours DESC
-    //     ";
-    //     $rows = DB::select($sql);
-    //     // Log::info($sql);
-    //     $result = [];
-    //     foreach ($rows as $row) {
-    //         $result[$row->user_id . "_" . $row->month0] = $row;
-    //     }
-    //     return $result;
-    // }
 
     function isExternalInspector()
     {
