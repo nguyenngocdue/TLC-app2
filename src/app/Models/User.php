@@ -38,7 +38,8 @@ class User extends ModelExtended implements
      */
     protected $fillable = [
         "name0", "full_name", "name_suffix", "employeeid", "first_name",
-        "last_name", "gender", "address", "phone", "time_keeping_type", "user_type", "workplace",
+        "last_name", "gender", "address", "phone", "time_keeping_type", "user_type",
+        "workplace", "current_workplace",
         "category", "date_of_birth", "first_date", "last_date", "title",
         "position",
         "discipline", "department", "show_on_beta",
@@ -87,6 +88,7 @@ class User extends ModelExtended implements
     public static $eloquentParams = [
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
+        "getCurrentWorkplace" => ['belongsTo', Workplace::class, 'current_workplace'],
         "getUserType" => ['belongsTo', User_type::class, 'user_type'],
         "getUserCompany" => ['belongsTo', User_company::class, 'company'],
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
@@ -180,6 +182,11 @@ class User extends ModelExtended implements
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
     public function getWorkplace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrentWorkplace()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
