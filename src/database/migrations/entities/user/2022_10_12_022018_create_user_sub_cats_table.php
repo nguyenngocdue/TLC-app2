@@ -21,12 +21,14 @@ return new class extends Migration
 
         $schema->create('user_sub_cats', function (BlueprintExtended $table) {
             $table->id();
-            $table->text('name');
+            $table->text('name')->nullable()->comment('Nameless');
             $table->text('description')->nullable();
 
-            $table->foreignId('user_type_id')->constrained();
             $table->foreignId('user_category_id')->constrained();
+            $table->foreignId('user_type_id')->constrained();
             $table->appendCommonFields();
+
+            $table->unique(['user_type_id', 'user_category_id']);
         });
     }
 

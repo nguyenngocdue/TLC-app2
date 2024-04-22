@@ -95,7 +95,7 @@ class User extends ModelExtended implements
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
         "getPosition" => ['belongsTo', User_position::class, 'position'],
 
-        "getUserErpSubCat" => ['belongsTo', Term::class, 'erp_sub_cat'],
+        "getUserErpSubCat" => ['belongsTo', User_sub_cat::class, 'erp_sub_cat'],
         "getUserErpSite" => ['belongsTo', Term::class, 'erp_site'],
         "getUserErpCashflow" => ['belongsTo', Term::class, 'erp_cashflow'],
 
@@ -184,7 +184,7 @@ class User extends ModelExtended implements
     public function getPosts()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkplace()
     {

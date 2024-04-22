@@ -2440,6 +2440,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "user_sub_cat": {
+        "name": "user_sub_cat",
+        "package_tab": "application",
+        "package": "system",
+        "sub_package": "user",
+        "title": "User Sub Cat",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "user_team_ncr": {
         "name": "user_team_ncr",
         "package_tab": "application",
