@@ -6,6 +6,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -16,6 +17,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -26,6 +28,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -36,6 +39,7 @@
         "assigned": "",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": "true"
     },
@@ -46,6 +50,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -56,6 +61,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -66,6 +72,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -76,6 +83,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -86,6 +94,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -96,6 +105,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -106,6 +116,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -116,6 +127,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -126,6 +138,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -136,6 +149,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -146,6 +160,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -156,6 +171,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -166,6 +182,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -176,6 +193,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": "true"
     },
@@ -186,6 +204,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -196,6 +215,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -206,6 +226,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -216,6 +237,7 @@
         "assigned": "",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -226,6 +248,7 @@
         "assigned": "",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -236,6 +259,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -246,6 +270,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": "true"
     },
@@ -256,6 +281,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -266,6 +292,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -276,6 +303,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -286,6 +314,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     }
