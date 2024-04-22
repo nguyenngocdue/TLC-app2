@@ -38,13 +38,15 @@ class User extends ModelExtended implements
      */
     protected $fillable = [
         "name0", "full_name", "name_suffix", "employeeid", "first_name",
-        "last_name", "gender", "address", "phone", "time_keeping_type", "user_type", "workplace",
-        "category", "date_of_birth", "first_date", "last_date", "title",
-        "position",
-        "discipline", "department", "show_on_beta",
+        "last_name", "gender", "address", "phone", "time_keeping_type", "user_type",
+        "workplace", "current_workplace", "category", "erp_sub_cat",
+        "date_of_birth", "first_date", "last_date", "leave_effective_date",
+        "title", "position", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
         "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
         "is_bod", "org_chart", "standard_signature",
+
+        "erp_site", "erp_cashflow",
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -87,10 +89,15 @@ class User extends ModelExtended implements
     public static $eloquentParams = [
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace'],
+        "getCurrentWorkplace" => ['belongsTo', Workplace::class, 'current_workplace'],
         "getUserType" => ['belongsTo', User_type::class, 'user_type'],
         "getUserCompany" => ['belongsTo', User_company::class, 'company'],
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
         "getPosition" => ['belongsTo', User_position::class, 'position'],
+
+        "getUserErpSubCat" => ['belongsTo', User_sub_cat::class, 'erp_sub_cat'],
+        "getUserErpSite" => ['belongsTo', Term::class, 'erp_site'],
+        "getUserErpCashflow" => ['belongsTo', Term::class, 'erp_cashflow'],
 
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
         "getUserOrgChart" => ['belongsTo', User_org_chart::class, 'org_chart'],
@@ -98,7 +105,7 @@ class User extends ModelExtended implements
         "getUserDepartment" => ['belongsTo', Department::class, 'department'],
         "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
 
-        "getPosts" => ['hasMany', Post::class, 'owner_id', 'id'],
+        "getPosts" => ['hasMany', Post::class, 'owner_id'],
 
         "getRoleSet" => ['morphToMany', Role_set::class, 'model', 'model_has_role_sets'],
         //This line is for ParentType to load,
@@ -177,9 +184,14 @@ class User extends ModelExtended implements
     public function getPosts()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3]);
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkplace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrentWorkplace()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -200,6 +212,21 @@ class User extends ModelExtended implements
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getUserErpSubCat()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserErpSite()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserErpCashflow()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getPosition()
     {
         $p = static::$eloquentParams[__FUNCTION__];

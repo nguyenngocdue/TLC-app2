@@ -11,7 +11,7 @@ class User_time_keep_type extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'time_keeping_type', 'id'],
+        "getUsers" => ['hasMany', User::class, 'time_keeping_type'],
     ];
 
     public function getUsers()

@@ -7,16 +7,8 @@ use App\BigThink\ModelExtended;
 class Term extends ModelExtended
 {
     protected $fillable = [
-        'id',
-        'name',
-        'description',
-        'slug',
-        'field_id',
-        'parent1_id',
-        'parent2_id',
-        'parent3_id',
-        'parent4_id',
-        'owner_id'
+        'id', 'name', 'description', 'slug', 'field_id', 'owner_id',
+        'parent1_id', 'parent2_id', 'parent3_id', 'parent4_id',
     ];
     public static $statusless = true;
 

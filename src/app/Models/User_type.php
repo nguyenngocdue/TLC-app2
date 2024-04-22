@@ -14,7 +14,7 @@ class User_type extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'user_type', 'id'],
+        "getUsers" => ['hasMany', User::class, 'user_type'],
     ];
 
     public function getUsers()

@@ -31,21 +31,6 @@ return new class extends Migration
             $table->unsignedBigInteger('parent4_id')->nullable();
             $table->appendCommonFields();
         });
-        // Schema::create('terms', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->unsignedBigInteger('field_id');
-        //     $table->unsignedBigInteger('parent1_id')->nullable();
-        //     $table->unsignedBigInteger('parent2_id')->nullable();
-        //     $table->unsignedBigInteger('parent3_id')->nullable();
-        //     $table->unsignedBigInteger('parent4_id')->nullable();
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

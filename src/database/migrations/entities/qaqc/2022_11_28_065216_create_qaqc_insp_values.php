@@ -27,17 +27,6 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_control_value_id');
             $table->appendCommonFields();
         });
-        // Schema::create('qaqc_insp_values', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->unsignedBigInteger('qaqc_insp_control_value_id');
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**
