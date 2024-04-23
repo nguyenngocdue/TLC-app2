@@ -285,7 +285,7 @@ $text = isset($params['quarter_time']) && !isset($params['only_month'])
                                         <li class="flex items-center pb-2">
                                             <div class="w-12 h-1 border rounded bg-[#6a329f]"></div>
                                             <p class='pl-4 text-gray-600 font-roboto  leading-tight text-xltext-center dark:text-gray-300'>
-                                                Standard CO2 levels based on the previous year.
+                                                Target CO2 levels based on the previous year.
                                             </p>
                                         </li>
                                     </ul>
