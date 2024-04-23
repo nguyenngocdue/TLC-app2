@@ -16,7 +16,7 @@ RUN apk update && apk add \
     nano \
     mc \
     htop \
-    supervisor \
+    supervisor \   
     php-zip
 
 RUN curl -sSLf \
