@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\ProdSequenceToProdOrderService;
-use App\Models\Prod_order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class WelcomeFortuneController extends Controller
 {
@@ -15,23 +13,11 @@ class WelcomeFortuneController extends Controller
     }
     public function index(Request $request)
     {
+        $connection = env('SQLSERVER_CONNECTION', 'sqlsrv');
+        // dump($connection);
 
-        // $allOrders = Prod_order::query()
-        //     ->with("getProdSequences")
-        //     ->get();
-        // $service = new ProdSequenceToProdOrderService();
-        // $count = 0;
-        // foreach ($allOrders as $order) {
-        //     if (is_null($order->prod_sequence_progress)) {
-        //         $sequences = $order->getProdSequences;
-        //         if (isset($sequences[0])) {
-        //             dump("Updating " . $order->id . " " . $sequences[0]->id);
-        //             $service->update($sequences[0]->id);
-        //             $count++;
-        //             if ($count > 100) break;
-        //         }
-        //     }
-        // }
+        $tables = DB::connection($connection)->select('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = \'BASE TABLE\' AND TABLE_CATALOG= ?', [env('SQLSERVER_DATABASE')]);
+        dump($tables);
         return view("welcome-fortune", []);
     }
 }

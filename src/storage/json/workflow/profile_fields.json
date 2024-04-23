@@ -1,12 +1,13 @@
 {
     "_address": {
         "name": "_address",
+        "profile_hidden": "true",
         "profile_readonly": "true"
     },
     "_attachment": {
         "name": "_attachment",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_category": {
@@ -16,15 +17,15 @@
     },
     "_company": {
         "name": "_company",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_created_at": {
         "name": "_created_at",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_date_of_birth": {
@@ -34,14 +35,14 @@
     },
     "_deleted_at": {
         "name": "_deleted_at",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_department": {
@@ -56,8 +57,8 @@
     },
     "_domain": {
         "name": "_domain",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_email": {
@@ -67,8 +68,8 @@
     },
     "_email_verified_at": {
         "name": "_email_verified_at",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_employeeid": {
@@ -102,8 +103,8 @@
     },
     "_getAvatar": {
         "name": "_getAvatar",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getOtTeams()": {
@@ -113,26 +114,26 @@
     },
     "_getPosts": {
         "name": "_getPosts",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getProdRoutingsOfExternalInspector()": {
         "name": "_getProdRoutingsOfExternalInspector()",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getQaqcInspTmplsOfExternalInspector()": {
         "name": "_getQaqcInspTmplsOfExternalInspector()",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getRoleSet": {
         "name": "_getRoleSet",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getSiteTeams()": {
@@ -142,14 +143,14 @@
     },
     "_getSubProjectsOfExternalInspector()": {
         "name": "_getSubProjectsOfExternalInspector()",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getSubProjectsOfProjectClient()": {
         "name": "_getSubProjectsOfProjectClient()",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_getTshtTeams()": {
@@ -159,14 +160,14 @@
     },
     "_guid": {
         "name": "_guid",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_id": {
         "name": "_id",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
@@ -177,8 +178,8 @@
     },
     "_last_date": {
         "name": "_last_date",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_last_name": {
@@ -188,14 +189,14 @@
     },
     "_leaf_uids": {
         "name": "_leaf_uids",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_name": {
         "name": "_name",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
@@ -216,14 +217,14 @@
     },
     "_owner_id": {
         "name": "_owner_id",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_password": {
         "name": "_password",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_phone": {
@@ -237,73 +238,73 @@
     },
     "_position_1": {
         "name": "_position_1",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_position_2": {
         "name": "_position_2",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_position_3": {
         "name": "_position_3",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_position_prefix": {
         "name": "_position_prefix",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_position_rendered": {
         "name": "_position_rendered",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_provider": {
         "name": "_provider",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_remember_token": {
         "name": "_remember_token",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_resigned": {
         "name": "_resigned",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_settings": {
         "name": "_settings",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_show_on_beta": {
         "name": "_show_on_beta",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_standard_signature": {
         "name": "_standard_signature",
-        "profile_readonly": "true",
-        "profile_hidden": "true"
+        "profile_hidden": "true",
+        "profile_readonly": "true"
     },
     "_time_keeping_type": {
         "name": "_time_keeping_type",
@@ -312,33 +313,33 @@
     },
     "_time_zone": {
         "name": "_time_zone",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
     "_title": {
         "name": "_title",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_user_id_passport": {
         "name": "_user_id_passport",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_readonly": "true"
     },
     "_user_pin": {
         "name": "_user_pin",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_user_type": {
@@ -348,8 +349,8 @@
     },
     "_viewport_uids": {
         "name": "_viewport_uids",
-        "profile_readonly": "true",
         "profile_hidden": "true",
+        "profile_readonly": "true",
         "me_hidden": "true"
     },
     "_workplace": {

@@ -30,18 +30,6 @@ return new class extends Migration
             $table->unsignedBigInteger('def_assignee');
             $table->appendCommonFields();
         });
-        // Schema::create('wir_descriptions', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->text('description')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->unsignedBigInteger('prod_discipline_id')->nullable();
-        //     $table->unsignedBigInteger('def_assignee');
-        //     $table->unsignedBigInteger('owner_id');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

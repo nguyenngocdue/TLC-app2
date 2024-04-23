@@ -59,7 +59,7 @@ trait TraitUpdatedProdSequenceEvent
                 //In case a new inspector is added, he has to be sent directly here
                 //Otherwise the event will not add the current sheet into their dashboard
                 $newSignOffList = $request['signature_qaqc_chklst_3rd_party_list()'];
-                event(new UpdatedQaqcChklstSheetEvent($id, $mailContent, $newSignOffList, "signature_qaqc_chklst_3rd_party"/* . "_list"*/));
+                event(new UpdatedQaqcChklstSheetEvent($id, /*$mailContent,*/ $newSignOffList, "signature_qaqc_chklst_3rd_party"/* . "_list"*/));
                 break;
             case 'qaqc_punchlist':
                 $mailContent = $this->getSubmittedMail($request, $id);

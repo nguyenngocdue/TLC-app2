@@ -6,6 +6,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -16,6 +17,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -26,6 +28,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -36,6 +39,29 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
+        "closed": "",
+        "not_applicable": ""
+    },
+    "_ncr_status_unique_value": {
+        "name": "_ncr_status_unique_value",
+        "column_name": "ncr_status_unique_value",
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "closed": "",
+        "not_applicable": ""
+    },
+    "_ncr_all_closed": {
+        "name": "_ncr_all_closed",
+        "column_name": "ncr_all_closed",
+        "new": "",
+        "assigned": "",
+        "partially_closed": "",
+        "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -46,6 +72,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -56,6 +83,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -66,6 +94,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -76,6 +105,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -86,6 +116,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -96,6 +127,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -106,6 +138,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -116,46 +149,18 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
-    "_qc_total": {
-        "name": "_qc_total",
-        "column_name": "qc_total",
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
         "new": "",
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
-        "closed": "",
-        "not_applicable": ""
-    },
-    "_qc_accepted": {
-        "name": "_qc_accepted",
-        "column_name": "qc_accepted",
-        "new": "",
-        "assigned": "",
-        "partially_closed": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
-    },
-    "_qc_remaining": {
-        "name": "_qc_remaining",
-        "column_name": "qc_remaining",
-        "new": "",
-        "assigned": "",
-        "partially_closed": "",
-        "rejected": "",
-        "closed": "",
-        "not_applicable": ""
-    },
-    "_qc_rejected": {
-        "name": "_qc_rejected",
-        "column_name": "qc_rejected",
-        "new": "",
-        "assigned": "",
-        "partially_closed": "",
-        "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -166,6 +171,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -176,6 +182,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -186,6 +193,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -196,6 +204,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -206,6 +215,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -216,6 +226,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -226,6 +237,7 @@
         "assigned": "true",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -236,6 +248,7 @@
         "assigned": "true",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -246,6 +259,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -256,6 +270,7 @@
         "assigned": "true",
         "partially_closed": "true",
         "rejected": "true",
+        "pending_ncr": "true",
         "closed": "true",
         "not_applicable": ""
     },
@@ -266,6 +281,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -276,6 +292,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -286,6 +303,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     },
@@ -296,6 +314,7 @@
         "assigned": "",
         "partially_closed": "",
         "rejected": "",
+        "pending_ncr": "",
         "closed": "",
         "not_applicable": ""
     }

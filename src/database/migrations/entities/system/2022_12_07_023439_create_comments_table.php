@@ -28,18 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('category');
             $table->appendCommonFields();
         });
-        // Schema::create('comments', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->text('content')->nullable();
-        //     $table->unsignedBigInteger(('owner_id'));
-        //     $table->text('position_rendered');
-        //     $table->string('commentable_type')->nullable();;
-        //     $table->unsignedBigInteger('commentable_id')->nullable();
-        //     $table->unsignedBigInteger('category');
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

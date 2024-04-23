@@ -43,8 +43,8 @@ RUN apk add nodejs npm
 RUN ln -s /usr/bin/node /usr/local/bin/node
 RUN ln -s /usr/bin/npm /usr/local/bin/npm
 RUN apk add --no-cache \
-        chromium \
-        chromium-chromedriver
+    chromium \
+    chromium-chromedriver
 RUN apk update && apk add --no-cache libgcc libstdc++ nss wget git 
 RUN npm install --location=global --unsafe-perm puppeteer@^17
 RUN chmod -R o+rx /usr/local/lib/node_modules/puppeteer/.local-chromium
@@ -55,6 +55,8 @@ COPY ./configs/php.ini /usr/local/etc/php/
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
+RUN apk add unixodbc-dev
+RUN pecl install pdo_sqlsrv sqlsrv
 
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./supervisor.d /etc/supervisor.d

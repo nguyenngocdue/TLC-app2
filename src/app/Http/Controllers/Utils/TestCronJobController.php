@@ -18,7 +18,7 @@ class TestCronJobController extends Controller
 
     public function index(Request $request)
     {
-        if (app()->isProduction()) return "This can not be run in production.";
+        // if (app()->isProduction()) return "This can not be run in production.";
 
         if ($request->input('case')) {
             $case = $request->input('case');
