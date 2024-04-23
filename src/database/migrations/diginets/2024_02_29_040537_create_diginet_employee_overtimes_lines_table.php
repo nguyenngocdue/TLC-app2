@@ -22,19 +22,12 @@ return new class extends Migration
         $schema->create('diginet_employee_overtime_lines', function (BlueprintExtended $table) {
 
             $table->id();
-            $table->string('tb_document_id')->nullable();
             $table->string('employeeid')->nullable();
-            $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
+            $table->string('employee_name')->nullable();
             $table->dateTime('ot_date')->nullable();
-            $table->string('la_type')->nullable();
             $table->decimal('ot_hours', 20, 2)->nullable();
-            $table->unsignedBigInteger('ot_projects')->nullable();
-            $table->string('ot_reason')->nullable();
-            $table->string('approver_id')->nullable();
-            $table->string('approver_name')->nullable();
-
 
             $table->orderable();
             $table->appendCommonFields();

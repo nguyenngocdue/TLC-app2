@@ -23,7 +23,6 @@ return new class extends Migration
             $table->id();
             $table->text('name')->nullable();
             $table->text('description')->nullable();
-            // $table->string('slug')->unique();
 
             $table->unsignedBigInteger("position_prefix")->nullable();
             $table->unsignedBigInteger("position_1")->nullable();

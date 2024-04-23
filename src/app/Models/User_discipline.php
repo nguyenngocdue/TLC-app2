@@ -11,7 +11,7 @@ class User_discipline extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'discipline', 'id'],
+        "getUsers" => ['hasMany', User::class, 'discipline'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
     ];
 

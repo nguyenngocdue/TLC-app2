@@ -31,16 +31,6 @@ return new class extends Migration
             $table->orderable();
             $table->appendCommonFields();
         });
-        // Schema::create('departments', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->text('name');
-        //     $table->text('description')->nullable();
-        //     $table->unsignedBigInteger('head_of_department')->nullable();
-        //     $table->string('slug')->unique();
-        //     $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-        //     // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
-        // });
     }
 
     /**

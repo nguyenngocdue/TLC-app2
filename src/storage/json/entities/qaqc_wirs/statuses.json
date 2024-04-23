@@ -3,6 +3,7 @@
     "assigned",
     "partially_closed",
     "rejected",
+    "pending_ncr",
     "closed",
     "not_applicable"
 ]

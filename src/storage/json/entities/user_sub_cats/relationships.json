@@ -1,4 +1,36 @@
 {
+    "_getUserType": {
+        "name": "_getUserType",
+        "relationship": "belongsTo",
+        "control_name": "user_type_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getUserCategory": {
+        "name": "_getUserCategory",
+        "relationship": "belongsTo",
+        "control_name": "user_category_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getOwner": {
         "name": "_getOwner",
         "relationship": "belongsTo",
@@ -31,14 +63,14 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getTerms": {
-        "name": "_getTerms",
+    "_getUsers": {
+        "name": "_getUsers",
         "relationship": "hasMany",
-        "control_name": "getTerms",
+        "control_name": "getUsers",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
-        "renderer_edit": "many_lines",
+        "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "relationship_renderer",
         "filter_columns": "",

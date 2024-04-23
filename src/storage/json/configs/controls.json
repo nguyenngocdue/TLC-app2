@@ -168,7 +168,8 @@
         "system_permission",
         "dashboard",
         "task_management",
-        "exam"
+        "exam",
+        "diginet_data"
     ],
     "assignees": [
         "assignee_1",

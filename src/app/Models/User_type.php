@@ -6,12 +6,15 @@ use App\BigThink\ModelExtended;
 
 class User_type extends ModelExtended
 {
-    protected $fillable = ["name", "description", "slug"];
+    protected $fillable = [
+        "name", "description", "slug",
+        "erp_code",
+    ];
 
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getUsers" => ['hasMany', User::class, 'user_type', 'id'],
+        "getUsers" => ['hasMany', User::class, 'user_type'],
     ];
 
     public function getUsers()

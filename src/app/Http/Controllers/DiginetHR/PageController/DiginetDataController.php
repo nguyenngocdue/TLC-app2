@@ -69,7 +69,6 @@ class DiginetDataController extends Controller
                 "model_name" => "Diginet_employee_leave_sheet",
             ],
             "employee-leave-lines" => [
-
                 "name" => "employee-leave-lines",
                 "field_index_name" => "la_date",
                 "endpoint_name_diginet" => "employee-leave",

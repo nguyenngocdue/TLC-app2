@@ -36,6 +36,7 @@ class DiginetService
     function createAndUpdateData($modelName, $params, $endpointName, $conFieldName = 'date')
     {
         $modelPath = 'App\Models\\' . $modelName;
+        dump($modelName);
 
         $modelIns = new $modelPath;
         $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 3);
@@ -45,7 +46,7 @@ class DiginetService
         $data = APIDiginet::getDatasourceFromAPI($endpointName, $params)['data'];
 
         // index data [0 => line, 1 => sheet]
-        $index = str_contains($modelName, 'line') ? 0 : 1;
+        $index = str_contains($modelName, 'line') ? 1 : 0;
         $index = str_contains('employee_hour', $modelName) ? 0 : $index;
 
         $response = ['status' => 'error', 'message' => "No data found to import into [{$tableName}] table.", 'recordsDeleted' => 0, 'recordsAdded' => 0];
