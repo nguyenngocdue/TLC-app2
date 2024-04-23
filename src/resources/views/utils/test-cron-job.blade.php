@@ -13,7 +13,7 @@
 
     Test Function
     <div class="grid grid-cols-12 gap-4 w-3/4 mx-auto justify-center items-center">
-        <x-renderer.button href="?case=send_test_mail&email=anything@tlc.com">Send A Test Email</x-renderer.button>
+        <x-renderer.button href="?case=send_test_mail&email=tchvan@gmail.com">Send A Test Email</x-renderer.button>
         <x-renderer.button href="?case=test_wss">Test WSS</x-renderer.button>
         <x-renderer.button href="?case=test_queue">Test Queue</x-renderer.button>
         <x-renderer.button href="?case=test_email_on_ldap_server">Test Email On LDAP Server</x-renderer.button>
