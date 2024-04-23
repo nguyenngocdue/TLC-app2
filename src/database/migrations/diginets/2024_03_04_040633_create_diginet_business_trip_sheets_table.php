@@ -22,6 +22,7 @@ return new class extends Migration
         $schema->create('diginet_business_trip_sheets', function (BlueprintExtended $table) {
 
             $table->id();
+            $table->string('tb_document_id')->nullable();
             $table->string('employeeid')->nullable();
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
@@ -30,10 +31,7 @@ return new class extends Migration
             $table->string('tb_type')->nullable();
             $table->dateTime('tb_date')->nullable();
 
-            $table->float('number_of_tb_day')->nullable();
             $table->unsignedBigInteger('tb_project')->nullable();
-            $table->string('tb_reason')->nullable();
-            $table->string('tb_document_id')->nullable();
 
             $table->unsignedBigInteger('approver_id')->nullable();
             $table->string('approver_name')->nullable();

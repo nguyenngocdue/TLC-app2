@@ -20,18 +20,17 @@ return new class extends Migration
         });
 
         $schema->create('diginet_employee_leave_sheets', function (BlueprintExtended $table) {
+
             $table->id();
+            $table->string('tb_document_id')->nullable();
             $table->string('employeeid')->nullable();
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
             $table->string('la_type')->nullable();
             $table->dateTime('la_date')->nullable();
-
-            $table->float('number_of_la_day')->nullable();
-            $table->string('la_reason')->nullable();
-            $table->unsignedBigInteger('la_document_id')->nullable();
-            $table->unsignedBigInteger('approver_id')->nullable();
+            $table->unsignedBigInteger('la_projects')->nullable();
+            $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();
 
 
