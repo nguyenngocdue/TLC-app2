@@ -35,7 +35,7 @@ class Eco_taken_action extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'eco_sheet_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'department_id'],
-            ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
         ];
     }
 }
