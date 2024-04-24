@@ -48,6 +48,12 @@ class UpdatedDocumentListener2 implements ShouldQueue
     }
     private function getValues(array $obj, array $bic, $type)
     {
+        if (!isset($obj['status'])) {
+            $msg = $type . " doesn't have status field. Halted.";
+            Log::error($msg);
+            dump($obj);
+            dd($msg); //If in QUEUE, this will never show on screen. 
+        }
         $status = $obj['status'];
         $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";

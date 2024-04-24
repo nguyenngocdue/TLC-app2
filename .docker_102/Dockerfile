@@ -15,7 +15,8 @@ RUN apk update && apk add \
     nano \
     mc \
     htop \
-    supervisor
+    supervisor \   
+    php-zip
 
 RUN curl -sSLf \
     -o /usr/local/bin/install-php-extensions \
@@ -28,6 +29,8 @@ RUN docker-php-ext-install pdo pdo_mysql \
 RUN docker-php-ext-install gd && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j$(nproc) gd
+
+RUN docker-php-ext-install zip
 
 RUN docker-php-ext-install pcntl
 

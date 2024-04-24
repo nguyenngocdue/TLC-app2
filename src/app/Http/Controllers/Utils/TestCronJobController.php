@@ -24,23 +24,24 @@ class TestCronJobController extends Controller
             $case = $request->input('case');
             switch ($case) {
                 case 'sign_off_remind':
-                    event(new \App\Events\SignOffRemindEvent());
                     dump("SignOffRemindEvent emitted.");
+                    event(new \App\Events\SignOffRemindEvent());
                     break;
                 case 'transfer_diginet_data':
-                    event(new \App\Events\TransferDiginetDataEvent());
                     dump("TransferDiginetDataEvent emitted.");
+                    event(new \App\Events\TransferDiginetDataEvent());
                     break;
                 case 'send_test_mail':
+                    dump("Test mail sent.");
                     SendEmail::sendTestEmail($request);
                     break;
                 case "test_wss":
-                    broadcast(new WssDemoChannel(['name' => 'wss-demo-822553']));
                     dump("WssDemoChannel emitted.");
+                    broadcast(new WssDemoChannel(['name' => 'wss-demo-822553']));
                     break;
                 case "test_queue":
-                    TestLogToFileJob::dispatch();
                     dump("TestLogToFileJob dispatched.");
+                    TestLogToFileJob::dispatch();
                     break;
                 case "test_email_on_ldap_server":
                     TestEmailOnLdapServer::Test();
