@@ -36,8 +36,6 @@ class DiginetService
     function createAndUpdateData($modelName, $params, $endpointName, $conFieldName = 'date')
     {
         $modelPath = 'App\Models\\' . $modelName;
-        dump($modelName);
-
         $modelIns = new $modelPath;
         $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 3);
         $tableName = $modelIns->getTable();
@@ -81,6 +79,8 @@ class DiginetService
             $response['recordsAdded'] = $recordCount;
             // Log::info($response);
         }
+        $info = "Data fetching time: {$response['period']}\nTable: {$response["table_on"]}\nStatus: {$response["status"]}";
+        dump($info);
         return $response;
     }
 
