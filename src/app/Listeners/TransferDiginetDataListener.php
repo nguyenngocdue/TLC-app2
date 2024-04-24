@@ -21,6 +21,8 @@ class TransferDiginetDataListener
             'CompanyCode' => 'TLCM',
             'WorkplaceCode' => 'HO,TF1,TF2,TF3,NZ,WS',
         ];
+        $info = "Data fetching time: {$params['FromDate']} - {$params['ToDate']}\nCompany Code: {$params["CompanyCode"]}\nWorkplace Code: {$params["WorkplaceCode"]}";
+        dump($info);
         $actions = $this->updateDiginetData($params);
         return $actions;
     }

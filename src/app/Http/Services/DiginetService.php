@@ -53,10 +53,11 @@ class DiginetService
         $data = array_values($data);
         $data = count($data) <= 2 ? $data[$index] : $data;
 
+        $FromDate = substr($params['FromDate'], 0, 10);
+        $toDate = substr($params['ToDate'], 0, 10);
+
         if (empty($data)) return $response;
         if ($data) {
-            $FromDate = substr($params['FromDate'], 0, 10);
-            $toDate = substr($params['ToDate'], 0, 10);
             DB::statement("ALTER TABLE $tableName AUTO_INCREMENT = 1;");
             $del = DB::table($tableName)
                 ->whereDate($conFieldName, '>=', $FromDate)
@@ -79,8 +80,6 @@ class DiginetService
             $response['recordsAdded'] = $recordCount;
             // Log::info($response);
         }
-        $info = "Data fetching time: {$response['period']}\nTable: {$response["table_on"]}\nStatus: {$response["status"]}";
-        dump($info);
         return $response;
     }
 
