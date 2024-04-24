@@ -62,7 +62,7 @@ Str::macro('limitWords', function (string $str, $count, $maxLen = 50) {
         $i++;
     }
     if (strlen($str) > $maxLen) {
-        $lastSpace = strrpos($str, ' ', $maxLen - 10);
+        $lastSpace = strrpos($str, ' '); //, $maxLen - 10); //Some time last word longer than 10 chars will cause bug
         $str = substr($str, 0, $lastSpace) . " ...";
     }
     return $str;
