@@ -33,8 +33,9 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
         };
         $lastDayOfMonth = substr(date("Y-m-t", strtotime("$month-01")), -2);
         $previousMonth = $y . '-' . sprintf('%02d', (int)$m - 1);
-        $previousDayOfMonth = substr(date("Y-m-t", strtotime("-01")), -2);
+        $previousDayOfMonth = substr(date("Y-m-t", strtotime($previousMonth)), -2);
         $previousMonth = str_pad($m - 1, '2', '0', STR_PAD_LEFT);
+
         $previousDate = $y . "-" . $previousMonth . "-" . $previousDayOfMonth;
         $latestDate = $month . '-' . $lastDayOfMonth;
         return [$previousDate, $latestDate];
@@ -45,7 +46,6 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
         if ($params['children_mode'] === 'filter_by_week') {
             [$previousDate, $latestDate] = $this->generateStartAndDayOfWeek($params);
         } else {
-
             [$previousDate, $latestDate] = $this->generateCurrentAndPreviousDate($params['year_month']);
         }
         return [$previousDate, $latestDate];

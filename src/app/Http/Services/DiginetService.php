@@ -53,19 +53,19 @@ class DiginetService
         $data = array_values($data);
         $data = count($data) <= 2 ? $data[$index] : $data;
 
-        $FromDate = substr($params['FromDate'], 0, 10);
+        $fromDate = substr($params['FromDate'], 0, 10);
         $toDate = substr($params['ToDate'], 0, 10);
 
         if (empty($data)) return $response;
         if ($data) {
             DB::statement("ALTER TABLE $tableName AUTO_INCREMENT = 1;");
             $del = DB::table($tableName)
-                ->whereDate($conFieldName, '>=', $FromDate)
+                ->whereDate($conFieldName, '>=', $fromDate)
                 ->whereDate($conFieldName, '<=', $toDate)
                 ->delete();
 
             $response['recordsDeleted'] = $del;
-            $response['message'] = "{$del} rows were deleted from {$tableName} from $FromDate to $toDate";
+            $response['message'] = "{$del} rows were deleted from {$tableName} from $fromDate to $toDate";
 
             foreach ($data as &$item) $item = $this->changeFields($item, $fieldsToMap, $conFieldName);
             $recordCount = 0;
@@ -74,9 +74,9 @@ class DiginetService
                 $recordCount++;
             }
             $response['status'] = 'success';
-            $response['period'] = $FromDate . ' - ' . $toDate;
+            $response['period'] = $fromDate . ' - ' . $toDate;
             $response['table_on'] = $tableName;
-            $response['message'] = "{$recordCount} rows have been successfully added to <strong>[{$tableName}]</strong> table.";
+            $response['message'] = "Period of time: <strong>{$fromDate} -> {$toDate}</strong></br>{$recordCount} rows have been successfully added to <strong>[{$tableName}]</strong> table.";
             $response['recordsAdded'] = $recordCount;
             // Log::info($response);
         }
