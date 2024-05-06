@@ -1,12 +1,14 @@
 @props(['chartType'])
 <div class="flex justify-center">
-	<div class="block" title="Component Name: PivotChartManyColumns.php">
+	<div class="block" title="{{$keyNameManage}} (Component Name: PivotChartManyColumns.php)">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
 @if(isset($dimensions['resetZoom']))
-	<div class="no-print">
-		<x-renderer.button type="info" id="resetZoom">Reset Zoom</x-renderer.button>
+	<div class="no-print pt-4">
+		<x-renderer.button type="info" id="resetZoom" class="border-blue-600 bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg active:bg-blue-800 active:shadow-lg">
+			Reset Zoom
+		</x-renderer.button>
 	</div>
 @endif
 {{-- @dd($dimensions) --}}

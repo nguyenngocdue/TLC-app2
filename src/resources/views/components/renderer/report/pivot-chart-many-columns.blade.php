@@ -9,6 +9,7 @@
     :metric="$dataWidgets['metric']"
     chartType="{{$chartType}}" 
     :dimensions="$dataWidgets['dimensions']"
+    keyNameManage="{{$keyNameManage}}"
     />
     @else
     <x-renderer.heading class="text-center italic text-gray-500" level=6 >There is no data to display chart.</x-renderer.heading>

@@ -278,7 +278,7 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
             ],
             [
                 'title' => 'Apartment Q.ty',
-                'dataIndex' => 'total_prod_order',
+                'dataIndex' => 'number_of_apartments',
                 'align' => 'right',
                 'width' => 150,
             ],

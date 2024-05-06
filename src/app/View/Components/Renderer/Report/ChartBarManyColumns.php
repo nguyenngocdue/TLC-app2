@@ -21,6 +21,7 @@ class ChartBarManyColumns extends Component
         private $showValue  = false,
         private $titleChart = '',
         private $dimensions = [],
+        private $keyNameManage = "",
     ) {
         //
     }
@@ -47,6 +48,7 @@ class ChartBarManyColumns extends Component
                 'titleChart' => $this->titleChart,
                 'dimensions' => $this->dimensions,
                 'titleTooltip' => $titleTooltip,
+                'keyNameManage' => $this->keyNameManage,
             ]
         );
     }

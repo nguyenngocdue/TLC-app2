@@ -127,8 +127,9 @@ class PivotChartManyColumns extends Component
 		$dataWidgets = $this->makeDataSource($this->data, $this->key, $this->paramFilters);
 		return view("components.renderer.report.pivot-chart-many-columns", [
 			'dataWidgets' => $dataWidgets,
-			'key' => $this->key,
-			'optionPrint' => $this->optionPrint
+			'key' => $this->key, // obsolete
+			'optionPrint' => $this->optionPrint,
+			'keyNameManage' => $this->key
 		]);
 	}
 }

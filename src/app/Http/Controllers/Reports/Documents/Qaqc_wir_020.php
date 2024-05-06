@@ -46,7 +46,7 @@ class Qaqc_wir_020 extends Qaqc_wir_010
             ],
             [
                 'title' => 'Apartment Q.ty',
-                'dataIndex' => 'total_prod_order',
+                'dataIndex' => 'number_of_apartments',
                 'align' => 'right',
             ],
             [

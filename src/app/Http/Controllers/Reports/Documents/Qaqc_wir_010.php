@@ -438,6 +438,8 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
             if (isset($groupProdRoutingsForApart[$subProjectId]) && isset($groupProdRoutingsForApart[$subProjectId][$prodRoutingId])) {
                 $apartValues = current($groupProdRoutingsForApart[$subProjectId][$prodRoutingId]);
                 $values['number_of_apartments'] = $apartValues['number_of_pj_units'];
+            } else {
+                $values['number_of_apartments'] = Null;
             }
         }
         return collect($result);
