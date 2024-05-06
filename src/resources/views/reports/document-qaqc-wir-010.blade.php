@@ -7,7 +7,22 @@
 
 @php
 $class1 = 'p-2 border h-full w-full flex border-gray-600 text-base font-medium bg-gray-50 items-center justify-end';
-$class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left'
+$class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm font-normal text-left';
+@endphp
+
+@php
+    if(isset($params['children_mode'])) {
+        $typeFilter = $params['children_mode'];
+        switch($typeFilter) {
+            case 'filter_by_month':
+                $params['regex_legend'] = 'Month';
+                break;
+            case 'filter_by_week':
+                $params['regex_legend'] = 'Week';
+                break;
+            default: $params;
+        }
+    }
 @endphp
 {{-- "Show utility"  --}}
 @php

@@ -1,6 +1,6 @@
 @props(['chartType'])
 <div class="flex justify-center">
-	<div class="block" title="{{$titleTooltip}} (Component Name: ChartBar3.php)">
+	<div class="block" title="Component Name: PivotChartManyColumns.php">
 		<canvas id="{{$key}}" width={{$dimensions['width'] ?? 400}} height={{$dimensions['height'] ?? 400}}></canvas>
 	</div>
 </div>
@@ -9,9 +9,7 @@
 		<x-renderer.button type="info" id="resetZoom">Reset Zoom</x-renderer.button>
 	</div>
 @endif
-
-{{-- @dd($meta) --}}
-
+{{-- @dd($dimensions) --}}
 @once
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
@@ -126,7 +124,8 @@
                     }
                 },
             }, 
-			legend: { 
+			legend: {
+				 	align: 'center', 
 					position: 'bottom'
 					,labels: {
 						color: 'rgba(0, 0, 0, 0.7)'
@@ -134,6 +133,7 @@
 							size: 16,
 						}
 						,padding: 16
+                		,usePointStyle: {!! $dimensions['usePointStyle'] ?? 0 !!},
 					}
 			},
 			datalabels:{	

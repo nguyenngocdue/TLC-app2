@@ -92,7 +92,6 @@
 			backgroundColor: Object.values(COLORS)
 			});
 		}
-	console.log(datasets)
 	Chart.register(ChartDataLabels);
   // Create the Chart.js configuration
 	var chartConfig  = {

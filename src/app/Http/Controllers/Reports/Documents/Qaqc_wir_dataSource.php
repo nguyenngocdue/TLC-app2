@@ -83,17 +83,18 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
         }
         // dd($params);
         $sql = " SELECT *
-            ,IF(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
-                -- Calculate after period
-                FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
-            
-                ,NULL) AS latest_qaqc_percent
-                
             ,IF(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description),
                 -- Calculate before period
                 FORMAT(total_prod_order_have_wir_before*100/(prod_order_in_wir*count_wir_description), 2)
 
-                ,NULL) AS previous_qaqc_percent,
+                ,NULL) AS previous_qaqc_percent
+            ,IF(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),
+                -- Calculate after period
+                FORMAT(total_prod_order_have_wir*100/(prod_order_in_wir*count_wir_description),2)
+            
+                ,NULL) AS latest_qaqc_percent,
+            
+                
                 -- NULL latest_finished_prod_percent,
                 -- NULL previous_finished_prod_percent,
                 count_wir_description,

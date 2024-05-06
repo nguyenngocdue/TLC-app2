@@ -92,7 +92,8 @@ class PivotChartManyColumns extends Component
 					if (isset($itemsInParams[$_field]) && isset($paramFilters[$itemsInParams[$_field]])) {
 						$dataOfParamsCol[$fieldMeta]['label'] = $paramFilters[$itemsInParams[$_field]];
 					} else {
-						$dataOfParamsCol[$fieldMeta]['label'] = $itemsInParams[$_field];
+						if (isset($paramFilters['regex_legend'])) $dataOfParamsCol[$fieldMeta]['label'] = preg_replace('/\{regex_legend\}/', $paramFilters['regex_legend'], $itemsInParams[$_field]);
+						else $dataOfParamsCol[$fieldMeta]['label'] = $itemsInParams[$_field];
 					}
 					$dataOfParamsCol[$fieldMeta] = (object)$dataOfParamsCol[$fieldMeta];
 				}
