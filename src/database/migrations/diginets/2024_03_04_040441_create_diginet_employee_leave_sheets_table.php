@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
             $table->string('la_type')->nullable();
-            $table->dateTime('la_date')->nullable();
+            $table->date('la_date')->nullable();
             $table->unsignedBigInteger('la_projects')->nullable();
             $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();

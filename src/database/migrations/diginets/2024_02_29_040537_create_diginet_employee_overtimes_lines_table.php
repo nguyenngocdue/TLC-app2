@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
             $table->string('employee_name')->nullable();
-            $table->dateTime('ot_date')->nullable();
+            $table->date('ot_date')->nullable();
             $table->decimal('ot_hours', 20, 2)->nullable();
 
             $table->orderable();

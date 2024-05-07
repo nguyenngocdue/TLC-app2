@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
-            $table->dateTime('ot_date')->nullable();
-            $table->string('la_type')->nullable();
+            $table->date('ot_date')->nullable();
+            $table->string('ot_type')->nullable();
             $table->decimal('ot_hours', 20, 2)->nullable();
             $table->unsignedBigInteger('ot_projects')->nullable();
             $table->string('ot_reason')->nullable();

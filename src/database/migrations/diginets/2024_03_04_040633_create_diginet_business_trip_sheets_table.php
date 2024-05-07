@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('workplace_code')->nullable();
 
             $table->string('tb_type')->nullable();
-            $table->dateTime('tb_date')->nullable();
+            $table->date('tb_date')->nullable();
 
             $table->unsignedBigInteger('tb_project')->nullable();
 

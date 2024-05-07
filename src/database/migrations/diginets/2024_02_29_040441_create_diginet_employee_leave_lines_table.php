@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
             $table->string('la_type')->nullable();
-            $table->dateTime('la_date')->nullable();
+            $table->date('la_date')->nullable();
 
             $table->float('number_of_la_day')->nullable();
             $table->string('la_reason')->nullable();

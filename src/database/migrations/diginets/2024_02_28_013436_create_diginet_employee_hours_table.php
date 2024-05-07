@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
-            $table->dateTime('date')->nullable();
+            $table->date('date')->nullable();
             $table->float('standard_hours')->nullable();
             $table->float('actual_working_hours')->nullable();
             $table->float('ot_hours')->nullable();
