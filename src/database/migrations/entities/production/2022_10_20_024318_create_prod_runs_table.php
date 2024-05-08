@@ -22,6 +22,7 @@ return new class extends Migration
         $schema->create('prod_runs', function (BlueprintExtended $table) {
             $table->id();
             $table->unsignedBigInteger('prod_sequence_id');
+            $table->boolean('is_rework')->nullable();
             $table->date('date')->nullable();
             $table->time('start')->nullable();
             $table->time('end')->nullable();

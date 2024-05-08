@@ -28,6 +28,7 @@ class Prod_sequence extends ModelExtended
         "getUomId" => ["belongsTo", Term::class, 'uom_id'],
 
         "getProdRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRunsRework" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
         "getProdRoutingDetail" => ['belongsTo', Prod_routing_detail::class, "prod_routing_id", "prod_routing_id"],
 
