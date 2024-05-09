@@ -76,7 +76,7 @@ class Prod_run extends ModelExtended
         // echo "IS PPR: $needToShowProdOutputQty";
 
         $result = [
-            ['dataIndex' => 'id', 'invisible' => !true,],
+            ['dataIndex' => 'id', 'invisible' => true,],
             ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'date', /*'cloneable' => true,*/ 'footer' => 'agg_none'],
             ['dataIndex' => 'start', /*'cloneable' => true,*/],
