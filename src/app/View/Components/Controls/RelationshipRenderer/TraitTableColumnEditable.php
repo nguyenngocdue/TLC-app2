@@ -26,7 +26,9 @@ trait TraitTableColumnEditable
 
             $newColumn['width'] = $prop['width'];
             $validation = $prop['default-values']['validation'] ?? "";
-            $isRequired = in_array("required", explode("|", $validation));
+            $isRequired0 = in_array("required", explode("|", $validation));
+            $isRequired1 = $column['required'] ?? false;
+            $isRequired = $isRequired0 || $isRequired1;
             $newColumn['column_type'] = $prop['column_type'];
 
             $newColumn['properties']['lineType'] = Str::singular($tableName);

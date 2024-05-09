@@ -111,7 +111,7 @@ class Prod_run extends ModelExtended
     {
         $columns = $this->getManyLineParams($parentItem);
 
-        foreach ($columns as $key => $column) {
+        foreach ($columns as $key => &$column) {
             // dump($key, $column);
             if ($column['dataIndex'] == 'remark') {
                 $column['required'] = true;
