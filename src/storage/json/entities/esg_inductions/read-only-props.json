@@ -2,91 +2,91 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_the_month": {
         "name": "_the_month",
         "column_name": "the_month",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_total_trainees": {
         "name": "_total_trainees",
         "column_name": "total_trainees",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_total_hours": {
         "name": "_total_hours",
         "column_name": "total_hours",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_attachment_esg_induction": {
         "name": "_attachment_esg_induction",
         "column_name": "attachment_esg_induction",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
-        "active": "true"
+        "new": "",
+        "active": ""
     }
 }
