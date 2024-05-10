@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h1a": {
         "name": "_h1a",
@@ -21,7 +22,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -33,7 +35,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_work_area_id": {
         "name": "_work_area_id",
@@ -45,7 +48,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_issue_datetime": {
         "name": "_issue_datetime",
@@ -57,19 +61,21 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_injured_person": {
         "name": "_injured_person",
         "column_name": "injured_person",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_injured_staff_id": {
         "name": "_injured_staff_id",
@@ -81,7 +87,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_injured_staff_position": {
         "name": "_injured_staff_position",
@@ -93,7 +100,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_injured_staff_cat": {
         "name": "_injured_staff_cat",
@@ -105,7 +113,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_first_date": {
         "name": "_first_date",
@@ -117,7 +126,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_injured_staff_cat_desc": {
         "name": "_injured_staff_cat_desc",
@@ -129,7 +139,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_employed_duration_in_year": {
         "name": "_employed_duration_in_year",
@@ -141,7 +152,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_injured_staff_discipline": {
         "name": "_injured_staff_discipline",
@@ -153,19 +165,21 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_manager_staff_id": {
         "name": "_manager_staff_id",
@@ -177,7 +191,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_manager_staff_position": {
         "name": "_manager_staff_position",
@@ -189,7 +204,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -201,7 +217,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_staff_id": {
         "name": "_owner_staff_id",
@@ -213,7 +230,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_staff_position": {
         "name": "_owner_staff_position",
@@ -225,7 +243,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",
@@ -237,7 +256,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_incident_doc_sub_type_id": {
         "name": "_incident_doc_sub_type_id",
@@ -249,7 +269,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_lost_value": {
         "name": "_lost_value",
@@ -261,7 +282,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "Please enter number if issue category is Incident",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_lost_unit_id": {
         "name": "_lost_unit_id",
@@ -273,7 +295,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_number_injured_person": {
         "name": "_number_injured_person",
@@ -285,7 +308,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_number_involved_person": {
         "name": "_number_involved_person",
@@ -297,7 +321,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -309,7 +334,8 @@
         "default_value": "16,108,88,2,191",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider1": {
         "name": "_divider1",
@@ -321,7 +347,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h1b": {
         "name": "_h1b",
@@ -333,7 +360,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_issue_description": {
         "name": "_issue_description",
@@ -345,7 +373,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_hse_incident_doc": {
         "name": "_attachment_hse_incident_doc",
@@ -357,7 +386,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider2": {
         "name": "_divider2",
@@ -369,7 +399,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h2b": {
         "name": "_h2b",
@@ -381,7 +412,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_accident_book_entry": {
         "name": "_accident_book_entry",
@@ -393,7 +425,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_lost_days": {
         "name": "_lost_days",
@@ -405,7 +438,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_need_to_transfer_position": {
         "name": "_need_to_transfer_position",
@@ -417,7 +451,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
@@ -429,7 +464,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_time_out_hospital": {
         "name": "_time_out_hospital",
@@ -441,7 +477,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
@@ -453,7 +490,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider3": {
         "name": "_divider3",
@@ -465,7 +503,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h8b": {
         "name": "_h8b",
@@ -477,7 +516,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_mainAffectedPart()": {
         "name": "_mainAffectedPart()",
@@ -489,7 +529,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_natureOfInjury()": {
         "name": "_natureOfInjury()",
@@ -501,7 +542,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_treatmentInstruction()": {
         "name": "_treatmentInstruction()",
@@ -513,7 +555,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
@@ -525,7 +568,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider8": {
         "name": "_divider8",
@@ -537,7 +581,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h2a": {
         "name": "_h2a",
@@ -549,7 +594,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_causeOfIssue()": {
         "name": "_causeOfIssue()",
@@ -561,7 +607,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider4": {
         "name": "_divider4",
@@ -573,7 +620,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h3b": {
         "name": "_h3b",
@@ -585,7 +633,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_activityLeadToIssue()": {
         "name": "_activityLeadToIssue()",
@@ -597,7 +646,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider5": {
         "name": "_divider5",
@@ -609,7 +659,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h4b": {
         "name": "_h4b",
@@ -621,7 +672,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_immediateCause()": {
         "name": "_immediateCause()",
@@ -633,7 +685,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider6": {
         "name": "_divider6",
@@ -645,7 +698,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h5b": {
         "name": "_h5b",
@@ -657,7 +711,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_issueRootCause()": {
         "name": "_issueRootCause()",
@@ -669,7 +724,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider7": {
         "name": "_divider7",
@@ -681,7 +737,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h6b": {
         "name": "_h6b",
@@ -693,7 +750,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_investigation_finding": {
         "name": "_investigation_finding",
@@ -705,7 +763,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_attachment_hse_witness": {
         "name": "_attachment_hse_witness",
@@ -717,7 +776,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider9": {
         "name": "_divider9",
@@ -729,7 +789,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h7b": {
         "name": "_h7b",
@@ -741,7 +802,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
@@ -753,7 +815,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider10": {
         "name": "_divider10",
@@ -765,7 +828,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h3a": {
         "name": "_h3a",
@@ -777,7 +841,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
@@ -789,7 +854,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_divider11": {
         "name": "_divider11",
@@ -801,7 +867,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_h4a": {
         "name": "_h4a",
@@ -813,7 +880,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -825,7 +893,8 @@
         "default_value": "16",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
@@ -837,7 +906,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_assignee_3": {
         "name": "_assignee_3",
@@ -849,7 +919,8 @@
         "default_value": "191",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_status": {
         "name": "_status",
@@ -861,7 +932,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -873,7 +945,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -885,7 +958,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -897,7 +971,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -909,6 +984,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }
