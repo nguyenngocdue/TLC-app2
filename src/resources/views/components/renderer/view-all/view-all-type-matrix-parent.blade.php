@@ -9,6 +9,8 @@
     $columns = $matrixValue['columns'];
     $dataSource = $matrixValue['dataSource'];
     $dataHeader = $matrixValue['dataHeader'];
+
+    $perPage = $matrixValue['perPage'];
 @endphp
 
 @if(sizeof($matrixes) > 1)

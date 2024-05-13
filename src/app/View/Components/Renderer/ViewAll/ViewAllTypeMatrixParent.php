@@ -437,16 +437,47 @@ abstract class ViewAllTypeMatrixParent extends Component
         return [];
     }
 
+    private function getPerPage()
+    {
+        $settings = CurrentUser::getSettings();
+        $route = route('updateUserSettings');
+        $result = [];
+
+        if ($this->multipleMatrix) {
+            foreach (array_keys($this->matrixes) as $key) {
+                $per_page = $settings[$this->type]['view_all']['matrix'][$key]['per_page'] ?? 15;
+                $page = $settings[$this->type]['view_all']['matrix'][$key]['page'] ?? 1;
+                $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page' key='$key'/>";
+                $result[$key] = [$perPage, $per_page, $page];
+            }
+        } else {
+            $per_page = $settings[$this->type]['view_all']['matrix']['per_page'] ?? 15;
+            $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
+            $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page' />";
+            $result = [$perPage, $per_page, $page];
+        }
+
+        return $result;
+    }
+
     public function render()
     {
         [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
         $footer = $this->getFooter($yAxisTableName);
-        $settings = CurrentUser::getSettings();
-        $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
-        $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
-        $dataSource = $this->paginate($dataSource, $per_page, $page);
-        $route = route('updateUserSettings');
-        $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
+        $perPageArray = [];
+
+        if ($this->multipleMatrix) {
+            $perPageArray = $this->getPerPage();
+            foreach (array_keys($this->matrixes) as $key) {
+                [$perPage, $per_page, $page] = $perPageArray[$key];
+                $dataSource[$key] = $this->paginate($dataSource[$key], $per_page, $page);
+                $perPageArray[$key] = $perPage;
+            }
+        } else {
+            [$perPage, $per_page, $page] = $this->getPerPage();
+            $dataSource = $this->paginate($dataSource, $per_page, $page);
+            $perPageArray = $perPage;
+        }
 
         $filterRenderer = $this->getFilter();
 
@@ -477,6 +508,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     'columns' => $columns,
                     'dataSource' => $dataSource,
                     'dataHeader' => $xAxis2ndHeading,
+                    'perPage' => $perPage,
                 ],
             ];
         } else {
@@ -487,6 +519,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     'columns' => $columns[$key],
                     'dataSource' => $dataSource[$key],
                     'dataHeader' => $xAxis2ndHeading,
+                    'perPage' => $perPageArray[$key],
                 ];
             }
         }
@@ -495,10 +528,10 @@ abstract class ViewAllTypeMatrixParent extends Component
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
                 'matrixes' => $matrixes,
+
                 'type' => $this->type,
                 'filterRenderer' => $filterRenderer,
                 'footer' => $footer,
-                'perPage' => $perPage,
                 'rotate45Width' => $this->rotate45Width,
                 'rotate45Height' => $this->rotate45Height,
                 'groupBy' => $this->groupBy,
