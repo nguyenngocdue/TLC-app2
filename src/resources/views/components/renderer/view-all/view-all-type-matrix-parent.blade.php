@@ -11,6 +11,7 @@
     $dataHeader = $matrixValue['dataHeader'];
 
     $perPage = $matrixValue['perPage'];
+    $actionButtons = $matrixValue['actionButtons'];
 @endphp
 
 @if(sizeof($matrixes) > 1)

@@ -460,6 +460,25 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $result;
     }
 
+    private function getActionButtons(string $key = null)
+    {
+        $params = [
+            'groupBy' => $this->groupBy,
+            'groupByLength' => $this->groupByLength,
+        ];
+        if ($key) $params['key'] = $key;
+        $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
+            routePrefix='_mep1.exportCsvMatrix1'
+            type='$this->type'
+            :actionBtnList='\$actionBtnList'
+            :params='\$params'
+            />", [
+            'actionBtnList' => $this->actionBtnList,
+            'params' => $params,
+        ]);
+        return $actionButtons;
+    }
+
     public function render()
     {
         [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
@@ -481,19 +500,7 @@ abstract class ViewAllTypeMatrixParent extends Component
 
         $filterRenderer = $this->getFilter();
 
-        $params = [
-            'groupBy' => $this->groupBy,
-            'groupByLength' => $this->groupByLength,
-        ];
-        $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
-            routePrefix='_mep1.exportCsvMatrix1'
-            type='$this->type'
-            :actionBtnList='\$actionBtnList'
-            :params='\$params'
-            />", [
-            'actionBtnList' => $this->actionBtnList,
-            'params' => $params,
-        ]);
+
         // dd($columns);
         // dump($dataSource[0]);
         // dump($xAxis2ndHeading);
@@ -509,6 +516,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     'dataSource' => $dataSource,
                     'dataHeader' => $xAxis2ndHeading,
                     'perPage' => $perPage,
+                    'actionButtons' => $this->getActionButtons(),
                 ],
             ];
         } else {
@@ -520,6 +528,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     'dataSource' => $dataSource[$key],
                     'dataHeader' => $xAxis2ndHeading,
                     'perPage' => $perPageArray[$key],
+                    'actionButtons' => $this->getActionButtons($key),
                 ];
             }
         }
@@ -537,7 +546,6 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'groupBy' => $this->groupBy,
                 'groupByLength' => $this->groupByLength,
                 'tableTrueWidth' => $this->tableTrueWidth,
-                'actionButtons' => $actionButtons,
                 'headerTop' => $this->headerTop,
                 'tableTopCenterControl' => $this->tableTopCenterControl,
                 'route' => $this->getRouteAfterSubmit(),
