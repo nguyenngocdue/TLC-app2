@@ -470,7 +470,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             $perPageArray = $this->getPerPage();
             foreach (array_keys($this->matrixes) as $key) {
                 [$perPage, $per_page, $page] = $perPageArray[$key];
-                $dataSource[$key] = $this->paginate($dataSource[$key], $per_page, $page);
+                $dataSource[$key] = $this->paginate($dataSource[$key], $per_page, $page, ['query' => ['key' => $key]]);
                 $perPageArray[$key] = $perPage;
             }
         } else {

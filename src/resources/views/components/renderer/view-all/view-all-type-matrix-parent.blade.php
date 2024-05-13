@@ -14,9 +14,10 @@
 @endphp
 
 @if(sizeof($matrixes) > 1)
+<div class="bg-white p-4 mb-4">
     <div class="flex">
-        <div class="w-1/2 font-semibold">{{$name}}</div>
-        <div class="w-1/2 text-right italic">{{$description}}</div>
+        <div class="w-1/2 text-xl font-semibold">{{$name}}</div>
+        <div class="w-1/2 text-sm text-right italic">{{$description}}</div>
     </div>
 @endif
 
@@ -46,7 +47,11 @@
             />
 </form>
 
+@if(sizeof($matrixes) > 1)
+</div>
+@endif
 @endforeach
+
 
 @if($showLegend)
     <x-renderer.legend type="{{$type}}" title="Legend of Status" />
