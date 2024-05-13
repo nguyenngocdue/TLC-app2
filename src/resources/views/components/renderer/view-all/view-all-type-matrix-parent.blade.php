@@ -1,4 +1,23 @@
 {!! $filterRenderer !!}
+
+{{-- @dump($matrixes) --}}
+
+@foreach($matrixes as $matrixValue)
+@php
+    $name = $matrixValue['name'];
+    $description = $matrixValue['description'];
+    $columns = $matrixValue['columns'];
+    $dataSource = $matrixValue['dataSource'];
+    $dataHeader = $matrixValue['dataHeader'];
+@endphp
+
+@if(sizeof($matrixes) > 1)
+    <div class="flex">
+        <div class="w-1/2 font-semibold">{{$name}}</div>
+        <div class="w-1/2 text-right italic">{{$description}}</div>
+    </div>
+@endif
+
 <form action="{{$route}}" method="POST" id="form-upload" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -24,6 +43,8 @@
             maxH="{{$maxH}}"
             />
 </form>
+
+@endforeach
 
 @if($showLegend)
     <x-renderer.legend type="{{$type}}" title="Legend of Status" />

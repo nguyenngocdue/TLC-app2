@@ -6,6 +6,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
+use App\Models\Sub_project;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
@@ -48,6 +49,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $groupBy = null;
     protected $apiToCallWhenCreateNew = 'cloneTemplate';
     protected $maxH = 60;
+    protected $multipleMatrix = true;
 
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
@@ -207,6 +209,31 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             'final_punchlist' =>  $status_object,
         ];
 
+        return $result;
+    }
+
+    protected function getMultipleMatrixObjects()
+    {
+        $show_on_ics_id = config("production.prod_routings.qaqc_insp_chklsts");
+        $prodRoutings = Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+        $result = [];
+        foreach ($prodRoutings as $key => $routing) {
+            $showOnScreenIds = $routing->getScreensShowMeOn()->pluck('id');
+            if ($showOnScreenIds->contains($show_on_ics_id)) {
+                $tmpls = $routing->getChklstTmpls();
+                if ($tmpls->count() > 0) {
+                    foreach ($tmpls as $tmpl) {
+                        $result[] = [
+                            'name'  => $routing->name,
+                            'description' => "Checklist Type: " . $tmpl->name,
+                            'routing' =>   $routing,
+                            'chklst_tmpls' => $tmpl,
+                        ];
+                    }
+                }
+            }
+        }
+        // dump($result);
         return $result;
     }
 }

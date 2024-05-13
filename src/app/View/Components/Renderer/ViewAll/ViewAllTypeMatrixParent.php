@@ -42,6 +42,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $nameColumnFixed = 'left';
     protected $cellAgg = null;
     protected $maxH = null;
+    protected $multipleMatrix = false;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -430,6 +431,11 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
     }
 
+    protected function getMultipleMatrixObjects()
+    {
+        return [];
+    }
+
     public function render()
     {
         [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
@@ -460,12 +466,34 @@ abstract class ViewAllTypeMatrixParent extends Component
         // dump($dataSource[0]);
         // dump($xAxis2ndHeading);
         // dump($perPage);
+
+        $matrixes = [];
+        if (!$this->multipleMatrix) {
+            $matrixes = [
+                [
+                    'name' => '',
+                    'description' => '',
+                    'columns' => $columns,
+                    'dataSource' => $dataSource,
+                    'dataHeader' => $xAxis2ndHeading,
+                ],
+            ];
+        } else {
+            foreach ($this->getMultipleMatrixObjects() as $object) {
+                $matrixes[] = [
+                    'name' => $object['name'],
+                    'description' => $object['description'],
+                    'columns' => $columns,
+                    'dataSource' => $dataSource,
+                    'dataHeader' => $xAxis2ndHeading,
+                ];
+            }
+        }
+
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
-                'columns' => $columns,
-                'dataSource' => $dataSource,
-                'dataHeader' => $xAxis2ndHeading,
+                'matrixes' => $matrixes,
                 'type' => $this->type,
                 'filterRenderer' => $filterRenderer,
                 'footer' => $footer,
