@@ -72,8 +72,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
         $this->fakeQaqcPunchlistObj = new FakeQaqcPunchlist();
 
-        $template = Qaqc_insp_tmpl::find($this->qaqcInspTmpl);
-        $this->hasPunchlist = $template?->has_punchlist;
+        // $template = Qaqc_insp_tmpl::find($this->qaqcInspTmpl);
+        // $this->hasPunchlist = $template?->has_punchlist;
+
+        $this->matrixes = $this->getMultipleMatrixObjects();
     }
 
     private function getUserSettings()
@@ -90,59 +92,73 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     public function getYAxis()
     {
-        $yAxis = $this->yAxis::query()
-            ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmpl)
-            ->where('sub_project_id', $this->subProject)
-            //This to enable AOI 1 Mockup Backup
-            ->where('prod_routing_id', $this->prodRouting)
-            ->with('getProdOrder')
-            ->with('getPunchlist')
-            ->orderBy('name')
-            ->get();
-        // dump(sizeof($yAxis));
-        return $yAxis;
+        $result = [];
+        foreach ($this->matrixes as $key => $matrix) {
+            $tmplId = $matrix['chklst_tmpls']->id;
+            $routingId = $matrix['routing']->id;
+            $yAxis = $this->yAxis::query()
+                ->where('sub_project_id', $this->subProject)
+                ->where('qaqc_insp_tmpl_id', $tmplId)
+                //This to enable AOI 1 Mockup Backup
+                ->where('prod_routing_id', $routingId)
+                ->with('getProdOrder')
+                ->with('getPunchlist')
+                ->orderBy('name');
+            $result[$key] = $yAxis->get();
+            // dump(sizeof($yAxis));
+        }
+        return $result;
     }
 
     protected function getXAxis()
     {
         $result = [];
-        if (is_null($this->qaqcInspTmpl)) {
-            echo Blade::render("<x-feedback.alert type='error' message='You must specify Checklist Type.'></x-feedback.alert>");
-            return [];
-        }
-        $data = Qaqc_insp_tmpl::find($this->qaqcInspTmpl)
-            ->getSheets()
-            ->orderBy('order_no')
-            ->get();
-        // dump($data[0]);      
-        foreach ($data as $line) {
-            $result[] = [
-                'dataIndex' => $line->id,
-                'columnIndex' => "status",
-                'title' => $line->name,
-                'align' => 'center',
-                'width' => 40,
-                'prod_discipline_id' => $line->prod_discipline_id,
-                // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
-            ];
-        }
+        foreach ($this->matrixes as $key => $matrix) {
+            $columns = [];
+            // if (is_null($this->qaqcInspTmpl)) {
+            //     echo Blade::render("<x-feedback.alert type='error' message='You must specify Checklist Type.'></x-feedback.alert>");
+            //     return [];
+            // }
+            $data = Qaqc_insp_tmpl::find($matrix['chklst_tmpls']->id)
+                ->getSheets()
+                ->orderBy('order_no')
+                ->get();
+            // dump($data[0]);      
+            foreach ($data as $line) {
+                $columns[] = [
+                    'dataIndex' => $line->id,
+                    'columnIndex' => "status",
+                    'title' => $line->name,
+                    'align' => 'center',
+                    'width' => 40,
+                    'prod_discipline_id' => $line->prod_discipline_id,
+                    // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
+                ];
+            }
 
-        if ($this->hasPunchlist) {
-            $QAQC_DISCIPLINE_ID = 7;
-            $result = [
-                ...$result,
-                ['dataIndex' => 'final_punchlist', 'prod_discipline_id' => $QAQC_DISCIPLINE_ID],
-            ];
+            if ($matrix['chklst_tmpls']->has_punchlist) {
+                $QAQC_DISCIPLINE_ID = 7;
+                $columns = [
+                    ...$columns,
+                    ['dataIndex' => 'final_punchlist', 'prod_discipline_id' => $QAQC_DISCIPLINE_ID],
+                ];
+            }
+            $result[$key] = $columns;
         }
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
+        // dd($result);
         return $result;
     }
 
     public function getMatrixDataSource($xAxis)
     {
-        $result = Qaqc_insp_chklst_sht::query()
-            // ->where('qaqc_insp_tmpl_id', $this->qaqcInspTmpl)
-            ->get();
+        $result = [];
+        foreach ($this->matrixes as $key => $matrix) {
+            $tmplId = $matrix['chklst_tmpls']->id;
+            $result[$key] = Qaqc_insp_chklst_sht::whereHas('getTmplSheet.getTmpl', function ($query) use ($tmplId) {
+                $query->where('qaqc_insp_tmpl_id', $tmplId);
+            })->get();
+        }
         return $result;
     }
 
@@ -223,7 +239,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 $tmpls = $routing->getChklstTmpls();
                 if ($tmpls->count() > 0) {
                     foreach ($tmpls as $tmpl) {
-                        $result[] = [
+                        $key = $routing->id . "_" . $tmpl->id;
+                        $result[$key] = [
                             'name'  => $routing->name,
                             'description' => "Checklist Type: " . $tmpl->name,
                             'routing' =>   $routing,

@@ -25,8 +25,8 @@
                     selected="{{$viewportParams['sub_project_id']}}"
                 />
             </div>
-            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Production Routing
+            {{-- <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
+                Production Routing ###
                 <x-renderer.view-all-matrix-filter.ProdRoutingFilter 
                     tableName="prod_routings" 
                     name="prod_routing_id" 
@@ -36,7 +36,7 @@
                     />
             </div>
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                CheckList Type
+                CheckList Type ###
                 <x-renderer.view-all-matrix-filter.ChecklistTypeFilter 
                     tableName="qaqc_insp_tmpls" 
                     name="qaqc_insp_tmpl_id" 
@@ -44,7 +44,7 @@
                     typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['qaqc_insp_tmpl_id']}}"
                     />
-            </div>
+            </div> --}}
             {{-- <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
                 Production Discipline
                 <x-renderer.view-all-matrix-filter.ProdDisciplineFilter 

@@ -43,6 +43,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $cellAgg = null;
     protected $maxH = null;
     protected $multipleMatrix = false;
+    protected $matrixes = null;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -479,12 +480,12 @@ abstract class ViewAllTypeMatrixParent extends Component
                 ],
             ];
         } else {
-            foreach ($this->getMultipleMatrixObjects() as $object) {
+            foreach ($this->matrixes as $key => $object) {
                 $matrixes[] = [
                     'name' => $object['name'],
                     'description' => $object['description'],
-                    'columns' => $columns,
-                    'dataSource' => $dataSource,
+                    'columns' => $columns[$key],
+                    'dataSource' => $dataSource[$key],
                     'dataHeader' => $xAxis2ndHeading,
                 ];
             }
@@ -545,10 +546,22 @@ abstract class ViewAllTypeMatrixParent extends Component
         $yAxis = $this->getYAxis();
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
-        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
-        $dataSource = $this->aggArrayOfCells($dataSource);
+        if ($this->multipleMatrix) {
+            // $matrixes = $this->getMultipleMatrixObjects();
+            foreach (array_keys($this->matrixes) as $key) {
+                $dataSource[$key] = $this->mergeDataSource($xAxis[$key], $yAxis[$key], $yAxisTableName, $dataSource[$key], $forExcel);
+                $dataSource[$key] = $this->aggArrayOfCells($dataSource[$key]);
+                $columns[$key] = $this->getColumns($xAxis[$key]);
+            }
+        } else {
+            $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
+            $dataSource = $this->aggArrayOfCells($dataSource);
+            $columns = $this->getColumns($xAxis);
+        }
+        // dump($dataSource);
+        // dd();
         // dd($dataSource[0]);
-        $columns = $this->getColumns($xAxis);
-        return [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
+        $result = [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
+        return $result;
     }
 }
