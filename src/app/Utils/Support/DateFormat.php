@@ -18,8 +18,8 @@ class DateFormat
         $firstMonth = $lastMonth === 12 ? 1 : $lastMonth - 1;
         $firstYear = $lastMonth === 1 ? $lastYear - 1 : $lastYear;
         return [
-            'first_date' => $firstYear . '-' . sprintf('%02d', $firstMonth) . '-25',
-            'last_date' => $lastYear . '-' .  sprintf('%02d', $lastMonth) . '-26'
+            'first_date' => $firstYear . '-' . sprintf('%02d', $firstMonth) . '-26',
+            'last_date' => $lastYear . '-' .  sprintf('%02d', $lastMonth) . '-25'
         ];
     }
 }
