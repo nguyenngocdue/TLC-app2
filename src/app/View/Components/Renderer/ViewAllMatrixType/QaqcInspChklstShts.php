@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
+use App\BigThink\Oracy;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
@@ -155,10 +156,16 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $result = [];
         foreach ($this->matrixes as $key => $matrix) {
             $tmplId = $matrix['chklst_tmpls']->id;
-            $result[$key] = Qaqc_insp_chklst_sht::whereHas('getTmplSheet.getTmpl', function ($query) use ($tmplId) {
+            $item = Qaqc_insp_chklst_sht::whereHas('getTmplSheet.getTmpl', function ($query) use ($tmplId) {
                 $query->where('qaqc_insp_tmpl_id', $tmplId);
-            })->get();
+            })
+                ->with('signature_qaqc_chklst_3rd_party')
+                ->get();
+            Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $item);
+            $result[$key] = $item;
         }
+        // dump($result);
+        // dd();
         return $result;
     }
 
@@ -210,7 +217,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $document = $y->getPunchlist[0];
             $route = route($this->fakeQaqcPunchlistObj->type . ".edit", $document->id);
 
-            $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj);
+            $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj, 'keykakaky');
         }
 
         $compliance_name = $y->getProdOrder->compliance_name ?: "";

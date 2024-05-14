@@ -25,18 +25,18 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         'sendManyRequest' => true,
     ];
 
-    public function getMatrixDataSource($xAxis)
-    {
-        $result = Qaqc_insp_chklst_sht::query()
-            ->with('signature_qaqc_chklst_3rd_party')
-            ->get();
+    // public function getMatrixDataSource($xAxis)
+    // {
+    //     $result = Qaqc_insp_chklst_sht::query()
+    //         ->with('signature_qaqc_chklst_3rd_party')
+    //         ->get();
 
-        Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $result);
-        // dump($result[0]);
-        return $result;
-    }
+    //     Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $result);
+    //     // dump($result[0]);
+    //     return $result;
+    // }
 
-    private function renderer($nominatedUsers, $signatures, $sheetTable, $sheetId)
+    private function renderer($nominatedUsers, $signatures, $sheetTable, $sheetId, $matrixKey)
     {
         $result = collect();
         $signaturesIndexed = $signatures->keyBy('user_id');
@@ -71,7 +71,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
                     $tooltip = "Request sent to $name on " . substr($signature->created_at, 0, 10);
                     break;
                 default:
-                    $onClick = "sendManyRequest($nominatedUser->id, \"$sheetTable\", $sheetId)";
+                    $onClick = "sendManyRequest($nominatedUser->id, \"$sheetTable\", $sheetId, \"$matrixKey\")";
                     break;
             }
 
@@ -89,7 +89,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         // return count($nominatedUsers) . " " . count($signatures);
     }
 
-    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null,  $objectToGet = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null,  $objectToGet = null, $matrixKey = null)
     {
         // dd($document);
         // dump($document->getTable());
@@ -119,7 +119,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
 
         if (count($nominatedUserIds) == 0) return (object)[];
         $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
-        $renderer = $this->renderer($nominatedUsers, $signatures, $document->getTable(), $document->id);
+        $renderer = $this->renderer($nominatedUsers, $signatures, $document->getTable(), $document->id, $matrixKey);
 
         $openSheet = "<div class='mt-2'><a href='$editRoute' class='bg-blue-600 text-white rounded p-2'>Open</a></div>";
         // [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);

@@ -52,17 +52,17 @@ function intersectionArraysOfArrays(arrays) {
 }
 
 const sendManyRequestCache = {}
-const sendManyRequest = (uid, sheetTable, sheetId) => {
-    // console.log(uid, sheetTable, sheetId)
-    const key = `${uid}|${sheetTable}|${sheetId}`
-    const divCheckId = `divCheck_${uid}_${sheetTable}_${sheetId}`
+const sendManyRequest = (uid, sheetTable, sheetId, matrixKey) => {
+    console.log(uid, sheetTable, sheetId, matrixKey)
+    const key = `${uid}|${sheetTable}|${sheetId}|${matrixKey}`
+    const divCheckIdIcon = `divCheck_${uid}_${sheetTable}_${sheetId}`
     if(sendManyRequestCache[key] === undefined ) {
         sendManyRequestCache[key] = true
-        $(`#${divCheckId}`).show()
+        $(`#${divCheckIdIcon}`).show()
     }
     else {
         delete sendManyRequestCache[key]
-        $(`#${divCheckId}`).hide()
+        $(`#${divCheckIdIcon}`).hide()
     }
     // console.log(sendManyRequestCache)
     const total = Object.keys(sendManyRequestCache).length
@@ -74,8 +74,13 @@ const sendManyRequest = (uid, sheetTable, sheetId) => {
         button.classList.add(total?`bg-blue-600`:`bg-blue-300`, total?`cursor-pointer`:`cursor-not-allowed`)
         button.innerHTML=text
         button.type='button'
-        button.addEventListener('click', ()=>{
-
+        button.addEventListener('click', (e)=>{
+            const btn = e.target
+            // console.log("Sending many request...",e.target)
+            btn.innerHTML = "Requesting..."
+            btn.classList.add('bg-blue-300', `cursor-not-allowed`)
+            btn.classList.remove('bg-blue-600', `cursor-pointer`)
+            btn.disabled = true
             const splitted = Object.keys(sendManyRequestCache).map(key=>key.split("|"))
             // console.log("Sending ", sendManyRequestCache, splitted  )
             const results = {}
@@ -104,10 +109,11 @@ const sendManyRequest = (uid, sheetTable, sheetId) => {
                     category,
                     wsClientId,
                 }
-                // console.log(data)
+                const url = `/api/v1/qaqc/request_to_sign_off`
+                // console.log(url, data)
                 $.ajax({
                     method:'POST',
-                    url: `/api/v1/qaqc/request_to_sign_off`,
+                    url,
                     data,
                 }).then(res=>{
                     setTimeout(()=>{
@@ -117,7 +123,7 @@ const sendManyRequest = (uid, sheetTable, sheetId) => {
             })
         })
    
-    $("#divSendManyRequest").html(button)
+    $("#divSendManyRequest"+matrixKey).html(button)
 }
 
 

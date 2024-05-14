@@ -124,7 +124,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $value ? $value : '';
     }
 
-    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null, $matrixKey = null)
     {
         if (is_null($statuses)) $statuses = $this->statuses;
         $status = $statuses[$document->status] ?? null;
@@ -195,7 +195,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return (object) $item;
     }
 
-    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $key = null)
     {
         $result = [];
         switch ($dataIndex) {
@@ -207,7 +207,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 // case 'status':
             case 'detail':
                 foreach ($cell as $document) {
-                    $result[] = $this->makeStatus($document, $forExcel);
+                    $result[] = $this->makeStatus($document, $forExcel, null, null, null, $key);
                 }
                 break;
             default:
@@ -273,7 +273,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
     }
 
-    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel)
+    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel, $key = null)
     {
         // dump($xAxis);
         // dd($yAxis);
@@ -309,12 +309,12 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $hasFile = isset($dataSource[$yId][$xId]);
                 // dump("yID $yId xId $xId $hasFile");
                 if ($hasFile) {
-                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel, $key);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $key = $xId . "_" . $column;
-                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel);
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel, $key);
                             //<< convert to empty string for excel
                             $line[$key] = is_null($value) ? "" : $value;
                         }
@@ -466,10 +466,12 @@ abstract class ViewAllTypeMatrixParent extends Component
             'groupBy' => $this->groupBy,
             'groupByLength' => $this->groupByLength,
         ];
-        if ($key) $params['key'] = $key;
+        if ($key) {
+            $params['key'] = $key;
+        }
         $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
-            routePrefix='_mep1.exportCsvMatrix1'
-            type='$this->type'
+        routePrefix='_mep1.exportCsvMatrix1'
+        type='$this->type'
             :actionBtnList='\$actionBtnList'
             :params='\$params'
             />", [
@@ -587,10 +589,11 @@ abstract class ViewAllTypeMatrixParent extends Component
         $yAxis = $this->getYAxis();
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
+        $columns = [];
         if ($this->multipleMatrix) {
             // $matrixes = $this->getMultipleMatrixObjects();
             foreach (array_keys($this->matrixes) as $key) {
-                $dataSource[$key] = $this->mergeDataSource($xAxis[$key], $yAxis[$key], $yAxisTableName, $dataSource[$key], $forExcel);
+                $dataSource[$key] = $this->mergeDataSource($xAxis[$key], $yAxis[$key], $yAxisTableName, $dataSource[$key], $forExcel, $key);
                 $dataSource[$key] = $this->aggArrayOfCells($dataSource[$key]);
                 $columns[$key] = $this->getColumns($xAxis[$key]);
             }

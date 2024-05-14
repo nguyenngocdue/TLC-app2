@@ -37,7 +37,7 @@ class TestCronJobController extends Controller
                     break;
                 case "test_wss":
                     dump("WssDemoChannel emitted.");
-                    broadcast(new WssDemoChannel(['name' => 'wss-demo-822553']));
+                    broadcast(new WssDemoChannel(['name' => "wss-demo-822553 from " . env("APP_NAME") . " " . env("APP_ENV"), "payload" => "Tested successfully."]));
                     break;
                 case "test_queue":
                     dump("TestLogToFileJob dispatched.");

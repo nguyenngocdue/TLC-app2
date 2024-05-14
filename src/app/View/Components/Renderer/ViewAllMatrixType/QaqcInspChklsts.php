@@ -144,7 +144,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null, $matrixKey = null)
     {
         $params = [
             'project_id' => $this->project,
