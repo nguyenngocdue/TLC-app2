@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReportController;
+use App\Http\Controllers\Reports\Report_ParentReport2Controller;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
-use App\Models\Esg_master_sheet;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\Support\Facades\DB;
 
-class Hse_incident_report_010 extends Report_ParentReportController
+class Hse_incident_report_010 extends Report_ParentReport2Controller
 
 {
     use TraitDynamicColumnsTableReport;
@@ -326,7 +325,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return $dataColumn;
     }
 
-    protected function getParamColumns()
+    protected function getParamColumns($dataSource, $modeType)
     {
         return [
             [
@@ -342,21 +341,22 @@ class Hse_incident_report_010 extends Report_ParentReportController
         ];
     }
 
-    private function calculateWorkHours($workPlacesHoursOfYear, $year, $workplaceIds){
+    private function calculateWorkHours($workPlacesHoursOfYear, $year, $workplaceIds)
+    {
         $number = 0;
         $fullMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-        $yearMonths = array_values(array_map(fn($item)=> $year.'-'.$item, $fullMonths));
+        $yearMonths = array_values(array_map(fn ($item) => $year . '-' . $item, $fullMonths));
 
         $numbers = [];
         foreach ($yearMonths as $yearMonth) {
             $number = 0;
             foreach ($workplaceIds as $id) {
-                 $number += $workPlacesHoursOfYear[$year][$id][$yearMonth] ?? 0;
+                $number += $workPlacesHoursOfYear[$year][$id][$yearMonth] ?? 0;
             }
             $numbers[$year][$yearMonth] = StringReport::fixDecimal($number);
         }
         // dd($numbers);
-       return $numbers;
+        return $numbers;
     }
 
 
@@ -411,12 +411,12 @@ class Hse_incident_report_010 extends Report_ParentReportController
                 $value['work_hours'] = is_null($num) ? $workHours[$hseMonth] : $num;
                 $value['hse_month'] = $hseMonth;
                 // Calculate the total recordable incident rate (TRIR)
-                if($value['work_hours'] > 0) {
+                if ($value['work_hours'] > 0) {
                     $totalRecIncidentRate = (($value['hseir_ltc_count_vote']
-                    + $value['hseir_rwc_count_vote']
-                    + $value['hseir_mtc_count_vote']
-                    + $value['hseir_incident_count_vote']
-                    + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
+                        + $value['hseir_rwc_count_vote']
+                        + $value['hseir_mtc_count_vote']
+                        + $value['hseir_incident_count_vote']
+                        + $value['hseir_near_miss_count_vote']) * 200000) / $value['work_hours'];
                 }
                 $totalRecIncidentRate = isset($totalRecIncidentRate) ? $totalRecIncidentRate : 0;
                 $value['trir'] = ($num = round($totalRecIncidentRate, 2)) ? $num : null;
