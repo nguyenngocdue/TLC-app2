@@ -38,6 +38,7 @@ abstract class Report_ParentController extends Controller
     protected $modeType = '';
     protected $viewName = '';
     protected $optionPrint = "landscape";
+    protected $showModeOnParam = false;
 
 
     private function overKeyAndValueDataSource($params, $data)
@@ -226,6 +227,7 @@ abstract class Report_ParentController extends Controller
             'optionPrint' => $this->optionPrint,
             'childrenMode' => $params['children_mode'] ?? 'not_children',
             'type' => $this->getType(),
+            'showModeOnParam' => $this->showModeOnParam,
         ] + $dataRenderDocReport);
     }
     protected function modifyDataToExportCSV($dataSource)

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Reports\Reports;
 
-use App\Http\Controllers\Reports\Report_ParentReport2Controller;
+use App\Http\Controllers\Reports\Report_ParentReportController;
 use App\Http\Controllers\Reports\TraitDynamicColumnsTableReport;
 use App\Http\Controllers\Reports\TraitForwardModeReport;
+use App\Models\Esg_master_sheet;
 use App\Models\Workplace;
 use App\Utils\Support\Report;
 use App\Utils\Support\StringReport;
 use Illuminate\Support\Facades\DB;
 
-class Hse_incident_report_010 extends Report_ParentReport2Controller
+class Hse_incident_report_010 extends Report_ParentReportController
 
 {
     use TraitDynamicColumnsTableReport;
@@ -325,7 +326,7 @@ class Hse_incident_report_010 extends Report_ParentReport2Controller
         return $dataColumn;
     }
 
-    protected function getParamColumns($dataSource, $modeType)
+    protected function getParamColumns()
     {
         return [
             [
