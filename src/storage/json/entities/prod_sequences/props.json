@@ -241,6 +241,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_getProdRunsRework": {
+        "name": "_getProdRunsRework",
+        "column_name": "getProdRunsRework",
+        "column_type": "eloquent_prop",
+        "label": "Rework",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_start_date": {
         "name": "_start_date",
         "column_name": "start_date",

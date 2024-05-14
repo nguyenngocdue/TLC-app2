@@ -85,7 +85,7 @@ class RelationshipRenderer2 extends Component
         return $hasOrderNoColumnInFillable && $hasOrderNoColumnInManyLineParams;
     }
 
-    private function getPaginatedDataSource($row, $colName, $isOrderable, $showAll = false)
+    private function getPaginatedDataSource($row, $colName, $isOrderable, $props, $showAll = false)
     {
         if (!isset($row::$eloquentParams[$colName])) {
             //TODO: 
@@ -97,11 +97,22 @@ class RelationshipRenderer2 extends Component
             //TODO: This is to prevent from a crash
             if ($eloquentParam[0] === 'morphToMany') return [];
 
+            $filterColumns = $props['relationships']['filter_columns'] ?? [];
+            $filterValues = $props['relationships']['filter_values'] ?? [];
+
+            // dump($filterColumns, $filterValues);
+
             if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
             elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
             elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
             $perPage = $showAll ? 10000 : 25;
             $result = $relation->getQuery();
+            if (sizeof($filterColumns) && sizeof($filterValues)) {
+                foreach ($filterColumns as $key => $value) {
+                    $result = $result->where($value, $filterValues[$key]);
+                }
+            }
+            // dump($result);
             if ($isOrderable) $result = $result->orderBy('order_no');
             $result = $result->paginate($perPage, ['*'], $colName);
             return $result;
@@ -210,7 +221,7 @@ class RelationshipRenderer2 extends Component
         $row = $modelPath::find($id);
         // dump($row);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
-        $paginatedDataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $showAll) : [];
+        $paginatedDataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $props, $showAll) : [];
 
         switch ($renderer_edit) {
             case "same_as_view_all":

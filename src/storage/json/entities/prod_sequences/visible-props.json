@@ -109,6 +109,16 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
+    "_getProdRunsRework": {
+        "name": "_getProdRunsRework",
+        "column_name": "getProdRunsRework",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
     "_start_date": {
         "name": "_start_date",
         "column_name": "start_date",
@@ -282,6 +292,76 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_calendar_days": {
+        "name": "_total_calendar_days",
+        "column_name": "total_calendar_days",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_no_of_sundays": {
+        "name": "_no_of_sundays",
+        "column_name": "no_of_sundays",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_no_of_ph_days": {
+        "name": "_no_of_ph_days",
+        "column_name": "no_of_ph_days",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_days_no_sun_no_ph": {
+        "name": "_total_days_no_sun_no_ph",
+        "column_name": "total_days_no_sun_no_ph",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_days_have_ts": {
+        "name": "_total_days_have_ts",
+        "column_name": "total_days_have_ts",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_discrepancy_days": {
+        "name": "_total_discrepancy_days",
+        "column_name": "total_discrepancy_days",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
         "new": "",
         "in_progress": "",
         "finished": "",

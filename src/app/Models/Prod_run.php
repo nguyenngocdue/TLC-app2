@@ -10,7 +10,7 @@ class Prod_run extends ModelExtended
         "id", "prod_sequence_id", "date", "start", "end", "owner_id",
         "total_hours", "total_man_hours",
         "worker_number", "worker_number_count", "worker_number_input",
-        "remark", "production_output",
+        "remark", "production_output", "is_rework",
 
     ];
 
@@ -51,12 +51,12 @@ class Prod_run extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    private function isNZ($parentItem)
-    {
-        $a = $parentItem->getRoutingsHaveWorkersOfRun();
-        if (in_array($parentItem->prod_routing_id, $a)) return true;
-        return false;
-    }
+    // private function isNZ($parentItem)
+    // {
+    //     $a = $parentItem->getRoutingsHaveWorkersOfRun();
+    //     if (in_array($parentItem->prod_routing_id, $a)) return true;
+    //     return false;
+    // }
 
     private function needToShowProdOutputQty($parentItem)
     {
@@ -70,7 +70,7 @@ class Prod_run extends ModelExtended
 
     public function getManyLineParams($parentItem)
     {
-        $isNZ = $this->isNZ($parentItem);
+        // $isNZ = $this->isNZ($parentItem);
         // echo "IS NZ: $isNZ";
         $needToShowProdOutputQty = $this->needToShowProdOutputQty($parentItem);
         // echo "IS PPR: $needToShowProdOutputQty";
@@ -83,11 +83,11 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'end', /*'cloneable' => true,*/],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum', /*'no_print' => true,*/],
         ];
-        if ($isNZ) {
-            $result[] = ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true,];
-        } else {
-            $result[] = ['dataIndex' => 'worker_number_input', 'footer' => 'agg_avg',];
-        }
+        // if ($isNZ) {
+        // $result[] = ['dataIndex' => 'getWorkersOfRun()', 'cloneable' => true,];
+        // } else {
+        $result[] = ['dataIndex' => 'worker_number_input', 'footer' => 'agg_avg',];
+        // }
         $result = [
             ...$result,
             ['dataIndex' => 'worker_number_count', 'invisible' => true,],
@@ -101,8 +101,22 @@ class Prod_run extends ModelExtended
         $result = [
             ...$result,
             ['dataIndex' => 'remark', /*'no_print' => true,*/],
+            ['dataIndex' => 'is_rework', "invisible" => true],
         ];
 
         return $result;
+    }
+
+    public function getManyLineParamsRework($parentItem)
+    {
+        $columns = $this->getManyLineParams($parentItem);
+
+        foreach ($columns as $key => &$column) {
+            // dump($key, $column);
+            if ($column['dataIndex'] == 'remark') {
+                $column['required'] = true;
+            }
+        }
+        return $columns;
     }
 }

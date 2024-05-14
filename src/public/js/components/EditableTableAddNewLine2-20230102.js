@@ -52,6 +52,23 @@ const addANewLine = (params) => {
     const parentTypeFieldName = findParentIdFieldName(tableId, 'value_as_parent_type')
     const parentType = getEById('entityParentType').val()
     // console.log(parentIdFieldName)
+
+    
+    //Check if edit sequence 
+    if(parentIdFieldName === 'prod_sequence_id') {
+        const a = tableObject[tableId].tableName
+        const b = tableObject[tableId].eloquentFn
+        // console.log(a, b)
+        if(a === 'prod_runs') {
+            if(b === 'getProdRuns') {
+                valuesOfOrigin['is_rework'] = 0
+            }
+            if(b === 'getProdRunsRework') {
+                valuesOfOrigin['is_rework'] = 1
+            }
+        }
+    }
+
     const data0 = {
         owner_id: currentUser,
         [parentIdFieldName]: parentId,
