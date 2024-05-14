@@ -39,7 +39,7 @@ abstract class MatrixForReportParent extends Component
     abstract function getYAxis();
     abstract function getDataSource($xAxis, $yAxis);
 
-    function cellRenderer($cell, $xAxis, $yAxis, $dataSource, $forExcel = false)
+    function cellRenderer($cell, $xAxis, $yAxis, $dataSource, $forExcel = false, $matrixKey = null)
     {
         if (isset($cell->status)) {
             $id = $cell->id;

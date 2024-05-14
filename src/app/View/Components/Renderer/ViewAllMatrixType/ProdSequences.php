@@ -273,7 +273,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $matrixKey = null)
     {
         if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
         if ($dataIndex === 'checkbox_print') return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);

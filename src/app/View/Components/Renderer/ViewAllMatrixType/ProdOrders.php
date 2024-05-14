@@ -156,7 +156,7 @@ class ProdOrders extends ViewAllTypeMatrixParent
         return $params;
     }
 
-    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $matrixKey = null)
     {
         if (count($cell) > 10)
             return "<div class='whitespace-nowrap'>(" . count($cell) . " items)</div>";

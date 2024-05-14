@@ -195,7 +195,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return (object) $item;
     }
 
-    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $key = null)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $matrixKey = null)
     {
         $result = [];
         switch ($dataIndex) {
@@ -207,7 +207,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 // case 'status':
             case 'detail':
                 foreach ($cell as $document) {
-                    $result[] = $this->makeStatus($document, $forExcel, null, null, null, $key);
+                    $result[] = $this->makeStatus($document, $forExcel, null, null, null, $matrixKey);
                 }
                 break;
             default:
