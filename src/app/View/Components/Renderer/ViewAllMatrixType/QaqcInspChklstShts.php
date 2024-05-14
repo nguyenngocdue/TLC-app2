@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\BigThink\Oracy;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl;
@@ -36,7 +37,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
     use TraitYAxisDiscipline;
 
-    private $project, $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline;
+    private $project, /*$qaqcInspTmpl,*/ $subProject, $prodRouting;
     // protected $viewportMode = null;
 
     protected $xAxis = Qaqc_insp_chklst_sht::class;
@@ -64,17 +65,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        [$this->project, $this->qaqcInspTmpl, $this->subProject, $this->prodRouting, $this->prodDiscipline] = $this->getUserSettings();
+        [$this->project, /*$this->qaqcInspTmpl,*/ $this->subProject, $this->prodRouting] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;
-        $this->prodRouting = $this->prodRouting ? $this->prodRouting : 2;
-        $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : null;
+        $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
+        // $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : null;
 
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
         $this->fakeQaqcPunchlistObj = new FakeQaqcPunchlist();
-
-        // $template = Qaqc_insp_tmpl::find($this->qaqcInspTmpl);
-        // $this->hasPunchlist = $template?->has_punchlist;
 
         $this->matrixes = $this->getMultipleMatrixObjects();
     }
@@ -84,11 +82,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
         $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
-        $qaqcInspTmpl = $settings[$type][Constant::VIEW_ALL]['matrix']['qaqc_insp_tmpl_id'] ?? null;
+        // $qaqcInspTmpl = $settings[$type][Constant::VIEW_ALL]['matrix']['qaqc_insp_tmpl_id'] ?? null;
         $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
         $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
-        $prodDiscipline = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_discipline_id'] ?? null;
-        return [$project, $qaqcInspTmpl, $subProject, $prodRouting, $prodDiscipline];
+        return [$project, /*$qaqcInspTmpl,*/ $subProject, $prodRouting];
     }
 
     public function getYAxis()
@@ -175,8 +172,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             'project_id' => $this->project,
             'sub_project_id' => $this->subProject,
             'prod_routing_id' => $this->prodRouting,
-            'qaqc_insp_tmpl_id' => $this->qaqcInspTmpl,
-            // 'prod_discipline_id' => $this->prodDiscipline,
+            // 'qaqc_insp_tmpl_id' => $this->qaqcInspTmpl,
         ];
     }
 
@@ -238,7 +234,11 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getMultipleMatrixObjects()
     {
         $show_on_ics_id = config("production.prod_routings.qaqc_insp_chklsts");
-        $prodRoutings = Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+        if ($this->prodRouting) {
+            $prodRoutings = [Prod_routing::find($this->prodRouting)];
+        } else {
+            $prodRoutings = Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+        }
         $result = [];
         foreach ($prodRoutings as $key => $routing) {
             $showOnScreenIds = $routing->getScreensShowMeOn()->pluck('id');

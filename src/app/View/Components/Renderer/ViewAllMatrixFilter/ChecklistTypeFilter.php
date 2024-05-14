@@ -38,6 +38,28 @@ class ChecklistTypeFilter extends Component
             ->get();
         Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
         return $db;
+
+        // $matrixView = (new QaqcInspChklstShts());
+        // $dataSource = $matrixView->getMultipleMatrixObjects();
+        // $objects = [];
+        // foreach ($dataSource as $value) {
+        //     $objects[] = $value['chklst_tmpls'];
+        // }
+
+        // $uniqueObjectsById = [];
+
+        // // Loop over each object
+        // foreach ($objects as $obj) {
+        //     if (!isset($uniqueObjectsById[$obj->id])) {
+        //         // Add the object to the array using id as key
+        //         $uniqueObjectsById[$obj->id] = $obj;
+        //     }
+        // }
+
+        // // Get the unique objects in a regular indexed array
+        // $uniqueObjects = array_values($uniqueObjectsById);
+
+        // return $uniqueObjects;
     }
 
     /**
