@@ -107,7 +107,7 @@ const sendManyRequest = (uid, sheetTable, sheetId, matrixKey) => {
                         category = "signature_qaqc_chklst_3rd_party"
                         break;
                     case 'qaqc_punchlists':
-                        category = "signature_qaqc_punchlist"
+                        category = "signature_qaqc_punchlist_qaqc"
                         break;
                 }
                 const data = { 

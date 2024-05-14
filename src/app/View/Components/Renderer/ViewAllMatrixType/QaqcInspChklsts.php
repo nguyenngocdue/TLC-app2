@@ -129,7 +129,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);

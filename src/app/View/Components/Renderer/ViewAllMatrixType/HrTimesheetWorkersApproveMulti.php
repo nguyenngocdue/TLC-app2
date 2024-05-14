@@ -33,9 +33,9 @@ class HrTimesheetWorkersApproveMulti extends HrTimesheetWorkers
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
-        $parent = parent::getMetaObjects($y, $dataSource, $xAxis, $forExcel);
+        $parent = parent::getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey);
         $yId = $y->id;
         $route = route($this->type . ".changeStatusMultiple");
         $script = "<script>const route_$yId='$route';</script>";

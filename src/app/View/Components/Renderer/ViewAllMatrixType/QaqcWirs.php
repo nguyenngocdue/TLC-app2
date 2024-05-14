@@ -152,7 +152,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     //     return $result;
     // }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         // $prodOrderId = $y->id;
         // $line = $dataSource[$prodOrderId] ?? [];

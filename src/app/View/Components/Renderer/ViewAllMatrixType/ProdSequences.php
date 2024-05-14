@@ -221,7 +221,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $columns;
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
         $finished_at = DateTimeConcern::convertForLoading("picker_datetime", $y->finished_at);

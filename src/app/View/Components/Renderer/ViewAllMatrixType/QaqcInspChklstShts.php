@@ -220,7 +220,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return $line['punchlistColumn'];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         if (!isset($y->getPunchlist[0])) {
             $status_object = $this->getCreateNewButton($y);
@@ -228,7 +228,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $document = $y->getPunchlist[0];
             $route = route($this->fakeQaqcPunchlistObj->type . ".edit", $document->id);
 
-            $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj, 'key_ahihi');
+            $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj, $matrixKey);
         }
 
         $compliance_name = $y->getProdOrder->compliance_name ?: "";

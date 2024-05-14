@@ -136,7 +136,7 @@ class ExamSheets extends ViewAllTypeMatrixParent
         return $columns;
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         return [
             'department_for_group_by' => $y->getUserDepartment->name,

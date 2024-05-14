@@ -230,7 +230,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $params;
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         return [];
     }
@@ -321,7 +321,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     }
                 }
             }
-            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel);
+            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey);
             foreach ($metaObjects as $key => $metaObject) {
                 $newObject = $metaObject;
                 if (Str::endsWith($key, "_for_group_by")) {

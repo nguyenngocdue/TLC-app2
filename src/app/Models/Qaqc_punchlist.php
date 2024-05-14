@@ -50,12 +50,12 @@ class Qaqc_punchlist extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function signature_qaqc_punchlist()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    }
+    // public function signature_qaqc_punchlist()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    // }
     // public function signature_qaqc_punchlist_list()
     // {
     //     $p = static::$oracyParams[__FUNCTION__ . '()'];
