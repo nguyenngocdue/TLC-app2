@@ -273,7 +273,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
     }
 
-    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel, $key = null)
+    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel, $matrixKey = null)
     {
         // dump($xAxis);
         // dd($yAxis);
@@ -309,12 +309,12 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $hasFile = isset($dataSource[$yId][$xId]);
                 // dump("yID $yId xId $xId $hasFile");
                 if ($hasFile) {
-                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel, $key);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel, $matrixKey);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $key = $xId . "_" . $column;
-                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel, $key);
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel, $matrixKey);
                             //<< convert to empty string for excel
                             $line[$key] = is_null($value) ? "" : $value;
                         }

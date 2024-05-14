@@ -217,7 +217,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $document = $y->getPunchlist[0];
             $route = route($this->fakeQaqcPunchlistObj->type . ".edit", $document->id);
 
-            $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj, 'keykakaky');
+            $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj, 'key_ahihi');
         }
 
         $compliance_name = $y->getProdOrder->compliance_name ?: "";
