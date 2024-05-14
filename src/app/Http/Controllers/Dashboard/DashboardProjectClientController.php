@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_tmpl;
+use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
 class DashboardProjectClientController extends DashboardController
 {
+    private $STW_SANDBOX_ID = 112;
+    private $STW_TOWNHOUSE_ID = 94;
+    private $STW_INSP_CHK_SHT_ID = 1007;
+
     private function getDefaultValues($subProjects)
     {
         if (sizeof($subProjects) == 1) {
@@ -17,8 +22,8 @@ class DashboardProjectClientController extends DashboardController
             $defaultSubProject = null;
         }
         switch ($defaultSubProject) {
-            case 107:
-                return [$defaultSubProject, 94, 1007];
+            case $this->STW_SANDBOX_ID:
+                return [$defaultSubProject, $this->STW_TOWNHOUSE_ID, $this->STW_INSP_CHK_SHT_ID];
             default:
                 return [$defaultSubProject, null, null];
         }
@@ -31,6 +36,7 @@ class DashboardProjectClientController extends DashboardController
         [$sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         $cu = CurrentUser::get();
         $subProjects = $cu->getSubProjectsOfProjectClient();
+        $subProjects->push(Sub_project::findFromCache($this->STW_SANDBOX_ID));
         // dump($subProjects);
 
         $qaqcInspTmpls = Qaqc_insp_tmpl::query()->get();

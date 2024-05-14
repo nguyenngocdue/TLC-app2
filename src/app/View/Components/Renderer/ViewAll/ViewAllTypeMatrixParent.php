@@ -528,7 +528,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                     'description' => $object['description'],
                     'columns' => $columns[$key],
                     'dataSource' => $dataSource[$key],
-                    'dataHeader' => $xAxis2ndHeading,
+                    'dataHeader' => $xAxis2ndHeading[$key],
                     'perPage' => $perPageArray[$key],
                     'actionButtons' => $this->getActionButtons($key),
                 ];
@@ -585,7 +585,6 @@ abstract class ViewAllTypeMatrixParent extends Component
     public function getViewAllMatrixParams($forExcel = false)
     {
         $xAxis = $this->getXAxis();
-        $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
         $yAxis = $this->getYAxis();
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
@@ -596,16 +595,18 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $dataSource[$key] = $this->mergeDataSource($xAxis[$key], $yAxis[$key], $yAxisTableName, $dataSource[$key], $forExcel, $key);
                 $dataSource[$key] = $this->aggArrayOfCells($dataSource[$key]);
                 $columns[$key] = $this->getColumns($xAxis[$key]);
+                $xAxis2ndHeading[$key] = $this->getXAxis2ndHeader($xAxis[$key]);
             }
         } else {
             $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
             $dataSource = $this->aggArrayOfCells($dataSource);
             $columns = $this->getColumns($xAxis);
+            $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
         }
         // dump($dataSource);
         // dd();
-        // dd($dataSource[0]);
         $result = [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
+        // dump($result);
         return $result;
     }
 }

@@ -7,7 +7,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
-use App\Models\Qaqc_insp_tmpl;
+use App\Models\Qaqc_insp_tmpl_sht;
 use App\Models\Sub_project;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
@@ -117,10 +117,17 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             //     echo Blade::render("<x-feedback.alert type='error' message='You must specify Checklist Type.'></x-feedback.alert>");
             //     return [];
             // }
-            $data = Qaqc_insp_tmpl::find($matrix['chklst_tmpls']->id)
-                ->getSheets()
+
+            $data = Qaqc_insp_tmpl_sht::query()
+                ->where('qaqc_insp_tmpl_id', $matrix['chklst_tmpls']->id)
+                ->with('getProdDiscipline')
                 ->orderBy('order_no')
                 ->get();
+
+            // $data = Qaqc_insp_tmpl::find($matrix['chklst_tmpls']->id)
+            //     ->getSheets()
+            //     ->orderBy('order_no')                
+            //     ->get();
             // dump($data[0]);      
             foreach ($data as $line) {
                 $columns[] = [
@@ -129,7 +136,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     'title' => $line->name,
                     'align' => 'center',
                     'width' => 40,
-                    'prod_discipline_id' => $line->prod_discipline_id,
+                    'discipline_description' => $line->getProdDiscipline->description,
+                    'discipline_css_class' => $line->getProdDiscipline->css_class,
+                    // 'prod_discipline_id' => $line->prod_discipline_id,
                     // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
                 ];
             }
@@ -228,6 +237,21 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             'final_punchlist' =>  $status_object,
         ];
 
+        return $result;
+    }
+
+    protected function getXAxis2ndHeader($xAxis)
+    {
+        $result = [];
+        foreach ($xAxis as $x) {
+            if (isset($x['discipline_description'])) {
+                $item = (object)[
+                    'value' => $x['discipline_description'],
+                    'cell_class' => $x['discipline_css_class'],
+                ];
+                $result[$x['dataIndex']] = $item;
+            }
+        }
         return $result;
     }
 
