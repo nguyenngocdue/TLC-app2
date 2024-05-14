@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\BigThink\Oracy;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
@@ -37,8 +38,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
     use TraitYAxisDiscipline;
 
-    private $project, /*$qaqcInspTmpl,*/ $subProject, $prodRouting;
-    // protected $viewportMode = null;
+    private $project, $subProject, $prodRouting;
+    private $QAQC_DISCIPLINE_ID = 7;
 
     protected $xAxis = Qaqc_insp_chklst_sht::class;
     protected $dataIndexX = "qaqc_insp_tmpl_sht_id";
@@ -111,6 +112,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getXAxis()
     {
         $result = [];
+
+        $qaqc_discipline = Prod_discipline::find($this->QAQC_DISCIPLINE_ID);
         foreach ($this->matrixes as $key => $matrix) {
             $columns = [];
             // if (is_null($this->qaqcInspTmpl)) {
@@ -144,10 +147,13 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             }
 
             if ($matrix['chklst_tmpls']->has_punchlist) {
-                $QAQC_DISCIPLINE_ID = 7;
                 $columns = [
                     ...$columns,
-                    ['dataIndex' => 'final_punchlist', 'prod_discipline_id' => $QAQC_DISCIPLINE_ID],
+                    [
+                        'dataIndex' => 'final_punchlist',
+                        'discipline_description' => $qaqc_discipline->description,
+                        'discipline_css_class' => $qaqc_discipline->css_class,
+                    ],
                 ];
             }
             $result[$key] = $columns;
