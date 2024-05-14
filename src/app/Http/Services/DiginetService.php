@@ -41,6 +41,10 @@ class DiginetService
         $tableName = $modelIns->getTable();
 
         // sent API request
+        $data = APIDiginet::getDatasourceFromAPI($endpointName, $params);
+        if (isset($data->original) && isset($data->original['error'])) {
+            return dd($data->original['error']);
+        }
         $data = APIDiginet::getDatasourceFromAPI($endpointName, $params)['data'];
 
         // index data [0 => line, 1 => sheet]
