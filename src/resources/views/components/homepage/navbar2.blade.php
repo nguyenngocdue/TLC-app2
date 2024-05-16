@@ -4,7 +4,7 @@ $viewAll = CurrentRoute::getTypePlural();
 $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFound:".$viewAll.".index";
 @endphp
 
-<header class="no-print fixed w-full z-20 py-4 bg-white shadow-md dark:bg-gray-800">
+<header class="h-16 no-print fixed w-full z-20 py-4 bg-white shadow-md dark:bg-gray-800">
     <div class="container1 flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
         {{-- <x-homepage.mobile-hamburger></x-homepage.mobile-hamburger> --}}
         <x-homepage.logo />

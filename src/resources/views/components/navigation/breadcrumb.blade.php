@@ -1,4 +1,4 @@
-<div class="flex justify-end pt-1">
+<div class="flex justify-end">
     @foreach($links as $value)
         @if (isset($value['href']))
         <div class="{{$classList}}">
