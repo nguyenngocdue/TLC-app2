@@ -289,6 +289,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                             'description' => "Checklist Type: " . $tmpl->name,
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
+
+                            'sub_project_id' => $this->subProject,
                         ];
                     }
                 }
