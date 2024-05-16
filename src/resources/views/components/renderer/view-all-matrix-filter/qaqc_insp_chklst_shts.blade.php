@@ -13,6 +13,7 @@
                     id="project_id" 
                     typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['project_id']}}"
+                    :dataSource="$dataSource['projects'] ?? null"
                     />
             </div>
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
@@ -23,6 +24,7 @@
                     id="sub_project_id" 
                     typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['sub_project_id']}}"
+                    :dataSource="$dataSource['sub_projects'] ?? null"
                 />
             </div>
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
@@ -35,6 +37,7 @@
                     typeToLoadListener="listener_config" 
                     allowClear
                     selected="{{$viewportParams['prod_routing_id']}}"
+                    :dataSource="$dataSource['prod_routings'] ?? null"
                     />
             </div>
             {{-- <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">

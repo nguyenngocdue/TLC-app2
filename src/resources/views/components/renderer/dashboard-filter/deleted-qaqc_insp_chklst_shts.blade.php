@@ -1,3 +1,4 @@
+DELETED....
 <form action="{{ route('updateUserSettings') }}" method="post">
     @csrf
     @method('PUT')

@@ -70,11 +70,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct("qaqc_insp_chklst_shts");
-        [$this->project, /*$this->qaqcInspTmpl,*/ $this->subProject, $this->prodRouting] = $this->getUserSettings();
-        $this->project = $this->project ? $this->project : 5;
-        $this->subProject = $this->subProject ? $this->subProject : 21;
+        [$this->project, $this->subProject, $this->prodRouting] = $this->getUserSettings();
+        $this->project = $this->project ? $this->project : 72;
+        $this->subProject = $this->subProject ? $this->subProject : 112;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
-        // $this->qaqcInspTmpl = $this->qaqcInspTmpl ? $this->qaqcInspTmpl : null;
 
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
         $this->fakeQaqcPunchlistObj = new FakeQaqcPunchlist();
@@ -82,15 +81,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $this->matrixes = $this->getMultipleMatrixObjects();
     }
 
-    private function getUserSettings()
+    protected function getUserSettings()
     {
         $type = Str::plural($this->type);
         $settings = CurrentUser::getSettings();
         $project = $settings[$type][Constant::VIEW_ALL]['matrix']['project_id'] ?? null;
-        // $qaqcInspTmpl = $settings[$type][Constant::VIEW_ALL]['matrix']['qaqc_insp_tmpl_id'] ?? null;
         $subProject = $settings[$type][Constant::VIEW_ALL]['matrix']['sub_project_id'] ?? null;
         $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
-        return [$project, /*$qaqcInspTmpl,*/ $subProject, $prodRouting];
+        return [$project, $subProject, $prodRouting];
     }
 
     public function getYAxis()
@@ -265,13 +263,18 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return $result;
     }
 
+    protected function getAllRoutingList()
+    {
+        return Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+    }
+
     protected function getMultipleMatrixObjects()
     {
         $show_on_ics_id = config("production.prod_routings.qaqc_insp_chklsts");
         if ($this->prodRouting) {
             $prodRoutings = [Prod_routing::find($this->prodRouting)];
         } else {
-            $prodRoutings = Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+            $prodRoutings = $this->getAllRoutingList();
         }
         $result = [];
         foreach ($prodRoutings as $key => $routing) {
