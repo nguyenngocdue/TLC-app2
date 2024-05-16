@@ -28,7 +28,7 @@ trait HasCheckbox
         if ($fieldId) return [$fieldId->id, false];
         if ($fieldIdReversed) return [$fieldIdReversed->id, true];
         //if not found either name or reversed_name
-        Log::error("Create a record in table Field with name/reversed_name as [$fieldNameOrId]");
+        Log::error("[$fieldNameOrId] not found in FileTable, please create one.");
         // dd();
     }
 
