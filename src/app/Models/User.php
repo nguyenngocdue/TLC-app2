@@ -327,7 +327,8 @@ class User extends ModelExtended implements
 
     public function isNewcomer()
     {
-        return is_null($this->discipline); //: 
+        $roleSet = $this->getRoleSet[0]->name;
+        return $roleSet == 'newcomer';
     }
 
     public function isAManager()

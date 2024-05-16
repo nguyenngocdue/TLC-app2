@@ -17,11 +17,9 @@ class DashboardProjectClientController extends DashboardController
 
     private function getDefaultValues($subProjects)
     {
-        if (sizeof($subProjects) == 1) {
-            $defaultSubProject = $subProjects->first()->id;
-        } else {
-            $defaultSubProject = null;
-        }
+        $defaultSubProject = null;
+        if (sizeof($subProjects) == 1) $defaultSubProject = $subProjects->first()->id;
+
         switch ($defaultSubProject) {
             case $this->STW_SANDBOX_ID:
                 return [$this->SANDBOX_ID, $defaultSubProject, $this->STW_TOWNHOUSE_ID, $this->STW_INSP_CHK_SHT_ID];
@@ -30,11 +28,8 @@ class DashboardProjectClientController extends DashboardController
         }
     }
 
-    public function index(Request $request)
+    private function getDataSource()
     {
-        $userSettings = $this->getUserSettings();
-        // dump($userSettings);
-        [$project_id, $sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         $cu = CurrentUser::get();
         $subProjects = $cu->getSubProjectsOfProjectClient();
         $subProjects->push(Sub_project::findFromCache($this->STW_SANDBOX_ID));
@@ -45,8 +40,15 @@ class DashboardProjectClientController extends DashboardController
 
         $prodRoutings = Prod_routing::query()->get();
         $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
-        // dump($prodRoutings);
+        return [$subProjects, $qaqcInspTmpls, $prodRoutings];
+    }
 
+    public function index(Request $request)
+    {
+        [$subProjects, $qaqcInspTmpls, $prodRoutings] = $this->getDataSource();
+
+        $userSettings = $this->getUserSettings();
+        [$project_id, $sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         [$defaultProject, $defaultSubProject, $defaultProdRouting, $defaultQaqcInspTmpl,] = $this->getDefaultValues($subProjects);
 
         $params = [
@@ -65,6 +67,7 @@ class DashboardProjectClientController extends DashboardController
 
         // echo "Project Client";
         // dump($params);
+        // dd();
         return view('dashboards.dashboard-external-inspector-and-client', $params);
     }
 }
