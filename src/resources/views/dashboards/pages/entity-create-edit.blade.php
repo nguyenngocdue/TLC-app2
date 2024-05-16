@@ -13,7 +13,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 
 $formWidth = "md:w-3/4";
 if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])){
-$formWidth = "md:w-1/2";
+$formWidth = "w-full md:w-3/4 lg:w-1/2";
 }
 @endphp
 

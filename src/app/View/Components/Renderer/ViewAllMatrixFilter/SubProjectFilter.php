@@ -27,12 +27,14 @@ class SubProjectFilter extends Component
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
         private $allowClear = false,
         private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $dataSource = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
     private function getDataSource()
     {
+        if ($this->dataSource) return $this->dataSource;
         $statuses = config("project.active_statuses.sub_projects");
         $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
             ->whereIn('status', $statuses)

@@ -30,6 +30,7 @@ class ProdRoutingFilter extends Component
         private $readOnly = false,
         private $allowClear = false,
         private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $dataSource = null,
     ) {
         // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
@@ -38,6 +39,7 @@ class ProdRoutingFilter extends Component
 
     private function getDataSource()
     {
+        if ($this->dataSource) return $this->dataSource;
         $db = Prod_routing::select('id', 'name', 'description')
             ->orderBy('name')
             ->get();

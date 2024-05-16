@@ -305,6 +305,11 @@ abstract class ViewAllTypeMatrixParent extends Component
         return [];
     }
 
+    protected function getViewportParams()
+    {
+        return [];
+    }
+
     protected function getMetaColumns()
     {
         return [];
@@ -324,11 +329,6 @@ abstract class ViewAllTypeMatrixParent extends Component
             ...$extraColumns,
             ...$this->getRightMetaColumns(),
         ];;
-    }
-
-    protected function getViewportParams()
-    {
-        return [];
     }
 
     private function paginate($items, $perPage = 15, $page = null, $options = [])
@@ -355,7 +355,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             </div>";
     }
 
-    private function getFilter()
+    protected function getFilter()
     {
         $filterDataSource  = $this->getFilterDataSource();
         $viewportParams = $this->getViewportParams();
