@@ -28,12 +28,19 @@ return new class extends Migration
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
 
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
+
+
             $table->string('tb_type')->nullable();
             $table->date('tb_date')->nullable();
 
-            $table->unsignedBigInteger('tb_project')->nullable();
-
-            $table->unsignedBigInteger('approver_id')->nullable();
+            $table->decimal('total_of_tb_day', 20, 2)->nullable();
+            $table->string('tb_project')->nullable();
+            $table->string('tb_reason')->nullable();
+            $table->string('tb_note')->nullable();
+            $table->string('tb_document_status')->nullable();
+            $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();
 
 

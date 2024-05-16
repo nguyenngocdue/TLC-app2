@@ -30,8 +30,8 @@ return new class extends Migration
 
             $table->float('number_of_la_day')->nullable();
             $table->string('la_reason')->nullable();
-            $table->unsignedBigInteger('la_document_id')->nullable();
-            $table->unsignedBigInteger('approver_id')->nullable();
+            $table->string('la_document_id')->nullable();
+            $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();
 
 

@@ -49,7 +49,7 @@ class DiginetDataController extends Controller
             ],
             "employee-leave-sheets" => [
                 "name" => "employee-leave-sheets",
-                "field_index_name" => "la_date",
+                "field_index_name" => "from_date",
                 "endpoint_name_diginet" => "employee-leave",
                 "card_name" => "Employee Leave",
                 "card_description" => "This is a short description of the item.",
