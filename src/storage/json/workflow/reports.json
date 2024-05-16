@@ -75,6 +75,15 @@
         "title": "CO2 Emission Comparison by Metric 2 Report",
         "hidden": "true"
     },
+    "document-ghg_sheet_080": {
+        "name": "document-ghg_sheet_080",
+        "package_tab": "report",
+        "package": null,
+        "breadcrumb-group": null,
+        "top_title": null,
+        "title": null,
+        "hidden": "true"
+    },
     "document-prod_sequence_010": {
         "name": "document-prod_sequence_010",
         "package_tab": "report",
