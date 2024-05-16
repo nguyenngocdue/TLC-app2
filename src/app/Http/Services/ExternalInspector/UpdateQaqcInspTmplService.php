@@ -27,6 +27,7 @@ class UpdateQaqcInspTmplService
 
         $result = array_values(array_unique(Arr::flatten($result)));
         if (is_array($newSignOffList)) $result = array_unique([...$result, ...$newSignOffList]);
+        $result = array_map(fn ($id) => +$id, $result);
 
         $item = Qaqc_insp_tmpl::find($qaqcInspTmplId);
         $item->syncCheck("getExternalInspectorsOfQaqcInspTmpl", \App\Models\User::class, $result);
