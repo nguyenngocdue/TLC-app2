@@ -23,13 +23,18 @@ return new class extends Migration
 
             $table->id();
             $table->string('tb_document_id')->nullable();
+            $table->string('tb_type')->nullable();
             $table->string('employeeid')->nullable();
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
             $table->string('workplace_code')->nullable();
-            $table->string('la_type')->nullable();
-            $table->date('la_date')->nullable();
-            $table->unsignedBigInteger('la_projects')->nullable();
+            $table->date('from_date')->nullable();
+            $table->date('to_date')->nullable();
+
+            $table->decimal('total_of_la_day', 20, 2)->nullable();
+            $table->string('la_reason')->nullable();
+            $table->string('la_note')->nullable();
+            $table->string('la_document_status')->nullable();
             $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();
 

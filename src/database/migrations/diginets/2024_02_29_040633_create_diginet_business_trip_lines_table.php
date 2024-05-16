@@ -31,11 +31,11 @@ return new class extends Migration
             $table->date('tb_date')->nullable();
 
             $table->float('number_of_tb_day')->nullable();
-            $table->unsignedBigInteger('tb_project')->nullable();
+            $table->string('tb_project')->nullable();
             $table->string('tb_reason')->nullable();
             $table->string('tb_document_id')->nullable();
 
-            $table->unsignedBigInteger('approver_id')->nullable();
+            $table->string('approver_id')->nullable();
             $table->string('approver_name')->nullable();
 
 

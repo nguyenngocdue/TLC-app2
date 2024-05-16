@@ -18,15 +18,47 @@ class DiginetService
         return $formattedDateTime;
     }
 
+    private function editFieldsOfItems($items)
+    {
+        $keysArray = [];
+        $keys = array_keys($items);
+        foreach ($keys as $value) {
+            $newKey = str_replace('ID', 'Id', $value);
+            $newKey = str_replace('OT', 'Ot', $newKey);
+            $newKey = str_replace('LA', 'La', $newKey);
+            $newKey = str_replace('TB', 'Tb', $newKey);
+            $newKey = str_replace('EmployeeId', 'employeeid', $newKey);
+            $newKey = str_replace('WorkPlaceCode', 'WorkplaceCode', $newKey);
+
+            $newKey = str_replace('TotalofTbDay', 'total_of_tb_day', $newKey);
+            $newKey = str_replace('TotalofLaDay', 'total_of_la_day', $newKey);
+
+            $newKey = str_replace('NumberofTbDay', 'number_of_tb_day', $newKey);
+            $newKey = str_replace('NumberofLaDay', 'number_of_la_day', $newKey);
+
+
+            $newKey = strtolower(preg_replace('/([A-Z])/', '_$1', $newKey));
+            if ($newKey[0] == '_') {
+                $newKey = substr($newKey, 1);
+            }
+            $keysArray[] = $newKey;
+        }
+        return $keysArray;
+    }
+
     function changeFields($item, $fieldsToMap, $conFieldName = 'date')
     {
         if (empty($item)) return [];
-        // dd($item, $fieldsToMap);
+
+        $editedKeys = self::editFieldsOfItems($item);
+        $diffFields = array_diff($editedKeys, $fieldsToMap);
+        if (!empty($diffFields)) return ['field_error' => $diffFields];
         $fieldsDiginet =  array_combine($fieldsToMap, array_keys($item));
         $array = [];
         foreach ($fieldsDiginet as $key => $field) {
             $val = $item[$field];
             if ($key === $conFieldName) $val = $this->changeTypeDate($val);
+            if ($key === 'from_date' || $key === 'to_date') $val = $this->changeTypeDate($val);
             $array[$key] = $val;
             $array['owner_id'] = 1;
         }
@@ -71,7 +103,16 @@ class DiginetService
             $response['recordsDeleted'] = $del;
             $response['message'] = "{$del} rows were deleted from {$tableName} from $fromDate to $toDate";
 
-            foreach ($data as &$item) $item = $this->changeFields($item, $fieldsToMap, $conFieldName);
+            foreach ($data as &$item) {
+                $item = $this->changeFields($item, $fieldsToMap, $conFieldName);
+                if (isset($item['field_error'])) {
+                    $response['status'] = 'error';
+                    $response['period'] = $fromDate . ' - ' . $toDate;
+                    $response['table_on'] = $tableName;
+                    $response['message'] = "Please verify the following fields in the table (" . $tableName . ") or Diginet's API: " . json_encode(array_values($item['field_error']));
+                    return $response;
+                }
+            }
             $recordCount = 0;
             foreach ($data as $row) {
                 $modelPath::create($row);
