@@ -67,6 +67,6 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
 
         $this->subProjectService->update($book->sub_project_id, $newSignOffList, $nominatedListFn);
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newSignOffList, $nominatedListFn);
-        $this->prodRoutingService->update($book->getProdOrder->prod_routing_id, $newSignOffList, $nominatedListFn);
+        $this->prodRoutingService->update($book->prod_routing_id, $newSignOffList, $nominatedListFn);
     }
 }

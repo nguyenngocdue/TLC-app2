@@ -26,6 +26,8 @@ class UpdateProdRoutingService
 
         $result = array_values(array_unique(Arr::flatten($result)));
         if (is_array($newSignOffList)) $result = array_unique([...$result, ...$newSignOffList]);
+        $result = array_map(fn ($id) => +$id, $result);
+
 
         $item = Prod_routing::find($prod_routing_id);
         $item->syncCheck("getExternalInspectorsOfProdRouting", \App\Models\User::class, $result);

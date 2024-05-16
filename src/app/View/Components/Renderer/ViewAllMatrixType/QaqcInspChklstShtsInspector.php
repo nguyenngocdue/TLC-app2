@@ -88,12 +88,14 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
         $cu = CurrentUser::get();
         $prodRoutings = $cu->getProdRoutingsOfExternalInspector();
         Oracy::attach('getSubProjects()', $prodRoutings);
+        // dump($prodRoutings);
         return $prodRoutings;
     }
 
     private static $matrixDataSourceSingleton = null;
     public function getMatrixDataSource($xAxis)
     {
+        // dump($this->matrixes);
         if (is_null(static::$matrixDataSourceSingleton)) {
             $cuid = CurrentUser::id();
             // dump($this->matrixes);
