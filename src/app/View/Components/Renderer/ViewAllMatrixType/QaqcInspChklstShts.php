@@ -263,13 +263,18 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return $result;
     }
 
+    protected function getAllRoutingList()
+    {
+        return Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+    }
+
     protected function getMultipleMatrixObjects()
     {
         $show_on_ics_id = config("production.prod_routings.qaqc_insp_chklsts");
         if ($this->prodRouting) {
             $prodRoutings = [Prod_routing::find($this->prodRouting)];
         } else {
-            $prodRoutings = Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+            $prodRoutings = $this->getAllRoutingList();
         }
         $result = [];
         foreach ($prodRoutings as $key => $routing) {

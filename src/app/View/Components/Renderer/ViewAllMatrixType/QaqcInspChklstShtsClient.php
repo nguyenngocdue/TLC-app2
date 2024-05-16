@@ -4,18 +4,13 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\BigThink\Oracy;
 use App\Models\Prod_routing;
-use App\Models\Project;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 
 class QaqcInspChklstShtsClient extends QaqcInspChklstShts
 {
+    use QaqcInspChklstShtsTraits;
     protected $allowCreation = false;
-
-    private $SANDBOX_ID = 72;
-    private $STW_SANDBOX_ID = 112;
-    // private $STW_TOWNHOUSE_ID = 94;
-    // private $STW_INSP_CHK_SHT_ID = 1007;
 
     private $projects, $subProjects;
 
@@ -25,13 +20,7 @@ class QaqcInspChklstShtsClient extends QaqcInspChklstShts
         $this->subProjects = $cu->getSubProjectsOfProjectClient();
         $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
 
-        $projectIds = [];
-        foreach ($this->subProjects as $subProject) $projectIds[] = $subProject->project_id;
-        $projectIds = array_unique($projectIds);
-
-        $this->projects = Project::query()
-            ->whereIn('id', $projectIds)
-            ->get();
+        $this->projects = $this->getProjectCollectionFromSubProjects();
         // dump($this->projects);
         parent::__construct();
     }
@@ -55,20 +44,9 @@ class QaqcInspChklstShtsClient extends QaqcInspChklstShts
     {
         $projects = $this->projects;
         $subProjects = $this->subProjects;
-        $subProjectIds = $subProjects->pluck('id')->toArray();
+        $prodRoutings = $this->getRoutingCollectionFromSubProjects();
 
-        $prodRoutings = Prod_routing::query()->get();
-        $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
-        Oracy::attach('getSubProjects()', $prodRoutings);
-        $prodRoutings1 = [];
-        foreach ($prodRoutings as $prodRouting0) {
-            $getSubProjects = $prodRouting0->{"getSubProjects()"}->toArray();
-            if (sizeof(array_intersect($getSubProjects, $subProjectIds)) > 0) {
-                $prodRoutings1[] = $prodRouting0;
-            }
-        }
-
-        return [$projects, $subProjects, $prodRoutings1];
+        return [$projects, $subProjects, $prodRoutings];
     }
 
     protected function getFilterDataSource()
