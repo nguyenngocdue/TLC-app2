@@ -152,6 +152,8 @@ class CurrentUser
                 return Constant::DASHBOARD_APARTMENT_OWNER;
             case static::get()->isNewcomer():
                 return Constant::DASHBOARD_NEWCOMER;
+            case static::get()->isCouncilMember():
+                return Constant::DASHBOARD_COUNCIL_MEMBER;
             default:
                 return "";
         }

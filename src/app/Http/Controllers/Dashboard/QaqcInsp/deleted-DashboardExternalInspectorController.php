@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\QaqcInsp;
 
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class DashboardExternalInspectorController extends DashboardController
+class DDDDashboardExternalInspectorController extends DashboardController
 {
     public function index(Request $request)
     {

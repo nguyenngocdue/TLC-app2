@@ -8,7 +8,7 @@ use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 
-class DashboardProjectClientController extends DashboardController
+class DDDDashboardProjectClientController extends DashboardController
 {
     private $SANDBOX_ID = 72;
     private $STW_SANDBOX_ID = 112;

@@ -5,6 +5,11 @@
 
 @section('content')
 {{-- @dump($viewportParams) --}}
+@php
+    $showOnlyInvolved=$showOnlyInvolved ?? false;
+    // dump($showOnlyInvolved);
+@endphp
+
 <div class="px-4 min-h-screen">
     <x-elapse title="Boot the layout: "/>
     <div class="grid grid-cols-12 gap-3 my-5">
