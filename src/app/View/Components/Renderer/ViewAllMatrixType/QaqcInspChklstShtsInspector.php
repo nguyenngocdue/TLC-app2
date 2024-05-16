@@ -19,6 +19,8 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     private $dataSource = null;
     private $projects, $subProjects, $prodRoutings;
 
+    protected $nominatedFn = "signature_qaqc_chklst_3rd_party_list";
+
     function  __construct()
     {
         $this->dataSource =  $this->getDataSource();
@@ -106,10 +108,10 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
                         $query->where('prod_routing_id', $routingId)->where('sub_project_id', $subProjectId);
                     })
                     ->get();
-                Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $sheets);
+                Oracy::attach($this->nominatedFn . "()", $sheets);
 
                 foreach ($sheets as $sheet) {
-                    $extInsp = $sheet->{"signature_qaqc_chklst_3rd_party_list()"};
+                    $extInsp = $sheet->{$this->nominatedFn . "()"};
                     if ($extInsp->contains($cuid)) {
                         $result[$key][] = $sheet;
                     }
