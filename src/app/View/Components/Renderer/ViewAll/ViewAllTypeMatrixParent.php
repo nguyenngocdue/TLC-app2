@@ -56,9 +56,9 @@ abstract class ViewAllTypeMatrixParent extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pluralType = null)
     {
-        $this->type = CurrentRoute::getTypePlural();
+        $this->type = $pluralType ?: CurrentRoute::getTypePlural();
         $this->typeModel = Str::modelPathFrom($this->type);
         $this->statuses = LibStatuses::getFor($this->type);
     }
@@ -160,51 +160,11 @@ abstract class ViewAllTypeMatrixParent extends Component
         return ['bg-' . $status['bg_color'], 'text-' . $status['text_color']];
     }
 
-    protected function makeCaptionForCheckbox($document)
-    {
-        if (is_null($this->checkboxCaptionColumn)) return "";
-
-        $caption = ($th = $document->total_hours) ?  "$th hours" : "...";
-        $href = route($this->type . ".edit", $document->id);
-        $a = "<a href='$href'>$caption</a>";
-
-        return $a;
-    }
-    protected function getCheckboxVisible($document, $y)
-    {
-        return true;
-    }
-
-    protected function makeCheckbox($document, $y, $forExcel)
-    {
-        $isCheckboxVisible = $this->getCheckboxVisible($document, $y) ? 1 : 0;
-        $id = $document->id;
-        $status = $document->status;
-        $yId = $y->id;
-
-        [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
-        $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$yId" : "cursor-not-allowed disabled:opacity-50";
-        $disabledStr = $isCheckboxVisible ? "" : "disabled";
-        $route = Route::has($rStr = ($this->type . ".changeStatusMultiple")) ? route($rStr) : "null";
-        $checkbox = "<input $disabledStr onclick='determineNextStatuses(\"$id\", \"$status\", this.checked, \"$route\")' status='$status' class='$className' title='" . Str::makeId($id) . "' type='checkbox' id='checkbox_{$yId}_$id' name='$id'/>";
-        $item = [
-            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
-            // 'cell_title' => 'Select check box id:' . $id,
-            'cell_class' => "$bgColor $textColor",
-        ];
-        return (object) $item;
-    }
-
     function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $matrixKey = null)
     {
         $result = [];
         switch ($dataIndex) {
-            case 'checkbox_change_status':
-            case 'checkbox_print':
-                foreach ($cell as $document) $result[] = $this->makeCheckbox($document, $y, $forExcel);
-                break;
             case 'status_only':
-                // case 'status':
             case 'detail':
                 foreach ($cell as $document) {
                     $result[] = $this->makeStatus($document, $forExcel, null, null, null, $matrixKey);
@@ -216,8 +176,6 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
         if (sizeof($result) == 1) return $result[0];
         return $result;
-        // dump($result);
-        // return [1, 2];
     }
 
     protected function getCreateNewParams($x, $y)
@@ -470,8 +428,8 @@ abstract class ViewAllTypeMatrixParent extends Component
             $params['key'] = $key;
         }
         $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
-        routePrefix='_mep1.exportCsvMatrix1'
-        type='$this->type'
+            routePrefix='_mep1.exportCsvMatrix1'
+            type='$this->type'
             :actionBtnList='\$actionBtnList'
             :params='\$params'
             />", [

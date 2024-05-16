@@ -23,6 +23,7 @@ class ProdRoutingFilter extends Component
         private $id,
         private $name,
         private $tableName,
+        private $typePlural = null,
         private $selected = "",
         private $multiple = false,
         private $control = 'dropdown2', // or 'radio-or-checkbox2'
@@ -32,6 +33,7 @@ class ProdRoutingFilter extends Component
     ) {
         // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
+        if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
     }
 
     private function getDataSource()
@@ -42,7 +44,7 @@ class ProdRoutingFilter extends Component
         Oracy::attach("getSubProjects()", $db);
 
         // if (CurrentUser::isAdmin()) {
-        $db = $db->filter(fn ($item) => $item->isShowOn(CurrentRoute::getTypePlural()))->values();
+        $db = $db->filter(fn ($item) => $item->isShowOn($this->typePlural))->values();
         // }
 
         return $db;

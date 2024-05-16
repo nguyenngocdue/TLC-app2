@@ -65,7 +65,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct("qaqc_insp_chklst_shts");
         [$this->project, /*$this->qaqcInspTmpl,*/ $this->subProject, $this->prodRouting] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : 21;

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class DashboardProjectClientController extends DashboardController
 {
+    private $SANDBOX_ID = 72;
     private $STW_SANDBOX_ID = 112;
     private $STW_TOWNHOUSE_ID = 94;
     private $STW_INSP_CHK_SHT_ID = 1007;
@@ -23,9 +24,9 @@ class DashboardProjectClientController extends DashboardController
         }
         switch ($defaultSubProject) {
             case $this->STW_SANDBOX_ID:
-                return [$defaultSubProject, $this->STW_TOWNHOUSE_ID, $this->STW_INSP_CHK_SHT_ID];
+                return [$this->SANDBOX_ID, $defaultSubProject, $this->STW_TOWNHOUSE_ID, $this->STW_INSP_CHK_SHT_ID];
             default:
-                return [$defaultSubProject, null, null];
+                return [$this->SANDBOX_ID, $defaultSubProject, null, null];
         }
     }
 
@@ -33,7 +34,7 @@ class DashboardProjectClientController extends DashboardController
     {
         $userSettings = $this->getUserSettings();
         // dump($userSettings);
-        [$sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
+        [$project_id, $sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id] = $userSettings;
         $cu = CurrentUser::get();
         $subProjects = $cu->getSubProjectsOfProjectClient();
         $subProjects->push(Sub_project::findFromCache($this->STW_SANDBOX_ID));
@@ -46,10 +47,11 @@ class DashboardProjectClientController extends DashboardController
         $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
         // dump($prodRoutings);
 
-        [$defaultSubProject, $defaultProdRouting, $defaultQaqcInspTmpl,] = $this->getDefaultValues($subProjects);
+        [$defaultProject, $defaultSubProject, $defaultProdRouting, $defaultQaqcInspTmpl,] = $this->getDefaultValues($subProjects);
 
         $params = [
             'viewportParams' => [
+                'project_id' => $project_id ?: $defaultProject,
                 'sub_project_id' => $sub_project_id ?: $defaultSubProject,
                 'qaqc_insp_tmpl_id' => $qaqc_insp_tmpl_id ?: $defaultQaqcInspTmpl,
                 'prod_routing_id' => $prod_routing_id ?: $defaultProdRouting,

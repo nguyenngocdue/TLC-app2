@@ -18,11 +18,12 @@ class DashboardController extends Controller
     {
         $settings = CurrentUser::getSettings();
         $array = $settings['qaqc_insp_chklst_shts'][Constant::VIEW_ALL]['dashboard_matrix'] ?? [];
+        $project_id = $array['project_id'] ?? null;
         $sub_project_id = $array['sub_project_id'] ?? null;
         $prod_routing_id = $array['prod_routing_id'] ?? null;
         $qaqc_insp_tmpl_id = $array['qaqc_insp_tmpl_id'] ?? null;
 
-        return [$sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id];
+        return [$project_id, $sub_project_id, $prod_routing_id, $qaqc_insp_tmpl_id];
     }
 
     /**
