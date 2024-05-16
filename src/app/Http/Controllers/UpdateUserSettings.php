@@ -60,7 +60,12 @@ class UpdateUserSettings extends Controller
         $type = $request->input("_entity");
         $toBeSaved = $request->except(["_token", "_method", "_entity", "action"]);
         if (isset($toBeSaved['page'])) {
-            $settings[$type][Constant::VIEW_ALL]['matrix']["page"] = $toBeSaved['page'];
+            if (isset($toBeSaved['key'])) {
+                $key = $toBeSaved['key'];
+                $settings[$type][Constant::VIEW_ALL]['matrix'][$key]["page"] = $toBeSaved['page'];
+            } else {
+                $settings[$type][Constant::VIEW_ALL]['matrix']["page"] = $toBeSaved['page'];
+            }
         } else {
             $settings[$type][Constant::VIEW_ALL]['matrix'] = $toBeSaved;
         }

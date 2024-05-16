@@ -221,7 +221,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $columns;
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         $started_at = DateTimeConcern::convertForLoading("picker_datetime", $y->started_at);
         $finished_at = DateTimeConcern::convertForLoading("picker_datetime", $y->finished_at);
@@ -273,7 +273,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $matrixKey = null)
     {
         if (in_array($dataIndex, ['status', 'detail'])) return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);
         if ($dataIndex === 'checkbox_print') return parent::cellRenderer($cell, $dataIndex, $x, $y, $forExcel);

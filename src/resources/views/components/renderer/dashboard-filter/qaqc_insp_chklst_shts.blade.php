@@ -23,6 +23,7 @@
                     tableName="prod_routings" 
                     name="prod_routing_id" 
                     id="prod_routing_id" 
+                    {{-- typePlural="qaqc_insp_chklst_shts" --}}
                     typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['prod_routing_id']}}"
                     :dataSource="$dataSource['prod_routings']"

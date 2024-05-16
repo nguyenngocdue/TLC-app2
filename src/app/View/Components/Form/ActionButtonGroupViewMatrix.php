@@ -24,6 +24,7 @@ class ActionButtonGroupViewMatrix extends Component
         protected $actionBtnList = [],
     ) {
         //
+        // dump($params['key'] ?? null);
     }
 
     /**
@@ -40,6 +41,7 @@ class ActionButtonGroupViewMatrix extends Component
             'type' => $this->type,
             'routeExportCSV' => $routeExportCSV,
             'actionBtnList' => $this->actionBtnList,
+            'matrixKey' => $this->params['key'] ?? null,
         ]);
     }
 }

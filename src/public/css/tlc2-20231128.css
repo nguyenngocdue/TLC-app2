@@ -342,3 +342,11 @@ div.scroll-to-month {
 .box-shadow-1 {
     box-shadow: 1px 1px 10px #000;
 }
+
+span.select2-selection__clear{
+    margin-left: 4px;    
+}
+
+span.select2-selection__arrow{
+    margin-top: 6px;
+}

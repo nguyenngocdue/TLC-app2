@@ -132,7 +132,7 @@ trait TableTraitRows
                             ?
                             $valueOfRawData
                             :
-                            "<div class='p-2 $cellDivClass' valueOfRawData>" . (is_object($valueOfRawData) ? "[object]" : $valueOfRawData) . "</div>"
+                            "<div class='p-2 $cellDivClass' valueOfRawData>" . (is_object($valueOfRawData) ? "[object]" : "<span class='min-w-4 block'>" . $valueOfRawData . "</span>") . "</div>"
                         );
                     break;
             }

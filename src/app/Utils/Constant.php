@@ -34,6 +34,7 @@ class Constant
     const DASHBOARD_PROJECT_CLIENT = "-project-client";
     const DASHBOARD_EXTERNAL_INSPECTOR = "-external-inspector";
     const DASHBOARD_APARTMENT_OWNER = "-apartment-owner";
+    const DASHBOARD_COUNCIL_MEMBER = "-council-member";
     const DASHBOARD_NEWCOMER = "-newcomer";
 
     const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'svg', 'webp', 'pdf'];

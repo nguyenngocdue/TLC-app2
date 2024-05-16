@@ -9,14 +9,20 @@ use Illuminate\Http\Request;
 
 class UpdateUserSettingsApi extends Controller
 {
-    public function updateUserSettingsPerPageApi(Request $request){
+    public function updateUserSettingsPerPageApi(Request $request)
+    {
         try {
             $entity = $request->input('entity');
             $perPage = $request->input('per_page');
+            $key = $request->input('key');
             if ($entity) {
                 $user = CurrentUser::get();
                 $settings = $user->settings;
-                $settings[$entity][Constant::VIEW_ALL]['per_page'] = $perPage;
+                if ($key) {
+                    $settings[$entity][Constant::VIEW_ALL]['matrix'][$key]['per_page'] = $perPage;
+                } else {
+                    $settings[$entity][Constant::VIEW_ALL]['per_page'] = $perPage;
+                }
                 $user->settings = $settings;
                 $user->update();
                 return ResponseObject::responseSuccess(
@@ -54,7 +60,8 @@ class UpdateUserSettingsApi extends Controller
             );
         }
     }
-    public function updateUserSettingsFilterApi(Request $request){
+    public function updateUserSettingsFilterApi(Request $request)
+    {
         try {
             $entity = $request->input('entity');
             $value = $request->input('current_filter');
@@ -75,6 +82,5 @@ class UpdateUserSettingsApi extends Controller
                 $th->getMessage(),
             );
         }
-
     }
 }

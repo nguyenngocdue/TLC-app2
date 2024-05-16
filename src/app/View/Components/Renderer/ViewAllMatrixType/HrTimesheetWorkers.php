@@ -86,7 +86,7 @@ class HrTimesheetWorkers extends ViewAllTypeMatrixParent
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         return [
             'meta01' => (object) [

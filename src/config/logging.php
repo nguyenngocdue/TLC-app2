@@ -120,5 +120,11 @@ return [
             "path" => storage_path("logs/emergency.log"),
             'level' => 'debug',
         ],
+        'mail_log_channel' => [
+            'driver' => 'daily', // or 'single' for a single log file
+            'path' => storage_path('logs/mail/mail.log'), // Define the log storage location
+            'level' => 'debug', // Define the log level
+            'days' => 7, // Number of days log files should be retained
+        ],
     ],
 ];

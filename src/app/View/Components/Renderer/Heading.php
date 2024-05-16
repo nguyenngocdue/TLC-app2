@@ -44,7 +44,7 @@ class Heading extends Component
                 $font = "font-medium";
             }
 
-            $theClass = " leading-tight my-2 dark:text-gray-300 $font text-{$textSize} text-{$this->xalign} $this->class";
+            $theClass = " leading-tight mx-4 dark:text-gray-300 $font text-{$textSize} text-{$this->xalign} $this->class";
             $slot = $data['slot'];
             $slot = htmlspecialchars_decode($slot);
 

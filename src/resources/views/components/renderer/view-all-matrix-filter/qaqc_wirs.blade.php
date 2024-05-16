@@ -6,7 +6,7 @@
     <div class="bg-white rounded w-full my-2 p-2">
         <div class="w-full my-1 grid grid-cols-12 gap-2">
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Project
+                Project <span class='text-red-400' title='required'>*</span>
                 <x-renderer.view-all-matrix-filter.ProjectFilter 
                     tableName="projects" 
                     name="project_id" 
@@ -16,7 +16,7 @@
                     />
             </div>
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Sub-Project
+                Sub-Project <span class='text-red-400' title='required'>*</span>
                 <x-renderer.view-all-matrix-filter.SubProjectFilter 
                     tableName="sub_projects" 
                     name="sub_project_id" 
@@ -26,7 +26,7 @@
                 />
             </div>
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Production Routing
+                Production Routing <span class='text-red-400' title='required'>*</span>
                 <x-renderer.view-all-matrix-filter.ProdRoutingFilter 
                     tableName="prod_routings" 
                     name="prod_routing_id" 

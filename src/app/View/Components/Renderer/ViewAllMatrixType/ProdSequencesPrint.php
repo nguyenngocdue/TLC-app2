@@ -53,7 +53,7 @@ class ProdSequencesPrint extends ProdSequences
         ];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         $yId = $y->id;
         $toggleBtn = Blade::render("<x-renderer.button size='xs' onClick='toggleCheckbox($yId)'>TG</x-renderer.button>");

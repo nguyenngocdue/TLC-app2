@@ -76,11 +76,13 @@ class SignOffRequestListener implements ShouldQueue
                 'signable_id' => $data['signableId'],
                 'category' => $category_id,
             ]);
-            broadcast(new WssToastrMessageChannel([
+            $params = [
                 'wsClientId' => $data['wsClientId'],
                 'type' => 'success',
                 'message' => "Email to <b>{$receiver->email}</b> sent successfully.",
-            ]));
+            ];
+            // Log::info($params);
+            broadcast(new WssToastrMessageChannel($params));
         }
 
         // return "OK";

@@ -16,7 +16,7 @@
 </form> --}}
 <div class="flex items-center lg:justify-end">
     <div class="w-28">
-        <select id="select_per_page" name="per_page" class="{{$classList}}" onchange="submitPerPage('{{$route}}',this.value)">
+        <select id="select_per_page" name="per_page" class="{{$classList}}" onchange="submitPerPage('{{$route}}',this.value, '{{$key}}')">
             @foreach([10,15,20,30,40,50,100] as $value)
             <option class="text-sm" value="{{$value}}" @selected($perPage==$value)>{{$value}} / page</option>
             @endforeach
@@ -25,11 +25,12 @@
 </div>
 <script>
     var entityPerPage = @json($type);
-    function submitPerPage(url,perPage){
+    function submitPerPage(url,perPage,key){
         if(perPage){
             const data = {
             entity: entityPerPage,
             per_page:perPage,
+            key,
             }
             $.ajax({
             type: 'put',

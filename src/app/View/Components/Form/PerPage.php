@@ -16,6 +16,7 @@ class PerPage extends Component
         private $type = '',
         private $route = '',
         private $perPage = '',
+        private $key = '',
     ) {
         //
     }
@@ -33,6 +34,7 @@ class PerPage extends Component
             'route' => $route,
             'perPage' => $this->perPage,
             'classList' => ClassList::DROPDOWN,
+            'key' => $this->key,
         ]);
     }
 }

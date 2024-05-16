@@ -57,8 +57,15 @@ class ViewAllInvokerController extends Controller
     public function exportCsvViewAllMatrix(Request $request)
     {
         try {
+            $key = $request->input('key');
             $modelPath = $this->getModelPath();
             [, $columns, $dataSource] = (new ($modelPath))->getViewAllMatrixParams(true);
+
+            if ($key) {
+                $columns = $columns[$key];
+                $dataSource = $dataSource[$key];
+            }
+
             $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
             $dataSource = $this->groupByDataSource($request, $dataSource);
             $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
@@ -165,5 +172,4 @@ class ViewAllInvokerController extends Controller
         $props =  SuperProps::getFor($this->type)['props'];
         return array_map(fn ($item) => $item['duplicatable'], $props);
     }
-    
 }

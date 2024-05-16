@@ -52,20 +52,25 @@ function intersectionArraysOfArrays(arrays) {
 }
 
 const sendManyRequestCache = {}
-const sendManyRequest = (uid, sheetTable, sheetId) => {
-    // console.log(uid, sheetTable, sheetId)
-    const key = `${uid}|${sheetTable}|${sheetId}`
-    const divCheckId = `divCheck_${uid}_${sheetTable}_${sheetId}`
-    if(sendManyRequestCache[key] === undefined ) {
-        sendManyRequestCache[key] = true
-        $(`#${divCheckId}`).show()
+const sendManyRequest = (uid, sheetTable, sheetId, matrixKey) => {
+    // console.log(uid, sheetTable, sheetId, matrixKey)
+    const key0 = matrixKey
+    const key1 = `${uid}|${sheetTable}|${sheetId}`
+    const divCheckIdIcon = `divCheck_${uid}_${sheetTable}_${sheetId}`
+    if(sendManyRequestCache[key0] === undefined ) {
+        sendManyRequestCache[key0] = {}
+    }
+    if(sendManyRequestCache[key0][key1] === undefined) {
+        sendManyRequestCache[key0][key1] = true
+        $(`#${divCheckIdIcon}`).show()
     }
     else {
-        delete sendManyRequestCache[key]
-        $(`#${divCheckId}`).hide()
+        delete sendManyRequestCache[key0][key1]
+        $(`#${divCheckIdIcon}`).hide()
     }
-    // console.log(sendManyRequestCache)
-    const total = Object.keys(sendManyRequestCache).length
+    // console.log(sendManyRequestCache[key0])
+    const total = Object.keys(sendManyRequestCache[key0]).length
+    
     let button = ''
     
         const text = total ? `Send ${total} Sign-Off Request${total>1?'s':''}` : `Send Sign-off Request`
@@ -74,9 +79,17 @@ const sendManyRequest = (uid, sheetTable, sheetId) => {
         button.classList.add(total?`bg-blue-600`:`bg-blue-300`, total?`cursor-pointer`:`cursor-not-allowed`)
         button.innerHTML=text
         button.type='button'
-        button.addEventListener('click', ()=>{
-
-            const splitted = Object.keys(sendManyRequestCache).map(key=>key.split("|"))
+        button.addEventListener('click', (e)=>{
+            const allKeys = Object.keys(sendManyRequestCache[key0])
+            const btn = e.target
+            const msg = "Sending " + allKeys.length +" request(s) to sign-off..."
+            console.log(msg)
+            toastr.info(msg)
+            btn.innerHTML = "Requesting..."
+            btn.classList.add('bg-blue-300', `cursor-not-allowed`)
+            btn.classList.remove('bg-blue-600', `cursor-pointer`)
+            btn.disabled = true
+            const splitted = allKeys.map(key=>key.split("|"))
             // console.log("Sending ", sendManyRequestCache, splitted  )
             const results = {}
             splitted.forEach(term=>{
@@ -94,7 +107,7 @@ const sendManyRequest = (uid, sheetTable, sheetId) => {
                         category = "signature_qaqc_chklst_3rd_party"
                         break;
                     case 'qaqc_punchlists':
-                        category = "signature_qaqc_punchlist"
+                        category = "signature_qaqc_punchlist_qaqc"
                         break;
                 }
                 const data = { 
@@ -104,20 +117,23 @@ const sendManyRequest = (uid, sheetTable, sheetId) => {
                     category,
                     wsClientId,
                 }
-                // console.log(data)
+                const url = `/api/v1/qaqc/request_to_sign_off`
+                // console.log(url, data)
                 $.ajax({
                     method:'POST',
-                    url: `/api/v1/qaqc/request_to_sign_off`,
+                    url,
                     data,
                 }).then(res=>{
                     setTimeout(()=>{
                         window.location.reload()
-                    }, 1000) /* Wait for the toastr to show */
+                    }, 2000) 
+                    /* Wait for the toastr to show */
+                    /* 1000ms is not long enough to write into DB*/
                 })
             })
         })
-   
-    $("#divSendManyRequest").html(button)
+    // console.log("Attach button to divSendManyRequest"+matrixKey)
+    $("#divSendManyRequest"+matrixKey).html(button)
 }
 
 

@@ -42,6 +42,8 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $nameColumnFixed = 'left';
     protected $cellAgg = null;
     protected $maxH = null;
+    protected $multipleMatrix = false;
+    protected $matrixes = null;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -54,9 +56,9 @@ abstract class ViewAllTypeMatrixParent extends Component
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pluralType = null)
     {
-        $this->type = CurrentRoute::getTypePlural();
+        $this->type = $pluralType ?: CurrentRoute::getTypePlural();
         $this->typeModel = Str::modelPathFrom($this->type);
         $this->statuses = LibStatuses::getFor($this->type);
     }
@@ -122,7 +124,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $value ? $value : '';
     }
 
-    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null)
+    protected function makeStatus($document, $forExcel, $editRoute = null, $statuses = null, $objectToGet = null, $matrixKey = null)
     {
         if (is_null($statuses)) $statuses = $this->statuses;
         $status = $statuses[$document->status] ?? null;
@@ -158,54 +160,14 @@ abstract class ViewAllTypeMatrixParent extends Component
         return ['bg-' . $status['bg_color'], 'text-' . $status['text_color']];
     }
 
-    protected function makeCaptionForCheckbox($document)
-    {
-        if (is_null($this->checkboxCaptionColumn)) return "";
-
-        $caption = ($th = $document->total_hours) ?  "$th hours" : "...";
-        $href = route($this->type . ".edit", $document->id);
-        $a = "<a href='$href'>$caption</a>";
-
-        return $a;
-    }
-    protected function getCheckboxVisible($document, $y)
-    {
-        return true;
-    }
-
-    protected function makeCheckbox($document, $y, $forExcel)
-    {
-        $isCheckboxVisible = $this->getCheckboxVisible($document, $y) ? 1 : 0;
-        $id = $document->id;
-        $status = $document->status;
-        $yId = $y->id;
-
-        [$bgColor, $textColor] = $this->getBackgroundColorAndTextColor($document);
-        $className = $isCheckboxVisible ? "cursor-pointer view-all-matrix-checkbox-$yId" : "cursor-not-allowed disabled:opacity-50";
-        $disabledStr = $isCheckboxVisible ? "" : "disabled";
-        $route = Route::has($rStr = ($this->type . ".changeStatusMultiple")) ? route($rStr) : "null";
-        $checkbox = "<input $disabledStr onclick='determineNextStatuses(\"$id\", \"$status\", this.checked, \"$route\")' status='$status' class='$className' title='" . Str::makeId($id) . "' type='checkbox' id='checkbox_{$yId}_$id' name='$id'/>";
-        $item = [
-            'value' => $checkbox . "<br/>" . $this->makeCaptionForCheckbox($document),
-            // 'cell_title' => 'Select check box id:' . $id,
-            'cell_class' => "$bgColor $textColor",
-        ];
-        return (object) $item;
-    }
-
-    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false)
+    function cellRenderer($cell, $dataIndex, $x, $y, $forExcel = false, $matrixKey = null)
     {
         $result = [];
         switch ($dataIndex) {
-            case 'checkbox_change_status':
-            case 'checkbox_print':
-                foreach ($cell as $document) $result[] = $this->makeCheckbox($document, $y, $forExcel);
-                break;
             case 'status_only':
-                // case 'status':
             case 'detail':
                 foreach ($cell as $document) {
-                    $result[] = $this->makeStatus($document, $forExcel);
+                    $result[] = $this->makeStatus($document, $forExcel, null, null, null, $matrixKey);
                 }
                 break;
             default:
@@ -214,8 +176,6 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
         if (sizeof($result) == 1) return $result[0];
         return $result;
-        // dump($result);
-        // return [1, 2];
     }
 
     protected function getCreateNewParams($x, $y)
@@ -228,7 +188,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         return $params;
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel)
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
         return [];
     }
@@ -271,7 +231,7 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
     }
 
-    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel)
+    function mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel, $matrixKey = null)
     {
         // dump($xAxis);
         // dd($yAxis);
@@ -307,19 +267,19 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $hasFile = isset($dataSource[$yId][$xId]);
                 // dump("yID $yId xId $xId $hasFile");
                 if ($hasFile) {
-                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel);
+                    $value = $this->cellRenderer($dataSource[$yId][$xId], $this->mode, $x, $y, $forExcel, $matrixKey);
                     $line[$xId] = $value;
                     if ($this->mode == 'detail') {
                         foreach ($extraColumns as $column) {
                             $key = $xId . "_" . $column;
-                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel);
+                            $value = $this->cellRenderer($dataSource[$yId][$xId], $column, $x, $y, $forExcel, $matrixKey);
                             //<< convert to empty string for excel
                             $line[$key] = is_null($value) ? "" : $value;
                         }
                     }
                 }
             }
-            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel);
+            $metaObjects = $this->getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey);
             foreach ($metaObjects as $key => $metaObject) {
                 $newObject = $metaObject;
                 if (Str::endsWith($key, "_for_group_by")) {
@@ -430,23 +390,43 @@ abstract class ViewAllTypeMatrixParent extends Component
         }
     }
 
-    public function render()
+    protected function getMultipleMatrixObjects()
     {
-        [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
-        $footer = $this->getFooter($yAxisTableName);
+        return [];
+    }
+
+    private function getPerPage()
+    {
         $settings = CurrentUser::getSettings();
-        $per_page = $settings[$this->type]['view_all']['per_page'] ?? 15;
-        $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
-        $dataSource = $this->paginate($dataSource, $per_page, $page);
         $route = route('updateUserSettings');
-        $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page'/>";
+        $result = [];
 
-        $filterRenderer = $this->getFilter();
+        if ($this->multipleMatrix) {
+            foreach (array_keys($this->matrixes) as $key) {
+                $per_page = $settings[$this->type]['view_all']['matrix'][$key]['per_page'] ?? 15;
+                $page = $settings[$this->type]['view_all']['matrix'][$key]['page'] ?? 1;
+                $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page' key='$key'/>";
+                $result[$key] = [$perPage, $per_page, $page];
+            }
+        } else {
+            $per_page = $settings[$this->type]['view_all']['matrix']['per_page'] ?? 15;
+            $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
+            $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page' />";
+            $result = [$perPage, $per_page, $page];
+        }
 
+        return $result;
+    }
+
+    private function getActionButtons(string $key = null)
+    {
         $params = [
             'groupBy' => $this->groupBy,
             'groupByLength' => $this->groupByLength,
         ];
+        if ($key) {
+            $params['key'] = $key;
+        }
         $actionButtons = Blade::render("<x-form.action-button-group-view-matrix
             routePrefix='_mep1.exportCsvMatrix1'
             type='$this->type'
@@ -456,26 +436,76 @@ abstract class ViewAllTypeMatrixParent extends Component
             'actionBtnList' => $this->actionBtnList,
             'params' => $params,
         ]);
+        return $actionButtons;
+    }
+
+    public function render()
+    {
+        [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading] = $this->getViewAllMatrixParams();
+        $footer = $this->getFooter($yAxisTableName);
+        $perPageArray = [];
+
+        if ($this->multipleMatrix) {
+            $perPageArray = $this->getPerPage();
+            foreach (array_keys($this->matrixes) as $key) {
+                [$perPage, $per_page, $page] = $perPageArray[$key];
+                $dataSource[$key] = $this->paginate($dataSource[$key], $per_page, $page, ['query' => ['key' => $key]]);
+                $perPageArray[$key] = $perPage;
+            }
+        } else {
+            [$perPage, $per_page, $page] = $this->getPerPage();
+            $dataSource = $this->paginate($dataSource, $per_page, $page);
+            $perPageArray = $perPage;
+        }
+
+        $filterRenderer = $this->getFilter();
+
+
         // dd($columns);
         // dump($dataSource[0]);
         // dump($xAxis2ndHeading);
         // dump($perPage);
+
+        $matrixes = [];
+        if (!$this->multipleMatrix) {
+            $matrixes = [
+                [
+                    'name' => '',
+                    'description' => '',
+                    'columns' => $columns,
+                    'dataSource' => $dataSource,
+                    'dataHeader' => $xAxis2ndHeading,
+                    'perPage' => $perPage,
+                    'actionButtons' => $this->getActionButtons(),
+                ],
+            ];
+        } else {
+            foreach ($this->matrixes as $key => $object) {
+                $matrixes[] = [
+                    'name' => $object['name'],
+                    'description' => $object['description'],
+                    'columns' => $columns[$key],
+                    'dataSource' => $dataSource[$key],
+                    'dataHeader' => $xAxis2ndHeading[$key],
+                    'perPage' => $perPageArray[$key],
+                    'actionButtons' => $this->getActionButtons($key),
+                ];
+            }
+        }
+
         return view(
             'components.renderer.view-all.view-all-type-matrix-parent',
             [
-                'columns' => $columns,
-                'dataSource' => $dataSource,
-                'dataHeader' => $xAxis2ndHeading,
+                'matrixes' => $matrixes,
+
                 'type' => $this->type,
                 'filterRenderer' => $filterRenderer,
                 'footer' => $footer,
-                'perPage' => $perPage,
                 'rotate45Width' => $this->rotate45Width,
                 'rotate45Height' => $this->rotate45Height,
                 'groupBy' => $this->groupBy,
                 'groupByLength' => $this->groupByLength,
                 'tableTrueWidth' => $this->tableTrueWidth,
-                'actionButtons' => $actionButtons,
                 'headerTop' => $this->headerTop,
                 'tableTopCenterControl' => $this->tableTopCenterControl,
                 'route' => $this->getRouteAfterSubmit(),
@@ -513,14 +543,28 @@ abstract class ViewAllTypeMatrixParent extends Component
     public function getViewAllMatrixParams($forExcel = false)
     {
         $xAxis = $this->getXAxis();
-        $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
         $yAxis = $this->getYAxis();
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
-        $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
-        $dataSource = $this->aggArrayOfCells($dataSource);
-        // dd($dataSource[0]);
-        $columns = $this->getColumns($xAxis);
-        return [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
+        $columns = [];
+        if ($this->multipleMatrix) {
+            // $matrixes = $this->getMultipleMatrixObjects();
+            foreach (array_keys($this->matrixes) as $key) {
+                $dataSource[$key] = $this->mergeDataSource($xAxis[$key], $yAxis[$key], $yAxisTableName, $dataSource[$key], $forExcel, $key);
+                $dataSource[$key] = $this->aggArrayOfCells($dataSource[$key]);
+                $columns[$key] = $this->getColumns($xAxis[$key]);
+                $xAxis2ndHeading[$key] = $this->getXAxis2ndHeader($xAxis[$key]);
+            }
+        } else {
+            $dataSource = $this->mergeDataSource($xAxis, $yAxis, $yAxisTableName, $dataSource, $forExcel);
+            $dataSource = $this->aggArrayOfCells($dataSource);
+            $columns = $this->getColumns($xAxis);
+            $xAxis2ndHeading = $this->getXAxis2ndHeader($xAxis);
+        }
+        // dump($dataSource);
+        // dd();
+        $result = [$yAxisTableName, $columns, $dataSource, $xAxis2ndHeading];
+        // dump($result);
+        return $result;
     }
 }
