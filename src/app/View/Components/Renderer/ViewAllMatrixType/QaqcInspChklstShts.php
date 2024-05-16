@@ -54,6 +54,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $maxH = 60;
     protected $multipleMatrix = true;
 
+    protected $metaShowPrint = true;
+    protected $metaShowProgress = true;
+    protected $metaShowComplianceName = true;
+
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
     private $hasPunchlist = false;
@@ -205,11 +209,11 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     protected function getMetaColumns()
     {
-        return [
-            ['dataIndex' => 'compliance_name', /* 'width' => 300, /*'fixed' => 'left',*/],
-            ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/],
-            ['dataIndex' => 'print', "title" => 'Print', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/],
-        ];
+        $result = [];
+        if ($this->metaShowComplianceName) $result[] = ['dataIndex' => 'compliance_name', /* 'width' => 300, /*'fixed' => 'left',*/];
+        if ($this->metaShowProgress) $result[] = ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
+        if ($this->metaShowPrint) $result[] = ['dataIndex' => 'print', "title" => 'Print', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
+        return $result;
     }
 
     protected function getCreateNewButton($y)
