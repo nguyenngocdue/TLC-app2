@@ -20,12 +20,9 @@ use Illuminate\Support\Facades\DB;
 class Ghg_sheet_080 extends Report_ParentDocument2Controller
 {
 
-
-
 	protected $viewName = 'document-ghg-sheet-080';
 	protected $year = '2023';
 	protected $mode = '080';
-
 
 	private function configForStringSQL()
 	{
@@ -116,7 +113,6 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 		return $strSQL;
 	}
 
-
 	private function generateStringSQL($years)
 	{
 		$dataConfig = $this->configForStringSQL();
@@ -158,12 +154,14 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 	}
 
 
-
-
-	protected function getParamColumns($dataSource, $modeType)
+	public function getParamColumns($dataSource, $modeType)
 	{
 		return [
-			[]
+			[
+				'title' => 'Year',
+				'dataIndex' => 'year',
+				'multiple' => true,
+			],
 		];
 	}
 
@@ -183,7 +181,8 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 			$dataQuery = DB::select($strSQL);
 			$dataOutput[$key] = $dataQuery;
 		}
-		dd($dataOutput);
+		// dd($dataOutput);
+		return $dataOutput;
 	}
 
 	public function getDataSource($params)

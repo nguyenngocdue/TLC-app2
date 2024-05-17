@@ -32,7 +32,6 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
     $key = $basicInfoWidgetReport['key'];
     $titleReport = $basicInfoWidgetReport['title_report'];
 @endphp
-
 <div class="grid grid-cols-12 gap-1">
         <div class="col-span-2">
             <div class="no-print justify-end pl-4 pt-5">
@@ -98,6 +97,7 @@ $class2 = 'p-2 border border-gray-600 flex justify-start items-center text-sm fo
 
 <script type="text/javascript">
     var param = {!! json_encode($params) !!}
+    console.log(params);
     var childrenMode = param.children_mode
     console.log(childrenMode)
     document.addEventListener('DOMContentLoaded', function() {
