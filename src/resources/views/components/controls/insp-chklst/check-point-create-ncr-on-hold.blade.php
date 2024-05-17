@@ -22,7 +22,7 @@
         </div>
     @endif
     
-    @if(!$isExternalInspector && !$isProjectClient)
+    @if(!$isExternal)
         <div id="divSubOptionNCR_{{$line->id}}" class="{{$controlValueId==2 ? "" : "hidden"}}">
             <x-renderer.button disabled="{{$readOnly}}" target="_blank" type='success' href="{!! $href !!}" class="m-1">{{$nameButton}}</x-renderer.button>
         </div>
