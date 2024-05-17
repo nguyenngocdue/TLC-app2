@@ -27,6 +27,8 @@ return new class extends Migration
             $table->unsignedBigInteger('workplace_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->dateTime('audit_datetime')->nullable();
+
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }
