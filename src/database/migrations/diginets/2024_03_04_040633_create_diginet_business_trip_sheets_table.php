@@ -23,6 +23,7 @@ return new class extends Migration
 
             $table->id();
             $table->string('tb_document_id')->nullable();
+            $table->string('tb_type')->nullable();
             $table->string('employeeid')->nullable();
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();
@@ -30,10 +31,6 @@ return new class extends Migration
 
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
-
-
-            $table->string('tb_type')->nullable();
-            $table->date('tb_date')->nullable();
 
             $table->decimal('total_of_tb_day', 20, 2)->nullable();
             $table->string('tb_project')->nullable();
