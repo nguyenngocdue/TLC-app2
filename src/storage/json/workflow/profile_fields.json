@@ -8,7 +8,8 @@
         "name": "_attachment",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_category": {
         "name": "_category",
@@ -26,7 +27,13 @@
         "name": "_created_at",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_current_workplace": {
+        "name": "_current_workplace",
+        "profile_readonly": "true",
+        "me_readonly": "true"
     },
     "_date_of_birth": {
         "name": "_date_of_birth",
@@ -37,13 +44,15 @@
         "name": "_deleted_at",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_department": {
         "name": "_department",
@@ -59,7 +68,8 @@
         "name": "_domain",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_email": {
         "name": "_email",
@@ -70,11 +80,33 @@
         "name": "_email_verified_at",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_employeeid": {
         "name": "_employeeid",
         "profile_readonly": "true",
+        "me_readonly": "true"
+    },
+    "_erp_cashflow": {
+        "name": "_erp_cashflow",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_erp_site": {
+        "name": "_erp_site",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_erp_sub_cat": {
+        "name": "_erp_sub_cat",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_featured_image": {
@@ -105,7 +137,8 @@
         "name": "_getAvatar",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_getOtTeams()": {
         "name": "_getOtTeams()",
@@ -116,28 +149,50 @@
         "name": "_getPosts",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_getProdRoutingsOfCouncilMember()": {
+        "name": "_getProdRoutingsOfCouncilMember()",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_readonly": "true"
     },
     "_getProdRoutingsOfExternalInspector()": {
         "name": "_getProdRoutingsOfExternalInspector()",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_getQaqcInspTmplsOfCouncilMember()": {
+        "name": "_getQaqcInspTmplsOfCouncilMember()",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_readonly": "true"
     },
     "_getQaqcInspTmplsOfExternalInspector()": {
         "name": "_getQaqcInspTmplsOfExternalInspector()",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_getRoleSet": {
         "name": "_getRoleSet",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_getSiteTeams()": {
         "name": "_getSiteTeams()",
+        "profile_readonly": "true",
+        "me_readonly": "true"
+    },
+    "_getSubProjectsOfCouncilMember()": {
+        "name": "_getSubProjectsOfCouncilMember()",
+        "profile_hidden": "true",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
@@ -145,13 +200,15 @@
         "name": "_getSubProjectsOfExternalInspector()",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_getSubProjectsOfProjectClient()": {
         "name": "_getSubProjectsOfProjectClient()",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_getTshtTeams()": {
         "name": "_getTshtTeams()",
@@ -162,7 +219,8 @@
         "name": "_guid",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_id": {
         "name": "_id",
@@ -180,7 +238,8 @@
         "name": "_last_date",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_last_name": {
         "name": "_last_name",
@@ -191,7 +250,14 @@
         "name": "_leaf_uids",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_leave_effective_date": {
+        "name": "_leave_effective_date",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_readonly": "true"
     },
     "_name": {
         "name": "_name",
@@ -219,13 +285,15 @@
         "name": "_owner_id",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_password": {
         "name": "_password",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_phone": {
         "name": "_phone",
@@ -275,31 +343,36 @@
         "name": "_provider",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_remember_token": {
         "name": "_remember_token",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_resigned": {
         "name": "_resigned",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_settings": {
         "name": "_settings",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_show_on_beta": {
         "name": "_show_on_beta",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_standard_signature": {
         "name": "_standard_signature",
@@ -322,13 +395,15 @@
         "name": "_title",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_user_id_passport": {
         "name": "_user_id_passport",
@@ -340,7 +415,8 @@
         "name": "_user_pin",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_user_type": {
         "name": "_user_type",
@@ -351,7 +427,8 @@
         "name": "_viewport_uids",
         "profile_hidden": "true",
         "profile_readonly": "true",
-        "me_hidden": "true"
+        "me_hidden": "true",
+        "me_readonly": "true"
     },
     "_workplace": {
         "name": "_workplace",
