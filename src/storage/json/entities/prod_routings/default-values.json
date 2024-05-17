@@ -100,7 +100,20 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This content is from nominated inspectors",
+        "control_extra": "This data is consolidated from QAQC ICS",
+        "textarea_rows": ""
+    },
+    "_getCouncilMembersOfProdRouting()": {
+        "name": "_getCouncilMembersOfProdRouting()",
+        "column_name": "getCouncilMembersOfProdRouting()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "This data is consolidated from QAQC ICS",
         "textarea_rows": ""
     },
     "_owner_id": {

@@ -20,6 +20,7 @@ class Qaqc_insp_tmpl extends ModelExtended
     public static $oracyParams = [
         "getProdRoutingsOfInspTmpl()" => ["getCheckedByField", Prod_routing::class],
         "getExternalInspectorsOfQaqcInspTmpl()" => ['getCheckedByField', User::class],
+        "getCouncilMembersOfQaqcInspTmpl()" => ['getCheckedByField', User::class],
     ];
 
     public function getSheets()
@@ -41,6 +42,12 @@ class Qaqc_insp_tmpl extends ModelExtended
     }
 
     public function getExternalInspectorsOfQaqcInspTmpl()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getCouncilMembersOfQaqcInspTmpl()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

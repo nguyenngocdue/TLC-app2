@@ -76,11 +76,16 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
         $sheetId = $event->sheet;
         $newSignOffList = $event->newSignOffList;
         $nominatedListFn = $event->nominatedListFn;
+        $signatureFn = $event->signatureFn;
+
+        $newCouncilList = $event->newCouncilList;
+        $councilListFn = $event->councilListFn;
+
         $sheet = Qaqc_insp_chklst_sht::find($sheetId);
 
         $this->updateProgress($sheet);
-        $this->updateStatusAccordingToSignOff($sheet, $nominatedListFn);
+        $this->updateStatusAccordingToSignOff($sheet, $signatureFn);
         // Log::info("Elaborate updated event to Checklist...");
-        event(new UpdatedQaqcChklstEvent($sheet, $newSignOffList, $nominatedListFn . "_list"));
+        event(new UpdatedQaqcChklstEvent($sheet, $newSignOffList, $nominatedListFn, $newCouncilList, $councilListFn));
     }
 }

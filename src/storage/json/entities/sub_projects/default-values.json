@@ -12,6 +12,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_General": {
+        "name": "_General",
+        "column_name": "General",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -103,9 +116,61 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_qr_plate_style_id": {
+        "name": "_qr_plate_style_id",
+        "column_name": "qr_plate_style_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_getProdRoutingsOfSubProject()": {
         "name": "_getProdRoutingsOfSubProject()",
         "column_name": "getProdRoutingsOfSubProject()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_Attachments": {
+        "name": "_Attachments",
+        "column_name": "Attachments",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_attachment_subproject_homeowner_manual": {
+        "name": "_attachment_subproject_homeowner_manual",
+        "column_name": "attachment_subproject_homeowner_manual",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_attachment_subproject_project_plans": {
+        "name": "_attachment_subproject_project_plans",
+        "column_name": "attachment_subproject_project_plans",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -181,9 +246,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getExternalInspectorsOfSubProject()": {
-        "name": "_getExternalInspectorsOfSubProject()",
-        "column_name": "getExternalInspectorsOfSubProject()",
+    "_divider1": {
+        "name": "_divider1",
+        "column_name": "divider1",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -191,12 +256,51 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from QAQC Inspection Check Sheet",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_Members of this Sub Project": {
+        "name": "_Members of this Sub Project",
+        "column_name": "Members of this Sub Project",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
         "textarea_rows": ""
     },
     "_getProjectMembers()": {
         "name": "_getProjectMembers()",
         "column_name": "getProjectMembers()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_Client of this SubProject": {
+        "name": "_Client of this SubProject",
+        "column_name": "Client of this SubProject",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_client_id": {
+        "name": "_client_id",
+        "column_name": "client_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -218,6 +322,58 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_Inspectors of this SubProject": {
+        "name": "_Inspectors of this SubProject",
+        "column_name": "Inspectors of this SubProject",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getExternalInspectorsOfSubProject()": {
+        "name": "_getExternalInspectorsOfSubProject()",
+        "column_name": "getExternalInspectorsOfSubProject()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "This data is consolidated from QAQC ICS",
+        "textarea_rows": ""
+    },
+    "_Council Members of this Sub Project": {
+        "name": "_Council Members of this Sub Project",
+        "column_name": "Council Members of this Sub Project",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getCouncilMembersOfSubProject()": {
+        "name": "_getCouncilMembersOfSubProject()",
+        "column_name": "getCouncilMembersOfSubProject()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "This data is consolidated from QAQC ICS",
         "textarea_rows": ""
     }
 }

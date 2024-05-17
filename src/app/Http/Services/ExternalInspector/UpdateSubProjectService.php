@@ -21,7 +21,8 @@ class UpdateSubProjectService
             $allSheets = $list->getSheets;
             // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
+                $list = $sheet->{$nominatedListFn}();
+                $result[] = $list->pluck('id')->toArray();
             }
         }
 

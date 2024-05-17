@@ -20,6 +20,8 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     private $projects, $subProjects, $prodRoutings;
 
     protected $nominatedFn = "signature_qaqc_chklst_3rd_party_list";
+    protected $getSubProjectsOfUserFn = "getSubProjectsOfExternalInspector";
+    protected $getProdRoutingsOfUserFn = "getProdRoutingsOfExternalInspector";
 
     function  __construct()
     {
@@ -30,7 +32,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     private function getDataSource()
     {
         $cu = CurrentUser::get();
-        $this->subProjects = $cu->getSubProjectsOfExternalInspector();
+        $this->subProjects = $cu->{$this->getSubProjectsOfUserFn}();
         if (!$this->subProjects->contains('id', $this->STW_SANDBOX_ID)) {
             $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
         }
@@ -86,7 +88,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     protected function getAllRoutingList()
     {
         $cu = CurrentUser::get();
-        $prodRoutings = $cu->getProdRoutingsOfExternalInspector();
+        $prodRoutings = $cu->{$this->getProdRoutingsOfUserFn}();
         Oracy::attach('getSubProjects()', $prodRoutings);
         // dump($prodRoutings);
         return $prodRoutings;

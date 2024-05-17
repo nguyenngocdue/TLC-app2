@@ -21,6 +21,8 @@ class UpdatedQaqcChklstEvent
         public $sheet,
         public $newSignOffList,
         public $nominatedListFn,
+        public $newCouncilList,
+        public $councilListFn,
     ) {
         //
         // Log::info('UpdatedQaqcChklstEvent');
