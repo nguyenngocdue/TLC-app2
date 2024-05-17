@@ -60,6 +60,8 @@ trait TraitUpdatedProdSequenceEvent
                 //Otherwise the event will not add the current sheet into their dashboard
                 $newSignOffList = $request['signature_qaqc_chklst_3rd_party_list()'];
                 $nominatedListFn = "signature_qaqc_chklst_3rd_party";
+                $newCouncilList = $request['council_member_list()'];
+                // Log::info($newCouncilList);
                 event(new UpdatedQaqcChklstSheetEvent($id, $newSignOffList, $nominatedListFn));
                 break;
             case 'qaqc_punchlist':

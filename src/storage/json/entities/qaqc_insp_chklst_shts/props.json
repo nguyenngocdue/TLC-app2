@@ -131,9 +131,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_council_members()": {
-        "name": "_council_members()",
-        "column_name": "council_members()",
+    "_council_member_list()": {
+        "name": "_council_member_list()",
+        "column_name": "council_member_list()",
         "column_type": "oracy_prop",
         "label": "Council Members",
         "control": "dropdown_multi",

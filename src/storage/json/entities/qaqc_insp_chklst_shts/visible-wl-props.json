@@ -395,9 +395,9 @@
         "contractor": "",
         "vendor": ""
     },
-    "_council_members()": {
-        "name": "_council_members()",
-        "column_name": "council_members()",
+    "_council_member_list()": {
+        "name": "_council_member_list()",
+        "column_name": "council_member_list()",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",

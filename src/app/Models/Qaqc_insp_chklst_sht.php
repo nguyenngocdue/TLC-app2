@@ -29,7 +29,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
     public static $oracyParams = [
         "getMonitors1()" => ["getCheckedByField", User::class],
-        "council_members()" => ["getCheckedByField", User::class],
+        "council_member_list()" => ["getCheckedByField", User::class],
         "signature_qaqc_chklst_3rd_party_list()"  => ["getCheckedByField", User::class],
     ];
 
@@ -94,7 +94,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
-    public function council_members()
+    public function council_member_list()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

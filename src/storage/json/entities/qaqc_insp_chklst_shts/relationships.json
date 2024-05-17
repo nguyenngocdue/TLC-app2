@@ -127,10 +127,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_council_members()": {
-        "name": "_council_members()",
+    "_council_member_list()": {
+        "name": "_council_member_list()",
         "relationship": "getCheckedByField",
-        "control_name": "council_members()",
+        "control_name": "council_member_list()",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "person",

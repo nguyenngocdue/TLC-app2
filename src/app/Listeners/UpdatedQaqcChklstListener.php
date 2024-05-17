@@ -65,8 +65,8 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         // Log::info($nominatedListFn);
         // dd($nominatedListFn);
 
-        Log::info($newSignOffList);
-        Log::info($nominatedListFn);
+        // Log::info($newSignOffList);
+        // Log::info($nominatedListFn);
 
         $this->subProjectService->update($book->sub_project_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfSubProject");
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfQaqcInspTmpl");
