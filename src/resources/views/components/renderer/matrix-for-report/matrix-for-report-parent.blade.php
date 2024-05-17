@@ -8,6 +8,7 @@
                     topLeftControl="{!! $actionButtons !!}"
                     topCenterControl=""
                     topRightControl=""
+                    tableTrueWidth=1
 
                     showNo=1 maxH=0 lineIgnoreNo=1
                     />

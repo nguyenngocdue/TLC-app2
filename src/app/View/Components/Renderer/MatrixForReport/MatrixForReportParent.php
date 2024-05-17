@@ -99,7 +99,7 @@ abstract class MatrixForReportParent extends Component
         $result = [];
         foreach ($dataSource as $yId => $columns) {
             foreach ($xAxis as $x) {
-                $result[$yId][$x->id] = "-"; //Make placeholder, incase if null, export to excel will have cell with -
+                $result[$yId][$x->id] = "<div class='text-center'>-</div>"; //Make placeholder, incase if null, export to excel will have cell with -
             }
         }
         foreach ($dataSource as $yId => $columns) {
@@ -125,6 +125,7 @@ abstract class MatrixForReportParent extends Component
                 'dataIndex' => $x->id,
                 'title' => $x->name,
                 // 'columnDivStyle' => ['z-index' => 2],
+                // 'width' => 40,
             ];
             $result[] = $column;
         }
@@ -244,7 +245,7 @@ abstract class MatrixForReportParent extends Component
                     'cell_class' => "text-center",
                 ];
             } else {
-                $line = "NA";
+                $line = "<div class='w-10 text-center'>NA</div>";
             }
         }
 
