@@ -32,9 +32,14 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
     {
         // $ids = $this->getIdChklst($event->subProjectId);
         $bookId = $event->sheet->qaqc_insp_chklst_id;
+        $book = Qaqc_insp_chklst::find($bookId);
+
         $newSignOffList = $event->newSignOffList;
         $nominatedListFn = $event->nominatedListFn;
-        $book = Qaqc_insp_chklst::find($bookId);
+
+        $newCouncilList = $event->newCouncilList;
+        $councilListFn = $event->councilListFn;
+
         // Log::info($book);
 
         $theTemplate = $book->getQaqcInspTmpl()->first();
@@ -65,8 +70,15 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         // Log::info($nominatedListFn);
         // dd($nominatedListFn);
 
-        $this->subProjectService->update($book->sub_project_id, $newSignOffList, $nominatedListFn);
-        $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newSignOffList, $nominatedListFn);
-        $this->prodRoutingService->update($book->getProdOrder->prod_routing_id, $newSignOffList, $nominatedListFn);
+        // Log::info($newSignOffList);
+        // Log::info($nominatedListFn);
+
+        $this->subProjectService->update($book->sub_project_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfSubProject");
+        $this->prodRoutingService->update($book->prod_routing_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfProdRouting");
+        $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfQaqcInspTmpl");
+
+        $this->subProjectService->update($book->sub_project_id, $newCouncilList, $councilListFn, "getCouncilMembersOfSubProject");
+        $this->prodRoutingService->update($book->prod_routing_id, $newCouncilList, $councilListFn, "getCouncilMembersOfProdRouting");
+        $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newCouncilList, $councilListFn, "getCouncilMembersOfQaqcInspTmpl");
     }
 }

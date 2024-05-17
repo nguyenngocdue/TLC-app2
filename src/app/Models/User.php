@@ -119,10 +119,15 @@ class User extends ModelExtended implements
         "getTshtTeams()" => ["getCheckedByField", User_team_tsht::class],
         "getSiteTeams()" => ["getCheckedByField", User_team_site::class],
 
+        "getSubProjectsOfCouncilMember()" => ['getCheckedByField', Sub_project::class],
         "getSubProjectsOfProjectClient()" => ['getCheckedByField', Sub_project::class],
         "getSubProjectsOfExternalInspector()" => ['getCheckedByField', Sub_project::class],
+
         "getQaqcInspTmplsOfExternalInspector()" => ['getCheckedByField', Qaqc_insp_tmpl::class],
+        "getQaqcInspTmplsOfCouncilMember()" => ['getCheckedByField', Qaqc_insp_tmpl::class],
+
         "getProdRoutingsOfExternalInspector()" => ['getCheckedByField', Prod_routing::class],
+        "getProdRoutingsOfCouncilMember()" => ['getCheckedByField', Prod_routing::class],
 
     ];
 
@@ -139,6 +144,12 @@ class User extends ModelExtended implements
     }
 
     public function getSiteTeams()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    function getSubProjectsOfCouncilMember() /////////////
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
@@ -162,7 +173,19 @@ class User extends ModelExtended implements
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
+    function getQaqcInspTmplsOfCouncilMember()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
     function getProdRoutingsOfExternalInspector()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    function getProdRoutingsOfCouncilMember()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

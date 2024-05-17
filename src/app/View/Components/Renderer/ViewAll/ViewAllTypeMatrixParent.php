@@ -547,9 +547,14 @@ abstract class ViewAllTypeMatrixParent extends Component
         $yAxisTableName = (new $this->yAxis)->getTableName();
         $dataSource = $this->getMatrixDataSource($xAxis);
         $columns = [];
+        $xAxis2ndHeading = [];
         if ($this->multipleMatrix) {
             // $matrixes = $this->getMultipleMatrixObjects();
             foreach (array_keys($this->matrixes) as $key) {
+                // dump($xAxis[$key]);
+                // dump($yAxis[$key]);
+                // dump($dataSource[$key]);
+
                 $dataSource[$key] = $this->mergeDataSource($xAxis[$key], $yAxis[$key], $yAxisTableName, $dataSource[$key], $forExcel, $key);
                 $dataSource[$key] = $this->aggArrayOfCells($dataSource[$key]);
                 $columns[$key] = $this->getColumns($xAxis[$key]);

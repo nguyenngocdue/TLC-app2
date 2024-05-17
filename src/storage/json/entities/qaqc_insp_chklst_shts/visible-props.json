@@ -59,9 +59,9 @@
         "pending_audit": "true",
         "audited": "true"
     },
-    "_council_members()": {
-        "name": "_council_members()",
-        "column_name": "council_members()",
+    "_council_member_list()": {
+        "name": "_council_member_list()",
+        "column_name": "council_member_list()",
         "in_progress": "true",
         "not_applicable": "true",
         "reviewed": "true",

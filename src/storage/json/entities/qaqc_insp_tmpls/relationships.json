@@ -63,6 +63,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getCouncilMembersOfQaqcInspTmpl()": {
+        "name": "_getCouncilMembersOfQaqcInspTmpl()",
+        "relationship": "getCheckedByField",
+        "control_name": "getCouncilMembersOfQaqcInspTmpl()",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getSheets": {
         "name": "_getSheets",
         "relationship": "hasMany",

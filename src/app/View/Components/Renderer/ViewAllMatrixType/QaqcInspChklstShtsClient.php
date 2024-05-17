@@ -18,7 +18,9 @@ class QaqcInspChklstShtsClient extends QaqcInspChklstShts
     {
         $cu = CurrentUser::get();
         $this->subProjects = $cu->getSubProjectsOfProjectClient();
-        $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
+        if (!$this->subProjects->contains('id', $this->STW_SANDBOX_ID)) {
+            $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
+        }
 
         $this->projects = $this->getProjectCollectionFromSubProjects();
         // dump($this->projects);

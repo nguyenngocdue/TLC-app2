@@ -2,13 +2,11 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-class QaqcInspChklstShtsCouncil extends QaqcInspChklstShts
+class QaqcInspChklstShtsCouncil extends QaqcInspChklstShtsInspector
 {
     protected $allowCreation = false;
 
-    function  __construct()
-    {
-        parent::__construct();
-        dump("COUNCIL");
-    }
+    protected $nominatedFn = "council_member_list";
+    protected $getSubProjectsOfUserFn = "getSubProjectsOfCouncilMember";
+    protected $getProdRoutingsOfUserFn = "getProdRoutingsOfCouncilMember";
 }

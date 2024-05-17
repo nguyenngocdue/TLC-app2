@@ -278,6 +278,12 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         }
         $result = [];
         foreach ($prodRoutings as $key => $routing) {
+            $allSubProjects = $routing->{"getSubProjects()"};
+            if ($allSubProjects) {
+                if (!$allSubProjects->contains($this->subProject)) {
+                    continue;
+                }
+            }
             $showOnScreenIds = $routing->getScreensShowMeOn()->pluck('id');
             if ($showOnScreenIds->contains($show_on_ics_id)) {
                 $tmpls = $routing->getChklstTmpls();
@@ -289,6 +295,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                             'description' => "Checklist Type: " . $tmpl->name,
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
+
+                            'sub_project_id' => $this->subProject,
                         ];
                     }
                 }

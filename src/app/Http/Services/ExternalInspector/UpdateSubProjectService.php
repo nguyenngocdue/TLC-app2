@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateSubProjectService
 {
-    function update($subProjectId, $newSignOffList, $nominatedListFn)
+    function update($subProjectId, $newSignOffList, $nominatedListFn, $targetFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("sub_project_id", $subProjectId)
@@ -21,15 +21,17 @@ class UpdateSubProjectService
             $allSheets = $list->getSheets;
             // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
+                $list = $sheet->{$nominatedListFn}();
+                $result[] = $list->pluck('id')->toArray();
             }
         }
 
         $result = array_values(array_unique(Arr::flatten($result)));
         if (is_array($newSignOffList)) $result = array_unique([...$result, ...$newSignOffList]);
+        $result = array_map(fn ($id) => +$id, $result);
 
         $item = Sub_project::find($subProjectId);
-        $item->syncCheck("getExternalInspectorsOfSubProject", \App\Models\User::class, $result);
+        $item->syncCheck($targetFn, \App\Models\User::class, $result);
         // Log::info("UpdateSubProjectService" . $subProjectId);
         // Log::info($result);
     }

@@ -30,6 +30,7 @@ class Prod_routing extends ModelExtended
         "getSubProjects()" => ["getCheckedByField", Sub_project::class],
         "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
         "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', User::class],
+        "getCouncilMembersOfProdRouting()" => ['getCheckedByField', User::class],
     ];
 
     public function getProdRoutingLinks()
@@ -75,6 +76,12 @@ class Prod_routing extends ModelExtended
     }
 
     public function getExternalInspectorsOfProdRouting()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
+
+    public function getCouncilMembersOfProdRouting()
     {
         $p = static::$oracyParams[__FUNCTION__ . '()'];
         return $this->{$p[0]}(__FUNCTION__, $p[1]);

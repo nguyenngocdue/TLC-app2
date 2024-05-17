@@ -322,5 +322,29 @@
         "on_hold": "true",
         "cancelled": "true",
         "timesheet_only": "true"
+    },
+    "_Council Members of this Sub Project": {
+        "name": "_Council Members of this Sub Project",
+        "column_name": "Council Members of this Sub Project",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_getCouncilMembersOfSubProject()": {
+        "name": "_getCouncilMembersOfSubProject()",
+        "column_name": "getCouncilMembersOfSubProject()",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
     }
 }

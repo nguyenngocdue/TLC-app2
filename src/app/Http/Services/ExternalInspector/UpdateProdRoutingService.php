@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateProdRoutingService
 {
-    function update($prod_routing_id, $newSignOffList, $nominatedListFn)
+    function update($prod_routing_id, $newSignOffList, $nominatedListFn, $targetFn)
     {
         $allLists = Qaqc_insp_chklst::query()
             ->where("prod_routing_id", $prod_routing_id)
@@ -26,9 +26,10 @@ class UpdateProdRoutingService
 
         $result = array_values(array_unique(Arr::flatten($result)));
         if (is_array($newSignOffList)) $result = array_unique([...$result, ...$newSignOffList]);
+        $result = array_map(fn ($id) => +$id, $result);
 
         $item = Prod_routing::find($prod_routing_id);
-        $item->syncCheck("getExternalInspectorsOfProdRouting", \App\Models\User::class, $result);
+        $item->syncCheck($targetFn, \App\Models\User::class, $result);
         // Log::info("UpdateProdRoutingService" . $prod_routing_id);
         // Log::info($result);
     }
