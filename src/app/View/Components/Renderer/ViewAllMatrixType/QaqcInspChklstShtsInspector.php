@@ -62,7 +62,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
         [$projects, $subProjects, $prodRoutings] = $this->dataSource;
         $defaultProjects = (sizeof($projects) > 0) ? $projects->first()->id : 72;
         $defaultSubProject = (sizeof($subProjects) > 0) ? $subProjects->first()->id : 112;
-        $defaultProdRouting =  94;
+        $defaultProdRouting = null;
         $result = [
             $project_id ?: $defaultProjects,
             $sub_project_id ?: $defaultSubProject,
