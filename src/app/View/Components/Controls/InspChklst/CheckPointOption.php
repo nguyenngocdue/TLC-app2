@@ -46,9 +46,12 @@ class CheckPointOption extends Component
                 static::$singletonOptions = $modelPath::where($keyIdModelControlGroup, static::$singletonControlGroup->id)->get();
             }
             $options = static::$singletonOptions->pluck('name', 'id',);
-            $isExternalInspector = CurrentUser::get()->isExternalInspector();
-            $isProjectClient = CurrentUser::get()->isProjectClient();
-            if ($isExternalInspector || $isProjectClient) unset($options[4]); //Remove On Hold
+            // $isExternalInspector = CurrentUser::get()->isExternalInspector();
+            // $isProjectClient = CurrentUser::get()->isProjectClient();
+            // $isCouncilMember = CurrentUser::get()->isCouncilMember();
+            // if ($isExternalInspector || $isProjectClient || $isCouncilMember) unset($options[4]); //Remove On Hold
+
+            if (CurrentUser::get()->isExternal()) unset($options[4]); //Remove On Hold
         } else {
             return "CONTROL GROUP ID IS NULL";
         }

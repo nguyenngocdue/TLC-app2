@@ -353,6 +353,11 @@ class User extends ModelExtended implements
         return in_array($this->discipline, [169]); //169: Council Member
     }
 
+    public function isExternal()
+    {
+        return $this->isExternalInspector() || $this->isProjectClient() || $this->isCouncilMember();
+    }
+
     public function isNewcomer()
     {
         $roleSet = $this->getRoleSet[0]->name;

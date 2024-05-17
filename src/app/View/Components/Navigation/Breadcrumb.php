@@ -130,7 +130,7 @@ class Breadcrumb extends Component
                 // $this->links[] = ['href' => null, 'title' => 'Export PDF', 'icon' => '<i class="fa-solid fa-file-export"></i>', 'id' => 'export-pdf'];
                 $this->links[] =  $printNow;
                 if (in_array($type, ['qaqc_insp_chklsts'])) {
-                    if (CurrentUser::get()->isProjectClient()) break;
+                    if (CurrentUser::get()->isExternal()) break;
                 }
                 if ($app['show_renderer'] == "qr-app-renderer") {
                     $id = $modelPath::where('slug', $id)->first()->id ?? $id;
@@ -160,10 +160,11 @@ class Breadcrumb extends Component
     private function hideForExternal($type)
     {
         if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {
-            $cu = CurrentUser::get();
-            if ($cu->isExternalInspector()) return true;
-            if ($cu->isProjectClient()) return true;
-            if ($cu->isCouncilMember()) return  true;
+            // $cu = CurrentUser::get();
+            // if ($cu->isExternalInspector()) return true;
+            // if ($cu->isProjectClient()) return true;
+            // if ($cu->isCouncilMember()) return  true;
+            if (CurrentUser::get()->isExternal()) return true;
         }
         return false;
     }

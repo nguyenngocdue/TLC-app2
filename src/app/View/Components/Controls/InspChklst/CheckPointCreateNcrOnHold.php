@@ -44,8 +44,13 @@ class CheckPointCreateNcrOnHold extends Component
                 break;
         }
 
-        $isExternalInspector = CurrentUser::get()->isExternalInspector();
-        $isProjectClient = CurrentUser::get()->isProjectClient();
+        // $isExternalInspector = CurrentUser::get()->isExternalInspector();
+        // $isProjectClient = CurrentUser::get()->isProjectClient();
+        // $isCouncilMember = CurrentUser::get()->isCouncilMember();
+        // $isExternal = $isExternalInspector || $isProjectClient || $isCouncilMember;
+
+        $isExternal = CurrentUser::get()->isExternal();
+
         return view('components.controls.insp-chklst.check-point-create-ncr-on-hold', [
             'line' => $this->line,
             'href' => $href,
@@ -56,8 +61,7 @@ class CheckPointCreateNcrOnHold extends Component
             'nameShow' => $nameShow,
             'syntax' => $syntax,
             'readOnly' => $this->readOnly,
-            'isExternalInspector' => $isExternalInspector,
-            'isProjectClient' => $isProjectClient,
+            'isExternal' => $isExternal,
         ]);
     }
     private function getHrefCreateNCR()

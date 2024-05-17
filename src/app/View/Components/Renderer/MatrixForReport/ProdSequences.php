@@ -123,10 +123,13 @@ class ProdSequences extends MatrixForReportParent
                 'value' => $y->quantity,
                 'cell_class' => "whitespace-nowrap text-right",
             ];
-            $result[$y->id]['progress'] = (object)[
-                'value' => number_format($y->prod_sequence_progress, 2),
-                'cell_class' => "whitespace-nowrap text-right",
-            ];
+
+            $result[$y->id]['progress'] = ($dataSource[$y->id]['progress'] ?? "N/A");
+
+            // $result[$y->id]['progress'] = (object)[
+            //     'value' => number_format($y->prod_sequence_progress, 2),
+            //     'cell_class' => "whitespace-nowrap text-right",
+            // ];
         }
         return $result;
     }
