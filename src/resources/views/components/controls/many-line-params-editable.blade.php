@@ -1,4 +1,16 @@
-<x-renderer.table tableName="{{$table01Name}}" :columns="$editableColumns" :dataHeader="$dataSource2ndThead" :dataSource="$dataSourceWithOld" showNo="{{$showNo?1:0}}" showNoR="{{$showNoR?1:0}}" footer="{{$tableFooter}}" maxH={{false}} tableDebug={{$tableDebug}} editable="{{$editable?1:0}}"/>
+<x-renderer.table 
+    tableName="{{$table01Name}}" 
+    :columns="$editableColumns" 
+    :dataHeader="$dataSource2ndThead" 
+    :dataSource="$dataSourceWithOld" 
+    showNo="{{$showNo?1:0}}" 
+    showNoR="{{$showNoR?1:0}}" 
+    footer="{{$tableFooter}}" 
+    maxH={{false}} 
+    tableDebug={{$tableDebug}} 
+    editable="{{$editable?1:0}}"
+    tableTrueWidth=1
+    />
 
 @once
 <script>
