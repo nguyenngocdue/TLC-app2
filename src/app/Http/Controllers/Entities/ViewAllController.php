@@ -62,9 +62,9 @@ class ViewAllController extends Controller
 
     public function index(Request $request, $trashed = false)
     {
-        if (CurrentUser::get()->isExternalInspector() || CurrentUser::get()->isProjectClient()) {
-            return abort(403);
-        }
+        $cu = CurrentUser::get();
+        if ($cu->isExternalInspector() || $cu->isProjectClient() || $cu->isCouncilMember()) return abort(403);
+
         if ($viewType = $request->input('view_type')) {
             (new UpdateUserSettings())($request);
             switch ($viewType) {
