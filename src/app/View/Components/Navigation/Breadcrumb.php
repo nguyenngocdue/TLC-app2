@@ -157,14 +157,20 @@ class Breadcrumb extends Component
                 break;
         }
     }
+    private function hideForExternal($type)
+    {
+        if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {
+            $cu = CurrentUser::get();
+            if ($cu->isExternalInspector()) return true;
+            if ($cu->isProjectClient()) return true;
+            if ($cu->isCouncilMember()) return  true;
+        }
+        return false;
+    }
     private function showButtonViewAll($type)
     {
-
         // dump($currentRouteName);
-        if (in_array($type, ['qaqc_insp_chklsts', 'qaqc_insp_chklst_shts'])) {
-            if (CurrentUser::get()->isExternalInspector()) return;
-            if (CurrentUser::get()->isProjectClient()) return;
-        }
+        if ($this->hideForExternal($type)) return;
 
         $currentRouteName = CurrentRoute::getName();
         if (in_array($currentRouteName, ['me.index', 'profile.index'])) return;
@@ -211,6 +217,7 @@ class Breadcrumb extends Component
     }
     private function showButtonViewReport($type)
     {
+        if ($this->hideForExternal($type)) return;
         $allReports = ReportIndexController::getReportOf($type);
         $allReports = $this->makeUpReports($allReports);
         if (!empty($allReports)) {
