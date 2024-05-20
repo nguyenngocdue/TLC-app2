@@ -10,13 +10,16 @@ use App\Utils\Support\CurrentUser;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
-class PostController extends Controller{
+class PostController extends Controller
+{
     use TraitEntityAttachment2;
-    public function index(){
+    public function index()
+    {
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
-            if($request->post_content || count($request->files) > 0){
+            if ($request->post_content || count($request->files) > 0) {
                 $newPost = Post::create([
                     'content' => $request->post_content,
                     'owner_id'  => CurrentUser::id(),
@@ -25,15 +28,15 @@ class PostController extends Controller{
                 if ($uploadedIds) {
                     $this->updateAttachmentParentId($uploadedIds, Post::class, $newPost->id);
                 }
-                Toastr::success("Created new post successfully","Post create");
+                toastr()->success("Created new post successfully", "Post create");
             }
             return redirect()->back();
         } catch (\Throwable $th) {
-            Toastr::error($th->getMessage(),"Post create");
+            toastr()->error($th->getMessage(), "Post create");
         }
-       
     }
-    public function destroy($id){
+    public function destroy($id)
+    {
         $post = Post::findOrFail($id);
         $post->delete();
         return redirect()->back();

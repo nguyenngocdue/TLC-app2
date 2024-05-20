@@ -100,12 +100,12 @@ class AdminSetRoleSetController extends Controller
     {
         $roleSetUpdate = $request->input('roleSet_id');
         if ($roleSetUpdate == 'none') {
-            Toastr::warning('Update Role Set failed ! Please choose another Role Set (none)', 'Set Role Set User');
+            toastr()->warning('Update Role Set failed ! Please choose another Role Set (none)', 'Set Role Set User');
             return back();
         }
         $user = User::find($id);
         $user->syncRoleSets($roleSetUpdate);
-        Toastr::success('Sync Role Set successfully', 'Sync Role Set');
+        toastr()->success('Sync Role Set successfully', 'Sync Role Set');
         return redirect()->back();
     }
 

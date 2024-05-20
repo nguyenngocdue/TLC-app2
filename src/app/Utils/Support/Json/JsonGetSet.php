@@ -47,15 +47,15 @@ class JsonGetSet
             $path = "entities/$type/$filename";
             $output = Storage::disk('json')->put($path, json_encode($data, JSON_PRETTY_PRINT), 'public');
             if ($output) {
-                Toastr::success("$filename saved successfully!", 'Successfully');
+                toastr()->success("$filename saved successfully!", 'Successfully');
                 return true;
             } else {
-                Toastr::warning("$filename saved failed. Maybe Permission is missing!", 'Failed');
+                toastr()->warning("$filename saved failed. Maybe Permission is missing!", 'Failed');
                 // dump(error_get_last()); //<<Useless
                 return false;
             }
         } catch (\Throwable $th) {
-            Toastr::warning($th, 'Save file json');
+            toastr()->warning($th, 'Save file json');
         }
     }
 

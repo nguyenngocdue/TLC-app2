@@ -22,9 +22,9 @@ class UpdatedProdSequenceListener implements ShouldQueue
             $id = $event->{'idChildren'};
             $this->prodSequenceService->update($id);
 
-            Toastr::success("The Event Updated Time Successfully!", 'Event Update Successfully');
+            toastr()->success("The Event Updated Time Successfully!", 'Event Update Successfully');
         } catch (\Throwable $th) {
-            Toastr::error($th->getMessage(), 'Event Update Failed');
+            toastr()->error($th->getMessage(), 'Event Update Failed');
         }
     }
 }

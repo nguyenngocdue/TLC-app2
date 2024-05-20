@@ -14,7 +14,7 @@ class All_DocId
     {
         $nameColumnDocIDFormat = self::getAllEntityHasDocId($type);
         if (!$nameColumnDocIDFormat) {
-            Toastr::warning('Please set value "Doc Id Format Column" in ManageApps', 'Warning Settings Formula');
+            toastr()->warning('Please set value "Doc Id Format Column" in ManageApps', 'Warning Settings Formula');
         }
         $tableName = Str::plural($type);
         $maxDocID = DB::table($tableName)->where($nameColumnDocIDFormat, $item[$nameColumnDocIDFormat])->max('doc_id');

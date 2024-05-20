@@ -19,7 +19,7 @@ trait TraitEntityUpdateUserSettings
             $settings[$type][Constant::VIEW_EDIT]['value_filters_task'] = $dataUserSettings;
             $user->settings = $settings;
             $user->update();
-            Toastr::success('User Settings Saved Successfully (#852)', 'Successfully');
+            toastr()->success('User Settings Saved Successfully (#852)', 'Successfully');
         }
     }
 }

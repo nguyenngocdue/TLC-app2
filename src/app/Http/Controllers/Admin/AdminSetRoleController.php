@@ -99,7 +99,7 @@ class AdminSetRoleController extends Controller
         $checkedSetRequest = $request->input('checked');
         $roleSelected = Role_set::findById($roleSetRequest);
         $roleSelected->syncRoles($checkedSetRequest);
-        // Toastr::success('Sync Roles successfully!', 'Sync Roles');
+        // toastr()->success('Sync Roles successfully!', 'Sync Roles');
         return $this->redirectBack($roleSetRequest);
     }
 

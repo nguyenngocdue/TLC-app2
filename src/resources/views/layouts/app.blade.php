@@ -67,7 +67,7 @@
         </div>
         {{-- Button Go to Top and Bottom --}}
         <x-renderer.button-scroll />
-        {!! Toastr::message() !!}
+        {!! toastr()->message() !!}
         <script>
             function numberToWords(number){
                 if(typeof number == 'string') number = number.replace(/[^0-9.\-]/g, '');

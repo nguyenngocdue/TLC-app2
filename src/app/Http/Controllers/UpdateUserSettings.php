@@ -461,7 +461,7 @@ class UpdateUserSettings extends Controller
         }
         $user->settings = $settings;
         $user->update();
-        Toastr::success('User Settings Saved Successfully', 'Successfully');
+        toastr()->success('User Settings Saved Successfully', 'Successfully');
         if (is_null($redirectTo)) return redirect()->back();
         return redirect($redirectTo);
     }

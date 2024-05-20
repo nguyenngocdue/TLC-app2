@@ -84,7 +84,7 @@ class AdminSetPermissionController extends Controller
         $checkedRequest = $request->input('checked');
         $roleSelected = Role::findById((int)$roleRequest, 'web');
         $roleSelected->syncPermissions($checkedRequest);
-        // Toastr::success('Sync Permissions successfully!', 'Sync Permissions');
+        // toastr()->success('Sync Permissions successfully!', 'Sync Permissions');
         return $this->redirectBack($roleRequest);
     }
 

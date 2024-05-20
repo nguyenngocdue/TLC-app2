@@ -106,7 +106,7 @@ class ManageStatuses extends Manage_Parent
                     dump(error_get_last());
                 }
             } catch (\Throwable $th) {
-                Toastr::warning("Saved failed. Maybe Permission is missing!", 'Failed');
+                toastr()->warning("Saved failed. Maybe Permission is missing!", 'Failed');
             }
         }
         return back();

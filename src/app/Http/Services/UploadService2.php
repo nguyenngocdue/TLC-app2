@@ -151,7 +151,7 @@ class UploadService2
             toastr()->warning($ve->getMessage() . "<br/>(You maybe upload more than the max allowed files.)", 'Upload File Problem');
         } catch (\Exception $e) {
             dd($e);
-            // Toastr::warning($e, 'Upload File Warning');
+            // toastr()->warning($e, 'Upload File Warning');
         }
     }
 }
