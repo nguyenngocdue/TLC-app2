@@ -21,7 +21,6 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 {
 
 	protected $viewName = 'document-ghg-sheet-080';
-	protected $year = '2023';
 	protected $mode = '080';
 
 	private function configForStringSQL()
@@ -116,7 +115,7 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 	private function generateStringSQL($params)
 	{
 		$dataConfig = $this->configForStringSQL();
-		$years = $params['year'];
+		$years = is_array($params['year']) ? $params['year'] : [$params['year']];
 		// string of field columns
 		$strCondition2 = trim($this->generateStringCondition2($years), ',');
 		$arrayStrSQL = [];
@@ -156,7 +155,8 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 
 	protected function getDefaultValueParams($params, $request)
 	{
-		$params['year'] = $this->year;
+		$params['year'] = [2022, 2023, (int)date('Y')];
+		$params['children_mode'] = 'filter_by_year';
 		return $params;
 	}
 

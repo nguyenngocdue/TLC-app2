@@ -18,9 +18,9 @@
 </style>
 
 @php
-	$years = [2021,2022,2023];
-	$timeCategory =  'filter_by_hafl_year';
-	$titleOfTime = ['Jan - Jun 21', 'Jul - Dec 21', 'Jan - Jun 22', 'Jul - Dec 22', 'Jan - Jun 23', 'Jul - Dec 23']
+	$years = is_array($params['year']) ? $params['year'] : [$params['year']];
+	$timeCategory =  $params['children_mode'];
+	$titleOfTime = array_values(App\Utils\Support\Report::generateTimeRanges($years));
 @endphp
 
 <table class="tg" style="undefined;table-layout: fixed; width: 1965px">
@@ -35,10 +35,14 @@
 <col style="width: 117.75px">
 
 {{-- Width of columns --}}
-@if ($timeCategory === 'filter_by_hafl_year')
+@if ($timeCategory === 'filter_by_half_year')
 	@for ($i = 0; $i < count($titleOfTime); $i++)
 		<col style="width: 121.75px">
 	@endfor
+@else
+	@foreach ($years as $year)
+		<col style="width: 121.75px">
+	@endforeach
 @endif
 
 <col style="width: 151.75px">
@@ -87,9 +91,13 @@
 	<td class="tg-qjmw" colspan="5">KPI Metric</td>
 
 	{{-- Title range of time --}}
-	@if ($timeCategory === 'filter_by_hafl_year')
+	@if ($timeCategory === 'filter_by_half_year')
 		@foreach ( $titleOfTime as $title)
 			<td class="tg-qjmw">{{$title}}</td>
+		@endforeach
+	@else
+		@foreach ( $years as $year)
+			<td class="tg-qjmw">{{$year}}</td>
 		@endforeach
 	@endif
 
