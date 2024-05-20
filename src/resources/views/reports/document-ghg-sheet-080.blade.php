@@ -57,7 +57,7 @@ $class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
 
 
 <br />
-{{-- @dd($tableDataSource) --}}
+{{-- @dd($tableDataSource['from_oil']) --}}
 <div class="flex justify-center bg-only-print px-4">
     <div class="md:px-4">
         <div style='' class="items-center bg-white box-border p-8">

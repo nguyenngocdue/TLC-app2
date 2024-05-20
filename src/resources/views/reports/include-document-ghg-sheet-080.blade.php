@@ -60,10 +60,6 @@
 	<td class="tg-73oq"><span style="font-weight:700;font-style:normal">Period Start</span></td>
 	<td class="tg-mcqj"></td>
 	<td class="tg-mcqj">7/1/2022</td>
-	{{-- <td class="tg-mcqj">1/1/2023</td> --}}
-	{{-- <td class="tg-mcqj">7/1/2023</td> --}}
-	{{-- <td class="tg-mcqj"></td> --}}
-	{{-- <td class="tg-73oq" rowspan="59"></td> --}}
   </tr>
   <tr>
 	<td class="tg-mcqj">Data Submission Date</td>
@@ -73,45 +69,18 @@
 	<td class="tg-73oq"><span style="font-weight:700;font-style:normal">Period End</span></td>
 	<td class="tg-mcqj"></td>
 	<td class="tg-mcqj">12/31/2022</td>
-	{{-- <td class="tg-mcqj">6/30/2023</td> --}}
-	{{-- <td class="tg-mcqj">12/31/2023</td> --}}
-	{{-- <td class="tg-mcqj"></td> --}}
   </tr>
   <tr>
 	<td class="tg-73oq" colspan="6">Please fill in the BLUE...</td>
 	{{-- <td class="tg-73oq"></td> --}}
-	{{-- <td class="tg-73oq"></td> --}}
-	{{-- <td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td> --}}
   </tr>
   <tr>
 	<td class="tg-73oq" colspan="6">Please also fill in the blank BLUE CELLS</td>
-	{{-- <td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td> --}}
+	{{-- <td class="tg-73oq"></td> --}}
   </tr>
   <tr>
 	<td class="tg-73oq" colspan="6">Please confirm/revise</td>
-	{{-- <td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td>
-	<td class="tg-73oq"></td> --}}
+	{{-- <td class="tg-73oq"></td> --}}
   </tr>
   <tr>
 	<td class="tg-qjmw">KPI  Topic</td>
@@ -140,7 +109,7 @@
   </tr>
 
   <tr>
-	<td class="tg-f7v4" rowspan="9"></td>
+	<td class="tg-f7v4" rowspan="10"></td>
 	<td class="tg-f7v4" rowspan="5"></td>
 	<td class="tg-f7v4" colspan="3">from Renewable Energy Source (ie: bioenergy)</td>
 	<td class="tg-f7v4">Please specify</td>
@@ -151,17 +120,15 @@
   <tr>
 	<td class="tg-f7v4" colspan="3">from Oil</td>
 	<td class="tg-f7v4">Litres</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'from_oil', 'timeCategory' => $timeCategory])
   </tr>
 
 
   <tr>
 	<td class="tg-f7v4" colspan="3">from Natural Gas</td>
 	<td class="tg-f7v4">BTU</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'from_natural_gas', 'timeCategory' => $timeCategory])
   </tr>
-
-
 
 
   <tr>
@@ -173,7 +140,7 @@
   <tr>
 	<td class="tg-f7v4" colspan="3">from Other (please specify non-renewable fuel type)</td>
 	<td class="tg-f7v4">kg</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'from_other_please_specify_non_renewable_fuel_type', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>
@@ -182,12 +149,19 @@
 	@include('components.reports.value-by-category')
   </tr>
 
+
   <tr>
-	<td class="tg-f7v4" rowspan="2"></td>
+	<td class="tg-f7v4" rowspan="3"></td>
 	<td class="tg-f7v4" colspan="3">Electricity Consumption from Renewable Energy Sources</td>
 	<td class="tg-f7v4">KWh</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'electricity_consumption_from_renewable_energy_sources', 'timeCategory' => $timeCategory])
   </tr>
+    <tr>
+	<td class="tg-f7v4" colspan="3">Electricity Consumption from Non-Renewable Energy Sources</td>
+	<td class="tg-f7v4">KWh</td>
+	@include('components.reports.value-by-category', ['fieldName' => 'electricity_consumption_from_non_renewable_energy_sources', 'timeCategory' => $timeCategory])
+  </tr>
+  
 
   <tr>
 	<td class="tg-f7v4" colspan="3">Other indirect energy consumption (e.g. district heating, cooding, purchased steam)</td>
@@ -213,7 +187,7 @@
 	<td class="tg-f7v4" rowspan="3"></td>
 	<td class="tg-f7v4" colspan="3">Waste Diverted from Disposal (Reused/Recycled/Recorverd)</td>
 	<td class="tg-f7v4">kg</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'waste_diverted_from_disposal', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>
@@ -241,7 +215,7 @@
 	<td class="tg-f7v4"></td>
 	<td class="tg-f7v4" colspan="3">Water Consumption from Recycled And Reused Sources</td>
 	<td class="tg-f7v4">m3</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'total_water_consumption', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>

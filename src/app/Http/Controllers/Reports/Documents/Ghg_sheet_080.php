@@ -45,22 +45,22 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 				'ghgmt1' => [1],
 				'ghgmt2' => [4],
 			],
-			"from_other_please specify non_renewable_fuel_type" =>  [
-				"field_type" => "from_other_please specify non_renewable_fuel_type",
+			"from_other_please_specify_non_renewable_fuel_type" =>  [
+				"field_type" => "from_other_please_specify_non_renewable_fuel_type",
 				"ghgtmp" => [1],
 				'ghgmt' => [1],
 				'ghgmt1' => [1],
 				'ghgmt2' => [9],
 			],
-			"electricity_consumption_from_non_renewable_energy" =>  [
-				"field_type" => "electricity_consumption_from_non_renewable_energy",
+			"electricity_consumption_from_renewable_energy_sources" =>  [
+				"field_type" => "electricity_consumption_from_renewable_energy_sources",
 				"ghgtmp" => [5],
 				'ghgmt' => [7],
 				'ghgmt1' => [23],
 				'ghgmt2' => [231],
 			],
-			"electricity_consumption_from_non_renewable_energy" =>  [
-				"field_type" => "electricity_consumption_from_non_renewable_energy",
+			"electricity_consumption_from_non_renewable_energy_sources" =>  [
+				"field_type" => "electricity_consumption_from_non_renewable_energy_sources",
 				"ghgtmp" => [8],
 				'ghgmt' => [$ghgMetricTypeIds],
 				'ghgmt1' => [$ghgMetricType1s],
