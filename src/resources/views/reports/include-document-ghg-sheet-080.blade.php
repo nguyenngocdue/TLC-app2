@@ -88,7 +88,8 @@
   </tr>
   <tr>
 	<td class="tg-qjmw">KPI  Topic</td>
-	<td class="tg-qjmw" colspan="5">KPI Metric</td>
+	<td class="tg-qjmw" colspan="4">KPI Metric</td>
+	<td class="tg-qjmw" colspan="1">Unit</td>
 
 	{{-- Title range of time --}}
 	@if ($timeCategory === 'filter_by_half_year')

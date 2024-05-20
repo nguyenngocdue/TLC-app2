@@ -20,4 +20,14 @@
 			@endif
 		@endforeach
 	@endif
+@else
+	@if ($timeCategory === 'filter_by_half_year')
+		@foreach ($titleOfTime as $value)
+			<td class="tg-f7v4">N/A</td>
+		@endforeach
+	@else
+		@foreach ( $years as $value )
+			<td class="tg-f7v4">N/A</td>
+		@endforeach
+	@endif
 @endif

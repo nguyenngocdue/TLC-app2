@@ -68,7 +68,4 @@ $class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
     </div>
 </div>
 
-
-
-
 @endsection
