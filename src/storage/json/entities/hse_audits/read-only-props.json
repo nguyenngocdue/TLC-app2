@@ -2,85 +2,85 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_audit_datetime": {
         "name": "_audit_datetime",
         "column_name": "audit_datetime",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
+        "new": "",
         "active": "true"
     }
 }
