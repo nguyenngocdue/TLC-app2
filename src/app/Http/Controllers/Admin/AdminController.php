@@ -51,7 +51,7 @@ abstract class AdminController extends Controller
     {
         $validated = $request->validate($this->validateCreate);
         App::make($this->model)::create($validated);
-        Toastr::success('Create new role successfully!', 'Create new role');
+        toastr()->success('Create new role successfully!', 'Create new role');
         return redirect()->back();
     }
 
@@ -92,9 +92,9 @@ abstract class AdminController extends Controller
         try {
             $data = App::make($this->model)::find($id);
             $data->update($validated);
-            Toastr::success('Update role successfully!', 'Update role');
+            toastr()->success('Update role successfully!', 'Update role');
         } catch (\Throwable $th) {
-            Toastr::warning('Update role failed!', 'Update role');
+            toastr()->warning('Update role failed!', 'Update role');
         }
         return redirect()->back();
     }

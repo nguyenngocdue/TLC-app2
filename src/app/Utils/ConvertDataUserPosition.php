@@ -7,7 +7,8 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class ConvertDataUserPosition
 {
-    public static function handle(){
+    public static function handle()
+    {
         try {
             $userPositions = User_position::all();
             foreach ($userPositions as $userPosition) {
@@ -17,19 +18,19 @@ class ConvertDataUserPosition
                 $userPosition->job_requirement = $tmp2;
                 $userPosition->save();
             }
-            Toastr::success("Convert Data User Position Successfully!", 'Convert Data Successfully');
+            toastr()->success("Convert Data User Position Successfully!", 'Convert Data Successfully');
         } catch (\Throwable $th) {
-            Toastr::error($th->getMessage(), 'Convert Data Failed');
+            toastr()->error($th->getMessage(), 'Convert Data Failed');
         }
     }
-    private static function convertData($str){
-        $lines = explode("\r\n",$str);
-        $processedLines = array_map(function($line){
+    private static function convertData($str)
+    {
+        $lines = explode("\r\n", $str);
+        $processedLines = array_map(function ($line) {
             $trimmedLine = trim($line);
-            if(empty($trimmedLine)) return "<p><br data-cke-filler='true'></p>";
+            if (empty($trimmedLine)) return "<p><br data-cke-filler='true'></p>";
             else return "<p> {$trimmedLine} </p>";
-        },$lines);
-        return join("",$processedLines);
+        }, $lines);
+        return join("", $processedLines);
     }
-    
 }

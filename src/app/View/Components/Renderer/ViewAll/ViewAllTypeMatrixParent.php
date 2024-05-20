@@ -409,7 +409,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 $result[$key] = [$perPage, $per_page, $page];
             }
         } else {
-            $per_page = $settings[$this->type]['view_all']['matrix']['per_page'] ?? 15;
+            $per_page = $settings[$this->type]['view_all']/*['matrix']*/['per_page'] ?? 15;
             $page = $settings[$this->type]['view_all']['matrix']['page'] ?? 1;
             $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$per_page' />";
             $result = [$perPage, $per_page, $page];

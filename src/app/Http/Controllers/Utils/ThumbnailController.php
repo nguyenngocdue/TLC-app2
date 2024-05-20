@@ -26,7 +26,7 @@ class ThumbnailController extends Controller
     public function create(Request $request)
     {
         if (!$request->height && !$request->width) {
-            Toastr::warning("Please fill input Height or Width", 'Create Thumbnail on S3 Minio');
+            toastr()->warning("Please fill input Height or Width", 'Create Thumbnail on S3 Minio');
             return redirect()->back();
         };
         try {
@@ -34,14 +34,14 @@ class ThumbnailController extends Controller
             $this->saveUserSettingForCreateThumbnail($values);
             $results = Thumbnail::createThumbnailByOptions($request->height, $request->width, $request->position);
             if ($request == true) {
-                Toastr::success('Create thumbnails all files successfully', 'Create Thumbnail on S3 Minio');
+                toastr()->success('Create thumbnails all files successfully', 'Create Thumbnail on S3 Minio');
                 $this->saveUserSettingForCreateThumbnail($values);
                 return redirect()->back();
             } else {
-                Toastr::warning($results, 'Create Thumbnail on S3 Minio');
+                toastr()->warning($results, 'Create Thumbnail on S3 Minio');
             }
         } catch (\Throwable $th) {
-            Toastr::error($th->getMessage(), 'Create Thumbnail on S3 Minio');
+            toastr()->error($th->getMessage(), 'Create Thumbnail on S3 Minio');
         }
     }
     private function saveUserSettingForCreateThumbnail($values)
