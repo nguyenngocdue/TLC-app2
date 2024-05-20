@@ -14,7 +14,7 @@ trait TraitSupportPermissionGate
 {
     private function useTree()
     {
-        if($this->type == 'user_position') return false;
+        if ($this->type == 'user_position') return false;
         return LibApps::getFor($this->type)['apply_approval_tree'] ?? false;
     }
     private function getCompanyTree($user, $flatten = true)
@@ -60,7 +60,7 @@ trait TraitSupportPermissionGate
             $message[] = 'Edit denied';
             $message[] = $edit ? '' : 'You are not the document owner';
             $message[] = $editOther ? '' : "You are not in the approval tree";
-            if (!($edit || $editOther)) return redirect($this->type.'.show');//abort(403, join(' & ', $message));
+            if (!($edit || $editOther)) return redirect($this->type . '.show'); //abort(403, join(' & ', $message));
         }
         return $model;
     }
@@ -105,19 +105,40 @@ trait TraitSupportPermissionGate
 
         return [$result1, $result2];
     }
-    private function getPositionsEntityUserPositionOfCurrentUser(){
+    private function getPositionsEntityUserPositionOfCurrentUser()
+    {
         $currentUser = CurrentUser::get();
-            $users = $currentUser->getPosition->getUsers;
-            $positions = [];
-            foreach($users as $user){
-                $positions[] = $user->getPosition->name;
-            }
-            $disciplineIds = User_discipline::where("def_assignee",$currentUser->id)->pluck('id')->toArray();
-            $users = User::whereIn("discipline",$disciplineIds)->get();
-            foreach($users as $user){
-                $positions[] = $user->getPosition->name;
-            }
-            $positions = array_unique($positions);
-            return $positions;
+        $users = $currentUser->getPosition->getUsers;
+        $positions = [];
+        foreach ($users as $user) {
+            $positions[] = $user->getPosition->name;
+        }
+        $disciplineIds = User_discipline::where("def_assignee", $currentUser->id)->pluck('id')->toArray();
+        $users = User::whereIn("discipline", $disciplineIds)->get();
+        foreach ($users as $user) {
+            $positions[] = $user->getPosition->name;
+        }
+        $positions = array_unique($positions);
+        return $positions;
+    }
+
+    private function checkIsExternalInspectorAndNominated($item)
+    {
+        $isExternalInspector = CurrentUser::get()->isExternalInspector();
+        if (!$isExternalInspector) return;
+        $nominatedList = $item->signature_qaqc_chklst_3rd_party_list()->pluck('id');
+        if (!$nominatedList->contains(CurrentUser::id())) {
+            abort(403, "You are not permitted to view this check sheet (External Inspector has not yet nominated). If you believe this is a mistake, please contact our admin.");
+        }
+    }
+
+    private function checkIsCouncilMemberAndNominated($item)
+    {
+        $isCouncilMember = CurrentUser::get()->isCouncilMember();
+        if (!$isCouncilMember) return;
+        $nominatedList = $item->council_member_list()->pluck('id');
+        if (!$nominatedList->contains(CurrentUser::id())) {
+            abort(403, "You are not permitted to view this check sheet (Council Member has not yet nominated). If you believe this is a mistake, please contact our admin.");
+        }
     }
 }

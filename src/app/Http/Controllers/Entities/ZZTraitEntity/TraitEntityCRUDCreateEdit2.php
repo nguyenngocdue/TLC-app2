@@ -90,6 +90,13 @@ trait TraitEntityCRUDCreateEdit2
 				'type' => $this->type,
 			]);
 		}
+
+		$item = $this->modelPath::find($id);
+		if ($this->type == 'qaqc_insp_chklst_sht') {
+			$this->checkIsExternalInspectorAndNominated($item);
+			$this->checkIsCouncilMemberAndNominated($item);
+		}
+
 		//check permission using gate
 		$original = $this->checkPermissionUsingGate($id, 'edit');
 		$status = $request->query('status');
@@ -103,8 +110,10 @@ trait TraitEntityCRUDCreateEdit2
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');
 		$hasDocID = All_DocId::getAllEntityHasDocId($this->type);
-		$docId = $hasDocID ? Str::markDocId($this->modelPath::find($id)) : null;
+
+		$docId = $hasDocID ? Str::markDocId($item) : null;
 		event(new OpenedDocumentEvent($this->type, $id, CurrentUser::id()));
+
 		return view('dashboards.pages.entity-create-edit', [
 			'superProps' => $superProps,
 			'item' => $original,

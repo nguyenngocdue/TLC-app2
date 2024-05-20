@@ -53,21 +53,6 @@ class SignatureGroup2a extends Component
     {
         if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light' title='Category: $this->category'>Please create this document before signing off.</i>";
         $cuid = CurrentUser::id();
-        $isExternalInspector = CurrentUser::get()->isExternalInspector();
-        if ($isExternalInspector) {
-            $nominatedList = $this->item->{$this->signOffOracy}()->pluck('id');
-            if (!$nominatedList->contains(CurrentUser::id())) {
-                return "<x-feedback.result type='warning' title='Permission Denied' message='You are not permitted to view this check sheet.<br/>If you believe this is a mistake, please contact our admin.' />";
-            }
-        }
-        // there is no definition of $this->signOffOracy
-        // $isCouncilMember = CurrentUser::get()->isCouncilMember();
-        // if ($isCouncilMember) {
-        //     $nominatedList = $this->item->{$this->signOffOracy}()->pluck('id');
-        //     if (!$nominatedList->contains(CurrentUser::id())) {
-        //         return "<x-feedback.result type='warning' title='Permission Denied' message='You are not permitted to view this check sheet.<br/>If you believe this is a mistake, please contact our admin: thucvo@tlcmodular.com' />";
-        //     }
-        // }
 
         $nominatedList = $this->item->{$this->signOffOracy}();
         // dump($nominatedList);
