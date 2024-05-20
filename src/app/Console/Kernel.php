@@ -19,6 +19,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule
+            ->call(function () {
+                Log::info("Schedule is running.");
+            })
+            ->everyMinute()
+            ->appendOutputTo("storage/logs/schedule_test_minute.log")
+            ->description("Every minute: Schedule is running.");
+
+        $schedule
             ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
             // ->weekly()
             // ->mondays()
