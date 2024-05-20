@@ -193,6 +193,8 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 
 	public function getDataSource($params)
 	{
-		return $this->generateDataSource($params);
+		$dataSource = $this->generateDataSource($params);
+		// dd($dataSource);
+		return $dataSource;
 	}
 }
