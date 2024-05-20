@@ -87,6 +87,17 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_opened_at": {
+        "name": "_opened_at",
+        "column_name": "opened_at",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
+        "closed": ""
+    },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
         "column_name": "getMonitors1()",
@@ -112,13 +123,13 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "new": "true",
-        "in_progress": "true",
-        "cancelled": "true",
-        "on_hold": "true",
-        "pending_verification": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
+        "closed": ""
     },
     "_closed_at": {
         "name": "_closed_at",
@@ -156,6 +167,17 @@
     "_closed_photos": {
         "name": "_closed_photos",
         "column_name": "closed_photos",
+        "new": "",
+        "in_progress": "",
+        "cancelled": "",
+        "on_hold": "",
+        "pending_verification": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
         "new": "",
         "in_progress": "",
         "cancelled": "",
@@ -230,17 +252,6 @@
         "rejected": "",
         "closed": ""
     },
-    "_correctable_type": {
-        "name": "_correctable_type",
-        "column_name": "correctable_type",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "pending_verification": "",
-        "rejected": "",
-        "closed": ""
-    },
     "_correctable_id": {
         "name": "_correctable_id",
         "column_name": "correctable_id",
@@ -252,9 +263,9 @@
         "rejected": "",
         "closed": ""
     },
-    "_remark": {
-        "name": "_remark",
-        "column_name": "remark",
+    "_correctable_type": {
+        "name": "_correctable_type",
+        "column_name": "correctable_type",
         "new": "",
         "in_progress": "",
         "cancelled": "",

@@ -293,6 +293,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                         $result[$key] = [
                             'name'  => $routing->name,
                             'description' => "Checklist Type: " . $tmpl->name,
+                            'name_for_sort_by' => $routing->name . " " . $tmpl->name,
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
 
@@ -302,6 +303,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 }
             }
         }
+        uasort($result, function ($a, $b) {
+            return $a['name_for_sort_by'] <=> $b['name_for_sort_by'];
+        });
         // dump($result);
         return $result;
     }

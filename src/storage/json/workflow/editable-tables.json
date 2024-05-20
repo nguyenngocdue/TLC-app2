@@ -148,6 +148,12 @@
         "button_recalculate": "true",
         "button_get_lines": "true"
     },
+    "hse_audit_01": {
+        "name": "hse_audit_01",
+        "entity-type": "hse_audits",
+        "editable-table": "hse_corrective_actions",
+        "button_add_a_new_line": "true"
+    },
     "hse_incident_reports_01": {
         "name": "hse_incident_reports_01",
         "entity-type": "hse_incident_reports",

@@ -1001,6 +1001,20 @@
         "show_in_my_view": "true",
         "apply_approval_tree": "true"
     },
+    "hse_audit": {
+        "name": "hse_audit",
+        "package_tab": "application",
+        "package": "operation",
+        "sub_package": "hse",
+        "title": "HSE Audits",
+        "nickname": "ha",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-regular fa-file-certificate\"><\/i>"
+    },
     "hse_corrective_action": {
         "name": "hse_corrective_action",
         "package_tab": "application",
