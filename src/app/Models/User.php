@@ -369,4 +369,9 @@ class User extends ModelExtended implements
         $d = User_discipline::query()->where('def_assignee', $this->id)->get();
         return sizeof($d) > 0;
     }
+
+    public static function getByEmployeeId($employeeId)
+    {
+        return static::where('employeeid', $employeeId)->first();
+    }
 }
