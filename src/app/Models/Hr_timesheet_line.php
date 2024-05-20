@@ -29,14 +29,6 @@ class Hr_timesheet_line extends ModelExtended
         "timesheetable" => ['morphTo', Hr_timesheet_line::class, 'timesheetable_type', 'timesheetable_id'],
     ];
 
-    // protected function duration_in_min(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn (string $value) => $value / 60,
-    //         set: fn (string $value) => $value * 60,
-    //     );
-    // }
-
     public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];

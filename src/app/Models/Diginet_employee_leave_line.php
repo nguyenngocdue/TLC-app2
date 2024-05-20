@@ -12,8 +12,15 @@ class Diginet_employee_leave_line extends ModelExtended
         "approver_id", "approver_name", "order_no", "owner_id",
     ];
 
-    public function getFillable()
+    // public function getFillable()
+    // {
+    //     return $this->fillable;
+    // }
+
+    public function getLinesByEmployeeIdAndRange(string $employeeId) //, $fromDate, $toDate)
     {
-        return $this->fillable;
+        return $this->where('employeeid', $employeeId)
+            // ->whereBetween('la_date', [$fromDate, $toDate])
+            ->get();
     }
 }

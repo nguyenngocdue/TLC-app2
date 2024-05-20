@@ -19,27 +19,26 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule
+            ->call(fn () => Log::info("Schedule is running."))
+            ->everyTwoHours()
+            ->appendOutputTo(storage_path("logs/schedule_test_minute.log"))
+            ->description("Every minute: Schedule is running.");
+
+        $schedule
             ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
-            // ->weekly()
-            // ->mondays()
-            // ->wednesdays()
-            // ->fridays()
-            // ->at('10:00')
             ->cron('0 10 * * 1,3,5') // 0 minute, 10 hour, any day of the month, any month, Monday/Wednesday/Friday
             ->timezone('America/New_York')
-            ->appendOutputTo("storage/logs/schedule_remind_signoff.log")
-            ->description("EVERY MON/WED/FRI at 10AM US Time: SignOffRemindEvent emitted from Schedule.");
+            ->appendOutputTo(storage_path("logs/schedule_remind_signoff.log"))
+            ->description("EVERY MON/WED/FRI at 10:00AM US Time: SignOffRemindEvent emitted from Schedule.");
 
 
         // transfer database from Diginet Data 
         $schedule
-            ->call(function () {
-                event(new \App\Events\TransferDiginetDataEvent());
-            })
+            ->call(fn () => event(new \App\Events\TransferDiginetDataEvent()))
             ->cron('0 22 * * *') // 0 minute, 22:00, every day of month, every month, day of week
-            ->timezone("Asia/Bangkok")
-            ->appendOutputTo("storage/logs/schedule_transfer_diginet_data.log")
-            ->description("Daily at 10PM Bangkok Time: TransferDiginetEvent emitted from schedule.");
+            ->timezone("Asia/Ho_Chi_Minh")
+            ->appendOutputTo(storage_path("logs/schedule_transfer_diginet_data.log"))
+            ->description("Daily at 22:00 Ho_Chi_Minh Time: TransferDiginetEvent emitted from schedule.");
     }
 
     /**`
