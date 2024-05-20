@@ -113,7 +113,7 @@ class DiginetDataController extends Controller
             ],
             "business-trip-sheets" => [
                 "name" => "business-trip-sheets",
-                "field_index_name" => "tb_date",
+                "field_index_name" => "from_date",
                 "endpoint_name_diginet" => "business-trip",
                 "card_name" => "Business Trip",
                 "card_description" => "This is a short description of the item.",

@@ -1,6 +1,6 @@
 @php
-    $beginMonth = 11;
-    $beginYear = 2023;
+    $beginMonth = 5;
+    $beginYear = 2024;
     $currentMonth = (int)date('m');
     $currentYear = (int)date('Y');
 @endphp
