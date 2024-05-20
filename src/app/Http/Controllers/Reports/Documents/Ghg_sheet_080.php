@@ -97,7 +97,7 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 			$strSQL .= "\n AND ghgmt1.id IN " . $ghgMetricType1Id;
 			$strSQL .= "\n AND ghgmt2.id IN " . $ghgMetricType2Id;
 		} catch (\Exception $e) {
-			dd($items);
+			dd("Something is wrong at Ghg_sheet_080.php", $items);
 		}
 		return $strSQL;
 	}
@@ -113,11 +113,12 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 		return $strSQL;
 	}
 
-	private function generateStringSQL($years)
+	private function generateStringSQL($params)
 	{
 		$dataConfig = $this->configForStringSQL();
+		$years = $params['year'];
 		// string of field columns
-		$strCondition2 = trim($this->generateStringCondition2([2021, 2022, 2023]), ',');
+		$strCondition2 = trim($this->generateStringCondition2($years), ',');
 		$arrayStrSQL = [];
 		foreach ($dataConfig as $key => $items) {
 			$strCondition1 = $this->generateStringCondition1($items);
@@ -153,6 +154,11 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 		return $arrayStrSQL;
 	}
 
+	protected function getDefaultValueParams($params, $request)
+	{
+		$params['year'] = $this->year;
+		return $params;
+	}
 
 	public function getParamColumns($dataSource, $modeType)
 	{
