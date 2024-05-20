@@ -16,6 +16,10 @@ trait TraitEntityCRUDShowChklstSht
     public function showChklstSht($id, $trashed)
     {
         $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);
+
+        $this->checkIsExternalInspectorAndNominated($entity);
+        $this->checkIsCouncilMemberAndNominated($entity);
+
         $entityLines = $entity->getLines->sortBy('order_no');
         $entityShtSigs = $entity->{$this->nominatedListFn};
         $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);
