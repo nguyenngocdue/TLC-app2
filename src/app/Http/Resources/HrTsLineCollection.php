@@ -60,7 +60,7 @@ class HrTsLineCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection->map(function ($item) {
-                Log::info($item);
+                // Log::info($item);
                 $item1 =  [
                     'title' => Calendar::renderTitle($item),
                     'tag_sub_project' => Calendar::renderTagSubProject($item) ?? '',
