@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string("name0")->default("New User");
             $table->string("full_name");
             $table->string("name_suffix")->nullable();
-            $table->string("employeeid")->nullable();
+            $table->string("employeeid")->unique();
             $table->string("first_name");
             $table->string("last_name");
             $table->boolean('gender')->nullable();
