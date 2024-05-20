@@ -82,6 +82,12 @@ class Prod_sequence extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getProdRunsRework()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     // public function getProdRoutingDetails()
     // {
     //     $p = static::$eloquentParams[__FUNCTION__];
