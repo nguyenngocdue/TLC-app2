@@ -904,6 +904,20 @@
         "hidden_navbar": "true",
         "do_not_send_notification_mails": "true"
     },
+    "hr_leave_nz_sheet": {
+        "name": "hr_leave_nz_sheet",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "Leave Application (NZ)",
+        "nickname": "lanz",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null
+    },
     "hr_leave_sg_sheet": {
         "name": "hr_leave_sg_sheet",
         "package_tab": "application",

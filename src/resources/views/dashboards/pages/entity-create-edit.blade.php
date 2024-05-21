@@ -129,7 +129,7 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
 <x-renderer.editable.modal-broadcast-notification />
 @if($action == 'edit')
     @if(!in_array($type, ['conqa_archives']))
-        <div class="px-4 flex justify-center bg-body">
+        <div class="px-4 flex justify-center bg-body pt-10">
             <div class="w-full md:w-3/4 p-2 rounded-lg  dark:bg-gray-800">
                 <x-renderer.card title="Timeline">
                     <x-controls.time-line2 id={{$id}} modelPath={{$modelPath}} :props="$props" />
