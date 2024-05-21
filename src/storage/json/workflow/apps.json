@@ -932,6 +932,38 @@
         "tutorial_link": null,
         "icon": null
     },
+    "hr_leave_tpto": {
+        "name": "hr_leave_tpto",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "HR Total Paid Time Off",
+        "nickname": "tpto",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
+    },
+    "hr_leave_tpto_line": {
+        "name": "hr_leave_tpto_line",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr_admin",
+        "title": "HR TPTO Lines",
+        "nickname": "tptol",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "do_not_send_notification_mails": "true"
+    },
     "hr_leave_type": {
         "name": "hr_leave_type",
         "package_tab": "application",

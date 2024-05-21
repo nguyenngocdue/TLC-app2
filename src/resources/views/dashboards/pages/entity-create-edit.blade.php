@@ -32,7 +32,7 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
     listenersOfDropdown4s = @json($listeners4);
     filtersOfDropdown4s = @json($filters4);
 </script>
-<div class="px-4 pt-2 bg-body">
+<div class="px-4 pt-2 bg-body min-h-[700px]">
     <x-elapse />
     <x-controls.workflow403-checker allowed="{{$allowed}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$allProps" />
