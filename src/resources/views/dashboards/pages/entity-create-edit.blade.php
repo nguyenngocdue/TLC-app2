@@ -49,7 +49,13 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
         @break
     @endswitch
     
-    <form class="w-full mt-2" id="form-upload" method="POST" enctype="multipart/form-data" action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} ">
+    <form 
+        class="w-full mt-2 mb-0" 
+        id="form-upload" 
+        method="POST" 
+        enctype="multipart/form-data" 
+        action="{{ route($action === "create" ? $editType.'.store': $editType.'.update', $action === "create" ? '' : $id )}} "
+        >
         @csrf
         <input name="tableNames[table00]" value="(the_form)" type='hidden' /> {{-- This line is required for updating  --}}
         <input name="redirect_back_to_last_page" value="{{$redirect}}" type='hidden' />  {{-- This line is required for profile and me --}}
