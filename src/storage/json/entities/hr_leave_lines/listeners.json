@@ -29,6 +29,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_remaining_days": {
+        "name": "_remaining_days",
+        "column_name": "remaining_days",
+        "listen_action": "expression",
+        "triggers": "leave_days, allowed_days",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "(allowed_days - leave_days).toFixed(2)",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_leave_cat_id": {
         "name": "_leave_cat_id",
         "column_name": "leave_cat_id",
@@ -122,21 +137,6 @@
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_remaining_days": {
-        "name": "_remaining_days",
-        "column_name": "remaining_days",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
