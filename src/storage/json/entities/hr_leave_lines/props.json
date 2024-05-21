@@ -113,7 +113,7 @@
         "name": "_allowed_days",
         "column_name": "allowed_days",
         "column_type": "double(8,2)",
-        "label": "Allowed days",
+        "label": "Allowed Days",
         "control": "number",
         "align": "",
         "col_span": "6",
