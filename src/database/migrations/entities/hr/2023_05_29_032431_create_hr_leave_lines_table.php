@@ -29,7 +29,9 @@ return new class extends Migration
             $table->unsignedBigInteger("leave_cat_id")->nullable();
 
             $table->unsignedBigInteger("leave_type_id")->nullable();
+            $table->float("allowed_days")->nullable();
             $table->float("leave_days")->nullable();
+            $table->float("remaining_days")->nullable();
 
             $table->unsignedBigInteger("workplace_id")->nullable();
             $table->unsignedBigInteger("user_id")->nullable();

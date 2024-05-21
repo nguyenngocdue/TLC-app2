@@ -10,6 +10,7 @@ class Hr_leave_line extends ModelExtended
         "id", "leaveable_type", "leaveable_id", "owner_id",
         "leave_date", "leave_type_id", "leave_days", "leave_cat_id",
         "workplace_id", "user_id", "remark",  "order_no",
+        "remaining_days", "allowed_days"
         // "status",
     ];
     public static $nameless = true;
@@ -67,7 +68,9 @@ class Hr_leave_line extends ModelExtended
 
             ['dataIndex' => 'leave_cat_id'],
             ['dataIndex' => 'leave_type_id'],
+            ['dataIndex' => 'allowed_days',],
             ['dataIndex' => 'leave_days', 'footer' => 'agg_sum'],
+            ['dataIndex' => 'remaining_days',],
 
             ['dataIndex' => 'leaveable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
             ['dataIndex' => 'leaveable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
