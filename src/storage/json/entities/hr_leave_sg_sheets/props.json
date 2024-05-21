@@ -223,7 +223,7 @@
         "name": "_getHrLeaveLines",
         "column_name": "getHrLeaveLines",
         "column_type": "eloquent_prop",
-        "label": "Lines",
+        "label": "Leave Details",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

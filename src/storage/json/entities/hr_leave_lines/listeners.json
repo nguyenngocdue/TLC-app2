@@ -14,6 +14,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_leave_cat_id": {
+        "name": "_leave_cat_id",
+        "column_name": "leave_cat_id",
+        "listen_action": "reduce",
+        "triggers": "workplace_id",
+        "listen_to_fields": "leave_cat_id",
+        "listen_to_attrs": "workplace_id",
+        "columns_to_set": "",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_leave_type_id": {
         "name": "_leave_type_id",
         "column_name": "leave_type_id",
@@ -62,21 +77,6 @@
     "_leave_date": {
         "name": "_leave_date",
         "column_name": "leave_date",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_leave_cat_id": {
-        "name": "_leave_cat_id",
-        "column_name": "leave_cat_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
