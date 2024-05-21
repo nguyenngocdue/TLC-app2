@@ -870,6 +870,24 @@
         "hidden_navbar": "true",
         "do_not_send_notification_mails": "true"
     },
+    "hr_leave_line": {
+        "name": "hr_leave_line",
+        "package_tab": "application",
+        "package": "hr_&_admin",
+        "sub_package": "hr",
+        "title": "Hr Leave Lines",
+        "nickname": "lal",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true",
+        "disallowed_direct_creation": null
+    },
     "hr_onboarding": {
         "name": "hr_onboarding",
         "package_tab": "application",
