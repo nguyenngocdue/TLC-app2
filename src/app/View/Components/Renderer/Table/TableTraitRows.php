@@ -148,7 +148,7 @@ trait TableTraitRows
             $borderGray = $this->noCss ? "border-gray-400" : "";
             $bgWhite = ($renderer == 'no.') ? "bg-white" : "";
             $nowrap = ($column['nowrap'] ?? false) ? "whitespace-nowrap" : "";
-            $td = "<td class='$fixedLeft $fixedRight $bgWhite dark:border-gray-600 border-b $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align $nowrap'";
+            $td = "<td class='dark:border-gray-600 border-b $fixedLeft $fixedRight $bgWhite $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align $nowrap'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";

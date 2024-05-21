@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger("workplace_id")->nullable();
             $table->unsignedBigInteger("user_id")->nullable();
-            $table->string("remark")->nullable();
+            $table->text("remark")->nullable();
 
             // $table->orderable();
             $table->hasStatus();
