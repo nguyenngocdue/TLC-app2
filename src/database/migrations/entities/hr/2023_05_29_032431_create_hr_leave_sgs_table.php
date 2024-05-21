@@ -19,24 +19,15 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('hr_leave_lines', function (BlueprintExtended $table) {
+        $schema->create('hr_leave_sg_sheets', function (BlueprintExtended $table) {
             $table->id();
-
-            $table->string("leaveable_type")->nullable();
-            $table->unsignedBigInteger("leaveable_id")->nullable();
-
-            $table->date("leave_date")->nullable();
-            $table->unsignedBigInteger("leave_cat_id")->nullable();
-
-            $table->unsignedBigInteger("leave_type_id")->nullable();
-            $table->float("leave_days")->nullable();
 
             $table->unsignedBigInteger("workplace_id")->nullable();
             $table->unsignedBigInteger("user_id")->nullable();
             $table->string("remark")->nullable();
 
-            $table->orderable();
-            // $table->hasStatus();
+            // $table->orderable();
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }
@@ -48,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hr_leave_lines');
+        Schema::dropIfExists('hr_leave_sg_sheets');
     }
 };

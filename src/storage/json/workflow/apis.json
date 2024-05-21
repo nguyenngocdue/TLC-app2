@@ -189,6 +189,13 @@
     "groups": {
         "name": "groups"
     },
+    "hr_leave_lines": {
+        "name": "hr_leave_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "hr_leave_sg_sheets": {
+        "name": "hr_leave_sg_sheets"
+    },
     "hr_onboarding_courses": {
         "name": "hr_onboarding_courses"
     },
@@ -220,6 +227,9 @@
         "name": "hr_timesheet_workers",
         "storeEmpty_and_updateShort": "true",
         "changeStatusMultiple": "true"
+    },
+    "hse_audits": {
+        "name": "hse_audits"
     },
     "hse_corrective_actions": {
         "name": "hse_corrective_actions",
@@ -477,6 +487,9 @@
     },
     "user_sign_in_histories": {
         "name": "user_sign_in_histories"
+    },
+    "user_sub_cats": {
+        "name": "user_sub_cats"
     },
     "user_team_ncrs": {
         "name": "user_team_ncrs"

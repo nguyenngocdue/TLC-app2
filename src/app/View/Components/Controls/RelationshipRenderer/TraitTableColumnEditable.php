@@ -11,7 +11,7 @@ trait TraitTableColumnEditable
 {
     private function makeEditableColumns($columns, $sp, $tableName, $table01Name)
     {
-        $result = [['dataIndex' => 'action', 'width' => 5,]];
+        $result = [['dataIndex' => 'action', 'width' => 108,]];
         foreach ($columns as $column) {
             $newColumn = $column;
             if (!isset($sp['props']["_" . $column['dataIndex']])) {

@@ -8,7 +8,7 @@ class Hr_leave_line extends ModelExtended
 {
     protected $fillable = [
         "id", "leaveable_type", "leaveable_id", "owner_id",
-        "leave_date", "leave_type_id", "leave_days", "absence_type_id",
+        "leave_date", "leave_type_id", "leave_days", "leave_cat_id",
         "workplace_id", "user_id", "remark",  "order_no",
         // "status",
     ];
@@ -17,8 +17,8 @@ class Hr_leave_line extends ModelExtended
 
     public static $eloquentParams = [
         "getUser" => ['belongsTo', User::class, 'user_id'],
-        "getLeaveType" => ['belongsTo', Term::class, 'leave_type_id'],
-        "getAbsenceType" => ['belongsTo', Term::class, 'absence_type_id'],
+        "getLeaveType" => ['belongsTo', Hr_leave_type::class, 'leave_type_id'],
+        "getLeaveCat" => ['belongsTo', Hr_leave_cat::class, 'leave_cat_id'],
         "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
 
         "leaveable" => ['morphTo', Hr_leave_line::class, 'leaveable_type', 'leaveable_id'],
@@ -42,7 +42,7 @@ class Hr_leave_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getAbsenceType()
+    public function getLeaveCat()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -59,24 +59,21 @@ class Hr_leave_line extends ModelExtended
         return [
             ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true, 'invisible' => true],
-            ['dataIndex' => 'timesheetable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
-            ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
 
-            ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => !true],
+            ['dataIndex' => 'user_id', 'title' => 'Full Name', /*'value_as_user_id' => true,*/ 'cloneable' => !true],
+            ['dataIndex' => 'workplace_id'],
 
-            // ['dataIndex' => 'ts_date', 'cloneable' => true],
-            ['dataIndex' => 'start_time', 'cloneable' => true],
-            ['dataIndex' => 'project_id', 'cloneable' => true],
-            ['dataIndex' => 'sub_project_id', 'cloneable' => true],
-            ['dataIndex' => 'lod_id', 'cloneable' => true],
-            ['dataIndex' => 'discipline_id', 'cloneable' => true],
-            ['dataIndex' => 'task_id', 'cloneable' => true],
-            ['dataIndex' => 'sub_task_id', 'cloneable' => true],
-            ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
-            // ['dataIndex' => 'ts_hour', 'cloneable' => true],
-            ['dataIndex' => 'duration_in_min', 'cloneable' => true],
+            ['dataIndex' => 'leave_date', 'cloneable' => true],
+
+            ['dataIndex' => 'leave_cat_id'],
+            ['dataIndex' => 'leave_type_id'],
+            ['dataIndex' => 'leave_days',],
+
+            ['dataIndex' => 'leaveable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
+            ['dataIndex' => 'leaveable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
+
             ['dataIndex' => 'remark', 'cloneable' => true],
-            ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
+
         ];
     }
 }
