@@ -44,7 +44,7 @@ class User extends ModelExtended implements
         "title", "position", "discipline", "department", "show_on_beta",
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
         "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
-        "is_bod", "org_chart", "standard_signature",
+        "is_bod", "org_chart", "standard_signature", "seniority_level",
 
         "erp_site", "erp_cashflow",
     ];
@@ -94,6 +94,7 @@ class User extends ModelExtended implements
         "getUserCompany" => ['belongsTo', User_company::class, 'company'],
         "getUserCat" => ['belongsTo', User_category::class, 'category'],
         "getPosition" => ['belongsTo', User_position::class, 'position'],
+        "getUserSeniorityLevel" => ['belongsTo', User_seniority_level::class, 'seniority_level'],
 
         "getUserErpSubCat" => ['belongsTo', User_sub_cat::class, 'erp_sub_cat'],
         "getUserErpSite" => ['belongsTo', Term::class, 'erp_site'],
@@ -205,6 +206,11 @@ class User extends ModelExtended implements
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->latestOfMany();
     }
     public function getPosts()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserSeniorityLevel()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

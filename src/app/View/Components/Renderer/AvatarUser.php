@@ -32,7 +32,7 @@ class AvatarUser extends Component
         if (isset($slot->{'id'})) {
             $user = User::findFromCache($slot->{'id'});
             $avatar = $user->getAvatarThumbnailUrl();
-            $companyName = $user->getUserCompany->name;
+            $companyName = $user->getUserCompany?->name;
         }
         if (is_null($user)) return null;
 
@@ -50,7 +50,7 @@ class AvatarUser extends Component
         $avatar = $user->getAvatarThumbnailUrl();
         $title = $user->full_name;
         $description = $user->getPosition->name ?? '';
-        $companyName = $user->getUserCompany->name;
+        $companyName = $user->getUserCompany?->name;
         $gray = $user->resigned;
         $href = "";
         return [$user, $avatar, $title, $description, $href, $companyName, $gray];

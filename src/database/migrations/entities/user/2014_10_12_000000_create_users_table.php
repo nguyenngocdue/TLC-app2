@@ -46,6 +46,7 @@ return new class extends Migration
             $table->string("title")->nullable();
 
             $table->unsignedBigInteger('position')->nullable();
+            $table->unsignedBigInteger("seniority_level")->nullable();
             $table->unsignedBigInteger("discipline")->nullable();
             $table->unsignedBigInteger("org_chart")->nullable();
             $table->unsignedBigInteger("department")->nullable();
