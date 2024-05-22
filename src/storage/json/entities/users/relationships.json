@@ -95,6 +95,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getUserSeniorityLevel": {
+        "name": "_getUserSeniorityLevel",
+        "relationship": "belongsTo",
+        "control_name": "seniority_level",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_getUserErpSubCat": {
         "name": "_getUserErpSubCat",
         "relationship": "belongsTo",

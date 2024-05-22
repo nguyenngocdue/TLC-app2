@@ -119,6 +119,24 @@
         "editable-table": "ghg_tmpl_lines",
         "button_add_a_new_line": "true"
     },
+    "hr_leave_nz_sheet_01": {
+        "name": "hr_leave_nz_sheet_01",
+        "entity-type": "hr_leave_nz_sheets",
+        "editable-table": "hr_leave_lines",
+        "button_add_a_new_line": "true"
+    },
+    "hr_leave_sg_sheet_01": {
+        "name": "hr_leave_sg_sheet_01",
+        "entity-type": "hr_leave_sg_sheets",
+        "editable-table": "hr_leave_lines",
+        "button_add_a_new_line": "true"
+    },
+    "hr_leave_tptp_01": {
+        "name": "hr_leave_tptp_01",
+        "entity-type": "hr_leave_tptos",
+        "editable-table": "hr_leave_tpto_lines",
+        "button_add_a_new_line": "true"
+    },
     "hr_onboardings_01": {
         "name": "hr_onboardings_01",
         "entity-type": "hr_onboardings",

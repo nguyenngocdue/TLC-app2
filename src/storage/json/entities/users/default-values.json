@@ -272,9 +272,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_date_of_birth": {
-        "name": "_date_of_birth",
-        "column_name": "date_of_birth",
+    "_erp_site": {
+        "name": "_erp_site",
+        "column_name": "erp_site",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_erp_cashflow": {
+        "name": "_erp_cashflow",
+        "column_name": "erp_cashflow",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -298,6 +311,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_date_of_birth": {
+        "name": "_date_of_birth",
+        "column_name": "date_of_birth",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_first_date": {
         "name": "_first_date",
         "column_name": "first_date",
@@ -314,6 +340,19 @@
     "_last_date": {
         "name": "_last_date",
         "column_name": "last_date",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_leave_effective_date": {
+        "name": "_leave_effective_date",
+        "column_name": "leave_effective_date",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -457,6 +496,19 @@
     "_email_verified_at": {
         "name": "_email_verified_at",
         "column_name": "email_verified_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_seniority_level": {
+        "name": "_seniority_level",
+        "column_name": "seniority_level",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -714,71 +766,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_position_prefix": {
-        "name": "_position_prefix",
-        "column_name": "position_prefix",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_position_1": {
-        "name": "_position_1",
-        "column_name": "position_1",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_position_2": {
-        "name": "_position_2",
-        "column_name": "position_2",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_position_3": {
-        "name": "_position_3",
-        "column_name": "position_3",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_position_rendered": {
-        "name": "_position_rendered",
-        "column_name": "position_rendered",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_standard_signature": {
         "name": "_standard_signature",
         "column_name": "standard_signature",
@@ -844,9 +831,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_leave_effective_date": {
-        "name": "_leave_effective_date",
-        "column_name": "leave_effective_date",
+    "_getQaqcInspTmplsOfCouncilMember()": {
+        "name": "_getQaqcInspTmplsOfCouncilMember()",
+        "column_name": "getQaqcInspTmplsOfCouncilMember()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -857,9 +844,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_erp_site": {
-        "name": "_erp_site",
-        "column_name": "erp_site",
+    "_getProdRoutingsOfCouncilMember()": {
+        "name": "_getProdRoutingsOfCouncilMember()",
+        "column_name": "getProdRoutingsOfCouncilMember()",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -870,9 +857,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_erp_cashflow": {
-        "name": "_erp_cashflow",
-        "column_name": "erp_cashflow",
+    "_getSubProjectsOfCouncilMember()": {
+        "name": "_getSubProjectsOfCouncilMember()",
+        "column_name": "getSubProjectsOfCouncilMember()",
         "label": "",
         "validation": "",
         "validation_regex": "",
