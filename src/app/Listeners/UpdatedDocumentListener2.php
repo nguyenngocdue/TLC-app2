@@ -52,7 +52,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
             $msg = $type . " doesn't have status field.";
             Log::error($msg);
             // dump($obj);
-            //<< This will cause queue to retry
+            //<< This will cause queue to retry "has been attempted too many times", DON'T DD()
             // dd($msg); //If in QUEUE, this will never show on screen. 
         }
         $status = $obj['status'];
@@ -63,7 +63,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
             $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2).";
             Log::error($msg);
             // dump($obj);
-            //<< This will cause queue to retry
+            //<< This will cause queue to retry "has been attempted too many times", DON'T DD()
             // dd($msg); //If in QUEUE, this will never show on screen. 
             $bic_id = null;
         } else {
@@ -74,6 +74,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
             // $msg = $bic_monitors . " is not found in $type (UpdatedDocumentListener2). Halted 2.";
             // Log::error($msg);
             // dump($obj);
+            //<< This will cause queue to retry "has been attempted too many times", DON'T DD()
             // dd($msg); //If in QUEUE, this will never show on screen.
             $monitor_ids = [];
         } else {
