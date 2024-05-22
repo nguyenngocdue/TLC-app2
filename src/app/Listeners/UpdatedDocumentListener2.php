@@ -49,20 +49,23 @@ class UpdatedDocumentListener2 implements ShouldQueue
     private function getValues(array $obj, array $bic, $type)
     {
         if (!isset($obj['status'])) {
-            $msg = $type . " doesn't have status field. Halted.";
+            $msg = $type . " doesn't have status field.";
             Log::error($msg);
-            dump($obj);
-            dd($msg); //If in QUEUE, this will never show on screen. 
+            // dump($obj);
+            //<< This will cause queue to retry
+            // dd($msg); //If in QUEUE, this will never show on screen. 
         }
         $status = $obj['status'];
         $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
         $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
 
         if (!isset($obj[$bic_assignee]) || is_null($obj[$bic_assignee])) {
-            $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2). Halted 1.";
+            $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2).";
             Log::error($msg);
-            dump($obj);
-            dd($msg); //If in QUEUE, this will never show on screen.
+            // dump($obj);
+            //<< This will cause queue to retry
+            // dd($msg); //If in QUEUE, this will never show on screen. 
+            $bic_id = null;
         } else {
             $bic_id = 1 * $obj[$bic_assignee];
         }
@@ -83,7 +86,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
 
             'bic_assignee' => $bic_assignee,
             'bic_assignee_uid' => $bic_id,
-            'bic_assignee_name' => User::findFromCache($bic_id)->name,
+            'bic_assignee_name' => $bic_id ? User::findFromCache($bic_id)->name : "Unknown User Name",
 
             'bic_monitors' => $bic_monitors,
             'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $monitor_ids),
@@ -144,22 +147,27 @@ class UpdatedDocumentListener2 implements ShouldQueue
 
     public function handle(UpdatedDocumentEvent $event)
     {
-        $previousValue = $event->previousValue;
-        $currentValue = $event->currentValue;
-        $type = $event->type;
-        $modelPath = $event->modelPath;
-        $id = $currentValue['id'];
-        $bic = BallInCourts::getAllOf($type);
+        try {
+            $previousValue = $event->previousValue;
+            $currentValue = $event->currentValue;
+            $type = $event->type;
+            $modelPath = $event->modelPath;
+            $id = $currentValue['id'];
+            $bic = BallInCourts::getAllOf($type);
 
-        // Log::info($previousValue);
-        // Log::info($currentValue);
-        $previousValue = $this->getValues($previousValue, $bic, $type);
-        $currentValue = $this->getValues($currentValue, $bic, $type);
-        $diff = $this->getDiff($previousValue, $currentValue);
-        // Log::info(json_encode($previousValue));
-        // Log::info(json_encode($currentValue));
-        // Log::info(json_encode($diff));
+            // Log::info($previousValue);
+            // Log::info($currentValue);
+            $previousValue = $this->getValues($previousValue, $bic, $type);
+            $currentValue = $this->getValues($currentValue, $bic, $type);
+            $diff = $this->getDiff($previousValue, $currentValue);
+            // Log::info(json_encode($previousValue));
+            // Log::info(json_encode($currentValue));
+            // Log::info(json_encode($diff));
 
-        $this->sendMail($previousValue, $currentValue, $diff, $type, $id, $this->getIdsByBICUsers($currentValue, $bic, $modelPath, $id));
+            $this->sendMail($previousValue, $currentValue, $diff, $type, $id, $this->getIdsByBICUsers($currentValue, $bic, $modelPath, $id));
+        } catch (\Exception $e) {
+            Log::error('Job failed with exception: ' . $e->getMessage());
+            throw $e;
+        }
     }
 }
