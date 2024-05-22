@@ -15,6 +15,7 @@
     const modalProject = $(`#project_id`);
     const modalSubProject = $(`#sub_project_id`);
     const modalLOD= $(`#lod_id`);
+    const modalDiscipline = $(`#discipline_id`);
     const modalTask = $(`#task_id`);
     const modalSubTask = $(`#sub_task_id`);
     const modalWorkMode = $(`#work_mode_id`);
@@ -102,18 +103,21 @@
                                 var projectId = extendedProps.project_id;
                                 var subProjectId = extendedProps.sub_project_id;
                                 var lodId = extendedProps.lod_id;
+                                var disciplineId = extendedProps.discipline_id;
                                 var taskId = extendedProps.task_id;
                                 var subTaskId = extendedProps.sub_task_id;
                                 var workModeId = extendedProps.work_mode_id;
                                 var remarkValue = extendedProps.remark;
                                 //render modal trigger
-                                modalTitleTaskValue.text(`Task: ${extendedProps.title_default}`);
+                                modalTitleTaskValue.text(`Task Detail`);//: ${extendedProps.title_default}`);
                                 modalProject.val(projectId)
                                 modalProject.trigger('change');
                                 modalSubProject.val(subProjectId)
                                 modalSubProject.trigger('change');
                                 modalLOD.val(lodId)
                                 modalLOD.trigger('change');
+                                modalDiscipline.val(disciplineId)
+                                modalDiscipline.trigger('change');
                                 modalTask.val(taskId)
                                 modalTask.trigger('change');
                                 modalSubTask.val(subTaskId);
@@ -216,7 +220,7 @@
             var dataTimeValue = $(this).attr('data-time');
             if(timeBreaks){
                 if ( dataTimeValue === timeBreaks[0] ||dataTimeValue === timeBreaks[1]) {
-                    $(this).css({'background-color': '#fdba74','border-radius': 0});
+                    $(this).css({'background-color': '#777777','border-radius': 0});
                 } 
             }
         });
