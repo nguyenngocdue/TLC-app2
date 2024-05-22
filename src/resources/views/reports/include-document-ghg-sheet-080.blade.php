@@ -20,7 +20,7 @@
 @php
 	$years = is_array($params['year']) ? $params['year'] : [$params['year']];
 	$timeCategory =  $params['children_mode'];
-	$titleOfTime = array_values(App\Utils\Support\Report::generateTimeRanges($years));
+	$titleOfTime = array_values(App\Utils\Support\DateReport::generateTimeRanges($years));
 @endphp
 
 <table class="tg" style="undefined;table-layout: fixed; width: 1965px">
@@ -93,8 +93,8 @@
 
 	{{-- Title range of time --}}
 	@if ($timeCategory === 'filter_by_half_year')
-		@foreach ( $titleOfTime as $title)
-			<td class="tg-qjmw">{{$title}}</td>
+		@foreach ( $titleOfTime as $items)
+			<td class="tg-qjmw">{{$items['text']}}</td>
 		@endforeach
 	@else
 		@foreach ( $years as $year)
@@ -231,25 +231,25 @@
 	<td class="tg-cscf">GHG Emissions</td>
 	<td class="tg-f7v4" colspan="4">Scope 1 GHG Emissions</td>
 	<td class="tg-f7v4">tCO2e</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'scope_1_ghg_emissions', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>
 	<td class="tg-f7v4" rowspan="2"></td>
 	<td class="tg-f7v4" colspan="4">Scope 2 GHG Emissions</td>
 	<td class="tg-f7v4">tCO2e</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'scope_2_ghg_emissions', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>
 	<td class="tg-f7v4" colspan="4">Scope 3 GHG Emissons</td>
 	<td class="tg-f7v4">tCO2e</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'scope_3_ghg_emissions', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>
-	<td class="tg-jpxn" colspan="2">SOCIAL</td>
-	<td class="tg-npz6" colspan="4"><span style="font-weight:bold">Reporting Boudary: </span>Vietnam facilities (TF1, TF2 and TF3)</td>
+	<td class="tg-jpxn" colspan="6">SOCIAL</td>
+	<td class="tg-npz6" colspan="3"><span style="font-weight:bold">Reporting Boudary: </span>Vietnam facilities (TF1, TF2 and TF3)</td>
 	<td class="tg-73oq">ADM (20210108): Please confirm whether the social dât only covers those stated in green cell. ....</td>
   </tr>
 
@@ -416,21 +416,18 @@
 	<td class="tg-cscf">Accidents</td>
 	<td class="tg-f7v4" colspan="4">Occupational Accidents</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'occupational_accidents', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" rowspan="2"></td>
 	<td class="tg-f7v4" colspan="4">Occupational Near Misses</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'occupational_near_miss', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="4">Total Lost Time Due to Injury, Accidents, Fatalities, or Illness</td>
 	<td class="tg-f7v4">Hours</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'total_lost_time', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-cscf">Grievances</td>

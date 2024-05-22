@@ -1,6 +1,6 @@
 @php
 	if(isset($fieldName)) {
-		$data =isset($tableDataSource[$fieldName]) && !empty($tableDataSource[$fieldName])? $tableDataSource[$fieldName][0] : [];
+		$data =isset($tableDataSource[$fieldName]) && !empty($tableDataSource[$fieldName])? $tableDataSource[$fieldName] : [];
 	} else $data = [];
 @endphp
 

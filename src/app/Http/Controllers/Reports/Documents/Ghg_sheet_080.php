@@ -187,13 +187,22 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 			$dataQuery = DB::select($strSQL);
 			$dataOutput[$key] = $dataQuery;
 		}
-		// dd($dataOutput);
+		$dataOutput = array_map(fn ($item) => (array)reset($item), $dataOutput);
 		return $dataOutput;
 	}
 
 	public function getDataSource($params)
 	{
 		$dataSource = $this->generateDataSource($params);
+
+		$instance = new Ghg_sheet_080_dataSource();
+		$data3Scopes = $instance->divide3Scopes($params);
+
+		// Accident data source
+		$data3Accidents = $instance->divide3Accidents($params);
+
+
+		$dataSource = array_merge($dataSource, $data3Scopes, $data3Accidents);
 		// dd($dataSource);
 		return $dataSource;
 	}

@@ -488,15 +488,4 @@ class Report
             return sprintf("%02d", $month);
         }, $array);
     }
-
-    public static function generateTimeRanges($years)
-    {
-        $result = [];
-        foreach ($years as $year) {
-            $shortYear = substr($year, -2);
-            $result["first_range_{$year}"] = "Jan - Jun {$shortYear}";
-            $result["second_range_{$year}"] = "Jul - Dec {$shortYear}";
-        }
-        return $result;
-    }
 }
