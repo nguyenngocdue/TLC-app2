@@ -63,16 +63,20 @@ class UpdatedDocumentListener2 implements ShouldQueue
             Log::error($msg);
             dump($obj);
             dd($msg); //If in QUEUE, this will never show on screen.
-        }
-        if (!isset($obj[$bic_monitors]) || is_null($obj[$bic_monitors])) {
-            $msg = $bic_monitors . " is not found in $type (UpdatedDocumentListener2). Halted 2.";
-            Log::error($msg);
-            dump($obj);
-            dd($msg); //If in QUEUE, this will never show on screen.
+        } else {
+            $bic_id = 1 * $obj[$bic_assignee];
         }
 
-        $bic_id = 1 * $obj[$bic_assignee];
-        $monitor_ids = $obj[$bic_monitors];
+        if (!isset($obj[$bic_monitors]) || is_null($obj[$bic_monitors])) {
+            // $msg = $bic_monitors . " is not found in $type (UpdatedDocumentListener2). Halted 2.";
+            // Log::error($msg);
+            // dump($obj);
+            // dd($msg); //If in QUEUE, this will never show on screen.
+            $monitor_ids = [];
+        } else {
+            $monitor_ids = $obj[$bic_monitors];
+        }
+
 
         $result = [
             'status' => $status,
