@@ -8,7 +8,7 @@
                 <h3 class="text-lg justify-center font-semibold text-gray-900 dark:text-white" id="title_task_value">
                     Task:
                 </h3>
-                <button type="button" onclick="closeModalEvent()" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal">
+                <button type="button" onclick="closeModalEvent()" class="text-gray-900 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
                     <i class="fa-sharp fa-solid fa-xmark w-6 h-6 text-base"></i>
                     <span class="sr-only">Close modal</span>
                 </button>
