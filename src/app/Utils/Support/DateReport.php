@@ -268,4 +268,26 @@ class DateReport
         }
         return $onlyMonths;
     }
+    public static function generateTimeRanges($years)
+    {
+        $result = [];
+
+        foreach ($years as $year) {
+            $shortYear = substr($year, -2); // Lấy hai chữ số cuối của năm
+
+            $result["first_range_{$year}"] = [
+                "text" => "Jan - Jun {$shortYear}",
+                "begin_date" => "{$year}-01-01",
+                "end_date" => "{$year}-06-30"
+            ];
+
+            $result["second_range_{$year}"] = [
+                "text" => "Jul - Dec {$shortYear}",
+                "begin_date" => "{$year}-07-01",
+                "end_date" => "{$year}-12-31"
+            ];
+        }
+
+        return $result;
+    }
 }
