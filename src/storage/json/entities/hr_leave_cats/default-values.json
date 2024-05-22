@@ -38,9 +38,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_leave_days": {
-        "name": "_leave_days",
-        "column_name": "leave_days",
+    "_tpto_key": {
+        "name": "_tpto_key",
+        "column_name": "tpto_key",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -68,7 +68,7 @@
     "_remark": {
         "name": "_remark",
         "column_name": "remark",
-        "column_type": "varchar(255)",
+        "column_type": "text",
         "label": "Reason",
         "control": "textarea",
         "align": "",

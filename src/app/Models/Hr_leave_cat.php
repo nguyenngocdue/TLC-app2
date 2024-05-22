@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Hr_leave_cat extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "owner_id",
+        "id", "name", "owner_id", "tpto_key",
         "leave_days", "workplace_id", "remark",
     ];
     // public static $nameless = true;

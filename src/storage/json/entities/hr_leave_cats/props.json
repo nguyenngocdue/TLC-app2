@@ -65,14 +65,14 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_leave_days": {
-        "name": "_leave_days",
-        "column_name": "leave_days",
-        "column_type": "double(8,2)",
-        "label": "Leave Days",
-        "control": "number",
+    "_tpto_key": {
+        "name": "_tpto_key",
+        "column_name": "tpto_key",
+        "column_type": "varchar(255)",
+        "label": "TPTO Key",
+        "control": "text",
         "align": "",
-        "col_span": "6",
+        "col_span": "",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->id();
             $table->string("name")->nullable();
             $table->unsignedBigInteger("workplace_id")->nullable();
-            $table->float("leave_days");
+            $table->string("tpto_key")->nullable();
             $table->string("remark")->nullable();
             // $table->orderable();
             // $table->hasStatus();
