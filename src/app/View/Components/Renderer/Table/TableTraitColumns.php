@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer\Table;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TableTraitColumns
@@ -43,6 +44,7 @@ trait TableTraitColumns
         $fixedLeft = $this->getFixedLeftOrRight($column, $index, "left", "th");
         $fixedRight = $this->getFixedLeftOrRight($column, $index, "right", "th");
         $isLastColumn = ($index == sizeof($columns) - 1);
+        $isFirstFixedRightColumn = $this->isFirstFixedRightColumn($columns, $index);
         $renderer = $column['renderer'] ?? "_no_renderer_";
         // $rendererUnit = $column['rendererUnit'] ?? "_no_unit_";
         $dataIndex = $column['dataIndex'];
@@ -90,13 +92,14 @@ trait TableTraitColumns
         $classDiv45 = ($this->rotate45Width) ? "rotated-title-left-div-{$this->rotate45Width} text-left" : "";
         $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
+        $borderLeft = $isFirstFixedRightColumn ?  "border-l" : "";
         $tinyText = $this->noCss ? "text-xs" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
         $borderColor = $this->noCss ? "border-gray-400" : $this->borderColor;
         $th = "";
         $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $thStyleStr ";
-        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b $borderColor $borderRight $classTh45 $hiddenStr' ";
+        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px-4 py-3 border-b $borderColor $borderRight $borderLeft $classTh45 $hiddenStr' ";
         $th .= "title='$tooltip' ";
         $th .= ">";
         $th .= "<div class='$classDiv45 $tinyText $columnDivClass text-gray-700 dark:text-gray-300' $divStyleStr>";
