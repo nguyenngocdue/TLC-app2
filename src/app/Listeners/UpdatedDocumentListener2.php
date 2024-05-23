@@ -50,7 +50,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
     {
         if (!isset($obj['status'])) {
             $msg = $type . " doesn't have status field.";
-            Log::error($msg);
+            Log::error("UpdatedDocumentListener2: " . $msg);
             // dump($obj);
             //<< This will cause queue to retry "has been attempted too many times", DON'T DD()
             // dd($msg); //If in QUEUE, this will never show on screen. 
@@ -61,7 +61,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
 
         if (!isset($obj[$bic_assignee]) || is_null($obj[$bic_assignee])) {
             $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2).";
-            Log::error($msg);
+            Log::error("UpdatedDocumentListener2: " . $msg);
             // dump($obj);
             //<< This will cause queue to retry "has been attempted too many times", DON'T DD()
             // dd($msg); //If in QUEUE, this will never show on screen. 
@@ -167,7 +167,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
 
             $this->sendMail($previousValue, $currentValue, $diff, $type, $id, $this->getIdsByBICUsers($currentValue, $bic, $modelPath, $id));
         } catch (\Exception $e) {
-            Log::error('Job failed with exception: ' . $e->getMessage());
+            Log::error("UpdatedDocumentListener2: Job failed with exception: " . $e->getMessage());
             throw $e;
         }
     }

@@ -52,8 +52,7 @@ class SignOffSubmittedListener implements ShouldQueue
                 ->bcc(env('MAIL_ARCHIVE_BCC'))
                 ->send($mail);
         } catch (\Exception $e) {
-            Log::error("Error during SignOffSubmittedListener:");
-            Log::error($e->getMessage() . $e->getFile() . $e->getLine());
+            Log::error("SignOffSubmittedListener: " . $e->getMessage() . $e->getFile() . $e->getLine());
             // $msg = "Mail to <b>{$receiver->email}</b> failed.<br/>";
             // $msg .= $e->getMessage();
             // $msg .= $e->getFile() . " (Line: " . $e->getLine() . ")";
