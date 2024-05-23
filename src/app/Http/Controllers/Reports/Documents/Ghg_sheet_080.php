@@ -201,8 +201,12 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 		// Accident data source
 		$data3Accidents = $instance->divide3Accidents($params);
 
+		// Total direct employees
+		$dataDirectEmployees = $instance->getDataHumanCapitalDirectEmpSource($params);
 
-		$dataSource = array_merge($dataSource, $data3Scopes, $data3Accidents);
+
+
+		$dataSource = array_merge($dataSource, $data3Scopes, $data3Accidents, $dataDirectEmployees);
 		// dd($dataSource);
 		return $dataSource;
 	}

@@ -257,7 +257,7 @@
 	<td class="tg-cscf">Human Capital &amp; Gender Diversity</td>
 	<td class="tg-f7v4" colspan="4">Total Direct Employees</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'total_direct_employees', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>

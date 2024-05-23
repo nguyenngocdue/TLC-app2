@@ -89,7 +89,7 @@ class Ghg_sheet_080_dataSource extends Controller
 			$strSQL .= "
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 108 
 					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = {$year} 
-					THEN 1 ELSE 0 END) AS occ_accidents_by_year_{$year},
+					THEN 1 ELSE 0 END) AS occ_accidents_by_sum_year_{$year},
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 108 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') < '{$year}-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '{$year}-01-01' 
@@ -101,7 +101,7 @@ class Ghg_sheet_080_dataSource extends Controller
 
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 109 
 					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = {$year} 
-					THEN 1 ELSE 0 END) AS occ_near_miss_by_year_{$year},
+					THEN 1 ELSE 0 END) AS occ_near_miss_by_sum_year_{$year},
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 109 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') < '{$year}-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '{$year}-01-01' 
@@ -113,7 +113,7 @@ class Ghg_sheet_080_dataSource extends Controller
 					
 				SUM(CASE WHEN hseinr.incident_doc_type_id IN (107,108,109)
 					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = {$year} 
-					THEN hseinr.lost_days ELSE 0 END)*8  AS total_lost_time_by_year_{$year},
+					THEN hseinr.lost_days ELSE 0 END)*8  AS total_lost_time_by_sum_year_{$year},
 				SUM(CASE WHEN hseinr.incident_doc_type_id IN (107,108,109)
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') < '{$year}-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '{$year}-01-01' 
@@ -145,5 +145,56 @@ class Ghg_sheet_080_dataSource extends Controller
 			}
 		}
 		return $result;
+	}
+
+	public function getDataHumanCapitalDirectEmpSource($params)
+	{
+		$years = $this->getYears($params);
+		$strSQL1 = "SELECT \n";
+
+		$strSQL2 = "\n FROM (SELECT \n";
+		foreach ($years as $year) {
+			$strSQL1 .= "SUM(tb.c1_total_direct_emp_by_year_{$year} + tb.c2_total_direct_emp_by_year_{$year}) AS total_direct_emp_by_sum_year_{$year},
+								SUM(tb.c1_first_range_total_direct_emp_by_half_year_{$year} + tb.c2_first_range_total_direct_emp_by_half_year_{$year}) AS first_range_total_direct_emp_by_half_year_{$year},
+								SUM(tb.c1_second_range_total_direct_emp_by_half_year_{$year} + tb.c2_second_range_total_direct_emp_by_half_year_{$year}) AS second_range_total_direct_emp_by_half_year_{$year},";
+			$strSQL2 .= "
+									-- Calculate total direct employees for the full year 
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$year}-12-31' 
+											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$year}-12-31'
+											AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$year}-12' 
+											THEN 1 ELSE 0 END AS c1_total_direct_emp_by_year_{$year},
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$year}-12-31' 
+											AND us.last_date IS NULL
+											THEN 1 ELSE 0 END AS c2_total_direct_emp_by_year_{$year},
+									
+								-- Calculate total direct employees for the first half of year
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '{$year}-07-01' 
+											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '{$year}-07-01'
+											AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$year}-06' 
+											THEN 1 ELSE 0 END AS c1_first_range_total_direct_emp_by_half_year_{$year},
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '{$year}-07-01' 
+											AND us.last_date IS NULL
+											THEN 1 ELSE 0 END AS c2_first_range_total_direct_emp_by_half_year_{$year},
+									
+									-- Calculate total direct employees for the second half of year
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$year}-12-31' 
+											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$year}-12-31'
+											AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$year}-12' 
+											THEN 1 ELSE 0 END AS c1_second_range_total_direct_emp_by_half_year_{$year},
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$year}-12-31' 
+											AND us.last_date IS NULL
+											THEN 1 ELSE 0 END AS c2_second_range_total_direct_emp_by_half_year_{$year},";
+		}
+		$strSQL1 = trim($strSQL1, ",");
+		$strSQL2 = trim($strSQL2, ",");
+
+		// $strSQL = trim($strSQL, ",");
+		$strSQL2 .= "\n FROM users us
+		WHERE 1 = 1
+		AND us.show_on_beta = 0 ) AS tb";
+		$strSQL = $strSQL1 . $strSQL2;
+		$dataSQL = (array)collect(DB::select($strSQL))->first();
+		$dataSQL = ['total_direct_employees' => $dataSQL];
+		return $dataSQL;
 	}
 }
