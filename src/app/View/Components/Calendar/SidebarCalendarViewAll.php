@@ -8,6 +8,7 @@ use App\Providers\Support\TraitSupportPermissionGate;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class SidebarCalendarViewAll extends Component
@@ -179,9 +180,13 @@ class SidebarCalendarViewAll extends Component
             $bgAndHover = $disable ? "bg-gray-400" : "bg-gray-200 hover:bg-gray-300 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800";
         }
         $activeClass = $active ? "border-blue-600" : "";
-        $html .= "<li class='relative $bgAndHover $activeClass border my-1 p-1 focus:ring-4 font-medium rounded-lg text-sm'>
+
+        //128: Project Client
+        if (!in_array($user->discipline, [128])) {
+            $html .= "<li class='123 relative $bgAndHover $activeClass border my-1 p-1 focus:ring-4 font-medium rounded-lg text-sm'>
                     $htmlHref
                   </li>";
+        }
         return $html;
     }
 }

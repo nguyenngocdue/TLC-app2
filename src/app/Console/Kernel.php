@@ -4,6 +4,8 @@ namespace App\Console;
 
 // use App\Console\Commands\CreateControllerEntityCommand;
 // use App\Console\Commands\CreateTableRelationshipCommand;
+
+use App\Utils\Constant;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -19,10 +21,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule
-            ->call(fn () => Log::info("Schedule is running."))
-            ->everyTwoHours()
+            ->call(function () {/* Do nothing */
+            })
+            ->everySixHours()
             ->appendOutputTo(storage_path("logs/schedule_test_minute.log"))
-            ->description("Every minute: Schedule is running.");
+            ->description("Every 6 hours: Schedule is running: " . date(Constant::FORMAT_DATETIME_ASIAN));
 
         $schedule
             ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
@@ -39,6 +42,13 @@ class Kernel extends ConsoleKernel
             ->timezone("Asia/Ho_Chi_Minh")
             ->appendOutputTo(storage_path("logs/schedule_transfer_diginet_data.log"))
             ->description("Daily at 22:00 Ho_Chi_Minh Time: TransferDiginetEvent emitted from schedule.");
+
+        $schedule
+            ->call(fn () => event(new \App\Events\CleanUpTrashEvent()))
+            ->dailyAt('21:00')
+            ->timezone("Asia/Ho_Chi_Minh")
+            ->appendOutputTo(storage_path("logs/schedule_clean_up_trash.log"))
+            ->description("Daily at 21:00 Ho_Chi_Minh Time: Clean Up Trash.");;
     }
 
     /**`

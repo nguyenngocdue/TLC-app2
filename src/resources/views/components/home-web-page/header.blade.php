@@ -41,7 +41,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
               >
                 <ul class="block lg:flex">
                   @foreach($dataSource as $item)
-                    <li>
+                    <li class="flex items-center">
                       <a
                         href="#{{Str::slug($item)}}"
                         class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"

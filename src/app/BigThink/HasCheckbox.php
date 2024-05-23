@@ -281,17 +281,17 @@ trait HasCheckbox
         $toBeAddedList = array_values(array_diff($toBeSynced, $currentIds));
         $toBeDeletedList = array_values(array_diff($currentIds, $toBeSynced));
         // if ($fieldId == 155) {
-        //     Log::channel("emergency")->info("syncCheck getProdRoutingsOfSubProject");
-        //     Log::channel("emergency")->info("Route:       " . CurrentRoute::getName());
-        //     Log::channel("emergency")->info("User:        " . CurrentUser::get()->name);
-        //     Log::channel("emergency")->info("SubProject:  " . Sub_project::find($this->id)?->name);
-        //     Log::channel("emergency")->info("before:      [" . join(", ", $currentIds) . "]");
+        //     Log::channel("emergency_channel")->info("syncCheck getProdRoutingsOfSubProject");
+        //     Log::channel("emergency_channel")->info("Route:       " . CurrentRoute::getName());
+        //     Log::channel("emergency_channel")->info("User:        " . CurrentUser::get()->name);
+        //     Log::channel("emergency_channel")->info("SubProject:  " . Sub_project::find($this->id)?->name);
+        //     Log::channel("emergency_channel")->info("before:      [" . join(", ", $currentIds) . "]");
         //     $sortedIds = $ids;
         //     sort($sortedIds);
-        //     Log::channel("emergency")->info("ids:         [" . join(", ", $sortedIds) . "]");
-        //     Log::channel("emergency")->info("toBeAdded:   [" . join(", ", $toBeAddedList) . "]");
-        //     Log::channel("emergency")->info("toBeDeleted: [" . join(", ", $toBeDeletedList) . "]");
-        //     Log::channel("emergency")->info("-");
+        //     Log::channel("emergency_channel")->info("ids:         [" . join(", ", $sortedIds) . "]");
+        //     Log::channel("emergency_channel")->info("toBeAdded:   [" . join(", ", $toBeAddedList) . "]");
+        //     Log::channel("emergency_channel")->info("toBeDeleted: [" . join(", ", $toBeDeletedList) . "]");
+        //     Log::channel("emergency_channel")->info("-");
         // }
 
         //This section is to handle sync for ids have Assoc.

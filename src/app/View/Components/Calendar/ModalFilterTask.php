@@ -7,6 +7,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Pj_task;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class ModalFilterTask extends Component
 {
@@ -54,7 +55,7 @@ class ModalFilterTask extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dump($params);
+        // Log::info($params);
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

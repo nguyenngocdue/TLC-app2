@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Diginet_employee_leave_line;
+use App\Models\Pj_task;
 use App\Models\Public_holiday;
 use App\Models\User;
 use App\Models\Workplace;
@@ -85,7 +86,6 @@ class HrTsLineCollection extends ResourceCollection
                     $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJSForPH($item);
                     $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDurationForPH($item);
                     $item1['color'] = '#BA3C36';
-                    // $item1['title_default'] = "SOME NAME HEHE";
                 } elseif ($item instanceof Diginet_employee_leave_line) {
                     $values = $this->getStartEndFromLADayAndWP($item);
                     //In case if leave is standard 0.53 or 0.47 or 0.56 or 0.44 or 1
@@ -96,7 +96,6 @@ class HrTsLineCollection extends ResourceCollection
                         $item1['start'] = $start;
                         $item1['end'] = $end;
                         $item1['color'] = '#26C560';
-                        // $item1['title_default'] = "SOME NAME HIHI";
                     }
                 } else {
                     $item1['id'] = $item->id;
@@ -104,7 +103,7 @@ class HrTsLineCollection extends ResourceCollection
                     $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJS($item->start_time);
                     $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min);
                     $item1['color'] = Calendar::setColorByWorkModeId($item->work_mode_id);
-                    // $item1['title_default'] = "SOME NAME HAHA"; //Pj_task::findOrFail($item->task_id)->name;
+                    $item1['title_default'] = Pj_task::findOrFail($item->task_id)->name;
                 }
 
                 return $item1;
