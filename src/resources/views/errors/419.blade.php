@@ -5,10 +5,12 @@ $message .= "<br/>For security purposes, you need to login again.";
 $message .= "<br/>Redirecting to the Login Page...";
 @endphp
 
-<x-feedback.result
+{{-- This will cause a weird error getType... --}}
+
+{{-- <x-feedback.result
     type="warning"
     title="Session Expires"    
     message="{!! $message !!}"
-></x-feedback.result>
+></x-feedback.result> --}}
 
 <script>setTimeout(() => {window.location.href = "/";}, 100);</script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\qaqc;
 
 use App\Http\Controllers\Controller;
+use App\Utils\Support\CurrentUser;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -73,6 +74,7 @@ class ConqaArchiveRendererController extends Controller
             "signoffs" => $signoffs,
             "users" => $json->users,
             "minioPath" => env('AWS_ENDPOINT') . '/conqa-backup/' . $projName,
+            'isAdmin' => CurrentUser::isAdmin(),
         ]);
 
         return $renderer;
