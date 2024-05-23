@@ -31,6 +31,10 @@ class TestCronJobController extends Controller
                     dump("TransferDiginetDataEvent emitted.");
                     event(new \App\Events\TransferDiginetDataEvent());
                     break;
+                case 'clean_up_trash':
+                    dump("CleanUpTrashEvent emitted.");
+                    event(new \App\Events\CleanUpTrashEvent());
+                    break;
                 case 'send_test_mail':
                     dump("Test mail sent.");
                     SendEmail::sendTestEmail($request);

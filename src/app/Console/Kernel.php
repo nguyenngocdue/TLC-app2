@@ -42,6 +42,13 @@ class Kernel extends ConsoleKernel
             ->timezone("Asia/Ho_Chi_Minh")
             ->appendOutputTo(storage_path("logs/schedule_transfer_diginet_data.log"))
             ->description("Daily at 22:00 Ho_Chi_Minh Time: TransferDiginetEvent emitted from schedule.");
+
+        $schedule
+            ->call(fn () => event(new \App\Events\CleanUpTrashEvent()))
+            ->dailyAt('21:00')
+            ->timezone("Asia/Ho_Chi_Minh")
+            ->appendOutputTo(storage_path("logs/schedule_clean_up_trash.log"))
+            ->description("Daily at 21:00 Ho_Chi_Minh Time: Clean Up Trash.");;
     }
 
     /**`

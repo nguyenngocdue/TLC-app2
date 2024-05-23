@@ -9,6 +9,7 @@
     <div class="grid grid-cols-12 gap-4 w-3/4 mx-auto justify-center items-center">
         <x-renderer.button href="?case=sign_off_remind">Sign Off Remind</x-renderer.button>
         <x-renderer.button href="?case=transfer_diginet_data">Transfer Diginet Data</x-renderer.button>
+        <x-renderer.button href="?case=clean_up_trash">Clean Up Trash</x-renderer.button>
     </div>
 
     Test Function

@@ -49,7 +49,7 @@ return [
     "channels" => [
         "stack" => [
             "driver" => "stack",
-            "channels" => ["single"], //log logging 
+            "channels" => ["single", "daily"], //log logging 
             "ignore_exceptions" => false,
         ],
 
@@ -61,10 +61,9 @@ return [
 
         "daily" => [
             "driver" => "daily",
-            "path" => storage_path("logs/laravel.log"),
+            "path" => storage_path("logs/daily/laravel.log"),
             "level" => env("LOG_LEVEL", "debug"),
-            "days" => 2,
-            // "days" => 14, //Default 14
+            "days" => 14, //Default 14
         ],
 
         "slack" => [
@@ -115,16 +114,24 @@ return [
             "handler" => NullHandler::class,
         ],
 
-        "emergency" => [
+        "emergency_channel" => [
             'driver' => 'single',
-            "path" => storage_path("logs/emergency.log"),
+            "path" => storage_path("logs/emergency/emergency.log"),
             'level' => 'debug',
         ],
+
+        "cleanup_trash_channel" => [
+            'driver' => 'daily', // or 'single' for a single log file
+            'path' => storage_path('logs/cleanup_trash/trashed.log'), // Define the log storage location
+            'level' => 'debug', // Define the log level
+            'days' => 30, // Number of days log files should be retained
+        ],
+
         'mail_log_channel' => [
             'driver' => 'daily', // or 'single' for a single log file
             'path' => storage_path('logs/mail/mail.log'), // Define the log storage location
             'level' => 'debug', // Define the log level
-            'days' => 7, // Number of days log files should be retained
+            'days' => 30, // Number of days log files should be retained
         ],
     ],
 ];

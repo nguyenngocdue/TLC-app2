@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\CleanUpTrashEvent;
 use App\Events\CreatedDocumentEvent2;
 use App\Events\OpenedDocumentEvent;
 use App\Events\SignOffRecallEvent;
@@ -11,13 +12,13 @@ use App\Events\SignOffSubmittedEvent;
 use App\Events\TransferDiginetDataEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
-use App\Events\UpdateDiginetDataEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\UpdatedUserPositionEvent;
 use App\Events\UserSignedInEvent;
 //------------
+use App\Listeners\CleanUpTrashListener;
 use App\Listeners\CreatedDocumentListener2;
 use App\Listeners\OpenedDocumentListener;
 use App\Listeners\SignOffRemindListener;
@@ -27,7 +28,6 @@ use App\Listeners\SignOffSubmittedListener;
 use App\Listeners\TransferDiginetDataListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
-use App\Listeners\UpdateDiginetDataListener;
 use App\Listeners\UpdatedProdSequenceListener;
 use App\Listeners\UpdatedQaqcChklstListener;
 use App\Listeners\UpdatedQaqcChklstSheetListener;
@@ -79,6 +79,8 @@ class EventServiceProvider extends ServiceProvider
 
         //Diginet
         TransferDiginetDataEvent::class => [TransferDiginetDataListener::class],
+
+        CleanUpTrashEvent::class => [CleanUpTrashListener::class],
     ];
 
     /**
