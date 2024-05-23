@@ -4,6 +4,8 @@ namespace App\Console;
 
 // use App\Console\Commands\CreateControllerEntityCommand;
 // use App\Console\Commands\CreateTableRelationshipCommand;
+
+use App\Utils\Constant;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +25,7 @@ class Kernel extends ConsoleKernel
             })
             ->everySixHours()
             ->appendOutputTo(storage_path("logs/schedule_test_minute.log"))
-            ->description("Every 6 hours: Schedule is running.");
+            ->description("Every 6 hours: Schedule is running: " . date(Constant::FORMAT_DATETIME_ASIAN));
 
         $schedule
             ->call(fn () => event(new \App\Events\SignOffRemindEvent()))
