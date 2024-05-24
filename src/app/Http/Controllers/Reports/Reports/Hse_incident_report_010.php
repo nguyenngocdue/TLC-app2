@@ -490,11 +490,11 @@ class Hse_incident_report_010 extends Report_ParentReportController
         return collect($dataSource);
     }
 
-    // protected function getDefaultValueParams($params, $request)
-    // {
-    //     if (isset($params['year']) || is_null($params['year'])) {
-    //         $params['year'] = Date('Y');
-    //     }
-    //     return $params;
-    // }
+    protected function getDefaultValueParams($params, $request)
+    {
+        if (!isset($params['year']) || is_null($params['year'])) {
+            $params['year'] = Date('Y');
+        }
+        return $params;
+    }
 }
