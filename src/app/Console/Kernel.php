@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
             })
             ->everySixHours()
             // ->appendOutputTo(storage_path("logs/schedule_test_minute.log"))
-            ->description("Every 6 hours: Schedule is running: " . date(Constant::FORMAT_DATETIME_ASIAN));
+            ->description("Every 6 hours: Heartbeat at: " . date(Constant::FORMAT_DATETIME_ASIAN));
 
         $schedule
             ->call(function () {
