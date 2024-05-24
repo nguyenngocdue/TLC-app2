@@ -29,7 +29,7 @@ class Thumbnails extends Component
         return function (array $data) {
             $max = 100;
             // dump($data['slot']);
-            $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+            $path = app()->pathMinio() . '/';
             $cell = json_decode($data['slot']);
             // dump($cell);
             if (is_null($cell)) return "";

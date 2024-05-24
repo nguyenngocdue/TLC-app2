@@ -80,7 +80,7 @@ class ParentId7UserOt extends Component
 
         foreach ($result as &$row) {
             if ($row->avatar) {
-                $row->avatar  = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $row->avatar;
+                $row->avatar  = app()->pathMinio() . '/' . $row->avatar;
             } else {
                 $row->avatar = "/images/avatar.jpg";
             }

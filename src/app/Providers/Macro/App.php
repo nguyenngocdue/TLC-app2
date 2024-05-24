@@ -33,6 +33,7 @@ App::macro('backgroundImage', function () {
 App::macro('pathMinio', function () {
     return env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
 });
+
 App::macro('textBanner', function () {
     return [
         "Build Smarter, Not Harder: Modular Management at Your Fingertips.",
