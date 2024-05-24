@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\BigThink\HasCachedAvatar;
+use App\BigThink\HasShowOnScreens;
 use App\BigThink\ModelExtended;
 
 class Project extends ModelExtended
 {
     use HasCachedAvatar;
+    use HasShowOnScreens;
 
     protected $fillable = ["id", "name", "description", "slug", "status", "owner_id", "qr_app_source"];
 
@@ -20,7 +22,14 @@ class Project extends ModelExtended
 
     public static $oracyParams = [
         "getProjectMembers()" => ['getCheckedByField', User::class],
+        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
     ];
+
+    public function getScreensShowMeOn()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
 
     public function getAvatar()
     {

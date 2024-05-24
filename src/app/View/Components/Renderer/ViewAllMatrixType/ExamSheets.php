@@ -15,7 +15,7 @@ class ExamSheets extends ViewAllTypeMatrixParent
 {
     // use TraitYAxisDiscipline;
 
-    private $project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline;
+    // private $project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline;
     // protected $viewportMode = null;
 
     // protected $xAxis = Prod_routing_link::class;
@@ -63,7 +63,9 @@ class ExamSheets extends ViewAllTypeMatrixParent
             ->whereNot('show_on_beta', 1)
             ->whereNot('time_keeping_type', 1)
             ->where('workplace', 1)
+            ->where('company', 7)
             ->with('getUserDepartment')
+            ->with('getAvatar')
             ->orderBy('name0')
             ->get();
         return $yAxis;
@@ -128,18 +130,19 @@ class ExamSheets extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         $columns = [
-            [
-                'dataIndex' => 'department_for_group_by',
-                'hidden' => true,
-            ],
+            ['dataIndex' => 'avatar',],
+            ['dataIndex' => 'department_for_group_by', 'hidden' => true,],
         ];
         return $columns;
     }
 
     function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
     {
+        // dump($y);
+        $src = app()->pathMinio() . "/" . $y->getAvatar->url_thumbnail;
         return [
             'department_for_group_by' => $y->getUserDepartment->name,
+            'avatar' =>  "<img src='$src' class='rounded w-10 h-10 mx-auto' ></img>",
         ];
     }
 }

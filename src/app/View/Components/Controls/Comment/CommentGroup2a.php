@@ -59,7 +59,6 @@ class CommentGroup2a extends Component
 
     function createDataSource($comments, $commentableType, $commentableId, $category, $category_id)
     {
-        // $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
         $counter = static::$counter;
         $index = 0;
         $currentUser = CurrentUser::get();

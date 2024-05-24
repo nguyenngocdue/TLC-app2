@@ -123,13 +123,13 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "new": "",
-        "in_progress": "",
-        "cancelled": "",
-        "on_hold": "",
-        "pending_verification": "",
-        "rejected": "",
-        "closed": ""
+        "new": "true",
+        "in_progress": "true",
+        "cancelled": "true",
+        "on_hold": "true",
+        "pending_verification": "true",
+        "rejected": "true",
+        "closed": "true"
     },
     "_closed_at": {
         "name": "_closed_at",

@@ -1,7 +1,7 @@
 <header x-data="{navbarOpen: false}"
 class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900 border-b">
       <div class="w-full mx-4">
-        <div class="relative -mx-4 flex items-center justify-between">
+        <div class="relative -mx-4 flex items-center justify-between w-full">
           <div class="w-60 max-w-full px-4">
             <a href="javascript:void(0)" class="block w-full">
               <img
@@ -44,7 +44,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     <li class="flex items-center">
                       <a
                         href="#{{Str::slug($item)}}"
-                        class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                        class="flex py-2 text-center items-center text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         {{$item}}
                       </a>
@@ -96,13 +96,13 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                 <a
                     href="/login"
                     {{-- class="px-7 py-3 text-base font-medium text-white hover:text-blue-800 dark:text-white" --}}
-                    class="rounded-md bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
+                    class="flex rounded-md text-center items-center bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
                 >
                     Login
                 </a>
                 <a
                     href="/register"
-                    class="rounded-md bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
+                    class="flex rounded-md text-center items-center bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
                 >
                     Sign Up
                 </a>

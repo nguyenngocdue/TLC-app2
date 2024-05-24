@@ -381,6 +381,7 @@ const addANewLineFull = (params) => {
                     const { control } = column
                     const attributeName = control === 'picker_datetime' ? 'name1' : 'name'
                     renderer = "<input component='editable/" + control + "' id='" + id + "' " + attributeName + "='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
+                    renderer += "<input type='hidden' name='"+id+"' id='hidden_"+id+"'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) + '</script>'
                     break

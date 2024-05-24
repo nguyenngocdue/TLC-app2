@@ -143,7 +143,9 @@
                                                 contentType="{{$attachment->contentType}}"
                                                 src="{{$src}}"
                                                 uploadedBy={{$uploadedBy}}
-                                                uploadedAt={{$uploadedAt}}                                            
+                                                uploadedAt={{$uploadedAt}}    
+                                                originalLink="https://conqa.imgix.net/{{$attachment->fileId}}"
+                                                isAdmin={{$isAdmin?1:0}}                                    
                                             /> 
                                         @endif                  
                                     @else

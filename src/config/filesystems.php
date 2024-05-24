@@ -62,20 +62,24 @@ return [
             //     ]
             // ],
         ],
-        "project_plans" => [
-            "driver" => "s3",
-            "key" => env("AWS_ACCESS_KEY_ID", "your AWS server key"),
-            "secret" => env("AWS_SECRET_ACCESS_KEY", "your AWS server secret"),
-            "region" => env("AWS_DEFAULT_REGION", "your AWS server secret"),
-            "bucket" => 'project-drawings',
-            // "bucket" => env("AWS_BUCKET", "your AWS bucket name"),
-            'url' => env('AWS_URL'),
-            "endpoint" => env("AWS_ENDPOINT", "http://localhost:9000"),
-            "use_path_style_endpoint" => env(
-                "AWS_USE_PATH_STYLE_ENDPOINT",
-                false,
-            ),
-        ]
+        // "conqa_backup" => [
+        //     "driver" => "s3",
+        //     "key" => env("AWS_ACCESS_KEY_ID", "your AWS server key"),
+        //     "secret" => env("AWS_SECRET_ACCESS_KEY", "your AWS server secret"),
+        //     "region" => env("AWS_DEFAULT_REGION", "your AWS server secret"),
+        //     "bucket" => 'conqa-backup',
+        //     // "bucket" => env("AWS_BUCKET", "your AWS bucket name"),
+        //     'url' => env('AWS_URL'),
+        //     "endpoint" => env("AWS_ENDPOINT", "http://localhost:9000"),
+        //     "use_path_style_endpoint" => env(
+        //         "AWS_USE_PATH_STYLE_ENDPOINT",
+        //         false,
+        //     ),
+        // ],
+        // "conqa_attachment" => [
+        //     "driver" => "local",
+        //     "root" => storage_path("database_attachments"),
+        // ],
     ],
 
     /*

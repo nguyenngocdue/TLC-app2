@@ -29,7 +29,7 @@ class Attachment3 extends Component
         $fileName = $dataSource->filename;
         $urlThumbnail = $dataSource->url_thumbnail;
         $urlMedia = $dataSource->url_media;
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        $path = app()->pathMinio() . '/';
         return view('components.renderer.attachment3', [
             'urlThumbnail' => $path . $urlThumbnail,
             'urlMedia' => $path . $urlThumbnail,

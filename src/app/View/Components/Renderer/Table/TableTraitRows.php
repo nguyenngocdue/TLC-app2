@@ -137,6 +137,7 @@ trait TableTraitRows
                     break;
             }
             $align = ($column['align'] ?? null) ? "text-" . $column['align'] : "";
+            $borderLeft = $this->isFirstFixedRightColumn($columns, $index) ? "border-l" : "";
             $borderRight = ($index < $columnCount - 1) ? "border-r" : "";
             $hidden = $this->isInvisible($column) ? "hidden" : "";
             $styleStr = $this->getStyleStr(['width' => ($column['width'] ?? 100) . "px", 'a' => 3]);
@@ -148,7 +149,7 @@ trait TableTraitRows
             $borderGray = $this->noCss ? "border-gray-400" : "";
             $bgWhite = ($renderer == 'no.') ? "bg-white" : "";
             $nowrap = ($column['nowrap'] ?? false) ? "whitespace-nowrap" : "";
-            $td = "<td class='dark:border-gray-600 border-b $fixedLeft $fixedRight $bgWhite $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderGray $align $nowrap'";
+            $td = "<td class='dark:border-gray-600 border-b $fixedLeft $fixedRight $bgWhite $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderLeft $borderGray $align $nowrap'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
             $td .= ">";

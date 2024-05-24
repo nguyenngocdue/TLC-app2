@@ -27,4 +27,7 @@
     @endswitch
     <p>{{$uploadedBy ?? ""}}</p>
     <p>{{$uploadedAt ?? ""}}</p>
+    @if(isset($isAdmin) && $isAdmin)
+        <a href="{{$originalLink}}" target="_blank">Original link</a>
+    @endif
 </div>

@@ -42,7 +42,7 @@ class Thumbnail extends Component
             }
         }
 
-        $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+        $path = app()->pathMinio() . '/';
 
         $dataIndex = $this->column['dataIndex'];
         $cell = $this->dataLine->$dataIndex;

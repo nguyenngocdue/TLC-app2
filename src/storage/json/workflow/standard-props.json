@@ -81,7 +81,7 @@
         "control": "status",
         "align": null,
         "col_span": "6",
-        "width": "150",
+        "width": "200",
         "hidden_edit": "true",
         "frozen_right": "true"
     },

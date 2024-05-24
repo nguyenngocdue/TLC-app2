@@ -45,4 +45,17 @@ trait TableTraitCommon
         }
         return $result;
     }
+
+    private function isFirstFixedRightColumn($columns, $index)
+    {
+        if ($index == 0) return false;
+        $column = $columns[$index];
+        $previousColumn = $columns[$index - 1];
+        $a = !isset($previousColumn['fixed']);
+        $b = (isset($previousColumn['fixed']) && $previousColumn['fixed'] != 'right');
+        if ($a || $b) {
+            if (isset($column['fixed']) && $column['fixed'] == 'right') return true;
+        }
+        return false;
+    }
 }

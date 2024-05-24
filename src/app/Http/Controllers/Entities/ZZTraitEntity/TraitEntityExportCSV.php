@@ -80,7 +80,7 @@ trait TraitEntityExportCSV
                     $collection = $dataLine
                         ->{$relationships['control_name_function']};
                     $dataAttachment = [];
-                    $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+                    $path = app()->pathMinio() . '/';
                     foreach ($collection as $value) {
                         $dataAttachment[] = $path . $value['url_media'];
                     }

@@ -44,15 +44,18 @@ trait TraitEntityCRUDShowQRLandingPage
 		}
 		return $linkDocs;
 	}
-	private function getDataSourceHOManual($model){
+	private function getDataSourceHOManual($model)
+	{
 		$attachments = $this->getDataRenderLinkDownloads($model);
 		return $this->getLinkDownloadsByAttachments($attachments);
 	}
-	private function getDataSourceProjectPlans($model){
-		$attachments = $this->getDataRenderLinkDownloads($model,"attachment_subproject_project_plans");
-        return $this->getLinkDownloadsByAttachments($attachments);
+	private function getDataSourceProjectPlans($model)
+	{
+		$attachments = $this->getDataRenderLinkDownloads($model, "attachment_subproject_project_plans");
+		return $this->getLinkDownloadsByAttachments($attachments);
 	}
-	private function getLinkDownloadsByAttachments($attachments){
+	private function getLinkDownloadsByAttachments($attachments)
+	{
 		$linkDownloads = [];
 		$pathMinio = app()->pathMinio();
 		foreach ($attachments as $attachment) {
@@ -114,7 +117,8 @@ trait TraitEntityCRUDShowQRLandingPage
 			return $prodOrderOrModule->getQaqcInspChklsts;
 		}
 	}
-	private function getDataRenderLinkDownloads($item, $func = 'attachment_subproject_homeowner_manual'){
+	private function getDataRenderLinkDownloads($item, $func = 'attachment_subproject_homeowner_manual')
+	{
 		$subProject = $item->getSubProject;
 		$attachments = $subProject->{$func} ?? [];
 		return $attachments;

@@ -13,7 +13,7 @@ trait HasCachedAvatar
     function getAvatarFromDB($defaultImage)
     {
         $avatar = $this->getAvatar;
-        if ($avatar) $avatar = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $avatar->url_thumbnail;
+        if ($avatar) $avatar = app()->pathMinio() . '/' . $avatar->url_thumbnail;
         else $avatar = $defaultImage;
         return $avatar;
     }
@@ -44,7 +44,7 @@ trait HasCachedAvatar
     {
         $id = $this->id;
         if (!isset(static::$avatarSingleton00[$this::class][$id])) {
-            $path = env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+            $path = app()->pathMinio() . '/';
             $thumbnail = $this->getUserAvatarFromDB($this::class, $id);
             // dump($thumbnail);
             static::$avatarSingleton00[$this::class][$id] = $thumbnail ?  $path .  $thumbnail : $defaultImage;
