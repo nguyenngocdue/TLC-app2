@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Project;
+use App\Utils\Support\CurrentRoute;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
@@ -25,20 +26,25 @@ class ProjectFilter extends Component
         private $readOnly = false,
         private $allowClear = false,
         // private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $typePlural = null,
         private $dataSource = null,
     ) {
         // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
+        if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
     }
 
     private function getDataSource()
     {
         if ($this->dataSource) return $this->dataSource;
-        $statuses = config("project.active_statuses.projects");
-        return Project::select('id', 'name', 'description')
-            ->whereIn('status', $statuses)
+        // $statuses = config("project.active_statuses.projects");
+        $db = Project::select('id', 'name', 'description')
+            // ->whereIn('status', $statuses)
             ->orderBy('name')
             ->get();
+
+        $db = $db->filter(fn ($item) => $item->isShowOn($this->typePlural))->values();
+        return $db;
     }
 
     /**
