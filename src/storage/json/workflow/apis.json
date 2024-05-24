@@ -317,6 +317,13 @@
         "name": "pj_job_lines",
         "storeEmpty_and_updateShort": "true"
     },
+    "pj_job_phases": {
+        "name": "pj_job_phases"
+    },
+    "pj_job_sub_lines": {
+        "name": "pj_job_sub_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
     "pj_jobs": {
         "name": "pj_jobs"
     },

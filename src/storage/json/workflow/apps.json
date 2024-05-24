@@ -1692,6 +1692,23 @@
         "hidden_navbar": "true",
         "do_not_send_notification_mails": "true"
     },
+    "pj_job_sub_line": {
+        "name": "pj_job_sub_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "project_management",
+        "title": "Job Sub Lines",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
+    },
     "pj_module": {
         "name": "pj_module",
         "package_tab": "application",
