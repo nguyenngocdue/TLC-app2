@@ -8,7 +8,7 @@
   vertical-align:top}
 .tg .tg-npz6{background-color:#c0c0c0;border-color:#000000;text-align:center;vertical-align:top}
 .tg .tg-ggjs{background-color:#9b9b9b;border-color:#000000;color:#ffffff;text-align:left;vertical-align:top}
-.tg .tg-f7v4{background-color:#c0c0c0;border-color:#000000;text-align:left;vertical-align:top}
+.tg .tg-f7v4{border-color:#000000;text-align:left;vertical-align:top}
 .tg .tg-u8ky{background-color:#9b9b9b;border-color:#000000;color:#ffffff;font-size:22px;font-weight:bold;text-align:left;
   vertical-align:top}
 .tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
@@ -265,91 +265,83 @@
 	<td class="tg-f7v4"></td>
 	<td class="tg-f7v4" colspan="3">Senior Employees (ie: managers, directors, supervisors)</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'senior_employees', 'timeCategory' => $timeCategory])
   </tr>
 
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Female</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'senior_employees_female', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Male</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'senior_employees_male', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4"></td>
 	<td class="tg-f7v4" colspan="3">Junior Employees</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'junior_employees', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Female</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'junior_employees_female', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Male</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'junior_employees_male', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4"></td>
 	<td class="tg-f7v4" colspan="3">New Empoyees</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'total_new_employees', 'timeCategory' => $timeCategory])
 
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Female</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'new_employees_female', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Male</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'new_employees_male', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4"></td>
 	<td class="tg-f7v4" colspan="3">Departed Employees</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'total_departed_employees', 'timeCategory' => $timeCategory])
+
 
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Female</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'departed_employees_female', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4" colspan="2"></td>
 	<td class="tg-f7v4" colspan="2">Male</td>
 	<td class="tg-f7v4">Number</td>
-	@include('components.reports.value-by-category')
-
+	@include('components.reports.value-by-category', ['fieldName' => 'departed_employees_male', 'timeCategory' => $timeCategory])
   </tr>
   <tr>
 	<td class="tg-f7v4"></td>
 	<td class="tg-f7v4" colspan="3">Hours Worked per Full-time Employee within 6-month period</td>
 	<td class="tg-f7v4">Hours/per person</td>
-	@include('components.reports.value-by-category')
+	@include('components.reports.value-by-category', ['fieldName' => 'hours_worked_employee', 'timeCategory' => $timeCategory])
 
   </tr>
   <tr>

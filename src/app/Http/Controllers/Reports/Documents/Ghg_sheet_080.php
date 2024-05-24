@@ -202,12 +202,29 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 		$data3Accidents = $instance->divide3Accidents($params);
 
 		// Total direct employees
-		$dataDirectEmployees = $instance->getDataHumanCapitalDirectEmpSource($params);
+		$dataDirectEmployees = $instance->divideTotalDirectEmployees($params);
 
+		// Human Capital Gender Diversity - New Employees
+		$dataNewEmployees = $instance->divideNewEmployees($params);
+		// dd($dataNewEmployees);
 
+		// Departed Employee
+		$dataDepartedEmployees = $instance->divideDepartedEmployees($params);
 
-		$dataSource = array_merge($dataSource, $data3Scopes, $data3Accidents, $dataDirectEmployees);
-		// dd($dataSource);
+		// Hours Worked per Full-time
+		$instance1 = new Ghg_sheet_080_dataSource1();
+		$dataHoursWorked = $instance1->getDataDepartedEmployees($params);
+
+		$dataSource = array_merge(
+			$dataSource,
+			$data3Scopes,
+			$data3Accidents,
+			$dataDirectEmployees,
+			$dataNewEmployees,
+			$dataDepartedEmployees,
+			$dataHoursWorked
+		);
+
 		return $dataSource;
 	}
 }
