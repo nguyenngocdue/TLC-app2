@@ -83,6 +83,18 @@
         "cancelled": "true",
         "on_hold": "true"
     },
+    "_getScreensShowMeOn()": {
+        "name": "_getScreensShowMeOn()",
+        "column_name": "getScreensShowMeOn()",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
     "_getProjectMembers()": {
         "name": "_getProjectMembers()",
         "column_name": "getProjectMembers()",
