@@ -105,7 +105,7 @@ class Ghg_sheet_080 extends Report_ParentDocument2Controller
 	{
 		$strSQL = "";
 		foreach ($years as $year) {
-			$strSQL .= "\n SUM(IF(year_only = {$year}, total, 0)) AS sum_year_{$year},";
+			$strSQL .= "\n SUM(IF(year_only = {$year}, total, 0)) AS by_year_{$year},";
 			$strSQL .= "\n SUM(IF(full_date >= '{$year}-01-01' AND full_date < '{$year}-07-01', total, 0)) AS sum_first_range_{$year}, 
 						\n SUM(IF(full_date >= '{$year}-07-01' AND full_date <= '{$year}-12-31', total, 0)) AS sum_second_range_{$year},";
 		}
