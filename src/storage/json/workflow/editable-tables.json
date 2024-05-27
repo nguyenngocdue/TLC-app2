@@ -196,6 +196,18 @@
         "editable-table": "hse_corrective_actions",
         "button_add_a_new_line": "true"
     },
+    "pj_job_01": {
+        "name": "pj_job_01",
+        "entity-type": "pj_jobs",
+        "editable-table": "pj_job_lines",
+        "button_add_a_new_line": "true"
+    },
+    "pj_job_line_01": {
+        "name": "pj_job_line_01",
+        "entity-type": "pj_job_lines",
+        "editable-table": "pj_job_sub_lines",
+        "button_add_a_new_line": "true"
+    },
     "prod_orders_01": {
         "name": "prod_orders_01",
         "entity-type": "prod_orders",

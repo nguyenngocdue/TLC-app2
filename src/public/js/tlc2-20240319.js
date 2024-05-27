@@ -121,7 +121,12 @@ const flatpickrHandleChange = (name, selectedDates) => {
     const date = selectedDates[0]
     const result = convertToServerTimezoneStr(date)
     const hiddenInput = document.getElementById('hidden_' + name);
-    hiddenInput.value = result;
+    if(hiddenInput){
+        hiddenInput.value = result;
+    } else {
+        const input = document.getElementById(name);
+        input.value = result;
+    }
 }
 
 const newFlatPickrDateTime = (id, config) => {
