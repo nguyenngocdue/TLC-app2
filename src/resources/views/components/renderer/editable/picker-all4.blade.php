@@ -5,7 +5,7 @@
 
 <input
     @readonly($readOnly)
-    component="editable/{{$control}}"
+    component="editable/{{$control}}/picker-all4a"
     {{-- component="editable/picker-all4" --}}
     id="{{$name}}"
     {{$attributeName}}="{{$name}}"
@@ -35,7 +35,7 @@ switch($control){
 
 <input
     @readonly($readOnly)
-    component="editable/{{$control}}"
+    component="editable/{{$control}}/picker-all4b"
     {{-- component="editable/picker-all4" --}}
     {{-- id="{{$name}}" --}}
     {{-- {{$attributeName}}="{{$name}}" --}}

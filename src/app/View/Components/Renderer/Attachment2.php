@@ -82,7 +82,7 @@ class Attachment2 extends Component
             'destroyable' => $this->destroyable,
             'readOnly' => $this->readOnly,
             'showUploadFile' => $this->showUploadFile,
-            'path' => app()->pathMinio() . '/',
+            'path' => app()->pathMinio(),
             'docs' => $docFiles,
             'attachments' => $remainingFiles,
             'acceptAttachment' => $acceptAttachment,

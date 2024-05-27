@@ -85,10 +85,16 @@ class AttachmentName
             // $tempMediaNames = array_column($tempMedia, 'filename');
             $tempData =  $mediaNames;
             [$baseName,  $maxNumber] =  self::getMaxNumberMediaName($tempData, $fileName, $extensionFile);
-            $fileName =  $baseName . '-' . $maxNumber + 1 . '.' . $extensionFile;
-            if (in_array($fileName, $mediaNames)) {
-                Log::info("Duplicate " . $fileName . "in attachments table.");
-            }
+            $index = 1;
+            do {
+
+                $fileName =  $baseName . '-' . $maxNumber + $index . '.' . $extensionFile;
+                $index++;
+                // if (in_array($fileName, $mediaNames)) {
+                //     Log::info("Duplicate " . $fileName . " in attachments table.");
+                // }
+            } while (in_array($fileName, $mediaNames));
+            Log::info($fileName);
             return $fileName;
         }
         return $fileName;
