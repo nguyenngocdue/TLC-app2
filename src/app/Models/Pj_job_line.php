@@ -49,7 +49,7 @@ class Pj_job_line extends ModelExtended
             ['dataIndex' => 'phase_id',],
             ['dataIndex' => 'name', 'title' => 'Name'],
             ['dataIndex' => 'description', 'title' => 'Description'],
-            ['dataIndex' => 'getSubLines',],
+            ['dataIndex' => 'getSubLines', 'renderer' => 'renderAllChildrenAndClickToOpenChildren'],
 
         ];
     }

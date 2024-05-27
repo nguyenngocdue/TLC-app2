@@ -115,10 +115,17 @@ trait TraitTableColumnEditable
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
                     break;
-                default:
+                case 'text':
                     $newColumn['renderer'] = "text4";
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
+                    break;
+                case 'relationship_renderer':
+                    $newColumn['renderer'] = "many-line4";
+                    if (isset($column['renderer'])) $newColumn['renderer'] = $column['renderer'];
+                    break;
+                default:
+                    $newColumn['renderer'] = "unknown renderer4 [" . $prop['control'] . "]";
                     break;
             }
             if (in_array($prop['control'], ['dropdown_multi', 'checkbox'])) {
