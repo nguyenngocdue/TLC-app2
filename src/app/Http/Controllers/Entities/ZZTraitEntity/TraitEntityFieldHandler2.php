@@ -155,7 +155,6 @@ trait TraitEntityFieldHandler2
         // Log::info($this->type);
         $propNames = [];
         foreach ($oracyProps as $prop) {
-            $relatedModel = $this->superProps['props'][$prop]['relationships']['oracyParams'][1];
             $propName = substr($prop, 1); //Remove first "_"
             $propNames[] = $propName;
         }
@@ -169,9 +168,10 @@ trait TraitEntityFieldHandler2
             // Log::info($getManyLineParamsDataIndex);
             $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
         }
-        // Log::info("PropNames after filtered: " . join(", ", $propNames));
+        // Log::info("PropNames to be updated: " . join(", ", $propNames));
 
         foreach ($propNames as $propName) {
+            $relatedModel = $this->superProps['props']['_' . $propName]['relationships']['oracyParams'][1];
             $ids = $request->input($propName);
             if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
             $ids = array_map(fn ($id) => $id * 1, $ids);

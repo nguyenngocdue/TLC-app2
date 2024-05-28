@@ -126,7 +126,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
-	public function update(Request $request, $id, $getManyLineParams = [])
+	public function update(Request $request, $id, $getManyLineParams = null)
 	{
 		// dd($request);
 		if ($this->type == 'exam_sheet') {
