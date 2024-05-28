@@ -97,9 +97,13 @@ trait TraitEntityEditableTable
                             }
                         } else {
                             // dump("Update");
-                            $eloquentFnName = $tableFnNames[$table01Name];
+                            $getManyLineParams1 = null;
+                            if ($tableFnNames && $tableFnNames[$table01Name]) {
+                                $eloquentFnName = $tableFnNames[$table01Name];
+                                $getManyLineParams1 = $getManyLineParams[$eloquentFnName];
+                            }
                             // Log::info($eloquentFnName);
-                            $updatedId = $controller->update($fakeRequest, $line['id'], $getManyLineParams[$eloquentFnName]);
+                            $updatedId = $controller->update($fakeRequest, $line['id'], $getManyLineParams1);
                             if (is_numeric($updatedId)) {
                                 session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Updated", 'id' => 1 * $line['id'],]);
                             } else {
