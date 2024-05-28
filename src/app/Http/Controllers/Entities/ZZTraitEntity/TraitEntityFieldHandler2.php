@@ -25,6 +25,7 @@ trait TraitEntityFieldHandler2
             'attachment' => [],
             'datetime' => [],
             'editable_table' => [],
+            'editable_table_get_many_line_params' => [],
         ];
 
         $dateTimeControls = JsonControls::getDateTimeControls();
@@ -64,6 +65,26 @@ trait TraitEntityFieldHandler2
                 $result[$column_type][] = $prop['name'];
             }
         }
+
+        foreach ($this->superProps['props'] as $prop) {
+            // Log::info($prop['relationships']);
+            $control_name = $prop['relationships']['control_name'] ?? false;
+            // Log::info($control_name);
+            if ($control_name) {
+                $modelPath = Str::modelPathFrom(Str::plural($this->type));
+                if (isset($modelPath::$eloquentParams[$control_name])) {
+                    // Log::info($modelPath::$eloquentParams[$control_name][1]);
+                    $modelPathOfLine = ($modelPath::$eloquentParams[$control_name][1]);
+                    $fn = ($prop['relationships']['renderer_edit_param'] ?? false);
+
+                    if ($fn) {
+                        $getManyLineParams = (new $modelPathOfLine)->$fn();
+                        $result['editable_table_get_many_line_params'][$control_name] = $getManyLineParams;
+                    }
+                }
+            }
+        }
+
         //This is for Inspection Checklist Sheet screen
         $arrayCheck = ['qaqc_insp_chklst_sht', 'hse_insp_chklst_sht'];
         if (in_array($this->superProps['type'], $arrayCheck)) {
@@ -126,11 +147,28 @@ trait TraitEntityFieldHandler2
         $theRow->transitionTo($newStatus);
     }
 
-    private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps)
+    private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)
     {
+        // Log::info($this->type);
+        $propNames = [];
         foreach ($oracyProps as $prop) {
             $relatedModel = $this->superProps['props'][$prop]['relationships']['oracyParams'][1];
             $propName = substr($prop, 1); //Remove first "_"
+            $propNames[] = $propName;
+        }
+        // Log::info("PropNames to be modify m2m: " . join(", ", $propNames));
+
+        if (!is_null($getManyLineParams)) {
+            // Log::info("Filter oracy props according to getManyLineParams");
+            // Log::info($oracyProps);
+            // Log::info($getManyLineParams);
+            $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
+            // Log::info($getManyLineParamsDataIndex);
+            $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
+        }
+        // Log::info("PropNames after filtered: " . join(", ", $propNames));
+
+        foreach ($propNames as $propName) {
             $ids = $request->input($propName);
             if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
             $ids = array_map(fn ($id) => $id * 1, $ids);
@@ -140,6 +178,7 @@ trait TraitEntityFieldHandler2
             $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
         }
     }
+
     private function removeAttachmentForFields(&$fields, $keyRemoves, $isFakeRequest, $allTable01Names)
     {
         foreach ($keyRemoves as $key) {

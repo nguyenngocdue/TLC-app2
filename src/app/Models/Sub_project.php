@@ -110,7 +110,7 @@ class Sub_project extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    function getManyLineParams()
+    public function getManyLineParams()
     {
         return [
             ['dataIndex' => 'id'],

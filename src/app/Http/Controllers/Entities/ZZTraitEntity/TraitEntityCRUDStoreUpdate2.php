@@ -93,7 +93,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		$toastrResult = [];
 		if ($request['tableNames'] !== 'fakeRequest') {
-			[$toastrResult] = $this->handleEditableTables($request, $props['editable_table'], $objectId);
+			[$toastrResult] = $this->handleEditableTables($request, $props['editable_table'], [], $objectId);
 		}
 		try {
 			$this->handleStatus($theRow, $request, $newStatus);
@@ -126,7 +126,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
-	public function update(Request $request, $id)
+	public function update(Request $request, $id, $getManyLineParams = [])
 	{
 		// dd($request);
 		if ($this->type == 'exam_sheet') {
@@ -197,6 +197,8 @@ trait TraitEntityCRUDStoreUpdate2
 			if (!$isFakeRequest) {
 				//This will stop Project update keep deleting the sub project routings
 				$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			} else {
+				$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop'], $getManyLineParams);
 			}
 
 			// dump($oldStatus);
@@ -220,7 +222,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$lineResult = true;
 			// dd($isFakeRequest);
 			if (!$isFakeRequest) {
-				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
+				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $props['editable_table_get_many_line_params'], $theRow->id);
 				// Log::info($toBeOverrideAggregatedFields);
 			}
 			//END OF TABLE BLOCK

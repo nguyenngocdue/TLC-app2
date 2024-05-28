@@ -19,7 +19,15 @@ class Pj_job_line extends ModelExtended
         "getSubLines" => ["hasMany", Pj_job_sub_line::class, "job_line_id"],
     ];
 
-    public static $oracyParams = [];
+    public static $oracyParams = [
+        "getSubJobsOfJobLine()" =>  ["getCheckedByField", Pj_job_sub_line::class],
+    ];
+
+    public function getSubJobsOfJobLine()
+    {
+        $p = static::$oracyParams[__FUNCTION__ . '()'];
+        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    }
 
     public function getParent()
     {
@@ -49,7 +57,8 @@ class Pj_job_line extends ModelExtended
             ['dataIndex' => 'phase_id',],
             ['dataIndex' => 'name', 'title' => 'Name'],
             ['dataIndex' => 'description', 'title' => 'Description'],
-            ['dataIndex' => 'getSubLines', 'renderer' => 'renderAllChildrenAndClickToOpenChildren'],
+            // ['dataIndex' => 'getSubLines', 'renderer' => 'renderAllChildrenAndClickToOpenChildren'],
+            ['dataIndex' => 'getSubJobsOfJobLine()',],
 
         ];
     }
