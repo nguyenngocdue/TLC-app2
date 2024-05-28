@@ -13,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 trait TraitEntityFieldHandler2
 {
     use TraitEntityFormula;
-    private function getProps1()
+    private function getProps1($item)
     {
         $table01Count = 0;
         $table01Index = "";
@@ -78,7 +78,7 @@ trait TraitEntityFieldHandler2
                     $fn = ($prop['relationships']['renderer_edit_param'] ?? false);
 
                     if ($fn) {
-                        $getManyLineParams = (new $modelPathOfLine)->$fn();
+                        $getManyLineParams = (new $modelPathOfLine)->$fn($item);
                         $result['editable_table_get_many_line_params'][$control_name] = $getManyLineParams;
                     }
                 }

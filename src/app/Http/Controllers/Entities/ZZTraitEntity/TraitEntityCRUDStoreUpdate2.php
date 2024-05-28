@@ -53,7 +53,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
-			$props = $this->getProps1();
+			$props = $this->getProps1(null);
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
@@ -146,6 +146,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
 
+		$previousItem = null;
 		//This is to compare status, assignee, and monitors for sending MailChangeStatus
 		if (!$isFakeRequest) {
 			$previousItem = $this->modelPath::find($id);
@@ -158,7 +159,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
-			$props = $this->getProps1();
+			$props = $this->getProps1($previousItem);
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 
