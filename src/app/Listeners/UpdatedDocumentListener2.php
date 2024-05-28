@@ -117,26 +117,30 @@ class UpdatedDocumentListener2 implements ShouldQueue
         $subject = MailUtility::getMailTitle($type, $id);
 
         $receiver = User::find($currentValue['bic_assignee_uid']);
-        $mail = new MailUpdatedDocument([
-            'previousValue' => $previousValue,
-            'currentValue' => $currentValue,
-            'diff' => $diff,
+        if ($receiver) {
+            $mail = new MailUpdatedDocument([
+                'previousValue' => $previousValue,
+                'currentValue' => $currentValue,
+                'diff' => $diff,
 
-            'action' => route(Str::plural($type) . '.edit', $id),
-            'name' => $receiver->name,
-        ]);
-        $mail->subject($subject);
+                'action' => route(Str::plural($type) . '.edit', $id),
+                'name' => $receiver->name,
+            ]);
+            $mail->subject($subject);
 
-        $cc = array_unique([
-            $previousValue['bic_assignee_uid'], ...$previousValue['bic_monitors_uids'],
-            ...$currentValue['bic_monitors_uids'], ...$ids
-        ]);
-        $cc = array_map(fn ($i) => User::findFromCache($i), $cc);
+            $cc = array_unique([
+                $previousValue['bic_assignee_uid'], ...$previousValue['bic_monitors_uids'],
+                ...$currentValue['bic_monitors_uids'], ...$ids
+            ]);
+            $cc = array_map(fn ($i) => User::findFromCache($i), $cc);
 
-        Mail::to($receiver)
-            ->cc($cc)
-            ->bcc(env('MAIL_ARCHIVE_BCC'))
-            ->send($mail);
+            Mail::to($receiver)
+                ->cc($cc)
+                ->bcc(env('MAIL_ARCHIVE_BCC'))
+                ->send($mail);
+        } else {
+            Log::info("UpdatedDocumentListener2: Receiver not found for $type/$id");
+        }
     }
 
     public function handle(UpdatedDocumentEvent $event)
