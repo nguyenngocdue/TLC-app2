@@ -9,14 +9,14 @@
         "column_name": "name",
         "new": "true"
     },
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
+        "new": "true"
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
         "new": "true"
     },
     "_getLodsOfTask()": {
@@ -37,6 +37,11 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "true"
     },
     "_created_at": {
