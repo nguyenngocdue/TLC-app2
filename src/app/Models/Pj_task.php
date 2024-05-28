@@ -8,7 +8,7 @@ class Pj_task extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'status', 'owner_id',
-        'department_id'
+        'department_id', 'user_id',
     ];
 
     public static $statusless = true;
