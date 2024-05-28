@@ -14,11 +14,6 @@
         "column_name": "description",
         "new": "true"
     },
-    "_discipline_id": {
-        "name": "_discipline_id",
-        "column_name": "discipline_id",
-        "new": "true"
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -32,6 +27,11 @@
     "_getDisciplinesOfTask()": {
         "name": "_getDisciplinesOfTask()",
         "column_name": "getDisciplinesOfTask()",
+        "new": "true"
+    },
+    "_getChildrenSubTasks()": {
+        "name": "_getChildrenSubTasks()",
+        "column_name": "getChildrenSubTasks()",
         "new": "true"
     },
     "_status": {

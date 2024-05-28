@@ -72,7 +72,7 @@
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "",
+        "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
