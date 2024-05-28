@@ -201,7 +201,9 @@ trait HasCheckbox
                 ];
                 $result[] = $origin;
             } else {
-                if (CurrentUser::isAdmin()) dump("ADMIN: ID #{$item->{$rightId}} not found in [$modelPath] (HasCheckbox)");
+                if (CurrentUser::isAdmin()) {
+                    dump("ADMIN: ID #{$item->{$rightId}} not found in [$modelPath] (HasCheckbox)");
+                }
             }
         }
 

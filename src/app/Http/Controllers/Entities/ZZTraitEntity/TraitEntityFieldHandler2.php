@@ -78,8 +78,11 @@ trait TraitEntityFieldHandler2
                     $fn = ($prop['relationships']['renderer_edit_param'] ?? false);
 
                     if ($fn) {
-                        $getManyLineParams = (new $modelPathOfLine)->$fn($item);
-                        $result['editable_table_get_many_line_params'][$control_name] = $getManyLineParams;
+                        $obj = (new $modelPathOfLine);
+                        if (method_exists($obj, $fn)) {
+                            $getManyLineParams = $obj->$fn($item);
+                            $result['editable_table_get_many_line_params'][$control_name] = $getManyLineParams;
+                        }
                     }
                 }
             }
