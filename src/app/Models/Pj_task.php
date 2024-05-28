@@ -14,7 +14,7 @@ class Pj_task extends ModelExtended
 
     public static $oracyParams = [
         "getDisciplinesOfTask()" => ["getCheckedByField", User_discipline::class],
-        "getLodsOfTask()" => ["getCheckedByField", Term::class],
+        "getLodsOfTask()" => ["getCheckedByField", Pj_task_phase::class],
         "getChildrenSubTasks()" => ["getCheckedByField", Pj_sub_task::class],
     ];
 

@@ -4,8 +4,9 @@ namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Term;
-use Database\Seeders\FieldSeeder;
+use App\Models\Pj_task_phase;
+// use App\Models\Term;
+// use Database\Seeders\FieldSeeder;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
@@ -34,9 +35,13 @@ class SidebarFilterLod extends Component
 
     private function getDataSource()
     {
-        $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Term::select('id', 'name', 'description')
-            ->where('field_id', $field_id)
+        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
+        // $dataSource = Term::select('id', 'name', 'description')
+        //     ->where('field_id', $field_id)
+        //     ->whereNotIn('id', [221, 222])
+        //     ->orderBy('name')
+        //     ->get();
+        $dataSource = Pj_task_phase::select('id', 'name', 'description')
             ->whereNotIn('id', [221, 222])
             ->orderBy('name')
             ->get();
@@ -58,7 +63,8 @@ class SidebarFilterLod extends Component
                 'listen_to_attrs' => ['lod_id'],
                 'listen_to_fields' => ['sub_project_id' . $suffix],
                 'listen_to_tables' => ['sub_projects'],
-                'table_name' => 'terms',
+                'table_name' => 'pj_task_phases',
+                // 'table_name' => 'terms',
                 'triggers' => ['sub_project_id' . $suffix],
             ],
         ];

@@ -57,8 +57,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown_multi",
-        "filter_columns": "field_id",
-        "filter_values": "139",
+        "filter_columns": "",
+        "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
