@@ -3,8 +3,8 @@
         "name": "_department_id",
         "column_name": "department_id",
         "listen_action": "dot",
-        "triggers": "owner_id",
-        "listen_to_fields": "owner_id",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
         "listen_to_attrs": "department",
         "columns_to_set": "",
         "attrs_to_compare": "",
@@ -29,9 +29,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -44,9 +44,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -107,6 +107,21 @@
     "_getChildrenSubTasks()": {
         "name": "_getChildrenSubTasks()",
         "column_name": "getChildrenSubTasks()",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             // $table->string('slug')->unique();
             $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->appendCommonFields();
         });
     }

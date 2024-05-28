@@ -4,14 +4,19 @@
         "column_name": "id",
         "new": "true"
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "new": "true"
     },
     "_department_id": {
         "name": "_department_id",
         "column_name": "department_id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "new": "true"
     },
     "_description": {
@@ -34,14 +39,14 @@
         "column_name": "getChildrenSubTasks()",
         "new": "true"
     },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true"
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "new": "true"
     },
     "_created_at": {

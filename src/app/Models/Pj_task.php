@@ -15,6 +15,7 @@ class Pj_task extends ModelExtended
 
     public static $eloquentParams = [
         "getDepartment" =>  ["belongsTo", Department::class, "department_id"],
+        "getUser" =>  ["belongsTo", User::class, "user_id"],
     ];
 
     public static $oracyParams = [
@@ -24,6 +25,12 @@ class Pj_task extends ModelExtended
     ];
 
     public function getDepartment()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
