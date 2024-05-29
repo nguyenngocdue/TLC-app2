@@ -3,8 +3,9 @@
 namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Term;
-use Database\Seeders\FieldSeeder;
+use App\Models\Pj_task_phase;
+// use App\Models\Term;
+// use Database\Seeders\FieldSeeder;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
@@ -32,9 +33,13 @@ class ModalFilterLod extends Component
 
     private function getDataSource()
     {
-        $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Term::select('id', 'name', 'description')
-            ->where('field_id', $field_id)
+        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
+        // $dataSource = Term::select('id', 'name', 'description')
+        //     ->where('field_id', $field_id)
+        //     ->whereNotIn('id', [221, 222])
+        //     ->orderBy('name')
+        //     ->get();
+        $dataSource = Pj_task_phase::select('id', 'name', 'description')
             ->whereNotIn('id', [221, 222])
             ->orderBy('name')
             ->get();
