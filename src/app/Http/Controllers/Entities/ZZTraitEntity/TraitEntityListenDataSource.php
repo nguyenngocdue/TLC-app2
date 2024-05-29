@@ -213,7 +213,16 @@ trait TraitEntityListenDataSource
             if (sizeof($columns) === 1 && $columns[0] === 'id') {
                 //Skip the table has only [id]: hr_timesheet_lines, comments,...
             } else {
-                $result[$table] = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
+                // Log::info($table);
+                $items = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
+                if ($table == 'users') {
+                    // Log::info($items);
+                    if (app()->isProduction()) {
+                        $items = array_filter($items, fn ($item) => !str_contains($item['name'], "(BETA)"));
+                        $items = array_values($items);
+                    }
+                }
+                $result[$table] = $items;
             }
         }
 
