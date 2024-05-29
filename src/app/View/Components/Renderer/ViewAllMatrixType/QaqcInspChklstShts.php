@@ -141,8 +141,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     'title' => $line->name,
                     'align' => 'center',
                     'width' => 40,
-                    'discipline_description' => $line->getProdDiscipline->description,
-                    'discipline_css_class' => $line->getProdDiscipline->css_class,
+                    'discipline_description' => $line->getProdDiscipline?->description,
+                    'discipline_css_class' => $line->getProdDiscipline?->css_class,
                     // 'prod_discipline_id' => $line->prod_discipline_id,
                     // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
                 ];
