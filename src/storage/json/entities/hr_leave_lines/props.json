@@ -157,7 +157,7 @@
         "name": "_remaining_days",
         "column_name": "remaining_days",
         "column_type": "double(8,2)",
-        "label": "Remaining Days",
+        "label": "Remaining Days (>=0)",
         "control": "number",
         "align": "",
         "col_span": "6",

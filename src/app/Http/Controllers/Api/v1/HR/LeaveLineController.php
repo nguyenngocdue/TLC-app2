@@ -55,6 +55,7 @@ class LeaveLineController extends Controller
                 AND user_id = $user_id
                 AND leave_cat_id = $leave_cat_id
                 AND id < $id
+                AND deleted_at IS NULL
             ";
             $resultLine = DB::select($sql);
             // Log::info($resultLine);
