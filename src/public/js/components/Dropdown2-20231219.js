@@ -556,7 +556,12 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     if (dataSource?.[0]?.name) {
         // console.log(id, dataSource)
         dataSource = dataSource
-            // .filter((item) => !item.name.includes("(RESIGNED)"))
+            .filter((item) => {
+                const isNotResigned = !item.name.includes("(RESIGNED)")
+                const isInSelected =  selected.includes( item.id)
+                return isNotResigned || isInSelected
+            })
+
             .sort((a, b) => a.name.localeCompare(b.name))
     }
 
