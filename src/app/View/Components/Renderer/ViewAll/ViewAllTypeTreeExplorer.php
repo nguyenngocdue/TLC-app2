@@ -11,7 +11,7 @@ class ViewAllTypeTreeExplorer extends Component
 {
     private function getImageFromSrc($src, $title)
     {
-        return  "<img title='$title' class='rounded mx-1' height='24' width='24' src='$src'></img>";
+        return  "<img title='$title' class='rounded-full mx-1' height='24' width='24' src='$src'></img>";
     }
 
     private function sortByName(&$departments, $departmentIds,)
