@@ -696,8 +696,6 @@ class Ghg_sheet_080_dataSource extends Controller
 		return $result;
 	}
 
-
-
 	private function getDataDepartedEmployees($params)
 	{
 		$years = $this->getYears($params);

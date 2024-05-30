@@ -10,6 +10,7 @@ use App\Utils\Support\Report;
 class Qaqc_ncr_010 extends Report_ParentReport2Controller
 {
     protected $tableTrueWidth = true;
+    protected $typeView = 'report-pivot';
     protected $maxH = 50;
     protected $projectId = 8;
     protected $subProjectId = 107;
@@ -122,7 +123,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
                 "title" => "Doc ID",
                 "dataIndex" => "doc_type",
                 "align" => "left",
-                "width" => 180,
+                "width" => 190,
             ],
             [
                 "title" => "NCR ID",
