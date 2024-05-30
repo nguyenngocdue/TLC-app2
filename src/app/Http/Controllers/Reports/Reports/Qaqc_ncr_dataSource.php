@@ -40,7 +40,9 @@ class Qaqc_ncr_dataSource extends Controller
                             (SELECT cll.name FROM qaqc_insp_chklst_lines cll WHERE tb1.parent_id = cll.id)
                            )
                     ) AS source_name,
-                    CONCAT('TLC-',sp.name,'-',IF(term_report_type.name = 'NCR' OR term_report_type.name = 'Defect','NCR',term_report_type.name),'-',
+                    CONCAT('TLC-',sp.name,'-',IF(term_report_type.name = 'NCR' OR term_report_type.name = 'Defect','NCR',
+                        UPPER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '_', -1))
+                        ),'-',
                         LPAD(tb1.doc_id, 4, '0')) AS doc_type 
                     FROM (SELECT
                     DATE_FORMAT(SUBSTR(ncr.created_at, 1, 10), '%d/%m/%Y') AS create_date,
