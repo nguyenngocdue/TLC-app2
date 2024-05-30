@@ -41,8 +41,8 @@ class Qaqc_ncr_dataSource extends Controller
                            )
                     ) AS source_name,
                     CONCAT('TLC-',sp.name,'-',IF(term_report_type.name = 'NCR' OR term_report_type.name = 'Defect','NCR',
-                        UPPER(SUBSTRING_INDEX(SUBSTRING_INDEX(tb1.parent_type, '\\\', -1), '_', -1))
-                        ),'-',
+                    SUBSTRING_INDEX(term_report_type.name, ' ', -1)
+                    ),'-',
                         LPAD(tb1.doc_id, 4, '0')) AS doc_type 
                     FROM (SELECT
                     DATE_FORMAT(SUBSTR(ncr.created_at, 1, 10), '%d/%m/%Y') AS create_date,
