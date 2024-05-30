@@ -41,19 +41,19 @@ class TaskManagerTreeExplorerRendererController extends Controller
             $route = route("pj_tasks.edit", $task->id);
 
             $subTaskIds = $task->{"getChildrenSubTasks()"};
-            $sub_tasks = $subTasks
-                ->whereIn('id', $subTaskIds)
-                ->pluck('name', 'id');
+            $sub_tasks =  $subTasks
+                ->whereIn('id', $subTaskIds)->values();
 
-            $sub_task_str = $sub_tasks->mapWithKeys(function ($item, $key) {
-                return [$key => "<a class='text-blue-600' href='" . route('pj_sub_tasks.edit', $key) . "'>" . $item . "</a>"];
+            $sub_task_str = $sub_tasks->map(function ($item) {
+                $route = route('pj_sub_tasks.edit', $item->id);
+                return "<a class='text-blue-600' title='$item->description' href='$route'>" . $item->name . "</a>";
             })->join(", ");
 
             foreach ($phaseIds as $phaseId) {
 
                 $item = [
                     // 'id' => $task->id,
-                    'name' => "<a class='text-blue-600' href='$route'>" . $task->name . "</a>",
+                    'name' => "<a class='text-blue-600' href='$route' title='$task->description'>" . $task->name . "</a>",
                     'phase' => $phases->where('id', $phaseId)->first()->name,
                     // 'sub_tasks' => $subTaskIds->count(),
                     'sub_tasks' => $sub_task_str,

@@ -8,14 +8,14 @@ class Pj_task extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'status', 'owner_id',
-        'department_id', 'user_id',
+        // 'department_id', 'user_id',
     ];
 
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getDepartment" =>  ["belongsTo", Department::class, "department_id"],
-        "getUser" =>  ["belongsTo", User::class, "user_id"],
+        // "getDepartment" =>  ["belongsTo", Department::class, "department_id"],
+        // "getUser" =>  ["belongsTo", User::class, "user_id"],
     ];
 
     public static $oracyParams = [
@@ -24,17 +24,17 @@ class Pj_task extends ModelExtended
         "getChildrenSubTasks()" => ["getCheckedByField", Pj_sub_task::class],
     ];
 
-    public function getDepartment()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    // public function getDepartment()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
 
-    public function getUser()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
+    // public function getUser()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
 
     public function getChildrenSubTasks()
     {

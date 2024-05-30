@@ -3,10 +3,10 @@
 
 <div class="grid grid-cols-12 gap-2">
     <div class="col-span-4 border rounded p-2 mt-2 overflow-x-auto">
-        <div id="json_tree_1" ></div>
+        <div id="json_tree_1"></div>
     </div>
     <div class="col-span-8 border rounded p-2 mt-2 overflow-x-auto">
-        <div id="tree_explorer_1" ></div>
+        <div id="tree_explorer_1"></div>
     </div>
 </div>
 
@@ -38,7 +38,10 @@
             if(Array.isArray(data.selected)){
                 // console.log(data.selected);
                 const disciplineId = data.selected[0]
-                loadRenderer(disciplineId)
+                //No load if user click on the department
+                if(!isNaN(disciplineId) && !isNaN(parseFloat(disciplineId))){
+                    loadRenderer(disciplineId)
+                }
             }
         });
     });

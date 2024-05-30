@@ -38,19 +38,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_getLodsOfTask()": {
         "name": "_getLodsOfTask()",
         "column_name": "getLodsOfTask()",
@@ -80,6 +67,19 @@
     "_getChildrenSubTasks()": {
         "name": "_getChildrenSubTasks()",
         "column_name": "getChildrenSubTasks()",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
