@@ -1,37 +1,7 @@
 {
-    "_department_id": {
-        "name": "_department_id",
-        "column_name": "department_id",
-        "listen_action": "dot",
-        "triggers": "user_id",
-        "listen_to_fields": "user_id",
-        "listen_to_attrs": "department",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_user_id": {
-        "name": "_user_id",
-        "column_name": "user_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
