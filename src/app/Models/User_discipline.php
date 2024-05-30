@@ -6,7 +6,10 @@ use App\BigThink\ModelExtended;
 
 class User_discipline extends ModelExtended
 {
-    protected $fillable = ["name", "description", "def_assignee", "slug"];
+    protected $fillable = [
+        "name", "description", "def_assignee", "slug",
+        "show_in_task_budget",
+    ];
 
     public static $statusless = true;
 

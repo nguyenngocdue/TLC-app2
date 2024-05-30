@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->string('slug')->unique();
+            $table->boolean('show_in_task_budget')->nullable();
             $table->appendCommonFields();
         });
     }
