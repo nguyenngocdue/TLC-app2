@@ -40,7 +40,7 @@ Route::group([
     Route::post("request_to_sign_off", [RequestSignOffController::class, 'requestSignOff']);
     Route::post("recall_to_sign_off", [RequestSignOffController::class, 'recallSignOff']);
 
-    Route::get("render_checklist", [ConqaArchiveRendererController::class, 'renderToJson'])->name("render_checklist");
+    Route::get("render_conqa_archive_checklist", [ConqaArchiveRendererController::class, 'renderToJson'])->name("render_conqa_archive_checklist");
 });
 
 
