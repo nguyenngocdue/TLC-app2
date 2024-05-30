@@ -333,7 +333,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "pj_task_budgets": {
-        "name": "pj_task_budgets"
+        "name": "pj_task_budgets",
+        "storeEmpty_and_updateShort": "true"
     },
     "pj_task_phases": {
         "name": "pj_task_phases"

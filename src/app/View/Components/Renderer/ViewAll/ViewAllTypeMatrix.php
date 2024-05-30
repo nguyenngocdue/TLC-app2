@@ -61,6 +61,8 @@ class ViewAllTypeMatrix extends Component
                 return Blade::render("<x-renderer.view-all-matrix-type.EsgInductions/>");
             case "exam_sheets":
                 return Blade::render("<x-renderer.view-all-matrix-type.ExamSheets/>");
+            case "pj_task_budgets":
+                return Blade::render("<x-renderer.view-all-matrix-type.PjTaskBudgets/>");
             default:
                 return "<div class='w-full p-4 border rounded mt-4 bg-gray-100 text-center'>Matrix view is not supported for " . $this->type . " (ViewAllTypeMatrix).<br/>Please use List View.</div>";
         }

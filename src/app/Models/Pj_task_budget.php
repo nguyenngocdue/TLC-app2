@@ -7,10 +7,18 @@ use App\BigThink\ModelExtended;
 class Pj_task_budget extends ModelExtended
 {
     protected $fillable = [
-        "name", "description", "owner_id", "project_id", "discipline_id",
+        "name", "description", "owner_id", "status",
+        "project_id", "discipline_id",
     ];
 
     public static $statusless = true;
+    public static $nameless = true;
+    public function getNameAttribute($value)
+    {
+        $project = $this->getProject;
+        $discipline = $this->getDiscipline;
+        return $project->name . " - " . $discipline->name;
+    }
 
     public static $eloquentParams = [
         "getDiscipline" => ['belongsTo', User_discipline::class, 'discipline_id'],

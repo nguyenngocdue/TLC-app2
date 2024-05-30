@@ -21,10 +21,12 @@ return new class extends Migration
 
         $schema->create('pj_task_budgets', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('discipline_id')->nullable();
+
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }
