@@ -305,7 +305,7 @@
 					<td class="tg-cscf">Waste</td>
 					<td class="tg-f7v4" colspan="4">Total Solid Waste Generated</td>
 					<td class="tg-f7v4">kg</td>
-					@include('components.reports.value-by-category')
+					@include('components.reports.value-by-category', ['showNa' => false])
 					<td class="tg-73oq" colspan="1"></td>
 				</tr>
 
