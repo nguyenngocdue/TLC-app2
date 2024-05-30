@@ -123,19 +123,22 @@
         "name": "hr_leave_nz_sheet_01",
         "entity-type": "hr_leave_nz_sheets",
         "editable-table": "hr_leave_lines",
-        "button_add_a_new_line": "true"
+        "button_add_a_new_line": "true",
+        "button_recalculate": "true"
     },
     "hr_leave_sg_sheet_01": {
         "name": "hr_leave_sg_sheet_01",
         "entity-type": "hr_leave_sg_sheets",
         "editable-table": "hr_leave_lines",
-        "button_add_a_new_line": "true"
+        "button_add_a_new_line": "true",
+        "button_recalculate": "true"
     },
-    "hr_leave_tptp_01": {
-        "name": "hr_leave_tptp_01",
+    "hr_leave_tpto_01": {
+        "name": "hr_leave_tpto_01",
         "entity-type": "hr_leave_tptos",
         "editable-table": "hr_leave_tpto_lines",
-        "button_add_a_new_line": "true"
+        "button_add_a_new_line": "true",
+        "button_add_from_a_list": "true"
     },
     "hr_onboardings_01": {
         "name": "hr_onboardings_01",
@@ -148,8 +151,8 @@
         "entity-type": "hr_overtime_requests",
         "editable-table": "hr_overtime_request_lines",
         "button_add_a_new_line": "true",
-        "button_add_from_a_list": "true",
-        "button_recalculate": "true"
+        "button_recalculate": "true",
+        "button_add_from_a_list": "true"
     },
     "hr_timesheet_officers_01": {
         "name": "hr_timesheet_officers_01",
@@ -162,8 +165,8 @@
         "entity-type": "hr_timesheet_workers",
         "editable-table": "hr_timesheet_lines",
         "button_add_a_new_line": "true",
-        "button_add_from_a_list": "true",
         "button_recalculate": "true",
+        "button_add_from_a_list": "true",
         "button_get_lines": "true"
     },
     "hse_audit_01": {
@@ -194,18 +197,6 @@
         "name": "hse_walkthroughs_01",
         "entity-type": "hse_walkthroughs",
         "editable-table": "hse_corrective_actions",
-        "button_add_a_new_line": "true"
-    },
-    "pj_job_01": {
-        "name": "pj_job_01",
-        "entity-type": "pj_jobs",
-        "editable-table": "pj_job_lines",
-        "button_add_a_new_line": "true"
-    },
-    "pj_job_line_01": {
-        "name": "pj_job_line_01",
-        "entity-type": "pj_job_lines",
-        "editable-table": "pj_job_sub_lines",
         "button_add_a_new_line": "true"
     },
     "prod_orders_01": {

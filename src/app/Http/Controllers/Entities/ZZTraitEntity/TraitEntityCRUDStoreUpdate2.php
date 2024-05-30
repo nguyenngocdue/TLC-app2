@@ -53,7 +53,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
-			$props = $this->getProps1();
+			$props = $this->getProps1(null);
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 			$uploadedIds = $this->uploadAttachmentWithoutParentId($request);
@@ -93,7 +93,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 		$toastrResult = [];
 		if ($request['tableNames'] !== 'fakeRequest') {
-			[$toastrResult] = $this->handleEditableTables($request, $props['editable_table'], $objectId);
+			[$toastrResult] = $this->handleEditableTables($request, $props['editable_table'], [], $objectId);
 		}
 		try {
 			$this->handleStatus($theRow, $request, $newStatus);
@@ -126,7 +126,7 @@ trait TraitEntityCRUDStoreUpdate2
 		}
 	}
 
-	public function update(Request $request, $id)
+	public function update(Request $request, $id, $getManyLineParams = null)
 	{
 		// dd($request);
 		if ($this->type == 'exam_sheet') {
@@ -146,6 +146,7 @@ trait TraitEntityCRUDStoreUpdate2
 		$this->updateUserSettings($request);
 		$this->reArrangeComments($request);
 
+		$previousItem = null;
 		//This is to compare status, assignee, and monitors for sending MailChangeStatus
 		if (!$isFakeRequest) {
 			$previousItem = $this->modelPath::find($id);
@@ -158,7 +159,7 @@ trait TraitEntityCRUDStoreUpdate2
 
 		try {
 			$this->dump1("Request", $request->input(), __LINE__);
-			$props = $this->getProps1();
+			$props = $this->getProps1($previousItem);
 			$this->deleteAttachments($props['attachment'], $request);
 			//Uploading attachments has to run before form validation
 
@@ -197,6 +198,8 @@ trait TraitEntityCRUDStoreUpdate2
 			if (!$isFakeRequest) {
 				//This will stop Project update keep deleting the sub project routings
 				$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			} else {
+				$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop'], $getManyLineParams);
 			}
 
 			// dump($oldStatus);
@@ -220,7 +223,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$lineResult = true;
 			// dd($isFakeRequest);
 			if (!$isFakeRequest) {
-				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $theRow->id);
+				[$toastrResult, $lineResult, $toBeOverrideAggregatedFields] = $this->handleEditableTables($request, $props['editable_table'], $props['editable_table_get_many_line_params'], $theRow->id);
 				// Log::info($toBeOverrideAggregatedFields);
 			}
 			//END OF TABLE BLOCK

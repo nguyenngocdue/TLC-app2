@@ -42,10 +42,10 @@ class Hr_leave_tpto_line extends ModelExtended
             ['dataIndex' => 'workplace_id'],
             ['dataIndex' => 'starting_date'],
 
-            ['dataIndex' => "annual_leave", 'footer' => 'agg_sum'],
-            ['dataIndex' => "sick_leave", 'footer' => 'agg_sum'],
-            ['dataIndex' => "domestic_violence_leave", 'footer' => 'agg_sum'],
-            ['dataIndex' => "cash_out", 'footer' => 'agg_sum'],
+            ['dataIndex' => "annual_leave", 'footer' => 'agg_sum', 'cloneable' => true,],
+            ['dataIndex' => "sick_leave", 'footer' => 'agg_sum', 'cloneable' => true,],
+            ['dataIndex' => "domestic_violence_leave", 'footer' => 'agg_sum', 'cloneable' => true,],
+            ['dataIndex' => "cash_out", 'footer' => 'agg_sum', 'cloneable' => true,],
             ['dataIndex' => "remark"],
         ];
     }

@@ -47,16 +47,14 @@ abstract class ModelExtended extends Model
         parent::__construct($attributes);
         static::$eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
         static::$eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
+
+        // static::$oracyParams["getMonitors1()"] = ["getCheckedByField", User::class];
     }
 
-    // public function toSearchableArray()
+    // public function getMonitors1()
     // {
-    //     return [
-    //         'id' => $this->id,
-    //         'name' => $this->name,
-    //         // 'description' => $this->description,
-    //         // 'slug' => $this->slug,
-    //     ];
+    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
     // }
 
     function getOwner()

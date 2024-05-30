@@ -38,32 +38,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_job_line_id": {
-        "name": "_job_line_id",
-        "column_name": "job_line_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

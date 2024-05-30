@@ -16,7 +16,54 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "column_type": "bigint",
+        "label": "Task Owner",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "6",
+        "width": "200",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
+        "column_type": "bigint",
+        "label": "Department",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "6",
+        "width": "100",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "true",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -26,7 +73,7 @@
         "control": "text",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "200",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
@@ -35,7 +82,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_description": {
         "name": "_description",
@@ -45,8 +95,8 @@
         "control": "textarea",
         "align": "",
         "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
+        "width": "200",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
@@ -54,45 +104,32 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "column_type": "bigint unsigned",
-        "label": "Creator",
-        "control": "dropdown",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "true",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getLodsOfTask()": {
         "name": "_getLodsOfTask()",
         "column_name": "getLodsOfTask()",
         "column_type": "oracy_prop",
-        "label": "LODs",
+        "label": "Phases",
         "control": "dropdown_multi",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "200",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
-        "hidden_filter": "",
+        "hidden_filter": "true",
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getDisciplinesOfTask()": {
         "name": "_getDisciplinesOfTask()",
@@ -102,7 +139,7 @@
         "control": "dropdown_multi",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "400",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
@@ -111,7 +148,54 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_getChildrenSubTasks()": {
+        "name": "_getChildrenSubTasks()",
+        "column_name": "getChildrenSubTasks()",
+        "column_type": "oracy_prop",
+        "label": "SubTasks",
+        "control": "dropdown_multi",
+        "align": "",
+        "col_span": "",
+        "width": "400",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "column_type": "bigint unsigned",
+        "label": "Creator",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "6",
+        "width": "200",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_status": {
         "name": "_status",
@@ -130,7 +214,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -149,7 +236,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -168,7 +258,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -187,7 +280,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -206,6 +302,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

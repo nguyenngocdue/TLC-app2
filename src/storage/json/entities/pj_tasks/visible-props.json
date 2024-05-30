@@ -4,6 +4,16 @@
         "column_name": "id",
         "new": "true"
     },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "new": "true"
+    },
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
+        "new": "true"
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -14,16 +24,6 @@
         "column_name": "description",
         "new": "true"
     },
-    "_discipline_id": {
-        "name": "_discipline_id",
-        "column_name": "discipline_id",
-        "new": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "true"
-    },
     "_getLodsOfTask()": {
         "name": "_getLodsOfTask()",
         "column_name": "getLodsOfTask()",
@@ -32,6 +32,16 @@
     "_getDisciplinesOfTask()": {
         "name": "_getDisciplinesOfTask()",
         "column_name": "getDisciplinesOfTask()",
+        "new": "true"
+    },
+    "_getChildrenSubTasks()": {
+        "name": "_getChildrenSubTasks()",
+        "column_name": "getChildrenSubTasks()",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "true"
     },
     "_status": {

@@ -297,7 +297,7 @@ class User extends ModelExtended implements
         return [
             'id' => 'id',
             'title' => 'name',
-            'description' => 'position_rendered',
+            'description' => 'position', //BUG
             'disabled' => 'resigned',
             'groupBy' => 'name',
         ];
@@ -307,7 +307,7 @@ class User extends ModelExtended implements
         return [
             ['dataIndex' => 'id'],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'position_rendered'],
+            ['dataIndex' => 'position'],
             ['dataIndex' => 'resigned'],
         ];
     }

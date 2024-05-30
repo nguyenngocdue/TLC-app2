@@ -120,32 +120,35 @@ trait TableTraitApplyRender
         //<< As Blade:render will auto convert $cell to htmlspecialchars, so the cell have to send a clone of itself
         //<< Then next time when the same cell is used in different columns, it is still the object, not &quote string.
         // $cell =  is_object($cell) ? clone $cell : $cell;
-        if (is_object($cell)) {
-            // dump($cell);
-            $rendered = [];
-            switch ($column['renderer']) {
-                case 'renderAllChildrenAndClickToOpenChildren':
-                    foreach ($cell as $key => $value) {
-                        if (isset($value->name)) {
-                            $rendered[] = "<div>" . $key + 1 . ". " . $value->name . "</div>";
-                        }
-                    }
-                    $allChildren = "<div class='mx-4'>" . join('', $rendered,) . "</div>";
-                    // dump($dataLineObj);
-                    $routeName = $dataLineObj->getTable() . ".edit";
-                    // dd($routeName);
-                    $route = route($routeName, $dataLineObj->id);
-                    $button = "<i class='fas fa-pencil-alt'>";
-                    $button = "<a href='$route' target='_blank'>$button </a>";
-                    $button = "<span class='text-blue-600 mx-4 my-auto'>$button</span>";
-                    return "<div class='flex justify-between'>" . $allChildren . $button . "</div>";
-                    break;
-                    // default:
-                    //     return "Unknown how to render $column[renderer] for $columnName.";
-                    //     break;
-            }
-        }
-        // $cell =  is_object($cell) ? "Take data[slot] instead." : $cell;
+
+        //<<This cause View All Table not rendering avatar correctly if it already rendered once.
+        // if (is_object($cell)) {
+        //     // dump($cell);
+        //     $rendered = [];
+        //     switch ($column['renderer']) {
+        //         case 'renderAllChildrenAndClickToOpenChildren':
+        //             foreach ($cell as $key => $value) {
+        //                 if (isset($value->name)) {
+        //                     $rendered[] = "<div>" . $key + 1 . ". " . $value->name . "</div>";
+        //                 }
+        //             }
+        //             $allChildren = "<div class='mx-4'>" . join('', $rendered,) . "</div>";
+        //             // dump($dataLineObj);
+        //             $routeName = $dataLineObj->getTable() . ".edit";
+        //             // dd($routeName);
+        //             $route = route($routeName, $dataLineObj->id);
+        //             $button = "<i class='fas fa-pencil-alt'>";
+        //             $button = "<a href='$route' target='_blank'>$button </a>";
+        //             $button = "<span class='text-blue-600 mx-4 my-auto'>$button</span>";
+        //             return "<div class='flex justify-between'>" . $allChildren . $button . "</div>";
+        //             break;
+        //             // default:
+        //             //     return "Unknown how to render $column[renderer] for $columnName.";
+        //             //     break;
+        //     }
+        // }
+
+        $cell =  is_object($cell) ? "Take data[slot] instead." : $cell;
 
         $params = ['column' => $column, 'dataLine' => $dataLineObj, 'cell' => $cell];
         if ($isDropdown) $params['cbbDataSource'] = $cbbDataSource;

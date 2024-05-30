@@ -28,6 +28,7 @@ class ViewAllController extends Controller
     use TraitViewAllMatrixSignatureController;
     use TraitViewAllMatrixApproveMultiController;
     use TraitViewAllKanbanController;
+    use TraitViewAllTreeExplorerController;
 
     protected $type = "";
     protected $typeModel = '';
@@ -53,10 +54,12 @@ class ViewAllController extends Controller
         $calendar_apps = JsonControls::getAppsHaveViewAllCalendar();
         $matrix_apps = JsonControls::getAppsHaveViewAllMatrix();
         $kanban_apps = JsonControls::getAppsHaveViewAllKanban();
+        $tree_apps = JsonControls::getAppsHaveViewAllTreeExplorer();
 
         if (in_array($table, $calendar_apps)) return 'calendar';
         if (in_array($table, $matrix_apps)) return 'matrix';
         if (in_array($table, $kanban_apps)) return 'kanban';
+        if (in_array($table, $tree_apps)) return 'tree_explorer';
         return null;
     }
 
@@ -84,10 +87,12 @@ class ViewAllController extends Controller
                 return $this->indexViewAllCalendar($request);
             case 'matrix':
                 return $this->indexViewAllMatrix($request);
-            case 'matrix_print':
-                return $this->indexViewAllMatrixPrint($request);
-            case "matrix_approve_multi":
-                return $this->indexViewAllMatrixApproveMulti($request);
+                // case 'matrix_print':
+                //     return $this->indexViewAllMatrixPrint($request);
+                // case "matrix_approve_multi":
+                //     return $this->indexViewAllMatrixApproveMulti($request);
+            case "tree_explorer":
+                return $this->indexViewAllTreeExplorer($request);
             case "matrix_signature":
                 return $this->indexViewAllMatrixSignature($request);
             case "kanban":

@@ -11,7 +11,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -25,7 +27,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -39,7 +43,9 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getMonitors1()": {
         "name": "_getMonitors1()",
@@ -53,7 +59,25 @@
         "control": "dropdown_multi",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getTasksOfDiscipline()": {
+        "name": "_getTasksOfDiscipline()",
+        "relationship": "getCheckedByField",
+        "control_name": "getTasksOfDiscipline()",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getUsers": {
         "name": "_getUsers",
@@ -67,6 +91,8 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

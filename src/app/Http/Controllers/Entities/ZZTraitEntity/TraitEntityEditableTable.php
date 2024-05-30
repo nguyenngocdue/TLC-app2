@@ -39,7 +39,7 @@ trait TraitEntityEditableTable
         // dump($fakeRequest->files);
     }
 
-    private function handleEditableTables(Request $request, $props, $parentId)
+    private function handleEditableTables(Request $request, $props, $getManyLineParams, $parentId)
     {
         // dd($request->input());
         $toastrResult = [];
@@ -97,7 +97,13 @@ trait TraitEntityEditableTable
                             }
                         } else {
                             // dump("Update");
-                            $updatedId = $controller->update($fakeRequest, $line['id']);
+                            $getManyLineParams1 = null;
+                            if ($tableFnNames && $tableFnNames[$table01Name]) {
+                                $eloquentFnName = $tableFnNames[$table01Name];
+                                $getManyLineParams1 = $getManyLineParams[$eloquentFnName];
+                            }
+                            // Log::info($eloquentFnName);
+                            $updatedId = $controller->update($fakeRequest, $line['id'], $getManyLineParams1);
                             if (is_numeric($updatedId)) {
                                 session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Updated", 'id' => 1 * $line['id'],]);
                             } else {

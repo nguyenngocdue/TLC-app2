@@ -72,7 +72,7 @@ class Prod_run extends ModelExtended
     {
         // $isNZ = $this->isNZ($parentItem);
         // echo "IS NZ: $isNZ";
-        $needToShowProdOutputQty = $this->needToShowProdOutputQty($parentItem);
+        // $needToShowProdOutputQty = $this->needToShowProdOutputQty($parentItem);
         // echo "IS PPR: $needToShowProdOutputQty";
 
         $result = [
@@ -94,10 +94,9 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'worker_number',  'footer' => 'agg_avg', 'no_print' => true,],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum',/* 'no_print' => true,*/],
         ];
-        if ($needToShowProdOutputQty) {
-            $result[] = ['dataIndex' => 'production_output',  'footer' => 'agg_sum', /*'no_print' => true,*/];
-            // $result[] = ['dataIndex' => 'getItemsOfProdOutput()', 'no_print' => true,];
-        }
+        // if ($needToShowProdOutputQty) {
+        $result[] = ['dataIndex' => 'production_output',  'footer' => 'agg_sum', /*'no_print' => true,*/];
+        // }
         $result = [
             ...$result,
             ['dataIndex' => 'remark', /*'no_print' => true,*/],

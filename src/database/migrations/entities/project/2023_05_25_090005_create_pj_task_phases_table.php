@@ -19,12 +19,12 @@ return new class extends Migration
             return new BlueprintExtended($table, $callback);
         });
 
-        $schema->create('pj_jobs', function (BlueprintExtended $table) {
+        $schema->create('pj_task_phases', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name');
             $table->text('description')->nullable();
-
-            $table->orderable();
+            // $table->string('slug')->unique();
+            // $table->unsignedBigInteger('discipline_id')->nullable();
             $table->appendCommonFields();
         });
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pj_jobs');
+        Schema::dropIfExists('pj_task_phases');
     }
 };

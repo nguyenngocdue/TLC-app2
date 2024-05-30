@@ -2,10 +2,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
 <div class="grid grid-cols-12 gap-2">
-    <div class="col-span-4 border no-print">
+    <div class="col-span-4 border no-print overflow-x-auto">
         <div>
             {{$folderName}}
-            <div id="json_tree_1" class="overflow-x-hidden" ></div>
+            <div id="json_tree_1" ></div>
         </div>
         <div class="border bg-gray-200 text-center p-4 mt-4"><span id="folderUuid"></span></div>
     </div>
@@ -15,7 +15,6 @@
 </div>
 
 <script>
-    const jsonTree = @json($tree);
     function loadChecklistRenderer(folderUuid) {
         const url = "{{$route}}";
         $.ajax({
@@ -31,7 +30,10 @@
             $("#checklist_1").html(element.textContent)
         })
     }
+</script>
 
+<script>
+    const jsonTree = @json($tree);
     $(function () { 
         $('#json_tree_1').jstree({ 'core' : {
             'data' : jsonTree

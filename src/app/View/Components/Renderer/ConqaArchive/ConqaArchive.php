@@ -72,7 +72,7 @@ class ConqaArchive extends Component
             "components.renderer.conqa_archive.conqa_archive",
             [
                 "tree" =>  $tree,
-                "route" => route("render_checklist"),
+                "route" => route("render_conqa_archive_checklist"),
                 "projName" => $this->projName,
                 "folderName" => $this->folderName,
             ]
