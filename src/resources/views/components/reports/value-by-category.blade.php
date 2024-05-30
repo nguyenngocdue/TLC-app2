@@ -2,6 +2,8 @@
 	if(isset($fieldName)) {
 		$data =isset($tableDataSource[$fieldName]) && !empty($tableDataSource[$fieldName])? $tableDataSource[$fieldName] : [];
 	} else $data = [];
+
+	$isNa = isset($showNa) ?  '': 'N/A';
 @endphp
 
 
@@ -23,11 +25,11 @@
 @else
 	@if ($timeCategory === 'filter_by_half_year')
 		@foreach ($titleOfTime as $value)
-			<td class="tg-f7v4 ">N/A</td>
+			<td class="tg-f7v4 ">{{$isNa}}</td>
 		@endforeach
 	@else
 		@foreach ( $years as $value )
-			<td class="tg-f7v4">N/A</td>
+			<td class="tg-f7v4">{{$isNa}}</td>
 		@endforeach
 	@endif
 @endif
