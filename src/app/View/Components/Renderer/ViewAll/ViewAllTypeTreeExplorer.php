@@ -140,6 +140,7 @@ class ViewAllTypeTreeExplorer extends Component
     {
         return view('components.renderer.view-all.view-all-type-tree-explorer', [
             'tree' => $this->getDepartmentTree(),
+            'route' => route("render_task_manager_tree_explorer"),
         ]);
     }
 }
