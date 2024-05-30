@@ -2,14 +2,61 @@
 
 namespace App\View\Components\Renderer\ViewAll;
 
+use App\Models\User;
 use App\Models\User_discipline;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class ViewAllTypeTreeExplorer extends Component
 {
-    private function getImageFromSrc($src)
+    private function getImageFromSrc($src, $title)
     {
-        return  "<img class='rounded mx-1' height='24' width='24' src='$src'></img>";
+        return  "<img title='$title' class='rounded mx-1' height='24' width='24' src='$src'></img>";
+    }
+
+    private function sortByName(&$departments, $departmentIds,)
+    {
+        $departmentIds = array_values(array_unique($departmentIds));
+        for ($i = 0; $i < sizeof($departmentIds); $i++) {
+            if ($departments[$departmentIds[$i]]['children']) {
+                uasort($departments[$departmentIds[$i]]['children'], function ($a, $b) {
+                    return $a['name_for_sort'] <=> $b['name_for_sort'];
+                });
+            }
+            $departments[$departmentIds[$i]]['children'] = array_values($departments[$departmentIds[$i]]['children']);
+        }
+
+        uasort($departments, function ($a, $b) {
+            return $a['name_for_sort'] <=> $b['name_for_sort'];
+        });
+    }
+
+    private function showOrphanTSO($usersInLeaf)
+    {
+        $getAllUserNeedTso = User::query()
+            ->select('id', 'first_name', 'last_name')
+            ->where('resigned', false)
+            ->where('time_keeping_type', 2)
+            ->get();
+
+        $getAllUserNeedTsoIds = $getAllUserNeedTso->pluck('id')->toArray();
+        $usersInLeaf = (collect($usersInLeaf)->flatMap(fn ($c) => $c));
+        $usersInLeafIds = $usersInLeaf->pluck('id')->toArray();
+
+        // dump(sizeof($getAllUserNeedTsoIds));
+        // dump(sizeof($usersInLeafIds));
+
+        $diffIds = (array_diff($getAllUserNeedTsoIds, $usersInLeafIds));
+        $result = [];
+        foreach ($diffIds as $id) {
+            $user = $getAllUserNeedTso->where('id', $id)->first();
+            $result[] = ($user->first_name . " " . $user->last_name . " (#" . $user->id . ")");
+        }
+
+        if (sizeof($result) > 0) {
+            dump("ADMIN: The following users are required to submit TSO but not belong to discipline or department:");
+            dump($result);
+        }
     }
 
     function getDepartmentTree()
@@ -32,6 +79,7 @@ class ViewAllTypeTreeExplorer extends Component
 
         $departments = [];
         $departmentIds = [];
+        $usersInLeaf = [];
         foreach ($disciplines as $discipline) {
             if ($discipline->getDefAssignee) {
                 $defaultAssignee = $discipline->getDefAssignee;
@@ -44,9 +92,10 @@ class ViewAllTypeTreeExplorer extends Component
                 $departments[$departmentId]['name_for_sort'] =  $departmentName; // to sort
                 if ($department->getHOD) {
                     // $departments[$departmentId]['icon'] = app()->pathMinio() . rawurlencode($department->getHOD->getAvatar->url_thumbnail);
+                    $user = $department->getHOD;
                     $departments[$departmentId]['icon'] = false;
-                    $icon = app()->pathMinio() . rawurlencode($department->getHOD->getAvatar->url_thumbnail);
-                    $img = $this->getImageFromSrc($icon);
+                    $icon = app()->pathMinio() . rawurlencode($user->getAvatar->url_thumbnail);
+                    $img = $this->getImageFromSrc($icon, $user->name);
                     // $img = "<img class='rounded mx-1' height='24' width='24' src='$icon'></img>";
                     $newText = $img . $departmentName;
                     $newText = "<div class='flex'>$newText</div>";
@@ -64,11 +113,13 @@ class ViewAllTypeTreeExplorer extends Component
                 foreach ($discipline->getUsers as $user) {
                     if ($user->getAvatar) {
                         $icon = app()->pathMinio() . rawurlencode($user->getAvatar->url_thumbnail);
-                        $imgs[] = $this->getImageFromSrc($icon);
+                        $imgs[] = $this->getImageFromSrc($icon, $user->name);
                     } else {
-                        $imgs[] = $this->getImageFromSrc("/images/avatar.jpg");
+                        $imgs[] = $this->getImageFromSrc("/images/avatar.jpg", $user->name);
                     }
                 }
+
+                $usersInLeaf[] = $discipline->getUsers;
 
                 $disciplineItem['text'] = "<div class='flex'>" . $disciplineItem['text'] . join("", $imgs) . "</div>";
 
@@ -76,19 +127,9 @@ class ViewAllTypeTreeExplorer extends Component
             }
         }
 
-        $departmentIds = array_values(array_unique($departmentIds));
-        for ($i = 0; $i < sizeof($departmentIds); $i++) {
-            if ($departments[$departmentIds[$i]]['children']) {
-                uasort($departments[$departmentIds[$i]]['children'], function ($a, $b) {
-                    return $a['name_for_sort'] <=> $b['name_for_sort'];
-                });
-            }
-            $departments[$departmentIds[$i]]['children'] = array_values($departments[$departmentIds[$i]]['children']);
-        }
+        if (CurrentUser::isAdmin()) $this->showOrphanTSO($usersInLeaf);
 
-        uasort($departments, function ($a, $b) {
-            return $a['name_for_sort'] <=> $b['name_for_sort'];
-        });
+        $this->sortByName($departments, $departmentIds);
 
         $departments = array_values($departments);
         // dump($departments);

@@ -5,7 +5,10 @@
     <div class="col-span-4 border rounded p-2 mt-2">
         <div id="json_tree_1" class="overflow-x-hidden" ></div>
     </div>
-    <div class="col-span-8 border rounded p-2 mt-2">B</div>
+    <div class="col-span-8 border rounded p-2 mt-2">
+        <div class='border p-2'>Members</div>
+        <div class='border p-2 mt-2'>Tasks</div>
+    </div>
 </div>
 
 <script>
