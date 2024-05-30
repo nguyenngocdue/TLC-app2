@@ -2,8 +2,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
 <div class="grid grid-cols-12 gap-2">
-    <div class="col-span-4 border rounded p-2 mt-2">
-        <div id="json_tree_1" class="overflow-x-hidden" ></div>
+    <div class="col-span-4 border rounded p-2 mt-2 overflow-x-auto">
+        <div id="json_tree_1" ></div>
     </div>
     <div class="col-span-8 border rounded p-2 mt-2">
         <div class='border p-2'>Members</div>
