@@ -18,15 +18,12 @@
     "apps_have_view_all_matrix_signature": [
         "qaqc_insp_chklst_shts"
     ],
+    "apps_have_view_all_tree_explorer": [
+        "pj_tasks"
+    ],
     "apps_have_view_all_kanban": [
         "kanban_task_pages"
-    ],
-    "apps_have_view_all_matrix_print": [
-        
-    ],
-    "apps_have_view_all_matrix_approve_multi": [
-        
-    ],
+    ],    
     "apps_have_add_new_by_cloning": [],
     "headings": [
         "",

@@ -15,7 +15,6 @@
 </div>
 
 <script>
-    const jsonTree = @json($tree);
     function loadChecklistRenderer(folderUuid) {
         const url = "{{$route}}";
         $.ajax({
@@ -31,7 +30,10 @@
             $("#checklist_1").html(element.textContent)
         })
     }
+</script>
 
+<script>
+    const jsonTree = @json($tree);
     $(function () { 
         $('#json_tree_1').jstree({ 'core' : {
             'data' : jsonTree

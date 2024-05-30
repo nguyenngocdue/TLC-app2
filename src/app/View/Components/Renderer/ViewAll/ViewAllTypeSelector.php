@@ -52,14 +52,14 @@ class ViewAllTypeSelector extends Component
                 ]
             ];
         };
-        if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixPrint())) {
-            $tabs['print'] = [
-                'href' => "?view_type=matrix_print&action=updateViewAllMode&_entity=$tableName",
-                'title' => "Print View",
-                'icon' => 'fa-duotone fa-print',
-                'active' =>  $this->viewType == 'matrix-print-view',
-            ];
-        };
+        // if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixPrint())) {
+        //     $tabs['print'] = [
+        //         'href' => "?view_type=matrix_print&action=updateViewAllMode&_entity=$tableName",
+        //         'title' => "Print View",
+        //         'icon' => 'fa-duotone fa-print',
+        //         'active' =>  $this->viewType == 'matrix-print-view',
+        //     ];
+        // };
         if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixSignature())) {
             $tabs['signature'] = [
                 'href' => "?view_type=matrix_signature&action=updateViewAllMode&_entity=$tableName",
@@ -68,14 +68,23 @@ class ViewAllTypeSelector extends Component
                 'active' =>  $this->viewType == 'matrix-signature-view',
             ];
         };
-        if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixApproveMulti())) {
-            $tabs['approval'] = [
-                'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",
-                'title' => "Approval View",
-                'icon' => 'fa-duotone fa-box-check',
-                'active' =>  $this->viewType == 'matrix-approve-multi-view',
+        if (in_array($tableName, JsonControls::getAppsHaveViewAllTreeExplorer())) {
+            $tabs['home'] = $listView;
+            $tabs['tree_explorer'] = [
+                'href' => "?view_type=tree_explorer&action=updateViewAllMode&_entity=$tableName",
+                'title' => "Tree Explorer",
+                'icon' => 'fa-duotone fa-folder-tree',
+                'active' =>  $this->viewType == 'tree-explorer-view',
             ];
         };
+        // if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixApproveMulti())) {
+        //     $tabs['approval'] = [
+        //         'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",
+        //         'title' => "Approval View",
+        //         'icon' => 'fa-duotone fa-box-check',
+        //         'active' =>  $this->viewType == 'matrix-approve-multi-view',
+        //     ];
+        // };
         return $tabs;
     }
 
