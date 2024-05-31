@@ -35,6 +35,7 @@ trait TraitManageRelationshipColumns
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => $viewAllControls,
+                'width' => 200,
             ],
             [
                 "dataIndex" => "renderer_view_all_param",
@@ -46,12 +47,14 @@ trait TraitManageRelationshipColumns
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => JsonControls::getParamUnits(),
+                'width' => 150,
             ],
             [
                 "dataIndex" => "renderer_edit",
                 "editable" => true,
                 "renderer" => "dropdown",
                 "cbbDataSource" => $editControls,
+                'width' => 250,
             ],
             [
                 "dataIndex" => "renderer_edit_param",

@@ -35,7 +35,7 @@ trait TraitManagePropColumns
                 "dataIndex" => "column_name",
                 "renderer" => $isManagePropScreen ? "read-only-text4" : "text4",
                 "editable" => true,
-                "hidden" => true,
+                "invisible" => true,
             ],
             [
                 "dataIndex" => "column_type",
