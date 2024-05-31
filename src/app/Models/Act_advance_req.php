@@ -24,13 +24,11 @@ class Act_advance_req extends ModelExtended
         'getCurrency' => ['belongsTo', Act_currency::class, 'currency_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "radioAdvanceType" => ['belongsTo', Term::class, 'radio_advance_type'],
+
+        "getMonitors1" => ['belongsToMany', User::class, 'ym2m_act_advance_req_user'],
+        "getSubProjectsOfAdvanceReq" => ['belongsToMany', Sub_project::class, 'ym2m_act_advance_req_sub_project'],
     ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        'getSubProjectsOfAdvanceReq()' => ['getCheckedByField', Sub_project::class,],
-
-    ];
     public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -38,8 +36,8 @@ class Act_advance_req extends ModelExtended
     }
     public function getSubProjectsOfAdvanceReq()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCurrency()
     {
@@ -58,8 +56,8 @@ class Act_advance_req extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getManyLineParams()
     {

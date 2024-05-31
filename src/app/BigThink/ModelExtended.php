@@ -32,7 +32,7 @@ abstract class ModelExtended extends Model
     use SoftDeletesWithDeletedBy;
 
     public static $eloquentParams = [];
-    public static $oracyParams = [];
+    // pxublic static $oracyParams = [];
     public static $statusless = false;
     public static $nameless = false;
     public static $hasDueDate = false;
