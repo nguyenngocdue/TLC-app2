@@ -4,7 +4,7 @@
 @section('title', 'Manage Properties')
 
 @section('content')
-<div class="px-4">
+<div class="px-4 pt-4 bg-body">
     <form action="{{$route}}" method="POST">
         @csrf
         <button class="hidden" title="This button is to avoid a bug when change label and press enter."></button>

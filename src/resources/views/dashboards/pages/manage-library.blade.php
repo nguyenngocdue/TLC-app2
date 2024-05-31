@@ -4,7 +4,7 @@
 @section('title', $title)
 
 @section('content')
-<div class="px-4">
+<div class="px-4 pt-4 bg-body">
     <x-elapse title="Bootraping: "/>
     <form action="{{$route}}" method="post">
         @csrf

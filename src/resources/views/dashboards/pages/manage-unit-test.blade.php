@@ -4,7 +4,7 @@
 @section('title', $title)
 
 @section('content')
-<div class="px-4">
+<div class="px-4 bg-body">
     <x-navigation.pill/>
     <form action="{{$route}}" method="POST">
         @csrf
