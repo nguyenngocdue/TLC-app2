@@ -63,10 +63,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_workplaceDropdownMulti1": {
-        "name": "_workplaceDropdownMulti1",
+    "_workplaceDropdownMulti2a": {
+        "name": "_workplaceDropdownMulti2a",
         "relationship": "belongsToMany",
-        "control_name": "workplaceDropdownMulti1",
+        "control_name": "workplaceDropdownMulti2a",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
@@ -79,10 +79,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_workplaceCheckbox1": {
-        "name": "_workplaceCheckbox1",
+    "_workplaceCheckbox2a": {
+        "name": "_workplaceCheckbox2a",
         "relationship": "belongsToMany",
-        "control_name": "workplaceCheckbox1",
+        "control_name": "workplaceCheckbox2a",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

@@ -351,9 +351,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_workplaceCheckbox1": {
-        "name": "_workplaceCheckbox1",
-        "column_name": "workplaceCheckbox1",
+    "_workplaceCheckbox2a": {
+        "name": "_workplaceCheckbox2a",
+        "column_name": "workplaceCheckbox2a",
         "column_type": "eloquent_prop",
         "label": "Checkbox 2A",
         "control": "checkbox_2a",
@@ -373,9 +373,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_workplaceDropdownMulti1": {
-        "name": "_workplaceDropdownMulti1",
-        "column_name": "workplaceDropdownMulti1",
+    "_workplaceDropdownMulti2a": {
+        "name": "_workplaceDropdownMulti2a",
+        "column_name": "workplaceDropdownMulti2a",
         "column_type": "eloquent_prop",
         "label": "Dropdown Multi 2A",
         "control": "dropdown_multi_2a",

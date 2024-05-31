@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
@@ -148,6 +149,21 @@ trait TraitEntityFieldHandler2
         }
 
         $theRow->transitionTo($newStatus);
+    }
+
+    private function handleCheckboxAndDropdownMulti2a(Request $request, $theRow, array $eloquentProps)
+    {
+        // Log::info("handleCheckboxAndDropdownMulti2a");
+        // Log::info($eloquentProps);
+        $uid = CurrentUser::id();
+        //
+        foreach ($eloquentProps as $possiblyM2MProps) {
+            $fnName = substr($possiblyM2MProps, 1); //Remove first "_"
+            $values = $request->input($fnName);
+            // Log::info($fnName);
+            // Log::info($values);
+            $theRow->{$fnName}()->syncWithPivotValues($values, ['owner_id' => $uid]);
+        }
     }
 
     private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)

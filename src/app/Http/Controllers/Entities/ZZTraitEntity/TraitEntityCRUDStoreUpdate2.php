@@ -196,6 +196,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request);
 			$this->processSignatures($request);
 			if (!$isFakeRequest) {
+				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['eloquent_prop']);
+			}
+			if (!$isFakeRequest) {
 				//This will stop Project update keep deleting the sub project routings
 				$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
 			} else {

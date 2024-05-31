@@ -104,21 +104,21 @@
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
-        "hasOne",
         "hasManyThrough",
-        "morphTo",
+        "hasOne",
         "morphMany",
         "morphOne",
+        "morphTo",
         "morphToMany"
     ],
     "view_all_eloquents": [
+        "belongsTo",
         "belongsToMany",
         "hasMany",
-        "hasOne",
         "hasManyThrough",
-        "morphTo",
+        "hasOne",
         "morphMany",
-        "belongsTo",
+        "morphTo",
         "morphToMany"
     ],
     "manage_prop_oracies": [
