@@ -22,7 +22,6 @@ class Act_travel_req_line extends ModelExtended
         "getTravelPlacePair" => ['belongsTo', Act_travel_place_pair::class, "travel_place_pair_id"],
     ];
 
-    public static $oracyParams = [];
     public function getTravelPlacePair()
     {
         $p = static::$eloquentParams[__FUNCTION__];

@@ -24,8 +24,6 @@ class Hse_insp_chklst_line extends ModelExtended
         "getCorrectiveActions" => ['morphMany', Hse_corrective_action::class, 'correctable', 'correctable_type', 'correctable_id'],
     ];
 
-    public static $oracyParams = [];
-
     public function insp_photos()
     {
         $p = static::$eloquentParams[__FUNCTION__];

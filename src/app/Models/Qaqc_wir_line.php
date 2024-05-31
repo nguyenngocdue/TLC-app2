@@ -17,7 +17,6 @@ class Qaqc_wir_line extends ModelExtended
         // 'getParent' => ['belongsTo', Qaqc_wir::class, 'qaqc_wir_id'],
     ];
 
-    public static $oracyParams = [];
     // public function getParent()
     // {
     //     $p = static::$eloquentParams[__FUNCTION__];

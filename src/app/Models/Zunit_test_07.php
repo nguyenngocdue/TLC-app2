@@ -38,18 +38,6 @@ class Zunit_test_07 extends ModelExtended
         "getMonitors9" => ["belongsToMany", User::class, 'ym2m_user_zunit_test_07_monitor_9'],
     ];
 
-    // public static $oracyParams = [
-    //     "getMonitors1()" => ["getCheckedByField", User::class],
-    //     "getMonitors2()" => ["getCheckedByField", User::class],
-    //     "getMonitors3()" => ["getCheckedByField", User::class],
-    //     "getMonitors4()" => ["getCheckedByField", User::class],
-    //     "getMonitors5()" => ["getCheckedByField", User::class],
-    //     "getMonitors6()" => ["getCheckedByField", User::class],
-    //     "getMonitors7()" => ["getCheckedByField", User::class],
-    //     "getMonitors8()" => ["getCheckedByField", User::class],
-    //     "getMonitors9()" => ["getCheckedByField", User::class],
-    // ];
-
     public function comment_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];

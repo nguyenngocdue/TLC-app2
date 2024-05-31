@@ -20,10 +20,6 @@ class Hse_insp_chklst_sht extends ModelExtended
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
 
-    public static $oracyParams = [
-        // "getMonitors1()" => ["getCheckedByField", User::class],
-    ];
-
     public function getLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -44,11 +40,6 @@ class Hse_insp_chklst_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    // public function getMonitors1()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
 
     public function getManyLineParams()
     {

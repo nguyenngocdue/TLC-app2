@@ -17,8 +17,6 @@ class Eco_labor_impact extends ModelExtended
         "getDepartment" => ['belongsTo', Department::class, 'department_id']
     ];
 
-    public static $oracyParams = [];
-
     public function getEcoSheet()
     {
         $p = static::$eloquentParams[__FUNCTION__];

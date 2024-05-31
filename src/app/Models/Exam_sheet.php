@@ -30,8 +30,6 @@ class Exam_sheet extends ModelExtended
         "getSheetLines" => ["hasMany", Exam_sheet_line::class, "exam_sheet_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getExamTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];

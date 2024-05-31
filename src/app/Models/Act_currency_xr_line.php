@@ -13,7 +13,6 @@ class Act_currency_xr_line extends ModelExtended
         'getCurrencyXr' => ['belongsTo', Act_currency_xr::class, 'currency_xr_id'],
     ];
 
-    public static $oracyParams = [];
     public function getCurrencyPair()
     {
         $p = static::$eloquentParams[__FUNCTION__];

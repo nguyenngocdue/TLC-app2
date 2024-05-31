@@ -21,7 +21,6 @@ class Act_currency_pair extends ModelExtended
         return ($base->name ?? "") . "/" . ($counter->name ?? "");
     }
 
-    public static $oracyParams = [];
     public function getBaseCurrency()
     {
         $p = static::$eloquentParams[__FUNCTION__];

@@ -17,8 +17,6 @@ class Exam_tmpl extends ModelExtended
         "getQuestions" => ["hasMany", Exam_tmpl_question::class, "exam_tmpl_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getGroups()
     {
         $p = static::$eloquentParams[__FUNCTION__];

@@ -13,8 +13,6 @@ class Kanban_task_bucket extends ModelExtended
         "getPages" => ["hasMany", Kanban_task_page::class, "kanban_bucket_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getPages()
     {
         $p = static::$eloquentParams[__FUNCTION__];

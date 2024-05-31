@@ -20,8 +20,6 @@ class Kanban_task extends ModelExtended
         "getPriority" => ['belongsTo', Term::class, 'task_priority'],
     ];
 
-    public static $oracyParams = [];
-
     public function getParent()
     {
         $p = static::$eloquentParams[__FUNCTION__];

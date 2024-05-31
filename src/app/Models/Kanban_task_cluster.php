@@ -13,8 +13,6 @@ class Kanban_task_cluster extends ModelExtended
         "getGroups" => ["hasMany", Kanban_task_group::class, "kanban_cluster_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getParent()
     {
         $p = static::$eloquentParams[__FUNCTION__];

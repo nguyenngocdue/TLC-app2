@@ -18,8 +18,6 @@ class Exam_tmpl_group extends ModelExtended
         "getHideWhen" => ["belongsTo", Term::class, "hide_when"],
     ];
 
-    public static $oracyParams = [];
-
     public function getExamTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];

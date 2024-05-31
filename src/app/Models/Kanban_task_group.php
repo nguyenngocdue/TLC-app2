@@ -17,8 +17,6 @@ class Kanban_task_group extends ModelExtended
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
     ];
 
-    public static $oracyParams = [];
-
     public function getParent()
     {
         $p = static::$eloquentParams[__FUNCTION__];

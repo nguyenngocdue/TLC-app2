@@ -26,8 +26,6 @@ class Exam_tmpl_question extends ModelExtended
         "getValidation" => ['belongsTo', Term::class, 'validation'],
     ];
 
-    public static $oracyParams = [];
-
     public function getExamTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];

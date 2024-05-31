@@ -20,8 +20,6 @@ class Hr_onboarding_line extends ModelExtended
         'getUsers' => ['belongsTo', User::class, 'user_id'],
     ];
 
-    public static $oracyParams = [];
-
     public function getSignatures()
     {
         $p = static::$eloquentParams[__FUNCTION__];

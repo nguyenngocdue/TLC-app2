@@ -98,10 +98,6 @@ class Zunit_test_09 extends ModelExtended
         "dropdownMonitorsZut9" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_09_monitor_1'],
     ];
 
-    // public static $oracyParams = [
-    //     "dropdownMonitorsZut9()" => ["getCheckedByField", User::class],
-    // ];
-
     public function getManyLineParamsReduce11()
     {
         return [

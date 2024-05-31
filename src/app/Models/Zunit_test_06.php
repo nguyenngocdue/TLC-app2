@@ -24,10 +24,7 @@ class Zunit_test_06 extends ModelExtended
         "signature_eco_managers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_manager',],
 
     ];
-    // public static $oracyParams = [
-    //     "signature_eco_peers_list()" => ["getCheckedByField", User::class],
-    //     "signature_eco_managers_list()" => ["getCheckedByField", User::class],
-    // ];
+
     public function attachment_1()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -92,16 +89,6 @@ class Zunit_test_06 extends ModelExtended
     //     $p = static::$eloquentParams[__FUNCTION__];
     //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    // }
-    // public function signature_eco_peers_list()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-    // public function signature_eco_managers_list()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
     // }
     public function signature_eco_peers_list()
     {

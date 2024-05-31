@@ -30,8 +30,6 @@ class Exam_sheet_line extends ModelExtended
         "getQuestionType" => ["belongsTo", Term::class, "question_type_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getExamTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];

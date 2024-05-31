@@ -17,7 +17,6 @@ class Hr_onboarding_course extends ModelExtended
         "attachment_onboarding_course" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
-    public static $oracyParams = [];
     public function getFacilitator()
     {
         $p = static::$eloquentParams[__FUNCTION__];

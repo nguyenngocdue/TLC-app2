@@ -32,13 +32,6 @@ class Zunit_test_02 extends ModelExtended
         "dropdownMultiPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02",],
     ];
 
-    // public static $oracyParams = [
-    // "checkboxYesNo()" => ["getCheckedByField", Qaqc_insp_control_value::class],
-    // "checkboxPassFail()" => ["getCheckedByField", Qaqc_insp_control_value::class],
-    // "dropdownMultiYesNo()" => ["getCheckedByField", Qaqc_insp_control_value::class],
-    // "dropdownMultiPassFail()" => ["getCheckedByField", Qaqc_insp_control_value::class],
-    // ];
-
     public function getManyLineParams()
     {
         return [
@@ -100,26 +93,4 @@ class Zunit_test_02 extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-
-    // public function checkboxYesNo()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-
-    // public function checkboxPassFail()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-    // public function dropdownMultiYesNo()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
-    // public function dropdownMultiPassFail()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
 }

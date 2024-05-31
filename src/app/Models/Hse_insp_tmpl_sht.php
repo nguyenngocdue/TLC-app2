@@ -13,8 +13,6 @@ class Hse_insp_tmpl_sht extends ModelExtended
         "getLines" => ["hasMany", Hse_insp_tmpl_line::class, "hse_insp_tmpl_sht_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
