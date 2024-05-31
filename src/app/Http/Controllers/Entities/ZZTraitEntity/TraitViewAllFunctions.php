@@ -93,7 +93,7 @@ trait TraitViewAllFunctions
                         if ($trash) {
                             $q->onlyTrashed();
                         }
-                        $this->handleWhereIn($q,$ids);
+                        $this->handleWhereIn($q, $ids);
                         $this->queryAdvancedFilter($q, $advanceFilters, $propsFilters);
                         return $q
                             ->with($eagerLoadParams)
@@ -114,12 +114,13 @@ trait TraitViewAllFunctions
             });
         return $result;
     }
-    private function handleWhereIn(&$model,$ids){
+    private function handleWhereIn(&$model, $ids)
+    {
         $currentUserRoleSet = CurrentUser::getRoleSet();
-        if($this->type == "user_position" && $currentUserRoleSet != "hr_manager"){
+        if ($this->type == "user_position" && $currentUserRoleSet != "hr_manager") {
             $positions = $this->getPositionsEntityUserPositionOfCurrentUser();
             $model->whereIn('name', array_unique($positions));
-        }else{
+        } else {
             $model->whereIn('owner_id', $ids);
         }
     }

@@ -146,6 +146,8 @@
                         @case ('radio')
                         @case ('dropdown_multi')
                         @case('checkbox')
+                        @case ('dropdown_multi_2a')
+                        @case('checkbox_2a')
                             <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
                         @break
                         @case('status')
@@ -174,7 +176,7 @@
                         <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
                         @break
                         @default
-                        <x-feedback.alert type="warning" title="Control" message="[{{$control}}] ???" />
+                        <x-feedback.alert type="warning" title="Control???" message="[{{$control}}]" />
                         @break
                         @endswitch
                         </div>
