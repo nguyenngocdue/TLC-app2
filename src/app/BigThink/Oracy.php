@@ -13,7 +13,7 @@ class Oracy
         foreach ($collection as &$item) {
             if ($item) {
                 if (method_exists($item, $fn)) {
-                    $values = $toArray ? $item->$fn()->pluck('id')->toArray() : $item->$fn()->pluck('id');
+                    $values = $toArray ? $item->$fn()->pluck('users.id')->toArray() : $item->$fn()->pluck('id');
                     $item->{$fnNameWithParenthesis} = $values;
                     // } else {
                     //     dump($fn . " is not found, oracy attachment is skipped.");

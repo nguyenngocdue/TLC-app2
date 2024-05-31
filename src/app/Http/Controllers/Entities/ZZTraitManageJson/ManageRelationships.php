@@ -74,7 +74,7 @@ class ManageRelationships extends Manage_Parent
                 if ($column === 'radio_checkbox_colspan') {
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
-                        if (!in_array($control, ['radio', 'checkbox'])) {
+                        if (!in_array($control, ['radio', 'checkbox', 'checkbox_2a'])) {
                             $result[$key][$column] = 'DO_NOT_RENDER';
                         }
                     }
@@ -82,7 +82,7 @@ class ManageRelationships extends Manage_Parent
                 if (in_array($column, ['filter_columns', 'filter_values'])) {
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
-                        if (!in_array($control, ['radio', 'checkbox', 'dropdown', 'dropdown_multi', 'relationship_renderer'])) {
+                        if (!in_array($control, ['radio', 'checkbox', 'checkbox_2a', 'dropdown', 'dropdown_multi', 'dropdown_multi_2a', 'relationship_renderer'])) {
                             $result[$key][$column] = 'DO_NOT_RENDER';
                         }
                     }

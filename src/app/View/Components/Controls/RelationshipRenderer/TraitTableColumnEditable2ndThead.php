@@ -16,7 +16,7 @@ trait TraitTableColumnEditable2ndThead
         foreach ($columns as $column) {
             if (isset($column['cloneable']) && $column['cloneable']) {
                 $dataIndex = $column['dataIndex'];
-                $renderer = $column['renderer'];
+                $renderer = $column['renderer'] ?? "tttt";
                 $button = "";
                 $button .= "<x-renderer.button size='xs' value='xxx456' onClick=\"cloneFirstLineDown('$dataIndex', '$tableId','$renderer')\" title='Clone value of the first line'>";
                 $button .= $copyIcon;

@@ -53,8 +53,10 @@ abstract class ModelExtended extends Model
 
     // public function getMonitors1()
     // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    //     dump("getMonitors1() is not implemented");
+    //     return collect([]);
+    //     // $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     // return $this->{$p[0]}(__FUNCTION__, $p[1]);
     // }
 
     function getOwner()

@@ -94,11 +94,13 @@ class Zunit_test_09 extends ModelExtended
         'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
 
         'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
+
+        "dropdownMonitorsZut9" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_09_monitor_1'],
     ];
 
-    public static $oracyParams = [
-        "dropdownMonitorsZut9()" => ["getCheckedByField", User::class],
-    ];
+    // public static $oracyParams = [
+    //     "dropdownMonitorsZut9()" => ["getCheckedByField", User::class],
+    // ];
 
     public function getManyLineParamsReduce11()
     {
@@ -208,8 +210,8 @@ class Zunit_test_09 extends ModelExtended
 
     public function dropdownMonitorsZut9()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function department1()

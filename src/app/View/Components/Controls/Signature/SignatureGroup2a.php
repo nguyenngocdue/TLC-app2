@@ -42,7 +42,7 @@ class SignatureGroup2a extends Component
         $sA = [];
         foreach ($signatureList as $sign) $sA[$sign->user_id] = $sign;
         foreach ($nominatedList as &$user) {
-            if (isset($sA[$user->id])) {
+            if ($user && isset($sA[$user->id])) {
                 $user->attached_signature = $sA[$user->id];
             }
         }
@@ -60,7 +60,7 @@ class SignatureGroup2a extends Component
         // dump($signatureList);
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
         // dump($signatures);
-        $all = ($nominatedList->pluck('email', 'id'));
+        $all = ($nominatedList->pluck('email', 'users.id'));
         // dump($all);
         $signed = ($signatureList->pluck('getUser.email', 'user_id'));
         // dump($signed);

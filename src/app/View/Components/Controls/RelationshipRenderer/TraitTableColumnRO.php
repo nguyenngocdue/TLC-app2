@@ -27,9 +27,11 @@ trait TraitTableColumnRO
                     $newColumn['align'] = 'center';
                     break;
                 case 'dropdown':
-                case 'dropdown_multi':
                 case 'radio':
+                case 'dropdown_multi':
                 case 'checkbox':
+                case 'dropdown_multi_2a':
+                case 'checkbox_2a':
                     $dataIndex = $prop['relationships']['control_name_function'];
                     $newColumn['dataIndex'] = $dataIndex;
                     $newColumn['renderer'] = $column['renderer'] ?? 'column';

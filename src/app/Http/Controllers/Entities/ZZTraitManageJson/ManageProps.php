@@ -53,7 +53,24 @@ class ManageProps extends Manage_Parent
         $result = [];
         foreach ($columnParams as $elqName => $elqValue) {
             if (in_array($elqValue[0], $allows)) {
-                $column_type = in_array($elqValue[0], $propEloquent) ? "eloquent_prop" : "oracy_prop";
+                // $column_type = in_array($elqValue[0], $propEloquent) ? "eloquent_prop" : "oracy_prop";
+                switch ($elqValue[0]) {
+                    case "belongsTo":
+                    case "hasMany":
+                    case "hasManyThrough":
+                    case "hasOne":
+                        $column_type = '1_to_many';
+                        break;
+                    case 'belongsToMany':
+                        $column_type = 'many_to_many';
+                        break;
+                    case "morphMany":
+                    case "morphOne":
+                    case "morphTo":
+                    case "morphToMany":
+                        $column_type = 'morph';
+                        break;
+                }
                 $result["_$elqName"] = [
                     "name" => "_$elqName",
                     "column_name" => "$elqName",

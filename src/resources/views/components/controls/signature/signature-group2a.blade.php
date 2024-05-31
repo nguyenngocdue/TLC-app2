@@ -18,6 +18,7 @@
 
         @foreach($signatures as $index => $user)
         @php
+            if(!$user) continue;
             $as = $user->attached_signature;
 
             $value = $as ? $as->value : "";

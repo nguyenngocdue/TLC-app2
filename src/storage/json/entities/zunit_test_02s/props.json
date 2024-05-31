@@ -16,7 +16,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -35,7 +38,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -54,7 +60,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_radio_yes_no": {
         "name": "_radio_yes_no",
@@ -73,7 +82,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_radio_pass_fail": {
         "name": "_radio_pass_fail",
@@ -92,7 +104,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_dropdown_yes_no": {
         "name": "_dropdown_yes_no",
@@ -111,7 +126,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_dropdown_pass_fail": {
         "name": "_dropdown_pass_fail",
@@ -130,14 +148,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_checkboxYesNo()": {
-        "name": "_checkboxYesNo()",
-        "column_name": "checkboxYesNo()",
-        "column_type": "oracy_prop",
+    "_checkboxYesNo": {
+        "name": "_checkboxYesNo",
+        "column_name": "checkboxYesNo",
+        "column_type": "many_to_many",
         "label": "CheckboxYesNo",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -149,14 +170,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_checkboxPassFail()": {
-        "name": "_checkboxPassFail()",
-        "column_name": "checkboxPassFail()",
-        "column_type": "oracy_prop",
+    "_checkboxPassFail": {
+        "name": "_checkboxPassFail",
+        "column_name": "checkboxPassFail",
+        "column_type": "many_to_many",
         "label": "CheckboxPassFail",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -168,14 +192,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_dropdownMultiYesNo()": {
-        "name": "_dropdownMultiYesNo()",
-        "column_name": "dropdownMultiYesNo()",
-        "column_type": "oracy_prop",
+    "_dropdownMultiYesNo": {
+        "name": "_dropdownMultiYesNo",
+        "column_name": "dropdownMultiYesNo",
+        "column_type": "many_to_many",
         "label": "DropdownMultiYesNo",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -187,14 +214,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_dropdownMultiPassFail()": {
-        "name": "_dropdownMultiPassFail()",
-        "column_name": "dropdownMultiPassFail()",
-        "column_type": "oracy_prop",
+    "_dropdownMultiPassFail": {
+        "name": "_dropdownMultiPassFail",
+        "column_name": "dropdownMultiPassFail",
+        "column_type": "many_to_many",
         "label": "DropdownMultiPassFail",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -206,7 +236,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -225,7 +258,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -244,7 +280,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -263,7 +302,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -282,7 +324,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -301,7 +346,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -320,6 +368,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

@@ -53,10 +53,10 @@ trait TraitCreatePivotTable
 
             $table->id();
             $table->unsignedBigInteger($key1);
-            $table->foreign($key1, "$key1+$key3")->references('id')->on($table1)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign($key1, "$key1+$key2+$key3")->references('id')->on($table1)->onDelete('cascade')->onUpdate('cascade');
 
             $table->unsignedBigInteger($key2);
-            $table->foreign($key2, "$key2+$key3")->references('id')->on($table2)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign($key2, "$key2+$key1+$key3")->references('id')->on($table2)->onDelete('cascade')->onUpdate('cascade');
 
             $table->unique([$key1, $key2], md5($key1 . $key2 . $key3));
 
