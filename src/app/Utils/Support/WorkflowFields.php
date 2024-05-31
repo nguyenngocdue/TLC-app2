@@ -173,13 +173,13 @@ class WorkflowFields
         switch ($control) {
             case 'textarea_diff':
                 $result['value'] = $values->{$columnName} ?? '';
-                $result['value2'] = $values->{$columnName.'_draft'} ?? '';
+                $result['value2'] = $values->{$columnName . '_draft'} ?? '';
                 break;
             case 'textarea_diff_draft':
                 $result['value'] = $values->{$columnName} ?? '';
-                $result['value2'] = $values->{str_replace('_draft',"",$columnName)} ?? '';
+                $result['value2'] = $values->{str_replace('_draft', "", $columnName)} ?? '';
                 break;
-            
+
             default:
                 $result['value'] = $values->{$columnName} ?? '';
                 break;
@@ -198,16 +198,16 @@ class WorkflowFields
         $result['iconJson'] = $columnType === 'json' ? '(JSON)' : "";
         // $result['iconJson'] = $columnType === 'json' ? '<i title="JSON format" class="fa-duotone fa-brackets-curly"></i>' : "";
 
-        $typeWorkflow ?  self::followWorkflow($result, $prop, $defaultValue, $hidden, $readonly, $required) : self::noneFollowWorkflow($result, $prop, $defaultValue);
+        $typeWorkflow ?  self::byWorkflow($result, $prop, $defaultValue, $hidden, $readonly, $required) : self::notByWorkflow($result, $prop, $defaultValue);
     }
-    private static function noneFollowWorkflow(&$result, $prop, $defaultValue)
+    private static function notByWorkflow(&$result, $prop, $defaultValue)
     {
         $result['hiddenRow'] = $prop['hidden_edit'] === 'true' ? "hidden" : "";
         $result['hiddenLabel'] = $prop['hidden_label'] === 'true';
         $result['readOnly'] =  ($prop['read_only'] ?? false) === 'true';
         $result['isRequired'] = in_array("required", explode("|", $defaultValue['validation'] ?? ""));
     }
-    private static function followWorkflow(&$result, $prop, $defaultValue, $hidden, $readonly, $required)
+    private static function byWorkflow(&$result, $prop, $defaultValue, $hidden, $readonly, $required)
     {
         $result['hiddenRow'] = ($prop['hidden_edit'] ? $prop['hidden_edit'] : in_array($prop['name'], $hidden)) == 'true' ? "hidden" : "";
         $result['hiddenLabel'] = ($prop['hidden_label'] ? $prop['hidden_label'] : in_array($prop['name'], $hidden)) == 'true';

@@ -1,6 +1,35 @@
 <div class="p-4 w-full {{$width}} {{$hiddenComponent}} grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
-    @php $prop ? extract($prop) : null; @endphp
+    {{-- @php dump($prop) @endphp --}}
+    @php
+    if($prop){
+        $label = $prop['label'];
+        $properties = $prop['properties'];
+        $columnName = $prop['columnName'];
+        $numericScale = $prop['numericScale'];
+        $new_line = $prop['new_line'];
+        $columnType = $prop['columnType'];
+        $align = $prop['align'];
+        $control = $prop['control'];
+        $col_span = $prop['col_span'];
+        $classColSpanLabel = $prop['classColSpanLabel'];
+        $classColStart = $prop['classColStart'];
+        $classColSpanControl = $prop['classColSpanControl'];
+        $value = $prop['value'];
+        $title = $prop['title'];
+        $default_value = $prop['default_value'];
+        $labelExtra = $prop['labelExtra'];
+        $placeholder = $prop['placeholder'];
+        $controlExtra = $prop['controlExtra'];
+        $textareaRows = $prop['textareaRows'];
+        $iconJson = $prop['iconJson'];
+        $hiddenRow = $prop['hiddenRow'];
+        $hiddenLabel = $prop['hiddenLabel'];
+        $readOnly = $prop['readOnly'];
+        $isRequired = $prop['isRequired'];
+    }
+    @endphp
+    {{-- @php $prop ? extract($prop) : null; @endphp --}}
         @if($prop)
             @php $readOnly = $hasReadOnly || $readOnly; @endphp
             <div class='col-span-{{$col_span}} {{$hiddenRow}}'>

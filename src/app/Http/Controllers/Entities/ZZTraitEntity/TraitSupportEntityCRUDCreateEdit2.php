@@ -114,6 +114,10 @@ trait TraitSupportEntityCRUDCreateEdit2
                     $field_name = substr($name, 0, strlen($name) - 2); //Remove parenthesis()
                     $values[$name] = json_encode($original->getCheckedByField($field_name)->pluck('id')->toArray());
                     break;
+                case 'checkbox_2a':
+                case 'dropdown_multi_2a':
+                    $values[$name] =  json_encode($original->{$name}->pluck('id')->toArray());
+                    break;
                 case 'attachment':
                     $attachmentsOfThisItem = $original->{$name};
                     if (isset($orphanAttachments[$name])) {
