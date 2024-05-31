@@ -74,8 +74,10 @@ class ViewAllTypeTreeExplorer extends Component
                     $query->with("getHOD");
                 }]);
             }])
+
             ->whereHas("getUsers", $getUserFn)
             // ->where('show_in_task_budget', true)
+
             ->with(["getUsers" => $getUserFn])
             ->get();
 
