@@ -88,6 +88,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request, $objectId);
 			$this->attachOrphan($props['attachment'], $request, $modelPath, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
+			$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['eloquent_prop']);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
