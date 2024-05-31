@@ -24,7 +24,7 @@ class Prod_run extends ModelExtended
 
     public static $oracyParams = [
         'getWorkersOfRun()' => ['getCheckedByField', User::class,],
-        'getItemsOfProdOutput()' => ['getCheckedByField', Prod_ppr_item::class,],
+        // 'getItemsOfProdOutput()' => ['getCheckedByField', Prod_ppr_item::class,],
     ];
 
     public function getUsers()
@@ -45,11 +45,11 @@ class Prod_run extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getItemsOfProdOutput()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
+    // public function getItemsOfProdOutput()
+    // {
+    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
 
     // private function isNZ($parentItem)
     // {

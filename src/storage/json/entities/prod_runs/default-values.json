@@ -181,9 +181,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getItemsOfProdOutput()": {
-        "name": "_getItemsOfProdOutput()",
-        "column_name": "getItemsOfProdOutput()",
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -194,9 +194,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_remark": {
-        "name": "_remark",
-        "column_name": "remark",
+    "_is_rework": {
+        "name": "_is_rework",
+        "column_name": "is_rework",
         "label": "",
         "validation": "",
         "validation_regex": "",
