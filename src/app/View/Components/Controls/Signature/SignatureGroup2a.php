@@ -27,7 +27,7 @@ class SignatureGroup2a extends Component
     ) {
         if (is_null($signOffOracy)) $this->signOffOracy = $category . "_list";
         // dump($this->signOffOracy);
-        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}()->pluck('id');
+        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}()->pluck('users.id');
         // dump($this->signOffAdminIds);
         // dump($category);
         // dump($item);

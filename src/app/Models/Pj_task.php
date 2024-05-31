@@ -38,20 +38,20 @@ class Pj_task extends ModelExtended
 
     public function getChildrenSubTasks()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getDisciplinesOfTask()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getLodsOfTask()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public static function getTasksOfUser($uid)

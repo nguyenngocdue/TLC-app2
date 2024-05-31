@@ -64,6 +64,32 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_hide_in_survey": {
+        "name": "_hide_in_survey",
+        "column_name": "hide_in_survey",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getSkillsOfDepartment": {
+        "name": "_getSkillsOfDepartment",
+        "column_name": "getSkillsOfDepartment",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",

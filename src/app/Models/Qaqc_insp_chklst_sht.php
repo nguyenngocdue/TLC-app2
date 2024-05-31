@@ -91,18 +91,18 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function council_member_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_chklst_3rd_party_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function comment_rejected_reason()

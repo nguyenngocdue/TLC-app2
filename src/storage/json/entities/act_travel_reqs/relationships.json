@@ -11,7 +11,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getTravelType": {
         "name": "_getTravelType",
@@ -25,7 +27,9 @@
         "control": "radio",
         "filter_columns": "field_id",
         "filter_values": "169",
-        "radio_checkbox_colspan": "6"
+        "radio_checkbox_colspan": "6",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getWorkplace": {
         "name": "_getWorkplace",
@@ -39,7 +43,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDiscipline": {
         "name": "_getDiscipline",
@@ -53,7 +59,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getWorkplaceStaff": {
         "name": "_getWorkplaceStaff",
@@ -67,7 +75,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getAssignee1": {
         "name": "_getAssignee1",
@@ -81,7 +91,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -95,7 +107,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -109,49 +123,57 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getReqTravelDesk()": {
-        "name": "_getReqTravelDesk()",
-        "relationship": "getCheckedByField",
-        "control_name": "getReqTravelDesk()",
+    "_getReqTravelDesk": {
+        "name": "_getReqTravelDesk",
+        "relationship": "belongsToMany",
+        "control_name": "getReqTravelDesk",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "168",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors2",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getTravelReqLines": {
         "name": "_getTravelReqLines",
@@ -165,7 +187,9 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_current_passport": {
         "name": "_attachment_current_passport",
@@ -179,7 +203,9 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_current_portrait": {
         "name": "_attachment_current_portrait",
@@ -193,6 +219,8 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

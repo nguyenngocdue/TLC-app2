@@ -26,10 +26,7 @@ class Hr_overtime_request extends ModelExtended
         // 'getHrOtrLines1' => ['hasMany', Hr_overtime_request_line::class, 'hr_overtime_request_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-    ];
-
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_hr_overtime_request_user_monitor_1"],
     ];
 
     public function getWorkplace()
@@ -64,8 +61,8 @@ class Hr_overtime_request extends ModelExtended
 
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function comment_rejected_reason()

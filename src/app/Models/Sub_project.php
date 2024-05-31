@@ -49,30 +49,30 @@ class Sub_project extends ModelExtended
 
     public function getProjectMembers()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdRoutingsOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getClientsOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getExternalInspectorsOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCouncilMembersOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     // public function getApartmentOwnersOfSubProject()
     // {

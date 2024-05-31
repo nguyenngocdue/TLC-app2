@@ -5,6 +5,7 @@ namespace App\BigThink;
 use App\BigThink\BlueprintExtended;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 trait TraitCreatePivotTable
@@ -16,6 +17,7 @@ trait TraitCreatePivotTable
         $relationshipKey = $this->relationshipKey;
 
         if ($table1Plural > $table2Plural) {
+            Log::info("$table1Plural > $table2Plural");
             $temp = $table1Plural;
             $table1Plural = $table2Plural;
             $table2Plural = $temp;

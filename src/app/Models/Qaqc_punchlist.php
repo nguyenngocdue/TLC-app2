@@ -42,13 +42,13 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMonitors2()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     // public function signature_qaqc_punchlist()
     // {
@@ -69,8 +69,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_qaqc_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_punchlist_production()
     {
@@ -80,8 +80,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_production_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_punchlist_project()
     {
@@ -91,8 +91,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_project_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_punchlist_factory()
     {
@@ -102,8 +102,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_factory_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProject()
     {

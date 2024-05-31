@@ -42,8 +42,8 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
     // }
     public function getDefExtInsp()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProdDiscipline()
     {

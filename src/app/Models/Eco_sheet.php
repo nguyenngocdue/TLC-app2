@@ -32,18 +32,16 @@ class Eco_sheet extends ModelExtended
 
         "signature_eco_peers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
+
+        "getMonitors1" => ["belongsToMany", User::class, 'ym2m_eco_sheet_user_monitor_1'],
+        "getMonitors2" => ["belongsToMany", User::class, 'ym2m_eco_sheet_user_monitor_2'],
+        "getMonitors3" => ["belongsToMany", User::class, 'ym2m_eco_sheet_user_monitor_3'],
+        "getSubProjectsOfEco" => ["belongsToMany", Sub_project::class, 'ym2m_eco_sheet_sub_project'],
+        "getTypesOfChangeOfEco" => ["belongsToMany", Term::class, 'ym2m_eco_sheet_term_type_of_change'],
+        "signature_eco_peers_list" => ["belongsToMany", User::class, 'ym2m_eco_sheet_user_peer'],
+        "signature_eco_managers_list" => ["belongsToMany", User::class, 'ym2m_eco_sheet_user_manager'],
     ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        "getMonitors2()" => ["getCheckedByField", User::class],
-        "getMonitors3()" => ["getCheckedByField", User::class],
-        "getSubProjectsOfEco()" => ["getCheckedByField", Sub_project::class],
-        "getTypesOfChangeOfEco()" => ["getCheckedByField", Term::class],
-
-        "signature_eco_peers_list()" => ["getCheckedByField", User::class],
-        "signature_eco_managers_list()" => ["getCheckedByField", User::class],
-    ];
     public function signature_eco_peers()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -127,37 +125,37 @@ class Eco_sheet extends ModelExtended
 
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMonitors2()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMonitors3()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_eco_peers_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_eco_managers_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getSubProjectsOfEco()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getTypesOfChangeOfEco()
     {
-        $p = $this::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }
