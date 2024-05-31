@@ -15,9 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(function ($table, $callback) {
-            return new BlueprintExtended($table, $callback);
-        });
+        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
 
         $schema->create('ym2m_workplace_zunit_test_01_dropdown_multi', function (BlueprintExtended $table) {

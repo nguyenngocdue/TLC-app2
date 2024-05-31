@@ -15,9 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(function ($table, $callback) {
-            return new BlueprintExtended($table, $callback);
-        });
+        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('prod_user_runs', function (BlueprintExtended $table) {
             $table->unsignedBigInteger('prod_run_id');
