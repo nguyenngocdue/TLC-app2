@@ -18,11 +18,9 @@ class Project extends ModelExtended
         "getAvatar" => ['morphOne', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
         "getQrAppSource" => ['belongsTo', Term::class, 'qr_app_source'],
-    ];
 
-    public static $oracyParams = [
-        "getProjectMembers()" => ['getCheckedByField', User::class],
-        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
+        "getProjectMembers" => ["belongsToMany", User::class, "ym2m_project_user_member"],
+        "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_project_term_show_me_on"],
     ];
 
     public function getScreensShowMeOn()
