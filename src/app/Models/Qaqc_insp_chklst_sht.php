@@ -25,12 +25,10 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getAssignee2' => ['belongsTo', User::class, 'assignee_2'],
-    ];
-
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        "council_member_list()" => ["getCheckedByField", User::class],
-        "signature_qaqc_chklst_3rd_party_list()"  => ["getCheckedByField", User::class],
+        //Many to many
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_monitor_1"],
+        "council_member_list" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_council_member"],
+        "signature_qaqc_chklst_3rd_party_list"  => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_3rd_party"],
     ];
 
     public function getLines()

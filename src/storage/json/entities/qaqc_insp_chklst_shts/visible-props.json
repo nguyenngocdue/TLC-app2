@@ -49,9 +49,9 @@
         "pending_audit": "true",
         "audited": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "in_progress": "true",
         "not_applicable": "true",
         "reviewed": "true",
@@ -59,9 +59,9 @@
         "pending_audit": "true",
         "audited": "true"
     },
-    "_council_member_list()": {
-        "name": "_council_member_list()",
-        "column_name": "council_member_list()",
+    "_council_member_list": {
+        "name": "_council_member_list",
+        "column_name": "council_member_list",
         "in_progress": "true",
         "not_applicable": "true",
         "reviewed": "true",
@@ -149,9 +149,9 @@
         "pending_audit": "true",
         "audited": "true"
     },
-    "_signature_qaqc_chklst_3rd_party_list()": {
-        "name": "_signature_qaqc_chklst_3rd_party_list()",
-        "column_name": "signature_qaqc_chklst_3rd_party_list()",
+    "_signature_qaqc_chklst_3rd_party_list": {
+        "name": "_signature_qaqc_chklst_3rd_party_list",
+        "column_name": "signature_qaqc_chklst_3rd_party_list",
         "in_progress": "true",
         "not_applicable": "true",
         "reviewed": "true",

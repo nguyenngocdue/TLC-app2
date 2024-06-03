@@ -20,7 +20,7 @@ class UpdateProdRoutingService
         foreach ($allLists as $list) {
             $allSheets = $list->getSheets;
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
+                $result[] = $sheet->{$nominatedListFn}->pluck('id')->toArray();
             }
         }
 

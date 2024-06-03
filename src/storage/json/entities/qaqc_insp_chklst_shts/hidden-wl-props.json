@@ -263,9 +263,9 @@
         "contractor": "",
         "vendor": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -989,9 +989,9 @@
         "contractor": "",
         "vendor": ""
     },
-    "_signature_qaqc_chklst_3rd_party_list()": {
-        "name": "_signature_qaqc_chklst_3rd_party_list()",
-        "column_name": "signature_qaqc_chklst_3rd_party_list()",
+    "_signature_qaqc_chklst_3rd_party_list": {
+        "name": "_signature_qaqc_chklst_3rd_party_list",
+        "column_name": "signature_qaqc_chklst_3rd_party_list",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",

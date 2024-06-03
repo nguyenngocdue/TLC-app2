@@ -284,7 +284,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     continue;
                 }
             }
-            $showOnScreenIds = $routing->getScreensShowMeOn()->pluck('id');
+            $showOnScreenIds = $routing->getScreensShowMeOn->pluck('id');
             if ($showOnScreenIds->contains($show_on_ics_id)) {
                 $tmpls = $routing->getChklstTmpls();
                 if ($tmpls->count() > 0) {

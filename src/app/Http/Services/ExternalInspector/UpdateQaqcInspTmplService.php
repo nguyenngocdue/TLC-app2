@@ -21,7 +21,7 @@ class UpdateQaqcInspTmplService
             $allSheets = $list->getSheets;
             // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
-                $result[] = $sheet->{$nominatedListFn}()->pluck('id')->toArray();
+                $result[] = $sheet->{$nominatedListFn}->pluck('id')->toArray();
             }
         }
 
