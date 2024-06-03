@@ -10,8 +10,8 @@ class Pj_sub_task extends ModelExtended
 
     public static $statusless = true;
 
-    public static $oracyParams = [
-        "getParentTasks()" => ["getCheckedByField", Pj_task::class],
+    public static $eloquentParams = [
+        "getParentTasks" => ["belongsToMany", Pj_task::class, "ym2m_pj_sub_task_pj_task"],
     ];
 
     public function getParentTasks()
