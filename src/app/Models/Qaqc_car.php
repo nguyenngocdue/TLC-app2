@@ -15,10 +15,8 @@ class Qaqc_car extends ModelExtended
     public static $eloquentParams = [
         "getQaqcNcr" => ['belongsTo', Qaqc_ncr::class, 'qaqc_ncr_id'],
         "getResponsiblePerson" => ['belongsTo', User::class, 'responsible_person'],
-    ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_car_user_monitor_1"],
     ];
 
     public function getQaqcNcr()
