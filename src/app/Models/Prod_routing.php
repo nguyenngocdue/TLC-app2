@@ -18,19 +18,16 @@ class Prod_routing extends ModelExtended
     public static $eloquentParams = [
         "getProdOrders" => ['hasMany', Prod_order::class],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, 'prod_routing_id'],
-
         "getProdSequences" => ["hasManyThrough", Prod_sequence::class, Prod_order::class],
-
         "getProdRoutingLinks" => ['belongsToMany', Prod_routing_link::class, 'prod_routing_details', 'prod_routing_id', 'prod_routing_link_id'],
-    ];
 
-    public static $oracyParams = [
-        "getWirDescriptions()" => ["getCheckedByField", Wir_description::class],
-        "getChklstTmpls()" => ["getCheckedByField", Qaqc_insp_tmpl::class],
-        "getSubProjects()" => ["getCheckedByField", Sub_project::class],
-        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
-        "getExternalInspectorsOfProdRouting()" => ['getCheckedByField', User::class],
-        "getCouncilMembersOfProdRouting()" => ['getCheckedByField', User::class],
+        //Many to many
+        "getWirDescriptions" => ["belongsToMany", Wir_description::class, "ym2m_prod_routing_wir_description"],
+        "getChklstTmpls" => ["belongsToMany", Qaqc_insp_tmpl::class, "ym2m_prod_routing_qaqc_insp_tmpl"],
+        "getSubProjects" => ["belongsToMany", Sub_project::class, "ym2m_prod_routing_sub_project"],
+        "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_prod_routing_term_show_me_on"],
+        "getExternalInspectorsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_external_inspector"],
+        "getCouncilMembersOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_council_member"],
     ];
 
     public function getProdRoutingLinks()

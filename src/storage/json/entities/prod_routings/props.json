@@ -87,12 +87,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getSubProjects()": {
-        "name": "_getSubProjects()",
-        "column_name": "getSubProjects()",
-        "column_type": "oracy_prop",
+    "_getSubProjects": {
+        "name": "_getSubProjects",
+        "column_name": "getSubProjects",
+        "column_type": "many_to_many",
         "label": "Sub Projects",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "300",
@@ -109,12 +109,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getScreensShowMeOn()": {
-        "name": "_getScreensShowMeOn()",
-        "column_name": "getScreensShowMeOn()",
-        "column_type": "oracy_prop",
+    "_getScreensShowMeOn": {
+        "name": "_getScreensShowMeOn",
+        "column_name": "getScreensShowMeOn",
+        "column_type": "many_to_many",
         "label": "Show On Screens",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "300",
@@ -131,12 +131,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getChklstTmpls()": {
-        "name": "_getChklstTmpls()",
-        "column_name": "getChklstTmpls()",
-        "column_type": "oracy_prop",
+    "_getChklstTmpls": {
+        "name": "_getChklstTmpls",
+        "column_name": "getChklstTmpls",
+        "column_type": "many_to_many",
         "label": "Available Checklist Templates",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "300",
@@ -153,12 +153,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getExternalInspectorsOfProdRouting()": {
-        "name": "_getExternalInspectorsOfProdRouting()",
-        "column_name": "getExternalInspectorsOfProdRouting()",
-        "column_type": "oracy_prop",
+    "_getExternalInspectorsOfProdRouting": {
+        "name": "_getExternalInspectorsOfProdRouting",
+        "column_name": "getExternalInspectorsOfProdRouting",
+        "column_type": "many_to_many",
         "label": "External Inspectors of Routing",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -175,12 +175,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getCouncilMembersOfProdRouting()": {
-        "name": "_getCouncilMembersOfProdRouting()",
-        "column_name": "getCouncilMembersOfProdRouting()",
-        "column_type": "oracy_prop",
+    "_getCouncilMembersOfProdRouting": {
+        "name": "_getCouncilMembersOfProdRouting",
+        "column_name": "getCouncilMembersOfProdRouting",
+        "column_type": "many_to_many",
         "label": "Council Members Of Prod Routing",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -222,7 +222,7 @@
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
         "column_name": "getProdRoutingLinks",
-        "column_type": "eloquent_prop",
+        "column_type": "many_to_many",
         "label": "Routing Links",
         "control": "relationship_renderer",
         "align": "",
@@ -244,7 +244,7 @@
     "_getProdOrders": {
         "name": "_getProdOrders",
         "column_name": "getProdOrders",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Production Orders",
         "control": "relationship_renderer",
         "align": "",
@@ -266,7 +266,7 @@
     "_getProdSequences": {
         "name": "_getProdSequences",
         "column_name": "getProdSequences",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Sequence-based Timesheets",
         "control": "relationship_renderer",
         "align": "",
@@ -288,7 +288,7 @@
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
         "column_name": "getProdRoutingDetails",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Routing Details",
         "control": "relationship_renderer",
         "align": "",
@@ -307,12 +307,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getWirDescriptions()": {
-        "name": "_getWirDescriptions()",
-        "column_name": "getWirDescriptions()",
-        "column_type": "oracy_prop",
+    "_getWirDescriptions": {
+        "name": "_getWirDescriptions",
+        "column_name": "getWirDescriptions",
+        "column_type": "many_to_many",
         "label": "Available WIRs",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "150",
