@@ -42,10 +42,8 @@ class User_position extends ModelExtended
         "getPosition2" => ['belongsTo', User_position2::class, 'position_2'],
         "getPosition3" => ['belongsTo', User_position3::class, 'position_3'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
-    ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_user_position_user_monitor_1"],
     ];
 
     public function getUsers()

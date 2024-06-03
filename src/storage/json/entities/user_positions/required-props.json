@@ -127,9 +127,9 @@
         "pending_verification": "true",
         "active": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "",
         "draft": "",
         "pending_verification": "",
