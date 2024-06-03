@@ -64,9 +64,9 @@
         "column_name": "remark",
         "new": "true"
     },
-    "_getReqTravelDesk()": {
-        "name": "_getReqTravelDesk()",
-        "column_name": "getReqTravelDesk()",
+    "_getReqTravelDesk": {
+        "name": "_getReqTravelDesk",
+        "column_name": "getReqTravelDesk",
         "new": "true"
     },
     "_sep01": {
@@ -99,14 +99,14 @@
         "column_name": "assignee_1",
         "new": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true"
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "new": "true"
     },
     "_owner_id": {

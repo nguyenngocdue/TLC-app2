@@ -134,9 +134,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

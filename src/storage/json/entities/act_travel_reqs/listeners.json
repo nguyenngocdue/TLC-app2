@@ -179,9 +179,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getReqTravelDesk()": {
-        "name": "_getReqTravelDesk()",
-        "column_name": "getReqTravelDesk()",
+    "_getReqTravelDesk": {
+        "name": "_getReqTravelDesk",
+        "column_name": "getReqTravelDesk",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -239,9 +239,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -254,9 +254,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

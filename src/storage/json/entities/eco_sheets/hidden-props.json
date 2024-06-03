@@ -77,9 +77,9 @@
         "pending_ack": "",
         "active": ""
     },
-    "_getSubProjectsOfEco()": {
-        "name": "_getSubProjectsOfEco()",
-        "column_name": "getSubProjectsOfEco()",
+    "_getSubProjectsOfEco": {
+        "name": "_getSubProjectsOfEco",
+        "column_name": "getSubProjectsOfEco",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
@@ -116,9 +116,9 @@
         "pending_ack": "",
         "active": ""
     },
-    "_getTypesOfChangeOfEco()": {
-        "name": "_getTypesOfChangeOfEco()",
-        "column_name": "getTypesOfChangeOfEco()",
+    "_getTypesOfChangeOfEco": {
+        "name": "_getTypesOfChangeOfEco",
+        "column_name": "getTypesOfChangeOfEco",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
@@ -428,9 +428,9 @@
         "pending_ack": "",
         "active": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
@@ -480,9 +480,9 @@
         "pending_ack": "",
         "active": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
@@ -519,9 +519,9 @@
         "pending_ack": "",
         "active": ""
     },
-    "_getMonitors3()": {
-        "name": "_getMonitors3()",
-        "column_name": "getMonitors3()",
+    "_getMonitors3": {
+        "name": "_getMonitors3",
+        "column_name": "getMonitors3",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",

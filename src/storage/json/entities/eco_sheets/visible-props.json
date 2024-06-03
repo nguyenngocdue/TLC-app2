@@ -77,9 +77,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getSubProjectsOfEco()": {
-        "name": "_getSubProjectsOfEco()",
-        "column_name": "getSubProjectsOfEco()",
+    "_getSubProjectsOfEco(": {
+        "name": "_getSubProjectsOfEco",
+        "column_name": "getSubProjectsOfEco",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -116,9 +116,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getTypesOfChangeOfEco()": {
-        "name": "_getTypesOfChangeOfEco()",
-        "column_name": "getTypesOfChangeOfEco()",
+    "_getTypesOfChangeOfEco": {
+        "name": "_getTypesOfChangeOfEco",
+        "column_name": "getTypesOfChangeOfEco",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -428,9 +428,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -480,9 +480,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -519,9 +519,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getMonitors3()": {
-        "name": "_getMonitors3()",
-        "column_name": "getMonitors3()",
+    "_getMonitors3": {
+        "name": "_getMonitors3",
+        "column_name": "getMonitors3",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -623,9 +623,9 @@
         "pending_ack": "",
         "active": ""
     },
-    "_signature_eco_peers_list()": {
-        "name": "_signature_eco_peers_list()",
-        "column_name": "signature_eco_peers_list()",
+    "_signature_eco_peers_list": {
+        "name": "_signature_eco_peers_list",
+        "column_name": "signature_eco_peers_list",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -636,9 +636,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_signature_eco_managers_list()": {
-        "name": "_signature_eco_managers_list()",
-        "column_name": "signature_eco_managers_list()",
+    "_signature_eco_managers_list": {
+        "name": "_signature_eco_managers_list",
+        "column_name": "signature_eco_managers_list",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
