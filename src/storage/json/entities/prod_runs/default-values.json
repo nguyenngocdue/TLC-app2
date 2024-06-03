@@ -90,9 +90,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getWorkersOfRun()": {
-        "name": "_getWorkersOfRun()",
-        "column_name": "getWorkersOfRun()",
+    "_getWorkersOfRun": {
+        "name": "_getWorkersOfRun",
+        "column_name": "getWorkersOfRun",
         "label": "",
         "validation": "",
         "validation_regex": "",

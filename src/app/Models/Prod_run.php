@@ -20,11 +20,8 @@ class Prod_run extends ModelExtended
     public static $eloquentParams = [
         "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
         "getUsers" => ['belongsToMany', User::class, 'prod_user_runs'], //, 'prod_run_id', 'user_id'],
-    ];
 
-    public static $oracyParams = [
-        'getWorkersOfRun()' => ['getCheckedByField', User::class,],
-        // 'getItemsOfProdOutput()' => ['getCheckedByField', Prod_ppr_item::class,],
+        "getWorkersOfRun" => ['belongsToMany', User::class, 'ym2m_prod_run_user_worker',],
     ];
 
     public function getUsers()
