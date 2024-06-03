@@ -7,6 +7,14 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_walkthrough_datetime": {
         "name": "_walkthrough_datetime",
         "column_name": "walkthrough_datetime",
@@ -23,14 +31,6 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
     "_description": {
         "name": "_description",
         "column_name": "description",
@@ -39,25 +39,9 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
-    "_getCorrectiveActions": {
-        "name": "_getCorrectiveActions",
-        "column_name": "getCorrectiveActions",
-        "new": "true",
-        "pending_approval": "true",
-        "rejected": "true",
-        "closed": "true"
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -74,6 +58,22 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_getCorrectiveActions": {
+        "name": "_getCorrectiveActions",
+        "column_name": "getCorrectiveActions",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_slug": {
+        "name": "_slug",
+        "column_name": "slug",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",

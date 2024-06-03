@@ -30,9 +30,6 @@ class Hse_corrective_action extends ModelExtended
         "getMonitors1" => ["belongsToMany", User::class, "ym2m_hse_corrective_action_user_monitor_1"],
     ];
 
-    // public static $oracyParams = [
-    //     "getMonitors1()" => ["getCheckedByField", User::class],
-    // ];
     public function opened_photos()
     {
         $p = static::$eloquentParams[__FUNCTION__];
