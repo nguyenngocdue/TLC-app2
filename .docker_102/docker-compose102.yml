@@ -57,6 +57,8 @@ services:
       UPLOAD_LIMIT: 104857600
       MEMORY_LIMIT: 2G
       # MAX_EXECUTION_TIME: 600
+    volumes:
+      - ./configs/custom.config.inc.php:/etc/phpmyadmin/config.user.inc.php
     ports:
       - "18102:80"
     networks:
