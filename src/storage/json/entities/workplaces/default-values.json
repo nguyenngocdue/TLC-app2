@@ -77,19 +77,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_weekend_days": {
-        "name": "_weekend_days",
-        "column_name": "weekend_days",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "0 is Sunday, 1 is Monday,... comma seperated",
-        "textarea_rows": ""
-    },
     "_break_duration_in_min": {
         "name": "_break_duration_in_min",
         "column_name": "break_duration_in_min",
@@ -101,6 +88,19 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_weekend_days": {
+        "name": "_weekend_days",
+        "column_name": "weekend_days",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "0 is Sunday, 1 is Monday,... comma seperated",
         "textarea_rows": ""
     },
     "_description": {
@@ -142,9 +142,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",
