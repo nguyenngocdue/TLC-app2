@@ -87,12 +87,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "column_type": "oracy_prop",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "many_to_many",
         "label": "Default Monitors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -153,12 +153,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getTasksOfDiscipline()": {
-        "name": "_getTasksOfDiscipline()",
-        "column_name": "getTasksOfDiscipline()",
-        "column_type": "oracy_prop",
+    "_getTasksOfDiscipline": {
+        "name": "_getTasksOfDiscipline",
+        "column_name": "getTasksOfDiscipline",
+        "column_type": "many_to_many",
         "label": "Tasks",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -178,7 +178,7 @@
     "_getUsers": {
         "name": "_getUsers",
         "column_name": "getUsers",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Users",
         "control": "relationship_renderer",
         "align": "",

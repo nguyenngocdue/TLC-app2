@@ -16,11 +16,10 @@ class User_discipline extends ModelExtended
     public static $eloquentParams = [
         "getUsers" => ['hasMany', User::class, 'discipline'],
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
-    ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        "getTasksOfDiscipline()" => ["getCheckedByField", Pj_task::class],
+        //Many to many
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_user_discipline_user_monitor_1"],
+        "getTasksOfDiscipline" => ["belongsToMany", Pj_task::class, "ym2m_pj_task_user_discipline"],
     ];
 
     public function getTasksOfDiscipline()

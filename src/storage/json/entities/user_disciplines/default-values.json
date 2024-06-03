@@ -51,9 +51,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -64,9 +64,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getTasksOfDiscipline()": {
-        "name": "_getTasksOfDiscipline()",
-        "column_name": "getTasksOfDiscipline()",
+    "_show_in_task_budget": {
+        "name": "_show_in_task_budget",
+        "column_name": "show_in_task_budget",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -84,6 +84,19 @@
         "validation": "",
         "validation_regex": "",
         "formula": "All_SlugifyByName",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getTasksOfDiscipline": {
+        "name": "_getTasksOfDiscipline",
+        "column_name": "getTasksOfDiscipline",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
