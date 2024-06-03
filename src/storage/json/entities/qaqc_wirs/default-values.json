@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_slug": {
         "name": "_slug",
@@ -21,7 +22,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_doc_id": {
         "name": "_doc_id",
@@ -33,7 +35,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getNcrs": {
         "name": "_getNcrs",
@@ -45,7 +48,34 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_ncr_status_unique_value": {
+        "name": "_ncr_status_unique_value",
+        "column_name": "ncr_status_unique_value",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_ncr_all_closed": {
+        "name": "_ncr_all_closed",
+        "column_name": "ncr_all_closed",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_project_id": {
         "name": "_project_id",
@@ -57,7 +87,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -69,7 +100,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -81,7 +113,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_order_id": {
         "name": "_prod_order_id",
@@ -93,7 +126,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -105,7 +139,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_wir_description_id": {
         "name": "_wir_description_id",
@@ -117,7 +152,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -129,7 +165,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
@@ -141,7 +178,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getLines": {
         "name": "_getLines",
@@ -153,7 +191,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -165,7 +204,8 @@
         "default_value": "2",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_due_date": {
         "name": "_due_date",
@@ -177,7 +217,8 @@
         "default_value": "+7 days",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -189,7 +230,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -201,11 +243,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -213,7 +256,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_lock_version": {
         "name": "_lock_version",
@@ -225,7 +269,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -237,7 +282,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
@@ -249,7 +295,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_closed_at": {
         "name": "_closed_at",
@@ -261,7 +308,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_status": {
         "name": "_status",
@@ -273,7 +321,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -285,7 +334,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -297,7 +347,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -309,7 +360,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -321,6 +373,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }
