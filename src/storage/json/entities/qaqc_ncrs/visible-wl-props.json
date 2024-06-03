@@ -2456,9 +2456,9 @@
         "client": "",
         "apartment_owner": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",

@@ -49,10 +49,8 @@ class Qaqc_ncr extends ModelExtended
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_resolved" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-    ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_ncr_user_monitor_1"],
     ];
 
     public function comment_asm_rejected_reason()

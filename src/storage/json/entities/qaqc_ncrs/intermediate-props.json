@@ -454,9 +454,9 @@
         "inspection_rejected": "",
         "closed": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "",
         "pending_review": "",
         "assigned": "",
