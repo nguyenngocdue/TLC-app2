@@ -1374,9 +1374,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2199,9 +2199,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_mainAffectedPart()": {
-        "name": "_mainAffectedPart()",
-        "column_name": "mainAffectedPart()",
+    "_mainAffectedPart": {
+        "name": "_mainAffectedPart",
+        "column_name": "mainAffectedPart",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2254,9 +2254,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_natureOfInjury()": {
-        "name": "_natureOfInjury()",
-        "column_name": "natureOfInjury()",
+    "_natureOfInjury": {
+        "name": "_natureOfInjury",
+        "column_name": "natureOfInjury",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2309,9 +2309,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_treatmentInstruction()": {
-        "name": "_treatmentInstruction()",
-        "column_name": "treatmentInstruction()",
+    "_treatmentInstruction": {
+        "name": "_treatmentInstruction",
+        "column_name": "treatmentInstruction",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2529,9 +2529,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_causeOfIssue()": {
-        "name": "_causeOfIssue()",
-        "column_name": "causeOfIssue()",
+    "_causeOfIssue": {
+        "name": "_causeOfIssue",
+        "column_name": "causeOfIssue",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2694,9 +2694,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_activityLeadToIssue()": {
-        "name": "_activityLeadToIssue()",
-        "column_name": "activityLeadToIssue()",
+    "_activityLeadToIssue": {
+        "name": "_activityLeadToIssue",
+        "column_name": "activityLeadToIssue",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -2859,9 +2859,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_immediateCause()": {
-        "name": "_immediateCause()",
-        "column_name": "immediateCause()",
+    "_immediateCause": {
+        "name": "_immediateCause",
+        "column_name": "immediateCause",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",
@@ -3024,9 +3024,9 @@
         "external_inspector": "",
         "qaqc_member_nz": ""
     },
-    "_issueRootCause()": {
-        "name": "_issueRootCause()",
-        "column_name": "issueRootCause()",
+    "_issueRootCause": {
+        "name": "_issueRootCause",
+        "column_name": "issueRootCause",
         "admin": "",
         "acct_manager": "",
         "acct_member": "",

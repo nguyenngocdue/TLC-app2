@@ -40,17 +40,15 @@ class Hse_incident_report extends ModelExtended
         "attachment_hse_incident_doc" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_hse_witness" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_hse_hr_decision" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-    ];
-
-    public static $oracyParams = [
-        "mainAffectedPart()" => ["getCheckedByField", Term::class],
-        "natureOfInjury()" => ["getCheckedByField", Term::class],
-        "treatmentInstruction()" => ["getCheckedByField", Term::class],
-        "causeOfIssue()" => ["getCheckedByField", Term::class],
-        "activityLeadToIssue()" => ["getCheckedByField", Term::class],
-        "immediateCause()" => ["getCheckedByField", Term::class],
-        "issueRootCause()" => ["getCheckedByField", Term::class],
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        //Many to many
+        "mainAffectedPart" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_main_affected_part"],
+        "natureOfInjury" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_nature_of_injury"],
+        "treatmentInstruction" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_treatment_instruction"],
+        "causeOfIssue" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_cause_of_issue"],
+        "activityLeadToIssue" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_activity_lead_to_issue"],
+        "immediateCause" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_immediate_cause"],
+        "issueRootCause" => ["belongsToMany", Term::class, "ym2m_hse_incident_report_term_issue_root_cause"],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_hse_incident_report_user_monitor_1"],
     ];
 
     public function attachment_hse_incident_doc()

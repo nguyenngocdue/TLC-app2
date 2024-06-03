@@ -2,36 +2,36 @@
     "new": {
         "name": "new",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "active": {
         "name": "active",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_ack": {
         "name": "pending_ack",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_review": {
         "name": "pending_review",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "review_rejected": {
         "name": "review_rejected",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_verification": {
         "name": "pending_verification",
         "ball-in-court-assignee": "assignee_3",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "closed": {
         "name": "closed",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     }
 }

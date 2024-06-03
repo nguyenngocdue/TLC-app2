@@ -11,7 +11,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getLineManager": {
         "name": "_getLineManager",
@@ -25,7 +27,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getFactoryManager": {
         "name": "_getFactoryManager",
@@ -39,7 +43,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getHseManager": {
         "name": "_getHseManager",
@@ -53,7 +59,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getWorkArea": {
         "name": "_getWorkArea",
@@ -67,7 +75,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDocType": {
         "name": "_getDocType",
@@ -81,7 +91,9 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "108",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDocSubType": {
         "name": "_getDocSubType",
@@ -95,7 +107,9 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "109",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getInjuredStaffCat": {
         "name": "_getInjuredStaffCat",
@@ -109,7 +123,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getInjuredStaffDiscipline": {
         "name": "_getInjuredStaffDiscipline",
@@ -123,7 +139,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getLostUnit": {
         "name": "_getLostUnit",
@@ -137,7 +155,9 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_values": "176",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -151,7 +171,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -165,119 +187,137 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_mainAffectedPart()": {
-        "name": "_mainAffectedPart()",
-        "relationship": "getCheckedByField",
-        "control_name": "mainAffectedPart()",
+    "_mainAffectedPart": {
+        "name": "_mainAffectedPart",
+        "relationship": "belongsToMany",
+        "control_name": "mainAffectedPart",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "101",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_natureOfInjury()": {
-        "name": "_natureOfInjury()",
-        "relationship": "getCheckedByField",
-        "control_name": "natureOfInjury()",
+    "_natureOfInjury": {
+        "name": "_natureOfInjury",
+        "relationship": "belongsToMany",
+        "control_name": "natureOfInjury",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "102",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_treatmentInstruction()": {
-        "name": "_treatmentInstruction()",
-        "relationship": "getCheckedByField",
-        "control_name": "treatmentInstruction()",
+    "_treatmentInstruction": {
+        "name": "_treatmentInstruction",
+        "relationship": "belongsToMany",
+        "control_name": "treatmentInstruction",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "103",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_causeOfIssue()": {
-        "name": "_causeOfIssue()",
-        "relationship": "getCheckedByField",
-        "control_name": "causeOfIssue()",
+    "_causeOfIssue": {
+        "name": "_causeOfIssue",
+        "relationship": "belongsToMany",
+        "control_name": "causeOfIssue",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "104",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_activityLeadToIssue()": {
-        "name": "_activityLeadToIssue()",
-        "relationship": "getCheckedByField",
-        "control_name": "activityLeadToIssue()",
+    "_activityLeadToIssue": {
+        "name": "_activityLeadToIssue",
+        "relationship": "belongsToMany",
+        "control_name": "activityLeadToIssue",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "105",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_immediateCause()": {
-        "name": "_immediateCause()",
-        "relationship": "getCheckedByField",
-        "control_name": "immediateCause()",
+    "_immediateCause": {
+        "name": "_immediateCause",
+        "relationship": "belongsToMany",
+        "control_name": "immediateCause",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "106",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_issueRootCause()": {
-        "name": "_issueRootCause()",
-        "relationship": "getCheckedByField",
-        "control_name": "issueRootCause()",
+    "_issueRootCause": {
+        "name": "_issueRootCause",
+        "relationship": "belongsToMany",
+        "control_name": "issueRootCause",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "field_id",
         "filter_values": "107",
-        "radio_checkbox_colspan": "3"
+        "radio_checkbox_colspan": "3",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors1()",
-        "renderer_view_all": "agg_count",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors1",
+        "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "person",
+        "renderer_view_all_unit": "",
         "renderer_edit": "many_icons",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
@@ -291,7 +331,9 @@
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
@@ -305,7 +347,9 @@
         "control": "comment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
@@ -319,7 +363,9 @@
         "control": "comment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
@@ -333,7 +379,9 @@
         "control": "comment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_hse_incident_doc": {
         "name": "_attachment_hse_incident_doc",
@@ -347,7 +395,9 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_hse_witness": {
         "name": "_attachment_hse_witness",
@@ -361,7 +411,9 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
@@ -375,6 +427,8 @@
         "control": "attachment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }
