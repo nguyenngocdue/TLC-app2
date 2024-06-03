@@ -22,10 +22,8 @@ class Prod_routing_link extends ModelExtended
         "getProdSequences" => ['hasMany', Prod_sequence::class, 'prod_routing_link_id'],
         "getProdRoutings" => ['belongsToMany', Prod_routing::class, 'prod_routing_details', 'prod_routing_link_id', 'prod_routing_id'],
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
-    ];
 
-    public static $oracyParams = [
-        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
+        "getScreensShowMeOn" => ['belongsToMany', Term::class, "ym2m_prod_routing_link_term_show_me_on",],
     ];
 
     public function getStandardUom()
