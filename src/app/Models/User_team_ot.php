@@ -10,10 +10,8 @@ class User_team_ot extends ModelExtended
 
     public static $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
-    ];
 
-    public static $oracyParams = [
-        "getOtMembers()" => ["getCheckedByField", User::class],
+        "getOtMembers" => ["belongsToMany", User::class, 'ym2m_user_team_ot_user_ot_member'],
     ];
 
     public function getDefAssignee()

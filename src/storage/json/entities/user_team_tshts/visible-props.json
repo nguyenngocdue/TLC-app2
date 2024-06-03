@@ -35,9 +35,9 @@
         "new": "true",
         "active": "true"
     },
-    "_getTshtMembers()": {
-        "name": "_getTshtMembers()",
-        "column_name": "getTshtMembers()",
+    "_getTshtMembers": {
+        "name": "_getTshtMembers",
+        "column_name": "getTshtMembers",
         "new": "true",
         "active": "true"
     },

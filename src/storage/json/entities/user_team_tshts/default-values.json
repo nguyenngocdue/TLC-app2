@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -21,7 +22,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
@@ -33,7 +35,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_slug": {
         "name": "_slug",
@@ -45,7 +48,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_def_assignee": {
         "name": "_def_assignee",
@@ -57,7 +61,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -69,11 +74,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_getTshtMembers()": {
-        "name": "_getTshtMembers()",
-        "column_name": "getTshtMembers()",
+    "_getTshtMembers": {
+        "name": "_getTshtMembers",
+        "column_name": "getTshtMembers",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -81,7 +87,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_status": {
         "name": "_status",
@@ -93,7 +100,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -105,7 +113,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -117,7 +126,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -129,7 +139,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -141,6 +152,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }
