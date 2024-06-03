@@ -15,12 +15,10 @@ class Qaqc_insp_tmpl extends ModelExtended
     public static $eloquentParams = [
         "getSheets" => ["hasMany", Qaqc_insp_tmpl_sht::class, "qaqc_insp_tmpl_id"],
         "getQaqcInspChklsts" => ['hasMany', Qaqc_insp_chklst::class, 'qaqc_insp_tmpl_id'],
-    ];
 
-    public static $oracyParams = [
-        "getProdRoutingsOfInspTmpl()" => ["getCheckedByField", Prod_routing::class],
-        "getExternalInspectorsOfQaqcInspTmpl()" => ['getCheckedByField', User::class],
-        "getCouncilMembersOfQaqcInspTmpl()" => ['getCheckedByField', User::class],
+        "getProdRoutingsOfInspTmpl" => ["belongsToMany", Prod_routing::class, "ym2m_prod_routing_qaqc_insp_tmpl"],
+        "getExternalInspectorsOfQaqcInspTmpl" => ['belongsToMany', User::class, "ym2m_qaqc_insp_tmpl_user_ext_insp"],
+        "getCouncilMembersOfQaqcInspTmpl" => ['belongsToMany', User::class, "ym2m_qaqc_insp_tmpl_user_council_member"],
     ];
 
     public function getSheets()

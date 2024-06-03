@@ -109,12 +109,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getProdRoutingsOfInspTmpl()": {
-        "name": "_getProdRoutingsOfInspTmpl()",
-        "column_name": "getProdRoutingsOfInspTmpl()",
-        "column_type": "oracy_prop",
+    "_getProdRoutingsOfInspTmpl": {
+        "name": "_getProdRoutingsOfInspTmpl",
+        "column_name": "getProdRoutingsOfInspTmpl",
+        "column_type": "many_to_many",
         "label": "Prod Routings",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -134,7 +134,7 @@
     "_getSheets": {
         "name": "_getSheets",
         "column_name": "getSheets",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Template Pages",
         "control": "relationship_renderer",
         "align": "",
@@ -156,7 +156,7 @@
     "_getQaqcInspChklsts": {
         "name": "_getQaqcInspChklsts",
         "column_name": "getQaqcInspChklsts",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Checklists",
         "control": "relationship_renderer",
         "align": "",
@@ -175,12 +175,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getExternalInspectorsOfQaqcInspTmpl()": {
-        "name": "_getExternalInspectorsOfQaqcInspTmpl()",
-        "column_name": "getExternalInspectorsOfQaqcInspTmpl()",
-        "column_type": "oracy_prop",
+    "_getExternalInspectorsOfQaqcInspTmpl": {
+        "name": "_getExternalInspectorsOfQaqcInspTmpl",
+        "column_name": "getExternalInspectorsOfQaqcInspTmpl",
+        "column_type": "many_to_many",
         "label": "External Inspectors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -197,12 +197,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getCouncilMembersOfQaqcInspTmpl()": {
-        "name": "_getCouncilMembersOfQaqcInspTmpl()",
-        "column_name": "getCouncilMembersOfQaqcInspTmpl()",
-        "column_type": "oracy_prop",
+    "_getCouncilMembersOfQaqcInspTmpl": {
+        "name": "_getCouncilMembersOfQaqcInspTmpl",
+        "column_name": "getCouncilMembersOfQaqcInspTmpl",
+        "column_type": "many_to_many",
         "label": "Council Members Of Qaqc Insp Tmpl",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",

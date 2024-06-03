@@ -55,9 +55,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getProdRoutingsOfInspTmpl()": {
-        "name": "_getProdRoutingsOfInspTmpl()",
-        "column_name": "getProdRoutingsOfInspTmpl()",
+    "_getProdRoutingsOfInspTmpl": {
+        "name": "_getProdRoutingsOfInspTmpl",
+        "column_name": "getProdRoutingsOfInspTmpl",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
