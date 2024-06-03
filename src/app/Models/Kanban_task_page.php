@@ -14,10 +14,8 @@ class Kanban_task_page extends ModelExtended
     public static $eloquentParams = [
         "getParent" => ["belongsTo", Kanban_task_bucket::class, "kanban_bucket_id"],
         "getClusters" => ["hasMany", Kanban_task_cluster::class, "kanban_page_id"],
-    ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_kanban_task_page_user_monitor_1"],
     ];
 
     public function getParent()
