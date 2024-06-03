@@ -18,11 +18,9 @@ class Wir_description extends ModelExtended
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
 
         "getProdRoutingDetails" => ["hasMany", Prod_routing_detail::class, "wir_description_id"],
-    ];
-
-    public static $oracyParams = [
-        "getDefMonitors1()" => ["getCheckedByField", User::class],
-        "getProdRoutingsOfWirDescription()" => ["getCheckedByField", Prod_routing::class],
+        //Many to many
+        "getDefMonitors1" => ["belongsToMany", User::class, "ym2m_user_wir_description_def_monitor_1"],
+        "getProdRoutingsOfWirDescription" => ["belongsToMany", Prod_routing::class, "ym2m_prod_routing_wir_description"],
     ];
 
     public function getProdRoutingDetails()
