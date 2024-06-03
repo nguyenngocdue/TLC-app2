@@ -47,17 +47,17 @@
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true",
         "pending_approval": "true",
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "new": "true",
         "pending_approval": "true",
         "inspected": "true",
@@ -71,33 +71,33 @@
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_signature_qaqc_punchlist_qaqc_list()": {
-        "name": "_signature_qaqc_punchlist_qaqc_list()",
-        "column_name": "signature_qaqc_punchlist_qaqc_list()",
+    "_signature_qaqc_punchlist_qaqc_list": {
+        "name": "_signature_qaqc_punchlist_qaqc_list",
+        "column_name": "signature_qaqc_punchlist_qaqc_list",
         "new": "true",
         "pending_approval": "true",
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_signature_qaqc_punchlist_production_list()": {
-        "name": "_signature_qaqc_punchlist_production_list()",
-        "column_name": "signature_qaqc_punchlist_production_list()",
+    "_signature_qaqc_punchlist_production_list": {
+        "name": "_signature_qaqc_punchlist_production_list",
+        "column_name": "signature_qaqc_punchlist_production_list",
         "new": "true",
         "pending_approval": "true",
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_signature_qaqc_punchlist_project_list()": {
-        "name": "_signature_qaqc_punchlist_project_list()",
-        "column_name": "signature_qaqc_punchlist_project_list()",
+    "_signature_qaqc_punchlist_project_list": {
+        "name": "_signature_qaqc_punchlist_project_list",
+        "column_name": "signature_qaqc_punchlist_project_list",
         "new": "true",
         "pending_approval": "true",
         "inspected": "true",
         "not_applicable": "true"
     },
-    "_signature_qaqc_punchlist_factory_list()": {
-        "name": "_signature_qaqc_punchlist_factory_list()",
-        "column_name": "signature_qaqc_punchlist_factory_list()",
+    "_signature_qaqc_punchlist_factory_list": {
+        "name": "_signature_qaqc_punchlist_factory_list",
+        "column_name": "signature_qaqc_punchlist_factory_list",
         "new": "true",
         "pending_approval": "true",
         "inspected": "true",

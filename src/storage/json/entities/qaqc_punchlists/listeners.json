@@ -89,9 +89,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -119,9 +119,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_qaqc_list()": {
-        "name": "_signature_qaqc_punchlist_qaqc_list()",
-        "column_name": "signature_qaqc_punchlist_qaqc_list()",
+    "_signature_qaqc_punchlist_qaqc_list": {
+        "name": "_signature_qaqc_punchlist_qaqc_list",
+        "column_name": "signature_qaqc_punchlist_qaqc_list",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -134,9 +134,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_production_list()": {
-        "name": "_signature_qaqc_punchlist_production_list()",
-        "column_name": "signature_qaqc_punchlist_production_list()",
+    "_signature_qaqc_punchlist_production_list": {
+        "name": "_signature_qaqc_punchlist_production_list",
+        "column_name": "signature_qaqc_punchlist_production_list",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -149,9 +149,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_project_list()": {
-        "name": "_signature_qaqc_punchlist_project_list()",
-        "column_name": "signature_qaqc_punchlist_project_list()",
+    "_signature_qaqc_punchlist_project_list": {
+        "name": "_signature_qaqc_punchlist_project_list",
+        "column_name": "signature_qaqc_punchlist_project_list",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -164,9 +164,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_signature_qaqc_punchlist_factory_list()": {
-        "name": "_signature_qaqc_punchlist_factory_list()",
-        "column_name": "signature_qaqc_punchlist_factory_list()",
+    "_signature_qaqc_punchlist_factory_list": {
+        "name": "_signature_qaqc_punchlist_factory_list",
+        "column_name": "signature_qaqc_punchlist_factory_list",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
