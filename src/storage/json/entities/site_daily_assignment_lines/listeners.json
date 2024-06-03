@@ -59,9 +59,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getSiteTasks()": {
-        "name": "_getSiteTasks()",
-        "column_name": "getSiteTasks()",
+    "_getSiteTasks": {
+        "name": "_getSiteTasks",
+        "column_name": "getSiteTasks",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

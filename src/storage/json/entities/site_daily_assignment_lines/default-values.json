@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_site_daily_assignment_id": {
         "name": "_site_daily_assignment_id",
@@ -21,7 +22,60 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_employeeid": {
+        "name": "_employeeid",
+        "column_name": "employeeid",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getSiteTasks": {
+        "name": "_getSiteTasks",
+        "column_name": "getSiteTasks",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -33,7 +87,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_status": {
         "name": "_status",
@@ -45,7 +100,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -57,7 +113,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -69,7 +126,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -81,7 +139,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -93,6 +152,20 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }

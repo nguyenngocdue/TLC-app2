@@ -90,7 +90,7 @@ class SiteDailyAssignments extends ViewAllTypeMatrixParent
                 'value' => User::findFromCache($y->def_assignee)->name,
                 'cell_title' => $y->def_assignee,
             ],
-            'count' => count($y->getSiteMembers()),
+            'count' => count($y->getSiteMembers),
         ];
     }
 }
