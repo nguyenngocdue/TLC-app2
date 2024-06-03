@@ -44,9 +44,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getLodsOfTask()": {
-        "name": "_getLodsOfTask()",
-        "column_name": "getLodsOfTask()",
+    "_getLodsOfTask": {
+        "name": "_getLodsOfTask",
+        "column_name": "getLodsOfTask",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -59,9 +59,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getDisciplinesOfTask()": {
-        "name": "_getDisciplinesOfTask()",
-        "column_name": "getDisciplinesOfTask()",
+    "_getDisciplinesOfTask": {
+        "name": "_getDisciplinesOfTask",
+        "column_name": "getDisciplinesOfTask",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -74,9 +74,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getChildrenSubTasks()": {
-        "name": "_getChildrenSubTasks()",
-        "column_name": "getChildrenSubTasks()",
+    "_getChildrenSubTasks": {
+        "name": "_getChildrenSubTasks",
+        "column_name": "getChildrenSubTasks",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

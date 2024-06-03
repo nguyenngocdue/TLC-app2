@@ -24,19 +24,19 @@
         "column_name": "description",
         "new": "true"
     },
-    "_getLodsOfTask()": {
-        "name": "_getLodsOfTask()",
-        "column_name": "getLodsOfTask()",
+    "_getLodsOfTask": {
+        "name": "_getLodsOfTask",
+        "column_name": "getLodsOfTask",
         "new": "true"
     },
-    "_getDisciplinesOfTask()": {
-        "name": "_getDisciplinesOfTask()",
-        "column_name": "getDisciplinesOfTask()",
+    "_getDisciplinesOfTask": {
+        "name": "_getDisciplinesOfTask",
+        "column_name": "getDisciplinesOfTask",
         "new": "true"
     },
-    "_getChildrenSubTasks()": {
-        "name": "_getChildrenSubTasks()",
-        "column_name": "getChildrenSubTasks()",
+    "_getChildrenSubTasks": {
+        "name": "_getChildrenSubTasks",
+        "column_name": "getChildrenSubTasks",
         "new": "true"
     },
     "_owner_id": {

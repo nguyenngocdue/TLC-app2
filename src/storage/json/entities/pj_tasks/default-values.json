@@ -38,9 +38,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getLodsOfTask()": {
-        "name": "_getLodsOfTask()",
-        "column_name": "getLodsOfTask()",
+    "_getLodsOfTask": {
+        "name": "_getLodsOfTask",
+        "column_name": "getLodsOfTask",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -51,9 +51,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getDisciplinesOfTask()": {
-        "name": "_getDisciplinesOfTask()",
-        "column_name": "getDisciplinesOfTask()",
+    "_getDisciplinesOfTask": {
+        "name": "_getDisciplinesOfTask",
+        "column_name": "getDisciplinesOfTask",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -64,9 +64,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getChildrenSubTasks()": {
-        "name": "_getChildrenSubTasks()",
-        "column_name": "getChildrenSubTasks()",
+    "_getChildrenSubTasks": {
+        "name": "_getChildrenSubTasks",
+        "column_name": "getChildrenSubTasks",
         "label": "",
         "validation": "",
         "validation_regex": "",
