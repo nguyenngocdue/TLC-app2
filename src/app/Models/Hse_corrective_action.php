@@ -26,11 +26,13 @@ class Hse_corrective_action extends ModelExtended
         'getUnsafeActionType' => ['belongsTo', Term::class, 'unsafe_action_type_id'],
         "opened_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "closed_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_hse_corrective_action_user_monitor_1"],
     ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-    ];
+    // public static $oracyParams = [
+    //     "getMonitors1()" => ["getCheckedByField", User::class],
+    // ];
     public function opened_photos()
     {
         $p = static::$eloquentParams[__FUNCTION__];
