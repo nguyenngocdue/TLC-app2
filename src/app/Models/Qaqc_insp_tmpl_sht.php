@@ -17,11 +17,8 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         "getTmpl" => ["belongsTo", Qaqc_insp_tmpl::class, 'qaqc_insp_tmpl_id'],
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
-    ];
 
-    public static $oracyParams = [
-        // "getMonitors1()" => ["getCheckedByField", User::class],
-        "getDefExtInsp()" => ["getCheckedByField", User::class],
+        "getDefExtInsp" => ["belongsToMany", User::class, "ym2m_qaqc_insp_tmpl_sht_user_def_ext_insp_1"],
     ];
 
     public function getLines()
