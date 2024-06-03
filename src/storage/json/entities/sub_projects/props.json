@@ -156,7 +156,7 @@
     "_getProdOrders": {
         "name": "_getProdOrders",
         "column_name": "getProdOrders",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Prod Orders",
         "control": "relationship_renderer",
         "align": "",
@@ -219,12 +219,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getProdRoutingsOfSubProject()": {
-        "name": "_getProdRoutingsOfSubProject()",
-        "column_name": "getProdRoutingsOfSubProject()",
-        "column_type": "oracy_prop",
+    "_getProdRoutingsOfSubProject": {
+        "name": "_getProdRoutingsOfSubProject",
+        "column_name": "getProdRoutingsOfSubProject",
+        "column_type": "many_to_many",
         "label": "Available Routings",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -266,7 +266,7 @@
     "_attachment_subproject_homeowner_manual": {
         "name": "_attachment_subproject_homeowner_manual",
         "column_name": "attachment_subproject_homeowner_manual",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "HomeOwner Manual",
         "control": "attachment",
         "align": "",
@@ -288,7 +288,7 @@
     "_attachment_subproject_project_plans": {
         "name": "_attachment_subproject_project_plans",
         "column_name": "attachment_subproject_project_plans",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Project Plans",
         "control": "attachment",
         "align": "",
@@ -351,12 +351,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getProjectMembers()": {
-        "name": "_getProjectMembers()",
-        "column_name": "getProjectMembers()",
-        "column_type": "oracy_prop",
+    "_getProjectMembers": {
+        "name": "_getProjectMembers",
+        "column_name": "getProjectMembers",
+        "column_type": "many_to_many",
         "label": "Project Members",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -417,12 +417,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getProjectClientsOfSubProject()": {
-        "name": "_getProjectClientsOfSubProject()",
-        "column_name": "getProjectClientsOfSubProject()",
-        "column_type": "oracy_prop",
+    "_getProjectClientsOfSubProject": {
+        "name": "_getProjectClientsOfSubProject",
+        "column_name": "getProjectClientsOfSubProject",
+        "column_type": "many_to_many",
         "label": "Project Client (Person)",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -461,12 +461,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getExternalInspectorsOfSubProject()": {
-        "name": "_getExternalInspectorsOfSubProject()",
-        "column_name": "getExternalInspectorsOfSubProject()",
-        "column_type": "oracy_prop",
+    "_getExternalInspectorsOfSubProject": {
+        "name": "_getExternalInspectorsOfSubProject",
+        "column_name": "getExternalInspectorsOfSubProject",
+        "column_type": "many_to_many",
         "label": "External Inspectors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -505,12 +505,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getCouncilMembersOfSubProject()": {
-        "name": "_getCouncilMembersOfSubProject()",
-        "column_name": "getCouncilMembersOfSubProject()",
-        "column_type": "oracy_prop",
+    "_getCouncilMembersOfSubProject": {
+        "name": "_getCouncilMembersOfSubProject",
+        "column_name": "getCouncilMembersOfSubProject",
+        "column_type": "many_to_many",
         "label": "Council Members Of SubProject",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",

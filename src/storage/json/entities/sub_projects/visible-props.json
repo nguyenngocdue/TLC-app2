@@ -119,9 +119,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getProdRoutingsOfSubProject()": {
-        "name": "_getProdRoutingsOfSubProject()",
-        "column_name": "getProdRoutingsOfSubProject()",
+    "_getProdRoutingsOfSubProject": {
+        "name": "_getProdRoutingsOfSubProject",
+        "column_name": "getProdRoutingsOfSubProject",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -251,9 +251,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getProjectMembers()": {
-        "name": "_getProjectMembers()",
-        "column_name": "getProjectMembers()",
+    "_getProjectMembers": {
+        "name": "_getProjectMembers",
+        "column_name": "getProjectMembers",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -287,9 +287,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getProjectClientsOfSubProject()": {
-        "name": "_getProjectClientsOfSubProject()",
-        "column_name": "getProjectClientsOfSubProject()",
+    "_getProjectClientsOfSubProject": {
+        "name": "_getProjectClientsOfSubProject",
+        "column_name": "getProjectClientsOfSubProject",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -311,9 +311,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getExternalInspectorsOfSubProject()": {
-        "name": "_getExternalInspectorsOfSubProject()",
-        "column_name": "getExternalInspectorsOfSubProject()",
+    "_getExternalInspectorsOfSubProject": {
+        "name": "_getExternalInspectorsOfSubProject",
+        "column_name": "getExternalInspectorsOfSubProject",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
@@ -335,9 +335,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getCouncilMembersOfSubProject()": {
-        "name": "_getCouncilMembersOfSubProject()",
-        "column_name": "getCouncilMembersOfSubProject()",
+    "_getCouncilMembersOfSubProject": {
+        "name": "_getCouncilMembersOfSubProject",
+        "column_name": "getCouncilMembersOfSubProject",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",
