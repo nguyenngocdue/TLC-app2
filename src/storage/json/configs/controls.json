@@ -13,7 +13,8 @@
         "esg_master_sheets",
         "esg_inductions",
         "exam_sheets",
-        "qaqc_punchlists"
+        "qaqc_punchlists",
+        "pj_task_budgets"
     ],
     "apps_have_view_all_matrix_signature": [
         "qaqc_insp_chklst_shts"
@@ -41,8 +42,10 @@
         "attachment",
         "comment",
         "checkbox",
+        "checkbox_2a",
         "dropdown",
         "dropdown_multi",
+        "dropdown_multi_2a",
         "hyperlink",
         "id",
         "doc_id",
@@ -101,21 +104,21 @@
     "manage_prop_eloquents": [
         "belongsToMany",
         "hasMany",
-        "hasOne",
         "hasManyThrough",
-        "morphTo",
+        "hasOne",
         "morphMany",
         "morphOne",
+        "morphTo",
         "morphToMany"
     ],
     "view_all_eloquents": [
+        "belongsTo",
         "belongsToMany",
         "hasMany",
-        "hasOne",
         "hasManyThrough",
-        "morphTo",
+        "hasOne",
         "morphMany",
-        "belongsTo",
+        "morphTo",
         "morphToMany"
     ],
     "manage_prop_oracies": [

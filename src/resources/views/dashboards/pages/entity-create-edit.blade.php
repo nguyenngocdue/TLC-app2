@@ -6,9 +6,9 @@ $id = ($action === "edit") ? $values->id : "";
 $status = $status ?? $values->status ?? null;
 $ownerId = $values->owner_id ?? null;
 $allProps = $superProps['props'];
-$tmp = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps ,$status,$type,$hasStatusColumn,$ownerId);
-[$status, $statuses, $props, $actionButtons, $transitions, $buttonSave,$propsIntermediate] = $tmp;
-$propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues,$status,$type);
+$tmp = App\Utils\Support\WorkflowFields::resolveSuperProps($superProps, $status, $type, $hasStatusColumn, $ownerId);
+[$status, $statuses, $props, $actionButtons, $transitions, $buttonSave, $propsIntermediate] = $tmp;
+$propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values, $defaultValues, $status, $type);
 $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 
 $formWidth = "md:w-3/4";

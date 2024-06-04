@@ -33,7 +33,9 @@ trait TraitViewAllTableController
         // $searchableArray = App::make($this->typeModel)->toSearchableArray();
         $app = LibApps::getFor($this->type);
         $tableTrueWidth = !($app['hidden'] ?? false);
-        if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
+
+        //Beta to show true width
+        // if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => $trashed ? '(Trash)' : '',

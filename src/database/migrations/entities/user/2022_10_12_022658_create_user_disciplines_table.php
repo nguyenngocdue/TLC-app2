@@ -15,9 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(function ($table, $callback) {
-            return new BlueprintExtended($table, $callback);
-        });
+        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('user_disciplines', function (BlueprintExtended $table) {
             $table->id();
@@ -25,6 +23,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('def_assignee')->nullable();
             $table->string('slug')->unique();
+            $table->boolean('show_in_task_budget')->nullable();
             $table->appendCommonFields();
         });
     }

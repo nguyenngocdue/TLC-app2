@@ -18,6 +18,7 @@ class ManageAppsController extends AbstractManageLibController
             [
                 "dataIndex" => "action",
                 "align" => "center",
+                'width' => 40,
             ],
             [
                 'dataIndex' => "name",
@@ -32,7 +33,7 @@ class ManageAppsController extends AbstractManageLibController
                 "cbbDataSource" => ['', 'application', 'manage_admin',],
                 // "sortBy" => "value",
                 // "properties" => ["strFn" => "appTitle"],
-                'width' => 100,
+                'width' => 180,
             ],
             [
                 'dataIndex' => "package",
@@ -41,7 +42,7 @@ class ManageAppsController extends AbstractManageLibController
                 "cbbDataSource" => $packages,
                 // "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
-                'width' => 100,
+                'width' => 220,
             ],
             [
                 'dataIndex' => "sub_package",
@@ -50,15 +51,84 @@ class ManageAppsController extends AbstractManageLibController
                 "cbbDataSource" => $subPackages,
                 "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
+                'width' => 220,
             ],
             [
                 'dataIndex' => 'title',
                 'renderer' => 'text4',
                 'editable' => true,
-                'width' => 200,
+                'width' => 300,
             ],
             [
                 'dataIndex' => 'nickname',
+                'renderer' => 'text4',
+                'editable' => true,
+                'width' => 70,
+            ],
+            [
+                'dataIndex' => 'do_not_send_notification_mails',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 30,
+            ],
+            [
+                'dataIndex' => 'apply_approval_tree',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 30,
+            ],
+            // [
+            //     'dataIndex' => 'view_all_absolute_table_width',
+            //     'renderer' => 'checkbox',
+            //     'editable' => true,
+            //     'align' => 'center',
+            // ],
+            [
+                'dataIndex' => "hidden",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'title' => "Hidden For non-admin Users",
+                'width' => 30,
+            ],
+            [
+                'dataIndex' => "hidden_navbar",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'title' => "Hidden In Navbar Menu",
+                'width' => 30,
+            ],
+            [
+                'dataIndex' => "disallowed_direct_creation",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'width' => 30,
+            ],
+            [
+                'dataIndex' => "show_in_my_view",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'width' => 30,
+            ],
+            [
+                'dataIndex' => "show_in_monitored_by_me",
+                "renderer"  => 'checkbox',
+                'align' => 'center',
+                'editable' => true,
+                'width' => 30,
+            ],
+            [
+                'dataIndex' => 'tutorial_link',
+                'renderer' => 'text4',
+                'editable' => true,
+            ],
+            [
+                'dataIndex' => 'icon',
                 'renderer' => 'text4',
                 'editable' => true,
             ],
@@ -72,6 +142,7 @@ class ManageAppsController extends AbstractManageLibController
                 'renderer' => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => ['', 'dev', 'beta'],
+                'width' => 90,
             ],
             [
                 'dataIndex' => 'edit_renderer',
@@ -98,68 +169,6 @@ class ManageAppsController extends AbstractManageLibController
                     'qr-app-renderer',
                 ],
             ],
-
-            [
-                'dataIndex' => 'do_not_send_notification_mails',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
-            [
-                'dataIndex' => 'apply_approval_tree',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
-            // [
-            //     'dataIndex' => 'view_all_absolute_table_width',
-            //     'renderer' => 'checkbox',
-            //     'editable' => true,
-            //     'align' => 'center',
-            // ],
-            [
-                'dataIndex' => "hidden",
-                "renderer"  => 'checkbox',
-                'align' => 'center',
-                'editable' => true,
-                'title' => "Hidden For non-admin Users",
-            ],
-            [
-                'dataIndex' => "hidden_navbar",
-                "renderer"  => 'checkbox',
-                'align' => 'center',
-                'editable' => true,
-                'title' => "Hidden In Navbar Menu",
-            ],
-            [
-                'dataIndex' => "disallowed_direct_creation",
-                "renderer"  => 'checkbox',
-                'align' => 'center',
-                'editable' => true,
-            ],
-            [
-                'dataIndex' => "show_in_my_view",
-                "renderer"  => 'checkbox',
-                'align' => 'center',
-                'editable' => true,
-            ],
-            [
-                'dataIndex' => "show_in_monitored_by_me",
-                "renderer"  => 'checkbox',
-                'align' => 'center',
-                'editable' => true,
-            ],
-            [
-                'dataIndex' => 'tutorial_link',
-                'renderer' => 'text4',
-                'editable' => true,
-            ],
-            [
-                'dataIndex' => 'icon',
-                'renderer' => 'text4',
-                'editable' => true,
-            ],
-
         ];
     }
 }

@@ -4,12 +4,23 @@
 @section('title', $title)
 
 @section('content')
-<div class="px-4">
+<div class="px-4 pt-4 bg-body">
     <x-elapse title="Bootraping: "/>
     <form action="{{$route}}" method="post">
         @csrf
         <button class="hidden" title="This button is to avoid a bug when change label and press enter."></button>
-        <x-renderer.table showNo=true groupBy="{{$groupBy}}" groupByLength="{{$groupByLength}}" :columns="$columns" :dataSource="$dataSource"></x-renderer.table>
+        <x-renderer.table 
+            showNo=1
+            groupBy="{{$groupBy}}" 
+            groupByLength="{{$groupByLength}}" 
+            :columns="$columns" 
+            :dataSource="$dataSource"
+
+            tableTrueWidth=1 
+            rotate45Width="200"
+            rotate45Height="150"
+            ></x-renderer.table>
+
         <x-renderer.button type="primary" htmlType='submit'>Update</x-renderer.button>
     </form>
     <br />

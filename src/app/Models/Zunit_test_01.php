@@ -36,12 +36,26 @@ class Zunit_test_01 extends ModelExtended
     public static $eloquentParams = [
         "workplaceDropDown1" => ['belongsTo', Workplace::class, 'dropdown1'],
         "workplaceRadio1" => ['belongsTo', Workplace::class, 'radio1'],
+
+        "workplaceDropdownMulti2a" => ['belongsToMany', Workplace::class, 'ym2m_workplace_zunit_test_01_dropdown_multi'],
+        "workplaceCheckbox2a" => ['belongsToMany', Workplace::class, 'ym2m_workplace_zunit_test_01_checkbox'],
     ];
 
     public static $oracyParams = [
         "checkboxZut1()" => ["getCheckedByField", Workplace::class],
         "dropdownMultiZut1()" => ["getCheckedByField", Workplace::class],
     ];
+
+    public function workplaceDropdownMulti2a()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function workplaceCheckbox2a()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getManyLineParams()
     {

@@ -2,56 +2,89 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true"
-    },
-    "_workplace_id": {
-        "name": "_workplace_id",
-        "column_name": "workplace_id",
-        "new": "true"
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
     },
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",
-        "new": "true"
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
     },
     "_remark": {
         "name": "_remark",
         "column_name": "remark",
-        "new": "true"
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "true"
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "new": "true"
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "new": "true"
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "new": "true"
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "new": "true"
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
     },
     "_getHrLeaveLines": {
         "name": "_getHrLeaveLines",
         "column_name": "getHrLeaveLines",
-        "new": "true"
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
     }
 }

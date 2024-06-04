@@ -15,9 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(function ($table, $callback) {
-            return new BlueprintExtended($table, $callback);
-        });
+        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('diginet_business_trip_lines', function (BlueprintExtended $table) {
 

@@ -4,7 +4,7 @@
 @section('title', $title)
 
 @section('content')
-<div class="px-4">
+<div class="px-4 bg-body">
     <x-navigation.pill />
     <div class="grid grid-cols-2 gap-5">
         <form action="{{$route}}" method="POST">

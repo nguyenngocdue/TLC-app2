@@ -67,15 +67,21 @@ class ViewAllTypeTreeExplorer extends Component
                 ->where('resigned', false)
                 ->where('time_keeping_type', 2);
         };
+
         $disciplines = User_discipline::query()
             ->with(["getDefAssignee" => function ($query) {
                 $query->with(["getUserDepartment" => function ($query) {
                     $query->with("getHOD");
                 }]);
             }])
+
             ->whereHas("getUsers", $getUserFn)
+            // ->where('show_in_task_budget', true)
+
             ->with(["getUsers" => $getUserFn])
             ->get();
+
+        // dump(count($disciplines));
 
         $departments = [];
         $departmentIds = [];

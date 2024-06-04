@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Helpers\Helper;
 use App\Utils\Constant;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Json\SuperProps;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 trait TraitEntityAdvancedFilter
 {
@@ -77,6 +77,11 @@ trait TraitEntityAdvancedFilter
                     case 'checkbox':
                     case 'dropdown_multi':
                         $result['dropdown_multi'][$key] = $value;
+                        break;
+                    case 'checkbox_2a':
+                    case 'dropdown_multi_2a':
+                        $result['dropdown_multi_2a'][$key] = $value;
+                        // dump($result['dropdown_multi_2a']);
                         break;
                     case 'picker_time':
                         $result['picker_time'][$key] = $value;
@@ -195,12 +200,18 @@ trait TraitEntityAdvancedFilter
                     case 'status':
                     case 'parent_type':
                         array_walk($value, function ($value, $key) use ($q) {
-                            if (!is_array($value)) {
-                                $value = [$value];
-                            }
+                            if (!is_array($value)) $value = [$value];
                             if (!in_array(null, $value)) {
                                 $q->whereIn($key, $value);
                             }
+                        });
+                        break;
+                        // case 'checkbox_2a':
+                    case 'dropdown_multi_2a':
+                        array_walk($value, function ($value, $key) use ($q) {
+                            $q->whereHas($key, function ($query) use ($value) {
+                                $query->whereIn('workplaces.id', $value);
+                            });
                         });
                         break;
                     case 'dropdown_multi':

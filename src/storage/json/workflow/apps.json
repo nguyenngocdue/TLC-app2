@@ -1735,6 +1735,37 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "pj_task_budget": {
+        "name": "pj_task_budget",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "project_management",
+        "title": "Task Budgets",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null
+    },
+    "pj_task_budget_line": {
+        "name": "pj_task_budget_line",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "project_management",
+        "title": "Task Budget Lines",
+        "nickname": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "tutorial_link": null,
+        "icon": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
+    },
     "pj_task_phase": {
         "name": "pj_task_phase",
         "package_tab": "application",

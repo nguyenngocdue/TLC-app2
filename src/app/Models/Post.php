@@ -11,6 +11,6 @@ class Post extends ModelExtended
     public static $eloquentParams = [
         "post_attachments" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "post_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "post_likes" => ['belongsToMany', Like::class, 'likes', 'post_id', 'user_id'],
+        // "post_likes" => ['belongsToMany', Like::class, 'likes', 'post_id', 'user_id'],
     ];
 }

@@ -1,0 +1,37 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": "true"
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": "true"
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    }
+}

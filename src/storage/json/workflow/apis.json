@@ -313,20 +313,6 @@
     "loggers": {
         "name": "loggers"
     },
-    "pj_job_lines": {
-        "name": "pj_job_lines",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "pj_job_phases": {
-        "name": "pj_job_phases"
-    },
-    "pj_job_sub_lines": {
-        "name": "pj_job_sub_lines",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "pj_jobs": {
-        "name": "pj_jobs"
-    },
     "pj_modules": {
         "name": "pj_modules"
     },
@@ -341,6 +327,17 @@
     },
     "pj_sub_tasks": {
         "name": "pj_sub_tasks"
+    },
+    "pj_task_budget_lines": {
+        "name": "pj_task_budget_lines",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "pj_task_budgets": {
+        "name": "pj_task_budgets",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "pj_task_phases": {
+        "name": "pj_task_phases"
     },
     "pj_tasks": {
         "name": "pj_tasks"

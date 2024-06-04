@@ -17,6 +17,8 @@ trait TableTraitColumns
             if (isset($column['width']) && $column['width'] != '') {
                 $w = $column['width'];
                 $result += $w;
+            } else {
+                $result += 100;
             }
         }
         return "width:" . $result . "px;";

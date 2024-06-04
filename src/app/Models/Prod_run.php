@@ -19,18 +19,18 @@ class Prod_run extends ModelExtended
 
     public static $eloquentParams = [
         "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
-        "getUsers" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
+        "getUsers" => ['belongsToMany', User::class, 'prod_user_runs'], //, 'prod_run_id', 'user_id'],
     ];
 
     public static $oracyParams = [
         'getWorkersOfRun()' => ['getCheckedByField', User::class,],
-        'getItemsOfProdOutput()' => ['getCheckedByField', Prod_ppr_item::class,],
+        // 'getItemsOfProdOutput()' => ['getCheckedByField', Prod_ppr_item::class,],
     ];
 
     public function getUsers()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4])->withPivot('user_id');
+        return $this->{$p[0]}($p[1], $p[2]); //, $p[3], $p[4]); //->withPivot('user_id');
     }
 
     public function getProdSequence()
@@ -45,11 +45,11 @@ class Prod_run extends ModelExtended
         return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 
-    public function getItemsOfProdOutput()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
+    // public function getItemsOfProdOutput()
+    // {
+    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
+    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
+    // }
 
     // private function isNZ($parentItem)
     // {

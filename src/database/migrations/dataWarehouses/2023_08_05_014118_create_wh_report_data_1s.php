@@ -15,9 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(function ($table, $callback) {
-            return new BlueprintExtended($table, $callback);
-        });
+        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('wh_report_data_1s', function (BlueprintExtended $table) {
             $table->id();
@@ -27,8 +25,6 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_routing_id');
             $table->integer('quantity');
             $table->float('progress');
-            
-
         });
     }
 

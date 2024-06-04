@@ -12,7 +12,7 @@ class HandleFieldsAttachment
         $extension = $attachment['extension'] ?? "";
         $attachmentFolder = $attachment['url_folder'] ?? '';
 
-        $isProd = str_starts_with($attachmentFolder, 'app2_prod') || str_starts_with($attachmentFolder, 'avatars');
+        $isProd = str_starts_with($attachmentFolder, 'app1_prod') || str_starts_with($attachmentFolder, 'app2_prod') || str_starts_with($attachmentFolder, 'avatars');
         $isTesting = str_starts_with($attachmentFolder, 'app2_beta');
         $isDev = !($isProd || $isTesting);
 
