@@ -23,6 +23,7 @@ class Zunit_test_06 extends ModelExtended
         "signature_eco_peers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_peer_list',],
         "signature_eco_managers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_manager_list',],
 
+        "getMonitors1" => ["belongsToMany", User::class, 'ym2m_user_zunit_test_06_monitor_1',],
     ];
 
     public function attachment_1()
@@ -96,6 +97,11 @@ class Zunit_test_06 extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_eco_managers_list()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getMonitors1()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

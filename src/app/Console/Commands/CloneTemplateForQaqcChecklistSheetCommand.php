@@ -86,14 +86,16 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
                 'assignee_2' => $default_assignee_2,
             ]);
 
-            $defaultMonitors = explode(",", $default_getMonitors1);
+            $defaultMonitors = $default_getMonitors1 ? explode(",", $default_getMonitors1) : [];
             $defaultMonitors = array_map(fn ($i) => $i * 1, $defaultMonitors);
             // Log::info($defaultMonitors);
-            $newSheet->syncCheck("getMonitors1", "App\Models\User", $defaultMonitors);
+            // $newSheet->syncCheck("getMonitors1", "App\Models\User", $defaultMonitors);
+            $newSheet->getMonitors1()->sync($defaultMonitors);
 
-            $thirdPartyList = $inspTmplSht->getDefExtInsp()->pluck('id')->toArray();
+            $thirdPartyList = $inspTmplSht->getDefExtInsp->pluck('id')->toArray();
             // Log::info($thirdPartyList);
-            $newSheet->syncCheck("signature_qaqc_chklst_3rd_party_list", "App\Models\User", $thirdPartyList);
+            // $newSheet->syncCheck("signature_qaqc_chklst_3rd_party_list", "App\Models\User", $thirdPartyList);
+            $newSheet->signature_qaqc_chklst_3rd_party_list()->sync($thirdPartyList);
 
             $lines = $inspTmplSht->getLines;
             foreach ($lines as $qaqcInspTmplLine) {

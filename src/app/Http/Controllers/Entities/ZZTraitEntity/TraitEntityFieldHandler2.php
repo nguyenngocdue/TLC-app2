@@ -6,7 +6,6 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use Illuminate\Http\Request;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -176,37 +175,37 @@ trait TraitEntityFieldHandler2
         }
     }
 
-    private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)
-    {
-        // Log::info($this->type);
-        $propNames = [];
-        foreach ($oracyProps as $prop) {
-            $propName = substr($prop, 1); //Remove first "_"
-            $propNames[] = $propName;
-        }
-        // Log::info("PropNames to be modify m2m: " . join(", ", $propNames));
+    // private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)
+    // {
+    //     // Log::info($this->type);
+    //     $propNames = [];
+    //     foreach ($oracyProps as $prop) {
+    //         $propName = substr($prop, 1); //Remove first "_"
+    //         $propNames[] = $propName;
+    //     }
+    //     // Log::info("PropNames to be modify m2m: " . join(", ", $propNames));
 
-        if (!is_null($getManyLineParams)) {
-            // Log::info("Filter oracy props according to getManyLineParams");
-            // Log::info($oracyProps);
-            // Log::info($getManyLineParams);
-            $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
-            // Log::info($getManyLineParamsDataIndex);
-            $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
-        }
-        // Log::info("PropNames to be updated: " . join(", ", $propNames));
+    //     if (!is_null($getManyLineParams)) {
+    //         // Log::info("Filter oracy props according to getManyLineParams");
+    //         // Log::info($oracyProps);
+    //         // Log::info($getManyLineParams);
+    //         $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
+    //         // Log::info($getManyLineParamsDataIndex);
+    //         $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
+    //     }
+    //     // Log::info("PropNames to be updated: " . join(", ", $propNames));
 
-        foreach ($propNames as $propName) {
-            $relatedModel = $this->superProps['props']['_' . $propName]['relationships']['oracyParams'][1];
-            $ids = $request->input($propName);
-            if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
-            $ids = array_map(fn ($id) => $id * 1, $ids);
+    //     foreach ($propNames as $propName) {
+    //         $relatedModel = $this->superProps['props']['_' . $propName]['relationships']['oracyParams'][1];
+    //         $ids = $request->input($propName);
+    //         if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
+    //         $ids = array_map(fn ($id) => $id * 1, $ids);
 
-            $fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
-            $theRow->syncCheck($fieldName, $relatedModel, $ids);
-            $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
-        }
-    }
+    //         $fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
+    //         $theRow->syncCheck($fieldName, $relatedModel, $ids);
+    //         $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
+    //     }
+    // }
 
     private function removeAttachmentForFields(&$fields, $keyRemoves, $isFakeRequest, $allTable01Names)
     {

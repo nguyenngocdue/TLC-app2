@@ -32,7 +32,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     private function getDataSource()
     {
         $cu = CurrentUser::get();
-        $this->subProjects = $cu->{$this->getSubProjectsOfUserFn}();
+        $this->subProjects = $cu->{$this->getSubProjectsOfUserFn};
         if (!$this->subProjects->contains('id', $this->STW_SANDBOX_ID)) {
             $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
         }
@@ -89,7 +89,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     {
         $cu = CurrentUser::get();
         $prodRoutings = $cu
-            ->{$this->getProdRoutingsOfUserFn}
+            ->{$this->getProdRoutingsOfUserFn}()
             ->with("getSubProjects")
             ->get();
         // Oracy::attach('getSubProjects()', $prodRoutings);
@@ -112,7 +112,9 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
                 $subProjectId = $matrix['sub_project_id'];
                 $sheets = Qaqc_insp_chklst_sht::query()
                     ->whereHas('getChklst', function ($query) use ($routingId, $subProjectId) {
-                        $query->where('prod_routing_id', $routingId)->where('sub_project_id', $subProjectId);
+                        $query
+                            ->where('prod_routing_id', $routingId)
+                            ->where('sub_project_id', $subProjectId);
                     })
                     ->with($this->nominatedFn)
                     ->get();

@@ -102,7 +102,7 @@ trait TraitEntityListenDataSource
 
         foreach ($sp['props'] as $prop) {
             if ($prop['hidden_edit']) continue;
-            if (in_array($prop['control'], ['radio', 'checkbox', 'dropdown', 'dropdown_multi'])) {
+            if (in_array($prop['control'], ['radio', 'checkbox', 'dropdown', 'dropdown_multi', 'checkbox_2a', 'dropdown_multi_2a'])) {
                 if (isset($prop['relationships']['table'])) {
                     $table = $prop['relationships']['table'];
                     $toBeLoaded[] = $table;

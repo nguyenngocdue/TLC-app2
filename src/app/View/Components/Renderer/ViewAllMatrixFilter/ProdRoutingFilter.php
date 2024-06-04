@@ -2,11 +2,9 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Prod_routing;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -40,10 +38,16 @@ class ProdRoutingFilter extends Component
     private function getDataSource()
     {
         if ($this->dataSource) return $this->dataSource;
+        // $QAQC_WIR = 346;
         $db = Prod_routing::select('id', 'name', 'description')
             ->with('getSubProjects')
+            // ->whereHas("getScreensShowMeOn", fn ($query) => $query->where("term_id", $QAQC_WIR))
             ->orderBy('name')
             ->get();
+
+        foreach ($db as &$item) {
+            $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+        }
         // Oracy::attach("getSubProjects()", $db);
 
         // if (CurrentUser::isAdmin()) {

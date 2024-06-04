@@ -113,7 +113,7 @@
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
         "column_type": "many_to_many",
-        "label": "Monitors",
+        "label": "Sign-Off Admins",
         "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",

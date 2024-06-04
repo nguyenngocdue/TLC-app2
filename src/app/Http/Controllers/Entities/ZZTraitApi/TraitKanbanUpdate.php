@@ -68,12 +68,12 @@ trait TraitKanbanUpdate
     {
         $input = $request->input();
         ['id' => $id, 'groupWidth' => $groupWidth] = $input;
-        $props = $this->getProps1();
-
         $item = $this->modelPath::find($id);
+        $props = $this->getProps1($item);
+
         $table = $this->modelPath::getTableName();
         $item->update($input);
-        $this->handleCheckboxAndDropdownMulti($request, $item, $props['oracy_prop']);
+        $this->handleCheckboxAndDropdownMulti2a($request, $item, $props['many_to_many']);
         $this->handleAttachments($request, $props['attachment'], $id);
         // Log::info($request->input());
 

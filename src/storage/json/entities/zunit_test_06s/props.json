@@ -307,6 +307,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "many_to_many",
+        "label": "Sign-Off Admins",
+        "control": "dropdown_multi_2a",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_signature_eco_peers_list": {
         "name": "_signature_eco_peers_list",
         "column_name": "signature_eco_peers_list",

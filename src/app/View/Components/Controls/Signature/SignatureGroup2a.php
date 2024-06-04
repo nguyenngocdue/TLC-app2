@@ -27,7 +27,7 @@ class SignatureGroup2a extends Component
     ) {
         if (is_null($signOffOracy)) $this->signOffOracy = $category . "_list";
         // dump($this->signOffOracy);
-        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}()->pluck('users.id');
+        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}->pluck('id');
         // dump($this->signOffAdminIds);
         // dump($category);
         // dump($item);
@@ -54,7 +54,7 @@ class SignatureGroup2a extends Component
         if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light' title='Category: $this->category'>Please create this document before signing off.</i>";
         $cuid = CurrentUser::id();
 
-        $nominatedList = $this->item->{$this->signOffOracy}();
+        $nominatedList = $this->item->{$this->signOffOracy};
         // dump($nominatedList);
         $signatureList = $this->item->{$this->category}()->with('getUser')->get();
         // dump($signatureList);

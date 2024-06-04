@@ -45,10 +45,14 @@ trait TraitStoreEmpty
 
 	private function insertManyToMany($item, $createdItem, $sp)
 	{
-		Log::info($item);
-		Log::info($createdItem);
-		Log::info($sp);
-		$createdItem->getMonitors1()->attach([1, 2], ['owner_id' => 1]);
+		foreach ($sp['props'] as $prop) {
+			if ($prop['column_type'] == 'many_to_many') {
+				$propName = $prop['column_name'];
+				if (isset($item[$propName])) {
+					$createdItem->{$propName}()->attach($item[$propName], ['owner_id' => CurrentUser::id()]);
+				}
+			}
+		}
 	}
 
 	public function tso_week_validate($lines)

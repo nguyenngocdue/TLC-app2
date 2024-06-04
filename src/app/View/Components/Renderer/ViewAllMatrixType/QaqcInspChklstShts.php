@@ -153,6 +153,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     ...$columns,
                     [
                         'dataIndex' => 'final_punchlist',
+                        'width' => 40,
                         'discipline_description' => $qaqc_discipline->description,
                         'discipline_css_class' => $qaqc_discipline->css_class,
                     ],
