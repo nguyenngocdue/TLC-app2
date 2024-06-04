@@ -20,8 +20,8 @@ class Zunit_test_06 extends ModelExtended
         "signature_eco_peers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         "signature_eco_managers" => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
 
-        "signature_eco_peers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_peer',],
-        "signature_eco_managers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_manager',],
+        "signature_eco_peers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_peer_list',],
+        "signature_eco_managers_list" => ['belongsToMany', User::class, 'ym2m_user_zunit_test_06_manager_list',],
 
     ];
 

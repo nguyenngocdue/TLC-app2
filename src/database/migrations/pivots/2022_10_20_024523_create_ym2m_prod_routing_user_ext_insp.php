@@ -6,9 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 return new class extends Migration
 {
     use TraitCreatePivotTable;
-    private $table1Plural = 'eco_sheets';
+    private $table1Plural = 'prod_routings';
     private $table2Plural = 'users';
-    private $relationshipKey = 'peer';
+    private $relationshipKey = 'ext_insp';
 
     public function up()
     {
