@@ -88,7 +88,7 @@ class WelcomeFortuneController extends Controller
 
         // $reversed =  []; ///*139,152,153,*/156, 161, 164, 186, 195, 203, 205, 206, 219, 220, 228, 230];
         $lines = DB::table("many_to_many")
-            ->where('field_id', '>', 31)
+            ->where('field_id', '>=', 31)
             ->whereNotIn('field_id', [138, 147, 175])
             ->get();
         // -> reversed
@@ -136,7 +136,7 @@ class WelcomeFortuneController extends Controller
             // break;
         }
 
-
+        dump("Migrated $count lines.");
         return view("welcome-fortune", []);
     }
 }
