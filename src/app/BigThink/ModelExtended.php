@@ -47,17 +47,7 @@ abstract class ModelExtended extends Model
         parent::__construct($attributes);
         static::$eloquentParams['getOwner'] =  ["belongsTo", User::class, "owner_id"];
         static::$eloquentParams['getDeletedBy'] =  ["belongsTo", User::class, "deleted_by"];
-
-        // static::$oracyParams["getMonitors1()"] = ["getCheckedByField", User::class];
     }
-
-    // public function getMonitors1()
-    // {
-    //     dump("getMonitors1() is not implemented");
-    //     return collect([]);
-    //     // $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     // return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
 
     function getOwner()
     {
@@ -97,10 +87,10 @@ abstract class ModelExtended extends Model
         if (isset($statuses[$this->status])) {
             $status = $statuses[$this->status];
             $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
-            $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
+            $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1";
             if (strlen($monitors_1_to_9) > 0) {
                 $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
-                if (method_exists($this, $fn)) $result = $this->$fn()->pluck('id')->toArray();
+                if (method_exists($this, $fn)) $result = $this->$fn->pluck('id')->toArray();
             }
         }
         return $result;

@@ -21,7 +21,7 @@ class BallInCourts extends JsonGetSet
                 $item['ball-in-court-assignee'] = 'owner_id';
             }
             if (!isset($item['ball-in-court-monitors'])) {
-                $item['ball-in-court-monitors'] = 'getMonitors1()';
+                $item['ball-in-court-monitors'] = 'getMonitors1';
             }
         }
         // dump($dataSource);

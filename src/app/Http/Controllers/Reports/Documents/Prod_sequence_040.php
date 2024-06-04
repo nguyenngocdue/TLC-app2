@@ -42,13 +42,13 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
 
     public function getSqlStr($params)
     {
-    
+
         $valOfParams = $this->generateValuesFromParamsReport($params);
-        
+
         $prodRoutingLinks = Prod_routing_link::all();
         $indexProdRoutingLinks = [];
-        foreach($prodRoutingLinks as $items){
-            if($items->getScreensShowMeOn()->toArray())$indexProdRoutingLinks[$items->id] = $items->name;
+        foreach ($prodRoutingLinks as $items) {
+            if ($items->getScreensShowMeOn->toArray()) $indexProdRoutingLinks[$items->id] = $items->name;
         }
         $idRoutingLinks = array_keys($indexProdRoutingLinks);
         $strIdRoutingLinks = implode(', ', $idRoutingLinks);
@@ -86,14 +86,14 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
                             #AND prl.id IN (11)
                             AND pose.deleted_by IS NULL
                             AND prl.id IN ($strIdRoutingLinks)";
-    if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id IN ({{sub_project_id}})";
-    if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id IN ({{prod_routing_id}})";
-    if (isset($valOfParams['prod_discipline_id']) && $valOfParams['prod_discipline_id']) $sql .= "\n AND pd.id IN ({{prod_discipline_id}})";
-    if (isset($valOfParams['prod_routing_link_id']) && $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ({{prod_routing_link_id}})";
+        if (isset($valOfParams['sub_project_id'])) $sql .= "\n AND po.sub_project_id IN ({{sub_project_id}})";
+        if (isset($valOfParams['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id IN ({{prod_routing_id}})";
+        if (isset($valOfParams['prod_discipline_id']) && $valOfParams['prod_discipline_id']) $sql .= "\n AND pd.id IN ({{prod_discipline_id}})";
+        if (isset($valOfParams['prod_routing_link_id']) && $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ({{prod_routing_link_id}})";
 
-                    $sql .= "\n GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id
+        $sql .= "\n GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id
                     ORDER BY project_name, sub_project_name, prod_discipline_name, order_no";
-            return $sql;
+        return $sql;
     }
 
 
@@ -104,7 +104,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
         return $params;
     }
 
-   
+
     protected function getParamColumns($dataSource, $modeType)
     {
         return [
@@ -132,7 +132,7 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
                 'hasListenTo' => true,
                 'multiple' => true,
             ],
-            
+
 
         ];
     }
@@ -142,63 +142,62 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
 
         $optionLayout = $params['optionPrintLayout'] ?? $this->optionPrint;
         return  [
-                [
-                    "title" => "Project",
-                    "dataIndex" => "project_name",
-                    "align" => "left",
-                    "width" =>  $optionLayout === 'portrait' ? 110: 80,
-                ],
-                [
-                    "title" => "Sub Project",
-                    "dataIndex" => "sub_project_name",
-                    "align" => "left",
-                    "width" =>  $optionLayout === 'portrait' ? 110: 80,
-                ],
-                [
-                    "title" => "Production Routing",
-                    "dataIndex" => "prod_routing_name",
-                    "align" => "left",
-                    "width" => $optionLayout === 'portrait' ? 180: 222,
-                ],
-                [
-                    "title" => "Production Discipline",
-                    "dataIndex" => "prod_discipline_name",
-                    "align" => "left",
-                    "width" => $optionLayout === 'portrait' ? 150: 190,
-                    "hasListenTo" => true,
-                ],
-                [
-                    "title" => "Production Routing Link",
-                    "dataIndex" => "prod_routing_link_name",
-                    "align" => "left",
-                    "width" => $optionLayout === 'portrait' ? 200: 270,
-                ],
-                [
-                    "title" => "m'p <br/> (AVG)",
-                    "dataIndex" => "avg_worker_number",
-                    "align" => "right",
-                    "width" => $optionLayout === 'portrait' ? 100: 110,
-                ],
-                [
-                    "title" => "Total UoM <br/> (AVG)",
-                    "dataIndex" => "avg_total_uom",
-                    "align" => "right",
-                    "width" => $optionLayout === 'portrait' ? 100: 110,
-                ],
-                [
-                    "title" => "min <br/> (AVG)",
-                    "dataIndex" => "avg_min",
-                    "align" => "right",
-                    "width" => $optionLayout === 'portrait' ? 100: 110,
-                ],
-                [
-                    "title" => "min/UoM <br/> (AVG)",
-                    "dataIndex" => "avg_min_uom",
-                    "align" => "right",
-                    "width" => $optionLayout === 'portrait' ? 100: 110,
-                ],
-            ];
-
+            [
+                "title" => "Project",
+                "dataIndex" => "project_name",
+                "align" => "left",
+                "width" =>  $optionLayout === 'portrait' ? 110 : 80,
+            ],
+            [
+                "title" => "Sub Project",
+                "dataIndex" => "sub_project_name",
+                "align" => "left",
+                "width" =>  $optionLayout === 'portrait' ? 110 : 80,
+            ],
+            [
+                "title" => "Production Routing",
+                "dataIndex" => "prod_routing_name",
+                "align" => "left",
+                "width" => $optionLayout === 'portrait' ? 180 : 222,
+            ],
+            [
+                "title" => "Production Discipline",
+                "dataIndex" => "prod_discipline_name",
+                "align" => "left",
+                "width" => $optionLayout === 'portrait' ? 150 : 190,
+                "hasListenTo" => true,
+            ],
+            [
+                "title" => "Production Routing Link",
+                "dataIndex" => "prod_routing_link_name",
+                "align" => "left",
+                "width" => $optionLayout === 'portrait' ? 200 : 270,
+            ],
+            [
+                "title" => "m'p <br/> (AVG)",
+                "dataIndex" => "avg_worker_number",
+                "align" => "right",
+                "width" => $optionLayout === 'portrait' ? 100 : 110,
+            ],
+            [
+                "title" => "Total UoM <br/> (AVG)",
+                "dataIndex" => "avg_total_uom",
+                "align" => "right",
+                "width" => $optionLayout === 'portrait' ? 100 : 110,
+            ],
+            [
+                "title" => "min <br/> (AVG)",
+                "dataIndex" => "avg_min",
+                "align" => "right",
+                "width" => $optionLayout === 'portrait' ? 100 : 110,
+            ],
+            [
+                "title" => "min/UoM <br/> (AVG)",
+                "dataIndex" => "avg_min_uom",
+                "align" => "right",
+                "width" => $optionLayout === 'portrait' ? 100 : 110,
+            ],
+        ];
     }
 
     public function getBasicInfoData($params)
@@ -207,9 +206,9 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
         $prodDiscipline = isset($params['prod_discipline_id']) ? Prod_discipline::find($params['prod_discipline_id'])->name : '';
 
         $subProjectName = isset($params['sub_project_id']) ?
-        str_replace(',', ', ',implode(',', Sub_project::whereIn('id', $params['sub_project_id'])
-            ->pluck('name')
-            ->toArray())) : '';
+            str_replace(',', ', ', implode(',', Sub_project::whereIn('id', $params['sub_project_id'])
+                ->pluck('name')
+                ->toArray())) : '';
 
         $basicInfoData['sub_project_name'] = $subProjectName;
         $basicInfoData['prod_routing_name'] = $prodPouting;
@@ -219,24 +218,26 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
     }
 
 
-    private function makeDataWidget($dataSource, $params){
+    private function makeDataWidget($dataSource, $params)
+    {
         $dataOfManageWidget = $this->makeParamsInManageWidgets($params);
         $dataWidgets = [];
-        foreach ($dataSource as $key => $items){
+        foreach ($dataSource as $key => $items) {
             $array = [];
-            foreach ($dataOfManageWidget as $keyInManage => $paramsWidget){
+            foreach ($dataOfManageWidget as $keyInManage => $paramsWidget) {
                 $result = $this->createDataSourceWidgets($key, $items, $paramsWidget);
                 $array[$keyInManage] = $result;
             }
-            $dataWidgets[$key] = $array; 
+            $dataWidgets[$key] = $array;
         }
         return $dataWidgets;
     }
 
-    public function getProdRoutingLinks($data){
+    public function getProdRoutingLinks($data)
+    {
 
-        if(empty($data)) return [];
-        return array_column($data,'prod_routing_link_name', 'prod_routing_link_id' );
+        if (empty($data)) return [];
+        return array_column($data, 'prod_routing_link_name', 'prod_routing_link_id');
     }
 
     public function changeDataSource($dataSource, $params)
@@ -245,11 +246,10 @@ class Prod_sequence_040 extends Report_ParentDocument2Controller
         $items = Report::getItemsFromDataSource($dataSource);
         $prodRoutingLinks = $this->getProdRoutingLinks($items);
 
-        $groupItems = Report::groupArrayByKey($items,'prod_routing_link_id');
+        $groupItems = Report::groupArrayByKey($items, 'prod_routing_link_id');
         $data['tableDataSource'] = $dataSource;
         $data['dataWidgets'] = $this->makeDataWidget($groupItems, $params);
         $data['table_of_contents'] = $prodRoutingLinks;
         return collect($data);
     }
-
 }

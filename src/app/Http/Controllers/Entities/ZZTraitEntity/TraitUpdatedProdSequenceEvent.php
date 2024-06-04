@@ -23,7 +23,7 @@ trait TraitUpdatedProdSequenceEvent
                 foreach ($signatures as $signature) {
                     if (isset($signature['signature_decision'])) {
                         $modelPath = Str::modelPathFrom(Str::plural($this->type));
-                        $monitors1 = $modelPath::find($id)->getMonitors1()->pluck('id')->toArray();
+                        $monitors1 = $modelPath::find($id)->getMonitors1->pluck('id')->toArray();
                         $mailContent = [
                             "user_id" => CurrentUser::id(),
                             "signature_id" => $signature['id'],
@@ -58,11 +58,11 @@ trait TraitUpdatedProdSequenceEvent
                 if ($mailContent) event(new SignOffSubmittedEvent($mailContent, $id, $plural));
                 //In case a new inspector is added, he has to be sent directly here
                 //Otherwise the event will not add the current sheet into their dashboard
-                $newSignOffList = $request['signature_qaqc_chklst_3rd_party_list()'];
+                $newSignOffList = $request['signature_qaqc_chklst_3rd_party_list'];
                 $signatureFn = "signature_qaqc_chklst_3rd_party";
                 $nominatedListFn = "signature_qaqc_chklst_3rd_party_list";
 
-                $newCouncilList = $request['council_member_list()'];
+                $newCouncilList = $request['council_member_list'];
                 $councilListFn = "council_member_list";
                 // Log::info($newCouncilList);
                 event(new UpdatedQaqcChklstSheetEvent($id, $newSignOffList, $nominatedListFn, $signatureFn, $newCouncilList, $councilListFn));

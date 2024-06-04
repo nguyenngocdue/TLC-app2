@@ -71,7 +71,7 @@ class QuestionAnswer extends Component
                 // dd($members);
                 return $members;
             case $this->MY_DEPT_TECH_SKILLS:
-                $skills = $department->getSkillsOfDepartment();
+                $skills = $department->getSkillsOfDepartment;
                 $allGroupIds = $skills->pluck('department_skill_group_id');
                 $allGroups = Department_skill_group::whereIn('id', $allGroupIds)->get()->pluck('name', 'id');
                 // dump($allGroups);

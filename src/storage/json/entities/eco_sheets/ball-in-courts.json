@@ -2,46 +2,46 @@
     "new": {
         "name": "new",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_endorsement": {
         "name": "pending_endorsement",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "endorsement_rejected": {
         "name": "endorsement_rejected",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_review": {
         "name": "pending_review",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "review_rejected": {
         "name": "review_rejected",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_approval": {
         "name": "pending_approval",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "approval_rejected": {
         "name": "approval_rejected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_ack": {
         "name": "pending_ack",
         "ball-in-court-assignee": "assignee_3",
-        "ball-in-court-monitors": "getMonitors3()"
+        "ball-in-court-monitors": "getMonitors3"
     },
     "active": {
         "name": "active",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     }
 }

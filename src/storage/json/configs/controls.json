@@ -183,15 +183,15 @@
         "assignee_9"
     ],
     "monitors": [
-        "getMonitors1()",
-        "getMonitors2()",
-        "getMonitors3()",
-        "getMonitors4()",
-        "getMonitors5()",
-        "getMonitors6()",
-        "getMonitors7()",
-        "getMonitors8()",
-        "getMonitors9()"
+        "getMonitors1",
+        "getMonitors2",
+        "getMonitors3",
+        "getMonitors4",
+        "getMonitors5",
+        "getMonitors6",
+        "getMonitors7",
+        "getMonitors8",
+        "getMonitors9"
     ],
     "users" : [
         "getUsers()"

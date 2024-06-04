@@ -35,8 +35,9 @@ class ChecklistTypeFilter extends Component
     {
         $db = Qaqc_insp_tmpl::select('id', 'name', 'description')
             ->orderBy('name')
+            ->with('getProdRoutingsOfInspTmpl')
             ->get();
-        Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
+        // Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
         return $db;
 
         // $matrixView = (new QaqcInspChklstShts());

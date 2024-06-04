@@ -46,7 +46,7 @@ trait TraitSignOffListener
         // Log::info($sheet);
         $project = $sheet->getProject;
         // Log::info($project);
-        $subProjects = $sheet->getSubProjectsOfEco();
+        $subProjects = $sheet->getSubProjectsOfEco;
         // Log::info($subProjects);
 
         return [

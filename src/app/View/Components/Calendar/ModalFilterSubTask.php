@@ -31,8 +31,10 @@ class ModalFilterSubTask extends Component
 
     private function getDataSource()
     {
-        $dataSource = Pj_sub_task::select('id', 'name', 'description')->get();
-        Oracy::attach("getParentTasks()", $dataSource);
+        $dataSource = Pj_sub_task::select('id', 'name', 'description')
+            ->with("getParentTasks")
+            ->get();
+        // Oracy::attach("getParentTasks()", $dataSource);
         return $dataSource;
     }
 

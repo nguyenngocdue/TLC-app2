@@ -119,73 +119,73 @@
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors3()": {
-        "name": "_getMonitors3()",
-        "column_name": "getMonitors3()",
+    "_getMonitors3": {
+        "name": "_getMonitors3",
+        "column_name": "getMonitors3",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors4()": {
-        "name": "_getMonitors4()",
-        "column_name": "getMonitors4()",
+    "_getMonitors4": {
+        "name": "_getMonitors4",
+        "column_name": "getMonitors4",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors5()": {
-        "name": "_getMonitors5()",
-        "column_name": "getMonitors5()",
+    "_getMonitors5": {
+        "name": "_getMonitors5",
+        "column_name": "getMonitors5",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors6()": {
-        "name": "_getMonitors6()",
-        "column_name": "getMonitors6()",
+    "_getMonitors6": {
+        "name": "_getMonitors6",
+        "column_name": "getMonitors6",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors7()": {
-        "name": "_getMonitors7()",
-        "column_name": "getMonitors7()",
+    "_getMonitors7": {
+        "name": "_getMonitors7",
+        "column_name": "getMonitors7",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors8()": {
-        "name": "_getMonitors8()",
-        "column_name": "getMonitors8()",
+    "_getMonitors8": {
+        "name": "_getMonitors8",
+        "column_name": "getMonitors8",
         "new": "true",
         "assigned": "true",
         "rejected": "true",
         "closed": "true"
     },
-    "_getMonitors9()": {
-        "name": "_getMonitors9()",
-        "column_name": "getMonitors9()",
+    "_getMonitors9": {
+        "name": "_getMonitors9",
+        "column_name": "getMonitors9",
         "new": "true",
         "assigned": "true",
         "rejected": "true",

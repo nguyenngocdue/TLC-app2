@@ -40,7 +40,7 @@ class ColumnLink extends Component
         // dump($dataIndex);
         // dump($dataSource);
         // if (is_null($dataSource)) return;
-        $discipline = ($this->column['dataIndex'] == "getDisciplinesOfTask()");
+        $discipline = ($this->column['dataIndex'] == "getDisciplinesOfTask");
         foreach ($dataSource as $item) {
             $table = $item->getTable();
             $route = route($table . ".edit", $item->id);

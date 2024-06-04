@@ -20,7 +20,7 @@
         "listen_action": "assign",
         "triggers": "prod_discipline_1_id",
         "listen_to_fields": "prod_discipline_1_id",
-        "listen_to_attrs": "getDefMonitors1()",
+        "listen_to_attrs": "getDefMonitors1",
         "columns_to_set": "",
         "attrs_to_compare": "",
         "expression": "",

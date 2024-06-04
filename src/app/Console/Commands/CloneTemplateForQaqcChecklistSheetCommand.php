@@ -51,7 +51,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
         $superProps = SuperProps::getFor($this->type);
         $default_assignee_1 = $superProps['props']['_assignee_1']['default-values']['default_value'];
         $default_assignee_2 = $superProps['props']['_assignee_2']['default-values']['default_value'];
-        $default_getMonitors1 = $superProps['props']['_getMonitors1()']['default-values']['default_value'];
+        $default_getMonitors1 = $superProps['props']['_getMonitors1']['default-values']['default_value'];
 
         // $prodOrderId = $this->input->getOption('prodOrderId');
         // $inspTmplId = $this->input->getOption('inspTmplId');

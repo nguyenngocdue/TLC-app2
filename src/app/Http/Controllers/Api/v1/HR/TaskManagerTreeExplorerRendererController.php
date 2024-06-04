@@ -19,14 +19,17 @@ class TaskManagerTreeExplorerRendererController extends Controller
     {
         $discipline = User_discipline::query()
             ->where('id', $disciplineId)
+            ->with("getTasksOfDiscipline")
             ->get();
-        Oracy::attach("getTasksOfDiscipline()", $discipline);
-        $taskIds = $discipline[0]->{"getTasksOfDiscipline()"};
+        // Oracy::attach("getTasksOfDiscipline()", $discipline);
+        $taskIds = $discipline[0]->getTasksOfDiscipline;
         $tasks = Pj_task::query()
             ->whereIn('id', $taskIds)
+            ->with("getChildrenSubTasks")
+            ->with("getLodsOfTask")
             ->get();
-        Oracy::attach("getChildrenSubTasks()", $tasks);
-        Oracy::attach("getLodsOfTask()", $tasks);
+        // Oracy::attach("getChildrenSubTasks()", $tasks);
+        // Oracy::attach("getLodsOfTask()", $tasks);
         return $tasks;
     }
 
@@ -36,11 +39,11 @@ class TaskManagerTreeExplorerRendererController extends Controller
         $subTasks = Pj_sub_task::all();
         $result = [];
         foreach ($tasks as $task) {
-            $phaseIds = $task->{"getLodsOfTask()"};
+            $phaseIds = $task->getLodsOfTask;
             // Log::info($phaseIds);
             $route = route("pj_tasks.edit", $task->id);
 
-            $subTaskIds = $task->{"getChildrenSubTasks()"};
+            $subTaskIds = $task->getChildrenSubTasks;
             $sub_tasks =  $subTasks
                 ->whereIn('id', $subTaskIds)->values();
 

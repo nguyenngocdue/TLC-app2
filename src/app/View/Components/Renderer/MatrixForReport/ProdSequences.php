@@ -55,7 +55,7 @@ class ProdSequences extends MatrixForReportParent
             case 1: // Major sequences
             default:
                 foreach ($allRoutingLinks as $routingLink) {
-                    $showMeOnIds = $routingLink->getScreensShowMeOn()->pluck('id')->toArray();
+                    $showMeOnIds = $routingLink->getScreensShowMeOn->pluck('id')->toArray();
                     if (in_array($this->showInReportToc, $showMeOnIds)) {
                         $result[] = $routingLink;
                     }

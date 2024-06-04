@@ -9,7 +9,7 @@ trait HasShowOnScreens
     function isShowOn($type)
     {
         $tableName = $this->getTable();
-        $allow = $this->getScreensShowMeOn()->pluck('terms.id')->toArray();
+        $allow = $this->getScreensShowMeOn->pluck('id')->toArray();
         $key = "production.$tableName.$type";
         $config = config($key);
         if (is_null($config) && !static::$showIsShowOn) {

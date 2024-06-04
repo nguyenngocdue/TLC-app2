@@ -141,7 +141,7 @@ class PrintProps extends Component
 			$tmp = substr($key, 1);
 			$dataSource[$tmp] = [
 				"signature_multi" => $dataSource[$tmp],
-				"parent" => $dataSource[$tmp . "_list()"]
+				"parent" => $dataSource[$tmp . "_list"]
 			];
 		}
 	}

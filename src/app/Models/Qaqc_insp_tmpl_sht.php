@@ -32,11 +32,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    // public function getMonitors1()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
+
     public function getDefExtInsp()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -57,7 +53,6 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
             ['dataIndex' => 'name'],
             // ['dataIndex' => 'description'],
             // ['dataIndex' => 'getLines',],
-            // ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
         ];
     }
 }

@@ -118,12 +118,12 @@ trait TraitEntityCRUDStoreUpdate2
 	private function attachMonitors(&$array, $item)
 	{
 		if (method_exists($item, "getMonitors1")) {
-			$values = $item->getMonitors1()->pluck('users.id')->toArray();
-			$array['getMonitors1()'] = $values;
+			$values = $item->getMonitors1->pluck('id')->toArray();
+			$array['getMonitors1'] = $values;
 		}
 		if (method_exists($item, "getMonitors2")) {
-			$values = $item->getMonitors2()->pluck('users.id')->toArray();
-			$array['getMonitors2()'] = $values;
+			$values = $item->getMonitors2->pluck('id')->toArray();
+			$array['getMonitors2'] = $values;
 		}
 	}
 
@@ -150,9 +150,11 @@ trait TraitEntityCRUDStoreUpdate2
 		$previousItem = null;
 		//This is to compare status, assignee, and monitors for sending MailChangeStatus
 		if (!$isFakeRequest) {
-			$previousItem = $this->modelPath::find($id);
+			$previousItem = $this->modelPath::find($id)
+				->with("getMonitors1")
+				->first();
 			// if ($this->type == 'qaqc_insp_chklst_sht') $diff = $this->getDiff($previousItem, $request);
-			Oracy::attach("getMonitors1()", [$previousItem], true);
+			// Oracy::attach("getMonitors1()", [$previousItem], true);
 			$previousValue = $previousItem->getAttributes();
 			// $previousValue = $this->getPreviousValue($currentValue, $theRow);
 			// dump($previousValue);

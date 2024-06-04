@@ -88,8 +88,11 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     protected function getAllRoutingList()
     {
         $cu = CurrentUser::get();
-        $prodRoutings = $cu->{$this->getProdRoutingsOfUserFn}();
-        Oracy::attach('getSubProjects()', $prodRoutings);
+        $prodRoutings = $cu
+            ->{$this->getProdRoutingsOfUserFn}
+            ->with("getSubProjects")
+            ->get();
+        // Oracy::attach('getSubProjects()', $prodRoutings);
         // dump($prodRoutings);
         return $prodRoutings;
     }
@@ -111,11 +114,12 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
                     ->whereHas('getChklst', function ($query) use ($routingId, $subProjectId) {
                         $query->where('prod_routing_id', $routingId)->where('sub_project_id', $subProjectId);
                     })
+                    ->with($this->nominatedFn)
                     ->get();
-                Oracy::attach($this->nominatedFn . "()", $sheets);
+                // Oracy::attach($this->nominatedFn . "()", $sheets);
 
                 foreach ($sheets as $sheet) {
-                    $extInsp = $sheet->{$this->nominatedFn . "()"};
+                    $extInsp = $sheet->{$this->nominatedFn};
                     if ($extInsp->contains($cuid)) {
                         $result[$key][] = $sheet;
                     }

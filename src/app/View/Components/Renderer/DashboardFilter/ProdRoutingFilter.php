@@ -34,8 +34,8 @@ class ProdRoutingFilter extends Component
 
     private function getDataSource()
     {
-        $db = $this->dataSource;
-        Oracy::attach("getSubProjects()", $db);
+        $db = $this->dataSource->with("getSubProjects")->get();
+        // Oracy::attach("getSubProjects()", $db);
         return $db;
     }
 

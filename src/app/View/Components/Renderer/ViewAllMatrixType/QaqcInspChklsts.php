@@ -72,10 +72,11 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
     {
         $result = [];
         $data = Qaqc_insp_tmpl::query()
+            ->with("getProdRoutingsOfInspTmpl")
             ->get();
         // dump($data[0]);
         foreach ($data as $line) {
-            $supported = $line->getProdRoutingsOfInspTmpl()->pluck('id')->toArray();
+            $supported = $line->getProdRoutingsOfInspTmpl->pluck('id')->toArray();
             if (!in_array($this->prodRouting, $supported)) continue;
             $result[] = [
                 'dataIndex' => $line->id,

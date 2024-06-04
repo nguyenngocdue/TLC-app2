@@ -69,9 +69,9 @@
         "column_name": "updated_at",
         "new": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true"
     },
     "_signature_eco_peers": {
@@ -79,9 +79,9 @@
         "column_name": "signature_eco_peers",
         "new": "true"
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "new": "true"
     },
     "_signature_eco_managers": {

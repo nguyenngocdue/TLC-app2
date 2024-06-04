@@ -28,12 +28,14 @@ trait QaqcInspChklstShtsTraits
     {
         $subProjectIds = $this->subProjects->pluck('id')->toArray();
 
-        $prodRoutings = Prod_routing::query()->get();
+        $prodRoutings = Prod_routing::query()
+            ->with("getSubProjects")
+            ->get();
         $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
-        Oracy::attach('getSubProjects()', $prodRoutings);
+        // Oracy::attach('getSubProjects()', $prodRoutings);
         $prodRoutings1 = collect();
         foreach ($prodRoutings as $prodRouting0) {
-            $getSubProjects = $prodRouting0->{"getSubProjects()"}->toArray();
+            $getSubProjects = $prodRouting0->getSubProjects->toArray();
             if (sizeof(array_intersect($getSubProjects, $subProjectIds)) > 0) {
                 $prodRoutings1->push($prodRouting0);
             }

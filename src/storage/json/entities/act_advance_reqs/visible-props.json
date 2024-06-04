@@ -24,9 +24,9 @@
         "column_name": "radio_advance_type",
         "new": "true"
     },
-    "_getSubProjectsOfAdvanceReq()": {
-        "name": "_getSubProjectsOfAdvanceReq()",
-        "column_name": "getSubProjectsOfAdvanceReq()",
+    "_getSubProjectsOfAdvanceReq": {
+        "name": "_getSubProjectsOfAdvanceReq",
+        "column_name": "getSubProjectsOfAdvanceReq",
         "new": "true"
     },
     "_advance_amount": {
@@ -54,9 +54,9 @@
         "column_name": "assignee_1",
         "new": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true"
     },
     "_owner_id": {

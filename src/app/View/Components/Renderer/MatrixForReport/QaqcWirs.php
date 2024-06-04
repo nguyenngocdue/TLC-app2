@@ -23,7 +23,7 @@ class QaqcWirs extends MatrixForReportParent
 
     function getXAxis()
     {
-        $result = Prod_routing::find($this->prodRoutingId)->getWirDescriptions()->pluck('id')->toArray();
+        $result = Prod_routing::find($this->prodRoutingId)->getWirDescriptions->pluck('id')->toArray();
         $result = Wir_description::whereIn('id', $result)
             ->orderBy('name')
             ->get();

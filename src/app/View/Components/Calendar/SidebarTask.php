@@ -38,9 +38,11 @@ class SidebarTask extends Component
         // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
         $dataSource = Pj_task::select('id', 'name', 'description')
             ->orderBy('name')
+            ->with('getDisciplinesOfTask')
+            ->with('getLodsOfTask')
             ->get();
-        Oracy::attach("getDisciplinesOfTask()", $dataSource);
-        Oracy::attach("getLodsOfTask()", $dataSource);
+        // Oracy::attach("getDisciplinesOfTask()", $dataSource);
+        // Oracy::attach("getLodsOfTask()", $dataSource);
 
         return $dataSource;
     }
@@ -57,7 +59,7 @@ class SidebarTask extends Component
             [
                 'listen_action' => 'reduce',
                 'column_name' => 'task_id' . $suffix,
-                'listen_to_attrs' => ['getLodsOfTask()', 'getDisciplinesOfTask()'],
+                'listen_to_attrs' => ['getLodsOfTask', 'getDisciplinesOfTask'],
                 'listen_to_fields' => ['task_id' . $suffix, 'task_id' . $suffix],
                 'listen_to_tables' => ['pj_tasks', 'pj_tasks'],
                 'table_name' => 'pj_tasks',

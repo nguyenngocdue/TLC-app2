@@ -98,9 +98,9 @@
         "rejected": "",
         "closed": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "",
         "in_progress": "",
         "cancelled": "",

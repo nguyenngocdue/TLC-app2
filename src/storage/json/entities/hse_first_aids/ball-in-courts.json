@@ -7,6 +7,6 @@
     "active": {
         "name": "active",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     }
 }

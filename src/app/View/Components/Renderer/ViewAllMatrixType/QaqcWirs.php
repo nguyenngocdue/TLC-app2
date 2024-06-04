@@ -73,7 +73,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
                 'align' => 'center',
                 'prod_discipline_id' => $line->prod_discipline_id,
                 'def_assignee' => $line->def_assignee,
-                'getDefMonitors1()' => $line->getDefMonitors1()->pluck('id'),
+                'getDefMonitors1' => $line->getDefMonitors1->pluck('id'),
                 'width' => 40,
             ];
         }
@@ -126,7 +126,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
         $params['prod_order_id'] =  $y->id;
         $params['prod_discipline_id'] =  $x['prod_discipline_id'];
         $params['assignee_1'] =  $x['def_assignee'];
-        $params['getMonitors1()'] = $x['getDefMonitors1()'];
+        $params['getMonitors1'] = $x['getDefMonitors1'];
 
         return $params;
     }

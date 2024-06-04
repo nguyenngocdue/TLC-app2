@@ -144,7 +144,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     'discipline_description' => $line->getProdDiscipline?->description,
                     'discipline_css_class' => $line->getProdDiscipline?->css_class,
                     // 'prod_discipline_id' => $line->prod_discipline_id,
-                    // 'default_monitors' => ($line->getMonitors1())->pluck('name'),
+                    // 'default_monitors' => ($line->getMonitors1)->pluck('name'),
                 ];
             }
 
@@ -174,8 +174,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 $query->where('qaqc_insp_tmpl_id', $tmplId);
             })
                 ->with('signature_qaqc_chklst_3rd_party')
+                ->with('signature_qaqc_chklst_3rd_party_list')
                 ->get();
-            Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $item);
+            // Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $item);
             $result[$key] = $item;
         }
         // dump($result);
@@ -265,7 +266,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     protected function getAllRoutingList()
     {
-        return Sub_project::find($this->subProject)->getProdRoutingsOfSubProject();
+        return Sub_project::find($this->subProject)->getProdRoutingsOfSubProject;
     }
 
     protected function getMultipleMatrixObjects()
@@ -278,7 +279,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         }
         $result = [];
         foreach ($prodRoutings as $key => $routing) {
-            $allSubProjects = $routing->{"getSubProjects()"};
+            $allSubProjects = $routing->getSubProjects;
             if ($allSubProjects) {
                 if (!$allSubProjects->contains($this->subProject)) {
                     continue;
@@ -286,7 +287,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             }
             $showOnScreenIds = $routing->getScreensShowMeOn->pluck('id');
             if ($showOnScreenIds->contains($show_on_ics_id)) {
-                $tmpls = $routing->getChklstTmpls();
+                $tmpls = $routing->getChklstTmpls;
                 if ($tmpls->count() > 0) {
                     foreach ($tmpls as $tmpl) {
                         $key = $routing->id . "_" . $tmpl->id;

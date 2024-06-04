@@ -34,8 +34,8 @@ class QaqcInspTmplFilter extends Component
 
     private function getDataSource()
     {
-        $db = $this->dataSource;
-        Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
+        $db = $this->dataSource->with("getProdRoutingsOfInspTmpl")->get();
+        // Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
         return $db;
     }
 

@@ -27,7 +27,7 @@ class Buckets extends Component
         $pagesAssignedToMe = [];
         $allPages = Kanban_task_page::query()->get();
         foreach ($allPages as $page) {
-            $members = $page->getMonitors1()->pluck('users.id')->toArray();
+            $members = $page->getMonitors1->pluck('id')->toArray();
             if (in_array($uid, $members)) $pagesAssignedToMe[] = $page->id;
         }
 
