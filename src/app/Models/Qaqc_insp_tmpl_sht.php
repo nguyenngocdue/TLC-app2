@@ -18,7 +18,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
 
-        "getDefExtInsp" => ["belongsToMany", User::class, "ym2m_qaqc_insp_tmpl_sht_user_def_ext_insp_1"],
+        "getDefExtInsp" => ["belongsToMany", User::class, "ym2m_qaqc_insp_tmpl_sht_user_def_ext_insp"],
     ];
 
     public function getLines()

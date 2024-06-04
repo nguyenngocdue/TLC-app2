@@ -4,6 +4,7 @@ namespace App\Http\Services\ExternalInspector;
 
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Sub_project;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
@@ -19,7 +20,6 @@ class UpdateSubProjectService
         $result = [];
         foreach ($allLists as $list) {
             $allSheets = $list->getSheets;
-            // Oracy::attach("getMonitors1()", $allSheets);
             foreach ($allSheets as $sheet) {
                 $list = $sheet->{$nominatedListFn};
                 $result[] = $list->pluck('id')->toArray();
@@ -31,7 +31,8 @@ class UpdateSubProjectService
         $result = array_map(fn ($id) => +$id, $result);
 
         $item = Sub_project::find($subProjectId);
-        $item->syncCheck($targetFn, \App\Models\User::class, $result);
+        // $item->syncCheck($targetFn, \App\Models\User::class, $result);
+        $item->{$targetFn}()->syncWithPivotValues($result, ['owner_id' => CurrentUser::id()]);
         // Log::info("UpdateSubProjectService" . $subProjectId);
         // Log::info($result);
     }

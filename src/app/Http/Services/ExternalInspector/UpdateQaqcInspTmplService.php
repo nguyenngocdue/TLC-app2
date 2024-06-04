@@ -4,6 +4,7 @@ namespace App\Http\Services\ExternalInspector;
 
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_tmpl;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
@@ -30,7 +31,8 @@ class UpdateQaqcInspTmplService
         $result = array_map(fn ($id) => +$id, $result);
 
         $item = Qaqc_insp_tmpl::find($qaqcInspTmplId);
-        $item->syncCheck($targetFn, \App\Models\User::class, $result);
+        // $item->syncCheck($targetFn, \App\Models\User::class, $result);
+        $item->{$targetFn}()->syncWithPivotValues($result, ['owner_id' => CurrentUser::id()]);
         // Log::info("UpdateQaqcInspTmplService" . $qaqcInspTmplId);
         // Log::info($result);
     }
