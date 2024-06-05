@@ -27,11 +27,13 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
                                 AND SUBSTR(ecos.due_date, 1, 7) = '$month'
                                 #AND ecos.status = 'active'
                                 ) AS ecosheet
-                                LEFT JOIN ( SELECT *
-                                                FROM many_to_many mtm
+                                LEFT JOIN ( SELECT
+                                                esum1.id AS field_id,
+                                                esum1.eco_sheet_id AS doc_id,
+                                                esum1.user_id AS term_id
+                                                FROM ym2m_eco_sheet_user_monitor_1 esum1
                                                 WHERE 1 = 1 
-                                                AND mtm.field_id = 31
-                                                AND mtm.doc_type = 'App\\\Models\\\Eco_sheet') AS usecos ON usecos.doc_id =  ecosheet.ecos_id
+                                            ) AS usecos ON usecos.doc_id =  ecosheet.ecos_id
                                 LEFT JOIN (SELECT sign.id AS sign_id, sign.owner_id AS sign_ower_id, sign.signable_id AS ecos_id, sign.updated_at AS sign_updated_at
                                         FROM signatures sign
                                         WHERE 1 = 1
@@ -111,7 +113,7 @@ class Eco_sheet_140 extends Report_ParentReport2Controller
                 foreach ($ids as $id) {
                     $ecoName = Eco_sheet::find($id)->toArray()['name'];
                     $route = route('eco_sheets.edit', $id);
-                    $strName .= '<a  class="text-blue-800" href="'. $route . '" >' . $ecoName . '</a>' . "</br>";
+                    $strName .= '<a  class="text-blue-800" href="' . $route . '" >' . $ecoName . '</a>' . "</br>";
                 }
                 $items['ecos_ids'] = (object)['value' => $strName,];
                 $dataSource[$key] = $items;

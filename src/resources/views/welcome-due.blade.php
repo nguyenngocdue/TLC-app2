@@ -4,38 +4,51 @@
 
 @section('content')
 
-<!-- Button -->
-<button id="myButton">Click me</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Combobox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-6 bg-white rounded shadow-lg">
+        <button id="addComboboxBtn" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            Plus
+        </button>
+        <div id="comboboxContainer" class="space-y-4"></div>
+    </div>
 
-<!-- Display area for message -->
-<div id="message"></div>
-
-<!-- Include Toastr CSS and JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-@if(Session::has('toastr_message'))
-    <!-- Execute JavaScript to show Toastr -->
     <script>
-        toastr.success('{{ Session::get('toastr_message') }}');
+        document.getElementById('addComboboxBtn').addEventListener('click', function() {
+            // Create a new div to hold the combobox
+            const newDiv = document.createElement('div');
+            newDiv.className = 'combobox';
+
+            // Create a new combobox (select element)
+            const newSelect = document.createElement('select');
+            newSelect.className = 'combobox-select block w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500';
+
+            // Add options to the combobox
+            const option1 = document.createElement('option');
+            option1.value = 'option1';
+            option1.text = 'Option 1';
+            newSelect.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = 'option2';
+            option2.text = 'Option 2';
+            newSelect.appendChild(option2);
+
+            // Append the combobox to the div
+            newDiv.appendChild(newSelect);
+
+            // Append the div to the container
+            document.getElementById('comboboxContainer').appendChild(newDiv);
+        });
     </script>
-@endif
-
-<!-- Include Axios library for making AJAX requests -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<script>
-    document.getElementById('myButton').addEventListener('click', function() {
-        axios.post('https://127.0.0.1:38002/diginet/transfer-diginet-data/handle-click-event')
-            .then(response => {
-                // Update the message display area with the response message
-                document.getElementById('message').innerText = response.data.message;
-                toastr.success(response.data.message);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    });
-</script>
+</body>
+</html>
 
 @endsection
