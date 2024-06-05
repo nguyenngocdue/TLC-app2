@@ -24,7 +24,7 @@
     "_getAvatar": {
         "name": "_getAvatar",
         "column_name": "getAvatar",
-        "column_type": "morph",
+        "column_type": "morphOne",
         "label": "Avatar",
         "control": "thumbnail",
         "align": "",
@@ -310,7 +310,7 @@
     "_featured_image": {
         "name": "_featured_image",
         "column_name": "featured_image",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Featured Image",
         "control": "attachment",
         "align": "",
@@ -926,7 +926,7 @@
     "_getRoleSet": {
         "name": "_getRoleSet",
         "column_name": "getRoleSet",
-        "column_type": "morph",
+        "column_type": "morphToMany",
         "label": "RoleSet",
         "control": "dropdown_multi",
         "align": "",
@@ -1102,7 +1102,7 @@
     "_attachment": {
         "name": "_attachment",
         "column_name": "attachment",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attachment",
         "control": "text",
         "align": "",

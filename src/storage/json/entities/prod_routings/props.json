@@ -266,7 +266,7 @@
     "_getProdSequences": {
         "name": "_getProdSequences",
         "column_name": "getProdSequences",
-        "column_type": "hasMany",
+        "column_type": "hasManyThrough",
         "label": "Sequence-based Timesheets",
         "control": "relationship_renderer",
         "align": "",

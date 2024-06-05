@@ -46,7 +46,7 @@
     "_getAvatar": {
         "name": "_getAvatar",
         "column_name": "getAvatar",
-        "column_type": "morph",
+        "column_type": "morphOne",
         "label": "Avatar",
         "control": "thumbnail",
         "align": "",
@@ -68,7 +68,7 @@
     "_featured_image": {
         "name": "_featured_image",
         "column_name": "featured_image",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Feature Images",
         "control": "attachment",
         "align": "",

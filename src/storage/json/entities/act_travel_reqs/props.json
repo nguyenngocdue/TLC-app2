@@ -354,7 +354,7 @@
     "_attachment_current_passport": {
         "name": "_attachment_current_passport",
         "column_name": "attachment_current_passport",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Current Passport Photos",
         "control": "attachment",
         "align": "",
@@ -376,7 +376,7 @@
     "_attachment_current_portrait": {
         "name": "_attachment_current_portrait",
         "column_name": "attachment_current_portrait",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Current Portrait Photos",
         "control": "attachment",
         "align": "",

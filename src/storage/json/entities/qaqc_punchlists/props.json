@@ -288,7 +288,7 @@
     "_signature_qaqc_punchlist_qaqc": {
         "name": "_signature_qaqc_punchlist_qaqc",
         "column_name": "signature_qaqc_punchlist_qaqc",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Reviewed and Prepared By",
         "control": "signature_multi",
         "align": "",
@@ -310,7 +310,7 @@
     "_signature_qaqc_punchlist_production": {
         "name": "_signature_qaqc_punchlist_production",
         "column_name": "signature_qaqc_punchlist_production",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Accepted by",
         "control": "signature_multi",
         "align": "",
@@ -332,7 +332,7 @@
     "_signature_qaqc_punchlist_project": {
         "name": "_signature_qaqc_punchlist_project",
         "column_name": "signature_qaqc_punchlist_project",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Accepted By",
         "control": "signature_multi",
         "align": "",
@@ -354,7 +354,7 @@
     "_signature_qaqc_punchlist_factory": {
         "name": "_signature_qaqc_punchlist_factory",
         "column_name": "signature_qaqc_punchlist_factory",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Approved By",
         "control": "signature_multi",
         "align": "",

@@ -266,7 +266,7 @@
     "_attachment_subproject_homeowner_manual": {
         "name": "_attachment_subproject_homeowner_manual",
         "column_name": "attachment_subproject_homeowner_manual",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "HomeOwner Manual",
         "control": "attachment",
         "align": "",
@@ -288,7 +288,7 @@
     "_attachment_subproject_project_plans": {
         "name": "_attachment_subproject_project_plans",
         "column_name": "attachment_subproject_project_plans",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Project Plans",
         "control": "attachment",
         "align": "",

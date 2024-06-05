@@ -222,7 +222,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Rejected Reason",
         "control": "comment",
         "align": "",

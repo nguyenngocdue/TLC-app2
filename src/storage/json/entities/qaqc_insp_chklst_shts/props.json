@@ -354,7 +354,7 @@
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
         "column_name": "signature_qaqc_chklst_3rd_party",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Signatures",
         "control": "signature_multi",
         "align": "",
@@ -376,7 +376,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Rejected Reason",
         "control": "comment",
         "align": "",

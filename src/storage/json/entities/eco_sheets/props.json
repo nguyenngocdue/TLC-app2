@@ -310,7 +310,7 @@
     "_attachment_eco_sht": {
         "name": "_attachment_eco_sht",
         "column_name": "attachment_eco_sht",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attachments",
         "control": "attachment",
         "align": "",
@@ -794,7 +794,7 @@
     "_signature_eco_peers": {
         "name": "_signature_eco_peers",
         "column_name": "signature_eco_peers",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Peer Manager Decisions",
         "control": "signature_multi",
         "align": "",
@@ -882,7 +882,7 @@
     "_signature_eco_managers": {
         "name": "_signature_eco_managers",
         "column_name": "signature_eco_managers",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Manager Decision",
         "control": "signature_multi",
         "align": "",

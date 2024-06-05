@@ -24,7 +24,7 @@
     "_correctable": {
         "name": "_correctable",
         "column_name": "correctable",
-        "column_type": "morph",
+        "column_type": "morphTo",
         "label": "Parent",
         "control": "parent_link",
         "align": "",
@@ -310,7 +310,7 @@
     "_opened_photos": {
         "name": "_opened_photos",
         "column_name": "opened_photos",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Opened Photos",
         "control": "attachment",
         "align": "",
@@ -332,7 +332,7 @@
     "_closed_photos": {
         "name": "_closed_photos",
         "column_name": "closed_photos",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Closed Photos",
         "control": "attachment",
         "align": "",

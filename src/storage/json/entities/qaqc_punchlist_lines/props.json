@@ -354,7 +354,7 @@
     "_punchlist_photos": {
         "name": "_punchlist_photos",
         "column_name": "punchlist_photos",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Photos",
         "control": "attachment",
         "align": "",

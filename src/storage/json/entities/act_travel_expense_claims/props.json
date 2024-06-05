@@ -662,7 +662,7 @@
     "_attachment_doc_travel_expense_claim": {
         "name": "_attachment_doc_travel_expense_claim",
         "column_name": "attachment_doc_travel_expense_claim",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attached Docs",
         "control": "attachment",
         "align": "",

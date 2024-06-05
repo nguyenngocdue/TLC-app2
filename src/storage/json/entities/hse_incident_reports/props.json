@@ -640,7 +640,7 @@
     "_attachment_hse_incident_doc": {
         "name": "_attachment_hse_incident_doc",
         "column_name": "attachment_hse_incident_doc",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attached Incident Doc",
         "control": "attachment",
         "align": "",
@@ -816,7 +816,7 @@
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
         "column_name": "attachment_hse_hr_decision",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "HR Decision",
         "control": "attachment",
         "align": "",
@@ -948,7 +948,7 @@
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "column_name": "comment_by_clinic",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment by Internal Clinic",
         "control": "comment",
         "align": "",
@@ -1300,7 +1300,7 @@
     "_attachment_hse_witness": {
         "name": "_attachment_hse_witness",
         "column_name": "attachment_hse_witness",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attached Witness Docs",
         "control": "attachment",
         "align": "",
@@ -1366,7 +1366,7 @@
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "2.5 Remedial Actions",
         "control": "relationship_renderer",
         "align": "",
@@ -1432,7 +1432,7 @@
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
         "column_name": "comment_by_line_manager",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment by Line Manager",
         "control": "comment",
         "align": "",
@@ -1520,7 +1520,7 @@
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "column_name": "comment_by_general_manager",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment by General Manager",
         "control": "comment",
         "align": "",
