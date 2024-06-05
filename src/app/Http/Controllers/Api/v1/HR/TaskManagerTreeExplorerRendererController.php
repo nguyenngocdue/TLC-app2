@@ -20,16 +20,13 @@ class TaskManagerTreeExplorerRendererController extends Controller
         $discipline = User_discipline::query()
             ->where('id', $disciplineId)
             ->with("getTasksOfDiscipline")
-            ->get();
-        // Oracy::attach("getTasksOfDiscipline()", $discipline);
-        $taskIds = $discipline[0]->getTasksOfDiscipline;
+            ->first();
+        $taskIds = $discipline->getTasksOfDiscipline->pluck('id')->toArray();
         $tasks = Pj_task::query()
             ->whereIn('id', $taskIds)
             ->with("getChildrenSubTasks")
             ->with("getLodsOfTask")
             ->get();
-        // Oracy::attach("getChildrenSubTasks()", $tasks);
-        // Oracy::attach("getLodsOfTask()", $tasks);
         return $tasks;
     }
 
@@ -39,26 +36,26 @@ class TaskManagerTreeExplorerRendererController extends Controller
         $subTasks = Pj_sub_task::all();
         $result = [];
         foreach ($tasks as $task) {
-            $phaseIds = $task->getLodsOfTask;
-            // Log::info($phaseIds);
+            $phaseIds = $task->getLodsOfTask->pluck('id')->toArray();
             $route = route("pj_tasks.edit", $task->id);
 
-            $subTaskIds = $task->getChildrenSubTasks;
+            $subTaskIds = $task->getChildrenSubTasks->pluck('id')->toArray();
             $sub_tasks =  $subTasks
-                ->whereIn('id', $subTaskIds)->values();
+                ->whereIn('id', $subTaskIds)
+                ->values();
 
             $sub_task_str = $sub_tasks->map(function ($item) {
-                $route = route('pj_sub_tasks.edit', $item->id);
-                return "<a class='text-blue-600' title='$item->description' href='$route'>" . $item->name . "</a>";
+                if ($item) {
+                    $route = route('pj_sub_tasks.edit', $item->id);
+                    return "<a class='text-blue-600' title='$item->description' href='$route'>" . $item->name . "</a>";
+                }
             })->join(", ");
 
             foreach ($phaseIds as $phaseId) {
-
                 $item = [
                     // 'id' => $task->id,
                     'name' => "<a class='text-blue-600' href='$route' title='$task->description'>" . $task->name . "</a>",
                     'phase' => $phases->where('id', $phaseId)->first()->name,
-                    // 'sub_tasks' => $subTaskIds->count(),
                     'sub_tasks' => $sub_task_str,
                 ];
                 $result[] = $item;
