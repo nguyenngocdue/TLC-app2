@@ -11,7 +11,10 @@ class Project extends ModelExtended
     use HasCachedAvatar;
     use HasShowOnScreens;
 
-    protected $fillable = ["id", "name", "description", "slug", "status", "owner_id", "qr_app_source"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "status", "owner_id",
+        "qr_app_source", "show_in_task_budget",
+    ];
 
     public static $eloquentParams = [
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
