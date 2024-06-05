@@ -159,7 +159,7 @@
 							<td class="tg-mcqj">{{$value}}-01-31</td>
 						@endforeach
 					@endif
-					<td class="tg-mcqj" colspan="1"></td>
+					<td class="tg-mcqj" colspan="{{$timeCategory === 'filter_by_year' ? 6 : 3}}"></td>
 				</tr>
 				<tr>
 					<td class="tg-mcqj">Data Submission Date</td>
@@ -177,10 +177,10 @@
 							<td class="tg-mcqj">{{$value}}-12-31</td>
 						@endforeach
 					@endif
-					<td class="tg-mcqj" colspan="1"></td>
+					<td class="tg-mcqj" colspan="{{$timeCategory === 'filter_by_year' ? 6 : 3}}"></td>
 				</tr>
 				@php
-					$colSpanOfHead = $timeCategory === 'filter_by_year' ? count($years) + 7 : count($years)*2 + 7;
+					$colSpanOfHead = $timeCategory === 'filter_by_year' ? count($years) + 7 + 3 : count($years)*2 + 7 + 3;
 				@endphp
 
 				<tr>
@@ -209,19 +209,19 @@
 							<td class="tg-qjmw">{{$year}}</td>
 						@endforeach
 					@endif
-					<td class="tg-qjmw" colspan="1"></td>
+					<td class="tg-qjmw" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-jpxn" colspan="6">ENVIROMENT</td>
-					<td class="tg-f7v4" colspan="{{ $timeCategory === 'filter_by_year' ?  1 :  count($titleOfTime)}}"><span style="font-weight:bold">Reporting Boundary:</span> Vietnam faciticies (TF1, TF2 and TF3)</td>
-					<td class="tg-73oq" colspan="{{$timeCategory === 'filter_by_year' ? count($years) : count($years) - 2}}"></td>
+					<td class="tg-f7v4" colspan="{{ $timeCategory === 'filter_by_year' ?  count($years) :  count($titleOfTime)}}"><span style="font-weight:bold">Reporting Boundary:</span> Vietnam faciticies (TF1, TF2 and TF3)</td>
+					<td class="tg-73oq" colspan="{{$timeCategory === 'filter_by_year' ? count($years) : count($years) - 2 + 3}}"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-cscf">Energy</td>
 					<td class="tg-f7v4" colspan="5">Direct Fuel Consumption</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -230,7 +230,7 @@
 					<td class="tg-f7v4" colspan="3">from Renewable Energy Source (ie: bioenergy)</td>
 					<td class="tg-f7v4">Please specify</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 
@@ -238,7 +238,7 @@
 					<td class="tg-f7v4" colspan="3">from Oil</td>
 					<td class="tg-f7v4">Litres</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'from_oil', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 
@@ -246,7 +246,7 @@
 					<td class="tg-f7v4" colspan="3">from Natural Gas</td>
 					<td class="tg-f7v4">BTU</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'from_natural_gas', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 
@@ -254,21 +254,21 @@
 					<td class="tg-f7v4" colspan="3">from Goal</td>
 					<td class="tg-f7v4">Litres</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-f7v4" colspan="3">from Other (please specify non-renewable fuel type)</td>
 					<td class="tg-f7v4">kg</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'from_other_please_specify_non_renewable_fuel_type', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-f7v4" colspan="4">Indirect Energy Consumption</td>
 					<td class="tg-f7v4">kWh</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 
@@ -277,13 +277,13 @@
 					<td class="tg-f7v4" colspan="3">Electricity Consumption from Renewable Energy Sources</td>
 					<td class="tg-f7v4">KWh</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'electricity_consumption_from_renewable_energy_sources', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 					<tr>
 					<td class="tg-f7v4" colspan="3">Electricity Consumption from Non-Renewable Energy Sources</td>
 					<td class="tg-f7v4">KWh</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'electricity_consumption_from_non_renewable_energy_sources', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				
 
@@ -291,14 +291,14 @@
 					<td class="tg-f7v4" colspan="3">Other indirect energy consumption (e.g. district heating, cooding, purchased steam)</td>
 					<td class="tg-f7v4">kWh</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-f7v4" colspan="4">Total Renewable Energy Generated</td>
 					<td class="tg-f7v4">kWh</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -306,7 +306,7 @@
 					<td class="tg-f7v4" colspan="4">Total Solid Waste Generated</td>
 					<td class="tg-f7v4">kg</td>
 					@include('components.reports.value-by-category', ['showNa' => false])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -315,14 +315,14 @@
 					<td class="tg-f7v4" colspan="3">Waste Diverted from Disposal (Reused/Recycled/Recorverd)</td>
 					<td class="tg-f7v4">kg</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'waste_diverted_from_disposal', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-f7v4" colspan="3">Hazardous Waste Generated</td>
 					<td class="tg-f7v4">kg</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -330,7 +330,7 @@
 					<td class="tg-f7v4" colspan="2">Radicactive Waste Generated</td>
 					<td class="tg-f7v4">kg</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -338,7 +338,7 @@
 					<td class="tg-f7v4" colspan="4">Total Water Consumption</td>
 					<td class="tg-f7v4">m3</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -347,7 +347,7 @@
 					<td class="tg-f7v4" colspan="3">Water Consumption from Recycled And Reused Sources</td>
 					<td class="tg-f7v4">m3</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'total_water_consumption', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -355,7 +355,7 @@
 					<td class="tg-f7v4" colspan="4">Scope 1 GHG Emissions</td>
 					<td class="tg-f7v4">tCO2e</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'scope_1_ghg_emissions', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -363,20 +363,20 @@
 					<td class="tg-f7v4" colspan="4">Scope 2 GHG Emissions</td>
 					<td class="tg-f7v4">tCO2e</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'scope_2_ghg_emissions', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-f7v4" colspan="4">Scope 3 GHG Emissons</td>
 					<td class="tg-f7v4">tCO2e</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'scope_3_ghg_emissions', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
 					<td class="tg-jpxn" colspan="6">SOCIAL</td>
-					<td class="tg-f7v4" colspan="{{ $timeCategory === 'filter_by_year' ?  1 :  count($titleOfTime)}}"><span style="font-weight:bold">Reporting Boudary: </span>Vietnam facilities (TF1, TF2 and TF3)</td>
-					<td class="tg-73oq" colspan="{{$timeCategory === 'filter_by_year' ? count($years) : count($years) - 2}}">ADM (20210108): Please confirm whether the social dât only covers those stated in green cell. ....</td>
+					<td class="tg-f7v4" colspan="{{ $timeCategory === 'filter_by_year' ?  count($years) :  count($titleOfTime)}}"><span style="font-weight:bold">Reporting Boudary: </span>Vietnam facilities (TF1, TF2 and TF3)</td>
+					<td class="tg-73oq" colspan="{{$timeCategory === 'filter_by_year' ? count($years) : count($years) - 2 + 3}}">ADM (20210108): Please confirm whether the social dât only covers those stated in green cell. ....</td>
 				</tr>
 
 				<tr>
@@ -384,7 +384,7 @@
 					<td class="tg-f7v4" colspan="4">Total Direct Employees</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'total_direct_employees', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -393,7 +393,7 @@
 					<td class="tg-f7v4" colspan="3">Senior Employees (ie: managers, directors, supervisors)</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'senior_employees', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 
 				<tr>
@@ -401,130 +401,130 @@
 					<td class="tg-f7v4" colspan="2">Female</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'senior_employees_female', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Male</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'senior_employees_male', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">Junior Employees</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'junior_employees', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Female</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'junior_employees_female', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Male</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'junior_employees_male', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">New Empoyees</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'total_new_employees', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Female</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'new_employees_female', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Male</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'new_employees_male', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">Departed Employees</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'total_departed_employees', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Female</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'departed_employees_female', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Male</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'departed_employees_male', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">Hours Worked per Full-time Employee within 6-month period</td>
 					<td class="tg-f7v4">Hours/per person</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'hours_worked_employee', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="4">Part-time/Season Workers Employees</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan=""></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Female</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="2"></td>
 					<td class="tg-f7v4" colspan="2">Male</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">Total Hours Worked by Part-time/Seasonal Workers</td>
 					<td class="tg-f7v4">Hours</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="4">On-site Workers Under a Contractor</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="4">Employees under the age of 18</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-cscf">Training</td>
 					<td class="tg-f7v4" colspan="4">Total Training Hours Attended (across All Employees)</td>
 					<td class="tg-f7v4">Hours</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" rowspan="2"></td>
@@ -532,41 +532,41 @@
 					<td class="tg-f7v4" colspan="3">ESG -related Traning</td>
 					<td class="tg-f7v4">Hours</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">Trained Employees</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-cscf">Accidents</td>
 					<td class="tg-f7v4" colspan="4">Occupational Accidents</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'occupational_accidents', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" rowspan="2"></td>
 					<td class="tg-f7v4" colspan="4">Occupational Near Misses</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'occupational_near_miss', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="4">Total Lost Time Due to Injury, Accidents, Fatalities, or Illness</td>
 					<td class="tg-f7v4">Hours</td>
 					@include('components.reports.value-by-category', ['fieldName' => 'total_lost_time', 'timeCategory' => $timeCategory])
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-cscf">Grievances</td>
 					<td class="tg-f7v4" colspan="4">Internal Grievances / Complaints Received</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" rowspan="4"></td>
@@ -574,27 +574,27 @@
 					<td class="tg-f7v4" colspan="3">Incidents Related to Discrimination Received</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">Incidents Grievances / Complaints Resolved</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4" colspan="4">External Grievances / Complaints Received</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-f7v4"></td>
 					<td class="tg-f7v4" colspan="3">External Grievances / Complaints Resolved</td>
 					<td class="tg-f7v4">Number</td>
 					@include('components.reports.value-by-category')
-					<td class="tg-73oq" colspan="1"></td>
+					<td class="tg-73oq" colspan="3"></td>
 				</tr>
 				<tr>
 					<td class="tg-73oq" colspan=""></td>

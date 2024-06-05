@@ -1,0 +1,34 @@
+{
+    "new": {
+        "name": "new",
+        "location": "-320.00 -20.00",
+        "new": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "location": "0.00 20.00",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "location": "10.00 -70.00",
+        "new": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "approved": {
+        "name": "approved",
+        "location": "300.00 0.00",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    }
+}

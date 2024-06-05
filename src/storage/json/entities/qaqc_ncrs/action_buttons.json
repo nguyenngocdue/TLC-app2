@@ -2,46 +2,55 @@
     "new": {
         "name": "new",
         "label": "New",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "pending_review": {
         "name": "pending_review",
-        "label": "Review",
-        "tooltip": ""
+        "label": "Request for Manager Review",
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "assigned": {
         "name": "assigned",
         "label": "Assign To",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "assign_rejected": {
         "name": "assign_rejected",
         "label": "Reject Assignment",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "resolved": {
         "name": "resolved",
-        "label": "Request for Review",
-        "tooltip": ""
+        "label": "Request for QC Review",
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "rejected": {
         "name": "rejected",
         "label": "Reject Resolution",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "inspected": {
         "name": "inspected",
         "label": "Request for Inspection",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
         "label": "Reject Inspection",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     },
     "closed": {
         "name": "closed",
         "label": "Close",
-        "tooltip": ""
+        "tooltip": "",
+        "change_status_multiple": ""
     }
 }
