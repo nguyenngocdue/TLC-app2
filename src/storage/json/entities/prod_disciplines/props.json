@@ -112,7 +112,7 @@
     "_getScreensShowMeOn": {
         "name": "_getScreensShowMeOn",
         "column_name": "getScreensShowMeOn",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Show On Screens",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -156,7 +156,7 @@
     "_getDefMonitors1": {
         "name": "_getDefMonitors1",
         "column_name": "getDefMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Default Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -200,7 +200,7 @@
     "_getProdRoutingLink": {
         "name": "_getProdRoutingLink",
         "column_name": "getProdRoutingLink",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Routing Links",
         "control": "relationship_renderer",
         "align": "",
@@ -222,7 +222,7 @@
     "_getDiscipline1s": {
         "name": "_getDiscipline1s",
         "column_name": "getDiscipline1s",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Prod Discipline 1",
         "control": "relationship_renderer",
         "align": "",
@@ -244,7 +244,7 @@
     "_getErpRoutingLinks": {
         "name": "_getErpRoutingLinks",
         "column_name": "getErpRoutingLinks",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "ERP Routing Links",
         "control": "relationship_renderer",
         "align": "",
@@ -266,7 +266,7 @@
     "_getWirDescriptions": {
         "name": "_getWirDescriptions",
         "column_name": "getWirDescriptions",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "WIR Description",
         "control": "relationship_renderer",
         "align": "",

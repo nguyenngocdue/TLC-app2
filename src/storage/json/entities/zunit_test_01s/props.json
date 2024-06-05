@@ -310,7 +310,7 @@
     "_workplaceCheckbox2a": {
         "name": "_workplaceCheckbox2a",
         "column_name": "workplaceCheckbox2a",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Checkbox 2A",
         "control": "checkbox_2a",
         "align": "",
@@ -332,7 +332,7 @@
     "_workplaceDropdownMulti2a": {
         "name": "_workplaceDropdownMulti2a",
         "column_name": "workplaceDropdownMulti2a",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Dropdown Multi 2A",
         "control": "dropdown_multi_2a",
         "align": "",

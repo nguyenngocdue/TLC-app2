@@ -134,7 +134,7 @@
     "_getSkillsOfDepartment": {
         "name": "_getSkillsOfDepartment",
         "column_name": "getSkillsOfDepartment",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Skills",
         "control": "checkbox_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getMembers": {
         "name": "_getMembers",
         "column_name": "getMembers",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "User count",
         "control": "relationship_renderer",
         "align": "",
@@ -200,7 +200,7 @@
     "_getMembers2": {
         "name": "_getMembers2",
         "column_name": "getMembers2",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "User count 2",
         "control": "relationship_renderer",
         "align": "",

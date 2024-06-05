@@ -73,7 +73,7 @@ trait TraitKanbanUpdate
 
         $table = $this->modelPath::getTableName();
         $item->update($input);
-        $this->handleCheckboxAndDropdownMulti2a($request, $item, $props['many_to_many']);
+        $this->handleCheckboxAndDropdownMulti2a($request, $item, $props['belongsToMany']);
         $this->handleAttachments($request, $props['attachment'], $id);
         // Log::info($request->input());
 

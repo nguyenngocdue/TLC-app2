@@ -46,7 +46,7 @@ trait TraitStoreEmpty
 	private function insertManyToMany($item, $createdItem, $sp)
 	{
 		foreach ($sp['props'] as $prop) {
-			if ($prop['column_type'] == 'many_to_many') {
+			if ($prop['column_type'] == 'belongsToMany') {
 				$propName = $prop['column_name'];
 				if (isset($item[$propName])) {
 					$createdItem->{$propName}()->attach($item[$propName], ['owner_id' => CurrentUser::id()]);

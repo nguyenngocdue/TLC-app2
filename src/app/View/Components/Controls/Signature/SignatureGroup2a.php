@@ -60,7 +60,7 @@ class SignatureGroup2a extends Component
         // dump($signatureList);
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
         // dump($signatures);
-        $all = ($nominatedList->pluck('email', 'users.id'));
+        $all = ($nominatedList->pluck('email', 'id'));
         // dump($all);
         $signed = ($signatureList->pluck('getUser.email', 'user_id'));
         // dump($signed);
@@ -75,7 +75,6 @@ class SignatureGroup2a extends Component
         // dump($alreadyRequested);
         // $alreadyRequestedSignatures = $alreadyRequested->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
         // dump($alreadyRequestedSignatures);
-
         $needToRecall = $signed->filter(fn ($email) => (!$all->contains($email)) && $email);
         // dump($needToRecall);
         $needToRecallSignatures = $needToRecall->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);

@@ -10,12 +10,12 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklst;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProject;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProps;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPage;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStore2;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Services\UploadService2;
 use App\Utils\Support\Json\SuperProps;
-use Illuminate\Support\Facades\App;
 
 class EntityCRUDController extends Controller
 {
@@ -26,7 +26,8 @@ class EntityCRUDController extends Controller
 	use TraitEntityCRUDShowChklstSht;
 
 	use TraitEntityCRUDCreateEdit2;
-	use TraitEntityCRUDStoreUpdate2;
+	use TraitEntityCRUDStore2;
+	use TraitEntityCRUDUpdate2;
 
 	use TraitEntityCRUDDestroy;
 	use TraitEntityDynamicType;

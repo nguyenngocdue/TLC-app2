@@ -112,7 +112,7 @@
     "_getProdRoutingsOfInspTmpl": {
         "name": "_getProdRoutingsOfInspTmpl",
         "column_name": "getProdRoutingsOfInspTmpl",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Prod Routings",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -134,7 +134,7 @@
     "_getSheets": {
         "name": "_getSheets",
         "column_name": "getSheets",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Template Pages",
         "control": "relationship_renderer",
         "align": "",
@@ -156,7 +156,7 @@
     "_getQaqcInspChklsts": {
         "name": "_getQaqcInspChklsts",
         "column_name": "getQaqcInspChklsts",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Checklists",
         "control": "relationship_renderer",
         "align": "",
@@ -178,7 +178,7 @@
     "_getExternalInspectorsOfQaqcInspTmpl": {
         "name": "_getExternalInspectorsOfQaqcInspTmpl",
         "column_name": "getExternalInspectorsOfQaqcInspTmpl",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "External Inspectors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -200,7 +200,7 @@
     "_getCouncilMembersOfQaqcInspTmpl": {
         "name": "_getCouncilMembersOfQaqcInspTmpl",
         "column_name": "getCouncilMembersOfQaqcInspTmpl",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Council Members Of Qaqc Insp Tmpl",
         "control": "dropdown_multi_2a",
         "align": "",

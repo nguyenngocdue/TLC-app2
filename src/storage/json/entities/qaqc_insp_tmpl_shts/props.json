@@ -134,7 +134,7 @@
     "_getDefExtInsp": {
         "name": "_getDefExtInsp",
         "column_name": "getDefExtInsp",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Default Ext Inspectors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -156,7 +156,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Template Lines",
         "control": "relationship_renderer",
         "align": "",

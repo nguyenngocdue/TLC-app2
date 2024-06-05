@@ -68,7 +68,7 @@
     "_getParentTasks": {
         "name": "_getParentTasks",
         "column_name": "getParentTasks",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Parent Tasks",
         "control": "dropdown_multi_2a",
         "align": "",

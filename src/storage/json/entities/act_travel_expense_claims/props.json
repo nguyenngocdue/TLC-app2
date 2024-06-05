@@ -112,7 +112,7 @@
     "_getSubProjectsOfExpenseClaim": {
         "name": "_getSubProjectsOfExpenseClaim",
         "column_name": "getSubProjectsOfExpenseClaim",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Sub Projects",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -574,7 +574,7 @@
     "_getTravelExpenseClaimLines": {
         "name": "_getTravelExpenseClaimLines",
         "column_name": "getTravelExpenseClaimLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Expense Details",
         "control": "relationship_renderer",
         "align": "",
@@ -662,7 +662,7 @@
     "_attachment_doc_travel_expense_claim": {
         "name": "_attachment_doc_travel_expense_claim",
         "column_name": "attachment_doc_travel_expense_claim",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attached Docs",
         "control": "attachment",
         "align": "",
@@ -750,7 +750,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Followed Up By",
         "control": "dropdown_multi_2a",
         "align": "",

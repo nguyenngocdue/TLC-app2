@@ -13,13 +13,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -35,13 +35,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_slug": {
         "name": "_slug",
@@ -57,13 +57,13 @@
         "hidden_label": "",
         "hidden_filter": "true",
         "hidden_print": "true",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_production_name": {
         "name": "_production_name",
@@ -79,13 +79,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_compliance_name": {
         "name": "_compliance_name",
@@ -101,13 +101,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_erp_name": {
         "name": "_erp_name",
@@ -123,13 +123,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_description": {
         "name": "_description",
@@ -145,13 +145,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_quantity": {
         "name": "_quantity",
@@ -167,13 +167,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_room_type_id": {
         "name": "_room_type_id",
@@ -189,13 +189,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_started_at": {
         "name": "_started_at",
@@ -211,13 +211,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "true",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_finished_at": {
         "name": "_finished_at",
@@ -233,13 +233,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "true",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_total_hours": {
         "name": "_total_hours",
@@ -255,13 +255,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "true",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_total_man_hours": {
         "name": "_total_man_hours",
@@ -277,13 +277,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "true",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -299,13 +299,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -321,13 +321,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_meta_type": {
         "name": "_meta_type",
@@ -343,13 +343,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_meta_id": {
         "name": "_meta_id",
@@ -365,18 +365,18 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getProdSequences": {
         "name": "_getProdSequences",
         "column_name": "getProdSequences",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Sequence-based Timesheets",
         "control": "relationship_renderer",
         "align": "",
@@ -387,18 +387,18 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getQaqcInspChklsts": {
         "name": "_getQaqcInspChklsts",
         "column_name": "getQaqcInspChklsts",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Inspection Checklists",
         "control": "relationship_renderer",
         "align": "",
@@ -409,18 +409,18 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "true",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getMeta": {
         "name": "_getMeta",
         "column_name": "getMeta",
-        "column_type": "eloquent_prop",
+        "column_type": "morphTo",
         "label": "Item",
         "control": "parent_link",
         "align": "",
@@ -431,13 +431,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -453,13 +453,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_status": {
         "name": "_status",
@@ -475,13 +475,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -497,13 +497,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -519,13 +519,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -541,13 +541,13 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -563,12 +563,188 @@
         "hidden_label": "",
         "hidden_filter": "",
         "hidden_print": "",
-        "hidden_template_print": "",
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_prod_sequence_progress": {
+        "name": "_prod_sequence_progress",
+        "column_name": "prod_sequence_progress",
+        "column_type": "float",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_sheet_count": {
+        "name": "_sheet_count",
+        "column_name": "sheet_count",
+        "column_type": "int unsigned",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_total_calendar_days": {
+        "name": "_total_calendar_days",
+        "column_name": "total_calendar_days",
+        "column_type": "int unsigned",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_no_of_sundays": {
+        "name": "_no_of_sundays",
+        "column_name": "no_of_sundays",
+        "column_type": "int unsigned",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_no_of_ph_days": {
+        "name": "_no_of_ph_days",
+        "column_name": "no_of_ph_days",
+        "column_type": "int unsigned",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_total_days_no_sun_no_ph": {
+        "name": "_total_days_no_sun_no_ph",
+        "column_name": "total_days_no_sun_no_ph",
+        "column_type": "int unsigned",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_total_days_have_ts": {
+        "name": "_total_days_have_ts",
+        "column_name": "total_days_have_ts",
+        "column_type": "int unsigned",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
+    "_total_discrepancy_days": {
+        "name": "_total_discrepancy_days",
+        "column_name": "total_discrepancy_days",
+        "column_type": "int",
+        "label": "",
+        "control": "",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "true",
+        "hidden_label": "true",
+        "hidden_filter": "true",
+        "hidden_print": "true",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

@@ -20,10 +20,15 @@ trait TraitEntityFieldHandler2
         // $comment01Count = 0;
         // $comment01Index = "";
         $result = [
-            'oracy_prop' => [],
-            '1_to_many' => [],
-            'many_to_many' => [],
-            'morph' => [],
+            'hasOne' => [],
+            'hasMany' => [],
+            'hasManyThrough' => [],
+            'belongsTo' => [],
+            'belongsToMany' => [],
+            'morphTo' => [],
+            'morphMany' => [],
+            'morphOne' => [],
+            'morphToMany' => [],
 
             'attachment' => [],
             'datetime' => [],
@@ -48,18 +53,9 @@ trait TraitEntityFieldHandler2
                 //     $comment01Count++;
                 //     $comment01Index = "comment" . str_pad($comment01Count, 2, '0', STR_PAD_LEFT);
             } else {
-                switch ($prop['column_type']) {
-                        // case 'oracy_prop':
-                        // case 'eloquent_prop':
-                    case '1_to_many':
-                    case 'many_to_many':
-                    case 'morph':
-                        $column_type = $prop['column_type'];
-                        break;
-                    default:
-                        $column_type = 'field';
-                        break;
-                }
+                $relationships = ['hasOne', 'hasMany', 'hasManyThrough', 'belongsTo', 'belongsToMany', 'morphTo', 'morphMany', 'morphOne', 'morphToMany',];
+                $column_type = 'field';
+                if (in_array($prop['column_type'], $relationships)) $column_type = $prop['column_type'];
             }
             if ($prop['control'] === 'relationship_renderer') {
                 $result[$column_type][$table01Index] = $prop['name'];

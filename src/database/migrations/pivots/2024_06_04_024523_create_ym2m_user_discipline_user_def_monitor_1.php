@@ -8,7 +8,7 @@ return new class extends Migration
     use TraitCreatePivotTable;
     private $table1Plural = 'user_disciplines';
     private $table2Plural = 'users';
-    private $relationshipKey = 'monitor_1';
+    private $relationshipKey = 'def_monitor_1';
 
     public function up()
     {

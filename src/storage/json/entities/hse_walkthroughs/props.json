@@ -112,7 +112,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Walkthrough Attendance",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Unsafe Practices",
         "control": "relationship_renderer",
         "align": "",

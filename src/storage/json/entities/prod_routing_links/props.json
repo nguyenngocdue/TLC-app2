@@ -134,7 +134,7 @@
     "_getScreensShowMeOn": {
         "name": "_getScreensShowMeOn",
         "column_name": "getScreensShowMeOn",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Show on Screens",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -200,7 +200,7 @@
     "_getProdRoutings": {
         "name": "_getProdRoutings",
         "column_name": "getProdRoutings",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Production Routings",
         "control": "relationship_renderer",
         "align": "",
@@ -222,7 +222,7 @@
     "_getProdSequences": {
         "name": "_getProdSequences",
         "column_name": "getProdSequences",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Sequence-based Timesheets",
         "control": "relationship_renderer",
         "align": "",

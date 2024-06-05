@@ -244,7 +244,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Default Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -288,7 +288,7 @@
     "_getUsers": {
         "name": "_getUsers",
         "column_name": "getUsers",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Users",
         "control": "relationship_renderer",
         "align": "",
@@ -310,7 +310,7 @@
     "_getPublicHolidays": {
         "name": "_getPublicHolidays",
         "column_name": "getPublicHolidays",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Public Holidays",
         "control": "relationship_renderer",
         "align": "",

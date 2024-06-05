@@ -112,7 +112,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Sign-Off Admins",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -134,7 +134,7 @@
     "_council_member_list": {
         "name": "_council_member_list",
         "column_name": "council_member_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Council Members",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Check Points",
         "control": "relationship_renderer",
         "align": "",
@@ -332,7 +332,7 @@
     "_signature_qaqc_chklst_3rd_party_list": {
         "name": "_signature_qaqc_chklst_3rd_party_list",
         "column_name": "signature_qaqc_chklst_3rd_party_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Norminated 3rd Inspectors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -354,7 +354,7 @@
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
         "column_name": "signature_qaqc_chklst_3rd_party",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Signatures",
         "control": "signature_multi",
         "align": "",
@@ -376,7 +376,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Rejected Reason",
         "control": "comment",
         "align": "",

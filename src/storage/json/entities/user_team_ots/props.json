@@ -134,7 +134,7 @@
     "_getOtMembers": {
         "name": "_getOtMembers",
         "column_name": "getOtMembers",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "OT Members",
         "control": "dropdown_multi_2a",
         "align": "",

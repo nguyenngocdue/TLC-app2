@@ -112,7 +112,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Get Lines",
         "control": "relationship_renderer",
         "align": "",

@@ -684,7 +684,7 @@
     "_dropdownMonitorsZut9": {
         "name": "_dropdownMonitorsZut9",
         "column_name": "dropdownMonitorsZut9",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
