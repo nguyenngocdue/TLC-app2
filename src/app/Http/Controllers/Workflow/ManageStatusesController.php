@@ -24,6 +24,7 @@ class ManageStatusesController extends AbstractManageLibController
                 'dataIndex' => "title",
                 'renderer' => 'text4',
                 'editable' => true,
+                'width' => 300,
             ],
             [
                 'dataIndex' => "color",
@@ -31,6 +32,7 @@ class ManageStatusesController extends AbstractManageLibController
                 'editable' => true,
                 "cbbDataSource" => ["", "slate", "zinc", "neutral", "stone", "amber", "yellow", "lime", "emerald", "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose", "green", "orange", "red", "gray"],
                 "sortBy" => "value",
+                'width' => 150,
             ],
             [
                 'dataIndex' => "color_index",
@@ -43,6 +45,7 @@ class ManageStatusesController extends AbstractManageLibController
                 'dataIndex' => 'icon',
                 'renderer' => 'text4',
                 'editable' => true,
+                'width' => 500,
             ],
             // [
             //     'dataIndex' => "rendered",
