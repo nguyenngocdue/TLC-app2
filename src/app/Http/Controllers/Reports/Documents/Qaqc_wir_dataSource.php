@@ -120,16 +120,14 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
                                         DISTINCT mtm1.term_id AS prod_routing_id,
                                         _pr.name AS prod_routing_name
                                         FROM (
-                                            SELECT mtm.term_id
-                                            FROM many_to_many mtm
-                                            WHERE mtm.doc_type = 'App\\\Models\\\Wir_description'
-                                            AND mtm.term_type = 'App\\\Models\\\Prod_routing'
+                                            SELECT prwid.prod_routing_id as term_id
+                                                FROM ym2m_prod_routing_wir_description prwid
                                         ) AS mtm1
                                         LEFT JOIN (
-                                            SELECT mtm.doc_id
-                                            FROM many_to_many mtm
-                                            WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
-                                            AND mtm.term_id = 346
+                                            SELECT prdtso.prod_routing_id as doc_id
+                                                FROM ym2m_prod_routing_term_show_me_on prdtso
+                                                WHERE 1 = 1
+                                                AND prdtso.term_id = 346
                                         ) AS mtm2 ON mtm1.term_id = mtm2.doc_id
                                         LEFT JOIN prod_routings _pr ON _pr.id = mtm1.term_id AND _pr.id IN ( $strIdsRoutings )
                         ) pr ON pr.prod_routing_id = po.prod_routing_id
@@ -177,12 +175,10 @@ class Qaqc_wir_dataSource extends Report_ParentDocument2Controller
                                                             ) AS tb1
                                                 LEFT JOIN (
                                                     SELECT
-                                                        mtm.term_id AS prod_routing_id,
-                                                        COUNT(mtm.doc_id) AS count_wir_description
-                                                    FROM many_to_many mtm 
+                                                        prwd.prod_routing_id AS prod_routing_id,
+                                                        COUNT(prwd.wir_description_id) AS count_wir_description
+                                                    FROM ym2m_prod_routing_wir_description prwd
                                                     WHERE 1 = 1 
-                                                        AND mtm.doc_type = 'App\\\Models\\\Wir_description' 
-                                                        AND mtm.term_type = 'App\\\Models\\\Prod_routing' 
                                                     GROUP BY prod_routing_id
                                                 ) AS tb2 ON tb2.prod_routing_id = tb1.prod_routing_id
 
