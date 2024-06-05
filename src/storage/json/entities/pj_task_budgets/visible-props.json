@@ -2,61 +2,73 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_discipline_id": {
         "name": "_discipline_id",
         "column_name": "discipline_id",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true"
+        "new": "true",
+        "not_applicable": "true"
     }
 }

@@ -93,8 +93,8 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
             $item = [
                 'dataIndex' => $line->id,
                 'columnIndex' => "status",
-                'title' => $line->name . "<br/><div class='flex'>" . $avatars . "</div>",
-                'width' => 65,
+                'title' => "<div class='flex items-baseline'>" . $line->name .  $avatars . "</div>",
+                'width' => 50,
             ];
             $result[] = $item;
         }
