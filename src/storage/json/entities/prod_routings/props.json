@@ -90,7 +90,7 @@
     "_getSubProjects": {
         "name": "_getSubProjects",
         "column_name": "getSubProjects",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Sub Projects",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -112,7 +112,7 @@
     "_getScreensShowMeOn": {
         "name": "_getScreensShowMeOn",
         "column_name": "getScreensShowMeOn",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Show On Screens",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -134,7 +134,7 @@
     "_getChklstTmpls": {
         "name": "_getChklstTmpls",
         "column_name": "getChklstTmpls",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Available Checklist Templates",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -156,7 +156,7 @@
     "_getExternalInspectorsOfProdRouting": {
         "name": "_getExternalInspectorsOfProdRouting",
         "column_name": "getExternalInspectorsOfProdRouting",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "External Inspectors of Routing",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getCouncilMembersOfProdRouting": {
         "name": "_getCouncilMembersOfProdRouting",
         "column_name": "getCouncilMembersOfProdRouting",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Council Members Of Prod Routing",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -222,7 +222,7 @@
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
         "column_name": "getProdRoutingLinks",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Routing Links",
         "control": "relationship_renderer",
         "align": "",
@@ -244,7 +244,7 @@
     "_getProdOrders": {
         "name": "_getProdOrders",
         "column_name": "getProdOrders",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Production Orders",
         "control": "relationship_renderer",
         "align": "",
@@ -266,7 +266,7 @@
     "_getProdSequences": {
         "name": "_getProdSequences",
         "column_name": "getProdSequences",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Sequence-based Timesheets",
         "control": "relationship_renderer",
         "align": "",
@@ -288,7 +288,7 @@
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
         "column_name": "getProdRoutingDetails",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Routing Details",
         "control": "relationship_renderer",
         "align": "",
@@ -310,7 +310,7 @@
     "_getWirDescriptions": {
         "name": "_getWirDescriptions",
         "column_name": "getWirDescriptions",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Available WIRs",
         "control": "checkbox_2a",
         "align": "",

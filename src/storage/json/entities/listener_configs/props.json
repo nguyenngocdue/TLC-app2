@@ -134,7 +134,7 @@
     "_getRoutingLinks": {
         "name": "_getRoutingLinks",
         "column_name": "getRoutingLinks",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Routing Links",
         "control": "dropdown_multi_2a",
         "align": "",

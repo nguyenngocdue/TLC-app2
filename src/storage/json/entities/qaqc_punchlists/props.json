@@ -134,7 +134,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Signature Admin",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -156,7 +156,7 @@
     "_getMonitors2": {
         "name": "_getMonitors2",
         "column_name": "getMonitors2",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Punchlist Items",
         "control": "relationship_renderer",
         "align": "",
@@ -200,7 +200,7 @@
     "_signature_qaqc_punchlist_qaqc_list": {
         "name": "_signature_qaqc_punchlist_qaqc_list",
         "column_name": "signature_qaqc_punchlist_qaqc_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "QC Deputy",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -222,7 +222,7 @@
     "_signature_qaqc_punchlist_production_list": {
         "name": "_signature_qaqc_punchlist_production_list",
         "column_name": "signature_qaqc_punchlist_production_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Production Managers",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -244,7 +244,7 @@
     "_signature_qaqc_punchlist_project_list": {
         "name": "_signature_qaqc_punchlist_project_list",
         "column_name": "signature_qaqc_punchlist_project_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Project Managers",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -266,7 +266,7 @@
     "_signature_qaqc_punchlist_factory_list": {
         "name": "_signature_qaqc_punchlist_factory_list",
         "column_name": "signature_qaqc_punchlist_factory_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Factory Manager",
         "control": "dropdown_multi_2a",
         "align": "",

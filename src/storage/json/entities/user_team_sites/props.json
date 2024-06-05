@@ -90,7 +90,7 @@
     "_getSiteMembers": {
         "name": "_getSiteMembers",
         "column_name": "getSiteMembers",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Members",
         "control": "dropdown_multi_2a",
         "align": "",

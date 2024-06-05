@@ -310,7 +310,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Sign-Off Admins",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -332,7 +332,7 @@
     "_signature_eco_peers_list": {
         "name": "_signature_eco_peers_list",
         "column_name": "signature_eco_peers_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Peer List",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -354,7 +354,7 @@
     "_signature_eco_managers_list": {
         "name": "_signature_eco_managers_list",
         "column_name": "signature_eco_managers_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Manager List",
         "control": "dropdown_multi_2a",
         "align": "",

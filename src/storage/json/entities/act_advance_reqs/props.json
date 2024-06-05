@@ -112,7 +112,7 @@
     "_getSubProjectsOfAdvanceReq": {
         "name": "_getSubProjectsOfAdvanceReq",
         "column_name": "getSubProjectsOfAdvanceReq",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Sub Projects",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -244,7 +244,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",

@@ -750,7 +750,7 @@
     "_getQaqcCars": {
         "name": "_getQaqcCars",
         "column_name": "getQaqcCars",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Corrective Actions",
         "control": "relationship_renderer",
         "align": "",
@@ -970,7 +970,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",

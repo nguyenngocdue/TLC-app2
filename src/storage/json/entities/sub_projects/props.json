@@ -156,7 +156,7 @@
     "_getProdOrders": {
         "name": "_getProdOrders",
         "column_name": "getProdOrders",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Prod Orders",
         "control": "relationship_renderer",
         "align": "",
@@ -222,7 +222,7 @@
     "_getProdRoutingsOfSubProject": {
         "name": "_getProdRoutingsOfSubProject",
         "column_name": "getProdRoutingsOfSubProject",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Available Routings",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -354,7 +354,7 @@
     "_getProjectMembers": {
         "name": "_getProjectMembers",
         "column_name": "getProjectMembers",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Project Members",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -420,7 +420,7 @@
     "_getProjectClientsOfSubProject": {
         "name": "_getProjectClientsOfSubProject",
         "column_name": "getProjectClientsOfSubProject",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Project Client (Person)",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -464,7 +464,7 @@
     "_getExternalInspectorsOfSubProject": {
         "name": "_getExternalInspectorsOfSubProject",
         "column_name": "getExternalInspectorsOfSubProject",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "External Inspectors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -508,7 +508,7 @@
     "_getCouncilMembersOfSubProject": {
         "name": "_getCouncilMembersOfSubProject",
         "column_name": "getCouncilMembersOfSubProject",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Council Members Of SubProject",
         "control": "dropdown_multi_2a",
         "align": "",

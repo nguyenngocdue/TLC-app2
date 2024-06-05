@@ -68,7 +68,7 @@
     "_getLodsOfTask": {
         "name": "_getLodsOfTask",
         "column_name": "getLodsOfTask",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Phases",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -90,7 +90,7 @@
     "_getDisciplinesOfTask": {
         "name": "_getDisciplinesOfTask",
         "column_name": "getDisciplinesOfTask",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Disciplines",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -112,7 +112,7 @@
     "_getChildrenSubTasks": {
         "name": "_getChildrenSubTasks",
         "column_name": "getChildrenSubTasks",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "SubTasks",
         "control": "dropdown_multi_2a",
         "align": "",

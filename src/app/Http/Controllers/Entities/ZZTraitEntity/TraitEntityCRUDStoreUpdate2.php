@@ -88,7 +88,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request, $objectId);
 			$this->attachOrphan($props['attachment'], $request, $modelPath, $objectId);
 			// $this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
-			$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['many_to_many']);
+			$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['belongsToMany']);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
@@ -150,9 +150,9 @@ trait TraitEntityCRUDStoreUpdate2
 		$previousItem = null;
 		//This is to compare status, assignee, and monitors for sending MailChangeStatus
 		if (!$isFakeRequest) {
-			$previousItem = $this->modelPath::find($id)
-				// ->with("getMonitors1")
-				->first();
+			$previousItem = $this->modelPath::find($id);
+			// ->with("getMonitors1")
+			// ->first();
 			// if ($this->type == 'qaqc_insp_chklst_sht') $diff = $this->getDiff($previousItem, $request);
 			// Oracy::attach("getMonitors1()", [$previousItem], true);
 			$previousValue = $previousItem->getAttributes();
@@ -199,9 +199,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request);
 			$this->processSignatures($request);
 			if (!$isFakeRequest) {
-				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['many_to_many']);
+				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['belongsToMany']);
 			} else {
-				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['many_to_many'], $getManyLineParams);
+				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['belongsToMany'], $getManyLineParams);
 			}
 			// if (!$isFakeRequest) {
 			// 	//This will stop Project update keep deleting the sub project routings

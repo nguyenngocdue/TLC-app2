@@ -200,7 +200,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 1",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -222,7 +222,7 @@
     "_getMonitors2": {
         "name": "_getMonitors2",
         "column_name": "getMonitors2",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 2",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -244,7 +244,7 @@
     "_getMonitors3": {
         "name": "_getMonitors3",
         "column_name": "getMonitors3",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 3",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -266,7 +266,7 @@
     "_getMonitors4": {
         "name": "_getMonitors4",
         "column_name": "getMonitors4",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 4",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -288,7 +288,7 @@
     "_getMonitors5": {
         "name": "_getMonitors5",
         "column_name": "getMonitors5",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 5",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -310,7 +310,7 @@
     "_getMonitors6": {
         "name": "_getMonitors6",
         "column_name": "getMonitors6",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 6",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -332,7 +332,7 @@
     "_getMonitors7": {
         "name": "_getMonitors7",
         "column_name": "getMonitors7",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 7",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -354,7 +354,7 @@
     "_getMonitors8": {
         "name": "_getMonitors8",
         "column_name": "getMonitors8",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 8",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -376,7 +376,7 @@
     "_getMonitors9": {
         "name": "_getMonitors9",
         "column_name": "getMonitors9",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors 9",
         "control": "dropdown_multi_2a",
         "align": "",

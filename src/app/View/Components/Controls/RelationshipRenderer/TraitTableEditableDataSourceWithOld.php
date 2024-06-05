@@ -108,7 +108,7 @@ trait TraitTableEditableDataSourceWithOld
         // Log::info($columns);
         $columns = array_filter($editableColumns, fn ($column) => isset($column['editable']) && $column['editable'] == true);
         $columns = array_filter($columns, fn ($column) => !str_contains($column['dataIndex'], "()")); //<< Ignored all oracy params
-        $columns = array_filter($columns, fn ($column) => $column['column_type'] !== 'many_to_many'); //<< Ignored all eloquent belongsToMany params
+        $columns = array_filter($columns, fn ($column) => $column['column_type'] !== 'belongsToMany'); //<< Ignored all eloquent belongsToMany params
         $columns = array_filter($columns, fn ($column) => $column['renderer'] !== 'attachment4'); //<< Ignored all attachments
         $columns = array_values(array_map(fn ($column) => $column['dataIndex'], $columns));
         // dump($editableColumns);

@@ -156,7 +156,7 @@
     "_getScreensShowMeOn": {
         "name": "_getScreensShowMeOn",
         "column_name": "getScreensShowMeOn",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Show On Screens",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getProjectMembers": {
         "name": "_getProjectMembers",
         "column_name": "getProjectMembers",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Team Members",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -200,7 +200,7 @@
     "_getSubProjects": {
         "name": "_getSubProjects",
         "column_name": "getSubProjects",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Sub Projects",
         "control": "relationship_renderer",
         "align": "",

@@ -156,7 +156,7 @@
     "_checkboxYesNo": {
         "name": "_checkboxYesNo",
         "column_name": "checkboxYesNo",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "CheckboxYesNo",
         "control": "checkbox_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_checkboxPassFail": {
         "name": "_checkboxPassFail",
         "column_name": "checkboxPassFail",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "CheckboxPassFail",
         "control": "checkbox_2a",
         "align": "",
@@ -200,7 +200,7 @@
     "_dropdownMultiYesNo": {
         "name": "_dropdownMultiYesNo",
         "column_name": "dropdownMultiYesNo",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "DropdownMultiYesNo",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -222,7 +222,7 @@
     "_dropdownMultiPassFail": {
         "name": "_dropdownMultiPassFail",
         "column_name": "dropdownMultiPassFail",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "DropdownMultiPassFail",
         "control": "dropdown_multi_2a",
         "align": "",

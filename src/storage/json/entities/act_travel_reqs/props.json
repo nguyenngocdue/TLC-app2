@@ -200,7 +200,7 @@
     "_getTravelReqLines": {
         "name": "_getTravelReqLines",
         "column_name": "getTravelReqLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Travel Request Lines",
         "control": "relationship_renderer",
         "align": "",
@@ -288,7 +288,7 @@
     "_getReqTravelDesk": {
         "name": "_getReqTravelDesk",
         "column_name": "getReqTravelDesk",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Request Travel Desk to",
         "control": "checkbox_2a",
         "align": "",
@@ -420,7 +420,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Followed Up By Departure",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -442,7 +442,7 @@
     "_getMonitors2": {
         "name": "_getMonitors2",
         "column_name": "getMonitors2",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Followed Up By Arrival",
         "control": "dropdown_multi_2a",
         "align": "",
