@@ -90,7 +90,7 @@
     "_getTerms": {
         "name": "_getTerms",
         "column_name": "getTerms",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Terms",
         "control": "relationship_renderer",
         "align": "",

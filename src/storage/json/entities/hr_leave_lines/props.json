@@ -46,7 +46,7 @@
     "_leaveable": {
         "name": "_leaveable",
         "column_name": "leaveable",
-        "column_type": "eloquent_prop",
+        "column_type": "morphTo",
         "label": "Parent",
         "control": "parent_link",
         "align": "",

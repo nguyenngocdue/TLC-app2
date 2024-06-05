@@ -90,7 +90,7 @@
     "_getHrTsLines": {
         "name": "_getHrTsLines",
         "column_name": "getHrTsLines",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "",
         "control": "relationship_renderer",
         "align": "",
@@ -222,7 +222,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "Rejected Reason",
         "control": "comment",
         "align": "",

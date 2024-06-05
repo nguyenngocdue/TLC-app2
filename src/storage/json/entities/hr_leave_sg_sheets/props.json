@@ -90,7 +90,7 @@
     "_getHrLeaveLines": {
         "name": "_getHrLeaveLines",
         "column_name": "getHrLeaveLines",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "Leave Details",
         "control": "relationship_renderer",
         "align": "",

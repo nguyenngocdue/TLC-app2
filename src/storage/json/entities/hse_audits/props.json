@@ -156,7 +156,7 @@
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "Unsafe Practices",
         "control": "relationship_renderer",
         "align": "",

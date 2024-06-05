@@ -222,7 +222,7 @@
     "_getProdRuns": {
         "name": "_getProdRuns",
         "column_name": "getProdRuns",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Production Run Lines",
         "control": "relationship_renderer",
         "align": "",
@@ -244,7 +244,7 @@
     "_getProdRunsRework": {
         "name": "_getProdRunsRework",
         "column_name": "getProdRunsRework",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Rework",
         "control": "relationship_renderer",
         "align": "",
@@ -398,7 +398,7 @@
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
         "column_name": "getProdRoutingDetails",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Prod Routing Details",
         "control": "relationship_renderer",
         "align": "",
@@ -508,7 +508,7 @@
     "_comment_on_hold_reason": {
         "name": "_comment_on_hold_reason",
         "column_name": "comment_on_hold_reason",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "On Hold Reason",
         "control": "comment",
         "align": "",
@@ -530,7 +530,7 @@
     "_comment_cancel_reason": {
         "name": "_comment_cancel_reason",
         "column_name": "comment_cancel_reason",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "Cancelled Reason",
         "control": "comment",
         "align": "",
