@@ -28,7 +28,7 @@ RUN docker-php-ext-install gd && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install zip
+# RUN docker-php-ext-install zip
 
 RUN docker-php-ext-install pcntl
 
