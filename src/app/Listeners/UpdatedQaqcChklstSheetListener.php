@@ -42,11 +42,11 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
         $sheet->save();
     }
 
-    private function updateStatusAccordingToSignOff($sheet, $nominatedListFn)
+    private function updateStatusAccordingToSignOff($sheet, $nominatedListFn, $signatureFn)
     {
         if ($sheet->status === 'pending_audit') {
-            $nominatedList = $sheet->{$nominatedListFn . "_list"}();
-            $signatures = $sheet->{$nominatedListFn}()->get();
+            $nominatedList = $sheet->{$nominatedListFn};
+            $signatures = $sheet->{$signatureFn};
             // Log::info($signatures);
             // Log::info($signatures->pluck('id'));
             if (sizeof($signatures) == 0) {
@@ -77,6 +77,9 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
         $newSignOffList = $event->newSignOffList;
         $nominatedListFn = $event->nominatedListFn;
         $signatureFn = $event->signatureFn;
+        // Log::info($newSignOffList);
+        // Log::info($nominatedListFn);
+        // Log::info($signatureFn);
 
         $newCouncilList = $event->newCouncilList;
         $councilListFn = $event->councilListFn;
@@ -84,7 +87,7 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
         $sheet = Qaqc_insp_chklst_sht::find($sheetId);
 
         $this->updateProgress($sheet);
-        $this->updateStatusAccordingToSignOff($sheet, $signatureFn);
+        $this->updateStatusAccordingToSignOff($sheet, $nominatedListFn, $signatureFn);
         // Log::info("Elaborate updated event to Checklist...");
         event(new UpdatedQaqcChklstEvent($sheet, $newSignOffList, $nominatedListFn, $newCouncilList, $councilListFn));
     }

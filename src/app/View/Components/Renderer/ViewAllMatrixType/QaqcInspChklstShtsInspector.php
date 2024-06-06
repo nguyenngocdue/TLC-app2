@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\BigThink\Oracy;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
@@ -92,7 +91,11 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
             ->{$this->getProdRoutingsOfUserFn}()
             ->with("getSubProjects")
             ->get();
-        // Oracy::attach('getSubProjects()', $prodRoutings);
+
+        foreach ($prodRoutings as &$item) {
+            $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();
+        }
+
         // dump($prodRoutings);
         return $prodRoutings;
     }

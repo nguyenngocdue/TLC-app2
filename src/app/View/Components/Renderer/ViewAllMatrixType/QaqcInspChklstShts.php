@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
@@ -13,7 +12,6 @@ use App\Models\Sub_project;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -282,9 +280,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         foreach ($prodRoutings as $key => $routing) {
             $allSubProjects = $routing->getSubProjects;
             if ($allSubProjects) {
-                if (!$allSubProjects->contains($this->subProject)) {
-                    continue;
-                }
+                if (in_array($this->subProject, $allSubProjects)) continue;
             }
             $showOnScreenIds = $routing->getScreensShowMeOn->pluck('id');
             if ($showOnScreenIds->contains($show_on_ics_id)) {

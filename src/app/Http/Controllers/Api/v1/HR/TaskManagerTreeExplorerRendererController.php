@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\v1\HR;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Controller;
 use App\Models\Pj_sub_task;
 use App\Models\Pj_task;

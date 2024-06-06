@@ -2,8 +2,6 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\BigThink\Oracy;
-use App\Models\Prod_routing;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 
@@ -17,7 +15,7 @@ class QaqcInspChklstShtsClient extends QaqcInspChklstShts
     function  __construct()
     {
         $cu = CurrentUser::get();
-        $this->subProjects = $cu->getSubProjectsOfProjectClient();
+        $this->subProjects = $cu->getSubProjectsOfProjectClient;
         if (!$this->subProjects->contains('id', $this->STW_SANDBOX_ID)) {
             $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
         }
@@ -46,7 +44,7 @@ class QaqcInspChklstShtsClient extends QaqcInspChklstShts
     {
         $projects = $this->projects;
         $subProjects = $this->subProjects;
-        $prodRoutings = $this->getRoutingCollectionFromSubProjects();
+        $prodRoutings = $this->getRoutingCollectionFromSubProjectsForClients();
 
         return [$projects, $subProjects, $prodRoutings];
     }
