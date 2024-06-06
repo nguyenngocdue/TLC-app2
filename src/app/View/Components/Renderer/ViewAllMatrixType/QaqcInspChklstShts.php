@@ -280,7 +280,11 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         foreach ($prodRoutings as $key => $routing) {
             $allSubProjects = $routing->getSubProjects;
             if ($allSubProjects) {
-                if (in_array($this->subProject, $allSubProjects)) continue;
+                if (is_array($allSubProjects)) {
+                    if (in_array($this->subProject, $allSubProjects)) continue;
+                } else {
+                    if (!$allSubProjects->contains($this->subProject)) continue;
+                }
             }
             $showOnScreenIds = $routing->getScreensShowMeOn->pluck('id');
             if ($showOnScreenIds->contains($show_on_ics_id)) {
