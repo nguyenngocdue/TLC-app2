@@ -24,6 +24,8 @@ class Pj_task_budget extends ModelExtended
         "getDiscipline" => ['belongsTo', User_discipline::class, 'discipline_id'],
         "getProject" => ['belongsTo', Project::class, 'project_id'],
         "getLines" => ['hasMany', Pj_task_budget_line::class, 'task_budget_id'],
+        // "getLinesHOF" => ['hasMany', Pj_task_budget_line::class, 'task_budget_id'],
+
     ];
 
     public function getDiscipline()
@@ -43,4 +45,10 @@ class Pj_task_budget extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    // public function getLinesHOF()
+    // {
+    //     $p = static::$eloquentParams[__FUNCTION__];
+    //     return $this->{$p[0]}($p[1], $p[2]);
+    // }
 }

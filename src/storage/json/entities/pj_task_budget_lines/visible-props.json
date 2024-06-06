@@ -1,0 +1,62 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description"
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id"
+    },
+    "_task_budget_id": {
+        "name": "_task_budget_id",
+        "column_name": "task_budget_id"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id"
+    },
+    "_phase_id": {
+        "name": "_phase_id",
+        "column_name": "phase_id"
+    },
+    "_discipline_id": {
+        "name": "_discipline_id",
+        "column_name": "discipline_id"
+    },
+    "_task_id": {
+        "name": "_task_id",
+        "column_name": "task_id"
+    },
+    "_budget_value": {
+        "name": "_budget_value",
+        "column_name": "budget_value"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no"
+    }
+}
