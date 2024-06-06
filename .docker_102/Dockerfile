@@ -1,10 +1,8 @@
-# FROM php:8.0-fpm-alpine
 FROM php:8.2-fpm-alpine3.17
 
 WORKDIR /var/www/app
 
 RUN apk update && apk add \
-    # build-base shadow supervisor \
     curl \
     libpng-dev \
     libxml2-dev \
@@ -36,6 +34,9 @@ RUN docker-php-ext-install pcntl
 
 RUN apk add build-base autoconf
 RUN pecl install apcu 
+
+#RUN apk add unixodbc-dev
+#RUN pecl install pdo_sqlsrv sqlsrv
 
 COPY ./configs/php.ini /usr/local/etc/php/
 
