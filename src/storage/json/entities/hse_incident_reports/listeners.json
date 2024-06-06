@@ -359,9 +359,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -494,9 +494,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_mainAffectedPart()": {
-        "name": "_mainAffectedPart()",
-        "column_name": "mainAffectedPart()",
+    "_mainAffectedPart": {
+        "name": "_mainAffectedPart",
+        "column_name": "mainAffectedPart",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -509,9 +509,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_natureOfInjury()": {
-        "name": "_natureOfInjury()",
-        "column_name": "natureOfInjury()",
+    "_natureOfInjury": {
+        "name": "_natureOfInjury",
+        "column_name": "natureOfInjury",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -524,9 +524,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_treatmentInstruction()": {
-        "name": "_treatmentInstruction()",
-        "column_name": "treatmentInstruction()",
+    "_treatmentInstruction": {
+        "name": "_treatmentInstruction",
+        "column_name": "treatmentInstruction",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -554,9 +554,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_causeOfIssue()": {
-        "name": "_causeOfIssue()",
-        "column_name": "causeOfIssue()",
+    "_causeOfIssue": {
+        "name": "_causeOfIssue",
+        "column_name": "causeOfIssue",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -569,9 +569,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_activityLeadToIssue()": {
-        "name": "_activityLeadToIssue()",
-        "column_name": "activityLeadToIssue()",
+    "_activityLeadToIssue": {
+        "name": "_activityLeadToIssue",
+        "column_name": "activityLeadToIssue",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -584,9 +584,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_immediateCause()": {
-        "name": "_immediateCause()",
-        "column_name": "immediateCause()",
+    "_immediateCause": {
+        "name": "_immediateCause",
+        "column_name": "immediateCause",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -599,9 +599,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_issueRootCause()": {
-        "name": "_issueRootCause()",
-        "column_name": "issueRootCause()",
+    "_issueRootCause": {
+        "name": "_issueRootCause",
+        "column_name": "issueRootCause",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

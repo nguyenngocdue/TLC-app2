@@ -25,12 +25,10 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getAssignee2' => ['belongsTo', User::class, 'assignee_2'],
-    ];
-
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        "council_member_list()" => ["getCheckedByField", User::class],
-        "signature_qaqc_chklst_3rd_party_list()"  => ["getCheckedByField", User::class],
+        //Many to many
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_monitor_1"],
+        "council_member_list" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_council_member"],
+        "signature_qaqc_chklst_3rd_party_list"  => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_3rd_party"],
     ];
 
     public function getLines()
@@ -91,18 +89,18 @@ class Qaqc_insp_chklst_sht extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function council_member_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_chklst_3rd_party_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function comment_rejected_reason()

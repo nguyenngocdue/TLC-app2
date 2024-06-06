@@ -17,8 +17,6 @@ class Department_skill extends ModelExtended
         "getDepartmentSkillGroup" => ['belongsTo', Department_skill_group::class, 'department_skill_group_id'],
     ];
 
-    public static $oracyParams = [];
-
     public function getDepartmentSkillGroup()
     {
         $p = static::$eloquentParams[__FUNCTION__];

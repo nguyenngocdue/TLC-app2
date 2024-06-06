@@ -14,15 +14,14 @@ class Hse_walkthrough extends ModelExtended
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "getCorrectiveActions" => ['morphMany', Hse_corrective_action::class, 'correctable', 'correctable_type', 'correctable_id'],
+
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_hse_walkthrough_user_monitor_1"],
     ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-    ];
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkplace()
     {

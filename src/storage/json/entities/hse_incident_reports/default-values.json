@@ -324,14 +324,14 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "16,108,88,2,191",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
@@ -519,9 +519,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_mainAffectedPart()": {
-        "name": "_mainAffectedPart()",
-        "column_name": "mainAffectedPart()",
+    "_mainAffectedPart": {
+        "name": "_mainAffectedPart",
+        "column_name": "mainAffectedPart",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -532,9 +532,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_natureOfInjury()": {
-        "name": "_natureOfInjury()",
-        "column_name": "natureOfInjury()",
+    "_natureOfInjury": {
+        "name": "_natureOfInjury",
+        "column_name": "natureOfInjury",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -545,9 +545,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_treatmentInstruction()": {
-        "name": "_treatmentInstruction()",
-        "column_name": "treatmentInstruction()",
+    "_treatmentInstruction": {
+        "name": "_treatmentInstruction",
+        "column_name": "treatmentInstruction",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -597,9 +597,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_causeOfIssue()": {
-        "name": "_causeOfIssue()",
-        "column_name": "causeOfIssue()",
+    "_causeOfIssue": {
+        "name": "_causeOfIssue",
+        "column_name": "causeOfIssue",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -636,9 +636,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_activityLeadToIssue()": {
-        "name": "_activityLeadToIssue()",
-        "column_name": "activityLeadToIssue()",
+    "_activityLeadToIssue": {
+        "name": "_activityLeadToIssue",
+        "column_name": "activityLeadToIssue",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -675,9 +675,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_immediateCause()": {
-        "name": "_immediateCause()",
-        "column_name": "immediateCause()",
+    "_immediateCause": {
+        "name": "_immediateCause",
+        "column_name": "immediateCause",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -714,9 +714,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_issueRootCause()": {
-        "name": "_issueRootCause()",
-        "column_name": "issueRootCause()",
+    "_issueRootCause": {
+        "name": "_issueRootCause",
+        "column_name": "issueRootCause",
         "label": "",
         "validation": "",
         "validation_regex": "",

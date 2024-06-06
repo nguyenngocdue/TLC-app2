@@ -41,9 +41,10 @@ class ProdRoutingFilter extends Component
     {
         if ($this->dataSource) return $this->dataSource;
         $db = Prod_routing::select('id', 'name', 'description')
+            ->with('getSubProjects')
             ->orderBy('name')
             ->get();
-        Oracy::attach("getSubProjects()", $db);
+        // Oracy::attach("getSubProjects()", $db);
 
         // if (CurrentUser::isAdmin()) {
         $db = $db->filter(fn ($item) => $item->isShowOn($this->typePlural))->values();

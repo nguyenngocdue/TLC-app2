@@ -296,9 +296,9 @@
         "inspection_rejected": "",
         "closed": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "",
         "assigned": "true",
         "rejected": "",

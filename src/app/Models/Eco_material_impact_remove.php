@@ -17,8 +17,6 @@ class Eco_material_impact_remove extends ModelExtended
         "getUnit" => ['belongsTo', Term::class, 'unit_id']
     ];
 
-    public static $oracyParams = [];
-
     public function getEcoSheet()
     {
         $p = static::$eloquentParams[__FUNCTION__];

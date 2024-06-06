@@ -28,14 +28,12 @@ class Act_travel_req extends ModelExtended
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "attachment_current_passport" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_current_portrait" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+
+        "getReqTravelDesk" => ["belongsToMany", Term::class, 'ym2m_act_travel_req_term_travel_desk'],
+        "getMonitors1" => ["belongsToMany", User::class, 'ym2m_act_travel_req_user_monitor_1'],
+        "getMonitors2" => ["belongsToMany", User::class, 'ym2m_act_travel_req_user_monitor_2'],
     ];
 
-    public static $oracyParams = [
-        "getReqTravelDesk()" => ["getCheckedByField", Term::class],
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        "getMonitors2()" => ["getCheckedByField", User::class],
-
-    ];
     public function getUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -65,8 +63,8 @@ class Act_travel_req extends ModelExtended
     }
     public function getReqTravelDesk()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getWorkplace()
     {
@@ -90,13 +88,13 @@ class Act_travel_req extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMonitors2()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getManyLineParams()

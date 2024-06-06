@@ -47,16 +47,16 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getSkillsOfDepartment()": {
-        "name": "_getSkillsOfDepartment()",
-        "relationship": "getCheckedByField",
-        "control_name": "getSkillsOfDepartment()",
+    "_getSkillsOfDepartment": {
+        "name": "_getSkillsOfDepartment",
+        "relationship": "belongsToMany",
+        "control_name": "getSkillsOfDepartment",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "2",

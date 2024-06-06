@@ -16,7 +16,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h1a": {
         "name": "_h1a",
@@ -35,7 +38,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -54,7 +60,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_work_area_id": {
         "name": "_work_area_id",
@@ -73,7 +82,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_issue_datetime": {
         "name": "_issue_datetime",
@@ -92,7 +104,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_injured_person": {
         "name": "_injured_person",
@@ -111,7 +126,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_injured_staff_id": {
         "name": "_injured_staff_id",
@@ -130,7 +148,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_injured_staff_position": {
         "name": "_injured_staff_position",
@@ -149,7 +170,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_injured_staff_cat": {
         "name": "_injured_staff_cat",
@@ -168,7 +192,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_first_date": {
         "name": "_first_date",
@@ -187,7 +214,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_injured_staff_cat_desc": {
         "name": "_injured_staff_cat_desc",
@@ -206,7 +236,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_employed_duration_in_year": {
         "name": "_employed_duration_in_year",
@@ -225,7 +258,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_injured_staff_discipline": {
         "name": "_injured_staff_discipline",
@@ -244,7 +280,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -263,7 +302,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_manager_staff_id": {
         "name": "_manager_staff_id",
@@ -282,7 +324,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_manager_staff_position": {
         "name": "_manager_staff_position",
@@ -301,7 +346,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -320,7 +368,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_staff_id": {
         "name": "_owner_staff_id",
@@ -339,7 +390,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_staff_position": {
         "name": "_owner_staff_position",
@@ -358,7 +412,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_incident_doc_type_id": {
         "name": "_incident_doc_type_id",
@@ -377,7 +434,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_incident_doc_sub_type_id": {
         "name": "_incident_doc_sub_type_id",
@@ -396,7 +456,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_lost_value": {
         "name": "_lost_value",
@@ -415,7 +478,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_lost_unit_id": {
         "name": "_lost_unit_id",
@@ -434,7 +500,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_number_injured_person": {
         "name": "_number_injured_person",
@@ -453,7 +522,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_number_involved_person": {
         "name": "_number_involved_person",
@@ -472,14 +544,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "column_type": "oracy_prop",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "many_to_many",
         "label": "Monitors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -491,7 +566,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider1": {
         "name": "_divider1",
@@ -510,7 +588,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h1b": {
         "name": "_h1b",
@@ -529,7 +610,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_issue_description": {
         "name": "_issue_description",
@@ -548,12 +632,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_attachment_hse_incident_doc": {
         "name": "_attachment_hse_incident_doc",
         "column_name": "attachment_hse_incident_doc",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Attached Incident Doc",
         "control": "attachment",
         "align": "",
@@ -567,7 +654,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider2": {
         "name": "_divider2",
@@ -586,7 +676,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h2b": {
         "name": "_h2b",
@@ -605,7 +698,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_accident_book_entry": {
         "name": "_accident_book_entry",
@@ -624,7 +720,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_lost_days": {
         "name": "_lost_days",
@@ -643,7 +742,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_need_to_transfer_position": {
         "name": "_need_to_transfer_position",
@@ -662,7 +764,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_time_in_hospital": {
         "name": "_time_in_hospital",
@@ -681,7 +786,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_time_out_hospital": {
         "name": "_time_out_hospital",
@@ -700,12 +808,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
         "column_name": "attachment_hse_hr_decision",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "HR Decision",
         "control": "attachment",
         "align": "",
@@ -719,7 +830,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider3": {
         "name": "_divider3",
@@ -738,7 +852,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h8b": {
         "name": "_h8b",
@@ -757,14 +874,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_mainAffectedPart()": {
-        "name": "_mainAffectedPart()",
-        "column_name": "mainAffectedPart()",
-        "column_type": "oracy_prop",
+    "_mainAffectedPart": {
+        "name": "_mainAffectedPart",
+        "column_name": "mainAffectedPart",
+        "column_type": "many_to_many",
         "label": "Main Parts Of Body Affected",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -776,14 +896,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_natureOfInjury()": {
-        "name": "_natureOfInjury()",
-        "column_name": "natureOfInjury()",
-        "column_type": "oracy_prop",
+    "_natureOfInjury": {
+        "name": "_natureOfInjury",
+        "column_name": "natureOfInjury",
+        "column_type": "many_to_many",
         "label": "Nature of Injury",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -795,14 +918,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_treatmentInstruction()": {
-        "name": "_treatmentInstruction()",
-        "column_name": "treatmentInstruction()",
-        "column_type": "oracy_prop",
+    "_treatmentInstruction": {
+        "name": "_treatmentInstruction",
+        "column_name": "treatmentInstruction",
+        "column_type": "many_to_many",
         "label": "Instruction to Injured Person",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -814,12 +940,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_comment_by_clinic": {
         "name": "_comment_by_clinic",
         "column_name": "comment_by_clinic",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Comment by Internal Clinic",
         "control": "comment",
         "align": "",
@@ -833,7 +962,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider8": {
         "name": "_divider8",
@@ -852,7 +984,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h2a": {
         "name": "_h2a",
@@ -871,14 +1006,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_causeOfIssue()": {
-        "name": "_causeOfIssue()",
-        "column_name": "causeOfIssue()",
-        "column_type": "oracy_prop",
+    "_causeOfIssue": {
+        "name": "_causeOfIssue",
+        "column_name": "causeOfIssue",
+        "column_type": "many_to_many",
         "label": "Cause of Issue",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -890,7 +1028,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider4": {
         "name": "_divider4",
@@ -909,7 +1050,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h3b": {
         "name": "_h3b",
@@ -928,14 +1072,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_activityLeadToIssue()": {
-        "name": "_activityLeadToIssue()",
-        "column_name": "activityLeadToIssue()",
-        "column_type": "oracy_prop",
+    "_activityLeadToIssue": {
+        "name": "_activityLeadToIssue",
+        "column_name": "activityLeadToIssue",
+        "column_type": "many_to_many",
         "label": "2.1 Actual Activity leads to Issue",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -947,7 +1094,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider5": {
         "name": "_divider5",
@@ -966,7 +1116,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h4b": {
         "name": "_h4b",
@@ -985,14 +1138,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_immediateCause()": {
-        "name": "_immediateCause()",
-        "column_name": "immediateCause()",
-        "column_type": "oracy_prop",
+    "_immediateCause": {
+        "name": "_immediateCause",
+        "column_name": "immediateCause",
+        "column_type": "many_to_many",
         "label": "2.2 Possible Immediate Cause",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -1004,7 +1160,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider6": {
         "name": "_divider6",
@@ -1023,7 +1182,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h5b": {
         "name": "_h5b",
@@ -1042,14 +1204,17 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
-    "_issueRootCause()": {
-        "name": "_issueRootCause()",
-        "column_name": "issueRootCause()",
-        "column_type": "oracy_prop",
+    "_issueRootCause": {
+        "name": "_issueRootCause",
+        "column_name": "issueRootCause",
+        "column_type": "many_to_many",
         "label": "2.3 Root Cause",
-        "control": "checkbox",
+        "control": "checkbox_2a",
         "align": "",
         "col_span": "",
         "width": "300",
@@ -1061,7 +1226,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider7": {
         "name": "_divider7",
@@ -1080,7 +1248,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h6b": {
         "name": "_h6b",
@@ -1099,7 +1270,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_investigation_finding": {
         "name": "_investigation_finding",
@@ -1118,12 +1292,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_attachment_hse_witness": {
         "name": "_attachment_hse_witness",
         "column_name": "attachment_hse_witness",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Attached Witness Docs",
         "control": "attachment",
         "align": "",
@@ -1137,7 +1314,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider9": {
         "name": "_divider9",
@@ -1156,7 +1336,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h7b": {
         "name": "_h7b",
@@ -1175,12 +1358,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "2.5 Remedial Actions",
         "control": "relationship_renderer",
         "align": "",
@@ -1194,7 +1380,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider10": {
         "name": "_divider10",
@@ -1213,7 +1402,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h3a": {
         "name": "_h3a",
@@ -1232,12 +1424,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_comment_by_line_manager": {
         "name": "_comment_by_line_manager",
         "column_name": "comment_by_line_manager",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Comment by Line Manager",
         "control": "comment",
         "align": "",
@@ -1251,7 +1446,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_divider11": {
         "name": "_divider11",
@@ -1270,7 +1468,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_h4a": {
         "name": "_h4a",
@@ -1289,7 +1490,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -1308,12 +1512,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_comment_by_general_manager": {
         "name": "_comment_by_general_manager",
         "column_name": "comment_by_general_manager",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Comment by General Manager",
         "control": "comment",
         "align": "",
@@ -1327,7 +1534,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_assignee_3": {
         "name": "_assignee_3",
@@ -1346,7 +1556,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_status": {
         "name": "_status",
@@ -1365,7 +1578,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -1384,7 +1600,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -1403,7 +1622,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -1422,7 +1644,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -1441,6 +1666,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

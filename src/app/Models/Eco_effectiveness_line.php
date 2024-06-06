@@ -17,7 +17,6 @@ class Eco_effectiveness_line extends ModelExtended
         "getChangeEffectiveness" => ['belongsTo', Term::class, 'change_effectiveness_id']
     ];
 
-    public static $oracyParams = [];
     public function getEcoSheet()
     {
         $p = static::$eloquentParams[__FUNCTION__];

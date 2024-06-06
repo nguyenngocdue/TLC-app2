@@ -17,7 +17,6 @@ class Act_currency_xr extends ModelExtended
         return DateTimeConcern::convertForLoading("picker_month", $this->month);
     }
 
-    public static $oracyParams = [];
     public function getLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];

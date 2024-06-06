@@ -131,15 +131,15 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "column_type": "oracy_prop",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "many_to_many",
         "label": "Signature Admin",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
-        "width": "200",
+        "width": "",
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
@@ -153,12 +153,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
-        "column_type": "oracy_prop",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
+        "column_type": "many_to_many",
         "label": "Monitors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "300",
@@ -178,7 +178,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Punchlist Items",
         "control": "relationship_renderer",
         "align": "",
@@ -197,12 +197,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_signature_qaqc_punchlist_qaqc_list()": {
-        "name": "_signature_qaqc_punchlist_qaqc_list()",
-        "column_name": "signature_qaqc_punchlist_qaqc_list()",
-        "column_type": "oracy_prop",
+    "_signature_qaqc_punchlist_qaqc_list": {
+        "name": "_signature_qaqc_punchlist_qaqc_list",
+        "column_name": "signature_qaqc_punchlist_qaqc_list",
+        "column_type": "many_to_many",
         "label": "QC Deputy",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "12",
         "width": "300",
@@ -219,12 +219,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_signature_qaqc_punchlist_production_list()": {
-        "name": "_signature_qaqc_punchlist_production_list()",
-        "column_name": "signature_qaqc_punchlist_production_list()",
-        "column_type": "oracy_prop",
+    "_signature_qaqc_punchlist_production_list": {
+        "name": "_signature_qaqc_punchlist_production_list",
+        "column_name": "signature_qaqc_punchlist_production_list",
+        "column_type": "many_to_many",
         "label": "Production Managers",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "6",
         "width": "",
@@ -241,12 +241,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_signature_qaqc_punchlist_project_list()": {
-        "name": "_signature_qaqc_punchlist_project_list()",
-        "column_name": "signature_qaqc_punchlist_project_list()",
-        "column_type": "oracy_prop",
+    "_signature_qaqc_punchlist_project_list": {
+        "name": "_signature_qaqc_punchlist_project_list",
+        "column_name": "signature_qaqc_punchlist_project_list",
+        "column_type": "many_to_many",
         "label": "Project Managers",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "3",
         "width": "",
@@ -263,12 +263,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_signature_qaqc_punchlist_factory_list()": {
-        "name": "_signature_qaqc_punchlist_factory_list()",
-        "column_name": "signature_qaqc_punchlist_factory_list()",
-        "column_type": "oracy_prop",
+    "_signature_qaqc_punchlist_factory_list": {
+        "name": "_signature_qaqc_punchlist_factory_list",
+        "column_name": "signature_qaqc_punchlist_factory_list",
+        "column_type": "many_to_many",
         "label": "Factory Manager",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "3",
         "width": "",
@@ -288,7 +288,7 @@
     "_signature_qaqc_punchlist_qaqc": {
         "name": "_signature_qaqc_punchlist_qaqc",
         "column_name": "signature_qaqc_punchlist_qaqc",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Reviewed and Prepared By",
         "control": "signature_multi",
         "align": "",
@@ -310,7 +310,7 @@
     "_signature_qaqc_punchlist_production": {
         "name": "_signature_qaqc_punchlist_production",
         "column_name": "signature_qaqc_punchlist_production",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Accepted by",
         "control": "signature_multi",
         "align": "",
@@ -332,7 +332,7 @@
     "_signature_qaqc_punchlist_project": {
         "name": "_signature_qaqc_punchlist_project",
         "column_name": "signature_qaqc_punchlist_project",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Accepted By",
         "control": "signature_multi",
         "align": "",
@@ -354,7 +354,7 @@
     "_signature_qaqc_punchlist_factory": {
         "name": "_signature_qaqc_punchlist_factory",
         "column_name": "signature_qaqc_punchlist_factory",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Approved By",
         "control": "signature_multi",
         "align": "",

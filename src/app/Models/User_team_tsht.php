@@ -10,10 +10,7 @@ class User_team_tsht extends ModelExtended
 
     public static $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
-    ];
-
-    public static $oracyParams = [
-        "getTshtMembers()" => ["getCheckedByField", User::class],
+        "getTshtMembers" => ['belongsToMany', User::class, 'ym2m_user_team_tsht_user_tsht_member',],
     ];
 
     public function getDefAssignee()
@@ -24,7 +21,7 @@ class User_team_tsht extends ModelExtended
 
     public function getTshtMembers()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

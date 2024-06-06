@@ -35,9 +35,9 @@
         "new": "true",
         "active": "true"
     },
-    "_getOtMembers()": {
-        "name": "_getOtMembers()",
-        "column_name": "getOtMembers()",
+    "_getOtMembers": {
+        "name": "_getOtMembers",
+        "column_name": "getOtMembers",
         "new": "true",
         "active": "true"
     },

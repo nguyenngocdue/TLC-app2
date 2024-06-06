@@ -181,9 +181,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_signature_eco_peers_list()": {
-        "name": "_signature_eco_peers_list()",
-        "column_name": "signature_eco_peers_list()",
+    "_signature_eco_peers_list": {
+        "name": "_signature_eco_peers_list",
+        "column_name": "signature_eco_peers_list",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_signature_eco_managers_list": {
+        "name": "_signature_eco_managers_list",
+        "column_name": "signature_eco_managers_list",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -197,19 +210,6 @@
     "_signature_eco_peers": {
         "name": "_signature_eco_peers",
         "column_name": "signature_eco_peers",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_signature_eco_managers_list()": {
-        "name": "_signature_eco_managers_list()",
-        "column_name": "signature_eco_managers_list()",
         "label": "",
         "validation": "",
         "validation_regex": "",

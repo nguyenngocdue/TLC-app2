@@ -50,7 +50,7 @@ class ActionButtons extends Component
 
         $isSignOff = $this->isCurrentAppHasSignOff();
         $monitors1 = method_exists($this->item, "getMonitors1") ? $this->item->getMonitors1() : collect();
-        $monitors1 = $monitors1->pluck('id')->toArray() ?? [];
+        $monitors1 = $monitors1->pluck('users.id')->toArray() ?? [];
         $isPendingApproval = ($this->item->status ?? null) == 'pending_approval';
         // dump("$isSignOff && $isPendingApproval");
         if ($isSignOff && $isPendingApproval) {

@@ -20,14 +20,13 @@ class Qaqc_punchlist extends ModelExtended
         'signature_qaqc_punchlist_production' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         'signature_qaqc_punchlist_project' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
         'signature_qaqc_punchlist_factory' => ['morphMany', Signature::class, 'signable', 'signable_type', 'signable_id'],
-    ];
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-        "getMonitors2()" => ["getCheckedByField", User::class],
-        "signature_qaqc_punchlist_qaqc_list()"  => ["getCheckedByField", User::class],
-        "signature_qaqc_punchlist_production_list()"  => ["getCheckedByField", User::class],
-        "signature_qaqc_punchlist_project_list()"  => ["getCheckedByField", User::class],
-        "signature_qaqc_punchlist_factory_list()"  => ["getCheckedByField", User::class],
+
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_user_monitor_1"],
+        "getMonitors2" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_user_monitor_2"],
+        "signature_qaqc_punchlist_qaqc_list" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_user_qaqc_list"],
+        "signature_qaqc_punchlist_production_list" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_user_production_list"],
+        "signature_qaqc_punchlist_project_list" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_user_project_list"],
+        "signature_qaqc_punchlist_factory_list" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_user_factory_list"],
     ];
 
     public function getLines()
@@ -42,25 +41,14 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getMonitors2()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
-    // public function signature_qaqc_punchlist()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-    //     return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
-    // }
-    // public function signature_qaqc_punchlist_list()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
     public function signature_qaqc_punchlist_qaqc()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -69,8 +57,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_qaqc_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_punchlist_production()
     {
@@ -80,8 +68,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_production_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_punchlist_project()
     {
@@ -91,8 +79,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_project_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_punchlist_factory()
     {
@@ -102,8 +90,8 @@ class Qaqc_punchlist extends ModelExtended
     }
     public function signature_qaqc_punchlist_factory_list()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProject()
     {

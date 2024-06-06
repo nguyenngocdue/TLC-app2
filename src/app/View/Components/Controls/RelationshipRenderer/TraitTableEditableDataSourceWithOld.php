@@ -4,6 +4,7 @@ namespace App\View\Components\Controls\RelationshipRenderer;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 
 trait TraitTableEditableDataSourceWithOld
 {
@@ -104,8 +105,10 @@ trait TraitTableEditableDataSourceWithOld
 
     private function alertIfFieldsAreMissingFromFillable(object $instance, string $lineModelPath, array $editableColumns)
     {
+        // Log::info($columns);
         $columns = array_filter($editableColumns, fn ($column) => isset($column['editable']) && $column['editable'] == true);
         $columns = array_filter($columns, fn ($column) => !str_contains($column['dataIndex'], "()")); //<< Ignored all oracy params
+        $columns = array_filter($columns, fn ($column) => $column['column_type'] !== 'many_to_many'); //<< Ignored all eloquent belongsToMany params
         $columns = array_filter($columns, fn ($column) => $column['renderer'] !== 'attachment4'); //<< Ignored all attachments
         $columns = array_values(array_map(fn ($column) => $column['dataIndex'], $columns));
         // dump($editableColumns);

@@ -88,7 +88,7 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request, $objectId);
 			$this->attachOrphan($props['attachment'], $request, $modelPath, $objectId);
 			$this->handleCheckboxAndDropdownMulti($request, $theRow, $props['oracy_prop']);
-			// $this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['eloquent_prop']);
+			$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['many_to_many']);
 		} catch (\Exception $e) {
 			$this->handleMyException($e, __FUNCTION__, 2);
 		}
@@ -118,11 +118,11 @@ trait TraitEntityCRUDStoreUpdate2
 	private function attachMonitors(&$array, $item)
 	{
 		if (method_exists($item, "getMonitors1")) {
-			$values = $item->getMonitors1()->pluck('id')->toArray();
+			$values = $item->getMonitors1()->pluck('users.id')->toArray();
 			$array['getMonitors1()'] = $values;
 		}
 		if (method_exists($item, "getMonitors2")) {
-			$values = $item->getMonitors2()->pluck('id')->toArray();
+			$values = $item->getMonitors2()->pluck('users.id')->toArray();
 			$array['getMonitors2()'] = $values;
 		}
 	}
@@ -197,7 +197,9 @@ trait TraitEntityCRUDStoreUpdate2
 			$this->processComments($request);
 			$this->processSignatures($request);
 			if (!$isFakeRequest) {
-				// $this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['eloquent_prop']);
+				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['many_to_many']);
+			} else {
+				$this->handleCheckboxAndDropdownMulti2a($request, $theRow, $props['many_to_many'], $getManyLineParams);
 			}
 			if (!$isFakeRequest) {
 				//This will stop Project update keep deleting the sub project routings

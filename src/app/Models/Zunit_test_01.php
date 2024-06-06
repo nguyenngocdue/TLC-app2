@@ -41,11 +41,6 @@ class Zunit_test_01 extends ModelExtended
         "workplaceCheckbox2a" => ['belongsToMany', Workplace::class, 'ym2m_workplace_zunit_test_01_checkbox'],
     ];
 
-    public static $oracyParams = [
-        "checkboxZut1()" => ["getCheckedByField", Workplace::class],
-        "dropdownMultiZut1()" => ["getCheckedByField", Workplace::class],
-    ];
-
     public function workplaceDropdownMulti2a()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -78,8 +73,7 @@ class Zunit_test_01 extends ModelExtended
             // ['dataIndex' => 'dropdown1'],
             ['dataIndex' => 'radio1', 'cloneable' => true],
             ['dataIndex' => 'boolean1', 'cloneable' => true],
-            ['dataIndex' => 'checkboxZut1()', 'cloneable' => true],
-            // ['dataIndex' => 'dropdownMultiZut1()'],
+            ['dataIndex' => 'workplaceCheckbox2a', 'cloneable' => true],
         ];
     }
 
@@ -92,15 +86,5 @@ class Zunit_test_01 extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
-    }
-    public function checkboxZut1()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    }
-    public function dropdownMultiZut1()
-    {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
     }
 }

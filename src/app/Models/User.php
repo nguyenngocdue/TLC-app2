@@ -113,83 +113,80 @@ class User extends ModelExtended implements
         //Otherwise in User screen, the thumbnail will lost its value
         "attachment" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
-    ];
+        //Many to many
+        "getOtTeams" => ["belongsToMany", User_team_ot::class, "ym2m_user_team_ot_user_ot_member"],
+        "getTshtTeams" => ["belongsToMany", User_team_tsht::class, "ym2m_user_team_tsht_user_tsht_member"],
+        "getSiteTeams" => ["belongsToMany", User_team_site::class, "ym2m_user_team_site_user_site_member"],
 
-    public static $oracyParams = [
-        "getOtTeams()" => ["getCheckedByField", User_team_ot::class],
-        "getTshtTeams()" => ["getCheckedByField", User_team_tsht::class],
-        "getSiteTeams()" => ["getCheckedByField", User_team_site::class],
+        "getSubProjectsOfCouncilMember" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_council_member"],
+        "getSubProjectsOfProjectClient" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_project_client"],
+        "getSubProjectsOfExternalInspector" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_ext_insp"],
 
-        "getSubProjectsOfCouncilMember()" => ['getCheckedByField', Sub_project::class],
-        "getSubProjectsOfProjectClient()" => ['getCheckedByField', Sub_project::class],
-        "getSubProjectsOfExternalInspector()" => ['getCheckedByField', Sub_project::class],
+        "getQaqcInspTmplsOfExternalInspector" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_ext_insp"],
+        "getQaqcInspTmplsOfCouncilMember" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_council_member"],
 
-        "getQaqcInspTmplsOfExternalInspector()" => ['getCheckedByField', Qaqc_insp_tmpl::class],
-        "getQaqcInspTmplsOfCouncilMember()" => ['getCheckedByField', Qaqc_insp_tmpl::class],
-
-        "getProdRoutingsOfExternalInspector()" => ['getCheckedByField', Prod_routing::class],
-        "getProdRoutingsOfCouncilMember()" => ['getCheckedByField', Prod_routing::class],
-
+        "getProdRoutingsOfExternalInspector" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_external_inspector"],
+        "getProdRoutingsOfCouncilMember" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_council_member"],
     ];
 
     public function getOtTeams()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getTshtTeams()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getSiteTeams()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getSubProjectsOfCouncilMember() /////////////
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getSubProjectsOfProjectClient() /////////////
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getSubProjectsOfExternalInspector() ///////
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getQaqcInspTmplsOfExternalInspector()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getQaqcInspTmplsOfCouncilMember()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getProdRoutingsOfExternalInspector()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     function getProdRoutingsOfCouncilMember()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     protected $guard_name = 'web';

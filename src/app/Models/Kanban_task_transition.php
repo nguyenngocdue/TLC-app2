@@ -12,6 +12,4 @@ class Kanban_task_transition extends ModelExtended
     ];
 
     public static $eloquentParams = [];
-
-    public static $oracyParams = [];
 }

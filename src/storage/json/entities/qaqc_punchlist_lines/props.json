@@ -263,12 +263,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "column_type": "oracy_prop",
-        "label": "Get Monitors",
-        "control": "dropdown_multi",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "many_to_many",
+        "label": "Monitors",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -354,7 +354,7 @@
     "_punchlist_photos": {
         "name": "_punchlist_photos",
         "column_name": "punchlist_photos",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Photos",
         "control": "attachment",
         "align": "",

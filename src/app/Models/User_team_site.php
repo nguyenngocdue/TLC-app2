@@ -10,10 +10,8 @@ class User_team_site extends ModelExtended
 
     public static $eloquentParams = [
         "getDefAssignee" => ['belongsTo', User::class, 'def_assignee'],
-    ];
 
-    public static $oracyParams = [
-        "getSiteMembers()" => ["getCheckedByField", User::class],
+        "getSiteMembers" => ["belongsToMany", User::class, 'ym2m_user_team_site_user_site_member'],
     ];
 
     public function getDefAssignee()
@@ -24,7 +22,7 @@ class User_team_site extends ModelExtended
 
     public function getSiteMembers()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

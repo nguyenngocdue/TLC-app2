@@ -207,14 +207,14 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "90",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",

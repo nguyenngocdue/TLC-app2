@@ -59,6 +59,54 @@
         "name": "_prod_order_1",
         "column_name": "prod_order_1"
     },
+    "_break8": {
+        "name": "_break8",
+        "column_name": "break8"
+    },
+    "_h8": {
+        "name": "_h8",
+        "column_name": "h8"
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id"
+    },
+    "_currency1_id": {
+        "name": "_currency1_id",
+        "column_name": "currency1_id"
+    },
+    "_currency_pair1_id": {
+        "name": "_currency_pair1_id",
+        "column_name": "currency_pair1_id"
+    },
+    "_currency2_id": {
+        "name": "_currency2_id",
+        "column_name": "currency2_id"
+    },
+    "_currency_pair2_id": {
+        "name": "_currency_pair2_id",
+        "column_name": "currency_pair2_id"
+    },
+    "_break9": {
+        "name": "_break9",
+        "column_name": "break9"
+    },
+    "_h9": {
+        "name": "_h9",
+        "column_name": "h9"
+    },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id"
+    },
+    "_rate_exchange_value_1": {
+        "name": "_rate_exchange_value_1",
+        "column_name": "rate_exchange_value_1"
+    },
+    "_rate_exchange_value_2": {
+        "name": "_rate_exchange_value_2",
+        "column_name": "rate_exchange_value_2"
+    },
     "_break3": {
         "name": "_break3",
         "column_name": "break3"
@@ -75,9 +123,9 @@
         "name": "_assignee_1",
         "column_name": "assignee_1"
     },
-    "_dropdownMonitorsZut9()": {
-        "name": "_dropdownMonitorsZut9()",
-        "column_name": "dropdownMonitorsZut9()"
+    "_dropdownMonitorsZut9": {
+        "name": "_dropdownMonitorsZut9",
+        "column_name": "dropdownMonitorsZut9"
     },
     "_break4": {
         "name": "_break4",
@@ -107,14 +155,6 @@
         "name": "_break5",
         "column_name": "break5"
     },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at"
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at"
-    },
     "_h5": {
         "name": "_h5",
         "column_name": "h5"
@@ -126,10 +166,6 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date"
-    },
-    "_order_no": {
-        "name": "_order_no",
-        "column_name": "order_no"
     },
     "_break6": {
         "name": "_break6",
@@ -198,5 +234,33 @@
     "_time_3": {
         "name": "_time_3",
         "column_name": "time_3"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status"
     }
 }

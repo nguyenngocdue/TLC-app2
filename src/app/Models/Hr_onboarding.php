@@ -19,8 +19,6 @@ class Hr_onboarding extends ModelExtended
         "getOnboardingLocation" => ["belongsTo", Workplace::class, "onboarding_location_id"],
     ];
 
-    public static $oracyParams = [];
-
     public function getLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];

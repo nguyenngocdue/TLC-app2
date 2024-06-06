@@ -263,9 +263,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -428,9 +428,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_mainAffectedPart()": {
-        "name": "_mainAffectedPart()",
-        "column_name": "mainAffectedPart()",
+    "_mainAffectedPart": {
+        "name": "_mainAffectedPart",
+        "column_name": "mainAffectedPart",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -439,9 +439,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_natureOfInjury()": {
-        "name": "_natureOfInjury()",
-        "column_name": "natureOfInjury()",
+    "_natureOfInjury": {
+        "name": "_natureOfInjury",
+        "column_name": "natureOfInjury",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -450,9 +450,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_treatmentInstruction()": {
-        "name": "_treatmentInstruction()",
-        "column_name": "treatmentInstruction()",
+    "_treatmentInstruction": {
+        "name": "_treatmentInstruction",
+        "column_name": "treatmentInstruction",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -494,9 +494,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_causeOfIssue()": {
-        "name": "_causeOfIssue()",
-        "column_name": "causeOfIssue()",
+    "_causeOfIssue": {
+        "name": "_causeOfIssue",
+        "column_name": "causeOfIssue",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -527,9 +527,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_activityLeadToIssue()": {
-        "name": "_activityLeadToIssue()",
-        "column_name": "activityLeadToIssue()",
+    "_activityLeadToIssue": {
+        "name": "_activityLeadToIssue",
+        "column_name": "activityLeadToIssue",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -560,9 +560,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_immediateCause()": {
-        "name": "_immediateCause()",
-        "column_name": "immediateCause()",
+    "_immediateCause": {
+        "name": "_immediateCause",
+        "column_name": "immediateCause",
         "new": "",
         "active": "",
         "pending_ack": "",
@@ -593,9 +593,9 @@
         "pending_verification": "",
         "closed": ""
     },
-    "_issueRootCause()": {
-        "name": "_issueRootCause()",
-        "column_name": "issueRootCause()",
+    "_issueRootCause": {
+        "name": "_issueRootCause",
+        "column_name": "issueRootCause",
         "new": "",
         "active": "",
         "pending_ack": "",

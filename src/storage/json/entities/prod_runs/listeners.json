@@ -3,7 +3,7 @@
         "name": "_worker_number_count",
         "column_name": "worker_number_count",
         "listen_action": "count_selected_values",
-        "triggers": "getWorkersOfRun()",
+        "triggers": "getWorkersOfRun",
         "listen_to_fields": "",
         "listen_to_attrs": "",
         "columns_to_set": "",
@@ -149,9 +149,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getWorkersOfRun()": {
-        "name": "_getWorkersOfRun()",
-        "column_name": "getWorkersOfRun()",
+    "_getWorkersOfRun": {
+        "name": "_getWorkersOfRun",
+        "column_name": "getWorkersOfRun",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

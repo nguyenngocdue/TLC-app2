@@ -19,10 +19,8 @@ class Site_daily_assignment_line extends ModelExtended
         "getParent" => ["belongsTo", Site_daily_assignment::class, 'site_daily_assignment_id'],
         "getUser" => ["belongsTo", User::class, 'user_id'],
         "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
-    ];
 
-    public static $oracyParams = [
-        "getSiteTasks()" => ["getCheckedByField", Prod_routing_link::class],
+        "getSiteTasks" => ["belongsToMany", Prod_routing_link::class, "ym2m_prod_routing_link_site_daily_assignment_line"],
     ];
 
     public function getParent()
@@ -38,8 +36,8 @@ class Site_daily_assignment_line extends ModelExtended
 
     public function getSiteTasks()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getSubProject()
@@ -57,7 +55,7 @@ class Site_daily_assignment_line extends ModelExtended
             ['dataIndex' => "user_id", 'value_as_user_id' => true,  'deaf' => true],
             ['dataIndex' => "employeeid",],
             ['dataIndex' => "sub_project_id", "cloneable" => true,],
-            ['dataIndex' => "getSiteTasks()"],
+            ['dataIndex' => "getSiteTasks"],
         ];
     }
 }

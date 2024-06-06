@@ -20,17 +20,13 @@ class Sub_project extends ModelExtended
 
         "attachment_subproject_homeowner_manual" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_subproject_project_plans" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-    ];
+        //Many to many
+        "getProjectMembers" => ['belongsToMany', User::class, "ym2m_sub_project_user_project_member"],
+        "getProdRoutingsOfSubProject" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_sub_project"],
 
-    public static $oracyParams = [
-        "getProjectMembers()" => ['getCheckedByField', User::class],
-        "getProdRoutingsOfSubProject()" => ['getCheckedByField', Prod_routing::class],
-
-        "getProjectClientsOfSubProject()" => ['getCheckedByField', User::class],
-        "getExternalInspectorsOfSubProject()" => ['getCheckedByField', User::class],
-        "getCouncilMembersOfSubProject()" => ['getCheckedByField', User::class],
-
-        // "getApartmentOwnersOfSubProject()" => ['getCheckedByField', User::class],
+        "getProjectClientsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_project_client"],
+        "getExternalInspectorsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_ext_insp"],
+        "getCouncilMembersOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_council_member"],
     ];
 
     public function attachment_subproject_homeowner_manual()
@@ -49,36 +45,36 @@ class Sub_project extends ModelExtended
 
     public function getProjectMembers()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getProdRoutingsOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getClientsOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getExternalInspectorsOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCouncilMembersOfSubProject()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
-    // public function getApartmentOwnersOfSubProject()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
+    public function getProjectClientsOfSubProject()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getProdOrders()
     {

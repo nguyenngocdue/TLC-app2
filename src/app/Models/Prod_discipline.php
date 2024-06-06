@@ -23,11 +23,9 @@ class Prod_discipline extends ModelExtended
         "getDiscipline1s" => ['hasMany', Prod_discipline_1::class, 'prod_discipline_id'],
         "getErpRoutingLinks" => ['hasMany', Erp_routing_link::class, 'prod_discipline_id'],
         "getWirDescriptions" => ['hasMany', Wir_description::class, 'prod_discipline_id'],
-    ];
 
-    public static $oracyParams = [
-        "getDefMonitors1()" => ["getCheckedByField", User::class],
-        "getScreensShowMeOn()" => ["getCheckedByField", Term::class],
+        "getDefMonitors1" => ['belongsToMany', User::class, 'ym2m_prod_discipline_user_def_monitor_1'],
+        "getScreensShowMeOn" => ['belongsToMany', Term::class, 'ym2m_prod_discipline_term_show_me_on'],
     ];
 
     public function getProdRoutingLink()
@@ -47,13 +45,13 @@ class Prod_discipline extends ModelExtended
     }
     public function getDefMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getScreensShowMeOn()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getErpRoutingLinks()
     {

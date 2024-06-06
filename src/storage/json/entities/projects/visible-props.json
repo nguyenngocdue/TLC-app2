@@ -83,9 +83,9 @@
         "cancelled": "true",
         "on_hold": "true"
     },
-    "_getScreensShowMeOn()": {
-        "name": "_getScreensShowMeOn()",
-        "column_name": "getScreensShowMeOn()",
+    "_getScreensShowMeOn": {
+        "name": "_getScreensShowMeOn",
+        "column_name": "getScreensShowMeOn",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",
@@ -95,9 +95,9 @@
         "cancelled": "true",
         "on_hold": "true"
     },
-    "_getProjectMembers()": {
-        "name": "_getProjectMembers()",
-        "column_name": "getProjectMembers()",
+    "_getProjectMembers": {
+        "name": "_getProjectMembers",
+        "column_name": "getProjectMembers",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",

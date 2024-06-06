@@ -9,7 +9,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -21,7 +22,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_parent_id": {
         "name": "_parent_id",
@@ -33,7 +35,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_radio_yes_no": {
         "name": "_radio_yes_no",
@@ -45,7 +48,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_radio_pass_fail": {
         "name": "_radio_pass_fail",
@@ -57,7 +61,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_dropdown_yes_no": {
         "name": "_dropdown_yes_no",
@@ -69,7 +74,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_dropdown_pass_fail": {
         "name": "_dropdown_pass_fail",
@@ -81,11 +87,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_checkboxYesNo()": {
-        "name": "_checkboxYesNo()",
-        "column_name": "checkboxYesNo()",
+    "_checkboxYesNo": {
+        "name": "_checkboxYesNo",
+        "column_name": "checkboxYesNo",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -93,11 +100,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_checkboxPassFail()": {
-        "name": "_checkboxPassFail()",
-        "column_name": "checkboxPassFail()",
+    "_checkboxPassFail": {
+        "name": "_checkboxPassFail",
+        "column_name": "checkboxPassFail",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -105,11 +113,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_dropdownMultiYesNo()": {
-        "name": "_dropdownMultiYesNo()",
-        "column_name": "dropdownMultiYesNo()",
+    "_dropdownMultiYesNo": {
+        "name": "_dropdownMultiYesNo",
+        "column_name": "dropdownMultiYesNo",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -117,11 +126,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_dropdownMultiPassFail()": {
-        "name": "_dropdownMultiPassFail()",
-        "column_name": "dropdownMultiPassFail()",
+    "_dropdownMultiPassFail": {
+        "name": "_dropdownMultiPassFail",
+        "column_name": "dropdownMultiPassFail",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -129,7 +139,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -141,7 +152,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -153,7 +165,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -165,7 +178,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -177,7 +191,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -189,7 +204,8 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -201,6 +217,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }

@@ -13,5 +13,4 @@ class Conqa_archive extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [];
-    public static $oracyParams = [];
 }

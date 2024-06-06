@@ -49,10 +49,8 @@ class Qaqc_ncr extends ModelExtended
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_inspector_decision" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_resolved" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-    ];
 
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_ncr_user_monitor_1"],
     ];
 
     public function comment_asm_rejected_reason()
@@ -184,8 +182,8 @@ class Qaqc_ncr extends ModelExtended
 
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getSeverity()

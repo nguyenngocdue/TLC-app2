@@ -155,9 +155,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -197,6 +197,19 @@
     "_is_original_scope": {
         "name": "_is_original_scope",
         "column_name": "is_original_scope",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_punchlist_photos": {
+        "name": "_punchlist_photos",
+        "column_name": "punchlist_photos",
         "label": "",
         "validation": "",
         "validation_regex": "",

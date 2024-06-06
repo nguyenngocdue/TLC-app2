@@ -49,9 +49,9 @@
         "pending_audit": "",
         "audited": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "in_progress": "",
         "not_applicable": "",
         "reviewed": "",
@@ -139,9 +139,9 @@
         "pending_audit": "",
         "audited": ""
     },
-    "_signature_qaqc_chklst_3rd_party_list()": {
-        "name": "_signature_qaqc_chklst_3rd_party_list()",
-        "column_name": "signature_qaqc_chklst_3rd_party_list()",
+    "_signature_qaqc_chklst_3rd_party_list": {
+        "name": "_signature_qaqc_chklst_3rd_party_list",
+        "column_name": "signature_qaqc_chklst_3rd_party_list",
         "in_progress": "",
         "not_applicable": "",
         "reviewed": "",

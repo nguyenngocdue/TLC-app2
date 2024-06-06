@@ -17,16 +17,16 @@
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "pending_audit": {
         "name": "pending_audit",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     },
     "audited": {
         "name": "audited",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()"
+        "ball-in-court-monitors": "getMonitors1"
     }
 }

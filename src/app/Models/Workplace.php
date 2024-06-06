@@ -24,9 +24,8 @@ class Workplace extends ModelExtended
 
         "getTravelPlace" => ["belongsTo", Act_travel_place::class, "travel_place_id"],
         // "getHrOtrs" => ["hasMany", Hr_overtime_request::class, 'workplace_id'],
-    ];
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
+
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_user_workplace_monitor_1"],
     ];
 
     public function getUsers()
@@ -57,8 +56,8 @@ class Workplace extends ModelExtended
 
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getDurationMorningDefault()
     {

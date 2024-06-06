@@ -63,7 +63,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
             echo Blade::render("<x-feedback.alert type='error' message='You must specify Production Routing.'></x-feedback.alert>");
             return [];
         }
-        $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
+        $data = Prod_routing::find($this->prodRouting)->getWirDescriptions;
         foreach ($data as $line) {
             if ($this->prodDiscipline && ($line->prod_discipline_id != $this->prodDiscipline)) continue;
             $result[] = [

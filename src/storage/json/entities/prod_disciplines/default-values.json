@@ -4,142 +4,220 @@
         "column_name": "id",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
         "label": "",
         "validation": "required",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_css_class": {
+        "name": "_css_class",
+        "column_name": "css_class",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "All_SlugifyByName",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getScreensShowMeOn": {
+        "name": "_getScreensShowMeOn",
+        "column_name": "getScreensShowMeOn",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_def_assignee": {
         "name": "_def_assignee",
         "column_name": "def_assignee",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
-    "_getDefMonitors1()": {
-        "name": "_getDefMonitors1()",
-        "column_name": "getDefMonitors1()",
+    "_getDefMonitors1": {
+        "name": "_getDefMonitors1",
+        "column_name": "getDefMonitors1",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "label": "",
-        "validation": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getProdRoutingLink": {
         "name": "_getProdRoutingLink",
         "column_name": "getProdRoutingLink",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getDiscipline1s": {
         "name": "_getDiscipline1s",
         "column_name": "getDiscipline1s",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getErpRoutingLinks": {
         "name": "_getErpRoutingLinks",
         "column_name": "getErpRoutingLinks",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getWirDescriptions": {
         "name": "_getWirDescriptions",
         "column_name": "getWirDescriptions",
         "label": "",
         "validation": "",
+        "validation_regex": "",
         "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }

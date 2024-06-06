@@ -29,9 +29,14 @@
         "column_name": "kanban_bucket_id",
         "new": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_default_statuses": {
+        "name": "_default_statuses",
+        "column_name": "default_statuses",
+        "new": ""
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true"
     },
     "_status": {

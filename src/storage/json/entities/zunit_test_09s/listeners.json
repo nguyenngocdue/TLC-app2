@@ -44,13 +44,13 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_dropdownMonitorsZut9()": {
-        "name": "_dropdownMonitorsZut9()",
-        "column_name": "dropdownMonitorsZut9()",
+    "_dropdownMonitorsZut9": {
+        "name": "_dropdownMonitorsZut9",
+        "column_name": "dropdownMonitorsZut9",
         "listen_action": "assign",
         "triggers": "prod_discipline_1",
         "listen_to_fields": "prod_discipline_1",
-        "listen_to_attrs": "getDefMonitors1()",
+        "listen_to_attrs": "getDefMonitors1",
         "columns_to_set": "",
         "attrs_to_compare": "",
         "expression": "",
@@ -95,7 +95,7 @@
         "listen_action": "dot",
         "triggers": "user_4",
         "listen_to_fields": "user_4",
-        "listen_to_attrs": "position_rendered",
+        "listen_to_attrs": "position",
         "columns_to_set": "",
         "attrs_to_compare": "",
         "expression": "",

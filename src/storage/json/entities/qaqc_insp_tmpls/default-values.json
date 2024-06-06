@@ -51,9 +51,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getProdRoutingsOfInspTmpl()": {
-        "name": "_getProdRoutingsOfInspTmpl()",
-        "column_name": "getProdRoutingsOfInspTmpl()",
+    "_has_punchlist": {
+        "name": "_has_punchlist",
+        "column_name": "has_punchlist",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getProdRoutingsOfInspTmpl": {
+        "name": "_getProdRoutingsOfInspTmpl",
+        "column_name": "getProdRoutingsOfInspTmpl",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -90,9 +103,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getExternalInspectorsOfQaqcInspTmpl()": {
-        "name": "_getExternalInspectorsOfQaqcInspTmpl()",
-        "column_name": "getExternalInspectorsOfQaqcInspTmpl()",
+    "_getExternalInspectorsOfQaqcInspTmpl": {
+        "name": "_getExternalInspectorsOfQaqcInspTmpl",
+        "column_name": "getExternalInspectorsOfQaqcInspTmpl",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getCouncilMembersOfQaqcInspTmpl": {
+        "name": "_getCouncilMembersOfQaqcInspTmpl",
+        "column_name": "getCouncilMembersOfQaqcInspTmpl",
         "label": "",
         "validation": "",
         "validation_regex": "",

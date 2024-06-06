@@ -19,6 +19,8 @@ class Qaqc_punchlist_line extends ModelExtended
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
         "getPunchlist" => ["belongsTo", Qaqc_punchlist::class, 'qaqc_punchlist_id'],
         "punchlist_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+
+        "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_punchlist_line_user_monitor_1"],
     ];
     public function punchlist_photos()
     {
@@ -26,9 +28,6 @@ class Qaqc_punchlist_line extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
-    public static $oracyParams = [
-        "getMonitors1()" => ["getCheckedByField", User::class],
-    ];
 
     public function getProdDiscipline()
     {
@@ -42,8 +41,8 @@ class Qaqc_punchlist_line extends ModelExtended
     }
     public function getMonitors1()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getManyLineParams()

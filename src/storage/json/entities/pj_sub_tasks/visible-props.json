@@ -14,9 +14,9 @@
         "column_name": "description",
         "new": "true"
     },
-    "_getParentTasks()": {
-        "name": "_getParentTasks()",
-        "column_name": "getParentTasks()",
+    "_getParentTasks": {
+        "name": "_getParentTasks",
+        "column_name": "getParentTasks",
         "new": "true"
     },
     "_owner_id": {

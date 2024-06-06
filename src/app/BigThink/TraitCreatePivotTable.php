@@ -5,6 +5,7 @@ namespace App\BigThink;
 use App\BigThink\BlueprintExtended;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 trait TraitCreatePivotTable
@@ -16,6 +17,7 @@ trait TraitCreatePivotTable
         $relationshipKey = $this->relationshipKey;
 
         if ($table1Plural > $table2Plural) {
+            Log::info("$table1Plural > $table2Plural");
             $temp = $table1Plural;
             $table1Plural = $table2Plural;
             $table2Plural = $temp;
@@ -53,10 +55,10 @@ trait TraitCreatePivotTable
 
             $table->id();
             $table->unsignedBigInteger($key1);
-            $table->foreign($key1, "$key1+$key3")->references('id')->on($table1)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign($key1, "$key1+$key2+$key3")->references('id')->on($table1)->onDelete('cascade')->onUpdate('cascade');
 
             $table->unsignedBigInteger($key2);
-            $table->foreign($key2, "$key2+$key3")->references('id')->on($table2)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign($key2, "$key2+$key1+$key3")->references('id')->on($table2)->onDelete('cascade')->onUpdate('cascade');
 
             $table->unique([$key1, $key2], md5($key1 . $key2 . $key3));
 

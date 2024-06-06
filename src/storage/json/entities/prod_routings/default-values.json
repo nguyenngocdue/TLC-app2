@@ -51,9 +51,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getSubProjects()": {
-        "name": "_getSubProjects()",
-        "column_name": "getSubProjects()",
+    "_getSubProjects": {
+        "name": "_getSubProjects",
+        "column_name": "getSubProjects",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -64,9 +64,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getScreensShowMeOn()": {
-        "name": "_getScreensShowMeOn()",
-        "column_name": "getScreensShowMeOn()",
+    "_getScreensShowMeOn": {
+        "name": "_getScreensShowMeOn",
+        "column_name": "getScreensShowMeOn",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -77,9 +77,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getChklstTmpls()": {
-        "name": "_getChklstTmpls()",
-        "column_name": "getChklstTmpls()",
+    "_getChklstTmpls": {
+        "name": "_getChklstTmpls",
+        "column_name": "getChklstTmpls",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -90,9 +90,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getExternalInspectorsOfProdRouting()": {
-        "name": "_getExternalInspectorsOfProdRouting()",
-        "column_name": "getExternalInspectorsOfProdRouting()",
+    "_getExternalInspectorsOfProdRouting": {
+        "name": "_getExternalInspectorsOfProdRouting",
+        "column_name": "getExternalInspectorsOfProdRouting",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -100,12 +100,12 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from QAQC ICS",
+        "control_extra": "",
         "textarea_rows": ""
     },
-    "_getCouncilMembersOfProdRouting()": {
-        "name": "_getCouncilMembersOfProdRouting()",
-        "column_name": "getCouncilMembersOfProdRouting()",
+    "_getCouncilMembersOfProdRouting": {
+        "name": "_getCouncilMembersOfProdRouting",
+        "column_name": "getCouncilMembersOfProdRouting",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -113,7 +113,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from QAQC ICS",
+        "control_extra": "",
         "textarea_rows": ""
     },
     "_owner_id": {
@@ -181,9 +181,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getWirDescriptions()": {
-        "name": "_getWirDescriptions()",
-        "column_name": "getWirDescriptions()",
+    "_getWirDescriptions": {
+        "name": "_getWirDescriptions",
+        "column_name": "getWirDescriptions",
         "label": "",
         "validation": "",
         "validation_regex": "",

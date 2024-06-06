@@ -24,9 +24,9 @@
         "column_name": "sub_project_id",
         "new": "true"
     },
-    "_getSiteTasks()": {
-        "name": "_getSiteTasks()",
-        "column_name": "getSiteTasks()",
+    "_getSiteTasks": {
+        "name": "_getSiteTasks",
+        "column_name": "getSiteTasks",
         "new": "true"
     },
     "_owner_id": {

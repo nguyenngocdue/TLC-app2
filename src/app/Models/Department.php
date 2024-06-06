@@ -18,10 +18,7 @@ class Department extends ModelExtended
         "getHOD" => ['belongsTo', User::class, 'head_of_department'],
         "getMembers" => ['hasMany', User::class, 'department'],
         "getMembers2" => ['hasMany', User::class, 'department'],
-    ];
-
-    public static $oracyParams = [
-        "getSkillsOfDepartment()" => ["getCheckedByField", Department_skill::class],
+        "getSkillsOfDepartment" => ['belongsToMany', Department_skill::class, 'ym2m_department_skill_department'],
     ];
 
     public function getHOD()
@@ -44,8 +41,8 @@ class Department extends ModelExtended
 
     public function getSkillsOfDepartment()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getManyLineParams()

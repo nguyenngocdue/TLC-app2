@@ -18,7 +18,6 @@ class Hse_first_aid extends ModelExtended
         'getWorkArea' => ['belongsTo', Work_area::class, 'work_area_id'],
     ];
 
-    public static $oracyParams = [];
     public static $nameless = true;
     public function getInjuredPerson()
     {

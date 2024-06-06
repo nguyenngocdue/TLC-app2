@@ -22,7 +22,10 @@ trait TraitEntityFieldHandler2
         // $comment01Index = "";
         $result = [
             'oracy_prop' => [],
-            'eloquent_prop' => [],
+            '1_to_many' => [],
+            'many_to_many' => [],
+            'morph' => [],
+
             'attachment' => [],
             'datetime' => [],
             'editable_table' => [],
@@ -47,8 +50,11 @@ trait TraitEntityFieldHandler2
                 //     $comment01Index = "comment" . str_pad($comment01Count, 2, '0', STR_PAD_LEFT);
             } else {
                 switch ($prop['column_type']) {
-                    case 'oracy_prop':
-                    case 'eloquent_prop':
+                        // case 'oracy_prop':
+                        // case 'eloquent_prop':
+                    case '1_to_many':
+                    case 'many_to_many':
+                    case 'morph':
                         $column_type = $prop['column_type'];
                         break;
                     default:
@@ -151,18 +157,22 @@ trait TraitEntityFieldHandler2
         $theRow->transitionTo($newStatus);
     }
 
-    private function handleCheckboxAndDropdownMulti2a(Request $request, $theRow, array $eloquentProps)
+    private function handleCheckboxAndDropdownMulti2a(Request $request, $theRow, array $eloquentProps, array $getManyLineParams = null)
     {
-        // Log::info("handleCheckboxAndDropdownMulti2a");
-        // Log::info($eloquentProps);
         $uid = CurrentUser::id();
         //
+        $propNames = [];
         foreach ($eloquentProps as $possiblyM2MProps) {
-            $fnName = substr($possiblyM2MProps, 1); //Remove first "_"
-            $values = $request->input($fnName);
-            // Log::info($fnName);
-            // Log::info($values);
-            $theRow->{$fnName}()->syncWithPivotValues($values, ['owner_id' => $uid]);
+            $propName = substr($possiblyM2MProps, 1); //Remove first "_"
+            $propNames[] = $propName;
+        }
+        if (!is_null($getManyLineParams)) {
+            $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
+            $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
+        }
+        foreach ($propNames as $propName) {
+            $values = $request->input($propName);
+            $theRow->{$propName}()->syncWithPivotValues($values, ['owner_id' => $uid]);
         }
     }
 

@@ -9,42 +9,42 @@
     "assigned": {
         "name": "assigned",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "rejected": {
         "name": "rejected",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "pending_ncr": {
         "name": "pending_ncr",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "inspection_rejected": {
         "name": "inspection_rejected",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "closed": {
         "name": "closed",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1()",
+        "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     }

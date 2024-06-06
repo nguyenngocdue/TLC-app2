@@ -34,7 +34,7 @@
     </div>
     <div class="flex ml-2 cursor-pointer">
         @php
-        $members = $page->getMonitors1();
+        $members = $page->getMonitors1;
         $first_10_members = $members->slice(0,10);
         $rest_of_members = $members->slice(10);
         $rest_of_member_names = $rest_of_members->map(fn($u)=>$u->full_name." - ".$u->getPosition->name." (#".$u->id.")")->join("\n");

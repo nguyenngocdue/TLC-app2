@@ -8,50 +8,32 @@ class Pj_task extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'description', 'status', 'owner_id',
-        // 'department_id', 'user_id',
     ];
 
     public static $statusless = true;
 
     public static $eloquentParams = [
-        // "getDepartment" =>  ["belongsTo", Department::class, "department_id"],
-        // "getUser" =>  ["belongsTo", User::class, "user_id"],
+        "getDisciplinesOfTask" => ["belongsToMany", User_discipline::class, "ym2m_pj_task_user_discipline"],
+        "getLodsOfTask" => ["belongsToMany", Pj_task_phase::class, "ym2m_pj_task_phase_pj_task"],
+        "getChildrenSubTasks" => ["belongsToMany", Pj_sub_task::class, "ym2m_pj_sub_task_pj_task"],
     ];
-
-    public static $oracyParams = [
-        "getDisciplinesOfTask()" => ["getCheckedByField", User_discipline::class],
-        "getLodsOfTask()" => ["getCheckedByField", Pj_task_phase::class],
-        "getChildrenSubTasks()" => ["getCheckedByField", Pj_sub_task::class],
-    ];
-
-    // public function getDepartment()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
-
-    // public function getUser()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
 
     public function getChildrenSubTasks()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getDisciplinesOfTask()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getLodsOfTask()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public static function getTasksOfUser($uid)

@@ -159,16 +159,16 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors1",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "person",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",

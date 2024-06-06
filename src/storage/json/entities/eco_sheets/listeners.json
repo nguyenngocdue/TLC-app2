@@ -74,12 +74,12 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getSubProjectsOfEco()": {
-        "name": "_getSubProjectsOfEco()",
-        "column_name": "getSubProjectsOfEco()",
+    "_getSubProjectsOfEco": {
+        "name": "_getSubProjectsOfEco",
+        "column_name": "getSubProjectsOfEco",
         "listen_action": "reduce",
         "triggers": "project_id",
-        "listen_to_fields": "getSubProjectsOfEco()",
+        "listen_to_fields": "getSubProjectsOfEco",
         "listen_to_attrs": "project_id",
         "columns_to_set": "",
         "attrs_to_compare": "id",
@@ -179,9 +179,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getTypesOfChangeOfEco()": {
-        "name": "_getTypesOfChangeOfEco()",
-        "column_name": "getTypesOfChangeOfEco()",
+    "_getTypesOfChangeOfEco": {
+        "name": "_getTypesOfChangeOfEco",
+        "column_name": "getTypesOfChangeOfEco",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -359,9 +359,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -389,9 +389,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "column_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "column_name": "getMonitors2",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -434,9 +434,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getMonitors3()": {
-        "name": "_getMonitors3()",
-        "column_name": "getMonitors3()",
+    "_getMonitors3": {
+        "name": "_getMonitors3",
+        "column_name": "getMonitors3",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

@@ -102,7 +102,9 @@ trait TableTraitApplyRender
             return $blade;
         }
 
-        $output = "<$tagName $attributes>$rawData</$tagName>";
+        $output = "<$tagName $attributes>";
+        $output .= $rawData;
+        $output .= "</$tagName>";
 
         // Log::info($output);
         // Log::info($column);

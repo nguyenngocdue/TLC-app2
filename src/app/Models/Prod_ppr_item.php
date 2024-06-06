@@ -17,6 +17,4 @@ class Prod_ppr_item extends ModelExtended
         // "getProdSequence" => ['belongsTo', Prod_sequence::class, 'prod_sequence_id'],
         // "getUsers" => ['belongsToMany', User::class, 'prod_user_runs', 'prod_run_id', 'user_id'],
     ];
-
-    public static $oracyParams = [];
 }

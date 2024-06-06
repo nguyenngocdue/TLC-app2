@@ -21,7 +21,6 @@ class Act_travel_expense_claim_line extends ModelExtended
         'getParent' => ['belongsTo', Act_travel_expense_claim::class, 'travel_expense_claim_id'],
     ];
 
-    public static $oracyParams = [];
     public function getCurrency()
     {
         $p = static::$eloquentParams[__FUNCTION__];

@@ -49,9 +49,9 @@
         "column_name": "deleted_at",
         "new": "true"
     },
-    "_getSiteMembers()": {
-        "name": "_getSiteMembers()",
-        "column_name": "getSiteMembers()",
+    "_getSiteMembers": {
+        "name": "_getSiteMembers",
+        "column_name": "getSiteMembers",
         "new": "true"
     }
 }

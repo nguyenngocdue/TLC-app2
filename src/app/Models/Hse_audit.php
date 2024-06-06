@@ -16,14 +16,6 @@ class Hse_audit extends ModelExtended
         "getCorrectiveActions" => ['morphMany', Hse_corrective_action::class, 'correctable', 'correctable_type', 'correctable_id'],
     ];
 
-    public static $oracyParams = [
-        // "getMonitors1()" => ["getCheckedByField", User::class],
-    ];
-    // public function getMonitors1()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
     public function getWorkplace()
     {
         $p = static::$eloquentParams[__FUNCTION__];

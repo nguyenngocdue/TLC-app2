@@ -11,7 +11,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getAssignee2": {
         "name": "_getAssignee2",
@@ -25,7 +27,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -39,7 +43,9 @@
         "control": "dropdown",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -53,133 +59,153 @@
         "control": "",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors1",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors2()": {
-        "name": "_getMonitors2()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors2()",
+    "_getMonitors2": {
+        "name": "_getMonitors2",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors2",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors3()": {
-        "name": "_getMonitors3()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors3()",
+    "_getMonitors3": {
+        "name": "_getMonitors3",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors3",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors4()": {
-        "name": "_getMonitors4()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors4()",
+    "_getMonitors4": {
+        "name": "_getMonitors4",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors4",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors5()": {
-        "name": "_getMonitors5()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors5()",
+    "_getMonitors5": {
+        "name": "_getMonitors5",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors5",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors6()": {
-        "name": "_getMonitors6()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors6()",
+    "_getMonitors6": {
+        "name": "_getMonitors6",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors6",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors7()": {
-        "name": "_getMonitors7()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors7()",
+    "_getMonitors7": {
+        "name": "_getMonitors7",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors7",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors8()": {
-        "name": "_getMonitors8()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors8()",
+    "_getMonitors8": {
+        "name": "_getMonitors8",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors8",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
-    "_getMonitors9()": {
-        "name": "_getMonitors9()",
-        "relationship": "getCheckedByField",
-        "control_name": "getMonitors9()",
+    "_getMonitors9": {
+        "name": "_getMonitors9",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors9",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -193,6 +219,8 @@
         "control": "comment",
         "filter_columns": "",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

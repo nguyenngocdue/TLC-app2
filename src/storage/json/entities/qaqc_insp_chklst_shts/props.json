@@ -109,12 +109,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
-        "column_type": "oracy_prop",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "many_to_many",
         "label": "Monitors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -131,12 +131,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_council_member_list()": {
-        "name": "_council_member_list()",
-        "column_name": "council_member_list()",
-        "column_type": "oracy_prop",
+    "_council_member_list": {
+        "name": "_council_member_list",
+        "column_name": "council_member_list",
+        "column_type": "many_to_many",
         "label": "Council Members",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -178,7 +178,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "eloquent_prop",
+        "column_type": "1_to_many",
         "label": "Check Points",
         "control": "relationship_renderer",
         "align": "",
@@ -329,12 +329,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_signature_qaqc_chklst_3rd_party_list()": {
-        "name": "_signature_qaqc_chklst_3rd_party_list()",
-        "column_name": "signature_qaqc_chklst_3rd_party_list()",
-        "column_type": "oracy_prop",
+    "_signature_qaqc_chklst_3rd_party_list": {
+        "name": "_signature_qaqc_chklst_3rd_party_list",
+        "column_name": "signature_qaqc_chklst_3rd_party_list",
+        "column_type": "many_to_many",
         "label": "Norminated 3rd Inspectors",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
@@ -354,7 +354,7 @@
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
         "column_name": "signature_qaqc_chklst_3rd_party",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Signatures",
         "control": "signature_multi",
         "align": "",
@@ -376,7 +376,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "eloquent_prop",
+        "column_type": "morph",
         "label": "Rejected Reason",
         "control": "comment",
         "align": "",

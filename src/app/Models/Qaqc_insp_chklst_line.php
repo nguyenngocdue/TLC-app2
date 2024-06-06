@@ -30,13 +30,6 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "insp_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
-    public static $oracyParams = [
-        // "getNoOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
-        // "getOnHoldOfYesNo()" => ["getCheckedByField", Qaqc_insp_value::class],
-        // "getFailedOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
-        // "getOnHoldOfPassFail()" => ["getCheckedByField", Qaqc_insp_value::class],
-    ];
-
     public function insp_photos()
     {
         $p = static::$eloquentParams[__FUNCTION__];

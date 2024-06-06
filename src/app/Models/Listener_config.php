@@ -23,10 +23,8 @@ class Listener_config extends ModelExtended
 
         "getDiscipline" => ["belongsTo", Prod_discipline::class, "prod_discipline_id"],
         "getProdOrder" => ["belongsTo", Prod_order::class, "prod_order_id"],
-    ];
 
-    public static $oracyParams = [
-        "getRoutingLinks()" => ['getCheckedByField', Prod_routing_link::class,],
+        "getRoutingLinks" => ["belongsToMany", Prod_routing_link::class, "ym2m_listen_config_prod_routing_link"]
     ];
 
     public function getProject()
@@ -62,7 +60,7 @@ class Listener_config extends ModelExtended
 
     public function getRoutingLinks()
     {
-        $p = static::$oracyParams[__FUNCTION__ . '()'];
-        return $this->{$p[0]}(__FUNCTION__, $p[1]);
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }
