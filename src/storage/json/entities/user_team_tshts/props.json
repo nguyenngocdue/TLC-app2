@@ -134,7 +134,7 @@
     "_getTshtMembers": {
         "name": "_getTshtMembers",
         "column_name": "getTshtMembers",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Timesheet Members",
         "control": "dropdown_multi_2a",
         "align": "",

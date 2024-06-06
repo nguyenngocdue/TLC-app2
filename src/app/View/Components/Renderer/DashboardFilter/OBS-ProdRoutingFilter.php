@@ -2,13 +2,12 @@
 
 namespace App\View\Components\Renderer\DashboardFilter;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class QaqcInspTmplFilter extends Component
+class ProdRoutingFilter extends Component
 {
     use TraitListenerControl;
     use TraitGetSuffixListenerControl;
@@ -34,8 +33,8 @@ class QaqcInspTmplFilter extends Component
 
     private function getDataSource()
     {
-        $db = $this->dataSource;
-        Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
+        $db = $this->dataSource->with("getSubProjects")->get();
+        // Oracy::attach("getSubProjects()", $db);
         return $db;
     }
 
@@ -49,6 +48,7 @@ class QaqcInspTmplFilter extends Component
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
         // dump($params);
+        echo "Here";
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

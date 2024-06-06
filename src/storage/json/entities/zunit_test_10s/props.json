@@ -16,7 +16,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -35,12 +38,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getCorrectiveActions": {
         "name": "_getCorrectiveActions",
         "column_name": "getCorrectiveActions",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "2.5 Remedial Actions",
         "control": "relationship_renderer",
         "align": "",
@@ -54,12 +60,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT1": {
         "name": "_getUT1",
         "column_name": "getUT1",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT1 Basic Controls",
         "control": "relationship_renderer",
         "align": "",
@@ -73,12 +82,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getDiscipline1": {
         "name": "_getDiscipline1",
         "column_name": "getDiscipline1",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Discipline 1",
         "control": "relationship_renderer",
         "align": "",
@@ -92,12 +104,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9Reduce11": {
         "name": "_getUT9Reduce11",
         "column_name": "getUT9Reduce11",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Reduce 11",
         "control": "relationship_renderer",
         "align": "",
@@ -111,12 +126,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9Reduce1111": {
         "name": "_getUT9Reduce1111",
         "column_name": "getUT9Reduce1111",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Reduce 1111",
         "control": "relationship_renderer",
         "align": "",
@@ -130,12 +148,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9Assign": {
         "name": "_getUT9Assign",
         "column_name": "getUT9Assign",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Assign",
         "control": "relationship_renderer",
         "align": "",
@@ -149,12 +170,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9Dot": {
         "name": "_getUT9Dot",
         "column_name": "getUT9Dot",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Dot",
         "control": "relationship_renderer",
         "align": "",
@@ -168,12 +192,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9DateOffset": {
         "name": "_getUT9DateOffset",
         "column_name": "getUT9DateOffset",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Date Offset",
         "control": "relationship_renderer",
         "align": "",
@@ -187,12 +214,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9Expression": {
         "name": "_getUT9Expression",
         "column_name": "getUT9Expression",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Expression",
         "control": "relationship_renderer",
         "align": "",
@@ -206,12 +236,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT9ExpressionDateTime": {
         "name": "_getUT9ExpressionDateTime",
         "column_name": "getUT9ExpressionDateTime",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT9 Expression DateTime",
         "control": "relationship_renderer",
         "align": "",
@@ -225,12 +258,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT2": {
         "name": "_getUT2",
         "column_name": "getUT2",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT2",
         "control": "relationship_renderer",
         "align": "",
@@ -244,7 +280,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -263,12 +302,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_getUT3": {
         "name": "_getUT3",
         "column_name": "getUT3",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "UT3",
         "control": "relationship_renderer",
         "align": "",
@@ -282,7 +324,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true"
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -301,7 +346,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -320,7 +368,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -339,7 +390,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -358,6 +412,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

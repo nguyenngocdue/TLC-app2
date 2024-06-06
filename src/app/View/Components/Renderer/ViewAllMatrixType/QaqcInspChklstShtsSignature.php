@@ -2,8 +2,6 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\BigThink\Oracy;
-use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\User;
 
 class QaqcInspChklstShtsSignature extends QaqcInspChklstShts

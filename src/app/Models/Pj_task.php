@@ -46,20 +46,22 @@ class Pj_task extends ModelExtended
         $discipline = User_discipline::findFromCache($discipline_id);
         $tasks = $discipline->getTasksOfDiscipline()->sortBy('name');
 
-        $tasks = $tasks->whereNotIn('id', ['mail_checking' => 4, 'meeting' => 5, 'other' => 6, 'training' => 8]);
+        $tasks = $tasks
+            ->whereNotIn('id', ['mail_checking' => 4, 'meeting' => 5, 'other' => 6, 'training' => 8])
+            ->with("getChildrenSubTasks")->get();
 
         $tree = [
             ["key" => 0, "name" => "Any Project"],
         ];
         foreach ($lods as $lod) {
             foreach ($tasks as $task) {
-                $allLodsOfThisTask = $task->getLodsOfTask()->pluck('id')->toArray();
+                $allLodsOfThisTask = $task->getLodsOfTask->pluck('id')->toArray();
                 if (in_array($lod->id, $allLodsOfThisTask)) {
                     $lodKey = "lod_" . $lod->id;
                     $tree[$lodKey] = ['key' => $lodKey, "name" => $lod->name, "parent" => 0];
                     $taskKey = "task_" . $task->id;
                     $tree[$taskKey . "+" . $lodKey] = ['key' => $taskKey, "name" => $task->name, "parent" => $lodKey];
-                    $subTasks = $task->getChildrenSubTasks()->pluck('name', 'id');
+                    $subTasks = $task->getChildrenSubTasks->pluck('name', 'id');
                     // dump($subTasks);
                     foreach ($subTasks as $subTaskId => $subTaskName) {
                         $subTaskKey = "subtask_" . $subTaskId;

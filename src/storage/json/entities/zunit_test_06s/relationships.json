@@ -63,6 +63,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "relationship": "belongsToMany",
+        "control_name": "getMonitors1",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_attachment_1": {
         "name": "_attachment_1",
         "relationship": "morphMany",

@@ -51,7 +51,6 @@ class HrOnboardingLines extends ViewAllTypeMatrixParent
     {
         $result = [];
         $data = Hr_onboarding_course::all();
-        // $data = Prod_routing::find($this->prodRouting)->getWirDescriptions();
         foreach ($data as $line) {
             $result[] = [
                 'dataIndex' => $line->id,

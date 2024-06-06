@@ -16,7 +16,6 @@ class WelcomeDueController extends Controller
     {
 
 
-        AttachmentName::testCasesUploadMedia();
 
 
         $widget =  [

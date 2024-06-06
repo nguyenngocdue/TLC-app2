@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->bigInteger('qr_app_source')->nullable();
+            $table->boolean('show_in_task_budget')->nullable();
             $table->appendCommonFields();
         });
     }

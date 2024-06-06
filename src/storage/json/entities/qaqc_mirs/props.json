@@ -46,7 +46,7 @@
     "_getNcrs": {
         "name": "_getNcrs",
         "column_name": "getNcrs",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Related NCRs",
         "control": "relationship_renderer",
         "align": "",
@@ -244,7 +244,7 @@
     "_attachment_mir_po": {
         "name": "_attachment_mir_po",
         "column_name": "attachment_mir_po",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "PO Attachemment",
         "control": "attachment",
         "align": "",
@@ -266,7 +266,7 @@
     "_attachment_mir_delivery_docket": {
         "name": "_attachment_mir_delivery_docket",
         "column_name": "attachment_mir_delivery_docket",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Delivery Dockets",
         "control": "attachment",
         "align": "",
@@ -288,7 +288,7 @@
     "_attachment_mir_invoice": {
         "name": "_attachment_mir_invoice",
         "column_name": "attachment_mir_invoice",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Invoices",
         "control": "attachment",
         "align": "",
@@ -310,7 +310,7 @@
     "_attachment_mir_packing_list": {
         "name": "_attachment_mir_packing_list",
         "column_name": "attachment_mir_packing_list",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Packing Lists",
         "control": "attachment",
         "align": "",
@@ -332,7 +332,7 @@
     "_attachment_mir_material_test_report": {
         "name": "_attachment_mir_material_test_report",
         "column_name": "attachment_mir_material_test_report",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Material Test Reports",
         "control": "attachment",
         "align": "",
@@ -354,7 +354,7 @@
     "_attachment_mir_material_test_certificate": {
         "name": "_attachment_mir_material_test_certificate",
         "column_name": "attachment_mir_material_test_certificate",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Material Test Certificates",
         "control": "attachment",
         "align": "",
@@ -376,7 +376,7 @@
     "_attachment_mir_conformity_certificate": {
         "name": "_attachment_mir_conformity_certificate",
         "column_name": "attachment_mir_conformity_certificate",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Conformity Certificates",
         "control": "attachment",
         "align": "",
@@ -398,7 +398,7 @@
     "_attachment_mir_quality_certificate": {
         "name": "_attachment_mir_quality_certificate",
         "column_name": "attachment_mir_quality_certificate",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Quality Certificates",
         "control": "attachment",
         "align": "",
@@ -420,7 +420,7 @@
     "_attachment_mir_general_certificate": {
         "name": "_attachment_mir_general_certificate",
         "column_name": "attachment_mir_general_certificate",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "General Certificates",
         "control": "attachment",
         "align": "",
@@ -442,7 +442,7 @@
     "_attachment_mir_non_conformity_report": {
         "name": "_attachment_mir_non_conformity_report",
         "column_name": "attachment_mir_non_conformity_report",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Non-Conformity Reports",
         "control": "attachment",
         "align": "",
@@ -464,7 +464,7 @@
     "_attachment_mir_safety_data_sheet": {
         "name": "_attachment_mir_safety_data_sheet",
         "column_name": "attachment_mir_safety_data_sheet",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Safety Data Sheets",
         "control": "attachment",
         "align": "",
@@ -486,7 +486,7 @@
     "_attachment_mir_technical_data_sheet": {
         "name": "_attachment_mir_technical_data_sheet",
         "column_name": "attachment_mir_technical_data_sheet",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Technical Data Sheets",
         "control": "attachment",
         "align": "",
@@ -508,7 +508,7 @@
     "_attachment_mir_material_inspection_photo": {
         "name": "_attachment_mir_material_inspection_photo",
         "column_name": "attachment_mir_material_inspection_photo",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Material Inspection Photos",
         "control": "attachment",
         "align": "",
@@ -530,7 +530,7 @@
     "_attachment_mir_pdf_attached": {
         "name": "_attachment_mir_pdf_attached",
         "column_name": "attachment_mir_pdf_attached",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "PDF Attached",
         "control": "attachment",
         "align": "",
@@ -596,7 +596,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -618,7 +618,7 @@
     "_comment_asm_rejected_reason": {
         "name": "_comment_asm_rejected_reason",
         "column_name": "comment_asm_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Assignment Rejected Reasons",
         "control": "comment",
         "align": "",
@@ -640,7 +640,7 @@
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
         "column_name": "comment_insp_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Inspection Rejected Reasons",
         "control": "comment",
         "align": "",
@@ -662,7 +662,7 @@
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
         "column_name": "comment_inspector_decision",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Inspector Decision",
         "control": "comment",
         "align": "",

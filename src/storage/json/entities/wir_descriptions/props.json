@@ -178,7 +178,7 @@
     "_getDefMonitors1": {
         "name": "_getDefMonitors1",
         "column_name": "getDefMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Def Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -200,7 +200,7 @@
     "_getProdRoutingsOfWirDescription": {
         "name": "_getProdRoutingsOfWirDescription",
         "column_name": "getProdRoutingsOfWirDescription",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Routings",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -244,7 +244,7 @@
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
         "column_name": "getProdRoutingDetails",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Production Routing Detail",
         "control": "relationship_renderer",
         "align": "",

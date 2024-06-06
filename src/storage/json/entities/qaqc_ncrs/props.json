@@ -24,7 +24,7 @@
     "_getParent": {
         "name": "_getParent",
         "column_name": "getParent",
-        "column_type": "morph",
+        "column_type": "morphTo",
         "label": "Parent",
         "control": "parent_link",
         "align": "",
@@ -596,7 +596,7 @@
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
         "column_name": "attachment_defect_photos",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Defective Photos",
         "control": "attachment",
         "align": "",
@@ -618,7 +618,7 @@
     "_attachment_defect_pdfs": {
         "name": "_attachment_defect_pdfs",
         "column_name": "attachment_defect_pdfs",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attached PDF",
         "control": "attachment",
         "align": "",
@@ -662,7 +662,7 @@
     "_attachment_corrective_photos": {
         "name": "_attachment_corrective_photos",
         "column_name": "attachment_corrective_photos",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Corrective Photos",
         "control": "attachment",
         "align": "",
@@ -684,7 +684,7 @@
     "_attachment_corrective_pdfs": {
         "name": "_attachment_corrective_pdfs",
         "column_name": "attachment_corrective_pdfs",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attached PDF",
         "control": "attachment",
         "align": "",
@@ -750,7 +750,7 @@
     "_getQaqcCars": {
         "name": "_getQaqcCars",
         "column_name": "getQaqcCars",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Corrective Actions",
         "control": "relationship_renderer",
         "align": "",
@@ -838,7 +838,7 @@
     "_comment_resolved": {
         "name": "_comment_resolved",
         "column_name": "comment_resolved",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Resolved Comment",
         "control": "comment",
         "align": "",
@@ -948,7 +948,7 @@
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
         "column_name": "comment_inspector_decision",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Inspector Decision",
         "control": "comment",
         "align": "",
@@ -970,7 +970,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -1124,7 +1124,7 @@
     "_comment_asm_rejected_reason": {
         "name": "_comment_asm_rejected_reason",
         "column_name": "comment_asm_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Assignement Rejected Reason",
         "control": "comment",
         "align": "",
@@ -1146,7 +1146,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Corrective Rejected Reason",
         "control": "comment",
         "align": "",
@@ -1168,7 +1168,7 @@
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
         "column_name": "comment_insp_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Inspection Rejected Reason",
         "control": "comment",
         "align": "",

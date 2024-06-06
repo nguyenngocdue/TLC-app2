@@ -22,7 +22,7 @@ class ParamProdRoutingId extends ParentParamReports
             case 'prod_sequences':
                 $typeIdOfShowOnScreen = 347; // SQB Timesheet
                 break;
-/*             case 'qaqc_ncrs':
+                /*             case 'qaqc_ncrs':
                     $typeIdOfShowOnScreen = 346; // QAQC Inspection
                 break;  */
             default:
@@ -36,20 +36,20 @@ class ParamProdRoutingId extends ParentParamReports
         $prodRoutings = ParameterReport::getDBParameter($targetIds, 'Prod_routing');
         $result = [];
         // dump($prodRoutings->toArray());
-        
+
         foreach ($prodRoutings as $routing) {
-            if ($routing->name === '-- available' || empty($routing->getScreensShowMeOn()->toArray())) continue;
-        
-            $ids = $routing->getScreensShowMeOn()->pluck('id')->toArray();
-            
+            if ($routing->name === '-- available' || empty($routing->getScreensShowMeOn->toArray())) continue;
+
+            $ids = $routing->getScreensShowMeOn->pluck('id')->toArray();
+
             $r = '';
             if ($typeIdOfShowOnScreen && in_array((int)$typeIdOfShowOnScreen, $ids)) $r = $routing;
             elseif (!$typeIdOfShowOnScreen)  $r = $routing;
 
-            if($r) {
-                $subProjectIds = $r->getSubProjects()->pluck('id')->toArray();
-                $chklstTmplIds = $r->getChklstTmpls()->pluck('id')->toArray();
-        
+            if ($r) {
+                $subProjectIds = $r->getSubProjects->pluck('id')->toArray();
+                $chklstTmplIds = $r->getChklstTmpls->pluck('id')->toArray();
+
                 $result[] = (object)[
                     'id' => $r->id,
                     'name' => $r->name,
@@ -59,7 +59,9 @@ class ParamProdRoutingId extends ParentParamReports
             }
         }
 
-        usort($result, function ($a, $b) { return strcmp($a->name, $b->name); });
+        usort($result, function ($a, $b) {
+            return strcmp($a->name, $b->name);
+        });
         return $result;
     }
 }

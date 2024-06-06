@@ -90,7 +90,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Lines",
         "control": "relationship_renderer",
         "align": "",

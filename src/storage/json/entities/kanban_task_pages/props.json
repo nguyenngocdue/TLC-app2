@@ -90,7 +90,7 @@
     "_getClusters": {
         "name": "_getClusters",
         "column_name": "getClusters",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Clusters",
         "control": "dropdown_multi",
         "align": "",
@@ -156,7 +156,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Members",
         "control": "dropdown_multi_2a",
         "align": "",

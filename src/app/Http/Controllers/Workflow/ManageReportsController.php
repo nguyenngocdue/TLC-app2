@@ -26,12 +26,14 @@ class ManageReportsController extends AbstractManageLibController
                 'dataIndex' => "name",
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
+                'width' => 300,
             ],
             [
                 'dataIndex' => "package_tab",
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => ['report'],
+                'width' => 150,
                 // "sortBy" => "value",
                 // "properties" => ["strFn" => "appTitle"],
             ],
@@ -42,28 +44,33 @@ class ManageReportsController extends AbstractManageLibController
                 "cbbDataSource" => $packages,
                 // "sortBy" => "value",
                 "properties" => ["strFn" => "appTitle"],
+                'width' => 300,
             ],
             [
                 'dataIndex' => "breadcrumb-group",
                 'renderer' => 'dropdown',
                 'editable' => true,
                 "cbbDataSource" => $breadcrumbGroups,
+                'width' => 200,
             ],
             [
                 'dataIndex' => 'top_title',
                 'renderer' => 'text4',
                 'editable' => true,
+                'width' => 300,
             ],
             [
                 'dataIndex' => 'title',
                 'renderer' => 'text4',
                 'editable' => true,
+                'width' => 300,
             ],
             [
                 'dataIndex' => 'hidden',
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
+                'width' => 200,
             ],
         ];
     }

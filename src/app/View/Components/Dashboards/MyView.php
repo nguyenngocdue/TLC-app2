@@ -91,14 +91,14 @@ class MyView extends Component
                 $status = $statuses[$doc->status];
                 // $assignee = $status['ball-in-courts']['ball-in-court-assignee'];
                 $monitors_1_to_9 = $status['ball-in-courts']['ball-in-court-monitors'];
-                $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1()";
+                $monitors_1_to_9 = $monitors_1_to_9 ? $monitors_1_to_9 : "getMonitors1";
                 // dump($doc->id, $monitors_1_to_9);
                 if (strlen($monitors_1_to_9) > 0) {
                     $fn = substr($monitors_1_to_9, 0, strlen($monitors_1_to_9) - 2);
                     // dump($fn);
                     if (method_exists($doc, $fn)) {
                         // dump("$doc->id $fn");
-                        $monitors = $doc->$fn()->pluck('id')->toArray();
+                        $monitors = $doc->$fn->pluck('id')->toArray();
                         // dump($monitors);
                         // dump($doc->id . ": ($fn) " . $uid . " in [" . join(", ", $monitors) . "]");
 

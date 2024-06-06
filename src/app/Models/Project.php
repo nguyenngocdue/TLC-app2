@@ -11,7 +11,10 @@ class Project extends ModelExtended
     use HasCachedAvatar;
     use HasShowOnScreens;
 
-    protected $fillable = ["id", "name", "description", "slug", "status", "owner_id", "qr_app_source"];
+    protected $fillable = [
+        "id", "name", "description", "slug", "status", "owner_id",
+        "qr_app_source", "show_in_task_budget",
+    ];
 
     public static $eloquentParams = [
         "getSubProjects" => ['hasMany', Sub_project::class, "project_id"],
@@ -19,7 +22,7 @@ class Project extends ModelExtended
         "featured_image" => ['morphMany', Attachment::class, 'attachments', 'object_type', 'object_id'],
         "getQrAppSource" => ['belongsTo', Term::class, 'qr_app_source'],
 
-        "getProjectMembers" => ["belongsToMany", User::class, "ym2m_project_user_member"],
+        "getProjectMembers" => ["belongsToMany", User::class, "ym2m_project_user_project_member"],
         "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_project_term_show_me_on"],
     ];
 

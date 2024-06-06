@@ -50,7 +50,7 @@ class UpdatedDocumentListener2 implements ShouldQueue
     {
         $status = $obj['status'];
         $bic_assignee = $bic[$status]['ball-in-court-assignee'] ?: 'owner_id';
-        $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1()";
+        $bic_monitors = $bic[$status]['ball-in-court-monitors'] ?: "getMonitors1";
 
         if (!isset($obj[$bic_assignee]) || is_null($obj[$bic_assignee])) {
             $msg = $bic_assignee . " is not found in $type (UpdatedDocumentListener2).";

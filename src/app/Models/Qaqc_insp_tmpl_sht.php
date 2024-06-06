@@ -18,7 +18,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         "getLines" => ["hasMany", Qaqc_insp_tmpl_line::class, "qaqc_insp_tmpl_sht_id"],
         "getProdDiscipline" => ['belongsTo', Prod_discipline::class, 'prod_discipline_id'],
 
-        "getDefExtInsp" => ["belongsToMany", User::class, "ym2m_qaqc_insp_tmpl_sht_user_def_ext_insp_1"],
+        "getDefExtInsp" => ["belongsToMany", User::class, "ym2m_qaqc_insp_tmpl_sht_user_def_ext_insp"],
     ];
 
     public function getLines()
@@ -32,11 +32,7 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    // public function getMonitors1()
-    // {
-    //     $p = static::$oracyParams[__FUNCTION__ . '()'];
-    //     return $this->{$p[0]}(__FUNCTION__, $p[1]);
-    // }
+
     public function getDefExtInsp()
     {
         $p = static::$eloquentParams[__FUNCTION__];
@@ -57,7 +53,6 @@ class Qaqc_insp_tmpl_sht extends ModelExtended
             ['dataIndex' => 'name'],
             // ['dataIndex' => 'description'],
             // ['dataIndex' => 'getLines',],
-            // ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
         ];
     }
 }

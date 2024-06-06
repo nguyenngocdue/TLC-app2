@@ -4,6 +4,7 @@ namespace App\Http\Services\ExternalInspector;
 
 use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_chklst;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
@@ -29,7 +30,8 @@ class UpdateProdRoutingService
         $result = array_map(fn ($id) => +$id, $result);
 
         $item = Prod_routing::find($prod_routing_id);
-        $item->syncCheck($targetFn, \App\Models\User::class, $result);
+        // $item->syncCheck($targetFn, \App\Models\User::class, $result);
+        $item->{$targetFn}()->syncWithPivotValues($result, ['owner_id' => CurrentUser::id()]);
         // Log::info("UpdateProdRoutingService" . $prod_routing_id);
         // Log::info($result);
     }

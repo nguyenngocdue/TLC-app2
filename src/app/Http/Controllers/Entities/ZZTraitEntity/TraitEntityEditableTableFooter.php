@@ -38,7 +38,9 @@ trait TraitEntityEditableTableFooter
         $listenFooters = [];
         foreach ($allListenFooters as $listener) {
             foreach ($listener['triggers'] as $trigger) {
-                if (str_starts_with($trigger, $columnName)) {
+                $functionName = Str::before($trigger, '[');
+                // if (str_starts_with($trigger, $columnName)) { //This cause issue when getRuns and getRunsRework
+                if ($columnName == $functionName) {
                     [$footer, $tableColumn, $aggName] = $this->split($trigger);
                     if ($footer === 'footer') {
                         $listenFooters[$columnName][] = [
@@ -82,7 +84,7 @@ trait TraitEntityEditableTableFooter
                 $result[$targetField] = $newValue;
             }
         }
-        // Log::info($raw);
+        // Log::info($result);
         return $result;
     }
 }

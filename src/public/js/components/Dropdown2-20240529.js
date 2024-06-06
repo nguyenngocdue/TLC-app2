@@ -378,8 +378,21 @@ const onChangeDropdown2Expression = (listener) => {
     }
     const result = eval(expression1)
     if (debugListener) console.log(column_name, ':(', expression1, ', result:', result, ')')
-    getEById(column_name).val(result)
-    getEById(column_name).trigger('change')
+    const datetime_controls = superProps.datetime_controls
+    const controlNames = Object.keys(datetime_controls)
+    if(controlNames.includes(column_name)){
+        switch(datetime_controls[column_name]){
+            case "picker_date":
+                newFlatPickrDate(column_name).setDate(new Date(result * 1000))
+                break
+            default:
+                console.log("Unsupport datetime control", datetime_controls[column_name], "for", column_name)
+                break
+        }
+    } else{
+        getEById(column_name).val(result)
+        getEById(column_name).trigger('change')
+    }
 }
 const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true

@@ -25,21 +25,33 @@ trait TraitStoreEmpty
 	use TraitEntityFieldHandler2;
 	use TraitFailObject;
 
-	private function getModelButNeedToHaveAMoreDecentWay($fieldName, $sp)
-	{
-		$model = ($sp['props']["_" . $fieldName . "()"]['relationships']['oracyParams'][1]);
-		return $model;
-	}
+	// private function getModelButNeedToHaveAMoreDecentWay($fieldName, $sp)
+	// {
+	// 	$model = ($sp['props']["_" . $fieldName . "()"]['relationships']['oracyParams'][1]);
+	// 	return $model;
+	// }
 
-	private function insertOracy($item, $createdItem, $sp)
+	// private function insertOracy($item, $createdItem, $sp)
+	// {
+	// 	// Log::info($item);
+	// 	$oracy = array_filter($item, fn ($fnName) => str_contains($fnName, '()'), ARRAY_FILTER_USE_KEY);
+	// 	// Log::info($oracy);
+	// 	foreach ($oracy as $functionName => $valueArr) {
+	// 		$fieldName = substr($functionName, 0, strlen($functionName) - 2);
+	// 		$model = $this->getModelButNeedToHaveAMoreDecentWay($fieldName, $sp);
+	// 		$createdItem->attachCheck($fieldName, $model, $valueArr);
+	// 	}
+	// }
+
+	private function insertManyToMany($item, $createdItem, $sp)
 	{
-		// Log::info($item);
-		$oracy = array_filter($item, fn ($fnName) => str_contains($fnName, '()'), ARRAY_FILTER_USE_KEY);
-		// Log::info($oracy);
-		foreach ($oracy as $functionName => $valueArr) {
-			$fieldName = substr($functionName, 0, strlen($functionName) - 2);
-			$model = $this->getModelButNeedToHaveAMoreDecentWay($fieldName, $sp);
-			$createdItem->attachCheck($fieldName, $model, $valueArr);
+		foreach ($sp['props'] as $prop) {
+			if ($prop['column_type'] == 'belongsToMany') {
+				$propName = $prop['column_name'];
+				if (isset($item[$propName])) {
+					$createdItem->{$propName}()->attach($item[$propName], ['owner_id' => CurrentUser::id()]);
+				}
+			}
 		}
 	}
 
@@ -150,7 +162,7 @@ trait TraitStoreEmpty
 
 				$createdItem = $this->modelPath::create($item);
 
-				$this->insertOracy($item, $createdItem, $sp);
+				$this->insertManyToMany($item, $createdItem, $sp);
 				// Log::info("Store empty");
 				// Log::info($createdItem);
 
@@ -166,8 +178,8 @@ trait TraitStoreEmpty
 			switch ($this->type) {
 				case 'hr_timesheet_worker':
 					foreach ($theRows as $row) {
-						$team = User_team_tsht::find($row->team_id);
-						$workers = $team->getTshtMembers();
+						$team = User_team_tsht::find($row->team_id)->with("getTshtMembers")->first();
+						$workers = $team->getTshtMembers;
 
 						$workers = $workers->toArray();
 						usort($workers, function ($a, $b) {
@@ -193,8 +205,8 @@ trait TraitStoreEmpty
 					break;
 				case "site_daily_assignment":
 					foreach ($theRows as $row) {
-						$team = User_team_site::find($row->site_team_id);
-						$workers = $team->getSiteMembers();
+						$team = User_team_site::find($row->site_team_id)->with("getSiteMembers")->first();
+						$workers = $team->getSiteMembers;
 						foreach ($workers as $worker) {
 							Site_daily_assignment_line::create([
 								'owner_id' => $row->owner_id,

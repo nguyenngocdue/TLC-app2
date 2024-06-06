@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\BigThink\Oracy;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
@@ -32,7 +31,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     private function getDataSource()
     {
         $cu = CurrentUser::get();
-        $this->subProjects = $cu->{$this->getSubProjectsOfUserFn}();
+        $this->subProjects = $cu->{$this->getSubProjectsOfUserFn};
         if (!$this->subProjects->contains('id', $this->STW_SANDBOX_ID)) {
             $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
         }
@@ -88,8 +87,15 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
     protected function getAllRoutingList()
     {
         $cu = CurrentUser::get();
-        $prodRoutings = $cu->{$this->getProdRoutingsOfUserFn}();
-        Oracy::attach('getSubProjects()', $prodRoutings);
+        $prodRoutings = $cu
+            ->{$this->getProdRoutingsOfUserFn}()
+            ->with("getSubProjects")
+            ->get();
+
+        foreach ($prodRoutings as &$item) {
+            $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();
+        }
+
         // dump($prodRoutings);
         return $prodRoutings;
     }
@@ -109,13 +115,16 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
                 $subProjectId = $matrix['sub_project_id'];
                 $sheets = Qaqc_insp_chklst_sht::query()
                     ->whereHas('getChklst', function ($query) use ($routingId, $subProjectId) {
-                        $query->where('prod_routing_id', $routingId)->where('sub_project_id', $subProjectId);
+                        $query
+                            ->where('prod_routing_id', $routingId)
+                            ->where('sub_project_id', $subProjectId);
                     })
+                    ->with($this->nominatedFn)
                     ->get();
-                Oracy::attach($this->nominatedFn . "()", $sheets);
+                // Oracy::attach($this->nominatedFn . "()", $sheets);
 
                 foreach ($sheets as $sheet) {
-                    $extInsp = $sheet->{$this->nominatedFn . "()"};
+                    $extInsp = $sheet->{$this->nominatedFn};
                     if ($extInsp->contains($cuid)) {
                         $result[$key][] = $sheet;
                     }

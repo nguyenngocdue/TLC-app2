@@ -112,7 +112,7 @@
     "_getSiteTasks": {
         "name": "_getSiteTasks",
         "column_name": "getSiteTasks",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Site Tasks",
         "control": "dropdown_multi_2a",
         "align": "",

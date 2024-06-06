@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Calendar;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Pj_sub_task;
 use Illuminate\View\Component;
@@ -31,8 +30,10 @@ class ModalFilterSubTask extends Component
 
     private function getDataSource()
     {
-        $dataSource = Pj_sub_task::select('id', 'name', 'description')->get();
-        Oracy::attach("getParentTasks()", $dataSource);
+        $dataSource = Pj_sub_task::select('id', 'name', 'description')
+            ->with("getParentTasks")
+            ->get();
+        // Oracy::attach("getParentTasks()", $dataSource);
         return $dataSource;
     }
 

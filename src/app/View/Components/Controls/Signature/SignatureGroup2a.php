@@ -27,7 +27,7 @@ class SignatureGroup2a extends Component
     ) {
         if (is_null($signOffOracy)) $this->signOffOracy = $category . "_list";
         // dump($this->signOffOracy);
-        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}()->pluck('users.id');
+        $this->signOffAdminIds = $this->item->{$this->signOfAdminFn}->pluck('id');
         // dump($this->signOffAdminIds);
         // dump($category);
         // dump($item);
@@ -54,13 +54,13 @@ class SignatureGroup2a extends Component
         if (!isset($this->item->{$this->category})) return "<i class='text-xs font-light' title='Category: $this->category'>Please create this document before signing off.</i>";
         $cuid = CurrentUser::id();
 
-        $nominatedList = $this->item->{$this->signOffOracy}();
+        $nominatedList = $this->item->{$this->signOffOracy};
         // dump($nominatedList);
         $signatureList = $this->item->{$this->category}()->with('getUser')->get();
         // dump($signatureList);
         $signatures = $this->mergeUserAndSignature($nominatedList, $signatureList);
         // dump($signatures);
-        $all = ($nominatedList->pluck('email', 'users.id'));
+        $all = ($nominatedList->pluck('email', 'id'));
         // dump($all);
         $signed = ($signatureList->pluck('getUser.email', 'user_id'));
         // dump($signed);
@@ -75,7 +75,6 @@ class SignatureGroup2a extends Component
         // dump($alreadyRequested);
         // $alreadyRequestedSignatures = $alreadyRequested->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);
         // dump($alreadyRequestedSignatures);
-
         $needToRecall = $signed->filter(fn ($email) => (!$all->contains($email)) && $email);
         // dump($needToRecall);
         $needToRecallSignatures = $needToRecall->map(fn ($i, $uid) => $signatureList->where('user_id', $uid)->pluck('id')->toArray()[0]);

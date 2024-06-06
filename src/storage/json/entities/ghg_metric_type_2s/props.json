@@ -18,7 +18,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -39,7 +40,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_description": {
         "name": "_description",
@@ -60,7 +62,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_ghg_metric_type_1_id": {
         "name": "_ghg_metric_type_1_id",
@@ -81,7 +84,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_unit": {
         "name": "_unit",
@@ -102,7 +106,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_factor": {
         "name": "_factor",
@@ -123,7 +128,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -144,7 +150,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_status": {
         "name": "_status",
@@ -165,7 +172,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -186,7 +194,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -207,7 +216,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -228,7 +238,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -249,7 +260,8 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -270,6 +282,7 @@
         "duplicatable": "",
         "new_line": "",
         "frozen_left": "",
-        "frozen_right": ""
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

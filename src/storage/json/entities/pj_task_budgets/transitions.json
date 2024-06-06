@@ -1,0 +1,14 @@
+{
+    "new": {
+        "name": "new",
+        "location": "",
+        "new": "",
+        "not_applicable": "true"
+    },
+    "not_applicable": {
+        "name": "not_applicable",
+        "location": "",
+        "new": "true",
+        "not_applicable": ""
+    }
+}

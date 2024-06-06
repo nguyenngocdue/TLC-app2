@@ -68,7 +68,7 @@
     "_getUsers": {
         "name": "_getUsers",
         "column_name": "getUsers",
-        "column_type": "eloquent_prop",
+        "column_type": "hasMany",
         "label": "Users",
         "control": "relationship_renderer",
         "align": "",

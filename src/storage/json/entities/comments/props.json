@@ -16,7 +16,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_content": {
         "name": "_content",
@@ -35,7 +38,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_category": {
         "name": "_category",
@@ -54,7 +60,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_commentable_type": {
         "name": "_commentable_type",
@@ -73,7 +82,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_commentable_id": {
         "name": "_commentable_id",
@@ -92,7 +104,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -111,7 +126,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_position_rendered": {
         "name": "_position_rendered",
@@ -130,12 +148,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_commentable": {
         "name": "_commentable",
         "column_name": "commentable",
-        "column_type": "eloquent_prop",
+        "column_type": "morphTo",
         "label": "Parent",
         "control": "parent_link",
         "align": "",
@@ -149,12 +170,15 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_comment_attachment": {
         "name": "_comment_attachment",
         "column_name": "comment_attachment",
-        "column_type": "eloquent_prop",
+        "column_type": "morphMany",
         "label": "Attachment",
         "control": "attachment",
         "align": "",
@@ -168,7 +192,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -187,7 +214,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -206,7 +236,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -225,7 +258,10 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -244,6 +280,9 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

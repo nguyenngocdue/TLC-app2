@@ -126,7 +126,7 @@ trait TraitSupportPermissionGate
     {
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
         if (!$isExternalInspector) return;
-        $nominatedList = $item->signature_qaqc_chklst_3rd_party_list()->pluck('id');
+        $nominatedList = $item->signature_qaqc_chklst_3rd_party_list->pluck('id');
         if (!$nominatedList->contains(CurrentUser::id())) {
             abort(403, "You are not permitted to view this check sheet (External Inspector has not yet nominated). If you believe this is a mistake, please contact our admin.");
         }
@@ -136,7 +136,7 @@ trait TraitSupportPermissionGate
     {
         $isCouncilMember = CurrentUser::get()->isCouncilMember();
         if (!$isCouncilMember) return;
-        $nominatedList = $item->council_member_list()->pluck('id');
+        $nominatedList = $item->council_member_list->pluck('id');
         if (!$nominatedList->contains(CurrentUser::id())) {
             abort(403, "You are not permitted to view this check sheet (Council Member has not yet nominated). If you believe this is a mistake, please contact our admin.");
         }

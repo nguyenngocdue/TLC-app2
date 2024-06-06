@@ -18,7 +18,7 @@ class User_discipline extends ModelExtended
         "getDefAssignee" => ["belongsTo", User::class, 'def_assignee'],
 
         //Many to many
-        "getMonitors1" => ["belongsToMany", User::class, "ym2m_user_discipline_user_monitor_1"],
+        "getDefMonitors1" => ["belongsToMany", User::class, "ym2m_user_discipline_user_def_monitor_1"],
         "getTasksOfDiscipline" => ["belongsToMany", Pj_task::class, "ym2m_pj_task_user_discipline"],
     ];
 
@@ -38,7 +38,7 @@ class User_discipline extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getMonitors1()
+    public function getDefMonitors1()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

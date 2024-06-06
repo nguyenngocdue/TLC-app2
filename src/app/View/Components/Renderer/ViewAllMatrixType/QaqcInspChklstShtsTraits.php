@@ -2,9 +2,9 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\BigThink\Oracy;
 use App\Models\Prod_routing;
 use App\Models\Project;
+use Illuminate\Support\Facades\Log;
 
 trait QaqcInspChklstShtsTraits
 {
@@ -24,16 +24,20 @@ trait QaqcInspChklstShtsTraits
             ->get();
     }
 
-    function getRoutingCollectionFromSubProjects()
+    function getRoutingCollectionFromSubProjectsForClients()
     {
         $subProjectIds = $this->subProjects->pluck('id')->toArray();
 
-        $prodRoutings = Prod_routing::query()->get();
+        $prodRoutings = Prod_routing::query()->with("getSubProjects")->get();
         $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
-        Oracy::attach('getSubProjects()', $prodRoutings);
+
+        foreach ($prodRoutings as &$item) {
+            $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();
+        }
+        // Log::info($prodRoutings);
         $prodRoutings1 = collect();
         foreach ($prodRoutings as $prodRouting0) {
-            $getSubProjects = $prodRouting0->{"getSubProjects()"}->toArray();
+            $getSubProjects = $prodRouting0->getSubProjects;
             if (sizeof(array_intersect($getSubProjects, $subProjectIds)) > 0) {
                 $prodRoutings1->push($prodRouting0);
             }

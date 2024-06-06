@@ -26,7 +26,7 @@ class Prod_routing extends ModelExtended
         "getChklstTmpls" => ["belongsToMany", Qaqc_insp_tmpl::class, "ym2m_prod_routing_qaqc_insp_tmpl"],
         "getSubProjects" => ["belongsToMany", Sub_project::class, "ym2m_prod_routing_sub_project"],
         "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_prod_routing_term_show_me_on"],
-        "getExternalInspectorsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_external_inspector"],
+        "getExternalInspectorsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_ext_insp"],
         "getCouncilMembersOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_council_member"],
     ];
 

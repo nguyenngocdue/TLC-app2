@@ -56,7 +56,8 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
     public function getYAxis()
     {
         $yAxis = $this->yAxis::query()
-            ->whereNotIn('status', ['concept', 'closed', 'cancelled'])
+            // ->whereNotIn('status', ['concept', 'closed', 'cancelled'])
+            ->where('show_in_task_budget', true)
             ->orderBy('name')
             ->get();
         return $yAxis;
@@ -67,6 +68,11 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
         $data = User_discipline::query()
             // ->whereHas("getUsers", $getUserFn)
             ->where('show_in_task_budget', true)
+            ->with(["getUsers" => function ($query) {
+                $query
+                    ->with("getAvatar")
+                    ->where('resigned', false);
+            }])
             ->orderBy('name')
             ->get();
         // dump(sizeof($data));
@@ -79,10 +85,16 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
         $data = $this->getXAxisPrimaryColumns();
         // dump($data);
         foreach ($data as $line) {
+            $avatars = $line->getUsers->map(function ($user) {
+                if (!$user->getAvatar) $src = "/image/avatar.jpg";
+                else $src = app()->pathMinio() . $user->getAvatar->url_thumbnail;
+                return "<img src='$src' class='w-8 h-8 rounded-full'>";
+            })->join("");
             $item = [
                 'dataIndex' => $line->id,
                 'columnIndex' => "status",
-                'title' => $line->name,
+                'title' => "<div class='flex items-baseline'>" . $line->name .  $avatars . "</div>",
+                'width' => 50,
             ];
             $result[] = $item;
         }

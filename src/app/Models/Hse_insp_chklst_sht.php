@@ -49,7 +49,7 @@ class Hse_insp_chklst_sht extends ModelExtended
             // ['dataIndex' => 'description'],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'hse_insp_tmpl_sht_id', 'rendererParam' => 'name'],
-            ['dataIndex' => 'getMonitors1()', 'renderer' => 'agg_count'],
+            ['dataIndex' => 'getMonitors1', 'renderer' => 'agg_count'],
             ['dataIndex' => 'progress'],
             ['dataIndex' => 'status'],
         ];

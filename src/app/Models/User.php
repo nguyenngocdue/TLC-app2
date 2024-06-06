@@ -125,7 +125,7 @@ class User extends ModelExtended implements
         "getQaqcInspTmplsOfExternalInspector" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_ext_insp"],
         "getQaqcInspTmplsOfCouncilMember" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_council_member"],
 
-        "getProdRoutingsOfExternalInspector" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_external_inspector"],
+        "getProdRoutingsOfExternalInspector" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_ext_insp"],
         "getProdRoutingsOfCouncilMember" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_council_member"],
     ];
 

@@ -93,7 +93,7 @@ class HrTimesheetWorkers extends ViewAllTypeMatrixParent
                 'value' => User::findFromCache($y->def_assignee)->name,
                 'cell_title' => $y->def_assignee,
             ],
-            'count' => count($y->getTshtMembers()),
+            'count' => count($y->getTshtMembers),
         ];
     }
 }

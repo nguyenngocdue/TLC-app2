@@ -207,14 +207,14 @@
         "title": "Pending",
         "color": "amber",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_ack": {
         "name": "pending_ack",
         "title": "Pending Acknowledgement",
         "color": "orange",
         "color_index": "800",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_approval": {
         "name": "pending_approval",
@@ -235,42 +235,42 @@
         "title": "Pending Confirmation",
         "color": "orange",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_endorsement": {
         "name": "pending_endorsement",
         "title": "Pending Endorsement",
         "color": "orange",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_ncr": {
         "name": "pending_ncr",
         "title": "Pending NCR",
         "color": "red",
-        "color_index": "800",
-        "icon": null
+        "color_index": "700",
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_received": {
         "name": "pending_received",
         "title": "Pending Received",
         "color": "orange",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_review": {
         "name": "pending_review",
         "title": "Pending Review",
         "color": "purple",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "pending_verification": {
         "name": "pending_verification",
         "title": "Pending Verification",
         "color": "orange",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
     },
     "publish": {
         "name": "publish",

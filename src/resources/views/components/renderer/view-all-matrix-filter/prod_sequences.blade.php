@@ -53,7 +53,7 @@
                     name="prod_routing_link_id[]" 
                     {{-- name="getRoutingLinks()[]"  --}}
                     {{-- Just Been here --}}
-                    id="getRoutingLinks()" 
+                    id="getRoutingLinks" 
                     typeToLoadListener="listener_config" 
                     allowClear="true"
                     :selected="$viewportParams['prod_routing_link_id']"

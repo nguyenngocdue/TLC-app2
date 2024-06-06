@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
-use App\BigThink\Oracy;
 use App\Models\Hr_overtime_request;
 use App\Models\Hr_overtime_request_line;
 use App\Models\Hr_timesheet_line;
@@ -25,7 +24,7 @@ trait TraitGetLines
 {
 	private function getTeamMembers($team_id)
 	{
-		return User_team_tsht::find($team_id)->getTshtMembers()->pluck('id');
+		return User_team_tsht::find($team_id)->getTshtMembers->pluck('id');
 	}
 
 	private function getCacheData($allSequences)
@@ -62,14 +61,17 @@ trait TraitGetLines
 
 	private function makeData($team_id, $date)
 	{
-		$runs = Prod_run::query()->where('date', $date)->get();
-		Oracy::attach("getWorkersOfRun()", $runs);
+		$runs = Prod_run::query()
+			->where('date', $date)
+			->with("getWorkersOfRun")
+			->get();
+		// Oracy::attach("getWorkersOfRun()", $runs);
 
 		$result = [];
 		$allSequences = [];
 		$teamMembers = $this->getTeamMembers($team_id)->toArray();
 		foreach ($runs as $run) {
-			foreach ($run->{"getWorkersOfRun()"} as $worker_id) {
+			foreach ($run->getWorkersOfRun as $worker_id) {
 				if (in_array($worker_id, $teamMembers)) {
 					$allSequences[$run->prod_sequence_id] = true;
 					$this->accumulate($result, [$worker_id, 'all', 'total_hours'], $run->total_hours);

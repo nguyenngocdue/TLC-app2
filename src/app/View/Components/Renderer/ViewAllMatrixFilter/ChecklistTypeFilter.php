@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Qaqc_insp_tmpl;
 use Illuminate\View\Component;
@@ -35,8 +34,9 @@ class ChecklistTypeFilter extends Component
     {
         $db = Qaqc_insp_tmpl::select('id', 'name', 'description')
             ->orderBy('name')
+            ->with('getProdRoutingsOfInspTmpl')
             ->get();
-        Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
+        // Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
         return $db;
 
         // $matrixView = (new QaqcInspChklstShts());

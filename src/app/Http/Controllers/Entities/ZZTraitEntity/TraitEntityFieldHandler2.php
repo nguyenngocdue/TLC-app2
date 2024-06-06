@@ -6,7 +6,6 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use Illuminate\Http\Request;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -21,10 +20,15 @@ trait TraitEntityFieldHandler2
         // $comment01Count = 0;
         // $comment01Index = "";
         $result = [
-            'oracy_prop' => [],
-            '1_to_many' => [],
-            'many_to_many' => [],
-            'morph' => [],
+            'hasOne' => [],
+            'hasMany' => [],
+            'hasManyThrough' => [],
+            'belongsTo' => [],
+            'belongsToMany' => [],
+            'morphTo' => [],
+            'morphMany' => [],
+            'morphOne' => [],
+            'morphToMany' => [],
 
             'attachment' => [],
             'datetime' => [],
@@ -49,18 +53,9 @@ trait TraitEntityFieldHandler2
                 //     $comment01Count++;
                 //     $comment01Index = "comment" . str_pad($comment01Count, 2, '0', STR_PAD_LEFT);
             } else {
-                switch ($prop['column_type']) {
-                        // case 'oracy_prop':
-                        // case 'eloquent_prop':
-                    case '1_to_many':
-                    case 'many_to_many':
-                    case 'morph':
-                        $column_type = $prop['column_type'];
-                        break;
-                    default:
-                        $column_type = 'field';
-                        break;
-                }
+                $relationships = ['hasOne', 'hasMany', 'hasManyThrough', 'belongsTo', 'belongsToMany', 'morphTo', 'morphMany', 'morphOne', 'morphToMany',];
+                $column_type = 'field';
+                if (in_array($prop['column_type'], $relationships)) $column_type = $prop['column_type'];
             }
             if ($prop['control'] === 'relationship_renderer') {
                 $result[$column_type][$table01Index] = $prop['name'];
@@ -176,37 +171,37 @@ trait TraitEntityFieldHandler2
         }
     }
 
-    private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)
-    {
-        // Log::info($this->type);
-        $propNames = [];
-        foreach ($oracyProps as $prop) {
-            $propName = substr($prop, 1); //Remove first "_"
-            $propNames[] = $propName;
-        }
-        // Log::info("PropNames to be modify m2m: " . join(", ", $propNames));
+    // private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)
+    // {
+    //     // Log::info($this->type);
+    //     $propNames = [];
+    //     foreach ($oracyProps as $prop) {
+    //         $propName = substr($prop, 1); //Remove first "_"
+    //         $propNames[] = $propName;
+    //     }
+    //     // Log::info("PropNames to be modify m2m: " . join(", ", $propNames));
 
-        if (!is_null($getManyLineParams)) {
-            // Log::info("Filter oracy props according to getManyLineParams");
-            // Log::info($oracyProps);
-            // Log::info($getManyLineParams);
-            $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
-            // Log::info($getManyLineParamsDataIndex);
-            $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
-        }
-        // Log::info("PropNames to be updated: " . join(", ", $propNames));
+    //     if (!is_null($getManyLineParams)) {
+    //         // Log::info("Filter oracy props according to getManyLineParams");
+    //         // Log::info($oracyProps);
+    //         // Log::info($getManyLineParams);
+    //         $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
+    //         // Log::info($getManyLineParamsDataIndex);
+    //         $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
+    //     }
+    //     // Log::info("PropNames to be updated: " . join(", ", $propNames));
 
-        foreach ($propNames as $propName) {
-            $relatedModel = $this->superProps['props']['_' . $propName]['relationships']['oracyParams'][1];
-            $ids = $request->input($propName);
-            if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
-            $ids = array_map(fn ($id) => $id * 1, $ids);
+    //     foreach ($propNames as $propName) {
+    //         $relatedModel = $this->superProps['props']['_' . $propName]['relationships']['oracyParams'][1];
+    //         $ids = $request->input($propName);
+    //         if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
+    //         $ids = array_map(fn ($id) => $id * 1, $ids);
 
-            $fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
-            $theRow->syncCheck($fieldName, $relatedModel, $ids);
-            $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
-        }
-    }
+    //         $fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
+    //         $theRow->syncCheck($fieldName, $relatedModel, $ids);
+    //         $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
+    //     }
+    // }
 
     private function removeAttachmentForFields(&$fields, $keyRemoves, $isFakeRequest, $allTable01Names)
     {

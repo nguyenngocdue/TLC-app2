@@ -68,7 +68,7 @@
     "_getNcrs": {
         "name": "_getNcrs",
         "column_name": "getNcrs",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Related NCRs",
         "control": "relationship_renderer",
         "align": "",
@@ -310,7 +310,7 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "WIR Lines",
         "control": "relationship_renderer",
         "align": "",
@@ -420,7 +420,7 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -464,7 +464,7 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Rejected Reasons",
         "control": "comment",
         "align": "",
@@ -486,7 +486,7 @@
     "_comment_inspector_decision": {
         "name": "_comment_inspector_decision",
         "column_name": "comment_inspector_decision",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Inspector Decision",
         "control": "comment",
         "align": "",

@@ -134,7 +134,7 @@
     "_getDefMonitors1": {
         "name": "_getDefMonitors1",
         "column_name": "getDefMonitors1",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Default Monitors",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -178,7 +178,7 @@
     "_getDiscipline2": {
         "name": "_getDiscipline2",
         "column_name": "getDiscipline2",
-        "column_type": "1_to_many",
+        "column_type": "hasMany",
         "label": "Discipline 2",
         "control": "relationship_renderer",
         "align": "",

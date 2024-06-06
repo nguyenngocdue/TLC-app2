@@ -19,7 +19,6 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
     {
         $dateIndex = $params['date_index'];
         // dd($dateIndex);
-
         $sql = "SELECT tb3.*
                 FROM(SELECT 
                             tb1.project_id,
@@ -51,10 +50,10 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
                             #AND pj.id = 8 
                             #AND po.id = 1325
                             ) tb1
-                        JOIN ( SELECT mtm.doc_id
-                                FROM many_to_many mtm
-                                WHERE mtm.doc_type = 'App\\\Models\\\Prod_routing'
-                                AND mtm.term_id = 346
+                        JOIN ( SELECT prdtso.prod_routing_id as doc_id
+                                    FROM ym2m_prod_routing_term_show_me_on prdtso
+                                    WHERE 1 = 1
+                                    AND prdtso.term_id = 346
                             ) standardPr ON tb1.prod_routing_id IN (standardPr.doc_id) 
                         LEFT JOIN (SELECT
                             qaqcwir.sub_project_id AS sub_project_id,
@@ -130,18 +129,13 @@ class Qaqc_wir_010 extends Qaqc_wir_dataSource
 
     private function getWeightOfWirDescriptionByRouting()
     {
-        $sql = "SELECT 
-                mtm.term_id AS mtm_prod_routing_id,
-                mtm.doc_id AS mtm_doc_id,
-                wirdes.wir_weight AS mtm_wir_weight
-                #wirdes.name AS wirdes_name
-                FROM many_to_many mtm, wir_descriptions wirdes
-                WHERE mtm.doc_type = 'App\\\Models\\\Wir_description'
-                AND mtm.term_type = 'App\\\Models\\\Prod_routing'
-                AND wirdes.id = mtm.doc_id
-                #AND mtm.term_id = 49
-                #ORDER BY wirdes_name
-                ";
+        $sql = "SELECT
+                    prwd.prod_routing_id AS mtm_prod_routing_id,
+                    prwd.wir_description_id AS mtm_doc_id,
+                    wirdes.wir_weight AS mtm_wir_weight
+                    FROM ym2m_prod_routing_wir_description prwd, wir_descriptions wirdes
+                    WHERE 1 = 1
+                    AND prwd.wir_description_id = wirdes.id";
         $sqlData = DB::select($sql);
         return collect($sqlData);
     }

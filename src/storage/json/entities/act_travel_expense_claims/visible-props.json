@@ -24,9 +24,9 @@
         "column_name": "user_id",
         "new": "true"
     },
-    "_getSubProjectsOfExpenseClaim()": {
-        "name": "_getSubProjectsOfExpenseClaim()",
-        "column_name": "getSubProjectsOfExpenseClaim()",
+    "_getSubProjectsOfExpenseClaim": {
+        "name": "_getSubProjectsOfExpenseClaim",
+        "column_name": "getSubProjectsOfExpenseClaim",
         "new": "true"
     },
     "_rate_exchange_month_id": {
@@ -169,9 +169,9 @@
         "column_name": "assignee_1",
         "new": "true"
     },
-    "_getMonitors1()": {
-        "name": "_getMonitors1()",
-        "column_name": "getMonitors1()",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true"
     },
     "_owner_id": {

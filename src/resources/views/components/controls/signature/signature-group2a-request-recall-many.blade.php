@@ -3,7 +3,7 @@
     $title_already_signed = $notYetSigned->join(", ");
 @endphp
 
-@if(count($nominatedList->get()) > 0)            
+@if(count($nominatedList) > 0)            
     <div class="text-right">
         @if($isSignOffAdmin)
             @if(count($needToRequest) > 1)

@@ -2,13 +2,12 @@
 
 namespace App\View\Components\Renderer\DashboardFilter;
 
-use App\BigThink\Oracy;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
-class ProdRoutingFilter extends Component
+class QaqcInspTmplFilter extends Component
 {
     use TraitListenerControl;
     use TraitGetSuffixListenerControl;
@@ -34,8 +33,8 @@ class ProdRoutingFilter extends Component
 
     private function getDataSource()
     {
-        $db = $this->dataSource;
-        Oracy::attach("getSubProjects()", $db);
+        $db = $this->dataSource->with("getProdRoutingsOfInspTmpl")->get();
+        // Oracy::attach("getProdRoutingsOfInspTmpl()", $db);
         return $db;
     }
 

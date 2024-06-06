@@ -46,7 +46,7 @@
     "_attachment_1": {
         "name": "_attachment_1",
         "column_name": "attachment_1",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Attachment",
         "control": "attachment",
         "align": "",
@@ -68,7 +68,7 @@
     "_comment_1": {
         "name": "_comment_1",
         "column_name": "comment_1",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment 1",
         "control": "comment",
         "align": "",
@@ -90,7 +90,7 @@
     "_comment_2": {
         "name": "_comment_2",
         "column_name": "comment_2",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment 2",
         "control": "comment",
         "align": "",
@@ -112,7 +112,7 @@
     "_comment_3": {
         "name": "_comment_3",
         "column_name": "comment_3",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment 3",
         "control": "comment",
         "align": "",
@@ -134,7 +134,7 @@
     "_comment_4": {
         "name": "_comment_4",
         "column_name": "comment_4",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Comment 4",
         "control": "comment",
         "align": "",
@@ -307,10 +307,32 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "belongsToMany",
+        "label": "Sign-Off Admins",
+        "control": "dropdown_multi_2a",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_signature_eco_peers_list": {
         "name": "_signature_eco_peers_list",
         "column_name": "signature_eco_peers_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Peer List",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -332,7 +354,7 @@
     "_signature_eco_managers_list": {
         "name": "_signature_eco_managers_list",
         "column_name": "signature_eco_managers_list",
-        "column_type": "many_to_many",
+        "column_type": "belongsToMany",
         "label": "Manager List",
         "control": "dropdown_multi_2a",
         "align": "",
@@ -354,7 +376,7 @@
     "_signature_eco_peers": {
         "name": "_signature_eco_peers",
         "column_name": "signature_eco_peers",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Peers' Signatures",
         "control": "signature_multi",
         "align": "",
@@ -376,7 +398,7 @@
     "_signature_eco_managers": {
         "name": "_signature_eco_managers",
         "column_name": "signature_eco_managers",
-        "column_type": "morph",
+        "column_type": "morphMany",
         "label": "Managers' Signatures",
         "control": "signature_multi",
         "align": "",

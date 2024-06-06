@@ -140,8 +140,8 @@
         "me_hidden": "true",
         "me_readonly": "true"
     },
-    "_getOtTeams()": {
-        "name": "_getOtTeams()",
+    "_getOtTeams": {
+        "name": "_getOtTeams",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
@@ -152,27 +152,27 @@
         "me_hidden": "true",
         "me_readonly": "true"
     },
-    "_getProdRoutingsOfCouncilMember()": {
-        "name": "_getProdRoutingsOfCouncilMember()",
+    "_getProdRoutingsOfCouncilMember": {
+        "name": "_getProdRoutingsOfCouncilMember",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
-    "_getProdRoutingsOfExternalInspector()": {
-        "name": "_getProdRoutingsOfExternalInspector()",
+    "_getProdRoutingsOfExternalInspector": {
+        "name": "_getProdRoutingsOfExternalInspector",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
-    "_getQaqcInspTmplsOfCouncilMember()": {
-        "name": "_getQaqcInspTmplsOfCouncilMember()",
+    "_getQaqcInspTmplsOfCouncilMember": {
+        "name": "_getQaqcInspTmplsOfCouncilMember",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
-    "_getQaqcInspTmplsOfExternalInspector()": {
-        "name": "_getQaqcInspTmplsOfExternalInspector()",
+    "_getQaqcInspTmplsOfExternalInspector": {
+        "name": "_getQaqcInspTmplsOfExternalInspector",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_hidden": "true",
@@ -185,33 +185,33 @@
         "me_hidden": "true",
         "me_readonly": "true"
     },
-    "_getSiteTeams()": {
-        "name": "_getSiteTeams()",
+    "_getSiteTeams": {
+        "name": "_getSiteTeams",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
-    "_getSubProjectsOfCouncilMember()": {
-        "name": "_getSubProjectsOfCouncilMember()",
+    "_getSubProjectsOfCouncilMember": {
+        "name": "_getSubProjectsOfCouncilMember",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_readonly": "true"
     },
-    "_getSubProjectsOfExternalInspector()": {
-        "name": "_getSubProjectsOfExternalInspector()",
-        "profile_hidden": "true",
-        "profile_readonly": "true",
-        "me_hidden": "true",
-        "me_readonly": "true"
-    },
-    "_getSubProjectsOfProjectClient()": {
-        "name": "_getSubProjectsOfProjectClient()",
+    "_getSubProjectsOfExternalInspector": {
+        "name": "_getSubProjectsOfExternalInspector",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
     },
-    "_getTshtTeams()": {
-        "name": "_getTshtTeams()",
+    "_getSubProjectsOfProjectClient": {
+        "name": "_getSubProjectsOfProjectClient",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_getTshtTeams": {
+        "name": "_getTshtTeams",
         "profile_readonly": "true",
         "me_readonly": "true"
     },

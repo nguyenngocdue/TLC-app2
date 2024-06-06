@@ -233,7 +233,7 @@ const getItem = () => {
     const item = {}
     for (let i = 0; i < formDataArray.length; i++) {
         const fieldName = formDataArray[i].name
-        const isMultiple = fieldName == 'getMonitors1()[]'
+        const isMultiple = fieldName == 'getMonitors1[]'
         if (isMultiple) {
             if (!item[fieldName]) item[fieldName] = []
             item[fieldName].push(formDataArray[i].value)
