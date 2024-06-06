@@ -1,10 +1,14 @@
-# FROM php:8.0-fpm-alpine
+# Use the official PHP image with FPM and Alpine
 FROM php:8.2-fpm-alpine3.17
 
+# Set the working directory
 WORKDIR /var/www/app
 
-RUN apk update && apk add \
-    build-base shadow supervisor \
+# Install necessary packages and PHP extensions
+RUN apk update && apk add --no-cache \
+    build-base \
+    shadow \
+    supervisor \
     curl \
     libzip-dev \
     libpng-dev \
@@ -16,62 +20,56 @@ RUN apk update && apk add \
     nano \
     mc \
     htop \
-    supervisor \   
-    php-zip
-
-RUN curl -sSLf \
-    -o /usr/local/bin/install-php-extensions \
-    https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
-    chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions ldap 
-RUN docker-php-ext-install pdo pdo_mysql
-
-RUN docker-php-ext-install gd && \
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install -j$(nproc) gd
-
-RUN docker-php-ext-install zip
-
-RUN docker-php-ext-install pcntl
-
-RUN apk add build-base autoconf
-RUN pecl install apcu 
-
-RUN apk add nodejs npm
-# RUN apk add -- no-cache gconf
-# Create a symbolic link to make node and npm commands available in /usr/local/bin
-RUN ln -s /usr/bin/node /usr/local/bin/node
-RUN ln -s /usr/bin/npm /usr/local/bin/npm
-RUN apk add --no-cache \
+    php-zip \
+    autoconf \
+    nodejs \
+    npm \
     chromium \
-    chromium-chromedriver
-RUN apk update && apk add --no-cache libgcc libstdc++ nss wget git 
-RUN npm install --location=global --unsafe-perm puppeteer@^17
-RUN chmod -R o+rx /usr/local/lib/node_modules/puppeteer/.local-chromium
+    chromium-chromedriver \
+    libgcc \
+    libstdc++ \
+    nss \
+    wget \
+    git \
+    unixodbc-dev && \
+    curl -sSLf -o /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
+    chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions ldap && \
+    docker-php-ext-install pdo pdo_mysql && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install -j$(nproc) gd && \
+    docker-php-ext-install zip && \
+    docker-php-ext-install pcntl && \
+    pecl install apcu && \
+    pecl install pdo_sqlsrv sqlsrv && \
+    ln -s /usr/bin/node /usr/local/bin/node && \
+    ln -s /usr/bin/npm /usr/local/bin/npm && \
+    npm install --location=global --unsafe-perm puppeteer@^17 && \
+    chmod -R o+rx /usr/local/lib/node_modules/puppeteer/.local-chromium && \
+    rm -rf /var/cache/apk/*
+
+# Set environment variables for Puppeteer
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true 
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
+# Copy PHP configuration file
 COPY ./configs/php.ini /usr/local/etc/php/
 
+# Copy Composer from the official Composer image
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN apk add unixodbc-dev
-RUN pecl install pdo_sqlsrv sqlsrv
-
+# Copy Supervisor configuration
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./supervisor.d /etc/supervisor.d
 
-#RUN addgroup -g 1000 ndcgp
-#RUN adduser -D -u 1000 ndc -G ndcgp
-#RUN chown -R ndc:ndcgp /var/www/app
-#USER ndc
+# Adjust permissions and ownership
+RUN usermod -u 82 www-data && \
+    chown -R www-data:www-data /var/www/app
 
-RUN usermod -u 82 www-data
-RUN chown -R www-data:www-data .
-
+# Uncomment if needed
 # ENV ENABLE_CRONTAB 1
 # ENV ENABLE_HORIZON 1
 
 # ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
 
-# CMD supervisord -n -c /etc/supervisord.conf
+# CMD ["supervisord", "-n", "-c", "/etc/supervisord.conf"]
