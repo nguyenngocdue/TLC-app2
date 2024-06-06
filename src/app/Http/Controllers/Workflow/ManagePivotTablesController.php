@@ -38,7 +38,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 50,
+                'width' => 300,
                 'fixed' => 'left',
             ],
             [
@@ -54,7 +54,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 200,
+                'width' => 400,
             ],
             [
                 'dataIndex' => 'insert_column_row_fields',
@@ -62,14 +62,14 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 200,
+                'width' => 400,
             ],
             [
                 'dataIndex' => 'column_fields',
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 200,
+                'width' => 400,
             ],
             // [
             //     'dataIndex' => 'value_index_fields',
@@ -90,7 +90,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 200,
+                'width' => 300,
             ],
             // [
             //     'dataIndex' => 'lookup_tables',
@@ -104,7 +104,7 @@ class ManagePivotTablesController extends AbstractManageLibController
                 'renderer' => 'textarea4',
                 'editable' => true,
                 'align' => 'center',
-                'width' => 200,
+                'width' => 300,
             ],
         ];
     }
