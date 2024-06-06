@@ -68,7 +68,7 @@ class WelcomeFortuneController extends Controller
             186 => 'site_member', //getSiteMembers
             195 => 'show_me_on', //getScreensShowMeOn
 
-
+            // 202
             203 => 'ext_insp', //getExternalInspectorsOfSubProject, getSubProjectsOfExternalInspector
             205 => 'ext_insp', //getExternalInspectorsOfQaqcInspTmpl, getQaqcInspTmplsOfExternalInspector
             206 => 'ext_insp', //getExternalInspectorsOfProdRouting, getProdRoutingsOfExternalInspector
@@ -81,6 +81,7 @@ class WelcomeFortuneController extends Controller
             228 => 'qaqc_list', //signature_qaqc_punchlist_qaqc_list
             230 => 'production_list', //signature_qaqc_punchlist_production_list
 
+            // 249
             250 => 'council_member', //getSubProjectsOfCouncilMember, getCouncilMembersOfSubProject
             251 => 'council_member', //getQaqcInspTmplsOfCouncilMember, getCouncilMembersOfQaqcInspTmpl
             252 => 'council_member', //getProdRoutingsOfCouncilMember, getCouncilMembersOfProdRouting 
@@ -91,7 +92,7 @@ class WelcomeFortuneController extends Controller
         $lines = DB::table("many_to_many")
             // ->where('field_id', 31)
             ->where('field_id', '>', 31)
-            ->whereNotIn('field_id', [138, 147, 175, 202])
+            ->whereNotIn('field_id', [138, 147, 175, 202, 249])
             ->get();
         // -> reversed
 
