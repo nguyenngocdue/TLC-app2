@@ -107,9 +107,9 @@
         "cancelled": "true",
         "on_hold": "true"
     },
-    "_getSubProjects": {
-        "name": "_getSubProjects",
-        "column_name": "getSubProjects",
+    "_show_in_task_budget": {
+        "name": "_show_in_task_budget",
+        "column_name": "show_in_task_budget",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",
@@ -122,6 +122,18 @@
     "_qr_app_source": {
         "name": "_qr_app_source",
         "column_name": "qr_app_source",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
+    "_getSubProjects": {
+        "name": "_getSubProjects",
+        "column_name": "getSubProjects",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",

@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStoreUpdate2;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStore2;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDUpdate2;
 use App\Http\Services\UploadService2;
 use App\Models\Kanban_task_bucket;
 use App\Models\Kanban_task_cluster;
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Log;
 trait TraitKanbanUpdate
 {
     use TraitKanbanItemRenderer;
-    use TraitEntityCRUDStoreUpdate2;
+    use TraitEntityCRUDStore2;
+    use TraitEntityCRUDUpdate2;
 
     function getOrderedDataSource($id, $item)
     {
@@ -30,7 +32,6 @@ trait TraitKanbanUpdate
                     // ->with("getGroups.getTasks")
                     ->with(["getGroups" => function ($query) {
                         $query->orderBy('order_no');
-
                         $query->with(["getTasks" => function ($query) {
                             $query->orderBy('order_no');
                         }]);

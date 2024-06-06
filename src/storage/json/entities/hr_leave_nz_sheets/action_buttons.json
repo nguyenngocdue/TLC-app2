@@ -1,0 +1,26 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "label": "Request for Approval",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "label": "Reject Approval",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "approved": {
+        "name": "approved",
+        "label": "Approve",
+        "tooltip": "",
+        "change_status_multiple": ""
+    }
+}

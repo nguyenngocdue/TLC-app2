@@ -17,45 +17,45 @@ class Ghg_sheet_080_dataSource extends Controller
 		$strSQL = "SELECT \n";
 		foreach ($years as $year) {
 			$strSQL .= "ROUND(SUM(CASE WHEN  
-								DATE_FORMAT(ghgsh.ghg_month, '%Y') = {$year} AND ghgsh.ghg_tmpl_id IN (1,2,3,4) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'scope_1_by_year_{$year}',
+								DATE_FORMAT(ghgsh.ghg_month, '%Y') = $year AND ghgsh.ghg_tmpl_id IN (1,2,3,4) 
+								THEN ghgsh.total ELSE 0 END),2) AS 'scope_1_by_year_$year',
 						ROUND(SUM(CASE WHEN  
-								DATE_FORMAT(ghgsh.ghg_month, '%Y') = {$year} AND ghgsh.ghg_tmpl_id IN (5) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'scope_2_by_year_{$year}',
+								DATE_FORMAT(ghgsh.ghg_month, '%Y') = $year AND ghgsh.ghg_tmpl_id IN (5) 
+								THEN ghgsh.total ELSE 0 END),2) AS 'scope_2_by_year_$year',
 						ROUND(SUM(CASE WHEN  
-								DATE_FORMAT(ghgsh.ghg_month, '%Y') = {$year} AND ghgsh.ghg_tmpl_id IN (6,7,8,9,10,15,11,16,12,13,14,23) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'scope_3_by_year_{$year}',
+								DATE_FORMAT(ghgsh.ghg_month, '%Y') = $year AND ghgsh.ghg_tmpl_id IN (6,7,8,9,10,15,11,16,12,13,14,23) 
+								THEN ghgsh.total ELSE 0 END),2) AS 'scope_3_by_year_$year',
 								
 						ROUND(SUM(CASE WHEN  
 								DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') < '$year-07-01' 
 								AND DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') >= '$year-01-01' 
 								AND ghgsh.ghg_tmpl_id IN (1,2,3,4) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'sum_first_range_scope_1_{$year}',
+								THEN ghgsh.total ELSE 0 END),2) AS 'sum_first_range_scope_1_$year',
 						ROUND(SUM(CASE WHEN  
 								DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') >= '$year-07-01'
 								AND DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') <= '$year-12-31' 
 								AND ghgsh.ghg_tmpl_id IN (1,2,3,4) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'sum_second_range_scope_1_{$year}',
+								THEN ghgsh.total ELSE 0 END),2) AS 'sum_second_range_scope_1_$year',
 						ROUND(SUM(CASE WHEN  
 								DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') < '$year-07-01' 
 								AND DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') >= '$year-01-01' 
 								AND ghgsh.ghg_tmpl_id IN (5) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'sum_first_range_scope_2_{$year}',
+								THEN ghgsh.total ELSE 0 END),2) AS 'sum_first_range_scope_2_$year',
 						ROUND(SUM(CASE WHEN  
 								DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') >= '$year-07-01' 
 								AND DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') <= '$year-12-31' 
 								AND ghgsh.ghg_tmpl_id IN (5) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'sum_second_range_scope_2_{$year}',
+								THEN ghgsh.total ELSE 0 END),2) AS 'sum_second_range_scope_2_$year',
 						ROUND(SUM(CASE WHEN  
 								DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') < '$year-07-01' 
 								AND DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') >= '$year-01-01' 
 								AND ghgsh.ghg_tmpl_id IN (6,7,8,9,10,15,11,16,12,13,14,23) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'sum_first_range_scope_3_{$year}',
+								THEN ghgsh.total ELSE 0 END),2) AS 'sum_first_range_scope_3_$year',
 						ROUND(SUM(CASE WHEN  
 								DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') >= '$year-07-01' 
 								AND DATE_FORMAT(ghgsh.ghg_month, '%Y-%m-%d') <= '$year-12-31' 
 								AND ghgsh.ghg_tmpl_id IN (6,7,8,9,10,15,11,16,12,13,14,23) 
-								THEN ghgsh.total ELSE 0 END),2) AS 'sum_second_range_scope_3_{$year}',";
+								THEN ghgsh.total ELSE 0 END),2) AS 'sum_second_range_scope_3_$year',";
 		}
 		$strSQL = trim($strSQL, ",");
 		$strSQL .= "\n FROM ghg_sheets ghgsh";
@@ -88,40 +88,40 @@ class Ghg_sheet_080_dataSource extends Controller
 		foreach ($years as $year) {
 			$strSQL .= "
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 108 
-					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = {$year} 
-					THEN 1 ELSE 0 END) AS occ_accidents_by_year_{$year},
+					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = $year 
+					THEN 1 ELSE 0 END) AS occ_accidents_by_year_$year,
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 108 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') < '$year-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '$year-01-01' 
-					THEN 1 ELSE 0 END) AS 'occ_accidents_sum_first_range_{$year}',
+					THEN 1 ELSE 0 END) AS 'occ_accidents_sum_first_range_$year',
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 108 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '$year-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') <= '$year-12-31' 
-					THEN 1 ELSE 0 END) AS 'occ_accidents_sum_second_range_{$year}',
+					THEN 1 ELSE 0 END) AS 'occ_accidents_sum_second_range_$year',
 
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 109 
-					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = {$year} 
-					THEN 1 ELSE 0 END) AS occ_near_miss_by_year_{$year},
+					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = $year 
+					THEN 1 ELSE 0 END) AS occ_near_miss_by_year_$year,
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 109 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') < '$year-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '$year-01-01' 
-					THEN 1 ELSE 0 END) AS 'occ_near_miss_sum_first_range_{$year}',
+					THEN 1 ELSE 0 END) AS 'occ_near_miss_sum_first_range_$year',
 				SUM(CASE WHEN hseinr.incident_doc_type_id = 109 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '$year-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') <= '$year-12-31' 
-					THEN 1 ELSE 0 END) AS 'occ_near_miss_sum_second_range_{$year}',
+					THEN 1 ELSE 0 END) AS 'occ_near_miss_sum_second_range_$year',
 					
 				SUM(CASE WHEN hseinr.incident_doc_type_id IN (107,108,109)
-					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = {$year} 
-					THEN hseinr.lost_days ELSE 0 END)*8  AS total_lost_time_by_year_{$year},
+					AND DATE_FORMAT(hseinr.issue_datetime,'%Y') = $year 
+					THEN hseinr.lost_days ELSE 0 END)*8  AS total_lost_time_by_year_$year,
 				SUM(CASE WHEN hseinr.incident_doc_type_id IN (107,108,109)
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') < '$year-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '$year-01-01' 
-					THEN hseinr.lost_days ELSE 0 END)*8  AS 'total_lost_time_sum_first_range_{$year}',
+					THEN hseinr.lost_days ELSE 0 END)*8  AS 'total_lost_time_sum_first_range_$year',
 				SUM(CASE WHEN hseinr.incident_doc_type_id IN (107,108,109) 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') >= '$year-07-01' 
 					AND DATE_FORMAT(hseinr.issue_datetime, '%Y-%m-%d') <= '$year-12-31' 
-					THEN hseinr.lost_days ELSE 0 END)*8  AS 'total_lost_time_sum_second_range_{$year}',";
+					THEN hseinr.lost_days ELSE 0 END)*8  AS 'total_lost_time_sum_second_range_$year',";
 		}
 		$strSQL = trim($strSQL, ",");
 		$strSQL .= "\n FROM hse_incident_reports hseinr";
@@ -154,143 +154,136 @@ class Ghg_sheet_080_dataSource extends Controller
 
 		$strSQL2 = "\n FROM (SELECT \n";
 		foreach ($years as $year) {
-			$strSQL1 .= "	SUM(tb.c1_total_direct_emp_by_year_{$year} + tb.c2_total_direct_emp_by_year_{$year}) AS total_direct_emp_by_year_{$year},
-							SUM(tb.c1_first_range_total_direct_emp_by_half_year_{$year} + tb.c2_first_range_total_direct_emp_by_half_year_{$year}) AS first_range_total_direct_emp_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_direct_emp_by_half_year_{$year} + tb.c2_second_range_total_direct_emp_by_half_year_{$year}) AS second_range_total_direct_emp_by_half_year_{$year},
+			$strSQL1 .= "	SUM(tb.c1_total_direct_emp_by_year_$year + tb.c2_total_direct_emp_by_year_$year) AS total_direct_emp_by_year_$year,
+							SUM(tb.c1_first_range_total_direct_emp_by_half_year_$year + tb.c2_first_range_total_direct_emp_by_half_year_$year) AS first_range_total_direct_emp_by_half_year_$year,
+							SUM(tb.c1_second_range_total_direct_emp_by_half_year_$year + tb.c2_second_range_total_direct_emp_by_half_year_$year) AS second_range_total_direct_emp_by_half_year_$year,
 							
 							#Senior employees
-							SUM(tb.c1_total_senior_emp_by_year_{$year} + tb.c2_total_senior_emp_by_year_{$year}) AS senior_emp_by_year_{$year},
-							SUM(tb.c1_first_range_total_senior_emp_by_half_year_{$year} + tb.c2_first_range_total_senior_emp_by_half_year_{$year}) AS first_range_total_senior_emp_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_senior_emp_by_half_year_{$year} + tb.c2_second_range_total_senior_emp_by_half_year_{$year}) AS second_range_total_senior_emp_by_half_year_{$year},
+							SUM(tb.c1_total_senior_emp_by_year_$year + tb.c2_total_senior_emp_by_year_$year) AS senior_emp_by_year_$year,
+							SUM(tb.c1_first_range_total_senior_emp_by_half_year_$year + tb.c2_first_range_total_senior_emp_by_half_year_$year) AS first_range_total_senior_emp_by_half_year_$year,
+							SUM(tb.c1_second_range_total_senior_emp_by_half_year_$year + tb.c2_second_range_total_senior_emp_by_half_year_$year) AS second_range_total_senior_emp_by_half_year_$year,
 
 							#Senior employees - female
-							SUM(tb.c1_total_senior_female_by_year_{$year} + tb.c2_total_senior_female_by_year_{$year}) AS senior_female_by_year_{$year},
-							SUM(tb.c1_first_range_total_senior_female_by_half_year_{$year} + tb.c2_first_range_total_senior_female_by_half_year_{$year}) AS first_range_total_senior_female_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_senior_female_by_half_year_{$year} + tb.c2_second_range_total_senior_female_by_half_year_{$year}) AS second_range_total_senior_female_by_half_year_{$year},
+							SUM(tb.c1_total_senior_female_by_year_$year + tb.c2_total_senior_female_by_year_$year) AS senior_female_by_year_$year,
+							SUM(tb.c1_first_range_total_senior_female_by_half_year_$year + tb.c2_first_range_total_senior_female_by_half_year_$year) AS first_range_total_senior_female_by_half_year_$year,
+							SUM(tb.c1_second_range_total_senior_female_by_half_year_$year + tb.c2_second_range_total_senior_female_by_half_year_$year) AS second_range_total_senior_female_by_half_year_$year,
 
 							#Senior employees - male
-							SUM(tb.c1_total_senior_male_by_year_{$year} + tb.c2_total_senior_male_by_year_{$year}) AS senior_male_by_year_{$year},
-							SUM(tb.c1_first_range_total_senior_male_by_half_year_{$year} + tb.c2_first_range_total_senior_male_by_half_year_{$year}) AS first_range_total_senior_male_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_senior_male_by_half_year_{$year} + tb.c2_second_range_total_senior_male_by_half_year_{$year}) AS second_range_total_senior_male_by_half_year_{$year},
+							SUM(tb.c1_total_senior_male_by_year_$year + tb.c2_total_senior_male_by_year_$year) AS senior_male_by_year_$year,
+							SUM(tb.c1_first_range_total_senior_male_by_half_year_$year + tb.c2_first_range_total_senior_male_by_half_year_$year) AS first_range_total_senior_male_by_half_year_$year,
+							SUM(tb.c1_second_range_total_senior_male_by_half_year_$year + tb.c2_second_range_total_senior_male_by_half_year_$year) AS second_range_total_senior_male_by_half_year_$year,
 
 							#Junior employees
-							SUM(tb.c1_total_junior_emp_by_year_{$year} + tb.c2_total_junior_emp_by_year_{$year}) AS junior_emp_by_year_{$year},
-							SUM(tb.c1_first_range_total_junior_emp_by_half_year_{$year} + tb.c2_first_range_total_junior_emp_by_half_year_{$year}) AS first_range_total_junior_emp_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_junior_emp_by_half_year_{$year} + tb.c2_second_range_total_junior_emp_by_half_year_{$year}) AS second_range_total_junior_emp_by_half_year_{$year},
+							SUM(tb.c1_total_junior_emp_by_year_$year + tb.c2_total_junior_emp_by_year_$year) AS junior_emp_by_year_$year,
+							SUM(tb.c1_first_range_total_junior_emp_by_half_year_$year + tb.c2_first_range_total_junior_emp_by_half_year_$year) AS first_range_total_junior_emp_by_half_year_$year,
+							SUM(tb.c1_second_range_total_junior_emp_by_half_year_$year + tb.c2_second_range_total_junior_emp_by_half_year_$year) AS second_range_total_junior_emp_by_half_year_$year,
 							
 							#Junior employees - female
-							SUM(tb.c1_total_junior_female_by_year_{$year} + tb.c2_total_junior_female_by_year_{$year}) AS junior_female_by_year_{$year},
-							SUM(tb.c1_first_range_total_junior_female_by_half_year_{$year} + tb.c2_first_range_total_junior_female_by_half_year_{$year}) AS first_range_total_junior_female_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_junior_female_by_half_year_{$year} + tb.c2_second_range_total_junior_female_by_half_year_{$year}) AS second_range_total_junior_female_by_half_year_{$year},
+							SUM(tb.c1_total_junior_female_by_year_$year + tb.c2_total_junior_female_by_year_$year) AS junior_female_by_year_$year,
+							SUM(tb.c1_first_range_total_junior_female_by_half_year_$year + tb.c2_first_range_total_junior_female_by_half_year_$year) AS first_range_total_junior_female_by_half_year_$year,
+							SUM(tb.c1_second_range_total_junior_female_by_half_year_$year + tb.c2_second_range_total_junior_female_by_half_year_$year) AS second_range_total_junior_female_by_half_year_$year,
 							
 							#Junior employees - male
-							SUM(tb.c1_total_junior_male_by_year_{$year} + tb.c2_total_junior_male_by_year_{$year}) AS junior_male_by_year_{$year},
-							SUM(tb.c1_first_range_total_junior_male_by_half_year_{$year} + tb.c2_first_range_total_junior_male_by_half_year_{$year}) AS first_range_total_junior_male_by_half_year_{$year},
-							SUM(tb.c1_second_range_total_junior_male_by_half_year_{$year} + tb.c2_second_range_total_junior_male_by_half_year_{$year}) AS second_range_total_junior_male_by_half_year_{$year},";
+							SUM(tb.c1_total_junior_male_by_year_$year + tb.c2_total_junior_male_by_year_$year) AS junior_male_by_year_$year,
+							SUM(tb.c1_first_range_total_junior_male_by_half_year_$year + tb.c2_first_range_total_junior_male_by_half_year_$year) AS first_range_total_junior_male_by_half_year_$year,
+							SUM(tb.c1_second_range_total_junior_male_by_half_year_$year + tb.c2_second_range_total_junior_male_by_half_year_$year) AS second_range_total_junior_male_by_half_year_$year,";
 
 			$strSQL2 .= "			
 								#for the full year 
 									#total direct employees 
 									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
-											AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
-											THEN 1 ELSE 0 END AS c1_total_direct_emp_by_year_{$year},
+											AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
+											THEN 1 ELSE 0 END AS c1_total_direct_emp_by_year_$year,
 									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 											AND us.last_date IS NULL
-											THEN 1 ELSE 0 END AS c2_total_direct_emp_by_year_{$year},
+											THEN 1 ELSE 0 END AS c2_total_direct_emp_by_year_$year,
 
 									# Senior employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.seniority_level IN (1, 2, 6)
-												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
-												THEN 1 ELSE 0 END AS c1_total_senior_emp_by_year_{$year},
+												THEN 1 ELSE 0 END AS c1_total_senior_emp_by_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.last_date IS NULL
 												AND us.seniority_level IN (1, 2, 6)
-												THEN 1 ELSE 0 END AS c2_total_senior_emp_by_year_{$year},
+												THEN 1 ELSE 0 END AS c2_total_senior_emp_by_year_$year,
 
 											# Senior employee - female
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 0
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
-													THEN 1 ELSE 0 END AS c1_total_senior_female_by_year_{$year},
+													THEN 1 ELSE 0 END AS c1_total_senior_female_by_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.gender = 0
 													AND us.seniority_level IN (1, 2, 6)
-													THEN 1 ELSE 0 END AS c2_total_senior_female_by_year_{$year},
+													THEN 1 ELSE 0 END AS c2_total_senior_female_by_year_$year,
 
 											# Senior employee - male
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 1
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
-													THEN 1 ELSE 0 END AS c1_total_senior_male_by_year_{$year},
+													THEN 1 ELSE 0 END AS c1_total_senior_male_by_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.gender = 1
 													AND us.seniority_level IN (1, 2, 6)
-													THEN 1 ELSE 0 END AS c2_total_senior_male_by_year_{$year},
+													THEN 1 ELSE 0 END AS c2_total_senior_male_by_year_$year,
 
 									#Junior employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.seniority_level IN (3, 4, 5)
-												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
-												THEN 1 ELSE 0 END AS c1_total_junior_emp_by_year_{$year},
+												THEN 1 ELSE 0 END AS c1_total_junior_emp_by_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.last_date IS NULL
 												AND us.seniority_level IN (3, 4, 5)
-												THEN 1 ELSE 0 END AS c2_total_junior_emp_by_year_{$year},
+												THEN 1 ELSE 0 END AS c2_total_junior_emp_by_year_$year,
 
 											# Junior employee - female
 												CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 														AND us.seniority_level IN (3, 4, 5)
 														AND us.gender = 0
-														AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 														AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
-														THEN 1 ELSE 0 END AS c1_total_junior_female_by_year_{$year},
+														THEN 1 ELSE 0 END AS c1_total_junior_female_by_year_$year,
 												CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 														AND us.last_date IS NULL
 														AND us.gender = 0
 														AND us.seniority_level IN (3, 4, 5)
-														THEN 1 ELSE 0 END AS c2_total_junior_female_by_year_{$year},
+														THEN 1 ELSE 0 END AS c2_total_junior_female_by_year_$year,
 											# Junior employee - male
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 1
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
-													THEN 1 ELSE 0 END AS c1_total_junior_male_by_year_{$year},
+													THEN 1 ELSE 0 END AS c1_total_junior_male_by_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.gender = 1
 													AND us.seniority_level IN (3, 4, 5)
-													THEN 1 ELSE 0 END AS c2_total_junior_male_by_year_{$year},
+													THEN 1 ELSE 0 END AS c2_total_junior_male_by_year_$year,
 					
 								#for the first half of year
 									#total direct employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
-												THEN 1 ELSE 0 END AS c1_first_range_total_direct_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c1_first_range_total_direct_emp_by_half_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 												AND us.last_date IS NULL
-												THEN 1 ELSE 0 END AS c2_first_range_total_direct_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c2_first_range_total_direct_emp_by_half_year_$year,
 									# Senior employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 												AND us.seniority_level IN (1, 2, 6)
 												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
-												THEN 1 ELSE 0 END AS c1_first_range_total_senior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c1_first_range_total_senior_emp_by_half_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 												AND us.last_date IS NULL
 												AND us.seniority_level IN (1, 2, 6)
-												THEN 1 ELSE 0 END AS c2_first_range_total_senior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c2_first_range_total_senior_emp_by_half_year_$year,
 									
 										# Senior employees - female
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
@@ -298,12 +291,12 @@ class Ghg_sheet_080_dataSource extends Controller
 													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c1_first_range_total_senior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_first_range_total_senior_female_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c2_first_range_total_senior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_first_range_total_senior_female_by_half_year_$year,
 										
 										# Senior employees - male
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
@@ -311,129 +304,122 @@ class Ghg_sheet_080_dataSource extends Controller
 													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c1_first_range_total_senior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_first_range_total_senior_male_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c2_first_range_total_senior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_first_range_total_senior_male_by_half_year_$year,
 
 									# Junior employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 												AND us.seniority_level IN (3, 4, 5)
 												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
-												THEN 1 ELSE 0 END AS c1_first_range_total_junior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c1_first_range_total_junior_emp_by_half_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 												AND us.last_date IS NULL
 												AND us.seniority_level IN (3, 4, 5)
-												THEN 1 ELSE 0 END AS c2_first_range_total_junior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c2_first_range_total_junior_emp_by_half_year_$year,
 										# Junior employees - female
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 													AND us.seniority_level IN (3, 4, 5)
 													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c1_first_range_total_junior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_first_range_total_junior_female_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c2_first_range_total_junior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_first_range_total_junior_female_by_half_year_$year,
 										# Junior employees - male
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 													AND us.seniority_level IN (3, 4, 5)
 													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c1_first_range_total_junior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_first_range_total_junior_male_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') < '$year-07-01' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c2_first_range_total_junior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_first_range_total_junior_male_by_half_year_$year,
 
 								# for the second half of year
 									#total direct employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
-												THEN 1 ELSE 0 END AS c1_second_range_total_direct_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c1_second_range_total_direct_emp_by_half_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.last_date IS NULL
-												THEN 1 ELSE 0 END AS c2_second_range_total_direct_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c2_second_range_total_direct_emp_by_half_year_$year,
 									# Senior employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 												AND us.seniority_level IN (1, 2, 6)
-												THEN 1 ELSE 0 END AS c1_second_range_total_senior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c1_second_range_total_senior_emp_by_half_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.last_date IS NULL
 												AND us.seniority_level IN (1, 2, 6)
-												THEN 1 ELSE 0 END AS c2_second_range_total_senior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c2_second_range_total_senior_emp_by_half_year_$year,
 
 										# Senior employees - female
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c1_second_range_total_senior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_second_range_total_senior_female_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c2_second_range_total_senior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_second_range_total_senior_female_by_half_year_$year,
 
 										# Senior employees - male
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c1_second_range_total_senior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_second_range_total_senior_male_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (1, 2, 6)
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c2_second_range_total_senior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_second_range_total_senior_male_by_half_year_$year,
 													
 									# Junior employees
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-												AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 												AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 												AND us.seniority_level IN (3, 4, 5)
-												THEN 1 ELSE 0 END AS c1_second_range_total_junior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c1_second_range_total_junior_emp_by_half_year_$year,
 										CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 												AND us.last_date IS NULL
 												AND us.seniority_level IN (3, 4, 5)
-												THEN 1 ELSE 0 END AS c2_second_range_total_junior_emp_by_half_year_{$year},
+												THEN 1 ELSE 0 END AS c2_second_range_total_junior_emp_by_half_year_$year,
 
 										# Junior employees - female
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c1_second_range_total_junior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_second_range_total_junior_female_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 0
-													THEN 1 ELSE 0 END AS c2_second_range_total_junior_female_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c2_second_range_total_junior_female_by_half_year_$year,
 										# Junior employees - male
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-													AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 													AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c1_second_range_total_junior_male_by_half_year_{$year},
+													THEN 1 ELSE 0 END AS c1_second_range_total_junior_male_by_half_year_$year,
 											CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 													AND us.last_date IS NULL
 													AND us.seniority_level IN (3, 4, 5)
 													AND us.gender = 1
-													THEN 1 ELSE 0 END AS c2_second_range_total_junior_male_by_half_year_{$year},";
+													THEN 1 ELSE 0 END AS c2_second_range_total_junior_male_by_half_year_$year,";
 		}
 
 		$strSQL1 = trim($strSQL1, ",");
@@ -487,187 +473,187 @@ class Ghg_sheet_080_dataSource extends Controller
 
 		foreach ($years as $year) {
 			$yearMinusOne = $year - 1;
-			$strSQL1 .= "	SUM((tb.c1_new_employees_by_{$year} + tb.c2_new_employees_by_{$year}) - (tb.c3_new_employees_by_{$year} + tb.c4_new_employees_by_{$year})) AS total_new_employees_by_year_{$year},
-							SUM((tb.c1_first_range_new_employees_by_half_year_{$year} + tb.c2_first_range_new_employees_by_half_year_{$year}) - (tb.c3_first_range_new_employees_by_half_year_{$year} + tb.c4_first_range_new_employees_by_half_year_{$year})) AS first_range_total_new_employees_by_half_sum_year_{$year},
-							SUM((tb.c1_second_range_new_employees_by_half_year_{$year} + tb.c2_second_range_new_employees_by_half_year_{$year}) - (tb.c3_second_range_new_employees_by_half_year_{$year} + tb.c4_second_range_new_employees_by_half_year_{$year})) AS second_range_total_new_employees_by_half_sum_year_{$year},
+			$strSQL1 .= "	SUM((tb.c1_new_employees_by_$year + tb.c2_new_employees_by_$year) - (tb.c3_new_employees_by_$year + tb.c4_new_employees_by_$year)) AS total_new_employees_by_year_$year,
+							SUM((tb.c1_first_range_new_employees_by_half_year_$year + tb.c2_first_range_new_employees_by_half_year_$year) - (tb.c3_first_range_new_employees_by_half_year_$year + tb.c4_first_range_new_employees_by_half_year_$year)) AS first_range_total_new_employees_by_half_sum_year_$year,
+							SUM((tb.c1_second_range_new_employees_by_half_year_$year + tb.c2_second_range_new_employees_by_half_year_$year) - (tb.c3_second_range_new_employees_by_half_year_$year + tb.c4_second_range_new_employees_by_half_year_$year)) AS second_range_total_new_employees_by_half_sum_year_$year,
 
-							SUM((tb.c1_new_employees_female_by_year_{$year} + tb.c2_new_employees_female_by_year_{$year}) - (tb.c3_new_employees_female_by_year_{$year} + tb.c4_new_employees_female_by_year_{$year})) AS new_employees_female_by_year_{$year},
-							SUM((tb . c1_first_range_new_employees_female_by_half_year_{$year} + tb.c2_first_range_new_employees_female_by_half_year_{$year}) - (tb.c3_first_range_new_employees_female_by_half_year_{$year} + tb.c4_first_range_new_employees_female_by_half_year_{$year})) AS first_range_new_employees_female_by_half_sum_year_{$year},
-							SUM((tb . c1_second_range_new_employees_female_by_half_year_{$year} + tb.c2_second_range_new_employees_female_by_half_year_{$year}) - (tb.c3_second_range_new_employees_female_by_half_year_{$year} + tb.c4_second_range_new_employees_female_by_half_year_{$year})) AS second_range_new_employees_female_by_half_sum_year_{$year},
+							SUM((tb.c1_new_employees_female_by_year_$year + tb.c2_new_employees_female_by_year_$year) - (tb.c3_new_employees_female_by_year_$year + tb.c4_new_employees_female_by_year_$year)) AS new_employees_female_by_year_$year,
+							SUM((tb . c1_first_range_new_employees_female_by_half_year_$year + tb.c2_first_range_new_employees_female_by_half_year_$year) - (tb.c3_first_range_new_employees_female_by_half_year_$year + tb.c4_first_range_new_employees_female_by_half_year_$year)) AS first_range_new_employees_female_by_half_sum_year_$year,
+							SUM((tb . c1_second_range_new_employees_female_by_half_year_$year + tb.c2_second_range_new_employees_female_by_half_year_$year) - (tb.c3_second_range_new_employees_female_by_half_year_$year + tb.c4_second_range_new_employees_female_by_half_year_$year)) AS second_range_new_employees_female_by_half_sum_year_$year,
 							
-							SUM((tb.c1_new_employees_male_by_year_{$year} + tb.c2_new_employees_male_by_year_{$year}) - (tb.c3_new_employees_male_by_year_{$year} + tb.c4_new_employees_male_by_year_{$year})) AS new_employees_male_by_year_{$year},
-							SUM((tb . c1_first_range_new_employees_male_by_half_year_{$year} + tb.c2_first_range_new_employees_male_by_half_year_{$year}) - (tb.c3_first_range_new_employees_male_by_half_year_{$year} + tb.c4_first_range_new_employees_male_by_half_year_{$year})) AS first_range_new_employees_male_by_half_sum_year_{$year},
-							SUM((tb . c1_second_range_new_employees_male_by_half_year_{$year} + tb.c2_second_range_new_employees_male_by_half_year_{$year}) - (tb.c3_second_range_new_employees_male_by_half_year_{$year} + tb.c4_second_range_new_employees_male_by_half_year_{$year})) AS second_range_new_employees_male_by_half_sum_year_{$year},";
+							SUM((tb.c1_new_employees_male_by_year_$year + tb.c2_new_employees_male_by_year_$year) - (tb.c3_new_employees_male_by_year_$year + tb.c4_new_employees_male_by_year_$year)) AS new_employees_male_by_year_$year,
+							SUM((tb . c1_first_range_new_employees_male_by_half_year_$year + tb.c2_first_range_new_employees_male_by_half_year_$year) - (tb.c3_first_range_new_employees_male_by_half_year_$year + tb.c4_first_range_new_employees_male_by_half_year_$year)) AS first_range_new_employees_male_by_half_sum_year_$year,
+							SUM((tb . c1_second_range_new_employees_male_by_half_year_$year + tb.c2_second_range_new_employees_male_by_half_year_$year) - (tb.c3_second_range_new_employees_male_by_half_year_$year + tb.c4_second_range_new_employees_male_by_half_year_$year)) AS second_range_new_employees_male_by_half_sum_year_$year,";
 			$strSQL2 .= " 
 							#New Employees for the full year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
-										THEN 1 ELSE 0 END AS c1_new_employees_by_{$year},
+										THEN 1 ELSE 0 END AS c1_new_employees_by_$year,
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
-										THEN 1 ELSE 0 END AS c2_new_employees_by_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-12' 
-										THEN 1 ELSE 0 END AS c3_new_employees_by_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31' 
+										THEN 1 ELSE 0 END AS c2_new_employees_by_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-12-31' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$yearMinusOne-12' 
+										THEN 1 ELSE 0 END AS c3_new_employees_by_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-12-31' 
 										AND us.last_date IS NULL
-										THEN 1 ELSE 0 END AS c4_new_employees_by_{$year},
+										AND DATE_FORMAT(us.first_date, '%Y') = '2022'
+										THEN 1 ELSE 0 END AS c4_new_employees_by_$year,
 									
 							
 							#New Employees for the first half year 
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-06-30'
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30'
 										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
-										THEN 1 ELSE 0 END AS c1_first_range_new_employees_by_half_year_{$year},
+										THEN 1 ELSE 0 END AS c1_first_range_new_employees_by_half_year_$year,
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
-										THEN 1 ELSE 0 END AS c2_first_range_new_employees_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-06' 
-										THEN 1 ELSE 0 END AS c3_first_range_new_employees_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
+										THEN 1 ELSE 0 END AS c2_first_range_new_employees_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$yearMinusOne-06-30' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$yearMinusOne-12' 
+										THEN 1 ELSE 0 END AS c3_first_range_new_employees_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$yearMinusOne-06-30' 
+										AND DATE_FORMAT(us.first_date, '%Y') = '$yearMinusOne'
 										AND us.last_date IS NULL
-										THEN 1 ELSE 0 END AS c4_first_range_new_employees_by_half_year_{$year},
+										THEN 1 ELSE 0 END AS c4_first_range_new_employees_by_half_year_$year,
 							
 							#New Employees for the second half year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') > '$year-06-30'
 										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
-										THEN 1 ELSE 0 END AS c1_second_range_new_employees_by_half_year_{$year},
+										THEN 1 ELSE 0 END AS c1_second_range_new_employees_by_half_year_$year,
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30' 
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
-										THEN 1 ELSE 0 END AS c2_second_range_new_employees_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-06' 
-										THEN 1 ELSE 0 END AS c3_second_range_new_employees_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
+										THEN 1 ELSE 0 END AS c2_second_range_new_employees_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
+										THEN 1 ELSE 0 END AS c3_second_range_new_employees_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
-										THEN 1 ELSE 0 END AS c4_second_range_new_employees_by_half_year_{$year},
+										THEN 1 ELSE 0 END AS c4_second_range_new_employees_by_half_year_$year,
 										
 							#New Employees female for the full year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c1_new_employees_female_by_year_{$year},
+										THEN 1 ELSE 0 END AS c1_new_employees_female_by_year_$year,
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
 										AND us.last_date IS NULL
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c2_new_employees_female_by_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-12' 
+										THEN 1 ELSE 0 END AS c2_new_employees_female_by_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-12-31' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$yearMinusOne-12'
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c3_new_employees_female_by_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31' 
+										THEN 1 ELSE 0 END AS c3_new_employees_female_by_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-12-31'
+										AND DATE_FORMAT(us.first_date, '%Y') = '$yearMinusOne'
 										AND us.last_date IS NULL
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c4_new_employees_female_by_year_{$year},
+										THEN 1 ELSE 0 END AS c4_new_employees_female_by_year_$year,
 
 							#New Employees Female for the first half year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
-											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-06-30'
 											AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06'
 											AND us.gender = 0
-											THEN 1 ELSE 0 END AS c1_first_range_new_employees_female_by_half_year_{$year},
+											THEN 1 ELSE 0 END AS c1_first_range_new_employees_female_by_half_year_$year,
 									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+											AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 											AND us.last_date IS NULL
 											AND us.gender = 0
-											THEN 1 ELSE 0 END AS c2_first_range_new_employees_female_by_half_year_{$year},
-									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
-											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30'
-											AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-06' 
+											THEN 1 ELSE 0 END AS c2_first_range_new_employees_female_by_half_year_$year,
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$yearMinusOne-06-30' 
+											AND DATE_FORMAT(us.last_date, '%Y-%m') = '$yearMinusOne-12' 
 											AND us.gender = 0
-											THEN 1 ELSE 0 END AS c3_first_range_new_employees_female_by_half_year_{$year},
-									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
+											THEN 1 ELSE 0 END AS c3_first_range_new_employees_female_by_half_year_$year,
+									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$yearMinusOne-06-30' 
+											AND DATE_FORMAT(us.first_date, '%Y') = '$yearMinusOne'
 											AND us.last_date IS NULL
 											AND us.gender = 0
-											THEN 1 ELSE 0 END AS c4_first_range_new_employees_female_by_half_year_{$year},
+											THEN 1 ELSE 0 END AS c4_first_range_new_employees_female_by_half_year_$year,
 								
 							#New Employees - Female for the second half year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') > '$year-06-30'
 										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c1_second_range_new_employees_female_by_half_year_{$year},
+										THEN 1 ELSE 0 END AS c1_second_range_new_employees_female_by_half_year_$year,
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30' 
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c2_second_range_new_employees_female_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-06' 
+										THEN 1 ELSE 0 END AS c2_second_range_new_employees_female_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c3_second_range_new_employees_female_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
+										THEN 1 ELSE 0 END AS c3_second_range_new_employees_female_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30'
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
 										AND us.gender = 0
-										THEN 1 ELSE 0 END AS c4_second_range_new_employees_female_by_half_year_{$year},
+										THEN 1 ELSE 0 END AS c4_second_range_new_employees_female_by_half_year_$year,
 
 
 							#New Employees Male for the full year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
 										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c1_new_employees_male_by_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31' 
+										THEN 1 ELSE 0 END AS c1_new_employees_male_by_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-12-31'
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c2_new_employees_male_by_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-12' 
+										THEN 1 ELSE 0 END AS c2_new_employees_male_by_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-12-31' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$yearMinusOne-12' 
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c3_new_employees_male_by_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-12-31' 
+										THEN 1 ELSE 0 END AS c3_new_employees_male_by_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$yearMinusOne-12-31'
+										AND DATE_FORMAT(us.first_date, '%Y') = '$yearMinusOne'
 										AND us.last_date IS NULL
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c4_new_employees_male_by_year_{$year},
+										THEN 1 ELSE 0 END AS c4_new_employees_male_by_year_$year,
 										
 							#New Employees Male for the first half year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
-											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-06-30'
 											AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06'
 											AND us.gender = 1
-											THEN 1 ELSE 0 END AS c1_first_range_new_employees_male_by_half_year_{$year},
-									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+											THEN 1 ELSE 0 END AS c1_first_range_new_employees_male_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30'
+											AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 											AND us.last_date IS NULL
 											AND us.gender = 1
-											THEN 1 ELSE 0 END AS c2_first_range_new_employees_male_by_half_year_{$year},
-									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
-											AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30'
-											AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-06' 
+											THEN 1 ELSE 0 END AS c2_first_range_new_employees_male_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$yearMinusOne-06-30' 
+											AND DATE_FORMAT(us.last_date, '%Y-%m') = '$yearMinusOne-06' 
 											AND us.gender = 1
-											THEN 1 ELSE 0 END AS c3_first_range_new_employees_male_by_half_year_{$year},
-									CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
+											THEN 1 ELSE 0 END AS c3_first_range_new_employees_male_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$yearMinusOne-06-30'
+											AND DATE_FORMAT(us.first_date, '%Y') = '$yearMinusOne'
 											AND us.last_date IS NULL
 											AND us.gender = 1
-											THEN 1 ELSE 0 END AS c4_first_range_new_employees_male_by_half_year_{$year},
+											THEN 1 ELSE 0 END AS c4_first_range_new_employees_male_by_half_year_$year,
 								
 							#New Employees Male for the second half year 
 								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') > '$year-06-30'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-12'
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c1_second_range_new_employees_male_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30' 
+										THEN 1 ELSE 0 END AS c1_second_range_new_employees_male_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') > '$year-06-30'
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c2_second_range_new_employees_male_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
-										AND DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30'
-										AND DATE_FORMAT(us.last_date, '%Y-%m') = '{$yearMinusOne}-06' 
+										THEN 1 ELSE 0 END AS c2_second_range_new_employees_male_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30' 
+										AND DATE_FORMAT(us.last_date, '%Y-%m') = '$year-06' 
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c3_second_range_new_employees_male_by_half_year_{$year},
-								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '{$yearMinusOne}-06-30' 
+										THEN 1 ELSE 0 END AS c3_second_range_new_employees_male_by_half_year_$year,
+								CASE WHEN DATE_FORMAT(us.first_date, '%Y-%m-%d') <= '$year-06-30'
+										AND DATE_FORMAT(us.first_date, '%Y') = '$year'
 										AND us.last_date IS NULL
 										AND us.gender = 1
-										THEN 1 ELSE 0 END AS c4_second_range_new_employees_male_by_half_year_{$year},";
+										THEN 1 ELSE 0 END AS c4_second_range_new_employees_male_by_half_year_$year,";
 		};
 		$strSQL1 = trim($strSQL1, ",");
 		$strSQL2 = trim($strSQL2, ",");
@@ -709,50 +695,50 @@ class Ghg_sheet_080_dataSource extends Controller
 			$strSQL2 .= "
 						#Calculate departed employees for the full year
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
-								THEN 1 ELSE 0 END) AS total_departed_employees_by_year_{$year},
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
+								THEN 1 ELSE 0 END) AS total_departed_employees_by_year_$year,
 
 						#Departed employees for the first half year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
-								THEN 1 ELSE 0 END) AS first_range_total_departed_employees_by_half_year_{$year},
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
+								THEN 1 ELSE 0 END) AS first_range_total_departed_employees_by_half_year_$year,
 						
 						#Departed employees for the second half year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') >= '$year-07-01'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
-								THEN 1 ELSE 0 END) AS second_range_total_departed_employees_by_half_year_{$year},
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
+								THEN 1 ELSE 0 END) AS second_range_total_departed_employees_by_half_year_$year,
 
 						#Departed employees - female for the full year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
 								AND us.gender = 0
-								THEN 1 ELSE 0 END) AS departed_employees_female_by_year_{$year},
+								THEN 1 ELSE 0 END) AS departed_employees_female_by_year_$year,
 						#Departed employees -female for the first half year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
 								AND us.gender = 0
-								THEN 1 ELSE 0 END) AS first_range_departed_employees_female_by_half_year_{$year},
+								THEN 1 ELSE 0 END) AS first_range_departed_employees_female_by_half_year_$year,
 						#Departed employees - female for the second half year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') >= '$year-07-01'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
 								AND us.gender = 0
-								THEN 1 ELSE 0 END) AS second_range_departed_employees_female_by_half_year_{$year},
+								THEN 1 ELSE 0 END) AS second_range_departed_employees_female_by_half_year_$year,
 
 						#Departed employees - male for the full year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') <= '$year-12-31'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
 								AND us.gender = 1
-								THEN 1 ELSE 0 END) AS departed_employees_male_by_year_{$year},
+								THEN 1 ELSE 0 END) AS departed_employees_male_by_year_$year,
 						#Departed employees - male for the first half year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') < '$year-07-01'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
 								AND us.gender = 1
-								THEN 1 ELSE 0 END) AS first_range_departed_employees_male_by_half_year_{$year},
+								THEN 1 ELSE 0 END) AS first_range_departed_employees_male_by_half_year_$year,
 						#Departed employees - female for the second half year 
 							SUM(CASE WHEN DATE_FORMAT(us.last_date, '%Y-%m-%d') >= '$year-07-01'
-								AND DATE_FORMAT(us.last_date, '%Y') = '{$year}'
+								AND DATE_FORMAT(us.last_date, '%Y') = '$year'
 								AND us.gender = 1
-								THEN 1 ELSE 0 END) AS second_range_departed_employees_male_by_half_year_{$year},";
+								THEN 1 ELSE 0 END) AS second_range_departed_employees_male_by_half_year_$year,";
 		}
 		$strSQL = $strSQL1 . $strSQL2;
 		$strSQL = trim($strSQL, ",");

@@ -13,7 +13,7 @@
                 </div>
             </x-renderer.card>
         </div>
-        <div class="col-span-12 md:col-span-6 lg:col-span-8 w-full max-h-60">
+        <div class="col-span-12 md:col-span-5 lg:col-span-7 w-full max-h-60">
             <x-renderer.card title="Accessible roles" py="1">
                 <div class="mb-1 max-h-[100px] overflow-y-scroll">
                     @isset($statuses[$status])
@@ -26,7 +26,7 @@
                 </div>
             </x-renderer.card>
         </div>
-        <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
+        <div class="col-span-12 md:col-span-3 lg:col-span-3 w-full">
             <x-renderer.card title="Quick Navigation">
                 <div class="mb-1 text-center">
                     @if($previousItem)
@@ -35,12 +35,12 @@
                     @if($nextItem)
                         <x-renderer.button title="Next Record" href="{{route($type.'.edit',$nextItem->id)}}" icon="fa-duotone fa-forward  ">#{{$nextItem->id}}</x-renderer.button>
                     @endif
+                    {{-- Console.log --}}
+                    {{-- <div class="mb-1 text-center"> --}}
+                        <x-renderer.button size="xs" onClick="console.log(superProps)">Super-Props</x-renderer.button>
+                        <x-renderer.button size="xs" onClick="console.log(superWorkflows)">Super-Workflows</x-renderer.button>
+                    {{-- </div> --}}
                 </div> 
-                Console.log
-                <div class="mb-1 text-center">
-                   <x-renderer.button size="xs" onClick="console.log(superProps)">Super-Props</x-renderer.button>
-                   <x-renderer.button size="xs" onClick="console.log(superWorkflows)">Super-Workflows</x-renderer.button>
-                </div>
             </x-renderer.card>
         </div>
         {{-- <div class="col-span-12 md:col-span-2 lg:col-span-2 w-full">
