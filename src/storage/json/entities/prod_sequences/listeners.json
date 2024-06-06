@@ -233,7 +233,7 @@
         "listen_to_attrs": "",
         "columns_to_set": "",
         "attrs_to_compare": "",
-        "expression": "Math.min(start_date_0,start_date_1)",
+        "expression": "(start_date_0 === 0 ? start_date_1 : (start_date_1 === 0 ? start_date_0 : Math.min(start_date_0, start_date_1)))",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",

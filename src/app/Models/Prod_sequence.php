@@ -23,20 +23,6 @@ class Prod_sequence extends ModelExtended
 
         "total_calendar_days", "no_of_sundays", "no_of_ph_days",
         "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
-        /*
-ALTER TABLE `prod_sequences` ADD `start_date_0` DATE NULL AFTER `start_date`;
-ALTER TABLE `prod_sequences` ADD `start_date_1` DATE NULL AFTER `start_date_0`;
-ALTER TABLE `prod_sequences` ADD `end_date_0` DATE NULL AFTER `end_date`;
-ALTER TABLE `prod_sequences` ADD `end_date_1` DATE NULL AFTER `end_date_0`;
-ALTER TABLE `prod_sequences` ADD `uom_agg_0` FLOAT NULL AFTER `uom_agg`;
-ALTER TABLE `prod_sequences` ADD `uom_agg_1` FLOAT NULL AFTER `uom_agg_0`;
-ALTER TABLE `prod_sequences` ADD `total_hours_0` FLOAT NULL AFTER `total_hours`;
-ALTER TABLE `prod_sequences` ADD `total_hours_1` FLOAT NULL AFTER `total_hours_0`;
-ALTER TABLE `prod_sequences` ADD `worker_number_0` FLOAT NULL AFTER `worker_number`;
-ALTER TABLE `prod_sequences` ADD `worker_number_1` FLOAT NULL AFTER `worker_number_0`;
-ALTER TABLE `prod_sequences` ADD `total_man_hours_0` FLOAT NULL AFTER `total_man_hours`;
-ALTER TABLE `prod_sequences` ADD `total_man_hours_1` FLOAT NULL AFTER `total_man_hours_0`;
-   */
     ];
 
     public static $nameless = true;
@@ -98,13 +84,13 @@ ALTER TABLE `prod_sequences` ADD `total_man_hours_1` FLOAT NULL AFTER `total_man
     public function getProdRuns()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->whereNot('is_rework', 1);
     }
 
     public function getProdRunsRework()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 1);
     }
 
     // public function getProdRoutingDetails()
