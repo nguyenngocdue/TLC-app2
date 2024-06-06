@@ -10,14 +10,33 @@ class Prod_sequence extends ModelExtended
     protected $fillable = [
         "id", "prod_order_id", "prod_routing_link_id",
         "status", "expected_start_at", "expected_finish_at",
-        "priority", "uom_id",  "owner_id",
-        "sub_project_id", "prod_routing_id",
-        "total_hours", "worker_number", "total_man_hours",
-        "start_date", "end_date", "prod_discipline_id",
-        "total_uom", "uom_input", "uom_agg",
-        "erp_prod_order_name",
-        "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
-        "closed_at",
+        "priority", "uom_id",  "owner_id", "closed_at",
+        "sub_project_id", "prod_routing_id", "prod_discipline_id",
+        "total_uom", "uom_input", "erp_prod_order_name",
+
+        "start_date_0", "start_date_1", "start_date",
+        "end_date_0", "end_date_1", "end_date",
+        "uom_agg_0", "uom_agg_1", "uom_agg",
+        "total_hours_0", "total_hours_1", "total_hours",
+        "worker_number_0", "worker_number_1", "worker_number",
+        "total_man_hours_0", "total_man_hours_1", "total_man_hours",
+
+        "total_calendar_days", "no_of_sundays", "no_of_ph_days",
+        "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
+        /*
+ALTER TABLE `prod_sequences` ADD `start_date_0` DATE NULL AFTER `start_date`;
+ALTER TABLE `prod_sequences` ADD `start_date_1` DATE NULL AFTER `start_date_0`;
+ALTER TABLE `prod_sequences` ADD `end_date_0` DATE NULL AFTER `end_date`;
+ALTER TABLE `prod_sequences` ADD `end_date_1` DATE NULL AFTER `end_date_0`;
+ALTER TABLE `prod_sequences` ADD `uom_agg_0` FLOAT NULL AFTER `uom_agg`;
+ALTER TABLE `prod_sequences` ADD `uom_agg_1` FLOAT NULL AFTER `uom_agg_0`;
+ALTER TABLE `prod_sequences` ADD `total_hours_0` FLOAT NULL AFTER `total_hours`;
+ALTER TABLE `prod_sequences` ADD `total_hours_1` FLOAT NULL AFTER `total_hours_0`;
+ALTER TABLE `prod_sequences` ADD `worker_number_0` FLOAT NULL AFTER `worker_number`;
+ALTER TABLE `prod_sequences` ADD `worker_number_1` FLOAT NULL AFTER `worker_number_0`;
+ALTER TABLE `prod_sequences` ADD `total_man_hours_0` FLOAT NULL AFTER `total_man_hours`;
+ALTER TABLE `prod_sequences` ADD `total_man_hours_1` FLOAT NULL AFTER `total_man_hours_0`;
+   */
     ];
 
     public static $nameless = true;
