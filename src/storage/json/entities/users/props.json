@@ -928,7 +928,7 @@
         "column_name": "getRoleSet",
         "column_type": "morphToMany",
         "label": "RoleSet",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "6",
         "width": "",

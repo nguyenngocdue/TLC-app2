@@ -92,7 +92,7 @@
         "column_name": "getClusters",
         "column_type": "hasMany",
         "label": "Clusters",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",

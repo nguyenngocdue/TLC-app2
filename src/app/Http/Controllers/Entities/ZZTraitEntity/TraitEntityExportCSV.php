@@ -52,16 +52,23 @@ trait TraitEntityExportCSV
                         else $result[] = "NULL";
                     }
                     break;
-                case "dropdown_multi":
-                case "checkbox":
-                    $fn = str_replace('()', '', $column['column_name']);
-                    $data = $dataLine->$fn() ?? [];
-                    $dataOracy = [];
-                    foreach ($data as $value) {
-                        if ($value) $dataOracy[] = $value['name'];
-                    }
-                    $result[] = join(',', $dataOracy);
+                case "dropdown_multi_2a":
+                case "checkbox_2a":
+                    $fn = $column['column_name'];
+                    $data = $dataLine->$fn ?? collect();
+                    $names = $data->pluck('name')->toArray();
+                    $result[] = join(',', $names);
                     break;
+                    // case "dropdown_multi":
+                    // case "checkbox":
+                    //     $fn = str_replace('()', '', $column['column_name']);
+                    //     $data = $dataLine->$fn() ?? [];
+                    //     $dataOracy = [];
+                    //     foreach ($data as $value) {
+                    //         if ($value) $dataOracy[] = $value['name'];
+                    //     }
+                    //     $result[] = join(',', $dataOracy);
+                    //     break;
 
                 case "parent_link":
                     $relationships = $column['relationships'];

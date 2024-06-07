@@ -26,10 +26,10 @@ class Zunit_test_02 extends ModelExtended
         "dropdownYesNo" => ['belongsTo', Qaqc_insp_control_value::class, 'dropdown_yes_no'],
         "dropdownPassFail" => ['belongsTo', Qaqc_insp_control_value::class, 'dropdown_pass_fail'],
         //Many to Many
-        "checkboxYesNo" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02",],
-        "checkboxPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02",],
-        "dropdownMultiYesNo" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02",],
-        "dropdownMultiPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02",],
+        "checkboxYesNo" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_checkbox_yes_no",],
+        "checkboxPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_checkbox_pass_fail",],
+        "dropdownMultiYesNo" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_dm_yes_no",],
+        "dropdownMultiPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_dm_pass_fail",],
     ];
 
     public function getManyLineParams()
@@ -44,10 +44,10 @@ class Zunit_test_02 extends ModelExtended
             ['dataIndex' => 'dropdown_yes_no', 'cloneable' => true],
             ['dataIndex' => 'dropdown_pass_fail', 'cloneable' => true],
 
-            ['dataIndex' => 'checkboxYesNo()', 'cloneable' => true],
-            ['dataIndex' => 'checkboxPassFail()', 'cloneable' => true],
-            ['dataIndex' => 'dropdownMultiYesNo()', 'cloneable' => true],
-            ['dataIndex' => 'dropdownMultiPassFail()', 'cloneable' => true],
+            ['dataIndex' => 'checkboxYesNo', 'cloneable' => true],
+            ['dataIndex' => 'checkboxPassFail', 'cloneable' => true],
+            ['dataIndex' => 'dropdownMultiYesNo', 'cloneable' => true],
+            ['dataIndex' => 'dropdownMultiPassFail', 'cloneable' => true],
 
         ];
     }

@@ -92,7 +92,7 @@
         "column_name": "getGroups",
         "column_type": "hasMany",
         "label": "Groups",
-        "control": "dropdown_multi",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",
