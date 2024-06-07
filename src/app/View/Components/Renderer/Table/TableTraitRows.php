@@ -75,13 +75,13 @@ trait TableTraitRows
                     break;
                 default:
                     $dataIndex = $column['dataIndex'];
-                    if (str_contains($dataIndex, "()")) {
-                        $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
-                        //<< this is to execute the getCheckedByField function
-                        $rawData = method_exists($dataLineObj, $fn) ? $dataLineObj->$fn() : "?";
-                    } else {
-                        $rawData = $dataLineObj->$dataIndex ?? "";
-                    }
+                    // if (str_contains($dataIndex, "()")) {
+                    //     $fn = substr($dataIndex, 0, strlen($dataIndex) - strlen("()"));
+                    //     //<< this is to execute the getCheckedByField function
+                    //     $rawData = method_exists($dataLineObj, $fn) ? $dataLineObj->$fn() : "?";
+                    // } else {
+                    $rawData = $dataLineObj->$dataIndex ?? "";
+                    // }
                     // $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     $isArrayOfValueObject = false;
                     if (is_array($rawData)) {

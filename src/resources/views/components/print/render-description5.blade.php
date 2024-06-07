@@ -33,7 +33,7 @@
                 {{-- @endif --}}
             </div>
             @break
-        @case('checkbox')
+        {{-- @case('checkbox') --}}
         @case('checkbox_2a')
             <div class='p1-2  bor1der border-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
                 @php
@@ -45,7 +45,7 @@
             @break
         @case('radio')
         @case('dropdown')
-        @case('dropdown_multi')
+        {{-- @case('dropdown_multi') --}}
         @case('dropdown_multi_2a')
             <div class='p-2 bord1er borde1r-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
                 <x-print.checkbox-or-radio5 :relationships="$relationships" :value="$value" />

@@ -105,7 +105,7 @@ trait TraitEntityCRUDCreateEdit2
 		$this->checkDryRunToken($dryRunTokenRequest, $valueCreateDryToken);
 		$superProps = $this->getSuperProps();
 		$props = $superProps['props'];
-		$values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $props);
+		$values = (object) $this->loadValueOfBelongsToManyAndAttachments($original, $props);
 		$tableBluePrint = $this->makeTableBluePrint($props);
 		$tableToLoadDataSource = [...array_values($tableBluePrint), $this->type];
 		$hasStatusColumn = Schema::hasColumn(Str::plural($this->type), 'status');

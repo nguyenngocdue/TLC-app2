@@ -173,21 +173,22 @@ trait TraitViewAllTable
         // Log::info($columns);
         // Log::info($rawDataSource);
         $eloquentParams = $this->typeModel::$eloquentParams;
-        $oracyParams = $this->typeModel::$oracyParams;
+        // $oracyParams = $this->typeModel::$oracyParams;
         // Log::info($eloquentParams);
 
         $json = Relationships::getAllOf($this->type);
         if (is_array($columns)) {
             foreach ($columns as &$column) {
                 $dataIndex = $column['dataIndex'];
-                if (!isset($eloquentParams[$dataIndex]) && !isset($oracyParams[$dataIndex])) continue; //<<Id, Name, Slug...
+                if (!isset($eloquentParams[$dataIndex])) continue; //<<Id, Name, Slug...
+                // if (!isset($eloquentParams[$dataIndex]) && !isset($oracyParams[$dataIndex])) continue; //<<Id, Name, Slug...
 
                 if (isset($eloquentParams[$dataIndex])) {
                     $relationship = $eloquentParams[$dataIndex][0];
                     $allows = JsonControls::getViewAllEloquents();
-                } elseif (isset($oracyParams[$dataIndex])) {
-                    $relationship = $oracyParams[$dataIndex][0];
-                    $allows = JsonControls::getViewAllOracies();
+                    // } elseif (isset($oracyParams[$dataIndex])) {
+                    //     $relationship = $oracyParams[$dataIndex][0];
+                    //     $allows = JsonControls::getViewAllOracies();
                 }
                 if (in_array($relationship, $allows)) {
                     // dd($json, $dataIndex, $json["_{$dataIndex}"]);

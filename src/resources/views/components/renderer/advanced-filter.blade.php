@@ -144,8 +144,8 @@
                         @break
                         @case ('dropdown')
                         @case ('radio')
-                        @case ('dropdown_multi')
-                        @case('checkbox')
+                        {{-- @case ('dropdown_multi') --}}
+                        {{-- @case('checkbox') --}}
                         @case ('dropdown_multi_2a')
                         @case('checkbox_2a')
                             <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>

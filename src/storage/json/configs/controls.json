@@ -41,10 +41,8 @@
         "",
         "attachment",
         "comment",
-        "checkbox",
         "checkbox_2a",
         "dropdown",
-        "dropdown_multi",
         "dropdown_multi_2a",
         "hyperlink",
         "id",
@@ -120,12 +118,6 @@
         "morphMany",
         "morphTo",
         "morphToMany"
-    ],
-    "manage_prop_oracies": [
-        "getCheckedByField"
-    ],
-    "view_all_oracies": [
-        "getCheckedByField"
     ],
     "packages": [
         "",

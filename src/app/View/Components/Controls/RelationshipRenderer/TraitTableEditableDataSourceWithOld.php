@@ -44,20 +44,20 @@ trait TraitTableEditableDataSourceWithOld
         return $toBeHighlighted;
     }
 
-    private function getOracyValues($oldValues)
-    {
-        $result = [];
-        foreach ($oldValues as $rowIndex => $line) {
-            foreach ($line as $controlName => $value) {
-                if (str_contains($controlName, "()")) {
-                    $result[$rowIndex] = [
-                        $controlName => $value,
-                    ];
-                }
-            }
-        }
-        return $result;
-    }
+    // private function getOracyValues($oldValues)
+    // {
+    //     $result = [];
+    //     foreach ($oldValues as $rowIndex => $line) {
+    //         foreach ($line as $controlName => $value) {
+    //             if (str_contains($controlName, "()")) {
+    //                 $result[$rowIndex] = [
+    //                     $controlName => $value,
+    //                 ];
+    //             }
+    //         }
+    //     }
+    //     return $result;
+    // }
 
     private function convertOldToDataSource($table01Name, $dataSource, $lineModelPath)
     {
@@ -72,7 +72,7 @@ trait TraitTableEditableDataSourceWithOld
         // dump($oldObjects);
 
         $this->removeDestroyedLines($editableTablesTransactions, $oldObjects);
-        $oracyValues = $this->getOracyValues($oldObjects);
+        // $oracyValues = $this->getOracyValues($oldObjects);
         // dump($oracyValues);
         $toBeHighlightedIndex = $this->getToBeHighlightedLineIndex($editableTablesTransactions);
         // dump($toBeHighlightedIndex);
@@ -80,11 +80,11 @@ trait TraitTableEditableDataSourceWithOld
         foreach ($oldObjects as $index => $oldObject) {
             $newObject = new $lineModelPath($oldObject);
             $newObject->extraTrClass = (in_array($index, $toBeHighlightedIndex)) ? "bg-red-300" : "";
-            if (isset($oracyValues[$index])) {
-                foreach ($oracyValues[$index] as $key => $value) {
-                    $newObject->{$key} = $value;
-                }
-            }
+            // if (isset($oracyValues[$index])) {
+            //     foreach ($oracyValues[$index] as $key => $value) {
+            //         $newObject->{$key} = $value;
+            //     }
+            // }
             // dump($newObject);
             $result[] = $newObject;
         }
@@ -107,7 +107,7 @@ trait TraitTableEditableDataSourceWithOld
     {
         // Log::info($columns);
         $columns = array_filter($editableColumns, fn ($column) => isset($column['editable']) && $column['editable'] == true);
-        $columns = array_filter($columns, fn ($column) => !str_contains($column['dataIndex'], "()")); //<< Ignored all oracy params
+        // $columns = array_filter($columns, fn ($column) => !str_contains($column['dataIndex'], "()")); //<< Ignored all oracy params
         $columns = array_filter($columns, fn ($column) => $column['column_type'] !== 'belongsToMany'); //<< Ignored all eloquent belongsToMany params
         $columns = array_filter($columns, fn ($column) => $column['renderer'] !== 'attachment4'); //<< Ignored all attachments
         $columns = array_values(array_map(fn ($column) => $column['dataIndex'], $columns));

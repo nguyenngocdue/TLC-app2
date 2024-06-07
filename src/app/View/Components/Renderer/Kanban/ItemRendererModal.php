@@ -44,7 +44,7 @@ class ItemRendererModal extends Component
 
         // $original = $this->checkPermissionUsingGate($this->id, 'edit');
         $original = $this->modelPath::find($this->id);
-        $values = (object) $this->loadValueOfOracyPropsAndAttachments($original, $this->props);
+        $values = (object) $this->loadValueOfBelongsToManyAndAttachments($original, $this->props);
 
         // dump($values);
         // Log::info($tableBluePrint);

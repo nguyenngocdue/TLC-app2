@@ -73,11 +73,11 @@ trait TraitEntityAdvancedFilter
                     case 'dropdown':
                         $result['dropdown'][$key] = $value;
                         break;
+                        // case 'checkbox':
+                        //     case 'dropdown_multi':
+                        //         $result['dropdown_multi'][$key] = $value;
+                        //         break;
                     case 'radio':
-                    case 'checkbox':
-                    case 'dropdown_multi':
-                        $result['dropdown_multi'][$key] = $value;
-                        break;
                     case 'checkbox_2a':
                     case 'dropdown_multi_2a':
                         $result['dropdown_multi_2a'][$key] = $value;
@@ -214,27 +214,27 @@ trait TraitEntityAdvancedFilter
                             });
                         });
                         break;
-                    case 'dropdown_multi':
-                        array_walk($value, function ($value, $key) use ($q, $propsFilters) {
-                            $relationship = $propsFilters['_' . $key]['relationships'];
-                            if (isset($relationship['oracyParams'])) {
-                                $oracyParams = $relationship['oracyParams'];
-                                $field = $key;
-                                $fieldId = DB::table('fields')->where('name', str_replace('()', '', $field))->value('id');
-                                $collectionFilter = DB::table('many_to_many')->where('field_id', $fieldId)
-                                    ->where('term_type', $oracyParams[1])
-                                    ->where('doc_type', $this->typeModel)
-                                    ->whereIn('term_id', $value)
-                                    ->get();
-                                $valueFilter = $collectionFilter->map(function ($item) {
-                                    return $item->doc_id;
-                                })->toArray();
-                                $q->whereIn('id', $valueFilter);
-                            } else {
-                                dump("Can not find oracyParams of $key, cancelled the criteria during filter.");
-                            }
-                        });
-                        break;
+                        // case 'dropdown_multi':
+                        //     array_walk($value, function ($value, $key) use ($q, $propsFilters) {
+                        //         $relationship = $propsFilters['_' . $key]['relationships'];
+                        //         if (isset($relationship['oracyParams'])) {
+                        //             $oracyParams = $relationship['oracyParams'];
+                        //             $field = $key;
+                        //             $fieldId = DB::table('fields')->where('name', str_replace('()', '', $field))->value('id');
+                        //             $collectionFilter = DB::table('many_to_many')->where('field_id', $fieldId)
+                        //                 ->where('term_type', $oracyParams[1])
+                        //                 ->where('doc_type', $this->typeModel)
+                        //                 ->whereIn('term_id', $value)
+                        //                 ->get();
+                        //             $valueFilter = $collectionFilter->map(function ($item) {
+                        //                 return $item->doc_id;
+                        //             })->toArray();
+                        //             $q->whereIn('id', $valueFilter);
+                        //         } else {
+                        //             dump("Can not find oracyParams of $key, cancelled the criteria during filter.");
+                        //         }
+                        //     });
+                        //     break;
                     default:
                         break;
                 }

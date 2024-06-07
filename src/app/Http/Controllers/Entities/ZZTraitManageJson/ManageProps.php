@@ -41,13 +41,15 @@ class ManageProps extends Manage_Parent
 
     private function getRenderableRelationships()
     {
-        $eloquentParams = $this->typeModel::$eloquentParams;
-        $oracyParams = $this->typeModel::$oracyParams;
-        $columnParams = $eloquentParams + $oracyParams;
+        // $eloquentParams = $this->typeModel::$eloquentParams;
+        // $oracyParams = $this->typeModel::$oracyParams;
+        // $columnParams = $eloquentParams + $oracyParams;
+        $columnParams =  $this->typeModel::$eloquentParams;
         // Log::info($columnParams);
 
-        $propEloquent = JsonControls::getManagePropEloquents();
-        $allows =  [...$propEloquent, ...JsonControls::getManagePropOracies()];
+        // $propEloquent = JsonControls::getManagePropEloquents();
+        // $allows =  [...$propEloquent, ...JsonControls::getManagePropOracies()];
+        $allows = JsonControls::getManagePropEloquents();
         // Log::info($allows);
 
         $result = [];

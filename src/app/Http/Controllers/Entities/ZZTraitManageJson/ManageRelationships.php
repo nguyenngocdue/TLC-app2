@@ -19,9 +19,11 @@ class ManageRelationships extends Manage_Parent
 
     private function makeBlankDefaultObject()
     {
-        $eloquentParams = $this->typeModel::$eloquentParams;
-        $oracyParams = $this->typeModel::$oracyParams;
-        $columnParams = $eloquentParams + $oracyParams;
+        // $eloquentParams = $this->typeModel::$eloquentParams;
+        // $oracyParams = $this->typeModel::$oracyParams;
+        // $columnParams = $eloquentParams + $oracyParams;
+
+        $columnParams = $this->typeModel::$eloquentParams;
 
         $allProps = Props::getAllOf($this->type);
 
@@ -82,7 +84,7 @@ class ManageRelationships extends Manage_Parent
                 if (in_array($column, ['filter_columns', 'filter_values'])) {
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
-                        if (!in_array($control, ['radio', 'checkbox', 'checkbox_2a', 'dropdown', 'dropdown_multi', 'dropdown_multi_2a', 'relationship_renderer'])) {
+                        if (!in_array($control, ['radio', /*'checkbox', 'dropdown_multi',*/ 'checkbox_2a', 'dropdown',  'dropdown_multi_2a', 'relationship_renderer'])) {
                             $result[$key][$column] = 'DO_NOT_RENDER';
                         }
                     }

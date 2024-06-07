@@ -102,7 +102,7 @@ trait TraitEntityListenDataSource
 
         foreach ($sp['props'] as $prop) {
             if ($prop['hidden_edit']) continue;
-            if (in_array($prop['control'], ['radio', 'checkbox', 'dropdown', 'dropdown_multi', 'checkbox_2a', 'dropdown_multi_2a'])) {
+            if (in_array($prop['control'], ['radio', 'dropdown', 'checkbox_2a', 'dropdown_multi_2a'])) {
                 if (isset($prop['relationships']['table'])) {
                     $table = $prop['relationships']['table'];
                     $toBeLoaded[] = $table;
@@ -203,10 +203,10 @@ trait TraitEntityListenDataSource
         $matrix = $this->getMatrix($types);
         // dump($types, $matrix);
         $result = [];
-        $columnsWithOracy = [];
+        // $columnsWithOracy = [];
         foreach ($matrix as $table => $columns) {
             $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
-            $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
+            // $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
             if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
 
             // dump($table, $columns);
@@ -226,23 +226,23 @@ trait TraitEntityListenDataSource
             }
         }
 
-        $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
-        foreach ($columnsWithOracy as $table => $listOfFn) {
-            // $modelPath = "App\\Models\\" . Str::singular($table);
-            $modelPath = Str::modelPathFrom($table);
-            if (sizeof($listOfFn) > 0) {
-                foreach ($listOfFn as $fn) {
-                    $fn_no_parenthesis = substr($fn, 0, strlen($fn) - 2); //Remove ()
+        // $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
+        // foreach ($columnsWithOracy as $table => $listOfFn) {
+        //     // $modelPath = "App\\Models\\" . Str::singular($table);
+        //     $modelPath = Str::modelPathFrom($table);
+        //     if (sizeof($listOfFn) > 0) {
+        //         foreach ($listOfFn as $fn) {
+        //             $fn_no_parenthesis = substr($fn, 0, strlen($fn) - 2); //Remove ()
 
-                    foreach ($result[$table] as &$row) {
-                        $model = new $modelPath(); //<<new $modelPath(['id' => $row['id']) doesn't work;
-                        $model->id = $row['id'];
-                        // $model = $modelPath::find($row['id']); //<<Don't have to actually init the model object to save ram
-                        $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
-                    }
-                }
-            }
-        }
+        //             foreach ($result[$table] as &$row) {
+        //                 $model = new $modelPath(); //<<new $modelPath(['id' => $row['id']) doesn't work;
+        //                 $model->id = $row['id'];
+        //                 // $model = $modelPath::find($row['id']); //<<Don't have to actually init the model object to save ram
+        //                 $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
+        //             }
+        //         }
+        //     }
+        // }
 
         // if table act_currency_xrs in the list, make more columns for it
         $result = $this->attachCurrencyXr($result);

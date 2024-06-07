@@ -66,8 +66,8 @@ trait TraitTableColumnEditable
                     $newColumn['align'] = 'center';
                     break;
                 case 'dropdown':
-                case 'dropdown_multi':
-                case 'checkbox':
+                    // case 'dropdown_multi':
+                    // case 'checkbox':
                 case 'dropdown_multi_2a':
                 case 'checkbox_2a':
                 case 'radio':
@@ -131,7 +131,7 @@ trait TraitTableColumnEditable
                     // $newColumn['renderer'] = "unknown renderer4 [" . $prop['control'] . "]";
                     // break;
             }
-            if (in_array($prop['control'], ['dropdown_multi', 'checkbox', 'dropdown_multi_2a', 'checkbox_2a'])) {
+            if (in_array($prop['control'], [/*'dropdown_multi', 'checkbox',*/'dropdown_multi_2a', 'checkbox_2a'])) {
                 $newColumn['multiple'] = true;
             }
             if ($newColumn['dataIndex'] === 'order_no') {

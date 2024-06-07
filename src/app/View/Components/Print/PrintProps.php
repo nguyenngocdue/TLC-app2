@@ -95,7 +95,7 @@ class PrintProps extends Component
 			}
 		}
 		// $this->handleDataSourceOfControlSignatureMulti($propsTemp,$dataSource);
-		$values = (object) $this->loadValueOfOracyPropsAndAttachments($dataModelCurrent, $props);
+		$values = (object) $this->loadValueOfBelongsToManyAndAttachments($dataModelCurrent, $props);
 		$status = $dataSource['status'] ?? null;
 		[$actionButtons, $buttonSave, $propsIntermediate] = $this->getConfigActionButtons($superProps, $status);
 		$tableBluePrint = $this->makeTableBluePrint($props);

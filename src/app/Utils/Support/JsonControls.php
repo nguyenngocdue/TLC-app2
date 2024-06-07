@@ -25,10 +25,10 @@ class JsonControls
         return self::getAll()['view_all_eloquents'];
     }
 
-    public static function getViewAllOracies()
-    {
-        return self::getAll()['view_all_oracies'];
-    }
+    // public static function getViewAllOracies()
+    // {
+    //     return self::getAll()['view_all_oracies'];
+    // }
 
     public static function getPackages()
     {
@@ -48,10 +48,10 @@ class JsonControls
         return self::getAll()['manage_prop_eloquents'];
     }
 
-    public static function getManagePropOracies()
-    {
-        return self::getAll()['manage_prop_oracies'];
-    }
+    // public static function getManagePropOracies()
+    // {
+    //     return self::getAll()['manage_prop_oracies'];
+    // }
 
     public static function getControls()
     {

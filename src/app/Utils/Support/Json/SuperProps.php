@@ -35,14 +35,14 @@ class SuperProps
                         break;
                     }
                 }
-                foreach ($modelPath::$oracyParams as $key2 => $params) {
-                    if ("_" . $key2 === $key) {
-                        $rls['oracyParams'] = $params;
-                        $rls['table'] = (new $params[1])->getTable();
-                        $rls['type'] = ucfirst(Str::singular($rls['table']));
-                        break;
-                    }
-                }
+                // foreach ($modelPath::$oracyParams as $key2 => $params) {
+                //     if ("_" . $key2 === $key) {
+                //         $rls['oracyParams'] = $params;
+                //         $rls['table'] = (new $params[1])->getTable();
+                //         $rls['type'] = ucfirst(Str::singular($rls['table']));
+                //         break;
+                //     }
+                // }
             }
 
             $rls['filter_columns'] = Str::parseArray($rls['filter_columns']);
