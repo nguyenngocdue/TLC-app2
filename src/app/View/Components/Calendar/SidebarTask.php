@@ -4,9 +4,9 @@ namespace App\View\Components\Calendar;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
-use App\Models\Pj_task;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class SidebarTask extends Component
 {
@@ -34,16 +34,8 @@ class SidebarTask extends Component
 
     private function getDataSource()
     {
-        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        $dataSource = Pj_task::select('id', 'name', 'description')
-            ->orderBy('name')
-            ->with('getDisciplinesOfTask')
-            ->with('getLodsOfTask')
-            ->get();
-        // Oracy::attach("getDisciplinesOfTask()", $dataSource);
-        // Oracy::attach("getLodsOfTask()", $dataSource);
-
-        return $dataSource;
+        //This will be override by getDataSource() of ModalFilterTask.php
+        return [];
     }
 
     public function getSuffix()

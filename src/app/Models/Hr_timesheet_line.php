@@ -24,7 +24,7 @@ class Hr_timesheet_line extends ModelExtended
         "getTask" => ['belongsTo', Pj_task::class, "task_id"],
         "getSubTask" => ['belongsTo', Pj_sub_task::class, "sub_task_id"],
         "getDiscipline" => ['belongsTo', User_discipline::class, "discipline_id"],
-        "getLod" => ['belongsTo', Term::class, "lod_id"],
+        "getLod" => ['belongsTo', Pj_task_phase::class, "lod_id"],
 
         "timesheetable" => ['morphTo', Hr_timesheet_line::class, 'timesheetable_type', 'timesheetable_id'],
     ];

@@ -52,7 +52,7 @@ class ViewAllTypeCalendar extends Component
         })->groupBy('year_value');
         $listIdPendingApproval = $this->getListIdPendingApproval($dataSource);
         $nodeProjectTreeArray = json_encode(array_values(Project::getSubProjectTree()));
-        $nodeTaskTreeArray = json_encode(array_values(Pj_task::getTasksOfUser($ownerId)));
+        $nodeTaskTreeArray = json_encode(array_values(Pj_task::getTaskTreeOfUser($ownerId)));
         // dump($nodeProjectTreeArray);
         // dump($nodeTaskTreeArray);
 
@@ -70,10 +70,11 @@ class ViewAllTypeCalendar extends Component
             'nodeTaskTreeArray' => $nodeTaskTreeArray,
             'listIdPendingApproval' => $listIdPendingApproval,
             'routeChangeStatusMultiple' => route("{$this->type}.changeStatusMultiple"),
-            'disableButton' => $this->disableButtonApproveAll($listIdPendingApproval,$userCurrentCalendar),
+            'disableButton' => $this->disableButtonApproveAll($listIdPendingApproval, $userCurrentCalendar),
         ]);
     }
-    private function disableButtonApproveAll($listIdPendingApproval,$userCurrentCalendar){
+    private function disableButtonApproveAll($listIdPendingApproval, $userCurrentCalendar)
+    {
         return empty($listIdPendingApproval) || ($userCurrentCalendar->id == CurrentUser::id());
     }
     private function getListIdPendingApproval($dataSource)

@@ -112,9 +112,9 @@
     "_date": {
         "name": "_date",
         "column_name": "date",
-        "column_type": "datetime",
+        "column_type": "date",
         "label": "Date",
-        "control": "picker_datetime",
+        "control": "picker_date",
         "align": "",
         "col_span": "",
         "width": "",

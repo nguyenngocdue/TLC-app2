@@ -32,9 +32,14 @@ class ModalFilterTask extends Component
     private function getDataSource()
     {
         $dataSource = Pj_task::select('id', 'name', 'description')
+            ->orderBy('name')
             ->with('getDisciplinesOfTask')
             ->with('getLodsOfTask')
             ->get();
+        foreach ($dataSource as &$data) {
+            $data->{"getDisciplinesOfTask"} = $data->getDisciplinesOfTask->pluck('id')->toArray();
+            $data->{"getLodsOfTask"} = $data->getLodsOfTask->pluck('id')->toArray();
+        }
         // Oracy::attach("getDisciplinesOfTask()", $dataSource);
         // Oracy::attach("getLodsOfTask()", $dataSource);
         return $dataSource;

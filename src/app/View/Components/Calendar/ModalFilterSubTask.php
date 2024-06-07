@@ -33,7 +33,9 @@ class ModalFilterSubTask extends Component
         $dataSource = Pj_sub_task::select('id', 'name', 'description')
             ->with("getParentTasks")
             ->get();
-        // Oracy::attach("getParentTasks()", $dataSource);
+        foreach ($dataSource as &$value) {
+            $value->{"getParentTasks"} = $value->getParentTasks->pluck('id')->toArray();
+        }
         return $dataSource;
     }
 

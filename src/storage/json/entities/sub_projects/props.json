@@ -179,7 +179,7 @@
         "name": "_lod_id",
         "column_name": "lod_id",
         "column_type": "bigint unsigned",
-        "label": "Current LOD",
+        "label": "Current Phase",
         "control": "dropdown",
         "align": "",
         "col_span": "6",

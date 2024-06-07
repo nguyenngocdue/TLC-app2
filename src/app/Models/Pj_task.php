@@ -36,23 +36,28 @@ class Pj_task extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public static function getTasksOfUser($uid)
+    public static function getTaskTreeOfUser($uid)
     {
         $user = User::findFromCache($uid);
         $discipline_id = $user->discipline;
 
-        $lods = Term::where('field_id', 139)->orderBy('name')->get();
+        // $lods = Term::where('field_id', 139)->orderBy('name')->get();
         // dump($lods);
-        $discipline = User_discipline::findFromCache($discipline_id);
-        $tasks = $discipline->getTasksOfDiscipline()->sortBy('name');
+        $discipline = User_discipline::query()
+            ->where('id', $discipline_id)
+            ->with(["getTasksOfDiscipline" => function ($q) {
+                $q->with("getChildrenSubTasks");
+            }])
+            ->first();
 
-        $tasks = $tasks
-            ->whereNotIn('id', ['mail_checking' => 4, 'meeting' => 5, 'other' => 6, 'training' => 8])
-            ->with("getChildrenSubTasks")->get();
+        $tasks = $discipline->getTasksOfDiscipline; //->sortBy('name');
+        // 
+        $tasks = $tasks->whereNotIn('id', ['mail_checking' => 4, 'meeting' => 5, 'other' => 6, 'training' => 8]);
 
         $tree = [
             ["key" => 0, "name" => "Any Project"],
         ];
+        $lods = Pj_task_phase::all();
         foreach ($lods as $lod) {
             foreach ($tasks as $task) {
                 $allLodsOfThisTask = $task->getLodsOfTask->pluck('id')->toArray();
