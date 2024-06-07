@@ -35,6 +35,9 @@ class ModalFilterTask extends Component
             ->orderBy('name')
             ->with('getDisciplinesOfTask')
             ->with('getLodsOfTask')
+            ->with(['getChildrenSubTasks' => function ($q) {
+                $q->orderBy('name');
+            }])
             ->get();
         foreach ($dataSource as &$data) {
             $data->{"getDisciplinesOfTask"} = $data->getDisciplinesOfTask->pluck('id')->toArray();

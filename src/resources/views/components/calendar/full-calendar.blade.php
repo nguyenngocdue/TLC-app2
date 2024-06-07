@@ -82,6 +82,7 @@
                         droppable: !readOnly,
                         events: events,
                         hiddenDays: arrHidden,
+                        // slotDuration: '00:15:00',
                         eventClick: function(info) {
                             var extendedProps = info.event._def.extendedProps;
                             if(extendedProps.public_holiday == true) return;
@@ -193,15 +194,14 @@
                             var eventTitle = info.event.title;
                             var tagSubProject = info.event.extendedProps.tag_sub_project;
                             var nameProject = info.event.extendedProps.name_project;
-                            var eventTitleHTML = '<div class="event-title w-full"><div class="flex justify-between" title="' 
-                                + nameProject + 
-                                '"><div>' 
-                                + timeText + 
-                                '</div>' 
-                                + tagSubProject + 
-                                '</div>' 
-                                + eventTitle + 
-                                '</div>';
+                            var eventTitleHTML = `
+                            <div class="event-title w-full">
+                                <div class="flex items-baseline justify-between" title="${nameProject}">
+                                    <div class="" style="font-size:0.65rem">${timeText}</div>
+                                    ${tagSubProject}
+                                    </div>
+                                ${eventTitle}
+                            </div>`;
                             return {
                                 html: eventTitleHTML
                             };

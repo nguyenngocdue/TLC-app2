@@ -1,4 +1,4 @@
-
+{{$id}}
 <div id='{{$id}}' 
     name='{{$multiple?$name."[]":$name}}' 
     {{-- onChange='onChangeDropdown2({name: "{{$id}}"})'  --}}
@@ -9,13 +9,14 @@
     {{$readOnly ? 'readOnly' : ''}}
     class='{{$classList}}'
 ></div>
+
 <script>
-    params2 = {
-        id: '{{$id}}'
-        , selectedJson: '{!! $selected !!}'
-        , table: "{{$table}}" 
-        , action: "{{$action ?? 'create'}}"
-    }
-    documentReadyDropdown2(params2)
+    // params2 = {
+    //     id: '{{$id}}'
+    //     , selectedJson: '{!! $selected !!}'
+    //     , table: "{{$table}}" 
+    //     , action: "{{$action ?? 'create'}}"
+    // }
+    // documentReadyDropdown2(params2)
 
 </script>

@@ -706,70 +706,40 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         const readOnly = getReadOnlyOfE(id)
         // console.log(attr_to_compare)
         // console.log('Here ne Canh', dataSource)
+        console.log(dataSource)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
+            // selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             classEvent = readOnly ? '' : 'fc-event'
             // console.log(item)
-            const title = item['description'] + ' (#' + itemId + ')'
+            // const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
-            option =
-                `<div class="${classEvent} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-1 px-2 py-0.5` +
-                bgColor +
-                ' ' +
-                colSpan +
-                ' ' +
-                '" ' +
-                'item_name="' +
-                item['name'] +
-                '" ' +
-                'item_description="' +
-                item['description'] +
-                '" ' +
-                '">'
-            // const cursor = item['disabled']
-            //     ? 'cursor-not-allowed'
-            //     : 'cursor-pointer'
-            // const inputBg = item['disabled'] ? 'bg-gray-300' : ''
-            // option +=
-            //     '<label class="truncate px-1 ' +
-            //     cursor +
-            //     ' rounded-md hover:bg-gray-100 w-full h-full" title="' +
-            //     title +
-            //     '">'
-            // option += "<div class='flex align-middle'>"
-            // option +=
-            //     '<input ' +
-            //     (item['disabled'] ? 'disabled ' : '') +
-            //     readonly +
-            //     ' ' +
-            //     'class="w-3.5 h-3.5 mr-1 mt-0.5 ' +
-            //     inputBg +
-            //     ' ' +
-            //     cursor +
-            //     '" ' +
-            //     'type="' +
-            //     radio_or_checkbox +
-            //     '" ' +
-            //     'name="' +
-            //     control_name +
-            //     '" ' +
-            //     'value="' +
-            //     itemId +
-            //     '" ' +
-            //     selectedStr +
-            //     ' ' +
-            //     '>'
-            option += '<div id="' + itemId + '" class="fc-event-main">'
+            option = ''
+            
+            option += '<div task-id="' + itemId + '"'
+            option += ` onMouseOver="$('.sub-task-of-${itemId}').show()"`
+            option += ` onMouseOut="$('.sub-task-of-${itemId}').hide()"`
+            
+            option += ' class="relative w-full fc-event-main123 bg-sky-500 text-white cursor-pointer rounded mt-0.5 px-2 py-0.5"'
+            option += ' component="draggable-dropdown2">'
             option += ' ' + item['name']
             if (item['subtitle']) option += '<br/>' + item['subtitle']
+
+            option += `<div class="absolute right-0 top-0 bg-gray-100 p-1 rounded z-50 sub-task-of-${itemId}" style="display:none">`
+            const {get_children_sub_tasks} = item
+            for(let j = 0; j< get_children_sub_tasks.length; j++){
+                const subTaskItem = get_children_sub_tasks[j]
+                option += `<div class="${classEvent} ${bgColor} ${colSpan} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-0.5 px-2 py-0.5 "
+                        item_name="${item['name']}" item_description="${item['description']}">`
+                option += `<div id="${itemId}" class="fc-event-main">${subTaskItem["name"]}</div>`
+                option += '</div>'
+            }
             option += '</div>'
-            // option += '</div>'
-            // option += '</label>'
+            
             option += '</div>'
             options.push(option)
         }

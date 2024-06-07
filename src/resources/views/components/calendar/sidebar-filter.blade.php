@@ -5,8 +5,11 @@
 @endphp
 <x-renderer.card title="Task Filter">
     <div class="grid grid-cols-12 gap-y-2">
-        <div class="hidden1 col-span-12 2xl:col-span-5 flex items-center justify-end pr-2 text-right">Discipline</div> 
-        <div class="hidden1 col-span-12 2xl:col-span-7">
+        {{-- @php
+            $hidden = App\Utils\Support\CurrentUser::isAdmin() ? '' : 'hidden';
+        @endphp --}}
+        <div class="hidden col-span-12 2xl:col-span-5 flex1 items-center justify-end pr-2 text-right">Discipline</div> 
+        <div class="hidden col-span-12 2xl:col-span-7">
             <x-calendar.SidebarFilterDiscipline readOnly="true" tableName="user_disciplines" name="userSettings[discipline_id]" id="discipline_id_11111" typeToLoadListener="hr_timesheet_line" selected="{{$selectedUserDisciplineId}}"/>
         </div>
         

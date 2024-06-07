@@ -110,7 +110,7 @@
 <span class="max-h-[400px] "></span>
 <span class="max-h-[500px] "></span>
 
-
+<span class="left-full"></span>
 {{-- <span class="h-[50vh]"></span> 50% of the screen height --}}
 
 <!-- gloabl -->
