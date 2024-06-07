@@ -208,7 +208,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         $result = [];
-        if ($this->metaShowComplianceName) $result[] = ['dataIndex' => 'compliance_name', /* 'width' => 300, /*'fixed' => 'left',*/];
+        if ($this->metaShowComplianceName) $result[] = ['dataIndex' => 'compliance_name', 'width' => 300, /*'fixed' => 'left',*/];
         if ($this->metaShowProgress) $result[] = ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
         if ($this->metaShowPrint) $result[] = ['dataIndex' => 'print', "title" => 'Print', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
         return $result;
