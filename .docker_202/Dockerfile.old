@@ -55,8 +55,8 @@ COPY ./configs/php.ini /usr/local/etc/php/
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN apk add unixodbc-dev
-RUN pecl install pdo_sqlsrv sqlsrv
+# RUN apk add unixodbc-dev
+# RUN pecl install pdo_sqlsrv sqlsrv
 
 COPY ./supervisord.conf /etc/supervisord.conf
 COPY ./supervisor.d /etc/supervisor.d

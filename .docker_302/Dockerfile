@@ -47,7 +47,7 @@ RUN apk update && apk add --no-cache \
     ln -s /usr/bin/npm /usr/local/bin/npm && \
     npm install --location=global --unsafe-perm puppeteer@^17 && \
     chmod -R o+rx /usr/local/lib/node_modules/puppeteer/.local-chromium && \
-    pecl install pdo_sqlsrv sqlsrv && \
+    # pecl install pdo_sqlsrv sqlsrv && \
     rm -rf /var/cache/apk/*
 
 # Set environment variables for Puppeteer
