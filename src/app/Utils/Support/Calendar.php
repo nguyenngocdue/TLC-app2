@@ -67,14 +67,14 @@ class Calendar
     {
         if ($item instanceof Public_holiday) {
             return "<div class='h-full'><div>"
-                . "<div class='font-bold'>Public Holiday</div>"
+                . "<div class='font-bold text-sm'>Public Holiday</div>"
                 . "<div class='font-semibold'>{$item->name}</div>"
                 . "</div>"
                 . "</div>";
         }
         if ($item instanceof Diginet_employee_leave_line) return "<div>"
             . "<div class='font-bold'>Leave Application</div>"
-            . "<div class='font-semibold'>{$item->la_reason}</div>"
+            . "<div class='font-semibold text-sm'>{$item->la_reason}</div>"
             . "<div class='text-sm'>(LA Type: {$item->la_type})</div>"
             . "</div>";
         $nameTask = Pj_task::findOrFail($item->task_id)->name;
@@ -85,8 +85,8 @@ class Calendar
 
         $remark = $item->remark ?? '';
         return "<div class='h-full'><div>"
-            . "<div class='font-semibold'>{$nameTask}</div>"
-            . ($nameSubTask ? "<div>{$nameSubTask}</div>" : "")
+            . "<div class='font-semibold text-sm'>{$nameTask}</div>"
+            . ($nameSubTask ? "<div class='text-sm'>{$nameSubTask}</div>" : "")
             . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
             . "</div>"
             . "</div>";

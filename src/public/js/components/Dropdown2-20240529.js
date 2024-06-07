@@ -706,7 +706,6 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         const readOnly = getReadOnlyOfE(id)
         // console.log(attr_to_compare)
         // console.log('Here ne Canh', dataSource)
-        console.log(dataSource)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
@@ -735,7 +734,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
                 const subTaskItem = get_children_sub_tasks[j]
                 option += `<div class="${classEvent} ${bgColor} ${colSpan} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-0.5 px-2 py-0.5 "
                         item_name="${item['name']}" item_description="${item['description']}">`
-                option += `<div id="${itemId}" class="fc-event-main">${subTaskItem["name"]}</div>`
+                option += `<div id="${itemId}" sub-task-id="${subTaskItem["id"]}" class="fc-event-main">${subTaskItem["name"]}</div>`
                 option += '</div>'
             }
             option += '</div>'

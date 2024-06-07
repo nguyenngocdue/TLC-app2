@@ -149,6 +149,7 @@
                                 var dateTime = info.event.startStr;
                                 var draggedElDiv = info.draggedEl;
                                 var taskId = draggedElDiv.children[0].getAttribute('id');
+                                var subTaskId = draggedElDiv.children[0].getAttribute('sub-task-id');
                                 switch (info.view.type) {
                                     case 'dayGridMonth':
                                         info.event.remove();
@@ -161,11 +162,13 @@
                                             "lod_id": lodId,
                                             "discipline_id": disciplineId,
                                             "task_id": taskId,
+                                            "sub_task_id": subTaskId,
                                             "date_time": dateTime,
                                             // "all_day": null,
                                             "timesheetable_type": timesheetableType,
                                             "timesheetable_id": timesheetableId
                                         }
+                                        console.log(data)
                                         callApi('post', url, data, info, function(info, calendar, response) {
                                             if (response.data) {
                                                 info.event.remove();
@@ -192,7 +195,7 @@
                         eventContent: function(info) {
                             var timeText = info.timeText;
                             var eventTitle = info.event.title;
-                            var tagSubProject = info.event.extendedProps.tag_sub_project;
+                            var tagSubProject = info.event.extendedProps.tag_sub_project || "";
                             var nameProject = info.event.extendedProps.name_project;
                             var eventTitleHTML = `
                             <div class="event-title w-full">
