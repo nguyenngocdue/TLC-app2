@@ -51,9 +51,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
-        "column_name": "getMonitors1",
+    "_getDefMonitors1": {
+        "name": "_getDefMonitors1",
+        "column_name": "getDefMonitors1",
         "label": "",
         "validation": "",
         "validation_regex": "",

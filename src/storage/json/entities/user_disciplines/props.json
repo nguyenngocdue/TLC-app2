@@ -87,9 +87,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
-        "column_name": "getMonitors1",
+    "_getDefMonitors1": {
+        "name": "_getDefMonitors1",
+        "column_name": "getDefMonitors1",
         "column_type": "belongsToMany",
         "label": "Default Monitors",
         "control": "dropdown_multi_2a",

@@ -47,10 +47,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
+    "_getDefMonitors1": {
+        "name": "_getDefMonitors1",
         "relationship": "belongsToMany",
-        "control_name": "getMonitors1",
+        "control_name": "getDefMonitors1",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

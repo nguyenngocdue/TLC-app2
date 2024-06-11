@@ -115,7 +115,10 @@ trait TraitSupportEntityCRUDCreateEdit2
                     //     break;
                 case 'checkbox_2a':
                 case 'dropdown_multi_2a':
-                    $values[$name] =  json_encode($original->{$name}->pluck('id')->toArray());
+                    $item = $original->{$name};
+                    if ($item) {
+                        $values[$name] =  json_encode($item->pluck('id')->toArray());
+                    }
                     break;
                 case 'attachment':
                     $attachmentsOfThisItem = $original->{$name};
