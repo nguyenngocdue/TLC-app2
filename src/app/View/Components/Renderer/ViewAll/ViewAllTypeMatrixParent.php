@@ -249,7 +249,7 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'cell_title' => "(#" . $y->id . ")",
                 'cell_class' => "text-blue-800 bg-white",
                 'cell_href' => route($yAxisTableName . ".edit", $y->id),
-                'cell_div_class' => 'whitespace-nowrap',
+                'cell_div_class' => 'p-2 whitespace-nowrap',
             ];
             if ($this->allowCreation) {
                 $this->makeCreateButton($xAxis, $y, $extraColumns, $line, $this);

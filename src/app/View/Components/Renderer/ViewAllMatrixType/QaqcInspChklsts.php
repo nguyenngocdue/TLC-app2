@@ -137,7 +137,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
         $result = [
             'compliance_name' => (object)[
                 'value' => $y->compliance_name,
-                'cell_div_class' => 'whitespace-nowrap',
+                'cell_div_class' => 'p-2 whitespace-nowrap',
             ],
             // 'progress' => $y->progress,
         ];

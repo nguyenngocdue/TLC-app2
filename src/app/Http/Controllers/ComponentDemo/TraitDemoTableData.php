@@ -172,7 +172,7 @@ trait TraitDemoTableData
                     'cell_href' => 'https://www.google.com',
                     'cell_class' => 'bg-green-300 text-red-500',
                     'cell_title' => 'Create a new item 111',
-                    'cell_div_class' => 'w-11',
+                    'cell_div_class' => 'p-2 w-11',
                 ],
                 'value' => (object)[
                     'value' => 456,
@@ -188,7 +188,7 @@ trait TraitDemoTableData
                     'cell_href' => 'https://www.google.com',
                     'cell_class' => 'bg-green-300 text-red-500',
                     'cell_title' => 'Create a new item 111',
-                    'cell_div_class' => 'w-11',
+                    'cell_div_class' => 'p-2 w-11',
                 ],
                 'value' => [
                     (object)[

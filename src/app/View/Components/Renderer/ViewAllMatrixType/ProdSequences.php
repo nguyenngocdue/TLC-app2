@@ -232,17 +232,17 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
             'prod_sequence_progress' => (object)[
-                'cell_div_class' => 'text-right',
+                'cell_div_class' => 'p-2 text-right',
                 'value' => ($v = $y->prod_sequence_progress) ? number_format($v, 2) : ""
             ],
             'production_name' => (object)[
-                'cell_div_class' => 'whitespace-nowrap',
+                'cell_div_class' => 'p-2 whitespace-nowrap',
                 'value' => $y->production_name
             ],
             'quantity' => ($v = $y->quantity) ? $v : "",
             'status' => $status_object,
             'room_type' => (object)[
-                'cell_div_class' => 'whitespace-nowrap',
+                'cell_div_class' => 'p-2 whitespace-nowrap',
                 'value' => ($y->getRoomType) ? $y->getRoomType->name : ""
             ],
             'started_at' => substr($started_at, 0, 10),
@@ -318,7 +318,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 }
             case "uom":
                 return (object) [
-                    'cell_div_class' => 'whitespace-nowrap',
+                    'cell_div_class' => 'p-2 whitespace-nowrap',
                     "value" =>  $this->unit[$doc->uom_id]['name'] ?? "(unknown unit)"
                 ];
             default:

@@ -117,12 +117,12 @@ trait TableTraitRows
                         $valueOfRawData = $rawData;
                     }
 
-                    $cellDivClass = '';
+                    $cellDivClass = 'p-2';
                     if (is_object($rawData)) {
                         if (isset($rawData->cell_div_class)) $cellDivClass = $rawData->cell_div_class;
                     }
                     if ($isArrayOfValueObject) {
-                        $cellDivClass = "flex justify-evenly";
+                        $cellDivClass = "p-2 flex justify-evenly";
                     }
                     $rendered = $renderer
                         // ? "A" 
@@ -132,7 +132,7 @@ trait TableTraitRows
                             ?
                             $valueOfRawData
                             :
-                            "<div class='p-2 $cellDivClass' valueOfRawData>" . (is_object($valueOfRawData) ? "[object]" : "<span class='min-w-4 block'>" . $valueOfRawData . "</span>") . "</div>"
+                            "<div class='$cellDivClass' valueOfRawData>" . (is_object($valueOfRawData) ? "[object]" : "<span class='min-w-4 block'>" . $valueOfRawData . "</span>") . "</div>"
                         );
                     break;
             }
