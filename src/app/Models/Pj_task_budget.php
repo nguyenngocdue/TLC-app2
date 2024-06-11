@@ -8,7 +8,7 @@ class Pj_task_budget extends ModelExtended
 {
     protected $fillable = [
         "name", "description", "owner_id", "status",
-        "project_id", "discipline_id",
+        "project_id", "department_id",
     ];
 
     public static $statusless = true;
@@ -16,19 +16,19 @@ class Pj_task_budget extends ModelExtended
     public function getNameAttribute($value)
     {
         $project = $this->getProject;
-        $discipline = $this->getDiscipline;
-        return $project->name . " - " . $discipline->name;
+        $department = $this->getDepartment;
+        return ($project ? $project->name : "?") . " - " . ($department ? $department->name : "?");
     }
 
     public static $eloquentParams = [
-        "getDiscipline" => ['belongsTo', User_discipline::class, 'discipline_id'],
+        "getDepartment" => ['belongsTo', Department::class, 'department_id'],
         "getProject" => ['belongsTo', Project::class, 'project_id'],
         "getLines" => ['hasMany', Pj_task_budget_line::class, 'task_budget_id'],
         // "getLinesHOF" => ['hasMany', Pj_task_budget_line::class, 'task_budget_id'],
 
     ];
 
-    public function getDiscipline()
+    public function getDepartment()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -1,8 +1,8 @@
 {
-    "_getDiscipline": {
-        "name": "_getDiscipline",
+    "_getDepartment": {
+        "name": "_getDepartment",
         "relationship": "belongsTo",
-        "control_name": "discipline_id",
+        "control_name": "department_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

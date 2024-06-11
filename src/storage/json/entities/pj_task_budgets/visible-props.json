@@ -23,9 +23,9 @@
         "new": "true",
         "not_applicable": "true"
     },
-    "_discipline_id": {
-        "name": "_discipline_id",
-        "column_name": "discipline_id",
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
         "new": "true",
         "not_applicable": "true"
     },

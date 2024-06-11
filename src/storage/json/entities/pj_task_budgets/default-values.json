@@ -51,6 +51,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -119,6 +132,19 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
         "label": "",
         "validation": "",
         "validation_regex": "",

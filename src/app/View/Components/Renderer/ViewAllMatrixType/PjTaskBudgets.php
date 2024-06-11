@@ -2,9 +2,9 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
+use App\Models\Department;
 use App\Models\Pj_task_budget;
 use App\Models\Project;
-use App\Models\User_discipline;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
 use Illuminate\Support\Facades\Log;
 
@@ -16,7 +16,7 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
     // protected $viewportMode = null;
 
     // protected $xAxis = Prod_routing_link::class;
-    protected $dataIndexX = "discipline_id";
+    protected $dataIndexX = "department_id";
     protected $yAxis = Project::class;
     protected $dataIndexY = "project_id";
     protected $rotate45Width = 300;
@@ -65,17 +65,12 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
 
     protected function getXAxisPrimaryColumns()
     {
-        $data = User_discipline::query()
-            // ->whereHas("getUsers", $getUserFn)
+        $data = Department::query()
             ->where('show_in_task_budget', true)
-            ->with(["getUsers" => function ($query) {
-                $query
-                    ->with("getAvatar")
-                    ->where('resigned', false);
+            ->with(['getHOD' => function ($q) {
+                $q->with("getAvatar");
             }])
-            ->orderBy('name')
             ->get();
-        // dump(sizeof($data));
         return $data;
     }
 
@@ -85,11 +80,10 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
         $data = $this->getXAxisPrimaryColumns();
         // dump($data);
         foreach ($data as $line) {
-            $avatars = $line->getUsers->map(function ($user) {
-                if (!$user->getAvatar) $src = "/image/avatar.jpg";
-                else $src = app()->pathMinio() . $user->getAvatar->url_thumbnail;
-                return "<img src='$src' class='w-8 h-8 rounded-full'>";
-            })->join("");
+            $user = $line->getHOD;
+            if (!$user->getAvatar) $src = "/images/avatar.jpg";
+            else $src = app()->pathMinio() . $user->getAvatar->url_thumbnail;
+            $avatars = "<img src='$src' class='w-8 h-8 rounded-full'>";
             $item = [
                 'dataIndex' => $line->id,
                 'columnIndex' => "status",

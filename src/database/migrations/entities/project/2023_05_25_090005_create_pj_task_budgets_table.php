@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
-            $table->unsignedBigInteger('discipline_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
 
             $table->hasStatus();
             $table->appendCommonFields();

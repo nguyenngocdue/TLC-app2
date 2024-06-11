@@ -26,6 +26,8 @@ return new class extends Migration
             $table->boolean('hide_in_survey')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('slug')->unique();
+
+            $table->boolean('show_in_task_budget')->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });

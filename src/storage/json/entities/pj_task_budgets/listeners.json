@@ -3,10 +3,10 @@
         "name": "_getLines",
         "column_name": "getLines",
         "listen_action": "set_table_column",
-        "triggers": "project_id,discipline_id",
-        "listen_to_fields": "project_id,discipline_id",
+        "triggers": "project_id,department_id",
+        "listen_to_fields": "project_id,department_id",
         "listen_to_attrs": "id,id",
-        "columns_to_set": "project_id,discipline_id",
+        "columns_to_set": "project_id,department_id",
         "attrs_to_compare": "",
         "expression": "",
         "ajax_response_attribute": "",
@@ -74,9 +74,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_discipline_id": {
-        "name": "_discipline_id",
-        "column_name": "discipline_id",
+    "department_id": {
+        "name": "department_id",
+        "column_name": "department_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

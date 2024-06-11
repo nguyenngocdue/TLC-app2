@@ -10,6 +10,7 @@ class Department extends ModelExtended
         "id", "owner_id", "name", "description",
         "head_of_department", "hide_in_org_chart", "hide_in_survey",
         "slug", "order_no", "parent_id",
+        "show_in_task_budget",
     ];
 
     public static $statusless = true;

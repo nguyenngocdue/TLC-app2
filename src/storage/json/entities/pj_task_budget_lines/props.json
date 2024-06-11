@@ -153,11 +153,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_discipline_id": {
-        "name": "_discipline_id",
-        "column_name": "discipline_id",
+    "_department_id": {
+        "name": "_department_id",
+        "column_name": "department_id",
         "column_type": "bigint unsigned",
-        "label": "Discipline",
+        "label": "Department",
         "control": "dropdown",
         "align": "",
         "col_span": "",
