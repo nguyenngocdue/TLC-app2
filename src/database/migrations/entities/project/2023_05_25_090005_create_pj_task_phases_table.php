@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->boolean('show_in_task_budget')->nullable();
             // $table->string('slug')->unique();
             // $table->unsignedBigInteger('discipline_id')->nullable();
 

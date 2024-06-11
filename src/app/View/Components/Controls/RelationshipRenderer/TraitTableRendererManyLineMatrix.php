@@ -13,13 +13,14 @@ trait TraitTableRendererManyLineMatrix
     private function getXAxis()
     {
         $phases = Pj_task_phase::query()
-            ->whereNotIn('id', [
-                221, //Leave
-                219, //HOF
-                222, //Public holiday
-                220, //NZO
-                230, //Mockup
-            ])
+            ->where('show_in_task_budget', 1)
+            // ->whereNotIn('id', [
+            //     221, //Leave
+            //     219, //HOF
+            //     222, //Public holiday
+            //     220, //NZO
+            //     230, //Mockup
+            // ])
             ->orderBy('order_no')
             ->get();
         $columns = $phases->map(function ($phase) {
