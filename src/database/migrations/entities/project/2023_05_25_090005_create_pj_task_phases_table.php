@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             // $table->string('slug')->unique();
             // $table->unsignedBigInteger('discipline_id')->nullable();
+
+            $table->orderable();
             $table->appendCommonFields();
         });
     }

@@ -93,10 +93,11 @@
     ],
     "renderer_edit": [
         "",
+        "calendar_grid",
+        "many_checkpoints",
         "many_icons",
         "many_lines",
-        "many_checkpoints",
-        "calendar_grid",
+        "many_to_many_matrix",
         "same_as_view_all"
     ],
     "manage_prop_eloquents": [
