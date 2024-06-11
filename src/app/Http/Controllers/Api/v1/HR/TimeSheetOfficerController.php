@@ -45,6 +45,15 @@ class TimeSheetOfficerController extends TimesheetController
     public function show(Request $request, $id)
     {
         $hrTimesheetOfficer = Hr_timesheet_officer::findOrFail($id);
+        // $hrTimesheetOfficer = Hr_timesheet_officer::query()
+        // ->where('id', $id)
+        // ->with(['getHrTsLines' => function ($q) {
+        //     $q->with('getProject')
+        //         ->with('getSubProject')
+        //         ->with('getTask')
+        //         ->with('getSubTask');
+        // }])
+        // ->first();
         $hrTsLines = $hrTimesheetOfficer->getHrTsLines;
 
         $ph = $this->getPublicHoliday($hrTimesheetOfficer);

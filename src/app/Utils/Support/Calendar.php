@@ -3,14 +3,11 @@
 namespace App\Utils\Support;
 
 use App\Models\Diginet_employee_leave_line;
-use App\Models\Pj_sub_task;
-use App\Models\Pj_task;
-use App\Models\Sub_project;
-use App\Models\Project;
 use App\Models\Public_holiday;
 use App\Models\Workplace;
 use App\Utils\Constant;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 
 class Calendar
 {
@@ -63,6 +60,21 @@ class Calendar
                     </div>
                 </div>";
     }
+    public static function renderSubTitle($item)
+    {
+        if ($item instanceof Public_holiday) return "";
+        $nameSubTask = '';
+        if ($item->sub_task_id) {
+            // $nameSubTask = Pj_sub_task::findOrFail($item->sub_task_id)->name ?? '';
+            $nameSubTask = $item->getSubTask->name ?? '';
+        }
+
+        $remark = $item->remark ?? '';
+        return "<div>"
+            . ($nameSubTask ? "<div class='text-sm'>{$nameSubTask}</div>" : "")
+            . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
+            . "</div>";
+    }
     public static function renderTitle($item)
     {
         if ($item instanceof Public_holiday) {
@@ -77,17 +89,11 @@ class Calendar
             . "<div class='font-semibold text-sm'>{$item->la_reason}</div>"
             . "<div class='text-sm'>(LA Type: {$item->la_type})</div>"
             . "</div>";
-        $nameTask = Pj_task::findOrFail($item->task_id)->name;
-        $nameSubTask = '';
-        if ($item->sub_task_id) {
-            $nameSubTask = Pj_sub_task::findOrFail($item->sub_task_id)->name ?? '';
-        }
+        // $nameTask = Pj_task::findOrFail($item->task_id)->name;
+        $nameTask = $item->getTask->name ?? '';
 
-        $remark = $item->remark ?? '';
         return "<div class='h-full'><div>"
             . "<div class='font-semibold text-sm'>{$nameTask}</div>"
-            . ($nameSubTask ? "<div class='text-sm'>{$nameSubTask}</div>" : "")
-            . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
             . "</div>"
             . "</div>";
     }
@@ -96,18 +102,33 @@ class Calendar
         if ($item instanceof Public_holiday) return;
         if ($item instanceof Diginet_employee_leave_line) return;
         if ($item->sub_project_id) {
-            $nameSubProject = Sub_project::findOrFail($item->sub_project_id)->name ?? '';
+            $nameSubProject = $item->getSubProject->name ?? '';
+            // $nameSubProject = Sub_project::findOrFail($item->sub_project_id)->name ?? '';
             $tagSubProject = Blade::render("<div class='flex items-end justify-between'><x-renderer.tag class='leading-none'>$nameSubProject</x-renderer.tag></div>");
         }
         return $tagSubProject ?? '';
     }
-    public static function renderNameProject($item)
+
+    public static function renderTagPhase($item)
     {
         if ($item instanceof Public_holiday) return;
         if ($item instanceof Diginet_employee_leave_line) return;
-        if ($item->project_id) {
-            $nameProject = Project::findOrFail($item->project_id)->name ?? '';
+        if ($item->lod_id) {
+            $name = $item->getLod->name ?? '';
+            // $name = Sub_project::findOrFail($item->sub_project_id)->name ?? '';
+            $tagSubProject = "<div class='italic text-right'>$name</div>";
+            // $tagSubProject = Blade::render("<x-renderer.tag class='leading-none'>$name</x-renderer.tag>");
         }
-        return $nameProject ?? '';
+        return $tagSubProject ?? '';
     }
+    // public static function renderNameProject($item)
+    // {
+    //     if ($item instanceof Public_holiday) return;
+    //     if ($item instanceof Diginet_employee_leave_line) return;
+    //     if ($item->project_id) {
+    //         $nameProject = $item->getProject->name ?? '';
+    //         // $nameProject = Project::findOrFail($item->project_id)->name ?? '';
+    //     }
+    //     return $nameProject ?? '';
+    // }
 }

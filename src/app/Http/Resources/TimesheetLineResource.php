@@ -20,8 +20,10 @@ class TimesheetLineResource extends JsonResource
     {
         return [
             'title' => Calendar::renderTitle($this),
+            'sub_title' => Calendar::renderSubTitle($this),
             'title_default' => Pj_task::findOrFail($this->task_id)->name,
             'tag_sub_project' => Calendar::renderTagSubProject($this),
+            'tag_phase' => Calendar::renderTagPhase($this),
             'start' => $this->start_time ? DateTimeConcern::formatTimestampFromDBtoJS($this->start_time) : null,
             'end' => $this->start_time ? DateTimeConcern::calTimestampEndFromStartTimeAndDuration($this->start_time, $this->duration_in_min) : null,
             'id' => $this->id,

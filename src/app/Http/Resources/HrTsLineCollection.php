@@ -64,8 +64,10 @@ class HrTsLineCollection extends ResourceCollection
                 // Log::info($item);
                 $item1 =  [
                     'title' => Calendar::renderTitle($item),
+                    'sub_title' => Calendar::renderSubTitle($item),
                     'tag_sub_project' => Calendar::renderTagSubProject($item) ?? '',
-                    'name_project' => Calendar::renderNameProject($item) ?? '',
+                    'tag_phase' => Calendar::renderTagPhase($item) ?? '',
+                    // 'name_project' => Calendar::renderNameProject($item) ?? '',
                     'user_id' => $item->user_id ?? '',
                     'project_id' => $item->project_id ?? '',
                     'sub_project_id' => $item->sub_project_id ?? '',

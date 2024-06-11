@@ -195,7 +195,9 @@
                         eventContent: function(info) {
                             var timeText = info.timeText;
                             var eventTitle = info.event.title;
+                            var eventSubTitle = info.event.extendedProps.sub_title;
                             var tagSubProject = info.event.extendedProps.tag_sub_project || "";
+                            var tagPhase = info.event.extendedProps.tag_phase || "";
                             var nameProject = info.event.extendedProps.name_project;
                             var eventTitleHTML = `
                             <div class="event-title w-full">
@@ -203,7 +205,9 @@
                                     <div class="" style="font-size:0.65rem">${timeText}</div>
                                     ${tagSubProject}
                                     </div>
-                                ${eventTitle}
+                                    ${eventTitle}
+                                    ${tagPhase}
+                                    ${eventSubTitle}
                             </div>`;
                             return {
                                 html: eventTitleHTML
@@ -281,6 +285,8 @@
                 event.setExtendedProp('remark', response.data.remark);
                 event.setExtendedProp('sub_task_id', response.data.sub_task_id);
                 event.setExtendedProp('tag_sub_project', response.data.tag_sub_project);
+                event.setExtendedProp('tag_phase', response.data.tag_phase);
+                event.setExtendedProp('sub_title', response.data.sub_title);
                 event.setProp('backgroundColor', response.data.color);
                 event.setProp('title', response.data.title);
                 toastr.success('Update data timesheet line successfully!');

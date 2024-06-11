@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\Json\Listeners;
 use App\Utils\Support\Json\SuperProps;
+use App\Utils\Support\JsonControls;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -162,6 +163,14 @@ trait TraitEntityListenDataSource
     {
         $modelPath = Str::modelPathFrom($table);
         $rows = $modelPath::query(); //->select($columnsWithoutOracy);
+
+        $eloquent = JsonControls::getViewAllEloquents();
+        foreach ($columnsWithoutOracy as $column) {
+            $column_type = $column['column_type'];
+            $columnName = $column['name'];
+            if (in_array($column_type, $eloquent)) $rows->with($columnName);
+        }
+
         $nameless = $modelPath::$nameless;
         if (!$nameless) $rows = $rows->orderBy('name');
         $objectRows = $rows->get();
@@ -179,10 +188,11 @@ trait TraitEntityListenDataSource
         foreach ($objectRows as $row) {
             $item = [];
             foreach ($columnsWithoutOracy as $column) {
-                $value = $row->{$column};
+                $columnName = $column['name'];
+                $value = $row->{$columnName};
                 //belongsToMany EG: production routing links belongsToMany production routings
                 if ($value instanceof \Illuminate\Support\Collection) $value = $value->pluck('id');
-                $item[$column] = $value;
+                $item[$columnName] = $value;
             }
             $objectRowsMinimal[] = $item;
         }
@@ -205,16 +215,31 @@ trait TraitEntityListenDataSource
         $result = [];
         // $columnsWithOracy = [];
         foreach ($matrix as $table => $columns) {
-            $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
+            // $columnsWithoutOracy = array_filter($columns, fn ($column) => !str_contains($column, "()"));
             // $columnsWithOracy[$table] = array_values(array_filter($columns, fn ($column) => str_contains($column, "()")));
-            if (empty($columnsWithoutOracy)) $columnsWithoutOracy = ['id']; //<< getRemainingHours()
+            $columns1 = $columns;
+            if (empty($columns1)) $columns1 = ['id']; //<< getRemainingHours()
 
             // dump($table, $columns);
             if (sizeof($columns) === 1 && $columns[0] === 'id') {
                 //Skip the table has only [id]: hr_timesheet_lines, comments,...
             } else {
+                $sp = SuperProps::getFor($table);
+                $columns1 = array_map(function ($column) use ($sp) {
+                    if (isset($sp['props']["_" . $column])) {
+                        return [
+                            'name' => $column,
+                            'column_type' => $sp['props']["_" . $column]['column_type'],
+                        ];
+                    } else {
+                        die("Column $column not found in prop.json. Please add it.");
+                        // return [
+                        //     'name' => $column,
+                        // ];
+                    }
+                }, $columns1);
                 // Log::info($table);
-                $items = $this->mapGetNameForNameless($table, $columnsWithoutOracy);
+                $items = $this->mapGetNameForNameless($table, $columns1);
                 if ($table == 'users') {
                     // Log::info($items);
                     if (app()->isProduction()) {
