@@ -39,7 +39,7 @@ class ProjectFilter extends Component
         if ($this->dataSource) return $this->dataSource;
         // $statuses = config("project.active_statuses.projects");
         $db = Project::select('id', 'name', 'description')
-            // ->whereIn('status', $statuses)
+            ->with('getScreensShowMeOn')
             ->orderBy('name')
             ->get();
 

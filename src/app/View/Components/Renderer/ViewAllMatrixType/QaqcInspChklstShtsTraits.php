@@ -28,7 +28,11 @@ trait QaqcInspChklstShtsTraits
     {
         $subProjectIds = $this->subProjects->pluck('id')->toArray();
 
-        $prodRoutings = Prod_routing::query()->with("getSubProjects")->get();
+        $prodRoutings = Prod_routing::query()
+            ->with("getSubProjects")
+            ->with('getScreensShowMeOn')
+            ->get();
+
         $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
 
         foreach ($prodRoutings as &$item) {

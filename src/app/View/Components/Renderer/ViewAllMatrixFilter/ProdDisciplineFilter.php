@@ -34,6 +34,7 @@ class ProdDisciplineFilter extends Component
     private function getDataSource()
     {
         $db = Prod_discipline::select('id', 'name', 'description')
+            ->with('getScreensShowMeOn')
             ->orderBy('name')
             ->get();
 

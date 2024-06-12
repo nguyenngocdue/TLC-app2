@@ -41,7 +41,7 @@ class ProdRoutingFilter extends Component
         // $QAQC_WIR = 346;
         $db = Prod_routing::select('id', 'name', 'description')
             ->with('getSubProjects')
-            // ->whereHas("getScreensShowMeOn", fn ($query) => $query->where("term_id", $QAQC_WIR))
+            ->with('getScreensShowMeOn')
             ->orderBy('name')
             ->get();
 
