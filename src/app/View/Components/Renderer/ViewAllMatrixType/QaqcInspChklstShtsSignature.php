@@ -111,7 +111,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
                 break;
         }
 
-        $nominatedUserIds = $document->{$nominatedFn}();
+        $nominatedUserIds = $document->{$nominatedFn};
         $nominatedUserIds = $nominatedUserIds->pluck('id');
         $signatures = $document->{$signaturesFn};
 
