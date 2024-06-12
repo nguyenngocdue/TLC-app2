@@ -116,10 +116,10 @@ class Calendar
         if ($item->lod_id) {
             $name = $item->getLod->name ?? '';
             // $name = Sub_project::findOrFail($item->sub_project_id)->name ?? '';
-            $tagSubProject = "<div class='italic text-right'>$name</div>";
-            // $tagSubProject = Blade::render("<x-renderer.tag class='leading-none'>$name</x-renderer.tag>");
+            $tagPhase = "<div class='italic text-right'>$name</div>";
+            // $tagPhase = Blade::render("<x-renderer.tag class='leading-none'>$name</x-renderer.tag>");
         }
-        return $tagSubProject ?? '';
+        return $tagPhase ?? '';
     }
     // public static function renderNameProject($item)
     // {

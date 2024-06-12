@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\RepositoryInterface;
+use Illuminate\Support\Facades\Log;
 
 class BaseService implements BaseServiceInterface
 {

@@ -90,7 +90,7 @@
     "_getHrTsLines": {
         "name": "_getHrTsLines",
         "column_name": "getHrTsLines",
-        "column_type": "morphMany",
+        "column_type": "hasMany",
         "label": "Lines",
         "control": "relationship_renderer",
         "align": "",

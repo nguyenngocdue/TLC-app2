@@ -157,17 +157,15 @@
     "hr_timesheet_officers_01": {
         "name": "hr_timesheet_officers_01",
         "entity-type": "hr_timesheet_officers",
-        "editable-table": "hr_timesheet_lines",
+        "editable-table": "hr_timesheet_officer_lines",
         "button_add_a_new_line": "true"
     },
     "hr_timesheet_workers_01": {
         "name": "hr_timesheet_workers_01",
         "entity-type": "hr_timesheet_workers",
-        "editable-table": "hr_timesheet_lines",
+        "editable-table": "hr_timesheet_worker_lines",
         "button_add_a_new_line": "true",
-        "button_recalculate": "true",
-        "button_add_from_a_list": "true",
-        "button_get_lines": "true"
+        "button_recalculate": "true"
     },
     "hse_audit_01": {
         "name": "hse_audit_01",

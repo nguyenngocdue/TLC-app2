@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 use App\Events\CreatedDocumentEvent2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFieldHandler2;
 use App\Http\Services\LoggerForTimelineService;
-use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
+use App\Models\Hr_timesheet_worker_line;
 use App\Models\Site_daily_assignment_line;
 use App\Models\User_team_site;
 use App\Models\User_team_tsht;
@@ -187,16 +187,18 @@ trait TraitStoreEmpty
 						});
 
 						foreach ($workers as $index => $worker) {
-							Hr_timesheet_line::create([
-								'timesheetable_type' => Hr_timesheet_worker::class,
-								'timesheetable_id' => $row->id,
+							Hr_timesheet_worker_line::create([
+								// 'timesheetable_type' => Hr_timesheet_worker::class,
+								'hr_timesheet_worker_id' => $row->id,
 								'owner_id' => $row->owner_id,
 								'user_id' => $worker['id'],
 								'discipline_id' => $worker['discipline'],
-								'task_id' => 357, //357 = on the floor
-								'work_mode_id' => 2, //2 = office/workshop
+								'ts_date' => $row->ts_date,
+								// 'task_id' => 357, //357 = on the floor
+								// 'work_mode_id' => 2, //2 = office/workshop
 								'duration_in_hour' => 8,
-								'duration_in_min' => 480, //480 = 8 * 60
+								'ot_in_hour' => 1,
+								// 'duration_in_min' => 480, //480 = 8 * 60
 								'order_no' => $index,
 							]);
 						}

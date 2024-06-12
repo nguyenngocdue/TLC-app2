@@ -1,34 +1,4 @@
 {
-    "_total_hours": {
-        "name": "_total_hours",
-        "column_name": "total_hours",
-        "listen_action": "aggregate_from_table",
-        "triggers": "getHrTsLines[footer][duration_in_hour][agg_sum]",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_total_ot_hours": {
-        "name": "_total_ot_hours",
-        "column_name": "total_ot_hours",
-        "listen_action": "aggregate_from_table",
-        "triggers": "getHrTsLines[footer][ot_in_hour][agg_sum]",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_id": {
         "name": "_id",
         "column_name": "id",
@@ -44,9 +14,24 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_team_id": {
-        "name": "_team_id",
-        "column_name": "team_id",
+    "_hr_timesheet_worker_id": {
+        "name": "_hr_timesheet_worker_id",
+        "column_name": "hr_timesheet_worker_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -74,9 +59,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_getHrTsLines": {
-        "name": "_getHrTsLines",
-        "column_name": "getHrTsLines",
+    "_duration_in_hour": {
+        "name": "_duration_in_hour",
+        "column_name": "duration_in_hour",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -89,9 +74,69 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
+    "_ot_in_hour": {
+        "name": "_ot_in_hour",
+        "column_name": "ot_in_hour",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "listen_action": "reduce",
+        "triggers": "project_id",
+        "listen_to_fields": "sub_project_id",
+        "listen_to_attrs": "project_id",
+        "columns_to_set": "",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_remark": {
+        "name": "_remark",
+        "column_name": "remark",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -119,9 +164,9 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
@@ -137,36 +182,6 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

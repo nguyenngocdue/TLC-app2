@@ -227,14 +227,17 @@
     "hr_overtime_requests": {
         "name": "hr_overtime_requests"
     },
-    "hr_timesheet_lines": {
-        "name": "hr_timesheet_lines",
-        "storeEmpty_and_updateShort": "true"
+    "hr_timesheet_officer_lines": {
+        "name": "hr_timesheet_officer_lines"
     },
     "hr_timesheet_officers": {
         "name": "hr_timesheet_officers",
         "storeEmpty_and_updateShort": "true",
         "changeStatusMultiple": "true"
+    },
+    "hr_timesheet_worker_lines": {
+        "name": "hr_timesheet_worker_lines",
+        "storeEmpty_and_updateShort": "true"
     },
     "hr_timesheet_workers": {
         "name": "hr_timesheet_workers",

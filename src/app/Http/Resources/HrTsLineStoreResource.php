@@ -20,14 +20,15 @@ class HrTsLineStoreResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'timesheetable_type' => $request->timesheetable_type,
-            'timesheetable_id' => $request->timesheetable_id,
+            // 'timesheetable_type' => $request->timesheetable_type,
+            // 'timesheetable_id' => $request->timesheetable_id,
+            'hr_timesheet_officer_id' => $request->hr_timesheet_officer_id,
             'start_time' => $request->date_time ? DateTimeConcern::formatTimestampFromJStoDB($request->date_time) : null,
             'duration_in_min' => DateTimeConcern::isFormatJsDateTime($request->date_time) ? 60 : null,
             'user_id' => CurrentUser::id() ?? null,
             'project_id' => $request->project_id,
             'sub_project_id' => $request->sub_project_id,
-            'prod_routing_id' => $request->prod_routing_id,
+            // 'prod_routing_id' => $request->prod_routing_id,
             'lod_id' => $request->lod_id,
             'discipline_id' => $request->discipline_id,
             'task_id' => $request->task_id,
@@ -35,7 +36,7 @@ class HrTsLineStoreResource extends JsonResource
             'work_mode_id' => $request->work_mode_id ?? 2,
             'remark' => $request->remark,
             'owner_id' => CurrentUser::id() ?? null,
-            'status' => $request->status ?? 'new',
+            // 'status' => $request->status ?? 'new',
         ];
     }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Entities\ZZTraitApi;
 
 use App\Models\Hr_overtime_request;
 use App\Models\Hr_overtime_request_line;
-use App\Models\Hr_timesheet_line;
 use App\Models\Hr_timesheet_worker;
+use App\Models\Hr_timesheet_worker_line;
 use App\Models\Prod_routing_link;
 use App\Models\Prod_run;
 use App\Models\Prod_sequence;
@@ -103,7 +103,7 @@ trait TraitGetLines
 		$lines = Hr_timesheet_worker::find($parent_id)->getHrTsLines()->get();
 		$ids = $lines->pluck('id');
 		// Log::info($ids);
-		Hr_timesheet_line::destroy($ids);
+		Hr_timesheet_worker_line::destroy($ids);
 	}
 
 	private function setCurrentTSWLines($result, $allSequences, $allSubProjects, $allRoutingLinks, $parent_id)
@@ -135,7 +135,7 @@ trait TraitGetLines
 
 					'owner_id' => CurrentUser::id(),
 				];
-				Hr_timesheet_line::create($item);
+				Hr_timesheet_worker_line::create($item);
 			}
 		}
 	}

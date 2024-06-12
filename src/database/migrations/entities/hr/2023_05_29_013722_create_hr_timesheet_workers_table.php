@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger("team_id")->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->double("total_hours", 8, 2)->nullable();
+            $table->double("total_ot_hours", 8, 2)->nullable();
 
             $table->appendCommonFields();
         });

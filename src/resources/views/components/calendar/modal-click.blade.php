@@ -19,37 +19,37 @@
                 <div class="grid grid-cols-12 mt-2 items-center">
                     <span class="col-span-3 text-right mr-1">Project</span>
                     <div class="col-span-9">
-                        <x-calendar.ModalFilterProject tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_line"/>
+                        <x-calendar.ModalFilterProject tableName="projects" name="project_id" id="project_id" typeToLoadListener="hr_timesheet_officer_line"/>
                     </div>
                 </div>
                  <div class="grid grid-cols-12 mt-2 items-center">
                     <span class="col-span-3 text-right mr-1">Sub Project</span>
                     <div class="col-span-9">
-                    <x-calendar.ModalFilterSubProject tableName="sub_projects" name="sub_project_id" id="sub_project_id" typeToLoadListener="hr_timesheet_line" />
+                    <x-calendar.ModalFilterSubProject tableName="sub_projects" name="sub_project_id" id="sub_project_id" typeToLoadListener="hr_timesheet_officer_line" />
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
                     <span class="col-span-3 text-right mr-1">Phase</span>
                     <div class="col-span-9">
-                    <x-calendar.ModalFilterLod tableName="pj_task_phases" name="lod_id" id="lod_id" typeToLoadListener="hr_timesheet_line" />
+                    <x-calendar.ModalFilterLod tableName="pj_task_phases" name="lod_id" id="lod_id" typeToLoadListener="hr_timesheet_officer_line" />
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center hidden">
                     <span class="col-span-3 text-right mr-1">Discipline</span>
                     <div class="col-span-9">
-                    <x-calendar.ModalFilterDiscipline tableName="user_disciplines" name="discipline_id" id="discipline_id" typeToLoadListener="hr_timesheet_line" />
+                    <x-calendar.ModalFilterDiscipline tableName="user_disciplines" name="discipline_id" id="discipline_id" typeToLoadListener="hr_timesheet_officer_line" />
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
                     <span class="col-span-3 text-right mr-1">Task</span>
                     <div class="col-span-9">
-                    <x-calendar.ModalFilterTask tableName="pj_tasks" name="task_id" typeToLoadListener="hr_timesheet_line" />
+                    <x-calendar.ModalFilterTask tableName="pj_tasks" name="task_id" typeToLoadListener="hr_timesheet_officer_line" />
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">
                     <span class="col-span-3 text-right mr-1">Sub-Task</span>
                     <div class="col-span-9">
-                    <x-calendar.ModalFilterSubTask tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_line"/>
+                    <x-calendar.ModalFilterSubTask tableName="pj_sub_tasks" name="sub_task_id" typeToLoadListener="hr_timesheet_officer_line"/>
                     </div>
                 </div>
                 <div class="grid grid-cols-12 mt-2 items-center">

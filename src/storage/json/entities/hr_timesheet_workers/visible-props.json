@@ -23,6 +23,22 @@
         "approval_rejected": "true",
         "approved": "true"
     },
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_total_ot_hours": {
+        "name": "_total_ot_hours",
+        "column_name": "total_ot_hours",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -31,9 +47,17 @@
         "approval_rejected": "true",
         "approved": "true"
     },
-    "_total_hours": {
-        "name": "_total_hours",
-        "column_name": "total_hours",
+    "_getHrTsLines": {
+        "name": "_getHrTsLines",
+        "column_name": "getHrTsLines",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
         "new": "true",
         "pending_approval": "true",
         "approval_rejected": "true",
@@ -82,22 +106,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "approved": "true"
-    },
-    "_getHrTsLines": {
-        "name": "_getHrTsLines",
-        "column_name": "getHrTsLines",
-        "new": "true",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "approved": "true"
-    },
-    "_comment_rejected_reason": {
-        "name": "_comment_rejected_reason",
-        "column_name": "comment_rejected_reason",
         "new": "true",
         "pending_approval": "true",
         "approval_rejected": "true",

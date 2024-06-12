@@ -27,7 +27,7 @@ const callApiStoreEmpty = (url, data, meta, callback = null) => {
 }
 
 const callApiCloneTemplate = (url, data, meta, callback = null) => callApiStoreEmpty(url, data, meta, callback)
-const callApiGetLines = (url, data, meta, callback = null) => callApiStoreEmpty(url, data, meta, callback)
+// const callApiGetLines = (url, data, meta, callback = null) => callApiStoreEmpty(url, data, meta, callback)
 
 const makeKi = (k) => {
     const ki = {}

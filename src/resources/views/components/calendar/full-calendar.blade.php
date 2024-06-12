@@ -165,8 +165,9 @@
                                             "sub_task_id": subTaskId,
                                             "date_time": dateTime,
                                             // "all_day": null,
-                                            "timesheetable_type": timesheetableType,
-                                            "timesheetable_id": timesheetableId
+                                            // "timesheetable_type": timesheetableType,
+                                            // "timesheetable_id": timesheetableId
+                                            "hr_timesheet_officer_id": timesheetableId
                                         }
                                         console.log(data)
                                         callApi('post', url, data, info, function(info, calendar, response) {
@@ -195,7 +196,7 @@
                         eventContent: function(info) {
                             var timeText = info.timeText;
                             var eventTitle = info.event.title;
-                            var eventSubTitle = info.event.extendedProps.sub_title;
+                            var eventSubTitle = info.event.extendedProps.sub_title || "";
                             var tagSubProject = info.event.extendedProps.tag_sub_project || "";
                             var tagPhase = info.event.extendedProps.tag_phase || "";
                             var nameProject = info.event.extendedProps.name_project;

@@ -71,7 +71,7 @@ class HrTsLineCollection extends ResourceCollection
                     'user_id' => $item->user_id ?? '',
                     'project_id' => $item->project_id ?? '',
                     'sub_project_id' => $item->sub_project_id ?? '',
-                    'prod_routing_id' => $item->prod_routing_id ?? '',
+                    // 'prod_routing_id' => $item->prod_routing_id ?? '',
                     'lod_id' => $item->lod_id ?? '',
                     'discipline_id' => $item->discipline_id ?? '',
                     'task_id' => $item->task_id ?? '',

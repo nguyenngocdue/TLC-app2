@@ -31,6 +31,7 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "renderer"  => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => $entities,
+                'width' => 300,
             ],
             [
                 'dataIndex' => "editable-table",
@@ -38,36 +39,42 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "renderer"  => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => $entities,
+                'width' => 300,
             ],
             [
                 'dataIndex' => "button_add_a_new_line",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
+                'width' => 60,
             ],
             [
                 'dataIndex' => "button_add_from_a_list",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
+                'width' => 60,
             ],
             [
                 'dataIndex' => "button_clone_from_tmpl",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
+                'width' => 60,
             ],
-            [
-                'dataIndex' => "button_get_lines",
-                "renderer"  => 'checkbox',
-                'editable' => true,
-                'align' => "center",
-            ],
+            // [
+            //     'dataIndex' => "button_get_lines",
+            //     "renderer"  => 'checkbox',
+            //     'editable' => true,
+            //     'align' => "center",
+            //     'width' => 60,
+            // ],
             [
                 'dataIndex' => "button_recalculate",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
+                'width' => 60,
             ],
 
         ];

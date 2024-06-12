@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\HrTsLineStoreResource;
 use App\Http\Resources\HrTsLineUpdateResource;
 use App\Http\Resources\TimesheetLineResource;
-use App\Models\Hr_timesheet_officer;
 use App\Models\User_discipline;
 use App\Services\Hr_timesheet_line\Hr_timesheet_lineServiceInterface;
 use App\Utils\Support\CurrentUser;
@@ -14,6 +13,7 @@ use App\Utils\Support\Json\Definitions;
 use App\Utils\System\Api\ResponseObject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 abstract class TimesheetController extends Controller
 {
@@ -113,21 +113,22 @@ abstract class TimesheetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->input('time_type') == 'full_day'){
+        if ($request->input('time_type') == 'full_day') {
             $results = [];
-            $timeTypes = ['morning','afternoon'];
+            $timeTypes = ['morning', 'afternoon'];
             $request->merge(['time_type' => $timeTypes[0]]);
-            $results['data'][] = $this->updateTimesheetLine($request,$id);
+            $results['data'][] = $this->updateTimesheetLine($request, $id);
             $request->merge(['time_type' => $timeTypes[1]]);
             $timesheetLine = $this->timesheetLineService->duplicate($id);
-            $results['data'][] = $this->updateTimesheetLine($request,$timesheetLine->id);
+            $results['data'][] = $this->updateTimesheetLine($request, $timesheetLine->id);
             return $results;
-        }else{
-            return $this->updateTimesheetLine($request,$id);
+        } else {
+            return $this->updateTimesheetLine($request, $id);
         }
     }
 
-    private function updateTimesheetLine($request,$id){
+    private function updateTimesheetLine($request, $id)
+    {
         $resource = new HrTsLineUpdateResource($request);
         $data = $resource->toArray($request);
         $data = array_filter($data, fn ($item) => $item);

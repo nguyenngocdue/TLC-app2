@@ -12,7 +12,7 @@
     tableTrueWidth=1
     />
 
-@once
+{{-- @once
 <script>
 const getLinesUnderTable = ({ tableId }) => {
     const team_id = getEById('team_id').val();
@@ -27,7 +27,7 @@ const getLinesUnderTable = ({ tableId }) => {
     // callApiGetLines(url, data, [], ()=>location.reload())
 }
 </script>
-@endonce
+@endonce --}}
 
 <div class="flex justify-between">
     <div>
@@ -51,9 +51,9 @@ const getLinesUnderTable = ({ tableId }) => {
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
         @endif
-        @if(isset($tableSettings['button_get_lines']) && $tableSettings['button_get_lines'])
+        {{-- @if(isset($tableSettings['button_get_lines']) && $tableSettings['button_get_lines'])
         <x-renderer.button disabled="{{$readOnly}}" id="btnGetLines_{{$table01Name}}" type="success" onClick="getLinesUnderTable({tableId: '{{$table01Name}}'})">Get Lines</x-renderer.button>
-    @endif
+    @endif --}}
     </div>
 
     @if( isset($tableSettings['button_recalculate']) && $tableSettings['button_recalculate'])

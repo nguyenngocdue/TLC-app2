@@ -9,7 +9,7 @@ class Hr_timesheet_worker extends ModelExtended
 {
     protected $fillable = [
         'id', 'name', 'ts_date', 'team_id', 'assignee_1',
-        'owner_id', 'status', 'total_hours',
+        'owner_id', 'status', 'total_hours', 'total_ot_hours',
     ];
     public static $nameless = true;
     public function getNameAttribute($value)
@@ -21,7 +21,7 @@ class Hr_timesheet_worker extends ModelExtended
     public static $eloquentParams = [
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         'getUserTeam' => ['belongsTo', User_team_tsht::class, 'team_id'],
-        'getHrTsLines' => ['morphMany', Hr_timesheet_line::class, 'timesheetable', 'timesheetable_type', 'timesheetable_id'],
+        "getHrTsLines" => ["hasMany", Hr_timesheet_worker_line::class, "hr_timesheet_worker_id"],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
