@@ -30,8 +30,8 @@ class AvatarUser extends Component
         $user = null;
         $companyName = null;
         if (isset($slot->{'id'})) {
-            $user = User::findFromCache($slot->{'id'});
-            $avatar = $user->getAvatarThumbnailUrl();
+            $user = User::findFromCache($slot->{'id'}, ['getAvatar', 'getUserCompany', 'getPosition']);
+            $avatar = app()->pathMinio() . $user->getAvatar?->url_thumbnail;
             $companyName = $user->getUserCompany?->name;
         }
         if (is_null($user)) return null;
@@ -46,8 +46,8 @@ class AvatarUser extends Component
 
     private function renderOneUserByAttribute()
     {
-        $user = User::findFromCache($this->uid);
-        $avatar = $user->getAvatarThumbnailUrl();
+        $user = User::findFromCache($this->uid, ['getAvatar', 'getUserCompany', 'getPosition']);
+        $avatar = app()->pathMinio() . $user->getAvatar?->url_thumbnail;
         $title = $user->full_name;
         $description = $user->getPosition->name ?? '';
         $companyName = $user->getUserCompany?->name;

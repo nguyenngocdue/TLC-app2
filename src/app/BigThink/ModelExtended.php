@@ -101,25 +101,60 @@ abstract class ModelExtended extends Model
         if ($this::$nameless) return "#" . $this->id;
         return $value;
     }
-    static $singletonDbUserCollection = null;
-    public static function getCollectionCache()
+
+    // static $singletonDbUserCollection = null;
+    // public static function getCollectionCache()
+    // {
+    //     if (!isset(static::$singletonDbUserCollection[static::class])) {
+    //         $all = static::all();
+    //         foreach ($all as $item) $indexed[$item->id] = $item;
+    //         static::$singletonDbUserCollection[static::class] = collect($indexed);
+    //     }
+    //     return static::$singletonDbUserCollection;
+    // }
+    // public static function getCollection()
+    // {
+    //     return static::getCollectionCache()[static::class] ?? collect();
+    // }
+    // public static function findFromCache($id)
+    // {
+    //     // if(!isset(static::getCollection()[$id]))
+    //     return static::getCollectionCache()[static::class][$id] ?? null;
+    // }
+
+    static $singletonDbCollection = null;
+    public static function getCollectionCache($className, $id = null, $with = [])
     {
-        if (!isset(static::$singletonDbUserCollection[static::class])) {
-            $all = static::all();
+        $withStr = join("+", $with);
+        $key = $className . "|" . $withStr;
+        if (!isset(static::$singletonDbCollection[$key])) {
+            // Log::info("Cache miss for $key");
+            $all = static::query();
+            if (count($with) > 0) {
+                foreach ($with as $w) $all = $all->with($w);
+            }
+            $all = $all->get();
             foreach ($all as $item) $indexed[$item->id] = $item;
-            static::$singletonDbUserCollection[static::class] = collect($indexed);
+            static::$singletonDbCollection[$key] = $indexed;
         }
-        return static::$singletonDbUserCollection;
+        if ($id == 'all') {
+            return collect(static::$singletonDbCollection[$key]);
+        } else {
+            if (isset(static::$singletonDbCollection[$key][$id]))
+                return static::$singletonDbCollection[$key][$id];
+            else
+                return null;
+        }
     }
     public static function getCollection()
     {
-        return static::getCollectionCache()[static::class] ?? collect();
+        return static::getCollectionCache(static::class, "all");
     }
-    public static function findFromCache($id)
+    public static function findFromCache($id, $with = [])
     {
-        // if(!isset(static::getCollection()[$id]))
-        return static::getCollectionCache()[static::class][$id] ?? null;
+        return static::getCollectionCache(static::class, $id, $with);
     }
+
     private static $singletonMorphMany = [];
 
     public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId, $useTableField)

@@ -320,21 +320,21 @@ class User extends ModelExtended implements
         ];
     }
 
-    static $singletonDbUserCollection = null;
-    public static function getCollection()
-    {
-        if (!isset(static::$singletonDbUserCollection)) {
-            $all = static::all();
-            foreach ($all as $item) $indexed[$item->id] = $item;
-            static::$singletonDbUserCollection = collect($indexed);
-        }
-        return static::$singletonDbUserCollection;
-    }
+    // static $singletonDbUserCollection = null;
+    // public static function getCollection()
+    // {
+    //     if (!isset(static::$singletonDbUserCollection)) {
+    //         $all = static::all();
+    //         foreach ($all as $item) $indexed[$item->id] = $item;
+    //         static::$singletonDbUserCollection = collect($indexed);
+    //     }
+    //     return static::$singletonDbUserCollection;
+    // }
 
-    public static function findFromCache($id)
-    {
-        return static::getCollection()[$id] ?? null;
-    }
+    // public static function findFromCache($id)
+    // {
+    //     return static::getCollection()[$id] ?? null;
+    // }
 
     function isExternalInspector()
     {
