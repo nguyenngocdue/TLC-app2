@@ -23,6 +23,18 @@
         "cancelled": "true",
         "on_hold": "true"
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
     "_getAvatar": {
         "name": "_getAvatar",
         "column_name": "getAvatar",
@@ -47,9 +59,9 @@
         "cancelled": "true",
         "on_hold": "true"
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
+    "_long_description": {
+        "name": "_long_description",
+        "column_name": "long_description",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",

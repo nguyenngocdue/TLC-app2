@@ -13,7 +13,7 @@ class Project extends ModelExtended
 
     protected $fillable = [
         "id", "name", "description", "slug", "status", "owner_id",
-        "qr_app_source", "show_in_task_budget",
+        "qr_app_source", "show_in_task_budget", "long_description",
     ];
 
     public static $eloquentParams = [

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('long_description')->nullable();
             $table->string('slug')->unique();
             $table->bigInteger('qr_app_source')->nullable();
             $table->boolean('show_in_task_budget')->nullable();
