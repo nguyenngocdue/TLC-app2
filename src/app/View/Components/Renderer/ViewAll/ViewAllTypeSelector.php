@@ -77,14 +77,14 @@ class ViewAllTypeSelector extends Component
                 'active' =>  $this->viewType == 'tree-explorer-view',
             ];
         };
-        // if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixApproveMulti())) {
-        //     $tabs['approval'] = [
-        //         'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",
-        //         'title' => "Approval View",
-        //         'icon' => 'fa-duotone fa-box-check',
-        //         'active' =>  $this->viewType == 'matrix-approve-multi-view',
-        //     ];
-        // };
+        if (in_array($tableName, JsonControls::getAppsHaveViewAllMatrixApproveMulti())) {
+            $tabs['approval'] = [
+                'href' => "?view_type=matrix_approve_multi&action=updateViewAllMode&_entity=$tableName",
+                'title' => "Approval View",
+                'icon' => 'fa-duotone fa-box-check',
+                'active' =>  $this->viewType == 'matrix-approve-multi-view',
+            ];
+        };
         return $tabs;
     }
 

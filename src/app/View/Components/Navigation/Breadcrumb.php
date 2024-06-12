@@ -203,19 +203,19 @@ class Breadcrumb extends Component
             $this->links[] = ['href' => route($type . '.create'), 'title' => 'Add New', 'icon' => '<i class="fa-regular fa-file-plus"></i>'];
         }
     }
-    private function showButtonAddNewByCloning($type)
-    {
-        // $types = ["hse_insp_chklst_shts", "ghg_sheets"];
-        $types = JsonControls::getAppsHaveAddNewByCloning();
-        if (in_array($type, $types)) {
-            $modalId = 'clone_sheet_from_template';
-            $this->links[] = [
-                'title' => 'Add New', 'icon' => "<i class='fa-light fa-clone'></i>", 'type' => 'modal',
-                'modalId' => $modalId,
-                "modalBody" => Blade::render("<x-modals.modal-clone modalId='$modalId' cloneFor='$type'/>")
-            ];
-        }
-    }
+    // private function showButtonAddNewByCloning($type)
+    // {
+    //     // $types = ["hse_insp_chklst_shts", "ghg_sheets"];
+    //     $types = JsonControls::getAppsHaveAddNewByCloning();
+    //     if (in_array($type, $types)) {
+    //         $modalId = 'clone_sheet_from_template';
+    //         $this->links[] = [
+    //             'title' => 'Add New', 'icon' => "<i class='fa-light fa-clone'></i>", 'type' => 'modal',
+    //             'modalId' => $modalId,
+    //             "modalBody" => Blade::render("<x-modals.modal-clone modalId='$modalId' cloneFor='$type'/>")
+    //         ];
+    //     }
+    // }
     private function showButtonViewReport($type)
     {
         if ($this->hideForExternal($type)) return;
@@ -271,7 +271,7 @@ class Breadcrumb extends Component
         $this->showButtonViewAll($type);
         if ($isAdmin || $isHrManager) $this->showButtonPrintAll($type);
         $this->showButtonAddNew($type);
-        $this->showButtonAddNewByCloning($type);
+        // $this->showButtonAddNewByCloning($type);
         $this->showButtonViewReport($type);
         $this->showButtonTutorialLink($type);
         if ($isAdmin) $this->showButtonViewTrash($type);

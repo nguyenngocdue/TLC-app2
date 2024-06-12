@@ -16,6 +16,9 @@
         "qaqc_punchlists",
         "pj_task_budgets"
     ],
+    "apps_have_view_all_matrix_approve_multi":[
+        "hr_timesheet_workers"
+    ],
     "apps_have_view_all_matrix_signature": [
         "qaqc_insp_chklst_shts"
     ],
@@ -25,7 +28,6 @@
     "apps_have_view_all_kanban": [
         "kanban_task_pages"
     ],    
-    "apps_have_add_new_by_cloning": [],
     "headings": [
         "",
         "z_h1",

@@ -89,8 +89,8 @@ class ViewAllController extends Controller
                 return $this->indexViewAllMatrix($request);
                 // case 'matrix_print':
                 //     return $this->indexViewAllMatrixPrint($request);
-                // case "matrix_approve_multi":
-                //     return $this->indexViewAllMatrixApproveMulti($request);
+            case "matrix_approve_multi":
+                return $this->indexViewAllMatrixApproveMulti($request);
             case "tree_explorer":
                 return $this->indexViewAllTreeExplorer($request);
             case "matrix_signature":

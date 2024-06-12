@@ -46,7 +46,8 @@ class Pj_task extends ModelExtended
         $discipline = User_discipline::query()
             ->where('id', $discipline_id)
             ->with(["getTasksOfDiscipline" => function ($q) {
-                $q->with("getChildrenSubTasks");
+                $q->with("getChildrenSubTasks")
+                    ->with("getLodsOfTask");
             }])
             ->first();
 
