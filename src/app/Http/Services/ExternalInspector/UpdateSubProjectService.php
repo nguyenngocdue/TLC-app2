@@ -31,7 +31,6 @@ class UpdateSubProjectService
         $result = array_map(fn ($id) => +$id, $result);
 
         $item = Sub_project::find($subProjectId);
-        // $item->syncCheck($targetFn, \App\Models\User::class, $result);
         $item->{$targetFn}()->syncWithPivotValues($result, ['owner_id' => CurrentUser::id()]);
         // Log::info("UpdateSubProjectService" . $subProjectId);
         // Log::info($result);

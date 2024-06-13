@@ -31,7 +31,6 @@ class UpdateQaqcInspTmplService
         $result = array_map(fn ($id) => +$id, $result);
 
         $item = Qaqc_insp_tmpl::find($qaqcInspTmplId);
-        // $item->syncCheck($targetFn, \App\Models\User::class, $result);
         $item->{$targetFn}()->syncWithPivotValues($result, ['owner_id' => CurrentUser::id()]);
         // Log::info("UpdateQaqcInspTmplService" . $qaqcInspTmplId);
         // Log::info($result);

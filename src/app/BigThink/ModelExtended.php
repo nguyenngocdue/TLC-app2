@@ -19,7 +19,7 @@ abstract class ModelExtended extends Model
     use HasFactory;
 
     use HasStatus;
-    use HasCheckbox;
+    // use HasCheckbox;
     use HasComments;
     use HasAttachments;
 
