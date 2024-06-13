@@ -728,14 +728,18 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             option += ' ' + item['name']
             if (item['subtitle']) option += '<br/>' + item['subtitle']
 
-            option += `<div class="absolute right-0 top-0 bg-gray-100 p-1 rounded z-50 sub-task-of-${itemId}" style="display:none">`
+            option += `<div class="absolute w-3/4 right-0 top-0 bg-gray-100 p-1 rounded z-50 sub-task-of-${itemId}" style="display:none">`
             const {get_children_sub_tasks} = item
-            for(let j = 0; j< get_children_sub_tasks.length; j++){
-                const subTaskItem = get_children_sub_tasks[j]
-                option += `<div class="${classEvent} ${bgColor} ${colSpan} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-0.5 px-2 py-0.5 "
-                        item_name="${item['name']}" item_description="${item['description']}">`
-                option += `<div id="${itemId}" sub-task-id="${subTaskItem["id"]}" class="fc-event-main">${subTaskItem["name"]}</div>`
-                option += '</div>'
+            if(get_children_sub_tasks.length > 0){
+                for(let j = 0; j< get_children_sub_tasks.length; j++){
+                    const subTaskItem = get_children_sub_tasks[j]
+                    option += `<div class="${classEvent} ${bgColor} ${colSpan} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-0.5 px-2 py-0.5 "
+                            item_name="${item['name']}" item_description="${item['description']}">`
+                    option += `<div id="${itemId}" sub-task-id="${subTaskItem["id"]}" class="fc-event-main whitespace-normal">${subTaskItem["name"]}</div>`
+                    option += '</div>'
+                }
+            } else {
+                option += `<div class="text-center text-red-400">No sub-task found.</div>`
             }
             option += '</div>'
             
