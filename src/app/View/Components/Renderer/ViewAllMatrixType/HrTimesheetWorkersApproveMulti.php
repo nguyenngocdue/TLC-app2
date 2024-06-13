@@ -39,7 +39,7 @@ class HrTimesheetWorkersApproveMulti extends HrTimesheetWorkers
         $yId = $y->id;
         $route = route($this->type . ".changeStatusMultiple");
         $script = "<script>const route_$yId='$route';</script>";
-        $btn = "$script<x-renderer.button size='xs' onClick='toggleCheckbox($yId, route_$yId)'>TG</x-renderer.button>";
+        $btn = "$script<x-renderer.button size='xs' onClick='toggleCheckbox($yId, route_$yId)'><i class='fa-duotone fa-check-double'></i></x-renderer.button>";
         $toggleBtn = Blade::render($btn);
         return array_merge(
             $parent,

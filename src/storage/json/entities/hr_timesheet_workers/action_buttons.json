@@ -9,7 +9,7 @@
         "name": "pending_approval",
         "label": "Submit for Approval",
         "tooltip": "",
-        "change_status_multiple": "true"
+        "change_status_multiple": ""
     },
     "approval_rejected": {
         "name": "approval_rejected",
