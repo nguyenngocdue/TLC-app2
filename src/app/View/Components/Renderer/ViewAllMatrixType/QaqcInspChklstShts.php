@@ -59,7 +59,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
     private $hasPunchlist = false;
-    // protected $mode = 'status_only';
     /**
      * Create a new component instance.
      *

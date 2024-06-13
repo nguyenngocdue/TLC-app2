@@ -19,11 +19,11 @@ class HrTimesheetWorkersApproveMulti extends HrTimesheetWorkers
     ];
 
 
-    protected function getXAxis2ndHeader($xAxis)
-    {
-        $result = [];
-        return $result;
-    }
+    // protected function getXAxis2ndHeader($xAxis)
+    // {
+    //     $result = [];
+    //     return $result;
+    // }
 
     protected function getMetaColumns()
     {

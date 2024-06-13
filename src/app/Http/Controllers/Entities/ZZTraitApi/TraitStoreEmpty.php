@@ -169,8 +169,8 @@ trait TraitStoreEmpty
 				// $this->eventCreatedNotificationAndMail($createdItem->getAttributes(), $createdItem->id, 'new', []);
 				(new LoggerForTimelineService())->insertForCreate($createdItem, CurrentUser::id(), $this->modelPath);
 				event(new CreatedDocumentEvent2($this->type, $createdItem->id));
-				$tableName = Str::plural($this->type);
-				$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
+				// $tableName = Str::plural($this->type);
+				// $createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 				$theRows[] = $createdItem;
 			}
 
@@ -186,7 +186,11 @@ trait TraitStoreEmpty
 							return $a['employeeid'] <=> $b['employeeid'];
 						});
 
+						$total_hours = 0;
+						$total_ot_hours = 0;
 						foreach ($workers as $index => $worker) {
+							$total_hours += 8;
+							$total_ot_hours += 1;
 							Hr_timesheet_worker_line::create([
 								// 'timesheetable_type' => Hr_timesheet_worker::class,
 								'hr_timesheet_worker_id' => $row->id,
@@ -203,6 +207,9 @@ trait TraitStoreEmpty
 							]);
 						}
 						$totalInsertedRows  += count($workers);
+						$row->total_hours = $total_hours;
+						$row->total_ot_hours = $total_ot_hours;
+						$row->save();
 					}
 					break;
 				case "site_daily_assignment":
@@ -222,6 +229,12 @@ trait TraitStoreEmpty
 					break;
 				default:
 					break;
+			}
+
+			//Add this after $row->save() to avoid error
+			foreach ($theRows as &$row) {
+				$tableName = Str::plural($this->type);
+				$createdItem->redirect_edit_href = route($tableName . '.edit', $createdItem->id);
 			}
 
 			$meta = $request->input('meta');

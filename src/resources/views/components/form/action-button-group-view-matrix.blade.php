@@ -8,11 +8,11 @@
     <x-renderer.button class="mr-1" type="secondary" htmlType="submit" outline=true>
         <i class="fa-duotone fa-print"></i> Print Template with extra empty lines
     </x-renderer.button>
-@endif
+@endif --}}
 
 @if(isset($actionBtnList['approveMulti']) && $actionBtnList['approveMulti'])
     <div id="divApproveMulti"></div>
-@endif --}}
+@endif
 
 
 @if(isset($actionBtnList['sendManyRequest']) && $actionBtnList['sendManyRequest'])
