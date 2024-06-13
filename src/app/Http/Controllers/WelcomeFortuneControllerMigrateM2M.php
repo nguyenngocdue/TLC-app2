@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class WelcomeFortuneController extends Controller
+class WelcomeFortuneControllerMigrateM2M extends Controller
 {
     function getType()
     {
