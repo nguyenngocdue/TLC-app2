@@ -15,7 +15,8 @@ trait TraitXAxisDate
                 [$begin, $end] = DateTimeConcern::getMonthBeginAndEndDate0($date);
                 $begin = Carbon::createFromDate($begin)->diffInDays($date);
                 $end = Carbon::createFromDate($end)->diffInDays($date);
-                return [-$begin, $end + 1];
+                $result = [-$begin, $end + 1];
+                return $result;
             case 'week':
             default:
                 $dayOfWeek = Carbon::createFromDate($date)->dayOfWeek  - 1;
@@ -41,7 +42,8 @@ trait TraitXAxisDate
         $date0 = date(Constant::FORMAT_DATE_MYSQL, $this->viewportDate); //today date
         [$begin, $end] = $this->getBeginEndFromViewMode($date0);
         for ($i = $begin; $i < $end; $i++) {
-            $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("+$i day", strtotime($date0)));
+            //Remove +$i as it cause date wrong
+            $date = date(Constant::FORMAT_DATE_MYSQL, strtotime("$i day", strtotime($date0)));
             $xAxis[] = date(Constant::FORMAT_DATE_MYSQL, strtotime($date));
         }
         // dump($xAxis);
