@@ -11,7 +11,7 @@
                 style="box-shadow: 1px 1px 10px #000;"
                 >
                 <a href="#" class="mt-5 flex items-center justify-center text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img class="w-32 items-center" src="{{ asset('logo/tlc.png') }}" alt="logo">
+                    <img class="w-32 items-center" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
                 </a>
                     <div class="space-y-2 p-4 sm:p-6 md:space-y-4">
                         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">

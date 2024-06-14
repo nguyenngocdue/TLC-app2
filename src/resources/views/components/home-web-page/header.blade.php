@@ -5,12 +5,12 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
           <div class="w-60 max-w-full px-4">
             <a href="javascript:void(0)" class="block w-full">
               <img
-                src="{{ asset('logo/tlc-white.svg') }}"
+                src="{{ asset('logo/moduqa-white.svg') }}"
                 alt="logo"
                 class="dark:hidden h-10 object-cover"
               />
               <img
-                src="{{ asset('logo/tlc-white.svg') }}"
+                src="{{ asset('logo/moduqa-white.svg') }}"
                 alt="logo"
                 class="hidden dark:block h-1 object-cover"
               />

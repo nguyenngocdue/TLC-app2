@@ -8,7 +8,7 @@
         </h1>
         <div class="w-full rounded-lg bg-white shadow dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
             <a href="#" class="mt-5 flex items-center justify-center text-2xl font-semibold text-gray-900 dark:text-white">
-                <img class="w-32" src="{{ asset('logo/tlc.png') }}" alt="logo">
+                <img class="w-32" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
             </a>
             <div class="space-y-2 p-4 sm:p-6 md:space-y-4">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">

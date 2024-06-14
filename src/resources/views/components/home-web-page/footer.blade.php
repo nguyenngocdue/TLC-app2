@@ -10,12 +10,12 @@
                 class="mb-6 inline-block max-w-[160px]"
               >
                 <img
-                  src="{{ asset('logo/tlc-white.svg') }}"
+                  src="{{ asset('logo/moduqa-white.svg') }}"
                   alt="logo"
                   class="max-w-full dark:hidden"
                 />
                 <img
-                  src="{{ asset('logo/tlc-white.svg') }}"
+                  src="{{ asset('logo/moduqa-white.svg') }}"
                   alt="logo"
                   class="hidden max-w-full dark:block"
                 />
