@@ -16,7 +16,8 @@
                     <div class="col-span-6 mr-2 text-right">Production Name:</div><div class="col-span-6"> {{$prodOrder->production_name}}</div>
                 </div>
                 <div class="mx-4">
-                    <img class="w-40" src="{{asset('logo/moduqa.svg')}}" />
+                    <img class="w-40" src="{{asset('logo/tlc.png')}}" />
+                    {{-- <img class="w-40" src="{{asset('logo/moduqa.svg')}}" /> --}}
                 </div>
             </div>
         </div>      
