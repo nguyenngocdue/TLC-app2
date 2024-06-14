@@ -99,35 +99,14 @@ services:
       - "39002:9000"
     networks:
       - laravel302
-  meilisearch:
-    image: getmeili/meilisearch:latest # You can specify a particular version instead of `latest`
-    container_name: laravel302_meilisearch
-    environment:
-      MEILI_MASTER_KEY: "I_LOVE_MEILISEARCH" # Replace with your desired master key
-    volumes:
-      - ../meilisearch_data:/data.ms
-    ports:
-      - "37702:7700" # Change ports if needed
-    networks:
-      - laravel302
-  # puppeteer:
-  #   image: minidocks/puppeteer
-  #   volumes:
-  #     - ../src:/var/www/app
-  #   links:
-  #     - chromium
+  # meilisearch:
+  #   image: getmeili/meilisearch:1.7.6 # You can specify a particular version instead of `latest`
+  #   container_name: laravel302_meilisearch
   #   environment:
-  #     PUPPETEER_EXECUTABLE_PATH: /bin/chromium
-  #     PUPPETEER_ARG_REMOTE_DEBUGGING_ADDRESS: chromium
-  #     PUPPETEER_ARG_REMOTE_DEBUGGING_PORT: 0
-  #     ALIAS_CHROMIUM: ssh chromium chromium
-  #   working_dir: /var/www/app
-
-  # chromium:
-  #   image: minidocks/chromium
+  #     MEILI_MASTER_KEY: "I_LOVE_MEILISEARCH" # Replace with your desired master key
   #   volumes:
-  #     - ../src:/var/www/app
-  #   cap_add:
-  #     - SYS_ADMIN
-  #   working_dir: /var/www/app
-  #   command: sshd
+  #     - ../meilisearch_data:/data.ms
+  #   ports:
+  #     - "37702:7700" # Change ports if needed
+  #   networks:
+  #     - laravel302
