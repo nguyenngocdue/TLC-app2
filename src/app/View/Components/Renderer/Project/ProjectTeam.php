@@ -52,7 +52,7 @@ class ProjectTeam extends Component
     {
         $modelPath = Str::modelPathFrom($this->table);
         $project = $modelPath::find($this->id);
-        $dataSource = $project->{$this->function}();
+        $dataSource = $project->{$this->function};
         return view(
             'components.renderer.project.project-team',
             [
