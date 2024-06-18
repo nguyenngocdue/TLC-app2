@@ -47,6 +47,7 @@ services:
       - laravel302
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    # build: ./pma
     container_name: laravel302_phpmyadmin
     restart: unless-stopped
     depends_on:
@@ -56,7 +57,7 @@ services:
       MYSQL_ROOT_PASSWORD: LNIBsCP9Gj7xF4d3
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
-      UPLOAD_LIMIT: 104857600
+      UPLOAD_LIMIT: 10714741824
       MEMORY_LIMIT: 2G
       # MAX_EXECUTION_TIME: 600
     volumes:
@@ -99,14 +100,3 @@ services:
       - "39002:9000"
     networks:
       - laravel302
-  # meilisearch:
-  #   image: getmeili/meilisearch:1.7.6 # You can specify a particular version instead of `latest`
-  #   container_name: laravel302_meilisearch
-  #   environment:
-  #     MEILI_MASTER_KEY: "I_LOVE_MEILISEARCH" # Replace with your desired master key
-  #   volumes:
-  #     - ../meilisearch_data:/data.ms
-  #   ports:
-  #     - "37702:7700" # Change ports if needed
-  #   networks:
-  #     - laravel302
