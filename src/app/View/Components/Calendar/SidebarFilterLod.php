@@ -41,9 +41,8 @@ class SidebarFilterLod extends Component
         //     ->whereNotIn('id', [221, 222])
         //     ->orderBy('name')
         //     ->get();
-        $dataSource = Pj_task_phase::select('id', 'name', 'description')
+        $dataSource = Pj_task_phase::select('id', 'name', 'order_no', 'description')
             ->whereNotIn('id', [221, 222])
-            ->orderBy('name')
             ->get();
         return $dataSource;
     }

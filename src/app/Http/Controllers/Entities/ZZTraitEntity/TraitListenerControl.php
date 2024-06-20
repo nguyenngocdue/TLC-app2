@@ -60,12 +60,14 @@ trait TraitListenerControl
         if (isset($this->typeToLoadListener) && !is_null($this->typeToLoadListener)) {
             $listenersOfDropdown2 = $this->getListenersOfDropdown2();
 
-            $str = "\n";
-            $str .= "<script>";
-            $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
-            $str .= "</script>";
-            $str .= "\n";
-            echo $str;
+            if (is_array($listenersOfDropdown2)) {
+                $str = "\n";
+                $str .= "<script>";
+                $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
+                $str .= "</script>";
+                $str .= "\n";
+                echo $str;
+            }
         }
     }
 

@@ -578,8 +578,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
                     return isNotResigned
                 }
             })
-
             .sort((a, b) => a.name.localeCompare(b.name))
+    }
+    if (dataSource?.[0]?.order_no) {
+        dataSource = dataSource.sort((a, b) => {
+            // console.log(a, a.order_no, b.order_no)
+            return a.order_no - b.order_no
+        })
     }
 
     if (debugListener) console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)

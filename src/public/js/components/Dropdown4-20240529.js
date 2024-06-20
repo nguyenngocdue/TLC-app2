@@ -540,6 +540,12 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
 
                 .sort((a, b) => a.name.localeCompare(b.name))
     }
+    if (dataSource?.[0]?.order_no) {
+        dataSource = dataSource.sort((a, b) => {
+            // console.log(a, a.order_no, b.order_no)
+            return a.order_no - b.order_no
+        })
+    }
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
