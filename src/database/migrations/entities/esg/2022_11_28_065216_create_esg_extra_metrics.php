@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('metric_month')->nullable();
             $table->unsignedBigInteger('workplace_id')->nullable();
 
-            $table->unsignedInteger("trained_employees")->nullable();
+            // $table->unsignedInteger("trained_employees")->nullable();
             $table->unsignedInteger("internal_discriminations")->nullable();
             $table->unsignedInteger("internal_grievances")->nullable();
             $table->unsignedInteger("external_grievances")->nullable();
