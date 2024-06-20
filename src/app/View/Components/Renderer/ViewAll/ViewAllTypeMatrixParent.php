@@ -417,6 +417,7 @@ abstract class ViewAllTypeMatrixParent extends Component
             case "hse_extra_metrics":
             case "hse_insp_chklst_shts":
             case "esg_inductions":
+            case "esg_extra_metrics":
                 $filterName = "select_year";
                 break;
             case "hr_timesheet_workers":

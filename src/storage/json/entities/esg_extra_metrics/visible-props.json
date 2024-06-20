@@ -1,0 +1,97 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_metric_month": {
+        "name": "_metric_month",
+        "column_name": "metric_month",
+        "new": "true"
+    },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "new": "true"
+    },
+    "_trained_employees": {
+        "name": "_trained_employees",
+        "column_name": "trained_employees",
+        "new": "true"
+    },
+    "_internal_discriminations": {
+        "name": "_internal_discriminations",
+        "column_name": "internal_discriminations",
+        "new": "true"
+    },
+    "_internal_grievances": {
+        "name": "_internal_grievances",
+        "column_name": "internal_grievances",
+        "new": "true"
+    },
+    "_external_grievances": {
+        "name": "_external_grievances",
+        "column_name": "external_grievances",
+        "new": "true"
+    },
+    "_onsite_workers_contractors": {
+        "name": "_onsite_workers_contractors",
+        "column_name": "onsite_workers_contractors",
+        "new": "true"
+    },
+    "_number_of_part_time_female": {
+        "name": "_number_of_part_time_female",
+        "column_name": "number_of_part_time_female",
+        "new": "true"
+    },
+    "_number_of_part_time_male": {
+        "name": "_number_of_part_time_male",
+        "column_name": "number_of_part_time_male",
+        "new": "true"
+    },
+    "_working_hours_of_part_time": {
+        "name": "_working_hours_of_part_time",
+        "column_name": "working_hours_of_part_time",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    }
+}

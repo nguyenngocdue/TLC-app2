@@ -21,7 +21,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->nullable(); //unique();
             $table->date('metric_month')->nullable();
             $table->unsignedBigInteger('workplace_id')->nullable();
 
@@ -34,8 +33,8 @@ return new class extends Migration
             $table->unsignedInteger("number_of_part_time_male")->nullable();
             $table->float("working_hours_of_part_time")->nullable();
 
+            $table->hasStatus();
             $table->appendCommonFields();
-
             $table->unique(['metric_month', 'workplace_id']);
         });
     }

@@ -21,6 +21,11 @@ class Esg_extra_metric extends ModelExtended
     ];
     // public static $statusless = true;
     public static $nameless = true;
+    // public function getNameAttribute($value)
+    // {
+    //     $workplaceName = $this->getWorkplace->name;
+    //     return $workplaceName . " " . $this->metric_month;
+    // }
 
     public static $eloquentParams = [
         'getWorkplace' => ['belongsTo', Workplace::class, 'workplace_id'],

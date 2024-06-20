@@ -14,7 +14,8 @@
         "esg_inductions",
         "exam_sheets",
         "qaqc_punchlists",
-        "pj_task_budgets"
+        "pj_task_budgets",
+        "esg_extra_metrics"
     ],
     "apps_have_view_all_matrix_approve_multi":[
         "hr_timesheet_workers"

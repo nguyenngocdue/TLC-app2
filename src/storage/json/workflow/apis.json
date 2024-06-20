@@ -105,6 +105,10 @@
     "erp_routing_links": {
         "name": "erp_routing_links"
     },
+    "esg_extra_metrics": {
+        "name": "esg_extra_metrics",
+        "storeEmpty_and_updateShort": "true"
+    },
     "esg_induction_lines": {
         "name": "esg_induction_lines",
         "storeEmpty_and_updateShort": "true"
@@ -385,8 +389,7 @@
     },
     "prod_runs": {
         "name": "prod_runs",
-        "storeEmpty_and_updateShort": "true",
-        "getLines": "true"
+        "storeEmpty_and_updateShort": "true"
     },
     "prod_sequences": {
         "name": "prod_sequences",
