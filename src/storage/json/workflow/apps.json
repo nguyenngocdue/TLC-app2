@@ -513,6 +513,21 @@
         "show_renderer": null,
         "hidden_navbar": "true"
     },
+    "esg_extra_metric": {
+        "name": "esg_extra_metric",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "compliance_data",
+        "title": "ESG Extra Metrics",
+        "nickname": "eem",
+        "tutorial_link": null,
+        "icon": null,
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "do_not_send_notification_mails": "true"
+    },
     "esg_induction": {
         "name": "esg_induction",
         "package_tab": "application",
