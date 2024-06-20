@@ -15,8 +15,8 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getLod": {
-        "name": "_getLod",
+    "_getCurrentLod": {
+        "name": "_getCurrentLod",
         "relationship": "belongsTo",
         "control_name": "lod_id",
         "renderer_view_all": "column",
@@ -25,8 +25,8 @@
         "renderer_edit": "",
         "renderer_edit_param": "",
         "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_values": "139",
+        "filter_columns": "",
+        "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""

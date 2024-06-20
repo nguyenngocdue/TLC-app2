@@ -14,7 +14,7 @@ class Sub_project extends ModelExtended
     public static $eloquentParams = [
         "getProject" => ['belongsTo', Project::class, "project_id"],
         "getProdOrders" => ['hasMany', Prod_order::class],
-        "getLod" => ['belongsTo', Term::class, "lod_id"],
+        "getCurrentLod" => ['belongsTo', Pj_task_phase::class, "lod_id"],
         "getClient" => ["belongsTo", User_company::class, "client_id"],
         "getQrPlateStyle" => ["belongsTo", Term::class, "qr_plate_style_id"],
 
@@ -94,7 +94,7 @@ class Sub_project extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getLod()
+    public function getCurrentLod()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
