@@ -517,7 +517,7 @@
         "name": "esg_extra_metric",
         "package_tab": "application",
         "package": "compliance",
-        "sub_package": "compliance_data",
+        "sub_package": "esg",
         "title": "ESG Extra Metrics",
         "nickname": "eem",
         "tutorial_link": null,
