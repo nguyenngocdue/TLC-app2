@@ -74,6 +74,7 @@ class Prod_run extends ModelExtended
 
     public function getManyLineParams($parentItem)
     {
+        $show_team_column = $parentItem->getSubProject->sqb_input_team;
         $result = [
             ['dataIndex' => 'id', 'invisible' => true,],
             ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
@@ -81,17 +82,12 @@ class Prod_run extends ModelExtended
             ['dataIndex' => 'start',],
             ['dataIndex' => 'end',],
             ['dataIndex' => 'total_hours', 'footer' => 'agg_sum',],
-        ];
-        $result[] = ['dataIndex' => 'worker_number_input',];
-        $result = [
-            ...$result,
+            ['dataIndex' => 'worker_number_input',],
             ['dataIndex' => 'worker_number_count', 'invisible' => true,],
             ['dataIndex' => 'worker_number', 'no_print' => true,],
             ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum',],
-        ];
-        $result[] = ['dataIndex' => 'production_output',  'footer' => 'agg_sum',];
-        $result = [
-            ...$result,
+            ['dataIndex' => 'production_output',  'footer' => 'agg_sum',],
+            ['dataIndex' => 'prod_discipline_id', 'invisible' => !$show_team_column],
             ['dataIndex' => 'remark',],
             ['dataIndex' => 'is_rework', "invisible" => true],
         ];

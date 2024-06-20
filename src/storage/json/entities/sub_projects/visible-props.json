@@ -119,6 +119,18 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_sqb_input_team": {
+        "name": "_sqb_input_team",
+        "column_name": "sqb_input_team",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_getProdRoutingsOfSubProject": {
         "name": "_getProdRoutingsOfSubProject",
         "column_name": "getProdRoutingsOfSubProject",
@@ -166,66 +178,6 @@
         "on_hold": "true",
         "cancelled": "true",
         "timesheet_only": "true"
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "concept": "true",
-        "design": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "timesheet_only": "true"
-    },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
-        "concept": "true",
-        "design": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "timesheet_only": "true"
-    },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
-        "concept": "true",
-        "design": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "finished": "true",
-        "on_hold": "true",
-        "cancelled": "true",
-        "timesheet_only": "true"
-    },
-    "_deleted_by": {
-        "name": "_deleted_by",
-        "column_name": "deleted_by",
-        "concept": "",
-        "design": "",
-        "manufacturing": "",
-        "construction_site": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "timesheet_only": ""
-    },
-    "_deleted_at": {
-        "name": "_deleted_at",
-        "column_name": "deleted_at",
-        "concept": "",
-        "design": "",
-        "manufacturing": "",
-        "construction_site": "",
-        "finished": "",
-        "on_hold": "",
-        "cancelled": "",
-        "timesheet_only": ""
     },
     "_divider1": {
         "name": "_divider1",
@@ -346,5 +298,65 @@
         "on_hold": "true",
         "cancelled": "true",
         "timesheet_only": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "concept": "",
+        "design": "",
+        "manufacturing": "",
+        "construction_site": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "timesheet_only": ""
     }
 }
