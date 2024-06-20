@@ -7,7 +7,7 @@ use App\Utils\Constant;
 
 class Hr_timesheet_officer extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'week', 'team_id', 'assignee_1',  'owner_id', 'status'];
+    protected $fillable = ['id', 'name', 'week', 'assignee_1',  'owner_id', 'status'];
     public static $nameless = true;
     public function getNameAttribute($value)
     {

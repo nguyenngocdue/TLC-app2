@@ -20,7 +20,7 @@ return new class extends Migration
         $schema->create('hr_timesheet_officers', function (BlueprintExtended $table) {
             $table->id();
             $table->date("week");
-            $table->unsignedBigInteger("team_id")->nullable();
+            // $table->unsignedBigInteger("team_id")->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->appendCommonFields();
         });
