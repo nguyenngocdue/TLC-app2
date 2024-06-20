@@ -73,7 +73,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -86,7 +86,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -99,7 +99,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -112,7 +112,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -125,7 +125,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -138,7 +138,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -151,7 +151,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Number",
         "control_extra": "",
         "textarea_rows": ""
     },
@@ -164,7 +164,7 @@
         "formula": "",
         "default_value": "",
         "label_extra": "",
-        "placeholder": "",
+        "placeholder": "Hours",
         "control_extra": "",
         "textarea_rows": ""
     },

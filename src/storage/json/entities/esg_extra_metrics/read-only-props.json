@@ -2,145 +2,145 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_metric_month": {
         "name": "_metric_month",
         "column_name": "metric_month",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_workplace_id": {
         "name": "_workplace_id",
         "column_name": "workplace_id",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_h1b": {
         "name": "_h1b",
         "column_name": "h1b",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_number_of_part_time_male": {
         "name": "_number_of_part_time_male",
         "column_name": "number_of_part_time_male",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_number_of_part_time_female": {
         "name": "_number_of_part_time_female",
         "column_name": "number_of_part_time_female",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_working_hours_of_part_time": {
         "name": "_working_hours_of_part_time",
         "column_name": "working_hours_of_part_time",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_onsite_workers_contractors": {
         "name": "_onsite_workers_contractors",
         "column_name": "onsite_workers_contractors",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_h2b": {
         "name": "_h2b",
         "column_name": "h2b",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_trained_employees": {
         "name": "_trained_employees",
         "column_name": "trained_employees",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_h3b": {
         "name": "_h3b",
         "column_name": "h3b",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_internal_discriminations": {
         "name": "_internal_discriminations",
         "column_name": "internal_discriminations",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_internal_grievances": {
         "name": "_internal_grievances",
         "column_name": "internal_grievances",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_external_grievances": {
         "name": "_external_grievances",
         "column_name": "external_grievances",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
+        "new": "",
         "active": "true"
     },
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "new": "true",
+        "new": "",
         "active": "true"
     }
 }
