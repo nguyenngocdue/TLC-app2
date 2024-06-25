@@ -208,10 +208,18 @@ trait TraitEntityAdvancedFilter
                         break;
                         // case 'checkbox_2a':
                     case 'dropdown_multi_2a':
-                        array_walk($value, function ($value, $key) use ($q) {
-                            $q->whereHas($key, function ($query) use ($value) {
-                                $query->whereIn('workplaces.id', $value);
-                            });
+                        array_walk($value, function ($value, $key) use ($q, $propsFilters) {
+                            $columnType = ($propsFilters["_$key"]['column_type']);
+                            if ($columnType == 'belongsToMany') {
+                                $tableName = ($propsFilters["_$key"]['relationships']['table']);
+                                foreach ($value as $id) {
+                                    $q->whereHas($key, function ($query) use ($value, $tableName, $id) {
+                                        $query->where("$tableName.id", $id);
+                                    }, '=', 1);
+                                }
+                            } else {
+                                $q->whereIn($key, $value);
+                            }
                         });
                         break;
                         // case 'dropdown_multi':
