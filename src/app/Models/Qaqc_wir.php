@@ -37,6 +37,7 @@ class Qaqc_wir extends ModelExtended
         "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
 
         "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_wir_user_monitor_1"],
+        "opened_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function comment_rejected_reason()
@@ -114,5 +115,12 @@ class Qaqc_wir extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    }
+
+    public function opened_photos()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 }
