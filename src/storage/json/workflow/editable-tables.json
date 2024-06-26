@@ -17,6 +17,12 @@
         "editable-table": "act_travel_req_lines",
         "button_add_a_new_line": "true"
     },
+    "crm_ticketings_01": {
+        "name": "crm_ticketings_01",
+        "entity-type": "crm_ticketings",
+        "editable-table": "crm_ticketing_tasks",
+        "button_add_a_new_line": "true"
+    },
     "department_skill_groups_01": {
         "name": "department_skill_groups_01",
         "entity-type": "department_skill_groups",

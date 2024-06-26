@@ -155,8 +155,12 @@
 
     @case('relationship_renderer')
         @if($action === "create")
-            <div title="[{{$prop['label']}}] table will appear after this document is created">
+            {{-- <div title="[{{$prop['label']}}] table will appear after this document is created">
                 <i class="fa-duotone fa-square-question text-yellow-800"></i>
+            </div> --}}
+            <div class="border rounded p-4 text-center">
+                <i class="fa-duotone fa-table text-yellow-800"></i>
+                This table will appear only after the document is saved.
             </div>
         @else
             <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />

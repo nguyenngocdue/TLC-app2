@@ -20,7 +20,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Completed by PE Members",
+        "label_extra": "Complete by PE Members",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
@@ -397,7 +397,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Completed by Peer Managers",
+        "label_extra": "Complete by Peer Managers",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
@@ -501,7 +501,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "Completed by PMs or Contractor",
+        "label_extra": "Complete by PMs or Contractor",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""

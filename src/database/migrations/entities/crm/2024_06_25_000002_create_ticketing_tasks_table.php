@@ -17,13 +17,17 @@ return new class extends Migration
         $schema = DB::connection()->getSchemaBuilder();
         $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('pj_units', function (BlueprintExtended $table) {
+        $schema->create('crm_ticketing_tasks', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
-            $table->unsignedBigInteger('project_id')->nullable();
-            $table->unsignedBigInteger('pj_sell_type_id')->nullable();
+
+            $table->unsignedBigInteger('ticketing_id')->nullable();
+            $table->unsignedBigInteger('priority_id')->nullable();
+            $table->dateTime('due_date')->nullable();
+
+            $table->orderable();
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }
@@ -35,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pj_units');
+        Schema::dropIfExists('crm_ticketing_tasks');
     }
 };

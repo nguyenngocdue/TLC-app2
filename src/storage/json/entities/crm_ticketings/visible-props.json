@@ -1,0 +1,192 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true"
+    },
+    "_section_owner_info": {
+        "name": "_section_owner_info",
+        "column_name": "section_owner_info",
+        "new": "true"
+    },
+    "_section_owner_info_sub": {
+        "name": "_section_owner_info_sub",
+        "column_name": "section_owner_info_sub",
+        "new": "true"
+    },
+    "_sep00": {
+        "name": "_sep00",
+        "column_name": "sep00",
+        "new": "true"
+    },
+    "_house_owner_id": {
+        "name": "_house_owner_id",
+        "column_name": "house_owner_id",
+        "new": "true"
+    },
+    "_house_owner_phone_number": {
+        "name": "_house_owner_phone_number",
+        "column_name": "house_owner_phone_number",
+        "new": "true"
+    },
+    "_house_owner_address": {
+        "name": "_house_owner_address",
+        "column_name": "house_owner_address",
+        "new": "true"
+    },
+    "_house_owner_email": {
+        "name": "_house_owner_email",
+        "column_name": "house_owner_email",
+        "new": "true"
+    },
+    "_section_basic_info": {
+        "name": "_section_basic_info",
+        "column_name": "section_basic_info",
+        "new": "true"
+    },
+    "_section_basic_info_sub": {
+        "name": "_section_basic_info_sub",
+        "column_name": "section_basic_info_sub",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_unit_id": {
+        "name": "_unit_id",
+        "column_name": "unit_id",
+        "new": "true"
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true"
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "new": "true"
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "new": "true"
+    },
+    "_defect_cat_id": {
+        "name": "_defect_cat_id",
+        "column_name": "defect_cat_id",
+        "new": "true"
+    },
+    "_defect_sub_cat_id": {
+        "name": "_defect_sub_cat_id",
+        "column_name": "defect_sub_cat_id",
+        "new": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true"
+    },
+    "_opened_photos": {
+        "name": "_opened_photos",
+        "column_name": "opened_photos",
+        "new": "true"
+    },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
+        "new": "true"
+    },
+    "_section_appointment": {
+        "name": "_section_appointment",
+        "column_name": "section_appointment",
+        "new": "true"
+    },
+    "_section_appointment_sub": {
+        "name": "_section_appointment_sub",
+        "column_name": "section_appointment_sub",
+        "new": "true"
+    },
+    "_appointment_title": {
+        "name": "_appointment_title",
+        "column_name": "appointment_title",
+        "new": "true"
+    },
+    "_appointment_from": {
+        "name": "_appointment_from",
+        "column_name": "appointment_from",
+        "new": "true"
+    },
+    "_appointment_to": {
+        "name": "_appointment_to",
+        "column_name": "appointment_to",
+        "new": "true"
+    },
+    "_appointment_detail": {
+        "name": "_appointment_detail",
+        "column_name": "appointment_detail",
+        "new": "true"
+    },
+    "_sep02": {
+        "name": "_sep02",
+        "column_name": "sep02",
+        "new": "true"
+    },
+    "_section_task": {
+        "name": "_section_task",
+        "column_name": "section_task",
+        "new": "true"
+    },
+    "_section_task_sub": {
+        "name": "_section_task_sub",
+        "column_name": "section_task_sub",
+        "new": "true"
+    },
+    "_getTicketingTasks": {
+        "name": "_getTicketingTasks",
+        "column_name": "getTicketingTasks",
+        "new": "true"
+    },
+    "_closed_photos": {
+        "name": "_closed_photos",
+        "column_name": "closed_photos",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "true"
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "true"
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true"
+    }
+}

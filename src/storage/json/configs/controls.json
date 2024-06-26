@@ -165,7 +165,8 @@
         "dashboard",
         "task_management",
         "exam",
-        "diginet_data"
+        "diginet_data",
+        "ticketing"
     ],
     "assignees": [
         "assignee_1",

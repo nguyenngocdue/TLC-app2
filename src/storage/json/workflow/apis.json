@@ -47,6 +47,16 @@
     "control_types": {
         "name": "control_types"
     },
+    "crm_ticketing_defect_cats": {
+        "name": "crm_ticketing_defect_cats"
+    },
+    "crm_ticketing_tasks": {
+        "name": "crm_ticketing_tasks",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "crm_ticketings": {
+        "name": "crm_ticketings"
+    },
     "department_skill_groups": {
         "name": "department_skill_groups"
     },
