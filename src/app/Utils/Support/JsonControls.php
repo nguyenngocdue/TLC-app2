@@ -115,6 +115,10 @@ class JsonControls
     {
         return self::getAll()['apps_have_qr_landing_page'];
     }
+    public static function getAppsHideViewAllListView()
+    {
+        return self::getAll()['apps_hide_view_all_list_view'];
+    }
     public static function getAppsHaveViewAllCalendar()
     {
         return self::getAll()['apps_have_view_all_calendar'];

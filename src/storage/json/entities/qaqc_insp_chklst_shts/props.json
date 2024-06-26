@@ -117,7 +117,7 @@
         "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "200",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",

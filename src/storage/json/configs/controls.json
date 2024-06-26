@@ -228,6 +228,10 @@
     "apps_have_view_all_calendar": [
         "hr_timesheet_officers"
     ],
+    "apps_hide_view_all_list_view":[
+        "qaqc_insp_chklsts",
+        "qaqc_insp_chklst_shts"
+    ],
     "apps_have_qr_landing_page": [
         "pj_module",
         "pj_shipment",

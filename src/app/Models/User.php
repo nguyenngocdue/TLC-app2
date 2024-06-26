@@ -387,9 +387,26 @@ class User extends ModelExtended implements
             // 'qaqc_wirs',
             'qaqc_ncrs',
             'qaqc_mirs',
-            'qaqc_punchlists',
+            // 'qaqc_punchlists',
             'qaqc_insp_chklsts',
             'qaqc_insp_chklst_shts',
+
+            // 'dashboards',
+        ];
+        return (in_array($plural, $allowed));
+    }
+
+    public static function showProjectFilterByDocType()
+    {
+        $plural = CurrentRoute::getTypePlural();
+        // dump($plural);
+        $allowed = [
+            // 'qaqc_wirs',
+            'qaqc_ncrs',
+            'qaqc_mirs',
+            // 'qaqc_punchlists',
+            // 'qaqc_insp_chklsts',
+            // 'qaqc_insp_chklst_shts',
 
             // 'dashboards',
         ];

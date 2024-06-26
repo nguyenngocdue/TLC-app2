@@ -28,7 +28,7 @@ class MenuProjectFilter extends Component
     {
 
         $cu = CurrentUser::get();
-        $isAllowed = $cu->isAllowedDocType();
+        $isAllowed = $cu->showProjectFilterByDocType();
         if (!$isAllowed) return "";
         $data = (new EntityIdClickCount)('project');
         $entitiesIds = collect($data)->pluck('entity_id')->toArray();
