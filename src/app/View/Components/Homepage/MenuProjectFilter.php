@@ -26,9 +26,12 @@ class MenuProjectFilter extends Component
      */
     public function render()
     {
+
+        $cu = CurrentUser::get();
+        $isAllowed = $cu->isAllowedDocType();
+        if (!$isAllowed) return "";
         $data = (new EntityIdClickCount)('project');
         $entitiesIds = collect($data)->pluck('entity_id')->toArray();
-        $cu = CurrentUser::get();
         $projectList = collect([]);
 
         $selectedProjectId = $cu->settings["global"]["selected-project-id"] ?? null;
@@ -38,6 +41,7 @@ class MenuProjectFilter extends Component
         if ($cu->isProjectClient()) {
             $statuses = config("project.active_statuses.projects");
             $allowedSubProjectIds = $cu->getAllowedSubProjectIds();
+            // dump($allowedSubProjectIds);
             $projectList = Project::query();
             if ($allowedSubProjectIds) {
                 $projectList = $projectList->whereHas('getSubProjects', fn ($q) => $q->whereIn('id', $allowedSubProjectIds));

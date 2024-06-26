@@ -382,6 +382,7 @@ class User extends ModelExtended implements
     public static function isAllowedDocType()
     {
         $plural = CurrentRoute::getTypePlural();
+        // dump($plural);
         $allowed = [
             // 'qaqc_wirs',
             'qaqc_ncrs',
@@ -389,6 +390,8 @@ class User extends ModelExtended implements
             'qaqc_punchlists',
             'qaqc_insp_chklsts',
             'qaqc_insp_chklst_shts',
+
+            // 'dashboards',
         ];
         return (in_array($plural, $allowed));
     }
@@ -396,8 +399,12 @@ class User extends ModelExtended implements
     public function getAllowedSubProjectIds()
     {
         $allowedSubProjectIds = null;
+        // dump($this->isProjectClient());
+        // dump($this->isAllowedDocType());
         if ($this->isProjectClient() && $this->isAllowedDocType()) {
-            $allowedSubProjectIds = $this->getSubProjectsOfProjectClient()->pluck('sub_projects.id')->toArray();
+            $allowedSubProjectIds = $this->getSubProjectsOfProjectClient()
+                ->pluck('sub_projects.id')
+                ->toArray();
         }
         return $allowedSubProjectIds;
     }
