@@ -1,4 +1,4 @@
-<form id="refresh_{{$type}}" action="{{$route}}" method="post">
+<form id="refresh_{{$type}}" action="{{$route}}" method="post" class="mb-0">
     @method('PUT')
     @csrf
     <input type="hidden" name='_entity' value="{{$type}}">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\BigThink\HasCachedAvatar;
 use App\BigThink\ModelExtended;
+use App\Utils\Support\CurrentRoute;
 use Laravel\Sanctum\HasApiTokens;
 use LdapRecord\Laravel\Auth\LdapAuthenticatable;
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
@@ -376,5 +377,28 @@ class User extends ModelExtended implements
     public static function getByEmployeeId($employeeId)
     {
         return static::where('employeeid', $employeeId)->first();
+    }
+
+    public static function isAllowedDocType()
+    {
+        $plural = CurrentRoute::getTypePlural();
+        $allowed = [
+            // 'qaqc_wirs',
+            'qaqc_ncrs',
+            'qaqc_mirs',
+            'qaqc_punchlists',
+            'qaqc_insp_chklsts',
+            'qaqc_insp_chklst_shts',
+        ];
+        return (in_array($plural, $allowed));
+    }
+
+    public function getAllowedSubProjectIds()
+    {
+        $allowedSubProjectIds = null;
+        if ($this->isProjectClient() && $this->isAllowedDocType()) {
+            $allowedSubProjectIds = $this->getSubProjectsOfProjectClient()->pluck('sub_projects.id')->toArray();
+        }
+        return $allowedSubProjectIds;
     }
 }

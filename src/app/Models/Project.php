@@ -50,11 +50,11 @@ class Project extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public static function getAllProjectByCondition()
-    {
-        $status = config("project.active_statuses." . static::getTableName());
-        return self::whereIn('status', $status)->get();
-    }
+    // public static function getAllProjectByCondition()
+    // {
+    //     $status = config("project.active_statuses." . static::getTableName());
+    //     return self::whereIn('status', $status)->get();
+    // }
     public function featured_image()
     {
         $p = static::$eloquentParams[__FUNCTION__];

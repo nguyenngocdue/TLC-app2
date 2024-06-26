@@ -26,10 +26,13 @@ class UpdateUserSettings extends Controller
     }
     private function updateGlobal($request, $settings)
     {
-        $themeBg = $request->input('theme-bg');
-        $themeText = $request->input('theme-text');
-        $settings[Constant::GLOBAL]['theme-bg'] = $themeBg;
-        $settings[Constant::GLOBAL]['theme-text'] = $themeText;
+        $supported = ['theme-bg', 'theme-text', 'selected-project-id'];
+        foreach ($supported as $key) {
+            if ($request->has($key)) {
+                $themeBg = $request->input($key);
+                $settings[Constant::GLOBAL][$key] = $themeBg;
+            }
+        }
         return $settings;
     }
     private function updateShowOptionsOrgChart($request, $settings)

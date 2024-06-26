@@ -42,7 +42,7 @@ class ViewAllTypeList extends Component
         $this->removeStatusColumnIfStatusless();
         $route = route('updateUserSettings');
         $perPage = "<x-form.per-page type='$this->type' route='$route' perPage='$this->perPage'/>";
-        $actionButtonGroup = "<div class='flex'>
+        $actionButtonGroup = "<div class='flex' component='actionButtonGroup'>
                     <x-form.refresh type='$this->type' route='$route' valueRefresh='$this->refreshPage'/>
                     <x-form.action-button-group type='$this->type' />
                 </div>";

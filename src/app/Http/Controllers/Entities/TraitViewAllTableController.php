@@ -6,6 +6,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -34,12 +35,16 @@ trait TraitViewAllTableController
         $app = LibApps::getFor($this->type);
         $tableTrueWidth = !($app['hidden'] ?? false);
 
+        $cu = CurrentUser::get();
+        $showAdvanceFilterForm = !$cu->isProjectClient();
+
         //Beta to show true width
         // if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
         return view('dashboards.pages.entity-view-all', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => $trashed ? '(Trash)' : '',
             'perPage' => $perPage,
+            'showAdvanceFilterForm' => $showAdvanceFilterForm,
             'valueAdvanceFilters' => $advanceFilters,
             'refreshPage' => $refreshPage,
             'type' => $type,

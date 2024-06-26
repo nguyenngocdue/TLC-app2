@@ -65,9 +65,16 @@ class ViewAllController extends Controller
 
     public function index(Request $request, $trashed = false)
     {
-        // $cu = CurrentUser::get();
-        // if ($cu->isExternalInspector() || $cu->isProjectClient() || $cu->isCouncilMember()) return abort(403);
-        if (CurrentUser::get()->isExternal()) return abort(403);
+        $cu = CurrentUser::get();
+        if ($cu->isExternalInspector() || $cu->isCouncilMember()) return abort(403, "External users are not allowed to access this page.");
+
+        if ($cu->isProjectClient()) {
+            if ($cu->isAllowedDocType()) {
+                // dump("Do crazy thing here");
+            } else {
+                return abort(403, "External users are not allowed to access this page.");
+            }
+        }
 
         if ($viewType = $request->input('view_type')) {
             (new UpdateUserSettings())($request);

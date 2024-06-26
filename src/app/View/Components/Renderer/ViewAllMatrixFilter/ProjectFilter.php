@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Project;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
@@ -36,9 +37,16 @@ class ProjectFilter extends Component
 
     private function getDataSource()
     {
+        //Override for 3rd party's dashboard
         if ($this->dataSource) return $this->dataSource;
-        // $statuses = config("project.active_statuses.projects");
-        $db = Project::select('id', 'name', 'description')
+
+        $cu = CurrentUser::get();
+        $allowedSubProjectIds = $cu->getAllowedSubProjectIds();
+
+        $db = Project::query();
+        if ($allowedSubProjectIds)
+            $db->whereHas('getSubProjects', fn ($q) => $q->whereIn('id', $allowedSubProjectIds));
+        $db = $db->select('id', 'name', 'description')
             ->with('getScreensShowMeOn')
             ->orderBy('name')
             ->get();

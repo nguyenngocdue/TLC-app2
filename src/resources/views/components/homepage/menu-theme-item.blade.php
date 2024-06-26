@@ -1,5 +1,5 @@
 {{-- {{$currentBg}} --}}
-<form action="{{$route}}" method="POST" class='flex'>
+<form action="{{$route}}" method="POST" class='flex mb-0'>
     @csrf
     @method('PUT')
     <input type="hidden" name="action" value="updateGlobal">
@@ -25,7 +25,7 @@
 <span class="block w-1 bg-{{$color}}-800"></span>
 <span class="block w-1 bg-{{$color}}-900"></span> 
 
-<form action="{{$route}}" method="POST" class='flex'>
+<form action="{{$route}}" method="POST" class='flex mb-0'>
     @csrf
     @method('PUT')
     <input type="hidden" name="action" value="updateGlobal">

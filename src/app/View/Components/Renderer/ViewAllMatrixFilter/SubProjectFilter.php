@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixFilter;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitGetSuffixListenerControl;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use App\Models\Sub_project;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Arr;
 
@@ -34,12 +35,22 @@ class SubProjectFilter extends Component
 
     private function getDataSource()
     {
+        //Override for 3rd party's dashboard
         if ($this->dataSource) return $this->dataSource;
+
         $statuses = config("project.active_statuses.sub_projects");
+
+        $cu = CurrentUser::get();
+        $allowedSubProjectIds = $cu->getAllowedSubProjectIds();
+
         $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
             ->whereIn('status', $statuses)
-            ->orderBy('name')
-            ->get();
+            ->orderBy('name');
+        if ($allowedSubProjectIds)
+            $dataSource = $dataSource->whereIn('id', $allowedSubProjectIds);
+        $dataSource =  $dataSource->get();
+
+        // dump($dataSource);
         return $dataSource;
     }
 

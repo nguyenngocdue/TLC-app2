@@ -2326,6 +2326,8 @@
         "status": null,
         "edit_renderer": null,
         "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
         "disallowed_direct_creation": "true"
     },
     "qaqc_punchlist_line": {
