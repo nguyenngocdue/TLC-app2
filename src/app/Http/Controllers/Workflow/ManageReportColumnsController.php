@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Workflow;
 
 use App\Utils\Support\JsonControls;
 
-class ManageTypeOfReportsController extends AbstractManageLibController
+class ManageReportColumnsController extends AbstractManageLibController
 {
-    protected $title = "Manage Column Reports";
-    protected $libraryClass = LibReports::class;
-    protected $route = "manageColumnReports";
+    protected $title = "Manage Report Columns";
+    protected $libraryClass = LibReports2::class;
+    protected $route = "manageReportColumns";
     protected $groupByLength = 6;
 
     protected function getColumns()
@@ -23,44 +23,62 @@ class ManageTypeOfReportsController extends AbstractManageLibController
                 "align" => "center",
             ],
             [
-                'dataIndex' => "name",
-                "renderer"  => 'text4',
-                'editable' => true,
-                'width' => 300,
-            ],
-            [
-                'dataIndex' => "is_active",
-                "renderer"  => 'dropdown',
-                'editable' => true,
-                'width' => 100,
-            ],
-            [
+                'title' => 'Column',
                 'dataIndex' => "data_index",
                 "renderer"  => 'text4',
                 'editable' => true,
                 'width' => 200,
             ],
             [
-                'dataIndex' => "width",
+                'title' => 'Block',
+                'dataIndex' => "block_id",
                 "renderer"  => 'text4',
                 'editable' => true,
                 'width' => 200,
             ],
             [
-                'dataIndex' => "cell_div_class_agg_footer",
+                'title' => 'Page',
+                'dataIndex' => "page_id",
                 "renderer"  => 'text4',
+                'editable' => true,
+                'width' => 200,
+            ],
+            [
+                'title' => 'Report',
+                'dataIndex' => "report_id",
+                "renderer"  => 'text4',
+                'editable' => true,
+                'width' => 200,
+            ],
+            [
+                'title' => 'Active',
+                'dataIndex' => "is_active",
+                "renderer"  => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 40,
+            ],
+            [
+                'dataIndex' => "width",
+                "renderer"  => 'text4',
+                'editable' => true,
+                'width' => 100,
+            ],
+            [
+                'dataIndex' => "cell_div_class_agg_footer",
+                "renderer"  => 'textarea4',
                 'editable' => true,
                 'width' => 200,
             ],
             [
                 'dataIndex' => "cell_div_class",
-                "renderer"  => 'text4',
+                "renderer"  => 'textarea4',
                 'editable' => true,
                 'width' => 200,
             ],
             [
                 'dataIndex' => "cell_class",
-                "renderer"  => 'text4',
+                "renderer"  => 'textarea4',
                 'editable' => true,
                 'width' => 200,
             ],
@@ -73,18 +91,19 @@ class ManageTypeOfReportsController extends AbstractManageLibController
             [
                 'dataIndex' => "icon_position",
                 "renderer"  => 'dropdown',
+                'cbbDataSource' => ['', 'top', 'bottom', 'left', 'right'],
                 'editable' => true,
                 'width' => 200,
             ],
             [
                 'dataIndex' => "row_cell_div_class",
-                "renderer"  => 'text4',
+                "renderer"  => 'textarea4',
                 'editable' => true,
-                'width' => 200,
+                'width' => 100,
             ],
             [
                 'dataIndex' => "row_cell_class",
-                "renderer"  => 'text4',
+                "renderer"  => 'textarea4',
                 'editable' => true,
                 'width' => 200,
             ],
@@ -97,24 +116,27 @@ class ManageTypeOfReportsController extends AbstractManageLibController
             [
                 'dataIndex' => "row_icon_position",
                 "renderer"  => 'dropdown',
+                'cbbDataSource' => ['', 'top', 'bottom', 'left', 'right'],
                 'editable' => true,
-                'width' => 200,
+                'width' => 100,
             ],
             [
                 'dataIndex' => "row_href_fn",
-                "renderer"  => 'text4',
+                "renderer"  => 'textarea4',
                 'editable' => true,
                 'width' => 200,
             ],
             [
                 'dataIndex' => "row_renderer",
                 "renderer"  => 'dropdown',
+                'cbbDataSource' => ['', 'Id', 'Tag (status)', 'Normal', 'Empty Icon'],
                 'editable' => true,
                 'width' => 200,
             ],
             [
                 'dataIndex' => "agg_footer",
                 "renderer"  => 'dropdown',
+                'cbbDataSource' => ['', 'Sum', 'Unique Item Sum', 'Average', 'Unique Count', 'Total Count'],
                 'editable' => true,
                 'width' => 200,
             ],
