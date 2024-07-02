@@ -17,7 +17,7 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
-        "listen_action": "",
+        "listen_action": "date_offset",
         "triggers": "priority_id",
         "listen_to_fields": "priority_id",
         "listen_to_attrs": "duration",
@@ -272,6 +272,21 @@
     "_appointment_detail": {
         "name": "_appointment_detail",
         "column_name": "appointment_detail",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
