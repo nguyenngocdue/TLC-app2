@@ -53,8 +53,9 @@ trait TraitTableRendererManyLines
             foreach ($dataSourceWithOld as &$item) {
                 if ($item instanceof \App\Models\Prod_run) {
                     $dateToCheck = Carbon::parse($item->date);
-                    $sevenDaysAgo = Carbon::now()->subDays(8);
-                    if (!$dateToCheck->greaterThanOrEqualTo($sevenDaysAgo)) {
+                    // $sevenDaysAgo = Carbon::now()->subDays(7+1);
+                    $fourDaysAgo = Carbon::now()->subDays(4 + 1);
+                    if (!$dateToCheck->greaterThanOrEqualTo($fourDaysAgo)) {
                         $item->readOnly = true;
                     }
                 }

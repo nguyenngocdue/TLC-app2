@@ -467,7 +467,7 @@ const addANewLineFull = (params) => {
                 break
             default:
                 const value = valuesOfOrigin[column['dataIndex']]
-                const picker4config = (tableName == 'prod_runs') ? { minDate: moment().subtract(7, 'days').format("YYYY-MM-DD") } : {}
+                const picker4config = (tableName == 'prod_runs') ? { minDate: moment().subtract(4, 'days').format("YYYY-MM-DD") } : {}
                 // console.log(picker4config)
                 // console.log("DDDDDD5", column, value)
                 if (column['value_as_parent_type']) {
