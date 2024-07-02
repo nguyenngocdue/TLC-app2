@@ -1,3 +1,10 @@
 [
-    "new"
+    "new",
+    "nominated",
+    "nomination_rejected",
+    "in_progress",
+    "on_hold",
+    "resolved",
+    "rejected",
+    "closed"
 ]

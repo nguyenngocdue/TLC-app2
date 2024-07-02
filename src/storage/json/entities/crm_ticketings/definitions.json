@@ -1,0 +1,57 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": "true"
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": "true"
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    }
+}

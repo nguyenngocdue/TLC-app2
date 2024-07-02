@@ -160,6 +160,20 @@
         "color_index": "200",
         "icon": "<i class=\"fa-duotone fa-file\"><\/i>"
     },
+    "nominated": {
+        "name": "nominated",
+        "title": "Nominated",
+        "color": "amber",
+        "color_index": "200",
+        "icon": null
+    },
+    "nomination_rejected": {
+        "name": "nomination_rejected",
+        "title": "Nomination Rejected",
+        "color": "orange",
+        "color_index": "200",
+        "icon": null
+    },
     "not_applicable": {
         "name": "not_applicable",
         "title": "Not Applicable",
@@ -296,7 +310,7 @@
     "resolved": {
         "name": "resolved",
         "title": "Resolved",
-        "color": "green",
+        "color": "cyan",
         "color_index": "200",
         "icon": null
     },

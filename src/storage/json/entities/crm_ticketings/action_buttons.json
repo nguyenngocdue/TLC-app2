@@ -1,0 +1,50 @@
+{
+    "new": {
+        "name": "new",
+        "label": "Create New",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "nominated": {
+        "name": "nominated",
+        "label": "Request for Nomination",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "nomination_rejected": {
+        "name": "nomination_rejected",
+        "label": "Reject Nomination",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "label": "Change to In Progress",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "label": "Change to On Hold",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "resolved": {
+        "name": "resolved",
+        "label": "Request for Confirmation",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "label": "Reject Resolvation",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "closed": {
+        "name": "closed",
+        "label": "Confirm and Close",
+        "tooltip": "",
+        "change_status_multiple": ""
+    }
+}

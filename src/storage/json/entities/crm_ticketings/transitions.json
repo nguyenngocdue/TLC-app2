@@ -1,0 +1,98 @@
+{
+    "new": {
+        "name": "new",
+        "location": "-260.00 -10.00",
+        "new": "",
+        "nominated": "true",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "nominated": {
+        "name": "nominated",
+        "location": "-140.00 10.00",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "nomination_rejected": {
+        "name": "nomination_rejected",
+        "location": "-140.00 -70.00",
+        "new": "",
+        "nominated": "true",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "location": "10.00 10.00",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "on_hold": {
+        "name": "on_hold",
+        "location": "20.00 -70.00",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "true",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "resolved": {
+        "name": "resolved",
+        "location": "130.00 0.00",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "rejected": {
+        "name": "rejected",
+        "location": "130.00 -70.00",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "true",
+        "rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "location": "280.00 0.00",
+        "new": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    }
+}

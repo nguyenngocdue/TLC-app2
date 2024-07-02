@@ -94,7 +94,7 @@
         "name": "_remaining_days",
         "column_name": "remaining_days",
         "label": "",
-        "validation": "numeric|min:0",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
