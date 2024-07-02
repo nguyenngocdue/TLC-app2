@@ -379,7 +379,8 @@ const addANewLineFull = (params) => {
                     break
                 case 'picker-all4':
                     const { control } = column
-                    const attributeName = control === 'picker_datetime' ? 'name1' : 'name'
+                    // const attributeName = control === 'picker_datetime' ? 'name1' : 'name'
+                    const attributeName = 'name' // when create new, this will be submitted with the form, so name not name1
                     renderer = "<input component='editable/" + control + "' id='" + id + "' " + attributeName + "='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
                     //This line will cause save problem on SQBTS
                     // renderer += "<input type='hidden1' name='"+id+"' id='hidden_"+id+"'>"

@@ -58,7 +58,7 @@
     <script src="{{ asset('js/components/Dropdown4-20240529.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231229.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine2-20240529.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine2-20240702.js') }}"></script>
     <script src="{{ asset('js/components/Footer4-20231219.js') }}"></script>
     
     <script src="{{ asset('js/components/ViewAllMatrix-20240401.js') }}"></script>
