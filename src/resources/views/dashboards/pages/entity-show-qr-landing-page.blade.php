@@ -19,7 +19,7 @@
 
                         @if($unitName)
                         <div class="col-span-6 text-right">
-                            Apartment / House No.:
+                            Apartment No.:
                         </div>
                         <div class="col-span-6">
                             <span class="ml-1 font-semibold">{{$unitName}}</span>
