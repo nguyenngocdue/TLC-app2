@@ -14,7 +14,7 @@ class Crm_ticketing_task extends ModelExtended
 
     public static $eloquentParams = [
         "getTicketing" => ['belongsTo', Crm_ticketing::class, 'ticketing_id'],
-        'getPriority' => ['belongsTo', Term::class, 'priority_id'],
+        'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
     ];
 
     public function getTicketing()
