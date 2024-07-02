@@ -12,21 +12,21 @@
                     <img class="w-full h-full object-cover" src="{{$thumbnailUrl}}" alt="image" >
                 </div>
                 <div class="p-4 text-base mx-auto bg-gray-200 truncate flex justify-center">
-                    <div class="w-1/2 grid grid-cols-12">
+                    <div class="w-full grid grid-cols-12">
                         @php
                             $unitName = $item->getPjUnit?->name;
                         @endphp
 
                         @if($unitName)
                         <div class="col-span-6 text-right">
-                            Apartment / House Number:
+                            Apartment / House No.:
                         </div>
                         <div class="col-span-6">
                             <span class="ml-1 font-semibold">{{$unitName}}</span>
                         </div>
                         @else
                         <div class="col-span-6 text-right">
-                            Module Number: 
+                            Module No.: 
                         </div>
                         <div class="col-span-6">
                             <span class="ml-1 font-semibold">{{$item->name}}</span>

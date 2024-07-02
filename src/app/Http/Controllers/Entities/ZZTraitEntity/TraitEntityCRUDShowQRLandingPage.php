@@ -19,8 +19,9 @@ trait TraitEntityCRUDShowQRLandingPage
 		}
 		$props = SuperProps::getFor($this->type)['props'];
 
-		$thumbnailUrl = $item->getSubProject?->getProject->getAvatarUrl() ?? "/images/generic-module1.webp";
-		return view('dashboards.pages.entity-show-landing-page', [
+		$thumbnailUrl = $item->getSubProject?->getProject->getAvatarUrl("/images/generic-module1.webp");
+		// dump($thumbnailUrl);
+		return view('dashboards.pages.entity-show-qr-landing-page', [
 			'props' => $props,
 			'item' => $item,
 			'dataSource' => $this->getDataSourceGroups($item),
