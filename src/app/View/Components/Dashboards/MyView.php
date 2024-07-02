@@ -168,8 +168,8 @@ class MyView extends Component
         $apps = LibApps::getAll();
         if (in_array($viewType, ['assigned_to_me', 'created_by_me'])) {
             $apps = array_filter($apps, fn ($app) => $app['show_in_my_view'] ?? false);
-        } elseif (in_array($viewType, ['monitored_by_me'])) {
-            $apps = array_filter($apps, fn ($app) => $app['show_in_monitored_by_me'] ?? false);
+            // } elseif (in_array($viewType, ['monitored_by_me'])) {
+            //     $apps = array_filter($apps, fn ($app) => $app['show_in_monitored_by_me'] ?? false);
         }
         $apps = array_filter($apps, fn ($app) => CurrentUser::hasPermissionTo("read-" . Str::plural($app['name'])));
 

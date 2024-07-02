@@ -405,8 +405,8 @@ class User extends ModelExtended implements
             'qaqc_ncrs',
             'qaqc_mirs',
             // 'qaqc_punchlists',
-            // 'qaqc_insp_chklsts',
-            // 'qaqc_insp_chklst_shts',
+            // 'qaqc_insp_chklsts', // this doesn't have Project, only sub project, cant apply
+            // 'qaqc_insp_chklst_shts', // this doesn't have Project, only sub project, cant apply
 
             // 'dashboards',
         ];

@@ -131,7 +131,8 @@
         "operation",
         "compliance",
         "system",
-        "unit_test"
+        "unit_test",
+        "report"
     ],
     "sub_packages": [
         "",
@@ -166,7 +167,8 @@
         "task_management",
         "exam",
         "diginet_data",
-        "ticketing"
+        "ticketing",
+        "report"
     ],
     "assignees": [
         "assignee_1",

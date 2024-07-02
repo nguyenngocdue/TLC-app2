@@ -19,7 +19,7 @@ return new class extends Migration
 
         $schema->create('rp_reports', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
 
             $table->appendCommonFields();

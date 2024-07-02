@@ -19,6 +19,7 @@ return new class extends Migration
 
         $schema->create('rp_letter_footers', function (BlueprintExtended $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->text('content')->nullable();
 
             $table->appendCommonFields();
