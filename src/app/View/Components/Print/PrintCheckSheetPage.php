@@ -46,19 +46,19 @@ class PrintCheckSheetPage extends Component
             [
                 'id' => 'yes',
                 'color' => 'green',
-                'percent' => ($all > 0) ? (100 * $yes / $all) . '%' : "ZERO",
+                'percent' => ($all > 0) ? (100 * $yes / $all) . '%' : "0%",
                 'label' => "Pass<br/>$yes/$all",
             ],
             [
                 'id' => 'no',
                 'color' => 'pink',
-                'percent' => ($all > 0) ? (100 * $no / $all) . '%' : "ZERO",
+                'percent' => ($all > 0) ? (100 * $no / $all) . '%' : "0%",
                 'label' => "Fail<br/>$no/$all",
             ],
             [
                 'id' => 'na',
                 'color' => 'gray',
-                'percent' => ($all > 0) ? (100 * $na / $all) . '%' : "ZERO",
+                'percent' => ($all > 0) ? (100 * $na / $all) . '%' : "0%",
                 'label' => "NA<br/>$na/$all",
             ],
             // [
