@@ -335,6 +335,18 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_comment_ticketing": {
+        "name": "_comment_ticketing",
+        "column_name": "comment_ticketing",
+        "new": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_sep02": {
         "name": "_sep02",
         "column_name": "sep02",
