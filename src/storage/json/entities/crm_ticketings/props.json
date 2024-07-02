@@ -593,6 +593,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "column_type": "belongsToMany",
+        "label": "Monitors",
+        "control": "dropdown_multi_2a",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_sep02": {
         "name": "_sep02",
         "column_name": "sep02",

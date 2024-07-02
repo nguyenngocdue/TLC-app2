@@ -7,22 +7,25 @@ use App\BigThink\ModelExtended;
 class Crm_ticketing extends ModelExtended
 {
     protected $fillable = [
-        'id', 'name', 'description', 'owner_id', 'status',
-        'project_id', 'unit_id', 'priority_id',
+        'id',
+        'house_owner_id', 'house_owner_phone_number', 'house_owner_address', 'house_owner_email',
+        'name', 'description', 'unit_id',  'project_id',
+        'priority_id', 'due_date',
         'defect_cat_id', 'defect_sub_cat_id',
-        'house_owner_id', 'house_owner_phone_number', 'house_owner_address',
-        'assignee_1',
+        'appointment_title', 'assignee_1',
+        'appointment_from', 'appointment_to', 'appointment_detail',
+        'owner_id', 'status',
     ];
-    public static $statusless = true;
 
     public static $eloquentParams = [
-        'getProject' => ['belongsTo', Project::class, 'project_id'],
-        'getUnit' => ['belongsTo', Pj_unit::class, 'unit_id'],
-        'getPriority' => ['belongsTo', Term::class, 'priority_id'],
-        'getDefectCat' => ['belongsTo', Crm_ticketing_defect_cat::class, 'defect_cat_id'],
-        'getDefectSubCat' => ['belongsTo', Crm_ticketing_defect_sub_cat::class, 'defect_sub_cat_id'],
-        'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
-        'getHouseOwner' => ['belongsTo', User::class, 'house_owner_id'],
+        "getProject" => ['belongsTo', Project::class, 'project_id'],
+        "getUnit" => ['belongsTo', Pj_unit::class, 'unit_id'],
+        "getPriority" => ['belongsTo', Priority::class, 'priority_id'],
+        "getDefectCat" => ['belongsTo', Crm_ticketing_defect_cat::class, 'defect_cat_id'],
+        "getDefectSubCat" => ['belongsTo', Crm_ticketing_defect_sub_cat::class, 'defect_sub_cat_id'],
+        "getAssignee1" => ['belongsTo', User::class, 'assignee_1'],
+        "getMonitors1" => ['belongsToMany', User::class, 'ym2m_crm_ticketing_user_monitor_1'],
+        "getHouseOwner" => ['belongsTo', User::class, 'house_owner_id'],
 
         "getTicketingTasks" => ['hasMany', Crm_ticketing_task::class, 'ticketing_id'],
 
@@ -56,6 +59,11 @@ class Crm_ticketing extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getMonitors1()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

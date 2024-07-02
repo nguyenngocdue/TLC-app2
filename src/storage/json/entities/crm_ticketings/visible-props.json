@@ -323,6 +323,18 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "new": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_sep02": {
         "name": "_sep02",
         "column_name": "sep02",
