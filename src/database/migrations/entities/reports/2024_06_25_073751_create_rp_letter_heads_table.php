@@ -17,8 +17,9 @@ return new class extends Migration
         $schema = DB::connection()->getSchemaBuilder();
         $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('rp_letter_headers', function (BlueprintExtended $table) {
+        $schema->create('rp_letter_heads', function (BlueprintExtended $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->text('content')->nullable();
 
             $table->appendCommonFields();
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rp_letter_headers');
+        Schema::dropIfExists('rp_letter_heads');
     }
 };

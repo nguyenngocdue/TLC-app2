@@ -62,9 +62,16 @@ trait TraitCreatePivotTable
 
             $table->unique([$key1, $key2], md5($key1 . $key2 . $key3));
 
+            $this->schemaPivot($table);
+
             $table->unsignedBigInteger('owner_id');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
+    }
+
+    public function schemaPivot(BlueprintExtended $table)
+    {
+        //This function is for child migration to override
     }
 }

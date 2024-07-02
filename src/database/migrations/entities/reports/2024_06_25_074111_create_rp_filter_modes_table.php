@@ -19,7 +19,7 @@ return new class extends Migration
 
         $schema->create('rp_filter_modes', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->unsignedBigInteger('report_id')->nullable();
 
             $table->appendCommonFields();

@@ -19,8 +19,23 @@ return new class extends Migration
 
         $schema->create('rp_blocks', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('name')->nullable();
             $table->text('sql_string')->nullable();
+            $table->boolean('table_true_width')->nullable();
+            $table->unsignedInteger('max_h')->nullable();
+            $table->unsignedInteger('rotate_45_width')->nullable();
+            $table->unsignedInteger('rotate_45_height')->nullable();
+            $table->unsignedBigInteger('renderer_type')->nullable();
+            $table->json('chart_json')->nullable();
+            $table->boolean('has_pagination')->nullable();
+            $table->unsignedBigInteger('top_left_control')->nullable();
+            $table->unsignedBigInteger('top_center_control')->nullable();
+            $table->unsignedBigInteger('top_right_control')->nullable();
+            $table->unsignedBigInteger('bottom_left_control')->nullable();
+            $table->unsignedBigInteger('bottom_center_control')->nullable();
+            $table->unsignedBigInteger('bottom_right_control')->nullable();
+            $table->unsignedBigInteger('chart_type')->nullable();
+            $table->text('html_content')->nullable();
 
             $table->appendCommonFields();
         });

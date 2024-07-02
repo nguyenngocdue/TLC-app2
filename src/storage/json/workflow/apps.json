@@ -2169,8 +2169,7 @@
         "status": null,
         "edit_renderer": null,
         "show_renderer": "checklist-sheet-renderer",
-        "disallowed_direct_creation": "true",
-        "show_in_monitored_by_me": "true"
+        "disallowed_direct_creation": "true"
     },
     "qaqc_insp_control_group": {
         "name": "qaqc_insp_control_group",
@@ -2427,6 +2426,40 @@
         "show_renderer": null,
         "hidden": "true",
         "hidden_navbar": "true"
+    },
+    "rp_page": {
+        "name": "rp_page",
+        "package_tab": "application",
+        "package": "report",
+        "sub_package": "report",
+        "title": "Report Pages",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": null,
+        "doc_id_format_column": null,
+        "status": "dev",
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
+    },
+    "rp_report": {
+        "name": "rp_report",
+        "package_tab": "application",
+        "package": "report",
+        "sub_package": "report",
+        "title": "Reports",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": null,
+        "doc_id_format_column": null,
+        "status": "dev",
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "setpermissions": {
         "name": "setpermissions",
