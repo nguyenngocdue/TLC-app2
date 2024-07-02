@@ -1,7 +1,9 @@
 {{-- @if($readOnly)
 <div class="p-2">{{$cell??$slot}}</div>
 @endif --}}
-@php $attributeName = ($control == 'picker_datetime') ? "name1" : "name"; @endphp
+@php 
+$attributeName = ($control == 'picker_datetime') ? ($readOnly?"name":"name1") : "name"; 
+@endphp
 
 <input
     @readonly($readOnly)
