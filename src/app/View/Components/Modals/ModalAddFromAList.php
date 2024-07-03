@@ -2,32 +2,34 @@
 
 namespace App\View\Components\Modals;
 
-use App\Models\User_team_ot;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ModalAddFromAList extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
     public function __construct(
         private $modalId = null,
+        private $table01Name = null,
+
+        private $eloquentFunctionName = null,
+        private $groupDataSourceName = null,
+        private $itemDataSourceName = null,
+        private $xxxForeignKey = null,
     ) {
-        //
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
     public function render()
     {
-        $list = User_team_ot::get();
-        return view('components.modals.modal-add-from-a-list', [
+        $params = [
             'modalId' => $this->modalId,
-        ]);
+            'table01Name' => $this->table01Name,
+
+            'eloquentFunctionName' => $this->eloquentFunctionName,
+            'groupDataSourceName' => $this->groupDataSourceName,
+            'itemDataSourceName' => $this->itemDataSourceName,
+            'xxxForeignKey' => $this->xxxForeignKey,
+        ];
+
+        return view('components.modals.modal-add-from-a-list', $params);
     }
 }

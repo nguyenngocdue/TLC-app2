@@ -11,7 +11,7 @@ class LibEditableTables extends AbstractLib
         $all = parent::getAll();
         $result = [];
         foreach ($all as $value) {
-            $checkbox = array_filter($value, fn ($v) => $v === 'true');
+            $checkbox = array_filter($value, fn ($v) => !is_null($v));
             $result['name'] = $value['name'];
             $result[$value['entity-type']][$value['editable-table']] = $checkbox;
         }

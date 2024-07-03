@@ -31,7 +31,7 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "renderer"  => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => $entities,
-                'width' => 300,
+                'width' => 250,
             ],
             [
                 'dataIndex' => "editable-table",
@@ -39,7 +39,7 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "renderer"  => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => $entities,
-                'width' => 300,
+                'width' => 250,
             ],
             [
                 'dataIndex' => "button_add_a_new_line",
@@ -54,6 +54,33 @@ class ManageEditableTablesController extends AbstractManageLibController
                 'editable' => true,
                 'align' => "center",
                 'width' => 60,
+            ],
+            [
+                "dataIndex" => "item_datasource",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                'cbbDataSource' => $entities,
+                'width' => 250,
+            ],
+            [
+                "dataIndex" => "eloquent_function_name",
+                "renderer"  => 'text4',
+                'editable' => true,
+                'width' => 200,
+            ],
+            [
+                "dataIndex" => "group_datasource",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                'cbbDataSource' => $entities,
+                'width' => 250,
+            ],
+
+            [
+                "dataIndex" => "foreign_key",
+                "renderer"  => 'text4',
+                'editable' => true,
+                'width' => 100,
             ],
             [
                 'dataIndex' => "button_clone_from_tmpl",

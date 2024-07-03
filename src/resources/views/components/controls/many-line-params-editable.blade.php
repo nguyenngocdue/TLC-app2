@@ -12,23 +12,6 @@
     tableTrueWidth=1
     />
 
-{{-- @once
-<script>
-const getLinesUnderTable = ({ tableId }) => {
-    const team_id = getEById('team_id').val();
-    const date = getEById('ts_date').val();
-    const parent_id = getEById('entityParentId').val()
-    console.log(team_id, date, parent_id)
-    // console.log(tableId, tableObject[tableId])
-    const url = @json(route("prod_runs.getLines"));
-    const data = [{team_id, date, parent_id }];
-    // const data = [{team_id: 4, date: '2022-08-31', parent_id: 11576 }];
-    callApiGetLines(url, data, [], ()=>alert("Get lines is done."))
-    // callApiGetLines(url, data, [], ()=>location.reload())
-}
-</script>
-@endonce --}}
-
 <div class="flex justify-between">
     <div>
         @if(isset($tableSettings['button_add_a_new_line']) && $tableSettings['button_add_a_new_line'])
@@ -48,8 +31,21 @@ const getLinesUnderTable = ({ tableId }) => {
             <x-renderer.button disabled="{{$readOnly}}" type="success" href="{!! $href !!}">Clone From Template</x-renderer.button>
         @endif
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
-            <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
-            <x-modals.modal-add-from-a-list modalId='{{$table01Name}}' />
+            @php
+                $eloquentFunctionName = $tableSettings['eloquent_function_name'];
+                $groupDataSourceName = $tableSettings['group_datasource'];
+                $itemDataSourceName = $tableSettings['item_datasource'];
+                $xxxForeignKey = $tableSettings['foreign_key'];
+            @endphp
+            <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('modal-add-from-a-list-of-{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
+            <x-modals.modal-add-from-a-list 
+                modalId='modal-add-from-a-list-of-{{$table01Name}}' 
+                table01Name='{{$table01Name}}' 
+                eloquentFunctionName='{{$eloquentFunctionName}}'
+                groupDataSourceName='{{$groupDataSourceName}}'                
+                itemDataSourceName='{{$itemDataSourceName}}'
+                xxxForeignKey='{{$xxxForeignKey}}'
+                />
         @endif
         {{-- @if(isset($tableSettings['button_get_lines']) && $tableSettings['button_get_lines'])
         <x-renderer.button disabled="{{$readOnly}}" id="btnGetLines_{{$table01Name}}" type="success" onClick="getLinesUnderTable({tableId: '{{$table01Name}}'})">Get Lines</x-renderer.button>
