@@ -42,4 +42,21 @@ class Rp_page extends ModelExtended
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
+
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => 'id', 'invisible' => true,],
+            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'report_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ["dataIndex" => 'name'],
+            ["dataIndex" => 'letter_head_id'],
+            ["dataIndex" => 'letter_footer_id'],
+            ["dataIndex" => 'is_landscape'],
+            ["dataIndex" => 'width'],
+            ["dataIndex" => 'height'],
+            ["dataIndex" => 'is_stackable_letter_head'],
+            ["dataIndex" => 'is_full_width'],
+        ];
+    }
 }

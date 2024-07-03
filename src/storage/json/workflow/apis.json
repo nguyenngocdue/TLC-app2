@@ -50,6 +50,9 @@
     "crm_ticketing_defect_cats": {
         "name": "crm_ticketing_defect_cats"
     },
+    "crm_ticketing_defect_sub_cats": {
+        "name": "crm_ticketing_defect_sub_cats"
+    },
     "crm_ticketing_tasks": {
         "name": "crm_ticketing_tasks",
         "storeEmpty_and_updateShort": "true"
@@ -474,6 +477,28 @@
         "name": "qaqc_wirs",
         "storeEmpty_and_updateShort": "true",
         "renderTableForPopupModals": "true"
+    },
+    "rp_blocks": {
+        "name": "rp_blocks"
+    },
+    "rp_columns": {
+        "name": "rp_columns"
+    },
+    "rp_filter_modes": {
+        "name": "rp_filter_modes"
+    },
+    "rp_letter_footers": {
+        "name": "rp_letter_footers"
+    },
+    "rp_letter_heads": {
+        "name": "rp_letter_heads"
+    },
+    "rp_pages": {
+        "name": "rp_pages",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "rp_reports": {
+        "name": "rp_reports"
     },
     "signatures": {
         "name": "signatures"
