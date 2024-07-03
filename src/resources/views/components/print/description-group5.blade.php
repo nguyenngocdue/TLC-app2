@@ -35,8 +35,8 @@
             @endswitch
         </div>
     </div>
+    @if (isset($propTree['children']))
     <div class='grid grid-cols-12'>
-        @if ($propTree['children'])
             @foreach($propTree['children'] as $prop)
             @php
             $label = $prop['label'];
@@ -46,8 +46,8 @@
             @endphp
                 <x-print.description5 type={{$type}} modelPath={{$modelPath}} :prop="$prop" :dataSource="$dataSource" :item="$item" numberOfEmptyLines="{{$numberOfEmptyLines}}" printMode="{{$printMode}}"/>
             @endforeach
-        @endif
-    </div>
+        </div>
+    @endif
     
 @else
     <div class='grid grid-cols-12'>
