@@ -32,13 +32,13 @@
         @endif
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
             @php
-                $eloquentFunctionName = $tableSettings['eloquent_function_name'];
-                $groupDataSourceName = $tableSettings['group_datasource'];
+                $eloquentFunctionName = $tableSettings['eloquent_function_name'] ?? null;
+                $groupDataSourceName = $tableSettings['group_datasource'] ?? null;
                 $itemDataSourceName = $tableSettings['item_datasource'];
                 $xxxForeignKey = $tableSettings['foreign_key'];
             @endphp
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('modal-add-from-a-list-of-{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
-            <x-modals.modal-add-from-a-list 
+            <x-modals.modal-add-from-a-list
                 modalId='modal-add-from-a-list-of-{{$table01Name}}' 
                 table01Name='{{$table01Name}}' 
                 eloquentFunctionName='{{$eloquentFunctionName}}'

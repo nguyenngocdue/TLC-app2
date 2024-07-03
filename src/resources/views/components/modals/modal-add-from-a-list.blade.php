@@ -12,11 +12,14 @@
 
 @section($modalId.'-body')
     <div class="h-4"></div>
+    @if($groupDataSourceName)    
     <x-modals.parent-type7-generic 
         name='{{$groupIdName}}' 
         tableName="{{$groupTableName}}" 
         dataSourceTableName="{{$groupDataSourceName}}"
         />
+    @endif
+    
     <div class="py-2">
         <x-renderer.button onClick="radioOrCheckboxSelectAll('{{$fieldIdName}}')">Select All</x-renderer.button>
         <x-renderer.button onClick="radioOrCheckboxDeselectAll('{{$fieldIdName}}')">Deselect All</x-renderer.button>

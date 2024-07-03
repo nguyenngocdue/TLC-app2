@@ -36,9 +36,13 @@ class ParentId7Generic extends Component
 
     private function getDataSource()
     {
+
         $modalPath = Str::modelPathFrom($this->dataSourceTableName);
-        $all = $modalPath::query()->with($this->eloquentFunctionName);
-        // if (method_exists($modalPath, 'getAvatar'))
+        $all = $modalPath::query();
+
+        if (method_exists($modalPath, $this->eloquentFunctionName)) {
+            $all = $all->with($this->eloquentFunctionName);
+        }
         switch ($this->dataSourceTableName) {
             case 'users':
                 $all = $all->whereNot('resigned', 1);
@@ -47,18 +51,19 @@ class ParentId7Generic extends Component
                 break;
         }
         $all = $all->get();
-
         $all = $all->map(function ($item) {
-            $className = get_class($item->{$this->eloquentFunctionName}());
-
             $groupIdName = null;
-            switch ($className) {
-                case 'Illuminate\Database\Eloquent\Relations\BelongsToMany':
-                    $groupIdName = $item->{$this->eloquentFunctionName}->pluck('id')->toArray();
-                    break;
-                case 'Illuminate\Database\Eloquent\Relations\BelongsTo':
+            if ($this->eloquentFunctionName) {
+                $className = get_class($item->{$this->eloquentFunctionName}());
 
-                    break;
+                switch ($className) {
+                    case 'Illuminate\Database\Eloquent\Relations\BelongsToMany':
+                        $groupIdName = $item->{$this->eloquentFunctionName}->pluck('id')->toArray();
+                        break;
+                    case 'Illuminate\Database\Eloquent\Relations\BelongsTo':
+
+                        break;
+                }
             }
 
             $newItem = [
