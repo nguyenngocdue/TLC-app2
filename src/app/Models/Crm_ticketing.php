@@ -12,7 +12,8 @@ class Crm_ticketing extends ModelExtended
         'name', 'description', 'unit_id',  'project_id',
         'priority_id', 'due_date',
         'defect_cat_id', 'defect_sub_cat_id',
-        'appointment_title', 'assignee_1',
+        'appointment_title',
+        'assignee_1', 'assignee_2',
         'appointment_from', 'appointment_to', 'appointment_detail',
         'owner_id', 'status',
     ];
