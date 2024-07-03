@@ -12,9 +12,17 @@ class Rp_report extends ModelExtended
 
     public static $eloquentParams = [
         "getLines" => ["hasMany", Rp_page::class, "report_id"],
+
+        "getFilterModes" => ["hasMany", Rp_filter_mode::class, "report_id"],
     ];
 
     public function getLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getFilterModes()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

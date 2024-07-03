@@ -282,6 +282,12 @@
         "editable-table": "rp_pages",
         "button_add_a_new_line": "true"
     },
+    "rp_reports_02": {
+        "name": "rp_reports_02",
+        "entity-type": "rp_reports",
+        "editable-table": "rp_filter_modes",
+        "button_add_a_new_line": "true"
+    },
     "site_daily_assignments_01": {
         "name": "site_daily_assignments_01",
         "entity-type": "site_daily_assignments",
