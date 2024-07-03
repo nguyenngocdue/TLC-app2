@@ -24,6 +24,8 @@ class Crm_ticketing extends ModelExtended
         "getDefectCat" => ['belongsTo', Crm_ticketing_defect_cat::class, 'defect_cat_id'],
         "getDefectSubCat" => ['belongsTo', Crm_ticketing_defect_sub_cat::class, 'defect_sub_cat_id'],
         "getAssignee1" => ['belongsTo', User::class, 'assignee_1'],
+        "getAssignee2" => ['belongsTo', User::class, 'assignee_2'],
+
         "getMonitors1" => ['belongsToMany', User::class, 'ym2m_crm_ticketing_user_monitor_1'],
         "getHouseOwner" => ['belongsTo', User::class, 'house_owner_id'],
 
@@ -61,6 +63,11 @@ class Crm_ticketing extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getAssignee2()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

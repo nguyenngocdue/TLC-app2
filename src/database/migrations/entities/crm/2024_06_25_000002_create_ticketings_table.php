@@ -34,6 +34,7 @@ return new class extends Migration
             $table->unsignedBigInteger('defect_cat_id')->nullable();
             $table->unsignedBigInteger('defect_sub_cat_id')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('assignee_2')->nullable();
 
             $table->string('appointment_title')->nullable();
             $table->dateTime('appointment_from')->nullable();
