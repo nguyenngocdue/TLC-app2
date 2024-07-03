@@ -27,6 +27,7 @@ class Rp_block extends ModelExtended
         'getControl6' => ['belongsTo', Term::class, 'bottom_right_control'],
 
         "getLines" => ["hasMany", Rp_column::class, "block_id"],
+        "get2ndHeaderLines" => ["hasMany", Rp_column::class, "block_id"],
 
     ];
 
@@ -85,6 +86,11 @@ class Rp_block extends ModelExtended
     public function getLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2])->whereNull('parent_id');
+    }
+    public function get2ndHeaderLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2])->whereNotNull('parent_id');
     }
 }

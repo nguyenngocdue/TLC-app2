@@ -10,6 +10,7 @@ return new class extends Migration
     private $table1Plural = 'rp_blocks';
     private $table2Plural = 'rp_pages';
     private $relationshipKey = null;
+    private $tableName = "rp_page_block_details";
 
     public function up()
     {

@@ -21,8 +21,6 @@ class Rp_column extends ModelExtended
         'getAggFooter' => ['belongsTo', Term::class, 'agg_footer'],
         "getBlock" => ['belongsTo', Rp_block::class, 'block_id'],
         "getParent" => ['belongsTo', Rp_column::class, 'parent_id'],
-
-
     ];
 
     public function getIconPosition()
@@ -65,7 +63,6 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'is_active'],
             ["dataIndex" => 'data_index'],
             ["dataIndex" => 'width'],
-            ["dataIndex" => 'cell_div_class_agg_footer'],
             ["dataIndex" => 'cell_div_class'],
             ["dataIndex" => 'cell_class'],
             ["dataIndex" => 'icon'],
@@ -77,6 +74,7 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'row_href_fn'],
             ["dataIndex" => 'row_renderer'],
             ["dataIndex" => 'agg_footer'],
+            ["dataIndex" => 'cell_div_class_agg_footer'],
         ];
     }
 }

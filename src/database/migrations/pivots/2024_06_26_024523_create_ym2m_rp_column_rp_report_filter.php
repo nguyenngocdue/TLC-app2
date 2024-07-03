@@ -10,6 +10,7 @@ return new class extends Migration
     private $table1Plural = 'rp_columns';
     private $table2Plural = 'rp_reports';
     private $relationshipKey = 'filter';
+    private $tableName = "rp_report_filter_details";
 
     public function up()
     {

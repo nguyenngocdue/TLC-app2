@@ -548,5 +548,27 @@
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""
+    },
+    "_get2ndHeaderLines": {
+        "name": "_get2ndHeaderLines",
+        "column_name": "get2ndHeaderLines",
+        "column_type": "hasMany",
+        "label": "2nd Headers",
+        "control": "relationship_renderer",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

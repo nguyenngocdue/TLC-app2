@@ -25,7 +25,11 @@ trait TraitCreatePivotTable
 
         $table1Singular = Str::singular($table1Plural);
         $table2Singular = Str::singular($table2Plural);
-        $tableName = "ym2m_{$table1Singular}_{$table2Singular}" . ($relationshipKey ? "_$relationshipKey" : '');
+        if (isset($this->tableName)) {
+            $tableName = $this->tableName;
+        } else {
+            $tableName = "ym2m_{$table1Singular}_{$table2Singular}" . ($relationshipKey ? "_$relationshipKey" : '');
+        }
         $table1IdColumn = $table1Singular . '_id';
         $table2IdColumn = $table2Singular . '_id';
 
