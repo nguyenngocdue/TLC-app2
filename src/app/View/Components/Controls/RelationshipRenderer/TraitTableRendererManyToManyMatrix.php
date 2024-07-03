@@ -7,7 +7,7 @@ use App\Models\Pj_task_phase;
 use App\Models\User_discipline;
 use Illuminate\Support\Facades\Log;
 
-trait TraitTableRendererManyLineMatrix
+trait TraitTableRendererManyToManyMatrix
 {
     private $tasks;
     private function getXAxis()
@@ -87,7 +87,7 @@ trait TraitTableRendererManyLineMatrix
         return $dataSource;
     }
 
-    private function renderManyLineMatrix($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $parentItem)
+    private function renderManyToManyMatrix($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $parentItem)
     {
         $this->tasks = $this->getTasks($parentItem);
         $columns = $this->getXAxis();
@@ -104,7 +104,7 @@ trait TraitTableRendererManyLineMatrix
         // dump($isOrderable);
         // dump($colName);
         // dump($tableFooter);
-        return view("components.controls.many-line-matrix", [
+        return view("components.controls.many-to-many-matrix", [
             'columns' => $columns,
             'dataSource' => $dataSource,
         ]);

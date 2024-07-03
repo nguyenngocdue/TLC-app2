@@ -15,7 +15,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyIcon
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLines;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererCalendarGrid;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyCheckpoints;
-use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLineMatrix;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyToManyMatrix;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -29,7 +29,7 @@ class RelationshipRenderer2 extends Component
     use TraitTableRendererSameAsViewAll;
     use TraitTableRendererManyIcons;
     use TraitTableRendererManyLines;
-    use TraitTableRendererManyLineMatrix;
+    use TraitTableRendererManyToManyMatrix;
     use TraitTableRendererManyCheckpoints;
     use TraitTableRendererCalendarGrid;
 
@@ -235,7 +235,9 @@ class RelationshipRenderer2 extends Component
             case "many_lines":
                 return $this->renderManyLines($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->numberOfEmptyLines);
             case "many_to_many_matrix":
-                return $this->renderManyLineMatrix($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->item);
+                return $this->renderManyToManyMatrix($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->item);
+                // case "many_to_many_lines":
+                // return $this-
             case "many_checkpoints":
                 return $this->renderManyCheckpoints($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter);
             default:

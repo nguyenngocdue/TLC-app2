@@ -101,6 +101,7 @@
         "many_icons",
         "many_lines",
         "many_to_many_matrix",
+        "many_to_many_lines",
         "same_as_view_all"
     ],
     "manage_prop_eloquents": [
