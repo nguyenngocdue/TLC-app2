@@ -34,5 +34,7 @@ return new class extends Migration
         $table->boolean('allow_clear')->nullable();
         $table->boolean('is_multiple')->nullable();
         $table->unsignedBigInteger('control_type')->nullable();
+        $table->unsignedBigInteger('deleted_at')->nullable();
+        $table->unsignedBigInteger('deleted_by')->nullable();
     }
 };

@@ -18,6 +18,8 @@ class Rp_page extends ModelExtended
         "getLetterFooter" => ['belongsTo', Rp_letter_footer::class, 'letter_footer_id'],
 
         "attachment_background" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "getBlockDetails" => ["hasMany", Rp_page_block_detail::class, "rp_page_id"],
+
     ];
 
     public function getParent()
@@ -78,5 +80,11 @@ class Rp_page extends ModelExtended
             ["dataIndex" => 'letter_footer_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'name'],
         ];
+    }
+
+    public function getBlockDetails()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

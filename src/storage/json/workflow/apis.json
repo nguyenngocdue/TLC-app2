@@ -495,8 +495,16 @@
     "rp_letter_heads": {
         "name": "rp_letter_heads"
     },
+    "rp_page_block_details": {
+        "name": "rp_page_block_details",
+        "storeEmpty_and_updateShort": "true"
+    },
     "rp_pages": {
         "name": "rp_pages",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "rp_report_filter_details": {
+        "name": "rp_report_filter_details",
         "storeEmpty_and_updateShort": "true"
     },
     "rp_reports": {

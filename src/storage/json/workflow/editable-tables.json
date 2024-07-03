@@ -276,6 +276,12 @@
         "editable-table": "rp_columns",
         "button_add_a_new_line": "true"
     },
+    "rp_pages_01": {
+        "name": "rp_pages_01",
+        "entity-type": "rp_pages",
+        "editable-table": "rp_page_block_details",
+        "button_add_a_new_line": "true"
+    },
     "rp_reports_01": {
         "name": "rp_reports_01",
         "entity-type": "rp_reports",
@@ -286,6 +292,12 @@
         "name": "rp_reports_02",
         "entity-type": "rp_reports",
         "editable-table": "rp_filter_modes",
+        "button_add_a_new_line": "true"
+    },
+    "rp_reports_03": {
+        "name": "rp_reports_03",
+        "entity-type": "rp_reports",
+        "editable-table": "rp_report_filter_details",
         "button_add_a_new_line": "true"
     },
     "site_daily_assignments_01": {

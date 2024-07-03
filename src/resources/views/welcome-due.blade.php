@@ -61,20 +61,19 @@ INSERT INTO `fields` (`id`, `name`, `reversed_name`, `description`, `owner_id`, 
  (300, 'getBlackWhite', NULL, NULL, '1', '2024-07-02 08:01:13', '2024-07-02 08:01:13', NULL, NULL),
  (301, 'getControlType', NULL, NULL, '1', '2024-07-03 08:01:13', '2024-07-03 08:01:13', NULL, NULL),
  (302, 'getIconPosition', NULL, NULL, '1', '2024-07-04 08:01:13', '2024-07-04 08:01:13', NULL, NULL),
- (303, 'getControlType', NULL, NULL, '1', '2024-07-05 08:01:13', '2024-07-05 08:01:13', NULL, NULL),
  (304, 'getRendererType', NULL, NULL, '1', '2024-07-06 08:01:13', '2024-07-06 08:01:13', NULL, NULL),
  (305, 'getDescription', NULL, NULL, '1', '2024-07-07 08:01:13', '2024-07-07 08:01:13', NULL, NULL),
  (306, 'getAggFooter', NULL, NULL, '1', '2024-07-08 08:01:13', '2024-07-08 08:01:13', NULL, NULL),
  (307, 'getRowRenderer', NULL, NULL, '1', '2024-07-09 08:01:13', '2024-07-09 08:01:13', NULL, NULL),
- (308, 'getChartType', NULL, NULL, '1', '2024-07-10 08:01:13', '2024-07-10 08:01:13', NULL, NULL)
+ (308, 'getChartType', NULL, NULL, '1', '2024-07-10 08:01:13', '2024-07-10 08:01:13', NULL, NULL),
 
 Terms
 
 INSERT INTO `terms` (`id`, `name`, `description`, `slug`, `field_id`, `parent1_id`, `parent2_id`, `parent3_id`, `parent4_id`, `owner_id`, `created_at`, `updated_at`, `deleted_by`, `deleted_at`) VALUES 
  (601, 'Black', 'black_or_white', 'black-or-white', '300', NULL, NULL, NULL, NULL, 1, '2024-07-02 08:01:13', '2024-07-02 08:01:13', NULL, NULL),
  (602, 'White', 'black_or_white', 'black-or-white-1', '300', NULL, NULL, NULL, NULL, 1, '2024-07-03 08:01:13', '2024-07-03 08:01:13', NULL, NULL),
- (603, 'Export', 'Util ', 'util', '303', NULL, NULL, NULL, NULL, 1, '2024-07-04 08:01:13', '2024-07-04 08:01:13', NULL, NULL),
- (604, 'Pagination', 'Util ', 'util-1', '303', NULL, NULL, NULL, NULL, 1, '2024-07-05 08:01:13', '2024-07-05 08:01:13', NULL, NULL),
+ (603, 'Export', 'Util ', 'util', '301', NULL, NULL, NULL, NULL, 1, '2024-07-04 08:01:13', '2024-07-04 08:01:13', NULL, NULL),
+ (604, 'Pagination', 'Util ', 'util-1', '301', NULL, NULL, NULL, NULL, 1, '2024-07-05 08:01:13', '2024-07-05 08:01:13', NULL, NULL),
  (605, 'Left', 'Icon-position', 'icon-position', '302', NULL, NULL, NULL, NULL, 1, '2024-07-06 08:01:13', '2024-07-06 08:01:13', NULL, NULL),
  (606, 'Right', 'Icon-position', 'icon-position-1', '302', NULL, NULL, NULL, NULL, 1, '2024-07-07 08:01:13', '2024-07-07 08:01:13', NULL, NULL),
  (607, 'Dropdown', 'control_type', 'control-type', '301', NULL, NULL, NULL, NULL, 1, '2024-07-08 08:01:13', '2024-07-08 08:01:13', NULL, NULL),
@@ -128,7 +127,7 @@ INSERT INTO `terms` (`id`, `name`, `description`, `slug`, `field_id`, `parent1_i
  (655, 'Chart Type 17', 'chart_type', 'chart-type-17', '308', NULL, NULL, NULL, NULL, 1, '2024-08-25 08:01:13', '2024-08-25 08:01:13', NULL, NULL),
  (656, 'Chart Type 18', 'chart_type', 'chart-type-18', '308', NULL, NULL, NULL, NULL, 1, '2024-08-26 08:01:13', '2024-08-26 08:01:13', NULL, NULL),
  (657, 'Chart Type 19', 'chart_type', 'chart-type-19', '308', NULL, NULL, NULL, NULL, 1, '2024-08-27 08:01:13', '2024-08-27 08:01:13', NULL, NULL),
- (658, 'Chart Type 20', 'chart_type', 'chart-type-20', '308', NULL, NULL, NULL, NULL, 1, '2024-08-28 08:01:13', '2024-08-28 08:01:13', NULL, NULL)
+ (658, 'Chart Type 20', 'chart_type', 'chart-type-20', '308', NULL, NULL, NULL, NULL, 1, '2024-08-28 08:01:13', '2024-08-28 08:01:13', NULL, NULL),
 
 
 
