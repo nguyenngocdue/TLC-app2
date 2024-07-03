@@ -482,7 +482,8 @@
         "name": "rp_blocks"
     },
     "rp_columns": {
-        "name": "rp_columns"
+        "name": "rp_columns",
+        "storeEmpty_and_updateShort": "true"
     },
     "rp_filter_modes": {
         "name": "rp_filter_modes"

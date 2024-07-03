@@ -26,6 +26,8 @@ class Rp_block extends ModelExtended
         'getControl5' => ['belongsTo', Term::class, 'bottom_center_control'],
         'getControl6' => ['belongsTo', Term::class, 'bottom_right_control'],
 
+        "getLines" => ["hasMany", Rp_column::class, "block_id"],
+
     ];
 
     public function getChartType()
@@ -78,5 +80,11 @@ class Rp_block extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function getLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

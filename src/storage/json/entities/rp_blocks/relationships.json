@@ -159,6 +159,22 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
+    "_getLines": {
+        "name": "_getLines",
+        "relationship": "hasMany",
+        "control_name": "getLines",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
     "_attachment_background": {
         "name": "_attachment_background",
         "relationship": "morphMany",

@@ -270,6 +270,12 @@
         "button_add_a_new_line": "true",
         "button_recalculate": "true"
     },
+    "rp_blocks_01": {
+        "name": "rp_blocks_01",
+        "entity-type": "rp_blocks",
+        "editable-table": "rp_columns",
+        "button_add_a_new_line": "true"
+    },
     "rp_reports_01": {
         "name": "rp_reports_01",
         "entity-type": "rp_reports",
