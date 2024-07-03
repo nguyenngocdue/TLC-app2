@@ -17,9 +17,9 @@ class Rp_page extends ModelExtended
         "getLetterHead" => ['belongsTo', Rp_letter_head::class, 'letter_head_id'],
         "getLetterFooter" => ['belongsTo', Rp_letter_footer::class, 'letter_footer_id'],
 
-        "attachment_background" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "getBlockDetails" => ["hasMany", Rp_page_block_detail::class, "rp_page_id"],
 
+        "attachment_background" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function getParent()
@@ -43,6 +43,12 @@ class Rp_page extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function getBlockDetails()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 
     public function getManyLineParams()
@@ -80,11 +86,5 @@ class Rp_page extends ModelExtended
             ["dataIndex" => 'letter_footer_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'name'],
         ];
-    }
-
-    public function getBlockDetails()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
     }
 }
