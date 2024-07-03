@@ -46,6 +46,7 @@ class SuperProps
             }
 
             $rls['filter_columns'] = Str::parseArray($rls['filter_columns']);
+            $rls['filter_operator'] = $rls['filter_operator'] ?? '=';
             $rls['filter_values'] = Str::parseArray($rls['filter_values']);
             $rls['radio_checkbox_colspan'] = $rls['radio_checkbox_colspan'] ? $rls['radio_checkbox_colspan'] : 4;
 

@@ -81,7 +81,7 @@ class ManageRelationships extends Manage_Parent
                         }
                     }
                 }
-                if (in_array($column, ['filter_columns', 'filter_values'])) {
+                if (in_array($column, ['filter_columns', 'filter_operator', 'filter_values'])) {
                     if (isset($json[$key]['control'])) {
                         $control = ($json[$key]['control']);
                         if (!in_array($control, ['radio', /*'checkbox', 'dropdown_multi',*/ 'checkbox_2a', 'dropdown',  'dropdown_multi_2a', 'relationship_renderer'])) {

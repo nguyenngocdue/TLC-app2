@@ -77,4 +77,29 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'cell_div_class_agg_footer'],
         ];
     }
+    public function getManyLineParams_2nd()
+    {
+        return [
+            ["dataIndex" => 'id', 'invisible' => true,],
+            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'block_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ["dataIndex" => 'parent_id',],
+            ["dataIndex" => 'name'],
+            ["dataIndex" => 'is_active'],
+            ["dataIndex" => 'data_index'],
+            ["dataIndex" => 'width'],
+            ["dataIndex" => 'cell_div_class'],
+            ["dataIndex" => 'cell_class'],
+            ["dataIndex" => 'icon'],
+            ["dataIndex" => 'icon_position'],
+            ["dataIndex" => 'row_cell_div_class'],
+            ["dataIndex" => 'row_cell_class'],
+            ["dataIndex" => 'row_icon'],
+            ["dataIndex" => 'row_icon_position'],
+            ["dataIndex" => 'row_href_fn'],
+            ["dataIndex" => 'row_renderer'],
+            ["dataIndex" => 'agg_footer'],
+            ["dataIndex" => 'cell_div_class_agg_footer'],
+        ];
+    }
 }

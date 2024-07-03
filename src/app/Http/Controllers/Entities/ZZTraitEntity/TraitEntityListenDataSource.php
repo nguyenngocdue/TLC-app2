@@ -301,6 +301,7 @@ trait TraitEntityListenDataSource
         foreach ($sp['props'] as $prop) {
             if (isset($prop['relationships']['filter_columns']) && sizeof($prop['relationships']['filter_columns']) > 0) {
                 $result[$prop['column_name']]['filter_columns'] = ($prop['relationships']['filter_columns']);
+                $result[$prop['column_name']]['filter_operator'] = ($prop['relationships']['filter_operator']);
                 $result[$prop['column_name']]['filter_values'] = ($prop['relationships']['filter_values']);
             }
         }

@@ -72,6 +72,23 @@ trait TraitManageRelationshipColumns
                 "renderer" => "text4",
             ],
             [
+                "dataIndex" => "filter_operator",
+                "editable" => true,
+                "cbbDataSource" => [
+                    '=',
+                    // '!=',
+                    // '>',
+                    // '>=',
+                    // '<',
+                    // '<=',
+                    'is null',
+                    'is not null',
+                    /*'like', 'not like', 'in', 'not in', 'between', 'not between', */
+                ],
+                "renderer" => "dropdown",
+                'width' => 200,
+            ],
+            [
                 "dataIndex" => "filter_values",
                 "editable" => true,
                 "renderer" => "text4",

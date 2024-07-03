@@ -100,6 +100,7 @@ class RelationshipRenderer2 extends Component
             if ($eloquentParam[0] === 'morphToMany') return [];
 
             $filterColumns = $props['relationships']['filter_columns'] ?? [];
+            $filterOperator = $props['relationships']['filter_operator'];
             $filterValues = $props['relationships']['filter_values'] ?? [];
 
             // dump($filterColumns, $filterValues);
@@ -109,12 +110,24 @@ class RelationshipRenderer2 extends Component
             elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
             $perPage = $showAll ? 10000 : 25;
             $result = $relation->getQuery();
-            if (sizeof($filterColumns) && sizeof($filterValues)) {
+            if (sizeof($filterColumns)) {
                 foreach ($filterColumns as $key => $value) {
-                    $result = $result->where($value, $filterValues[$key]);
+                    switch ($filterOperator) {
+                        case '=':
+                            if (sizeof($filterValues)) $result = $result->where($value, $filterValues[$key]);
+                            break;
+                        case 'is null':
+                            $result = $result->whereNull($value);
+                            break;
+                        case 'is not null':
+                            $result = $result->whereNotNull($value);
+                            break;
+                        default:
+                            dump("Unknown filter operator [$filterOperator]");
+                            break;
+                    }
                 }
             }
-            // dump($result);
             if ($isOrderable) $result = $result->orderBy('order_no');
             $result = $result->paginate($perPage, ['*'], $colName);
             return $result;
