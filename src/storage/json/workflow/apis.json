@@ -486,7 +486,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "rp_filter_modes": {
-        "name": "rp_filter_modes"
+        "name": "rp_filter_modes",
+        "storeEmpty_and_updateShort": "true"
     },
     "rp_letter_footers": {
         "name": "rp_letter_footers"

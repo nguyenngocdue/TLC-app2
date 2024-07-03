@@ -59,4 +59,24 @@ class Rp_page extends ModelExtended
             ["dataIndex" => 'is_full_width'],
         ];
     }
+
+    public function getManyLineParamsLetterHead()
+    {
+        return [
+            ["dataIndex" => 'id'],
+            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'letter_head_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ["dataIndex" => 'name'],
+        ];
+    }
+
+    public function getManyLineParamsLetterFooter()
+    {
+        return [
+            ["dataIndex" => 'id'],
+            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'letter_footer_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ["dataIndex" => 'name'],
+        ];
+    }
 }
