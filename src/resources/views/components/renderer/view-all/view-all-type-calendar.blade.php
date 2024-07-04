@@ -1,5 +1,5 @@
 <div class="grid grid-cols-12 gap-2">
-    <div class="col-span-3 overflow-y-auto overflow-x-hidden h-screen px-2 bg-white rounded">
+    <div class="col-span-3 overflow-y-auto overflow-x-hidden h-screen1 px-2 bg-white rounded" style="height: 700px">
         <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
     </div>
     <div class="w-full px-1 bg-gray-100 rounded-lg shadow col-span-9">

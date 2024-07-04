@@ -7,6 +7,7 @@
         </div>
         <div class="border-t my-2"></div>
         {!!$htmlRenderTree!!}
+        <div style="height: 100px;"></div>
       </ul>
 </div>
 <script>
