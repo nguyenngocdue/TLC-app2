@@ -48,7 +48,7 @@
         "column_name": "description",
         "column_type": "text",
         "label": "Description",
-        "control": "text",
+        "control": "textarea",
         "align": "",
         "col_span": "",
         "width": "",
