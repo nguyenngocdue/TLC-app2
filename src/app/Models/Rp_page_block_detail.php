@@ -15,6 +15,8 @@ class Rp_page_block_detail extends ModelExtended
         "getBlock" => ['belongsTo', Rp_Block::class, 'rp_block_id'],
         "getPage" => ['belongsTo', Rp_Page::class, 'rp_page_id'],
 
+        "attachment_background" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+
     ];
 
     public function getBlock()
@@ -37,5 +39,12 @@ class Rp_page_block_detail extends ModelExtended
             ["dataIndex" => 'rp_block_id'],
             ["dataIndex" => 'col_span'],
         ];
+    }
+
+    public function attachment_background()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 }
