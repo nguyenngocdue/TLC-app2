@@ -10,6 +10,8 @@ class Rp_report extends ModelExtended
         "id", "name", "description", "owner_id",
     ];
 
+    public static $statusless = true;
+
     public static $eloquentParams = [
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
         "getFilterDetails" => ["hasMany", Rp_report_filter_detail::class, "rp_report_id"],
