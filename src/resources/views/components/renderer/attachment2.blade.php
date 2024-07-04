@@ -21,9 +21,9 @@
                     @if($openType == '_blank')
                     </a>
                     @endif
-                @elseif(in_array($extension,["csv","pdf","zip"]))
+                @elseif(in_array(strtolow($extension), ["csv","pdf","zip"]))
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
-                @elseif(in_array($extension,["mov","mp4","MP4","webm"]))
+                @elseif(in_array(strtolow($extension), ["mov","mp4","webm"]))
                     <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
                 @elseif($extension === 'svg')
                     <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
@@ -35,7 +35,7 @@
                 </span>
                 @if($openType == 'gallery')
                     @php
-                        if(!in_array($extension,\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
+                        if(!in_array(strtolower($extension),\App\Utils\Constant::EXTENSIONS_OF_FILE_GALLERY)) {
                             $onClick = '';
                             $url = $path.$attachment['url_media'];
                             $href = "$url";

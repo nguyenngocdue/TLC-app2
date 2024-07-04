@@ -27,7 +27,7 @@
                     $urlThumbnail = $urlMedia;
                     $dataVideo = '';
                     $dataIframe=false;
-                    switch ($extension) {
+                    switch (strtolower($extension)) {
                         case 'csv':
                         case 'pdf':
                         case 'zip':
@@ -36,8 +36,8 @@
                             $dataIframe=true;
                             $urlThumbnail = asset("icons/$extension-128.png");
                             break;
-                        case 'MP4':
-                        case 'MOV':
+                        case 'mp4':
+                        case 'mov':
                             $mimeType ='video/mp4';
                             break;
                         default:

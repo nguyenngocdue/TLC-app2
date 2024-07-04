@@ -37,7 +37,7 @@ class Constant
     const DASHBOARD_COUNCIL_MEMBER = "-council-member";
     const DASHBOARD_NEWCOMER = "-newcomer";
 
-    const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'pdf'];
+    const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'mov', 'png', 'jpeg', 'gif', 'jpg', 'pdf'];
 
 
     const COLOR_PUBLIC_HOLIDAY = ["teal", "cyan", "yellow", "blue", "pink", "violet", "green"];
