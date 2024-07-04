@@ -39,6 +39,7 @@
                 :value="$attachments" 
                 :properties="$props['props']['_insp_photos']['properties']"
                 readOnly="{{$readOnly}}"
+                destroyable="{{$destroyable}}"
                 />
             <br />
             <x-controls.comment.comment-group2a readOnly="{{$readOnly}}" :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}" commentableId="{{$line->id}}" />

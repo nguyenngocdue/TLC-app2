@@ -4,6 +4,7 @@ namespace App\View\Components\Controls\InspChklst;
 
 use App\Models\Control_type;
 use App\Models\Qaqc_insp_chklst_line;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
@@ -39,6 +40,7 @@ class CheckPoint extends Component
         $controlType = Control_type::getCollection()->pluck('name', 'id',) ?? Control_type::get()->pluck('name', 'id');
         $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos'); // cache attachments
         $props = SuperProps::getFor(Qaqc_insp_chklst_line::getTableName());
+        $destroyable = !CurrentUser::get()->isExternal();
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
@@ -51,6 +53,7 @@ class CheckPoint extends Component
             'props' => $props,
             'readOnly' => $this->readOnly,
             'index' => $this->index,
+            'destroyable' => $destroyable,
         ]);
     }
 }
