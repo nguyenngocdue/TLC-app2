@@ -82,6 +82,7 @@ class ViewAllTypeSelector extends Component
                 'active' =>  $this->viewType == 'matrix-approve-multi-view',
             ];
         };
+        // dump($tabs);
         return $tabs;
     }
 
@@ -92,10 +93,13 @@ class ViewAllTypeSelector extends Component
      */
     public function render()
     {
+        $tabs = $this->getTabs();
+        if (sizeof($tabs) <= 1) return '';
+
         return view(
             'components.renderer.view-all.view-all-type-selector',
             [
-                'tabs' => $this->getTabs(),
+                'tabs' => $tabs,
             ]
         );
     }

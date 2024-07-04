@@ -233,7 +233,8 @@
     ],
     "apps_hide_view_all_list_view":[
         "qaqc_insp_chklsts",
-        "qaqc_insp_chklst_shts"
+        "qaqc_insp_chklst_shts",
+        "hr_timesheet_officers"
     ],
     "apps_have_qr_landing_page": [
         "pj_module",

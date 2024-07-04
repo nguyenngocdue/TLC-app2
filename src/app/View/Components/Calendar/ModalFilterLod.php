@@ -40,7 +40,8 @@ class ModalFilterLod extends Component
         //     ->orderBy('name')
         //     ->get();
         $dataSource = Pj_task_phase::select('id', 'name', 'order_no', 'description')
-            ->whereNotIn('id', [221, 222])
+            // ->where('show_in_task_budget', 1) //this also hide Overhead
+            ->whereNotIn('id', [3, 4])
             ->get();
         return $dataSource;
     }
