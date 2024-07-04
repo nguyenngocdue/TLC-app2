@@ -12,8 +12,8 @@ class Rp_page_block_detail extends ModelExtended
     ];
 
     public static $eloquentParams = [
-        "getBlock" => ['belongsTo', Rp_Block::class, 'rp_block_id'],
-        "getPage" => ['belongsTo', Rp_Page::class, 'rp_page_id'],
+        "getBlock" => ['belongsTo', Rp_block::class, 'rp_block_id'],
+        "getPage" => ['belongsTo', Rp_page::class, 'rp_page_id'],
 
         "attachment_background" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
 
