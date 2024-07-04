@@ -36,8 +36,10 @@ class AggCount extends Component
             $str = $count . " " . $str;
             $names = [];
             foreach ($json as $index => $item) {
-                $name = $item->name ?? "Nameless #" . $item->id;
-                $names[] = (1 + $index) . ". " . $name;
+                if (!is_null($item)) {
+                    $name = $item->name ?? "Nameless #" . $item->id;
+                    $names[] = (1 + $index) . ". " . $name;
+                }
             }
             $title = join("\n", $names);
             if ($this->renderRaw) return $str;
