@@ -37,16 +37,19 @@ class Constant
     const DASHBOARD_COUNCIL_MEMBER = "-council-member";
     const DASHBOARD_NEWCOMER = "-newcomer";
 
-    const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'svg', 'webp', 'pdf'];
+    const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'MP4', 'mov', 'MOV', 'png', 'jpeg', 'gif', 'jpg', 'pdf'];
 
 
     const COLOR_PUBLIC_HOLIDAY = ["teal", "cyan", "yellow", "blue", "pink", "violet", "green"];
     const COLOR_PUBLIC_HOLIDAY2 = ["#5eead4", "#67e8f9", "#fde047", "#93c5fd", "#f9a8d4", "#c4b5fd", "#86efac"];
 
-
-    const ARRAY_ONLY_IMAGES = ["jpeg", "png", "jpg", "gif", "webp"];
-    const ONLY_IMAGES = "png,jpeg,gif,jpg,svg,webp";
     const ONLY_VIDEOS = "mp4,mov";
-    const ONLY_NONE_MEDIA = "csv,pdf,zip,docx";
+
+    const ARRAY_ONLY_IMAGES = ["jpeg", "png", "jpg", "gif"];
+    const ONLY_IMAGES = "png,jpeg,gif,jpg";
+    // const ONLY_IMAGES = join(",", self::ARRAY_ONLY_IMAGES);
+
     const ARRAY_ONLY_NONE_MEDIA = ["csv", "pdf", "zip", "docx"];
+    const ONLY_NONE_MEDIA = "csv,pdf,zip,docx";
+    // const ONLY_NONE_MEDIA = join(",", self::ARRAY_ONLY_NONE_MEDIA);
 }

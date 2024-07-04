@@ -1,4 +1,4 @@
-@if(in_array($extension,["png","gif","jpg","jpeg","webp","svg"]))
+@if(in_array($extension,["png","gif","jpg","jpeg"]))
     <div title="{{$fileName}}">
         <img src="{{$urlMedia}}" alt="{{$fileName}}"/>
     </div>

@@ -126,14 +126,10 @@ Str::macro('getExtFromMime', function ($mime) {
         case "application/pdf":
             return "pdf";
 
-        case "image/webp":
-            return "webp";
         case "image/avif":
             return "avid";
         case "image/png":
             return "png";
-        case "image/svg+xml":
-            return "svg";
         case "image/jpeg":
             return "jpg";
 

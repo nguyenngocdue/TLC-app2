@@ -42,14 +42,14 @@ class Attachment2 extends Component
         $properties['allowed_file_types'] = $properties['allowed_file_types'] ?? 'only_images';
         // dd($properties);
         $message =  "<i class='fa-sharp fa-regular fa-upload'></i> Browse (Max " . $properties['max_file_count'] . " files, each " . $properties['max_file_size']  . "MB)";
-        $onlyImages = ".png,.jpeg,.gif,.jpg,.svg,.webp";
+        $onlyImages = ".png,.jpeg,.gif,.jpg";
         $onlyVideos = "video/mp4";
         $onlyMedia = "video/* image/*";
         $onlyNoneMedia = ".csv,.pdf,.zip,.docx";
         switch ($properties['allowed_file_types']) {
             case 'only_images':
                 $acceptAttachment = $onlyImages;
-                $title = "Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG)";
+                $title = "Only Images (JPG, JPEG, PNG, GIF)";
                 break;
             case 'only_videos':
                 $acceptAttachment = $onlyVideos;
@@ -57,7 +57,7 @@ class Attachment2 extends Component
                 break;
             case 'only_media':
                 $acceptAttachment = $onlyMedia;
-                $title = "Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG) and Videos (MP4)";
+                $title = "Only Images (JPG, JPEG, PNG, GIF) and Videos (MP4)";
                 break;
             case 'only_non_media':
                 $acceptAttachment = $onlyNoneMedia;

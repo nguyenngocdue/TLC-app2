@@ -48,7 +48,7 @@ class ManageProperties extends Manage_Parent
                 'editable' => true,
                 'cbbDataSource' => [
                     // ['value' => '', 'title' => ''],
-                    ['value' => 'only_images', 'title' => 'Only Images (JPG, JPEG, PNG, GIF, WEBP, SVG)'],
+                    ['value' => 'only_images', 'title' => 'Only Images (JPG, JPEG, PNG, GIF)'],
                     ['value' => 'only_videos', 'title' => 'Only Videos (MP4)'],
                     ['value' => 'only_media', 'title' => 'Only Images and Videos'],
                     ['value' => 'only_non_media', 'title' => 'Only Non-Media (CSV, PDF, ZIP)'],

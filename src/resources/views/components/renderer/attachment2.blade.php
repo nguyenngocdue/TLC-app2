@@ -13,7 +13,7 @@
         <div class="border-{{$border}}-300 h-full">
             <div name='{{$name}}' title="{{$title}}" class="relative flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
                 {{-- This is the image --}}
-                @if(in_array($extension,["png","gif","jpg","jpeg","webp"]))
+                @if(in_array($extension,["png","gif","jpg","jpeg"]))
                     @if($openType == '_blank')
                     <a target="_blank" href="{{$path.$attachment['url_media']}}">
                     @endif
