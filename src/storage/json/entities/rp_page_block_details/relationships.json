@@ -66,5 +66,22 @@
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
+    },
+    "_attachment_background": {
+        "name": "_attachment_background",
+        "relationship": "morphMany",
+        "control_name": "attachment_background",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }
