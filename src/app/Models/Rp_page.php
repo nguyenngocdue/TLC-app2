@@ -54,8 +54,8 @@ class Rp_page extends ModelExtended
     public function getManyLineParamsPages()
     {
         return [
-            ["dataIndex" => 'id', 'invisible' => true,],
-            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'id', /* 'invisible' => true, */],
+            ["dataIndex" => 'order_no',/*  'invisible' => true, */],
             ["dataIndex" => 'report_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'name'],
             ["dataIndex" => 'letter_head_id'],
@@ -65,6 +65,7 @@ class Rp_page extends ModelExtended
             ["dataIndex" => 'height'],
             ["dataIndex" => 'is_stackable_letter_head'],
             ["dataIndex" => 'is_full_width'],
+            // ["dataIndex" => 'background'],
         ];
     }
 
