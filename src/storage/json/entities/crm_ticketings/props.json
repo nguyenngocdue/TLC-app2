@@ -417,6 +417,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "column_type": "bigint unsigned",
+        "label": "TLC Customer Service",
+        "control": "dropdown",
+        "align": "",
+        "col_span": "6",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_sep01": {
         "name": "_sep01",
         "column_name": "sep01",
@@ -505,11 +527,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "column_type": "bigint unsigned",
-        "label": "Supporter",
+        "label": "Nominator",
         "control": "dropdown",
         "align": "",
         "col_span": "6",

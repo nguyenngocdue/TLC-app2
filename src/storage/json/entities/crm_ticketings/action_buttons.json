@@ -5,6 +5,12 @@
         "tooltip": "",
         "change_status_multiple": ""
     },
+    "opened": {
+        "name": "opened",
+        "label": "Send Request",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
     "nominated": {
         "name": "nominated",
         "label": "Request for Nomination",

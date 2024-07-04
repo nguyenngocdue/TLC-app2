@@ -1,5 +1,6 @@
 [
     "new",
+    "opened",
     "nominated",
     "nomination_rejected",
     "in_progress",
