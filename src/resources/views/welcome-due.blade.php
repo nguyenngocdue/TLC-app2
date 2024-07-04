@@ -130,7 +130,7 @@ INSERT INTO `terms` (`id`, `name`, `description`, `slug`, `field_id`, `parent1_i
  (697, 'Chart Type 17', 'chart_type', 'chart-type-17', '308', NULL, NULL, NULL, NULL, 1, '2024-08-25 08:01:13', '2024-08-25 08:01:13', NULL, NULL),
  (698, 'Chart Type 18', 'chart_type', 'chart-type-18', '308', NULL, NULL, NULL, NULL, 1, '2024-08-26 08:01:13', '2024-08-26 08:01:13', NULL, NULL),
  (699, 'Chart Type 19', 'chart_type', 'chart-type-19', '308', NULL, NULL, NULL, NULL, 1, '2024-08-27 08:01:13', '2024-08-27 08:01:13', NULL, NULL),
- (700, 'Chart Type 20', 'chart_type', 'chart-type-20', '308', NULL, NULL, NULL, NULL, 1, '2024-08-28 08:01:13', '2024-08-28 08:01:13', NULL, NULL),
+ (700, 'Chart Type 20', 'chart_type', 'chart-type-20', '308', NULL, NULL, NULL, NULL, 1, '2024-08-28 08:01:13', '2024-08-28 08:01:13', NULL, NULL)
 
 
 
