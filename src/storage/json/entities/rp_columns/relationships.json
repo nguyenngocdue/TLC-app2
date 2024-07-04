@@ -11,7 +11,7 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_operator": "=",
-        "filter_values": "302",
+        "filter_values": "301",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
@@ -28,7 +28,7 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_operator": "=",
-        "filter_values": "302",
+        "filter_values": "301",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
@@ -45,7 +45,7 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_operator": "=",
-        "filter_values": "307",
+        "filter_values": "306",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": "true"
@@ -62,7 +62,7 @@
         "control": "dropdown",
         "filter_columns": "field_id",
         "filter_operator": "=",
-        "filter_values": "306",
+        "filter_values": "305",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""

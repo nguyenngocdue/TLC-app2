@@ -6,16 +6,23 @@
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
+    "opened": {
+        "name": "opened",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
     "nominated": {
         "name": "nominated",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "nomination_rejected": {
         "name": "nomination_rejected",
-        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-assignee": "assignee_1",
         "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
@@ -43,14 +50,14 @@
     },
     "rejected": {
         "name": "rejected",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""
     },
     "closed": {
         "name": "closed",
-        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-assignee": "assignee_2",
         "ball-in-court-monitors": "getMonitors1",
         "ball-in-court-users": "",
         "also-send-to-users-discipline": ""

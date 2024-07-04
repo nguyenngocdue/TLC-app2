@@ -188,7 +188,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "2",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
@@ -246,6 +246,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "969",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_sep01": {
         "name": "_sep01",
         "column_name": "sep01",
@@ -298,9 +311,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -340,6 +353,32 @@
     "_appointment_detail": {
         "name": "_appointment_detail",
         "column_name": "appointment_detail",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "2,35,38,105,959,26",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_comment_ticketing": {
+        "name": "_comment_ticketing",
+        "column_name": "comment_ticketing",
         "label": "",
         "validation": "",
         "validation_regex": "",

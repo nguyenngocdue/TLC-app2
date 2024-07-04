@@ -10,7 +10,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_owner_info": {
         "name": "_section_owner_info",
@@ -23,7 +23,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_owner_info_sub": {
         "name": "_section_owner_info_sub",
@@ -36,7 +36,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_house_owner_id": {
         "name": "_house_owner_id",
@@ -49,7 +49,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_house_owner_phone_number": {
         "name": "_house_owner_phone_number",
@@ -62,7 +62,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_house_owner_address": {
         "name": "_house_owner_address",
@@ -75,7 +75,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_house_owner_email": {
         "name": "_house_owner_email",
@@ -88,7 +88,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_sep00": {
         "name": "_sep00",
@@ -101,7 +101,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_basic_info": {
         "name": "_section_basic_info",
@@ -114,7 +114,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_basic_info_sub": {
         "name": "_section_basic_info_sub",
@@ -127,7 +127,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_name": {
         "name": "_name",
@@ -140,7 +140,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_description": {
         "name": "_description",
@@ -153,7 +153,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_unit_id": {
         "name": "_unit_id",
@@ -166,19 +166,19 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "new": "",
-        "opened": "",
-        "nominated": "",
-        "nomination_rejected": "",
-        "in_progress": "",
-        "on_hold": "",
-        "resolved": "",
-        "rejected": "",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
         "closed": "true"
     },
     "_priority_id": {
@@ -192,7 +192,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_due_date": {
         "name": "_due_date",
@@ -205,7 +205,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_defect_cat_id": {
         "name": "_defect_cat_id",
@@ -218,7 +218,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_defect_sub_cat_id": {
         "name": "_defect_sub_cat_id",
@@ -231,7 +231,7 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_opened_photos": {
         "name": "_opened_photos",
@@ -244,11 +244,24 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
         "new": "",
         "opened": "",
         "nominated": "",
@@ -257,25 +270,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
-    },
-    "_sep01": {
-        "name": "_sep01",
-        "column_name": "sep01",
-        "new": "true",
-        "opened": "",
-        "nominated": "",
-        "nomination_rejected": "",
-        "in_progress": "",
-        "on_hold": "",
-        "resolved": "",
-        "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_appointment": {
         "name": "_section_appointment",
         "column_name": "section_appointment",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -283,12 +283,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_appointment_sub": {
         "name": "_section_appointment_sub",
         "column_name": "section_appointment_sub",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -296,12 +296,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_appointment_title": {
         "name": "_appointment_title",
         "column_name": "appointment_title",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -309,12 +309,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
         "column_name": "assignee_2",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -322,12 +322,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_appointment_from": {
         "name": "_appointment_from",
         "column_name": "appointment_from",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -335,12 +335,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_appointment_to": {
         "name": "_appointment_to",
         "column_name": "appointment_to",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -348,12 +348,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_appointment_detail": {
         "name": "_appointment_detail",
         "column_name": "appointment_detail",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -361,12 +361,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -374,12 +374,12 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_comment_ticketing": {
         "name": "_comment_ticketing",
         "column_name": "comment_ticketing",
-        "new": "true",
+        "new": "",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
@@ -387,137 +387,137 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_sep02": {
         "name": "_sep02",
         "column_name": "sep02",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_task": {
         "name": "_section_task",
         "column_name": "section_task",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_section_task_sub": {
         "name": "_section_task_sub",
         "column_name": "section_task_sub",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_getTicketingTasks": {
         "name": "_getTicketingTasks",
         "column_name": "getTicketingTasks",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_closed_photos": {
         "name": "_closed_photos",
         "column_name": "closed_photos",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     },
     "_status": {
         "name": "_status",
@@ -530,6 +530,6 @@
         "on_hold": "",
         "resolved": "",
         "rejected": "",
-        "closed": "true"
+        "closed": ""
     }
 }
