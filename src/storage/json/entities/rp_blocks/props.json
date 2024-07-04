@@ -43,6 +43,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "column_type": "text",
+        "label": "Description",
+        "control": "text",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_sql_string": {
         "name": "_sql_string",
         "column_name": "sql_string",

@@ -20,6 +20,7 @@ return new class extends Migration
         $schema->create('rp_blocks', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->text('sql_string')->nullable();
             $table->boolean('table_true_width')->nullable();
             $table->unsignedInteger('max_h')->nullable();
