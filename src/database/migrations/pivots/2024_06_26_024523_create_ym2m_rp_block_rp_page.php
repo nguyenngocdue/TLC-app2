@@ -27,7 +27,7 @@ return new class extends Migration
     {
         $table->integer('col_span')->nullable();
         $table->orderable();
-        $table->unsignedBigInteger('deleted_at')->nullable();
         $table->unsignedBigInteger('deleted_by')->nullable();
+        $table->softDeletes();
     }
 };
