@@ -65,7 +65,7 @@ class Rp_page extends ModelExtended
             ["dataIndex" => 'height'],
             ["dataIndex" => 'is_stackable_letter_head'],
             ["dataIndex" => 'is_full_width'],
-            // ["dataIndex" => 'background'],
+            ["dataIndex" => 'attachment_background'],
         ];
     }
 
