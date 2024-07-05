@@ -90,7 +90,8 @@ trait TableTraitApplyRender
             $batchLength = "batchLength=$batchLength";
             $rawData = ($rawData instanceof EloquentCollection || $rawData instanceof SupportCollection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
-            $attributes = "$name $typeRender $multiple $deaf $propertyRender $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
+            $attributes = "$name $typeRender $multiple $deaf $propertyRender $rowReadOnly ";
+            $attributes .= " $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
             // if (App::isLocal()) {
             //     $styleRender = isset($column['width']) ? 'style="width: ' . $column['width'] . 'px;"' : '';
             //     $attributes .= "$styleRender ";
