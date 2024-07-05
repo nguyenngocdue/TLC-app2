@@ -38,9 +38,13 @@ class ColumnLink extends Component
             $dataSource = $this->dataLine->$dataIndex;
         }
         // dump($dataIndex);
-        // dump($dataSource);
+
         // if (is_null($dataSource)) return;
-        $discipline = ($this->column['dataIndex'] == "getDisciplinesOfTask");
+        // $discipline = ($this->column['dataIndex'] == "getDisciplinesOfTask");
+        if (!is_array($dataSource)) {
+            if ($dataSource === null) $dataSource = [];
+            else $dataSource = [$dataSource];
+        }
         foreach ($dataSource as $item) {
             $table = $item->getTable();
             $route = route($table . ".edit", $item->id);
@@ -58,12 +62,12 @@ class ColumnLink extends Component
                 }
             } else {
                 $value = $item->$rendererParam;
-                if ($discipline) {
-                    $defAssignee = $item->def_assignee;
-                    $u = User::findFromCache($defAssignee);
-                    if ($u) $value .= " (" . $u->name . ")";
-                    else $value .= " (???????????)";
-                }
+                // if ($discipline) {
+                //     $defAssignee = $item->def_assignee;
+                //     $u = User::findFromCache($defAssignee);
+                //     if ($u) $value .= " (" . $u->name . ")";
+                //     else $value .= " (???????????)";
+                // }
             }
             $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1 whitespace-nowrap'>" . $value . "</a>";
         }
