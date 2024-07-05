@@ -92,7 +92,7 @@
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "block",
         "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParamsPages",
+        "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
         "filter_operator": "=",

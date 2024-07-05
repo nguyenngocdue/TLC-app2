@@ -32,15 +32,16 @@ class Rp_page_block_detail extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getManyLineParamsPages()
+    public function getManyLineParams()
     {
         return [
             ["dataIndex" => 'id', 'invisible' => !true,],
             ["dataIndex" => 'order_no', 'invisible' => true,],
             ["dataIndex" => 'rp_page_id', 'value_as_parent_id' => true, 'invisible' => true,],
-            ["dataIndex" => 'rp_block_id'],
+            ["dataIndex" => 'rp_block_id', 'rendererParam' => 'name'],
             ["dataIndex" => 'col_span'],
             ["dataIndex" => 'attachment_background'],
+            // ["dataIndex" => 'table_true_width'],
         ];
     }
 

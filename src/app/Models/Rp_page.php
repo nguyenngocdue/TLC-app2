@@ -53,7 +53,7 @@ class Rp_page extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getManyLineParamsPages()
+    public function getManyLineParams()
     {
         return [
             ["dataIndex" => 'id', /* 'invisible' => true, */],
