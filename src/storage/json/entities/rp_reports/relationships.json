@@ -39,7 +39,7 @@
         "control_name": "getPages",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
+        "renderer_view_all_unit": "page",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParamsPages",
         "control": "relationship_renderer",

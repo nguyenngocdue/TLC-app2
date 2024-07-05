@@ -57,7 +57,7 @@
                                         action="{{$action}}"
                                         label="{{$label}}"
                                         isRequired="{{$isRequired}}"
-                                        iconJson="{{$iconJson}}"
+                                        iconJson="{!! $iconJson !!}"
                                         labelExtra="{{$labelExtra}}"
                                 />
                             </div>

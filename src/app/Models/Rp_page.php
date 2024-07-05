@@ -12,6 +12,8 @@ class Rp_page extends ModelExtended
         "is_stackable_letter_head", "is_full_width", "order_no", "owner_id"
     ];
 
+    public static $statusless = true;
+
     public static $eloquentParams = [
         "getParent" => ['belongsTo', Rp_report::class, 'report_id'],
         "getLetterHead" => ['belongsTo', Rp_letter_head::class, 'letter_head_id'],

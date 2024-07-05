@@ -15,9 +15,10 @@ class Rp_block extends ModelExtended
         "chart_type", "html_content",
     ];
 
+    public static $statusless = true;
+
     public static $eloquentParams = [
         'getChartType' => ['belongsTo', Term::class, 'chart_type'],
-        "attachment_background" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         'getRendererType' => ['belongsTo', Term::class, 'renderer_type'],
         'getControl' => ['belongsTo', Term::class, 'top_left_control'],
         'getControl2' => ['belongsTo', Term::class, 'top_center_control'],
@@ -29,6 +30,7 @@ class Rp_block extends ModelExtended
         "getLines" => ["hasMany", Rp_column::class, "block_id"],
         "get2ndHeaderLines" => ["hasMany", Rp_column::class, "block_id"],
 
+        "html_attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function getChartType()
@@ -76,7 +78,7 @@ class Rp_block extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function attachment_background()
+    public function html_attachment()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

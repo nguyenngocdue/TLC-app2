@@ -51,7 +51,7 @@
         "control": "dropdown",
         "align": "",
         "col_span": "6",
-        "width": "",
+        "width": "200",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",

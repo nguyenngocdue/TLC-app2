@@ -25,6 +25,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_sql_string": {
         "name": "_sql_string",
         "column_name": "sql_string",
@@ -37,6 +50,32 @@
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": "30"
+    },
+    "_renderer_type": {
+        "name": "_renderer_type",
+        "column_name": "renderer_type",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_html_attachment": {
+        "name": "_html_attachment",
+        "column_name": "html_attachment",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_has_pagination": {
         "name": "_has_pagination",
@@ -93,32 +132,6 @@
     "_rotate_45_height": {
         "name": "_rotate_45_height",
         "column_name": "rotate_45_height",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_renderer_type": {
-        "name": "_renderer_type",
-        "column_name": "renderer_type",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_chart_json": {
-        "name": "_chart_json",
-        "column_name": "chart_json",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -220,6 +233,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_chart_json": {
+        "name": "_chart_json",
+        "column_name": "chart_json",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_html_content": {
         "name": "_html_content",
         "column_name": "html_content",
@@ -298,9 +324,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_attachment_background": {
-        "name": "_attachment_background",
-        "column_name": "attachment_background",
+    "_getLines": {
+        "name": "_getLines",
+        "column_name": "getLines",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_get2ndHeaderLines": {
+        "name": "_get2ndHeaderLines",
+        "column_name": "get2ndHeaderLines",
         "label": "",
         "validation": "",
         "validation_regex": "",

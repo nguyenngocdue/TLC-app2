@@ -11,6 +11,8 @@ class Rp_page_block_detail extends ModelExtended
         "order_no", "owner_id"
     ];
 
+    public static $statusless = true;
+
     public static $eloquentParams = [
         "getBlock" => ['belongsTo', Rp_block::class, 'rp_block_id'],
         "getPage" => ['belongsTo', Rp_page::class, 'rp_page_id'],
