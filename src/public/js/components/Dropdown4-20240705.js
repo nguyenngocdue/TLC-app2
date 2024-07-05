@@ -15,16 +15,27 @@ const dumbIncludes4 = (item, array) => {
     }
 }
 const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + "[" + fieldName + "][" + rowIndex + "]"
-const smartFilter4 = (dataSource, column, value) => {
+const smartFilter4 = (dataSource, column, operator, value) => {
     return dataSource.filter((row) => {
         let result = null
-        if (Array.isArray(row[column])) {
-            result = dumbIncludes4(value, row[column])
-        } else {
-            result = row[column] == value
+        switch(operator || '='){
+            case '=':
+                if (Array.isArray(row[column])) 
+                    result = dumbIncludes4(value, row[column])
+                else 
+                    result = row[column] == value
+                return result
+            case '!=':
+                if (Array.isArray(row[column])) 
+                    result = !dumbIncludes4(value, row[column])
+                else 
+                    result = row[column] != value
+                return result
+            default: 
+                console.log("Implement me", operator)
+                return false
         }
-        return result
-    })
+        })
 }
 
 const getFieldNameInTable01FormatJS = (name, table01Name) => {
@@ -46,7 +57,7 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
     const column_name = getFieldNameInTable01FormatJS(id, table01Name)
     // console.log(filtersOfDropdown4, column_name)
     if (filtersOfDropdown4[column_name] !== undefined) {
-        const { filter_columns, filter_values } = filtersOfDropdown4[column_name]
+        const { filter_columns, filter_operator, filter_values } = filtersOfDropdown4[column_name]
         //Filter by filter_columns and filter_values
         for (let i = 0; i < filter_columns.length; i++) {
             const column = filter_columns[i]
@@ -58,7 +69,7 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
             })
-            dataSource = smartFilter4(dataSource, column, value)
+            dataSource = smartFilter4(dataSource, column, filter_operator, value)
         }
     }
     // console.log("Filtered")
@@ -82,7 +93,7 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
         if (column === undefined) console.log("The column to look up [", column, "] is not found in ...")
         if (!value) continue;
         if (debugListener) console.log("Applying", column, value, "to", table_name, 'by column', column)
-        dataSource = smartFilter4(dataSource, column, value)
+        dataSource = smartFilter4(dataSource, column, '=', value)
     }
 
     if (debugListener) console.log("DataSource AFTER reduce", dataSource)

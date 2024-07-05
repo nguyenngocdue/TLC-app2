@@ -76,13 +76,13 @@ trait TraitManageRelationshipColumns
                 "editable" => true,
                 "cbbDataSource" => [
                     '=',
-                    // '!=',
+                    '!=',
                     // '>',
                     // '>=',
                     // '<',
                     // '<=',
-                    'is null',
-                    'is not null',
+                    'is_null',
+                    'is_not_null',
                     /*'like', 'not like', 'in', 'not in', 'between', 'not between', */
                 ],
                 "renderer" => "dropdown",

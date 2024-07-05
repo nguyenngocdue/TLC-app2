@@ -1,9 +1,11 @@
 <?php
+
 namespace App\View\Components\AdvancedFilter;
 
-use App\Models\Field;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
+
 class Dropdown3 extends Component
 {
     static $singleton = null;
@@ -40,12 +42,13 @@ class Dropdown3 extends Component
         $filterColumns = $dataRelationShips['filter_columns'];
         $filterValues = $dataRelationShips['filter_values'];
         return view('components.advanced-filter.dropdown3', [
-            'dataSource' => $this->getDataSource($params,$typeRelationship,$filterColumns,$filterValues),
+            'dataSource' => $this->getDataSource($params, $typeRelationship, $filterColumns, $filterValues),
             'name' =>  $this->name,
             'valueSelected' => $this->valueSelected,
         ]);
     }
-    private function getDataSource($params,$typeRelationship,$filterColumns,$filterValues){
+    private function getDataSource($params, $typeRelationship, $filterColumns, $filterValues)
+    {
         if (!empty($filterColumns) && !empty($filterValues)) {
             $arrayQuery = [];
             foreach ($filterColumns as $key => $value) {
@@ -61,19 +64,25 @@ class Dropdown3 extends Component
             if ($typeRelationship == 'eloquent') {
                 return ($params[1])::where(function ($q) use ($arrayQuery, $typeRelationship) {
                     foreach ($arrayQuery as $key => $value) {
-                        is_array($value) ? $q->whereIn($key, $value) : $q->where($key, $value);
+                        //This crash production runs > view all
+                        // if (is_array($value)) {
+                        //     Log::info($key);
+                        //     Log::info($value);
+                        //     // $q->whereIn($key, $value);
+                        // } else
+                        $q->where($key, $value);
                     }
                     return $q;
                 })->get();
-            } 
+            }
             try {
                 $keyFirst = array_key_first($arrayQuery);
                 $valueFirst = $arrayQuery[$keyFirst];
-                if($keyFirst == 'field_id'){
-                    return ($params[1])::where($keyFirst,$valueFirst)->get();
+                if ($keyFirst == 'field_id') {
+                    return ($params[1])::where($keyFirst, $valueFirst)->get();
                 }
                 $allModel =  ($params[1])::all();
-                $results = $allModel->filter(function($item) use ($keyFirst,$valueFirst){
+                $results = $allModel->filter(function ($item) use ($keyFirst, $valueFirst) {
                     return $item->{$keyFirst}->where('id', $valueFirst)->count() > 0;
                 });
                 return $results;
@@ -81,8 +90,6 @@ class Dropdown3 extends Component
                 dump('Oracy Filter Not Support');
                 return collect();
             }
-            
-            
         } else {
             if (isset($params[1])) {
                 if ($params[1] == 'App\Models\User') {

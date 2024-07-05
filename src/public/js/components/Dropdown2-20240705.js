@@ -18,16 +18,29 @@ const select2FormatState = (state) => {
 }
 const getEById = (id) => $("[id='" + id + "']")
 const dumbIncludes2 = (array, item) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
-const smartFilter2 = (dataSource, column, value) => {
+const smartFilter2 = (dataSource, column, operator, value) => {
     return dataSource.filter((row) => {
         let result = null
         // console.log("Row:", row, "column:", column, "row[column]", row[column])
-        if (Array.isArray(row[column])) {
-            result = dumbIncludes2(row[column], value)
-        } else {
-            result = (row[column] == value)
+        switch (operator || '=') {
+            case '=':
+                if (Array.isArray(row[column])) {
+                    result = dumbIncludes2(row[column], value)
+                } else {
+                    result = (row[column] == value)
+                }
+                return result
+            case '!=':
+                if (Array.isArray(row[column])) {
+                    result = !dumbIncludes2(row[column], value)
+                } else {
+                    result = (row[column] != value)
+                }
+                return result
+            default:
+                console.error('Unknown operator', operator)
+                return false
         }
-        return result
     })
 }
 const getIsMultipleOfE = (id) => (getEById(id)[0]) ? getEById(id)[0].hasAttribute('multiple') : false
@@ -170,7 +183,7 @@ const filterDropdown2 = (column_name, dataSource) => {
     // const filtersOfDropdown2 = filtersOfDropdown2s[lineType]
     // console.log(filtersOfDropdown2s, filtersOfDropdown2, column_name, lineType)
     if (filtersOfDropdown2[column_name] !== undefined) {
-        const { filter_columns, filter_values } = filtersOfDropdown2[column_name]
+        const { filter_columns, filter_operator, filter_values } = filtersOfDropdown2[column_name]
         //Filter by filter_columns and filter_values
         for (let i = 0; i < filter_columns.length; i++) {
             const column = filter_columns[i]
@@ -182,7 +195,7 @@ const filterDropdown2 = (column_name, dataSource) => {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
             })
-            dataSource = smartFilter2(dataSource, column, value)
+            dataSource = smartFilter2(dataSource, column, filter_operator, value)
         }
     }
     return dataSource
@@ -206,7 +219,7 @@ const onChangeDropdown2Reduce = (listener) => {
         const column = listen_to_attrs[i]
         if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
         if (debugListener) console.log('Applying', column, value, 'to', table_name)
-        dataSource = smartFilter2(dataSource, column, value)
+        dataSource = smartFilter2(dataSource, column, '=', value)
     }
 
     if (debugListener) console.log('DataSource AFTER reduce', dataSource)

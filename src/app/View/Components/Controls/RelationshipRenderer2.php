@@ -16,6 +16,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLine
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererCalendarGrid;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyCheckpoints;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyToManyMatrix;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -103,7 +104,9 @@ class RelationshipRenderer2 extends Component
             $filterOperator = $props['relationships']['filter_operator'];
             $filterValues = $props['relationships']['filter_values'] ?? [];
 
-            // dump($filterColumns, $filterValues);
+            // Log::info($filterColumns);
+            // Log::info($filterOperator);
+            // Log::info($filterValues);
 
             if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
             elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
@@ -114,12 +117,15 @@ class RelationshipRenderer2 extends Component
                 foreach ($filterColumns as $key => $value) {
                     switch ($filterOperator) {
                         case '=':
-                            if (sizeof($filterValues)) $result = $result->where($value, $filterValues[$key]);
+                            if (isset($filterValues[$key])) $result = $result->where($value, $filterValues[$key]);
                             break;
-                        case 'is null':
+                        case '!=':
+                            if (isset($filterValues[$key])) $result = $result->whereNot($value, $filterValues[$key]);
+                            break;
+                        case 'is_null':
                             $result = $result->whereNull($value);
                             break;
-                        case 'is not null':
+                        case 'is_not_null':
                             $result = $result->whereNotNull($value);
                             break;
                         default:
