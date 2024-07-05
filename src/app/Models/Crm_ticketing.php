@@ -34,6 +34,7 @@ class Crm_ticketing extends ModelExtended
 
         "opened_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "closed_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "rejected_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
 
         "comment_ticketing" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
@@ -101,6 +102,13 @@ class Crm_ticketing extends ModelExtended
     }
 
     public function closed_photos()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function rejected_photos()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
