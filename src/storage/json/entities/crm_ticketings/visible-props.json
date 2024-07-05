@@ -454,6 +454,19 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_rejected_photos": {
+        "name": "_rejected_photos",
+        "column_name": "rejected_photos",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
@@ -522,6 +535,58 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_comment_rejected_reason": {
+        "name": "_comment_rejected_reason",
+        "column_name": "comment_rejected_reason",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_comment_on_hold_reason": {
+        "name": "_comment_on_hold_reason",
+        "column_name": "comment_on_hold_reason",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_comment_resolved": {
+        "name": "_comment_resolved",
+        "column_name": "comment_resolved",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
+    "_comment_asm_rejected_reason": {
+        "name": "_comment_asm_rejected_reason",
+        "column_name": "comment_asm_rejected_reason",
         "new": "true",
         "opened": "true",
         "nominated": "true",

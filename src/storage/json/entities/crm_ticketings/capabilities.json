@@ -73,13 +73,13 @@
         "name": "apartment_owner",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "opened": "",
         "nominated": "",
         "nomination_rejected": "",
         "in_progress": "",
         "on_hold": "",
-        "resolved": "",
+        "resolved": "true",
         "rejected": "",
         "closed": ""
     },
@@ -95,7 +95,7 @@
         "on_hold": "true",
         "resolved": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "bd_member": {
         "name": "bd_member",
@@ -193,7 +193,7 @@
         "on_hold": "true",
         "resolved": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "dc_ho": {
         "name": "dc_ho",
@@ -235,7 +235,7 @@
         "on_hold": "true",
         "resolved": "true",
         "rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "des_manager": {
         "name": "des_manager",
