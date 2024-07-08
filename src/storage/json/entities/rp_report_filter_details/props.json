@@ -65,28 +65,6 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_col_span": {
-        "name": "_col_span",
-        "column_name": "col_span",
-        "column_type": "int unsigned",
-        "label": "Column Span",
-        "control": "number",
-        "align": "",
-        "col_span": "6",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": "",
-        "frozen_left": "",
-        "frozen_right": "",
-        "nowrap_view_all": ""
-    },
     "_default_value": {
         "name": "_default_value",
         "column_name": "default_value",

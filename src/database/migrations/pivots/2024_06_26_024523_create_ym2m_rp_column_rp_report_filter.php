@@ -25,7 +25,6 @@ return new class extends Migration
 
     public function schemaPivot(BlueprintExtended $table)
     {
-        $table->unsignedInteger('col_span')->nullable();
         $table->string('bw_list_ids')->nullable();
         $table->unsignedBigInteger('black_or_white')->nullable();
         $table->boolean('is_required')->nullable();

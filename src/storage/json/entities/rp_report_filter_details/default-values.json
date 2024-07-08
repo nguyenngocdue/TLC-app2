@@ -38,9 +38,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_col_span": {
-        "name": "_col_span",
-        "column_name": "col_span",
+    "_default_value": {
+        "name": "_default_value",
+        "column_name": "default_value",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -80,19 +80,6 @@
     "_is_required": {
         "name": "_is_required",
         "column_name": "is_required",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_default_value": {
-        "name": "_default_value",
-        "column_name": "default_value",
         "label": "",
         "validation": "",
         "validation_regex": "",
