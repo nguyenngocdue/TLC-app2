@@ -9,7 +9,6 @@ class Rp_report_filter_detail extends ModelExtended
     protected $fillable = [
         "id",
         "rp_column_id", "rp_report_id",
-        "col_span",
         "bw_list_ids", "black_or_white",
         "is_required", "default_value",
         "has_listen_to", "allow_clear",
