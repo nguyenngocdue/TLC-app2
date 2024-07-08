@@ -21,7 +21,7 @@
                             Apartment No.:
                             <span class="ml-1 font-semibold">{{$unitName}}</span>
                         @else
-                            Module No.: 
+                            Apartment No.: 
                             <span class="ml-1 font-semibold">{{$item->name}}</span>
                         @endif
                     </div>
