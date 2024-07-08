@@ -23,10 +23,10 @@
         "name": "finished",
         "location": "110.00 80.00",
         "new": "",
-        "in_progress": "true",
+        "in_progress": "",
         "finished": "",
-        "on_hold": "true",
-        "cancelled": "true",
+        "on_hold": "",
+        "cancelled": "",
         "not_applicable": ""
     },
     "on_hold": {

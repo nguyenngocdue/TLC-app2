@@ -98,6 +98,39 @@
         "cancelled": "",
         "not_applicable": ""
     },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "council_member": {
+        "name": "council_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
@@ -357,7 +390,7 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
@@ -614,6 +647,17 @@
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     },
     "whs_manager": {
         "name": "whs_manager",
