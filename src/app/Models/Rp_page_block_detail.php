@@ -32,23 +32,23 @@ class Rp_page_block_detail extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function attachment_background()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
     public function getManyLineParams()
     {
         return [
             ["dataIndex" => 'id', 'invisible' => !true,],
             ["dataIndex" => 'order_no', 'invisible' => true,],
             ["dataIndex" => 'rp_page_id', 'value_as_parent_id' => true, 'invisible' => true,],
-            ["dataIndex" => 'rp_block_id', 'rendererParam' => 'name'],
+            ["dataIndex" => 'rp_block_id', /*'renderer' => 'column_link', /*'rendererParam' => 'name'*/],
             ["dataIndex" => 'col_span'],
             ["dataIndex" => 'attachment_background'],
             // ["dataIndex" => 'table_true_width'],
         ];
-    }
-
-    public function attachment_background()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
-        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
 }

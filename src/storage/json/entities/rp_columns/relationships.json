@@ -14,7 +14,7 @@
         "filter_values": "301",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "true"
     },
     "_getRowIconPosition": {
         "name": "_getRowIconPosition",
@@ -31,7 +31,7 @@
         "filter_values": "301",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "true"
     },
     "_getRowRenderer": {
         "name": "_getRowRenderer",
@@ -65,7 +65,7 @@
         "filter_values": "305",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "true"
     },
     "_getBlock": {
         "name": "_getBlock",
@@ -95,7 +95,7 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "parent_id",
-        "filter_operator": "is null",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
