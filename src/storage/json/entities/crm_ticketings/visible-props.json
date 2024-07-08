@@ -90,6 +90,19 @@
         "rejected": "true",
         "closed": "true"
     },
+    "_house_owner_additional": {
+        "name": "_house_owner_additional",
+        "column_name": "house_owner_additional",
+        "new": "true",
+        "opened": "true",
+        "nominated": "true",
+        "nomination_rejected": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "resolved": "true",
+        "rejected": "true",
+        "closed": "true"
+    },
     "_sep00": {
         "name": "_sep00",
         "column_name": "sep00",

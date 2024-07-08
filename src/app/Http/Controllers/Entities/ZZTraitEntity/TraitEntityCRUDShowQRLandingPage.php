@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Models\Pj_module;
 use App\Models\Pj_unit;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 trait TraitEntityCRUDShowQRLandingPage
@@ -13,9 +15,10 @@ trait TraitEntityCRUDShowQRLandingPage
 	public function showQRApp($slug, $trashed)
 	{
 		$modelCurrent = new ($this->modelPath);
-		$item = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
+		// $item = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
+		$item = $modelCurrent::where('slug', $slug)->first();
 		if (!$item) {
-			throw new NotFoundHttpException();
+			throw new NotFoundHttpException("Not found, #971.");
 		}
 		$props = SuperProps::getFor($this->type)['props'];
 
@@ -91,12 +94,49 @@ trait TraitEntityCRUDShowQRLandingPage
 				break;
 		}
 
+		$cu = CurrentUser::get();
+		// Log::info($cu);
+		// dump($this->type);
+		// Log::info($item);
+		$unit_id = null;
+		$project_id = null;
+		switch ($this->type) {
+			case "pj_unit":
+				$unit_id = $item->id;
+				$project_id = $item->project_id;
+				break;
+			case "pj_module":
+				$unit_id = $item->pj_unit_id;
+				$project_id = $item->getSubProject->project_id;
+				break;
+		}
+
+		if ($cu) {
+			$name = "Raise a TICKET";
+			$href = route("crm_ticketings.create", [
+				"house_owner_phone_number" => $cu->phone,
+				"house_owner_id" => $cu->id,
+				"house_owner_email" => $cu->email,
+				"house_owner_address" => $cu->address,
+				"unit_id" => $unit_id,
+				"project_id" => $project_id,
+			]);
+		} else {
+			$name = "Please Login to Raise a TICKET";
+			$href = null;
+		}
+
+		$ticket = [[
+			'name' => $name,
+			'href' => $href,
+		],];
+
 		return [
-			'HomeOwner Manual' => empty($ho_manuals) ? [['name' => "To Be Added"],] : $ho_manuals,
+			'HomeOwner Manual' => empty($ho_manuals) ? [['name' => "To Be Added by DC"],] : $ho_manuals,
 			"QA Records $qa_source" =>  empty($qa_records) ? [['name' => "To Be Added"],] : $qa_records,
-			'Project Plans' => empty($project_plans) ? [['name' => "To Be Added"],] : $project_plans,
-			'Ticketing' => [['name' => "To Be Added"],],
-			'Customer Survey' => [['name' => "To Be Added"],],
+			'Project Plans' => empty($project_plans) ? [['name' => "To Be Added by DC"],] : $project_plans,
+			'Customer Service' => $ticket,
+			'Customer Survey' => [['name' => "To Be Added by Software Team"],],
 		];
 	}
 	public function getConfigRenderSource($item)

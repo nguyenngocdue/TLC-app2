@@ -90,6 +90,19 @@
         "rejected": "",
         "closed": ""
     },
+    "_house_owner_additional": {
+        "name": "_house_owner_additional",
+        "column_name": "house_owner_additional",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
     "_sep00": {
         "name": "_sep00",
         "column_name": "sep00",
@@ -171,15 +184,15 @@
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
-        "new": "true",
-        "opened": "true",
-        "nominated": "true",
-        "nomination_rejected": "true",
-        "in_progress": "true",
-        "on_hold": "true",
-        "resolved": "true",
-        "rejected": "true",
-        "closed": "true"
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
     },
     "_priority_id": {
         "name": "_priority_id",
@@ -444,6 +457,19 @@
     "_closed_photos": {
         "name": "_closed_photos",
         "column_name": "closed_photos",
+        "new": "",
+        "opened": "",
+        "nominated": "",
+        "nomination_rejected": "",
+        "in_progress": "",
+        "on_hold": "",
+        "resolved": "",
+        "rejected": "",
+        "closed": ""
+    },
+    "_rejected_photos": {
+        "name": "_rejected_photos",
+        "column_name": "rejected_photos",
         "new": "",
         "opened": "",
         "nominated": "",

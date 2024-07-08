@@ -9,6 +9,7 @@ class Crm_ticketing extends ModelExtended
     protected $fillable = [
         'id',
         'house_owner_id', 'house_owner_phone_number', 'house_owner_address', 'house_owner_email',
+        'house_owner_additional',
         'name', 'description', 'unit_id',  'project_id',
         'priority_id', 'due_date',
         'defect_cat_id', 'defect_sub_cat_id',

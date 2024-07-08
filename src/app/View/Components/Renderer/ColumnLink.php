@@ -37,39 +37,45 @@ class ColumnLink extends Component
         } else {
             $dataSource = $this->dataLine->$dataIndex;
         }
+
+
         // dump($dataIndex);
 
         // if (is_null($dataSource)) return;
         // $discipline = ($this->column['dataIndex'] == "getDisciplinesOfTask");
-        if (!is_array($dataSource)) {
+        if (!is_iterable($dataSource)) { // array or collection
             if ($dataSource === null) $dataSource = [];
             else $dataSource = [$dataSource];
         }
         foreach ($dataSource as $item) {
-            $table = $item->getTable();
-            $route = route($table . ".edit", $item->id);
+            if (method_exists($item, 'getTable')) {
+                $table = $item->getTable();
+                $route = route($table . ".edit", $item->id);
 
-            $id = $item->id ?? "";
-            $value = null;
-            if (!isset($item->$rendererParam)) {
-                // dump('l1'.$rendererParam);
-                if ($rendererParam !== 'name') {
-                    $result[] = "Renderer View All Param [" . $rendererParam . "] is missing";
-                    continue;
+                $id = $item->id ?? "";
+                $value = null;
+                if (!isset($item->$rendererParam)) {
+                    // dump('l1'.$rendererParam);
+                    if ($rendererParam !== 'name') {
+                        $result[] = "Renderer View All Param [" . $rendererParam . "] is missing";
+                        continue;
+                    } else {
+                        $value = "";
+                        // $value = "Nameless #".($id); //<< This will cause eye noises
+                    }
                 } else {
-                    $value = "";
-                    // $value = "Nameless #".($id); //<< This will cause eye noises
+                    $value = $item->$rendererParam;
+                    // if ($discipline) {
+                    //     $defAssignee = $item->def_assignee;
+                    //     $u = User::findFromCache($defAssignee);
+                    //     if ($u) $value .= " (" . $u->name . ")";
+                    //     else $value .= " (???????????)";
+                    // }
                 }
+                $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1 whitespace-nowrap'>" . $value . "</a>";
             } else {
-                $value = $item->$rendererParam;
-                // if ($discipline) {
-                //     $defAssignee = $item->def_assignee;
-                //     $u = User::findFromCache($defAssignee);
-                //     if ($u) $value .= " (" . $u->name . ")";
-                //     else $value .= " (???????????)";
-                // }
+                $result[] = "getTable() not found in " . get_class($item);
             }
-            $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1 whitespace-nowrap'>" . $value . "</a>";
         }
         return "<p class='p-2'>" . join(", ", $result) . "</p>";
         // dump($this->column);

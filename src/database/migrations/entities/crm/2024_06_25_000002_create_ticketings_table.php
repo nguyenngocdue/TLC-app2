@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('house_owner_phone_number')->nullable();
             $table->string('house_owner_address')->nullable();
             $table->string('house_owner_email')->nullable();
+            $table->text('house_owner_additional')->nullable();
 
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->unsignedBigInteger('project_id')->nullable();
