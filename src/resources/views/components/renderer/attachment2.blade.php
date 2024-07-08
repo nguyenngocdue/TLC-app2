@@ -21,9 +21,9 @@
                     @if($openType == '_blank')
                     </a>
                     @endif
-                @elseif(in_array(strtolow($extension), ["csv","pdf","zip"]))
+                @elseif(in_array(strtolower($extension), ["csv","pdf","zip"]))
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
-                @elseif(in_array(strtolow($extension), ["mov","mp4","webm"]))
+                @elseif(in_array(strtolower($extension), ["mov","mp4","webm"]))
                     <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
                 @elseif($extension === 'svg')
                     <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
