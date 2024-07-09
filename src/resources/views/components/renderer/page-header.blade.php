@@ -5,7 +5,7 @@
 </script>
 @endonce
 
-<main class="mt-16 m1b-8 w-full flex-grow dark:bg-gray-700 no-print">
+<main class="w-full flex-grow dark:bg-gray-700 no-print">
     <div class="w-full h-18 no-print">
         @if($visible)
         <div class="no-print flex bg-white dark:bg-gray-800 flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
