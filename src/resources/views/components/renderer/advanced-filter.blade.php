@@ -90,94 +90,121 @@
                             <label for={{$columnName}} class="ml-1 text-gray-900 dark:text-gray-300 text-sm font-normal" >{{$label}}</label>
                         </div>
                         @switch ($control)
-                        @case('picker_time')
-                        <x-advanced-filter.picker-time3  :name="$columnName" :value="$valueControl"/>
-                        @if(Session::has($columnName))
-                            <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
-                        @endif
-                        @break
-                        @case('picker_month')
-                        <x-advanced-filter.picker-month3  :name="$columnName" :value="$valueControl"/>
-                        @if(Session::has($columnName))
-                            <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
-                        @endif
-                        @break
-                        @case('picker_week')
-                        <x-advanced-filter.picker-week3  :name="$columnName" :value="$valueControl"/>
-                        @if(Session::has($columnName))
-                            <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
-                        @endif
-                        @break
-                        @case('picker_year')
-                        <x-advanced-filter.picker-year3  :name="$columnName" :value="$valueControl"/>
-                        @if(Session::has($columnName))
-                            <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
-                        @endif
-                        @break
-                        @case('picker_quarter')
-                        <x-advanced-filter.picker-quarter3  :name="$columnName" :value="$valueControl"/>
-                        @if(Session::has($columnName))
-                            <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
-                        @endif
-                        @break
-                        @case('picker_date')
-                        @case('picker_datetime')
-                        <x-advanced-filter.picker-date3  :name="$columnName" :value="$valueControl"/>
-                        @if(Session::has($columnName))
-                            <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
-                        @endif
-                        @break
-                        @case('id')
-                        @case('doc_id')
-                        @case('parent_id')
-                        <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
-                        @break
-                        @case('text')
-                        @case('number')
-                        @case('textarea')
-                        @case('textarea_diff')
-                        @case('textarea_diff_draft')
-                            <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}}/>
-                        @break
-                        @case('toggle')
-                        <x-advanced-filter.toggle3  name={{$columnName}} value={{$valueControl}} />
-                        @break
-                        @case ('dropdown')
-                        @case ('radio')
-                        {{-- @case ('dropdown_multi') --}}
-                        {{-- @case('checkbox') --}}
-                        @case ('dropdown_multi_2a')
-                        @case('checkbox_2a')
-                            <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
-                        @break
-                        @case('status')
-                        {{--@if(!$valueControl || !$valueControl[0] || count($valueControl) > 1) --}}
-                            @php
-                            $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
-                            @endphp
-                            <div class="select2-short" title={{$control}}>
-                                <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
-                                    @foreach($libStatus as $value)
-                                    <option value="{{$value['name']}}" @selected($valueControl ? in_array($value['name'],$valueControl) : null) >{{$value['title'] ?? $value['name']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <script>
-                                    $('[id="'+"{{$columnName}}"+'"]').select2({
-                                        placeholder: "Please select..."
-                                        , allowClear: true
-                                        , templateResult: select2FormatState
-                                    });
-                            </script>
-                        {{--@endif--}}
-                            
-                        @break
-                        @case('parent_type')
-                        <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
-                        @break
-                        @default
-                        <x-feedback.alert type="warning" title="Control???" message="[{{$control}}]" />
-                        @break
+                            @case('picker_time')
+                                <x-advanced-filter.picker-time3  :name="$columnName" :value="$valueControl"/>
+                                @if(Session::has($columnName))
+                                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                                @endif
+                            @break
+
+                            @case('picker_month')
+                                <x-advanced-filter.picker-month3  :name="$columnName" :value="$valueControl"/>
+                                @if(Session::has($columnName))
+                                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                                @endif
+                            @break
+
+                            @case('picker_week')
+                                <x-advanced-filter.picker-week3  :name="$columnName" :value="$valueControl"/>
+                                @if(Session::has($columnName))
+                                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                                @endif
+                            @break
+
+                            @case('picker_year')
+                                <x-advanced-filter.picker-year3  :name="$columnName" :value="$valueControl"/>
+                                @if(Session::has($columnName))
+                                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                                @endif
+                            @break
+
+                            @case('picker_quarter')
+                                <x-advanced-filter.picker-quarter3  :name="$columnName" :value="$valueControl"/>
+                                @if(Session::has($columnName))
+                                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                                @endif
+                            @break
+
+                            @case('picker_date')
+                            @case('picker_datetime')
+                                <x-advanced-filter.picker-date3  :name="$columnName" :value="$valueControl"/>
+                                @if(Session::has($columnName))
+                                    <p class="ml-3 mt-1 text-xs font-light text-red-600">{{ Session::get($columnName) }}</p>
+                                @endif
+                            @break
+
+                            @case('id')
+                            @case('doc_id')
+                            @case('parent_id')
+                                <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}} placeholder="Comma separated numbers are allowed"/>
+                            @break
+
+                            @case('text')
+                            @case('number')
+                            @case('textarea')
+                            @case('textarea_diff')
+                            @case('textarea_diff_draft')
+                                <x-advanced-filter.text3  name={{$columnName}} value={{$valueControl}}/>
+                            @break
+
+                            @case('toggle')
+                                <x-advanced-filter.toggle3  name={{$columnName}} value={{$valueControl}} />
+                            @break
+
+                            @case ('dropdown')
+                            @case ('radio')
+                            @case ('dropdown_multi_2a')
+                            @case('checkbox_2a')
+                                <x-advanced-filter.dropdown3 :name="$columnName" :relationships="$relationships" :valueSelected="$valueControl"/>
+                            @break
+
+                            @case('status')
+                                @php
+                                $libStatus = App\Http\Controllers\Workflow\LibStatuses::getFor($type);
+                                @endphp
+                                <div class="select2-short" title={{$control}}>
+                                    <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
+                                        @foreach($libStatus as $value)
+                                        <option value="{{$value['name']}}" @selected($valueControl ? in_array($value['name'],$valueControl) : null) >{{$value['title'] ?? $value['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <script>
+                                        $('[id="'+"{{$columnName}}"+'"]').select2({
+                                            placeholder: "Please select..."
+                                            , allowClear: true
+                                            , templateResult: select2FormatState
+                                        });
+                                </script>
+                            @break
+
+                            @case('entity_type')
+                                @php
+                                $libEntityTypes = App\Utils\Support\Entities::getAllPluralNames();
+                                @endphp
+                                <div class="select2-short" title={{$control}}>
+                                    <select id="{{$columnName}}" class="select2-hidden-accessible" multiple="multiple" style="width: 100%;" name="{{$columnName}}[]" tabindex="-1" aria-hidden="true">
+                                        @foreach($libEntityTypes as $value)
+                                        <option value="{{$value}}" @selected($valueControl ? in_array($value,$valueControl) : null) >{{$value}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <script>
+                                        $('[id="'+"{{$columnName}}"+'"]').select2({
+                                            placeholder: "Please select..."
+                                            , allowClear: true
+                                            , templateResult: select2FormatState
+                                        });
+                                </script>
+                            @break
+
+                            @case('parent_type')
+                                <x-advanced-filter.parent-type3 :type="$type" :name="$columnName" :valueSelected="$valueControl"/>
+                            @break
+
+                            @default
+                                <x-feedback.alert type="warning" title="Control???" message="[{{$control}}]" />
+                            @break
                         @endswitch
                         </div>
                         @endforeach

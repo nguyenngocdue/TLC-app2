@@ -57,6 +57,11 @@
         @endif
     @break
 
+    @case('entity_type')
+        <x-controls.entity-type-dropdown2 value="{{$value}}" name={{$columnName}} readOnly={{$readOnly}}/>
+        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+    @break
+
     @case ('dropdown')
     @php $value = $value ? $value : $defaultValue; @endphp
     <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />

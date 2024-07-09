@@ -67,6 +67,9 @@ trait TraitEntityAdvancedFilter
                     case 'status':
                         $result['status'][$key] = $value;
                         break;
+                    case 'entity_type':
+                        $result['entity_type'][$key] = $value;
+                        break;
                     case 'toggle':
                         $result['toggle'][$key] = $value;
                         break;
@@ -120,6 +123,8 @@ trait TraitEntityAdvancedFilter
     {
         if ($advanceFilters) {
             $queryResult = array_filter($advanceFilters, fn ($item) => $item);
+            // Log::info($queryResult);
+            // Log::info($queryResult);
             array_walk($queryResult, function ($value, $key) use ($q, $propsFilters) {
                 switch ($key) {
                     case 'id':
@@ -196,6 +201,7 @@ trait TraitEntityAdvancedFilter
                                 ->whereDate($key, '<=', $this->convertDateTime($arrayDate[1]));
                         });
                         break;
+                    case 'entity_type':
                     case 'dropdown':
                     case 'status':
                     case 'parent_type':
