@@ -40,7 +40,7 @@ const renderSearchModalHtml = (apps,url) => {
                     }</span>
                                     ${isAdmin}
                                     ${statusHtml}
-                                    <span class="hidden sm:inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
+                                    <span class="hidden sm:flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${package_rendered}</span>
                                     </a>
                                     <button tabIndex=-1 id='bookmark_${app.name
                     }' onclick="bookmarkSearchModal('${app.name
@@ -104,7 +104,7 @@ const renderTopDrawerHtmlV2 = (buttonTabs,recentDoc, appsRender) => {
                         ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${item.entity_id}</span>`
                         : ''
             const iconAction = matchIconForAction(item.action_recent);
-            const actionHtml = item.action_recent ?  `<span class="hidden sm:inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
+            const actionHtml = item.action_recent ?  `<span class="hidden sm:flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
             : '';
             html += `<li>
                         <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
@@ -264,7 +264,7 @@ const renderTopDrawerHtml = (buttonTabs,recentDoc, appsRender, url) => {
                         ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${item.entity_id}</span>`
                         : ''
             const iconAction = matchIconForAction(item.action_recent);
-            const actionHtml = item.action_recent ?  `<span class="hidden sm:inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
+            const actionHtml = item.action_recent ?  `<span class="hidden sm:flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
             : '';
             html += `<li>
                         <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
@@ -460,7 +460,7 @@ const renderTopDrawerHtmlV3 = (buttonTabs,recentDoc, appsRender, url) => {
                             ? `<span class="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-red-200 rounded dark:bg-gray-700 dark:text-gray-300">${item.entity_id}</span>`
                             : ''
                 const iconAction = matchIconForAction(item.action_recent);
-                const actionHtml = item.action_recent ?  `<span class="hidden sm:inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
+                const actionHtml = item.action_recent ?  `<span class="hidden sm:flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-normal text-gray-600 bg-green-200 rounded dark:bg-gray-700 dark:text-gray-300">${iconAction}</span>`
                 : '';
                 html += `<li>
                             <div class='flex p-2 text-xs font-medium  text-gray-600 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white'>
