@@ -1,8 +1,8 @@
 <header x-data="{navbarOpen: false}"
 class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900 border-b">
       <div class="w-full mx-4">
-        <div class="relative -mx-4 flex items-center justify-between w-full">
-          <div class="w-60 max-w-full px-4">
+        <div class="relative flex items-center justify-between w-full">
+          <div class="w-80 max-w-full">
             <a href="javascript:void(0)" class="block w-full">
               <img
                 src="{{ asset('logo/moduqa-white.svg') }}"
