@@ -119,6 +119,18 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_getProdRoutingsOfSubProject": {
+        "name": "_getProdRoutingsOfSubProject",
+        "column_name": "getProdRoutingsOfSubProject",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_sqb_input_team": {
         "name": "_sqb_input_team",
         "column_name": "sqb_input_team",
@@ -131,9 +143,9 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
-    "_getProdRoutingsOfSubProject": {
-        "name": "_getProdRoutingsOfSubProject",
-        "column_name": "getProdRoutingsOfSubProject",
+    "_hide_in_sts": {
+        "name": "_hide_in_sts",
+        "column_name": "hide_in_sts",
         "concept": "true",
         "design": "true",
         "manufacturing": "true",

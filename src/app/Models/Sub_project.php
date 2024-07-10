@@ -9,7 +9,7 @@ class Sub_project extends ModelExtended
     protected $fillable = [
         "id", "name", "description", "slug", "status", "project_id",
         "qr_plate_style_id", "owner_id", 'lod_id', "client_id",
-        "sqb_input_team",
+        "sqb_input_team", "hide_in_sts",
     ];
 
     public static $eloquentParams = [

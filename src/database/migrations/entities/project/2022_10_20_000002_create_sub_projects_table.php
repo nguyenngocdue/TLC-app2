@@ -26,7 +26,9 @@ return new class extends Migration
             $table->unsignedBigInteger('lod_id')->nullable();
             $table->unsignedBigInteger('client_id')->nullable();
             $table->unsignedBigInteger('qr_plate_style_id')->nullable();
+
             $table->boolean('sqb_input_team')->nullable();
+            $table->boolean('hide_in_sts')->default(false);
 
             $table->appendCommonFields();
         });

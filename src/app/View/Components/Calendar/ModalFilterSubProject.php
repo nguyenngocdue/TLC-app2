@@ -32,6 +32,7 @@ class ModalFilterSubProject extends Component
     private function getDataSource()
     {
         $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
+            ->whereNot('hide_in_sts', 1)
             ->orderBy('name')
             ->get();
         return $dataSource;
