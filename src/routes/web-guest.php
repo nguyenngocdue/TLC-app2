@@ -16,7 +16,11 @@ Route::group(['middleware' =>  ['auth', 'impersonate'],], function () {
     Route::get('welcome-canh-all', [WelcomeCanhController::class, 'indexAll'])->name('welcome-canh-all.index');
 
     Route::resource('welcome-due-test-widget', WelcomeDueController::class)->only('index');
+
     Route::resource('welcome-due', WelcomeDueController::class)->only('index');
+    //Unit tests for reports
+    Route::resource('welcome-due/ut_page-1a', WelcomeDueController::class)->only('index');
+
 
     Route::resource('welcome-fortune', WelcomeFortuneController::class)->only('index', 'store');
 });
