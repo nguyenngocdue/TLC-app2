@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Reports2\Rp_page_block_detailController;
+use App\Http\Controllers\Reports2\Rp_pageController;
+use App\Models\Rp_page_block_detail;
 use App\Utils\Support\AttachmentName;
+use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 
 class WelcomeDueController extends Controller
@@ -12,11 +16,39 @@ class WelcomeDueController extends Controller
         return "dashboard";
     }
 
+    private function getLayoutStr($isLandscape, $width, $height)
+    {
+        return $isLandscape ? "max-w-[{$width}] min-h-[{$height}]" : "max-w-[{$height}] min-h-[{$width}]";
+    }
+
     public function index(Request $request)
     {
 
 
+        // Test Page
+        $rpPageCtrl = new Rp_pageController();
+        $isLandscape = $rpPageCtrl->getPageLandscape() ? true : false;
+        $isPortrait = $rpPageCtrl->getPagePortrait() ? true : false;
+        $pagesWidthAndHeight = $rpPageCtrl->getPageWidthAndHeight();
+        $pagesFullWidth = $rpPageCtrl->getPageFullWidth();
+        $pagesOrderNo = $rpPageCtrl->getPageOrderNo();
+        $pagesLetterHeadStackable = $rpPageCtrl->getPageLetterHeadStackable();
+        $pagesHeaderFooterBackground = $rpPageCtrl->getPageHeaderFooterBackground();
 
-        return view("welcome-due", []);
+        // Test Page Block
+        $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
+        $pageBlocksColSpan = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
+        $pageBlocksBackground = $rpPageBlockDetailCtrl->getPageBlocksBackground();
+        $pageBlocksOrderNo = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
+        dd($pageBlocksOrderNo);
+
+
+
+        // $layoutStr = $this->getLayoutStr($isLandscape, $this->width, $this->height);
+
+
+        // return view("welcome-due-ut-reports", [
+        //     'layoutStr' = $this->layoutStr
+        // ]);
     }
 }

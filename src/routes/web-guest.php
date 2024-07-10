@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\HomeWebPage\HomeWebPageController;
+use App\Http\Controllers\Reports2\Rp_pageController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
@@ -17,7 +18,7 @@ Route::group(['middleware' =>  ['auth', 'impersonate'],], function () {
 
     Route::resource('welcome-due-test-widget', WelcomeDueController::class)->only('index');
 
-    Route::resource('welcome-due', WelcomeDueController::class)->only('index');
+    // Route::resource('welcome-due', WelcomeDueController::class)->only('index');
     //Unit tests for reports
     Route::resource('welcome-due/ut_page-1a', WelcomeDueController::class)->only('index');
 
