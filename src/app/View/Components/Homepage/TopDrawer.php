@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Homepage;
 
-use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\BookmarkTraits\TraitFormatBookmarkEntities;
 use Illuminate\View\Component;
 
@@ -26,7 +25,7 @@ class TopDrawer extends Component
      */
     public function render()
     {
-        [$allAppsRecent,$allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
+        [$allAppsRecent, $allApps, $allAppsTopDrawer] = $this->getAllAppsOfSearchModalAndTopDrawer();
         return view('components.homepage.top-drawer', [
             'buttonTabs' => $this->buttonTabs($allAppsTopDrawer),
             'allAppsRecent' => $allAppsRecent,
@@ -35,9 +34,10 @@ class TopDrawer extends Component
             'route' => route('updateBookmark'),
         ]);
     }
-    private function buttonTabs($allAppsTopDrawer){
-        $buttonTabs = array_unique(array_column($allAppsTopDrawer,'package_tab'));
-        array_push($buttonTabs,'recent_document');
+    private function buttonTabs($allAppsTopDrawer)
+    {
+        $buttonTabs = array_unique(array_column($allAppsTopDrawer, 'package_tab'));
+        array_push($buttonTabs, 'recent_document');
         return array_values($buttonTabs);
     }
 }
