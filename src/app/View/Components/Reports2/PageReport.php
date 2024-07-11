@@ -31,10 +31,7 @@ class PageReport extends Component
 
     public function render()
     {
-
-
         $layoutClass = $this->createLayoutClass($this->isLandscape, $this->width, $this->height, $this->isFullWidth);
-
         return view('components.reports2.page-report', [
             'layoutClass' => $layoutClass,
             'letterHeadId' => $this->letterHeadId,

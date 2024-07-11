@@ -25,6 +25,7 @@ class Rp_page_block_detailController extends Controller
                 ->toArray();
             $value = array_merge($value, $blocks);
         }
+        // dd($data);
         return Report::getItemsByKeys($data, $keys);
     }
 

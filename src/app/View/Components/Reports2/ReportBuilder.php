@@ -30,9 +30,9 @@ class ReportBuilder extends Component
         // Test Page Block
         $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
         $pages = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
-        // $pages = $rpPageBlockDetailCtrl->getPageBlocksBackground();
-        // $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
-        // dd($pages);
+        $pages = $rpPageBlockDetailCtrl->getPageBlocksBackground();
+        $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
+        // dump($pages);
 
         // UT_Page - 3A
         // $pages = $rpPageContr->getPageOrderNo();

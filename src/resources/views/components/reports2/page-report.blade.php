@@ -38,11 +38,7 @@
 
                 <div class="container mx-auto p-5">
                     <div class="grid grid-cols-12 gap-4">
-                        @if($blocks)
-                            @foreach ($blocks as $key => $value)
-                                <div title="{{$value['order_no']}}" class="col-span-{{$value['col_span']}} bg-gray-200 p-4 text-center">Col Span = {{$value['col_span']}}</div>
-                            @endforeach    
-                        @endif
+                         <x-reports2.block-report :blocks="$blocks"/>
                     </div>
                 </div>
                 
