@@ -18,12 +18,12 @@ class Rp_pageController extends Controller
 
     public static $paramsGetData = [
         // function name => method name, report_id, key to get value
-        "getPageLandscape" => ['getData', 1, ['is_landscape']],
+        "getPageLandscape" => ['getData', 1, ['id', 'name', 'report_id', 'order_no', 'is_landscape']],
         "getPagePortrait" => ['getData', 2, ['is_landscape']],
         "getPageWidthAndHeight" => ['getData', 3, ['width', 'height']],
-        "getPageFullWidth" => ['getData', 4, ['is_full_width']],
-        "getPageOrderNo" => ['getData', 5, ['order_no']],
-        "getPageHeaderFooterBackground" => ['getData', 6, ['letter_head_id', 'letter_footer_id', 'background']],
+        "getPageFullWidth" => ['getData', 4, ['width', 'height', 'is_full_width']],
+        "getPageOrderNo" => ['getData', 5, ['id', 'name', 'report_id', 'order_no']],
+        "getPageHeadFooterBackground" => ['getData', 6, ['letter_head_id', 'letter_footer_id', 'background']],
         "getPageLetterHeadStackable" => ['getData', 13, ['is_stackable_letter_head']],
 
     ];
@@ -64,7 +64,7 @@ class Rp_pageController extends Controller
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    public function getPageHeaderFooterBackground()
+    public function getPageHeadFooterBackground()
     {
         $p = static::$paramsGetData[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

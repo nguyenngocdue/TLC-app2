@@ -16,10 +16,7 @@ class WelcomeDueController extends Controller
         return "dashboard";
     }
 
-    private function getLayoutStr($isLandscape, $width, $height)
-    {
-        return $isLandscape ? "max-w-[{$width}] min-h-[{$height}]" : "max-w-[{$height}] min-h-[{$width}]";
-    }
+
 
     public function index(Request $request)
     {
@@ -33,22 +30,24 @@ class WelcomeDueController extends Controller
         $pagesFullWidth = $rpPageCtrl->getPageFullWidth();
         $pagesOrderNo = $rpPageCtrl->getPageOrderNo();
         $pagesLetterHeadStackable = $rpPageCtrl->getPageLetterHeadStackable();
-        $pagesHeaderFooterBackground = $rpPageCtrl->getPageHeaderFooterBackground();
+        $pagesHeaderFooterBackground = $rpPageCtrl->getPageHeadFooterBackground();
 
         // Test Page Block
         $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
         $pageBlocksColSpan = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
         $pageBlocksBackground = $rpPageBlockDetailCtrl->getPageBlocksBackground();
         $pageBlocksOrderNo = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
-        dd($pageBlocksOrderNo);
+
+
+        // dump($pagesOrderNo);
 
 
 
         // $layoutStr = $this->getLayoutStr($isLandscape, $this->width, $this->height);
 
 
-        // return view("welcome-due-ut-reports", [
-        //     'layoutStr' = $this->layoutStr
-        // ]);
+        return view("welcome-due-ut-reports", [
+            // 'layoutStr' = $this->layoutStr
+        ]);
     }
 }

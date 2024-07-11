@@ -43,7 +43,7 @@ class Rp_page_block_detail extends ModelExtended
     {
         return [
             ["dataIndex" => 'id', 'invisible' => !true,],
-            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'order_no', /* 'invisible' => true, */],
             ["dataIndex" => 'rp_page_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'rp_block_id', /*'renderer' => 'column_link', /*'rendererParam' => 'name'*/],
             ["dataIndex" => 'col_span'],
