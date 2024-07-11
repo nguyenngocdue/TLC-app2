@@ -11,61 +11,70 @@ use App\Utils\Support\Report;
 class Rp_page_block_detailController extends Controller
 {
 
-    public function getData($reportId, $keys)
-    {
-        $pageIds = Rp_report::find($reportId)->getPages()->pluck('id')->toArray();
-        $data = Rp_page_block_detail::whereIn('rp_page_id', $pageIds)->get()->toArray();
-        return Report::getItemsByKeys($data, $keys);
-    }
-
     public function getDataPageBlocks($pageId, $keys)
     {
-        $data = Rp_page_block_detail::where('rp_page_id', $pageId)->orderBy('order_no')->get()->toArray();
+        $data = Rp_page_block_detail::where('rp_page_id', $pageId)
+            ->orderBy('order_no')
+            ->get()
+            ->toArray();
+        foreach ($data as $key => &$value) {
+            $blocks = Rp_page_block_detail::find($value['id'])
+                ->getBlock()
+                ->get()
+                ->first()
+                ->toArray();
+            $value = array_merge($value, $blocks);
+        }
         return Report::getItemsByKeys($data, $keys);
     }
 
-    public function getData2($reportId)
+    private function mapBlocksIntoPages($pages)
+    {
+        foreach ($pages as &$page) {
+            $page['blocks'] = $this->getDataPageBlocks(
+                $page['id'],
+                ['id', 'col_span', 'name', 'renderer_type', 'order_no']
+            );
+        };
+        return $pages;
+    }
+
+    public function getData($reportId)
     {
         return Rp_report::find($reportId)->getPages()->get()->toArray();
     }
 
+
     public static $paramsGetData = [
-        "getPageBlocksBackground" => ['getData', 8, ['background']],
-        "getPageBlocksColSpan" => ['getData', 17, ['col_span']],
-        "getPageBlocksOrderNo" => ['getData', 14, ['order_no']],
-        "getPagesColSpan" => ['getData2', 17],
+        "getPageBlocksBackground" => ['getData', 8],
+        "getPageBlocksOrderNo" => ['getData', 14],
+        "getPageBlocksColSpan" => ['getData', 17],
 
     ];
 
 
-    public function getPagesColSpan()
-    {
-        $p = static::$paramsGetData[__FUNCTION__];
-        $pagesHaveBlocks = $this->{$p[0]}($p[1]);
-        foreach ($pagesHaveBlocks as &$page) {
-            $page['blocks'] = $this->getDataPageBlocks(
-                $page['id'],
-                ['id', 'col_span', 'name']
-            );
-        };
-        return $pagesHaveBlocks;
-    }
-
     public function getPageBlocksColSpan()
     {
         $p = static::$paramsGetData[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $pages = $this->{$p[0]}($p[1]);
+        $pagesHaveBlocks = $this->mapBlocksIntoPages($pages);
+        return $pagesHaveBlocks;
     }
+
 
     public function getPageBlocksBackground()
     {
         $p = static::$paramsGetData[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $pages = $this->{$p[0]}($p[1]);
+        $pageBlockMap = $this->mapBlocksIntoPages($pages);
+        return $pageBlockMap;
     }
 
     public function getPageBlocksOrderNo()
     {
         $p = static::$paramsGetData[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $pages = $this->{$p[0]}($p[1]);
+        $pageBlockMap = $this->mapBlocksIntoPages($pages);
+        return $pageBlockMap;
     }
 }

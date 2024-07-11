@@ -26,13 +26,13 @@ class ReportBuilder extends Component
         $pages = $rpPageContr->getPageHeadFooterBackground();
         $pages = $rpPageContr->getPageLetterHeadStackable();
 
-        // dd($pages);
 
         // Test Page Block
         $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
-        $pages = $rpPageBlockDetailCtrl->getPagesColSpan();
-        // $pageBlocks = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
-        // dump($pages);
+        $pages = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
+        // $pages = $rpPageBlockDetailCtrl->getPageBlocksBackground();
+        // $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
+        // dd($pages);
 
         // UT_Page - 3A
         // $pages = $rpPageContr->getPageOrderNo();

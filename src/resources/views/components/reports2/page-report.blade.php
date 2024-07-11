@@ -28,27 +28,24 @@
                 <p class="text-base font-bold text-center">
                     This is the main content area. It fills most of the page and is designed to hold the bulk of your text or graphical information.
                 </p>
-                {{-- <div class=" flex flex-col items-left">
+                <div class=" flex flex-col items-left">
                     @foreach ($content as $key => $value)
                         @if (!is_array($value))
                             <p class="text-3xl text-green-700">{{$key}}: {{$value}}</p>
                         @endif
                     @endforeach                
-                </div> --}}
+                </div>
 
                 <div class="container mx-auto p-5">
                     <div class="grid grid-cols-12 gap-4">
                         @if($blocks)
                             @foreach ($blocks as $key => $value)
-                                <div class="col-span-{{$value['col_span']}} bg-gray-200 p-4 text-center">Col Span = {{$value['col_span']}}</div>
+                                <div title="{{$value['order_no']}}" class="col-span-{{$value['col_span']}} bg-gray-200 p-4 text-center">Col Span = {{$value['col_span']}}</div>
                             @endforeach    
                         @endif
                     </div>
                 </div>
                 
-
-
-
             </div>
 
             <!-- Footer section with a border -->
