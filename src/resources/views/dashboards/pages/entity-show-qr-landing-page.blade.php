@@ -18,11 +18,19 @@
                         @endphp
 
                         @if($unitName)
-                            Apartment No.:
-                            <span class="ml-1 font-semibold">{{$unitName}}</span>
+                            <div>
+                                Apartment No.:
+                                <span class="ml-1 font-semibold">{{$unitName}}</span>
+                            </div>
+                            <div>
+                                Module No.: 
+                                <span class="ml-1 font-semibold">{{$item->name}}</span>
+                            </div>
                         @else
-                            Apartment No.: 
-                            <span class="ml-1 font-semibold">{{$item->name}}</span>
+                            <div>
+                            {{-- No.:  --}}
+                                <span class="ml-1 font-semibold">{{$item->name}}</span>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -31,11 +39,18 @@
                 <div class="lg:grid lg:grid-cols-2 gap-5">
                     @foreach($dataSource as $index => $group)
                     <x-renderer.card title="{{$index}}">
-                        @foreach($group as $value)
+                        @foreach($group as $name => $values)
                             @php
-                                $href = $value['href'] ?? '';
+                                if(!is_numeric($name)) echo $name;
                             @endphp
-                            <x-print.hyper-link5 label="{{$value['name']}}" href="{!! $href !!}" />
+                            @foreach($values as $value)
+                                @php
+                                    $name = $value['name'] ?? '';
+                                    $href = $value['href'] ?? '';
+                                @endphp
+                                <x-print.hyper-link5 label="{!! $name !!}" href="{!! $href !!}" />
+                            @endforeach
+                          
                         @endforeach
                     </x-renderer.card>
                     @endforeach

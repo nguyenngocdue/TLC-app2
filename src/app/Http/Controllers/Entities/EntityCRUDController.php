@@ -9,7 +9,8 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklstSht;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklst;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProject;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProps;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPage;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPageModule;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPageUnit;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStore2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
@@ -21,7 +22,8 @@ class EntityCRUDController extends Controller
 {
 	use TraitEntityCRUDShowProps;
 	use TraitEntityCRUDShowProject;
-	use TraitEntityCRUDShowQRLandingPage;
+	use TraitEntityCRUDShowQRLandingPageModule;
+	use TraitEntityCRUDShowQRLandingPageUnit;
 	use TraitEntityCRUDShowChklst;
 	use TraitEntityCRUDShowChklstSht;
 
@@ -81,7 +83,13 @@ class EntityCRUDController extends Controller
 			case 'checklist-sheet-renderer':
 				return $this->showChklstSht($id_or_slug, $trashed);
 			case 'qr-app-renderer':
-				return $this->showQRApp($id_or_slug, $trashed);
+				switch ($this->type) {
+					case 'pj_module':
+						return $this->showQRAppModule($id_or_slug, $trashed);
+					case 'pj_unit':
+						return $this->showQRAppUnit($id_or_slug, $trashed);
+					default:
+				}
 			default:
 				dump("Unknown how to render $show_renderer.");
 		}

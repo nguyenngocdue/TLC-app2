@@ -10,9 +10,9 @@ use App\Utils\Support\Json\SuperProps;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-trait TraitEntityCRUDShowQRLandingPage
+trait TraitEntityCRUDShowQRLandingPageModule
 {
-	public function showQRApp($slug, $trashed)
+	public function showQRAppModule($slug, $trashed)
 	{
 		$modelCurrent = new ($this->modelPath);
 		// $item = $trashed ? $modelCurrent::withTrashed()->where('slug', $slug)->first() : $modelCurrent::where('slug', $slug)->first();
@@ -24,29 +24,48 @@ trait TraitEntityCRUDShowQRLandingPage
 
 		$thumbnailUrl = $item->getSubProject?->getProject->getAvatarUrl("/images/generic-module1.webp");
 		// dump($thumbnailUrl);
-		return view('dashboards.pages.entity-show-qr-landing-page', [
+		$params = [
 			'props' => $props,
 			'item' => $item,
 			'dataSource' => $this->getDataSourceGroups($item),
 			'thumbnailUrl' => $thumbnailUrl,
 			'type' => $this->type,
 			'topTitle' => CurrentRoute::getTitleOf($this->type),
-		]);
+		];
+		return view('dashboards.pages.entity-show-qr-landing-page', $params);
 	}
 	private function getDataSourceQARecords($model)
 	{
-		$dataRender = $this->getDataRenderLinkDocsOfQARecord($model);
-		$linkDocs = [];
-		foreach ($dataRender as $value) {
-			$href = route($value->getTable() . '.show', $value->id) ?? "";
-			$name = $value->getQaqcInspTmpl->short_name ?? "";
-			if ($href)
-				$linkDocs[] = [
-					'href' => $href,
-					'name' => $name,
-				];
-		}
-		return $linkDocs;
+		[$icsOfUnit, $icsOfModule] = $this->getDataRenderLinkDocsOfQARecord($model);
+		$linkDocsOfUnit = [];
+		$linkDocsOfModule = [];
+		if ($icsOfUnit)
+			foreach ($icsOfUnit as $value) {
+				$href = route($value->getTable() . '.show', $value->id) ?? "";
+				$name = $value->getQaqcInspTmpl->short_name ?? "";
+				if ($href)
+					$linkDocsOfUnit[] = [
+						'href' => $href,
+						'name' => $name,
+					];
+			}
+
+		if ($icsOfModule)
+			foreach ($icsOfModule as $value) {
+				$href = route($value->getTable() . '.show', $value->id) ?? "";
+				$name = $value->getQaqcInspTmpl->short_name ?? "";
+				if ($href)
+					$linkDocsOfModule[] = [
+						'href' => $href,
+						'name' => $name,
+					];
+			}
+
+		if (!empty($linkDocsOfUnit))
+			$result["Apartment:"] = $linkDocsOfUnit;
+		if (!empty($linkDocsOfModule))
+			$result["Module:"] = $linkDocsOfModule;
+		return $result;
 	}
 	private function getDataSourceHOManual($model)
 	{
@@ -87,8 +106,14 @@ trait TraitEntityCRUDShowQRLandingPage
 				$insp_chklst_link = $item->insp_chklst_link;
 				$shipping_doc_link = $item->shipping_doc_link;
 
-				$qa_records[] = ['name' => "MODULE Inspection Checklist", 'href' => $insp_chklst_link,];
-				$qa_records[] = ['name' => "SHIPPING / DELIVERY Checklist", 'href' => $shipping_doc_link,];
+				$qa_records = [
+					"Apartment:" => [
+						['name' => "MODULE Inspection Checklist", 'href' => $insp_chklst_link,]
+					],
+					"Module:" => [
+						['name' => "SHIPPING / DELIVERY Checklist", 'href' => $shipping_doc_link,]
+					],
+				];
 				break;
 			default:
 				break;
@@ -130,13 +155,13 @@ trait TraitEntityCRUDShowQRLandingPage
 			'name' => $name,
 			'href' => $href,
 		],];
-
+		// dump($qa_records);
 		return [
-			'HomeOwner Manual' => empty($ho_manuals) ? [['name' => "To Be Added by DC"],] : $ho_manuals,
-			"QA Records $qa_source" =>  empty($qa_records) ? [['name' => "To Be Added"],] : $qa_records,
-			'Project Plans' => empty($project_plans) ? [['name' => "To Be Added by DC"],] : $project_plans,
-			'Customer Service' => $ticket,
-			'Customer Survey' => [['name' => "To Be Added by Software Team"],],
+			'HomeOwner Manual' => empty($ho_manuals) ? [[['name' => "To Be Added by DC"],]] : [$ho_manuals],
+			"QA Records $qa_source" =>  empty($qa_records) ? [[['name' => "To Be Added"],]] : $qa_records,
+			'Project Plans' => empty($project_plans) ? [[['name' => "To Be Added by DC"],]] : [$project_plans],
+			'Customer Service' => [$ticket],
+			'Customer Survey' => [[['name' => "To Be Added by Software Team"],]],
 		];
 	}
 	public function getConfigRenderSource($item)
@@ -148,15 +173,13 @@ trait TraitEntityCRUDShowQRLandingPage
 		$unitId = $item->pj_unit_id;
 		$id = $item->id;
 		// $prodOrder = Prod_order::where('meta_type', $this->modelPath)->where('meta_id', $unitId)->first();
-		$prodOrderOfUnit = Pj_unit::find($unitId)?->getProdOrders->first() ?? [];
-		$prodOrderOrModule = Pj_module::find($id)?->getProdOrders->first() ?? [];
+		$prodOrderOfUnit = Pj_unit::find($unitId)?->getProdOrders->first();
+		$prodOrderOfModule = Pj_module::find($id)?->getProdOrders->first();
 
-		$inspChecklists = $prodOrderOfUnit->getQaqcInspChklsts ?? null;
-		if ($inspChecklists) {
-			return $inspChecklists->merge($prodOrderOrModule->getQaqcInspChklsts ?? []);
-		} else {
-			return $prodOrderOrModule->getQaqcInspChklsts;
-		}
+		$icsOfUnit = $prodOrderOfUnit?->getQaqcInspChklsts;
+		$icsOfModule = $prodOrderOfModule?->getQaqcInspChklsts;
+
+		return [$icsOfUnit, $icsOfModule];
 	}
 	private function getDataRenderLinkDownloads($item, $func = 'attachment_subproject_homeowner_manual')
 	{
