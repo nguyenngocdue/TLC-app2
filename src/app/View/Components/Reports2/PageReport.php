@@ -17,6 +17,7 @@ class PageReport extends Component
         private $letterHeadId = 0,
         private $letterFooterId = 0,
         private $blocks = [],
+        private $background = "",
     ) {
     }
 
@@ -38,6 +39,7 @@ class PageReport extends Component
             'letterFooterId' => $this->letterFooterId,
             'content' => $this->content,
             'blocks' => $this->blocks,
+            'background' => $this->background,
         ]);
     }
 }

@@ -19,19 +19,19 @@ class ReportBuilder extends Component
 
 
         // UT_Page - 1A & 1B, 2A & 2B, 3A, 4A & 4B
-        $pages = $rpPageContr->getPageLandscape();
-        $pages = $rpPageContr->getPagePortrait();
-        $pages = $rpPageContr->getPageWidthAndHeight();
-        $pages = $rpPageContr->getPageFullWidth();
+        // $pages = $rpPageContr->getPageLandscape();
+        // $pages = $rpPageContr->getPagePortrait();
+        // $pages = $rpPageContr->getPageWidthAndHeight();
+        // $pages = $rpPageContr->getPageFullWidth();
         $pages = $rpPageContr->getPageHeadFooterBackground();
-        $pages = $rpPageContr->getPageLetterHeadStackable();
+        // $pages = $rpPageContr->getPageLetterHeadStackable();
 
 
         // Test Page Block
         $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
-        $pages = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
-        $pages = $rpPageBlockDetailCtrl->getPageBlocksBackground();
-        $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
+        // $pages = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
+        // $pages = $rpPageBlockDetailCtrl->getPageBlocksBackground();
+        // $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
         // dump($pages);
 
         // UT_Page - 3A

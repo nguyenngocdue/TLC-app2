@@ -11,6 +11,7 @@
         :letterHeadId="$page['letter_head_id'] ?? 1"
         :letterFooterId="$page['letter_footer_id'] ?? 1"
         :blocks="$page['blocks'] ?? []"
+        :background="$page['url_media'] ?? ''"
         />
 @endforeach
 

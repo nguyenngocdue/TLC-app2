@@ -21,11 +21,15 @@ class Rp_page_block_detailController extends Controller
             $blocks = Rp_page_block_detail::find($value['id'])
                 ->getBlock()
                 ->get()
-                ->first()
-                ->toArray();
-            $value = array_merge($value, $blocks);
+                ->first();
+            $blocks = $blocks ? $blocks->toArray() : [];
+            $attachments = Rp_page_block_detail::find($value['id'])
+                ->attachment_background()
+                ->get()
+                ->first();
+            $attachments = $attachments ? $attachments->toArray() : [];
+            $value = array_merge($value, $blocks, $attachments);
         }
-        // dd($data);
         return Report::getItemsByKeys($data, $keys);
     }
 
@@ -34,7 +38,12 @@ class Rp_page_block_detailController extends Controller
         foreach ($pages as &$page) {
             $page['blocks'] = $this->getDataPageBlocks(
                 $page['id'],
-                ['id', 'col_span', 'name', 'renderer_type', 'order_no']
+                [
+                    'id', 'col_span', 'name',
+                    'renderer_type', 'order_no',
+                    'url_thumbnail',
+                    'url_media'
+                ]
             );
         };
         return $pages;

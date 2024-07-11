@@ -23,7 +23,7 @@ class Rp_pageController extends Controller
         "getPageWidthAndHeight" => ['getData', 3, ['width', 'height']],
         "getPageFullWidth" => ['getData', 4, ['width', 'height', 'is_full_width']],
         "getPageOrderNo" => ['getData', 5, ['id', 'name', 'report_id', 'order_no']],
-        "getPageHeadFooterBackground" => ['getData', 6, ['letter_head_id', 'letter_footer_id', 'background']],
+        "getPageHeadFooterBackground" => ['getData', 6, ['id', 'letter_head_id', 'letter_footer_id']],
         "getPageLetterHeadStackable" => ['getData', 13, ['is_stackable_letter_head']],
 
     ];
@@ -67,7 +67,21 @@ class Rp_pageController extends Controller
     public function getPageHeadFooterBackground()
     {
         $p = static::$paramsGetData[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        $data = $this->{$p[0]}($p[1], $p[2]);
+        foreach ($data as &$value) {
+            $attachments = Rp_page::find($value['id'])
+                ->attachment_background()
+                ->get()
+                ->first();
+            $attachments = $attachments ? $attachments->toArray() : [];
+            $value['url_thumbnail'] = '';
+            $value['url_media'] = '';
+            if ($attachments) {
+                $value['url_thumbnail'] =  "'" . env('AWS_ENDPOINT') . '/tlc-app//' . $attachments['url_thumbnail'] . "'";
+                $value['url_media'] = "'" . env('AWS_ENDPOINT') . '/tlc-app//' . $attachments['url_media'] . "'";
+            }
+        }
+        return  $data;
     }
 
     public function getPageBlocksColSpan()

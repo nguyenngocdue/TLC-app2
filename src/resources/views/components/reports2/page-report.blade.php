@@ -2,11 +2,15 @@
 //dump($content);
 //dump($letterHeadId)
 //dd($content);
+dump($layoutClass)
 @endphp
 
 <div class="flex justify-center">
     <div class="py-4"> 
-        <div class="{{$layoutClass}} items-center bg-white p-0 flex flex-col"> 
+        <div class="{{$layoutClass}} items-center bg-white p-0 flex flex-col"
+             {{-- style="background-image: url({{$background}});" --}}
+             @if($background) style="background-image: url({{$background}});" @endif
+            > 
             <!-- Head section with a border -->
             <div class="w-full border-2 border-gray-300 p-2 mb-1"> 
                 @switch($letterHeadId)
@@ -35,7 +39,7 @@
                         @endif
                     @endforeach                
                 </div>
-
+                {{-- Blocks --}}
                 <div class="container mx-auto p-5">
                     <div class="grid grid-cols-12 gap-4">
                          <x-reports2.block-report :blocks="$blocks"/>
