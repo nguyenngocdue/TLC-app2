@@ -374,17 +374,34 @@ class Report
 
     public static function getValuesByField($dataSource, $fieldName)
     {
-        $valuesOfFiled = [];
+        $valuesOfField = [];
         foreach ($dataSource as $item) {
             $item = (array)$item;
             if (is_array($item) && isset($item[$fieldName])) {
                 $valuesOfFiled[] = $item[$fieldName];
             } elseif (is_array($item)) {
-                $valuesOfFiled = array_merge($valuesOfFiled, self::getValuesByField($item, $fieldName));
+                $valuesOfField = array_merge($valuesOfField, self::getValuesByField($item, $fieldName));
             }
         }
-        return $valuesOfFiled;
+        return $valuesOfField;
     }
+
+    public static function getItemsByKeys($dataSource, $fieldNames)
+    {
+        $valuesOfField = [];
+        foreach ($dataSource as $k1 => $items) {
+            $items = (array)$items;
+            if (is_array($items)) {
+                foreach ($fieldNames as $k2 => $field) {
+                    if ($field && isset($items[$field])) {
+                        $valuesOfField[$k1][$field] =  $items[$field];
+                    }
+                }
+            }
+        }
+        return $valuesOfField;
+    }
+
 
     public static function countChildrenItemsByKey($data, $key = "children_metrics")
     {

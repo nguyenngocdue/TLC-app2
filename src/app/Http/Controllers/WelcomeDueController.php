@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Reports2\Rp_page_block_detailController;
+use App\Http\Controllers\Reports2\Rp_pageController;
+use App\Models\Rp_page_block_detail;
 use App\Utils\Support\AttachmentName;
+use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 
 class WelcomeDueController extends Controller
@@ -12,58 +16,39 @@ class WelcomeDueController extends Controller
         return "dashboard";
     }
 
+    private function getLayoutStr($isLandscape, $width, $height)
+    {
+        return $isLandscape ? "max-w-[{$width}] min-h-[{$height}]" : "max-w-[{$height}] min-h-[{$width}]";
+    }
+
     public function index(Request $request)
     {
 
 
+        // Test Page
+        $rpPageCtrl = new Rp_pageController();
+        $isLandscape = $rpPageCtrl->getPageLandscape() ? true : false;
+        $isPortrait = $rpPageCtrl->getPagePortrait() ? true : false;
+        $pagesWidthAndHeight = $rpPageCtrl->getPageWidthAndHeight();
+        $pagesFullWidth = $rpPageCtrl->getPageFullWidth();
+        $pagesOrderNo = $rpPageCtrl->getPageOrderNo();
+        $pagesLetterHeadStackable = $rpPageCtrl->getPageLetterHeadStackable();
+        $pagesHeaderFooterBackground = $rpPageCtrl->getPageHeaderFooterBackground();
+
+        // Test Page Block
+        $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
+        $pageBlocksColSpan = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
+        $pageBlocksBackground = $rpPageBlockDetailCtrl->getPageBlocksBackground();
+        $pageBlocksOrderNo = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
+        dd($pageBlocksOrderNo);
 
 
-        $widget =  [
-            "title_a" => "Production Orders",
-            "title_b" => "by Status",
-            "meta" =>  [
-                "labels" => "['finished', 'new', 'in_progress']",
-                "numbers" => "[10, 20, 30]",
-                "max" => 50,
-                "count" => 3,
-            ],
-            "metric" =>  (object)[
-                [
-                    "metric_id" =>  1,
-                    "metric_name" =>  "finished",
-                    // "metric_count" =>  10,
-                ],
-                [
-                    "metric_id" =>  2,
-                    "metric_name" =>  "new",
-                    // "metric_count" =>  20,
-                ],
-                [
-                    "metric_id" =>  3,
-                    "metric_name" =>  "in_progress",
-                    // "metric_count" =>  30,
-                ]
-            ],
-            "chartType" => "bar",
-            "hidden" => null,
-            "name" => "prod_order_status",
-            "report_name" => null,
-            "chart_type" => "bar",
-            "fn" => "SqlForeignKeyWidget01",
-            "section_title" => "Production Orders",
-            "widget_title" => "by Status",
-            "params" =>  [
-                "table_a" => "prod_orders",
-                "key_a1" => "sub_project_id",
-                "att_metric_name" => "status",
-                "table_widget" => null,
-                "check_id" => null,
-            ]
-        ];
+
+        // $layoutStr = $this->getLayoutStr($isLandscape, $this->width, $this->height);
 
 
-        return view("welcome-due", [
-            'widget' => $widget
-        ]);
+        // return view("welcome-due-ut-reports", [
+        //     'layoutStr' = $this->layoutStr
+        // ]);
     }
 }
