@@ -167,6 +167,7 @@ class ManageAppsController extends AbstractManageLibController
                     'checklist-renderer',
                     'checklist-sheet-renderer',
                     'qr-app-renderer',
+                    'report-renderer',
                 ],
             ],
         ];

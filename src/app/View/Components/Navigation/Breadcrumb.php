@@ -69,6 +69,10 @@ class Breadcrumb extends Component
                 $title = 'Landing Page Mode';
                 $icon = "fa-duotone fa-browser";
                 break;
+            case "report-renderer":
+                $title = 'Report Mode';
+                $icon = "fa-duotone fa-file-chart-column";
+                break;
             default:
                 $title = "Show Mode";
                 $icon = "fa-duotone fa-question";

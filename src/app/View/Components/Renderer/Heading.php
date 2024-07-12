@@ -50,7 +50,7 @@ class Heading extends Component
 
             $result = "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: {$this->scrollMarginTop}px;'>";
             $result .= $slot;
-            $result .= "<p class='text-sm font-light italic' >";
+            $result .= "<p class='text-xs font-light italic1' >";
             $result .= $labelExtra;
             $result .= "</p>";
             $result .= "</$h>";

@@ -2558,7 +2558,7 @@
         "doc_id_format_column": null,
         "status": "dev",
         "edit_renderer": null,
-        "show_renderer": null,
+        "show_renderer": "report-renderer",
         "hidden": "true",
         "hidden_navbar": "true",
         "do_not_send_notification_mails": "true"

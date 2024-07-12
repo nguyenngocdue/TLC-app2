@@ -10,8 +10,13 @@
         @if($visible)
         <div class="no-print flex bg-white dark:bg-gray-800 flex-wrap items-center justify-between h-full text-purple-600 dark:text-purple-300">
             <div class="w-full md:w-1/2 flex items-center">
-                    <x-renderer.heading level=4 title="@yield('tooltip')">
-                        @yield('title', 'Untitled') 
+                    <x-renderer.heading 
+                        level=4 
+                        title="@yield('tooltip')" 
+                        labelExtra="@yield('subTitle')"
+                        class="py-2 w-full text-center md:text-left"
+                        >
+                        @yield('title', 'Untitled Page') 
                     </x-renderer.heading>
                     @if(in_array($action,['edit']))
                         @hasSection('status')

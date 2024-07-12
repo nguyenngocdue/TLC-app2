@@ -11,6 +11,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProject;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProps;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPageModule;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowQRLandingPageUnit;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDStore2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDUpdate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
@@ -22,6 +23,7 @@ class EntityCRUDController extends Controller
 {
 	use TraitEntityCRUDShowProps;
 	use TraitEntityCRUDShowProject;
+	use TraitEntityCRUDShowReport;
 	use TraitEntityCRUDShowQRLandingPageModule;
 	use TraitEntityCRUDShowQRLandingPageUnit;
 	use TraitEntityCRUDShowChklst;
@@ -90,6 +92,8 @@ class EntityCRUDController extends Controller
 						return $this->showQRAppUnit($id_or_slug, $trashed);
 					default:
 				}
+			case 'report-renderer':
+				return $this->showReport($id_or_slug, $trashed);
 			default:
 				dump("Unknown how to render $show_renderer.");
 		}
