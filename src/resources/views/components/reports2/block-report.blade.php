@@ -1,13 +1,17 @@
 @if($blocks)
-    @foreach ($blocks as $key => $value)
+    {{-- @dd($blocks) --}}
+    @foreach ($blocks as $key => $values)
     @php
-        $backgroundPath = isset($value['url_media']) && $value['url_media'] ? "'".env('AWS_ENDPOINT').'/tlc-app//'.$value['url_media']."'" : '';
+        $block = $values['blocks'];
+        $colSpan = $values['col_span'];
+        $background = $values['background_block'];
+        $backgroundPath = isset($background->url_media)? "'".env('AWS_ENDPOINT').'/tlc-app//'.$background->url_media."'" : '';
     @endphp
-        <div title="{{ $value['order_no'] }}" 
-             class="col-span-{{ $value['col_span'] }} {{ !$backgroundPath ? 'bg-slate-500' : ''}} p-4 text-center bg-cover bg-center"
+        <div title="{{ $block ->name}}" 
+             class="col-span-{{ $colSpan}} {{$backgroundPath ? '' : 'bg-orange-300'}} p-4 text-center bg-cover bg-center "
             @if($backgroundPath) style="background-image: url({{$backgroundPath}});" @endif> 
-            Col Span = {{ $value['col_span'] }}
-            <br/>
+            ID: {{ $block -> id}} <br/>
+            Name: {{ $block -> name}}
         </div>
     @endforeach    
 @endif

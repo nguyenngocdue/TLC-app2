@@ -3,14 +3,13 @@
 //dump($letterHeadId)
 //dd($content);
 //dd($backgroundPage)
-dump($layoutClass)
+//dump($layoutClass)
 @endphp
 
 <div class="flex justify-center">
     <div class="py-4 {{$layoutClass === 'w-full' ? 'w-full' : ''}}"> 
         <div class=" items-center bg-white p-0 flex flex-col"
              style="{{$layoutClass}}"
-             @if($backgroundPage) style="background-image: url('{{$backgroundPage}}');" @endif
             > 
             <!-- Head section with a border -->
             <div class="w-full border-2 border-gray-300 p-2 mb-1"> 
@@ -43,7 +42,7 @@ dump($layoutClass)
                 {{-- Blocks --}}
                 <div class="container mx-auto p-5">
                     <div class="grid grid-cols-12 gap-4">
-                         <x-reports2.block-report :blocks="$blocks"/>
+                         <x-reports2.block-report :blockDetails="$blockDetails"/>
                     </div>
                 </div>
                 

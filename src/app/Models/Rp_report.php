@@ -44,8 +44,9 @@ class Rp_report extends ModelExtended
                 $q->with("getLetterHead")
                     ->with('attachment_background')
                     ->with("getLetterFooter")
-                    ->with(["getBlockDetails" => function ($q) {
-                        $q->with(["getBlock", "attachment_background"]);
+                    ->with(["getBlockDetails" => function ($q1) {
+                        $q1->with(["attachment_background"])
+                            ->with('getBlock');
                     }]);
             }])
             ->get()
@@ -54,21 +55,4 @@ class Rp_report extends ModelExtended
         // $rpReport->getPages[29]->getBlockDetails;
         return $rpReport;
     }
-
-    // public function get()
-    // {
-    //     $reports = Rp_report::with([
-    //         'getPages' => function ($query) {
-    //             $query->with([
-    //                 'getLetterHead',
-    //                 'attachment_background',
-    //                 'getLetterFooter',
-    //                 'getBlockDetails' => function ($query) {
-    //                     $query->with(['getBlock', 'attachment_background']);
-    //                 }
-    //             ]);
-    //         }
-    //     ])->get()->keyBy('id')->toArray();
-    //     return $reports;
-    // }
 }
