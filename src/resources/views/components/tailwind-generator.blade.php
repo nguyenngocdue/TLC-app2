@@ -54,6 +54,11 @@
 <input class="h-[900px] w-[900px]" />
 <input class="h-[950px] w-[950px]" />
 
+<input class="w-[1410px] h-[1000px]" />
+<input class="w-[1000px] h-[1410px]" />
+<input class="w-[1000px] h-[1000px]" />
+<input class="w-[1410px] h-[1410px]" />
+
 <!-- Divide -->
 <span class=" translate-x-[16px]"> </span>
 <span class=" translate-x-[-16px]"> </span>

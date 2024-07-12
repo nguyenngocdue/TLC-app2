@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Reports2;
 
 use App\Http\Controllers\Controller;
-use App\Models\Rp_block;
 use App\Models\Rp_page_block_detail;
 use App\Models\Rp_report;
 use App\Utils\Support\Report;

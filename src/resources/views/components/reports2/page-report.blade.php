@@ -32,7 +32,7 @@ dump($layoutClass)
                 <p class="text-base font-bold text-center">
                     This is the main content area. It fills most of the page and is designed to hold the bulk of your text or graphical information.
                 </p>
-                <div class=" flex flex-col items-left">
+                <div class=" flex flex-col items-left {{-- bg-blue-300 --}}">
                     @foreach ($content as $key => $value)
                         @if (!is_array($value))
                             <p class="text-3xl text-green-700">{{$key}}: {{$value}}</p>

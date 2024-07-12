@@ -19,11 +19,11 @@ class ReportBuilder extends Component
 
 
         // UT_Page - 1A & 1B, 2A & 2B, 3A, 4A & 4B
-        // $pages = $rpPageContr->getPageLandscape();
+        $pages = $rpPageContr->getPageLandscape();
         // $pages = $rpPageContr->getPagePortrait();
         // $pages = $rpPageContr->getPageWidthAndHeight();
         // $pages = $rpPageContr->getPageFullWidth();
-        $pages = $rpPageContr->getPageHeadFooterBackground();
+        // $pages = $rpPageContr->getPageHeadFooterBackground();
         // $pages = $rpPageContr->getPageLetterHeadStackable();
 
 
