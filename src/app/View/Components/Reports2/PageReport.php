@@ -18,7 +18,7 @@ class PageReport extends Component
         $FullWidthClass = $width  ? "w-[{$width}px]" : 'w-full';
         $width = $width ? $width : 1000;
         $height = $height ? $height : 1410;
-        $class = $isFullWidth ? $FullWidthClass : ($isLandscape ? "w-[{$height}px] h-[{$width}px] " : "w-[{$width}px] h-[{$height}px]");
+        $class = $isFullWidth ? $FullWidthClass : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
         return $class;
     }
 

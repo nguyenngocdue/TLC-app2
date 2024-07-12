@@ -3,12 +3,13 @@
 //dump($letterHeadId)
 //dd($content);
 //dd($backgroundPage)
+dump($layoutClass)
 @endphp
 
 <div class="flex justify-center">
-    <div class="py-4"> 
-        <div class="{{$layoutClass}} items-center bg-white p-0 flex flex-col"
-             {{-- style="background-image: url({{$background}});" --}}
+    <div class="py-4 {{$layoutClass === 'w-full' ? 'w-full' : ''}}"> 
+        <div class=" items-center bg-white p-0 flex flex-col"
+             style="{{$layoutClass}}"
              @if($backgroundPage) style="background-image: url('{{$backgroundPage}}');" @endif
             > 
             <!-- Head section with a border -->

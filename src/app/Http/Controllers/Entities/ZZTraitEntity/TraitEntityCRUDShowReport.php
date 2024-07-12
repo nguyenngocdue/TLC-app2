@@ -10,7 +10,7 @@ trait TraitEntityCRUDShowReport
 	public function showReport($id, $trashed)
 	{
 		$report = Rp_report::find($id)->getDeep();
-		$pages = $report->getPages;
+		$pages = $report->getPages->sortBy('order_no');
 		return view('dashboards.pages.entity-show-report', [
 			'appName' => LibApps::getFor($this->type)['title'],
 			'report' => $report,
