@@ -26,9 +26,9 @@ return new class extends Migration
             $table->boolean("is_landscape")->nullable();
             $table->unsignedInteger("width")->nullable();
             $table->unsignedInteger("height")->nullable();
-            // $table->string("background")->nullable();
             $table->boolean("is_stackable_letter_head")->nullable();
             $table->boolean("is_full_width")->nullable();
+            $table->text("page_body_class")->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
