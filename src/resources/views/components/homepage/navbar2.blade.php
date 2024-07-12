@@ -7,12 +7,11 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
 <header class="h-16 no-print fixed w-full z-20 py-4 bg-white shadow-md dark:bg-gray-800">
     <div class="container1 flex px-2 items-center justify-between h-full mx-auto text-purple-600 dark:text-purple-300">
         {{-- <x-homepage.mobile-hamburger></x-homepage.mobile-hamburger> --}}      
+        <x-homepage.logo />
         @auth
-        <div class="flex flex-1 lg:mr-32 ml-5">
-            <div class="mr-5">
-                <x-homepage.top-drawer/>
-            </div>
-            <b class="text-xl font-semibold hidden sm:block">
+        <div class="flex flex-1 lg:mr-32 ml-2">
+            <x-homepage.top-drawer/>
+            <b class="text-xl p-2 font-semibold hidden md:block">
                 <a href="{{$routeSrc}}" class="hover:underline">
                     @yield('topTitle', 'Untitled')
                 </a>
@@ -48,16 +47,16 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
             </li>
         </ul>
         @else
-            <x-homepage.logo />
+            
         @endauth
 
     </div> 
 </header>
 <div class="h-16 no-print"></div>
 
-<header class="sm:hidden h-16 top-16 no-print fixed w-full z-10 flex text-center items-center bg-white shadow-md dark:bg-gray-800">
+<header class="md:hidden h-16 top-16 no-print fixed w-full z-10 flex text-center items-center bg-white shadow-md dark:bg-gray-800">
     <a href="{{$routeSrc}}" class="text-xl font-semibold w-full text-purple-600 hover:underline">
         @yield('topTitle', 'Untitled')
     </a>
 </header>
-<div class="sm:hidden h-16 no-print"></div>
+<div class="md:hidden h-16 no-print"></div>

@@ -1,4 +1,7 @@
-<button class="focus:shadow-outline-purple rounded-md focus:outline-none text-xl" @click="toggleTopDrawer" @keydown.escape="closeTopDrawer">
+<button class="focus:shadow-outline-purple rounded-md focus:outline-none text-xl p-2 hover:bg-gray-50 hover:border-gray-200 border-transparent border" 
+    @click="toggleTopDrawer" 
+    @keydown.escape="closeTopDrawer"
+    >
     <i class="fa-solid fa-bars"></i>
 </button>
 <template x-if="isTopDrawerOpen">

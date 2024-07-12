@@ -4,6 +4,9 @@
 <label class='peer-checked:bg-gray-300 peer-checked:text-gray-700'></label>
 <label class='peer-checked:bg-orange-300 peer-checked:text-orange-700'></label>
 
+{{-- <div class="xs:hidden"></div>
+<div class="xs:block"></div> --}}
+
 {{-- editable select --}}
 <div class="focus-visible:border-none" ></div> 
 <div class="duration-500 " ></div> 
