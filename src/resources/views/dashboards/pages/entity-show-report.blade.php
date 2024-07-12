@@ -7,7 +7,9 @@
 @section('content')
 <div class="p-5 bg-body">
     <div class="border rounded bg-gray-200 p-10 text-center">
-        My report renderer is here
+        @foreach ($pages as $page)
+            <x-reports2.page-report :page="$page"/>
+        @endforeach
     </div>   
 </div>
 @endsection

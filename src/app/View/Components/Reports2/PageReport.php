@@ -9,15 +9,7 @@ use Illuminate\View\Component;
 class PageReport extends Component
 {
     public function __construct(
-        private $width = "",
-        private $height = "",
-        private $isLandscape = false,
-        private $isFullWidth = false,
-        private $content = '',
-        private $letterHeadId = 0,
-        private $letterFooterId = 0,
-        private $blocks = [],
-        private $background = "",
+        private $page
     ) {
     }
 
@@ -30,16 +22,36 @@ class PageReport extends Component
         return $class;
     }
 
+    private function isEmptyCollection($coll)
+    {
+        return $coll->isEmpty();
+    }
+
     public function render()
     {
-        $layoutClass = $this->createLayoutClass($this->isLandscape, $this->width, $this->height, $this->isFullWidth);
+        $page = $this->page;
+        $pageArray = $page?->toArray();
+        $attachmentBackgroundPage = $page->attachment_background->first()?->toArray();
+        $blocks = $page->getBlockDetails->sortBy('order_no')?->toArray();
+        $layoutClass = $this->createLayoutClass(
+            $pageArray['is_landscape'],
+            $pageArray['width'],
+            $pageArray['height'],
+            $pageArray['is_full_width']
+        );
+
+
+        if ($attachmentBackgroundPage) {
+            $backgroundPagePath = env('AWS_ENDPOINT') . '/tlc-app//' . $attachmentBackgroundPage['url_media'];
+        }
+
         return view('components.reports2.page-report', [
             'layoutClass' => $layoutClass,
-            'letterHeadId' => $this->letterHeadId,
-            'letterFooterId' => $this->letterFooterId,
-            'content' => $this->content,
-            'blocks' => $this->blocks,
-            'background' => $this->background,
+            'letterHeadId' => $pageArray['letter_head_id'],
+            'letterFooterId' => $pageArray['letter_footer_id'],
+            'content' => $pageArray,
+            'blocks' => $blocks,
+            'backgroundPage' => $backgroundPagePath ?? '',
         ]);
     }
 }

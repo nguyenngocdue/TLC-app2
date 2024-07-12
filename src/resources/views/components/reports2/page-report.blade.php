@@ -2,14 +2,14 @@
 //dump($content);
 //dump($letterHeadId)
 //dd($content);
-dump($layoutClass)
+//dd($backgroundPage)
 @endphp
 
 <div class="flex justify-center">
     <div class="py-4"> 
         <div class="{{$layoutClass}} items-center bg-white p-0 flex flex-col"
              {{-- style="background-image: url({{$background}});" --}}
-             @if($background) style="background-image: url({{$background}});" @endif
+             @if($backgroundPage) style="background-image: url('{{$backgroundPage}}');" @endif
             > 
             <!-- Head section with a border -->
             <div class="w-full border-2 border-gray-300 p-2 mb-1"> 

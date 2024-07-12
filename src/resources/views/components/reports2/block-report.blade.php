@@ -8,8 +8,6 @@
             @if($backgroundPath) style="background-image: url({{$backgroundPath}});" @endif> 
             Col Span = {{ $value['col_span'] }}
             <br/>
-            {{ $value['name'] }} 
-            {{ $value['renderer_type'] ?? null }}
         </div>
     @endforeach    
 @endif
