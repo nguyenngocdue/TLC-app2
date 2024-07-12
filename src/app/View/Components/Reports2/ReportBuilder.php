@@ -4,6 +4,7 @@ namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Reports2\Rp_page_block_detailController;
 use App\Http\Controllers\Reports2\Rp_pageController;
+use App\Models\Rp_report;
 use Illuminate\View\Component;
 
 class ReportBuilder extends Component
@@ -19,7 +20,7 @@ class ReportBuilder extends Component
 
 
         // UT_Page - 1A & 1B, 2A & 2B, 3A, 4A & 4B
-        $pages = $rpPageContr->getPageLandscape();
+        // $pages = $rpPageContr->getPageLandscape();
         // $pages = $rpPageContr->getPagePortrait();
         // $pages = $rpPageContr->getPageWidthAndHeight();
         // $pages = $rpPageContr->getPageFullWidth();
@@ -27,12 +28,20 @@ class ReportBuilder extends Component
         // $pages = $rpPageContr->getPageLetterHeadStackable();
 
 
-        // Test Page Block
+        // Test Page Blockư
         $rpPageBlockDetailCtrl = new Rp_page_block_detailController();
         // $pages = $rpPageBlockDetailCtrl->getPageBlocksColSpan();
         // $pages = $rpPageBlockDetailCtrl->getPageBlocksBackground();
-        // $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
+        $pages = $rpPageBlockDetailCtrl->getPageBlocksOrderNo();
         // dump($pages);
+
+
+        // $rpIds = Rp_report::all()->pluck('id')->toArray();
+        $reports = Rp_report::get();
+        dd($reports);
+
+
+
 
         // UT_Page - 3A
         // $pages = $rpPageContr->getPageOrderNo();

@@ -20,6 +20,7 @@ Route::group(['middleware' =>  ['auth', 'impersonate'],], function () {
 
     // Route::resource('welcome-due', WelcomeDueController::class)->only('index');
     //Unit tests for reports
+
     Route::resource('welcome-due/zunit-test-report', WelcomeDueController::class)->only('index');
 
 

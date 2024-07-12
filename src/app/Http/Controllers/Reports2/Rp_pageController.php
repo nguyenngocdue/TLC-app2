@@ -11,6 +11,7 @@ class Rp_pageController extends Controller
 
     public function getData($reportId, $keys)
     {
+
         $rpPage = new Rp_page();
         $data = $rpPage->where('report_id', $reportId)->get()->toArray();
         return Report::getItemsByKeys($data, $keys);

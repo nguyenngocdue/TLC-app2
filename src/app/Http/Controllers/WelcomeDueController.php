@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Reports2\Rp_page_block_detailController;
 use App\Http\Controllers\Reports2\Rp_pageController;
-use App\Models\Rp_page_block_detail;
-use App\Utils\Support\AttachmentName;
-use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 
 class WelcomeDueController extends Controller

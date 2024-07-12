@@ -12,6 +12,7 @@ class Rp_page_block_detailController extends Controller
 
     public function getDataPageBlocks($pageId, $keys)
     {
+
         $data = Rp_page_block_detail::where('rp_page_id', $pageId)
             ->orderBy('order_no')
             ->get()
