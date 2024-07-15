@@ -24,7 +24,7 @@ class TableBlockReport extends Component
             "tableColumns" => $tableColumns,
             "showNo" => $block->showNo,
             "tableTrueWidth" => $block->table_true_width,
-            "maxHeight" => $block->max_h ?? 15,
+            "maxHeight" => $block->max_h,
             "rotate45Width" => $block->rotate_45_width,
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,

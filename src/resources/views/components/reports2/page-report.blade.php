@@ -29,16 +29,16 @@
 
             <!-- Main content area -->
             <div class="w-full flex-grow flex flex-col items-center justify-center space-y-1 border-2 border-gray-300"> 
-                <p class="text-base font-bold text-center">
+{{--                 <p class="text-base font-bold text-center">
                     This is the main content area. It fills most of the page and is designed to hold the bulk of your text or graphical information.
-                </p>
-                <div class=" flex flex-col items-left {{-- bg-blue-300 --}}">
+                </p> --}}
+               {{--  <div class=" flex flex-col items-left ">
                     @foreach ($content as $key => $value)
                         @if (!is_array($value))
                             <p class="text-lg text-green-700">{{$key}}: {{$value}}</p>
                         @endif
                     @endforeach                
-                </div>
+                </div> --}}
                 {{-- Blocks --}}
                 <div class="container mx-auto p-5">
                     <div class="grid grid-cols-12 gap-4">

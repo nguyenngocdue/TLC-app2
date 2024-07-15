@@ -10,8 +10,11 @@ trait TraitDataColumnReport
     public function getDataSQLString($block)
     {
         $sqlString = $block->sql_string;
-        $sqlData = DB::select($sqlString);
-        return collect($sqlData);
+        if ($sqlString) {
+            $sqlData = DB::select($sqlString);
+            return collect($sqlData);
+        }
+        return collect();
     }
 
     public function getAllUniqueFields(Collection $collection)

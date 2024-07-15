@@ -22,6 +22,9 @@
                 @case(643)
                     <x-reports2.paragraph-block-report :block="$block"/>
                     @break
+                @case(644)
+                    <x-reports2.description-block-report :block="$block"/>
+                    @break
                 @default
                     <span class="text-lg text-green-600 font-semibold">
                         Kindly select a type of renderer.
