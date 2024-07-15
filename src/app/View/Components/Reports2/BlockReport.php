@@ -23,6 +23,8 @@ class BlockReport extends Component
             ];
             $blocks[] = $array;
         }
+
+
         return view('components.reports2.block-report', [
             'blocks' => $blocks
         ]);
