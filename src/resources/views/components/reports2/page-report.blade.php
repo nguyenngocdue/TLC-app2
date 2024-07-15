@@ -35,7 +35,7 @@
                 <div class=" flex flex-col items-left {{-- bg-blue-300 --}}">
                     @foreach ($content as $key => $value)
                         @if (!is_array($value))
-                            <p class="text-3xl text-green-700">{{$key}}: {{$value}}</p>
+                            <p class="text-lg text-green-700">{{$key}}: {{$value}}</p>
                         @endif
                     @endforeach                
                 </div>

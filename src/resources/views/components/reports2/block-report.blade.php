@@ -9,11 +9,9 @@
         $backgroundPath = isset($background->url_media)? "'".env('AWS_ENDPOINT').'/tlc-app//'.$background->url_media."'" : '';
     @endphp
         <div title="{{ $block ->name}}" 
-             class="col-span-{{$colSpan}} {{$backgroundPath ? '' : 'bg-gray-300'}} p-4 text-center bg-cover bg-center "
+             class="col-span-{{$colSpan}} {{$backgroundPath ? '' : 'bg-gray-200'}} p-4 text-center bg-cover bg-center "
             @if($backgroundPath) style="background-image: url({{$backgroundPath}});" @endif> 
 
-            {{-- ID: {{ $block -> id}} <br/> --}}
-            {{-- Name: {{ $block -> name}} --}}
             @switch($rendererType)
                 @case(641)
                     <x-reports2.table-block-report :block="$block"/>
@@ -25,7 +23,10 @@
                     <x-reports2.paragraph-block-report :block="$block"/>
                     @break
                 @default
-                    <span>Select a type of renderer.</span>
+                    <span class="text-lg text-green-600 font-semibold">
+                        Kindly select a type of renderer.
+                    </span>
+
                 @break 
             @endswitch
 
