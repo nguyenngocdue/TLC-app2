@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->unsignedInteger('advanced_filter_col_span')->nullable();
             $table->text('description')->nullable();
+            $table->string('entity_type')->nullable();
 
             $table->appendCommonFields();
         });
