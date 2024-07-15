@@ -1,3 +1,6 @@
+<x-renderer.heading level=5 xalign='left'>{{$name}}</x-renderer.heading>
+<x-renderer.heading level=6 xalign='left'>{{$description}}</x-renderer.heading>
+
 <div class="bg-white shadow-md rounded-lg p-6 max-w-sm">
   <h2 class="text-xl font-semibold mb-2">A Quiet Evening</h2>
   <p class="text-gray-700 mb-4">

@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_report extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "advanced_filter_col_span", "owner_id",
+        "id", "name", "description", "entity_type", "owner_id",
     ];
 
     public static $statusless = true;

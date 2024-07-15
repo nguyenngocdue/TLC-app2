@@ -8,14 +8,16 @@ use Illuminate\View\Component;
 class ParagraphBlockReport extends Component
 {
     public function __construct(
-        private $width = "",
-
-
+        private $block = null,
     ) {
     }
 
     public function render()
     {
-        return view('components.reports2.paragraph-block-report', []);
+        $block = $this->block;
+        return view('components.reports2.paragraph-block-report', [
+            'name' => $block->name ?? '',
+            'description' => $block->description ?? '',
+        ]);
     }
 }
