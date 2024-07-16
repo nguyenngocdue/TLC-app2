@@ -16,7 +16,6 @@ class BlockReport extends Component
 
     public function render()
     {
-
         $blockDetails = $this->blockDetails;
         $blocksDataSource = [];
         $params = [
@@ -25,13 +24,13 @@ class BlockReport extends Component
 
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
-            $dataSql = $this->getDataSQLString($block, $params);
-            [$tableDataSource, $tableColumns] = $this->getColumns($block, $params, $dataSql);
+            $dataQuery = $this->getDataSQLString($block, $params);
+            [$tableDataSource, $tableColumns] = $this->getColumns($block, $params, $dataQuery);
             $array = [
                 'colSpan' => $item->col_span,
                 'blocks' => $item->getBlock,
                 'backgroundBlock' => $item->attachment_background->first(),
-                'dataSQL' => $dataSql,
+                'dataQuery' => $dataQuery,
                 'tableDataSource' => $tableDataSource,
                 'tableColumns' => $tableColumns,
             ];

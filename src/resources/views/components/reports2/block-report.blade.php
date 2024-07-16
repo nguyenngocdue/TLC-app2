@@ -8,6 +8,8 @@
         $rendererType = $block->renderer_type;
         $colSpan = $values['colSpan'] ?? 12;
 
+        $dataQuery = $values['dataQuery'];
+
         $background = $values['backgroundBlock'];
         $backgroundPath = isset($background->url_media)? "'".env('AWS_ENDPOINT').'/tlc-app//'.$background->url_media."'" : '';
     @endphp
@@ -29,6 +31,7 @@
                     <x-reports2.chart-block-report 
                             :block="$block"
                             reportId="{{$reportId}}"
+                            :dataQuery="$dataQuery"
                         />
                     @break
                 @case(643)
@@ -47,7 +50,6 @@
                     <span class="text-lg text-green-600 font-semibold">
                         Kindly select a type of renderer.
                     </span>
-
                 @break 
             @endswitch
 

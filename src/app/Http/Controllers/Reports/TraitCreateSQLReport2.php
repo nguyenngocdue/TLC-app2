@@ -11,7 +11,7 @@ trait TraitCreateSQLReport2
 
     public function preg_match_all($sqlStr, $params)
     {
-        preg_match_all('/{{([^}]*)}}/', $sqlStr, $matches);
+        preg_match_all('/(?<!\\\)\{\{\s*([^}]*)\s*\}\}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
             $value = trim(str_replace('$', '', $value));
             if (isset($params[$value])) {
@@ -38,6 +38,8 @@ trait TraitCreateSQLReport2
             $sqlStr = str_replace('{{end_date}}', $dates['end'], $sqlStr);
             $sqlStr = str_replace('{{start_date}}', $dates['start'], $sqlStr);
         }
+        $sqlStr = str_replace(["\{{", "\}}"], ["{{", "}}"], $sqlStr);
+        // dump($sqlStr);
         return $sqlStr;
     }
     public function getSql($sqlString, $params)

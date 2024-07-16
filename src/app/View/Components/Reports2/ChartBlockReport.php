@@ -10,6 +10,7 @@ class ChartBlockReport extends Component
     use TraitDataColumnReport;
     public function __construct(
         private $block = null,
+        private $dataQuery = null,
     ) {
     }
 
@@ -19,6 +20,10 @@ class ChartBlockReport extends Component
         return view('components.reports2.chart-block-report', [
             'name' => $block->name,
             'description' => $block->description,
+            'chartType' => $block->chart_type,
+            'chartJson' => $block->chart_json,
+            'dataQuery' => $this->dataQuery,
+            'showNo' => $block->showNo,
         ]);
     }
 }
