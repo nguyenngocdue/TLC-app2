@@ -16,12 +16,9 @@ class ChartBlockReport extends Component
     public function render()
     {
         $block = $this->block;
-        $dataSql = $this->getDataSQLString($block);
-
         return view('components.reports2.chart-block-report', [
             'name' => $block->name,
             'description' => $block->description,
-            'dataSql' => $dataSql,
         ]);
     }
 }

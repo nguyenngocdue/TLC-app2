@@ -2,17 +2,24 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Http\Controllers\Reports\TraitCreateSQL;
+use App\Http\Controllers\Reports\TraitCreateSQLReport2;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 trait TraitDataColumnReport
 {
-    public function getDataSQLString($block)
+    use TraitCreateSQLReport2;
+
+    public function getDataSQLString($block, $params)
     {
         $sqlString = $block->sql_string;
         if ($sqlString) {
-            $sqlData = DB::select($sqlString);
-            return collect($sqlData);
+            $sql = $this->getSql($sqlString, $params);
+            if (is_null($sql) || !$sql) return collect();
+            $sqlData = DB::select($sql);
+            $collection = collect($sqlData);
+            return $collection;
         }
         return collect();
     }
@@ -26,11 +33,12 @@ trait TraitDataColumnReport
         }, null);
     }
 
-    public function getColumns($block)
+    public function getColumns($block, $params, $dataSqlColl = [])
     {
-        $dataSqlColl = $this->getDataSQLString($block);
+        if (empty($dataSqlColl)) {
+            $dataSqlColl = $this->getDataSQLString($block, $params);
+        }
         $uniqueFields = $this->getAllUniqueFields($dataSqlColl);
-
         $lines = $block->getLines()->get();
 
         $columns = [];

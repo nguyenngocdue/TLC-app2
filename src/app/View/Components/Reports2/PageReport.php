@@ -10,8 +10,7 @@ class PageReport extends Component
 {
     public function __construct(
         private $page,
-        // private $width = 1000 * 0.75,
-        // private $height = 1410 * 0.75,
+        private $reportId,
         private $factorPage = 0.75,
         private $w = 1000,
         private $h = 1410,
@@ -55,6 +54,7 @@ class PageReport extends Component
 
 
         return view('components.reports2.page-report', [
+            'reportId' => $this->reportId,
             'layoutClass' => $layoutClass,
             'letterHeadId' => $pageArray['letter_head_id'],
             'letterFooterId' => $pageArray['letter_footer_id'],
