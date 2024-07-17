@@ -24,7 +24,7 @@ trait TraitDataColumnReport
         return collect();
     }
 
-    public function getAllUniqueFields(Collection $collection)
+    public function getAllUniqueFields($collection)
     {
         return $collection->map(function ($item) {
             return array_keys(get_object_vars($item));

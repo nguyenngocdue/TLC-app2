@@ -7,12 +7,10 @@ use App\View\Components\Reports2\Charts\TraitTransformationData;
 use App\View\Components\Reports2\TraitDataColumnReport;
 use Illuminate\View\Component;
 
-class ChartColumn extends Component
+class ChartBar extends Component
 {
     use TraitDataColumnReport;
     use TraitTransformationData;
-    use TraitTransformationData;
-
     public function __construct(
         private $chartType,
         private $dataQuery,
@@ -20,6 +18,7 @@ class ChartColumn extends Component
         private $tableColumns,
     ) {
     }
+
 
     public function render()
     {
@@ -40,13 +39,10 @@ class ChartColumn extends Component
 
         $chartJson = json_decode($this->chartJson);
         $chartJson = array_pop($chartJson);
-
-
-        return view('components.reports2.charts.types.chart-column-1', [
+        return view('components.reports2.charts.types.chart-bar', [
             'series' => $series,
             'chartType' => $chartType,
             'chartJson' => $chartJson,
-
         ]);
     }
 }

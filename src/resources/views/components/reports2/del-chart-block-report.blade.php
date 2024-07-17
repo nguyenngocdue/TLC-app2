@@ -8,7 +8,13 @@
             :chartJson="$chartJson"
             :dataQuery="$dataQuery"
         />
+    @break
     @case(682)
+     <x-reports2.charts.types.chart-column
+            chartType={{$chartType}}
+            :chartJson="$chartJson"
+            :dataQuery="$dataQuery"
+        />
     @break
 @endswitch
 
