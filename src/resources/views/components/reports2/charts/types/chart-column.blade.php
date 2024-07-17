@@ -2,55 +2,46 @@
 
 <div id="chart"></div>
 
+
 <script>
+  series = @json($series);
+  chartJson = @json($chartJson);
+  xAxisFn = chartJson["xaxis"];
+
+  if (xAxisFn && xAxisFn.labels && xAxisFn.labels.formatter){
+    console.log(xAxisFn.labels.formatter);
+        xAxisFn.labels.formatter = new Function("val", "return " + xAxisFn.labels.formatter + ";");
+  }
 // Define the options for the column chart
  var options = {
-          series: [{
-          name: 'Net Profit',
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-        }, {
-          name: 'Revenue',
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        }, {
-          name: 'Free Cash Flow',
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-        }],
-          chart: {
-          type: 'bar',
-          height: 350
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-          },
-        },
-        dataLabels: {
-          enabled: false
-        },
+          series: series,
+          chart: chartJson["chart"],
+        plotOptions: chartJson["plotOptions"],
         stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
+          width: 1,
+          colors: ['#fff']
         },
-        xaxis: {
-          categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        },
+        title: chartJson["title"],
+        xaxis: xAxisFn,
         yaxis: {
           title: {
-            text: '$ (thousands)'
+            text: undefined
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + "K"
+            }
           }
         },
         fill: {
           opacity: 1
         },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return "$ " + val + " thousands"
-            }
-          }
+        legend: {
+          position: 'top',
+          horizontalAlign: 'left',
+          offsetX: 40
         }
         };
 

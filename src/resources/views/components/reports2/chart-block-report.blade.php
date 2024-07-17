@@ -3,7 +3,11 @@
 
 @switch($chartType)
     @case(681)
-        <x-reports2.charts.types.chart-column />
+        <x-reports2.charts.types.chart-column
+            chartType={{$chartType}}
+            :chartJson="$chartJson"
+            :dataQuery="$dataQuery"
+        />
     @case(682)
     @break
 @endswitch

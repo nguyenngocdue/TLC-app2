@@ -32,6 +32,7 @@
                             :block="$block"
                             reportId="{{$reportId}}"
                             :dataQuery="$dataQuery"
+                            :tableColumns="$tableColumns"
                         />
                     @break
                 @case(643)
