@@ -23,7 +23,6 @@ class ChartBlockReport extends Component
             'chartType' => $block->chart_type,
             'chartJson' => $block->chart_json,
             'dataQuery' => $this->dataQuery,
-            'showNo' => $block->showNo,
         ]);
     }
 }
