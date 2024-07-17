@@ -48,7 +48,6 @@ class Rp_page_block_detail extends ModelExtended
             ["dataIndex" => 'rp_block_id', /*'renderer' => 'column_link', /*'rendererParam' => 'name'*/],
             ["dataIndex" => 'col_span'],
             ["dataIndex" => 'attachment_background'],
-            // ["dataIndex" => 'table_true_width'],
         ];
     }
 }

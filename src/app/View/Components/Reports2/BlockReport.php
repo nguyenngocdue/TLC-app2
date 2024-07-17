@@ -2,31 +2,43 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Http\Controllers\Reports\TraitCreateSQL;
 use Illuminate\View\Component;
 
 class BlockReport extends Component
 {
+    use TraitDataColumnReport;
     public function __construct(
         private $blockDetails = [],
+        private $reportId
     ) {
     }
 
     public function render()
     {
         $blockDetails = $this->blockDetails;
-        $blocks = [];
+        $blocksDataSource = [];
+        $params = [
+            'report_id' => $this->reportId
+        ];
+
         foreach ($blockDetails as $item) {
+            $block = $item->getBlock;
+            $dataQuery = $this->getDataSQLString($block, $params);
+            [$tableDataSource, $tableColumns] = $this->getColumns($block, $params, $dataQuery);
             $array = [
-                'col_span' => $item->col_span,
+                'colSpan' => $item->col_span,
                 'blocks' => $item->getBlock,
-                'background_block' => $item->attachment_background->first()
+                'backgroundBlock' => $item->attachment_background->first(),
+                'dataQuery' => $dataQuery,
+                'tableDataSource' => $tableDataSource,
+                'tableColumns' => $tableColumns,
             ];
-            $blocks[] = $array;
+            $blocksDataSource[] = $array;
         }
-
-
         return view('components.reports2.block-report', [
-            'blocks' => $blocks
+            'blocksDataSource' => $blocksDataSource,
+            'reportId' => $this->reportId,
         ]);
     }
 }

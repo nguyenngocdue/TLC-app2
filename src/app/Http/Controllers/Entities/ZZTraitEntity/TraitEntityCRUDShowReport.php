@@ -14,7 +14,8 @@ trait TraitEntityCRUDShowReport
 		return view('dashboards.pages.entity-show-report', [
 			'appName' => LibApps::getFor($this->type)['title'],
 			'report' => $report,
-			'pages' => $pages
+			'pages' => $pages,
+			'reportId' => $id
 		]);
 	}
 }

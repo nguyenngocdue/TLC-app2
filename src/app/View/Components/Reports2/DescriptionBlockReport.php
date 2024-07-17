@@ -16,12 +16,10 @@ class DescriptionBlockReport extends Component
     public function render()
     {
         $block = $this->block;
-        $dataSql = $this->getDataSQLString($block);
 
         return view('components.reports2.description-block-report', [
             'name' => $block->name ?? '',
             'description' => $block->description ?? '',
-            'dataSql' => $dataSql,
         ]);
     }
 }

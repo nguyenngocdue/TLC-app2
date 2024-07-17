@@ -1,9 +1,4 @@
 @php
-//dump($content);
-//dump($letterHeadId)
-//dd($content);
-//dd($backgroundPage)
-//dump($layoutClass)
 @endphp
 
 <div class="flex justify-center">
@@ -42,7 +37,7 @@
                 {{-- Blocks --}}
                 <div class="container mx-auto p-5">
                     <div class="grid grid-cols-12 gap-4">
-                         <x-reports2.block-report :blockDetails="$blockDetails"/>
+                         <x-reports2.block-report :blockDetails="$blockDetails" reportId="{{$reportId}}"/>
                     </div>
                 </div>
                 
