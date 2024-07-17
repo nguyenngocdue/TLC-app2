@@ -8,15 +8,12 @@
     <title>@yield('topTitle', 'Untitled') - @yield('title', 'Untitled') - {{ config('app.name') }}</title>
     
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome-pro-6/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/flowbite.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fonts.google.Inter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}">
-
-    
 
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh.css') }}">
@@ -46,7 +43,6 @@
     <script src="{{ asset('js/textarea-diff-20240312.js') }}"></script>
     <script src="{{ asset('js/listenSubmitForm-20240312.js') }}"></script>
     
-    <script src="{{ asset('js/flowbite.min.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/chartComponent-20231110.js') }}"></script>

@@ -39,7 +39,7 @@ class HomeWebPageController extends Controller
     }
     private function dataVideo()
     {
-        $link = "https://www.youtube.com/embed/pV1HMCfL5t8";
+        $link = "https://www.youtube.com/embed/ak69h2gPs9I";
         return [
             "title" => "Click on the video for an overview",
             "iframe" => '<iframe width="1154" height="649" src="' . $link . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
