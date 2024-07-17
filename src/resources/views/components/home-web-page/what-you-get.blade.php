@@ -71,7 +71,7 @@
             </div>
         </div>
     </div>
-    <div class="flex justify-center py-10 lg:py-20">
+    {{-- <div class="flex justify-center py-10 lg:py-20">
         <x-home-web-page.button>Learn more about the App</x-home-web-page.button>
-    </div>
+    </div> --}}
 </section>

@@ -123,13 +123,13 @@ class HomeWebPageController extends Controller
     private function dataHeader()
     {
         return [
-            "Overview",
             "What It Does",
             "What You Get",
             "Why It's Cool",
             "Who Use It",
             "Testimonials",
             "FAQs",
+            "Overview Video",
         ];
     }
     private function dataFAQ()

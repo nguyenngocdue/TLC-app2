@@ -84,4 +84,7 @@
     <script src="{{ asset('js/lightgallery.js') }}"></script>
     <script src="{{ asset('js/jsdiff.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/10.0.1/decoupled-document/ckeditor.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </head>

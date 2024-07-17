@@ -36,7 +36,7 @@
             </span>
         </button>
     </div>
-    <div class="flex justify-center py-5 lg:py-10">
+    {{-- <div class="flex justify-center py-5 lg:py-10">
         <x-home-web-page.button>Book a Demo</x-home-web-page.button>
-    </div>
+    </div> --}}
 </section>
