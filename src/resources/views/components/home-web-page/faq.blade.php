@@ -5,8 +5,8 @@
     @foreach($dataSource as $faq)
     <li class="border 1rounded-lg">
         <details class="group">
-            <summary class="flex 1rounded-t-lg bg-blue-300 items-center justify-between gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
-                <span class="text-lg ">{{$faq['title']}}</span>
+            <summary class="flex 1rounded-t-lg bg-black-tlc items-center justify-between gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
+                <span class="text-lg text-white">{{$faq['title']}}</span>
                 <svg class="w-5 h-5 text-gr1ay-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"

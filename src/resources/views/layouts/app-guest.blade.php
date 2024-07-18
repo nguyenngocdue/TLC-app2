@@ -19,17 +19,11 @@
 </head>
 
 <style>
-    body {
-        font-family: "ClashGrotesk-Regular", sans-serif;
-    }
-    
-    .text-yellow-tlc {
-        color: #da9f5c ;
-    }
-
-    .bg-black-tlc {
-        background-color: #161c2d;
-    }
+    body {font-family: "ClashGrotesk-Regular", sans-serif;}
+    .text-yellow-tlc {color: #da9f5c ;}
+    .text-black-tlc {color: #161c2d ;}
+    .bg-black-tlc {background-color: #161c2d;}
+    .bg-blue-tlc {background-color: #2f4273;}
 
 </style>
 

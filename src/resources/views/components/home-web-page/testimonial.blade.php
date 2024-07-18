@@ -6,12 +6,17 @@
     <!-- Carousel wrapper -->
         <div class="relative h-72 overflow-hidden rounded-lg">
             @foreach($dataSource as $item)
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <div class="flex justify-center items-center h-full">
-                        <div class="text-white text-center mx-10 md:mx-80">
-                            <x-home-web-page.rating rating="{{$item['rating']}}"/>
-                            <h4 class="py-2 text-base md:text-xl font-bold">{{$item["title"]}}</h4>
-                            <p class="text-sm md:text-base">{{$item["content"]}}</p>
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="active"
+                onmouseover="FlowbiteInstances.getInstance('Carousel', 'controls-carousel').pause()"        
+                onmouseout="FlowbiteInstances.getInstance('Carousel', 'controls-carousel').cycle()"  
+                >
+                <div class="flex justify-center items-center h-full">
+                    <div class="text-white text-center mx-10 md:mx-80"
+                    >
+                    <x-home-web-page.rating rating="{{$item['rating']}}"/>
+                    <h4 class="py-2 text-base md:text-xl font-bold">{{$item["title"]}}</h4>
+                    <p class="text-sm md:text-base"
+                            >{{$item["content"]}}</p>
                             <span class="py-2 text-base md:text-xl font-bold">{{$item["owner"]}}</span>
                         </div>
                     </div>

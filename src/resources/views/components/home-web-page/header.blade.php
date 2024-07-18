@@ -1,16 +1,16 @@
 <header x-data="{navbarOpen: false}"
-class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900 border-b">
+class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-to-r bg-white border-b" style="height: 90px;">
       <div class="w-full mx-4">
         <div class="relative flex items-center justify-between w-full">
           <div class="w-80 max-w-full">
             <a href="javascript:void(0)" class="block w-full">
               <img
-                src="{{ asset('logo/moduqa-white.svg') }}"
+                src="{{ asset('logo/moduqa.svg') }}"
                 alt="logo"
                 class="dark:hidden h-10 object-cover"
               />
               <img
-                src="{{ asset('logo/moduqa-white.svg') }}"
+                src="{{ asset('logo/moduqa.svg') }}"
                 alt="logo"
                 class="hidden dark:block h-1 object-cover"
               />
@@ -44,7 +44,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     <li class="flex items-center">
                       <a
                         href="#{{Str::slug($item)}}"
-                        class="flex py-2 text-center items-center text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                        class="flex py-2 text-center items-center  font-semibold hover:font-bold uppercase text-black-tlc hover:text-blue-900  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                       >
                         {{$item}}
                       </a>
@@ -56,7 +56,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                         <li>
                             <a
                                 href="/dashboard"
-                                class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                                class="flex py-2  text-shadow-lg font-bold hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                             >
                                 Dashboard
                             </a>
@@ -66,7 +66,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     <li>
                         <a
                             href="/login"
-                            class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                            class="flex py-2  text-shadow-lg font-bold hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                         >
                             Login
                         </a>
@@ -74,7 +74,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     <li>
                         <a
                             href="/register"
-                            class="flex py-2 text-base text-shadow-lg font-medium hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                            class="flex py-2  text-shadow-lg font-bold hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                         >
                             Sign Up
                         </a>
@@ -87,23 +87,20 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
             @auth
                 <a
                     href="/dashboard"
-                    class="rounded-md bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
+                    class="rounded-full uppercase font-bold bg-blue-tlc px-7 py-3   text-white hover:bg-blue-800/90"
                 >
                     Dashboard
                 </a>
             @endauth
             @guest
-                <a
-                    href="/login"
-                    {{-- class="px-7 py-3 text-base font-medium text-white hover:text-blue-800 dark:text-white" --}}
-                    class="flex rounded-md text-center items-center bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
-                >
+                <a href="/login"
+                    class="flex rounded-full uppercase font-bold text-center items-center bg-blue-tlc px-7 py-3 text-white hover:bg-blue-800/90"
+                    >
                     Login
                 </a>
-                <a
-                    href="/register"
-                    class="flex rounded-md text-center items-center bg-blue-400 px-7 py-3 text-base font-medium text-white hover:bg-blue-800/90"
-                >
+                <a href="/register"
+                    class="flex rounded-full uppercase font-bold text-center items-center bg-blue-tlc px-7 py-3 text-white hover:bg-blue-800/90"
+                    >
                     Sign Up
                 </a>
             @endguest
