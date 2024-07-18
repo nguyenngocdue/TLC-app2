@@ -99,7 +99,8 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                     tb2.year_num,
                     tb2.workplace_id,
                     tb2.esg_tmpl_id,
-                    tb2.esg_metric_type_id";
+                    tb2.esg_metric_type_id
+                ORDER BY tb2.esg_metric_type_name";
         return $sql;
     }
 
@@ -156,7 +157,9 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
             foreach (range(1, 12) as $num) {
                 if (isset($value[str_pad($num, 2, '0', STR_PAD_LEFT)])) {
                     $x12[] = number_format($value[str_pad($num, 2, '0', STR_PAD_LEFT)], 2);
-                };
+                } else {
+                    $x12[] = 0;
+                }
             }
             $results[$key] = array_merge($x1, $x12);
         }
@@ -193,6 +196,8 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                             $monthlyTotals[$monthKey] =  0;
                         }
                         $monthlyTotals[$monthKey] += $item[$monthKey];
+                    } else {
+                        $monthlyTotals[$monthKey] = 0;
                     };
                 }
             }
@@ -242,8 +247,7 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                 $totalValueOfWorkplaceIds = $this->calculateValuesFroWorkplaceIds($workplaceIdsInData, $childrenMeType);
                 // add rows
                 $lineNumber = count($workplaceIdsInData);
-                $items['rowspan'] = $items['rowspan'] + $lineNumber + 1;
-
+                // $items['rowspan'] = $items['rowspan'] + $lineNumber + 1;
                 $summaryValueOfWorkplaceIds = ArrayReport::summaryAllValuesOfArray($totalValueOfWorkplaceIds);
                 $firstMetric = reset($childrenMeType);
                 // add info for others
@@ -260,7 +264,11 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                 ];
                 $childrenMeType = array_merge([reset($arrayMeType)], [$array_others], $childrenMeType);
                 $items['array_metric_type'] = $childrenMeType;
+
+                $newArrayMeType = $items['array_metric_type'];
+                $items['rowspan'] =  count($newArrayMeType) * $lineNumber + count($newArrayMeType);
             }
+            // dump($items);
         }
         return $dataSource;
     }
