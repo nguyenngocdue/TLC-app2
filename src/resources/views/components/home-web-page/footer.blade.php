@@ -8,7 +8,7 @@
     >
       <div class="container1 bg-white mx-32 pt-10 px-20 rounded">
         <div class="-mx-4 flex flex-wrap">
-          <div class="w-full px-4 sm:w-2/3 lg:w-3/12">
+          <div class="w-full px-4 sm:w-full lg:w-3/12">
             <div class="mb-10 w-full">
               <a
                 href="javascript:void(0)"
@@ -79,47 +79,6 @@
               </ul>
             </div>
           </div>
-          {{-- <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
-            <div class="mb-10 w-full">
-              <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
-                Resources
-              </h4>
-              <ul class="space-y-3">
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    SaaS Development
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Our Products
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Technical Philosophy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div> --}}
           <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div class="mb-10 w-full">
               <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
