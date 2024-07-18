@@ -543,7 +543,7 @@
         "nickname": "co",
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-file-invoice\"><\/i>",
-        "doc_id_format_column": null,
+        "doc_id_format_column": "project_id",
         "status": null,
         "edit_renderer": null,
         "show_renderer": null,

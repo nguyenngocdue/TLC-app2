@@ -77,7 +77,7 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getSubProjectsOfEco(": {
+    "_getSubProjectsOfEco": {
         "name": "_getSubProjectsOfEco",
         "column_name": "getSubProjectsOfEco",
         "new": "true",
@@ -415,9 +415,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -428,9 +428,22 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
-        "column_name": "getMonitors1",
+    "_signature_eco_peers_list": {
+        "name": "_signature_eco_peers_list",
+        "column_name": "signature_eco_peers_list",
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "active": "true"
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -467,9 +480,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_h3b": {
-        "name": "_h3b",
-        "column_name": "h3b",
+    "_signature_eco_managers_list": {
+        "name": "_signature_eco_managers_list",
+        "column_name": "signature_eco_managers_list",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -480,9 +493,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getMonitors2": {
-        "name": "_getMonitors2",
-        "column_name": "getMonitors2",
+    "_h3b": {
+        "name": "_h3b",
+        "column_name": "h3b",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -622,31 +635,5 @@
         "approval_rejected": "",
         "pending_ack": "",
         "active": ""
-    },
-    "_signature_eco_peers_list": {
-        "name": "_signature_eco_peers_list",
-        "column_name": "signature_eco_peers_list",
-        "new": "true",
-        "pending_endorsement": "true",
-        "endorsement_rejected": "true",
-        "pending_review": "true",
-        "review_rejected": "true",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
-    },
-    "_signature_eco_managers_list": {
-        "name": "_signature_eco_managers_list",
-        "column_name": "signature_eco_managers_list",
-        "new": "true",
-        "pending_endorsement": "true",
-        "endorsement_rejected": "true",
-        "pending_review": "true",
-        "review_rejected": "true",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
     }
 }
