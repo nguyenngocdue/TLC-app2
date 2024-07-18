@@ -14,9 +14,12 @@ class ParamQaqcInspTmplId extends ParentParamReports
         $ids = Qaqc_insp_tmpl::all()->pluck('id')->toArray();
         $result = [];
         foreach ($ids as $id) {
-            $ins = Qaqc_insp_tmpl::find($id)->with("getProdRoutingsOfInspTmpl")->first();
+            $ins = Qaqc_insp_tmpl::query()
+                ->where('id', $id)
+                ->with("getProdRoutingsOfInspTmpl")
+                ->first();
             $prodRoutingIds = $ins->getProdRoutingsOfInspTmpl->pluck('id')->toArray();
-            $name = $ins->toArray()['name'];
+            $name = $ins->name;
             $result[] = [
                 'id' => $id,
                 'name' => $name,
