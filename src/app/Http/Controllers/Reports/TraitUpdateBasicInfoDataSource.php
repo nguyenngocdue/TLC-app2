@@ -14,6 +14,7 @@ trait TraitUpdateBasicInfoDataSource
     private static function updateFieldsStatusAndValues($values, $fields, $attrib, $fieldsHref)
     {
         $values =  (array)$values;
+        // dd($values);
         $fields = array_intersect($fields, array_keys((array)$values));
         foreach ($fields as $field) {
             if (isset($values[$field])) {
@@ -49,15 +50,18 @@ trait TraitUpdateBasicInfoDataSource
                     }
                     $cellClass = $cellHref ? 'text-blue-500' : '';
                 }
-
-                $values[$field] = (object)[
-                    'value' => $editedValue ? $editedValue : $values[$field],
-                    'cell_title' => $cellTitle,
-                    'cell_href' => $cellHref,
-                    'cell_class' => $cellClass,
-                ];
+                // dump($values, $editedValue, $field);
+                if (!is_object($values[$field])) {
+                    $values[$field] = (object)[
+                        'value' => $editedValue ? $editedValue : $values[$field],
+                        'cell_title' => $cellTitle,
+                        'cell_href' => $cellHref,
+                        'cell_class' => $cellClass,
+                    ];
+                }
             }
         }
+        // dd($values);
         return $values;
     }
 
