@@ -14,7 +14,7 @@
                         level=4 
                         title="@yield('tooltip')" 
                         labelExtra="@yield('subTitle')"
-                        class="py-2 w-full text-center md:text-left"
+                        class="py-2 w-full1 text-center md:text-left"
                         >
                         @yield('title', 'Untitled Page') 
                     </x-renderer.heading>
