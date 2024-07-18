@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     
+    <link rel="stylesheet" href="{{ asset('fonts/ClashGrotesk/WEB/css/clash-grotesk.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome-pro-6/css/all.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet">
     <link href="{{ asset('css/flowbite.min.css') }}" rel="stylesheet">
