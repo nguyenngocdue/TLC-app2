@@ -13,11 +13,14 @@ class ChartColumn extends Component
     use TraitTransformationData;
     use TraitTransformationData;
 
+    protected $chartTypeName = 'column';
+
     public function __construct(
-        private $chartType,
+        private $chartTypeId,
         private $dataQuery,
         private $chartJson,
-        private $tableColumns,
+        private $tableColumns = [],
+        private $key
     ) {
     }
 
@@ -35,17 +38,18 @@ class ChartColumn extends Component
                 $transformation = $this->mapDataQueryToColumns($dataQuery, $tableColumns);
                 break;
         }
-        $chartType = $this->chartType;
+        $chartTypeId = $this->chartTypeId;
         $series = $this->makeSeriesChart($transformation, $tableColumns);
 
         $chartJson = json_decode($this->chartJson);
         $chartJson = array_pop($chartJson);
 
 
-        return view('components.reports2.charts.types.chart-column-1', [
+        return view('components.reports2.charts.types.chart-column', [
             'series' => $series,
-            'chartType' => $chartType,
+            'chartTypeId' => $chartTypeId,
             'chartJson' => $chartJson,
+            'key' => $this->key,
 
         ]);
     }

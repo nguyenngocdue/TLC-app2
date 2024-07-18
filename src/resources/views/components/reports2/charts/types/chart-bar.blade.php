@@ -1,12 +1,11 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-<div id="chart"></div>
+<div id="chart-{{$key}}"></div>
 
 <script>
   series = @json($series);
   chartJson = @json($chartJson);
   xAxisFn = chartJson["xaxis"];
-  chartType = {{$chartType}};
+  key = "{{$key}}";
 
   if (xAxisFn && xAxisFn.labels && xAxisFn.labels.formatter){
         xAxisFn.labels.formatter = new Function("val", "return " + xAxisFn.labels.formatter + ";");
@@ -44,7 +43,7 @@
         }
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        var chart = new ApexCharts(document.querySelector("#chart-"+ key), options);
         chart.render();
       
 
