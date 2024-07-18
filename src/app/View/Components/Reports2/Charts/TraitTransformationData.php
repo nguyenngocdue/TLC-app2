@@ -21,11 +21,25 @@ trait TraitTransformationData
         return $result;
     }
 
+    public function chartJsonDeCode()
+    {
+        $chartJson = $this->chartJson;
+        $chartJson = json_decode($chartJson);
+        return array_pop($chartJson);;
+    }
+
     public function makeSeriesChart($rowsToFields, $tableColumns)
     {
         $series = [];
-        foreach ($tableColumns as $item) {
-            $dataIndex = $item['dataIndex'];
+        $chartTypeName = $this->chartTypeName ?? '';
+
+        $dataIndexes = array_column($tableColumns, 'dataIndex');
+        if ($chartTypeName === 'pie-donut') {
+            $rowsToFields = (array)$rowsToFields->first();
+            $series = array_values(array_intersect_key($rowsToFields, array_flip($dataIndexes)));
+            return $series;
+        }
+        foreach ($dataIndexes as $dataIndex) {
             $name = isset($item['title']) ? $item['title'] : $dataIndex;
             $series[] = [
                 'name' => $name,
