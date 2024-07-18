@@ -1,6 +1,6 @@
 <section id="who-use-it" class="items-center py-20 lg:py-30">
     <div class="flex items-center justify-center">
-        <h2 class="text-4xl md:text-6xl font-bold">Who Use It</h2>
+        <h2 class="text-4xl md:text-6xl font-bold">Who Use It - We Offer End-To-End</h2>
     </div>
     <div class="m-10 xl:w-3/5 w-3/4 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         @foreach($dataSource as $item)

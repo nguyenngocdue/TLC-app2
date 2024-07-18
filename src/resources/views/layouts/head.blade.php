@@ -92,3 +92,9 @@
 
     
 </head>
+
+<style>
+    body {
+        font-family: "ClashGrotesk-Regular", sans-serif;
+    }
+</style>

@@ -18,6 +18,21 @@
 
 </head>
 
+<style>
+    body {
+        font-family: "ClashGrotesk-Regular", sans-serif;
+    }
+    
+    .text-yellow-tlc {
+        color: #da9f5c ;
+    }
+
+    .bg-black-tlc {
+        background-color: #161c2d;
+    }
+
+</style>
+
 <body>
     @yield('content')
 </body>

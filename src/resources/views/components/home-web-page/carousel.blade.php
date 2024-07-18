@@ -1,4 +1,4 @@
-<section id="what-it-does" class="relative w-full bg-black" data-carousel="slide">
+<section id="what-it-does" class="relative w-full bg-black-tlc" data-carousel="slide">
     <!-- Carousel wrapper -->
     <div class="relative min-h-[50vh] sm:min-h-[60vh] overflow-hidden md:min-h-[100vh]">
         @foreach($images as $key => $image)
