@@ -33,6 +33,55 @@
           <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div class="mb-10 w-full">
               <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
+                ModuQA
+              </h4>
+              <ul class="space-y-3">
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    What it does
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    What you get
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    Why it's cool
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    Who use it
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    Overview Video
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {{-- <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
+            <div class="mb-10 w-full">
+              <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
                 Resources
               </h4>
               <ul class="space-y-3">
@@ -57,7 +106,7 @@
                     href="javascript:void(0)"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                    User Flow
+                    Technical Philosophy
                   </a>
                 </li>
                 <li>
@@ -65,12 +114,12 @@
                     href="javascript:void(0)"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                    User Strategy
+                    Careers
                   </a>
                 </li>
               </ul>
             </div>
-          </div>
+          </div> --}}
           <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div class="mb-10 w-full">
               <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
@@ -82,48 +131,7 @@
                     href="javascript:void(0)"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                    About US
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Contact & Support
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Success History
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Setting & Privacy
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
-            <div class="mb-10 w-full">
-              <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
-                Quick Links
-              </h4>
-              <ul class="space-y-3">
-                <li>
-                  <a
-                    href="javascript:void(0)"
-                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
-                  >
-                    Premium Support
+                    Our Products
                   </a>
                 </li>
                 <li>
@@ -147,7 +155,64 @@
                     href="javascript:void(0)"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
+                  Contact & Support
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                  Careers
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
+            <div class="mb-10 w-full">
+              <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
+                Quick Links
+              </h4>
+              <ul class="space-y-3">
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
                     Access App
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    Terms & Conditions
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="javascript:void(0)"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/dashboard"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    FAQs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/dashboard"
+                    class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
+                  >
+                    Testimonials
                   </a>
                 </li>
               </ul>

@@ -32,9 +32,9 @@ class HomeWebPageController extends Controller
             "header" => $this->dataHeader(),
             "video" => $this->dataVideo(),
             "carousel" => $this->dataCarousel(),
-            "testimonial" => $this->dataTestimonial(),
             "team" => $this->dataTeam(),
-            "faq" => $this->dataFaq(),
+            // "testimonial" => $this->dataTestimonial(),
+            // "faq" => $this->dataFaq(),
         ];
     }
     private function dataVideo()
@@ -127,8 +127,8 @@ class HomeWebPageController extends Controller
             "What You Get",
             "Why It's Cool",
             "Who Use It",
-            "Testimonials",
-            "FAQs",
+            // "Testimonials",
+            // "FAQs",
             "Overview Video",
         ];
     }

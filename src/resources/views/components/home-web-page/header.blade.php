@@ -2,8 +2,8 @@
 class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-to-r bg-white border-b" style="height: 90px;">
       <div class="w-full mx-4">
         <div class="relative flex items-center justify-between w-full">
-          <div class="w-80 max-w-full">
-            <a href="javascript:void(0)" class="block w-full">
+          <div class="w-80 flex justify-center">
+            <a href="javascript:void(0)" class="text-center">
               <img
                 src="{{ asset('logo/moduqa.svg') }}"
                 alt="logo"
@@ -17,7 +17,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
             </a>
           </div>
           <div class="flex w-full items-center justify-between px-4">
-            <div>
+            <div class="mx-auto">
               <button
                 @click="navbarOpen = !navbarOpen"
                 :class="navbarOpen && 'navbarTogglerActive' "
@@ -83,7 +83,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                 </ul>
               </nav>
             </div>
-            <div class="hidden justify-end pr-16 sm:flex lg:pr-0 gap-1">
+            <div class="w-80 hidden justify-center pr-16 sm:flex lg:pr-0 gap-1">
             @auth
                 <a
                     href="/dashboard"
