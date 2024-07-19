@@ -27,11 +27,6 @@ class PageReport extends Component
         return $class;
     }
 
-    private function isEmptyCollection($coll)
-    {
-        return $coll->isEmpty();
-    }
-
     public function render()
     {
         $page = $this->page;

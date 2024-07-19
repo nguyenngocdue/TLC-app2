@@ -112,6 +112,10 @@ class TableBlockReport extends Component
         $block = $this->block;
 
         $columns = $this->block->getLines()->get()->sortby('order_no');
+        $secondColumns = $this->block->get2ndHeaderLines()->get()->sortby('order_no');
+        dd($secondColumns);
+
+
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
         $keyAndColumnsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
 
