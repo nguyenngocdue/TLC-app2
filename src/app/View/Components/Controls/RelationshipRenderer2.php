@@ -243,14 +243,16 @@ class RelationshipRenderer2 extends Component
         // dump($row);
         $isOrderable = $row ? $this->isTableOrderable($row, $colName, $columns) : false;
         $paginatedDataSource = $row ? $this->getPaginatedDataSource($row, $colName, $isOrderable, $props, $showAll) : [];
-
         switch ($renderer_edit) {
             case "same_as_view_all":
                 return $this->renderSameAsViewAll($props, $paginatedDataSource);
-            case "calendar_grid":
-                return $this->renderCalendarGrid($id, $modelPath, $row, $type);
             case "many_icons":
                 return $this->renderManyIcons($colName, $type, $paginatedDataSource, $tableName);
+            case "calendar_grid":
+                if (CurrentRoute::getControllerAction() == 'edit') {
+                    return $this->renderCalendarGrid($id, $modelPath, $row, $type);
+                }
+                //fall down to many lines for print
             case "many_lines":
                 return $this->renderManyLines($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter, $this->numberOfEmptyLines);
             case "many_to_many_matrix":

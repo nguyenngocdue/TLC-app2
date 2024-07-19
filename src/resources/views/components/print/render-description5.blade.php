@@ -19,18 +19,7 @@
     @switch($control)
         @case('attachment')
             <div class='flex p-0 bord1er text-left bor1der-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
-                {{-- @php
-                    $isRenderSimple = $content->every(function($item){
-                        return in_array($item->extension,App\Utils\Constant::ARRAY_ONLY_NONE_MEDIA);
-                    });
-                @endphp
-                @if($isRenderSimple)
-                <div>
-                    <x-print.attachment-simple :dataSource="$value"/>
-                </div>
-                @else --}}
-                    <x-renderer.attachment2 openType='_blank' name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
-                {{-- @endif --}}
+                <x-renderer.attachment2 openType='_blank' name='attachment' :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />
             </div>
             @break
         {{-- @case('checkbox') --}}
@@ -66,7 +55,7 @@
                 <x-print.signature5 :relationships="$relationships" :dataSource="$value" />
             </div>
             @break
-        @case('relationship_renderer')
+        @case('relationship_renderer')                        
             <div class='p1-2  bord1er bor1der-gray-600 text-sm font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left'>
                 <x-controls.relationship-renderer2 id={{$id}} type={{$type}} colName={{$columnName}} modelPath={{$modelPath}} noCss={{true}} :item="$item"  numberOfEmptyLines="{{$numberOfEmptyLines}}"/>
             </div>

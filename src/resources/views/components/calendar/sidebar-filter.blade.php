@@ -8,22 +8,22 @@
         {{-- @php
             $hidden = App\Utils\Support\CurrentUser::isAdmin() ? '' : 'hidden';
         @endphp --}}
-        <div class="hidden col-span-12 2xl:col-span-5 flex1 items-center justify-end pr-2 text-right">Discipline</div> 
+        <div class="hidden col-span-12 2xl:col-span-5 flex1 items-center justify-end pr-2 text-right">Discipline <i class='text-red-400' title='required'>*</i></div> 
         <div class="hidden col-span-12 2xl:col-span-7">
             <x-calendar.SidebarFilterDiscipline readOnly="true" tableName="user_disciplines" name="userSettings[discipline_id]" id="discipline_id_11111" typeToLoadListener="hr_timesheet_officer_line" selected="{{$selectedUserDisciplineId}}"/>
         </div>
         
-        <div class="col-span-12 2xl:col-span-5 flex items-center justify-end pr-2 text-right">Project</div>
+        <div class="col-span-12 2xl:col-span-5 flex items-center justify-end pr-2 text-right">Project <i class='text-red-400' title='required'>*</i></div>
         <div class="col-span-12 2xl:col-span-7">
             <x-calendar.SidebarFilterProject readOnly="{{$readOnly}}" tableName="projects" name="userSettings[project_id]" id="project_id_11111" typeToLoadListener="hr_timesheet_officer_line" selected="{{$projectId}}"/>
         </div>
 
-        <div class="col-span-12 2xl:col-span-5 flex items-center justify-end pr-2 text-right">Sub Project</div>
+        <div class="col-span-12 2xl:col-span-5 flex items-center justify-end pr-2 text-right">Sub Project <i class='text-red-400' title='required'>*</i></div>
         <div class="col-span-12 2xl:col-span-7">
             <x-calendar.SidebarFilterSubProject readOnly="{{$readOnly}}" tableName="sub_projects" name="userSettings[sub_project_id]" id="sub_project_id_11111" typeToLoadListener="hr_timesheet_officer_line" selected="{{$subProjectId}}"/>
         </div>
    
-        <div class="col-span-12 2xl:col-span-5  flex items-center justify-end pr-2 text-right">Phase</div> 
+        <div class="col-span-12 2xl:col-span-5  flex items-center justify-end pr-2 text-right">Phase <i class='text-red-400' title='required'>*</i></div> 
         <div class="col-span-12 2xl:col-span-7">
             <x-calendar.SidebarFilterLod readOnly="{{$readOnly}}" tableName="pj_task_phases" name="userSettings[lod_id]" id="lod_id_11111" typeToLoadListener="hr_timesheet_officer_line" selected="{{$lodId}}"/>
         </div>

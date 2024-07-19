@@ -107,52 +107,52 @@ class Hr_timesheet_officer_line extends ModelExtended
         return [
             ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
             ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true, 'invisible' => true],
-            ['dataIndex' => 'timesheetable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
-            ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
+            // ['dataIndex' => 'timesheetable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
+            // ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
 
-            ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, 'cloneable' => !true],
+            ['dataIndex' => 'user_id', 'title' => 'Full Name', 'invisible' => true, 'value_as_user_id' => true, 'cloneable' => !true],
 
             // ['dataIndex' => 'ts_date', 'cloneable' => true],
             ['dataIndex' => 'start_time', 'cloneable' => true],
-            ['dataIndex' => 'project_id', 'cloneable' => true],
-            ['dataIndex' => 'sub_project_id', 'cloneable' => true],
-            ['dataIndex' => 'lod_id', 'cloneable' => true],
-            ['dataIndex' => 'discipline_id', 'cloneable' => true],
-            ['dataIndex' => 'task_id', 'cloneable' => true],
-            ['dataIndex' => 'sub_task_id', 'cloneable' => true],
-            ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
-            // ['dataIndex' => 'ts_hour', 'cloneable' => true],
             ['dataIndex' => 'duration_in_min', 'cloneable' => true],
-            ['dataIndex' => 'remark', 'cloneable' => true],
-            ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
-        ];
-    }
-
-    public function getManyLineParams_Workers()
-    {
-        return [
-            ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
-            ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true, 'invisible' => true],
-            ['dataIndex' => 'timesheetable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
-            ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
-
-            ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, "deaf" => true, 'cloneable' => !true, 'footer' => 'agg_count_unique_values'],
-            ['dataIndex' => 'discipline_id', 'cloneable' => true, 'deaf' => !true],
-
-            // ['dataIndex' => 'ts_date', 'cloneable' => true],
-            // ['dataIndex' => 'start_time', 'cloneable' => true],
-            ['dataIndex' => 'project_id', 'cloneable' => true],
+            // ['dataIndex' => 'project_id', 'cloneable' => true],
             ['dataIndex' => 'sub_project_id', 'cloneable' => true],
-            ['dataIndex' => 'prod_routing_id', 'cloneable' => true],
-            ['dataIndex' => 'lod_id', 'cloneable' => true],
+            ['dataIndex' => 'lod_id', 'title' => 'Phase', 'cloneable' => true],
+            ['dataIndex' => 'discipline_id', 'invisible' => true, 'cloneable' => true],
             ['dataIndex' => 'task_id', 'cloneable' => true],
             ['dataIndex' => 'sub_task_id', 'cloneable' => true],
             ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
             // ['dataIndex' => 'ts_hour', 'cloneable' => true],
-            ['dataIndex' => 'duration_in_hour', 'cloneable' => true, 'footer' => 'agg_sum'],
-            ['dataIndex' => 'duration_in_min', 'invisible' => 'true'],
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
         ];
     }
+
+    // public function getManyLineParams_Workers()
+    // {
+    //     return [
+    //         ["dataIndex" => 'order_no', 'invisible' => true, 'no_print' => true],
+    //         ["dataIndex" => 'id', 'title' => 'OT Line ID', 'no_print' => true, 'invisible' => true],
+    //         ['dataIndex' => 'timesheetable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
+    //         ['dataIndex' => 'timesheetable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
+
+    //         ['dataIndex' => 'user_id', 'title' => 'Full Name', 'value_as_user_id' => true, "deaf" => true, 'cloneable' => !true, 'footer' => 'agg_count_unique_values'],
+    //         ['dataIndex' => 'discipline_id', 'cloneable' => true, 'deaf' => !true],
+
+    //         // ['dataIndex' => 'ts_date', 'cloneable' => true],
+    //         // ['dataIndex' => 'start_time', 'cloneable' => true],
+    //         ['dataIndex' => 'project_id', 'cloneable' => true],
+    //         ['dataIndex' => 'sub_project_id', 'cloneable' => true],
+    //         ['dataIndex' => 'prod_routing_id', 'cloneable' => true],
+    //         ['dataIndex' => 'lod_id', 'cloneable' => true],
+    //         ['dataIndex' => 'task_id', 'cloneable' => true],
+    //         ['dataIndex' => 'sub_task_id', 'cloneable' => true],
+    //         ['dataIndex' => 'work_mode_id', 'cloneable' => true, 'no_print' => true],
+    //         // ['dataIndex' => 'ts_hour', 'cloneable' => true],
+    //         ['dataIndex' => 'duration_in_hour', 'cloneable' => true, 'footer' => 'agg_sum'],
+    //         ['dataIndex' => 'duration_in_min', 'invisible' => 'true'],
+    //         ['dataIndex' => 'remark', 'cloneable' => true],
+    //         ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
+    //     ];
+    // }
 }

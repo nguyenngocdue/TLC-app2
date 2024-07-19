@@ -6,10 +6,21 @@
         <div class='grid grid-row-1'>
             <div class='grid grid-cols-12 text-right'>
                 <x-print.render-description5
-                newLine="{{$newLine}}" :item="$item"
-                :content="$content" colSpan="{{$colSpan}}" hiddenLabel="{{$hiddenLabel}}"
-                type="{{$type}}" columnName="{{$columnName}}" :relationships="$relationships" numberOfEmptyLines="{{$numberOfEmptyLines}}" modelPath="{{$modelPath}}"
-                id="{{$id}}" control="{{$control}}" label="{{$label}}" printMode="{{$printMode}}"/>
+                    newLine="{{$newLine}}" 
+                    :item="$item"
+                    :content="$content" 
+                    colSpan="{{$colSpan}}" 
+                    hiddenLabel="{{$hiddenLabel}}"
+                    type="{{$type}}" 
+                    columnName="{{$columnName}}" 
+                    :relationships="$relationships" 
+                    numberOfEmptyLines="{{$numberOfEmptyLines}}" 
+                    modelPath="{{$modelPath}}"
+                    id="{{$id}}" 
+                    control="{{$control}}" 
+                    label="{{$label}}" 
+                    printMode="{{$printMode}}"
+                />
             </div>
         </div>
     </div>

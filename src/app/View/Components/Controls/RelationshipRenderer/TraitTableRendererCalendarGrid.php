@@ -33,7 +33,7 @@ trait TraitTableRendererCalendarGrid
         if ($statusTimeSheet && in_array($statusTimeSheet, ['pending_approval', 'approved'])) {
             $hasRenderSidebar = false;
         }
-        return view('components.calendar.calendar-grid', [
+        $params = [
             'timesheetableType' => $modelPath,
             'timesheetableId' => $id,
             'apiUrl' => $apiUrl,
@@ -41,6 +41,8 @@ trait TraitTableRendererCalendarGrid
             'arrHidden' => $arrHidden,
             'type' => $type,
             'hasRenderSidebar' => $hasRenderSidebar,
-        ]);
+        ];
+
+        return view('components.calendar.calendar-grid', $params);
     }
 }
