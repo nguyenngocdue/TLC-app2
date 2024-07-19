@@ -1,4 +1,4 @@
-<x-renderer.heading level=5 xalign='left'>{{$name}}</x-renderer.heading>
+<x-renderer.heading level=5 title='Block Id: {{$block->id}}' xalign='left'>{{$name}}</x-renderer.heading>
 <x-renderer.heading level=6 xalign='left'>{{$description}}</x-renderer.heading>
 
 {{-- @dump($rotate45Width, $rotate45Height) --}}
@@ -16,7 +16,6 @@
 @php
 @endphp    
 <x-renderer.card title="">
-    {{-- showNo= { { true } } --}}
     <x-renderer.table 
         headerTop=12 
         showNo=true

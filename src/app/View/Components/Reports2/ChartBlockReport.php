@@ -14,7 +14,7 @@ class ChartBlockReport extends Component
     public function __construct(
         private $block = null,
         private $dataQuery = null,
-        private $tableColumns = []
+        private $rawTableColumns = []
     ) {
     }
 
@@ -27,7 +27,7 @@ class ChartBlockReport extends Component
         $viewName = '';
         $series = [];
         $key = md5($chartTypeId);
-        $tableColumns = $this->tableColumns;
+        $tableColumns = $this->rawTableColumns;
 
 
         switch ($chartTypeId) {
