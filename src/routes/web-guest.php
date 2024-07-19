@@ -10,7 +10,9 @@ use App\Http\Controllers\WelcomeFortuneController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
-Route::get('/', [HomeWebPageController::class, 'index'])->name('home-web-page.index');
+Route::get('/', [HomeWebPageController::class, 'indexModuQa'])->name('home-web-page.indexModuQa');
+Route::get('/home/company', [HomeWebPageController::class, 'indexCompany'])->name('home-web-page.indexCompany');
+Route::get('/home/quicklink', [HomeWebPageController::class, 'indexQuickLink'])->name('home-web-page.indexQuickLink');
 
 Route::group(['middleware' =>  ['auth', 'impersonate'],], function () {
     Route::resource('welcome-canh', WelcomeCanhController::class)->only('index');

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 Arr::macro('groupByToChildren', function ($arr, $col1, $col2 = null) {
     $result = [];
@@ -139,3 +140,15 @@ Arr::macro('sameContent', function (array $array1, array $array2) {
 // Arr::macro('isTraversable', function ($array_or_collection) {
 //     return is_array($array_or_collection) || $array_or_collection instanceof \Traversable;
 // });
+
+Arr::macro('getFileListFromDisk', function ($path) {
+    $directory = public_path($path);
+    $path = asset($path);
+    if (File::isDirectory($directory)) {
+        $files = File::files($directory);
+        return array_map(function ($file) use ($path) {
+            return $path . '/' . $file->getFilename();
+        }, $files);
+    }
+    return [];
+});

@@ -33,7 +33,7 @@
           <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div class="mb-10 w-full">
               <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
-                ModuQA
+                <a href="/">ModuQA</a>
               </h4>
               <ul class="space-y-3">
                 <li>
@@ -82,7 +82,7 @@
           <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div class="mb-10 w-full">
               <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
-                Company
+                <a href="/home/company">Company</a>
               </h4>
               <ul class="space-y-3">
                 <li>
@@ -111,27 +111,28 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/dashboard"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                  Contact & Support
+                    FAQs
                   </a>
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/dashboard"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                  Careers
+                    Testimonials
                   </a>
                 </li>
+                
               </ul>
             </div>
           </div>
           <div class="w-full px-4 sm:w-1/2 lg:w-2/12">
             <div class="mb-10 w-full">
               <h4 class="mb-9 text-lg font-semibold text-dark dark:text-white">
-                Quick Links
+                <a href="/home/quicklink">Quick Links</a>
               </h4>
               <ul class="space-y-3">
                 <li>
@@ -160,18 +161,18 @@
                 </li>
                 <li>
                   <a
-                    href="/dashboard"
+                    href="javascript:void(0)"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                    FAQs
+                  Contact & Support
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/dashboard"
+                    href="javascript:void(0)"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
-                    Testimonials
+                  Careers
                   </a>
                 </li>
               </ul>

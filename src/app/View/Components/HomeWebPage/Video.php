@@ -11,9 +11,8 @@ class Video extends Component
      *
      * @return void
      */
-    public function __construct(
-        private $dataSource = null,
-    ) {
+    public function __construct()
+    {
         //
     }
 
@@ -24,7 +23,11 @@ class Video extends Component
      */
     public function render()
     {
-
-        return view('components.home-web-page.video', $this->dataSource);
+        $link = "https://www.youtube.com/embed/ak69h2gPs9I";
+        $dataSource = [
+            "title" => "Click on the video for an overview",
+            "iframe" => '<iframe width="1154" height="649" src="' . $link . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+        ];
+        return view('components.home-web-page.video', $dataSource);
     }
 }
