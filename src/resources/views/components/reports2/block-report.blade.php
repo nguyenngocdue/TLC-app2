@@ -21,9 +21,8 @@
                 @case(641)
                     <x-reports2.table-block-report 
                             reportId="{{$reportId}}"
-                            :blockDataSource="$values"
-                            :tableDataSource="$tableDataSource"
-                            :tableColumns="$tableColumns"
+                            :rawTableDataSource="$tableDataSource"
+                            :rawTableColumns="$tableColumns"
                             :block="$block"
                         />
                     @break
@@ -32,7 +31,7 @@
                             :block="$block"
                             reportId="{{$reportId}}"
                             :dataQuery="$dataQuery"
-                            :tableColumns="$tableColumns"
+                            :rawTableColumns="$tableColumns"
                         />
                     @break
                 @case(643)
