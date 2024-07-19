@@ -1,6 +1,6 @@
-<section id="what-it-does" class="relative w-full bg-black-tlc" data-carousel="slide">
+<section id="what-it-does" class="relative w-full bg-black-tlc" data-carousel="slide" style="scroll-margin-top: 90px;">
     <!-- Carousel wrapper -->
-    <div class="relative min-h-[50vh] sm:min-h-[60vh] overflow-hidden md:min-h-[100vh]">
+    <div class="relative min-h-[50vh] sm:min-h-[60vh] overflow-hidden md:min-h-[90vh]">
         @foreach($images as $key => $image)
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <div class="z-40">

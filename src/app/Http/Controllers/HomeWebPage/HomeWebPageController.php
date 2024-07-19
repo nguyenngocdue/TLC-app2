@@ -33,7 +33,7 @@ class HomeWebPageController extends Controller
         return view('home-web-page.home-web-page-company', [
             "header" => [
                 "Our Products",
-                "Our Service",
+                "Our Services",
                 "Know Our Team",
                 "FAQs",
                 "Testimonials",

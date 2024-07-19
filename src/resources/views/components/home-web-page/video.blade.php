@@ -1,6 +1,7 @@
 <!-- ====== Video Section Start -->
 <section id="overview-video"
-      class="bg-black-tlc dark:bg-dark py-20 lg:py-36"
+      class="bg-black-tlc dark:bg-dark py-10 lg:py-20"
+      style="scroll-margin-top: 90px;"
     >
       <div class="container mx-auto">
           <div class="-mx-4 flex flex-wrap justify-center">

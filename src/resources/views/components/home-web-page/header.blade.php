@@ -110,3 +110,5 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
         </div>
       </div>
 </header>
+<div class="no-print " style="height: 90px;">
+</div>
