@@ -47,9 +47,7 @@
                         />
                     @break
                 @default
-                    <span class="text-lg text-green-600 font-semibold">
-                        Kindly select a type of renderer.
-                    </span>
+                        <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning">Kindly select a type of renderer for block.</x-renderer.button>
                 @break 
             @endswitch
 

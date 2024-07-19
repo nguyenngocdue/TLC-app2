@@ -39,7 +39,7 @@ trait TraitDataColumnReport
             $dataSqlColl = $this->getDataSQLString($block, $params);
         }
         $uniqueFields = $this->getAllUniqueFields($dataSqlColl);
-        $lines = $block->getLines()->get();
+        $lines = $block->getLines()->get()->sortby('order_no');
 
         $columns = [];
         $processedIndices = []; // Renamed from 'temp' for clarity

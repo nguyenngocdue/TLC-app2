@@ -111,11 +111,12 @@ class TableBlockReport extends Component
     {
         $block = $this->block;
 
-        $columns = $this->block->getLines()->get();
+        $columns = $this->block->getLines()->get()->sortby('order_no');
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
         $keyAndColumnsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
 
         $newTableDataSource = $this->createTableDataSourceForRow($this->rawTableDataSource, $keyAndColumnsReduced);
+
         $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
         return view('components.reports2.table-block-report', [
