@@ -415,6 +415,19 @@
         "pending_ack": "true",
         "active": "true"
     },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
+        "active": "true"
+    },
     "_assignee_2": {
         "name": "_assignee_2",
         "column_name": "assignee_2",
@@ -428,13 +441,13 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
-        "column_name": "getMonitors1",
+    "_signature_eco_peers_list": {
+        "name": "_signature_eco_peers_list",
+        "column_name": "signature_eco_peers_list",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
-        "pending_review": "true",
+        "pending_review": "",
         "review_rejected": "",
         "pending_approval": "true",
         "approval_rejected": "true",
@@ -467,6 +480,19 @@
         "pending_ack": "true",
         "active": "true"
     },
+    "_signature_eco_managers_list": {
+        "name": "_signature_eco_managers_list",
+        "column_name": "signature_eco_managers_list",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "true",
+        "active": "true"
+    },
     "_h3b": {
         "name": "_h3b",
         "column_name": "h3b",
@@ -477,19 +503,6 @@
         "review_rejected": "",
         "pending_approval": "true",
         "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
-    },
-    "_getMonitors2": {
-        "name": "_getMonitors2",
-        "column_name": "getMonitors2",
-        "new": "",
-        "pending_endorsement": "",
-        "endorsement_rejected": "",
-        "pending_review": "",
-        "review_rejected": "",
-        "pending_approval": "true",
-        "approval_rejected": "",
         "pending_ack": "true",
         "active": "true"
     },
@@ -516,7 +529,7 @@
         "review_rejected": "",
         "pending_approval": "",
         "approval_rejected": "",
-        "pending_ack": "",
+        "pending_ack": "true",
         "active": "true"
     },
     "_getMonitors3": {
@@ -529,7 +542,7 @@
         "review_rejected": "",
         "pending_approval": "",
         "approval_rejected": "",
-        "pending_ack": "",
+        "pending_ack": "true",
         "active": "true"
     },
     "_owner_id": {
@@ -542,7 +555,20 @@
         "review_rejected": "",
         "pending_approval": "",
         "approval_rejected": "",
-        "pending_ack": "",
+        "pending_ack": "true",
+        "active": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "true",
         "active": "true"
     },
     "_created_at": {
@@ -609,18 +635,5 @@
         "approval_rejected": "",
         "pending_ack": "",
         "active": ""
-    },
-    "_status": {
-        "name": "_status",
-        "column_name": "status",
-        "new": "",
-        "pending_endorsement": "true",
-        "endorsement_rejected": "",
-        "pending_review": "true",
-        "review_rejected": "true",
-        "pending_approval": "true",
-        "approval_rejected": "true",
-        "pending_ack": "true",
-        "active": "true"
     }
 }

@@ -428,9 +428,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_signature_eco_peers_list": {
-        "name": "_signature_eco_peers_list",
-        "column_name": "signature_eco_peers_list",
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
@@ -441,9 +441,9 @@
         "pending_ack": "true",
         "active": "true"
     },
-    "_assignee_2": {
-        "name": "_assignee_2",
-        "column_name": "assignee_2",
+    "_signature_eco_peers_list": {
+        "name": "_signature_eco_peers_list",
+        "column_name": "signature_eco_peers_list",
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",

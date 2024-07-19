@@ -69,6 +69,20 @@
         "pending_ack": "true",
         "active": "true"
     },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
@@ -85,6 +99,62 @@
     },
     "bd_member": {
         "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "council_member": {
+        "name": "council_member",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -419,6 +489,48 @@
         "pending_ack": "",
         "active": ""
     },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "proc_manager": {
         "name": "proc_manager",
         "name_rendered": "",
@@ -517,6 +629,20 @@
         "pending_ack": "",
         "active": ""
     },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "proj_manager": {
         "name": "proj_manager",
         "name_rendered": "",
@@ -552,6 +678,20 @@
         "new": "true",
         "pending_endorsement": "",
         "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
+    "proj_member_nz": {
+        "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
         "pending_review": "",
         "review_rejected": "",
         "pending_approval": "",
@@ -559,8 +699,8 @@
         "pending_ack": "",
         "active": ""
     },
-    "proj_member_nz": {
-        "name": "proj_member_nz",
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -657,6 +797,20 @@
         "pending_ack": "",
         "active": ""
     },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
@@ -668,6 +822,20 @@
         "review_rejected": "",
         "pending_approval": "",
         "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
         "pending_ack": "",
         "active": ""
     },
