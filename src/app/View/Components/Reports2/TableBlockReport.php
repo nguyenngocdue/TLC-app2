@@ -8,6 +8,8 @@ use Illuminate\View\Component;
 class TableBlockReport extends Component
 {
     use TraitDataColumnReport;
+    use TermsBlockReport;
+
     public function __construct(
         private $reportId,
         private $block,
@@ -27,43 +29,61 @@ class TableBlockReport extends Component
         return $result;
     }
 
-    private function getTitleWithIcon($title, $icon, $iconPosition)
+    private function createIconPosition($content, $iconPosition, $icon)
     {
         if ($iconPosition) {
             switch ($iconPosition) {
-                case 611:
-                    return $icon . ' ' . $title;
-                case 612:
-                    return $title . ' ' . $icon;
+                case 'Left':
+                    return $icon . ' ' . $content;
+                case 'Right':
+                    return $content . ' ' . $icon;
             }
         }
-        return $title;
+        return $content;
+    }
+
+    private function createContentInHeader($content, $icon, $iconPosition)
+    {
+        return $this->createIconPosition($content, $iconPosition, $icon);
+    }
+
+    private function createContentInRowCell($value, $column)
+    {
+        $rowIcon = $column->row_icon;
+        $rowIconPosition = $this->getTermName($column->row_icon_position);
+        $rowRenderer = $this->getTermName($column->row_renderer);
+        switch ($rowRenderer) {
+            case "Icon":
+                $content = $rowIcon;
+                break;
+            default:
+                $content = $this->createIconPosition($value, $rowIconPosition, $rowIcon);
+                break;
+        }
+        return $content;
     }
 
     private function createTableDataSourceForRow($dataQuery, $keyAndReducedColumns)
     {
         $result = collect();
-
         foreach ($dataQuery as $k1 => $item) {
             $re = (object)[];
             foreach ($item as $k2 => $value) {
                 if (array_key_exists($k2, $keyAndReducedColumns)) {
                     $column = $keyAndReducedColumns[$k2];
-                    $title = $this->getTitleWithIcon($column->name, $column->icon, $column->row_icon_position);
+                    $content = $this->createContentInRowCell($value, $column);
                     $newValue = (object)[
-                        'value' => $value,
-                        'cell_href' => '',
+                        'value' => $content,
+                        'cell_href' => 'google.com.vn',
                         'cell_class' => $column->row_cell_class,
-                        'cell_title' => $title,
+                        // 'cell_title' => $title,
                         'cell_div_class' => $column->row_cell_div_class,
                     ];
                     $re->$k2 = $newValue;
                 }
             }
-
             $result->put($k1, $re);
         }
-
         return $result;
     }
 
@@ -71,19 +91,22 @@ class TableBlockReport extends Component
     {
         $result = [];
         foreach ($data as $column) {
-            $title = $this->getTitleWithIcon($column->name, $column->icon, $column->icon_position);
+            $title = $this->createContentInHeader($column->name, $column->icon, $column->icon_position);
+            $aagFooter = $this->getTermName($column->agg_footer);
             $newValue = [
                 'title' => $title,
                 'dataIndex' => $column->data_index,
                 'width' => $column->width,
                 'align' => 'center',
-                'cellClass' => $column->cell_class,
-                'cellDivClass' => $column->cell_div_class,
+                'cell_class' => $column->cell_class,
+                'cell_div_class' => $column->cell_div_class,
+                'footer' => $aagFooter,
             ];
             $result[] = $newValue;
         }
         return $result;
     }
+
     public function render()
     {
         $block = $this->block;
@@ -101,6 +124,7 @@ class TableBlockReport extends Component
             "description" => $block->description,
             "tableDataSource" => $newTableDataSource,
             "tableColumns" =>  $editedTableColumns,
+
             "showNo" => $block->showNo,
             "tableTrueWidth" => $block->table_true_width,
             "maxHeight" => $block->max_h,
