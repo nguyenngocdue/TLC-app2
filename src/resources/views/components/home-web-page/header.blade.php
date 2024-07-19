@@ -3,7 +3,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
       <div class="w-full mx-4">
         <div class="relative flex items-center justify-between w-full">
           <div class="w-80 flex justify-center">
-            <a href="javascript:void(0)" class="text-center">
+            <a href="/" class="text-center">
               <img
                 src="{{ asset('logo/moduqa.svg') }}"
                 alt="logo"
