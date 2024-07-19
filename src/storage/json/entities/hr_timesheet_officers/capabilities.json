@@ -44,6 +44,15 @@
         "rejected": "true",
         "approved": "true"
     },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
@@ -60,6 +69,42 @@
         "new": "true",
         "pending_approval": "",
         "rejected": "true",
+        "approved": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "council_member": {
+        "name": "council_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": ""
     },
     "cpl_manager_nz": {
@@ -363,9 +408,9 @@
         "name": "proj_admin",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
+        "new": "true",
         "pending_approval": "",
-        "rejected": "",
+        "rejected": "true",
         "approved": ""
     },
     "proj_manager": {
@@ -467,6 +512,15 @@
         "rejected": "true",
         "approved": ""
     },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
@@ -474,6 +528,15 @@
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
+        "approved": ""
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
         "approved": ""
     },
     "whs_manager": {
