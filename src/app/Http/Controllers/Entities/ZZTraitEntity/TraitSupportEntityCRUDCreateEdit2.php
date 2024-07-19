@@ -99,7 +99,11 @@ trait TraitSupportEntityCRUDCreateEdit2
     private function loadValueOfBelongsToManyAndAttachments($original, $props)
     {
         $orphanAttachments = $this->loadValueOfOrphanAttachments($props);
-        // dump($orphanAttachments);		
+        // dump($orphanAttachments);
+        if (!method_exists($original, 'getOriginal')) {
+            $name = get_class($original);
+            abort(500, "The model [$name] does not have getOriginal method.");
+        }
         $values = $original->getOriginal();
         foreach ($props as $prop) {
             $name = $prop['column_name'];
@@ -108,11 +112,6 @@ trait TraitSupportEntityCRUDCreateEdit2
             //     continue;
             // }
             switch ($prop['control']) {
-                    // case 'checkbox':
-                    // case 'dropdown_multi':
-                    //     $field_name = substr($name, 0, strlen($name) - 2); //Remove parenthesis()
-                    //     $values[$name] = json_encode($original->getCheckedByField($field_name)->pluck('id')->toArray());
-                    //     break;
                 case 'checkbox_2a':
                 case 'dropdown_multi_2a':
                     $item = $original->{$name};
