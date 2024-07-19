@@ -1,3 +1,5 @@
 <section id="privacy-policy" class="p-12 bg-black-tlc text-white" style="scroll-margin-top: 90px;" >
-    Privacy Policy
+    <div class="flex items-center justify-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-bold text-yellow-tlc">Privacy Policy</h2>
+    </div>
 </section>
