@@ -38,7 +38,7 @@
               <ul class="space-y-3">
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/#what-it-does"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     What it does
@@ -46,7 +46,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/#what-you-get"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     What you get
@@ -54,7 +54,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/#why-its-cool"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Why it's cool
@@ -62,7 +62,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/#who-use-it"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Who use it
@@ -70,7 +70,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/#overview-video"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Overview Video
@@ -87,7 +87,7 @@
               <ul class="space-y-3">
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/company/#our-products"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Our Products
@@ -95,7 +95,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/company/#our-services"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Our Services
@@ -103,7 +103,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/company/#know-our-team"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Know Our Team
@@ -111,7 +111,7 @@
                 </li>
                 <li>
                   <a
-                    href="/dashboard"
+                    href="/home/company/#faqs"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     FAQs
@@ -119,13 +119,12 @@
                 </li>
                 <li>
                   <a
-                    href="/dashboard"
+                    href="/home/company/#testimonials"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Testimonials
                   </a>
                 </li>
-                
               </ul>
             </div>
           </div>
@@ -137,7 +136,7 @@
               <ul class="space-y-3">
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/quicklink/#access-app"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Access App
@@ -145,7 +144,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/quicklink/#terms-conditions"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Terms & Conditions
@@ -153,7 +152,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/quicklink/#privacy-policy"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                     Privacy Policy
@@ -161,7 +160,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/quicklink/#contact-support"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                   Contact & Support
@@ -169,7 +168,7 @@
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href="/home/quicklink/#careers"
                     class="inline-block text-base leading-loose text-body-color hover:text-primary dark:text-dark-6"
                   >
                   Careers
