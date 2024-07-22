@@ -55,7 +55,7 @@
     
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>
     <script src="{{ asset('js/components/Number4.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown2-20240705.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown2-20240722.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20240705.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231229.js') }}"></script>
