@@ -339,7 +339,10 @@ class User extends ModelExtended implements
 
     function isExternalInspector()
     {
-        return in_array($this->discipline, [138]); //138: External Inspector
+        return in_array($this->discipline, [
+            138, //138: External Inspector
+            180, //180: Shipping Agent
+        ]);
     }
 
     public function isProjectClient()
