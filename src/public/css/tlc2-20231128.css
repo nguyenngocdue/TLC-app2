@@ -2,6 +2,11 @@ body {
     /* When table has width: 2000px, it will show x-scroll for table and for the body. Use this to hide for body*/
     overflow-x: hidden;
 }
+
+.box-shadow-1 {
+    box-shadow: 1px 1px 10px #000;
+}
+
 th.rotated-title-right-th {
     vertical-align: bottom;
     text-align: left !important;
