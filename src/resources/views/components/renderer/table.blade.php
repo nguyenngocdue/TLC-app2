@@ -29,9 +29,13 @@ var tableObjectIndexedColumns = {};
                 @endif
                 @if($showPaginationTop)
                 <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
-                    <span class='lg:col-span-4 md:col-span-12 flex gap-1'>{!! Blade::render( $topLeftControl) !!}</span>
-                    <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-center">{!! Blade::render($topCenterControl) !!}</span>
-                    <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-end">
+                    <span class='md:col-span-4 col-span-12 flex gap-1 justify-start'>
+                        {!! Blade::render($topLeftControl) !!}
+                    </span>
+                    <span class="md:col-span-4 col-span-12 flex gap-1 justify-center">
+                        {!! Blade::render($topCenterControl) !!}
+                    </span>
+                    <span class="md:col-span-4 col-span-12 flex gap-1 justify-end">
                         {!! $showing !!}
                         {!! $pagination !!}
                         {!! Blade::render($topRightControl) !!}
@@ -74,9 +78,13 @@ var tableObjectIndexedColumns = {};
                 </div>
                 @if($showPaginationBottom)
                 <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 px-4 py-1.5 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
-                    <span class='lg:col-span-4 md:col-span-12 flex gap-1'>{!! Blade::render($bottomLeftControl) !!}</span>
-                    <span class="lg:col-span-4 md:col-span-12 flex gap-1 justify-center">{!! Blade::render($bottomCenterControl) !!}</span>
-                    <div class="lg:col-span-4 md:col-span-12 flex gap-1 justify-end">
+                    <span class='md:col-span-4 col-span-12 flex gap-1 justify-start'>
+                        {!! Blade::render($bottomLeftControl) !!}
+                    </span>
+                    <span class="md:col-span-4 col-span-12 flex gap-1 justify-center">
+                        {!! Blade::render($bottomCenterControl) !!}
+                    </span>
+                    <div class="md:col-span-4 col-span-12 flex gap-1 justify-end">
                         {!! $showing !!}
                         {!! $pagination !!}
                         {!! Blade::render($bottomRightControl) !!}
