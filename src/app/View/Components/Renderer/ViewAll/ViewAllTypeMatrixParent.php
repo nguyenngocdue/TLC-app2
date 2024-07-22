@@ -44,6 +44,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $maxH = null;
     protected $multipleMatrix = false;
     protected $matrixes = null;
+    protected $showNameColumn = true;
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -291,13 +292,15 @@ abstract class ViewAllTypeMatrixParent extends Component
             $yId = $y->id;
             $line = [];
             $line['name_for_group_by'] = $y->name;
-            $line['name'] = (object)[
-                'value' => $y->name,
-                'cell_title' => "(#" . $y->id . ")",
-                'cell_class' => "text-blue-800 bg-white",
-                'cell_href' => route($yAxisTableName . ".edit", $y->id),
-                'cell_div_class' => 'p-2 whitespace-nowrap',
-            ];
+            if ($this->showNameColumn) {
+                $line['name'] = (object)[
+                    'value' => $y->name,
+                    'cell_title' => "(#" . $y->id . ")",
+                    'cell_class' => "text-blue-800 bg-white",
+                    'cell_href' => route($yAxisTableName . ".edit", $y->id),
+                    'cell_div_class' => 'p-2 whitespace-nowrap',
+                ];
+            }
             if ($this->allowCreation) {
                 $this->makeCreateButton($xAxis, $y, $extraColumns, $line, $this);
             } else {
@@ -369,13 +372,19 @@ abstract class ViewAllTypeMatrixParent extends Component
 
     protected function getColumns($extraColumns)
     {
-        return  [
+        $columns = [
             ['dataIndex' => 'name_for_group_by', 'hidden' => true],
-            ['dataIndex' => 'name', 'fixed' => $this->nameColumnFixed,],
+        ];
+        if ($this->showNameColumn) {
+            $columns[] = ['dataIndex' => 'name', 'fixed' => $this->nameColumnFixed,];
+        }
+        $columns =  [
+            ...$columns,
             ...$this->getMetaColumns(),
             ...$extraColumns,
             ...$this->getRightMetaColumns(),
-        ];;
+        ];
+        return $columns;
     }
 
     private function paginate($items, $perPage = 15, $page = null, $options = [])

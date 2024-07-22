@@ -59,6 +59,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
     private $hasPunchlist = false;
+    protected $showNameColumn = false;
+
     /**
      * Create a new component instance.
      *
@@ -207,9 +209,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         $result = [];
+        $result[] = ['dataIndex' => 'name', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
         if ($this->metaShowComplianceName) $result[] = ['dataIndex' => 'compliance_name', 'width' => 300, /*'fixed' => 'left',*/];
         if ($this->metaShowProgress) $result[] = ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
-        if ($this->metaShowPrint) $result[] = ['dataIndex' => 'print', "title" => 'Print', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
         return $result;
     }
 
@@ -233,14 +235,26 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         }
 
         $compliance_name = $y->getProdOrder->compliance_name ?: "";
-        $print_link = route("qaqc_insp_chklsts.show", $y->id);
+        $name = [
+            'value' => $y->name,
+            'cell_title' => "(#" . $y->id . ")",
+        ];
+        if ($this->metaShowPrint) {
+            $name['cell_href'] = route("qaqc_insp_chklsts.show", $y->id);
+            $name['cell_class'] = "text-blue-800 bg-white";
+            $name['cell_div_class'] = 'p-2 whitespace-nowrap cursor-pointer';
+        } else {
+            $name['cell_div_class'] = 'p-2 whitespace-nowrap';
+            $name['cell_class'] = "bg-white";
+        }
+
         $result = [
+            'name' => (object)$name,
             'compliance_name' => (object)[
                 'value' => $compliance_name,
                 'cell_class' => 'whitespace-nowrap'
             ],
             'progress' => $y->progress ?: 0,
-            'print' => "<a href='$print_link'><i class='fa-duotone fa-print text-blue-600'/></a>",
             'final_punchlist' =>  $status_object,
         ];
 
