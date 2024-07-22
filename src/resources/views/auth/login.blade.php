@@ -86,7 +86,7 @@
                             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
                                 Don’t have an account yet? 
                             </h1>
-                            <p class="bg-primary-500 rounded-lg py-2 text-sm font-light text-white dark:text-gray-300 text-center">
+                            <p class="bg-primary-600 rounded-lg py-2 text-sm font-light text-white dark:text-gray-300 text-center">
                                 <a href="{{ route('register') }}"
                                     class="font-medium hover:underline dark:text-primary-500">
                                     Sign up (For non-TLC staff only)
