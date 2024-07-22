@@ -37,7 +37,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
               <nav
                 :class="!navbarOpen && 'hidden' "
                 id="navbarCollapse"
-                class="absolute right-4 top-full w-full  max-w-[250px] rounded-lg lg:bg-transparent bg-white border box-shadow-1 px-6 py-2 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent"
+                class="absolute right-4 top-full w-full  max-w-[250px] rounded-lg lg:bg-transparent bg-white box-shadow-1 px-6 py-2 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent"
               >
                 <ul class="block lg:flex">
                   @foreach($dataSource as $item)
