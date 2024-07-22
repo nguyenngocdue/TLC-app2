@@ -15,12 +15,40 @@ trait TraitEntityCRUDShowChklst
 
     public function showChklst($id, $trashed)
     {
-        $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);;
+        // $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);;
+        $entity = ($this->modelPath)::query()
+            ->where('id', $id)
+            ->with([
+                "getSheets" => function ($query) {
+                    $query
+                        ->with([
+                            // "getChklst",
+                            // "getProject",
+                            // "getSubProject",
+                            // "getProdOrder",
+                            "getLines" => function ($query) {
+                                $query->orderBy('order_no')
+                                    ->with([
+                                        "getControlGroup",
+                                        "getControlType",
+                                        "getControlValue",
+                                        "getGroup",
+
+                                        "insp_photos",
+                                        "insp_comments",
+                                    ]);
+                            }
+                        ])
+                        ->with($this->nominatedListFn);
+                }
+            ])
+            ->first();
+
         $entityShts = $entity->getSheets;
 
         $tableDataSource = [];
         foreach ($entityShts as $sheet) {
-            $tableDataSource[] = $this->transformDataSource($sheet->getLines->sortBy('order_no'), $sheet->{$this->nominatedListFn});
+            $tableDataSource[] = $this->transformDataSource($sheet->getLines/*->sortBy('order_no')*/, $sheet->{$this->nominatedListFn});
         }
 
         $valueOptionPrint = $this->getValueOptionPrint();
