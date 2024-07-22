@@ -29,16 +29,19 @@ var tableObjectIndexedColumns = {};
                 @endif
                 @if($showPaginationTop)
                 <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 px-4 py-3 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
-                    <span class='md:col-span-4 col-span-12 flex gap-1 justify-start'>
+                    <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
                         {!! Blade::render($topLeftControl) !!}
                     </span>
-                    <span class="md:col-span-4 col-span-12 flex gap-1 justify-center">
+                    <span class="lg:col-span-4 col-span-12 flex gap-1 justify-center">
                         {!! Blade::render($topCenterControl) !!}
                     </span>
-                    <span class="md:col-span-4 col-span-12 flex gap-1 justify-end">
-                        {!! $showing !!}
-                        {!! $pagination !!}
-                        {!! Blade::render($topRightControl) !!}
+                    <span class="lg:col-span-4 col-span-12 grid grid-cols-12 sm:flex gap-1 justify-end items-center pt-2 sm:pt-0">
+                        <div class="col-span-12 py-1 sm:py-0 mx-auto hidden {{ !!$pagination ? "sm:block" : "sm:hidden"}}">{!! $showing !!}</div>
+                        <div class="col-span-12 py-1 sm:py-0 mx-auto sm:block">{!! $pagination !!}</div>                        
+                        <div class="col-span-12 py-1 sm:py-0 mx-auto1 flex gap-2 items-center justify-end">
+                            <span class="{{ !$pagination ? "" : "sm:hidden"}}">{!! $showing !!}</span>
+                            {!! Blade::render($topRightControl) !!}
+                        </div>
                     </span>
                 </div>
                 @endif
@@ -78,17 +81,25 @@ var tableObjectIndexedColumns = {};
                 </div>
                 @if($showPaginationBottom)
                 <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 px-4 py-1.5 text-xs font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
-                    <span class='md:col-span-4 col-span-12 flex gap-1 justify-start'>
+                    <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
                         {!! Blade::render($bottomLeftControl) !!}
                     </span>
-                    <span class="md:col-span-4 col-span-12 flex gap-1 justify-center">
+                    <span class="lg:col-span-4 col-span-12 flex gap-1 justify-center">
                         {!! Blade::render($bottomCenterControl) !!}
                     </span>
-                    <div class="md:col-span-4 col-span-12 flex gap-1 justify-end">
-                        {!! $showing !!}
-                        {!! $pagination !!}
-                        {!! Blade::render($bottomRightControl) !!}
-                    </div>
+                    <span class="lg:col-span-4 col-span-12 grid grid-cols-12 sm:flex gap-1 justify-end items-center pt-2 sm:pt-0">
+                        <div class="col-span-12 py-1 sm:py-0 mx-auto hidden {{ !!$pagination ? "sm:block" : "sm:hidden"}}">{!! $showing !!}</div>
+                        <div class="col-span-12 py-1 sm:py-0 mx-auto sm:block">{!! $pagination !!}</div>                        
+                        <div class="col-span-12 py-1 sm:py-0 mx-auto1 flex gap-2 items-center justify-end">
+                            <span class="{{ !$pagination ? "" : "sm:hidden"}}">{!! $showing !!}</span>
+                            {!! Blade::render($bottomRightControl) !!}
+                        </div>
+                    </span>
+                    {{-- <div class="md:col-span-4 col-span-12 flex gap-1 justify-end">
+                        <div>{!! $showing !!}</div>
+                        <div>{!! $pagination !!}</div>
+                        <div>{!! Blade::render($bottomRightControl) !!}</div>
+                    </div> --}}
                 </div>
                 @endif
                 @if ($footer)
