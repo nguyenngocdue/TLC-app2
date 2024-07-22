@@ -5,9 +5,9 @@
     <div class="my-10 xl:w-3/5 w-full px-2 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         @foreach($dataSource as $item)
             <figure class="relative mx-auto max-w-sm w-44 transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
-                <a href="#">
+                {{-- <a href="#"> --}}
                     <img class="rounded-2xl" src="{{$item['src']}}" alt="image description">
-                </a>
+                {{-- </a> --}}
                 <figcaption class="absolute px-4 w-full text-lg text-white bottom-6">
                     <div class="flex justify-center items-center text-center">
                         <p class="text-2xl text-white font-bold text-shadow-xl">{{$item['name']}}</p>
