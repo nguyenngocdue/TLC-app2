@@ -1,11 +1,12 @@
-<div class="border1 py-52">
+<div class="border1 pt-48 pb-10">
+    {{-- <div class="text-5xl">OPTION 4</div> --}}
     <div class="p-4">
-        <img class="w-3/4 mx-auto" src="{{ asset('logo/tlc.png') }}">
+        <img class="w-1/2 mx-auto" src="{{ asset('logo/tlc.png') }}">
         <div class="w-full text-center font-bold text-2xl">{{config('company.name')}}</div>
     </div>
 
     <div class="p-8">
-        <img class="w-1/2 mx-auto rounded box-shadow-1" src="{{ $src }}">
+        <img class="w-3/4 mx-auto rounded box-shadow-1" src="{{ $src }}">
     </div>
 
     <div class="text-center font-bold text-3xl pt-10 pb-4">
@@ -30,5 +31,8 @@
         </div> --}}
     </div>
 
+    <div class="flex justify-center items-center pt-64">
+        Powered by <img class="w-32 items-center" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
+    </div>
 </div>
 <x-renderer.page-break />
