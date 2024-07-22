@@ -2,8 +2,8 @@
 
 namespace App\View\Components\Renderer;
 
-use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\GridCss;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 
 class Legend extends Component
@@ -21,11 +21,6 @@ class Legend extends Component
         // dump($type);
     }
 
-    private function getLegendDataSource()
-    {
-        return LibStatuses::getFor($this->type);
-    }
-
     /**
      * Get the view / contents that represent the component.
      *
@@ -33,13 +28,18 @@ class Legend extends Component
      */
     public function render()
     {
-        $dataSource = $this->dataSource ?  $this->dataSource : $this->getLegendDataSource();
+        $sp = SuperProps::getFor($this->type);
+        $statuses = $sp['statuses'];
+        // dump($statuses);
+        $dataSource = $this->dataSource ?  $this->dataSource :  $statuses; //LibStatuses::getFor($this->type);
         $count = count($dataSource);
         $gridCss = GridCss::getGridCss($count);
-        return view('components.renderer.legend', [
+        $params = [
             'dataSource' => $dataSource,
             'title' => $this->title,
             'gridCss' => $gridCss,
-        ]);
+        ];
+        // dump($params);
+        return view('components.renderer.legend', $params);
     }
 }

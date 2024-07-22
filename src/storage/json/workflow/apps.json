@@ -2317,7 +2317,7 @@
         "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
-        "title": "QAQC Punchlists",
+        "title": "Punchlists",
         "nickname": "pl",
         "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
@@ -2326,7 +2326,6 @@
         "edit_renderer": null,
         "show_renderer": null,
         "hidden": "true",
-        "hidden_navbar": "true",
         "disallowed_direct_creation": "true"
     },
     "qaqc_punchlist_line": {
@@ -2334,7 +2333,7 @@
         "package_tab": "application",
         "package": "project_management",
         "sub_package": "quality_control",
-        "title": "QAQC Punchlist Lines",
+        "title": "Punchlist Lines",
         "nickname": "pll",
         "tutorial_link": null,
         "icon": null,

@@ -1,38 +1,44 @@
 {
-    "in_progress": {
-        "name": "in_progress",
-        "label": "Return to In Progress",
+    "not_applicable": {
+        "name": "not_applicable",
+        "status_title": "",
+        "label": "Change to N\/A",
         "tooltip": "",
         "change_status_multiple": ""
     },
-    "not_applicable": {
-        "name": "not_applicable",
-        "label": "Change to N\/A",
+    "in_progress": {
+        "name": "in_progress",
+        "status_title": "",
+        "label": "Return to In Progress",
         "tooltip": "",
         "change_status_multiple": ""
     },
     "reviewed": {
         "name": "reviewed",
+        "status_title": "QC Done",
         "label": "Request to Review",
         "tooltip": "",
         "change_status_multiple": ""
     },
     "inspected": {
         "name": "inspected",
+        "status_title": "QA Done",
         "label": "Ready for Third Party Sign-off",
         "tooltip": "",
         "change_status_multiple": ""
     },
     "pending_audit": {
         "name": "pending_audit",
+        "status_title": "Pending Sign-off",
         "label": "Request To Sign Off",
-        "tooltip": "",
+        "tooltip": "Waiting 3rd parties to sign-off",
         "change_status_multiple": ""
     },
     "audited": {
         "name": "audited",
+        "status_title": "Closed",
         "label": "Approve",
-        "tooltip": "",
+        "tooltip": "All 3rd parties sign-off is done",
         "change_status_multiple": ""
     }
 }

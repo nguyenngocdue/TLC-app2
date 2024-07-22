@@ -29,6 +29,12 @@ class ManageActionButtons extends Manage_Parent
                 'title' => 'Key',
             ],
             [
+                "dataIndex" => 'status_title',
+                'renderer' => 'text4',
+                'editable' => true,
+                'properties' => ['placeholder' => 'As status TITLE'],
+            ],
+            [
                 "dataIndex" => 'label',
                 'renderer' => 'text4',
                 'editable' => true,
