@@ -4,7 +4,7 @@ $viewAll = CurrentRoute::getTypePlural();
 $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFound:".$viewAll.".index";
 @endphp
 
-<header class="h-16 no-print fixed w-full z-20 py-4 bg-white shadow-md dark:bg-gray-800">
+<header class="h-16 no-print fixed w-full z-30 py-4 bg-white shadow-md dark:bg-gray-800">
     <div class="container1 flex px-2 items-center justify-between h-full mx-auto text-purple-600 dark:text-purple-300">
         {{-- <x-homepage.mobile-hamburger></x-homepage.mobile-hamburger> --}}      
         <x-homepage.logo />
@@ -54,7 +54,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
 </header>
 <div class="h-16 no-print"></div>
 
-<header class="md:hidden h-16 top-16 no-print fixed w-full z-10 flex text-center items-center bg-white shadow-md dark:bg-gray-800">
+<header class="md:hidden h-16 top-16 no-print fixed w-full z-20 flex text-center items-center bg-white shadow-md dark:bg-gray-800">
     <a href="{{$routeSrc}}" class="text-xl font-semibold w-full text-purple-600 hover:underline">
         @yield('topTitle', 'Untitled')
     </a>

@@ -4,7 +4,7 @@
         <div class="{{$classList}}">
             <a class="text-lg text-blue-500 hover:text-gray-400" target="{{isset($value['target'])?$value['target']:''}}" href="{{$value['href']}}">
                 {!!$value['icon']!!}
-                <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
+                <span class="hidden sm:flex text-xs font-normal">{!! $value['title'] !!}</span>
             </a>
         </div>
         @elseif(isset($value['type']))
@@ -13,7 +13,7 @@
                 <div class="{{$classList}}">
                     <button class="text-lg text-blue-500 hover:text-gray-400" onclick="window.print();">
                         {!!$value['icon']!!}
-                        <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
+                        <span class="hidden sm:flex text-xs font-normal">{!! $value['title'] !!}</span>
                     </button>
                 </div>
                 @break
@@ -24,17 +24,18 @@
                             @keydown.escape="closeModal('{{$value['modalId']}}')"
                             >
                             {!!$value['icon']!!}
-                            <span class="flex text-xs font-normal">{!! $value['title'] !!}</span>
+                            <span class="hidden sm:flex text-xs font-normal">{!! $value['title'] !!}</span>
                         </button>
                     </div>
                     {!! $value['modalBody'] !!}
                 @break
                 @case('selectDropdown')
                     <div class="{{$classList}}">
-                        <button class="text-lg text-blue-500 hover:text-gray-400" data-dropdown-toggle="a" data-dropdown-delay="500" data-dropdown-trigger="click" >
+                        <button class="text-lg flex items-center sm:block text-blue-500 hover:text-gray-400" data-dropdown-toggle="a" data-dropdown-delay="500" data-dropdown-trigger="click" >
                             {!!$value['icon']!!}
-                            <span class="flex text-xs font-normal">
-                                {!! $value['title'] !!}
+                            <span class="flex sm:hidden"><i class="fa-solid text-sm fa-chevron-down pl-1"></i></span>
+                            <span class="hidden sm:flex text-xs font-normal">
+                                <span>{!! $value['title'] !!}</span>
                                 <i class="fa-solid fa-chevron-down pl-1"></i>
                             </span>
                         </button>
