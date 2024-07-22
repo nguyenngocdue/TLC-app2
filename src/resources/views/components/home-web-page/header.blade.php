@@ -37,7 +37,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
               <nav
                 :class="!navbarOpen && 'hidden' "
                 id="navbarCollapse"
-                class="absolute right-4 top-full w-full  max-w-[250px] rounded-lg lg:bg-transparent bg-blue-800 px-6 py-2 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent"
+                class="absolute right-4 top-full w-full  max-w-[250px] rounded-lg lg:bg-transparent bg-white border box-shadow-1 px-6 py-2 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent"
               >
                 <ul class="block lg:flex">
                   @foreach($dataSource as $item)
@@ -56,7 +56,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                         <li>
                             <a
                                 href="/dashboard"
-                                class="flex py-2  text-shadow-lg font-bold hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                                class="flex py-2 font-bold hover:font-bold uppercase text-black hover:text-blue-900 dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                             >
                                 Dashboard
                             </a>
@@ -66,7 +66,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     <li>
                         <a
                             href="/login"
-                            class="flex py-2  text-shadow-lg font-bold hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                            class="flex py-2 font-bold hover:font-bold uppercase text-black hover:text-blue-900  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                         >
                             Login
                         </a>
@@ -74,7 +74,7 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
                     <li>
                         <a
                             href="/register"
-                            class="flex py-2  text-shadow-lg font-bold hover:font-bold uppercase text-slate-200 hover:text-white  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
+                            class="flex py-2 font-bold hover:font-bold uppercase text-black hover:text-blue-900  dark:text-slate-900 dark:hover:text-white lg:ml-12 lg:inline-flex"
                         >
                             Sign Up
                         </a>
@@ -87,19 +87,19 @@ class="fixed z-50 flex w-full items-center text-white dark:bg-black bg-gradient-
             @auth
                 <a
                     href="/dashboard"
-                    class="rounded-full uppercase font-bold bg-blue-tlc px-7 py-3   text-white hover:bg-blue-800/90"
+                    class="rounded-full uppercase font-bold bg-blue-tlc px-7 py-3 hover:bg-blue-800/90"
                 >
                     Dashboard
                 </a>
             @endauth
             @guest
                 <a href="/login"
-                    class="flex rounded-full uppercase font-bold text-center items-center bg-blue-tlc px-7 py-3 text-white hover:bg-blue-800/90"
+                    class="flex rounded-full uppercase font-bold text-center items-center bg-blue-tlc px-7 py-3 hover:bg-blue-800/90"
                     >
                     Login
                 </a>
                 <a href="/register"
-                    class="flex rounded-full uppercase font-bold text-center items-center bg-blue-tlc px-7 py-3 text-white hover:bg-blue-800/90"
+                    class="flex rounded-full uppercase font-bold text-center items-center bg-blue-tlc px-7 py-3 hover:bg-blue-800/90"
                     >
                     Sign Up
                 </a>
