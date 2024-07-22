@@ -148,6 +148,7 @@
         "warehouse",
         "production",
         "quality_control",
+        "quality_assurance",
         "on_site",
         "hse",
         "esg",
@@ -168,8 +169,7 @@
         "dashboard",
         "task_management",
         "exam",
-        "diginet_data",
-        "ticketing",
+        "diginet_data",        
         "report"
     ],
     "assignees": [
