@@ -6,7 +6,7 @@
       style="background-image: url('{{$src}}'); opacity: 0.7;"
       {{-- class="relative z-10 text-white text-shadow-md pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px] bg-gradient-to-r from-blue-900 via-blue-500 to-blue-900" --}}
     >
-      <div class="container1 bg-white mx-32 pt-10 px-20 rounded">
+      <div class="container1 bg-white mx-6 sm:mx-32 pt-10 px-20 rounded">
         <div class="-mx-4 flex flex-wrap">
           <div class="w-full px-4 sm:w-full lg:w-3/12">
             <div class="mb-10 w-full">
