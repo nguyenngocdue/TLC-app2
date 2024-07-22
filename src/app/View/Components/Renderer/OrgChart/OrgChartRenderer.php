@@ -78,7 +78,7 @@ class OrgChartRenderer extends Component
         if ($departmentId) {
             $departmentId = $departmentId == "null" ? $this::DPM_BOD : $departmentId;
             $department = Department::findFromCache($departmentId);
-            $headOfDepartmentId = $department->head_of_department;
+            $headOfDepartmentId = $department->head_of_department ?? null;
             if ($headOfDepartmentId) {
                 $tree = $isApprovalView ? BuildTree::getTreeById($headOfDepartmentId) : BuildTreeOrgChart::getTreeById($headOfDepartmentId);
             }
