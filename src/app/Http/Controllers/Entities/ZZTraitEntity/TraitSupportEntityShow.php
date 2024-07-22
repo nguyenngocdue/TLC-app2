@@ -152,7 +152,8 @@ trait TraitSupportEntityShow
             if ($value > 0) { //If it is YES|NO|NA|ONHOLD
                 $uid = $item->inspector_id; //?? $item->user_id;
                 if ($uid) {
-                    $user = User::find($uid);
+                    $user = User::findFromCache($uid);
+                    // $user = User::find($uid);
                     $name = $user ? $user->name : "";
                     $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
                     $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";

@@ -45,7 +45,7 @@ class Comment5 extends Component
         $result = [];
         foreach ($dataSource as $value) {
             $ownerId = $value['owner_id'];
-            $model = User::find($ownerId);
+            $model = User::findFromCache($ownerId);
             $result[] = [
                 "user" => $model,
                 "date" => date('d/m/Y H:m:s', strtotime($value['created_at'])),
