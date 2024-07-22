@@ -2,7 +2,7 @@
     <div class="flex items-center justify-center">
         <h2 class="text-4xl md:text-6xl font-bold">Who Use It</h2>
     </div>
-    <div class="m-10 xl:w-3/5 w-full mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div class="my-10 xl:w-3/5 w-full px-2 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3">
         @foreach($dataSource as $item)
             <figure class="relative mx-auto max-w-sm w-44 transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
                 <a href="#">
