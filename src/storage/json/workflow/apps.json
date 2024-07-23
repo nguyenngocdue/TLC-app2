@@ -2138,6 +2138,7 @@
         "status": null,
         "edit_renderer": null,
         "show_renderer": "checklist-renderer",
+        "hidden_navbar": "true",
         "disallowed_direct_creation": "true"
     },
     "qaqc_insp_chklst_line": {
