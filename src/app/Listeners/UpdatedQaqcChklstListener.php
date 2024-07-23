@@ -62,12 +62,15 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         if ($allTemplateSheetCount == 0) {
             $newProgress = 100;
         } else {
-            $allSheetsCount = $allSheets->filter(function ($sheet) {
-                return in_array($sheet->status, ['not_applicable', 'audited']);
+            $allNaCount = $allSheets->filter(function ($sheet) {
+                return $sheet->status == 'not_applicable';
             })->count();
-            // Log::info($allSheetsCount);
-            // Log::info($allTemplateSheetCount);
-            $newProgress = $allSheetsCount / $allTemplateSheetCount * 100;
+            $allSheetsCount = $allSheets->filter(function ($sheet) {
+                return in_array($sheet->status, ['inspected', 'audited']);
+            })->count();
+            // Log::info("TU SO " . $allSheetsCount);
+            // Log::info("MAU SO " . ($allTemplateSheetCount - $allNaCount));
+            $newProgress = $allSheetsCount / ($allTemplateSheetCount - $allNaCount) * 100;
         }
 
         $book->progress = $newProgress;

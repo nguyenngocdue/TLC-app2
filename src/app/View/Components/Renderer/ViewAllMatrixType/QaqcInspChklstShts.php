@@ -55,11 +55,12 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $metaShowPrint = true;
     protected $metaShowProgress = true;
     protected $metaShowComplianceName = true;
+    protected $showNameColumn = false;
 
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
     private $hasPunchlist = false;
-    protected $showNameColumn = false;
+
 
     /**
      * Create a new component instance.
@@ -211,7 +212,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $result = [];
         $result[] = ['dataIndex' => 'name', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
         if ($this->metaShowComplianceName) $result[] = ['dataIndex' => 'compliance_name', 'width' => 300, /*'fixed' => 'left',*/];
-        if ($this->metaShowProgress) $result[] = ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
+        if ($this->metaShowProgress) $result[] = [
+            'dataIndex' => 'progress',
+            "title" => 'Progress (%)',
+            'align' => 'right',
+            'width' => 50,
+            'footer' => 'agg_avg',
+            /* 'fixed' => 'left',*/
+        ];
         return $result;
     }
 
