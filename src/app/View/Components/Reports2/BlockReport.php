@@ -25,7 +25,7 @@ class BlockReport extends Component
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             $dataQuery = $this->getDataSQLString($block, $params);
-            [$tableDataSource, $tableColumns,] = $this->getColumns($block, $params, $dataQuery);
+            [$tableDataSource, $tableColumns, $dataHeader] = $this->getColumns($block, $params, $dataQuery);
             $array = [
                 'colSpan' => $item->col_span,
                 'blocks' => $item->getBlock,
@@ -33,7 +33,7 @@ class BlockReport extends Component
                 'dataQuery' => $dataQuery,
                 'tableDataSource' => $tableDataSource,
                 'tableColumns' => $tableColumns,
-
+                'dataHeader' => $dataHeader,
             ];
             $blocksDataSource[] = $array;
         }

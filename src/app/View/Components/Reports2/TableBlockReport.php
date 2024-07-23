@@ -15,6 +15,7 @@ class TableBlockReport extends Component
         private $block,
         private $rawTableDataSource,
         private $rawTableColumns,
+        private $dataHeader,
     ) {
     }
 
@@ -98,9 +99,11 @@ class TableBlockReport extends Component
                 'dataIndex' => $column->data_index,
                 'width' => $column->width,
                 'align' => 'center',
+                'footer' => $aagFooter,
+                'colspan' => $column->col_span_second_header ?? null,
+                // not yet to code
                 'cell_class' => $column->cell_class,
                 'cell_div_class' => $column->cell_div_class,
-                'footer' => $aagFooter,
             ];
             $result[] = $newValue;
         }
@@ -123,31 +126,13 @@ class TableBlockReport extends Component
 
         $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
-        foreach ($editedTableColumns as &$value) {
-            if ($value['dataIndex'] === 'a'){
-                $value['colspan'] = 3;
-            }
-             if ($value['dataIndex'] === 'd'){
-                $value['colspan'] = 2;
-            }
-        }
-
-        // dump($editedTableColumns);
-
-        $dataHeader =  [
-            'a' => 'Actual',
-            'b' => 'Target',
-            'c' => 'Variance',
-        ];
-
-
         return view('components.reports2.table-block-report', [
             'block' => $block,
             "name" => $block->name,
             "description" => $block->description,
             "tableDataSource" => $newTableDataSource,
             "tableColumns" =>  $editedTableColumns,
-            "dataHeader" => $dataHeader,
+            "dataHeader" => $this->dataHeader,
 
             "showNo" => $block->showNo,
             "tableTrueWidth" => $block->table_true_width,

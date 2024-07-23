@@ -48,14 +48,17 @@ class Rp_report extends ModelExtended
                         $q1->with(["attachment_background"])
                             ->with(["getBlock" => function ($q2) {
                                 $q2->with('getLines');
-                                $q2->with('get2ndHeaderLines');
+                                $q2->with(['get2ndHeaderLines' => function ($q3) {
+                                     $q3->with('getParent');
+                                }]);
                             }]);
                     }]);
             }])
             ->get()
             ->first();
         // dd($rpReport->toArray());
-        // $rpReport->getPages[29]->getBlockDetails;
+        // $rpReport->getPages[10]->getBlockDetails;
+        // dd($rpReport->getPages[10]);
         return $rpReport;
     }
 }
