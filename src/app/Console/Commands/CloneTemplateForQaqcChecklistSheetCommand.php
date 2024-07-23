@@ -7,6 +7,7 @@ use App\Models\Qaqc_insp_chklst_sht;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_tmpl_sht;
+use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use App\View\Components\Formula\All_SlugifyByName;
 use Illuminate\Console\Command;
@@ -89,11 +90,12 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
             $defaultMonitors = $default_getMonitors1 ? explode(",", $default_getMonitors1) : [];
             $defaultMonitors = array_map(fn ($i) => $i * 1, $defaultMonitors);
             // Log::info($defaultMonitors);
-            $newSheet->getMonitors1()->sync($defaultMonitors);
+            $uid = CurrentUser::id();
+            $newSheet->getMonitors1()->syncWithPivotValues($defaultMonitors, ['owner_id' => $uid]);
 
             $thirdPartyList = $inspTmplSht->getDefExtInsp->pluck('id')->toArray();
             // Log::info($thirdPartyList);
-            $newSheet->signature_qaqc_chklst_3rd_party_list()->sync($thirdPartyList);
+            $newSheet->signature_qaqc_chklst_3rd_party_list()->syncWithPivotValues($thirdPartyList, ['owner_id' => $uid]);
 
             $lines = $inspTmplSht->getLines;
             foreach ($lines as $qaqcInspTmplLine) {
