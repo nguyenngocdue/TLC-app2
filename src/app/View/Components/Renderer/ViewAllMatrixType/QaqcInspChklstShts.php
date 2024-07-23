@@ -293,10 +293,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             ->where('prod_order_id', $prod_order_id)
             ->get();
         $count = count($ncrList);
+        $label = $count;
         if ($product_id) {
-            $label = " - Module $product_id: " . $count . ($count == 1 ? " NCR" : " NCRs");
-        } else {
-            $label = $count;
+            if ($count) $label = " - Module $product_id: " . $count . ($count == 1 ? " NCR" : " NCRs");
+            else $label = "";
         }
 
         $content = Blade::render('<x-renderer.id_status_link :dataSource="$ncrList" showTitle=1 />', [
@@ -313,9 +313,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $product_id = $prodOrder->meta_id;
         $content = "";
         switch ($product_type) {
-            case Pj_module::class:
-                [$label, $count, $content] = $this->makeIdStatusLink($prod_order_id);
-                break;
             case Pj_unit::class:
                 $unit = Pj_unit::query()
                     ->where('id', $product_id)
@@ -338,8 +335,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 $label = $sum;
                 $content = join(" ", $contents);
                 break;
+            case Pj_module::class:
             default:
-                $label = "??? $product_type ???";
+                [$label, $count, $content] = $this->makeIdStatusLink($prod_order_id);
                 break;
         }
 
