@@ -46,8 +46,6 @@ class PageReport extends Component
             $backgroundPagePath ?? ''
         );
 
-
-
         return view('components.reports2.page-report', [
             'reportId' => $this->reportId,
             'layoutClass' => $layoutClass,

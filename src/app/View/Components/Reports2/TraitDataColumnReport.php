@@ -6,10 +6,25 @@ use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitCreateSQLReport2;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use App\Models\Term;
 
 trait TraitDataColumnReport
 {
     use TraitCreateSQLReport2;
+    
+    public function createIconPosition($content, $icon, $iconPosition)
+    {
+        $name = Term::find($iconPosition)?->name;
+        if ($name) {
+            switch ($name) {
+                case 'Left':
+                    return $icon . ' ' . $content;
+                case 'Right':
+                    return $content . ' ' . $icon;
+            }
+        }
+        return $content;
+    }
 
     public function getDataSQLString($block, $params)
     {
@@ -38,9 +53,11 @@ trait TraitDataColumnReport
         $dataHeader = [];
         $secHeaderLines = $block->get2ndHeaderLines;#()->getParent();
         foreach ($secHeaderLines as $key => $column) {
+            // dd($column);
             $parent  = $column->getParent;
             if($parent->is_active){
-                $dataHeader[$parent->data_index ] = $column ->name;
+                $content = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
+                $dataHeader[$parent->data_index ] = $content;
             }
         }
         return $dataHeader;
@@ -73,4 +90,5 @@ trait TraitDataColumnReport
         if (empty($columns)) $columns = [['dataIndex' => null]];
         return [$dataSqlColl, $columns, $dataHeader];
     }
+
 }

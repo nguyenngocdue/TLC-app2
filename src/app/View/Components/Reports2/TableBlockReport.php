@@ -4,6 +4,7 @@ namespace App\View\Components\Reports2;
 
 use App\Utils\Support\Report;
 use Illuminate\View\Component;
+use App\Models\Term;
 
 class TableBlockReport extends Component
 {
@@ -28,24 +29,6 @@ class TableBlockReport extends Component
             }
         }
         return $result;
-    }
-
-    private function createIconPosition($content, $iconPosition, $icon)
-    {
-        if ($iconPosition) {
-            switch ($iconPosition) {
-                case 'Left':
-                    return $icon . ' ' . $content;
-                case 'Right':
-                    return $content . ' ' . $icon;
-            }
-        }
-        return $content;
-    }
-
-    private function createContentInHeader($content, $icon, $iconPosition)
-    {
-        return $this->createIconPosition($content, $iconPosition, $icon);
     }
 
     private function createContentInRowCell($value, $column)
@@ -85,6 +68,7 @@ class TableBlockReport extends Component
             }
             $result->put($k1, $re);
         }
+        // dump($result);
         return $result;
     }
 
@@ -92,7 +76,7 @@ class TableBlockReport extends Component
     {
         $result = [];
         foreach ($data as $column) {
-            $title = $this->createContentInHeader($column->name, $column->icon, $column->icon_position);
+            $title = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
             $aagFooter = $this->getTermName($column->agg_footer);
             $newValue = [
                 'title' => $title,
@@ -121,10 +105,10 @@ class TableBlockReport extends Component
 
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
         $keyAndColumnsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
+        $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
         $newTableDataSource = $this->createTableDataSourceForRow($this->rawTableDataSource, $keyAndColumnsReduced);
 
-        $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
         return view('components.reports2.table-block-report', [
             'block' => $block,
