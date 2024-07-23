@@ -209,7 +209,9 @@ trait TraitEntityCRUDUpdate2
 		(new LoggerForTimelineService())->insertForUpdate($theRow, $previousValue, CurrentUser::id(), $this->modelPath);
 		event(new UpdatedDocumentEvent($previousValue, $currentValue, $this->type, $this->modelPath, CurrentUser::id()));
 		$this->emitPostUpdateEvent($theRow->id, $request);
-		Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
+		$msElapsed = Timer::getTimeElapseFromLastAccess();
+		if ($msElapsed > 1000) Log::info($this->type . " update2 elapsed ms (SLOWER than 1000ms): " . $msElapsed);
+		// Log::info($this->type . " update2 elapsed ms: " . Timer::getTimeElapseFromLastAccess());
 		return $this->redirectCustomForUpdate2($request, $theRow);
 	}
 }

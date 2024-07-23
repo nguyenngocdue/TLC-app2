@@ -7,8 +7,6 @@ use App\Http\Services\ExternalInspector\UpdateProdRoutingService;
 use App\Http\Services\ExternalInspector\UpdateQaqcInspTmplService;
 use App\Http\Services\ExternalInspector\UpdateSubProjectService;
 use App\Models\Qaqc_insp_chklst;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
 class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
@@ -49,16 +47,28 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         $allSheets = $book->getSheets()->get();
         // Log::info($allSheets);
 
-        $templateIds = $allTemplateSheets->pluck('id');
-        // Log::info($templateIds);
-        $sheetIds = $allSheets->pluck('progress', 'qaqc_insp_tmpl_sht_id',);
-        // Log::info($sheetIds);
+        // $templateIds = $allTemplateSheets->pluck('id');
+        // // Log::info($templateIds);
+        // $sheetIds = $allSheets->pluck('progress', 'qaqc_insp_tmpl_sht_id',);
+        // // Log::info($sheetIds);
 
-        $array = [];
-        foreach ($templateIds as $id) $array[$id] = 0;
-        foreach ($sheetIds as $tmplId => $progress) $array[$tmplId] = $progress;
-        // Log::info($array);
-        $newProgress = array_sum($array) / count($array);
+        // $array = [];
+        // foreach ($templateIds as $id) $array[$id] = 0;
+        // foreach ($sheetIds as $tmplId => $progress) $array[$tmplId] = $progress;
+        // // Log::info($array);
+        // $newProgress = array_sum($array) / count($array);
+
+        $allTemplateSheetCount = $allTemplateSheets->count();
+        if ($allTemplateSheetCount == 0) {
+            $newProgress = 100;
+        } else {
+            $allSheetsCount = $allSheets->filter(function ($sheet) {
+                return in_array($sheet->status, ['not_applicable', 'audited']);
+            })->count();
+            // Log::info($allSheetsCount);
+            // Log::info($allTemplateSheetCount);
+            $newProgress = $allSheetsCount / $allTemplateSheetCount * 100;
+        }
 
         $book->progress = $newProgress;
         $book->save();

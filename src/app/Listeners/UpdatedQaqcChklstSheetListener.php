@@ -36,7 +36,11 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
                 };
             }
         }
-        $percentCompletion = round(($numLineCompletion / count($sheetLines)) * 100, 2);
+        if (count($sheetLines) == 0) {
+            $percentCompletion = 100;
+        } else {
+            $percentCompletion = round(($numLineCompletion / count($sheetLines)) * 100, 2);
+        }
         // Log::info($numLineCompletion . '/' . count($sheetLines));
         $sheet->progress = $percentCompletion;
         $sheet->save();
