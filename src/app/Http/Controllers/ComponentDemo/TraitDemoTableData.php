@@ -98,7 +98,10 @@ trait TraitDemoTableData
         $onClick = "console.log(\"Hello\")";
         $button = "<x-renderer.button size='xs' value='xxx' onClick='$onClick'>Hello in console</x-renderer.button>";
         return [
-            'client' => Blade::render($button),
+            'client' => (object)[
+                'value' =>   Blade::render($button),
+                'cell_class' => 'bg-green-300',
+            ],
             'loggedIn' => "01<br/>01<br/>23"
         ];
     }
