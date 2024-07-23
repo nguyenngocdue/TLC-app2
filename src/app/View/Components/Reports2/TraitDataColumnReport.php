@@ -33,6 +33,19 @@ trait TraitDataColumnReport
         }, null);
     }
 
+
+    private function getSecondColumns($block) {
+        $dataHeader = [];
+        $secHeaderLines = $block->get2ndHeaderLines;#()->getParent();
+        foreach ($secHeaderLines as $key => $column) {
+            $parent  = $column->getParent;
+            if($parent->is_active){
+                $dataHeader[$parent->data_index ] = $column ->name;
+            }
+        }
+        return $dataHeader;
+    }
+
     public function getColumns($block, $params, $dataSqlColl = [])
     {
         if (empty($dataSqlColl)) {
@@ -40,6 +53,7 @@ trait TraitDataColumnReport
         }
         $uniqueFields = $this->getAllUniqueFields($dataSqlColl);
         $lines = $block->getLines()->get()->sortby('order_no');
+        $dataHeader = $this->getSecondColumns($block);
 
         $columns = [];
         $processedIndices = []; // Renamed from 'temp' for clarity
@@ -57,6 +71,6 @@ trait TraitDataColumnReport
             }
         }
         if (empty($columns)) $columns = [['dataIndex' => null]];
-        return [$dataSqlColl, $columns];
+        return [$dataSqlColl, $columns, $dataHeader];
     }
 }

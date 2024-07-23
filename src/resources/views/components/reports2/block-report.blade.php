@@ -10,6 +10,8 @@
 
         $dataQuery = $values['dataQuery'];
 
+        $dataHeader = $values['dataHeader'];
+
         $background = $values['backgroundBlock'];
         $backgroundPath = isset($background->url_media)? "'".env('AWS_ENDPOINT').'/tlc-app//'.$background->url_media."'" : '';
     @endphp
@@ -23,6 +25,7 @@
                             reportId="{{$reportId}}"
                             :rawTableDataSource="$tableDataSource"
                             :rawTableColumns="$tableColumns"
+                            :dataHeader="$dataHeader"
                             :block="$block"
                         />
                     @break
