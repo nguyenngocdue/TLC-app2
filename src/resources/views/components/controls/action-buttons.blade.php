@@ -4,7 +4,7 @@
 @if(!$isFloatingOnRightSide)
 <div class="flex justify-end rounded-lg dark:bg-gray-800 px-5">
 @endif
-    <div id="divActionButtons" class="bg-white mr-1 p-1 pr-2 rounded {{$isFloatingOnRightSide ? 'my-0' : 'my-3'}}">
+    <div id="divActionButtons" class="bg-white mr-1 p-1 pr-2 rounded {{$isFloatingOnRightSide ? 'my-0 hidden md:block' : 'my-3'}}">
         @if($buttonSave)
             @php $btnText = $action=='edit' ? 'Save' : 'Create New' @endphp
             @if($action !== 'create')
