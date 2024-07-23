@@ -113,7 +113,7 @@ class TableBlockReport extends Component
 
         $columns = $this->block->getLines()->get()->sortby('order_no');
         $secondColumns = $this->block->get2ndHeaderLines()->get()->sortby('order_no');
-        dd($secondColumns);
+        // dd($secondColumns);
 
 
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
@@ -123,12 +123,31 @@ class TableBlockReport extends Component
 
         $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
+        foreach ($editedTableColumns as &$value) {
+            if ($value['dataIndex'] === 'a'){
+                $value['colspan'] = 3;
+            }
+             if ($value['dataIndex'] === 'd'){
+                $value['colspan'] = 2;
+            }
+        }
+
+        // dump($editedTableColumns);
+
+        $dataHeader =  [
+            'a' => 'Actual',
+            'b' => 'Target',
+            'c' => 'Variance',
+        ];
+
+
         return view('components.reports2.table-block-report', [
             'block' => $block,
             "name" => $block->name,
             "description" => $block->description,
             "tableDataSource" => $newTableDataSource,
             "tableColumns" =>  $editedTableColumns,
+            "dataHeader" => $dataHeader,
 
             "showNo" => $block->showNo,
             "tableTrueWidth" => $block->table_true_width,
