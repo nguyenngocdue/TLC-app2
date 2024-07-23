@@ -14,9 +14,13 @@ class IdStatusLink extends Component
      * @return void
      */
     public function __construct(
+        private $showTitle = false,
+        //Option 1
         private $dataLine = null,
         private $column = null,
         private $rendererParam = '',
+        //Option 2
+        private $dataSource = null,
     ) {
     }
 
@@ -27,37 +31,32 @@ class IdStatusLink extends Component
      */
     public function render()
     {
-        if (!$this->dataLine) return "reference value";
-        // if ($this->rendererParam === '') return "renderer_param ?";
-        // $rendererParam = $this->rendererParam;
         $result = [];
-
-        $dataIndex = $this->column['dataIndex'];
-        if (str_contains($dataIndex, "()")) {
-            $dataIndex = substr($dataIndex, 0, strlen($dataIndex) - 2);
-            $dataSource = $this->dataLine->{$dataIndex}();
-        } else {
+        if (is_null($this->dataSource)) {
+            if (!$this->dataLine) return "reference value";
+            $dataIndex = $this->column['dataIndex'];
             $dataSource = $this->dataLine->$dataIndex;
+        } else {
+            $dataSource = $this->dataSource;
         }
         // dump($dataIndex);
         // dump($dataSource);
-        // if (is_null($dataSource)) return;
         foreach ($dataSource as $item) {
             $table = $item->getTable();
             $route = route($table . ".edit", $item->id);
 
             $id = $item->id ?? "";
             $name = $item->name ?? "";
-            $name .= " (" . $item->status . ")";
             $idText = Str::makeId($id);
             $value = $item->status;
+            $title = $idText;
+            if ($this->showTitle) {
+                $title = $idText . " - " . Str::limitWords($name, 5) . " (" . $item->status . ")";
+            }
+            $name .= " (" . $item->status . ")";
 
-            // $value = $item->$rendererParam;
-            // $result[] = Blade::render("<x-renderer.status title='$idText' href='$route' tooltip='".$name."'>$value</x-renderer.status>");
-            // dump($name);
-            $result[] = Blade::render("<x-renderer.status title='$idText' href='$route'>$value</x-renderer.status>");
-            // $result[] = "<a title='#{$id}' href='$route' class='hover:bg-blue-200 rounded p-1 whitespace-nowrap'>" . $id . "</a>";
+            $result[] = Blade::render("<x-renderer.status title='$title' tooltip='$name' href='$route'>$value</x-renderer.status>");
         }
-        return "<p class='p-2'>" . join(" ", $result) . "</p>";
+        return "<ul class='p-2'><li>" . join("</li><li>", $result) . "</li></ul>";
     }
 }

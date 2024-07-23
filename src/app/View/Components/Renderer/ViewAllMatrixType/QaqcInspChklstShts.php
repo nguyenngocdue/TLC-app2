@@ -3,15 +3,19 @@
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Pj_module;
+use App\Models\Pj_unit;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl_sht;
+use App\Models\Qaqc_ncr;
 use App\Models\Sub_project;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -104,6 +108,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 ->where('prod_routing_id', $routingId)
                 ->with('getProdOrder')
                 ->with('getPunchlist')
+                ->with('getProdOrder.getSubProject')
                 ->orderBy('name');
             $result[$key] = $yAxis->get();
             // dump(sizeof($yAxis));
@@ -147,6 +152,17 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     // 'default_monitors' => ($line->getMonitors1)->pluck('name'),
                 ];
             }
+
+            $columns = [
+                ...$columns,
+                [
+                    'dataIndex' => 'ncr_count',
+                    'title' => 'NCR Count',
+                    'width' => 40,
+                    'discipline_description' => $qaqc_discipline->description,
+                    'discipline_css_class' => $qaqc_discipline->css_class,
+                ],
+            ];
 
             if ($matrix['chklst_tmpls']->has_punchlist) {
                 $columns = [
@@ -210,8 +226,17 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getMetaColumns()
     {
         $result = [];
-        $result[] = ['dataIndex' => 'name', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/];
-        if ($this->metaShowComplianceName) $result[] = ['dataIndex' => 'compliance_name', 'width' => 300, /*'fixed' => 'left',*/];
+        $result[] = [
+            'dataIndex' => 'name',
+            'align' => 'right',
+            'width' => 50,
+            /* 'fixed' => 'left',*/
+        ];
+        if ($this->metaShowComplianceName) $result[] = [
+            'dataIndex' => 'compliance_name',
+            'width' => 300,
+            /*'fixed' => 'left',*/
+        ];
         if ($this->metaShowProgress) $result[] = [
             'dataIndex' => 'progress',
             "title" => 'Progress (%)',
@@ -231,7 +256,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return $line['punchlistColumn'];
     }
 
-    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
+    private function makeStatusObjectForPunchlist($y, $matrixKey)
     {
         if (!isset($y->getPunchlist[0])) {
             $status_object = $this->getCreateNewButton($y);
@@ -241,12 +266,16 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
             $status_object = $this->makeStatus($document, false, $route, static::$punchlistStatuses, $this->fakeQaqcPunchlistObj, $matrixKey);
         }
+        return $status_object;
+    }
 
-        $compliance_name = $y->getProdOrder->compliance_name ?: "";
+    private function makeOpenPrintPageWhenClickName($y)
+    {
         $name = [
             'value' => $y->name,
             'cell_title' => "(#" . $y->id . ")",
         ];
+
         if ($this->metaShowPrint) {
             $name['cell_href'] = route("qaqc_insp_chklsts.show", $y->id);
             $name['cell_class'] = "text-blue-800 bg-white";
@@ -255,6 +284,88 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $name['cell_div_class'] = 'p-2 whitespace-nowrap';
             $name['cell_class'] = "bg-white";
         }
+        return $name;
+    }
+
+    private function makeIdStatusLink($prod_order_id, $product_id = null)
+    {
+        $ncrList = Qaqc_ncr::query()
+            ->where('prod_order_id', $prod_order_id)
+            ->get();
+        $count = count($ncrList);
+        if ($product_id) {
+            $label = " - Module $product_id: " . $count . ($count == 1 ? " NCR" : " NCRs");
+        } else {
+            $label = $count;
+        }
+
+        $content = Blade::render('<x-renderer.id_status_link :dataSource="$ncrList" showTitle=1 />', [
+            'ncrList' => $ncrList,
+        ]);
+        return [$label, $count, $content,];
+    }
+
+    private function makeNcrCount($y)
+    {
+        $prodOrder = $y->getProdOrder;
+        $prod_order_id = $prodOrder->id;
+        $product_type = $prodOrder->meta_type;
+        $product_id = $prodOrder->meta_id;
+        $content = "";
+        switch ($product_type) {
+            case Pj_module::class:
+                [$label, $count, $content] = $this->makeIdStatusLink($prod_order_id);
+                break;
+            case Pj_unit::class:
+                $unit = Pj_unit::query()
+                    ->where('id', $product_id)
+                    ->with(['getPjModules' => function ($query) {
+                        $query->with('getProdOrders');
+                    }])
+                    ->first();
+
+                $contents = [];
+                $sum = 0;
+                foreach ($unit->getPjModules as $module) {
+                    $prodOrder = $module->getProdOrders;
+                    foreach ($prodOrder as $order) {
+                        [$label, $count, $content] = $this->makeIdStatusLink($order->id, $module->name);
+                        $contents[] = $label . " " . $content;
+                        $sum += $count;
+                    }
+                }
+
+                $label = $sum;
+                $content = join(" ", $contents);
+                break;
+            default:
+                $label = "??? $product_type ???";
+                break;
+        }
+
+        $ncr_count = '';
+        if ($label) {
+            $ncr_count = Blade::render('
+        <button data-popover-target="popover-{{$id}}" data-popover-placement="right" type="button" class="font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+        {!! $label !!}
+        </button>
+        <x-renderer.popover id="popover-{{$id}}" title="{!! $title !!}" content="{!! $content !!}"/>
+        ', [
+                'id' => $y->id,
+                'label' => "<b>" . $label . "</b>",
+                'title' => "NCR Summary",
+                'content' => $content,
+            ]);
+        }
+        return $ncr_count;
+    }
+
+    function getMetaObjects($y, $dataSource, $xAxis, $forExcel, $matrixKey)
+    {
+        $status_object = $this->makeStatusObjectForPunchlist($y, $matrixKey);
+        $compliance_name = $y->getProdOrder->compliance_name ?: "";
+        $name = $this->makeOpenPrintPageWhenClickName($y);
+        $ncr_count = $this->makeNcrCount($y);
 
         $result = [
             'name' => (object)$name,
@@ -263,6 +374,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 'cell_class' => 'whitespace-nowrap'
             ],
             'progress' => $y->progress ?: 0,
+            'ncr_count' => (object)[
+                "value" => $ncr_count,
+                "cell_div_class" => "whitespace-nowrap",
+            ],
             'final_punchlist' =>  $status_object,
         ];
 
