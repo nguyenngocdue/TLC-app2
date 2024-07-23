@@ -4,18 +4,19 @@
 @section('content')
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 <div class="flex justify-center bg-only-print">
-    <div class="md:px-4 flex-grow flex-shrink-0 w-full overflow-x-auto">        
-        <div style1='{{$layout}}' style='width: 100vw; font-size:1vw;' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+    <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">        
+        <div style1='{{$layout}}' style='width: 75vw; font-size:1vw;' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
             <x-print.cover-page :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
-        <div style='{{$layout}}' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+        <div style1='{{$layout}}' style='width: 75vw; font-size:1vw;' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
             <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
         <x-renderer.page-break />
         @php $count = count($tableDataSource) ?? 0; @endphp
         @foreach($tableDataSource as $key => $value)
             <x-print.print-check-sheet-page 
-                layout="{{$layout}}" 
+                {{-- layout="{{$layout}}"  --}}
+                layout='width: 75vw; font-size:1vw;'
                 page='{{$key+1}}'
                 type="qaqc_insp_chklst_shts"
                 nominatedListFn="{{$nominatedListFn}}"
