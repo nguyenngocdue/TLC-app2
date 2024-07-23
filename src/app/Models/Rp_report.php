@@ -56,7 +56,6 @@ class Rp_report extends ModelExtended
             }])
             ->get()
             ->first();
-        // dd($rpReport->toArray());
         // $rpReport->getPages[10]->getBlockDetails;
         // dd($rpReport->getPages[10]);
         return $rpReport;
