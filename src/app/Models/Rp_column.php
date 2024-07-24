@@ -8,7 +8,7 @@ class Rp_column extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "block_id", "parent_id", "is_active", "data_index",
-        "col_span_second_header","row_span",
+        "col_span", "row_span",
         "order_no", "name", "width", "cell_div_class_agg_footer", "cell_div_class",
         "cell_class", "icon", "icon_position", "row_cell_div_class", "row_cell_class",
         "row_icon", "row_icon_position", "row_href_fn", "row_renderer", "agg_footer",
@@ -63,7 +63,7 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'name'],
             ["dataIndex" => 'is_active'],
             ["dataIndex" => 'data_index'],
-            ["dataIndex" => 'col_span_second_header'],
+            ["dataIndex" => 'col_span'],
             ["dataIndex" => 'row_span'],
             ["dataIndex" => 'width'],
             ["dataIndex" => 'cell_div_class'],

@@ -84,7 +84,7 @@ class TableBlockReport extends Component
     //             'width' => $column->width,
     //             'align' => 'center',
     //             'footer' => $aagFooter,
-    //             'colspan' => $column->col_span_second_header ?? null,
+    //             'colspan' => $column->col_span ?? null,
     //             // not yet to code
     //             'cell_class' => $column->cell_class,
     //             'cell_div_class' => $column->cell_div_class,
