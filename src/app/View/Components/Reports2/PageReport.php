@@ -19,7 +19,7 @@ class PageReport extends Component
 
     private function createLayoutClass($isLandscape, $width, $height, $isFullWidth, $backgroundPagePath)
     {
-        $FullWidthClass = $width  ? "w-[{$width}px]" : 'w-full';
+        $FullWidthClass = $width  ? "width :{$width}px" : 'w-full';
         $width = $width ? $width  : $this->w * $this->factorPage;
         $height = $height ? $height  : $this->h * $this->factorPage;
         $class = $isFullWidth ? $FullWidthClass : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");

@@ -58,9 +58,8 @@ class TableBlockReport extends Component
                     $content = $this->createContentInRowCell($value, $column);
                     $newValue = (object)[
                         'value' => $content,
-                        'cell_href' => 'google.com.vn',
+                        'cell_href' => $column->row_href_fn,
                         'cell_class' => $column->row_cell_class,
-                        // 'cell_title' => $title,
                         'cell_div_class' => $column->row_cell_div_class,
                     ];
                     $re->$k2 = $newValue;
@@ -72,27 +71,6 @@ class TableBlockReport extends Component
         return $result;
     }
 
-    // private function editTableColumns($data)
-    // {
-    //     $result = [];
-    //     foreach ($data as $column) {
-    //         $title = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
-    //         $aagFooter = $this->getTermName($column->agg_footer);
-    //         $newValue = [
-    //             'title' => $title,
-    //             'dataIndex' => $column->data_index,
-    //             'width' => $column->width,
-    //             'align' => 'center',
-    //             'footer' => $aagFooter,
-    //             'colspan' => $column->col_span ?? null,
-    //             // not yet to code
-    //             'cell_class' => $column->cell_class,
-    //             'cell_div_class' => $column->cell_div_class,
-    //         ];
-    //         $result[] = $newValue;
-    //     }
-    //     return $result;
-    // }
 
     public function render()
     {
