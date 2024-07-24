@@ -10,7 +10,7 @@
         listenersOfDropdown4s = @json($listeners4);
         filtersOfDropdown4s = @json($filters4);
         </script>   
-    <div class="flex justify-center">
+    <div class="flex justify-center print-responsive ">
         <div class="w-90vw overflow-x-auto print:overflow-x-hidden items-center">
             <div class="bg-white box-border p-8 items-center" style1="{{$layout}}"> 
                     

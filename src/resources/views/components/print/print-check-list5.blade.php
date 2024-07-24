@@ -5,7 +5,7 @@
 <div class="block py-4 no-print" role="divider">
 </div>
 {{-- <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/> --}}
-<div class="flex justify-center bg-only-print">
+<div class="flex justify-center bg-only-print print-responsive ">
     <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">   
 
         <div class="w-90vw items-center bg-white box-border p-8 mb-4 mx-auto">

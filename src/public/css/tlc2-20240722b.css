@@ -353,176 +353,176 @@ span.select2-selection__arrow {
 }
 
 @media (min-width: 1024px) {
-    .w-90vw {
+    .print-responsive .w-90vw {
         width: 1000px;
         min-height: 1400px;
     }
 
-    .m-1vw {
+    .print-responsive .m-1vw {
         --parent-width: 1000px;
         margin: calc(var(--parent-width) * 1.4 * 0.01);
     }
 
-    .p-05vw {
+    .print-responsive .p-05vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.005);
     }
 
-    .p-1vw {
+    .print-responsive .p-1vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.01);
     }
 
-    .p-4vw {
+    .print-responsive .p-4vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.04);
     }
 
-    .p-8vw {
+    .print-responsive .p-8vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.08);
     }
 
-    .p-10vw {
+    .print-responsive .p-10vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.1);
     }
 
-    .text-xs-vw {
+    .print-responsive .text-xs-vw {
         font-size: 12px;
     }
 
-    .text-sm-vw {
+    .print-responsive .text-sm-vw {
         font-size: 14px;
     }
 
-    .text-md-vw {
+    .print-responsive .text-md-vw {
         font-size: 16px;
     }
 
-    .text-lg-vw {
+    .print-responsive .text-lg-vw {
         font-size: 18px;
     }
 
-    .text-xl-vw {
+    .print-responsive .text-xl-vw {
         font-size: 20px;
     }
 
-    .text-2xl-vw {
+    .print-responsive .text-2xl-vw {
         font-size: 24px;
     }
 
-    .text-3xl-vw {
+    .print-responsive .text-3xl-vw {
         font-size: 30px;
     }
 
-    .text-4xl-vw {
+    .print-responsive .text-4xl-vw {
         font-size: 36px;
     }
 
-    .text-5xl-vw {
+    .print-responsive .text-5xl-vw {
         font-size: 48px;
     }
 
-    .text-6xl-vw {
+    .print-responsive .text-6xl-vw {
         font-size: 60px;
     }
 
-    .text-7xl-vw {
+    .print-responsive .text-7xl-vw {
         font-size: 72px;
     }
 
-    .text-8xl-vw {
+    .print-responsive .text-8xl-vw {
         font-size: 96px;
     }
 
-    .text-9xl-vw {
+    .print-responsive .text-9xl-vw {
         font-size: 128px;
     }
 }
 
 @media (max-width: 1023px) {
-    .w-90vw {
+    .print-responsive .w-90vw {
         width: 90vw;
         min-height: calc(90vw * 1.4);
     }
 
     /* Custom padding (p-div-10) as 10% of (width of the viewport * 1.4) */
 
-    .m-1vw {
+    .print-responsive .m-1vw {
         margin: calc((90vw * 1.4) * 0.01);
     }
 
-    .p-05vw {
+    .print-responsive .p-05vw {
         padding: calc((90vw * 1.4) * 0.005);
     }
 
-    .p-1vw {
+    .print-responsive .p-1vw {
         padding: calc((90vw * 1.4) * 0.01);
     }
 
-    .p-4vw {
+    .print-responsive .p-4vw {
         padding: calc((90vw * 1.4) * 0.04);
     }
 
-    .p-8vw {
+    .print-responsive .p-8vw {
         padding: calc((90vw * 1.4) * 0.08);
     }
 
-    .p-10vw {
+    .print-responsive .p-10vw {
         padding: calc((90vw * 1.4) * 0.1);
     }
 
     /* Define custom viewport width based font sizes */
-    .text-xs-vw {
+    .print-responsive .text-xs-vw {
         font-size: 1vw;
     }
 
-    .text-sm-vw {
+    .print-responsive .text-sm-vw {
         font-size: 1.167vw;
     }
 
-    .text-md-vw {
+    .print-responsive .text-md-vw {
         font-size: 1.333vw;
     }
 
-    .text-lg-vw {
+    .print-responsive .text-lg-vw {
         font-size: 1.5vw;
     }
 
-    .text-xl-vw {
+    .print-responsive .text-xl-vw {
         font-size: 1.667vw;
     }
 
-    .text-2xl-vw {
+    .print-responsive .text-2xl-vw {
         font-size: 2vw;
     }
 
-    .text-3xl-vw {
+    .print-responsive .text-3xl-vw {
         font-size: 2.5vw;
     }
 
-    .text-4xl-vw {
+    .print-responsive .text-4xl-vw {
         font-size: 3vw;
     }
 
-    .text-5xl-vw {
+    .print-responsive .text-5xl-vw {
         font-size: 4vw;
     }
 
-    .text-6xl-vw {
+    .print-responsive .text-6xl-vw {
         font-size: 5vw;
     }
 
-    .text-7xl-vw {
+    .print-responsive .text-7xl-vw {
         font-size: 6vw;
     }
 
-    .text-8xl-vw {
+    .print-responsive .text-8xl-vw {
         font-size: 8vw;
     }
 
-    .text-9xl-vw {
+    .print-responsive .text-9xl-vw {
         font-size: 10.667vw;
     }
 }
