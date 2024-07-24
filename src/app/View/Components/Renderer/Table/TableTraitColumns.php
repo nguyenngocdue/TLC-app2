@@ -101,7 +101,7 @@ trait TableTraitColumns
         $borderColor = $this->noCss ? "border-gray-400" : $this->borderColor;
         $th = "";
         $th .= "<th id='{$table01Name}_th_{$columnName}' $colspanStr $thStyleStr ";
-        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px1-4 py1-3 p-1vw text-sm-vw border-b $borderColor $borderRight $borderLeft $classTh45 $hiddenStr' ";
+        $th .= "class='$fixedLeft $fixedRight bg-gray-100 px1-4 py-3 p-vw text-sm-vw border-b $borderColor $borderRight $borderLeft $classTh45 $hiddenStr' ";
         $th .= "title='$tooltip' ";
         $th .= ">";
         $th .= "<div class='$classDiv45 $tinyText $columnDivClass text-gray-700 dark:text-gray-300' $divStyleStr>";

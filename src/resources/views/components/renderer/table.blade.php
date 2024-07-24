@@ -23,12 +23,12 @@ var tableObjectIndexedColumns = {};
         <div>
             <div class="inline-block1 w-full sm:px-0 lg:px-0 ">
                 @if ($header)
-                <div class='grid1 border-t bg-gray-100 p-1vw px1-4 py1-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                <div class='grid1 border-t bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
                     {!! $header !!}
                 </div>
                 @endif
                 @if($showPaginationTop)
-                <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 p-1vw px1-4 py1-3 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                     <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
                         {!! Blade::render($topLeftControl) !!}
                     </span>
@@ -57,7 +57,7 @@ var tableObjectIndexedColumns = {};
                 <div class="table-wrp block bg-gray-100 {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
                     <table 
                             id="{{$tableName}}" 
-                            class='whitespace-no-wrap w-full text-sm-vw border-separate border-spacing-0 {{$borderColor}}' 
+                            class='whitespace-no-wrap w-full text-sm text-sm-vw border-separate border-spacing-0 {{$borderColor}}' 
                             style="table-layout: auto; {{$tableWidth}}"
                             >
                         <colgroup>
@@ -84,7 +84,7 @@ var tableObjectIndexedColumns = {};
                     </table>
                 </div>
                 @if($showPaginationBottom)
-                <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 p-1vw px1-4 py1-1.5 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 p-1vw px-4 py-1.5 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                     <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
                         {!! Blade::render($bottomLeftControl) !!}
                     </span>
@@ -107,7 +107,7 @@ var tableObjectIndexedColumns = {};
                 </div>
                 @endif
                 @if ($footer)
-                <div class='grid1 border-t rounded-b bg-gray-100 p-1vw px1-4 py1-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                <div class='grid1 border-t rounded-b bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
                     {!! $footer !!}
                 </div>
                 @endif

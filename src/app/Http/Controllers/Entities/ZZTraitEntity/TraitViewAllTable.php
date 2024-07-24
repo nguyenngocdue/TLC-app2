@@ -31,7 +31,7 @@ trait TraitViewAllTable
                 $output['renderer'] = 'qr-code';
                 $output['align'] = 'center';
                 $output['type'] = $type;
-                $output['width'] = 10;
+                $output['width'] = 40;
                 $output['fixed'] = 'left';
                 break;
             case 'avatar':
@@ -44,7 +44,7 @@ trait TraitViewAllTable
                 $output['renderer'] = 'action_column';
                 $output['align'] = 'center';
                 $output['type'] = $type;
-                $output['width'] = 10;
+                $output['width'] = 70;
                 $output['fixed'] = 'left';
                 break;
             case 'restore_column':
@@ -58,7 +58,7 @@ trait TraitViewAllTable
                 $output['renderer'] = 'checkbox_column';
                 $output['align'] = 'center';
                 $output['type'] = $type;
-                $output['width'] = 10;
+                $output['width'] = 30;
                 $output['fixed'] = 'left';
                 break;
             case 'toggle':
