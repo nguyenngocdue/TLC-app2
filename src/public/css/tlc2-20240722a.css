@@ -352,10 +352,25 @@ span.select2-selection__arrow {
     margin-top: 6px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
     .w-90vw {
         width: 1000px;
         min-height: 1400px;
+    }
+
+    .p-4vw {
+        --parent-width: 1000px;
+        padding: calc(var(--parent-width) * 1.4 * 0.04);
+    }
+
+    .p-8vw {
+        --parent-width: 1000px;
+        padding: calc(var(--parent-width) * 1.4 * 0.08);
+    }
+
+    .p-10vw {
+        --parent-width: 1000px;
+        padding: calc(var(--parent-width) * 1.4 * 0.1);
     }
 
     .text-xs-vw {
@@ -411,34 +426,24 @@ span.select2-selection__arrow {
     }
 }
 
-.p-div-10 {
-    --parent-width: 1000px;
-    padding: calc(var(--parent-width) * 1.4 * 0.1);
-}
-
-@media (max-width: 639px) {
+@media (max-width: 1023px) {
     .w-90vw {
         width: 90vw;
-        min-height: calc(
-            90vw * 1.4
-        ); /* Minimum height is 1.4 times the width */
+        min-height: calc(90vw * 1.4);
+    }
+
+    /* Custom padding (p-div-10) as 10% of (width of the viewport * 1.4) */
+
+    .p-4vw {
+        padding: calc((90vw * 1.4) * 0.04);
+    }
+
+    .p-8vw {
+        padding: calc((90vw * 1.4) * 0.08);
     }
 
     .p-10vw {
-        padding: calc((100vw * 1.4) * 0.1);
-    }
-
-    .p-20vw {
-        padding: calc((100vw * 1.4) * 0.2);
-    }
-    .p-30vw {
-        padding: calc((100vw * 1.4) * 0.3);
-    }
-    .p-40vw {
-        padding: calc((100vw * 1.4) * 0.4);
-    }
-    .p-50vw {
-        padding: calc((100vw * 1.4) * 0.5);
+        padding: calc((90vw * 1.4) * 0.1);
     }
 
     /* Define custom viewport width based font sizes */
