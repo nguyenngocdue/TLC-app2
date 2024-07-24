@@ -24,18 +24,8 @@
 
             <!-- Main content area -->
             <div class="w-full items-center border-2 border-gray-300">
-                {{--                 <p class="text-base font-bold text-center">
-                    This is the main content area. It fills most of the page and is designed to hold the bulk of your text or graphical information.
-                </p> --}}
-                {{--  <div class=" flex flex-col items-left ">
-                    @foreach ($content as $key => $value)
-                        @if (!is_array($value))
-                            <p class="text-lg text-green-700">{{$key}}: {{$value}}</p>
-                        @endif
-                    @endforeach                
-                </div> --}}
                 {{-- Blocks --}}
-                <div class="container mx-auto p-5">
+                <div class="container mx-auto p-5" title="{{ $content['name'] ?? null }}">
                     <div class="grid grid-cols-12 gap-4">
                         <x-reports2.block-report :blockDetails="$blockDetails" reportId="{{ $reportId }}" />
                     </div>
