@@ -16,19 +16,19 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
             <img class="object-cover w-full h-full {{$shape}}" src="{{$avatar}}" loading="lazy">
         </div>
     </div>
-    <div class="flex text-xs justify-center">
+    <div class="flex text-xs-vw justify-center">
         <span>
-            <p class="text-xs font-semibold text-center {{$textGray}}">{{$title}}</p>
-            <p class="text-xs text-gray-600 dark:text-gray-300 italic text-center">{{$description}}</p>
+            <p class="text-xs-vw font-semibold text-center {{$textGray}}">{{$title}}</p>
+            <p class="text-xs-vw text-gray-600 dark:text-gray-300 italic text-center">{{$description}}</p>
             <i>{{$content}}</i>
         </span>
     </div> 
 </div>
 @elseif($flipped)
-<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm rounded px-1 w-full justify-end" title="{{$tooltip}}" component="avatar-item-flipped">
+<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm-vw rounded px-1 w-full justify-end" title="{{$tooltip}}" component="avatar-item-flipped">
     <span>
         <p class="font-semibold text-right {{$textGray}}">{{$title}}</p>
-        <p class="text-right text-xs text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
+        <p class="text-right text-xs-vw text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
         <i>{{$content}}</i>
     </span>
     <div class="{{$sizeStr}} ml-2">
@@ -38,7 +38,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
     </div>
 </div>
 @else
-<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm rounded px-1 w-full " title="{{$tooltip}}" component="avatar-item-normal">
+<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm-vw rounded px-1 w-full " title="{{$tooltip}}" component="avatar-item-normal">
     <div class="{{$sizeStr}} mr-2">
         <span class="relat1ive  {{$sizeStr}} rounded-full sm:block1 hidden1">
             <img class="object-cover w-full h-full {{$shape}}" src="{{$avatar}}" loading="lazy">
@@ -46,7 +46,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
     </div>
     <span>
         <p class="font-semibold text-left {{$textGray}}">{{$title}}</p>
-        <p class="text-left text-xs text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
+        <p class="text-left text-xs-vw text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
         <i>{{$content}}</i>
     </span>
 </div>

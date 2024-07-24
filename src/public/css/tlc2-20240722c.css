@@ -390,54 +390,67 @@ span.select2-selection__arrow {
 
     .print-responsive .text-xs-vw {
         font-size: 12px;
+        line-height: calc(12px * 1.5);
     }
 
     .print-responsive .text-sm-vw {
         font-size: 14px;
+        line-height: calc(14px * 1.5);
     }
 
     .print-responsive .text-md-vw {
         font-size: 16px;
+        line-height: calc(16px * 1.5);
     }
 
     .print-responsive .text-lg-vw {
         font-size: 18px;
+        line-height: calc(18px * 1.5);
     }
 
     .print-responsive .text-xl-vw {
         font-size: 20px;
+        line-height: calc(20px * 1.5);
     }
 
     .print-responsive .text-2xl-vw {
         font-size: 24px;
+        line-height: calc(24px * 1.5);
     }
 
     .print-responsive .text-3xl-vw {
         font-size: 30px;
+        line-height: calc(30px * 1.5);
     }
 
     .print-responsive .text-4xl-vw {
         font-size: 36px;
+        line-height: calc(36px * 1.5);
     }
 
     .print-responsive .text-5xl-vw {
         font-size: 48px;
+        line-height: calc(48px * 1.5);
     }
 
     .print-responsive .text-6xl-vw {
         font-size: 60px;
+        line-height: calc(60px * 1.5);
     }
 
     .print-responsive .text-7xl-vw {
         font-size: 72px;
+        line-height: calc(72px * 1.5);
     }
 
     .print-responsive .text-8xl-vw {
         font-size: 96px;
+        line-height: calc(96px * 1.5);
     }
 
     .print-responsive .text-9xl-vw {
         font-size: 128px;
+        line-height: calc(128px * 1.5);
     }
 }
 
@@ -476,53 +489,66 @@ span.select2-selection__arrow {
     /* Define custom viewport width based font sizes */
     .print-responsive .text-xs-vw {
         font-size: 1vw;
+        line-height: calc(1vw * 1.5);
     }
 
     .print-responsive .text-sm-vw {
         font-size: 1.167vw;
+        line-height: calc(1.167vw * 1.5);
     }
 
     .print-responsive .text-md-vw {
         font-size: 1.333vw;
+        line-height: calc(1.333vw * 1.5);
     }
 
     .print-responsive .text-lg-vw {
         font-size: 1.5vw;
+        line-height: calc(1.5vw * 1.5);
     }
 
     .print-responsive .text-xl-vw {
         font-size: 1.667vw;
+        line-height: calc(1.667vw * 1.5);
     }
 
     .print-responsive .text-2xl-vw {
         font-size: 2vw;
+        line-height: calc(2vw * 1.5);
     }
 
     .print-responsive .text-3xl-vw {
         font-size: 2.5vw;
+        line-height: calc(2.5vw * 1.5);
     }
 
     .print-responsive .text-4xl-vw {
         font-size: 3vw;
+        line-height: calc(3vw * 1.5);
     }
 
     .print-responsive .text-5xl-vw {
         font-size: 4vw;
+        line-height: calc(4vw * 1.5);
     }
 
     .print-responsive .text-6xl-vw {
         font-size: 5vw;
+        line-height: calc(5vw * 1.5);
     }
 
     .print-responsive .text-7xl-vw {
         font-size: 6vw;
+        line-height: calc(6vw * 1.5);
     }
 
     .print-responsive .text-8xl-vw {
         font-size: 8vw;
+        line-height: calc(8vw * 1.5);
     }
 
     .print-responsive .text-9xl-vw {
         font-size: 10.667vw;
+        line-height: calc(10.667vw * 1.5);
     }
 }

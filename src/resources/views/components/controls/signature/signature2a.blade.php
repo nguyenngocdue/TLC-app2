@@ -1,23 +1,24 @@
 {{-- https://github.com/szimek/signature_pad --}}
 @php 
-$w=210; $h=138; /* ORI 220 x 90*/ 
+// $w=210; $h=138; /* ORI 220 x 90*/ 
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
-<div style="width:{{$w+2}}px;">
+<div style="width:90%; aspect-ratio:210/138;">
     @if(!$readOnly)
     <div title="{{$title}}">Signature here:</div>
     @endif
-    <div id="div1{{$name}}" class="relative border rounded h-[140px]">
+    <div id="div1{{$name}}" class="relative border rounded h-full">
         @if(!$readOnly)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
             </button>
         @endif
         
-        <canvas width="{{$w}}" height="{{$h}}" 
+        <canvas 
+                {{-- width1="{{$w}}" height="{{$h}}"  --}}
                 id="canvas_{{$id}}" 
-                class="{{$canvasBg}} rounded"
+                class="{{$canvasBg}} rounded w-full h-full"
                 style="touch-action: none; user-select: none;" ></canvas>
     </div>
     <input type="{{$input_or_hidden}}" class="border rounded w-full border-gray-200" name="{{$name}}" id="{{$name}}" value="{!! $value !!}" />

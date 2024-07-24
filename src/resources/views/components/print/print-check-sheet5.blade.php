@@ -7,8 +7,8 @@
 <div class="flex justify-center bg-only-print">
     <div class="md:px-4 flex-grow flex-shrink-0 w-full overflow-x-auto">        
        <x-print.print-check-sheet-page
-            layout="{{$layout}}" 
-            {{-- page=123 --}}
+            {{-- layout="{{$layout}}"  --}}
+            {{-- page=123 --}}            
             type="{{$typePlural}}"
             nominatedListFn="{{$nominatedListFn}}"
             :headerDataSource="$headerDataSource" 

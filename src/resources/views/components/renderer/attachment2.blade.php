@@ -133,7 +133,7 @@
             @endif
             <div class="items-center gap-2 p-1">
                 <div class="flex gap-2 group relative items-center">
-                    <a href="{{$path.$doc['url_media']}}" target="_blank" class="text-blue-500 w-full text-base text-left">
+                    <a href="{{$path.$doc['url_media']}}" 111111 target="_blank" class="text-blue-500 w-full text-md-vw text-left">
                         <p><i class="fa-light fa-file mr-1"></i>{{$doc['filename']}}</p>
                         
                     </a>
@@ -154,7 +154,7 @@
                 <div class="flex items-center gap-1" title="Uploaded by {{$displayName}} (#{{$uid}})">
                     <img class="w-6 h-6 rounded-full" src="{{$src}}" />
                     <span>{{$displayName}}</span>
-                    <p class="text-sm">{{date('d/m/Y',strtotime($doc['created_at'] ?? ''))}}</p>
+                    <p class="text-sm-vw">{{date('d/m/Y',strtotime($doc['created_at'] ?? ''))}}</p>
                 </div>
                 
             </div>

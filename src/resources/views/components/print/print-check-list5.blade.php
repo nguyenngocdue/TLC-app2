@@ -8,12 +8,12 @@
 <div class="flex justify-center bg-only-print print-responsive ">
     <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">   
 
-        <div class="w-90vw items-center bg-white box-border p-8 mb-4 mx-auto">
+        <div class="w-90vw items-center bg-white box-border p-4vw mx-auto">
             <x-print.cover-page :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>    
         <x-renderer.page-break /> 
 
-        <div class="w-90vw items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+        <div class="w-90vw items-center bg-white box-border p-4vw mx-auto">
             <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
         <x-renderer.page-break />
@@ -21,8 +21,7 @@
         @php $count = count($tableDataSource) ?? 0; @endphp
         @foreach($tableDataSource as $key => $value)
             <x-print.print-check-sheet-page 
-                layout="{{$layout}}" 
-                layout2='width: 75vw; font-size:1vw;'
+                {{-- layout="{{$layout}}"  --}}
                 page='{{$key+1}}'
                 type="qaqc_insp_chklst_shts"
                 nominatedListFn="{{$nominatedListFn}}"

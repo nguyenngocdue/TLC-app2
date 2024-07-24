@@ -50,7 +50,7 @@ trait TraitSupportEntityShow
         $controlRender = $item->getControlType->name ?? 'signature';
         $str = '';
         if (!is_null($controlGroup)) {
-            $str = "<table class='text-sm text-left text-gray-500 dark:text-gray-400'>";
+            $str = "<table class='text-sm-vw text-left text-gray-500 dark:text-gray-400'>";
             $str .= "<tbody>";
             $str .= "<tr title='Chklst Line ID: {$item->id}' class='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>";
             $str .= $this->createStrHtmlGroupRadio($item, $controlGroup);
@@ -123,9 +123,9 @@ trait TraitSupportEntityShow
                     default:
                         break;
                 }
-                $str .= '<td class="border text-center" style="width:30px">' . $valueRender . '</td>';
+                $str .= '<td class="border text-center" style="width:30%">' . $valueRender . '</td>';
             } else {
-                $str .=  '<td class="border text-center" style="width:30px">' . $circleIcon . $value . '</td>';
+                $str .=  '<td class="border text-center" style="width:30%">' . $circleIcon . $value . '</td>';
             }
         };
         $longStr =  $str; // $runUpdated;
@@ -144,7 +144,7 @@ trait TraitSupportEntityShow
             if ($isSignature) $inspId = $item->user_id;
             // $inspId = $item->user_id || $item->inspector_id;
             if (is_null($inspId)) return "";
-            $renderInspector = Blade::render("<div class='flex justify-end ml-20'><x-renderer.avatar-user uid='$inspId' content='$dateTime' showCompany=1 /></div>");
+            $renderInspector = Blade::render("<div class='flex justify-end'><x-renderer.avatar-user uid='$inspId' content='$dateTime' showCompany=1 /></div>");
             return $renderInspector;
         } else {
             $value = $item->qaqc_insp_control_value_id ?: $item->hse_insp_control_value_id;
@@ -168,7 +168,7 @@ trait TraitSupportEntityShow
     {
         if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
             $span = '<span class="" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</span>';
-            return "<div class='bg-white border rounded dark:bg-gray-800 dark:border-gray-700 p-2 my-1'>" . $span . "</div>";
+            return "<div class='bg-white border rounded dark:bg-gray-800 dark:border-gray-700 p-1 my-1'>" . $span . "</div>";
         }
         return '';
     }

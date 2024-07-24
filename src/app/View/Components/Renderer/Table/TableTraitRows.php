@@ -205,7 +205,7 @@ trait TableTraitRows
                     //<<This fixedLeft still doesn't work
                     $fixedLeft = "table-th-fixed-left table-th-fixed-left-0";
                     $tr = "<tr $readOnlyStr class='bg-gray-100 dark:bg-gray-800' >";
-                    $tr .= "<td class='$fixedLeft bg-white1 p-2 border-b $borderColor text-lg font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
+                    $tr .= "<td class='$fixedLeft bg-white1 p-2 border-b $borderColor text-lg-vw font-bold text-gray-600 dark:text-gray-300' colspan=$colspan>{$index}</td>";
                     $tr .= "</tr>";
                     $trs[] = $tr;
                 }
@@ -221,7 +221,7 @@ trait TableTraitRows
                 $colspan_minus_1 = $colspan - 1;
 
                 $td = "<td class='p-2 border-b text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLineObj->rowDescription}</td>";
-                $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600  bg-gray-100 '><td class='border-b'></td>$td</tr>";
+                $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600 bg-gray-100'><td class='border-b'></td>$td</tr>";
             }
         }
         $tr_td = join("", $trs);
