@@ -34,7 +34,7 @@
     <div class="p-8vw block" role="divider"></div>
 
     <div class="flex justify-center items-center text-md-vw">
-        Powered by <img class="w-32 items-center" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
+        Powered by <img class="w-1/6 items-center" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
     </div>
 </div>
 <x-renderer.page-break />
