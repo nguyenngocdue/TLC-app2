@@ -21,6 +21,7 @@ trait TraitEntityCRUDShowChklst
             ->with([
                 "getSheets" => function ($query) {
                     $query
+                        ->whereNot('status', 'not_applicable')
                         ->with([
                             // "getChklst",
                             // "getProject",
@@ -48,7 +49,7 @@ trait TraitEntityCRUDShowChklst
 
         $tableDataSource = [];
         foreach ($entityShts as $sheet) {
-            $tableDataSource[] = $this->transformDataSource($sheet->getLines/*->sortBy('order_no')*/, $sheet->{$this->nominatedListFn});
+            $tableDataSource[] = $this->transformDataSource($sheet->getLines, $sheet->{$this->nominatedListFn});
         }
 
         $valueOptionPrint = $this->getValueOptionPrint();
