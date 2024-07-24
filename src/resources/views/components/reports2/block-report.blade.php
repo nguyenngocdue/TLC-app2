@@ -18,7 +18,7 @@
                 : '';
         @endphp
         <div title="{{ $block->name }}"
-            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : 'bg-gray-200' }} p-4 text-center bg-cover bg-center "
+            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : 'bg-gray-600' }} p-4 text-center bg-cover bg-center "
             @if ($backgroundPath) style="background-image: url({{ $backgroundPath }});" @endif>
 
             @switch($rendererType)

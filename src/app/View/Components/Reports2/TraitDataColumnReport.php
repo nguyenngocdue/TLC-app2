@@ -92,7 +92,7 @@ trait TraitDataColumnReport
                     'title' => $title,
                     'dataIndex' => $dataIndex,
                     'width' => $line->width,
-                    'colspan' => $line?->col_span,
+                    'colspan' => $line->col_span,
                     'footer' => $aagFooter,
                 ];
             }
