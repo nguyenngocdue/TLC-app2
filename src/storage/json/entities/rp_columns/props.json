@@ -153,11 +153,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_col_span": {
-        "name": "_col_span",
-        "column_name": "col_span",
-        "column_type": "int",
-        "label": "Col Span (2nd Header)",
+    "_width": {
+        "name": "_width",
+        "column_name": "width",
+        "column_type": "int unsigned",
+        "label": "Width (set table true width)",
         "control": "number",
         "align": "",
         "col_span": "6",
@@ -197,11 +197,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_width": {
-        "name": "_width",
-        "column_name": "width",
-        "column_type": "int unsigned",
-        "label": "Width (set table true width)",
+    "_col_span": {
+        "name": "_col_span",
+        "column_name": "col_span",
+        "column_type": "int",
+        "label": "Col Span (2nd Header)",
         "control": "number",
         "align": "",
         "col_span": "6",
