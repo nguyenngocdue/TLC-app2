@@ -42,11 +42,14 @@ class Header5 extends Component
 
     private function makeDiv($dataSource)
     {
-        $result = [];
+        $lines = [];
         foreach ($dataSource as $key => $value) {
-            $result[] = "<span class='col-span-2 text-right mr-2 font-medium'>$key</span><span class='col-span-4'>$value</span>";
+            $lines[] = "<span class='col-span-2 text-right font-bold p-05vw'>$key </span> <span class='col-span-4 p-05vw'> $value</span>";
         }
-        return "<div class='border rounded-lg px-2 py-2 grid grid-cols-12 text-base w-full border-gray-600'>" . join("", $result) . "</div>";
+        $result = "<div class='text-md-vw border rounded-lg  grid grid-cols-12 w-full border-gray-600'>";
+        $result .= join("", $lines);
+        $result .= "</div>";
+        return $result;
     }
     private function contentHeaderHseChecklist()
     {

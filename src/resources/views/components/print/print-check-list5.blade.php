@@ -8,18 +8,12 @@
 <div class="flex justify-center bg-only-print">
     <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">   
 
-        @roleset('admin')
-        <div 
-            {{-- style1='{{$layout}}'  --}}
-            class="w-90vw items-center bg-white box-border p-8 mb-4 mx-auto">
+        <div class="w-90vw items-center bg-white box-border p-8 mb-4 mx-auto">
             <x-print.cover-page :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>    
         <x-renderer.page-break /> 
-        @endroleset 
 
-        <div 
-            {{-- style1='{{$layout}}'  --}}
-            class="w-90vw items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+        <div class="w-90vw items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
             <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
         <x-renderer.page-break />

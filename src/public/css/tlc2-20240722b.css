@@ -363,6 +363,11 @@ span.select2-selection__arrow {
         margin: calc(var(--parent-width) * 1.4 * 0.01);
     }
 
+    .p-05vw {
+        --parent-width: 1000px;
+        padding: calc(var(--parent-width) * 1.4 * 0.005);
+    }
+
     .p-1vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.01);
@@ -446,6 +451,10 @@ span.select2-selection__arrow {
 
     .m-1vw {
         margin: calc((90vw * 1.4) * 0.01);
+    }
+
+    .p-05vw {
+        padding: calc((90vw * 1.4) * 0.005);
     }
 
     .p-1vw {
