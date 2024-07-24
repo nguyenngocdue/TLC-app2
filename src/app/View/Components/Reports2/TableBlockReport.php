@@ -72,40 +72,39 @@ class TableBlockReport extends Component
         return $result;
     }
 
-    private function editTableColumns($data)
-    {
-        $result = [];
-        foreach ($data as $column) {
-            $title = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
-            $aagFooter = $this->getTermName($column->agg_footer);
-            $newValue = [
-                'title' => $title,
-                'dataIndex' => $column->data_index,
-                'width' => $column->width,
-                'align' => 'center',
-                'footer' => $aagFooter,
-                'colspan' => $column->col_span_second_header ?? null,
-                // not yet to code
-                'cell_class' => $column->cell_class,
-                'cell_div_class' => $column->cell_div_class,
-            ];
-            $result[] = $newValue;
-        }
-        return $result;
-    }
+    // private function editTableColumns($data)
+    // {
+    //     $result = [];
+    //     foreach ($data as $column) {
+    //         $title = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
+    //         $aagFooter = $this->getTermName($column->agg_footer);
+    //         $newValue = [
+    //             'title' => $title,
+    //             'dataIndex' => $column->data_index,
+    //             'width' => $column->width,
+    //             'align' => 'center',
+    //             'footer' => $aagFooter,
+    //             'colspan' => $column->col_span_second_header ?? null,
+    //             // not yet to code
+    //             'cell_class' => $column->cell_class,
+    //             'cell_div_class' => $column->cell_div_class,
+    //         ];
+    //         $result[] = $newValue;
+    //     }
+    //     return $result;
+    // }
 
     public function render()
     {
         $block = $this->block;
 
         $columns = $this->block->getLines()->get()->sortby('order_no');
-        $secondColumns = $this->block->get2ndHeaderLines()->get()->sortby('order_no');
+        // $secondColumns = $this->block->get2ndHeaderLines()->get()->sortby('order_no');
         // dd($secondColumns);
-
 
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
         $keyAndColumnsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
-        $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
+        // $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
         $newTableDataSource = $this->createTableDataSourceForRow($this->rawTableDataSource, $keyAndColumnsReduced);
 
@@ -115,7 +114,7 @@ class TableBlockReport extends Component
             "name" => $block->name,
             "description" => $block->description,
             "tableDataSource" => $newTableDataSource,
-            "tableColumns" =>  $editedTableColumns,
+            "tableColumns" =>  $this->rawTableColumns,
             "dataHeader" => $this->dataHeader,
 
             "showNo" => $block->showNo,
