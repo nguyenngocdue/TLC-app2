@@ -352,107 +352,145 @@ span.select2-selection__arrow {
     margin-top: 6px;
 }
 
-/* Define custom viewport width based font sizes */
-/* .text-xs-vw {
-    font-size: 0.625vw;
+@media (min-width: 640px) {
+    .w-90vw {
+        width: 1000px;
+        min-height: 1400px;
+    }
+
+    .text-xs-vw {
+        font-size: 12px;
+    }
+
+    .text-sm-vw {
+        font-size: 14px;
+    }
+
+    .text-md-vw {
+        font-size: 16px;
+    }
+
+    .text-lg-vw {
+        font-size: 18px;
+    }
+
+    .text-xl-vw {
+        font-size: 20px;
+    }
+
+    .text-2xl-vw {
+        font-size: 24px;
+    }
+
+    .text-3xl-vw {
+        font-size: 30px;
+    }
+
+    .text-4xl-vw {
+        font-size: 36px;
+    }
+
+    .text-5xl-vw {
+        font-size: 48px;
+    }
+
+    .text-6xl-vw {
+        font-size: 60px;
+    }
+
+    .text-7xl-vw {
+        font-size: 72px;
+    }
+
+    .text-8xl-vw {
+        font-size: 96px;
+    }
+
+    .text-9xl-vw {
+        font-size: 128px;
+    }
 }
 
-.text-sm-vw {
-    font-size: 0.729vw;
+.p-div-10 {
+    --parent-width: 1000px;
+    padding: calc(var(--parent-width) * 1.4 * 0.1);
 }
 
-.text-md-vw {
-    font-size: 0.833vw;
-}
+@media (max-width: 639px) {
+    .w-90vw {
+        width: 90vw;
+        min-height: calc(
+            90vw * 1.4
+        ); /* Minimum height is 1.4 times the width */
+    }
 
-.text-lg-vw {
-    font-size: 0.938vw;
-}
+    .p-10vw {
+        padding: calc((100vw * 1.4) * 0.1);
+    }
 
-.text-xl-vw {
-    font-size: 1.042vw;
-}
+    .p-20vw {
+        padding: calc((100vw * 1.4) * 0.2);
+    }
+    .p-30vw {
+        padding: calc((100vw * 1.4) * 0.3);
+    }
+    .p-40vw {
+        padding: calc((100vw * 1.4) * 0.4);
+    }
+    .p-50vw {
+        padding: calc((100vw * 1.4) * 0.5);
+    }
 
-.text-2xl-vw {
-    font-size: 1.25vw;
-}
+    /* Define custom viewport width based font sizes */
+    .text-xs-vw {
+        font-size: 1vw;
+    }
 
-.text-3xl-vw {
-    font-size: 1.563vw;
-}
+    .text-sm-vw {
+        font-size: 1.167vw;
+    }
 
-.text-4xl-vw {
-    font-size: 1.875vw;
-}
+    .text-md-vw {
+        font-size: 1.333vw;
+    }
 
-.text-5xl-vw {
-    font-size: 2.5vw;
-}
+    .text-lg-vw {
+        font-size: 1.5vw;
+    }
 
-.text-6xl-vw {
-    font-size: 3.125vw;
-}
+    .text-xl-vw {
+        font-size: 1.667vw;
+    }
 
-.text-7xl-vw {
-    font-size: 3.75vw;
-}
+    .text-2xl-vw {
+        font-size: 2vw;
+    }
 
-.text-8xl-vw {
-    font-size: 5vw;
-}
+    .text-3xl-vw {
+        font-size: 2.5vw;
+    }
 
-.text-9xl-vw {
-    font-size: 6.67vw;
-} */
-/* Define custom viewport width based font sizes */
-.text-xs-vw {
-    font-size: 1vw;
-}
+    .text-4xl-vw {
+        font-size: 3vw;
+    }
 
-.text-sm-vw {
-    font-size: 1.167vw;
-}
+    .text-5xl-vw {
+        font-size: 4vw;
+    }
 
-.text-md-vw {
-    font-size: 1.333vw;
-}
+    .text-6xl-vw {
+        font-size: 5vw;
+    }
 
-.text-lg-vw {
-    font-size: 1.5vw;
-}
+    .text-7xl-vw {
+        font-size: 6vw;
+    }
 
-.text-xl-vw {
-    font-size: 1.667vw;
-}
+    .text-8xl-vw {
+        font-size: 8vw;
+    }
 
-.text-2xl-vw {
-    font-size: 2vw;
-}
-
-.text-3xl-vw {
-    font-size: 2.5vw;
-}
-
-.text-4xl-vw {
-    font-size: 3vw;
-}
-
-.text-5xl-vw {
-    font-size: 4vw;
-}
-
-.text-6xl-vw {
-    font-size: 5vw;
-}
-
-.text-7xl-vw {
-    font-size: 6vw;
-}
-
-.text-8xl-vw {
-    font-size: 8vw;
-}
-
-.text-9xl-vw {
-    font-size: 10.667vw;
+    .text-9xl-vw {
+        font-size: 10.667vw;
+    }
 }
