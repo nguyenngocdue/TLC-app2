@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/tlc2-20240722.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/tlc2-20240722a.css') }}" rel="stylesheet">
 </head>
 
 <body>
