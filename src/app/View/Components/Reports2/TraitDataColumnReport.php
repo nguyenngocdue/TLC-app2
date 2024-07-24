@@ -11,7 +11,7 @@ use App\Models\Term;
 trait TraitDataColumnReport
 {
     use TraitCreateSQLReport2;
-    
+
     public function createIconPosition($content, $icon, $iconPosition)
     {
         $name = Term::find($iconPosition)?->name;
@@ -49,15 +49,21 @@ trait TraitDataColumnReport
     }
 
 
-    private function getSecondColumns($block) {
+    private function getSecondColumns($block)
+    {
         $dataHeader = [];
-        $secHeaderLines = $block->get2ndHeaderLines;#()->getParent();
+        $secHeaderLines = $block->get2ndHeaderLines; #()->getParent();
         foreach ($secHeaderLines as $key => $column) {
             // dd($column);
             $parent  = $column->getParent;
-            if($parent->is_active){
+            if ($parent->is_active) {
                 $content = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
-                $dataHeader[$parent->data_index ] = $content;
+                $dataHeader[$parent->data_index] = (object)[
+                    'value' => $content,
+                    'cell_class' => $column?->cell_class,
+                    'cell_div_class' =>  $column?->cell_div_class,
+
+                ];
             }
         }
         return $dataHeader;
@@ -90,5 +96,4 @@ trait TraitDataColumnReport
         if (empty($columns)) $columns = [['dataIndex' => null]];
         return [$dataSqlColl, $columns, $dataHeader];
     }
-
 }
