@@ -5,7 +5,7 @@
     <div id="background-image" class="w-auto h-screen bg-cover transition-transform duration-500">
         <div class="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
             <div
-            class="box-shadow-1 bg-opacity-70 w-full rounded-lg bg-white shadow dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
+            class="shadow-1 bg-opacity-70 w-full rounded-lg bg-white dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
             <a href="/login" class="mt-5 justify-center flex items-center text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="w-32" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
             </a>

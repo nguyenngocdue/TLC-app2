@@ -7,7 +7,7 @@
                 <h1 id="text-banner" class="mx-auto mt-64 px-40 text-4xl text-white hidden lg:block lg:text-7xl text-shadow-xl">
                 </h1>
                 <div
-                class="box-shadow-1 bg-opacity-70 w-full rounded-lg bg-white dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
+                class="shadow-1 bg-opacity-70 w-full rounded-lg bg-white dark:border dark:border-gray-600 dark:bg-gray-800 sm:max-w-md md:mt-0 xl:p-0">
                 <a href="#" class="mt-5 flex items-center justify-center text-2xl font-semibold text-gray-900 dark:text-white">
                     <img class="w-32 items-center" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
                 </a>

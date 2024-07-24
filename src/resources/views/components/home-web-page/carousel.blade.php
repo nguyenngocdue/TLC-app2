@@ -8,7 +8,7 @@
                     onmouseover="FlowbiteInstances.getInstance('Carousel', 'what-it-does').pause()"        
                     onmouseout="FlowbiteInstances.getInstance('Carousel', 'what-it-does').cycle()"        
                 >
-                <div class="box-shadow-1 bg-opacity-70 text-lg text-blue-900 absolute border-3 rounded-lg top-[80%] ml-[1%] w-[98%] xl:left-1/4 xl:w-1/2 p-2 bg-white">
+                <div class="shadow-1 bg-opacity-70 text-lg text-blue-900 absolute border-3 rounded-lg top-[80%] ml-[1%] w-[98%] xl:left-1/4 xl:w-1/2 p-2 bg-white">
                     <p class="text-xl font-bold text-shadow-md">{{$contents[$key]["title"]}}</p>
                     <p class="hidden md:block">{{$contents[$key]["description"]}}</p>
                 </div>

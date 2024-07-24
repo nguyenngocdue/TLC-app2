@@ -6,7 +6,7 @@
     </div>
 
     <div class="p-8">
-        <img class="w-3/4 mx-auto rounded box-shadow-1" src="{{ $src }}">
+        <img class="w-3/4 mx-auto rounded shadow-1" src="{{ $src }}">
     </div>
 
     <div class="text-center font-bold text-3xl pt-10 pb-4">

@@ -3,10 +3,6 @@ body {
     overflow-x: hidden;
 }
 
-.box-shadow-1 {
-    box-shadow: 1px 1px 10px #000;
-}
-
 th.rotated-title-right-th {
     vertical-align: bottom;
     text-align: left !important;
@@ -346,10 +342,6 @@ div.scroll-to-month {
 
 .page-break-after {
     page-break-after: always !important;
-}
-
-.box-shadow-1 {
-    box-shadow: 1px 1px 10px #000;
 }
 
 span.select2-selection__clear {
