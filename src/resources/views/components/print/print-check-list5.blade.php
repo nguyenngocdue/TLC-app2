@@ -5,9 +5,10 @@
 <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
 <div class="flex justify-center bg-only-print">
     <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">        
-        <div style='{{$layout}}' style2='width: 75vw; font-size:1vw;' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+        <div style1='{{$layout}}' style='width: 90vw; font-size:1vw;' 
+            class="items-center bg-white box-border p-8 mb-4 mx-auto">
             <x-print.cover-page :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
-        </div>
+        </div>        
         <div style='{{$layout}}' style2='width: 75vw; font-size:1vw;' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
             <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
