@@ -353,7 +353,7 @@ span.select2-selection__arrow {
 }
 
 /* Define custom viewport width based font sizes */
-.text-xs-vw {
+/* .text-xs-vw {
     font-size: 0.625vw;
 }
 
@@ -403,4 +403,56 @@ span.select2-selection__arrow {
 
 .text-9xl-vw {
     font-size: 6.67vw;
+} */
+
+.text-xs-vw {
+    font-size: 0.75vw;
+}
+
+.text-sm-vw {
+    font-size: 0.875vw;
+}
+
+.text-md-vw {
+    font-size: 1vw;
+}
+
+.text-lg-vw {
+    font-size: 1.125vw;
+}
+
+.text-xl-vw {
+    font-size: 1.25vw;
+}
+
+.text-2xl-vw {
+    font-size: 1.5vw;
+}
+
+.text-3xl-vw {
+    font-size: 1.875vw;
+}
+
+.text-4xl-vw {
+    font-size: 2.25vw;
+}
+
+.text-5xl-vw {
+    font-size: 3vw;
+}
+
+.text-6xl-vw {
+    font-size: 3.75vw;
+}
+
+.text-7xl-vw {
+    font-size: 4.5vw;
+}
+
+.text-8xl-vw {
+    font-size: 6vw;
+}
+
+.text-9xl-vw {
+    font-size: 8vw;
 }
