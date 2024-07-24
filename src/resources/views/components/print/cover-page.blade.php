@@ -1,12 +1,12 @@
 <div class="border1 p-4vw">
     {{-- <div class="text-5xl">OPTION 4</div> --}}
     <div class="p-4vw">
-        <img class="w-3/4 mx-auto" src="{{ asset('logo/tlc.png') }}">
+        <img class="w-7/12 mx-auto" src="{{ asset('logo/tlc.png') }}">
         <div class="w-full text-center font-bold text-2xl-vw">{{config('company.name')}}</div>
     </div>
 
     <div class="p-4vw">
-        <img class="w-3/4 mx-auto rounded shadow-1" src="{{ $src }}">
+        <img class="w-11/12 mx-auto rounded shadow-1" src="{{ $src }}">
     </div>
 
     <div class="text-center font-bold text-3xl-vw p-4vw">
