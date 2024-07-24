@@ -351,3 +351,56 @@ span.select2-selection__clear {
 span.select2-selection__arrow {
     margin-top: 6px;
 }
+
+/* Define custom viewport width based font sizes */
+.text-xs-vw {
+    font-size: 0.625vw;
+}
+
+.text-sm-vw {
+    font-size: 0.729vw;
+}
+
+.text-md-vw {
+    font-size: 0.833vw;
+}
+
+.text-lg-vw {
+    font-size: 0.938vw;
+}
+
+.text-xl-vw {
+    font-size: 1.042vw;
+}
+
+.text-2xl-vw {
+    font-size: 1.25vw;
+}
+
+.text-3xl-vw {
+    font-size: 1.563vw;
+}
+
+.text-4xl-vw {
+    font-size: 1.875vw;
+}
+
+.text-5xl-vw {
+    font-size: 2.5vw;
+}
+
+.text-6xl-vw {
+    font-size: 3.125vw;
+}
+
+.text-7xl-vw {
+    font-size: 3.75vw;
+}
+
+.text-8xl-vw {
+    font-size: 5vw;
+}
+
+.text-9xl-vw {
+    font-size: 6.67vw;
+}
