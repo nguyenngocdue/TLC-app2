@@ -11,6 +11,7 @@ use App\Models\Term;
 trait TraitDataColumnReport
 {
     use TraitCreateSQLReport2;
+    use TermsBlockReport;
 
     public function createIconPosition($content, $icon, $iconPosition)
     {
@@ -79,17 +80,20 @@ trait TraitDataColumnReport
         $dataHeader = $this->getSecondColumns($block);
 
         $columns = [];
-        $processedIndices = []; // Renamed from 'temp' for clarity
-
+        $processedIndices = [];
         foreach ($lines as $line) {
             $dataIndex = $line->data_index;
             $isActive = $line->is_active;
             if ($isActive && !in_array($dataIndex, $processedIndices) && in_array($dataIndex, $uniqueFields)) {
                 $processedIndices[] = $dataIndex;
+                $aagFooter = $this->getTermName($line->agg_footer);
+                $title = $this->createIconPosition($line->name, $line->icon, $line->icon_position);
                 $columns[] = [
-                    'title' => $line->name,
+                    'title' => $title,
                     'dataIndex' => $dataIndex,
                     'width' => $line->width,
+                    'colspan' => $line?->col_span_second_header,
+                    'footer' => $aagFooter,
                 ];
             }
         }
