@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->boolean('is_active')->nullable();
             $table->string('data_index')->nullable();
-            $table->unsignedInteger('col_span_second_header')->nullable();
+            $table->unsignedInteger('col_span')->nullable();
             $table->unsignedInteger('row_span')->nullable();
             $table->unsignedInteger('width')->nullable();
             $table->text('cell_div_class')->nullable();

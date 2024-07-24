@@ -153,11 +153,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_col_span_second_header": {
-        "name": "_col_span_second_header",
-        "column_name": "col_span_second_header",
+    "_col_span": {
+        "name": "_col_span",
+        "column_name": "col_span",
         "column_type": "int",
-        "label": "Col Span 2nd Header",
+        "label": "Col Span (2nd Header)",
         "control": "number",
         "align": "",
         "col_span": "6",
