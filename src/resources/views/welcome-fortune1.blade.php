@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0, user-scalable=yes">
   <title>Responsive Design</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/tlc2-20240722b.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/tlc2-20240722c.css') }}">
 </head>
 <body>
   {{-- {!! $str !!} --}}
