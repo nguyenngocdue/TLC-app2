@@ -37,4 +37,3 @@
         Powered by <img class="w-1/6 items-center" src="{{ asset('logo/moduqa.svg') }}" alt="logo">
     </div>
 </div>
-<x-renderer.page-break />

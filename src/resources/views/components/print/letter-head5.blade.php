@@ -4,34 +4,26 @@
     @endphp
     <tbody>
         <tr>
-            <td align="left">
-                <div class="h-20 w-56">
-                    <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="h-full w-full">
-                </div>
+            <td style="width: 30%;">
+                <img alt="TLC Logo" src="{{$dataSource['company_logo']}}" class="mx-auto w-11/12">
             </td>
-            <td class="text-sm">
+            <td style="width: 50%;" class="text-sm-vw">
                 <b>{{$dataSource['company_name']}}</b>
                 <br>{{$dataSource['company_address']}}
                 <br>Tel: {{$dataSource['company_telephone']}} 
                 <br>Fax: {{$dataSource['company_fax']}}
-                <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}</td>
-                <td class="w-[20%]" align="center">
-                    <div class="flex flex-row items-center justify-center gap-y-2 1ml-10">
-                            <div id="{{$id}}" class="w-28 h-28 flex m-5"></div>
-                            {{-- <div class="flex w-28 transform rotate-[270deg] float-right -ml-14 text-xs whitespace-pre-wrap">
-                                @php
-                                    $tableName = $type.'/'.$id;
-                                    $tableName = join(' ',str_split($tableName, 16)); 
-                                @endphp
-                                {{$tableName}}
-                            </div> --}}
-                    </div>
-                    @if($nameRenderDocId)
-                    <div class="flex border border-gray-600 p-1 text-sm mb-1">
-                        Doc ID: {{$nameRenderDocId}}
-                    </div>
-                    @endif
-                    
+                <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}
+            </td>
+            <td style="width: 20%">
+                <div class="flex flex-row items-center justify-center">
+                    <div id="{{$id}}" class="flex w-7/12"></div>
+                </div>
+                @if($nameRenderDocId)
+                <div class="flex border border-gray-600 text-sm-vw m-1vw">
+                    Doc ID: {{$nameRenderDocId}}
+                </div>
+                @endif
+                
             </td>
         </tr>
     </tbody>

@@ -2,21 +2,28 @@
 @section('title', 'Print')
 @section('topTitle', $topTitle)
 @section('content')
-<x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/>
+<div class="block py-4 no-print" role="divider">
+</div>
+{{-- <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/> --}}
 <div class="flex justify-center bg-only-print">
     <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">   
 
         @roleset('admin')
-        <div style1='{{$layout}}' 
+        <div 
+            {{-- style1='{{$layout}}'  --}}
             class="w-90vw items-center bg-white box-border p-8 mb-4 mx-auto">
             <x-print.cover-page :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
-        </div>     
+        </div>    
+        <x-renderer.page-break /> 
         @endroleset 
 
-        <div style='{{$layout}}' style2='width: 75vw; font-size:1vw;' class="items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
+        <div 
+            {{-- style1='{{$layout}}'  --}}
+            class="w-90vw items-center bg-white box-border p-8 mx-4 mb-4 lg:mx-auto">
             <x-print.print-page-toc :dataSource="$headerDataSource" :headerDataSource="$entityDataSource" type="{{$type}}"/>
         </div>
         <x-renderer.page-break />
+
         @php $count = count($tableDataSource) ?? 0; @endphp
         @foreach($tableDataSource as $key => $value)
             <x-print.print-check-sheet-page 
