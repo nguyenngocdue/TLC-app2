@@ -84,7 +84,7 @@ var tableObjectIndexedColumns = {};
                     </table>
                 </div>
                 @if($showPaginationBottom)
-                <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 p-1vw px-4 py-1.5 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 p1-1vw px-4 py-1.5 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
                     <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
                         {!! Blade::render($bottomLeftControl) !!}
                     </span>
