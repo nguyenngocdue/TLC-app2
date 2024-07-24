@@ -2,9 +2,10 @@
 @section('title', 'Print')
 @section('topTitle', $topTitle)
 @section('content')
-<div class="block py-4 no-print" role="divider">
-</div>
+
+<div class="block py-4 no-print" role="divider"></div>
 {{-- <x-print.setting-layout5 class="{{$classListOptionPrint}}" value="{{$valueOptionPrint}}" type="{{$typePlural}}"/> --}}
+
 <div class="flex justify-center bg-only-print print-responsive ">
     <div class="md:px1-4 flex-grow flex-shrink-0 w-full overflow-x-auto">   
 

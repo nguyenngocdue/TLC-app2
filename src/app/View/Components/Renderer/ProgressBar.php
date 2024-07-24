@@ -37,7 +37,7 @@ class ProgressBar extends Component
         // </div>";
         if (is_null($this->dataSource)) return "<div class='p-2'>dataSource is null</div>";
         $dataSource = $this->dataSource;
-        $classList = "shadow-none flex flex-col text-xs text-center whitespace-nowrap justify-center";
+        $classList = "shadow-none flex flex-col text-xs-vw text-center whitespace-nowrap justify-center";
         return view('components.renderer.progress-bar', [
             'dataSource' => $dataSource,
             'classList' => $classList,

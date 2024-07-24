@@ -1,5 +1,5 @@
 <div class="relative p-2">
-    <div class="overflow-hidden text-xs flex rounded bg-gray-200" style="height: {{$height}};">
+    <div class="overflow-hidden text-xs-vw flex rounded bg-gray-200" style="height1: {{$height}};">
         @foreach($dataSource as $line)
             @if($line['percent'] == "0%") @continue @endif
             {{-- <div style="width: {{$line['percent']}}" 
