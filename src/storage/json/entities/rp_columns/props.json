@@ -21,6 +21,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "column_type": "varchar(255)",
+        "label": "Title",
+        "control": "text",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_section_01": {
         "name": "_section_01",
         "column_name": "section_01",
@@ -178,7 +200,7 @@
     "_row_span": {
         "name": "_row_span",
         "column_name": "row_span",
-        "column_type": "int",
+        "column_type": "int unsigned",
         "label": "Row Span",
         "control": "number",
         "align": "",
@@ -200,7 +222,7 @@
     "_col_span": {
         "name": "_col_span",
         "column_name": "col_span",
-        "column_type": "int",
+        "column_type": "int unsigned",
         "label": "Col Span (2nd Header)",
         "control": "number",
         "align": "",

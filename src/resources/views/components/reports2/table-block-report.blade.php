@@ -1,9 +1,4 @@
-<x-renderer.heading level=5 title='Block Id: {{ $block->id }}' xalign='left'>
-    <a href="{{ route('rp_blocks.edit', $block->id) }}" target="blank">
-        {{ $name }}
-    </a>
-</x-renderer.heading>
-<x-renderer.heading level=6 xalign='left'>{{ $description }}</x-renderer.heading>
+<x-renderer.report2.title-description-block :block="$block" />
 
 {{-- @dump($rotate45Width, $rotate45Height) --}}
 

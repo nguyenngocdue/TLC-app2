@@ -57,14 +57,14 @@ class ChartBlockReport extends Component
 
 
         if ($viewName) {
-            $name = "<x-renderer.heading title='Block Id: {$block->id}, Chart Type Id: {$chartTypeId}' level=5 xalign='left'>{$block->name}</x-renderer.heading>";
-            $description = "<x-renderer.heading level=6 xalign='left'>{$block->description}</x-renderer.heading>";
+            $titleAndDesc = '<x-renderer.report2.title-description-block :block="$block" />';
             $componentName = "x-reports2.charts.types." . $viewName;
             $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :chartJson="$chartJson" :dataQuery="$dataQuery"/>';
-            $views = $name . $description . $chart;
-            // dump($views);
+            $views = $titleAndDesc . $chart;
+
             return  Blade::render($views, [
                 'key' => $key,
+                'block' => $block,
                 'chartTypeId' => $chartTypeId,
                 'chartJson' => $chartJson,
                 'dataQuery' => $dataQuery,

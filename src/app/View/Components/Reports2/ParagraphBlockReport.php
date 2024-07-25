@@ -37,9 +37,8 @@ class ParagraphBlockReport extends Component
         $htmlRender = $this->renderHtml($strHtml, $varsInHtml);
 
         return view('components.reports2.paragraph-block-report', [
-            'name' => $block->name ?? '',
-            'description' => $block->description ?? '',
-            'htmlRender' => Blade::render($htmlRender)
+            'htmlRender' => Blade::render($htmlRender),
+            'block' => $block
         ]);
     }
 }
