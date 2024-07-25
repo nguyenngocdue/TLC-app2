@@ -12,10 +12,16 @@ class LoggerAccessRecent
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
         $data = DB::connection($connection)
             ->select("SELECT DISTINCT url, entity_name,route_name,entity_id, MAX(created_at) AS created_at
-                FROM logger_access
-                WHERE owner_id = '$owner_id'
-                GROUP BY url ,entity_name,route_name,entity_id
-                ORDER BY created_at DESC
+                -- FROM logger_access
+                FROM (
+                    SELECT * 
+                    FROM logger_access 
+                    WHERE owner_id = '$owner_id'
+                    ORDER BY id DESC 
+                    LIMIT 100
+                ) AS XXX
+                GROUP BY url, entity_name, route_name, entity_id
+                -- ORDER BY created_at DESC
                 LIMIT 10");
         return $data;
     }

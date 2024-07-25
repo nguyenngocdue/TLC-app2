@@ -67,6 +67,6 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         // $this->loadPdfIntoDb();
-        return view("welcome-fortune1", []);
+        return view("welcome-fortune", []);
     }
 }

@@ -7,6 +7,7 @@ use App\Utils\AccessLogger\EntityNameClickCount;
 use App\Utils\AccessLogger\LoggerAccessRecent;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Log;
 
 trait TraitFormatBookmarkEntities
 {
@@ -23,7 +24,7 @@ trait TraitFormatBookmarkEntities
                     $value['click_count'] = $entities[$key]['click_count'];
                 }
             });
-            $entitiesName = array_filter($entitiesName,fn($item) => $item);
+            $entitiesName = array_filter($entitiesName, fn ($item) => $item);
             $allApps = array_filter(array_replace(array_flip($entitiesName), $allApps), function ($item) {
                 return is_array($item);
             });
@@ -79,20 +80,23 @@ trait TraitFormatBookmarkEntities
         }, []);
         return $result;
     }
-    private function getDataSourceRecentDoc(){
+    private function getDataSourceRecentDoc()
+    {
         $data = (new LoggerAccessRecent)(CurrentUser::id());
+        // Log::info($data);
         return collect($data)->toArray();
     }
-    private function filterRecentDocument($array,$allApps){
-        return array_filter(array_map(function($item) use ($allApps){
+    private function filterRecentDocument($array, $allApps)
+    {
+        return array_filter(array_map(function ($item) use ($allApps) {
             $index = $item->entity_name;
-            if(isset($allApps[$index])){
+            if (isset($allApps[$index])) {
                 $allApps[$index]['href_recent'] = $item->url;
                 $allApps[$index]['action_recent'] = substr($item->route_name, strpos($item->route_name, ".") + 1);
                 $allApps[$index]['entity_id'] = $item->entity_id;
                 return $allApps[$index];
             }
-        },$array),fn($item) => $item);
+        }, $array), fn ($item) => $item);
     }
     public function getAllAppsOfSearchModalAndTopDrawer()
     {
@@ -100,7 +104,7 @@ trait TraitFormatBookmarkEntities
         $allApps = $this->getDataSource(LibApps::getAllShowBookmark());
         $allAppsTopDrawer = $this->getDataSource(LibApps::getAllNavbarBookmark());
         $allAppsTopDrawer = $this->formatDataSource($allAppsTopDrawer);
-        $allAppsRecent = $this->filterRecentDocument($recentDoc,$allApps);
-        return [array_values($allAppsRecent),array_values($allApps), array_values($allAppsTopDrawer)];
+        $allAppsRecent = $this->filterRecentDocument($recentDoc, $allApps);
+        return [array_values($allAppsRecent), array_values($allApps), array_values($allAppsTopDrawer)];
     }
 }
