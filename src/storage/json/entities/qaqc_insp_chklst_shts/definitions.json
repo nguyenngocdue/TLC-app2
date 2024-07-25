@@ -1,8 +1,8 @@
 {
     "new": {
         "name": "new",
-        "in_progress": "true",
         "not_applicable": "",
+        "in_progress": "true",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
@@ -10,8 +10,8 @@
     },
     "read-only": {
         "name": "read-only",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
@@ -19,8 +19,8 @@
     },
     "hide-save-btn": {
         "name": "hide-save-btn",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
@@ -28,8 +28,8 @@
     },
     "closed": {
         "name": "closed",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
@@ -37,8 +37,8 @@
     },
     "post-closed": {
         "name": "post-closed",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
