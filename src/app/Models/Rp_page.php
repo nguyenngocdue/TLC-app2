@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_page extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "report_id", "letter_head_id", "letter_footer_id",
+        "id", "name", "title", "report_id", "letter_head_id", "letter_footer_id",
         "is_landscape", "width", "height", "background",
         "is_stackable_letter_head", "is_full_width", "page_body_class", "order_no", "owner_id"
     ];
