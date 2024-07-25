@@ -74,7 +74,7 @@ class Prod_run extends ModelExtended
 
     public function getManyLineParams($parentItem)
     {
-        $show_team_column = $parentItem->getSubProject->sqb_input_team;
+        $show_team_column = $parentItem?->getSubProject->sqb_input_team;
         $result = [
             ['dataIndex' => 'id', 'invisible' => true,],
             ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
