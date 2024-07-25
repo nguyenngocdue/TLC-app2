@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_report extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "entity_type", "owner_id",
+        "id", "name", "title", "description", "entity_type", "owner_id",
     ];
 
     public static $statusless = true;
@@ -49,7 +49,7 @@ class Rp_report extends ModelExtended
                             ->with(["getBlock" => function ($q2) {
                                 $q2->with('getLines');
                                 $q2->with(['get2ndHeaderLines' => function ($q3) {
-                                     $q3->with('getParent');
+                                    $q3->with('getParent');
                                 }]);
                             }]);
                     }]);

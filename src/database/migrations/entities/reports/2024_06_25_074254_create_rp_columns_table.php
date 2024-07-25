@@ -19,6 +19,7 @@ return new class extends Migration
 
         $schema->create('rp_columns', function (BlueprintExtended $table) {
             $table->id();
+            $table->string("title")->nullable();
             $table->string('name')->nullable();
             $table->unsignedBigInteger('block_id')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();

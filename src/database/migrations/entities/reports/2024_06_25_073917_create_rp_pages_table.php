@@ -20,6 +20,7 @@ return new class extends Migration
         $schema->create("rp_pages", function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
+            $table->string("title")->nullable();
             $table->unsignedBigInteger("report_id")->nullable();
             $table->unsignedBigInteger("letter_head_id")->nullable();
             $table->unsignedBigInteger("letter_footer_id")->nullable();

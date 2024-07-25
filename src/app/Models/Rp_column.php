@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_column extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "block_id", "parent_id", "is_active", "data_index",
+        "id", "name", "title", "block_id", "parent_id", "is_active", "data_index",
         "col_span", "row_span",
         "order_no", "name", "width", "cell_div_class_agg_footer", "cell_div_class",
         "cell_class", "icon", "icon_position", "row_cell_div_class", "row_cell_class",
