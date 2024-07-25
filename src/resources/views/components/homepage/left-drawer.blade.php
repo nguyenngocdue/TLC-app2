@@ -1,6 +1,6 @@
  @props(['title' => ""])
  <!-- drawer component -->
- <div id="drawer-left" class="fixed min-w-[200px] top-16 left-0 z-10 shadow-xl h-screen px-2 py-4 overflow-y-auto transition-transform -translate-x-full bg-white w-auto dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-left-label">
+ <div id="drawer-left" class="fixed min-w-[200px] top-32 left-0 z-10 shadow-xl h-screen px-2 py-4 overflow-y-auto transition-transform -translate-x-full bg-white w-auto dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-left-label">
     <h5 id="drawer-left-label" class="inline-flex items-center mb-1 text-base font-semibold text-gray-500 dark:text-gray-400">
       {{$title}}</h5>
     <button type="button" data-drawer-hide="drawer-left" aria-controls="drawer-left" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
