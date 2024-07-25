@@ -11,20 +11,27 @@
             <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div class="border-{{$border}}-300 h-full">
-            <div name='{{$name}}' title="{{$title}}" class="relative flex mx-1 flex-col items-center p-1 border-2 rounded-lg  group/item overflow-hidden bg-inherit">
+            <div 
+            name='{{$name}}' 
+            title="{{$title}}" 
+            class="relative flex mx-1 flex-col items-center p-025vw border-2 rounded-lg  group/item overflow-hidden bg-inherit"
+            >
                 {{-- This is the image --}}
                 @if(in_array($extension,["png","gif","jpg","jpeg"]))
-                    @if($openType == '_blank')
-                    <a target="_blank" href="{{$path.$attachment['url_media']}}">
-                    @endif
-                        <img src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
-                    @if($openType == '_blank')
-                    </a>
-                    @endif
+                    @if($openType == '_blank') <a target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
+                    <img class="rounded" src="{{$path.$attachment['url_thumbnail']}}" alt="{{$attachment['filename']}}" />
+                    @if($openType == '_blank') </a> @endif
                 @elseif(in_array(strtolower($extension), ["csv","pdf","zip"]))
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
                 @elseif(in_array(strtolower($extension), ["mov","mp4","webm"]))
-                    <video class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
+                @if($openType == '_blank') <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
+                    <video class="w-auto rounded h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
+                    @if($openType == '_blank') </a> @endif
+                    <div class="z-10" style="margin-top: -40%;" >
+                        <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}">
+                            <i class="text-3xl-vw text-3xl text-yellow-400 fa-solid fa-circle-play"></i>
+                        </a>
+                    </div>
                 @elseif($extension === 'svg')
                     <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
                 @else
@@ -70,7 +77,7 @@
                 @endphp
             @if(!$hideUploader)
             <span class="flex items-center gap-1 mt-1 justify-center" title="Uploaded by {{$displayName}} (#{{$uid}})">
-                <img class="w-6 rounded-full" src="{{$src}}" />
+                <img style="width:17%" class="w1-6 rounded-full" src="{{$src}}" />
                 {{$firstName}} 
             </span>
             @endif

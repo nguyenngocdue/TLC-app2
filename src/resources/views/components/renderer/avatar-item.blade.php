@@ -29,7 +29,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
     <span>
         <p class="font-semibold text-right {{$textGray}}">{{$title}}</p>
         <p class="text-right text-xs-vw text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
-        <i>{{$content}}</i>
+        <p class="text-right text-xs-vw italic">{{$content}}</p>
     </span>
     <div class="{{$sizeStr}} ml-2">
         <span class="relative  {{$sizeStr}} rounded-full sm:block1 hidden1">
