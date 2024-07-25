@@ -4,7 +4,7 @@
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
-<div style="width:90%; aspect-ratio:210/138;">
+<div style="width:90%; aspect-ratio:210/105;">
     @if(!$readOnly)
     <div title="{{$title}}">Signature here:</div>
     @endif
@@ -18,7 +18,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
         <canvas 
                 {{-- width1="{{$w}}" height="{{$h}}"  --}}
                 id="canvas_{{$id}}" 
-                class="{{$canvasBg}} rounded w-full h-full"
+                class="{{$canvasBg}} rounded w-full"
                 style="touch-action: none; user-select: none;" ></canvas>
     </div>
     <input type="{{$input_or_hidden}}" class="border rounded w-full border-gray-200" name="{{$name}}" id="{{$name}}" value="{!! $value !!}" />

@@ -433,7 +433,7 @@ span.select2-selection__arrow {
         line-height: calc(36px * 1.5);
     }
 
-    .print-responsive .text-5xl-vw {
+    /* .print-responsive .text-5xl-vw {
         font-size: 48px;
         line-height: calc(48px * 1.5);
     }
@@ -456,7 +456,7 @@ span.select2-selection__arrow {
     .print-responsive .text-9xl-vw {
         font-size: 128px;
         line-height: calc(128px * 1.5);
-    }
+    } */
 }
 
 @media (max-width: 1023px) {
@@ -534,7 +534,7 @@ span.select2-selection__arrow {
         font-size: 3vw;
         line-height: calc(3vw * 1.5);
     }
-
+    /* 
     .print-responsive .text-5xl-vw {
         font-size: 4vw;
         line-height: calc(4vw * 1.5);
@@ -558,5 +558,5 @@ span.select2-selection__arrow {
     .print-responsive .text-9xl-vw {
         font-size: 10.667vw;
         line-height: calc(10.667vw * 1.5);
-    }
+    } */
 }
