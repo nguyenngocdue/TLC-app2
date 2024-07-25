@@ -46,29 +46,29 @@ class Heading extends Component
 
             switch ($this->level) {
                 case 1:
-                    $text = "text-4xl-vw";
+                    $text = "text-4xl text-4xl-vw";
                     break;
                 case 2:
-                    $text = "text-3xl-vw";
+                    $text = "text-3xl text-3xl-vw";
                     break;
                 case 3:
-                    $text = "text-2xl-vw";
+                    $text = "text-2xl text-2xl-vw";
                     break;
                 case 4:
-                    $text = "text-xl-vw";
+                    $text = "text-xl text-xl-vw";
                     break;
                 case 5:
-                    $text = "text-lg-vw";
+                    $text = "text-lg text-lg-vw";
                     break;
                 default:
                 case 6:
-                    $text = "text-md-vw";
+                    $text = "text-md text-md-vw";
                     break;
                 case 7:
-                    $text = "text-sm-vw";
+                    $text = "text-sm text-sm-vw";
                     break;
                 case 8:
-                    $text = "text-xs-vw";
+                    $text = "text-xs text-xs-vw";
                     break;
             }
 
