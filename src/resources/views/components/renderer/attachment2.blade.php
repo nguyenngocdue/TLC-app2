@@ -111,7 +111,7 @@
                     
                 </div>
                 <div class="flex items-center gap-1" title="Uploaded by {{$displayName}} (#{{$uid}})">
-                    <img style="" class="w-1/12 rounded-full" src="{{$src}}" />
+                    <img style="width:4%" class="rounded-full" src="{{$src}}" />
                     <span>{{$displayName}}</span>
                     <p class="text-sm-vw">{{date('d/m/Y',strtotime($doc['created_at'] ?? ''))}}</p>
                 </div>
