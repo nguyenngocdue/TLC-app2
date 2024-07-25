@@ -122,7 +122,8 @@
 {{-- <span class="h-[50vh]"></span> 50% of the screen height --}}
 
 <!-- gloabl -->
-<div class="justify-evenly animate-pulse animate-bounce " ></div>
+<div class="justify-evenly animate-bounce " ></div>
+<div class="justify-evenly animate-pulse  " ></div>
 
 {{-- Table footer aggregate --}}
 <div class="focus:outline-none"></div>
