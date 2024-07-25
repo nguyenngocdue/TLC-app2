@@ -4,7 +4,7 @@ namespace App\View\Components\HomeWebPage;
 
 use Illuminate\View\Component;
 
-class OurProduct extends Component
+class OurProducts extends Component
 {
     function render()
     {

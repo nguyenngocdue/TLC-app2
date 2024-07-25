@@ -190,6 +190,8 @@ return [
         App\Providers\PermissionEditServiceProvider::class,
         App\Providers\PermissionDeleteServiceProvider::class,
         App\Providers\MigrationsServiceProvider::class,
+
+        App\Providers\MobileDetectServiceProvider::class,
     ],
 
     /*
@@ -208,6 +210,8 @@ return [
             'Image' => Intervention\Image\Facades\Image::class,
             'Redis' => Illuminate\Support\Facades\Redis::class,
             'Agent' => Jenssegers\Agent\Facades\Agent::class,
+            'MobileDetect' => App\Facades\MobileDetect::class,
+            'Log' => Illuminate\Support\Facades\Log::class,
         ])
         ->toArray(),
 ];

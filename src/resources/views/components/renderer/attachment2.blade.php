@@ -25,13 +25,16 @@
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
                 @elseif(in_array(strtolower($extension), ["mov","mp4","webm"]))
                 @if($openType == '_blank') <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
+                    @php
+                        $isMobile = MobileDetect::isMobile();
+                    @endphp
                     <video 
-                        class="w-auto rounded h-full object-cover" 
+                        class="w-auto rounded object-cover bg-slate-500" 
                         src="{{$path.$attachment['url_media']}}" 
                         alt="{{$attachment['filename']}}" 
-                        controls
+                        {{$isMobile ? "autoplay" : ""}}
+                        {{-- controls muted loop --}}
                         >
-                        {{-- <source src="{{$path.$attachment['url_media']}}"> --}}
                         Browser does not support video tag.
                     </video>
                     @if($openType == '_blank') </a> @endif
