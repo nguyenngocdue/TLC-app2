@@ -4,11 +4,12 @@
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
-<div style="width:90%; aspect-ratio:210/105;">
+<div style="width:210px; aspect-ratio:210/105;">
+{{-- <div style="width:90%; aspect-ratio:210/105;"> --}}
     @if(!$readOnly)
     <div title="{{$title}}">Signature here:</div>
     @endif
-    <div id="div1{{$name}}" class="relative border rounded h-full">
+    <div id="div1{{$name}}" class="relative border rounded h-full2">
         @if(!$readOnly)
             <button type="button" id="btnReset1_{{$count}}" class="no-print w-10 h-10 top-1 right-2 absolute">
                 <i class="text-red-700 fa-solid fa-xmark cursor-pointer text-lg"></i>
@@ -16,7 +17,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
         @endif
         
         <canvas 
-                {{-- width1="{{$w}}" height="{{$h}}"  --}}
+                width="210" height="105" 
                 id="canvas_{{$id}}" 
                 class="{{$canvasBg}} rounded w-full"
                 style="touch-action: none; user-select: none;" ></canvas>
