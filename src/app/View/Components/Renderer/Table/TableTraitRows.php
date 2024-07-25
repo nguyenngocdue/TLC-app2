@@ -145,7 +145,7 @@ trait TableTraitRows
 
             [$cellClassList, $cellTitle, $cellHref, $cellOnClick] = $this->parseCellObject($rawData);
             $breakWords = $this->noCss ? "break-all123" : "";
-            $tinyText = $this->noCss ? "text-xs" : "";
+            $tinyText = $this->noCss ? "text-xs text-xs-vw" : "";
             $borderGray = $this->noCss ? "border-gray-400" : "";
             $bgWhite = ($renderer == 'no.') ? "bg-white" : "";
             $nowrap = ($column['nowrap'] ?? false) ? "whitespace-nowrap" : "";
@@ -220,7 +220,7 @@ trait TableTraitRows
             if (isset($dataLineObj->rowDescription)) {
                 $colspan_minus_1 = $colspan - 1;
 
-                $td = "<td class='p-2 border-b text-xs dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLineObj->rowDescription}</td>";
+                $td = "<td class='p-2 border-b text-xs text-xs-vw dark:text-gray-300 text-gray-600' colspan=$colspan_minus_1>{$dataLineObj->rowDescription}</td>";
                 $trs[] = "<tr component='rowDescription' class='dark:bg-gray-600 bg-gray-100'><td class='border-b'></td>$td</tr>";
             }
         }

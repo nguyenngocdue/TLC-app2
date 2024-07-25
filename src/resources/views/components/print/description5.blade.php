@@ -37,26 +37,26 @@
                 @if ($newLine)
                     @if(!$hiddenLabel)
                         @if($control != 'textarea_diff_draft')
-                        <label class='p-2 text-base font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
+                        <label class='p-2 text-md-vw font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
                         @endif
                     @endif
                     @if ($control == 'toggle')
-                    <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
+                    <span class='p-2 border border-gray-600 flex justify-start items-center text-sm-vw font-normal col-span-12 text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
                     @elseif ($control == 'textarea_diff')
-                        <div class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
+                        <div class='p-2 border border-gray-600 flex justify-start items-center text-sm-vw font-normal col-span-12 text-left'>
                             <x-controls.text-editor name="{{$columnName}}" :value="$content" />
                         </div>
                     @else
-                    <span class='p-2 border border-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>{!!$content!!}</span>
+                    <span class='p-2 border border-gray-600 flex justify-start items-center text-sm-vw font-normal col-span-12 text-left'>{!!$content!!}</span>
                     @endif
                 @else
                     @if(!$hiddenLabel)
-                        <label class='p-2 border-r border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
+                        <label class='p-2 border-r border-gray-600 text-md-vw font-medium bg-gray-50 h-full w-full flex col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
                     @endif
                     @if ($control == 'toggle')
-                        <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
+                        <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm-vw font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{{$content == "1" ? "Yes" : "No"}}</span>
                     @else
-                        <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{!!$content!!}</span>
+                        <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm-vw font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>{!!$content!!}</span>
                     @endif
                 @endif
             </div>
@@ -69,27 +69,27 @@
         <div class='grid grid-cols-12 text-right '>
             @if ($newLine)
                 @if(!$hiddenLabel)
-                    <label class='p-2 text-base font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
+                    <label class='p-2 text-md-vw font-medium h-full w-full flex col-span-12 items-center justify-start col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'parent_link')
-                    <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
+                    <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm-vw font-normal col-span-12 text-left'>
                         <x-print.parent-link5 :dataSource="$content"/>
                     </span>
                 @else
-                    <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm font-normal col-span-12 text-left'>
+                    <span class='p-2 bor1der bor1der-gray-600 flex justify-start items-center text-sm-vw font-normal col-span-12 text-left'>
                         (None)
                     </span>
                 @endif
             @else
                 @if(!$hiddenLabel)
-                    <label class='p-2 border-r border-gray-600 text-base font-medium bg-gray-50 h-full w-full flex col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
+                    <label class='p-2 border-r border-gray-600 text-md-vw font-medium bg-gray-50 h-full w-full flex col-span-{{24/$colSpan}} items-center justify-end col-start-1'>{{$label}}</label>
                 @endif
                 @if ($control == 'parent_link')
-                    <span class='p-2 bord1er bord1er-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                    <span class='p-2 bord1er bord1er-gray-600 flex justify-start items-center text-sm-vw font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
                         <x-print.parent-link5 :dataSource="$content"/>
                     </span>
                 @else
-                    <span class='p-2 bord1er bor1der-gray-600 flex justify-start items-center text-sm font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
+                    <span class='p-2 bord1er bor1der-gray-600 flex justify-start items-center text-sm-vw font-normal col-start-{{24/$colSpan+1}} col-span-{{12 - 24/$colSpan}} text-left'>
                     </span>
                 @endif
             @endif

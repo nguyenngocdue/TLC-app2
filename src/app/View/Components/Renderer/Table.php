@@ -118,7 +118,7 @@ class Table extends Component
       'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
       // 'minH' => $this->minH ? "min-h-[{$this->minH}rem]" : "",
       'tableDebug' => $this->tableDebug,
-      'trClassList' => 'bg-gray-100 text-center text-xs font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
+      'trClassList' => 'bg-gray-100 text-center text-xs text-xs-vw font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
       'noCss' => $this->noCss,
       'showPaginationTop' => $this->showPaginationTop,
       'showPaginationBottom' => $this->showPaginationBottom,

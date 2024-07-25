@@ -95,7 +95,7 @@ trait TableTraitColumns
         $borderRight = $isLastColumn ? "" : "border1 border-r";
         $borderRight = ($this->rotate45Width) ? "" : $borderRight;
         $borderLeft = $isFirstFixedRightColumn ?  "border-l" : "";
-        $tinyText = $this->noCss ? "text-xs" : "";
+        $tinyText = $this->noCss ? "text-xs text-xs-vw" : "";
         $colspanStr = ($colspan > 1) ? "colspan=$colspan" : "";
         $hiddenStr = $hidden ? "hidden" : "";
         $borderColor = $this->noCss ? "border-gray-400" : $this->borderColor;
