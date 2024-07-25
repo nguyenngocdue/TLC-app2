@@ -20,7 +20,7 @@ class Attachment2 extends Component
         private $label = '',
         private $properties = [],
         private $openType = 'gallery',
-        private $gridCols = 'grid-cols-5',
+        private $gridCols = 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 ',
     ) {
         // dump($openType);
         if (is_array($value)) {
