@@ -46,7 +46,7 @@
                                     />
                             </div>
                         @else
-                            <div class='col-start-1 {{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-right" }} '>
+                            <div class='col-start-1 col-span-12 sm:{{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-left sm:text-right" }} '>
                                 <x-renderer.item-render-label
                                         :item="$item"
                                         :prop="$prop"
@@ -61,7 +61,7 @@
                                         labelExtra="{{$labelExtra}}"
                                 />
                             </div>
-                            <div class="{{$classColStart}} {{$classColSpanControl}} pb-2 text-left">
+                            <div class="{{$classColStart}} sm:{{$classColSpanControl}} col-span-12 pb-2 text-left">
                                 @php $value2 = $value2 ?? "" @endphp
                                 <x-renderer.item-render-control
                                     :item="$item"
