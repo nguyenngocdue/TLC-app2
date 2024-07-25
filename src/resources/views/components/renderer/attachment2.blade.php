@@ -2,7 +2,7 @@
     @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
-    <div class="grid {{$gridCols}} lg:gap-3 md:gap-2 sm:gap-1 p-1 break-inside-avoid1" style="break-inside: auto">
+    <div class="grid {{$gridCols}} lg:gap-3 md:gap-2 sm:gap-1 p-1 ">
         @foreach($attachments as $attachment)
         @php
         [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
@@ -10,7 +10,7 @@
         @if($hasOrphan)
             <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
-        <div class="border-{{$border}}-300 h-full">
+        <div class="border-{{$border}}-300 h-full break-inside-avoid">
             <div 
             name='{{$name}}' 
             title="{{$title}}" 
