@@ -44,7 +44,7 @@ class Header5 extends Component
     {
         $lines = [];
         foreach ($dataSource as $key => $value) {
-            $lines[] = "<span class='col-span-2 text-right font-bold p-05vw'>$key </span> <span class='col-span-4 p-05vw'> $value</span>";
+            $lines[] = "<span class='col-span-2 text-right font-bold p-025vw'>$key </span> <span class='col-span-4 p-025vw'> $value</span>";
         }
         $result = "<div class='text-md-vw border rounded-lg  grid grid-cols-12 w-full border-gray-600'>";
         $result .= join("", $lines);

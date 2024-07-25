@@ -20,6 +20,7 @@ class AvatarUser extends Component
         private $title = null,
         private $description = null,
         private $showCompany = false,
+        private $size = null,
     ) {
         //
     }
@@ -77,7 +78,7 @@ class AvatarUser extends Component
         if ($this->icon) {
             return "<div  style='width:{$this->icon}px; height:{$this->icon}px;' title='$title - $description $tooltip' ><img src='$avatar' class='rounded-full'/></div>";
         } else {
-            return "<x-renderer.avatar-item class='$class' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
+            return "<x-renderer.avatar-item class='$class' size='$this->size' flipped='$this->flipped' tooltip='$tooltip' title='$title' description='$description' href='$href' avatar='$avatar' gray='$gray' verticalLayout='$verticalLayout'></x-renderer.avatar-item>";
         }
     }
 

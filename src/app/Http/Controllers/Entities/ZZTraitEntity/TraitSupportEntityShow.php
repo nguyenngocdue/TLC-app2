@@ -99,33 +99,38 @@ trait TraitSupportEntityShow
         $str = "";
         foreach ($arrayControl as $value) {
             if ($controlValue === $value) {
+                $tdColor = "";
                 switch ($value) {
                     case in_array($value, ['Yes', 'Pass']):
                         $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-green-700'></i>";
                         $value = "<span class=' text-green-700'>" . $value . "</span>";
-                        $valueRender = "<div class='bg-green-300'>" . $checkedIcon . $value . "</div>";
+                        $valueRender = $checkedIcon . $value;
+                        $tdColor = "bg-green-300";
                         break;
                     case in_array($value, ['No', 'Fail']):
                         $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-pink-700'></i>";
                         $value = "<span class=' text-pink-700'>" . $value . "</span>";
-                        $valueRender = "<div class='bg-pink-300'>" . $checkedIcon . $value . "</div>";
+                        $valueRender =  $checkedIcon . $value;
+                        $tdColor = "bg-pink-300";
                         break;
                     case 'NA':
                         $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-gray-700'></i>";
                         $value = "<span class=' text-gray-700'>" . $value . "</span>";
-                        $valueRender = "<div class='bg-gray-300'>" . $checkedIcon . $value . "</div>";
+                        $valueRender = $checkedIcon . $value;
+                        $tdColor = "bg-gray-300";
                         break;
                     case 'On Hold':
                         $checkedIcon = "<i class='fa-solid fa-circle-check pr-1 text-orange-700'></i>";
                         $value = "<span class=' text-orange-700'>" . $value . "</span>";
-                        $valueRender = "<div class='bg-orange-300'>" . $checkedIcon . $value . "</div>";
+                        $valueRender = $checkedIcon . $value;
+                        $tdColor = "bg-orange-300";
                         break;
                     default:
                         break;
                 }
-                $str .= '<td class="border text-center" style="width:30%">' . $valueRender . '</td>';
+                $str .= '<td class="border text-center font-bold 11111 ' . $tdColor . '" style="width:30%">' . $valueRender . '</td>';
             } else {
-                $str .=  '<td class="border text-center" style="width:30%">' . $circleIcon . $value . '</td>';
+                $str .=  '<td class="border text-center 22222" style="width:30%">' . $circleIcon . $value . '</td>';
             }
         };
         $longStr =  $str; // $runUpdated;
@@ -144,7 +149,7 @@ trait TraitSupportEntityShow
             if ($isSignature) $inspId = $item->user_id;
             // $inspId = $item->user_id || $item->inspector_id;
             if (is_null($inspId)) return "";
-            $renderInspector = Blade::render("<div class='flex justify-end'><x-renderer.avatar-user uid='$inspId' content='$dateTime' showCompany=1 /></div>");
+            $renderInspector = Blade::render("<div class='flex justify-end'><x-renderer.avatar-user size='w-2/12' uid='$inspId' content='$dateTime' showCompany=1 /></div>");
             return $renderInspector;
         } else {
             $value = $item->qaqc_insp_control_value_id ?: $item->hse_insp_control_value_id;
@@ -156,7 +161,7 @@ trait TraitSupportEntityShow
                     // $user = User::find($uid);
                     $name = $user ? $user->name : "";
                     $avatar = $user ? $user->getAvatarThumbnailUrl() : "";
-                    $avatarStr = $avatar ? "<img src='$avatar' class='w-6 h-6 rounded-full' />" : "";
+                    $avatarStr = $avatar ? "<img src='$avatar' style='width:12%;' class='rounded-full' />" : "";
                     $inspector = $avatarStr . ' ' . $name . " ";
                     return '<span class="flex gap-1">' . $inspector . $date . "</span>";
                 }

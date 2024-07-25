@@ -15,8 +15,8 @@
                <input type="hidden" name="{{$table01Name}}[inspector_id][{{$rowIndex}}]" value="{{$cuid}}" />
                @endif
 
-               @if($line->value && $uid) 
-                    <x-renderer.avatar-user size="xlarge" uid="{{$uid}}" flipped=1 content="Signed at {{$timestamp}}"></x-renderer.avatar-user> 
+               @if($line->value && $uid)                
+                    <x-renderer.avatar-user size="xl" uid="{{$uid}}" flipped=1 content="Signed at {{$timestamp}}"></x-renderer.avatar-user> 
                @endif
           </div>
      </div>

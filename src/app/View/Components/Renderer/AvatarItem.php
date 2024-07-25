@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class AvatarItem extends Component
@@ -44,11 +45,14 @@ class AvatarItem extends Component
             case 'large':
                 $sizeStr = "w-10 h-10";
                 break;
-            case 'xlarge':
+            case 'xl':
                 $sizeStr = "w-14 h-14";
                 break;
-            default:
+            case null:
                 $sizeStr = "w-8 h-8";
+                break;
+            default:
+                $sizeStr = $this->size;
                 break;
         }
         return view('components.renderer.avatar-item', [

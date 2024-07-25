@@ -363,6 +363,11 @@ span.select2-selection__arrow {
         margin: calc(var(--parent-width) * 1.4 * 0.01);
     }
 
+    .print-responsive .p-025vw {
+        --parent-width: 1000px;
+        padding: calc(var(--parent-width) * 1.4 * 0.0025);
+    }
+
     .print-responsive .p-05vw {
         --parent-width: 1000px;
         padding: calc(var(--parent-width) * 1.4 * 0.005);
@@ -466,6 +471,9 @@ span.select2-selection__arrow {
         margin: calc((90vw * 1.4) * 0.01);
     }
 
+    .print-responsive .p-025vw {
+        padding: calc((90vw * 1.4) * 0.0025);
+    }
     .print-responsive .p-05vw {
         padding: calc((90vw * 1.4) * 0.005);
     }

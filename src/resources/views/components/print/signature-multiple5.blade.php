@@ -19,7 +19,7 @@
             @endif
             <div class='mt-2 flex justify-center'>
                 <div>
-                    <x-renderer.avatar-user size="xlarge" uid="{{$userId}}" showCompany=1 content={{$dateTime}}/>
+                    <x-renderer.avatar-user size="xl" uid="{{$userId}}" showCompany=1 content={{$dateTime}}/>
                 </div>
             </div>
         </div>

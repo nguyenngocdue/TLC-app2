@@ -76,7 +76,7 @@
                     />
                 @endif
             </div>
-            <x-renderer.avatar-user size="xlarge" uid="{{$user->id}}" flipped=1 content=""/>
+            <x-renderer.avatar-user size="xl" uid="{{$user->id}}" flipped=1 content=""/>
         </div>
         @endforeach
         
