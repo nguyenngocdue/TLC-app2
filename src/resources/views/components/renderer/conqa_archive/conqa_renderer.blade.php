@@ -4,7 +4,7 @@
 {{-- @dump($signoffs) --}}
 @foreach($sections as $section)
     <div class="bg-white my-10 mx-auto p-10 border" style="max-width: 1000px;">
-        <x-renderer.heading level=3 xalign='center'>{{$section->name}}</x-renderer.heading>
+        <x-renderer.heading level=3 class='text-center'>{{$section->name}}</x-renderer.heading>
         <br/>
         
         @foreach($section->checkpoints as $checkpointId)

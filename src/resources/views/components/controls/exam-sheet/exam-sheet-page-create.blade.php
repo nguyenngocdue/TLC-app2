@@ -8,10 +8,10 @@
     <div class="col-span-12 text-center">
         <div class="flex w-full justify-center">
         <div class="w-1/3">
-            <x-renderer.heading level=3 xalign=center>Welcome to Questionare system.</x-renderer.heading>
+            <x-renderer.heading level=3 class="text-center">Welcome to Questionare system.</x-renderer.heading>
 
             @if(sizeof($availableExams) > 0)
-                <x-renderer.heading class="mt-10" level=4 xalign=center>The New questionares:</x-renderer.heading>
+                <x-renderer.heading class="mt-10" level=4 class="text-center">The New questionares:</x-renderer.heading>
                 @foreach($availableExams as $exam)
                 <form action="{{$routeStore}}" method="POST" class="hover:bg-lime-200 rounded p-2">
                     @csrf
@@ -28,7 +28,7 @@
             @endif
 
             @if(sizeof($myInProgressSheets) > 0)
-                <x-renderer.heading class="mt-10" level=4 xalign=center>The In Progress questionares:</x-renderer.heading>
+                <x-renderer.heading class="mt-10" level=4 class="text-center">The In Progress questionares:</x-renderer.heading>
                 @foreach($myInProgressSheets as $sheet)
                 @php
                     $routeEdit = route(Str::plural($type) . '.edit', $sheet->id);
@@ -44,7 +44,7 @@
             @endif
 
             @if(sizeof($mySubmittedSheets) > 0)
-                <x-renderer.heading class="mt-10" level=4 xalign=center>The Submitted questionares:</x-renderer.heading>
+                <x-renderer.heading class="mt-10" level=4 class="text-center">The Submitted questionares:</x-renderer.heading>
                 @foreach($mySubmittedSheets as $sheet)
                 @php
                     $routeEdit = route(Str::plural($type) . '.edit', $sheet->id);
@@ -60,7 +60,7 @@
             @endif
 
             @if(sizeof($myFinishedSheets) > 0)
-                <x-renderer.heading class="mt-10" level=4 xalign=center>The Finished questionares:</x-renderer.heading>
+                <x-renderer.heading class="mt-10" level=4 class="text-center">The Finished questionares:</x-renderer.heading>
                 @foreach($myFinishedSheets as $sheet)
                 @php
                     $routeEdit = route(Str::plural($type) . '.edit', $sheet->id);

@@ -16,7 +16,7 @@
                     
                 <x-print.letter-head5 showId={{$showId}} type={{$type}} :dataSource="$dataSource" />
                     
-                <x-renderer.heading level=3 xalign='center'>{{Str::singular($topTitle)}}</x-renderer.heading>
+                <x-renderer.heading level=3 class='text-center uppercase font-bold p-1vw'>{{Str::singular($topTitle)}}</x-renderer.heading>
                 
                 @foreach($propsTree as $propTree)
                     <x-print.description-group5 type={{$type}} modelPath={{$modelPath}}

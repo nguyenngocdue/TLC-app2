@@ -15,7 +15,7 @@ class Heading extends Component
         private $id = '',
         private $level = 6,
         private $title = '',
-        private $xalign = 'left',
+        // private $xalign = 'left',
         private $class = '',
         private $labelExtra = '',
         private $scrollMarginTop = 90,
@@ -32,28 +32,57 @@ class Heading extends Component
     {
         return function (array $data) {
             $id = $this->id;
-            $font = "";
-            $size = 6 - $this->level;
-            $h = "h" . $this->level;
-            $labelExtra = $this->labelExtra;
-            $textSize = $size . "xl";
-            if ($size === 1) $textSize = "xl";
-            if ($size === 0) {
-                $textSize = "base";
-            } else {
-                $font = "font-medium";
+            // $font = "";
+            // $size = 6 - $this->level;
+            // $h = "h" . $this->level;
+            // $labelExtra = $this->labelExtra;
+            // $textSize = $size . "xl";
+            // if ($size === 1) $textSize = "xl";
+            // if ($size === 0) {
+            //     $textSize = "base";
+            // } else {
+            //     $font = "font-medium";
+            // }
+
+            switch ($this->level) {
+                case 1:
+                    $text = "text-4xl-vw";
+                    break;
+                case 2:
+                    $text = "text-3xl-vw";
+                    break;
+                case 3:
+                    $text = "text-2xl-vw";
+                    break;
+                case 4:
+                    $text = "text-xl-vw";
+                    break;
+                case 5:
+                    $text = "text-lg-vw";
+                    break;
+                default:
+                case 6:
+                    $text = "text-md-vw";
+                    break;
+                case 7:
+                    $text = "text-sm-vw";
+                    break;
+                case 8:
+                    $text = "text-xs-vw";
+                    break;
             }
 
-            $theClass = " leading-tight mx-4 dark:text-gray-300 $font text-{$textSize} text-{$this->xalign} $this->class";
+            // $theClass = " leading-tight mx-4 dark:text-gray-300 $font text-{$textSize} text-{$this->xalign} $this->class";
+            $theClass = $text . " leading-tight " . $this->class;
             $slot = $data['slot'];
             $slot = htmlspecialchars_decode($slot);
 
-            $result = "<$h  class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: {$this->scrollMarginTop}px;'>";
+            $result = "<div class='$theClass' id='$id' title='$this->title' style='scroll-margin-top: {$this->scrollMarginTop}px;'>";
             $result .= $slot;
             $result .= "<p class='text-xs font-light italic1' >";
-            $result .= $labelExtra;
+            $result .= $this->labelExtra;
             $result .= "</p>";
-            $result .= "</$h>";
+            $result .= "</div>";
             return  $result;
         };
         // return view('components.renderer.heading');

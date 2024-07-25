@@ -9,7 +9,7 @@ if($prodOrder->compliance_name) $a[] = "<span title='Compliance Name'>".$prodOrd
 $bigTitle = join(" / ", $a);
 if($project) $href = route("qaqc_insp_chklsts.edit", $chklst->id);
 @endphp
-<x-renderer.heading level=4 xalign="center">
+<x-renderer.heading level=4 class="text-center">
     {!! $bigTitle !!}
 </x-renderer.heading>
 @if($project)

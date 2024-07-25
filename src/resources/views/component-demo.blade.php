@@ -7,7 +7,7 @@
 $activeClass = "bg-white border-t border-r border-l -mb-px";
 @endphp
 
-<x-renderer.heading level=3 xalign='center'><a href="/components">Components</a></x-renderer.heading>
+<x-renderer.heading level=3 class='text-center'><a href="/components">Components</a></x-renderer.heading>
 
 <!-- Tabs -->
 <div class="bg-gray-100 h-screen">

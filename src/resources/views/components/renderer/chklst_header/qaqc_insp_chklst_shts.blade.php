@@ -6,7 +6,7 @@
 <div class="flex justify-center "> 
     <div class="{{$formWidth}}"> 
         <div class="border bg-white rounded p-5">
-            <x-renderer.heading level="4" xalign="center" title="#{{$item->id}}">
+            <x-renderer.heading level="4" class="text-center" title="#{{$item->id}}">
                 {{strtoupper( $item->name)}}
             </x-renderer.heading>
             <hr/>

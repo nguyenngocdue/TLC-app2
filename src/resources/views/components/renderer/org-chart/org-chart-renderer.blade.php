@@ -1,5 +1,5 @@
 <div class="my-10">
-    <x-renderer.heading level=3 xalign="center">
+    <x-renderer.heading level=3 class="text-center">
         {{$department? strtoupper($department->name) : ""}}
     </x-renderer.heading>
 </div>
