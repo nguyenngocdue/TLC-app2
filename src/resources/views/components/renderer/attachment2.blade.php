@@ -2,7 +2,7 @@
     @if(sizeof($attachments) ==0 && sizeof($docs) == 0)
     <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
-    <div class="grid {{$gridCols}} lg:gap-3 md:gap-2 sm:gap-1 p-1 break-inside-avoid">
+    <div class="grid {{$gridCols}} lg:gap-3 md:gap-2 sm:gap-1 p-1 break-inside-avoid1" style="break-inside: auto">
         @foreach($attachments as $attachment)
         @php
         [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
@@ -14,8 +14,18 @@
             <div 
             name='{{$name}}' 
             title="{{$title}}" 
-            class="relative flex mx-1 flex-col items-center p-025vw border-2 rounded-lg  group/item overflow-hidden bg-inherit"
+            class="relative flex mx-1 flex-col items-center p-025vw border-2 rounded-lg  
+                    group/item overflow-hidden bg-inherit
+                    aspect-square
+                    "
             >
+            @if(in_array(strtolower($extension), ["mov","mp4","webm"]))
+                <div class="z-10 absolute" style="bottom:1%; right:5%; " >
+                    <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}">
+                        <i class="text-2xl-vw text-2xl text-yellow-400 fa-solid fa-circle-play"></i>
+                    </a>
+                </div>
+            @endif
                 {{-- This is the image --}}
                 @if(in_array($extension,["png","gif","jpg","jpeg"]))
                     @if($openType == '_blank') <a target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
@@ -24,12 +34,12 @@
                 @elseif(in_array(strtolower($extension), ["csv","pdf","zip"]))
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
                 @elseif(in_array(strtolower($extension), ["mov","mp4","webm"]))
-                @if($openType == '_blank') <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
+                    @if($openType == '_blank') <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
                     @php
                         $isMobile = MobileDetect::isMobile();
                     @endphp
                     <video 
-                        class="w-auto rounded object-cover bg-slate-500" 
+                        class="w-auto rounded object-cover bg-slate-500 aspect-square" 
                         src="{{$path.$attachment['url_media']}}" 
                         alt="{{$attachment['filename']}}" 
                         {{$isMobile ? "autoplay" : ""}}
@@ -38,11 +48,7 @@
                         Browser does not support video tag.
                     </video>
                     @if($openType == '_blank') </a> @endif
-                    <div class="z-10" style="margin-top: -40%; margin-right: -60%;" >
-                        <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}">
-                            <i class="text-2xl-vw text-2xl text-yellow-400 fa-solid fa-circle-play"></i>
-                        </a>
-                    </div>
+                    
                 @elseif($extension === 'svg')
                     <img class="w-auto h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}" />
                 @else
