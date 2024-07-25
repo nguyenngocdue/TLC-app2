@@ -25,11 +25,19 @@
                     <i class="w-auto h-full object-cover fa-light fa-file-{{$extension=='zip' ? 'arrow-down' : $extension}} text-9xl"></i>
                 @elseif(in_array(strtolower($extension), ["mov","mp4","webm"]))
                 @if($openType == '_blank') <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}"> @endif
-                    <video class="w-auto rounded h-full object-cover" src="{{$path.$attachment['url_media']}}" alt="{{$attachment['filename']}}"></video>
+                    <video 
+                        class="w-auto rounded h-full object-cover" 
+                        src="{{$path.$attachment['url_media']}}" 
+                        alt="{{$attachment['filename']}}" 
+                        controls
+                        >
+                        {{-- <source src="{{$path.$attachment['url_media']}}"> --}}
+                        Browser does not support video tag.
+                    </video>
                     @if($openType == '_blank') </a> @endif
-                    <div class="z-10" style="margin-top: -40%;" >
+                    <div class="z-10" style="margin-top: -40%; margin-right: -60%;" >
                         <a class="cursor-pointer" target="_blank" href="{{$path.$attachment['url_media']}}">
-                            <i class="text-3xl-vw text-3xl text-yellow-400 fa-solid fa-circle-play"></i>
+                            <i class="text-2xl-vw text-2xl text-yellow-400 fa-solid fa-circle-play"></i>
                         </a>
                     </div>
                 @elseif($extension === 'svg')
