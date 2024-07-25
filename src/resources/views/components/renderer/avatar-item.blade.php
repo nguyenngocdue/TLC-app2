@@ -25,7 +25,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
     </div> 
 </div>
 @elseif($flipped)
-<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm-vw rounded px-1 w-full justify-end" title="{{$tooltip}}" component="avatar-item-flipped">
+<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm text-sm-vw rounded px-1 w-full justify-end" title="{{$tooltip}}" component="avatar-item-flipped">
     <span>
         <p class="font-semibold text-right {{$textGray}}">{{$title}}</p>
         <p class="text-right text-xs-vw text-gray-600 dark:text-gray-300 ">{!! $description !!}</p>
@@ -38,7 +38,7 @@ $class .= $href ? "hover:bg-gray-200 hover:cursor-pointer":"";
     </div>
 </div>
 @else
-<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm-vw rounded px-1 w-full " title="{{$tooltip}}" component="avatar-item-normal">
+<div class="{{$bgGray}} {{$class}} min-h-[36px] flex items-center text-sm text-sm-vw rounded px-1 w-full " title="{{$tooltip}}" component="avatar-item-normal">
     <div class="{{$sizeStr}} mr-2">
         <span class="relat1ive  {{$sizeStr}} rounded-full sm:block1 hidden1">
             <img class="object-cover w-full h-full {{$shape}}" src="{{$avatar}}" loading="lazy">

@@ -16,7 +16,7 @@
                @endif
 
                @if($line->value && $uid)                
-                    <x-renderer.avatar-user size="xl" uid="{{$uid}}" flipped=1 content="Signed at {{$timestamp}}"></x-renderer.avatar-user> 
+                    <x-renderer.avatar-user uid="{{$uid}}" flipped=1 content="{{$timestamp}}"></x-renderer.avatar-user> 
                @endif
           </div>
      </div>
