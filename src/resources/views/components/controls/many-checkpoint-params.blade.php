@@ -12,7 +12,7 @@
     @php
         $slug = Str::slug($group['name']);
     @endphp
-    <x-renderer.heading id="{{$slug}}" title="#{{$groupId}}" level=5>{{$group['name']}}</x-renderer.heading>
+    <x-renderer.heading id="{{$slug}}" title="#{{$groupId}}" level=5 class="font-bold uppercase p-2">{{$group['name']}}</x-renderer.heading>
     
 
     @foreach($group['items'] as $rowIndex => $checkpoint)    
