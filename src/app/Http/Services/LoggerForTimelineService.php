@@ -26,7 +26,7 @@ class LoggerForTimelineService
     function insertForUpdate($currentValue, $previousValue,  $userId, $modelPath,)
     {
         if (!isset($previousValue['status']) || !isset($currentValue['status'])) {
-            Log::info("$modelPath is statusless. Cancelled Logger.");
+            // Log::info("$modelPath is statusless. Cancelled Logger.");
             return;
         }
         $isChanged = ($previousValue['status'] !== $currentValue['status']);
