@@ -341,7 +341,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 break;
         }
 
-        $ncr_count = '';
+        $ncr_count = '<div class="text-center"><span class="font-bold ">0</span></div>';
         if ($label) {
             $ncr_count = Blade::render('
         <button data-popover-target="popover-{{$id}}" data-popover-placement="right" type="button" class="font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
