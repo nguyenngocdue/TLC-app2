@@ -70,16 +70,6 @@ class Header5 extends Component
     private function contentHeaderQaqcChecklist()
     {
         $dataSource = $this->dataSource;
-        $prodOrder = $dataSource->getProdOrder;
-        $prodOrderName = $prodOrder->production_name ?? '';
-        $subProject = $prodOrder?->getSubProject;
-        $subProjectName = $subProject->name ?? '';
-        $project = $subProject?->getProject;
-        $projectName = $project->description ?? '';
-
-        // $prodOrderName = $dataSource->getProdOrder->production_name ?? '';
-        // $projectName = $dataSource->getProject->description ?? '';
-        // $subProjectName = $dataSource->getSubProject->name ?? '';
         $nameCompany = config('company.name') ?? '';
         switch ($this->type) {
             case "qaqc_insp_chklst":
