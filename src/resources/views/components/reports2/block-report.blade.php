@@ -41,6 +41,8 @@
                 @break
 
                 @default
+                    @dump($block->sql_string)
+                    @dump($dataQuery)
                     <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning" title="{{ $block->name }}">
                         Kindly select a type of renderer for block.
                     </x-renderer.button>

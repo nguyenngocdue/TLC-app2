@@ -7,6 +7,8 @@ use Illuminate\View\Component;
 use App\Models\Term;
 use App\Utils\Support\HrefReport;
 use App\Utils\Support\RegexReport;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Log;
 
 class TableBlockReport extends Component
 {
@@ -35,17 +37,10 @@ class TableBlockReport extends Component
 
     private function createContentInRowCell($value, $column)
     {
-        $rowIcon = $column->row_icon;
-        $rowIconPosition = $this->getTermName($column->row_icon_position);
-        $rowRenderer = $this->getTermName($column->row_renderer);
-        switch ($rowRenderer) {
-            case "Icon":
-                $content = $rowIcon;
-                break;
-            default:
-                $content = $this->createIconPosition($value, $rowIconPosition, $rowIcon);
-                break;
+        if ($column->parent_id) {
+            $column = $column->getParent();
         }
+        $content = $this->createIconPosition($value, $column->row_icon, $column->row_icon_position);
         return $content;
     }
 
@@ -58,11 +53,13 @@ class TableBlockReport extends Component
             foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $keyAndReducedColumns)) {
                     $column = $keyAndReducedColumns[$k2];
-                    $rowHref = HrefReport::createHrefForRow($column, $dataLine);
+                    $dataHref = HrefReport::createDataHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
+                    Log::info($content);
+
                     $newValue = (object)[
                         'value' => $content,
-                        'cell_href' => $rowHref,
+                        'cell_href' => $dataHref->first(),
                         'cell_class' => $column->row_cell_class,
                         'cell_div_class' => $column->row_cell_div_class,
                     ];
@@ -71,7 +68,6 @@ class TableBlockReport extends Component
             }
             $result->put($k1, $re);
         }
-        // dump($result);
         return $result;
     }
 

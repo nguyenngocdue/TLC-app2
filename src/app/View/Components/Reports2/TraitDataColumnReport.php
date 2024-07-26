@@ -15,9 +15,9 @@ trait TraitDataColumnReport
 
     public function createIconPosition($content, $icon, $iconPosition)
     {
-        $name = Term::find($iconPosition)?->name;
-        if ($name) {
-            switch ($name) {
+        $rowIconPosition = $this->getTermName($iconPosition);
+        if ($rowIconPosition) {
+            switch ($rowIconPosition) {
                 case 'Left':
                     return $icon . ' ' . $content;
                 case 'Right':

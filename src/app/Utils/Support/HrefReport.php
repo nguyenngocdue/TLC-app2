@@ -17,7 +17,7 @@ class HrefReport
         ];
     }
 
-    public static function createHrefForRow($column, $dataLine)
+    public static function createDataHrefForRow($column, $dataLine)
     {
         $rowHrefFn = $column->row_href_fn;
         $regexValues = RegexReport::pregLinkRowCell($rowHrefFn);
@@ -28,12 +28,17 @@ class HrefReport
             array_map(fn ($field) => $dataLine->{$field} ?? null, $fields)
         );
         $href = str_replace($variables, array_values($result), $rowHrefFn);
+        [$entity, $action] = ["", ""];
 
         if (str_contains($href, 'route(')) {
             [$routeName, $id] = static::extractRouteParts($href);
-            $routeExits = Route::has($routeName);
-            $href =  $routeExits ? route($routeName, $id) : "#";
+            [$entity, $action] = explode('.', $routeName);
+            $href = Route::has($routeName) ? route($routeName, $id) : "#";
         }
-        return $href;
+        return collect([
+            'href' => $href,
+            'entity' => $entity,
+            'action' => $action,
+        ]);
     }
 }
