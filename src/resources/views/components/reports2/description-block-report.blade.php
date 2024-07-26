@@ -1,4 +1,4 @@
-<x-renderer.report2.title-description-block :block="$block" />
+{{-- <x-renderer.report2.title-description-block :block="$block" /> --}}
 
 
 <table class="w-full table-auto border-collapse border border-gray-300">

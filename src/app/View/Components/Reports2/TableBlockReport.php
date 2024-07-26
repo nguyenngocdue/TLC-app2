@@ -5,6 +5,8 @@ namespace App\View\Components\Reports2;
 use App\Utils\Support\Report;
 use Illuminate\View\Component;
 use App\Models\Term;
+use App\Utils\Support\HrefReport;
+use App\Utils\Support\RegexReport;
 
 class TableBlockReport extends Component
 {
@@ -47,18 +49,20 @@ class TableBlockReport extends Component
         return $content;
     }
 
+
     private function createTableDataSourceForRow($dataQuery, $keyAndReducedColumns)
     {
         $result = collect();
-        foreach ($dataQuery as $k1 => $item) {
+        foreach ($dataQuery as $k1 => $dataLine) {
             $re = (object)[];
-            foreach ($item as $k2 => $value) {
+            foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $keyAndReducedColumns)) {
                     $column = $keyAndReducedColumns[$k2];
+                    $rowHref = HrefReport::createHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
                     $newValue = (object)[
                         'value' => $content,
-                        'cell_href' => $column->row_href_fn,
+                        'cell_href' => $rowHref,
                         'cell_class' => $column->row_cell_class,
                         'cell_div_class' => $column->row_cell_div_class,
                     ];
@@ -75,17 +79,12 @@ class TableBlockReport extends Component
     public function render()
     {
         $block = $this->block;
-
         $columns = $this->block->getLines()->get()->sortby('order_no');
-        // $secondColumns = $this->block->get2ndHeaderLines()->get()->sortby('order_no');
-        // dd($secondColumns);
 
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
         $keyAndColumnsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
-        // $editedTableColumns = $this->editTableColumns($keyAndColumnsReduced);
 
         $newTableDataSource = $this->createTableDataSourceForRow($this->rawTableDataSource, $keyAndColumnsReduced);
-
 
         return view('components.reports2.table-block-report', [
             'block' => $block,
