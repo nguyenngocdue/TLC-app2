@@ -21,7 +21,7 @@
 
     <x-renderer.status>in progress</x-renderer.status>
 
-    {{-- <x-renderer.id_name_link :dataLine="$dataLine" routeStr="{{ $routeStr }}">Id Name</x-renderer.status> --}}
+    <x-renderer.id_name_link :dataLine="$dataLine" routeStr="{{ $routeStr }}">Id Name</x-renderer.status>
 
-    {{-- <x-renderer.id_status_link :dataSource="$ids" showTitle=1>150</x-renderer.id_status_link> --}}
-@endsection
+        {{-- <x-renderer.id_status_link :dataSource="$ids" showTitle=1>150</x-renderer.id_status_link> --}}
+    @endsection
