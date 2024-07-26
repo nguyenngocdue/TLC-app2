@@ -106,9 +106,11 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 ->where('qaqc_insp_tmpl_id', $tmplId)
                 //This to enable AOI 1 Mockup Backup
                 ->where('prod_routing_id', $routingId)
-                ->with('getProdOrder')
-                ->with('getPunchlist')
-                ->with('getProdOrder.getSubProject')
+                ->with([
+                    'getProdOrder',
+                    'getPunchlist',
+                    'getProdOrder.getSubProject'
+                ])
                 ->orderBy('name');
             $result[$key] = $yAxis->get();
             // dump(sizeof($yAxis));

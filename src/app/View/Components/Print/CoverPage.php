@@ -18,7 +18,7 @@ class CoverPage extends Component
         $template = $checklist->getQaqcInspTmpl;
         $routing = $checklist->getProdRouting;
         $prodOrder = $checklist->getProdOrder;
-        $subProject = $this->headerDataSource->getSubProject;
+        $subProject = $this->headerDataSource->getProdOrder->getSubProject;
         $project = $subProject->getProject;
         $src = app()->pathMinio() . $project->getAvatar->url_media;
         $params = [

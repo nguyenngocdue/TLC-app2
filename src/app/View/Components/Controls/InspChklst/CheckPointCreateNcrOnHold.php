@@ -73,10 +73,10 @@ class CheckPointCreateNcrOnHold extends Component
             'description' => "During " . $this->line->description . ", ",
             'prod_discipline_id' => $this->line->getSheet->prod_discipline_id,
         ];
-        if ($this->line->getProject) $params['project_id'] = $this->line->getProject->id;
-        if ($this->line->getSubProject) $params['sub_project_id'] = $this->line->getSubProject->id;
-        if ($this->line->getProdRouting) $params['prod_routing_id'] = $this->line->getProdRouting->id;
-        if ($this->line->getProdOrder) $params['prod_order_id'] = $this->line->getProdOrder->id;
+        if ($x = $this->line->getProject) $params['project_id'] = $x->id;
+        if ($y = $this->line->getSubProject) $params['sub_project_id'] = $y->id;
+        if ($z = $this->line->getProdRouting) $params['prod_routing_id'] = $z->id;
+        if ($t = $this->line->getProdOrder) $params['prod_order_id'] = $t->id;
         $href = route('qaqc_ncrs.create', $params);
         $lineNcrs = $this->line->getMorphManyByIds($this->checkPointIds, 'getNcrs', false);
         return ['NCR', $href, 'Create a new NCR', $lineNcrs, 'qaqc_ncrs.show'];

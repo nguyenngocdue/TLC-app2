@@ -70,23 +70,39 @@ class Header5 extends Component
     private function contentHeaderQaqcChecklist()
     {
         $dataSource = $this->dataSource;
-        $projectName = $dataSource->getProject->description ?? '';
-        $subProjectName = $dataSource->getSubProject->name ?? '';
-        $prodOrderName = $dataSource->getProdOrder->production_name ?? '';
+        $prodOrder = $dataSource->getProdOrder;
+        $prodOrderName = $prodOrder->production_name ?? '';
+        $subProject = $prodOrder?->getSubProject;
+        $subProjectName = $subProject->name ?? '';
+        $project = $subProject?->getProject;
+        $projectName = $project->description ?? '';
+
+        // $prodOrderName = $dataSource->getProdOrder->production_name ?? '';
+        // $projectName = $dataSource->getProject->description ?? '';
+        // $subProjectName = $dataSource->getSubProject->name ?? '';
         $nameCompany = config('company.name') ?? '';
         switch ($this->type) {
             case "qaqc_insp_chklst":
+                $prodOrder = $dataSource->getProdOrder;
+                break;
             case "qaqc_insp_chklst_shts":
-                $data = [
-                    "Organization:" => $nameCompany,
-                    "Project:" => $projectName,
-                    "Sub-Project:" => $subProjectName,
-                    "Production Name:" => $prodOrderName,
-                ];
-                return $this->makeDiv($data);
+                $prodOrder = $dataSource->getChklst->getProdOrder;
+                break;
             default:
                 return "Unknown how to render [$this->type]";
         }
+        $prodOrderName = $prodOrder->production_name ?? '';
+        $subProject = $prodOrder?->getSubProject;
+        $subProjectName = $subProject->name ?? '';
+        $project = $subProject?->getProject;
+        $projectName = $project->description ?? '';
+        $data = [
+            "Organization:" => $nameCompany,
+            "Project:" => $projectName,
+            "Sub-Project:" => $subProjectName,
+            "Production Name:" => $prodOrderName,
+        ];
+        return $this->makeDiv($data);
     }
 
     /**

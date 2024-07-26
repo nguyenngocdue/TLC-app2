@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Models\Qaqc_insp_chklst;
 use App\Utils\ClassList;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
@@ -16,17 +17,15 @@ trait TraitEntityCRUDShowChklst
     public function showChklst($id, $trashed)
     {
         // $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);;
-        $entity = ($this->modelPath)::query()
+        // $modelPath = Qaqc_insp_chklst::class;
+        // $entity = ($this->modelPath)::query()
+        $entity = Qaqc_insp_chklst::class::query()
             ->where('id', $id)
             ->with([
                 "getSheets" => function ($query) {
                     $query
                         ->whereNot('status', 'not_applicable')
                         ->with([
-                            // "getChklst",
-                            // "getProject",
-                            // "getSubProject",
-                            // "getProdOrder",
                             "getLines" => function ($query) {
                                 $query->orderBy('order_no')
                                     ->with([
@@ -40,8 +39,10 @@ trait TraitEntityCRUDShowChklst
                                     ]);
                             }
                         ])
-                        ->with($this->nominatedListFn);
-                }
+                        ->with($this->nominatedListFn)
+                        ->with('getChklst.getProdOrder.getSubProject.getProject');
+                },
+                // "getProdOrder.getSubProject.getProject",
             ])
             ->first();
 
