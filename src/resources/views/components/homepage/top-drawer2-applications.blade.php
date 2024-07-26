@@ -16,11 +16,17 @@
             @endforelse
         </div>
         @forelse($dataSource as $value) 
-        <div id="topDrawerGroup_{{$value['id']}}" class="top-drawer-group col-span-12 sm:col-span-8 xl:col-span-10 mx-auto w-3/4 grid grid-cols-12 gap-5">
+        <div id="topDrawerGroup_{{$value['id']}}" class="hidden p-4 top-drawer-group col-span-12 sm:col-span-8 xl:col-span-10 mx-auto w-3/4 grid grid-cols-12 ">
             @forelse($value["items"] as $item)
-                <div class="col-span-6 sm:col-span-6 md:col-span-4 xl:col-span-3 2xl:col-span-2 border rounded px-2 py-1 cursor-pointer hover:text-blue-600 hover:bg-blue-200 aspect-square">
-                    {!! $item["icon"] !!}
-                    {{$item["title"]}}
+                <div class="col-span-6 p-4 sm:col-span-6 md:col-span-4 xl:col-span-3 2xl:col-span-2 cursor-pointer hover:font-bold hover:text-blue-600">
+                    <div class="border rounded  aspect-square flex hover:border-blue-400  hover:bg-blue-200">
+                        <div class="text-5xl text-center m-auto">                        
+                            {!! $item["icon"] !!}
+                        </div>
+                    </div>
+                    <div class="relative text-center -mt-10">
+                        {{$item["title"]}}
+                    </div>
                 </div>
             @empty
                 <div class="col-span-12 p-2 border w-full rounded mx-auto text-center">
@@ -42,7 +48,7 @@ function toggleTopDrawer2Group(current){
     let topDrawerGroups = document.querySelectorAll('.top-drawer-group');
     topDrawerGroups.forEach((group) => {
         if(group.id === 'topDrawerGroup_' + current){
-            group.classList.toggle('hidden');
+            group.classList.remove('hidden');
         }else{
             group.classList.add('hidden');
         }
