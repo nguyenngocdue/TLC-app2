@@ -19,13 +19,12 @@ class TopDrawer2 extends Component
                 'title' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i> Applications',
                 'jsOnMouseOver' => "
                     $('#topDrawer2Applications').show(); 
-                    $('#tab-pan-applications').addClass('bg-white -mb-px').removeClass('bg-gray-200');
-
                     $('#topDrawer2Reports').hide(); 
-                    $('#tab-pan-reports').removeClass('bg-white -mb-px').addClass('bg-gray-200');
-
                     $('#topDrawer2Documents').hide(); 
-                    $('#tab-pan-documents').removeClass('bg-white -mb-px').addClass('bg-gray-200');",
+
+                    toggleTabPan('applications');
+                    ",
+
                 'active' => 1,
             ],
             [
@@ -33,13 +32,10 @@ class TopDrawer2 extends Component
                 'title' => '<i class="text-green-600 fa-duotone fa-file-chart-column"></i> Reports',
                 'jsOnMouseOver' => "
                     $('#topDrawer2Applications').hide(); 
-                    $('#tab-pan-applications').removeClass('bg-white -mb-px').addClass('bg-gray-200');
-
                     $('#topDrawer2Reports').show(); 
-                    $('#tab-pan-reports').addClass('bg-white -mb-px').removeClass('bg-gray-200');
-
                     $('#topDrawer2Documents').hide(); 
-                    $('#tab-pan-documents').removeClass('bg-white -mb-px').addClass('bg-gray-200');
+
+                    toggleTabPan('reports');
                     ",
             ],
             [
@@ -47,18 +43,309 @@ class TopDrawer2 extends Component
                 'title' => '<i class="text-orange-600 fa-duotone fa-file-lines"></i> Documents',
                 'jsOnMouseOver' => "
                     $('#topDrawer2Applications').hide(); 
-                    $('#tab-pan-applications').removeClass('bg-white -mb-px').addClass('bg-gray-200');
-
                     $('#topDrawer2Reports').hide(); 
-                    $('#tab-pan-reports').removeClass('bg-white -mb-px').addClass('bg-gray-200');
-
                     $('#topDrawer2Documents').show(); 
-                    $('#tab-pan-documents').addClass('bg-white -mb-px').removeClass('bg-gray-200');
+
+                    toggleTabPan('documents');
                     ",
             ],
         ];
+        $dataSource = [
+
+            [
+                'id' => "Project Managements",
+                'title' => "Project Managements",
+                'count' => 123,
+                'items' => [
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                    [
+                        'id' => 1,
+                        'title' => "Project 1",
+                        'count' => 123,
+                        'href' => '#',
+                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
+                        'create_new_href' => '#',
+                        'bookmark_href' => '#',
+                    ],
+                ],
+            ],
+            [
+                'id' => "Quality Controls",
+                'title' => "Quality Controls",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "Productions",
+                'title' => "Productions",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "Task Managements",
+                'title' => "Task Managements",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "On Sites",
+                'title' => "On Sites",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "HR Admins",
+                'title' => "HR Admins",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "Exams",
+                'title' => "Exams",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "Quality Assurances",
+                'title' => "Quality Assurances",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "Compliance Datas",
+                'title' => "Compliance Datas",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "ESG",
+                'title' => "ESG",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "HSE",
+                'title' => "HSE",
+                'count' => 123,
+                'items' => [],
+            ],
+            [
+                'id' => "Accounting",
+                'title' => "Accounting",
+                'count' => 123,
+                'items' => [],
+            ],
+
+        ];
         return view('components.homepage.top-drawer2', [
             'tabPans' => $tabPans,
+            'dataSource' => $dataSource,
             'route' => route('updateBookmark'),
         ]);
     }

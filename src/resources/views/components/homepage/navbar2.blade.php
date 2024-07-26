@@ -12,6 +12,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
             <div class="flex flex-1 lg:mr-32 ml-2">
                 @roleset('admin')
                     <x-homepage.top-drawer2/>
+                    @dd()
                 @else
                     <x-homepage.top-drawer/>
                 @endroleset

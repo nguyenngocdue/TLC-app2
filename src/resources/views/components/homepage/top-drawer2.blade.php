@@ -16,10 +16,12 @@
         >
         <div data-top-drawer class="px-1 xl:px-6 overflow-y-auto" style="max-height: 63vh; height:63vh;">
             <x-renderer.tab-pane :tabs="$tabPans">
-                <x-homepage.top-drawer2-applications />
+                <x-homepage.top-drawer2-applications :dataSource="$dataSource" />
                 <x-homepage.top-drawer2-reports />
                 <x-homepage.top-drawer2-documents />
+                <div class="block h-10"></div>
             </x-renderer.tab-pane>
+            <div class="block h-2"></div>
         </div>
         <div class="flex items-center hover:text-orange-400 text-gray-500 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
             <a href="https://appcenter.tlcmodular.com" class="inline-flex gap-2 items-center text-xs font-normal hover:underline dark:text-gray-300">
