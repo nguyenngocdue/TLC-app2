@@ -1,50 +1,37 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<div id="chart-{{$key}}"></div>
-
+<div id="chart-{{ $key }}"></div>
+{{-- @dump($jsonChart) --}}
 <script>
-  series = @json($series);
-  chartJson = @json($chartJson);
-  xAxisFn = chartJson["xaxis"];
-  key = "{{$key}}";
+    var key = "{{ $key }}";
+    var series = @json($series);
 
-  if (xAxisFn && xAxisFn.labels && xAxisFn.labels.formatter){
-        xAxisFn.labels.formatter = new Function("val", "return " + xAxisFn.labels.formatter + ";");
-  }
-// Define the options for the column chart
- var options = {
-          series: series,
-          chart: chartJson["chart"],
-        plotOptions: chartJson["plotOptions"],
-        stroke: {
-          width: 1,
-          colors: ['#fff']
-        },
-        title: chartJson["title"],
-        xaxis: xAxisFn,
-        yaxis: {
-          title: {
-            text: undefined
-          },
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return val + "K"
-            }
-          }
-        },
-        fill: {
-          opacity: 1
-        },
-        legend: {
-          position: 'top',
-          horizontalAlign: 'left',
-          offsetX: 40
-        }
+    // JSON cấu hình từ phía server
+    var jsonChart = {!! $jsonChart !!};
+
+    // Parse the JSON configuration
+    var chartOptions = JSON.parse(JSON.stringify(jsonChart));
+
+    // Check if xaxis and tooltip objects exist and replace stringified functions with actual functions
+    if (chartOptions.xaxis && chartOptions.xaxis.labels) {
+        chartOptions.xaxis.labels.formatter = function(val) {
+            return val + 'K';
         };
+    }
 
-        var chart = new ApexCharts(document.querySelector("#chart-"+ key), options);
-        chart.render();
-      
+    if (chartOptions.tooltip && chartOptions.tooltip.y) {
+        chartOptions.tooltip.y.formatter = function(val) {
+            return val + 'K';
+        };
+    }
 
+
+
+    var options = {
+        series: series,
+        ...chartOptions
+    };
+    console.log(chartOptions);
+    var chart = new ApexCharts(document.querySelector("#chart-" + key), options);
+    chart.render();
+    // */
 </script>

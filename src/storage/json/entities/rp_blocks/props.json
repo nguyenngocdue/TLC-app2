@@ -420,8 +420,8 @@
     "_chart_json": {
         "name": "_chart_json",
         "column_name": "chart_json",
-        "column_type": "json",
-        "label": "Chart Json",
+        "column_type": "text",
+        "label": "Chart Option",
         "control": "textarea",
         "align": "",
         "col_span": "",
