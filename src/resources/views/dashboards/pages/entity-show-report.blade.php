@@ -5,9 +5,10 @@
 @section('subTitle', $report->description)
 
 @section('content')
-<div class="p-2 bg-body">
+    <x-reports2.filter-report :filterModes="$filterModes" reportId="{{ $reportId }}" />
+    <div class="p-2 bg-body">
         @foreach ($pages as $page)
-            <x-reports2.page-report :page="$page" reportId="{{$reportId}}"/>
+            <x-reports2.page-report :page="$page" reportId="{{ $reportId }}" />
         @endforeach
-</div>
+    </div>
 @endsection

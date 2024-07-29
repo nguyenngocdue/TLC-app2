@@ -11,11 +11,14 @@ trait TraitEntityCRUDShowReport
 	{
 		$report = Rp_report::find($id)->getDeep();
 		$pages = $report->getPages->sortBy('order_no');
+		$filterModes = $report->getFilterModes;
+
 		return view('dashboards.pages.entity-show-report', [
 			'appName' => LibApps::getFor($this->type)['title'],
 			'report' => $report,
 			'pages' => $pages,
-			'reportId' => $id
+			'reportId' => $id,
+			'filterModes' => $filterModes,
 		]);
 	}
 }

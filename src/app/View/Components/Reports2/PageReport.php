@@ -2,8 +2,6 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Http\Controllers\Reports2\Rp_page_block_detailController;
-use App\Http\Controllers\Reports2\Rp_pageController;
 use Illuminate\View\Component;
 
 class PageReport extends Component
