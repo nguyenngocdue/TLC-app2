@@ -22,11 +22,11 @@ class FilterReport extends Component
             return [$filterMode->name => $filterMode->name];
         });
 
-        // dd($filterModes);
+        // dd($names);
 
 
         return view('components.reports2.filter-report', [
-            'filterModes' => $this->filterModes,
+            'dataSource' => $names,
         ]);
     }
 }
