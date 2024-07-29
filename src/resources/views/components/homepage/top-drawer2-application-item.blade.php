@@ -1,13 +1,11 @@
 <div class="col-span-6 md:col-span-4 xl:col-span-3 2xl:col-span-2 p-2">
-    <a 
-        href="#111" 
-        class="relative" 
+    <div 
+        class="relative cursor-pointer w-8 h-8 text-center rounded-full {{$item['bookmarked'] ? "hover:bg-pink-700" : "hover:bg-blue-700"}}"
         style="top:14%; right: -85%;"
+        onclick="console.log('Toggle Bookmark for {{$item['name']}}');"
         >
-        <div class="relative w-8 h-8 text-center rounded-full {{$item['bookmarked'] ? "hover:bg-pink-700" : "hover:bg-blue-700"}}">
-            <i class="fa-duotone fa-bookmark text-2xl {{$item['bookmarked'] ? "text-blue-400" : "text-gray-200"}}"></i>
-        </div>
-    </a>
+        <i class="fa-duotone fa-bookmark text-2xl {{$item['bookmarked'] ? "text-blue-400" : "text-gray-200"}}"></i>
+    </div>
     <a href="{{$item['href']}}">
         <div class="cursor-pointer hover1:font-bold hover:text-blue-600">
             <div class="flex1 border rounded aspect-square hover:border-blue-200  hover:bg-blue-200">
@@ -22,7 +20,7 @@
                 {{-- <div 
                     class="relative flex items-center justify-center text-xs text-white rounded-full bg-pink-700 w-8 h-6 font-bold" 
                     style="bottom:-13%; right: -90%;">
-                    {{ $item["click_count"] }}
+                    {{ BADGE HERE }}
                 </div> --}}
             </div>      
         </div>

@@ -5,6 +5,7 @@ namespace App\View\Components\Homepage;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\AccessLogger\EntityNameCount;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class TopDrawer2 extends Component
@@ -30,28 +31,28 @@ class TopDrawer2 extends Component
 
                 'active' => 1,
             ],
-            [
-                'id' => 'reports',
-                'title' => '<i class="text-green-600 fa-duotone fa-file-chart-column"></i> Reports',
-                'jsOnMouseOver' => "
-                    $('#topDrawer2Applications').hide(); 
-                    $('#topDrawer2Reports').show(); 
-                    $('#topDrawer2Documents').hide(); 
+            // [
+            //     'id' => 'reports',
+            //     'title' => '<i class="text-green-600 fa-duotone fa-file-chart-column"></i> Reports',
+            //     'jsOnMouseOver' => "
+            //         $('#topDrawer2Applications').hide(); 
+            //         $('#topDrawer2Reports').show(); 
+            //         $('#topDrawer2Documents').hide(); 
 
-                    toggleTabPan('reports');
-                    ",
-            ],
-            [
-                'id' => 'documents',
-                'title' => '<i class="text-orange-600 fa-duotone fa-file-lines"></i> Documents',
-                'jsOnMouseOver' => "
-                    $('#topDrawer2Applications').hide(); 
-                    $('#topDrawer2Reports').hide(); 
-                    $('#topDrawer2Documents').show(); 
+            //         toggleTabPan('reports');
+            //         ",
+            // ],
+            // [
+            //     'id' => 'documents',
+            //     'title' => '<i class="text-orange-600 fa-duotone fa-file-lines"></i> Documents',
+            //     'jsOnMouseOver' => "
+            //         $('#topDrawer2Applications').hide(); 
+            //         $('#topDrawer2Reports').hide(); 
+            //         $('#topDrawer2Documents').show(); 
 
-                    toggleTabPan('documents');
-                    ",
-            ],
+            //         toggleTabPan('documents');
+            //         ",
+            // ],
         ];
         return $tabPans;
     }
@@ -59,7 +60,6 @@ class TopDrawer2 extends Component
     private function getDataSourceApplication()
     {
         $allApps0 = LibApps::getAll();
-        // dd($allApps0);
         $allApps = array_filter($allApps0, function ($app) {
             $hiddenNavbar = !($app['hidden_navbar'] ?? false);
             if (CurrentUser::isAdmin()) {
@@ -79,10 +79,14 @@ class TopDrawer2 extends Component
         $clickCountArr = [];
         foreach ($clickCount as $line) $clickCountArr[$line->entity_name] = $line->click_count;
         foreach ($allApps as &$app) $app['click_count'] = $clickCountArr[$app['name']] ?? 0;
-        // dump(array_pop($allApps));
         uasort($allApps, function ($a, $b) {
+            //For some reason, if no name concatenated, it will duplicate the last item (2x sub projects)
+            // $aa = str_pad($a['click_count'], 10, "0", STR_PAD_LEFT) . $a['name'];
+            // $bb = str_pad($b['click_count'], 10, "0", STR_PAD_LEFT) . $b['name'];
             return $b['click_count'] <=> $a['click_count'];
         });
+
+        // Log::info(($allApps));
 
         $appGroups = [];
         foreach ($allApps as $app) {
@@ -97,11 +101,12 @@ class TopDrawer2 extends Component
             $appGroups[$app['sub_package']]['click_count'] += $app['click_count'];
             $appGroups[$app['sub_package']]['items'][] = $app;
         }
-        // dd($appGroups);
 
         uasort($appGroups, function ($a, $b) {
             return $b['click_count'] <=> $a['click_count'];
         });
+
+        // Log::info($appGroups);
 
         return $appGroups;
     }

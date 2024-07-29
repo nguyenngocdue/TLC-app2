@@ -2114,7 +2114,7 @@
         "package_tab": "application",
         "package": "compliance",
         "sub_package": "quality_assurance",
-        "title": "Corrective Action Registers",
+        "title": "Corrective Actions",
         "nickname": "car",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-square-check\"><\/i>",
