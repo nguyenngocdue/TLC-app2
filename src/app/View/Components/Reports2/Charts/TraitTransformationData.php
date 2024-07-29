@@ -41,7 +41,7 @@ trait TraitTransformationData
         }
         foreach ($dataIndexes as $dataIndex) {
             $name = isset($item['title']) ? $item['title'] : $dataIndex;
-            $series[] = [
+            $series[] = (object)[
                 'name' => $name,
                 'data' => $rowsToFields[$dataIndex] ?? [],
             ];
