@@ -4,38 +4,38 @@
             @forelse($dataSource as $value)
             <div 
                 class="p-2 border bg-blue-50 hover:bg-blue-200 hover:font-bold hover:text-blue-600 cursor-pointer rounded flex justify-between"
-                onmouseover="toggleTopDrawer2Group('{{$value['id']}}')"
-                {{-- onmouseout="currentTopDrawer2Group = null" --}}
+                @if(MobileDetect::isMobile())
+                    onclick="toggleTopDrawer2GroupOnPhone('{{$value['id']}}')"
+                @else
+                    onmouseover="toggleTopDrawer2Group('{{$value['id']}}')"
+                @endif
                 >
                 <span>{{$value['title']}}</span>
                 <i class="fa-duotone fa-caret-down sm:hidden"></i>
                 <i class="fa-duotone fa-caret-right hidden sm:block"></i>
             </div>
+            {{-- For Mobile --}}
+            <div class="sm:hidden">
+                <x-homepage.top-drawer2-application-items :item="$value"></x-homepage.top-drawer2-application-items>
+            </div>                
             @empty
                 ?????
             @endforelse
         </div>
-        @forelse($dataSource as $value) 
-        <div id="topDrawerGroup_{{$value['id']}}" class="hidden p-4 top-drawer-group col-span-12 sm:col-span-8 xl:col-span-10 mx-auto w-3/4 grid grid-cols-12 ">
-            @forelse($value["items"] as $item)
-                <div class="col-span-6 p-4 sm:col-span-6 md:col-span-4 xl:col-span-3 2xl:col-span-2 cursor-pointer hover:font-bold hover:text-blue-600">
-                    <div class="border rounded  aspect-square flex hover:border-blue-400  hover:bg-blue-200">
-                        <div class="text-5xl text-center m-auto">                        
-                            {!! $item["icon"] !!}
-                        </div>
-                    </div>
-                    <div class="relative text-center -mt-10">
-                        {{$item["title"]}}
-                    </div>
-                </div>
+        {{-- For PC --}}
+        <div class="hidden sm:grid sm:col-span-8 xl:col-span-10">
+            @forelse($dataSource as $value) 
+                <x-homepage.top-drawer2-application-items :item="$value"></x-homepage.top-drawer2-application-items>
             @empty
-                <div class="col-span-12 p-2 border w-full rounded mx-auto text-center">
-                    There is no items under this group
-                </div>
+                ?????
             @endforelse
         </div>
-        @empty
-        @endforelse
+        {{-- SOME CSS ISSUE, THIS IS ALWAYS HIDDEN --}}
+        {{-- <div class="hidden sm:col-span-4 p-1">
+            <div id="divContentDescription" class="hidden1 bg-red-400 border rounded p-2">
+                Content
+            </div>
+        </div>             --}}
     </div>
 </div>
 
@@ -53,5 +53,17 @@ function toggleTopDrawer2Group(current){
             group.classList.add('hidden');
         }
     });
+}
+
+function toggleTopDrawer2GroupOnPhone(current){    
+    if(currentTopDrawer2Group === current){
+        let topDrawerGroups = document.querySelectorAll('.top-drawer-group');
+        topDrawerGroups.forEach((group) => {
+            group.classList.add('hidden');
+        });
+        currentTopDrawer2Group = null;
+    } else {
+        toggleTopDrawer2Group(current);
+    }
 }
 </script>

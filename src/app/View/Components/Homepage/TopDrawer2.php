@@ -294,12 +294,6 @@ class TopDrawer2 extends Component
                 'items' => [],
             ],
             [
-                'id' => "On Sites",
-                'title' => "On Sites",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
                 'id' => "HR Admins",
                 'title' => "HR Admins",
                 'count' => 123,
