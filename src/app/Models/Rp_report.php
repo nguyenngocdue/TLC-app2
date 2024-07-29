@@ -54,10 +54,14 @@ class Rp_report extends ModelExtended
                             }]);
                     }]);
             }])
+            ->with(["getFilterModes" => function ($q) {
+                $q->with("getParent");
+            }])
+            ->with("getFilterDetails")
             ->get()
             ->first();
         // $rpReport->getPages[10]->getBlockDetails;
-        // dd($rpReport->getPages[10]);
+        // dd($rpReport);
         return $rpReport;
     }
 }
