@@ -5,6 +5,7 @@ namespace App\View\Components\Homepage;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\AccessLogger\EntityNameCount;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
@@ -59,8 +60,8 @@ class TopDrawer2 extends Component
 
     private function getDataSourceApplication()
     {
-        $allApps0 = LibApps::getAll();
-        $allApps = array_filter($allApps0, function ($app) {
+        $allApps = LibApps::getAll();
+        $allApps = array_filter($allApps, function ($app) {
             $hiddenNavbar = !($app['hidden_navbar'] ?? false);
             if (CurrentUser::isAdmin()) {
                 $hiddenNonAdmin = true;
@@ -71,6 +72,15 @@ class TopDrawer2 extends Component
             return $hiddenNavbar && $hiddenNonAdmin;
         });
 
+        if (!CurrentUser::isAdmin()) {
+            $permissions = CurrentUser::getPermissions();
+            $readPermissions = array_filter($permissions, function ($permission) {
+                return str_starts_with($permission, 'read-');
+            });
+            $allApps = array_filter($allApps, function ($app)  use ($readPermissions) {
+                return in_array('read-' . Str::plural($app['name']), $readPermissions);
+            });
+        }
 
         $bookmarked = CurrentUser::bookmark();
         foreach ($allApps as &$app) $app['bookmarked'] = (in_array($app['name'], $bookmarked));
@@ -79,14 +89,13 @@ class TopDrawer2 extends Component
         $clickCountArr = [];
         foreach ($clickCount as $line) $clickCountArr[$line->entity_name] = $line->click_count;
         foreach ($allApps as &$app) $app['click_count'] = $clickCountArr[$app['name']] ?? 0;
+
+        //As app is still a reference to the array, we need to unset it to avoid duplication of the last item
+        unset($app);
+
         uasort($allApps, function ($a, $b) {
-            //For some reason, if no name concatenated, it will duplicate the last item (2x sub projects)
-            // $aa = str_pad($a['click_count'], 10, "0", STR_PAD_LEFT) . $a['name'];
-            // $bb = str_pad($b['click_count'], 10, "0", STR_PAD_LEFT) . $b['name'];
             return $b['click_count'] <=> $a['click_count'];
         });
-
-        // Log::info(($allApps));
 
         $appGroups = [];
         foreach ($allApps as $app) {
