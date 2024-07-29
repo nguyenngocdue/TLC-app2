@@ -14,19 +14,20 @@ class FilterReport extends Component
     }
 
 
-
     public function render()
     {
         $filterModes = collect($this->filterModes);
-        $names = $filterModes->mapWithKeys(function ($filterMode) {
+        $keysNames = $filterModes->mapWithKeys(function ($filterMode) {
             return [$filterMode->name => $filterMode->name];
         });
+        $params = [
+            "forward_to_mode" => "Mode 2"
+        ];
 
-        // dd($filterModes);
-
-
+        // dd($names);
         return view('components.reports2.filter-report', [
-            'filterModes' => $this->filterModes,
+            'keysNames' => $keysNames,
+            'params' => $params
         ]);
     }
 }
