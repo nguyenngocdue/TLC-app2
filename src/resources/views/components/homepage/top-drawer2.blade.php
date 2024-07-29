@@ -16,7 +16,7 @@
         >
         <div data-top-drawer class="px-1 xl:px-6 overflow-y-auto" style="max-height: 63vh; height:63vh;">
             <x-renderer.tab-pane :tabs="$tabPans">
-                <x-homepage.top-drawer2-applications :dataSource="$dataSource" />
+                <x-homepage.top-drawer2-applications :dataSource="$dataSourceApplications" />
                 <x-homepage.top-drawer2-reports />
                 <x-homepage.top-drawer2-documents />
                 <div class="block h-4"></div>

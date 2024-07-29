@@ -76,6 +76,9 @@ class LibApps extends AbstractLib
                     $app['nickname'] = $app['nickname'] ?? '' . " ?";
                     $app['href'] = "#RouteNotFound3:$route";
                 }
+                if (is_null($app['icon'])) {
+                    $app['icon'] = '<i class="fa-duotone fa-file"></i>';
+                }
             }
             static::$singleton = $result;
         }

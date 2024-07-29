@@ -5,9 +5,9 @@ namespace App\Utils\AccessLogger;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class EntityNameClickCount
+class EntityNameCount
 {
-    function entityNameClickCountExpensive($owner_id)
+    function __invoke($owner_id)
     {
         if (!env('ACCESS_LOGGER_ENABLED')) return [];
         $connection = env('TELESCOPE_DB_CONNECTION', 'mysql');
@@ -16,15 +16,7 @@ class EntityNameClickCount
             FROM view_logger_access_entity_name 
             WHERE 
                 owner_id ='$owner_id'
-            
-            UNION ALL
-            
-            SELECT * 
-            FROM view_logger_access_route_name 
-            WHERE 
-                owner_id ='$owner_id'
-            ");
-        // Log::info($data);
+                ");
         if (!app()->isLocal()) {
             $allClick = 0;
             foreach ($data as $line) $allClick += $line->click_count;
@@ -32,17 +24,5 @@ class EntityNameClickCount
             if ($allClick < 100) return []; //<< Incase too little click, data will not be reliable
         }
         return $data;
-    }
-
-    static $singleton = [];
-
-    function __invoke($owner_id)
-    {
-        if (!isset(static::$singleton[$owner_id])) {
-            static::$singleton[$owner_id] = $this->entityNameClickCountExpensive($owner_id);
-        }
-        $result = static::$singleton[$owner_id];
-        // Log::info($result);
-        return $result;
     }
 }

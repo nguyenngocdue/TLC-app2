@@ -2,6 +2,9 @@
 
 namespace App\View\Components\Homepage;
 
+use App\Http\Controllers\Workflow\LibApps;
+use App\Utils\AccessLogger\EntityNameCount;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class TopDrawer2 extends Component
@@ -11,7 +14,7 @@ class TopDrawer2 extends Component
         //
     }
 
-    public function render()
+    private function getTabPan()
     {
         $tabPans = [
             [
@@ -50,296 +53,66 @@ class TopDrawer2 extends Component
                     ",
             ],
         ];
-        $dataSource = [
+        return $tabPans;
+    }
 
-            [
-                'id' => "Project Managements",
-                'title' => "Project Managements",
-                'count' => 123,
-                'items' => [
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                    [
-                        'id' => 1,
-                        'title' => "Project 1",
-                        'count' => 123,
-                        'href' => '#',
-                        'icon' => '<i class="text-blue-600 fa-duotone fa-cabinet-filing"></i>',
-                        'create_new_href' => '#',
-                        'bookmark_href' => '#',
-                    ],
-                ],
-            ],
-            [
-                'id' => "Quality Controls",
-                'title' => "Quality Controls",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "Productions",
-                'title' => "Productions",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "Task Managements",
-                'title' => "Task Managements",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "HR Admins",
-                'title' => "HR Admins",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "Exams",
-                'title' => "Exams",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "Quality Assurances",
-                'title' => "Quality Assurances",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "Compliance Datas",
-                'title' => "Compliance Datas",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "ESG",
-                'title' => "ESG",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "HSE",
-                'title' => "HSE",
-                'count' => 123,
-                'items' => [],
-            ],
-            [
-                'id' => "Accounting",
-                'title' => "Accounting",
-                'count' => 123,
-                'items' => [],
-            ],
+    private function getDataSourceApplication()
+    {
+        $allApps0 = LibApps::getAll();
+        // dd($allApps0);
+        $allApps = array_filter($allApps0, function ($app) {
+            $hiddenNavbar = !($app['hidden_navbar'] ?? false);
+            if (CurrentUser::isAdmin()) {
+                $hiddenNonAdmin = true;
+            } else {
+                $hiddenNonAdmin = !($app['hidden'] ?? false);
+            }
 
-        ];
+            return $hiddenNavbar && $hiddenNonAdmin;
+        });
+
+
+        $bookmarked = CurrentUser::bookmark();
+        foreach ($allApps as &$app) $app['bookmarked'] = (in_array($app['name'], $bookmarked));
+
+        $clickCount = (new EntityNameCount)(CurrentUser::id());
+        $clickCountArr = [];
+        foreach ($clickCount as $line) $clickCountArr[$line->entity_name] = $line->click_count;
+        foreach ($allApps as &$app) $app['click_count'] = $clickCountArr[$app['name']] ?? 0;
+        // dump(array_pop($allApps));
+        uasort($allApps, function ($a, $b) {
+            return $b['click_count'] <=> $a['click_count'];
+        });
+
+        $appGroups = [];
+        foreach ($allApps as $app) {
+            if (!isset($appGroups[$app['sub_package']])) {
+                $appGroups[$app['sub_package']] = [
+                    'id' => $app['sub_package'],
+                    'title' => $app['sub_package_rendered'],
+                    'click_count' => 0,
+                    'items' => [],
+                ];
+            }
+            $appGroups[$app['sub_package']]['click_count'] += $app['click_count'];
+            $appGroups[$app['sub_package']]['items'][] = $app;
+        }
+        // dd($appGroups);
+
+        uasort($appGroups, function ($a, $b) {
+            return $b['click_count'] <=> $a['click_count'];
+        });
+
+        return $appGroups;
+    }
+
+    public function render()
+    {
+        $dataSourceApplication =  $this->getDataSourceApplication();
+
         return view('components.homepage.top-drawer2', [
-            'tabPans' => $tabPans,
-            'dataSource' => $dataSource,
+            'tabPans' => $this->getTabPan(),
+            'dataSourceApplications' => $dataSourceApplication,
             'route' => route('updateBookmark'),
         ]);
     }

@@ -3,14 +3,19 @@
         <div class="col-span-12 sm:col-span-4 md:col-span-3 xl:col-span-2 space-y-1 ">
             @forelse($dataSource as $value)
             <div 
-                class="p-2 border bg-blue-50 hover:bg-blue-200 hover:font-bold hover:text-blue-600 cursor-pointer rounded flex justify-between"
+                class="p-2 border bg-blue-50 hover:bg-blue-200 hover1:font-bold hover:text-blue-600 cursor-pointer rounded flex justify-between"
                 @if(MobileDetect::isMobile())
                     onclick="toggleTopDrawer2GroupOnPhone('{{$value['id']}}')"
                 @else
                     onmouseover="toggleTopDrawer2Group('{{$value['id']}}')"
                 @endif
                 >
-                <span>{{$value['title']}}</span>
+                <div>
+                    {{$value['title']}}
+                    @roleset('admin')
+                        <span class="text-xs text-gray-500">({{$value['click_count']}})</span>
+                    @endroleset
+                </div>
                 <i class="fa-duotone fa-caret-down sm:hidden"></i>
                 <i class="fa-duotone fa-caret-right hidden sm:block"></i>
             </div>
