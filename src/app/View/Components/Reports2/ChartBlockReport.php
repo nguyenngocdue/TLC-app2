@@ -22,12 +22,14 @@ class ChartBlockReport extends Component
     {
         $block = $this->block;
         $chartTypeId = $block->chart_type;
-        $chartJson = $block->chart_json;
+        $chartOptionStr = $block->chart_json;
         $dataQuery = $this->dataQuery;
         $viewName = '';
         $series = [];
         $key = md5($chartTypeId);
         $tableColumns = $this->rawTableColumns;
+
+        $uniqueFields = $this->getAllUniqueFields($dataQuery);
 
 
         switch ($chartTypeId) {
@@ -38,13 +40,10 @@ class ChartBlockReport extends Component
                         $transformation = $this->makeRowsToFields($dataQuery, $tableColumns);
                         break;
                     default:
-                        $transformation = $this->mapDataQueryToColumns($dataQuery, $tableColumns);
+                        $transformation = $this->groupNames($dataQuery);
                         break;
                 }
-                $series = $this->makeSeriesChart($transformation, $tableColumns);
-
-                $chartJson = json_decode($chartJson);
-                $chartJson = array_pop($chartJson);
+                $series = $this->makeSeriesChart($transformation);
                 $viewName = 'chart-bar';
                 break;
             case (682):
@@ -59,14 +58,14 @@ class ChartBlockReport extends Component
         if ($viewName) {
             $titleAndDesc = '<x-renderer.report2.title-description-block :block="$block" />';
             $componentName = "x-reports2.charts.types." . $viewName;
-            $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :chartJson="$chartJson" :dataQuery="$dataQuery"/>';
+            $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :chartOptionStr="$chartOptionStr" :dataQuery="$dataQuery"/>';
             $views = $titleAndDesc . $chart;
 
             return  Blade::render($views, [
                 'key' => $key,
                 'block' => $block,
                 'chartTypeId' => $chartTypeId,
-                'chartJson' => $chartJson,
+                'chartOptionStr' => $chartOptionStr,
                 'dataQuery' => $dataQuery,
                 'series' => $series,
                 'tableColumns' => $tableColumns

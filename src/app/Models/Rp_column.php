@@ -56,6 +56,8 @@ class Rp_column extends ModelExtended
     }
     public function getManyLineParams()
     {
+
+
         return [
             ["dataIndex" => 'id'],
             ["dataIndex" => 'order_no', 'invisible' => true,],

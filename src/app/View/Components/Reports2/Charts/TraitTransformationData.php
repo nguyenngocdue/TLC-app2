@@ -28,12 +28,12 @@ trait TraitTransformationData
         return array_pop($chartJson);;
     }
 
-    public function makeSeriesChart($rowsToFields, $tableColumns)
+    public function makeSeriesChart($rowsToFields)
     {
         $series = [];
         $chartTypeName = $this->chartTypeName ?? '';
 
-        $dataIndexes = array_column($tableColumns, 'dataIndex');
+        $dataIndexes = array_keys($rowsToFields);
         if ($chartTypeName === 'pie-donut') {
             $rowsToFields = (array)$rowsToFields->first();
             $series = array_values(array_intersect_key($rowsToFields, array_flip($dataIndexes)));
@@ -49,15 +49,15 @@ trait TraitTransformationData
         return $series;
     }
 
-    public function mapDataQueryToColumns($dataQuery, $tableColumns)
+    public function groupNames($collection)
     {
-        $result = [];
-        foreach ($tableColumns as $key => $value) {
-            $dataIndex = $value['dataIndex'];
-            if (isset($dataQuery[$key])) {
-                $result[$dataIndex] = array_values((array)$dataQuery[$key]);
+        $grouped = [];
+        foreach ($collection as $item) {
+            foreach ($item as $key => $value) {
+                $grouped[$key][] = $value;
             }
         }
-        return $result;
+
+        return $grouped;
     }
 }

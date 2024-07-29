@@ -1,50 +1,18 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<div id="chart-{{$key}}"></div>
-
+<div id="chart-{{ $key }}"></div>
 <script>
-  series = @json($series);
-  chartJson = @json($chartJson);
-  xAxisFn = chartJson["xaxis"];
-  key = "{{$key}}";
+    const key = "{{ $key }}";
+    const series = @json($series);
+    const chartOptionStr = @json($chartOptionStr);
+    const chartOptions = JSON.parse(chartOptionStr);
+    console.log(chartOptions);
 
-  if (xAxisFn && xAxisFn.labels && xAxisFn.labels.formatter){
-        xAxisFn.labels.formatter = new Function("val", "return " + xAxisFn.labels.formatter + ";");
-  }
-// Define the options for the column chart
- var options = {
-          series: series,
-          chart: chartJson["chart"],
-        plotOptions: chartJson["plotOptions"],
-        stroke: {
-          width: 1,
-          colors: ['#fff']
-        },
-        title: chartJson["title"],
-        xaxis: xAxisFn,
-        yaxis: {
-          title: {
-            text: undefined
-          },
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return val + "K"
-            }
-          }
-        },
-        fill: {
-          opacity: 1
-        },
-        legend: {
-          position: 'top',
-          horizontalAlign: 'left',
-          offsetX: 40
-        }
-        };
+    // Define the options for the column chart
+    const options = {
+        series: series,
+        ...chartOptions
+    };
 
-        var chart = new ApexCharts(document.querySelector("#chart-"+ key), options);
-        chart.render();
-      
-
+    const chart = new ApexCharts(document.querySelector("#chart-" + key), options);
+    chart.render();
 </script>

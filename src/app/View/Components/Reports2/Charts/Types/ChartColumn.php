@@ -35,7 +35,7 @@ class ChartColumn extends Component
                 $transformation = $this->makeRowsToFields($dataQuery, $tableColumns);
                 break;
             default:
-                $transformation = $this->mapDataQueryToColumns($dataQuery, $tableColumns);
+                $transformation = $this->groupNames($dataQuery, $tableColumns);
                 break;
         }
         $chartTypeId = $this->chartTypeId;
