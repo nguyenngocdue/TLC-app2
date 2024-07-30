@@ -23,7 +23,7 @@ class Parameter3Report extends Component
         private $optionPrint = '',
         private $childrenMode = '',
         private $type = '',
-        private $forwardToMode = '',
+        // private $forwardToMode = '',
     ) {
         //
     }
@@ -41,7 +41,7 @@ class Parameter3Report extends Component
             'hasListenTo' => $this->hasListenTo,
             'optionPrint' => $this->optionPrint,
             'childrenMode' => $this->childrenMode,
-            'forwardToMode' => $this->forwardToMode,
+            'forwardToMode' => $this->itemsSelected['forward_to_mode'] ?? null,
             'type' => $this->type,
         ]);
     }
