@@ -98,8 +98,10 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                                             AND tb2.prod_routing_link_id = tb3.prod_routing_link_id
                                                             AND tb2.prod_routing_id = tb3.prod_routing_id
                             WHERE tb3.prod_sequence_id IS NULL
-                                AND tb1.prod_order_id IS NOT NULL
-        UNION ALL
+                                AND tb1.prod_order_id IS NOT NULL";
+        if ($sts = $valOfParams['status']) $sql .= "\n AND tb3.prod_sequence_status IN ( $sts )";
+
+        $sql .= "\n UNION ALL
                 SELECT
                     pj.id AS project_id,
                     pj.name AS project_name,
@@ -129,6 +131,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                 LEFT JOIN erp_routing_links erl ON erl.id = prd.erp_routing_link_id 
                 WHERE pr.prod_sequence_id IS NULL";
 
+        // dd($valOfParams);
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
@@ -136,6 +139,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.iid IN ($prl)";
         if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
         if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prd.erp_routing_link_id IN ($erp)";
+        if ($sts = $valOfParams['status']) $sql .= "\n AND ps.status IN ( $sts )";
         // dump($sql);
         return $sql;
     }
