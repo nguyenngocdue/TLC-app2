@@ -20,7 +20,7 @@ class FilterReport extends Component
         $filterModes = collect($this->filterModes);
         $filterDetails = $this->filterDetails;
 
-        dd($filterDetails);
+        dump($filterDetails);
 
 
         $keysNames = $filterModes->mapWithKeys(function ($filterMode) {
