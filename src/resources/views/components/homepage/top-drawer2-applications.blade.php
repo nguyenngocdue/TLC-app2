@@ -11,10 +11,7 @@
                 @endif
                 >
                 <div>
-                    {{$value['title']}}
-                    @roleset('admin')
-                        <span class="text-xs text-gray-500">({{$value['click_count']}})</span>
-                    @endroleset
+                    {{$value['title']}}                   
                 </div>
                 <i class="fa-duotone fa-caret-down sm:hidden"></i>
                 <i class="fa-duotone fa-caret-right hidden sm:block"></i>

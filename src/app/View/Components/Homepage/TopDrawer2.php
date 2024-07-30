@@ -93,7 +93,11 @@ class TopDrawer2 extends Component
         $clickCount = (new EntityNameCount)(CurrentUser::id());
         $clickCountArr = [];
         foreach ($clickCount as $line) $clickCountArr[$line->entity_name] = $line->click_count;
-        foreach ($allApps as &$app) $app['click_count'] = $clickCountArr[$app['name']] ?? 0;
+        foreach ($allApps as &$app) {
+            $app['click_count'] = $clickCountArr[$app['name']] ?? 0;
+            if (CurrentUser::isAdmin())
+                $app['title'] = $app['title'] . ' <span class="border1 rounded px-1 py-0.5 ml-1 bg-pink-100 text-pink-900">' . $app['click_count'] . '</span>';
+        }
 
         //As app is still a reference to the array, we need to unset it to avoid duplication of the last item
         unset($app);
