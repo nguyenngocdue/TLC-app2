@@ -55,7 +55,7 @@ class IdStatusLink extends Component
             }
             $name .= " (" . $item->status . ")";
 
-            $result[] = Blade::render("<x-renderer.status title='$title' tooltip='$name' href='$route'>$value</x-renderer.status>");
+            $result[] = Blade::render("<x-renderer.status title='$title' tooltip='" . e($name) . "' href='$route'>$value</x-renderer.status>");
         }
         return "<ul class='p-2'><li>" . join("</li><li>", $result) . "</li></ul>";
     }
