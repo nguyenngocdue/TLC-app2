@@ -37,6 +37,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                         tb2.erp_routing_link_id,
                         tb2.erp_routing_link_name,
                         tb3.prod_sequence_id,
+                        tb3.prod_sequence_status,
                         NULL AS man_power,
                         NULL AS hours,
                         NULL AS total_man_hours
@@ -91,7 +92,8 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                     pse.id AS prod_sequence_id,
                                     pse.prod_order_id AS prod_order_id,
                                     pse.prod_routing_id AS prod_routing_id,
-                                    pse.prod_routing_link_id AS prod_routing_link_id
+                                    pse.prod_routing_link_id AS prod_routing_link_id,
+                                    pse.status AS prod_sequence_status
                                     FROM prod_sequences pse ) tb3 ON tb1.prod_order_id = tb3.prod_order_id 
                                                             AND tb2.prod_routing_link_id = tb3.prod_routing_link_id
                                                             AND tb2.prod_routing_id = tb3.prod_routing_id
@@ -112,6 +114,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                     erl.id AS erp_routing_link_id,
                     erl.name AS erp_routing_link_name,
                     ps.id AS prod_sequence_id,
+                    ps.status AS prod_sequence_status,
                     NULL AS man_power,
                     NULL AS hours,
                     ps.total_man_hours AS total_man_hours

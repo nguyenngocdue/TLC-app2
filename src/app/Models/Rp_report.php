@@ -59,6 +59,7 @@ class Rp_report extends ModelExtended
             }])
             ->with(["getFilterDetails" => function ($q5) {
                 $q5->with("getListenReducer");
+                $q5->with("getColumn");
             }])
             ->get()
             ->first();

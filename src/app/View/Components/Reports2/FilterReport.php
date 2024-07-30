@@ -17,6 +17,15 @@ class FilterReport extends Component
 
     public function render()
     {
+        $type = 'prod_sequences';
+        $viewportParams = [
+            'project_id' => '75',
+            'sub_project_id' => '116',
+            'prod_routing_id' => '80',
+            'prod_routing_link_id' => [],
+            'prod_discipline_id' => '10',
+        ];
+
         $filterModes = collect($this->filterModes);
         $filterDetails = $this->filterDetails;
 

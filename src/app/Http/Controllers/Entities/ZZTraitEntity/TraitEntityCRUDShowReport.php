@@ -11,8 +11,8 @@ trait TraitEntityCRUDShowReport
 	{
 		$report = Rp_report::find($id)->getDeep();
 		$pages = $report->getPages->sortBy('order_no');
-		$filterModes = $report->getFilterModes;
-		$filterDetails = $report->getFilterDetails;
+		$filterModes = $report->getFilterModes->sortBy('order_no');
+		$filterDetails = $report->getFilterDetails->sortBy('order_no');
 		// dd($filterDetails);
 
 
