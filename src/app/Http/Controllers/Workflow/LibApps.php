@@ -102,13 +102,13 @@ class LibApps extends AbstractLib
         });
         return $allApps;
     }
-    public static function getAllNavbarBookmark()
-    {
-        return array_filter(static::getAllShowBookmark(), function ($item) {
-            $isHiddenNavbar = $item['hidden_navbar'] ?? false;
-            return !$isHiddenNavbar;
-        });
-    }
+    // public static function getAllNavbarBookmark()
+    // {
+    //     return array_filter(static::getAllShowBookmark(), function ($item) {
+    //         $isHiddenNavbar = $item['hidden_navbar'] ?? false;
+    //         return !$isHiddenNavbar;
+    //     });
+    // }
 
     public static function getFor($entityType)
     {
