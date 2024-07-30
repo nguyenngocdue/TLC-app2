@@ -53,7 +53,7 @@
             bookmark.className = "flex items-center p-2 bg-white rounded border cursor-pointer text-blue-500 hover:bg-blue-500 hover:text-gray-100 hover:shadow-lg min-h-16";
             if(index >= 12) bookmark.className += " hidden toggle-bookmark";
             let result = ''
-            result += `<span class="px-3"> ${icon}</span>`
+            result += `<span class="px-3 text-4xl"> ${icon}</span>`
             result += ` ${title}`
             // result += ` (${click_count})`
             bookmark.innerHTML = result;
