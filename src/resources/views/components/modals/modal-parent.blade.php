@@ -17,7 +17,7 @@
                     @yield($modalId.'-header-extra')
                 </div>
                 <!-- Modal body -->
-                <div class="px-6 overflow-y-auto h-[400px] md:h-[600px]" style="height:{{$height??""}}px" data-modal-container>
+                <div class="px-6 overflow-y-auto h-[400px] md:h-[600px]" style="height:{{$height??""}}px" data-container>
                     @yield($modalId.'-body')
                     @sectionMissing($modalId.'-body')
                     <x-renderer.emptiness></x-renderer.emptiness>
