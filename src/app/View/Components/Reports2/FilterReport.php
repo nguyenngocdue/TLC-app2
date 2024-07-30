@@ -9,6 +9,7 @@ class FilterReport extends Component
     public function __construct(
         private $reportId = "",
         private $filterModes = [],
+        private $filterDetails = [],
 
     ) {
     }
@@ -17,6 +18,11 @@ class FilterReport extends Component
     public function render()
     {
         $filterModes = collect($this->filterModes);
+        $filterDetails = $this->filterDetails;
+
+        dd($filterDetails);
+
+
         $keysNames = $filterModes->mapWithKeys(function ($filterMode) {
             return [$filterMode->name => $filterMode->name];
         });
@@ -27,7 +33,8 @@ class FilterReport extends Component
         // dd($names);
         return view('components.reports2.filter-report', [
             'keysNames' => $keysNames,
-            'params' => $params
+            'params' => $params,
+            'filterDetails' => $filterDetails
         ]);
     }
 }
