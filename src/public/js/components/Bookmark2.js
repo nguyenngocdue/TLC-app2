@@ -54,6 +54,7 @@ function toggleBookmark(entity, sub_package, url, source) {
             if (response.success) {
                 // toastr.success(response.message, 'Bookmark')
                 const newValue = modifyGlobalVariable(sub_package, entity)
+                BookmarkBarInit()
                 switch (source) {
                     case 'searchModal':
                         modifySearchModalBookmarkButton(entity, newValue)

@@ -29,6 +29,7 @@
     }
 
     function BookmarkBarInit(){
+        document.getElementById("bookmark-list").innerHTML = "";
         const bookmarkItems = []
         Object.keys(allApps).forEach(function(key) {
             var items = allApps[key]['items'];
@@ -48,6 +49,7 @@
         bookmarkItems.forEach(function(item, index){
             var { href, icon, title, click_count } = item
             var bookmark = document.createElement("a");
+            bookmark.href = href;
             bookmark.className = "flex items-center p-2 bg-white rounded border cursor-pointer text-blue-500 hover:bg-blue-500 hover:text-gray-100 hover:shadow-lg min-h-16";
             if(index >= 12) bookmark.className += " hidden toggle-bookmark";
             let result = ''
