@@ -29,7 +29,7 @@ return new class extends Migration
         $table->unsignedBigInteger('black_or_white')->nullable();
         $table->boolean('is_required')->nullable();
         $table->string('default_value')->nullable();
-        $table->boolean('has_listen_to')->nullable();
+        $table->unsignedBigInteger('listen_reducer_id')->nullable();
         $table->boolean('allow_clear')->nullable();
         $table->boolean('is_multiple')->nullable();
         $table->unsignedBigInteger('control_type')->nullable();

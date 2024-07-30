@@ -11,7 +11,7 @@ class Rp_report_filter_detail extends ModelExtended
         "rp_column_id", "rp_report_id",
         "bw_list_ids", "black_or_white",
         "is_required", "default_value",
-        "listen_to_id", "has_listen_to", "allow_clear",
+        "listen_reducer_id", "has_listen_to", "allow_clear",
         "is_multiple", "control_type",
         "owner_id",
     ];
@@ -21,7 +21,7 @@ class Rp_report_filter_detail extends ModelExtended
         'getControlType' => ['belongsTo', Term::class, 'control_type'],
         'getReport' => ['belongsTo', Rp_report::class, 'rp_report_id'],
         'getColumn' => ['belongsTo', Rp_column::class, 'rp_column_id'],
-        'getListenReduce' => ['belongsTo', Rp_listen_reduce::class, 'listen_to_id'],
+        'getListenReducer' => ['belongsTo', Rp_listen_reducer::class, 'listen_reducer_id'],
 
     ];
 
@@ -45,7 +45,7 @@ class Rp_report_filter_detail extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getListenReduce()
+    public function getListenReducer()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

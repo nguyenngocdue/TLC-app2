@@ -17,11 +17,12 @@ return new class extends Migration
         $schema = DB::connection()->getSchemaBuilder();
         $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('rp_listen_reduces', function (BlueprintExtended $table) {
+        $schema->create('rp_listen_reducers', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('trigger')->nullable();
-            $table->string('listen_to_field')->nullable();
+            $table->string('column_name')->nullable();
+            $table->string('triggers')->nullable();
+            $table->string('listen_to_fields')->nullable();
             $table->string('columns_to_set')->nullable();
             $table->string('attrs_to_compare')->nullable();
 
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rp_listen_reduces');
+        Schema::dropIfExists('rp_listen_reducers');
     }
 };
