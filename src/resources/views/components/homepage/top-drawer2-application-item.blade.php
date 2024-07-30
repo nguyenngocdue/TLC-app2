@@ -2,7 +2,7 @@
     <div 
         class="relative cursor-pointer w-8 h-8 text-center rounded-full {{$item['bookmarked'] ? "hover:bg-pink-700" : "hover:bg-blue-700"}}"
         style="top:14%; right: -85%;"
-        onclick="console.log('Toggle Bookmark for {{$item['name']}}');"
+        onclick="toggleBookmark('{{$item['name']}}')"
         >
         <i class="fa-duotone fa-bookmark text-2xl {{$item['bookmarked'] ? "text-blue-400" : "text-gray-200"}}"></i>
     </div>

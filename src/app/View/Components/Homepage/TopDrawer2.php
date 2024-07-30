@@ -62,15 +62,20 @@ class TopDrawer2 extends Component
     {
         $allApps = LibApps::getAll();
         $allApps = array_filter($allApps, function ($app) {
-            $hiddenNavbar = !($app['hidden_navbar'] ?? false);
             if (CurrentUser::isAdmin()) {
-                $hiddenNonAdmin = true;
+                $keepForNonAdmin = true;
             } else {
-                $hiddenNonAdmin = !($app['hidden'] ?? false);
+                $keepForNonAdmin = !($app['hidden'] ?? false);
             }
 
-            return $hiddenNavbar && $hiddenNonAdmin;
+            return $keepForNonAdmin;
         });
+
+        foreach ($allApps as &$app) {
+            $app['hidden_for_non_admin'] = !($app['hidden'] ?? false);
+            // unset($app['hidden']); // This can do after fully remove old search modal and top drawer
+            $app['hidden_navbar'] = !($app['hidden_navbar'] ?? false);
+        }
 
         if (!CurrentUser::isAdmin()) {
             $permissions = CurrentUser::getPermissions();

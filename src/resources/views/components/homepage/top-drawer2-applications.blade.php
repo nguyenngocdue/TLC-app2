@@ -24,7 +24,7 @@
                 <x-homepage.top-drawer2-application-items :item="$value"></x-homepage.top-drawer2-application-items>
             </div>                
             @empty
-                ?????
+                There is no application item to display.
             @endforelse
         </div>
         {{-- For PC --}}
@@ -32,7 +32,7 @@
             @forelse($dataSource as $value) 
                 <x-homepage.top-drawer2-application-items :item="$value"></x-homepage.top-drawer2-application-items>
             @empty
-                ?????
+                There is no application item to display.
             @endforelse
         </div>
         {{-- SOME CSS ISSUE, THIS IS ALWAYS HIDDEN --}}
