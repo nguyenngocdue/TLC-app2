@@ -10,13 +10,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
         <x-homepage.logo />
         @auth
             <div class="flex flex-1 lg:mr-32 ml-2">
-                {{-- @roleset('admin')
-                    <x-homepage.top-drawer2/>
-                    @dd()
-                    @else --}}
-                    <x-homepage.top-drawer/>
-                    {{-- <x-homepage.top-drawer/> --}}
-                {{-- @endroleset --}}
+                <x-homepage.top-drawer2/>
                 <b class="text-xl p-2 font-semibold hidden md:block">
                     <a href="{{$routeSrc}}" class="hover:underline">
                         @yield('topTitle', 'Untitled')
@@ -29,7 +23,7 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
             </div> --}}
             <ul class="flex items-center flex-shrink-0 space-x-2 border1">
                 <li class="flex border1 px-2" title="Hot Key: Alt + Q">
-                    <x-homepage.search-modal modalId="modal-search-app" />
+                    <x-homepage.search-modal2 modalId="modal-search-app" />
                 </li>
                 <!-- <li class="flex">
                     <x-homepage.theme-toggle></x-homepage.theme-toggle>

@@ -11,15 +11,15 @@
     @else
         <x-elapse title="Boot the layout: "/>
         
-        <div class="py-2" />
-        <x-dashboards.bookmark-group />
+        <div class="py-2"></div>
+        <x-dashboards.bookmark-group2 />
         <x-elapse title="Bookmark group: " />
 
-        <div class="py-2" />
+        <div class="py-2"></div>
         <x-renderer.project.project-overview-by-due-date />
         <x-elapse title="Project Overview: " />
 
-        <div class="py-2" />
+        <div class="py-2"></div>
         <x-dashboards.my-view-groups />
         <x-elapse title="My View: "/>
         {{-- <x-dashboards.widget-groups /> --}}

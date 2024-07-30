@@ -20,15 +20,14 @@
 <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
     <div class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-300">
         <i class="fa-light fa-circle-question pr-1"></i>
-        <p class="mr-1">Total number of apps: <p class="font-bold">{{" ?"}}</p></p>
-        
+        <p class="mr-1">Search Result: <p id="searchModalTotalAppCount" class="font-bold"></p></p>
     </div>
 </div>
 @endsection
 
 @section($modalId.'-javascript')
 <script>
-    onSearchModalInit();
+    onSearchModalInit("{{$route}}");
 </script>
 @endsection
   

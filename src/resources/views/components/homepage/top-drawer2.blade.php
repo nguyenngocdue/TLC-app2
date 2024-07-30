@@ -20,7 +20,16 @@
         >
         <div data-top-drawer class="px-1 xl:px-6 overflow-y-auto" style="max-height: 63vh; height:63vh;">
             <x-renderer.tab-pane :tabs="$tabPans">
-                <x-homepage.top-drawer2-applications :dataSource="$dataSourceApplications" />
+                @php
+                    $dataSourceApplications01 = array_filter($dataSourceApplications, function($value){
+                        $items = $value["items"];
+                        $filteredItems = array_filter($items, function($item){
+                            return $item["hidden_for_non_admin"] && $item["hidden_navbar"];
+                        });
+                        return count($filteredItems) > 0;
+                    });
+                @endphp
+                <x-homepage.top-drawer2-applications :dataSource="$dataSourceApplications01" route="{{$route}}" />
                 <x-homepage.top-drawer2-reports />
                 <x-homepage.top-drawer2-documents />
                 <div class="block h-4"></div>
