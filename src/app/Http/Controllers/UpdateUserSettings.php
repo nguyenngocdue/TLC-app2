@@ -347,6 +347,7 @@ class UpdateUserSettings extends Controller
     private function updateReport($request, $settings)
     {
         $inputValue = $request->all();
+        // dd($inputValue);
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport") {
             return $this->resetParamsReport($request, $settings);
         }

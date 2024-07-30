@@ -21,14 +21,14 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_title": {
-        "name": "_title",
-        "column_name": "title",
-        "column_type": "varchar(255)",
-        "label": "Title",
-        "control": "text",
+    "_section_01": {
+        "name": "_section_01",
+        "column_name": "section_01",
+        "column_type": "static",
+        "label": "Column attributes",
+        "control": "z_h4",
         "align": "",
-        "col_span": "",
+        "col_span": "12",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",
@@ -43,14 +43,14 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_section_01": {
-        "name": "_section_01",
-        "column_name": "section_01",
-        "column_type": "static",
-        "label": "Column attributes",
-        "control": "z_h4",
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "column_type": "varchar(255)",
+        "label": "Title",
+        "control": "text",
         "align": "",
-        "col_span": "12",
+        "col_span": "",
         "width": "",
         "hidden_view_all": "",
         "hidden_edit": "",

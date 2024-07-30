@@ -38,6 +38,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_listen_reducer_id": {
+        "name": "_listen_reducer_id",
+        "column_name": "listen_reducer_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_default_value": {
         "name": "_default_value",
         "column_name": "default_value",
@@ -80,19 +93,6 @@
     "_is_required": {
         "name": "_is_required",
         "column_name": "is_required",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_has_listen_to": {
-        "name": "_has_listen_to",
-        "column_name": "has_listen_to",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -181,9 +181,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_created_at": {
-        "name": "_created_at",
-        "column_name": "created_at",
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -194,9 +194,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_updated_at": {
-        "name": "_updated_at",
-        "column_name": "updated_at",
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
         "label": "",
         "validation": "",
         "validation_regex": "",
