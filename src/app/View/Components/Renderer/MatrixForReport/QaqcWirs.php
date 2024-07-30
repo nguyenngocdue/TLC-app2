@@ -18,7 +18,7 @@ class QaqcWirs extends MatrixForReportParent
         private $dateToCompare = null,
     ) {
         parent::__construct("qaqc_wirs", $this->dateToCompare);
-        // echo ($prodRoutingId . " - " . $subProjectId);
+        // echo ($prodRoutingId . " - " . $subProjectId);        
     }
 
     function getXAxis()
@@ -87,5 +87,16 @@ class QaqcWirs extends MatrixForReportParent
             ];
         }
         return $result;
+    }
+
+    function getCsvExportParams()
+    {
+        return [
+            'prodRoutingId' => $this->prodRoutingId,
+            'subProjectId' => $this->subProjectId,
+            'dateToCompare' => $this->dateToCompare,
+            // 'sequenceModeId' => $this->sequenceModeId,
+            // 'prodDisciplineId' => $this->prodDisciplineId,
+        ];
     }
 }
