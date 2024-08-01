@@ -9,7 +9,8 @@
     $subProjectId = is_array($params['sub_project_id']) ? join(",", $params['sub_project_id']) : $params['sub_project_id'];
     $prodRoutingId = is_array($params['prod_routing_id']) ? join(",", $params['prod_routing_id']) : $params['prod_routing_id'];
 
-    $prodDisciplineId = join(",", ($params['prod_discipline_id'] ?? []));
+    $params['prod_discipline_id'] = $params['prod_discipline_id'] ?? [];
+    $prodDisciplineId = is_array($params['prod_discipline_id']) ? join(",", $params['prod_discipline_id']) : $params['prod_discipline_id'];
     $sequenceModeId = $params['sequence_mode'];
     $dateToCompare = isset($params['picker_date']) ? App\Utils\Support\DateReport::basicFormatDateString(str_replace('/', '-', $params['picker_date']), 'Y-m-d'): null;
     
