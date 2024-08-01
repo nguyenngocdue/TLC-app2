@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\MatrixForReport;
 use App\Models\Prod_order;
 use App\Models\Prod_routing;
 use App\Models\Prod_sequence;
+use Illuminate\Support\Facades\Log;
 
 class ProdSequences extends MatrixForReportParent
 {
@@ -30,12 +31,15 @@ class ProdSequences extends MatrixForReportParent
     function getXAxis()
     {
         $result = Prod_routing::query()
+            ->where("id", $this->prodRoutingId)
             ->with(['getProdRoutingDetails' => function ($q) {
                 $q->with(['getProdRoutingLink' => function ($q) {
                     $q->with('getDiscipline');
                 }]);
             }])
-            ->find($this->prodRoutingId);
+            ->first();
+        // ->find($this->prodRoutingId);
+        // if (is_null($result)) return collect();
         $allRoutingLinkDetails = $result->getProdRoutingDetails;
         // dump($allRoutingLinkDetails[0]);
         $allRoutingLinkDetails = $allRoutingLinkDetails->sortBy("order_no");
