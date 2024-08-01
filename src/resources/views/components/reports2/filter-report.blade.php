@@ -34,9 +34,7 @@
             <span class='px-1'>Project</span>
             <x-renderer.report2.filter-report-item />
         </div>
-
  --}}
-
         @foreach ($filterDetails as $filter)
             @php
                 $title = is_NUll($x = $filter->getColumn->title) ? 'Set title for column' : $x;
