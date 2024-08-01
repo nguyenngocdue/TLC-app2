@@ -131,10 +131,9 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                 LEFT JOIN erp_routing_links erl ON erl.id = prd.erp_routing_link_id 
                 WHERE pr.prod_sequence_id IS NULL";
 
-        // dd($valOfParams);
         if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
-        if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
+        if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND prt.id IN ($pr)";
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN($po)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
         if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
