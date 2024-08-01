@@ -23,6 +23,10 @@ class TestCronJobController extends Controller
         if ($request->input('case')) {
             $case = $request->input('case');
             switch ($case) {
+                case 'start_of_week_timesheet_remind':
+                    dump("StartOfWeekTimesheetRemindEvent emitted.");
+                    event(new \App\Events\StartOfWeekTimesheetRemindEvent());
+                    break;
                 case 'sign_off_remind':
                     dump("SignOffRemindEvent emitted.");
                     event(new \App\Events\SignOffRemindEvent());

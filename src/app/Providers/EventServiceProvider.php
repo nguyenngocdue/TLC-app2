@@ -9,6 +9,7 @@ use App\Events\SignOffRecallEvent;
 use App\Events\SignOffRemindEvent;
 use App\Events\SignOffRequestEvent;
 use App\Events\SignOffSubmittedEvent;
+use App\Events\StartOfWeekTimesheetRemindEvent;
 use App\Events\TransferDiginetDataEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
@@ -25,6 +26,7 @@ use App\Listeners\SignOffRemindListener;
 use App\Listeners\SignOffRecallListener;
 use App\Listeners\SignOffRequestListener;
 use App\Listeners\SignOffSubmittedListener;
+use App\Listeners\StartOfWeekTimesheetRemindListener;
 use App\Listeners\TransferDiginetDataListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
@@ -73,6 +75,7 @@ class EventServiceProvider extends ServiceProvider
 
         //Schedule
         SignOffRemindEvent::class => [SignOffRemindListener::class],
+        StartOfWeekTimesheetRemindEvent::class => [StartOfWeekTimesheetRemindListener::class],
 
         //Handle update job description
         UpdatedUserPositionEvent::class => [UpdatedUserPositionListener::class],
