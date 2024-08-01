@@ -46,7 +46,8 @@ class ProdSequences extends MatrixForReportParent
         $allRoutingLinks = $allRoutingLinkDetails->map(fn ($item) => $item->getProdRoutingLink);
         // dump($allRoutingLinks[0]);
         if ($this->prodDisciplineId) {
-            $allRoutingLinks = $allRoutingLinks->filter(fn ($item) => ($item->prod_discipline_id == $this->prodDisciplineId));
+            $disciplineIds = explode(",", $this->prodDisciplineId);
+            $allRoutingLinks = $allRoutingLinks->filter(fn ($item) => (in_array($item->prod_discipline_id, $disciplineIds)));
         }
 
         $toHide = config('prod_discipline.to_hide');

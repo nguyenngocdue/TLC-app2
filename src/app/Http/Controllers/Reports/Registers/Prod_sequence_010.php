@@ -26,7 +26,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     protected $mode = '010';
     protected $maxH = 45;
     protected $viewName = "register-prod-sequence-010";
-    protected $sequence_mode = 1;
+    protected $sequence_mode = 2;
 
     public function getSqlStr($params)
     {
