@@ -463,7 +463,7 @@
         "item_datasource": "rp_blocks",
         "eloquent_function_name": null,
         "group_datasource": null,
-        "foreign_key": "block_id",
+        "foreign_key": "rp_block_id",
         "button_add_from_a_list": "true"
     },
     "rp_reports_01": {

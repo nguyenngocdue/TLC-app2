@@ -136,7 +136,7 @@
         "column_name": "entity_type",
         "column_type": "varchar(255)",
         "label": "Entity Type",
-        "control": "text",
+        "control": "entity_type",
         "align": "",
         "col_span": "",
         "width": "",
