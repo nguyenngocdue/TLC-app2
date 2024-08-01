@@ -9,7 +9,6 @@
 
     <div class="col-span-10">
         <div class="px-4">
-            ABCABCABCABCABCABCABCABC
         </div>
     </div>
 </div>
@@ -39,11 +38,12 @@
  --}}
 
         @foreach ($filterDetails as $filter)
+            @php
+                $title = is_NUll($x = $filter->getColumn->title) ? 'Set title for column' : $x;
+            @endphp
             <div id="" class="col-span-2">
-                @php
-                @endphp
                 <a target="blank" href="{{ route('rp_report_filter_details.edit', $filter->id) }}">
-                    <span class='px-1'>{{ $filter->title }}</span>
+                    <span class='px-1'>{{$title}}</span>
                 </a>
                 {{-- <x-renderer.report2.filter-report-item-listener :filterDetail="$filter" /> --}}
                 <x-renderer.report2.filter-report-item :filterDetail="$filter" />

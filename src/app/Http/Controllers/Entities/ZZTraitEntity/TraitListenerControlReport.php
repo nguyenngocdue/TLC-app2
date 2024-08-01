@@ -26,14 +26,14 @@ trait TraitListenerControlReport
     //Suffix is for case one form have multiple dropdown but same control (like sub projects in sidebar filter and sub projects in edit modal)
     public function getListenersOfDropdown2()
     {
-        dd($this->filterDetail);
+        // dd($this->filterDetail);
 
         // Log::info($a);
         $listenersOfDropdown2 = [[
             'column_name' => 'sub_project_id',
             'listen_action' => 'reduce',
             'triggers' => [
-                'sub_project_id',
+                'project_id',
             ],
             'listen_to_fields' => [
                 'sub_project_id',
