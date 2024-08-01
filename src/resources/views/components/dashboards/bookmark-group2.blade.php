@@ -1,5 +1,5 @@
 <x-renderer.card title="Bookmarks" icon="fa-duotone fa-bookmark">
-    <div class="flex justify-center">
+    <div class="flex justify-center sm:justify-start">
         <div id="bookmark-list" class="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"></div>
         <div id="bookmark-btn-more">            
             <button 
