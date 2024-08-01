@@ -46,6 +46,7 @@ class User extends ModelExtended implements
         "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
         "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
         "is_bod", "org_chart", "standard_signature", "seniority_level",
+        "show_on_org_chart",
 
         "erp_site", "erp_cashflow",
     ];

@@ -88,8 +88,10 @@ class OrgChartRenderer extends Component
     private function convertDataSource($value, $options)
     {
         if (
-            in_array($value->workplace, $options['workplace']) && in_array($value->resigned, $options['resigned'])
-            && in_array($value->time_keeping_type, $options['time_keeping_type']) && in_array($value->is_bod, $options['is_bod'])
+            in_array($value->workplace, $options['workplace'])
+            && in_array($value->resigned, $options['resigned'])
+            && in_array($value->time_keeping_type, $options['time_keeping_type'])
+            && in_array($value->is_bod, $options['is_bod'])
         ) {
             $id = $value->id;
             $user = User::findFromCache($id);

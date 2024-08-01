@@ -54,6 +54,7 @@ return new class extends Migration
             $table->unsignedBigInteger("erp_cashflow")->nullable();
 
             $table->boolean("show_on_beta")->nullable();
+            $table->boolean("show_on_org_chart")->nullable();
             $table->boolean("is_bod")->nullable();
             $table->boolean("resigned")->nullable();
             $table->string("viewport_uids")->nullable();
