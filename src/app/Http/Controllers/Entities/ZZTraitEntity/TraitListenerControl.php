@@ -51,7 +51,6 @@ trait TraitListenerControl
             }
             // Log::info($a);
             $listenersOfDropdown2 = [$a];
-            dump($listenersOfDropdown2);
             return $listenersOfDropdown2;
         }
     }
