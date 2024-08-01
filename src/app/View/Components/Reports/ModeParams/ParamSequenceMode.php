@@ -2,9 +2,9 @@
 
 namespace App\View\Components\Reports\ModeParams;
 
-use App\View\Components\Reports\ParentTypeParamReport;
+use App\View\Components\Reports\ParentParamReports;
 
-class ParamSequenceMode extends ParentTypeParamReport
+class ParamSequenceMode extends ParentParamReports
 {
     protected function getDataSource()
     {

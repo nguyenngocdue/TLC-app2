@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 use App\Utils\ClassList;
 use Illuminate\Support\Facades\Log;
 
-trait TraitListenerControl
+trait TraitListenerControlReport
 {
     use TraitEntityListenDataSource;
     use TraitGetSuffixListenerControl;
@@ -26,49 +26,52 @@ trait TraitListenerControl
     //Suffix is for case one form have multiple dropdown but same control (like sub projects in sidebar filter and sub projects in edit modal)
     public function getListenersOfDropdown2()
     {
-        $a = $this->getListeners2($this->typeToLoadListener);
-        // dump($a);
-        $columnName = $this->id ?? $this->name;
-        // dump($columnName);
-        $suffix = $this->getSuffix();
-        // dump($suffix);
-        $a = array_filter($a, fn ($x) => ($x['column_name'] . $suffix) == $columnName);
-        // dump($a);
-        $a = array_values($a);
-        // dump($a);
-        if (!isset($a[0])) {
-            // dump("A");
-            // throw new \Exception("Can not find control with column_name as [" . $columnName . "], maybe you forget getSuffix() function.");
-            //<<This cause WIR View All Matrix crashes
-        } else {
-            // dump("B");
-            $a = $a[0];
+        dd($this->filterDetail);
 
-            if ($suffix) {
-                $a['column_name'] .= $suffix;
-                foreach ($a['triggers'] as &$x) $x .= $suffix;
-                // foreach ($a['listen_to_fields'] as $x) $x .= $suffix;
-            }
-            // Log::info($a);
-            $listenersOfDropdown2 = [$a];
-            dump($listenersOfDropdown2);
-            return $listenersOfDropdown2;
-        }
+        // Log::info($a);
+        $listenersOfDropdown2 = [[
+            'column_name' => 'sub_project_id',
+            'listen_action' => 'reduce',
+            'triggers' => [
+                'sub_project_id',
+            ],
+            'listen_to_fields' => [
+                'sub_project_id',
+            ],
+            'listen_to_attrs' => [
+                'project_id',
+            ],
+            'columns_to_set' => [],
+            'attrs_to_compare' => [
+                'id',
+            ],
+            'expression' => '',
+            'ajax_response_attribute' => '',
+            'ajax_form_attributes' => [],
+            'ajax_item_attributes' => [],
+            'ajax_default_values' => [],
+            'table_name' => 'sub_projects',
+            'listen_to_tables' => [
+                'sub_projects',
+            ],
+        ]];
+        return $listenersOfDropdown2;
     }
 
     private function renderJSForListener()
     {
-        if (isset($this->typeToLoadListener) && !is_null($this->typeToLoadListener)) {
-            $listenersOfDropdown2 = $this->getListenersOfDropdown2();
+        $listenersOfDropdown2 = $this->getListenersOfDropdown2();
+        dump(
+            $listenersOfDropdown2
+        );
 
-            if (is_array($listenersOfDropdown2)) {
-                $str = "\n";
-                $str .= "<script>";
-                $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
-                $str .= "</script>";
-                $str .= "\n";
-                echo $str;
-            }
+        if (is_array($listenersOfDropdown2)) {
+            $str = "\n";
+            $str .= "<script>";
+            $str .= " listenersOfDropdown2 = [...listenersOfDropdown2, ..." . json_encode($listenersOfDropdown2) . "];";
+            $str .= "</script>";
+            $str .= "\n";
+            echo $str;
         }
     }
 
@@ -86,7 +89,7 @@ trait TraitListenerControl
                 break;
         }
         return  [
-            'id' => $this->id ?? $this->name,
+            'id' => /* $this->id ?? */ $this->name,
             'name' => $this->name,
             'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",

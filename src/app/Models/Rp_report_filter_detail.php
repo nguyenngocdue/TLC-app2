@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_report_filter_detail extends ModelExtended
 {
     protected $fillable = [
-        "id",
+        "id", "title",
         "rp_column_id", "rp_report_id",
         "bw_list_ids", "black_or_white",
         "is_required", "default_value",

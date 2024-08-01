@@ -95,7 +95,7 @@ class Prod_sequence_dataSource extends Controller
 
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND ps.prod_order_id IN($po)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prde.prod_routing_link_id IN ($prl)";
-        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
+        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id IN ($pd)";
         if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prde.erp_routing_link_id IN ($erp)";
         if ($status = $valOfParams['status']) $sql .= "\n AND ps.status IN( $status )";
 

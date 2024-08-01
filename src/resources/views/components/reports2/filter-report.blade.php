@@ -1,9 +1,3 @@
-@php
-
-@endphp
-
-
-
 <div class="grid grid-cols-12 gap-1">
     <div class="col-span-2">
         <div class="no-print justify-end pl-4 pt-5">
@@ -29,8 +23,34 @@
         'prod_routing_link_id' => [],
         'prod_discipline_id' => '10',
     ];
+
 @endphp
 
+
+
+
+<div class="grid grid-row-1 w-full">
+    <div class="grid grid-cols-12 gap-4 items-baseline">
+        {{--      <div id="" class="col-span-2">
+            <span class='px-1'>Project</span>
+            <x-renderer.report2.filter-report-item />
+        </div>
+
+ --}}
+
+        @foreach ($filterDetails as $filter)
+            <div id="" class="col-span-2">
+                @php
+                @endphp
+                <a target="blank" href="{{ route('rp_report_filter_details.edit', $filter->id) }}">
+                    <span class='px-1'>{{ $filter->title }}</span>
+                </a>
+                {{-- <x-renderer.report2.filter-report-item-listener :filterDetail="$filter" /> --}}
+                <x-renderer.report2.filter-report-item :filterDetail="$filter" />
+            </div>
+        @endforeach
+    </div>
+</div>
 
 
 <form action="{{ route('updateUserSettings') }}" method="post">
@@ -41,38 +61,6 @@
     <div class="bg-white rounded w-full my-2 p-2">
         <div class="w-full my-1 grid grid-cols-12 gap-2">
 
-
-
-            @foreach ($filterDetails as $value)
-                @php
-
-                @endphp
-
-                <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                    Project <span class='text-red-400' title='required'>*</span>
-                    <x-renderer.view-all-matrix-filter.ProjectFilter tableName="projects" name="project_id"
-                        id="project_id" typeToLoadListener="qaqc_wir" selected="{{ $viewportParams['project_id'] }}" />
-                </div>
-            @endforeach
-
-            {{--             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Sub-Project <span class='text-red-400' title='required'>*</span>
-                <x-renderer.view-all-matrix-filter.SubProjectFilter tableName="sub_projects" name="sub_project_id"
-                    id="sub_project_id" typeToLoadListener="qaqc_wir"
-                    selected="{{ $viewportParams['sub_project_id'] }}" />
-            </div>
-            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Production Routing <span class='text-red-400' title='required'>*</span>
-                <x-renderer.view-all-matrix-filter.ProdRoutingFilter tableName="prod_routings" name="prod_routing_id"
-                    id="prod_routing_id" typeToLoadListener="qaqc_wir"
-                    selected="{{ $viewportParams['prod_routing_id'] }}" />
-            </div>
-            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Production Discipline
-                <x-renderer.view-all-matrix-filter.ProdDisciplineFilter tableName="prod_disciplines"
-                    name="prod_discipline_id" id="prod_discipline_id" typeToLoadListener="qaqc_wir" allowClear="true"
-                    selected="{{ $viewportParams['prod_discipline_id'] }}" />
-            </div> --}}
 
         </div>
         <x-renderer.button type='primary' htmlType="submit" icon="fa-sharp fa-solid fa-check">Apply
