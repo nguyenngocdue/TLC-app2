@@ -2,44 +2,58 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class FilterReport extends Component
 {
     public function __construct(
-        private $reportId = "",
+        private $report = "",
         private $filterModes = [],
         private $filterDetails = [],
 
     ) {
     }
-
+    private function createDefaultCurrentParams($filterDetails, $currentParams)
+    {
+        foreach ($filterDetails as $filter) {
+            $filterName = str_replace('_name', '_id', $filter->getColumn->data_index);
+            $currentParams[$filterName] = $currentParams[$filterName] ?? (
+                is_null($filter->default_value)
+                ? null
+                : '[' . '"' . implode('","', explode(',', $filter->default_value)) . '"' . ']'
+            );
+        }
+        return $currentParams;
+    }
 
     public function render()
     {
-        $type = 'prod_sequences';
-
-
+        $report = (object)$this->report;
+        $reportName = $report->name;
         $filterModes = collect($this->filterModes);
         $filterDetails = $this->filterDetails;
 
-        // dd($filterDetails);
-
-
-        $keysNames = $filterModes->mapWithKeys(function ($filterMode) {
+        $keyNameModes = $filterModes->mapWithKeys(function ($filterMode) {
             return [$filterMode->name => $filterMode->name];
         });
-        $params = [
-            "forward_to_mode" => "Mode 2"
-        ];
 
-        // dd($names);
+        $settingUser = CurrentUser::getSettings();
+        $paramIndex = isset($settingUser[$reportName]) ?  $settingUser[$reportName] : [];
+        $currentMode =  isset($paramIndex['current_mode']) ? $paramIndex['current_mode'] : 'Mode 1';
+
+        $currentMode = $modes['current_mode'] ?? 'Mode 1';
+        $currentParams = isset($paramIndex[$currentMode]) ? $paramIndex[$currentMode] : [];
+
+        $currentParams = $this->createDefaultCurrentParams($filterDetails, $currentParams);
+        // dd($currentParams);
+
         return view('components.reports2.filter-report', [
-            'keysNames' => $keysNames,
-            'params' => $params,
+            'keyNameModes' => $keyNameModes,
             'filterDetails' => $filterDetails,
-            'type' => $type,
-            'entity' => 'prod_sequences'
+            'entity_type' => "not yet",
+            'reportName' => $reportName,
+            'params' => $currentParams,
         ]);
     }
 }

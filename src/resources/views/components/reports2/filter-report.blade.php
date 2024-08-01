@@ -1,15 +1,20 @@
+@php
+    $route = 'https://127.0.0.1:38002/dashboard/rp_reports/34';
+@endphp
+
+
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4">
     <!-- Mode Dropdown -->
     <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <x-reports.dropdown8 
             title="Mode" 
-            name="forward_to_mode" 
+            name="current_mode" 
             routeName="report-prod_sequence_020"
             :allowClear="false" 
-            :dataSource="$keysNames" 
+            :dataSource="$keyNameModes" 
             typeReport="reports" 
-            entity="prod_sequences" 
+            entity="prod_sequences"
             modeOption="020"
             :itemsSelected="$params" 
         />
@@ -20,22 +25,30 @@
         <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
             
-            <form action="{{ route('updateUserSettings') }}" method="post">
+            <form action="{{ $route }}" id="{{ $reportName }}" method="GET">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="action" value="updateViewAllMatrix" />
-                <input type="hidden" name="_entity" value="{{ $type }}" />
+                {{-- <input type="hidden" name='_entity' value="{{ $entity }}">
+                <input type="hidden" name='action' value="updateReport{{ Str::ucfirst($typeReport) }}">
+                <input type="hidden" name='type_report' value="{{ $typeReport }}"> --}}
                 
                 <div class="grid grid-cols-12 gap-4 items-baseline">
                     @foreach ($filterDetails as $filter)
+                        
                         @php
                             $title = is_null($x = $filter->getColumn->title) ? '(Set title for column)' : $x;
+                            $keyParam = str_replace('name', 'id', $x = $filter->getColumn->data_index);
+                            $selected =  $params[$keyParam];
                         @endphp
+                        
                         <div class="col-span-2">
                             <a target="_blank" href="{{ route('rp_report_filter_details.edit', $filter->id) }}">
                                 <span class='px-1'>{{$title}}</span>
                             </a>
-                            <x-renderer.report2.filter-report-item :filterDetail="$filter" />
+                            <x-renderer.report2.filter-report-item 
+                                :filterDetail="$filter"
+                                :selected="$selected"    
+                            />
                         </div>
                     @endforeach
                 </div>
@@ -53,10 +66,3 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function resetFilter() {
-        $('[id="' + "{{ $entity }}" + '"]').append(
-            '<input type="hidden" name="form_type" value="resetParamsReport">'
-        );
-    }
-</script>

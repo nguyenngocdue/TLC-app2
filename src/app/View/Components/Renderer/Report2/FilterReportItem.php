@@ -46,6 +46,7 @@ class FilterReportItem extends Component
         $this->tableName = $tableName;
         $this->name = $name;
         $this->id = $filterDetail->id;
+        $this->multiple = $filterDetail->is_multiple;
     }
 
     private function getListenReducer()

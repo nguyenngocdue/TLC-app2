@@ -1,6 +1,3 @@
-@php
-@endphp
-
 <div class="flex justify-center">
     <div class="py-4 {{ $layoutClass === 'w-full' ? 'w-full' : '' }}">
         <div class=" items-center bg-white p-0 flex flex-col justify-between" style="{{ $layoutClass }}">
