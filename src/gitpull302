@@ -1,6 +1,8 @@
 git pull
-# && sudo chmod 777 storage/framework/* -R
-# && sudo chown 82:82 * -R
+# sudo chown 82:82 storage -R         
+# sudo chmod 777 storage/framework -R  
+# sudo chmod 775 storage/logs -R
+
 docker exec -it laravel302_php php artisan cache:clear
 docker exec -it laravel302_php php artisan view:clear
 docker exec -it laravel302_php php artisan config:clear
