@@ -32,7 +32,7 @@
         dataSourceTableName="{{$itemDataSourceName}}"
         eloquentFunctionName="{{$eloquentFunctionName}}"
         multiple=1
-        control='radio-or-checkbox2' 
+        control='radio-or-checkbox2a' 
         {{-- span=6 --}}
         />
 @endsection

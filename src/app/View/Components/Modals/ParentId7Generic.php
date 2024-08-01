@@ -116,7 +116,8 @@ class ParentId7Generic extends Component
         $params = $this->getParamsForHasDataSource();
         $params['span'] = $this->span ?: 3;
         $this->renderJSForK();
-        // dump($params);
+        // dump($this->control);
+        // dump($params);   
         return view('components.controls.has-data-source.' . $this->control, $params);
     }
 }

@@ -75,7 +75,8 @@ trait TraitListenerControl
     private function getParamsForHasDataSource()
     {
         switch ($this->control) {
-            case "radio-or-checkbox2":
+                // case "radio-or-checkbox2":
+            case "radio-or-checkbox2a":
                 $classList = ClassList::RADIO_CHECKBOX;
                 break;
             case "dropdown2":
