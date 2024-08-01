@@ -280,7 +280,8 @@
     function renderHtmlContentWeek(html,array,month){
         array.forEach(day => {
             isToday = dayNow(day,month);
-            html += isToday 
+            //Make sure day is not empty, like 1st is on Wed so it will create ghost red box before 1st
+            html += (isToday && day) 
             ? `<p class='text-red-600 rounded-lg bg-rose-300 items-center justify-center'>
                 ${day}
                 </p>` 
