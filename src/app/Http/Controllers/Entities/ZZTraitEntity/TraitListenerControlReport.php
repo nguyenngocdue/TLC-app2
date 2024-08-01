@@ -61,9 +61,6 @@ trait TraitListenerControlReport
     private function renderJSForListener()
     {
         $listenersOfDropdown2 = $this->getListenersOfDropdown2();
-        dump(
-            $listenersOfDropdown2
-        );
 
         if (is_array($listenersOfDropdown2)) {
             $str = "\n";

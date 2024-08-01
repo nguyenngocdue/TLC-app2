@@ -11,7 +11,7 @@ class Rp_report_filter_detail extends ModelExtended
         "rp_column_id", "rp_report_id",
         "bw_list_ids", "black_or_white",
         "is_required", "default_value",
-        "listen_reducer_id", "has_listen_to", "allow_clear",
+        "listen_reducer_id", "allow_clear",
         "is_multiple", "control_type",
         "owner_id",
     ];
@@ -61,7 +61,6 @@ class Rp_report_filter_detail extends ModelExtended
             ["dataIndex" => 'black_or_white'],
             ["dataIndex" => 'is_required'],
             ["dataIndex" => 'default_value'],
-            ["dataIndex" => 'has_listen_to'],
             ["dataIndex" => 'allow_clear'],
             ["dataIndex" => 'is_multiple'],
             ["dataIndex" => 'control_type'],
