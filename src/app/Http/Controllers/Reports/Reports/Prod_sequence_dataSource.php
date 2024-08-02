@@ -88,8 +88,8 @@ class Prod_sequence_dataSource extends Controller
                         LEFT JOIN users us ON us.id = pru.owner_id
                         LEFT JOIN comments cm ON cm.commentable_type = 'App\\\Models\\\Prod_sequence' AND cm.commentable_id = ps.id
                     WHERE 1 = 1";
-        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
-        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
+        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id IN ($pj)";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id IN ($sub)";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
 
 

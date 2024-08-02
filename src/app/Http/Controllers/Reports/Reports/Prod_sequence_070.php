@@ -60,8 +60,8 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                 #AND sp.id = 21
                                 #AND pj.id = 5
                                 ";
-        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
-        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
+        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id IN ($pj)";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id IN ($sub)";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN($po)";
 
@@ -82,7 +82,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                     WHERE 1 = 1 ";
 
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
-        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
+        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id IN ($pd)";
         if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prd.erp_routing_link_id IN ($erp)";
 
 
@@ -131,12 +131,12 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                 LEFT JOIN erp_routing_links erl ON erl.id = prd.erp_routing_link_id 
                 WHERE pr.prod_sequence_id IS NULL";
 
-        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id = $pj";
-        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
+        if ($pj = $valOfParams['project_id']) $sql .= "\n AND sp.project_id IN ($pj)";
+        if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id IN ($sub)";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND prt.id IN ($pr)";
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN($po)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
-        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id = $pd";
+        if ($pd = $valOfParams['prod_discipline_id']) $sql .= "\n AND prl.prod_discipline_id IN ($pd)";
         if ($erp = $valOfParams['erp_routing_link_id']) $sql .= "\n AND prd.erp_routing_link_id IN ($erp)";
         if ($sts = $valOfParams['status']) $sql .= "\n AND ps.status IN ( $sts )";
         // dump($sql);
