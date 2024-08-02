@@ -3,6 +3,7 @@
 use App\Http\Controllers\Entities\EntityCRUDController;
 use App\Http\Controllers\Entities\ViewAllController;
 use App\Http\Controllers\Entities\ViewAllInvokerController;
+use App\Http\Controllers\Reports2\Rp_reportController;
 use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ Route::group([], function () {
             Route::get("{$entityName}/{{$entitySingular}}/show_calender", [EntityCRUDController::class, 'showCalender'])->name("{$entityName}.showCalender");
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
+
+            Route::post("rp_reports/update_filters/{id}", [Rp_reportController::class, 'updateFilters']);
 
             Route::post("{$entityName}_rs", [EntityCRUDController::class, "restoreMultiple"])->name("{$entityName}.restoreMultiple");
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");

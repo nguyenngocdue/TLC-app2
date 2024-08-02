@@ -40,11 +40,8 @@ class FilterReport extends Component
 
         $settingUser = CurrentUser::getSettings();
         $paramIndex = isset($settingUser[$reportName]) ?  $settingUser[$reportName] : [];
-        $currentMode =  isset($paramIndex['current_mode']) ? $paramIndex['current_mode'] : 'Mode 1';
-
-        $currentMode = $modes['current_mode'] ?? 'Mode 1';
+        $currentMode =  isset($paramIndex['current_mode']) || is_null($paramIndex['current_mode'])  ? 'Mode 1' :  $paramIndex['current_mode'];
         $currentParams = isset($paramIndex[$currentMode]) ? $paramIndex[$currentMode] : [];
-
         $currentParams = $this->createDefaultCurrentParams($filterDetails, $currentParams);
         // dd($currentParams);
 

@@ -13,8 +13,6 @@ trait TraitEntityCRUDShowReport
 		$pages = $report->getPages->sortBy('order_no');
 		$filterModes = $report->getFilterModes->sortBy('order_no');
 		$filterDetails = $report->getFilterDetails->sortBy('order_no');
-		// dd($filterDetails);
-
 
 		return view('dashboards.pages.entity-show-report', [
 			'appName' => LibApps::getFor($this->type)['title'],

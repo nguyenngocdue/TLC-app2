@@ -358,6 +358,24 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
+    private function updateReport2($request, $settings)
+    {
+        $inputValue = $request->all();
+
+        $reportName = $inputValue['report_name'];
+        $currentMode = $inputValue['current_mode'];
+
+        if ($inputValue['form_type'] ?? null === "resetParamsReport" && isset($settings[$reportName][$currentMode])) {
+            foreach (array_keys($settings[$reportName][$currentMode]) as $key) {
+                if (!in_array($key, ['_token', 'action'])) $settings[$reportName][$currentMode][$key] = null;
+            }
+        } else {
+            $settings[$reportName][$currentMode] = $inputValue;
+        }
+        $settings[$reportName]['current_mode'] = $currentMode;
+        return $settings;
+    }
+
     private function updatePerPageReports($request, $settings)
     {
         $entity = $request->input("_entity");
@@ -370,7 +388,6 @@ class UpdateUserSettings extends Controller
     public function __invoke(Request $request, $redirectTo = null)
     {
         $action = $request->input('action');
-        // dd($request);
         $user = User::find(Auth::id());
         $settings = $user->settings;
         switch ($action) {
@@ -437,6 +454,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'updateReportDocuments':
                 $settings = $this->updateReport($request, $settings);
+                break;
+            case 'updateReport2':
+                $settings = $this->updateReport2($request, $settings);
                 break;
             case 'updatePerPageRegisters':
                 $settings = $this->updatePerPageReports($request, $settings);

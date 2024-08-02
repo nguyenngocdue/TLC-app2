@@ -34,10 +34,8 @@ class FilterReportItem extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
         if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
 
-
         $filterDetail = $this->filterDetail;
         $column = $filterDetail->getColumn;
-        $listenReducer = $filterDetail->getListenReducer;
 
         $dataIndex = $column->data_index ?? '';
         $tableName = Str::plural(str_replace('_name', '', $dataIndex));

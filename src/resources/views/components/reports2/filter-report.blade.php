@@ -1,5 +1,5 @@
 @php
-    $route = 'https://127.0.0.1:38002/dashboard/rp_reports/34';
+    $route = 'https://127.0.0.1:38002/dashboard/rp_reports/update_filters/34';
 @endphp
 
 
@@ -25,13 +25,12 @@
         <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
             
-            <form action="{{ $route }}" id="{{ $reportName }}" method="GET">
+            <form action="{{ $route }}" id="{{ $reportName }}" method="POST">
                 @csrf
-                @method('PUT')
-                {{-- <input type="hidden" name='_entity' value="{{ $entity }}">
-                <input type="hidden" name='action' value="updateReport{{ Str::ucfirst($typeReport) }}">
-                <input type="hidden" name='type_report' value="{{ $typeReport }}"> --}}
-                
+                <input type="hidden" name='action' value="updateReport2">
+                <input type="hidden" name='current_mode' value="{{$params['current_mode']}}">
+                <input type="hidden" name='report_name' value="{{$reportName}}">
+               
                 <div class="grid grid-cols-12 gap-4 items-baseline">
                     @foreach ($filterDetails as $filter)
                         
@@ -66,3 +65,9 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    function resetFilter() {
+        $('[id="' + "{{ $reportName }}" + '"]').append(
+            '<input type="hidden" name="form_type" value="resetParamsReport">')
+    }
+</script>
