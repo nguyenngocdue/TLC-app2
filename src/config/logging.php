@@ -137,25 +137,25 @@ return [
 
         'schedule_heartbeat_channel' => [
             'driver' => 'daily', // or 'single' for a single log file
-            'path' => storage_path('logs/schedule/schedule_heartbeat.log'), // Define the log storage location
+            'path' => storage_path('logs/schedule/heartbeat/schedule.log'), // Define the log storage location
             'level' => 'debug', // Define the log level
             'days' => 30, // Number of days log files should be retained
         ],
         'schedule_diginet_sync_channel' => [
             'driver' => 'daily', // or 'single' for a single log file
-            'path' => storage_path('logs/schedule/schedule_diginet_sync.log'), // Define the log storage location
+            'path' => storage_path('logs/schedule/diginet/schedule.log'), // Define the log storage location
             'level' => 'debug', // Define the log level
             'days' => 30, // Number of days log files should be retained
         ],
         'schedule_cleanup_trash_channel' => [
             'driver' => 'daily', // or 'single' for a single log file
-            'path' => storage_path('logs/schedule/schedule_cleanup_trash.log'), // Define the log storage location
+            'path' => storage_path('logs/schedule/cleanup_trash/schedule.log'), // Define the log storage location
             'level' => 'debug', // Define the log level
             'days' => 30, // Number of days log files should be retained
         ],
         'schedule_remind_signoff_channel' => [
             'driver' => 'daily', // or 'single' for a single log file
-            'path' => storage_path('logs/schedule/schedule_remind_signoff.log'), // Define the log storage location
+            'path' => storage_path('logs/schedule/remind_signoff/schedule.log'), // Define the log storage location
             'level' => 'debug', // Define the log level
             'days' => 30, // Number of days log files should be retained
         ],
