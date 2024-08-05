@@ -49,7 +49,8 @@ return [
     "channels" => [
         "stack" => [
             "driver" => "stack",
-            "channels" => ["single", "daily"], //log logging 
+            // "channels" => ["single", "daily"], //log logging 
+            'channels' => env('APP_ENV') === 'production' ? ['single'] : ['daily'],
             "ignore_exceptions" => false,
         ],
 
