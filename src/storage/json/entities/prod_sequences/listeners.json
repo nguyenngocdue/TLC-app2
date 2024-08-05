@@ -293,7 +293,7 @@
         "listen_to_attrs": "",
         "columns_to_set": "",
         "attrs_to_compare": "",
-        "expression": "(total_man_hours\/total_hours).toFixed(2)",
+        "expression": "total_hours === 0 ? 0 : (total_man_hours\/total_hours).toFixed(2)",
         "ajax_response_attribute": "",
         "ajax_form_attributes": "",
         "ajax_item_attributes": "",
