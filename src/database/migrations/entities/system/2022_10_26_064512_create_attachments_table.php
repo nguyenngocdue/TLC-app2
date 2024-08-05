@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('object_type')->nullable();
             $table->unsignedBigInteger('object_id')->nullable();
             $table->unsignedBigInteger('category');
+            $table->unsignedBigInteger('sub_category')->nullable();
             $table->appendCommonFields();
         });
     }

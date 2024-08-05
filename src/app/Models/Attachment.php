@@ -17,6 +17,7 @@ class Attachment extends ModelExtended
         "url_media",
         "filename",
         "category",
+        "sub_category",
         "owner_id",
         'object_id',
         'object_type',
