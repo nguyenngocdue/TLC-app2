@@ -75,7 +75,6 @@ class FilterReportItem extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dump($params);
         return view(
             'components.controls.has-data-source.dropdown2',
             $params

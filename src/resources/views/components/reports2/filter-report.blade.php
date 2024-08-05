@@ -1,22 +1,13 @@
-@php
-    $route = 'https://127.0.0.1:38002/dashboard/rp_reports/update_filters/34';
-@endphp
-
-
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4">
     <!-- Mode Dropdown -->
     <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
-        <x-reports.dropdown8 
+        <x-reports2.dropdown9 
             title="Mode" 
             name="current_mode" 
-            routeName="report-prod_sequence_020"
-            :allowClear="false" 
-            :dataSource="$keyNameModes" 
-            typeReport="reports" 
-            entity="prod_sequences"
-            modeOption="020"
-            :itemsSelected="$params" 
+            routeName="{{$routeFilter}}"
+            :dataSource="$reportAccesses" 
+            :currentParams="$modeData" 
         />
     </div>
     
@@ -25,7 +16,7 @@
         <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
             
-            <form action="{{ $route }}" id="{{ $reportName }}" method="POST">
+            <form action="{{$routeFilter}}" id="{{ $reportName }}" method="POST">
                 @csrf
                 <input type="hidden" name='action' value="updateReport2">
                 <input type="hidden" name='current_mode' value="{{$params['current_mode']}}">
