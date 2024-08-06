@@ -18,7 +18,7 @@ class Pj_module extends ModelExtended
     public static $eloquentParams = [
         'getPjBuilding' => ['belongsTo', Term::class, 'pj_building_id'],
         'getPjLevel' => ['belongsTo', Term::class, 'pj_level_id'],
-        'getPjType' => ['belongsTo', Term::class, 'pj_module_type_id'],
+        'getPjType' => ['belongsTo', Pj_module_type::class, 'pj_module_type_id'],
         'getPjName' => ['belongsTo', Term::class, 'pj_name_id'],
         'getPjCharacter' => ['belongsTo', Term::class, 'pj_character_id'],
         'getPjUnit' => ['belongsTo', Pj_unit::class, 'pj_unit_id'],

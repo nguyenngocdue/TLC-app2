@@ -12,5 +12,20 @@ class Pj_module_type extends ModelExtended
 
     public static $statusless = true;
 
-    public static $eloquentParams = [];
+    public static $eloquentParams = [
+        "getModules" => ['hasMany', Pj_module::class, 'pj_module_type_id'],
+        "getRoomList" => ["belongsToMany", Term::class, "ym2m_pj_module_type_term_get_room_list"],
+    ];
+
+    public function getModules()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getRoomList()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }
