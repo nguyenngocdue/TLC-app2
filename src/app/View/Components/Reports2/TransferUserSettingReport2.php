@@ -8,7 +8,6 @@ use App\Utils\Support\Report;
 class TransferUserSettingReport2
 {
     private static $instance = null;
-
     private function __construct()
     {
     }
@@ -37,9 +36,7 @@ class TransferUserSettingReport2
         } else {
             $settings = $this->initializeReportLink($settings, $filterDetailsRpLink, $paramsCurrentRp, $entityType, $entityType2, $reportLinkId);
         }
-
         $settings[$entityType][$entityType2][$currentRpId]['current_report_link'] = (string)$reportLinkId;
-
         return $settings;
     }
 
