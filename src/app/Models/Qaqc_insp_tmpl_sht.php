@@ -8,8 +8,10 @@ use Illuminate\Support\Str;
 class Qaqc_insp_tmpl_sht extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug", "owner_id", 'order_no',
+        "id", "name", "description",
+        "slug", "owner_id", 'order_no',
         "qaqc_insp_tmpl_id", "prod_discipline_id",
+        "is_attachment_grouped",
     ];
     public static $statusless = true;
 

@@ -27,16 +27,16 @@ trait TraitEntityCRUDShowChklst
                         ->whereNot('status', 'not_applicable')
                         ->with([
                             "getLines" => function ($query) {
-                                $query->orderBy('order_no')
-                                    ->with([
-                                        "getControlGroup",
-                                        "getControlType",
-                                        "getControlValue",
-                                        "getGroup",
+                                $query->with([
+                                    "getControlGroup",
+                                    "getControlType",
+                                    "getControlValue",
+                                    "getGroup",
 
-                                        "insp_photos",
-                                        "insp_comments",
-                                    ]);
+                                    "insp_photos",
+                                    "insp_comments",
+                                ])
+                                    ->orderBy('order_no');
                             }
                         ])
                         ->with($this->nominatedListFn)

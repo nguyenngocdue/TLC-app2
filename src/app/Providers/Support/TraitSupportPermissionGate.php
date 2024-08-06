@@ -47,7 +47,12 @@ trait TraitSupportPermissionGate
     }
     private function checkPermissionUsingGate($id, $action = 'edit', $restore = false)
     {
-        $item = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
+        // $item = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
+        $item = $this->modelPath::query()
+            ->where('id', $id);
+        if ($restore) $item = $item->withTrashed();
+        $item = $item->first();
+
         $isTree = $this->useTree();
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);

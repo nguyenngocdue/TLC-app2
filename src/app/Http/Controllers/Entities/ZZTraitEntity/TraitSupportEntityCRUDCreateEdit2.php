@@ -82,7 +82,7 @@ trait TraitSupportEntityCRUDCreateEdit2
         $result = [];
         $categoryNames = [];
         foreach ($query as $attachmentItem) {
-            $categoryName = $attachmentItem->getRelations()['getCategory']->name;
+            $categoryName = $attachmentItem->getCategory->name;
             $attachmentItem->isOrphan = true;
             $categoryNames[] = $categoryName;
             $result[$categoryName][] = $attachmentItem;

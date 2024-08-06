@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->unsignedBigInteger('prod_discipline_id');
+            $table->boolean('is_attachment_grouped')->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });

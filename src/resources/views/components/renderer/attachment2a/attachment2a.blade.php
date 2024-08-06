@@ -42,9 +42,14 @@
 @if(!$readOnly)
     <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='{{$hiddenOrText}}' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
     @if($showUploadButton)
-    <div class="flex mt-2 custom-file-button no-print1">
-        <label for="{{$name}}_browse" class="{{$btnClass}} w-1/2 border cursor-pointer p-2 bg-blue-50 font-normal text-sm" title="{{$btnTooltip}}">{!! $btnLabel !!}</label>
-        <input name="{{$name}}[toBeUploaded][]" id="{{$name}}_browse" multiple type="file" accept="{{$acceptedExt}}" class="hidden1 w-1/2 h-9 text-sm text-gray-900 p-2.5 rounded-lg bg-white1 border border-white cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+    @php
+        $width = $groupMode ? 'w-full' : 'w-1/2' ;
+    @endphp
+    <div class="flex1 mt-2 custom-file-button no-print1">
+        <label for="{{$name}}_browse" 
+            class="{{$btnClass}} {{$width}} border cursor-pointer p-2 bg-blue-50 font-normal text-sm" title="{{$btnTooltip}}">{!! $btnLabel !!}</label>
+        <input name="{{$name}}[toBeUploaded][]" id="{{$name}}_browse" multiple type="file" accept="{{$acceptedExt}}" 
+            class="{{$width}} hidden1 h-9 text-sm text-gray-900 p-2.5 rounded-lg bg-white1 cursor-pointer dark:text-gray-300 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
     </div>
     @endif
 @endif

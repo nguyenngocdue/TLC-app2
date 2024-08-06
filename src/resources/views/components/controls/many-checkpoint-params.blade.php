@@ -17,14 +17,14 @@
 
     @foreach($group['items'] as $rowIndex => $checkpoint)    
         <x-controls.insp-chklst.check-point 
-        :line="$checkpoint" 
-        :checkPointIds="$checkPointIds" 
-        table01Name="{{$table01Name}}" 
-        :rowIndex="$rowIndex" 
-        type="{{$lineType}}"
-        readOnly="{{$readOnly}}"
-        index="{{++$cpIndex}}"
-        />
+            :line="$checkpoint" 
+            :checkPointIds="$checkPointIds" 
+            table01Name="{{$table01Name}}" 
+            :rowIndex="$rowIndex" 
+            type="{{$lineType}}"
+            readOnly="{{$readOnly}}"
+            index="{{++$cpIndex}}"
+            />
     @endforeach
     @if($index++ < sizeof($groupedCheckpoints )-1)
     <x-renderer.divider></x-renderer.divider>
