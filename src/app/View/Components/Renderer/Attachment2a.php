@@ -91,9 +91,10 @@ class Attachment2a extends Component
     private function enrichAttachments()
     {
         foreach ($this->attachments as &$attachment) {
-            $attachment['hasOrphan'] = isset($attachment['hasOrphan']) && $attachment['hasOrphan'];
+            $attachment['isOrphan'] = isset($attachment['isOrphan']) && $attachment['isOrphan'];
+            $attachment['borderColor'] = $attachment['isOrphan'] ? 'border-red-500' : 'border-gray-300';
+
             $attachment['sameEnv'] = $this->isSameEnv($attachment);
-            $attachment['borderColor'] = $attachment['hasOrphan'] ? 'border-red-500' : 'border-gray-300';
             $attachment['onClick'] = $this->openType == 'gallery' ? 'openGallery(' . $attachment['id'] . ')' : null;
 
             $user = User::findFromCache($attachment['owner_id'] ?? 1, ['getAvatar']);

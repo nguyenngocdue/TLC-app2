@@ -3,7 +3,7 @@
         <x-renderer.emptiness p="2" class="border" message="There is no attachment to be found." />
     @else
         @foreach($attachments as $attachment)
-            @if($attachment['hasOrphan'])
+            @if($attachment['isOrphan'])
                 <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
             @endif
         @endforeach

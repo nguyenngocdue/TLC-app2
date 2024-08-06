@@ -5,9 +5,9 @@
     <div class="grid {{$gridCols}} lg:gap-3 md:gap-2 sm:gap-1 p-1 ">
         @foreach($attachments as $attachment)
         @php
-        [$hasOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
+        [$isOrphan,$sameEnv,$extension,$border,$title] = App\Utils\Support\HandleFieldsAttachment::handle($attachment)
         @endphp
-        @if($hasOrphan)
+        @if($isOrphan)
             <input name="{{$name}}[toBeAttached][]" value="{{$attachment['id']}}" type="{{$hiddenOrText}}" />
         @endif
         <div class="border-{{$border}}-300 h-full break-inside-avoid">
@@ -107,11 +107,11 @@
     @foreach($docs as $doc)
     <div class="border rounded text-left px-2 my-0.5 hover:bg-blue-200">
             @php
-            [$hasOrphan,$sameEnv] = App\Utils\Support\HandleFieldsAttachment::handle($doc);
+            [$isOrphan,$sameEnv] = App\Utils\Support\HandleFieldsAttachment::handle($doc);
             $uid = $doc['owner_id'] ?? 1;
             [$src,$firstName,$displayName] = App\Utils\Support\GetInfoUserById::get($uid);
             @endphp
-            @if($hasOrphan)
+            @if($isOrphan)
             <input name="{{$name}}[toBeAttached][]" value="{{$doc['id']}}" type="{{$hiddenOrText}}" />
             @endif
             <div class="items-center gap-2 p-1">
