@@ -167,7 +167,7 @@ class Attachment2a extends Component
             'btnLabel' => $this->getButtonLabel(),
             'btnTooltip' => $title,
             'btnClass' => ClassList::BUTTON,
-            'thumbnailClass' => "relative flex mx-1 flex-col items-center p-025vw border border-2 rounded group/item overflow-hidden bg-inherit aspect-square ",
+            'thumbnailClass' => "relative flex mx-1 flex-col items-center p1-025vw border border-2 rounded group/item overflow-hidden bg-inherit aspect-square ",
 
             'openType' => $this->openType, // gallery or href
             'gridCols' => $this->gridCols,

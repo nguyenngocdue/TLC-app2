@@ -6,7 +6,7 @@
                 $isMobile = MobileDetect::isMobile();
             @endphp
             <video 
-                class="w-auto rounded object-cover bg-slate-500 aspect-square" 
+                class="w-auto object-cover bg-slate-500 aspect-square" 
                 src="{{$path.$video['url_media']}}" 
                 alt="{{$video['filename']}}" 
                 {{$isMobile ? "autoplay" : ""}}
