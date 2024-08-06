@@ -1,5 +1,5 @@
 {{-- @dump($unknown) --}}
-<div data-id="{{$unknown['id']}}" name='{{$name}}' class="bg-red-300 border rounded text-left px-2 my-0.5 hover:bg-blue-200 break-inside-avoid {{$unknown['borderColor']}}">
+<div data-id="{{$unknown['id']}}" name='{{$name}}' class="bg-red-300 border-2 rounded text-left px-2 my-0.5 hover:bg-blue-200 break-inside-avoid {{$unknown['borderColor']}}">
     <div class="items-center gap-2 p-1">
         <div class="flex gap-2 group relative items-center">
             <a href="{{$path.$unknown['url_media']}}" 222222 target="_blank" class="text-red-800 w-full text-md-vw text-left flex items-center">
