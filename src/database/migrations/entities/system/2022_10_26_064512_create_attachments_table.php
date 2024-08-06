@@ -19,7 +19,7 @@ return new class extends Migration
 
         $schema->create('attachments', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('url_thumbnail');
+            $table->string('url_thumbnail')->nullable(); //PDF, DOCX, ZIP, CSV doesn't have thumbnail
             $table->string('url_media');
             $table->string('url_folder');
             $table->string('filename');

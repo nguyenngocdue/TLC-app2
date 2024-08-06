@@ -47,27 +47,27 @@ trait TraitSupportPermissionGate
     }
     private function checkPermissionUsingGate($id, $action = 'edit', $restore = false)
     {
-        $model = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
+        $item = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
         $isTree = $this->useTree();
         $permissions = $this->permissionMiddleware[$action];
         $permissions = is_array($permissions) ? $permissions : explode('|', $permissions);
         if (CurrentUser::isAdmin()) {
-            return $model;
+            return $item;
         }
         $message = [];
         if ($isTree) {
-            [$edit, $editOther] = $this->useTreeForPermissionTheLine($permissions, $model);
+            [$edit, $editOther] = $this->useTreeForPermissionTheLine($permissions, $item);
             $message[] = 'Edit denied';
             $message[] = $edit ? '' : 'You are not the document owner';
             $message[] = $editOther ? '' : "You are not in the approval tree";
             if (!($edit || $editOther)) return redirect($this->type . '.show'); //abort(403, join(' & ', $message));
         }
-        return $model;
+        return $item;
     }
-    private function checkTree($model)
+    private function checkTree($item)
     {
         foreach ($this->getCompanyTree(CurrentUser::get()) as $value) {
-            if ($model->owner_id == $value->id) {
+            if ($item->owner_id == $value->id) {
                 return true;
             }
         }
@@ -81,10 +81,10 @@ trait TraitSupportPermissionGate
         // Log::info("Permissions " . join(",", $permissions));
         $arrFail = [];
         foreach ($ids as $id) {
-            $model = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
-            $isTree = $this->useTree($model);
+            $item = $restore ? $this->modelPath::withTrashed()->findOrFail($id) : $this->modelPath::findOrFail($id);
+            $isTree = $this->useTree($item);
             if ($isTree) {
-                [$delete, $deleteOther] = $this->useTreeForPermissionTheLine($permissions, $model);
+                [$delete, $deleteOther] = $this->useTreeForPermissionTheLine($permissions, $item);
                 if (!($delete || $deleteOther)) $arrFail[] = $id;
             }
             // Log::info("Result " . $isTree . " - " . $delete . " - " . $deleteOther);
@@ -92,15 +92,15 @@ trait TraitSupportPermissionGate
         $result = array_unique($arrFail) ?? [];
         return $result;
     }
-    private function useTreeForPermissionTheLine($permissions, $model)
+    private function useTreeForPermissionTheLine($permissions, $item)
     {
         $result1 = false;
         $result2 = false;
         if ($this->checkPermission($permissions[0])) {
-            $result1 = CurrentUser::id() == $model->owner_id;
+            $result1 = CurrentUser::id() == $item->owner_id;
         }
         if ($this->checkPermission($permissions[1])) {
-            $result2 = (CurrentUser::id() == $model->owner_id) || $this->checkTree($model);
+            $result2 = (CurrentUser::id() == $item->owner_id) || $this->checkTree($item);
         }
 
         return [$result1, $result2];

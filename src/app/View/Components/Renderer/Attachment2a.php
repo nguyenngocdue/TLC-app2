@@ -43,8 +43,7 @@ class Attachment2a extends Component
     private $debugAttachment = false;
     public function __construct(
         private $name,
-        //either a string of serialized array of attachments object or array or attachments 
-        private $value = "",
+        private $value = "", //either a string of serialized array of attachments object or array or attachments 
         private $readOnly = false,
         private $destroyable = true,
         private $showUploadFile = true,

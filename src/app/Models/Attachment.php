@@ -10,27 +10,29 @@ class Attachment extends ModelExtended
     use HasProperties;
 
     protected $fillable = [
-        "url_folder",
-        "url_thumbnail",
-        "extension",
-        "mime_type",
-        "url_media",
-        "filename",
-        "category",
-        "sub_category",
+        "url_folder", "url_thumbnail",
+        "extension", "mime_type",
+        "url_media", "filename",
+        "category", "sub_category",
+        'object_id', 'object_type',
         "owner_id",
-        'object_id',
-        'object_type',
     ];
     public static $nameless = true;
     public static $statusless = true;
 
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
+        "getSubCategory" => ['belongsTo', Field::class, 'sub_category'],
         "attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
     ];
 
     public function getCategory()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getSubCategory()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -41,12 +43,4 @@ class Attachment extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
     }
-
-    // public function toSearchableArray()
-    // {
-    //     return [
-    //         'id' => $this->id,
-    //         'filename' => $this->title,
-    //     ];
-    // }
 }
