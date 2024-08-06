@@ -1756,6 +1756,22 @@
         "edit_renderer": null,
         "show_renderer": "qr-app-renderer"
     },
+    "pj_module_type": {
+        "name": "pj_module_type",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "production",
+        "title": "Module Types",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "pj_pod": {
         "name": "pj_pod",
         "package_tab": "application",

@@ -108,16 +108,18 @@ class TopDrawer2 extends Component
 
         $appGroups = [];
         foreach ($allApps as $app) {
-            if (!isset($appGroups[$app['sub_package']])) {
-                $appGroups[$app['sub_package']] = [
-                    'id' => $app['sub_package'],
-                    'title' => $app['sub_package_rendered'],
-                    'click_count' => 0,
-                    'items' => [],
-                ];
+            if (isset($app['sub_package'])) {
+                if (!isset($appGroups[$app['sub_package']])) {
+                    $appGroups[$app['sub_package']] = [
+                        'id' => $app['sub_package'],
+                        'title' => $app['sub_package_rendered'],
+                        'click_count' => 0,
+                        'items' => [],
+                    ];
+                }
+                $appGroups[$app['sub_package']]['click_count'] += $app['click_count'];
+                $appGroups[$app['sub_package']]['items'][] = $app;
             }
-            $appGroups[$app['sub_package']]['click_count'] += $app['click_count'];
-            $appGroups[$app['sub_package']]['items'][] = $app;
         }
 
         uasort($appGroups, function ($a, $b) {
