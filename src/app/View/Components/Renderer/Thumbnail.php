@@ -31,12 +31,17 @@ class Thumbnail extends Component
             $supportedImages = [
                 'image/png',
                 'image/jpeg',
+                'image/gif',
             ];
             switch (true) {
                 case $this->dataLine->mime_type == "application/pdf":
                     return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-pdf"></i></div>';
                 case $this->dataLine->mime_type == "application/zip":
                     return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-zipper"></i></div>';
+                case $this->dataLine->mime_type == "text/csv":
+                    return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-csv"></i></div>';
+                case $this->dataLine->mime_type == "video/mp4":
+                    return '<div class="flex flex-row justify-center"><i class="text-3xl fa-duotone fa-file-video"></i></div>';
                 case !in_array($this->dataLine->mime_type, $supportedImages):
                     return $this->dataLine->mime_type;
             }
