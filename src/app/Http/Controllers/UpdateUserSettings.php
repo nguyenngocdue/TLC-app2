@@ -9,6 +9,7 @@ use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Report;
+use App\View\Components\Reports2\TransferUserSettingReport2;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -394,49 +395,8 @@ class UpdateUserSettings extends Controller
 
     private function switchReport2($request, $settings)
     {
-        $inputValue = $request->all();
-        $entityType = $inputValue['entity_type'];
-        $entityType2 = $inputValue['entity_type2'];
-        $paramsCurrentRp = (array)json_decode($inputValue['params_current_report']);
-        $reportLinkId = $inputValue['current_report_link'];
-        $currentRpId = $inputValue['report_id'];
-
-        // get filter detail from report link
-        $insRp = Rp_report::find((int)$reportLinkId)->getDeep();
-        $filterDetailsRpLink = $insRp->getFilterDetails;
-        // update params for report link
-        $keys = [$entityType, $entityType2, $reportLinkId];
-        if (Report::nestedKeysExist($settings, $keys)) {
-            foreach ($filterDetailsRpLink as $k1 => $filter) {
-                $filterName = Report::changeFieldOfFilter($filter);
-                if (array_key_exists($filterName, $paramsCurrentRp)) {
-                    if (!empty($paramsCurrentRp[$filterName])) {
-                        $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $paramsCurrentRp[$filterName];
-                    } else {
-                        $defaultArray = Report::getDefaultValuesFilterByFilterDetail($filterDetailsRpLink);
-                        $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $defaultArray[$filterName];
-                    }
-                }
-            }
-            $settings[$entityType][$entityType2][$reportLinkId]['current_report_link'] = (string)$reportLinkId;
-            $settings[$entityType][$entityType2][$currentRpId]['current_report_link'] = (string)$reportLinkId;
-        } else {
-            // the first time you open this report link
-            foreach ($filterDetailsRpLink as $k2 => $filter) {
-                $filterName = Report::changeFieldOfFilter($filter);
-                if (array_key_exists($filterName, $paramsCurrentRp)) {
-                    if (!empty($paramsCurrentRp[$filterName])) {
-                        //update value for report link
-                        $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $paramsCurrentRp[$filterName];
-                    }/*  else {
-                        $array2[$filterName] = (array)explode(',', $filter->default_value);
-                    } */
-                }
-            }
-            $settings[$entityType][$entityType2][$reportLinkId]['current_report_link'] = (string)$reportLinkId;
-            $settings[$entityType][$entityType2][$currentRpId]['current_report_link'] = (string)$reportLinkId;
-        }
-        return $settings;
+        $ins = TransferUserSettingReport2::getInstance();
+        return $ins->switchReport2($request, $settings);
     }
 
     private function updatePerPageReports($request, $settings)
