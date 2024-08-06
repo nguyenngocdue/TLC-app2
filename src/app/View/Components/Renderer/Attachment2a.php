@@ -93,6 +93,7 @@ class Attachment2a extends Component
         foreach ($this->attachments as &$attachment) {
             $attachment['isOrphan'] = isset($attachment['isOrphan']) && $attachment['isOrphan'];
             $attachment['borderColor'] = $attachment['isOrphan'] ? 'border-red-500' : 'border-gray-300';
+            $attachment['showUrl'] = $this->properties['show_url'] ?? false;
 
             $attachment['sameEnv'] = $this->isSameEnv($attachment);
             $attachment['onClick'] = $this->openType == 'gallery' ? 'openGallery(' . $attachment['id'] . ')' : null;

@@ -13,6 +13,11 @@
             path="{{$path}}"
             />
     </div>
+    @if($image['showUrl']) 
+    <div class="w-full flex justify-center">
+        <a class="text-blue-600" target="_blank" href="{{$path.$image['url_media']}}">Full URL</a>
+    </div>
+    @endif
     <x-renderer.attachment2a.comp-thumb-uploader 
         :attachment="$image" 
         hideUploader="{{$hideUploader}}" 

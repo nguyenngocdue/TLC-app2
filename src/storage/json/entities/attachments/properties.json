@@ -4,349 +4,395 @@
         "field_id": "1",
         "field_name": "attachment_1",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_images",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_images"
+        "show_url": ""
     },
     "_attachment_2": {
         "name": "_attachment_2",
         "field_id": "2",
         "field_name": "attachment_2",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_videos",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_videos"
+        "show_url": ""
     },
     "_attachment_3": {
         "name": "_attachment_3",
         "field_id": "3",
         "field_name": "attachment_3",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_media"
+        "show_url": ""
     },
     "_attachment_4": {
         "name": "_attachment_4",
         "field_id": "4",
         "field_name": "attachment_4",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_attachment_5": {
         "name": "_attachment_5",
         "field_id": "5",
         "field_name": "attachment_5",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_corrective_pdfs": {
         "name": "_attachment_corrective_pdfs",
         "field_id": "146",
         "field_name": "attachment_corrective_pdfs",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_attachment_corrective_photos": {
         "name": "_attachment_corrective_photos",
         "field_id": "145",
         "field_name": "attachment_corrective_photos",
         "max_file_size": "10",
+        "max_file_count": "50",
+        "allowed_file_types": "only_images",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "50",
-        "allowed_file_types": "only_images"
+        "show_url": ""
     },
     "_attachment_defect_pdfs": {
         "name": "_attachment_defect_pdfs",
         "field_id": "144",
         "field_name": "attachment_defect_pdfs",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_attachment_defect_photos": {
         "name": "_attachment_defect_photos",
         "field_id": "143",
         "field_name": "attachment_defect_photos",
         "max_file_size": "10",
+        "max_file_count": "50",
+        "allowed_file_types": "only_images",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "50",
-        "allowed_file_types": "only_images"
+        "show_url": ""
     },
     "_attachment_eco_sht": {
         "name": "_attachment_eco_sht",
         "field_id": "160",
         "field_name": "attachment_eco_sht",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_esg_induction": {
         "name": "_attachment_esg_induction",
         "field_id": "208",
         "field_name": "attachment_esg_induction",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_esg_sheet": {
         "name": "_attachment_esg_sheet",
         "field_id": "199",
         "field_name": "attachment_esg_sheet",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_hse_hr_decision": {
         "name": "_attachment_hse_hr_decision",
         "field_id": "150",
         "field_name": "attachment_hse_hr_decision",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_attachment_hse_incident_doc": {
         "name": "_attachment_hse_incident_doc",
         "field_id": "148",
         "field_name": "attachment_hse_incident_doc",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_hse_witness": {
         "name": "_attachment_hse_witness",
         "field_id": "149",
         "field_name": "attachment_hse_witness",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_conformity_certificate": {
         "name": "_attachment_mir_conformity_certificate",
         "field_id": "126",
         "field_name": "attachment_mir_conformity_certificate",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_delivery_docket": {
         "name": "_attachment_mir_delivery_docket",
         "field_id": "121",
         "field_name": "attachment_mir_delivery_docket",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_general_certificate": {
         "name": "_attachment_mir_general_certificate",
         "field_id": "128",
         "field_name": "attachment_mir_general_certificate",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_invoice": {
         "name": "_attachment_mir_invoice",
         "field_id": "122",
         "field_name": "attachment_mir_invoice",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_material_inspection_photo": {
         "name": "_attachment_mir_material_inspection_photo",
         "field_id": "132",
         "field_name": "attachment_mir_material_inspection_photo",
         "max_file_size": "30",
+        "max_file_count": "50",
+        "allowed_file_types": "only_images",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "50",
-        "allowed_file_types": "only_images"
+        "show_url": ""
     },
     "_attachment_mir_material_test_certificate": {
         "name": "_attachment_mir_material_test_certificate",
         "field_id": "125",
         "field_name": "attachment_mir_material_test_certificate",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_material_test_report": {
         "name": "_attachment_mir_material_test_report",
         "field_id": "124",
         "field_name": "attachment_mir_material_test_report",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_non_conformity_report": {
         "name": "_attachment_mir_non_conformity_report",
         "field_id": "129",
         "field_name": "attachment_mir_non_conformity_report",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_packing_list": {
         "name": "_attachment_mir_packing_list",
         "field_id": "123",
         "field_name": "attachment_mir_packing_list",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_pdf_attached": {
         "name": "_attachment_mir_pdf_attached",
         "field_id": "133",
         "field_name": "attachment_mir_pdf_attached",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_attachment_mir_po": {
         "name": "_attachment_mir_po",
         "field_id": "120",
         "field_name": "attachment_mir_po",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_quality_certificate": {
         "name": "_attachment_mir_quality_certificate",
         "field_id": "127",
         "field_name": "attachment_mir_quality_certificate",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_safety_data_sheet": {
         "name": "_attachment_mir_safety_data_sheet",
         "field_id": "130",
         "field_name": "attachment_mir_safety_data_sheet",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_mir_technical_data_sheet": {
         "name": "_attachment_mir_technical_data_sheet",
         "field_id": "131",
         "field_name": "attachment_mir_technical_data_sheet",
         "max_file_size": "20",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_onboarding_course": {
         "name": "_attachment_onboarding_course",
         "field_id": "167",
         "field_name": "attachment_training_course",
         "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_attachment_subproject_homeowner_manual": {
         "name": "_attachment_subproject_homeowner_manual",
         "field_id": "225",
         "field_name": "attachment_subproject_homeowner_manual",
         "max_file_size": "100",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_attachment_subproject_project_plans": {
         "name": "_attachment_subproject_project_plans",
         "field_id": "224",
         "field_name": "attachment_subproject_project_plans",
         "max_file_size": "100",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "10",
-        "allowed_file_types": "only_non_media"
+        "show_url": ""
     },
     "_featured_image": {
         "name": "_featured_image",
         "field_id": "11",
         "field_name": "featured_image",
         "max_file_size": "10",
+        "max_file_count": "1",
+        "allowed_file_types": "only_images",
         "hide_uploader": "true",
         "hide_upload_date": "true",
-        "max_file_count": "1",
-        "allowed_file_types": "only_images"
+        "show_url": ""
+    },
+    "_html_attachment": {
+        "name": "_html_attachment",
+        "field_id": "309",
+        "field_name": "html_attachment",
+        "max_file_size": "10",
+        "max_file_count": "100",
+        "allowed_file_types": "only_images",
+        "hide_uploader": "",
+        "hide_upload_date": "",
+        "show_url": "true"
     },
     "_insp_photos": {
         "name": "_insp_photos",
         "field_id": "12",
         "field_name": "insp_photos",
         "max_file_size": "50",
+        "max_file_count": "100",
+        "allowed_file_types": "all_supported",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "100",
-        "allowed_file_types": "all_supported"
+        "show_url": ""
     },
     "_punchlist_photos": {
         "name": "_punchlist_photos",
         "field_id": "246",
         "field_name": "punchlist_photos",
         "max_file_size": "10",
+        "max_file_count": "100",
+        "allowed_file_types": "only_images",
         "hide_uploader": "",
         "hide_upload_date": "",
-        "max_file_count": "100",
-        "allowed_file_types": "only_images"
+        "show_url": ""
     }
 }

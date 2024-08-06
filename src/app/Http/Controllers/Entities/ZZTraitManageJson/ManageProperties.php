@@ -23,25 +23,16 @@ class ManageProperties extends Manage_Parent
                 'editable' => true,
                 'title' => 'Max File Size (in MB)',
                 'properties' => ['placeholder' => 10],
+                'width' => 50,
             ],
 
-            [
-                'dataIndex' => 'hide_uploader',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
-            [
-                'dataIndex' => 'hide_upload_date',
-                'renderer' => 'checkbox',
-                'editable' => true,
-                'align' => 'center',
-            ],
+
             [
                 'dataIndex' => 'max_file_count',
                 'renderer' => 'number4',
                 'editable' => true,
                 'properties' => ['placeholder' => 10],
+                'width' => 50,
             ],
             [
                 'dataIndex' => 'allowed_file_types',
@@ -55,6 +46,28 @@ class ManageProperties extends Manage_Parent
                     ['value' => 'only_non_media', 'title' => Attachment2a::$TYPE['only_non_media']['title']],
                     ['value' => 'all_supported', 'title' => Attachment2a::$TYPE['all_supported']['title']],
                 ],
+                'width' => 150,
+            ],
+            [
+                'dataIndex' => 'hide_uploader',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
+            [
+                'dataIndex' => 'hide_upload_date',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
+            [
+                'dataIndex' => 'show_url',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
             ],
         ];
         $result['comment'] = [
@@ -117,7 +130,7 @@ class ManageProperties extends Manage_Parent
                 "cbbDataSource" => $columns,
                 'sortBy' => 'name',
                 "properties" => ["strFn" => 'same'],
-                'width' => 150,
+                'width' => 250,
             ],
             [
                 'dataIndex' => 'field_name',
