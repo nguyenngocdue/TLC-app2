@@ -34,7 +34,7 @@
     
         <div id="group_attachment_comment_{{$rowIndex}}" @class([ 'hidden'=> $type == 'hse_insp_chklst'
             ])>
-            <x-renderer.attachment2 
+            <x-renderer.attachment2a 
                 name="{{$table01Name}}[insp_photos][{{$rowIndex}}]" 
                 :value="$attachments" 
                 :properties="$props['props']['_insp_photos']['properties']"

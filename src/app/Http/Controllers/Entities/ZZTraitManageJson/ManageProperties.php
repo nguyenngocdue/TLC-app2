@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Entities\ZZTraitManageJson;
 
 use App\Models\Field;
 use App\Utils\Support\Json\Properties;
+use App\View\Components\Renderer\Attachment2a;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
@@ -48,11 +49,11 @@ class ManageProperties extends Manage_Parent
                 'editable' => true,
                 'cbbDataSource' => [
                     // ['value' => '', 'title' => ''],
-                    ['value' => 'only_images', 'title' => 'Only Images (JPG, JPEG, PNG, GIF)'],
-                    ['value' => 'only_videos', 'title' => 'Only Videos (MP4)'],
-                    ['value' => 'only_media', 'title' => 'Only Images and Videos'],
-                    ['value' => 'only_non_media', 'title' => 'Only Non-Media (CSV, PDF, ZIP)'],
-                    ['value' => 'all_supported', 'title' => 'All above formats'],
+                    ['value' => 'only_images', 'title' => Attachment2a::$TYPE['only_images']['title']],
+                    ['value' => 'only_videos', 'title' => Attachment2a::$TYPE['only_videos']['title']],
+                    ['value' => 'only_media', 'title' => Attachment2a::$TYPE['only_media']['title']],
+                    ['value' => 'only_non_media', 'title' => Attachment2a::$TYPE['only_non_media']['title']],
+                    ['value' => 'all_supported', 'title' => Attachment2a::$TYPE['all_supported']['title']],
                 ],
             ],
         ];

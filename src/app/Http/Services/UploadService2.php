@@ -8,6 +8,7 @@ use App\Models\Field;
 use App\Utils\Constant;
 use App\Utils\Support\AttachmentName;
 use App\Utils\Support\Json\Properties;
+use App\View\Components\Renderer\Attachment2a;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -37,26 +38,8 @@ class UploadService2
     private function getAllowedFileTypes($type)
     {
         $prefix = "mimes:";
-        switch ($type) {
-            case 'only_images':
-                $result = $prefix . Constant::ONLY_IMAGES;
-                break;
-            case 'only_videos':
-                $result = $prefix . Constant::ONLY_VIDEOS;
-                break;
-            case 'only_media':
-                $result = $prefix . Constant::ONLY_IMAGES . "," . Constant::ONLY_VIDEOS;
-                break;
-            case 'only_non_media':
-                $result = $prefix . Constant::ONLY_NONE_MEDIA;
-                break;
-            case 'all_supported':
-                $result = $prefix . Constant::ONLY_IMAGES . "," . Constant::ONLY_VIDEOS . "," . Constant::ONLY_NONE_MEDIA;
-                break;
-            default:
-                break;
-        }
-        return $result;
+        $result = Attachment2a::$TYPE[$type]['string'];
+        return $prefix . $result;
     }
     private function countFileUploadByCondition($fieldName, $id)
     {
@@ -72,7 +55,7 @@ class UploadService2
     {
         $thumbnailW = 150;
         $thumbnailH = 150;
-        $allowedExts = Constant::ARRAY_ONLY_IMAGES;
+        $allowedExts = Attachment2a::$TYPE['only_images']['array'];
         // $attachmentP = Properties::getAllOf('attachment');
         $path = env('MEDIA_ROOT_FOLDER', 'media') . "/" . date(Constant::FORMAT_YEAR_MONTH) . "/";
         try {
@@ -81,7 +64,6 @@ class UploadService2
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
                 $property = Properties::getFor('attachment', '_' . $fieldName);
-                // $property = ($attachmentP['_' . $fieldName] ?? ['max_file_size' => 10, 'max_file_count' => 10, 'allowed_file_types' => 'only_images']);
                 $nameValidate = $fieldName . '.toBeUploaded';
                 $maxFileSize = ($property['max_file_size'] == "" ? 10 : $property['max_file_size']) * 1024;
                 $maxFileCount = ($property['max_file_count'] == "" ? 10 : $property['max_file_count']);
@@ -90,9 +72,14 @@ class UploadService2
                 $allowedFileTypes = $property['allowed_file_types'];
                 $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
 
-                $request->validate([
+                $validator = [
                     $nameValidate => 'array|max:' . $fileUploadRemainingCount,
                     $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
+                ];
+
+                $request->validate($validator, [
+                    $nameValidate . '.max' => 'The ' . $fieldName . ' must have at most ' . $maxFileCount . ' items.',
+                    $nameValidate . '.*.max' => 'The ' . $fieldName . ' must not more than ' . round($maxFileSize / 1024, 1) . ' MB.',
                 ]);
 
                 $files = $files['toBeUploaded'];
@@ -148,7 +135,7 @@ class UploadService2
             // dd($result);
             return $result;
         } catch (ValidationException $ve) {
-            toastr()->warning($ve->getMessage() . "<br/>(You maybe upload more than the max allowed files.)", 'Upload File Problem');
+            toastr()->warning($ve->getMessage() . "<br/>", 'Upload File Failed');
         } catch (\Exception $e) {
             dd($e);
             // toastr()->warning($e, 'Upload File Warning');

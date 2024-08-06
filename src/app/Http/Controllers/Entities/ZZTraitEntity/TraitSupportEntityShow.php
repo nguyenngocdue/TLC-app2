@@ -223,7 +223,7 @@ trait TraitSupportEntityShow
 
     private function formatAttachmentRender($items)
     {
-        $strCenter = Blade::render('<x-renderer.attachment2 gridCols="grid-cols-3" openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
+        $strCenter = Blade::render('<x-renderer.attachment2a gridCols="grid grid-cols-3 gap-1" openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
             'value' => $items->toArray()
         ]);
         return $strCenter;

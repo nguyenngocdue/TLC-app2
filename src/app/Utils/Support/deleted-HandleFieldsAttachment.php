@@ -7,7 +7,7 @@ class HandleFieldsAttachment
     public static function handle($attachment)
     {
         $hasOrphan = isset($attachment['hasOrphan']) && $attachment['hasOrphan'];
-        $border = $hasOrphan ? "red" : "gray";
+        $borderColor = $hasOrphan ? "red" : "gray";
         $title = $hasOrphan ? "Orphan image found. Will attach after this document is saved." : "";
         $extension = $attachment['extension'] ?? "";
         $attachmentFolder = $attachment['url_folder'] ?? '';
@@ -21,6 +21,6 @@ class HandleFieldsAttachment
         if (app()->isTesting() && $isTesting) $sameEnv = true;
         if (app()->isLocal() && $isDev) $sameEnv = true;
         // dump($sameEnv);
-        return [$hasOrphan, $sameEnv, $extension, $border, $title];
+        return [$hasOrphan, $sameEnv, $extension, $borderColor, $title];
     }
 }
