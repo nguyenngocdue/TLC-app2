@@ -21,7 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('title')->nullable();
-            $table->unsignedBigInteger('report_access_id')->nullable();
+            $table->unsignedBigInteger('linked_to_report_id')->nullable();
             $table->unsignedBigInteger('stored_filter_key')->nullable();
             $table->unsignedBigInteger('report_id')->nullable();
 

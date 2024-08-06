@@ -505,4 +505,43 @@ class Report
             return sprintf("%02d", $month);
         }, $array);
     }
+
+    public static function nestedKeysExist(array $array, array $keys)
+    {
+        foreach ($keys as $key) {
+            if (!isset($array[$key])) {
+                return false;
+            }
+            $array = $array[$key];
+        }
+        return true;
+    }
+
+    public static function getDefaultValuesFilterByFilterDetail($filterDetails)
+    {
+        $params = [];
+        foreach ($filterDetails as $filter) {
+            $val = $filter->default_value;
+            $filterName = str_replace('_name', '_id', $filter->getColumn->data_index);
+            if (!empty($val)) {
+                $defaultValues = explode(',', $val);
+                $params[$filterName] = $defaultValues;
+            } else {
+                $params[$filterName] = $val;
+            }
+        }
+        return $params;
+    }
+
+    public static function editColumnNameByFilterDetails($filterDetails)
+    {
+        $params = [];
+        foreach ($filterDetails as $filter) $params[] = str_replace('_name', '_id', $filter->getColumn->data_index);
+        return $params;
+    }
+
+    public static function changeFieldOfFilter($filter)
+    {
+        return  str_replace('_name', '_id', $filter->getColumn->data_index);
+    }
 }
