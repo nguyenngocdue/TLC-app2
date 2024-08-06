@@ -87,11 +87,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_report_access_id": {
-        "name": "_report_access_id",
-        "column_name": "report_access_id",
+    "_linked_to_report_id": {
+        "name": "_linked_to_report_id",
+        "column_name": "linked_to_report_id",
         "column_type": "bigint unsigned",
-        "label": "Report Access",
+        "label": "Linked To Report",
         "control": "dropdown",
         "align": "",
         "col_span": "",

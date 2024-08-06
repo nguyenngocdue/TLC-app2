@@ -3,11 +3,17 @@
 namespace App\View\Components\Reports2;
 
 use App\Models\Rp_report;
+use App\Models\User;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class FilterReport extends Component
 {
+    use TraitInitUserSettingReport2;
+
+    protected $entityType2 = 'report2';
     public function __construct(
         private $report = "",
         private $filterModes = [],
@@ -15,58 +21,50 @@ class FilterReport extends Component
 
     ) {
     }
-    private function createDefaultCurrentParams($filterDetails, $currentParams, $reportName)
-    {
-        foreach ($filterDetails as $filter) {
-            $filterName = str_replace('_name', '_id', $filter->getColumn->data_index);
-            $currentParams[$filterName] = $currentParams[$filterName] ?? (
-                is_null($filter->default_value)
-                ? null
-                : explode(',', $filter->default_value));
-        }
-        if (!isset($currentParams['current_mode'])) {
-            $currentParams['current_mode'] = $reportName;
-        }
-        return $currentParams;
-    }
 
     public function render()
     {
         $report = (object)$this->report;
+        $currentRpId = $report->id;
         $reportName = $report->name;
-        $reportId = $report->id;
-        $filterModes = collect($this->filterModes);
-        $filterDetails = $this->filterDetails;
+        $entityType = $report->entity_type;
+        $entityType2 = $this->entityType2;
 
-        $reportAccesses = $filterModes->mapWithKeys(function ($filterMode) {
-            $reportAccess = Rp_report::find($filterMode->report_access_id)->name;
-            return [$reportAccess => $filterMode->name];
+        // check and set report_id if the current report is already stored in the db
+        $userSetting = CurrentUser::getSettings();
+        $keys = [$entityType, $entityType2, $currentRpId];
+        if (Report::nestedKeysExist($userSetting, $keys)) { # => has previously been opened and saved into user_setting
+            $paramsInUser = $userSetting[$entityType][$entityType2][$currentRpId];
+            $currentRpId = $paramsInUser['current_report_link'] ?? $currentRpId;
+        }
+
+        $filterModes = collect($this->filterModes);
+        $reportLink = Rp_report::find((int)$currentRpId)->getDeep();
+        // get filter detail from current report
+        $filterDetails = $reportLink->getFilterDetails;
+        // Save initial parameters to set default values when you open for the first time.
+        $this->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails);
+
+        // create params from user_setting and default value
+        $currentParams = $this->getCurrentParams($entityType, $currentRpId, $filterDetails);
+        // dump($currentParams, $currentRpId);
+
+        // create data to render dropdown of report link
+        $dataDropdownRpLink = $filterModes->mapWithKeys(function ($filterMode) {
+            $linkedToRpId = Rp_report::find($filterMode->linked_to_report_id)->id;
+            return [$linkedToRpId => $filterMode->name];
         });
 
-        $settingUser = CurrentUser::getSettings();
-        $paramIndex = isset($settingUser[$reportName]) ?  $settingUser[$reportName] : [];
-
-        $currentMode =  isset($paramIndex['current_mode'])  ? (is_null($x = $paramIndex['current_mode']) ? $reportName :  $x) : $reportName;
-
-
-        $currentParams = isset($paramIndex[$currentMode]) ? $paramIndex[$currentMode] : [];
-        $currentParams = $this->createDefaultCurrentParams($filterDetails, $currentParams, $reportName);
-
-        $modeData = isset($paramIndex[$currentMode]) ? $paramIndex[$currentMode] : [
-            'report_name' => $reportName,
-            'current_mode' => $currentMode
-        ];
-        // dd($currentParams);
-
-        $routeFilter = route('filter_report.update', $reportId);
         return view('components.reports2.filter-report', [
-            'reportAccesses' => $reportAccesses,
-            'filterDetails' => $filterDetails,
-            'entity_type' => "not yet",
+            'entityType' => $entityType,
             'reportName' => $reportName,
-            'params' => $currentParams,
-            'routeFilter' => $routeFilter,
-            'modeData' => $modeData
+            'entityType2' => $entityType2,
+            'filterDetails' => $filterDetails,
+            'entity_type' => $entityType,
+            'reportId' => $report->id,
+            'currentParams' => $currentParams,
+            'routeFilter' => route('filter_report.update', $report->id),
+            'dataDropdownRpLink' => $dataDropdownRpLink,
         ]);
     }
 }

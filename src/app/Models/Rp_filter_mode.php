@@ -6,11 +6,11 @@ use App\BigThink\ModelExtended;
 
 class Rp_filter_mode extends ModelExtended
 {
-    protected $fillable = ["id", "name", "title", "report_id", "report_access_id", "stored_filter_key", "owner_id"];
+    protected $fillable = ["id", "name", "title", "report_id", "linked_to_report_id", "stored_filter_key", "owner_id"];
 
     public static $eloquentParams = [
         "getParent" => ['belongsTo', Rp_report::class, 'report_id'],
-        "getReportAccess" => ['belongsTo', Rp_report::class, 'report_access_id'],
+        "getReportAccess" => ['belongsTo', Rp_report::class, 'linked_to_report_id'],
     ];
 
     public function getParent()
@@ -32,7 +32,7 @@ class Rp_filter_mode extends ModelExtended
             ["dataIndex" => "id", /* "invisible" => true, */],
             ["dataIndex" => "report_id", "value_as_parent_id" => true, "invisible" => true,],
             ["dataIndex" => "name"],
-            ["dataIndex" => "report_access_id"],
+            ["dataIndex" => "linked_to_report_id"],
             ["dataIndex" => "stored_filter_key"]
         ];
     }

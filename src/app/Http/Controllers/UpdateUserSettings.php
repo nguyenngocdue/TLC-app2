@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAdvancedFilter;
+use App\Models\Rp_report;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
+use App\Utils\Support\Report;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -358,21 +360,82 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
+    private function getAdvancedFilterReport2($dataInput, $reset = false)
+    {
+        $advancedFilters = [];
+        foreach ($dataInput as $key => $value) {
+            if (!in_array($key, ['_token', 'action', 'entity_type', 'entity_type2', 'report_id', 'form_type'])) {
+                $advancedFilters[$key] = $reset ? null : $value;
+            }
+            if ($key === 'current_report_link') {
+                $advancedFilters['current_report_link'] = $value;
+            }
+        };
+        return $advancedFilters;
+    }
+
     private function updateReport2($request, $settings)
     {
         $inputValue = $request->all();
+        $entityType = $inputValue['entity_type'];
+        $entityType2 = $inputValue['entity_type2'];
+        $rpId = $inputValue['report_id'];
+        $rpLinkId = $inputValue['current_report_link'];
 
-        $reportName = $inputValue['report_name'];
-        $currentMode = $inputValue['current_mode'];
-
-        if ($inputValue['form_type'] ?? null === "resetParamsReport" && isset($settings[$reportName][$currentMode])) {
-            foreach (array_keys($settings[$reportName][$currentMode]) as $key) {
-                if (!in_array($key, ['_token', 'action'])) $settings[$reportName][$currentMode][$key] = null;
-            }
-        } else {
-            $settings[$reportName][$currentMode] = $inputValue;
+        $advancedFilters = $this->getAdvancedFilterReport2($inputValue);
+        // dd($advancedFilters, $rpId);
+        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") {
+            $advancedFilters = $this->getAdvancedFilterReport2($inputValue, true);
         }
-        $settings[$reportName]['current_mode'] = $currentMode;
+        // $settings[$entityType][$entityType2][$rpId] = $advancedFilters;
+        $settings[$entityType][$entityType2][$rpLinkId] = $advancedFilters;
+        return $settings;
+    }
+
+    private function switchReport2($request, $settings)
+    {
+        $inputValue = $request->all();
+        $entityType = $inputValue['entity_type'];
+        $entityType2 = $inputValue['entity_type2'];
+        $paramsCurrentRp = (array)json_decode($inputValue['params_current_report']);
+        $reportLinkId = $inputValue['current_report_link'];
+        $currentRpId = $inputValue['report_id'];
+
+        // get filter detail from report link
+        $insRp = Rp_report::find((int)$reportLinkId)->getDeep();
+        $filterDetailsRpLink = $insRp->getFilterDetails;
+        // update params for report link
+        $keys = [$entityType, $entityType2, $reportLinkId];
+        if (Report::nestedKeysExist($settings, $keys)) {
+            foreach ($filterDetailsRpLink as $k1 => $filter) {
+                $filterName = Report::changeFieldOfFilter($filter);
+                if (array_key_exists($filterName, $paramsCurrentRp)) {
+                    if (!empty($paramsCurrentRp[$filterName])) {
+                        $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $paramsCurrentRp[$filterName];
+                    } else {
+                        $defaultArray = Report::getDefaultValuesFilterByFilterDetail($filterDetailsRpLink);
+                        $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $defaultArray[$filterName];
+                    }
+                }
+            }
+            $settings[$entityType][$entityType2][$reportLinkId]['current_report_link'] = (string)$reportLinkId;
+            $settings[$entityType][$entityType2][$currentRpId]['current_report_link'] = (string)$reportLinkId;
+        } else {
+            // the first time you open this report link
+            foreach ($filterDetailsRpLink as $k2 => $filter) {
+                $filterName = Report::changeFieldOfFilter($filter);
+                if (array_key_exists($filterName, $paramsCurrentRp)) {
+                    if (!empty($paramsCurrentRp[$filterName])) {
+                        //update value for report link
+                        $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $paramsCurrentRp[$filterName];
+                    }/*  else {
+                        $array2[$filterName] = (array)explode(',', $filter->default_value);
+                    } */
+                }
+            }
+            $settings[$entityType][$entityType2][$reportLinkId]['current_report_link'] = (string)$reportLinkId;
+            $settings[$entityType][$entityType2][$currentRpId]['current_report_link'] = (string)$reportLinkId;
+        }
         return $settings;
     }
 
@@ -469,6 +532,9 @@ class UpdateUserSettings extends Controller
                 break;
             case 'switchParamsReport':
                 $settings = $this->switchParamsReport($request, $settings);
+                break;
+            case 'switchReport2':
+                $settings = $this->switchReport2($request, $settings);
                 break;
             case 'updatePerPageDocuments':
                 $settings = $this->updatePerPageReports($request, $settings);

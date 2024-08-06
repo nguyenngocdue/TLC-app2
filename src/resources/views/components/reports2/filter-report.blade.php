@@ -1,26 +1,33 @@
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4">
     <!-- Mode Dropdown -->
+    @if(count($dataDropdownRpLink) > 1)
     <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
         <x-reports2.dropdown9 
             title="Mode" 
-            name="current_mode" 
+            name="current_report_link" 
+            entityType="{{$entity_type}}"
+            entityType2="{{$entityType2}}"
+            reportId="{{$reportId}}"
             routeName="{{$routeFilter}}"
-            :dataSource="$reportAccesses" 
-            :currentParams="$modeData" 
+            :dataSource="$dataDropdownRpLink" 
+            :currentParams="$currentParams" 
+            :filterDetails="$filterDetails"
         />
     </div>
-    
+    @endif
     <!-- Advanced Filter Section -->
-    <div class="col-span-10">
+    <div class="col-span-{{count($dataDropdownRpLink) > 1 ? 10 : 12 }}">
         <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
             <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
             
             <form action="{{$routeFilter}}" id="{{ $reportName }}" method="POST">
                 @csrf
                 <input type="hidden" name='action' value="updateReport2">
-                <input type="hidden" name='current_mode' value="{{$params['current_mode']}}">
-                <input type="hidden" name='report_name' value="{{$reportName}}">
+                <input type="hidden" name='current_report_link' value="{{$currentParams['current_report_link']}}">
+                <input type="hidden" name='entity_type' value="{{$entityType}}">
+                <input type="hidden" name='entity_type2' value="{{$entityType2}}">
+                <input type="hidden" name='report_id' value="{{$reportId}}">
                
                 <div class="grid grid-cols-12 gap-4 items-baseline">
                     @foreach ($filterDetails as $filter)
@@ -28,7 +35,7 @@
                         @php
                             $title = is_null($x = $filter->getColumn->title) ? '(Set title for column)' : $x;
                             $keyParam = str_replace('name', 'id', $x = $filter->getColumn->data_index);
-                            $selected =  $params[$keyParam];
+                            $selected =  $currentParams[$keyParam] ?? null;
                         @endphp
                         
                         <div class="col-span-2">
@@ -59,6 +66,6 @@
 <script type="text/javascript">
     function resetFilter() {
         $('[id="' + "{{ $reportName }}" + '"]').append(
-            '<input type="hidden" name="form_type" value="resetParamsReport">')
+            '<input type="hidden" name="form_type" value="resetParamsReport2">')
     }
 </script>
