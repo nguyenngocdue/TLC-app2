@@ -18,7 +18,7 @@ class ModelData
                 dd($e->getMessage());
             }
         } else {
-            dd("Model class $modelClass does not exist.");
+            dump("Model class $modelClass does not exist.");
         }
         return null;
     }

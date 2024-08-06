@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class FilterReport extends Component
@@ -37,10 +38,10 @@ class FilterReport extends Component
             $currentRpId = $paramsInUser['current_report_link'] ?? $currentRpId;
         }
 
-        $filterModes = collect($this->filterModes);
-        $reportLink = Rp_report::find((int)$currentRpId)->getDeep();
         // get filter detail from current report
+        $reportLink = Rp_report::find((int)$currentRpId)->getDeep();
         $filterDetails = $reportLink->getFilterDetails;
+
         // Save initial parameters to set default values when you open for the first time.
         $ins =  InitUserSettingReport2::getInstance($this->entityType2);
         $ins->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails);
@@ -50,8 +51,10 @@ class FilterReport extends Component
         // dump($currentParams, $currentRpId);
 
         // create data to render dropdown of report link
+        $filterModes = collect($this->filterModes);
         $dataDropdownRpLink = $filterModes->mapWithKeys(function ($filterMode) {
-            $linkedToRpId = Rp_report::find($filterMode->linked_to_report_id)->id;
+            $linkedToRpId = Rp_report::find($filterMode->linked_to_report_id)->id ?? null;
+            if (is_null($linkedToRpId)) return [];
             return [$linkedToRpId => $filterMode->name];
         });
 
@@ -65,6 +68,7 @@ class FilterReport extends Component
             'currentParams' => $currentParams,
             'routeFilter' => route('filter_report.update', $report->id),
             'dataDropdownRpLink' => $dataDropdownRpLink,
+            'filterModes' => $filterModes
         ]);
     }
 }
