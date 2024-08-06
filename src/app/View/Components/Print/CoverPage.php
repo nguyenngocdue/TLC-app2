@@ -20,7 +20,11 @@ class CoverPage extends Component
         $prodOrder = $checklist->getProdOrder;
         $subProject = $this->headerDataSource->getProdOrder->getSubProject;
         $project = $subProject->getProject;
-        $src = app()->pathMinio() . $project->getAvatar->url_media;
+        if ($project->getAvatar) {
+            $src = app()->pathMinio() . $project->getAvatar?->url_media;
+        } else {
+            $src = '/images/modules.png';
+        }
         $params = [
             'src' => $src,
             'project' => $project,
