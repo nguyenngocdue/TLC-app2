@@ -31,7 +31,7 @@ class InitUserSettingReport2
 
         if ($params) {
             $this->updateUserSettings($entityType, $currentRpId, $params);
-            toastr()->success('Init User Settings Successfully', 'Successfully');
+            toastr()->success("Initialize User Settings Successfully", "Successfully");
             return redirect()->back();
         }
     }
