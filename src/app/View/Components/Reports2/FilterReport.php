@@ -11,7 +11,6 @@ use Illuminate\View\Component;
 
 class FilterReport extends Component
 {
-    use TraitInitUserSettingReport2;
 
     protected $entityType2 = 'report2';
     public function __construct(
@@ -43,10 +42,11 @@ class FilterReport extends Component
         // get filter detail from current report
         $filterDetails = $reportLink->getFilterDetails;
         // Save initial parameters to set default values when you open for the first time.
-        $this->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails);
+        $ins =  InitUserSettingReport2::getInstance($this->entityType2);
+        $ins->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails);
 
         // create params from user_setting and default value
-        $currentParams = $this->getCurrentParams($entityType, $currentRpId, $filterDetails);
+        $currentParams = $ins->getCurrentParams($entityType, $currentRpId, $filterDetails);
         // dump($currentParams, $currentRpId);
 
         // create data to render dropdown of report link

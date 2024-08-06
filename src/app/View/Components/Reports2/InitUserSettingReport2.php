@@ -7,10 +7,25 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
 
-trait TraitInitUserSettingReport2
+class InitUserSettingReport2
 {
+    private static $instance = null;
+    protected $entityType2;
 
-    function saveFirstParamsToUser($entityType, $currentRpId, $filterDetails)
+    private function __construct($entityType2)
+    {
+        $this->entityType2 = $entityType2;
+    }
+    public static function getInstance($entityType2)
+    {
+        if (self::$instance == null) {
+            self::$instance = new InitUserSettingReport2($entityType2);
+        }
+        return self::$instance;
+    }
+
+
+    public function saveFirstParamsToUser($entityType, $currentRpId, $filterDetails)
     {
         $params = $this->getDefaultParams($entityType, $filterDetails, $currentRpId);
 
@@ -21,7 +36,7 @@ trait TraitInitUserSettingReport2
         }
     }
 
-    private function getDefaultParams($entityType, $filterDetails, $currentRpId)
+    public function getDefaultParams($entityType, $filterDetails, $currentRpId)
     {
         $params = [];
         foreach ($filterDetails as $filter) {

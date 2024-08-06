@@ -8,6 +8,7 @@ use App\Utils\Support\Report;
 class TransferUserSettingReport2
 {
     private static $instance = null;
+
     private function __construct()
     {
     }
