@@ -38,13 +38,13 @@
             <div class="w-auto justify-center mt-6 mx-auto px-4">
                 <div class="lg:grid lg:grid-cols-2 gap-5">
                     @foreach($dataSource as $index => $group)
-                    <x-renderer.card title="{{$index}}">
-                        @foreach($group as $name => $values)
+                    <x-renderer.card title="{{$index}}" tooltip="{{$group['tooltip'] ?? ''}}">
+                        @foreach($group['items'] as $name => $values)
                             @php
                                 if(!is_numeric($name)) echo $name;
-                            @endphp
+                            @endphp                            
                             @foreach($values as $value)
-                                @php
+                            @php
                                     $name = $value['name'] ?? '';
                                     $href = $value['href'] ?? '';
                                 @endphp

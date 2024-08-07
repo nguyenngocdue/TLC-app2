@@ -157,11 +157,44 @@ trait TraitEntityCRUDShowQRLandingPageModule
 		],];
 		// dump($qa_records);
 		return [
-			'HomeOwner Manual' => empty($ho_manuals) ? [[['name' => "To Be Added by DC"],]] : [$ho_manuals],
-			"QA Records $qa_source" =>  empty($qa_records) ? [[['name' => "To Be Added"],]] : $qa_records,
-			'Project Plans' => empty($project_plans) ? [[['name' => "To Be Added by DC"],]] : [$project_plans],
-			'Customer Service' => [$ticket],
-			'Customer Survey' => [[['name' => "To Be Added by Software Team"],]],
+			'HomeOwner Manual' => [
+				'items' => empty($ho_manuals) ? [
+					[
+						['name' => "To Be Added by DC"],
+					]
+				] : [
+					$ho_manuals
+				]
+			],
+			"Compliance Records" => [
+				'tooltip' => $qa_source,
+				'items' => empty($qa_records) ? [
+					[
+						['name' => "To Be Added",],
+					]
+				] : $qa_records
+			],
+			'Project Plans' => [
+				'items' => empty($project_plans) ? [
+					[
+						['name' => "To Be Added by DC"],
+					]
+				] : [
+					$project_plans
+				]
+			],
+			'Ticketing' => [
+				'items' => [
+					$ticket
+				],
+			],
+			'Customer Survey' => [
+				'items' => [
+					[
+						['name' => "To Be Added by Software Team"],
+					]
+				]
+			],
 		];
 	}
 	public function getConfigRenderSource($item)
