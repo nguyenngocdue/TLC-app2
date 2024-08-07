@@ -1,3 +1,4 @@
+{{-- @dump($routeFilter) --}}
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4">
     <!-- Mode Dropdown -->

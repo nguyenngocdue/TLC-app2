@@ -40,7 +40,7 @@ class FilterReport extends Component
 
         // get filter detail from current report
         $reportLink = Rp_report::find((int)$currentRpId)->getDeep();
-        $filterDetails = $reportLink->getFilterDetails;
+        $filterDetails = $reportLink->getFilterDetails->sortBy('order_no');
 
         // Save initial parameters to set default values when you open for the first time.
         $ins =  InitUserSettingReport2::getInstance($this->entityType2);
@@ -48,7 +48,7 @@ class FilterReport extends Component
 
         // create params from user_setting and default value
         $currentParams = $ins->getCurrentParams($entityType, $currentRpId, $filterDetails);
-        // dump($currentParams, $currentRpId);
+        // dump($filterDetails, $currentRpId);
 
         // create data to render dropdown of report link
         $filterModes = collect($this->filterModes);

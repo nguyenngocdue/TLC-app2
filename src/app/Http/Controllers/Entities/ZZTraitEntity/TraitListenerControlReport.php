@@ -87,7 +87,7 @@ trait TraitListenerControlReport
         }
         return  [
             'id' => /* $this->id ?? */ $this->name,
-            'name' => $this->name,
+            'name' => $this->name . '[]', // all values are submitted to the db as array
             'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $this->tableName,

@@ -54,7 +54,6 @@ class FilterReportItem extends Component
 
     private function getDataSource()
     {
-
         $columnName = $this->filterDetail->getColumn->data_index;
         $modelClass = ModelData::initModelByField($columnName);
         if ($modelClass) {
@@ -78,6 +77,7 @@ class FilterReportItem extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
+        // dump($params);
         return view(
             'components.controls.has-data-source.dropdown2',
             $params

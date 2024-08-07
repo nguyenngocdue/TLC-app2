@@ -378,17 +378,15 @@ class UpdateUserSettings extends Controller
     private function updateReport2($request, $settings)
     {
         $inputValue = $request->all();
+        // dd($inputValue);
         $entityType = $inputValue['entity_type'];
         $entityType2 = $inputValue['entity_type2'];
-        $rpId = $inputValue['report_id'];
         $rpLinkId = $inputValue['current_report_link'];
 
         $advancedFilters = $this->getAdvancedFilterReport2($inputValue);
-        // dd($advancedFilters, $rpId);
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") {
             $advancedFilters = $this->getAdvancedFilterReport2($inputValue, true);
         }
-        // $settings[$entityType][$entityType2][$rpId] = $advancedFilters;
         $settings[$entityType][$entityType2][$rpLinkId] = $advancedFilters;
         return $settings;
     }

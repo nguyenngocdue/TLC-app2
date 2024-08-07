@@ -18,6 +18,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Services\UploadService2;
 use App\Utils\Support\Json\SuperProps;
+use Illuminate\Http\Request;
 
 class EntityCRUDController extends Controller
 {
@@ -71,7 +72,7 @@ class EntityCRUDController extends Controller
 	{
 		return $this->type;
 	}
-	public function show($id_or_slug, $trashed = false)
+	public function show(Request $request, $id_or_slug, $trashed = false)
 	{
 		$app = LibApps::getFor($this->type);
 		$show_renderer = $app['show_renderer'];
@@ -93,13 +94,13 @@ class EntityCRUDController extends Controller
 					default:
 				}
 			case 'report-renderer':
-				return $this->showReport($id_or_slug, $trashed);
+				return $this->showReport($request, $id_or_slug, $trashed);
 			default:
 				dump("Unknown how to render $show_renderer.");
 		}
 	}
-	public function showTrashed($id_or_slug)
+	public function showTrashed(Request $request, $id_or_slug)
 	{
-		$this->show($id_or_slug, true);
+		$this->show($request, $id_or_slug, true);
 	}
 }
