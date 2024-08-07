@@ -199,10 +199,11 @@
                             var eventSubTitle = info.event.extendedProps.sub_title || "";
                             var tagSubProject = info.event.extendedProps.tag_sub_project || "";
                             var tagPhase = info.event.extendedProps.tag_phase || "";
-                            var nameProject = info.event.extendedProps.name_project;
+                            // var nameProject = info.event.extendedProps.name_project || "";
+                            var remark = info.event.extendedProps.remark || "";
                             var eventTitleHTML = `
-                            <div class="event-title w-full">
-                                <div class="flex items-baseline justify-between" title="${nameProject}">
+                            <div class="event-title w-full" title="${remark}">
+                                <div class="flex items-baseline justify-between" title="${remark}">
                                     <div class="" style="font-size:0.65rem">${timeText}</div>
                                     ${tagSubProject}
                                     </div>
