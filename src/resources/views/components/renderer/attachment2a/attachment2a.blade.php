@@ -43,7 +43,8 @@
     <input id="{{$name}}-toBeDeleted" name="{{$name}}[toBeDeleted]" readonly type='{{$hiddenOrText}}' class='p-2.5 w-full bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  focus:shadow-outline-purple focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray '>
     @if($showUploadButton)
     @php
-        $width = $groupMode ? 'w-full' : 'w-1/2' ;
+        // $width = $groupMode ? 'w-full' : 'w-1/2' ;
+        $width = 'w-full';
     @endphp
     <div class="flex1 mt-2 custom-file-button no-print1">
         <label for="{{$name}}_browse" 
