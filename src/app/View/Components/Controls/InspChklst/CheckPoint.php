@@ -10,11 +10,6 @@ use Illuminate\View\Component;
 
 class CheckPoint extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
     public function __construct(
         private $line,
         private $type,
@@ -41,6 +36,20 @@ class CheckPoint extends Component
         $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos'); // cache attachments
         $props = SuperProps::getFor(Qaqc_insp_chklst_line::getTableName());
         $destroyable = !CurrentUser::get()->isExternal();
+        $prodOrder = $this->sheet->getChklst->getProdOrder;
+        $meta_type = $prodOrder->meta_type;
+        $meta_id = $prodOrder->meta_id;
+        $module = $meta_type::findFromCache($meta_id, ['getPjType']);
+        // dump($module->name);
+        $module_type = $module->getPjType;
+        $roomList = $module_type->getRoomList;
+
+        $isAttachmentGrouped = $this->sheet->getTmplSheet->is_attachment_grouped;
+        $groups = null;
+        if ($isAttachmentGrouped) {
+            $groups = $roomList->pluck('name', 'id');
+            // dump($roomList);
+        }
         return view('components.controls.insp-chklst.check-point', [
             'line' => $this->line,
             'controlType' => $controlType,
@@ -54,6 +63,7 @@ class CheckPoint extends Component
             'readOnly' => $this->readOnly,
             'index' => $this->index,
             'destroyable' => $destroyable,
+            'groups' => $groups,
         ]);
     }
 }

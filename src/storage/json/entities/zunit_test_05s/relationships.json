@@ -10,8 +10,11 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -24,8 +27,11 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_1": {
         "name": "_attachment_1",
@@ -38,8 +44,11 @@
         "renderer_edit_param": "",
         "control": "attachment",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_2": {
         "name": "_attachment_2",
@@ -52,8 +61,11 @@
         "renderer_edit_param": "",
         "control": "attachment",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_3": {
         "name": "_attachment_3",
@@ -66,8 +78,11 @@
         "renderer_edit_param": "",
         "control": "attachment",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_4": {
         "name": "_attachment_4",
@@ -80,8 +95,11 @@
         "renderer_edit_param": "",
         "control": "attachment",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     },
     "_attachment_5": {
         "name": "_attachment_5",
@@ -94,7 +112,27 @@
         "renderer_edit_param": "",
         "control": "attachment",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_attachment_6": {
+        "name": "_attachment_6",
+        "relationship": "morphMany",
+        "control_name": "attachment_6",
+        "renderer_view_all": "thumbnails",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "attachment",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
     }
 }

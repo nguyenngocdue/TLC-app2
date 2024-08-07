@@ -28,11 +28,10 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
 
     listenersOfDropdown2 = @json($listeners2);
     filtersOfDropdown2 = @json($filters2);
-
     listenersOfDropdown4s = @json($listeners4);
     filtersOfDropdown4s = @json($filters4);
 </script>
-<div class="px-4 pt-2 bg-body min-h-[700px]">
+<div class="p-2 sm:px-4 bg-body min-h-[700px]">
     <x-elapse />
     <x-controls.workflow403-checker allowed="{{$allowed}}" status="{{$status}}"/>
     <x-controls.header-alert-validation :strProps="$allProps" />
@@ -42,10 +41,10 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
 
     @switch($type) 
         @case ('qaqc_insp_chklst_shts')  
-            <x-renderer.chklst_header.qaqc_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
+            <x-renderer.chklst_header.qaqc_insp_chklst_shts formWidth="{{$formWidth}}" :item="$item"/>
         @break
         @case ('hse_insp_chklst_shts')  
-            <x-renderer.chklst_header.hse_insp_chklst_shts  formWidth="{{$formWidth}}" :item="$item"/>
+            <x-renderer.chklst_header.hse_insp_chklst_shts formWidth="{{$formWidth}}" :item="$item"/>
         @break
     @endswitch
     
@@ -63,9 +62,9 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
         @switch($app['edit_renderer'])
         
             @case ('')
-            <div class="px-2 flex justify-center">
+            <div class="flex justify-center sm:px-2">
                 {{-- Table of content --}}
-                <div class="fixed left-0">
+                <div class="fixed left-0" 99999>
                     <div class="text-center">
                         <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-left" data-drawer-show="drawer-left" aria-controls="drawer-contact" data-drawer-body-scrolling="true" data-drawer-backdrop="false">
                             <i class="fa-solid fa-bars"></i>
@@ -108,7 +107,7 @@ $formWidth = "w-full md:w-3/4 lg:w-1/2";
         <x-renderer.editable.modal-intermediate key={{$key}} action={{$action}} type={{$type}} status={{$status}} id={{$id}} modelPath={{$modelPath}} :actionButtons="$actionButtons" :props="$props" :item="$item" :dataSource="$propsOfIntermediatePage" />
         @endforeach
         @if(!$hasReadOnly)
-        <div class="px-2 flex justify-center">
+        <div class="flex justify-center sm:px-2">
             <div class="bg-white rounded-lg mt-2 w-full md:w-3/4">
                 <x-controls.action-buttons 
                     :buttonSave="$buttonSave" 

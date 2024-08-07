@@ -40,7 +40,7 @@ class Attachment2a extends Component
     ];
 
     private $attachments = [];
-    private $debugAttachment = false;
+
     public function __construct(
         private $name,
         private $value = "", //either a string of serialized array of attachments object or array or attachments 
@@ -51,6 +51,9 @@ class Attachment2a extends Component
         private $properties = [],
         private $openType = 'gallery',
         private $gridCols = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1',
+        private $groupMode = false,
+        private $groupId = null,
+        private $hiddenOrText = null,
     ) {
         // dump($openType);
         if (is_array($value)) {
@@ -60,15 +63,28 @@ class Attachment2a extends Component
             //Convert to array if object given
             foreach ($this->attachments as &$attachment) if (is_object($attachment)) $attachment = (array)$attachment;
         }
+
+        if ($this->groupMode) $this->gridCols = "";
+
         // dump($this->attachments);
     }
 
-    private function getButtonLabel()
+    private function getMaxStr()
     {
         $MAX_FILE_COUNT = $this->properties['max_file_count'] ?? 10;
         $MAX_FILE_SIZE = $this->properties['max_file_size'] ?? 10;
+        return "Max " . $MAX_FILE_COUNT . " files, each " . $MAX_FILE_SIZE  . "MB";
+    }
+
+    private function getButtonLabel($maxStr)
+    {
         $ALLOWED_FILE_TYPE_KEY = $this->properties['allowed_file_types'] ?? 'only_images';
-        $message =  "<i class='fa-sharp fa-regular fa-upload'></i> Browse ($ALLOWED_FILE_TYPE_KEY) (Max " . $MAX_FILE_COUNT . " files, each " . $MAX_FILE_SIZE  . "MB)";
+        if ($this->groupMode) {
+            $message = "<i class='fa-sharp fa-regular fa-upload'></i>";
+        } else {
+            $message =  "<i class='fa-sharp fa-regular fa-upload'></i> Browse ($ALLOWED_FILE_TYPE_KEY) ($maxStr)";
+        }
+
         return $message;
     }
 
@@ -148,8 +164,10 @@ class Attachment2a extends Component
         $this->enrichAttachments();
         [$docFiles, $imageFiles, $videoFiles, $unknownFiles] = $this->groupByType();
 
+        $maxString = $this->getMaxStr();
+
         return view('components.renderer.attachment2a.attachment2a', [
-            'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
+            'hiddenOrText' => $this->hiddenOrText,
             'name' => $this->name,
             'destroyable' => $this->destroyable,
             'readOnly' => $this->readOnly,
@@ -163,13 +181,15 @@ class Attachment2a extends Component
             'unknowns' => $unknownFiles,
 
             'acceptedExt' => $acceptedExt,
-            'btnLabel' => $this->getButtonLabel(),
-            'btnTooltip' => $title,
+            'btnLabel' => $this->getButtonLabel($maxString),
+            'btnTooltip' => $title . "\n" . $maxString,
             'btnClass' => ClassList::BUTTON,
-            'thumbnailClass' => "relative flex mx-1 flex-col items-center p1-025vw border border-2 rounded group/item overflow-hidden bg-inherit aspect-square ",
+            'thumbnailClass' => "relative flex flex-col items-center p1-025vw border border-2 rounded group/item overflow-hidden bg-inherit aspect-square ",
 
             'openType' => $this->openType, // gallery or href
             'gridCols' => $this->gridCols,
+            'groupMode' => $this->groupMode,
+            'groupId' => $this->groupId,
 
             'hideUploader' => $HIDE_UPLOADER,
             'hideUploadDate' => $HIDE_UPLOAD_DATE,

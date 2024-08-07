@@ -138,7 +138,8 @@
     @break
 
     @case('attachment')
-    <x-renderer.attachment2a name={{$columnName}} :value="$valueArray" :properties="$prop['properties']" readOnly={{$readOnly}} />
+    <x-renderer.attachment-group name={{$columnName}} :value="$valueArray" :properties="$prop['properties']" readOnly={{$readOnly}} />
+    {{-- <x-renderer.attachment2a name={{$columnName}} :value="$valueArray" :properties="$prop['properties']" readOnly={{$readOnly}} /> --}}
     <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 

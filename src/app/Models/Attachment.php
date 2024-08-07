@@ -22,7 +22,7 @@ class Attachment extends ModelExtended
 
     public static $eloquentParams = [
         "getCategory" => ['belongsTo', Field::class, 'category'],
-        "getSubCategory" => ['belongsTo', Field::class, 'sub_category'],
+        "getSubCategory" => ['belongsTo', Term::class, 'sub_category'],
         "attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
     ];
 

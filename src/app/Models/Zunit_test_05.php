@@ -16,6 +16,7 @@ class Zunit_test_05 extends ModelExtended
         "attachment_3" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_4" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "attachment_5" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+        "attachment_6" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
 
     public function attachment_1()
@@ -43,6 +44,12 @@ class Zunit_test_05 extends ModelExtended
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
     }
     public function attachment_5()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+    public function attachment_6()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

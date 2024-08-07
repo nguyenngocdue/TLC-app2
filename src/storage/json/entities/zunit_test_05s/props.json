@@ -175,6 +175,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_attachment_6": {
+        "name": "_attachment_6",
+        "column_name": "attachment_6",
+        "column_type": "morphMany",
+        "label": "Attachment 6",
+        "control": "attachment",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "true",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",

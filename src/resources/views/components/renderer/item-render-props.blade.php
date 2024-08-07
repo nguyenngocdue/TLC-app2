@@ -1,4 +1,4 @@
-<div class="p-4 w-full {{$width}} {{$hiddenComponent}} grid grid-cols-12 px-4 bg-white dark:bg-gray-800 rounded-lg">
+<div class="p-2 sm:p-4 w-full {{$width}} {{$hiddenComponent}} grid grid-cols-12 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
     {{-- @php dump($prop) @endphp --}}
     @php

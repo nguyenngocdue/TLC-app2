@@ -49,6 +49,13 @@ class ManageProperties extends Manage_Parent
                 'width' => 150,
             ],
             [
+                'dataIndex' => 'group_array',
+                'renderer' => 'text4',
+                'editable' => true,
+                // 'align' => 'center',
+                'width' => 250,
+            ],
+            [
                 'dataIndex' => 'hide_uploader',
                 'renderer' => 'checkbox',
                 'editable' => true,

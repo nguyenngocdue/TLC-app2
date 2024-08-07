@@ -2,7 +2,7 @@
 <div data-id="{{$doc['id']}}" name='{{$name}}' class="border-2 rounded text-left px-2 my-0.5 hover:bg-blue-200 break-inside-avoid {{$doc['borderColor']}}">
     <div class="items-center gap-2 p-1">
         <div class="flex gap-2 group relative items-center">
-            <a href="{{$path.$doc['url_media']}}" 111111 target="_blank" class="text-blue-500 w-full text-md-vw text-left flex items-center">
+            <a href="{{$path.$doc['url_media']}}" 111111 target="_blank" class="text-blue-500 w-full text-md-vw text-left flex items-center truncate">
                 <x-renderer.attachment2a.comp-file-icon class="text-xl fa-light mr-1" extension="{{$doc['extension'] ?? null}}" />
                 {{$doc['filename']}}
             </a>

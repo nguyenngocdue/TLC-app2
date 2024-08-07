@@ -63,64 +63,69 @@ class UploadService2
             $filesUpload = $request->files;
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
-                $property = Properties::getFor('attachment', '_' . $fieldName);
-                $nameValidate = $fieldName . '.toBeUploaded';
-                $maxFileSize = ($property['max_file_size'] == "" ? 10 : $property['max_file_size']) * 1024;
-                $maxFileCount = ($property['max_file_count'] == "" ? 10 : $property['max_file_count']);
-                $fileUploadCount = $this->countFileUploadByCondition($fieldName, $request->input('id'));
-                $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
-                $allowedFileTypes = $property['allowed_file_types'];
-                $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
-
-                $validator = [
-                    $nameValidate => 'array|max:' . $fileUploadRemainingCount,
-                    $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
-                ];
-
-                $request->validate($validator, [
-                    $nameValidate . '.max' => 'The ' . $fieldName . ' must have at most ' . $maxFileCount . ' items.',
-                    $nameValidate . '.*.max' => 'The ' . $fieldName . ' must not more than ' . round($maxFileSize / 1024, 1) . ' MB.',
-                ]);
-
+                // dd($filesUpload);
                 $files = $files['toBeUploaded'];
-                foreach ($files as $file) {
-                    if (!$file->getClientOriginalExtension()) {
-                        toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
-                    } else {
-                        $fileName =  $file->getClientOriginalName();
-                        $mediaNames = Attachment::get()->pluck('filename')->toArray();
-                        $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
-                        // dd($fileName); //to test case
-                        $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
-                        $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
-                        $mimeType = $file->getMimeType();
-                        $imagePath = $path . $fileName;
+                foreach ($files as $groupId => $groupItems) {
+                    $property = Properties::getFor('attachment', '_' . $fieldName);
+                    $nameValidate = $fieldName . '.toBeUploaded.' . $groupId;
+                    $maxFileSize = ($property['max_file_size'] == "" ? 10 : $property['max_file_size']) * 1024;
+                    $maxFileCount = ($property['max_file_count'] == "" ? 10 : $property['max_file_count']);
+                    $fileUploadCount = $this->countFileUploadByCondition($fieldName, $request->input('id'));
+                    $fileUploadRemainingCount = $maxFileCount - $fileUploadCount;
+                    $allowedFileTypes = $property['allowed_file_types'];
+                    $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
 
-                        Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
-                        // Log::info($fileName);
-                        //Only crunch if the attachment is a photo
-                        if (in_array($fileExt, $allowedExts)) {
-                            $thumbnailImage = Image::make($file);
-                            $thumbnailImage->fit($thumbnailW, $thumbnailH);
-                            $resource = $thumbnailImage->stream();
-                            $thumbnailFileName = $fileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
-                            $thumbnailPath = $path . $thumbnailFileName;
-                            Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
+                    $validator = [
+                        $nameValidate => 'array|max:' . $fileUploadRemainingCount,
+                        $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
+                    ];
+
+                    $request->validate($validator, [
+                        $nameValidate . '.max' => 'The ' . $fieldName . ' must have at most ' . $maxFileCount . ' items.',
+                        $nameValidate . '.*.max' => 'The ' . $fieldName . ' must not more than ' . round($maxFileSize / 1024, 1) . ' MB.',
+                    ]);
+
+                    // Log::info($groupItems);
+                    foreach ($groupItems as $file) {
+                        if (!$file->getClientOriginalExtension()) {
+                            toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
+                        } else {
+                            $fileName =  $file->getClientOriginalName();
+                            $mediaNames = Attachment::get()->pluck('filename')->toArray();
+                            $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
+                            // dd($fileName); //to test case
+                            $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                            $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
+                            $mimeType = $file->getMimeType();
+                            $imagePath = $path . $fileName;
+
+                            Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
+                            // Log::info($fileName);
+                            //Only crunch if the attachment is a photo
+                            if (in_array($fileExt, $allowedExts)) {
+                                $thumbnailImage = Image::make($file);
+                                $thumbnailImage->fit($thumbnailW, $thumbnailH);
+                                $resource = $thumbnailImage->stream();
+                                $thumbnailFileName = $fileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
+                                $thumbnailPath = $path . $thumbnailFileName;
+                                Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
+                            }
+                            // dd($fields[$fieldName);
+                            $item = [
+                                'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
+                                'url_media' => $imagePath,
+                                'url_folder' => $path,
+                                'filename' => basename($imagePath),
+                                'extension' => $fileExt,
+                                'category' => $fields[$fieldName],
+                                'sub_category' => $groupId ?: null,
+                                'owner_id' =>  (int)Auth::user()->id,
+                                'mime_type' => $mimeType,
+                            ];
+                            if ($object_type) $item['object_type'] = $object_type;
+                            if ($object_id) $item['object_id'] = $object_id;
+                            array_push($attachmentRows, $item);
                         }
-                        // dd($fields[$fieldName);
-                        $item = [
-                            'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
-                            'url_media' => $imagePath,
-                            'url_folder' => $path,
-                            'filename' => basename($imagePath),
-                            'extension' => $fileExt,
-                            'category' => $fields[$fieldName],
-                            'owner_id' =>  (int)Auth::user()->id,
-                            'mime_type' => $mimeType,
-                        ];
-                        if ($object_type) $item['object_type'] = $object_type;
-                        if ($object_id) $item['object_id'] = $object_id;
-                        array_push($attachmentRows, $item);
                     }
                 }
             }

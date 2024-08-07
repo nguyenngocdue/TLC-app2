@@ -11,7 +11,7 @@
     </div>
     <input type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$rowIndex}}]" value="{{$line->id}}">
 
-    <div class="p-4">
+    <div component="check-point" class="p-1 sm:p-2">
         <div class="flex justify-center mb-2">
             @switch($line->control_type_id)
             @case (1) {{-- 1 => "text" --}}
@@ -32,14 +32,16 @@
             @endswitch
         </div>
     
-        <div id="group_attachment_comment_{{$rowIndex}}" @class([ 'hidden'=> $type == 'hse_insp_chklst'
-            ])>
-            <x-renderer.attachment2a 
+        <div id="group_attachment_comment_{{$rowIndex}}" @class([ 'hidden'=> $type == 'hse_insp_chklst'])>
+            <x-renderer.attachment-group 
+            {{-- <x-renderer.attachment2a  --}}
                 name="{{$table01Name}}[insp_photos][{{$rowIndex}}]" 
                 :value="$attachments" 
                 :properties="$props['props']['_insp_photos']['properties']"
                 readOnly="{{$readOnly}}"
                 destroyable="{{$destroyable}}"
+                groupMode="true"
+                :groups="$groups"
                 />
             <br />
             <x-controls.comment.comment-group2a readOnly="{{$readOnly}}" :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}" commentableId="{{$line->id}}" />

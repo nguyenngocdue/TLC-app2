@@ -14,7 +14,7 @@
             <div 
             name='{{$name}}' 
             title="{{$title}}" 
-            class="relative flex mx-1 flex-col items-center p-025vw border-2 rounded-lg  
+            class="relative flex flex-col items-center p-025vw border-2 rounded-lg  
                     group/item overflow-hidden bg-inherit
                     aspect-square
                     "
