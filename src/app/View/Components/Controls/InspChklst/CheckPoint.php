@@ -36,13 +36,17 @@ class CheckPoint extends Component
         $attachments = $this->line->getMorphManyByIds($this->checkPointIds, 'insp_photos'); // cache attachments
         $props = SuperProps::getFor(Qaqc_insp_chklst_line::getTableName());
         $destroyable = !CurrentUser::get()->isExternal();
-        $prodOrder = $this->sheet->getChklst->getProdOrder;
-        $meta_type = $prodOrder->meta_type;
-        $meta_id = $prodOrder->meta_id;
-        $module = $meta_type::findFromCache($meta_id, ['getPjType']);
-        // dump($module->name);
-        $module_type = $module->getPjType;
-        $roomList = $module_type->getRoomList;
+
+        //This is of QAQC, NOT HSE
+        if ($this->sheet->getChklst) {
+            $prodOrder = $this->sheet->getChklst?->getProdOrder;
+            $meta_type = $prodOrder->meta_type;
+            $meta_id = $prodOrder->meta_id;
+            $module = $meta_type::findFromCache($meta_id, ['getPjType']);
+            // dump($module->name);
+            $module_type = $module->getPjType;
+            $roomList = $module_type->getRoomList;
+        }
 
         $isAttachmentGrouped = $this->sheet->getTmplSheet->is_attachment_grouped;
         $groups = null;
