@@ -45,7 +45,7 @@ class AttachmentName
         $maxNumber = 0;
         foreach ($tempData as $nameDB) {
             $dot = self::indexCharacterInString('.', $nameDB);
-            $n = substr($nameDB, 0, $dot);
+            $nameDb = substr($nameDB, 0, $dot);
             $e = substr($nameDB, $dot + 1, strlen($nameDB) - $dot);
             if ($extension !== $e) continue;
 
@@ -54,21 +54,40 @@ class AttachmentName
 
             $hyphenNameUp = substr($fileNameUp, 0, $hyphenInxFileUp + 1) . '-';
 
-            // update names have tail(-01, -02..) which similar values in data : "hlc-003-1-1"
-            if (str_contains($n, $hyphenNameUp) && $hyphenInxFileUp === $hyphenInxDB && $dot === $idx) {
-                $num = str_replace($hyphenNameUp, '', $n);
+            // check case: update names have tail(-01, -02..) which similar values in data : "hlc-003-1-1"
+            if (str_contains($nameDb, $hyphenNameUp) && $hyphenInxFileUp === $hyphenInxDB && $dot === $idx) {
+                $num = str_replace($hyphenNameUp, '', $nameDb);
                 $maxNumber < $num ? $maxNumber = $num : $maxNumber;
                 $baseName = substr($fileNameUp, 0, $hyphenInxFileUp);
             }
-            // update names have similar values in data, not tail (-01, -02): "hlc-003-2"
-            $aliasName = substr($fileNameUp, 0, $idx) . '-';
-            if (str_contains($n, $aliasName)) {
-                $num = str_replace($aliasName, '', $n);
-                $maxNumber < $num ? $maxNumber = $num : $maxNumber;
+
+            // // check case:  "11.png" is contained within "screenshot-20-11-2025.png"
+            // $aliasName = substr($fileNameUp, 0, $idx);
+            // if ($nameDb === $aliasName) {
+            //     $num = str_replace($aliasName, '', $nameDb);
+            //     $maxNumber < $num ? $maxNumber = $num : $maxNumber;
+            // }
+
+            // // check case: update names have similar values in data, not tail (-01, -02): "hlc-003-2"
+            // $aliasName = substr($fileNameUp, 0, $idx) . '-';
+            // if (str_contains($nameDb, $aliasName)) {
+            //     // dd($nameDb, $aliasName);
+            //     $num = str_replace($aliasName, '', $nameDb);
+            //     Log::info($nameDb);
+            //     $maxNumber < $num ? $maxNumber = $num : $maxNumber;
+            // }
+
+            ///refactor
+            $aliasName1 = substr($fileNameUp, 0, $idx);
+            $aliasName2 = $aliasName1 . '-';
+
+            if ($nameDb === $aliasName1 || str_contains($nameDb, $aliasName2)) {
+                $num = str_replace([$aliasName1, $aliasName2], '', $nameDb);
+                $maxNumber = max($maxNumber, $num);
             }
         }
         $maxNumber = self::getLastNumberInString($maxNumber);
-        // dd("-----------", $fileNameUp, $tempData, $maxNumber);
+        // dd("-----------", $fileNameUp, $maxNumber);
         return [$baseName, $maxNumber];
     }
 
@@ -87,14 +106,14 @@ class AttachmentName
             [$baseName,  $maxNumber] =  self::getMaxNumberMediaName($tempData, $fileName, $extensionFile);
             $index = 1;
             do {
-
                 $fileName =  $baseName . '-' . $maxNumber + $index . '.' . $extensionFile;
                 $index++;
                 // if (in_array($fileName, $mediaNames)) {
                 //     Log::info("Duplicate " . $fileName . " in attachments table.");
                 // }
             } while (in_array($fileName, $mediaNames));
-            Log::info($fileName);
+            // Log::info($fileName);
+            // dd($fileName);
             return $fileName;
         }
         return $fileName;

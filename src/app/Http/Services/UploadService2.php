@@ -63,7 +63,6 @@ class UploadService2
             $filesUpload = $request->files;
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
-                // dd($filesUpload);
                 $files = $files['toBeUploaded'];
                 foreach ($files as $groupId => $groupItems) {
                     $property = Properties::getFor('attachment', '_' . $fieldName);
@@ -93,14 +92,16 @@ class UploadService2
                             $fileName =  $file->getClientOriginalName();
                             $mediaNames = Attachment::get()->pluck('filename')->toArray();
                             $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
-                            // dd($fileName); //to test case
+                            //to test case
+                            // if ($groupId === 4) {
+                            //     dd($fileName);
+                            // }
                             $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
                             $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
                             $mimeType = $file->getMimeType();
                             $imagePath = $path . $fileName;
 
                             Storage::disk('s3')->put($imagePath, file_get_contents($file), 'public');
-                            // Log::info($fileName);
                             //Only crunch if the attachment is a photo
                             if (in_array($fileExt, $allowedExts)) {
                                 $thumbnailImage = Image::make($file);
@@ -124,21 +125,13 @@ class UploadService2
                             ];
                             if ($object_type) $item['object_type'] = $object_type;
                             if ($object_id) $item['object_id'] = $object_id;
-                            array_push($attachmentRows, $item);
+                            // Log::info($fileName);
+                            // save database
+                            Attachment::create($item);
                         }
                     }
                 }
             }
-
-            // dd($attachmentRows);
-            $invertedFields = array_flip($fields);
-            $result = [];
-            foreach ($attachmentRows as $row) {
-                $insertedRow = Attachment::create($row);
-                $result[$insertedRow['id']] = $invertedFields[$row['category']];
-            }
-            // dd($result);
-            return $result;
         } catch (ValidationException $ve) {
             toastr()->warning($ve->getMessage() . "<br/>", 'Upload File Failed');
         } catch (\Exception $e) {
