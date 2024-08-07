@@ -22,7 +22,7 @@ trait TraitEntityCRUDShowChklstSht
 
         $entityLines = $entity->getLines->sortBy('order_no');
         $entityShtSigs = $entity->{$this->nominatedListFn};
-        $tableDataSource = $this->transformDataSource($entityLines, $entityShtSigs);
+        $tableDataSource = $this->transformDataSource($entity, $entityLines, $entityShtSigs);
         $valueOptionPrint = $this->getValueOptionPrint();
         return view('components.print.print-check-sheet5', [
             'tableColumns' => $this->getTableColumns(),

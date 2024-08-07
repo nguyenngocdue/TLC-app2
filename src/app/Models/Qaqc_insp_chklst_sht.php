@@ -87,6 +87,16 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
         return $relation;
     }
+    public function getRoomListFromModuleType()
+    {
+        $prodOrder = $this->getChklst->getProdOrder;
+        $meta_type = $prodOrder->meta_type;
+        $meta_id = $prodOrder->meta_id;
+        $module = $meta_type::findFromCache($meta_id, ['getPjType']);
+        // dump($module->name);
+        $module_type = $module->getPjType;
+        return $module_type->getRoomList;
+    }
     public function getMonitors1()
     {
         $p = static::$eloquentParams[__FUNCTION__];

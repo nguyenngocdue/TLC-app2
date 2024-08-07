@@ -25,16 +25,16 @@ trait TraitSupportEntityShow
         ];
     }
 
-    private function transformDataSource($dataSource, $entityShtSigs)
+    private function transformDataSource($sheet, $dataSource, $entityShtSigs)
     {
         foreach ($dataSource as &$value) {
-            $value['response_type'] = $this->createDataSource($value, false);
+            $value['response_type'] = $this->createDataSource($sheet, $value, false);
             $value['name_description'] = $this->createDataSourceDescription($value);
             $value['group_description'] = $value->getGroup->name ?? '';
         }
         if ($entityShtSigs) {
             foreach ($entityShtSigs as &$value) {
-                $value['response_type'] = $this->createDataSource($value, true);
+                $value['response_type'] = $this->createDataSource($sheet, $value, true);
                 $value['name_description'] = $this->createDataSourceDescription($value);
                 $value['group_description'] = 'Third Party Sign-Off';
             }
@@ -169,10 +169,12 @@ trait TraitSupportEntityShow
         }
     }
 
-    private function createStrHtmlAttachment($item)
+    private function createStrHtmlAttachment($sheet, $chklst_line)
     {
-        if (isset($item->insp_photos) && !$item->insp_photos->isEmpty()) {
-            $span = '<span class="" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($item->insp_photos) . '</span>';
+        //If not radio (PASS/FAIL/NA) then quit
+        if ($chklst_line->control_type_id != 4) return '';
+        if (isset($chklst_line->insp_photos) && !$chklst_line->insp_photos->isEmpty()) {
+            $span = '<span class="" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($sheet, $chklst_line->insp_photos) . '</span>';
             return "<div class='bg-white border rounded dark:bg-gray-800 dark:border-gray-700 p-1 my-1'>" . $span . "</div>";
         }
         return '';
@@ -214,17 +216,28 @@ trait TraitSupportEntityShow
         return $strCenter;
     }
 
-    private function formatCommentRender($items)
+    private function formatCommentRender($comments)
     {
-        $value = $items->toArray();
+        $value = $comments->toArray();
         $strCenter = Blade::render('<x-print.comment5 :value="$value" />', ['value' => $value]);
         return $strCenter;
     }
 
-    private function formatAttachmentRender($items)
+    private function formatAttachmentRender($sheet, $attachments)
     {
-        $strCenter = Blade::render('<x-renderer.attachment2a gridCols="grid grid-cols-3 gap-1" openType="_blank" name="attachment" :value="$value" destroyable={{false}} showToBeDeleted={{false}} showUploadFile={{false}} />', [
-            'value' => $items->toArray()
+        $isAttachmentGrouped = $sheet->getTmplSheet->is_attachment_grouped;
+        $groups = null;
+        if ($isAttachmentGrouped) {
+            if (method_exists($sheet, "getRoomListFromModuleType")) {
+                $roomList = $sheet->getRoomListFromModuleType();
+                $groups = $roomList->pluck('name', 'id');
+                // dump($roomList);
+            }
+        }
+
+        $strCenter = Blade::render('<x-renderer.attachment-group :groups="$groups" openType="_blank" name="attachment" :value="$value" readOnly=1 destroyable=0 showToBeDeleted=0 showUploadFile=0 />', [
+            'value' => $attachments->toArray(),
+            'groups' => $groups,
         ]);
         return $strCenter;
     }
@@ -237,12 +250,12 @@ trait TraitSupportEntityShow
                 </div>";
     }
 
-    private function createDataSource($value, $isSignature)
+    private function createDataSource($sheet, $value, $isSignature)
     {
         // dump($isSignature);
         [$mainTable, $isSignatureLine] = $this->transFormLine($value);
         $inspector = $this->createInspectorAndDatetime($value, $isSignature, $isSignatureLine);
-        $attachments = $this->createStrHtmlAttachment($value);
+        $attachments = $this->createStrHtmlAttachment($sheet, $value);
         $comments = $this->createStrHtmlComment($value);
         return "<div class='grid grid-cols-2 gap-2' > "
             . $mainTable

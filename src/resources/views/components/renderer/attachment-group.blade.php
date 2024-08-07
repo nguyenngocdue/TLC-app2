@@ -9,6 +9,7 @@
                 readOnly={{$readOnly}} 
                 groupMode="{{count($attachmentGroups) > 1}}"
                 groupId="{{$groupId}}"
+                openType="{{$openType}}"
                 />
         </div>
     @endforeach

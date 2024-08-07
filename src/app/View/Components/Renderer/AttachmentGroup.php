@@ -30,7 +30,7 @@ class AttachmentGroup extends Component
             //Convert to array if object given
             foreach ($this->attachments as &$attachment) if (is_object($attachment)) $attachment = (array)$attachment;
         }
-        $groupArray = json_decode($this->properties['group_array'], true);
+        $groupArray = json_decode($this->properties['group_array'] ?? null, true);
         if ($groupArray) {
             $this->groups = $groupArray;
             // dump($groupArray);

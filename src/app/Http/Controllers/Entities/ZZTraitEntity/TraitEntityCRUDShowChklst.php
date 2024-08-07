@@ -50,7 +50,7 @@ trait TraitEntityCRUDShowChklst
 
         $tableDataSource = [];
         foreach ($entityShts as $sheet) {
-            $tableDataSource[] = $this->transformDataSource($sheet->getLines, $sheet->{$this->nominatedListFn});
+            $tableDataSource[] = $this->transformDataSource($sheet, $sheet->getLines, $sheet->{$this->nominatedListFn});
         }
 
         $valueOptionPrint = $this->getValueOptionPrint();
