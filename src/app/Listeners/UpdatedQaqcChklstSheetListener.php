@@ -5,7 +5,9 @@ namespace App\Listeners;
 use App\Events\UpdatedQaqcChklstEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;
 use App\Events\WssToastrMessageChannel;
+use App\Http\Services\LoggerForTimelineService;
 use App\Models\Qaqc_insp_chklst_sht;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -67,6 +69,8 @@ class UpdatedQaqcChklstSheetListener //implements ShouldQueue //MUST NOT QUEUE
             if ($allApproved && $allSigned) {
                 // Log::info("Auto change status of sheet " . $sheet->id . " to audited");
                 $sheet->update(['status' => 'audited']);
+                $previousValue = ['status' => 'pending_audit'];
+                (new LoggerForTimelineService())->insertForUpdate($sheet, $previousValue, CurrentUser::id(), Qaqc_insp_chklst_sht::class);
             } else {
                 // Log::info("Do nothing for sheet #" . $sheet->id);
                 // Log::info($signature_decisions);
