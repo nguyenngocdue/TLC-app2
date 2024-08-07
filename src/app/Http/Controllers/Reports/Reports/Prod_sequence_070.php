@@ -30,6 +30,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
     private function getSqlStr($params)
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
+        // dump($valOfParams);
         $sql = "SELECT 
                         tb1.*,
                         tb2.prod_routing_link_id,
@@ -37,6 +38,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                         tb2.erp_routing_link_id,
                         tb2.erp_routing_link_name,
                         tb3.prod_sequence_id,
+                        tb2.prod_discipline_id,
                         tb3.prod_sequence_status,
                         NULL AS man_power,
                         NULL AS hours,
@@ -74,7 +76,8 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                     prl.id AS prod_routing_link_id,
                                     prl.name AS prod_routing_link_name,
                                     erl.id AS erp_routing_link_id,
-                                    erl.name AS erp_routing_link_name
+                                    erl.name AS erp_routing_link_name,
+                                    prl.prod_discipline_id AS prod_discipline_id
                                     FROM prod_routings pr
                                     LEFT JOIN prod_routing_details prd ON prd.prod_routing_id = pr.id
                                     LEFT JOIN prod_routing_links prl ON prl.id = prd.prod_routing_link_id 
@@ -116,6 +119,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                     erl.id AS erp_routing_link_id,
                     erl.name AS erp_routing_link_name,
                     ps.id AS prod_sequence_id,
+                    ps.prod_discipline_id,
                     ps.status AS prod_sequence_status,
                     NULL AS man_power,
                     NULL AS hours,
