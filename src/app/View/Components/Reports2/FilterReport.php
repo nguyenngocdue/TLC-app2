@@ -18,6 +18,7 @@ class FilterReport extends Component
         private $report = "",
         private $filterModes = [],
         private $filterDetails = [],
+        private $paramsUrl = [],
 
     ) {
     }
@@ -44,7 +45,8 @@ class FilterReport extends Component
 
         // Save initial parameters to set default values when you open for the first time.
         $ins =  InitUserSettingReport2::getInstance($this->entityType2);
-        $ins->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails);
+        $ins->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails, $this->paramsUrl);
+
 
         // create params from user_setting and default value
         $currentParams = $ins->getCurrentParams($entityType, $currentRpId, $filterDetails);
@@ -56,7 +58,7 @@ class FilterReport extends Component
             $linkedToRpId = Rp_report::find($filterMode->linked_to_report_id)->id ?? null;
             if (is_null($linkedToRpId)) return [];
             return [$linkedToRpId => $filterMode->name];
-        });
+        });;
 
         return view('components.reports2.filter-report', [
             'entityType' => $entityType,

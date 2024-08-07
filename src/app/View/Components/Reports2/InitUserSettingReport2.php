@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class InitUserSettingReport2
 {
@@ -25,24 +26,22 @@ class InitUserSettingReport2
     }
 
 
-    public function saveFirstParamsToUser($entityType, $currentRpId, $filterDetails)
+    public function saveFirstParamsToUser($entityType, $currentRpId, $filterDetails, $paramsUrl)
     {
-        $params = $this->getDefaultParams($entityType, $filterDetails, $currentRpId);
-
-        if ($params) {
-            $this->updateUserSettings($entityType, $currentRpId, $params);
-            toastr()->success("Initialize User Settings Successfully", "Successfully");
-            return redirect()->back();
-        }
+        $params = $this->getDefaultParams($entityType, $filterDetails, $currentRpId, $paramsUrl);
+        if ($params) $this->updateUserSettings($entityType, $currentRpId, $params);
     }
 
-    public function getDefaultParams($entityType, $filterDetails, $currentRpId)
+    public function getDefaultParams($entityType, $filterDetails, $currentRpId, $paramsUrl)
     {
         $params = [];
         foreach ($filterDetails as $filter) {
+            $filterName = Report::changeFieldOfFilter($filter);
+            if (!empty($paramsUrl) && isset($paramsUrl[$filterName])) {
+                $params[$filterName] = (array)$paramsUrl[$filterName];
+            }
             $defaultValue = $filter->default_value;
             if ($defaultValue) {
-                $filterName = Report::changeFieldOfFilter($filter);
                 $userSetting = CurrentUser::getSettings();
                 $paramsInUser = $userSetting[$entityType][$this->entityType2][$currentRpId] ?? [];
                 if (!array_key_exists($filterName, $paramsInUser) || is_null($paramsInUser[$filterName])) {
@@ -50,7 +49,6 @@ class InitUserSettingReport2
                 }
             }
         }
-
         return $params;
     }
 
@@ -62,6 +60,12 @@ class InitUserSettingReport2
         $user = User::find(Auth::id());
         $user->settings = $userSetting;
         $user->update();
+        Session::forget('paramsUrl');
+        if ($user->update()) {
+            return toastr()->success("Initialize User Settings Successfully", "Successfully");
+        } else {
+            return toastr()->error("Failed to Initialize User Settings", "Error");
+        }
     }
 
     private function createDefaultCurrentParams($filterDetails, $paramsUser)
