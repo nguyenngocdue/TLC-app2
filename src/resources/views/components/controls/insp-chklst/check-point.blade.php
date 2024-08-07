@@ -33,17 +33,19 @@
         </div>
     
         <div id="group_attachment_comment_{{$rowIndex}}" @class([ 'hidden'=> $type == 'hse_insp_chklst'])>
-            <x-renderer.attachment-group 
-            {{-- <x-renderer.attachment2a  --}}
-                name="{{$table01Name}}[insp_photos][{{$rowIndex}}]" 
-                :value="$attachments" 
-                :properties="$props['props']['_insp_photos']['properties']"
-                readOnly="{{$readOnly}}"
-                destroyable="{{$destroyable}}"
-                groupMode="true"
-                :groups="$groups"
-                />
-            <br />
+            @if($line->control_type_id == 4) {{-- 4 => "radio" --}}
+                <x-renderer.attachment-group 
+                {{-- <x-renderer.attachment2a  --}}
+                    name="{{$table01Name}}[insp_photos][{{$rowIndex}}]" 
+                    :value="$attachments" 
+                    :properties="$props['props']['_insp_photos']['properties']"
+                    readOnly="{{$readOnly}}"
+                    destroyable="{{$destroyable}}"
+                    groupMode="true"
+                    :groups="$groups"
+                    />
+                <br />
+            @endif
             <x-controls.comment.comment-group2a readOnly="{{$readOnly}}" :commentIds="$checkPointIds" category="insp_comments" commentableType="{{$type}}" commentableId="{{$line->id}}" />
         </div>
     </div>
