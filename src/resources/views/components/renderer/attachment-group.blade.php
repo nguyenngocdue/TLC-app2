@@ -1,7 +1,7 @@
 <div class="flex">
     @foreach($attachmentGroups as $groupId => $attachmentGroup)
         <div class="border rounded p-0.5 m-0.5 {{$width}} ">
-            {{$attachmentGroup['name']}}
+            <div class="font-bold text-center text-sm" title="#{{$groupId}}">{{$attachmentGroup['name']}}</div>
             <x-renderer.attachment2a 
                 name={{$name}} 
                 :value="$attachmentGroup['items']" 
