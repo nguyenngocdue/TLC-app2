@@ -7,17 +7,23 @@ const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) 
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 // const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
 const select2FormatState = (state) => {
-
-    return !state.title ? $(`<div title="#${state.id}">${state.text}</div>`) : $(
-        `<div class="flex justify-between px-1" title="#${state.id}">
+    return !state.title
+        ? $(`<div title="#${state.id}">${state.text}</div>`)
+        : $(
+              `<div class="flex justify-between px-1" title="#${state.id}">
         <span>${state.text}</span>
         <pre>   </pre>
         <span>${state.title}</span>
-    </div>`
-    )
+    </div>`,
+          )
 }
 const getEById = (id) => $("[id='" + id + "']")
-const dumbIncludes2 = (array, item) => { for (let i = 0; i < array.length; i++) { if (array[i] == item) return true } return false }
+const dumbIncludes2 = (array, item) => {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == item) return true
+    }
+    return false
+}
 const smartFilter2 = (dataSource, column, operator, value) => {
     return dataSource.filter((row) => {
         let result = null
@@ -27,14 +33,14 @@ const smartFilter2 = (dataSource, column, operator, value) => {
                 if (Array.isArray(row[column])) {
                     result = dumbIncludes2(row[column], value)
                 } else {
-                    result = (row[column] == value)
+                    result = row[column] == value
                 }
                 return result
             case '!=':
                 if (Array.isArray(row[column])) {
                     result = !dumbIncludes2(row[column], value)
                 } else {
-                    result = (row[column] != value)
+                    result = row[column] != value
                 }
                 return result
             default:
@@ -43,21 +49,22 @@ const smartFilter2 = (dataSource, column, operator, value) => {
         }
     })
 }
-const getIsMultipleOfE = (id) => (getEById(id)[0]) ? getEById(id)[0].hasAttribute('multiple') : false
+const getIsMultipleOfE = (id) => (getEById(id)[0] ? getEById(id)[0].hasAttribute('multiple') : false)
 const getControlTypeOfE = (id) => getEById(id).attr('controlType')
 const getAllowClear = (id) => !!(getEById(id).attr('allowClear') === 'true')
 const getLetUserChooseWhenOneItem = (id) => !!(getEById(id).attr('letUserChooseWhenOneItem') === 'true')
 const getColSpanOfE = (id) => getEById(id).attr('colSpan')
 const getReadOnlyOfE = (id) => getEById(id).attr('readOnly')
 const getAllVariablesFromExpression = (str) => {
-    const regex = new RegExp('["|\']?[a-zA-Z_]+[a-zA-Z0-9]*["|\']?', 'gm'), result = []
+    const regex = new RegExp('["|\']?[a-zA-Z_]+[a-zA-Z0-9]*["|\']?', 'gm'),
+        result = []
     let m
     while ((m = regex.exec(str)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
         if (m.index === regex.lastIndex) regex.lastIndex++
         m.forEach((match) => {
-            if (match[0] == '"' && match[match.length - 1] == '"') return; //remove "closed" or "new;pending"
-            if (match[0] == "'" && match[match.length - 1] == "'") return; //remove 'closed' or 'new;pending'
+            if (match[0] == '"' && match[match.length - 1] == '"') return //remove "closed" or "new;pending"
+            if (match[0] == "'" && match[match.length - 1] == "'") return //remove 'closed' or 'new;pending'
             result.push(match)
         })
     }
@@ -67,9 +74,12 @@ const getAllVariablesFromExpression = (str) => {
 const getSecondsFromTime = (hms) => {
     var a = hms.split(':') // split it at the colons
     switch (a.length) {
-        case 1: return +a[0]
-        case 2: return +a[0] * 60 * 60 + +a[1] * 60 // HH:MM
-        case 3: return +a[0] * 60 * 60 + +a[1] * 60 + +a[2]
+        case 1:
+            return +a[0]
+        case 2:
+            return +a[0] * 60 * 60 + +a[1] * 60 // HH:MM
+        case 3:
+            return +a[0] * 60 * 60 + +a[1] * 60 + +a[2]
     }
 }
 const getDaysFromDateSlash = (dmy) => moment(dmy, 'DD/MM/YYYY').diff(moment('1970-01-01'), 'days')
@@ -111,8 +121,7 @@ const setValueOfEById = (id, value) => {
             $(queryStr).prop('checked', false)
             if (debugSetValue) console.log('Unchecked all', queryStr)
             value.forEach((id_id) => {
-                queryStr =
-                    "input:checkbox[name='" + id + "[]'][value=" + id_id + ']'
+                queryStr = "input:checkbox[name='" + id + "[]'][value=" + id_id + ']'
                 $(queryStr).prop('checked', true)
                 if (debugSetValue) console.log('Checking', queryStr)
             })
@@ -136,42 +145,49 @@ const setValueOfEById = (id, value) => {
 
 const convertStrToNumber = (varValue) => {
     const debugListener = false
-    let type = "normal_number"
-    if (varValue.includes(",")) type = "number_with_commas"
-    else if (isNaN(varValue)) type = "datetime_string"
+    let type = 'normal_number'
+    if (varValue.includes(',')) type = 'number_with_commas'
+    else if (isNaN(varValue)) type = 'datetime_string'
 
     // console.log(varValue, isNaN(varValue), type)
     if (varValue) {
         switch (type) {
-            case "normal_number": break
-            case "number_with_commas":
-                varValue = (varValue + '').replace(/\,/g, '') * 1  //<<Remove all "," as the thousand separator
+            case 'normal_number':
                 break
-            case "datetime_string":
+            case 'number_with_commas':
+                varValue = (varValue + '').replace(/\,/g, '') * 1 //<<Remove all "," as the thousand separator
+                break
+            case 'datetime_string':
                 const includedHour = varValue.includes(':')
                 const includedDateSlash = varValue.includes('/')
                 const includedDateDash = varValue.includes('-')
-                if (includedHour && includedDateSlash) { /* 01/01/2023 12:34 */
+                if (includedHour && includedDateSlash) {
+                    /* 01/01/2023 12:34 */
                     const datetime = varValue.split(' ')
                     const date = datetime[0]
                     const time = datetime[1]
                     varValue = getDaysFromDateSlash(date) * 24 * 3600 + getSecondsFromTime(time)
-                } else if (includedHour && includedDateDash) { /* 2023-01-01 12:34 */
+                } else if (includedHour && includedDateDash) {
+                    /* 2023-01-01 12:34 */
                     const datetime = varValue.split(' ')
                     const date = datetime[0]
                     const time = datetime[1]
                     varValue = getDaysFromDateDash(date) * 24 * 3600 + getSecondsFromTime(time)
                 } else {
-                    if (includedHour) {/* 12:34 */
+                    if (includedHour) {
+                        /* 12:34 */
                         varValue = getSecondsFromTime(varValue)
-                    } else if (includedDateSlash) { /* 01/02/2023 */
+                    } else if (includedDateSlash) {
+                        /* 01/02/2023 */
                         varValue = getDaysFromDateSlash(varValue) * 24 * 3600
-                    } else if (includedDateDash) {/* 2023-01-01 */
+                    } else if (includedDateDash) {
+                        /* 2023-01-01 */
                         varValue = getDaysFromDateDash(varValue) * 24 * 3600
                     }
                 }
                 break
-            default: console.log("Unknown how to convert string to value: " + varValue)
+            default:
+                console.log('Unknown how to convert string to value: ' + varValue)
         }
 
         if (debugListener) console.log(varName, varValue)
@@ -204,7 +220,7 @@ const filterDropdown2 = (column_name, dataSource) => {
 const onChangeDropdown2Reduce = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('Reduce listener', listener)
-    const { column_name, table_name, listen_to_attrs, triggers, attrs_to_compare, } = listener
+    const { column_name, table_name, listen_to_attrs, triggers, attrs_to_compare } = listener
     let dataSource = k[table_name]
     if (debugListener) console.log('dataSource in k of', table_name, dataSource)
 
@@ -249,12 +265,11 @@ const onChangeDropdown2Reduce = (listener) => {
     const allowClear = getAllowClear(column_name)
     const letUserChooseWhenOneItem = getLetUserChooseWhenOneItem(column_name)
     // console.log(column_name, allowClear, false)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, letUserChooseWhenOneItem, allowClear,)
+    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, letUserChooseWhenOneItem, allowClear)
 
     // console.log("Set to ", column_name, lastSelected1)
     // setValueOfEById(column_name, lastSelected1)
     // getEById(column_name).trigger('change')
-
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -273,7 +288,7 @@ const onChangeGetSelectedObject2_1 = (listener, index = 0) => {
     const { listen_to_fields, listen_to_tables, listen_to_attrs } = listener
     const listen_to_field = listen_to_fields[index]
     const listen_to_table = listen_to_tables[index]
-    const listen_to_attr = listen_to_attrs[index] || "id"
+    const listen_to_attr = listen_to_attrs[index] || 'id'
     const selectedId = getValueOfEById(listen_to_field)
 
     const table = k[listen_to_table]
@@ -291,7 +306,7 @@ const onChangeDropdown2Assign = (listener, onLoad) => {
     let listen_to_attr = listen_to_attrs[0]
 
     //This section allows {currency_pair1_id, currency_pair2_id} to be lookup the value on the form to make it column
-    if (listen_to_attr[0] === "{" && listen_to_attr[listen_to_attr.length - 1] === "}") {
+    if (listen_to_attr[0] === '{' && listen_to_attr[listen_to_attr.length - 1] === '}') {
         listen_to_attr = listen_to_attr.slice(1, -1)
         // console.log(listen_to_attr)
         listen_to_attr = getValueOfEById(listen_to_attr)
@@ -329,10 +344,10 @@ const onChangeDropdown2Dot = (listener) => {
         // console.log(superProps['props']["_" + column_name], column_name)
 
         //suffix here has not been implemented
-        const control = superProps['props']["_" + column_name]?.['control']
+        const control = superProps['props']['_' + column_name]?.['control']
 
         switch (control) {
-            case "picker_date":
+            case 'picker_date':
                 newFlatPickrDate(column_name).setDate(theValue)
                 break
             //Haven't tested yet:
@@ -348,8 +363,7 @@ const onChangeDropdown2Dot = (listener) => {
         }
 
         getEById(column_name).trigger('change')
-        if (debugListener)
-            console.log('Dotting', column_name, 'with value', theValue)
+        if (debugListener) console.log('Dotting', column_name, 'with value', theValue)
     }
 }
 
@@ -364,7 +378,7 @@ const onChangeDropdown2DateOffset = (listener) => {
         const theValue = selectedObject[listen_to_attr]
         if (debugListener) console.log(theValue)
 
-        const twelveHoursLater = new Date((new Date()).getTime() + (theValue * 24 * 60 * 60 * 1000));
+        const twelveHoursLater = new Date(new Date().getTime() + theValue * 24 * 60 * 60 * 1000)
         newFlatPickrDateTime(column_name).setDate(twelveHoursLater)
         flatpickrHandleChange(column_name, [twelveHoursLater])
 
@@ -393,16 +407,16 @@ const onChangeDropdown2Expression = (listener) => {
     if (debugListener) console.log(column_name, ':(', expression1, ', result:', result, ')')
     const datetime_controls = superProps.datetime_controls
     const controlNames = Object.keys(datetime_controls)
-    if(controlNames.includes(column_name)){
-        switch(datetime_controls[column_name]){
-            case "picker_date":
+    if (controlNames.includes(column_name)) {
+        switch (datetime_controls[column_name]) {
+            case 'picker_date':
                 newFlatPickrDate(column_name).setDate(new Date(result * 1000))
                 break
             default:
-                console.log("Unsupport datetime control", datetime_controls[column_name], "for", column_name)
+                console.log('Unsupport datetime control', datetime_controls[column_name], 'for', column_name)
                 break
         }
-    } else{
+    } else {
         getEById(column_name).val(result)
         getEById(column_name).trigger('change')
     }
@@ -411,7 +425,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('AjaxRequestScalar', listener)
     const { triggers, expression: url } = listener
-    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values, } = listener
+    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } = listener
 
     let enoughParams = true
     const data = {}
@@ -427,7 +441,8 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     if (enoughParams) {
         if (debugListener) console.log('Sending AjaxRequest with data:', data, url)
         $.ajax({
-            url, data,
+            url,
+            data,
             success: (response) => {
                 let value = -1
                 if (debugListener) console.log('Response', response)
@@ -435,10 +450,17 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
                 for (let i = 0; i < ajax_form_attributes.length; i++) {
                     if (hits_0 === undefined) {
                         value = ajax_default_values[i]
-                        if (debugListener) console.log('Response empty', ajax_response_attribute, '- assigning default value', ajax_default_values[i])
+                        if (debugListener)
+                            console.log('Response empty', ajax_response_attribute, '- assigning default value', ajax_default_values[i])
                     } else if (hits_0[ajax_item_attributes[i]] === undefined) {
                         value = ajax_default_values[i]
-                        if (debugListener) console.log('Requested column', ajax_item_attributes[i], 'not found, assigning default value', ajax_default_values[i])
+                        if (debugListener)
+                            console.log(
+                                'Requested column',
+                                ajax_item_attributes[i],
+                                'not found, assigning default value',
+                                ajax_default_values[i],
+                            )
                     } else {
                         value = hits_0[ajax_item_attributes[i]]
                     }
@@ -451,11 +473,7 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
             error: (response) => console.error(response),
         })
     } else {
-        if (debugListener)
-            console.log(
-                'Sending AjaxRequest cancelled as not enough parameters',
-                missingParams
-            )
+        if (debugListener) console.log('Sending AjaxRequest cancelled as not enough parameters', missingParams)
     }
 }
 
@@ -476,7 +494,7 @@ const onChangeSetTableColumn = (listener, triggerIndex) => {
     const batchLength = getAllRows(table01Name).length
 
     for (let i = 0; i < batchLength; i++) {
-        const id = table01Name + "[" + column_to_set + "][" + i + "]" //table01[my_file][0]
+        const id = table01Name + '[' + column_to_set + '][' + i + ']' //table01[my_file][0]
         getEById(id).val(selectedAttr)
         getEById(id).trigger('change', { batchLength })
     }
@@ -486,20 +504,20 @@ const onChangeNumberToWords = (listener) => {
     // console.log("onChangeNumberToWords", listener)
     const { triggers, column_name } = listener
     const number = getValueOfEById(triggers[0])
-    let numberWords = ""
+    let numberWords = ''
     if (number) {
         numberWords = numberToWords(number)
     }
 
     const currency = getValueOfEById(triggers[1])
-    let currencyWords = ""
+    let currencyWords = ''
     if (currency) {
-        const currencyObject = k["act_currencies"].find(i => i['id'] === currency * 1)
+        const currencyObject = k['act_currencies'].find((i) => i['id'] === currency * 1)
         // console.log(currencyObject)
-        currencyWords = (currencyObject)?.description
+        currencyWords = currencyObject?.description
     }
     // console.log(numberWords)
-    getEById(column_name).val(numberWords + " " + currencyWords)
+    getEById(column_name).val(numberWords + ' ' + currencyWords)
     getEById(column_name).trigger('change')
 }
 
@@ -523,7 +541,7 @@ const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
         const { triggers, listen_action, column_name } = listener
 
         // console.log(listen_action, name, triggers)
-        if (debugFlow) console.log(name, "-->", column_name, listen_action)
+        if (debugFlow) console.log(name, '-->', column_name, listen_action)
         for (let i = 0; i < triggers.length; i++) {
             // if (triggers.includes(name)) {
             if (name == triggers[i]) {
@@ -583,9 +601,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         // console.log(id, dataSource)
         dataSource = dataSource
             .filter((item) => {
-                const isNotResigned = !item.name.includes("(RESIGNED)")
-                if(selected){
-                    const isInSelected =  selected.includes( item.id)
+                const isNotResigned = !item.name.includes('(RESIGNED)')
+                if (selected) {
+                    const isInSelected = selected.includes(item.id)
                     return isNotResigned || isInSelected
                 } else {
                     return isNotResigned
@@ -606,10 +624,13 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
     if (control_type === 'dropdown') {
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
-            if (letUserChooseWhenOneItem) { selectedStr = (dumbIncludes2(selected, item.id) ? 'selected' : '') }
-            else { selectedStr = (dataSource.length === 1) ? 'selected' : (dumbIncludes2(selected, item.id) ? 'selected' : '') }
+            if (letUserChooseWhenOneItem) {
+                selectedStr = dumbIncludes2(selected, item.id) ? 'selected' : ''
+            } else {
+                selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
+            }
             // console.log(id, selected, item.id, selectedStr)
-            const title = item.employeeid || item.description || "" //  || (isNaN(item.id) ? item.id : makeId(item.id))
+            const title = item.employeeid || item.description || '' //  || (isNaN(item.id) ? item.id : makeId(item.id))
             option = "<option value='" + item.id + "' title='" + title + "' " + selectedStr + ' >'
             option += item.name || 'Nameless #' + item.id
             option += '</option>'
@@ -643,8 +664,11 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
             // selectedStr = (dataSource.length === 1) ? 'checked' : (dumbIncludes2(selected, itemId) ? 'checked' : '')
-            if (letUserChooseWhenOneItem) { selectedStr = (dumbIncludes2(selected, item.id) ? 'checked' : '') }
-            else { selectedStr = (dataSource.length === 1) ? 'checked' : (dumbIncludes2(selected, item.id) ? 'checked' : '') }
+            if (letUserChooseWhenOneItem) {
+                selectedStr = dumbIncludes2(selected, item.id) ? 'checked' : ''
+            } else {
+                selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, item.id) ? 'checked' : ''
+            }
             // console.log(selected, itemId, selectedStr)
             // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
@@ -665,16 +689,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
                 item['description'] +
                 '" ' +
                 '">'
-            const cursor = item['disabled']
-                ? 'cursor-not-allowed'
-                : 'cursor-pointer'
+            const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
             const inputBg = item['disabled'] ? 'bg-gray-300' : ''
-            option +=
-                '<label class="truncate px-1 ' +
-                cursor +
-                ' rounded-md hover:bg-gray-100 w-full h-full" title="' +
-                title +
-                '">'
+            option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
             option += "<div class='flex align-middle'>"
             option +=
                 '<input ' +
@@ -698,12 +715,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
                 selectedStr +
                 ' ' +
                 '>'
-            if (item['avatar'])
-                option +=
-                    ' ' +
-                    '<img class="w-10 h-10 mr-1 rounded" src="' +
-                    item['avatar'] +
-                    '" />'
+            if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
             option += '<div>'
             option += ' ' + item['name']
             if (item['subtitle']) option += '<br/>' + item['subtitle']
@@ -736,37 +748,35 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             // const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
             option = ''
-            
+
             option += '<div task-id="' + itemId + '"'
             option += ` onMouseOver="$('.sub-task-of-${itemId}').show()"`
             option += ` onMouseOut="$('.sub-task-of-${itemId}').hide()"`
-            
+
             option += ' class="relative w-full fc-event-main123 bg-sky-500 text-white cursor-pointer rounded mt-0.5 px-2 py-0.5"'
             option += ' component="draggable-dropdown2">'
             option += ' ' + item['name']
             if (item['subtitle']) option += '<br/>' + item['subtitle']
 
             option += `<div class="absolute w-3/4 right-0 top-0 bg-gray-100 p-1 rounded z-50 sub-task-of-${itemId}" style="display:none">`
-            const {get_children_sub_tasks} = item
-            if(get_children_sub_tasks.length > 0){
-                for(let j = 0; j< get_children_sub_tasks.length; j++){
+            const { get_children_sub_tasks } = item
+            if (get_children_sub_tasks.length > 0) {
+                for (let j = 0; j < get_children_sub_tasks.length; j++) {
                     const subTaskItem = get_children_sub_tasks[j]
                     option += `<div class="${classEvent} ${bgColor} ${colSpan} fc-h-event fc-daygrid-event fc-daygrid-block-event cursor-pointer my-0.5 px-2 py-0.5 "
                             item_name="${item['name']}" item_description="${item['description']}">`
-                    option += `<div id="${itemId}" sub-task-id="${subTaskItem["id"]}" class="fc-event-main whitespace-normal">${subTaskItem["name"]}</div>`
+                    option += `<div id="${itemId}" sub-task-id="${subTaskItem['id']}" class="fc-event-main456 whitespace-normal">${subTaskItem['name']}</div>`
                     option += '</div>'
                 }
             } else {
                 option += `<div class="text-center text-red-400">No sub-task found.</div>`
             }
             option += '</div>'
-            
+
             option += '</div>'
             options.push(option)
         }
-        options.push(
-            "<p><input type='checkbox' class='hidden' id='drop-remove' /></p>"
-        )
+        options.push("<p><input type='checkbox' class='hidden' id='drop-remove' /></p>")
         getEById(id).append(options)
     } else {
         console.error('Unknown control_type', control_type)
@@ -783,8 +793,7 @@ const documentReadyDropdown2 = (params) => {
     // console.log(selectedArray)
     // table = "{{$table}}"
     dataSourceDropdown = k[table]
-    if (dataSourceDropdown === undefined)
-        console.error('key ' + table + ' not found in k[]')
+    if (dataSourceDropdown === undefined) console.error('key ' + table + ' not found in k[]')
     let attr_to_compare = 'id'
     // for (let i = 0; i < listenersOfDropdown2.length; i++) {
     //     if (listenersOfDropdown2[i].column_name === id) {
@@ -795,7 +804,7 @@ const documentReadyDropdown2 = (params) => {
     // }
     // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
     // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
-    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, letUserChooseWhenOneItem, allowClear,)
+    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, letUserChooseWhenOneItem, allowClear)
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
