@@ -132,7 +132,10 @@ abstract class TimesheetController extends Controller
         $resource = new HrTsLineUpdateResource($request);
         $data = $resource->toArray($request);
         $data = array_filter($data, fn ($item) => $item);
+        if (!isset($data['remark'])) $data['remark'] = ''; // if user clear old remark, force its value here
+
         try {
+
             $this->timesheetLineService->update($id, $data);
             return new TimesheetLineResource($this->timesheetLineService->find($id));
         } catch (\Throwable $th) {
