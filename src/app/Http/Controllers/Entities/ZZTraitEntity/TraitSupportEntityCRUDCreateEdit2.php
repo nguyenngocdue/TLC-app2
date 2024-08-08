@@ -98,6 +98,7 @@ trait TraitSupportEntityCRUDCreateEdit2
 
     private function loadValueOfBelongsToManyAndAttachments($original, $props)
     {
+        if (is_null($original)) return null;
         $orphanAttachments = $this->loadValueOfOrphanAttachments($props);
         // dump($orphanAttachments);
         if (!method_exists($original, 'getOriginal')) {

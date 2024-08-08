@@ -32,7 +32,7 @@ class OpenedDocumentListener //implements ShouldQueue
         $sender = User::find($cuid);
         $senderName = $sender->name;
         $item = $modelPath::find($id);
-        $itemName = $item->name;
+        $itemName = $item?->name;
 
         // switch ($type) {
         //     case 'qaqc_insp_chklst_sht':
