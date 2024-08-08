@@ -33,7 +33,8 @@
         </div>
     
         <div id="group_attachment_comment_{{$rowIndex}}" @class([ 'hidden'=> $type == 'hse_insp_chklst'])>
-            @if($line->control_type_id == 4) {{-- 4 => "radio" --}}
+            {{-- 4 => "radio" --}}
+            @if($line->control_type_id == 4) 
                 <x-renderer.attachment-group 
                 {{-- <x-renderer.attachment2a  --}}
                     name="{{$table01Name}}[insp_photos][{{$rowIndex}}]" 
@@ -41,7 +42,6 @@
                     :properties="$props['props']['_insp_photos']['properties']"
                     readOnly="{{$readOnly}}"
                     destroyable="{{$destroyable}}"
-                    groupMode="true"
                     :groups="$groups"
                     />
                 <br />

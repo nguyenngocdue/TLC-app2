@@ -49,6 +49,12 @@ class AttachmentGroup extends Component
                     "items" => [],
                 ];
             }
+        } else {
+            //This is for ICS, sheet that doesn't have group and have no existing attachment
+            $result[null] = [
+                "name" => "",
+                "items" => [],
+            ];
         }
         foreach ($this->attachments as $attachment) {
             $subCatId = $attachment['sub_category'];
