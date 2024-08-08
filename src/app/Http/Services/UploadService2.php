@@ -6,7 +6,6 @@ use App\Helpers\Helper;
 use App\Models\Attachment;
 use App\Models\Field;
 use App\Utils\Constant;
-use App\Utils\Support\AttachmentName;
 use App\Utils\Support\Json\Properties;
 use App\View\Components\Renderer\Attachment2a;
 use Illuminate\Support\Str;
@@ -114,7 +113,7 @@ class UploadService2
                                 $thumbnailPath = $path . $thumbnailFileName;
                                 Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
                             }
-                            // dd($fields[$fieldName);
+                            // dd($fields[$fieldName]);
                             $item = [
                                 'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
                                 'url_media' => $imagePath,
@@ -128,13 +127,20 @@ class UploadService2
                             ];
                             if ($object_type) $item['object_type'] = $object_type;
                             if ($object_id) $item['object_id'] = $object_id;
-                            // Log::info($fileName);
-                            // save database
-                            Attachment::create($item);
+                            array_push($attachmentRows, $item);
                         }
                     }
                 }
             }
+            // dd($attachmentRows);
+            $invertedFields = array_flip($fields);
+            $result = [];
+            foreach ($attachmentRows as $row) {
+                $insertedRow = Attachment::create($row);
+                $result[$insertedRow['id']] = $invertedFields[$row['category']];
+            }
+            // dd($result);
+            return $result;
         } catch (ValidationException $ve) {
             toastr()->warning($ve->getMessage() . "<br/>", 'Upload File Failed');
         } catch (\Exception $e) {
