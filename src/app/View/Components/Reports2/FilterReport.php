@@ -79,3 +79,11 @@ class FilterReport extends Component
         ]);
     }
 }
+
+
+/*
+    Case 1
+    https://127.0.0.1:38002/dashboard/rp_reports/34?project_id=5&sub_project_id=82&prod_order_id=50&prod_routing_id=2
+    Case 2
+    https://127.0.0.1:38002/dashboard/rp_reports/34?sub_project_id[]=5&sub_project_id[]=6&sub_project_id[]=7
+*/
