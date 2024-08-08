@@ -53,7 +53,7 @@ class Attachment2a extends Component
         private $gridCols = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1',
         private $groupMode = false,
         private $groupId = null,
-        private $hiddenOrText = null,
+        private $hiddenOrText = 'hidden',
     ) {
         // dump($openType);
         if (is_array($value)) {
