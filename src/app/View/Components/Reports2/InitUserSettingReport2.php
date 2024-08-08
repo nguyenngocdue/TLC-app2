@@ -29,7 +29,13 @@ class InitUserSettingReport2
     public function saveFirstParamsToUser($entityType, $currentRpId, $filterDetails, $paramsUrl)
     {
         $params = $this->getDefaultParams($entityType, $filterDetails, $currentRpId, $paramsUrl);
-        if ($params) $this->updateUserSettings($entityType, $currentRpId, $params);
+        if ($params) {
+            $this->updateUserSettings($entityType, $currentRpId, $params);
+            return [
+                'status' => 'success',
+                'message' => 'Parameters saved successfully.',
+            ];
+        }
     }
 
     public function getDefaultParams($entityType, $filterDetails, $currentRpId, $paramsUrl)

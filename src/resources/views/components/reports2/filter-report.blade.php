@@ -84,3 +84,13 @@
             '<input type="hidden" name="form_type" value="resetParamsReport2">')
     }
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+        const refreshPage = {!! json_encode($refreshPage) !!};
+        const reportId = {!! json_encode($reportId) !!};
+        if (refreshPage) {
+            window.location.href = '{{ route("rp_reports.show", ":id") }}'.replace(':id', reportId);
+        }
+    });
+</script>

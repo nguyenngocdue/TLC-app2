@@ -6,14 +6,15 @@ use App\Models\Rp_report;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\Component;
 
 class FilterReport extends Component
 {
 
     protected $entityType2 = 'report2';
+    public $refreshPage = false;
+
     public function __construct(
         private $report = "",
         private $filterModes = [],
@@ -47,10 +48,13 @@ class FilterReport extends Component
         $ins =  InitUserSettingReport2::getInstance($this->entityType2);
         $ins->saveFirstParamsToUser($entityType, $currentRpId, $filterDetails, $this->paramsUrl);
 
+        // refresh page when save into db
+        $paramsUrl1 = Session::get('paramsUrl1');
+        if (count($paramsUrl1) > 0)  $this->refreshPage = true;
+        Session::forget('paramsUrl1');
 
         // create params from user_setting and default value
         $currentParams = $ins->getCurrentParams($entityType, $currentRpId, $filterDetails);
-        // dump($filterDetails, $currentRpId);
 
         // create data to render dropdown of report link
         $filterModes = collect($this->filterModes);
@@ -70,7 +74,8 @@ class FilterReport extends Component
             'currentParams' => $currentParams,
             'routeFilter' => route('filter_report.update', $report->id),
             'dataDropdownRpLink' => $dataDropdownRpLink,
-            'filterModes' => $filterModes
+            'filterModes' => $filterModes,
+            'refreshPage' => $this->refreshPage,
         ]);
     }
 }

@@ -19,11 +19,7 @@ trait TraitEntityCRUDShowReport
 		$filterDetails = $report->getFilterDetails->sortBy('order_no');
 
 		$paramsUrl = $request->input();
-		if ($paramsUrl) {
-			Session::put('paramsUrl', $paramsUrl);
-			return redirect()->to($request->getPathInfo());
-		}
-		$paramsUrl = Session::get('paramsUrl', []);
+		Session::put('paramsUrl1', $paramsUrl);
 
 		return view('dashboards.pages.entity-show-report', [
 			'appName' => LibApps::getFor($this->type)['title'],
