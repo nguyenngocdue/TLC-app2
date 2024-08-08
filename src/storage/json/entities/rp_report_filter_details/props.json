@@ -249,7 +249,7 @@
         "control": "number",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "130",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",

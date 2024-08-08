@@ -522,7 +522,7 @@ class Report
         $params = [];
         foreach ($filterDetails as $filter) {
             $val = $filter->default_value;
-            $filterName = str_replace('_name', '_id', $filter->getColumn->data_index);
+            $filterName = Report::changeFieldOfFilter($filter);
             if (!empty($val)) {
                 $defaultValues = explode(',', $val);
                 $params[$filterName] = $defaultValues;
@@ -536,7 +536,7 @@ class Report
     public static function editColumnNameByFilterDetails($filterDetails)
     {
         $params = [];
-        foreach ($filterDetails as $filter) $params[] = str_replace('_name', '_id', $filter->getColumn->data_index);
+        foreach ($filterDetails as $filter) $params[] = Report::changeFieldOfFilter($filter);
         return $params;
     }
 

@@ -8,7 +8,11 @@
         <span class="sr-only">Loading...</span>
     </div>
 
-
+@if($warningFilters)
+    @foreach($warningFilters as $filter)
+        <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
+    @endforeach
+@endif
 
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
@@ -52,16 +56,19 @@
                     
                         <div class="grid grid-cols-12 gap-4 items-baseline">
                             @foreach ($filterDetails as $filter)
-                                
                                 @php
                                     $title = is_null($x = $filter->getColumn->title) ? '(Set title for column)' : $x;
-                                    $keyParam = str_replace('name', 'id', $x = $filter->getColumn->data_index);
+                                    //$keyParam = str_replace('name', 'id', $x = $filter->getColumn->data_index);
+                                    $keyParam = 'App\Utils\Support\Report'::changeFieldOfFilter($filter);
                                     $selected =  $currentParams[$keyParam] ?? null;
                                 @endphp
                                 
                                 <div class="col-span-2">
-                                    <a target="_blank" href="{{ route('rp_report_filter_details.edit', $filter->id) }}">
+                                    <a target="_blank" href="{{ route('rp_report_filter_details.edit', $filter->id) }}" title="id : {{$filter->id}}">
                                         <span class='px-1'>{{$title}}</span>
+                                        @if($filter->is_required)
+                                            <span class="text-red-400" title="required">*</span>
+                                        @endif
                                     </a>
                                     <x-renderer.report2.filter-report-item 
                                         :filterDetail="$filter"

@@ -24,6 +24,20 @@ class FilterReport extends Component
     ) {
     }
 
+    private function getWarningFilters($filterDetails, $currentParams)
+    {
+        $warningFilters = [];
+        foreach ($filterDetails as $filter) {
+            if ($filter->is_required) {
+                $column =  Report::changeFieldOfFilter($filter);
+                if (empty($currentParams[$column])) {
+                    $warningFilters[] = $filter->getColumn->title;
+                }
+            }
+        }
+        return $warningFilters;
+    }
+
     public function render()
     {
         $report = (object)$this->report;
@@ -62,7 +76,8 @@ class FilterReport extends Component
             $linkedToRpId = Rp_report::find($filterMode->linked_to_report_id)->id ?? null;
             if (is_null($linkedToRpId)) return [];
             return [$linkedToRpId => $filterMode->name];
-        });;
+        });
+        $warningFilters = $this->getWarningFilters($filterDetails, $currentParams);
 
         return view('components.reports2.filter-report', [
             'entityType' => $entityType,
@@ -76,6 +91,7 @@ class FilterReport extends Component
             'dataDropdownRpLink' => $dataDropdownRpLink,
             'filterModes' => $filterModes,
             'refreshPage' => $this->refreshPage,
+            'warningFilters' => $warningFilters,
         ]);
     }
 }

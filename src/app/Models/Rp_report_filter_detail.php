@@ -54,7 +54,7 @@ class Rp_report_filter_detail extends ModelExtended
     {
         return [
             ["dataIndex" => 'id'],
-            ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'order_no', /* 'invisible' => true, */],
             ["dataIndex" => 'rp_report_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'rp_column_id'],
             ["dataIndex" => 'bw_list_ids'],

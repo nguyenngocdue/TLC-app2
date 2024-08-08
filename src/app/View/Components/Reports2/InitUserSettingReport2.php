@@ -81,7 +81,7 @@ class InitUserSettingReport2
     {
         $params = [];
         foreach ($filterDetails as $filter) {
-            $filterName = str_replace('_name', '_id', $filter->getColumn->data_index);
+            $filterName = Report::changeFieldOfFilter($filter);
             $val = $filter->default_value;
             $defaultValues = explode(',', $val);
 
