@@ -61,9 +61,11 @@ class UploadService2
         try {
             $fields = Helper::getDataDbByName('fields', 'name', 'id');
             $filesUpload = $request->files;
+
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
                 $files = $files['toBeUploaded'];
+                $isGrouped = array_keys($files)[0] != 0; // If no grouped, the keys will be 0, 1, 2, ...
                 foreach ($files as $groupId => $groupItems) {
                     $property = Properties::getFor('attachment', '_' . $fieldName);
                     $nameValidate = $fieldName . '.toBeUploaded.' . $groupId;
@@ -119,7 +121,7 @@ class UploadService2
                                 'filename' => basename($imagePath),
                                 'extension' => $fileExt,
                                 'category' => $fields[$fieldName],
-                                'sub_category' => $groupId ?: null,
+                                'sub_category' => $isGrouped ? $groupId : null,
                                 'owner_id' =>  (int)Auth::user()->id,
                                 'mime_type' => $mimeType,
                             ];
