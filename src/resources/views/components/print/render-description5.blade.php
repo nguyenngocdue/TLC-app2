@@ -17,16 +17,17 @@
 @endif
 @if(sizeof($value) > 0)
     @switch($control)
-        @case('attachment')
+        @case('attachment')            
             <div class='flex p-0 bord1er text-left bor1der-gray-600 text-sm-vw font-normal {{$valueColSpan[1]}} {{$valueColSpan[2]}} text-left items-center'>
                 <x-renderer.attachment-group 
                 {{-- <x-renderer.attachment2a  --}}
                     openType='_blank' 
                     name='attachment' 
                     :value="$value" 
-                    destroyable={{false}} 
-                    showToBeDeleted={{false}} 
-                    showUploadFile={{false}} 
+                    readOnly=1
+                    destroyable=0
+                    showToBeDeleted=0
+                    showUploadFile=0
                     />
             </div>
             @break

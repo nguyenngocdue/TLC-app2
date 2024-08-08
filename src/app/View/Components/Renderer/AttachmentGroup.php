@@ -84,6 +84,8 @@ class AttachmentGroup extends Component
                 $span = "w-1/$colCount";
                 break;
         }
+        // dump($this->readOnly);
+        // dump($this->destroyable);
         return view('components.renderer.attachment-group', [
             'hiddenOrText' => $this->debugAttachment ? "text" : "hidden",
             'attachmentGroups' => $this->attachments,
@@ -93,6 +95,7 @@ class AttachmentGroup extends Component
             'readOnly' => $this->readOnly,
             'destroyable' => $this->destroyable,
             'showUploadFile' => $this->showUploadFile,
+
             'label' => $this->label,
             'properties' => $this->properties,
             'openType' => $this->openType,

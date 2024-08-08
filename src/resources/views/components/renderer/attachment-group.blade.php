@@ -1,4 +1,4 @@
-<div class="flex">
+<div class="flex w-full" component="attachment-group">
     @foreach($attachmentGroups as $groupId => $attachmentGroup)
         <div class="border rounded p-0.5 m-0.5 {{$width}} ">
             <div class="font-bold text-center text-sm" title="#{{$groupId}}">{{$attachmentGroup['name']}}</div>

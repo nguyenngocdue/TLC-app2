@@ -175,7 +175,7 @@ trait TraitSupportEntityShow
         if ($chklst_line->control_type_id != 4) return '';
         if (isset($chklst_line->insp_photos) && !$chklst_line->insp_photos->isEmpty()) {
             $span = '<span class="" colspan=5 style="width:190px">'  . $this->formatAttachmentRender($sheet, $chklst_line->insp_photos) . '</span>';
-            return "<div class='bg-white border rounded dark:bg-gray-800 dark:border-gray-700 p-1 my-1'>" . $span . "</div>";
+            return "<div class='bg-white border1 rounded dark:bg-gray-800 dark:border-gray-700 my-1'>" . $span . "</div>";
         }
         return '';
     }
