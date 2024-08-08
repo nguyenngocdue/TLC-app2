@@ -9,6 +9,7 @@ use App\Utils\Constant;
 use App\Utils\Support\AttachmentName;
 use App\Utils\Support\Json\Properties;
 use App\View\Components\Renderer\Attachment2a;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -93,11 +94,14 @@ class UploadService2
                             toastr()->warning('File without extension cannot be uploaded!', 'Upload File Warning');
                         } else {
                             $fileName =  $file->getClientOriginalName();
-                            $mediaNames = Attachment::get()->pluck('filename')->toArray();
-                            $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
-                            // dd($fileName); //to test case
                             $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
                             $fileNameWithoutExt = pathinfo($fileName, PATHINFO_FILENAME);
+
+                            // $mediaNames = Attachment::get()->pluck('filename')->toArray();
+                            // $fileName = AttachmentName::slugifyImageName($fileName, $mediaNames);
+                            $newFileNameWithoutExt = $fileNameWithoutExt . '-(' . Str::uuid() . ')';
+                            $fileName =  $newFileNameWithoutExt . '.' . $fileExt;
+                            // dd($fileName); //to test case
                             $mimeType = $file->getMimeType();
                             $imagePath = $path . $fileName;
 
@@ -108,7 +112,7 @@ class UploadService2
                                 $thumbnailImage = Image::make($file);
                                 $thumbnailImage->fit($thumbnailW, $thumbnailH);
                                 $resource = $thumbnailImage->stream();
-                                $thumbnailFileName = $fileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
+                                $thumbnailFileName = $newFileNameWithoutExt . "-{$thumbnailW}x{$thumbnailH}." . $fileExt;
                                 $thumbnailPath = $path . $thumbnailFileName;
                                 Storage::disk('s3')->put($thumbnailPath, $resource->__toString(), 'public');
                             }
