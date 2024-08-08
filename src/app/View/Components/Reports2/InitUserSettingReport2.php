@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class InitUserSettingReport2
@@ -29,8 +30,10 @@ class InitUserSettingReport2
     public function saveFirstParamsToUser($entityType, $currentRpId, $filterDetails, $paramsUrl)
     {
         $params = $this->getDefaultParams($entityType, $filterDetails, $currentRpId, $paramsUrl);
+        // dump($params);
         if ($params) {
             $this->updateUserSettings($entityType, $currentRpId, $params);
+            // Log::info(json_encode($params));
             return [
                 'status' => 'success',
                 'message' => 'Parameters saved successfully.',
@@ -60,14 +63,14 @@ class InitUserSettingReport2
 
     private function updateUserSettings($entityType, $currentRpId, $params)
     {
+        // dump($params);
         $userSetting = CurrentUser::getSettings();
         $userSetting[$entityType][$this->entityType2][$currentRpId] = $params;
 
         $user = User::find(Auth::id());
         $user->settings = $userSetting;
-        $user->update();
-        Session::forget('paramsUrl');
-        if ($user->update()) {
+        $updateSuccess = $user->update();
+        if ($updateSuccess) {
             return toastr()->success("Initialize User Settings Successfully", "Successfully");
         } else {
             return toastr()->error("Failed to Initialize User Settings", "Error");

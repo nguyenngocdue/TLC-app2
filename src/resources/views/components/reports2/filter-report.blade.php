@@ -1,6 +1,17 @@
-{{-- @dump($routeFilter) --}}
+    <div id="loading-content" role="status" class="max-w-sm animate-pulse" style="display: none;">
+        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+        <span class="sr-only">Loading...</span>
+    </div>
+
+
+
 <div class="no-print justify-end pb-5"></div> 
-<div class="grid grid-cols-12 gap-4 items-baseline px-4">
+<div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
     <!-- Mode Dropdown -->
     @if(!empty($filterModes->toArray()))
         <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
