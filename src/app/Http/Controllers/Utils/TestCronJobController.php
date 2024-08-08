@@ -6,11 +6,19 @@ use App\Events\WssDemoChannel;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Utils\TestFunction\SendEmail;
 use App\Http\Controllers\Utils\TestFunction\TestEmailOnLdapServer;
+use App\Http\Services\CleanOrphanAttachment\ListFileService;
+use App\Http\Services\CleanOrphanAttachment\ListFolderService;
 use App\Jobs\TestLogToFileJob;
 use Illuminate\Http\Request;
 
 class TestCronJobController extends Controller
 {
+    function __construct(
+        private ListFolderService $listFolderService,
+        private ListFileService $listFileService,
+    ) {
+    }
+
     public function getType()
     {
         return "dashboard";
@@ -53,6 +61,10 @@ class TestCronJobController extends Controller
                     break;
                 case "test_email_on_ldap_server":
                     TestEmailOnLdapServer::Test();
+                    break;
+                case "refresh_attachment_orphan":
+                    $this->listFolderService->handle();
+                    $this->listFileService->handle();
                     break;
                 default:
                     dump($case  . " is not found.");

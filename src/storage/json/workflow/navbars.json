@@ -119,13 +119,14 @@
         "href": "https:\/\/fontawesome.com\/icons",
         "icon_fa": "fa-duotone fa-font-awesome"
     },
-    "clean_many_to_many_orphan": {
+    "clean_attachment_orphan": {
         "name": "clean_many_to_many_orphan",
         "group": "internal",
-        "title": "Clean Orphan-M2M",
-        "href": "\/orphan\/many_to_many",
+        "title": "Clean Orphan-Attachment",
+        "href": "\/orphan\/attachment",
         "icon_fa": "fa-duotone fa-gauge"
     },
+   
     "permission_matrix": {
         "name": "permission_matrix",
         "group": "internal",

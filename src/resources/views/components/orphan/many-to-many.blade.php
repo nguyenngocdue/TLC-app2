@@ -4,7 +4,7 @@
 @section('title', "Orphan many to many")
 
 @section('content')
-<form action="{{route('orphan.destroy')}}" method="POST">
+<form action="{{route('orphanM2M.destroy')}}" method="POST">
     @csrf
     @method('POST')
     <input name="table_name" value="{{$tableFilterOrphan}}" type='hidden' />

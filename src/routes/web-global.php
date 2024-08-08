@@ -17,6 +17,7 @@ use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\UpdateUserSettingsApi;
 use App\Http\Controllers\Utils\DepartmentMatrixController;
 use App\Http\Controllers\Utils\MyCompanyController;
+use App\Http\Controllers\Utils\OrphanAttachmentController;
 use App\Http\Controllers\Utils\OrphanManyToManyController;
 use App\Http\Controllers\Utils\TestCronJobController;
 use App\Http\Controllers\Utils\ThumbnailController;
@@ -55,8 +56,10 @@ Route::group([
     Route::get('utils/createThumbnail', [ThumbnailController::class, 'index'])->name('createThumbnail.index');
     Route::post('utils/createThumbnail', [ThumbnailController::class, 'create'])->name('createThumbnail.create');
 
-    Route::get('orphan/many_to_many', [OrphanManyToManyController::class, 'get'])->name('orphan.index');
-    Route::post('orphan/many_to_many', [OrphanManyToManyController::class, 'destroy'])->name('orphan.destroy');
+    Route::get('orphan/many_to_many', [OrphanManyToManyController::class, 'get'])->name('orphanM2M.index');
+    Route::post('orphan/many_to_many', [OrphanManyToManyController::class, 'destroy'])->name('orphanM2M.destroy');
+
+    Route::get('orphan/attachment', [OrphanAttachmentController::class, 'index'])->name('orphanAttachment.index');
 
     Route::get('php_info', fn () => phpinfo());
 });
