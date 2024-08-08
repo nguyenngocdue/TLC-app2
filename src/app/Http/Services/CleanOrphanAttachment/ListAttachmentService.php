@@ -23,14 +23,15 @@ class ListAttachmentService
         $a = array_diff($attArr, $fileListArr);
         $b = array_diff($fileListArr, $attArr);
 
-        if (count($a) > 0 || count($b) > 0) {
+        // if (count($a) > 0 || count($b) > 0) {
+        if (count($a) > 0) {
             dump($folderName);
             if (count($a) > 0) {
-                dump("Have in attachment but not in MinIO");
+                dump("LIST A: Have in attachment but not in MinIO");
                 dump($a);
             }
             if (count($b) > 0) {
-                dump("Have in MinIO but not in attachment");
+                dump("LIST B: Have in MinIO but not in attachment");
                 dump($b);
             }
             echo "<br/>";
