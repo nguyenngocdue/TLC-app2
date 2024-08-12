@@ -15,8 +15,8 @@ use Illuminate\Support\Str;
 
 class OrgChartRenderer extends Component
 {
-    const ARRAY_RESIGNED = [0, 1];
-    const DPM_BOD = 2;
+    // const ARRAY_RESIGNED = [0, 1];
+    const DEPT_BOD_ID = 2;
 
     function __construct(
         private $id,
@@ -25,7 +25,6 @@ class OrgChartRenderer extends Component
         private $departments = null,
         private $headIds = [],
 
-        private $isApprovalView = null,
         private $isPrintMode = null,
         private $zoomToFit = null,
     ) {
@@ -33,10 +32,10 @@ class OrgChartRenderer extends Component
         // dump($zoomToFit);
     }
 
-    private function getTreeByDepartment($departmentId, $options, $isApprovalView)
+    private function getTreeByDepartment($departmentId, $options,)
     {
-        $tree = $isApprovalView ? BuildTree::getTree() : BuildTreeOrgChart::getTree();
-        $this->setTreeByDepartment($tree, $departmentId, $isApprovalView);
+        $tree = BuildTreeOrgChart::getTree();
+        $this->setTreeByDepartment($tree, $departmentId);
         $results = [];
         if ($this->departments) {
             $this->headIds = $this->departments->pluck('head_of_department')->toArray();
@@ -63,46 +62,44 @@ class OrgChartRenderer extends Component
             }
             if (App::isProduction()) {
                 if ($value->show_on_beta == 0) {
-                    $a = $this->convertDataSource($value, $options);
+                    $a = $this->enrichUser($value, $options);
                     if ($a) $results[] = $a;
                 }
             } else {
-                $a = $this->convertDataSource($value, $options);
+                $a = $this->enrichUser($value, $options);
                 if ($a) $results[] = $a;
             }
         }
     }
 
-    private function setTreeByDepartment(&$tree, $departmentId, $isApprovalView)
+    private function setTreeByDepartment(&$tree, $departmentId)
     {
         if ($departmentId) {
-            $departmentId = $departmentId == "null" ? $this::DPM_BOD : $departmentId;
+            $departmentId = $departmentId == "null" ? $this::DEPT_BOD_ID : $departmentId;
             $department = Department::findFromCache($departmentId);
             $headOfDepartmentId = $department->head_of_department ?? null;
             if ($headOfDepartmentId) {
-                $tree = $isApprovalView ? BuildTree::getTreeById($headOfDepartmentId) : BuildTreeOrgChart::getTreeById($headOfDepartmentId);
+                $tree = BuildTreeOrgChart::getTreeById($headOfDepartmentId);
             }
         }
     }
 
-    private function convertDataSource($value, $options)
+    private function enrichUser($value, $options)
     {
         if (
-            in_array($value->workplace, $options['workplace'])
-            && in_array($value->resigned, $options['resigned'])
-            && in_array($value->time_keeping_type, $options['time_keeping_type'])
-            && in_array($value->is_bod, $options['is_bod'])
+            1
+            && in_array($value->resigned, $options['loadResigned'])
+            && in_array($value->is_bod, $options['loadOnlyBod'])
+            && (in_array($value->time_keeping_type, $options['loadWorker']) || $value->show_on_org_chart == 1)
         ) {
             $id = $value->id;
             $user = User::findFromCache($id);
             $positionRendered = isset($user->position) ? User_position::findFromCache($user->position)->name : "";
-            // $positionRendered = $user->position_rendered;
-            // $positionRendered = $user->getPosition->name;
             $workplace = isset($value->workplace) ? Workplace::findFromCache($value->workplace)->name : '';
 
             $email = $user->email;
             $avatar = $user->getAvatarThumbnailUrl() ?? '';
-            $memberCount = $this->getMemberCount($value, $options['resigned']);
+            $memberCount = $this->getMemberCount($value, $options['loadResigned']);
             $memberCount = $memberCount ? '(' . sprintf("%02d", $memberCount) . ')' : '';
             return [
                 'key' => $id,
@@ -123,14 +120,14 @@ class OrgChartRenderer extends Component
     private function getMemberCount($value, $options)
     {
         if (isset($value->children)) {
-            if ($options == $this::ARRAY_RESIGNED) return sizeof($value->children);
-            else {
-                $count = 0;
-                foreach ($value->children as $user) {
-                    if ($user->resigned == 0) $count++;
-                }
-                return $count;
+            // if ($options == $this::ARRAY_RESIGNED) return sizeof($value->children);
+            // else {
+            $count = 0;
+            foreach ($value->children as $user) {
+                if ($user->resigned == 0) $count++;
             }
+            return $count;
+            // }
         }
         return '';
     }
@@ -144,7 +141,7 @@ class OrgChartRenderer extends Component
     public function render()
     {
         // dd($this->departmentId);
-        $tree = $this->getTreeByDepartment($this->departmentId, $this->options, $this->isApprovalView);
+        $tree = $this->getTreeByDepartment($this->departmentId, $this->options);
         // dump($this->zoomToFit);
         return view("components.renderer.org-chart.org-chart-renderer", [
             'id' => $this->id,

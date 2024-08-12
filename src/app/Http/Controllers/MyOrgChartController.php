@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class MyOrgChartController extends Controller
 {
-    const ARRAY_RESIGNED = [0, 1];
-    const ARRAY_TSO_NONE = [2, 3];
-    const ARRAY_NONE_RESIGNED = [0];
-    const IS_BOD = [1];
-    const ARRAY_BOD = [0, 1];
+    const TSW_ID = 1;
 
     use TraitViewAllFunctions;
     public function getType()
@@ -26,9 +22,10 @@ class MyOrgChartController extends Controller
     }
     public function index(Request $request)
     {
-        $isApprovalView = $request->has('approval-tree');
-        $isAdvancedMode = $request->has('advanced-mode');
-        $viewSettings = $this->getUserSettings($isApprovalView, $isAdvancedMode);
+        $orgChartMode = 'standard-mode';
+        if ($request->has('advanced-mode')) $orgChartMode = 'advanced-mode';
+
+        $viewSettings = $this->getUserSettings($orgChartMode);
 
         $showOptions = $this->getUserSettingsViewOrgChart();
         $options = $this->getOptionsRenderByUserSetting($showOptions);
@@ -58,47 +55,30 @@ class MyOrgChartController extends Controller
         );
     }
 
-    private function getUserSettings($isApprovalView, $isAdvancedMode)
+    private function getUserSettings($orgChartMode)
     {
         $settings = CurrentUser::getSettings();
-        $settings['org_chart']['approval_view'] = $isApprovalView;
-        $settings['org_chart']['advanced_mode'] = $isAdvancedMode;
+        $settings['org_chart']['org_chart_mode'] = $orgChartMode;
         return $settings['org_chart'];
     }
 
-    private function getIdsWorkplace()
-    {
-        return Workplace::query()->get()->pluck('id')->toArray();
-    }
-    private function getIdsUserTimeKeepingType()
-    {
-        return User_time_keep_type::query()->get()->pluck('id')->toArray();
-    }
-    private function getIdsUserCategories()
-    {
-        return User_category::query()->get()->pluck('id')->toArray();
-    }
     private function getOptionsRenderByUserSetting($showOptions)
     {
         $results = [
-            'resigned' => $this::ARRAY_NONE_RESIGNED,
-            'time_keeping_type' => $this::ARRAY_TSO_NONE,
-            'workplace' => $this->getIdsWorkplace(),
-            'is_bod' => $this::ARRAY_BOD,
+            'loadResigned' => [0],
+            'loadWorker' => [],
+            'loadOnlyBod' => [0, 1],
         ];
         foreach ($showOptions as $key => $value) {
             switch ($key) {
-                case 'resigned':
-                    if ($value == 'true') $results['resigned'] = $this::ARRAY_RESIGNED;
+                case 'loadResigned':
+                    if ($value == 'true') $results['loadResigned'] = [0, 1];
                     break;
-                case 'time_keeping_type':
-                    if ($value == 'true') $results['time_keeping_type'] = $this->getIdsUserTimeKeepingType();
+                case 'loadWorker':
+                    if ($value == 'true') $results['loadWorker'] = [$this::TSW_ID]; //#1: TSW
                     break;
-                case 'workplace':
-                    if (is_array($value)) $results['workplace'] = $value;
-                    break;
-                case 'is_bod':
-                    if ($value == 'true') $results['is_bod'] = $this::IS_BOD;
+                case 'loadOnlyBod':
+                    if ($value == 'true') $results['loadOnlyBod'] = [1];
                     break;
                 default:
                     break;
