@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->unsignedBigInteger('linked_to_report_id')->nullable();
-            $table->unsignedBigInteger('stored_filter_key')->nullable();
+            $table->string('stored_filter_key')->nullable();
 
             $table->appendCommonFields();
         });

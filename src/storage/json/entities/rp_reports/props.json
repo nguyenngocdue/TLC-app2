@@ -87,16 +87,16 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getFilterModes": {
-        "name": "_getFilterModes",
-        "column_name": "getFilterModes",
+    "_getFilterLinkDetails": {
+        "name": "_getFilterLinkDetails",
+        "column_name": "getFilterLinkDetails",
         "column_type": "hasMany",
-        "label": "Filter Modes",
+        "label": "Report Link",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",
         "width": "",
-        "hidden_view_all": "true",
+        "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
@@ -104,7 +104,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true",
+        "new_line": "",
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""

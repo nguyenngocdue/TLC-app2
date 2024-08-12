@@ -33,15 +33,13 @@ class Rp_report_filter_link_detail extends ModelExtended
     }
 
 
-    // public function getManyLineParams()
-    // {
-    //     return [
-    //         ["dataIndex" => 'id', 'invisible' => !true,],
-    //         ["dataIndex" => 'order_no', /* 'invisible' => true, */],
-    //         ["dataIndex" => 'rp_page_id', 'value_as_parent_id' => true, 'invisible' => true,],
-    //         ["dataIndex" => 'rp_block_id', /*'renderer' => 'column_link', /*'rendererParam' => 'name'*/],
-    //         ["dataIndex" => 'col_span'],
-    //         ["dataIndex" => 'attachment_background'],
-    //     ];
-    // }
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => 'id',],
+            ["dataIndex" => 'order_no',],
+            ["dataIndex" => 'rp_report_id', 'invisible' => true],
+            ["dataIndex" => 'rp_filter_link_id'],
+        ];
+    }
 }

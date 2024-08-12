@@ -479,12 +479,12 @@
     "rp_reports_02": {
         "name": "rp_reports_02",
         "entity-type": "rp_reports",
-        "editable-table": "rp_filter_modes",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
+        "editable-table": "rp_report_filter_link_details",
+        "item_datasource": "rp_filter_links",
         "eloquent_function_name": null,
         "group_datasource": null,
-        "foreign_key": null
+        "foreign_key": "rp_filter_link_id",
+        "button_add_from_a_list": "true"
     },
     "rp_reports_03": {
         "name": "rp_reports_03",

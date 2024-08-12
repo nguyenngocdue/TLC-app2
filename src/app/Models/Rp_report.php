@@ -21,8 +21,15 @@ class Rp_report extends ModelExtended
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
         "getFilterDetails" => ["hasMany", Rp_report_filter_detail::class, "rp_report_id"],
 
-        "getFilterModes" => ["hasMany", Rp_filter_link::class, "report_id"],
+        "getFilterLinkDetails" => ["hasMany", Rp_report_filter_link_detail::class, "rp_report_id"],
+
     ];
+
+    public function getFilterLinkDetails()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getPages()
     {
