@@ -7,7 +7,12 @@ use App\BigThink\ModelExtended;
 class Rp_report extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "title", "description", "entity_type", "owner_id",
+        "id",
+        "name",
+        "title",
+        "description",
+        "entity_type",
+        "owner_id",
     ];
 
     public static $statusless = true;
@@ -16,7 +21,7 @@ class Rp_report extends ModelExtended
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
         "getFilterDetails" => ["hasMany", Rp_report_filter_detail::class, "rp_report_id"],
 
-        "getFilterModes" => ["hasMany", Rp_filter_mode::class, "report_id"],
+        "getFilterModes" => ["hasMany", Rp_filter_link::class, "report_id"],
     ];
 
     public function getPages()

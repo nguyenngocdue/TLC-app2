@@ -15,15 +15,14 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('rp_filter_modes', function (BlueprintExtended $table) {
+        $schema->create('rp_filter_links', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->unsignedBigInteger('linked_to_report_id')->nullable();
             $table->unsignedBigInteger('stored_filter_key')->nullable();
-            $table->unsignedBigInteger('report_id')->nullable();
 
             $table->appendCommonFields();
         });
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rp_filter_modes');
+        Schema::dropIfExists('rp_filter_links');
     }
 };
