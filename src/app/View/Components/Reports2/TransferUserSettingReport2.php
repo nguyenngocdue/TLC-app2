@@ -8,9 +8,7 @@ use App\Utils\Support\Report;
 class TransferUserSettingReport2
 {
     private static $instance = null;
-    private function __construct()
-    {
-    }
+    private function __construct() {}
     public static function getInstance()
     {
         if (self::$instance == null) {
@@ -23,20 +21,26 @@ class TransferUserSettingReport2
         $inputValue = $request->all();
         $entityType = $inputValue['entity_type'];
         $entityType2 = $inputValue['entity_type2'];
-        $paramsCurrentRp = (array)json_decode($inputValue['params_current_report']);
-        $reportLinkId = $inputValue['current_report_link'];
+        $currentParamsRp = json_decode($inputValue['current_param_report'], true);
+        $rpLinkId = $inputValue['current_report_link'];
         $currentRpId = $inputValue['report_id'];
 
-        $insRp = Rp_report::find((int)$reportLinkId)->getDeep();
-        $filterDetailsRpLink = $insRp->getFilterDetails;
+        $ins = UserSettingReport2::getInstance($entityType2);
+        $storesKeyFilter = $ins->getStoredFilterKeyUserSetting($currentRpId, $rpLinkId);
+        if ($storesKeyFilter) {
+            $currentParamsUser = $ins->getCurrentParamsUser($entityType, $storesKeyFilter);
+            $currentParamsUser['current_report_link'] = (int)$rpLinkId;
 
-        $keys = [$entityType, $entityType2, $reportLinkId];
-        if (Report::nestedKeysExist($settings, $keys)) {
-            $settings = $this->updateExistingReport($settings, $filterDetailsRpLink, $paramsCurrentRp, $entityType, $entityType2, $reportLinkId);
-        } else {
-            $settings = $this->initializeReportLink($settings, $filterDetailsRpLink, $paramsCurrentRp, $entityType, $entityType2, $reportLinkId);
+            // update filter for report link
+            foreach ($currentParamsRp as $key => $value) {
+                if (is_null($value)) {
+                    if (isset($currentParamUser[$key])) {
+                        $currentParamsUser[$key] = $value;
+                    }
+                }
+            }
+            $settings[$entityType][$entityType2][$storesKeyFilter] = $currentParamsUser;
         }
-        $settings[$entityType][$entityType2][$currentRpId]['current_report_link'] = (string)$reportLinkId;
         return $settings;
     }
 

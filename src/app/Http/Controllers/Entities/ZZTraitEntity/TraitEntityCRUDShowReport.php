@@ -14,9 +14,7 @@ trait TraitEntityCRUDShowReport
 	public function showReport(Request $request, $id,  $trashed)
 	{
 		$report = Rp_report::find($id)->getDeep();
-		$pages = $report->getPages->sortBy('order_no');
-		$filterModes = $report->getFilterModes->sortBy('order_no');
-		$filterDetails = $report->getFilterDetails->sortBy('order_no');
+		$pages = $report->getPages;
 
 		$paramsUrl = $request->input();
 		Session::put('paramsUrl1', $paramsUrl);
@@ -26,8 +24,6 @@ trait TraitEntityCRUDShowReport
 			'report' => $report,
 			'pages' => $pages,
 			'reportId' => $id,
-			'filterModes' => $filterModes,
-			'filterDetails' => $filterDetails,
 			'paramsUrl' => $paramsUrl,
 		]);
 	}
