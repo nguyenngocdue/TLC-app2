@@ -91,7 +91,7 @@
         "name": "_getFilterLinkDetails",
         "column_name": "getFilterLinkDetails",
         "column_type": "hasMany",
-        "label": "Report Link",
+        "label": "Report Link Detail",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

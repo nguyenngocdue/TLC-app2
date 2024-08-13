@@ -60,63 +60,31 @@ class FilterReport extends Component
     public function render()
     {
         $rp = (object)$this->report;
+        $reportId = $rp->id;
+        $advancedFilters = $rp->getAdvancedFilters;
+        $filterLinkDetails = $rp->getFilterLinkDetails;
 
-        $currentRpId = $rp->id;
+
+
+
+
         $rpName = $rp->name;
         $entityType = $rp->entity_type;
         $entityType2 = $this->entityType2;
 
-        $filterRpLinks = $rp->getFilterModes;
-        $filterDetails = $rp->getFilterDetails;
-        $keyFilterRpLinks = $this->getFilterKeyRpLinks($filterRpLinks, $filterDetails);
 
-
-
-        // // // check and set report_id if the current report is already stored in the db
-        // $userSetting = CurrentUser::getSettings();
-        // $keys = [$entityType, $entityType2, $currentRpId];
-        // if (Report::nestedKeysExist($userSetting, $keys)) { # => has previously been opened and saved into user_setting
-        //     $paramsInUser = $userSetting[$entityType][$entityType2][$currentRpId];
-        //     $currentRpId = $paramsInUser['current_report_link'] ?? $currentRpId;
-        // }
-
-
-        // get filter detail from current report
-        // $reportLink = Rp_report::find((int)$currentRpId)->getDeep();
-        // $filterDetails = $reportLink->getFilterDetails->sortBy('order_no');
-
-        // Save initial parameters to set default values when you open for the first time.
-        $ins =  InitUserSettingReport2::getInstance($this->entityType2);
-        $paramsInit = $ins->saveParamsToUser($entityType, $currentRpId, $keyFilterRpLinks, $this->paramsUrl);
-
-        // create params from 'user_setting' and default value
-        $currentParams = $ins->getCurrentParams($entityType, $currentRpId, $filterDetails);
-
-        // Case: The 'currentParams' didn't reset after updating' user_setting'
-        if (empty($currentParams)) $currentParams =  reset($paramsInit);
-
-
-        // create data to render dropdown of report link
-        $dataDropdownRpLink = collect($filterRpLinks)->mapWithKeys(function ($filterMode) {
-            $linkedToRpId = Rp_report::find($filterMode->linked_to_report_id)->id ?? null;
-            if (is_null($linkedToRpId)) return [];
-            return [$linkedToRpId => $filterMode->name];
-        });
-        $warningFilters = $this->getWarningFilters($filterDetails, $currentParams);
-
+        $currentParams = [];
         return view('components.reports2.filter-report', [
             'entityType' => $entityType,
             'reportName' => $rpName,
             'entityType2' => $entityType2,
-            'filterDetails' => $filterDetails,
             'entity_type' => $entityType,
-            'reportId' => $rp->id,
+            'reportId' => $reportId,
             'currentParams' => $currentParams,
             'routeFilter' => route('filter_report.update', $rp->id),
-            'dataDropdownRpLink' => $dataDropdownRpLink,
-            'filterModes' => $filterRpLinks,
             'refreshPage' => $this->refreshPage,
-            'warningFilters' => $warningFilters,
+            'filterLinkDetails' => $filterLinkDetails,
+            'advancedFilters' => $advancedFilters
         ]);
     }
 }
