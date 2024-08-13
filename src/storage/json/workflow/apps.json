@@ -1148,7 +1148,7 @@
         "sub_package": "hr_admin",
         "title": "Staff Timesheet",
         "nickname": "sts",
-        "tutorial_link": null,
+        "tutorial_link": "https:\/\/appcenter.tlcmodular.com\/timesheet-office\/",
         "icon": "<i class=\"fa-solid fa-file-spreadsheet\"><\/i>",
         "doc_id_format_column": null,
         "status": null,
