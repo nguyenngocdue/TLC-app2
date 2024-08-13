@@ -23,7 +23,7 @@ Dear {{$user_name}}, this is the timesheet status of the following staff:
     Open Staff Timesheet App
 </x-mail::button>
 
-As a team leader, you will need to approve the timesheet before the deadline (by 23:59:59 {{$deadline}}).
+As a team leader, you need to approve the timesheet before the deadline (by 23:59:59 {{$deadline}}).
 
 Best Regard,
 
