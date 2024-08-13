@@ -19,7 +19,7 @@ class Rp_report extends ModelExtended
 
     public static $eloquentParams = [
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
-        "getFilterDetails" => ["hasMany", Rp_report_filter_detail::class, "rp_report_id"],
+        "getAdvancedFilters" => ["hasMany", Rp_advanced_filter::class, "rp_report_id"],
 
         "getFilterLinkDetails" => ["hasMany", Rp_report_filter_link_detail::class, "rp_report_id"],
 
@@ -42,7 +42,7 @@ class Rp_report extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    public function getFilterDetails()
+    public function getAdvancedFilters()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -66,13 +66,13 @@ class Rp_report extends ModelExtended
                             }]);
                     }]);
             }])
-            ->with(["getFilterModes" => function ($q4) {
-                $q4->with("getParent");
-            }])
-            ->with(["getFilterDetails" => function ($q5) {
-                $q5->with("getListenReducer");
-                $q5->with("getColumn");
-            }])
+            // ->with(["getFilterModes" => function ($q4) {
+            //     $q4->with("getParent");
+            // }])
+            // ->with(["getAdvancedFilters" => function ($q5) {
+            //     $q5->with("getListenReducer");
+            //     $q5->with("getColumn");
+            // }])
             ->get()
             ->first();
         // $rpReport->getPages[10]->getBlockDetails;
