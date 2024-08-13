@@ -38,17 +38,51 @@ class User extends ModelExtended implements
      * @var array<int, string>
      */
     protected $fillable = [
-        "name0", "full_name", "name_suffix", "employeeid", "first_name",
-        "last_name", "gender", "address", "phone", "time_keeping_type", "user_type",
-        "workplace", "current_workplace", "category", "erp_sub_cat",
-        "date_of_birth", "first_date", "last_date", "leave_effective_date",
-        "title", "position", "discipline", "department", "show_on_beta",
-        "resigned", "viewport_uids", "leaf_uids", 'email_verified_at', "email", "password",
-        "settings", "provider", "user_id_passport", "user_pin", "company", "owner_id",
-        "is_bod", "org_chart", "standard_signature", "seniority_level",
+        "name0",
+        "full_name",
+        "name_suffix",
+        "employeeid",
+        "first_name",
+        "last_name",
+        "gender",
+        "address",
+        "phone",
+        "time_keeping_type",
+        "user_type",
+        "workplace",
+        "current_workplace",
+        "category",
+        "erp_sub_cat",
+        "date_of_birth",
+        "first_date",
+        "last_date",
+        "leave_effective_date",
+        "title",
+        "position",
+        "discipline",
+        "department",
+        "show_on_beta",
+        "resigned",
+        "viewport_uids",
+        "leaf_uids",
+        'email_verified_at',
+        "email",
+        "password",
+        "settings",
+        "provider",
+        "user_id_passport",
+        "user_pin",
+        "company",
+        "owner_id",
+        "is_bod",
+        "org_chart",
+        "standard_signature",
+        "seniority_level",
         "show_on_org_chart",
+        "ts_proxy_approver_id",
 
-        "erp_site", "erp_cashflow",
+        "erp_site",
+        "erp_cashflow",
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -104,6 +138,7 @@ class User extends ModelExtended implements
 
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'discipline'],
         "getUserOrgChart" => ['belongsTo', User_org_chart::class, 'org_chart'],
+        "getTSProxyApprover" => ['belongsTo', User::class, 'ts_proxy_approver_id'],
 
         "getUserDepartment" => ['belongsTo', Department::class, 'department'],
         "getTimeKeepType" => ['belongsTo', User_time_keep_type::class, 'time_keeping_type'],
@@ -266,6 +301,11 @@ class User extends ModelExtended implements
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getUserOrgChart()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getTSProxyApprover()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -22,11 +22,35 @@ class SidebarCalendarViewAll extends Component
      */
     const TIME_KEEPING_TYPE_TSO = 2;
     const TIME_KEEPING_TYPE_NONE = 3;
+
+    const PROJECT_CLIENT_ID = 128;
+
     public function __construct(
         private $type,
         private $typeModel,
     ) {
         //
+    }
+
+    function removeUserNoNeedSTS($tree)
+    {
+        $filteredTree = [];
+
+        foreach ($tree as $key => $node) {
+            // Recursively filter children
+            if (isset($node->children) && !empty($node->children)) {
+                $node->children = $this->removeUserNoNeedSTS($node->children);
+            }
+
+            // Check if the node should be kept
+            if ($node->resigned != 1) {
+                if ($node->time_keeping_type == 2 || !empty($node->children)) {
+                    $filteredTree[$key] = $node;
+                }
+            }
+        }
+        // dump($filteredTree);
+        return $filteredTree;
     }
 
     /**
@@ -42,6 +66,7 @@ class SidebarCalendarViewAll extends Component
         [, $filterViewAllCalendar, $viewAllCalendarShowAllChildren] = $this->getUserSettingsViewAllCalendar();
         $idsRenderCalendar = $filterViewAllCalendar['owner_id'] ?? [$userId];
         $tree = $this->getTreeOwnerIds($user);
+        $tree = $this->removeUserNoNeedSTS($tree);
         $ids = $this->getListOwnerIds($user);
         $idsFormatQuery = join(',', $ids);
         $dataCountQuerySql = $this->queryTotalPendingApprovalBySql($idsFormatQuery);
@@ -49,6 +74,7 @@ class SidebarCalendarViewAll extends Component
         $users = $this->queryUsersSql($ids);
         $users = $this->transformUserData($users);
         $dataSource = $this->treeDataSource($tree, $type, $idsRenderCalendar, $dataCountQuerySql);
+
         $htmlRenderTree = $this->renderHtmlByTreeDataSource($dataSource, $users, $viewAllCalendarShowAllChildren);
         return view('components.calendar.sidebar-calendar-view-all', [
             'htmlRenderCurrentUser' => $this->renderHtml($dataUserCurrent, $users, true),
@@ -182,7 +208,7 @@ class SidebarCalendarViewAll extends Component
         $activeClass = $active ? "border-blue-600" : "";
 
         //128: Project Client
-        if (!in_array($user->discipline, [128])) {
+        if (!in_array($user->discipline, [$this::PROJECT_CLIENT_ID])) {
             $html .= "<li class='123 relative $bgAndHover $activeClass border my-1 p-1 focus:ring-4 font-medium rounded-lg text-sm'>
                     $htmlHref
                   </li>";

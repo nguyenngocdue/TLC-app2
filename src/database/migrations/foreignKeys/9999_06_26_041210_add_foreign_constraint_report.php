@@ -28,7 +28,7 @@ return new class extends Migration
         //     $table->foreign('page_id')->references('id')->on('rp_pages');
         //     $table->foreign('block_id')->references('id')->on('rp_blocks');
         // });
-        // Schema::table('rp_filter_mode', function (Blueprint $table) {
+        // Schema::table('rp_filter_links', function (Blueprint $table) {
         //     $table->foreign('report_id')->references('id')->on('rp_reports');
         // });
         // Schema::table('rp_types', function (Blueprint $table) {
@@ -57,7 +57,5 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-    }
+    public function down() {}
 };

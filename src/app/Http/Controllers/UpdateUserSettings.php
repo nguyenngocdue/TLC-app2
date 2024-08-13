@@ -378,7 +378,6 @@ class UpdateUserSettings extends Controller
     private function updateReport2($request, $settings)
     {
         $inputValue = $request->all();
-        // dd($inputValue);
         $entityType = $inputValue['entity_type'];
         $entityType2 = $inputValue['entity_type2'];
         $rpLinkId = $inputValue['current_report_link'];
@@ -387,7 +386,19 @@ class UpdateUserSettings extends Controller
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") {
             $advancedFilters = $this->getAdvancedFilterReport2($inputValue, true);
         }
-        $settings[$entityType][$entityType2][$rpLinkId] = $advancedFilters;
+
+
+        $insRp = Rp_report::find($rpLinkId)->getDeep()->getFilterModes;
+        $storedFilterKey = $insRp->where('linked_to_report_id', $rpLinkId)->first()->stored_filter_key;
+        $currentParamsUser = $settings[$entityType][$entityType2][$storedFilterKey];
+
+        foreach ($advancedFilters as $param => $value) {
+            if (empty($value)) continue;
+            if (!is_null($value)) {
+                $currentParamsUser[$param] = $value;
+            }
+        }
+        $settings[$entityType][$entityType2][$storedFilterKey] = $currentParamsUser;
         return $settings;
     }
 

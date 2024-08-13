@@ -276,7 +276,7 @@ class Report
     public static function removeNullValuesFromArray($inputArray)
     {
         // if (is_null(reset($inputArray)) && count($inputArray) === 1) return [];
-        return array_filter($inputArray, fn ($value) => $value !== null);
+        return array_filter($inputArray, fn($value) => $value !== null);
     }
 
     public static function createDefaultPickerDate($daysStr = '-3 days')
@@ -506,7 +506,7 @@ class Report
         }, $array);
     }
 
-    public static function nestedKeysExist(array $array, array $keys)
+    public static function checkKeysExist(array $array, array $keys)
     {
         foreach ($keys as $key) {
             if (!isset($array[$key])) {
@@ -543,5 +543,17 @@ class Report
     public static function changeFieldOfFilter($filter)
     {
         return  str_replace('_name', '_id', $filter->getColumn->data_index);
+    }
+
+    public static function arraysAreDifferent($array1, $array2)
+    {
+        $diffKeys = array_diff_key($array1, $array2) || array_diff_key($array2, $array1);
+        $diffValues = array_udiff_assoc($array1, $array2, function ($a, $b) {
+            return ($a === $b) ? 0 : 1;
+        });
+        if ($diffKeys || !empty($diffValues)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('users', function (BlueprintExtended $table) {
             $table->id();
@@ -58,6 +58,7 @@ return new class extends Migration
             $table->boolean("is_bod")->nullable();
             $table->boolean("resigned")->nullable();
             $table->string("viewport_uids")->nullable();
+            $table->unsignedBigInteger("ts_proxy_approver_id")->nullable();
             $table->string("leaf_uids")->nullable();
             $table->string("user_id_passport")->nullable();
             $table->string("user_pin")->nullable();

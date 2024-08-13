@@ -7,7 +7,7 @@
         @csrf
         <input type="hidden" name="action" value="switchReport2">
         <input type="hidden" name="current_report_link" value="{{ $currentParams['current_report_link'] }}">
-        <input type="hidden" name="params_current_report" value="{{ json_encode($paramsCurrentRp) }}">
+        <input type="hidden" name="current_param_report" value="{{ json_encode($paramsCurrentRp) }}">
         <input type="hidden" name="report_id" value="{{$reportId}}">
         <input type="hidden" name="entity_type" value="{{ $entityType}}">
         <input type="hidden" name="entity_type2" value="{{ $entityType2}}">
