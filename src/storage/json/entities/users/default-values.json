@@ -224,7 +224,7 @@
         "name": "_workplace",
         "column_name": "workplace",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -389,6 +389,32 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_org_chart": {
+        "name": "_org_chart",
+        "column_name": "org_chart",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_show_on_org_chart": {
+        "name": "_show_on_org_chart",
+        "column_name": "show_on_org_chart",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_is_bod": {
         "name": "_is_bod",
         "column_name": "is_bod",
@@ -431,6 +457,19 @@
     "_viewport_uids": {
         "name": "_viewport_uids",
         "column_name": "viewport_uids",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_ts_proxy_approver_id": {
+        "name": "_ts_proxy_approver_id",
+        "column_name": "ts_proxy_approver_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -530,19 +569,6 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "$link_to_user_position",
-        "textarea_rows": ""
-    },
-    "_org_chart": {
-        "name": "_org_chart",
-        "column_name": "org_chart",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
         "textarea_rows": ""
     },
     "_getRoleSet": {
