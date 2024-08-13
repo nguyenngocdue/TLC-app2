@@ -3,6 +3,8 @@
 namespace App\View\Components\Calendar;
 
 use App\Models\Hr_timesheet_officer;
+use App\Utils\Constant;
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 
 class NavigationCalendar extends Component
@@ -29,8 +31,18 @@ class NavigationCalendar extends Component
         return $result;
     }
 
+    function updateUserSettings()
+    {
+        $cu = CurrentUser::get();
+        $userSettings = $cu->settings;
+        $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['owner_id'] = [$this->owner->id];
+        $cu->settings = $userSettings;
+        $cu->save();
+    }
+
     function render()
     {
+        $this->updateUserSettings();
         $tss = Hr_timesheet_officer::query()
             ->where('owner_id', $this->owner->id)
             ->orderBy('week')
