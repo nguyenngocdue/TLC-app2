@@ -116,7 +116,7 @@ class Calendar
         if ($item->lod_id) {
             $name = $item->getLod->name ?? '';
             // $name = Sub_project::findOrFail($item->sub_project_id)->name ?? '';
-            $tagPhase = "<div class='italic text-right'>$name</div>";
+            $tagPhase = $name;
             // $tagPhase = Blade::render("<x-renderer.tag class='leading-none'>$name</x-renderer.tag>");
         }
         return $tagPhase ?? '';

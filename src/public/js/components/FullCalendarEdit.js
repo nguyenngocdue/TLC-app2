@@ -60,7 +60,8 @@ function callApiGetEvents(id, url) {
                     timeZone: 'local',
                     initialDate: response.meta,
                     height: 850,
-                    contentHeight: 830,
+                    // contentHeight: 830,
+                    scrollTime: '06:30:00',
                     aspectRatio: 2,
                     initialView: 'timeGridWeek',
                     locale: 'en',
@@ -193,7 +194,7 @@ function callApiGetEvents(id, url) {
                         var tagSubProject = info.event.extendedProps.tag_sub_project || ''
                         var tagPhase = info.event.extendedProps.tag_phase || ''
                         // var nameProject = info.event.extendedProps.name_project || "";
-                        var remark = info.event.extendedProps.remark || ''
+                        var remark = info.event.extendedProps.remark || '(No remark)'
                         var eventTitleHTML = `
                         <div class="event-title w-full" title="${remark}">
                             <div class="flex items-baseline justify-between" title="${remark}">
@@ -201,8 +202,10 @@ function callApiGetEvents(id, url) {
                                 ${tagSubProject}
                                 </div>
                                 ${eventTitle}
-                                ${tagPhase}
                                 ${eventSubTitle}
+                                <span class='border1 rounded bg-gray-400 block text-center italic'>
+                                ${tagPhase}
+                                </span>
                         </div>`
                         return {
                             html: eventTitleHTML,
