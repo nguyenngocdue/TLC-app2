@@ -8,12 +8,14 @@ Dear {{$user->name}}, this is a reminder that the following staff timesheet is s
 @endif
 
 {{-- @php Log::info($staff_list) @endphp --}}
+{{-- |{{$value['staff_name']}}| <span style="display: inline;"><x-mail::status>pending_approval</x-mail::status><x-mail::status>new</x-mail::status></span>| --}}
+{{-- |{{$value['staff_name']}}|@foreach($value['links'] as $link) <x-mail::status href="{{$link['href']}}">{{$link['status']}}</x-mail::status> @endforeach| --}}
 
 <x-mail::table>
     |**Team Member** |**Link** |
     | :------------- |:--------|
     @foreach($staff_list as $key => $value)
-    |{{$value['staff_name']}}|{!! $value['linkStr'] !!}|
+    |{{$value['staff_name']}}|{!!$value['linkStr']!!}|
     @endforeach
 </x-mail::table>
 

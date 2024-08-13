@@ -9,6 +9,7 @@ use App\Models\User_discipline;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\MailServiceProvider;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -57,7 +58,7 @@ class StartOfWeekTimesheetRemindListener
             $disciplines[$manager_id]["staff_list"][$user->id] = [
                 'staff_name' => $user->name,
                 'staff_email' => $user->email,
-                'links' => [], //"Not yet submitted",
+                // 'links' => [], //"Not yet submitted",
                 'linkStr' => "Not yet submitted",
             ];
             $debugMessage = ($count++) . " User #" . str_pad($user->id, 4, '0', STR_PAD_LEFT) . " - " . $user->name . " ($discipline) notified.";
@@ -75,12 +76,13 @@ class StartOfWeekTimesheetRemindListener
                     $tss = $timesheets[$staff_id];
                     foreach ($tss as $ts) {
                         $href = route('hr_timesheet_officers.edit', $ts->id);
-
-                        $links[] = "<a href='$href'>{$ts->status} ({$ts->week})</a>";
-                        //     $links[] = [
-                        //         'status' => $ts->status,
-                        //         'href' => $href,
-                        //     ];
+                        $statusTitle = Str::headline($ts->status);
+                        $idTitle = Str::makeId($ts->id);
+                        $links[] = "<a href='$href' style=''>$statusTitle ($idTitle) </a>";
+                        // $links[] = [
+                        //     'status' => $ts->status,
+                        //     'href' => $href,
+                        // ];
                     }
                 }
             }
