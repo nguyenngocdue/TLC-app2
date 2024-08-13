@@ -90,7 +90,7 @@
     "_linked_to_report_id": {
         "name": "_linked_to_report_id",
         "column_name": "linked_to_report_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Link To Report",
         "control": "dropdown",
         "align": "",

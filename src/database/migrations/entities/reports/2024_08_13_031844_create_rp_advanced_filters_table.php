@@ -19,7 +19,7 @@ return new class extends Migration
 
         $schema->create('rp_advanced_filters', function (BlueprintExtended $table) {
             $table->id();
-            $table->unsignedBigInteger('rp_report_id')->nullable();
+            $table->unsignedBigInteger('report_id')->nullable();
             $table->string('data_index')->nullable();
             $table->string('entity_type')->nullable();
             $table->string('bw_list_ids')->nullable();
