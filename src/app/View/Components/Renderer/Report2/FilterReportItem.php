@@ -17,7 +17,7 @@ class FilterReportItem extends Component
     use TraitListenerControlReport;
 
     public function __construct(
-        private $filterDetail,
+        private $advancedFilter,
         private $id = "",
         private $name = "",
         private $tableName = "",
@@ -34,32 +34,29 @@ class FilterReportItem extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
         if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
 
-        $filterDetail = $this->filterDetail;
-        $column = $filterDetail->getColumn;
+        $advFilter = $this->advancedFilter;
 
-        $dataIndex = $column->data_index ?? '';
-        $tableName = Str::plural(str_replace('_name', '', $dataIndex));
-        $name = Str::singular(str_replace('_name', '_id', $dataIndex));
-
-        $this->tableName = $tableName;
-        $this->name = $name;
-        $this->id = $filterDetail->id;
-        $this->multiple = $filterDetail->is_multiple;
+        $entityType = $advFilter->entity_type;
+        $this->tableName = Str::plural($entityType);
+        $this->id = $advFilter->id;
+        $this->multiple = (bool)$advFilter->is_multiple;
+        $this->name = $advFilter->is_multiple ? Str::plural($advFilter->data_index) : $advFilter->data_index;
+        $this->allowClear = (bool)$advFilter->allow_clear;
     }
 
     private function getListenReducer()
     {
-        return $this->filterDetail->getListenReducer;
+        return $this->advancedFilter->getListenReducer;
     }
 
     private function getDataSource()
     {
-        $columnName = $this->filterDetail->getColumn->data_index;
-        $modelClass = ModelData::initModelByField($columnName);
+        $entityType = $this->advancedFilter->entity_type;
+        $modelClass = ModelData::initModelByField($entityType);
         if ($modelClass) {
             $db = $modelClass::query();
             try {
-                $listenReducer = $this->filterDetail->getListenReducer;
+                $listenReducer = $this->advancedFilter->getListenReducer;
                 $triggerName = $listenReducer->triggers;
                 $db = $db->select('id', 'name', 'description', $triggerName)
                     ->orderBy('name')
@@ -77,7 +74,7 @@ class FilterReportItem extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dump($params);
+        dump($params);
         return view(
             'components.controls.has-data-source.dropdown2',
             $params
