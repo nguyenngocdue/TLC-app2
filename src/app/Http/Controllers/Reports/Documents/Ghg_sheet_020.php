@@ -19,7 +19,6 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 	use TraitParamsSettingReport;
 
 	protected $viewName = 'document-ghg-sheet-020';
-	protected $year = '2023';
 	protected $mode = '020';
 	protected $type = 'ghg_sheets';
 	protected $optionPrint = "landscape";
@@ -276,7 +275,7 @@ class Ghg_sheet_020 extends Report_ParentDocument2Controller
 
 	protected function getDefaultValueParams($params, $request)
 	{
-		$params['year'] = $this->year;
+		$params['year'] = (int)date("Y");
 		return $params;
 	}
 
