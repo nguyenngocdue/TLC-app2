@@ -3,8 +3,8 @@
         <x-calendar.sidebar-calendar-view-all type="{{$type}}" typeModel="{{$typeModel}}"/>
     </div>
     <div class="w-full px-1 bg-gray-100 rounded-lg shadow col-span-9">
-        <div class="grid lg:grid-cols-12 gap-2 mx-2">
-            <div class="md:col-span-3 flex">
+        <div class="grid grid-cols-12 gap-2 mx-2">
+            <div class="col-span-12 md:col-span-8 xl:col-span-4">
                     <x-renderer.card title="Selected view">
                         <div class="flex">
                             <x-renderer.avatar-user uid='{{$userCurrentCalendar->id}}'></x-renderer.avatar-user>
@@ -26,7 +26,7 @@
                         </div>
                     </x-renderer.card>
             </div>
-            <div class="md:col-span-3 lg:col-span-2">
+            <div class="col-span-12 md:col-span-4 xl:col-span-2">
                 <x-renderer.card title="Selected Year">
                         <div class="text-center flex justify-around items-center">
                             <button type="button" onclick="decrease(1)" class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
@@ -39,18 +39,17 @@
                         </div>
                 </x-renderer.card>
             </div>
-            <div class="md:col-span-3 lg:col-span-5">
+            <div class="col-span-12 md:col-span-8 xl:col-span-4">
                 <x-renderer.legend type="{{$type}}" title="{{$titleLegend}}" />
             </div>
-            <div class="md:col-span-3 lg:col-span-2">
+            <div class="col-span-12 md:col-span-4 xl:col-span-2">
             @php
                 $listIdPendingApproval = json_encode($listIdPendingApproval);
             @endphp
                 <x-renderer.card title="Options">
-                    <x-renderer.button 
-                        class="w-40" 
+                    <x-renderer.button                         
                         icon="fa-duotone fa-thumbs-up"
-                        class="bg-green-200 text-green-800"
+                        class="bg-green-200 text-green-800 w-full"
                         onClick="changeStatusAll('{{$routeChangeStatusMultiple}}',{{$listIdPendingApproval}}, 'approved', 'Approved')"
                         disabled="{{$disableButton}}"
                         >
