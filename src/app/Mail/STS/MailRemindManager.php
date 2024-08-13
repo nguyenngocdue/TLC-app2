@@ -2,6 +2,7 @@
 
 namespace App\Mail\STS;
 
+use DateTime;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -21,6 +22,8 @@ class MailRemindManager extends Mailable
     public function build()
     {
         // Log::info($this->data);
+        $deadline =  (new DateTime())->modify('next Saturday')->format('d/m/Y');
+        $this->data['deadline'] = $deadline;
         return $this->markdown('mails.sts.mail-remind-manager', $this->data);
     }
 }

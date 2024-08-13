@@ -1,9 +1,9 @@
 <x-mail::message>
-# Weekly staff timesheet outstanding report
+# Weekly Staff Timesheet Status Report
 
-Dear {{$user->name}}, this is a reminder that the following staff timesheet is still outstanding:
+Dear {{$user_name}}, this is the timesheet status of the following staff:
 
-@if($user->name != $def_assignee)
+@if($user_name != $def_assignee)
 (You received this email because you are a proxy approver of {{$def_assignee}})
 @endif
 
@@ -23,7 +23,9 @@ Dear {{$user->name}}, this is a reminder that the following staff timesheet is s
     Open Staff Timesheet App
 </x-mail::button>
 
-As a team leader, you will need to approve the timesheet before the deadline.
-Best Regard,<br>
+As a team leader, you will need to approve the timesheet before the deadline (by 23:59:59 {{$deadline}}).
+
+Best Regard,
+
 {{ config('app.name') }}
 </x-mail::message>

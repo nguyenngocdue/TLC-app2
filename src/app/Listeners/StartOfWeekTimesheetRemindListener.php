@@ -44,23 +44,26 @@ class StartOfWeekTimesheetRemindListener
 
             if (!isset($disciplines[$manager_id])) {
                 $disciplines[$manager_id] = [
-                    'user' => $proxy,
-                    // 'user_name' => $proxy->name,
+                    // 'user' => $proxy,
+                    'user_name' => $proxy->name,
+                    'user_email' => $proxy->email,
                     "def_assignee" => $manager->name,
                     // "proxy_name" => $proxy->name,
                     // "email" => $proxy->email,
                     "url" => route('hr_timesheet_officers.index'),
                     "staff_list" => [],
+                    "staff_emails" => [],
                 ];
             }
 
             $userIdsToCheck[] = $user->id;
             $disciplines[$manager_id]["staff_list"][$user->id] = [
                 'staff_name' => $user->name,
-                'staff_email' => $user->email,
+                // 'staff_email' => $user->email,
                 // 'links' => [], //"Not yet submitted",
                 'linkStr' => "Not yet submitted",
             ];
+            $disciplines[$manager_id]["staff_emails"][] = $user->email;
             $debugMessage = ($count++) . " User #" . str_pad($user->id, 4, '0', STR_PAD_LEFT) . " - " . $user->name . " ($discipline) notified.";
             // Log::info($debugMessage);
         }
@@ -69,9 +72,9 @@ class StartOfWeekTimesheetRemindListener
 
         foreach ($disciplines as $manager_id => $manager) {
             $staffList = $manager['staff_list'];
-            $links = [];
             $statuses = [];
             foreach ($staffList as $staff_id => $staff) {
+                $links = [];
                 if (isset($timesheets[$staff_id])) {
                     $tss = $timesheets[$staff_id];
                     foreach ($tss as $ts) {
@@ -84,9 +87,9 @@ class StartOfWeekTimesheetRemindListener
                         //     'href' => $href,
                         // ];
                     }
+                    $staffList[$staff_id]['linkStr'] = join("<br/>", $links);
                 }
             }
-            $staffList[$staff_id]['linkStr'] = join("<br/>", $links);
             // $staffList[$staff_id]['links'] = $links;
             // $staffList[$staff_id]['statuses'] = $statuses;
 
@@ -129,10 +132,21 @@ class StartOfWeekTimesheetRemindListener
         // $managers = User::query()->where('id', 1)->get();
         foreach ($userLists as $list) {
             $mail = new MailRemindManager($list);
-            $user = $list['user'];
-            $mail->subject("Reminder: Start of the week timesheet submission - " . $user->name);
+            $user_name = $list['user_name'];
+            $user_email = $list['user_email'];
+            $mail->subject("Reminder: Start of the week timesheet submission - " . $user_name);
 
-            Mail::to($user->email)->send($mail);
+            // Log::info($user->email);
+            // Log::info($list['staff_emails']);
+
+            try {
+                Mail::to($user_email)
+                    ->cc($list['staff_emails'])
+                    ->bcc(env('MAIL_ARCHIVE_BCC'))
+                    ->send($mail);
+            } catch (\Exception $e) {
+                Log::error(get_class() . $e->getMessage() . $e->getFile() . $e->getLine());
+            }
         }
     }
 }

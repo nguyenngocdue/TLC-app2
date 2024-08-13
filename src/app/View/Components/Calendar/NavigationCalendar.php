@@ -1,0 +1,45 @@
+<?php
+
+namespace App\View\Components\Calendar;
+
+use App\Models\Hr_timesheet_officer;
+use Illuminate\View\Component;
+
+class NavigationCalendar extends Component
+{
+    function __construct(
+        private $timesheetId,
+        private $owner,
+    ) {
+        //
+    }
+
+    private function slice($tss)
+    {
+
+        $currentIndex = 0;
+        foreach ($tss as $index => $ts) {
+            if ($ts->id == $this->timesheetId) {
+                $currentIndex = $index;
+                break;
+            }
+        }
+        $start = max(0, $currentIndex - 3);
+        $result = $tss->slice($start, 7)->values();
+        return $result;
+    }
+
+    function render()
+    {
+        $tss = Hr_timesheet_officer::query()
+            ->where('owner_id', $this->owner->id)
+            ->orderBy('week')
+            ->get();
+        $tss = $this->slice($tss);
+
+        return view('components.calendar.navigation-calendar', [
+            'tss' => $tss,
+            'timesheetId' => $this->timesheetId,
+        ]);
+    }
+}

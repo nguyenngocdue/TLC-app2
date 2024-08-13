@@ -48,6 +48,7 @@ class FullCalendar extends Component
             'arrHidden' => $this->arrHidden,
             'timeBreaks' => $timeBreaks,
             'suffix' => $this->getSuffix(),
+            'owner' => $owner,
         ]);
     }
     private function getTimeBreaksByWorkplace($workplace)
