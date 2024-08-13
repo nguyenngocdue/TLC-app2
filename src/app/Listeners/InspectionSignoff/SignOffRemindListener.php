@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\InspectionSignoff;
 
-use App\Events\SignOffRemindEvent;
 use App\Events\WssToastrMessageChannel;
-use App\Listeners\TraitSignOffListener;
+use App\Listeners\MailUtility;
 use App\Mail\MailSignOffRemind;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Signature;

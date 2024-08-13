@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\StaffTimesheet;
 
 use App\Mail\STS\MailRemindManager;
 use App\Models\Hr_timesheet_officer;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class StartOfWeekTimesheetRemindListener
+class StartOfWeekRemindListener
 {
     /**
      * Create the event listener.
@@ -124,7 +124,7 @@ class StartOfWeekTimesheetRemindListener
     public function handle(object $event): void
     {
         //
-        Log::info("StartOfWeekTimesheetRemindListener is triggered.");
+        Log::info("StartOfWeekRemindListener is triggered.");
 
         $userLists = $this->makeUserList();
 

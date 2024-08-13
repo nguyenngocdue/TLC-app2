@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\InspectionSignoff;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;

@@ -16,8 +16,7 @@ class TestCronJobController extends Controller
     function __construct(
         private ListFolderService $listFolderService,
         private ListFileService $listFileService,
-    ) {
-    }
+    ) {}
 
     public function getType()
     {
@@ -33,11 +32,11 @@ class TestCronJobController extends Controller
             switch ($case) {
                 case 'start_of_week_timesheet_remind':
                     dump("StartOfWeekTimesheetRemindEvent emitted.");
-                    event(new \App\Events\StartOfWeekTimesheetRemindEvent());
+                    event(new \App\Events\StaffTimesheet\StartOfWeekRemindEvent());
                     break;
                 case 'sign_off_remind':
                     dump("SignOffRemindEvent emitted.");
-                    event(new \App\Events\SignOffRemindEvent());
+                    event(new \App\Events\InspectionSignoff\SignOffRemindEvent());
                     break;
                 case 'transfer_diginet_data':
                     dump("TransferDiginetDataEvent emitted.");

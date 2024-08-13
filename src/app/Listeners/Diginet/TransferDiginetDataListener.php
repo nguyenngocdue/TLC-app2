@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\Diginet;
 
 use App\Http\Controllers\DiginetHR\TraitUpdateDiginetData;
 use App\Utils\Support\CurrentUser;

@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Events\CleanUpTrashEvent;
 use App\Events\CreatedDocumentEvent2;
+use App\Events\InspectionSignoff\SignOffRecallEvent;
+use App\Events\InspectionSignoff\SignOffRemindEvent;
+use App\Events\InspectionSignoff\SignOffRequestEvent;
+use App\Events\InspectionSignoff\SignOffSubmittedEvent;
 use App\Events\OpenedDocumentEvent;
-use App\Events\SignOffRecallEvent;
-use App\Events\SignOffRemindEvent;
-use App\Events\SignOffRequestEvent;
-use App\Events\SignOffSubmittedEvent;
-use App\Events\StartOfWeekTimesheetRemindEvent;
+
+use App\Events\StaffTimesheet\EndOfWeekRemindEvent;
+use App\Events\StaffTimesheet\StartOfWeekRemindEvent;
 use App\Events\TransferDiginetDataEvent;
 use App\Events\UpdatedDocumentEvent;
 use App\Events\UpdatedEsgSheetEvent;
@@ -21,13 +23,14 @@ use App\Events\UserSignedInEvent;
 //------------
 use App\Listeners\CleanUpTrashListener;
 use App\Listeners\CreatedDocumentListener2;
+use App\Listeners\Diginet\TransferDiginetDataListener;
+use App\Listeners\InspectionSignoff\SignOffRecallListener;
+use App\Listeners\InspectionSignoff\SignOffRemindListener;
+use App\Listeners\InspectionSignoff\SignOffRequestListener;
+use App\Listeners\InspectionSignoff\SignOffSubmittedListener;
 use App\Listeners\OpenedDocumentListener;
-use App\Listeners\SignOffRemindListener;
-use App\Listeners\SignOffRecallListener;
-use App\Listeners\SignOffRequestListener;
-use App\Listeners\SignOffSubmittedListener;
-use App\Listeners\StartOfWeekTimesheetRemindListener;
-use App\Listeners\TransferDiginetDataListener;
+use App\Listeners\StaffTimesheet\EndOfWeekRemindListener;
+use App\Listeners\StaffTimesheet\StartOfWeekRemindListener;
 use App\Listeners\UpdatedDocumentListener2;
 use App\Listeners\UpdatedEsgSheetListener;
 use App\Listeners\UpdatedProdSequenceListener;
@@ -75,7 +78,10 @@ class EventServiceProvider extends ServiceProvider
 
         //Schedule
         SignOffRemindEvent::class => [SignOffRemindListener::class],
-        StartOfWeekTimesheetRemindEvent::class => [StartOfWeekTimesheetRemindListener::class],
+
+        //STS
+        StartOfWeekRemindEvent::class => [StartOfWeekRemindListener::class],
+        EndOfWeekRemindEvent::class => [EndOfWeekRemindListener::class],
 
         //Handle update job description
         UpdatedUserPositionEvent::class => [UpdatedUserPositionListener::class],

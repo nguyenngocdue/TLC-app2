@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\InspectionSignoff;
 
-use App\Events\SignOffSubmittedEvent;
+use App\Events\InspectionSignoff\SignOffSubmittedEvent;
 use App\Events\WssToastrMessageChannel;
-use App\Listeners\TraitSignOffListener;
+use App\Listeners\MailUtility;
 use App\Mail\MailSignOffSubmitted;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,7 +35,7 @@ class SignOffSubmittedListener implements ShouldQueue
             $inspector = User::find($mailContent['user_id']);
             $monitors = User::whereIn('id', $mailContent['monitors1'])->get();
             $param = [
-                'monitorNames' => $monitors->map(fn ($u) => $u->first_name)->join(", "),
+                'monitorNames' => $monitors->map(fn($u) => $u->first_name)->join(", "),
                 "inspectorName" => $inspector->name,
                 "signature_decision" => $mailContent['signature_decision'],
                 "signature_comment" => $mailContent['signature_comment'],

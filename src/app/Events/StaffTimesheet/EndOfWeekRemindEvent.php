@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\StaffTimesheet;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class SignOffRemindEvent
+class EndOfWeekRemindEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,14 +19,9 @@ class SignOffRemindEvent
      *
      * @return void
      */
-    public function __construct(
-        // public $mailContent,
-        // public $signableId,
-        // public $tableName,
-    )
+    public function __construct()
     {
         //
-        // Log::info($data);        
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace App\Events\InspectionSignoff;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class SignOffRequestEvent
+class SignOffSubmittedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,10 +21,12 @@ class SignOffRequestEvent
      * @return void
      */
     public function __construct(
-        public $data,
+        public $mailContent,
+        public $signableId,
+        public $tableName,
     ) {
         //
-        // Log::info($data);
+        // Log::info($data);        
     }
 
     /**

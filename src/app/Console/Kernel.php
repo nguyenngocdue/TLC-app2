@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
 
         $schedule
             ->call(function () {
-                event(new \App\Events\SignOffRemindEvent());
+                event(new \App\Events\InspectionSignoff\SignOffRemindEvent());
                 Log::channel('schedule_remind_signoff_channel')->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
             })
             ->cron('0 10 * * 1,3,5') // 0 minute, 10 hour, any day of the month, any month, Monday/Wednesday/Friday

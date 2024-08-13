@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
-use App\Events\SignOffSubmittedEvent;
+use App\Events\InspectionSignoff\SignOffSubmittedEvent;
 use App\Events\UpdatedEsgSheetEvent;
 use App\Events\UpdatedProdSequenceEvent;
 use App\Events\UpdatedQaqcChklstSheetEvent;

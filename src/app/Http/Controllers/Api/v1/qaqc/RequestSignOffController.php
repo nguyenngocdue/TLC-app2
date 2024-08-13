@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\v1\qaqc;
 
-use App\Events\SignOffRecallEvent;
-use App\Events\SignOffRequestEvent;
+use App\Events\InspectionSignoff\SignOffRecallEvent;
+use App\Events\InspectionSignoff\SignOffRequestEvent;
 use App\Http\Controllers\Controller;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
