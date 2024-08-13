@@ -19,7 +19,7 @@ class Rp_report extends ModelExtended
 
     public static $eloquentParams = [
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
-        "getAdvancedFilters" => ["hasMany", Rp_advanced_filter::class, "rp_report_id"],
+        "getAdvancedFilters" => ["hasMany", Rp_advanced_filter::class, "report_id"],
 
         "getFilterLinkDetails" => ["hasMany", Rp_report_filter_link_detail::class, "rp_report_id"],
 

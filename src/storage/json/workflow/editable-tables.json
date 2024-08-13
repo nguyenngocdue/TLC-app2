@@ -489,7 +489,7 @@
     "rp_reports_03": {
         "name": "rp_reports_03",
         "entity-type": "rp_reports",
-        "editable-table": "rp_report_filter_details",
+        "editable-table": "rp_advanced_filters",
         "button_add_a_new_line": "true",
         "item_datasource": null,
         "eloquent_function_name": null,

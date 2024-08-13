@@ -8,7 +8,7 @@ class Rp_advanced_filter extends ModelExtended
 {
     protected $fillable = [
         "id", /* "title", */
-        "rp_report_id",
+        "report_id",
         "data_index",
         "entity_type",
         "bw_list_ids",
@@ -26,7 +26,7 @@ class Rp_advanced_filter extends ModelExtended
     public static $eloquentParams = [
         'getBlackOrWhite' => ['belongsTo', Term::class, 'black_or_white'],
         'getControlType' => ['belongsTo', Term::class, 'control_type'],
-        'getReport' => ['belongsTo', Rp_report::class, 'rp_report_id'],
+        'getReport' => ['belongsTo', Rp_report::class, 'report_id'],
         'getListenReducer' => ['belongsTo', Rp_listen_reducer::class, 'listen_reducer_id'],
 
     ];
@@ -51,20 +51,21 @@ class Rp_advanced_filter extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
-    // public function getManyLineParamsFilterDetails()
-    // {
-    //     return [
-    //         ["dataIndex" => 'id'],
-    //         ["dataIndex" => 'order_no',],
-    //         ["dataIndex" => 'data_index'],
-    //         ["dataIndex" => 'entity_type'],
-    //         ["dataIndex" => 'bw_list_ids'],
-    //         ["dataIndex" => 'black_or_white'],
-    //         ["dataIndex" => 'is_required'],
-    //         ["dataIndex" => 'default_value'],
-    //         ["dataIndex" => 'allow_clear'],
-    //         ["dataIndex" => 'is_multiple'],
-    //         ["dataIndex" => 'control_type'],
-    //     ];
-    // }
+    public function getManyLineParams()
+    {
+        return [
+            ["dataIndex" => 'id'],
+            ["dataIndex" => 'order_no',],
+            ["dataIndex" => 'report_id',],
+            ["dataIndex" => 'data_index'],
+            ["dataIndex" => 'entity_type'],
+            ["dataIndex" => 'bw_list_ids'],
+            ["dataIndex" => 'black_or_white'],
+            ["dataIndex" => 'is_required'],
+            ["dataIndex" => 'default_value'],
+            ["dataIndex" => 'allow_clear'],
+            ["dataIndex" => 'is_multiple'],
+            ["dataIndex" => 'control_type'],
+        ];
+    }
 }
