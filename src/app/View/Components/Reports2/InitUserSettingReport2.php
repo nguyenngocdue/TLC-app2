@@ -73,7 +73,7 @@ class InitUserSettingReport2
             $paramsInConfig = $this->createDefaultParams($rpFilters);
             $paramsInUser = $settings[$entityType][$this->entityType2][$storedFilterKey] ?? [];
             $paramsToUpdate = self::getParamsToUpdates($paramsInConfig, $paramsInUser);
-            if($paramsToUpdate) {
+            if(!empty($paramsToUpdate)) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
                 $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;
                 $isSave = True;
@@ -84,6 +84,7 @@ class InitUserSettingReport2
             $settings[$entityType][$this->entityType2][$storedFilterKey] = $defaultParams;
             $isSave = True;    
         }
+        // dump($isSave);
         if($isSave) {
             self::updateUserSettingRp($settings);
         }
@@ -114,7 +115,7 @@ class InitUserSettingReport2
         if($isSave) {
             self::updateUserSettingRp($settings);
         }
-        $params = $settings[$entityType][$this->entityType2][$storedFilterKey];
+        $params = $settings[$entityType][$this->entityType2][$storedFilterKey] ?? [];
         return  $params;
     }
 }

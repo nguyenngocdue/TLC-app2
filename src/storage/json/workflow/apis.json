@@ -333,6 +333,9 @@
     "loggers": {
         "name": "loggers"
     },
+    "pj_module_types": {
+        "name": "pj_module_types"
+    },
     "pj_modules": {
         "name": "pj_modules"
     },
@@ -485,8 +488,11 @@
         "name": "rp_columns",
         "storeEmpty_and_updateShort": "true"
     },
-    "rp_filter_modes": {
-        "name": "rp_filter_modes",
+    "rp_filter_links": {
+        "name": "rp_filter_links"
+    },
+    "rp_filters": {
+        "name": "rp_filters",
         "storeEmpty_and_updateShort": "true"
     },
     "rp_letter_footers": {
@@ -494,6 +500,10 @@
     },
     "rp_letter_heads": {
         "name": "rp_letter_heads"
+    },
+    "rp_listen_reducers": {
+        "name": "rp_listen_reducers",
+        "storeEmpty_and_updateShort": "true"
     },
     "rp_page_block_details": {
         "name": "rp_page_block_details",
@@ -503,8 +513,8 @@
         "name": "rp_pages",
         "storeEmpty_and_updateShort": "true"
     },
-    "rp_report_filter_details": {
-        "name": "rp_report_filter_details",
+    "rp_report_filter_link_details": {
+        "name": "rp_report_filter_link_details",
         "storeEmpty_and_updateShort": "true"
     },
     "rp_reports": {

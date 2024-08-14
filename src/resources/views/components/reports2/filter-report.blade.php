@@ -1,3 +1,10 @@
+{{-- @dd($currentParams) --}} 
+{{-- @if($warningFilters)
+    @foreach($warningFilters as $filter)
+        <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
+    @endforeach
+@endif
+
 {{-- @dump($filterLinkDetails) --}}
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
@@ -47,7 +54,7 @@
                                                 <span class="text-red-400" title="required">*</span>
                                             @endif
                                         </a>
-                                        <x-renderer.report2.filter-report-item 
+                                        <x-renderer.report2.filter-report-item
                                             :filter="$filter"
                                             :selected="$selected"    
                                         />
