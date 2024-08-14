@@ -86,4 +86,4 @@
     const typeEntity = @json($type);
     const ownerId = @json($ownerId);
 </script>
-<script src="{{ asset('js/components/FullCalendarViewAll.js') }}"></script>
+<script src="{{ asset('js/components/FullCalendarViewAll-20240814.js') }}"></script>
