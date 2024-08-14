@@ -14,6 +14,7 @@ use App\View\Components\Formula\NCR_Report_Type;
 use App\View\Components\Formula\TSO_GetAssignee1;
 use App\View\Components\Formula\User_PositionRendered;
 use App\View\Components\Formula\Wir_NameRendered;
+use Illuminate\Support\Facades\Log;
 
 trait TraitEntityFormula
 {
@@ -75,6 +76,8 @@ trait TraitEntityFormula
                     //     $value = (new Wir_NameRendered())($item);
                     //     break;
                 case "TSO_GetAssignee1":
+                    $assignee1 = $item['assignee_1'];
+                    if ($assignee1) continue 2; // if timesheet has assignee_1 during update, do not update
                     $value = (new TSO_GetAssignee1())($type);
                     break;
                 case "NCR_Report_Type":
