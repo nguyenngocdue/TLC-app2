@@ -29,12 +29,11 @@ class FilterReport extends Component
         $entityType = $rp->entity_type;
         $entityType2 = $this->entityType2;
         
-        $insInitUserSetting = InitUserSettingReport2::getInstance($entityType2);
-
+        $ins = InitUserSettingReport2::getInstance($entityType2);
         if($paramsUrl = $this->paramsUrl){
-            $currentParams = $insInitUserSetting->initParamsUrlUserSettingRp($entityType, $paramsUrl, $rpFilters);
+            $currentParams = $ins->initParamsUrlUserSettingRp($entityType, $paramsUrl, $rpFilters);
         } else {
-            $currentParams = $insInitUserSetting->initParamsUserSettingRp($entityType, $filterLinkDetails, $rpFilters);
+            $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters);
         }
         return view('components.reports2.filter-report', [
             'entityType' => $entityType,

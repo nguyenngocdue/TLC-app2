@@ -17,7 +17,7 @@ class FilterReportItem extends Component
     use TraitListenerControlReport;
 
     public function __construct(
-        private $filters,
+        private $filter,
         private $id = "",
         private $name = "",
         private $tableName = "",
@@ -34,30 +34,30 @@ class FilterReportItem extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
         if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
 
-        $filters = $this->filters;
+        $filter = $this->filter;
 
 
-        $entityType = $filters->entity_type;
+        $entityType = $filter->entity_type;
         $this->tableName = Str::plural($entityType);
-        $this->id = $filters->id;
-        $this->multiple = (bool)$filters->is_multiple;
-        $this->name = $filters->is_multiple ? Str::plural($filters->data_index) : $filters->data_index;
-        $this->allowClear = (bool)$filters->allow_clear;
+        $this->id = $filter->id;
+        $this->multiple = (bool)$filter->is_multiple;
+        $this->name = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
+        $this->allowClear = (bool)$filter->allow_clear;
     }
 
     private function getListenReducer()
     {
-        return $this->filters->getListenReducer;
+        return $this->filter->getListenReducer;
     }
 
     private function getDataSource()
     {
-        $entityType = $this->filters->entity_type;
+        $entityType = $this->filter->entity_type;
         $modelClass = ModelData::initModelByField($entityType);
         if ($modelClass) {
             $db = $modelClass::query();
             try {
-                $listenReducer = $this->filters->getListenReducer;
+                $listenReducer = $this->filter->getListenReducer;
                 $triggerName = $listenReducer->triggers;
                 $db = $db->select('id', 'name', 'description', $triggerName)
                     ->orderBy('name')

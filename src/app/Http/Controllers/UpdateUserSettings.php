@@ -384,8 +384,7 @@ class UpdateUserSettings extends Controller
             $paramsInput = $this->getFilterReport2($inputValue, true);
         }
         
-        $filterLink = Rp_report::find($rpId)->getDeep()->getFilterLinkDetails->first()->getFilterLink;
-        $storedFilterKey = $filterLink->stored_filter_key;
+        $storedFilterKey = Rp_report::find($rpId)->getDeep()->getFilterLinkDetails->first()->getFilterLink->stored_filter_key ?? $rpId;
         $settings[$entityType][$entityType2][$storedFilterKey] = $paramsInput;
         return $settings;
     }
