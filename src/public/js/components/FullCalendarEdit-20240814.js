@@ -197,7 +197,12 @@ function callApiGetEvents(id, url) {
                         var tagPhase = info.event.extendedProps.tag_phase || ''
                         // var nameProject = info.event.extendedProps.name_project || "";
                         var remark = info.event.extendedProps.remark || '(No remark)'
-                        var title = `${eventTitle}\n${eventSubTitle}\n${remark}\n#${info.event.id}`
+                        let title = ''
+                        if (eventTitle == eventSubTitle) {
+                            title = `${eventTitle}\n${remark}\n#${info.event.id}`
+                        } else {
+                            title = `${eventTitle}\n${eventSubTitle}\n${remark}\n#${info.event.id}`
+                        }
                         var eventTitleHTML = `
                         <div class="event-title w-full" title="${title}">
                             <div class="flex items-baseline justify-between" title="${title}">
@@ -207,7 +212,7 @@ function callApiGetEvents(id, url) {
                                 <div class="font-bold">
                                 ${eventTitle}
                                 </div>
-                                ${eventSubTitle}
+                                ${eventTitle == eventSubTitle ? '' : eventSubTitle}
                                 <span class='border1 rounded bg-gray-400 block text-center italic'>
                                 ${tagPhase}
                                 </span>
