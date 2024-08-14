@@ -27,6 +27,8 @@ Please find below the timesheet status for the following team members:
 
 As a team leader, you are required to complete the approval process before the deadline: 23:59:59 on {{$deadline}}.
 
+Failing to approve these timesheets on time will result in deducting your merit points.
+
 Best Regard,
 
 {{ config('app.name') }}
