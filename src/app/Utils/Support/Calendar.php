@@ -72,7 +72,7 @@ class Calendar
         $remark = $item->remark ?? '';
         return "<div>"
             . ($nameSubTask ? "<div class='text-sm'>{$nameSubTask}</div>" : "")
-            . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
+            // . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
             . "</div>";
     }
     public static function renderTitle($item)
