@@ -58,7 +58,7 @@ function callApiGetEvents(id, url) {
                     },
                     timeZone: 'local',
                     initialDate: response.meta,
-                    height: 850,
+                    height: 900,
                     // contentHeight: 830,
                     scrollTime: '06:30:00',
                     aspectRatio: 2,
