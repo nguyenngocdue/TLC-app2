@@ -189,6 +189,7 @@ function callApiGetEvents(id, url) {
                         }
                     },
                     eventContent: function (info) {
+                        console.log(info.event.id)
                         var timeText = info.timeText
                         var eventTitle = info.event.title
                         var eventSubTitle = info.event.extendedProps.sub_title || ''
@@ -197,7 +198,7 @@ function callApiGetEvents(id, url) {
                         // var nameProject = info.event.extendedProps.name_project || "";
                         var remark = info.event.extendedProps.remark || '(No remark)'
                         var eventTitleHTML = `
-                        <div class="event-title w-full" title="${remark}">
+                        <div class="event-title w-full" title="${remark}\n#${info.event.id}">
                             <div class="flex items-baseline justify-between" title="${remark}">
                                 <div class="" style="font-size:0.65rem">${timeText}</div>
                                 ${tagSubProject}
@@ -207,7 +208,7 @@ function callApiGetEvents(id, url) {
                                 <span class='border1 rounded bg-gray-400 block text-center italic'>
                                 ${tagPhase}
                                 </span>
-                                ${remark}
+                                ${remark}                               
                         </div>`
                         return {
                             html: eventTitleHTML,
