@@ -11,7 +11,7 @@ This is a friendly reminder to submit your timesheet for this week.
 
 As per company policy, the deadline is 23:59:59 on {{$deadline}}.
 
-Failing to submit your timesheet on time will result in deducting your merit points.
+Failure to submit your timesheet on time will result in a deduction of your merit points.
 
 To unsubscribe from this reminder, please uncheck it in <a href="{{route("me.index")}}">My Profile</a>.
 
