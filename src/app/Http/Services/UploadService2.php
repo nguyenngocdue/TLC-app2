@@ -118,7 +118,7 @@ class UploadService2
                                 'url_thumbnail' => isset($thumbnailPath) ? $thumbnailPath : "",
                                 'url_media' => $imagePath,
                                 'url_folder' => $path,
-                                'filename' => $fileNameWithoutExt . $fileExt,
+                                'filename' => $fileNameWithoutExt . "." . $fileExt,
                                 // 'filename' => basename($imagePath),
                                 'extension' => $fileExt,
                                 'category' => $fields[$fieldName],
