@@ -134,9 +134,9 @@
     "_tb_date": {
         "name": "_tb_date",
         "column_name": "tb_date",
-        "column_type": "datetime",
+        "column_type": "date",
         "label": "Travel Business Date",
-        "control": "picker_datetime",
+        "control": "picker_date",
         "align": "",
         "col_span": "",
         "width": "",
@@ -178,7 +178,7 @@
     "_tb_project": {
         "name": "_tb_project",
         "column_name": "tb_project",
-        "column_type": "bigint unsigned",
+        "column_type": "varchar(255)",
         "label": "TB Projects",
         "control": "text",
         "align": "",
@@ -244,7 +244,7 @@
     "_approver_id": {
         "name": "_approver_id",
         "column_name": "approver_id",
-        "column_type": "bigint unsigned",
+        "column_type": "varchar(255)",
         "label": "Approver ID",
         "control": "text",
         "align": "",

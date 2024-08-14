@@ -112,9 +112,9 @@
     "_ot_date": {
         "name": "_ot_date",
         "column_name": "ot_date",
-        "column_type": "datetime",
+        "column_type": "date",
         "label": "OT Date",
-        "control": "picker_datetime",
+        "control": "picker_date",
         "align": "",
         "col_span": "",
         "width": "",
