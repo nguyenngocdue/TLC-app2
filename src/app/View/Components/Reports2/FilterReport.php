@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class FilterReport extends Component
 {
@@ -15,6 +16,21 @@ class FilterReport extends Component
         private $paramsUrl = [],
 
     ) {}
+
+    private function getParamsWarning($rpFilter, $currentParams)
+    {
+        $result = [];
+        foreach ($rpFilter as $filter) {
+            if ($filter->is_required) {
+                $dataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
+                if (!isset($currentParams[$dataIndex]) || is_null($currentParams[$dataIndex])) {
+                    $result[$dataIndex] = $filter->title ? $filter->title : $filter->entity_type;
+                }
+            }
+        }
+        return $result;
+    }
+    
 
     public function render()
     {
@@ -34,6 +50,9 @@ class FilterReport extends Component
         } else {
             $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters);
         }
+
+        $paramsWarning = $this->getParamsWarning($rpFilters, $currentParams);
+        
         return view('components.reports2.filter-report', [
             'entityType' => $entityType,
             'reportName' => $rpName,
@@ -44,7 +63,8 @@ class FilterReport extends Component
             'routeFilter' => route('filter_report.update', $rp->id),
             'refreshPage' => $this->refreshPage,
             'filterLinkDetails' => $filterLinkDetails,
-            'rpFilters' => $rpFilters
+            'rpFilters' => $rpFilters,
+            'paramsWarning' => $paramsWarning,
         ]);
     }
 }

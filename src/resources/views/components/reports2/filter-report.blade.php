@@ -1,6 +1,6 @@
 {{-- @dd($currentParams) --}} 
-{{-- @if($warningFilters)
-    @foreach($warningFilters as $filter)
+@if($paramsWarning)
+    @foreach($paramsWarning as $filter)
         <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
     @endforeach
 @endif
@@ -45,7 +45,7 @@
                                         ($filter->is_multiple ? Str::plural($filter->entity_type) : Str::singular($filter->entity_type)); 
                                         
                                         $editedDataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : Str::singular($filter->data_index); 
-                                        $selected =  $currentParams[$editedDataIndex] ?? [];
+                                        $selected = $currentParams[$editedDataIndex] ?? [];
                                     @endphp
                                     <div class="col-span-2">
                                         <a class="" target="_blank" href="{{ route('rp_filters.edit', $filter->id) }}" title="id : {{$filter->id}}">
