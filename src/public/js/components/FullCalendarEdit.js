@@ -66,6 +66,7 @@ function callApiGetEvents(id, url) {
                     locale: 'en',
                     firstDay: 1,
                     // slotDuration: '00:15:00',
+                    eventOverlap: false,
                     dayMaxEvents: true,
                     weekNumbers: true,
                     editable: !readOnly,
