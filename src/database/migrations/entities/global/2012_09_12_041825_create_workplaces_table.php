@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('workplaces', function (BlueprintExtended $table) {
             $table->id();
@@ -29,6 +29,10 @@ return new class extends Migration
             $table->time('standard_start_time')->nullable();
             $table->time('standard_start_break')->nullable();
             $table->string('weekend_days')->nullable();
+
+            $table->unsignedInteger('remind_timesheet_day')->nullable();
+            $table->time('remind_timesheet_time')->nullable();
+
             $table->string('slug')->unique();
             $table->appendCommonFields();
         });

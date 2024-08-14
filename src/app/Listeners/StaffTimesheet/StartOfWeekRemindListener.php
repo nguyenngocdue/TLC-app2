@@ -124,7 +124,7 @@ class StartOfWeekRemindListener
     public function handle(object $event): void
     {
         //
-        Log::info("StartOfWeekRemindListener is triggered.");
+        // Log::info("StartOfWeekRemindListener is triggered.");
 
         $userLists = $this->makeUserList();
 
@@ -145,7 +145,7 @@ class StartOfWeekRemindListener
                     ->bcc(env('MAIL_ARCHIVE_BCC'))
                     ->send($mail);
             } catch (\Exception $e) {
-                Log::error(get_class() . $e->getMessage() . $e->getFile() . $e->getLine());
+                Log::error(get_class() . " " . $e->getMessage() . $e->getFile() . $e->getLine());
             }
         }
     }

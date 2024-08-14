@@ -5,6 +5,11 @@ namespace App\Console;
 // use App\Console\Commands\CreateControllerEntityCommand;
 // use App\Console\Commands\CreateTableRelationshipCommand;
 
+use App\Events\CleanUpTrashEvent;
+use App\Events\InspectionSignoff\SignOffRemindEvent;
+use App\Events\StaffTimesheet\EndOfWeekRemindEvent;
+use App\Events\StaffTimesheet\StartOfWeekRemindEvent;
+use App\Events\TransferDiginetDataEvent;
 use App\Utils\Constant;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -22,7 +27,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule
             ->call(function () {/* Do nothing */
-                Log::channel('schedule_heartbeat_channel')->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
+                Log::channel('schedule_heartbeat_channel')
+                    ->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
             })
             ->everySixHours()
             // ->appendOutputTo(storage_path("logs/schedule_test_minute.log"))
@@ -30,8 +36,9 @@ class Kernel extends ConsoleKernel
 
         $schedule
             ->call(function () {
-                event(new \App\Events\InspectionSignoff\SignOffRemindEvent());
-                Log::channel('schedule_remind_signoff_channel')->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
+                event(new SignOffRemindEvent());
+                Log::channel('schedule_remind_signoff_channel')
+                    ->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
             })
             ->cron('0 10 * * 1,3,5') // 0 minute, 10 hour, any day of the month, any month, Monday/Wednesday/Friday
             ->timezone('America/New_York')
@@ -42,8 +49,9 @@ class Kernel extends ConsoleKernel
         // transfer database from Diginet Data 
         $schedule
             ->call(function () {
-                event(new \App\Events\TransferDiginetDataEvent());
-                Log::channel('schedule_diginet_sync_channel')->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
+                event(new TransferDiginetDataEvent());
+                Log::channel('schedule_diginet_sync_channel')
+                    ->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
             })
             ->cron('0 22 * * *') // 0 minute, 22:00, every day of month, every month, day of week
             ->timezone("Asia/Ho_Chi_Minh")
@@ -52,13 +60,24 @@ class Kernel extends ConsoleKernel
 
         $schedule
             ->call(function () {
-                event(new \App\Events\CleanUpTrashEvent());
-                Log::channel('schedule_cleanup_trash_channel')->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
+                event(new CleanUpTrashEvent());
+                Log::channel('schedule_cleanup_trash_channel')
+                    ->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
             })
             ->dailyAt('21:00')
             ->timezone("Asia/Ho_Chi_Minh")
             // ->appendOutputTo(storage_path("logs/schedule_clean_up_trash.log"))
             ->description("Daily at 21:00 Ho_Chi_Minh Time: Clean Up Trash.");;
+
+        $schedule->call(function () {
+            event(new StartOfWeekRemindEvent());
+        })->cron('0 8 * * 1')
+            ->timezone("Asia/Ho_Chi_Minh")
+            ->description("Every Monday at 08:00 Ho_Chi_Minh Time: send timesheet reminder to managers.");
+
+        $schedule->call(function () {
+            event(new EndOfWeekRemindEvent());
+        })->hourly();
     }
 
     /**`

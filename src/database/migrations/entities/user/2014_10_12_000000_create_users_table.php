@@ -68,6 +68,9 @@ return new class extends Migration
             $table->string("time_zone")->nullable();
             $table->text("standard_signature")->nullable();
             $table->json("settings");
+
+            $table->boolean("unsubscribe_ts_weekly_reminder_for_staff")->nullable();
+
             $table->rememberToken();
             $table->appendCommonFields();
         });

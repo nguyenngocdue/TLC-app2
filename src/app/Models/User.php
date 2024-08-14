@@ -81,6 +81,8 @@ class User extends ModelExtended implements
         "show_on_org_chart",
         "ts_proxy_approver_id",
 
+        "unsubscribe_ts_weekly_reminder_for_staff",
+
         "erp_site",
         "erp_cashflow",
     ];

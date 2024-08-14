@@ -100,7 +100,33 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "0 is Sunday, 1 is Monday,... comma seperated",
+        "control_extra": "0: SUN, 1: MON, 2: TUE, 3: WED, 4: THU, 5: FRI, 6: SAT, comma separated",
+        "textarea_rows": ""
+    },
+    "_remind_timesheet_day": {
+        "name": "_remind_timesheet_day",
+        "column_name": "remind_timesheet_day",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "0: SUN, 1: MON, 2: TUE, 3: WED, 4: THU, 5: FRI, 6: SAT",
+        "textarea_rows": ""
+    },
+    "_remind_timesheet_time": {
+        "name": "_remind_timesheet_time",
+        "column_name": "remind_timesheet_time",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "UTC+0, have to be ended with :00 for cron",
         "textarea_rows": ""
     },
     "_description": {

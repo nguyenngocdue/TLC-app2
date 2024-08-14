@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Utils;
 
+use App\Events\CleanUpTrashEvent;
+use App\Events\InspectionSignoff\SignOffRemindEvent;
+use App\Events\StaffTimesheet\EndOfWeekRemindEvent;
+use App\Events\StaffTimesheet\StartOfWeekRemindEvent;
+use App\Events\TransferDiginetDataEvent;
 use App\Events\WssDemoChannel;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Utils\TestFunction\SendEmail;
@@ -32,19 +37,23 @@ class TestCronJobController extends Controller
             switch ($case) {
                 case 'start_of_week_timesheet_remind':
                     dump("StartOfWeekTimesheetRemindEvent emitted.");
-                    event(new \App\Events\StaffTimesheet\StartOfWeekRemindEvent());
+                    event(new StartOfWeekRemindEvent());
+                    break;
+                case 'end_of_week_timesheet_remind':
+                    dump("EndOfWeekTimesheetRemindEvent emitted.");
+                    event(new EndOfWeekRemindEvent());
                     break;
                 case 'sign_off_remind':
                     dump("SignOffRemindEvent emitted.");
-                    event(new \App\Events\InspectionSignoff\SignOffRemindEvent());
+                    event(new SignOffRemindEvent());
                     break;
                 case 'transfer_diginet_data':
                     dump("TransferDiginetDataEvent emitted.");
-                    event(new \App\Events\TransferDiginetDataEvent());
+                    event(new TransferDiginetDataEvent());
                     break;
                 case 'clean_up_trash':
                     dump("CleanUpTrashEvent emitted.");
-                    event(new \App\Events\CleanUpTrashEvent());
+                    event(new CleanUpTrashEvent());
                     break;
                 case 'send_test_mail':
                     dump("Test mail sent.");

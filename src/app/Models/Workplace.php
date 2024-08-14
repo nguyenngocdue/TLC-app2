@@ -8,10 +8,18 @@ use Carbon\Carbon;
 class Workplace extends ModelExtended
 {
     protected $fillable = [
-        "name", "description",
-        "standard_working_hour", "standard_start_time", "standard_start_break",
-        "break_duration_in_min", "def_assignee", "slug",
-        "travel_place_id", "weekend_days",
+        "name",
+        "description",
+        "standard_working_hour",
+        "standard_start_time",
+        "standard_start_break",
+        "break_duration_in_min",
+        "def_assignee",
+        "slug",
+        "travel_place_id",
+        "weekend_days",
+        "remind_timesheet_day",
+        "remind_timesheet_time",
     ];
 
     public static $statusless = true;

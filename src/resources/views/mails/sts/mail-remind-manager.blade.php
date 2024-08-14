@@ -1,10 +1,12 @@
 <x-mail::message>
 # Weekly Staff Timesheet Status Report
 
-Dear {{$user_name}}, this is the timesheet status of the following staff:
+Dear {{$user_name}},
+
+Please find below the timesheet status for the following team members:
 
 @if($user_name != $def_assignee)
-(You received this email because you are a proxy approver of {{$def_assignee}})
+(You received this email because you are a proxy approver for {{$def_assignee}})
 @endif
 
 {{-- @php Log::info($staff_list) @endphp --}}
@@ -12,7 +14,7 @@ Dear {{$user_name}}, this is the timesheet status of the following staff:
 {{-- |{{$value['staff_name']}}|@foreach($value['links'] as $link) <x-mail::status href="{{$link['href']}}">{{$link['status']}}</x-mail::status> @endforeach| --}}
 
 <x-mail::table>
-    |**Team Member** |**Link** |
+    |**Team Member** |**Status** |
     | :------------- |:--------|
     @foreach($staff_list as $key => $value)
     |{{$value['staff_name']}}|{!!$value['linkStr']!!}|
@@ -23,7 +25,7 @@ Dear {{$user_name}}, this is the timesheet status of the following staff:
     Open Staff Timesheet App
 </x-mail::button>
 
-As a team leader, you need to approve the timesheet before the deadline (by 23:59:59 {{$deadline}}).
+As a team leader, you are required to complete the approval process before the deadline: 23:59:59 on {{$deadline}}.
 
 Best Regard,
 

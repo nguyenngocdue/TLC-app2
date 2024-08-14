@@ -143,6 +143,7 @@
     "_getOtTeams": {
         "name": "_getOtTeams",
         "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_getPosts": {
@@ -156,6 +157,7 @@
         "name": "_getProdRoutingsOfCouncilMember",
         "profile_hidden": "true",
         "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_getProdRoutingsOfExternalInspector": {
@@ -169,6 +171,7 @@
         "name": "_getQaqcInspTmplsOfCouncilMember",
         "profile_hidden": "true",
         "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_getQaqcInspTmplsOfExternalInspector": {
@@ -188,12 +191,14 @@
     "_getSiteTeams": {
         "name": "_getSiteTeams",
         "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_getSubProjectsOfCouncilMember": {
         "name": "_getSubProjectsOfCouncilMember",
         "profile_hidden": "true",
         "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_getSubProjectsOfExternalInspector": {
@@ -213,6 +218,7 @@
     "_getTshtTeams": {
         "name": "_getTshtTeams",
         "profile_readonly": "true",
+        "me_hidden": "true",
         "me_readonly": "true"
     },
     "_guid": {
@@ -360,6 +366,13 @@
         "me_hidden": "true",
         "me_readonly": "true"
     },
+    "_seniority_level": {
+        "name": "_seniority_level",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
     "_settings": {
         "name": "_settings",
         "profile_hidden": "true",
@@ -369,6 +382,13 @@
     },
     "_show_on_beta": {
         "name": "_show_on_beta",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_show_on_org_chart": {
+        "name": "_show_on_org_chart",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_hidden": "true",
@@ -397,6 +417,15 @@
         "profile_readonly": "true",
         "me_hidden": "true",
         "me_readonly": "true"
+    },
+    "_ts_proxy_approver_id": {
+        "name": "_ts_proxy_approver_id",
+        "profile_readonly": "true",
+        "me_readonly": "true"
+    },
+    "_unsubscribe_ts_weekly_reminder_for_staff": {
+        "name": "_unsubscribe_ts_weekly_reminder_for_staff",
+        "profile_readonly": "true"
     },
     "_updated_at": {
         "name": "_updated_at",

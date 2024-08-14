@@ -19,4 +19,17 @@
     .fc-event-main {
         overflow: hidden;
     }
+    .fc-timegrid-slots table tbody tr:nth-child(even){
+        background-color: #efefef;
+        border-radius: 0;
+    }
+    .fc .fc-scrollgrid tbody > tr:last-child td:last-child {
+        border-radius: 0;
+    }
+    .fc .fc-scrollgrid tbody > tr:last-child td:first-child {
+        border-radius: 0;
+    }
+    .fc .fc-scrollgrid {
+        border-radius: 0;
+    }
 </style>
