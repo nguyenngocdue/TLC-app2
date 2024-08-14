@@ -42,17 +42,27 @@ class InitUserSettingReport2
     }
     
 
-    public static function getParamsToUpdates($paramsInConfig, $paramsInUser)
+    public static function getParamsToUpdate($paramsInConfig, $paramsInUser, $ignoreNullsInConfig = false)
     {
-        $pramsToUpdate = [];
-        foreach($paramsInConfig as $key => $value) {
-            if(empty($value)) continue;
-            if (!isset($paramsInUser[$key]) || isset($paramsInUser[$key]) && empty($paramsInUser[$key])){
-                $pramsToUpdate[$key] = $value;
+        $paramsToUpdate = [];
+    
+        foreach ($paramsInConfig as $key => $value) {
+            if ($ignoreNullsInConfig && is_null($value)) {
+                continue;
+            }
+    
+            if (isset($paramsInUser[$key]) && is_null($paramsInUser[$key])) {
+                continue;
+            }
+    
+            if (!isset($paramsInUser[$key]) || empty($paramsInUser[$key])) {
+                $paramsToUpdate[$key] = $value ? $paramsInUser[$key] : $value;
             }
         }
-        return $pramsToUpdate;
+    
+        return $paramsToUpdate;
     }
+    
 
     function updateUserSettingRp($settings) {
         $user = User::find(Auth::id());
@@ -72,7 +82,7 @@ class InitUserSettingReport2
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInConfig = $this->createDefaultParams($rpFilters);
             $paramsInUser = $settings[$entityType][$this->entityType2][$storedFilterKey] ?? [];
-            $paramsToUpdate = self::getParamsToUpdates($paramsInConfig, $paramsInUser);
+            $paramsToUpdate = self::getParamsToUpdate($paramsInConfig, $paramsInUser, true);
             if(!empty($paramsToUpdate)) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
                 $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;
@@ -101,7 +111,7 @@ class InitUserSettingReport2
             unset($paramsUrl['stored_filter_key']);
             $paramsInConfig = $this->createDefaultParams($rpFilters);
             $paramsInUser = $paramsUrl;
-            $paramsToUpdate = self::getParamsToUpdates($paramsInConfig, $paramsInUser);
+            $paramsToUpdate = self::getParamsToUpdate($paramsInConfig, $paramsInUser, false);
             if($paramsToUpdate) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
                 $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;
