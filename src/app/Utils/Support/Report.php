@@ -517,43 +517,4 @@ class Report
         return true;
     }
 
-    public static function getDefaultValuesFilterByFilterDetail($filterDetails)
-    {
-        $params = [];
-        foreach ($filterDetails as $filter) {
-            $val = $filter->default_value;
-            $filterName = Report::changeFieldOfFilter($filter);
-            if (!empty($val)) {
-                $defaultValues = explode(',', $val);
-                $params[$filterName] = $defaultValues;
-            } else {
-                $params[$filterName] = $val;
-            }
-        }
-        return $params;
-    }
-
-    public static function editColumnNameByFilterDetails($filterDetails)
-    {
-        $params = [];
-        foreach ($filterDetails as $filter) $params[] = Report::changeFieldOfFilter($filter);
-        return $params;
-    }
-
-    public static function changeFieldOfFilter($filter)
-    {
-        return  str_replace('_name', '_id', $filter->getColumn->data_index);
-    }
-
-    public static function arraysAreDifferent($array1, $array2)
-    {
-        $diffKeys = array_diff_key($array1, $array2) || array_diff_key($array2, $array1);
-        $diffValues = array_udiff_assoc($array1, $array2, function ($a, $b) {
-            return ($a === $b) ? 0 : 1;
-        });
-        if ($diffKeys || !empty($diffValues)) {
-            return true;
-        }
-        return false;
-    }
 }

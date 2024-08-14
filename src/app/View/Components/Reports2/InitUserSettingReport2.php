@@ -28,7 +28,6 @@ class InitUserSettingReport2
     private function createDefaultParams($rpFilters)
     {
         $params = [];
-    
         foreach ($rpFilters as $filter) {
             $defaultVal = $filter->default_value;
             $dataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
@@ -47,19 +46,12 @@ class InitUserSettingReport2
         $paramsToUpdate = [];
     
         foreach ($paramsInConfig as $key => $value) {
-            if ($ignoreNullsInConfig && is_null($value)) {
-                continue;
-            }
-    
-            if (isset($paramsInUser[$key]) && is_null($paramsInUser[$key])) {
-                continue;
-            }
-    
+            if ($ignoreNullsInConfig && is_null($value)) continue;
+            if (isset($paramsInUser[$key]) && is_null($paramsInUser[$key])) continue;
             if (!isset($paramsInUser[$key]) || empty($paramsInUser[$key])) {
                 $paramsToUpdate[$key] = $value ? $paramsInUser[$key] : $value;
             }
         }
-    
         return $paramsToUpdate;
     }
     
@@ -68,7 +60,7 @@ class InitUserSettingReport2
         $user = User::find(Auth::id());
         $user->settings = $settings;
         $user->update();
-        toastr()->success('User Settings Saved Successfully', 'Successfully');
+        toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
     }
 
     public function initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters){
@@ -101,6 +93,7 @@ class InitUserSettingReport2
         $params = $settings[$entityType][$this->entityType2][$storedFilterKey] ?? [];
         return  $params;
     }
+
     function initParamsUrlUserSettingRp($entityType , $paramsUrl, $rpFilters){
         $storedFilterKey = $paramsUrl['stored_filter_key'] ?? $paramsUrl['report_id'];
         unset($paramsUrl['report_id']);

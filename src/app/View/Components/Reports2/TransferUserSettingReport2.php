@@ -2,8 +2,6 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Models\Rp_report;
-use App\Utils\Support\Report;
 
 class TransferUserSettingReport2
 {
@@ -41,34 +39,6 @@ class TransferUserSettingReport2
             }
             $settings[$entityType][$entityType2][$storesKeyFilter] = $currentParamsUser;
         }
-        return $settings;
-    }
-
-    private function updateExistingReport($settings, $filterDetailsRpLink, $paramsCurrentRp, $entityType, $entityType2, $reportLinkId)
-    {
-        foreach ($filterDetailsRpLink as $filter) {
-            $filterName = Report::changeFieldOfFilter($filter);
-            if (array_key_exists($filterName, $paramsCurrentRp)) {
-                $settings[$entityType][$entityType2][$reportLinkId][$filterName] = !empty($paramsCurrentRp[$filterName]) ?
-                    $paramsCurrentRp[$filterName] :
-                    Report::getDefaultValuesFilterByFilterDetail($filterDetailsRpLink)[$filterName];
-            }
-        }
-        $settings[$entityType][$entityType2][$reportLinkId]['current_report_link'] = (string)$reportLinkId;
-
-        return $settings;
-    }
-
-    private function initializeReportLink($settings, $filterDetailsRpLink, $paramsCurrentRp, $entityType, $entityType2, $reportLinkId)
-    {
-        foreach ($filterDetailsRpLink as $filter) {
-            $filterName = Report::changeFieldOfFilter($filter);
-            if (array_key_exists($filterName, $paramsCurrentRp) && !empty($paramsCurrentRp[$filterName])) {
-                $settings[$entityType][$entityType2][$reportLinkId][$filterName] = $paramsCurrentRp[$filterName];
-            }
-        }
-        $settings[$entityType][$entityType2][$reportLinkId]['current_report_link'] = (string)$reportLinkId;
-
         return $settings;
     }
 }
