@@ -19,6 +19,8 @@ return new class extends Migration
 
         $schema->create('rp_filters', function (BlueprintExtended $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->boolean('is_active')->nullable();
             $table->unsignedBigInteger('report_id')->nullable();
             $table->string('data_index')->nullable();
             $table->string('entity_type')->nullable();
@@ -30,7 +32,6 @@ return new class extends Migration
             $table->boolean('allow_clear')->nullable();
             $table->boolean('is_multiple')->nullable();
             $table->unsignedBigInteger('control_type')->nullable();
-            $table->boolean('is_active')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();

@@ -9,6 +9,8 @@ class Rp_filter extends ModelExtended
     protected $fillable = [
         "id", /* "title", */
         "report_id",
+        "title",
+        "is_active",
         "data_index",
         "entity_type",
         "bw_list_ids",
@@ -19,7 +21,6 @@ class Rp_filter extends ModelExtended
         "allow_clear",
         "is_multiple",
         "control_type",
-        "is_active",
         "order_no",
         "owner_id",
     ];
@@ -57,6 +58,7 @@ class Rp_filter extends ModelExtended
         return [
             ["dataIndex" => 'id'],
             ["dataIndex" => 'order_no',],
+            ["dataIndex" => 'title',],
             ["dataIndex" => 'report_id',],
             ["dataIndex" => 'is_active',],
             ["dataIndex" => 'data_index'],

@@ -94,7 +94,7 @@
         "name": "_entity_type",
         "column_name": "entity_type",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",

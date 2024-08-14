@@ -13,7 +13,6 @@ class Dropdown9 extends Component
         private $filterLinkDetails = [],
         private $name = 'No name',
         private $currentParams = [],
-        private $title = "No title",
         private $allowClear = false,
         private $routeName = '',
 
@@ -77,7 +76,6 @@ class Dropdown9 extends Component
             'rpLinks' =>  $rpLinks,
             'name' => $this->name,
             'currentParams' => $currentParams,
-            'title' => $this->title,
             'allowClear' => $this->allowClear,
             'routeName' => $this->routeName,
             'entityType' => $this->entityType,
