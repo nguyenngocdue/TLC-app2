@@ -361,18 +361,15 @@ class UpdateUserSettings extends Controller
         return $settings;
     }
 
-    private function getAdvancedFilterReport2($dataInput, $reset = false)
+    private function getFilterReport2($dataInput, $reset = false)
     {
-        $advancedFilters = [];
+        $params = [];
         foreach ($dataInput as $key => $value) {
             if (!in_array($key, ['_token', 'action', 'entity_type', 'entity_type2', 'report_id', 'form_type'])) {
-                $advancedFilters[$key] = $reset ? null : $value;
-            }
-            if ($key === 'current_report_link') {
-                $advancedFilters['current_report_link'] = $value;
+                $params[$key] = $reset ? null : $value;
             }
         };
-        return $advancedFilters;
+        return $params;
     }
 
     private function updateReport2($request, $settings)
@@ -380,25 +377,16 @@ class UpdateUserSettings extends Controller
         $inputValue = $request->all();
         $entityType = $inputValue['entity_type'];
         $entityType2 = $inputValue['entity_type2'];
-        $rpLinkId = $inputValue['current_report_link'];
+        $rpId = $inputValue['report_id'];
 
-        $advancedFilters = $this->getAdvancedFilterReport2($inputValue);
+        $paramsInput = $this->getFilterReport2($inputValue);
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") {
-            $advancedFilters = $this->getAdvancedFilterReport2($inputValue, true);
+            $paramsInput = $this->getFilterReport2($inputValue, true);
         }
-
-
-        $insRp = Rp_report::find($rpLinkId)->getDeep()->getFilterModes;
-        $storedFilterKey = $insRp->where('linked_to_report_id', $rpLinkId)->first()->stored_filter_key;
-        $currentParamsUser = $settings[$entityType][$entityType2][$storedFilterKey];
-
-        foreach ($advancedFilters as $param => $value) {
-            if (empty($value)) continue;
-            if (!is_null($value)) {
-                $currentParamsUser[$param] = $value;
-            }
-        }
-        $settings[$entityType][$entityType2][$storedFilterKey] = $currentParamsUser;
+        
+        $filterLink = Rp_report::find($rpId)->getDeep()->getFilterLinkDetails->first()->getFilterLink;
+        $storedFilterKey = $filterLink->stored_filter_key;
+        $settings[$entityType][$entityType2][$storedFilterKey] = $paramsInput;
         return $settings;
     }
 

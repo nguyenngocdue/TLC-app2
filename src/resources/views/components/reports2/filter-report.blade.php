@@ -1,4 +1,4 @@
-{{-- @dd($currentParams) --}}
+{{-- @dump($currentParams) --}}
 {{-- @if($warningFilters)
     @foreach($warningFilters as $filter)
         <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
@@ -16,7 +16,7 @@
             @if(count($filterLinkDetails) > 1)
                 <x-reports2.dropdown9 
                     title="Mode" 
-                    name="current_report_link" 
+                    name="report_link" 
                     entityType="{{$entity_type}}"
                     entityType2="{{$entityType2}}"
                     reportId="{{$reportId}}"
@@ -32,10 +32,10 @@
         </div>
     {{-- @endif --}}
         <!-- Advanced Filter Section -->
-        <div class="col-span-{{count($advancedFilters->toArray()) > 0 ? 10 : 12 }}">
+        <div class="col-span-{{count($rpFilters->toArray()) > 0 ? 10 : 12 }}">
             <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
                 <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
-                @if($advancedFilters->toArray())
+                @if($rpFilters->toArray())
                     <form action="{{$routeFilter}}" id="{{ $reportName }}" method="POST">
                         @csrf
                         <input type="hidden" name='action' value="updateReport2">
@@ -44,25 +44,27 @@
                         <input type="hidden" name='report_id' value="{{$reportId}}">
                     
                         <div class="grid grid-cols-12 gap-4 items-baseline">
-                            @foreach ($advancedFilters as $advFilter)
-                                @php
-                                    $t = $advFilter->is_multiple ? Str::plural($advFilter->entity_type) : Str::singular($advFilter->entity_type); 
-                                    $title = is_null($t) ? '(Set title for column)' : ucwords(str_replace('_', ' ',$t)) ;
-                                    $selected =  "";
-                                @endphp
-                                
-                                <div class="col-span-2">
-                                    <a target="_blank" href="{{ route('rp_advanced_filters.edit', $advFilter->id) }}" title="id : {{$advFilter->id}}">
-                                        <span class='px-1'>{{$title}}</span>
-                                        @if($advFilter->is_required)
-                                            <span class="text-red-400" title="required">*</span>
-                                        @endif
-                                    </a>
-                                    <x-renderer.report2.filter-report-item 
-                                        :advancedFilter="$advFilter"
-                                        :selected="$selected"    
-                                    />
-                                </div>
+                            @foreach ($rpFilters as $filters)
+                                @if($filters->is_active)
+                                    @php
+                                        $t = $filters->is_multiple ? Str::plural($filters->entity_type) : Str::singular($filters->entity_type); 
+                                        $editedDataIndex = $filters->is_multiple ? Str::plural($filters->data_index) : Str::singular($filters->data_index); 
+                                        $title = is_null($t) ? '(Set title for column)' : ucwords(str_replace('_', ' ',$t)) ;
+                                        $selected =  $currentParams[$editedDataIndex];
+                                    @endphp
+                                    <div class="col-span-2">
+                                        <a target="_blank" href="{{ route('rp_filters.edit', $filters->id) }}" title="id : {{$filters->id}}">
+                                            <span class='px-1'>{{$title}}</span>
+                                            @if($filters->is_required)
+                                                <span class="text-red-400" title="required">*</span>
+                                            @endif
+                                        </a>
+                                        <x-renderer.report2.filter-report-item 
+                                            :filters="$filters"
+                                            :selected="$selected"    
+                                        />
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                         

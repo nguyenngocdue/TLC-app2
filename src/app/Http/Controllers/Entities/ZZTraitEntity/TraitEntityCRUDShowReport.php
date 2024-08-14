@@ -15,7 +15,7 @@ trait TraitEntityCRUDShowReport
 	{
 		$report = Rp_report::find($id)->getDeep();
 		$pages = $report->getPages;
-
+		
 		$paramsUrl = $request->input();
 		Session::put('paramsUrl1', $paramsUrl);
 

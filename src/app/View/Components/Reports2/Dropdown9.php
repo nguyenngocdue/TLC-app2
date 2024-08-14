@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use App\Models\Rp_report;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\Component;
 
 class Dropdown9 extends Component
@@ -23,6 +24,44 @@ class Dropdown9 extends Component
 
     ) {}
 
+    private function createLinkReports($rpLinks, $currentParams)
+    {
+        $result = [];
+        foreach ($rpLinks as $rpLink) {
+            if (!Route::has('rp_reports.show')) {
+                dd('rp_reports.show is not defined');
+            }
+            $route = route('rp_reports.show', $rpLink->linked_to_report_id);
+    
+            if (!$route) {
+                dd('Route for rp_reports.show with ID ' . $rpLink->linked_to_report_id . ' is not defined');
+            }
+    
+            if ($currentParams) {
+                $storedFilterKey = $rpLink ->stored_filter_key;
+                $urlQuery = $this->buildUrl($currentParams);
+                $route .= '?' . $urlQuery.'&stored_filter_key='.$storedFilterKey.'&report_id='.$rpLink->linked_to_report_id;
+            }
+            $result[$rpLink->linked_to_report_id] = $route;
+        }
+        return $result;
+    }
+    
+    private function buildUrl($params)
+    {
+        $query = [];
+        foreach ($params as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $subValue) {
+                    $query[] = urlencode($key) . '[]=' . urlencode($subValue);
+                }
+            } else {
+                $query[] = urlencode($key) . '=' . urlencode($value);
+            }
+        }
+        return implode('&', $query);
+    }
+    
 
     public function render()
     {
@@ -33,20 +72,18 @@ class Dropdown9 extends Component
             return $item->getFilterLink;
         });
 
-        $paramsCurrentRp = [];
-
+        $linkReports = $this->createLinkReports($rpLinks,$currentParams);
         return view('components.reports2.dropdown9', [
             'rpLinks' =>  $rpLinks,
             'name' => $this->name,
             'currentParams' => $currentParams,
-            'paramsCurrentRp' => $paramsCurrentRp,
-            'name' => $this->name,
             'title' => $this->title,
             'allowClear' => $this->allowClear,
             'routeName' => $this->routeName,
             'entityType' => $this->entityType,
             'entityType2' => $this->entityType2,
-            'reportId' => $this->reportId
+            'reportId' => $this->reportId,
+            'linkReports' => $linkReports,
 
         ]);
     }

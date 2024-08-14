@@ -2,13 +2,8 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Models\Rp_report;
-use App\Models\User;
-use App\Utils\Support\CurrentUser;
-use App\Utils\Support\Report;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\View\Component;
+use Illuminate\Support\Str;
 
 class FilterReport extends Component
 {
@@ -22,58 +17,25 @@ class FilterReport extends Component
 
     ) {}
 
-    private function getWarningFilters($filterDetails, $currentParams)
-    {
-        $warningFilters = [];
-        foreach ($filterDetails as $filter) {
-            if ($filter->is_required) {
-                $column =  Report::changeFieldOfFilter($filter);
-                if (empty($currentParams[$column])) {
-                    $warningFilters[] = $filter->getColumn->title;
-                }
-            }
-        }
-        return $warningFilters;
-    }
-
-    private function getFilterKeyRpLinks($filterRpLinks, $filterDetails)
-    {
-        $dataIndexes = [];
-        foreach ($filterRpLinks as $rpLink) {
-            $rpLinkId = $rpLink->linked_to_report_id;
-            $storedFilterKey = is_null($x = $rpLink->stored_filter_key) ? $rpLinkId : $x;
-            $filterDetails = Rp_report::find($rpLinkId)->getDeep()->getFilterDetails;
-            foreach ($filterDetails  as $filter) {
-                $column = $filter->getColumn->data_index;
-                if (isset($dataIndexes[$storedFilterKey])) {
-                    if (!in_array($column, $dataIndexes[$storedFilterKey])) {
-                        $dataIndexes[$storedFilterKey][$column] = $filter;
-                    }
-                } else {
-                    $dataIndexes[$storedFilterKey] = [];
-                }
-            }
-        }
-        return $dataIndexes;
-    }
-
     public function render()
     {
+        
         $rp = (object)$this->report;
         $reportId = $rp->id;
-        $advancedFilters = $rp->getAdvancedFilters;
+        $rpFilters = $rp->getRpFilters;
         $filterLinkDetails = $rp->getFilterLinkDetails;
-
-
-
-
-
+        
         $rpName = $rp->name;
         $entityType = $rp->entity_type;
         $entityType2 = $this->entityType2;
+        
+        $insInitUserSetting = InitUserSettingReport2::getInstance($entityType2);
 
-
-        $currentParams = [];
+        if($paramsUrl = $this->paramsUrl){
+            $currentParams = $insInitUserSetting->initParamsUrlUserSettingRp($entityType, $paramsUrl, $rpFilters);
+        } else {
+            $currentParams = $insInitUserSetting->initParamsUserSettingRp($entityType, $filterLinkDetails, $rpFilters);
+        }
         return view('components.reports2.filter-report', [
             'entityType' => $entityType,
             'reportName' => $rpName,
@@ -84,7 +46,7 @@ class FilterReport extends Component
             'routeFilter' => route('filter_report.update', $rp->id),
             'refreshPage' => $this->refreshPage,
             'filterLinkDetails' => $filterLinkDetails,
-            'advancedFilters' => $advancedFilters
+            'rpFilters' => $rpFilters
         ]);
     }
 }

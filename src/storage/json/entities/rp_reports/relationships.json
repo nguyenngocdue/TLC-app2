@@ -50,16 +50,16 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getAdvancedFilters": {
-        "name": "_getAdvancedFilters",
+    "_getRpFilters": {
+        "name": "_getRpFilters",
         "relationship": "hasMany",
-        "control_name": "getAdvancedFilters",
+        "control_name": "getRpFilters",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
-        "control": "dropdown",
+        "control": "relationship_renderer",
         "filter_columns": "",
         "filter_operator": "=",
         "filter_values": "",

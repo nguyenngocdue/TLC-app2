@@ -17,7 +17,7 @@ return new class extends Migration
         $schema = DB::connection()->getSchemaBuilder();
         $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('rp_advanced_filters', function (BlueprintExtended $table) {
+        $schema->create('rp_filters', function (BlueprintExtended $table) {
             $table->id();
             $table->unsignedBigInteger('report_id')->nullable();
             $table->string('data_index')->nullable();
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->boolean('allow_clear')->nullable();
             $table->boolean('is_multiple')->nullable();
             $table->unsignedBigInteger('control_type')->nullable();
+            $table->boolean('is_active')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();
@@ -43,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rp_advanced_filters');
+        Schema::dropIfExists('rp_filters');
     }
 };

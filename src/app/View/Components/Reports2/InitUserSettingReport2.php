@@ -2,11 +2,11 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Models\Rp_report;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class InitUserSettingReport2
 {
@@ -17,7 +17,7 @@ class InitUserSettingReport2
     {
         $this->entityType2 = $entityType2;
     }
-    public static function getInstance($entityType2)
+    public static function getInstance($entityType2 = null)
     {
         if (self::$instance == null) {
             self::$instance = new InitUserSettingReport2($entityType2);
@@ -25,119 +25,97 @@ class InitUserSettingReport2
         return self::$instance;
     }
 
-
-    public function saveParamsToUser($entityType, $currentRpId, $keyFilterRpLinks)
+    private function createDefaultParams($rpFilters)
     {
-        $params = $this->createValueForParams($entityType, $keyFilterRpLinks, $currentRpId);
-
-        $checkParams = $params;
-        unset($checkParams[array_key_first($checkParams)]['current_report_link']);
-
-        if (!empty(array_filter($checkParams[array_key_first($checkParams)]))) {
-            $this->updateUserSettings($entityType, $params, $currentRpId);
-            return $params;
-        }
-        return [];
-    }
-
-
-
-    public function createValueForParams($entityType, $keyFilterRpLinks, $currentRpId)
-    {
-        $filterRpLinks = Rp_report::find($currentRpId)->getDeep()->getFilterModes;
-        $rp = $filterRpLinks->where('linked_to_report_id', $currentRpId)->first();
-        $storedFilterKey = $rp->stored_filter_key; // return xxx
-        $paramsNeedToSave = $keyFilterRpLinks[$storedFilterKey];
-
-        $ins = UserSettingReport2::getInstance($this->entityType2);
-        $storesKeyFilter = $ins->getStoredFilterKeyUserSetting($currentRpId);
-
-        // has already saved into db
-        $currentParamsUser = [];
-        if ($storesKeyFilter) {
-            $currentParamsUser = $ins->getCurrentParamsUser($entityType, $storesKeyFilter);
-        }
-        $paramsToSave = [];
-        foreach ($paramsNeedToSave as $key => $filterDetail) {
-            $defaultValue = ($x = $filterDetail->default_value) ? explode(',', $x) : $x;
-            // set default value 
-            if ($defaultValue && !isset($currentParamsUser[$key]) || $defaultValue && is_null($currentParamsUser[$key])) {
-                $paramsToSave[$storedFilterKey][$key] = $defaultValue;
-            }
-            //  else {
-            //     // set current value
-            //     $paramsToSave[$storedFilterKey][$key] = $currentParamsUser[$key] ?? null;
-            // }
-        }
-        $paramsToSave[$storedFilterKey]['current_report_link'] = $currentRpId;
-        return $paramsToSave;
-    }
-
-    private function updateUserSettings($entityType, $params, $currentRpId)
-    {
-        $setting = CurrentUser::getSettings();
-        $keys = [$entityType, $this->entityType2];
-        $needsUpdate = false;
-
-        if (Report::checkKeysExist($setting, $keys)) {
-            $storedSettings = $setting[$entityType][$this->entityType2];
-            $storedKey = key($params);
-
-            if (isset($storedSettings[$storedKey]) && Report::arraysAreDifferent($storedSettings[$storedKey], end($params))) {
-                $needsUpdate = true;
-            }
-        } else {
-            $needsUpdate = true;
-        }
-
-        if ($needsUpdate) {
-            $setting[$entityType][$this->entityType2] = $params;
-            $user = User::find(Auth::id());
-            $user->settings = $setting;
-
-            if ($user->update()) {
-                $needsUpdate = false;
-                return toastr()->success("User settings initialized successfully.", "Success");
-            } else {
-                return toastr()->error("Failed to update user settings.", "Error");
-            }
-        }
-    }
-
-
-
-    private function createDefaultCurrentParams($filterDetails, $paramsUser)
-    {
-        $params = [];
-        foreach ($filterDetails as $filter) {
-            $filterName = Report::changeFieldOfFilter($filter);
-            $val = $filter->default_value;
-            $defaultValues = explode(',', $val);
-
-            if (array_key_exists($filterName, $paramsUser)) {
-                if (is_null($paramsUser[$filterName]) && $val) {
-                    $paramsUser[$filterName] = (array)$defaultValues;
+        $result = [];
+        foreach ($rpFilters as $key => $filter) {
+            $defaultVal = $filter->default_value;
+            $dataIndex = $filter->data_index;
+            if ($defaultVal) {
+                if ($filter->is_multiple) {
+                    $defaultVal = explode(",", $defaultVal);
+                    $dataIndex = Str::plural($dataIndex);
+                    $result[$dataIndex] = $defaultVal;
                 }
-            } elseif (empty($paramsUser)) {
-                $params[$filterName] = $val;
-            } elseif (!in_array($filterName, array_keys($paramsUser))) {
-                // the 1st time click dropdown of report link
-                $params[$filterName] = $val;
+                $result[$dataIndex] = $defaultVal;
             }
+            $result[$dataIndex] = $defaultVal;
         }
-        $result = array_merge($paramsUser, $params);
         return $result;
     }
 
-    function getCurrentParams($entityType, $reportId)
+    public static function getParamsToUpdates($paramsInConfig, $paramsInUser)
     {
-        $ins = UserSettingReport2::getInstance($this->entityType2);
-        $storesKeyFilter = $ins->getStoredFilterKeyUserSetting($reportId);
-        if ($storesKeyFilter) {
-            $currentParamsUser = $ins->getCurrentParamsUser($entityType, $storesKeyFilter);
-            // dd($storesKeyFilter, $currentParamsUser);
-            return $currentParamsUser;
+        $pramsToUpdate = [];
+        foreach($paramsInConfig as $key => $value) {
+            if (!isset($paramsInUser[$key]) || isset($paramsInUser[$key]) && empty($paramsInUser[$key])){
+                $pramsToUpdate[$key] = $value;
+            }
         }
-        return [$entityType][$this->entityType2][$storesKeyFilter];
+        return $pramsToUpdate;
+    }
+
+    function updateUserSettingRp($settings) {
+        $user = User::find(Auth::id());
+        $user->settings = $settings;
+        $user->update();
+        toastr()->success('User Settings Saved Successfully', 'Successfully');
+    }
+
+    public function initParamsUserSettingRp($entityType, $filterLinkDetails, $rpFilters){
+        $settings = CurrentUser::getSettings();
+        
+        $storedFilterKey = $filterLinkDetails->first()->getFilterLink->stored_filter_key;
+        
+        // create default values in the database -> in case that the reports were previously saved in user_setting
+        $keys = [$entityType, $this->entityType2];
+        $isSave = false;
+        if (Report::checkKeysExist($settings, $keys)) {
+            $paramsInConfig = $this->createDefaultParams($rpFilters);
+            $paramsInUser = $settings[$entityType][$this->entityType2][$storedFilterKey];
+            $paramsToUpdate = self::getParamsToUpdates($paramsInConfig, $paramsInUser);
+            if($paramsToUpdate) {
+                $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
+                $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;
+                $isSave = True;
+            }
+        } else {
+            // create default values in the database -> in case that the reports weren't saved in user_setting
+            $defaultParams = $this->createDefaultParams($rpFilters);
+            $settings[$entityType][$this->entityType2][$storedFilterKey] = $defaultParams;
+            $isSave = True;    
+        }
+        if($isSave) {
+            self::updateUserSettingRp($settings);
+        }
+        $params = $settings[$entityType][$this->entityType2][$storedFilterKey];
+        return  $params;
+    }
+    function initParamsUrlUserSettingRp($entityType , $paramsUrl, $rpFilters){
+        $storedFilterKey = $paramsUrl['stored_filter_key'] ?? $paramsUrl['report_id'];
+        unset($paramsUrl['report_id']);
+        $settings = CurrentUser::getSettings();
+        $keys = [$entityType, $this->entityType2];
+        $isSave = false;
+        if (Report::checkKeysExist($settings, $keys)) {
+            unset($paramsUrl['stored_filter_key']);
+            $paramsInConfig = $this->createDefaultParams($rpFilters);
+            $paramsInUser = $paramsUrl;
+            $paramsToUpdate = self::getParamsToUpdates($paramsInConfig, $paramsInUser);
+            if($paramsToUpdate) {
+                $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
+                $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;
+                $isSave = True;
+            }
+        }else{
+            unset($paramsUrl['stored_filter_key']);
+            $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsUrl;
+            $isSave = True;
+        }
+        if($isSave) {
+            self::updateUserSettingRp($settings);
+        }
+        $params = $settings[$entityType][$this->entityType2][$storedFilterKey];
+        return  $params;
     }
 }

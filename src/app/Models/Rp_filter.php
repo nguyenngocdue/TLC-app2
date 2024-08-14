@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\BigThink\ModelExtended;
 
-class Rp_advanced_filter extends ModelExtended
+class Rp_filter extends ModelExtended
 {
     protected $fillable = [
         "id", /* "title", */
@@ -19,6 +19,7 @@ class Rp_advanced_filter extends ModelExtended
         "allow_clear",
         "is_multiple",
         "control_type",
+        "is_active",
         "order_no",
         "owner_id",
     ];
@@ -57,6 +58,7 @@ class Rp_advanced_filter extends ModelExtended
             ["dataIndex" => 'id'],
             ["dataIndex" => 'order_no',],
             ["dataIndex" => 'report_id',],
+            ["dataIndex" => 'is_active',],
             ["dataIndex" => 'data_index'],
             ["dataIndex" => 'entity_type'],
             ["dataIndex" => 'bw_list_ids'],

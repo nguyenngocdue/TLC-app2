@@ -9,7 +9,7 @@ class ModelData
 {
     public static function initModelByField($field)
     {
-        $modelName = Str::singular(ucfirst(str_replace(['_id', '_name'], '', $field)));
+        $modelName = Str::singular(ucfirst($field));
         $modelClass = 'App\Models\\' . $modelName;
         if (class_exists($modelClass)) {
             try {
