@@ -76,8 +76,8 @@ trait TraitEntityFormula
                     //     $value = (new Wir_NameRendered())($item);
                     //     break;
                 case "TSO_GetAssignee1":
-                    $assignee1 = $item['assignee_1'];
-                    if ($assignee1) continue 2; // if timesheet has assignee_1 during update, do not update
+                    // $assignee1 = $item['assignee_1'];
+                    if (isset($item['assignee_1'])) continue 2; // if timesheet has assignee_1 during update, do not update
                     $value = (new TSO_GetAssignee1())($type);
                     break;
                 case "NCR_Report_Type":
