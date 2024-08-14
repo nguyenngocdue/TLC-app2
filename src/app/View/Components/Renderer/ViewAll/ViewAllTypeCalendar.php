@@ -4,8 +4,10 @@ namespace App\View\Components\Renderer\ViewAll;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Diginet_employee_leave_line;
 use App\Models\Pj_task;
 use App\Models\Project;
+use App\Models\Public_holiday;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
@@ -28,11 +30,38 @@ class ViewAllTypeCalendar extends Component
         //
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+    private function getLeaveDates($userCurrentCalendar)
+    {
+        $leaveLines = (new Diginet_employee_leave_line())->getLinesByEmployeeIdAndRange($userCurrentCalendar->employeeid);
+        $leaveDates = [];
+        foreach ($leaveLines as $line) {
+            $leaveDates[] = [
+                'date' => Carbon::parse($line->la_date)->day,
+                'month' => Carbon::parse($line->la_date)->month,
+                'year' => Carbon::parse($line->la_date)->year,
+            ];
+        }
+        return $leaveDates;
+    }
+
+    private function getPublicHolidays($year, $userCurrentCalendar)
+    {
+        $ph = Public_holiday::query()
+            ->where('year', $year)
+            ->where('workplace_id', $userCurrentCalendar->workplace)
+            ->get();
+        $result = [];
+        foreach ($ph as $value) {
+            $result[] = [
+                'date' => Carbon::parse($value->ph_date)->day,
+                'month' => Carbon::parse($value->ph_date)->month,
+                'year' => Carbon::parse($value->ph_date)->year,
+            ];
+        }
+        // dump($result);
+        return $result;
+    }
+
     public function render()
     {
         $dataSource = $this->dataSource;
@@ -56,13 +85,19 @@ class ViewAllTypeCalendar extends Component
         // dump($nodeProjectTreeArray);
         // dump($nodeTaskTreeArray);
 
+        $year = $filterViewAllCalendar['year'] ?? Carbon::now()->format('Y');
+        $leaveDates = $this->getLeaveDates($userCurrentCalendar);
+        // dump($leaveDates);
+        $publicHolidays = $this->getPublicHolidays($year, $userCurrentCalendar);
+        // dump($publicHolidays);
+
         return view('components.renderer.view-all.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
             'routeCreate' => route($this->type . '.storeEmpty'),
             'token' => $token,
             'type' => $this->type,
             'typeModel' => $this->typeModel,
-            'year' => $filterViewAllCalendar['year'] ?? '',
+            'year' => $year,
             'userCurrentCalendar' => $userCurrentCalendar,
             'titleLegend' => 'Legend',
             'ownerId' => $ownerId,
@@ -71,6 +106,8 @@ class ViewAllTypeCalendar extends Component
             'listIdPendingApproval' => $listIdPendingApproval,
             'routeChangeStatusMultiple' => route("{$this->type}.changeStatusMultiple"),
             'disableButton' => $this->disableButtonApproveAll($listIdPendingApproval, $userCurrentCalendar),
+            'leaveDates' => $leaveDates,
+            'publicHolidays' => $publicHolidays,
         ]);
     }
     private function disableButtonApproveAll($listIdPendingApproval, $userCurrentCalendar)

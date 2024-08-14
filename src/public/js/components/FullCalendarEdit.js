@@ -1,5 +1,3 @@
-console.log('Hello from FullCalendarEdit.js!')
-
 const modal = $(`#` + modalId)
 const containerEl = document.getElementById(`task_id` + suffix)
 const calendarEl = document.getElementById('calendar')
