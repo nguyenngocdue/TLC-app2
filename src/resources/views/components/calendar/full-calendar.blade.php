@@ -32,4 +32,9 @@
     .fc .fc-scrollgrid {
         border-radius: 0;
     }
+    /* This is for slot 00:15:00 */
+    /* .fc .fc-timegrid-slot {
+        height: 1rem;
+        font-size: 0.4rem;
+    } */
 </style>

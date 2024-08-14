@@ -65,6 +65,7 @@ function callApiGetEvents(id, url) {
                     initialView: 'timeGridWeek',
                     locale: 'en',
                     firstDay: 1,
+                    // slotDuration: '00:15:00',
                     dayMaxEvents: true,
                     weekNumbers: true,
                     editable: !readOnly,
