@@ -210,13 +210,13 @@ function renderHtmlContentWeek(html, array, month) {
         if (day) {
             switch (true) {
                 case isToday:
-                    html += `<p class='text-yellow-600 rounded-lg bg-yellow-300 items-center justify-center'>${day}</p>`
+                    html += `<p class='text-gray-100 bg-gray-500 rounded-lg items-center justify-center'>${day}</p>`
                     break
                 case leaveDates.some((item) => item.month == month && item.date == day && item.year == year):
-                    html += `<p class='text-gray-100 rounded-lg bg-gray-500 items-center justify-center'>${day}</p>`
+                    html += `<p class='text-yellow-600 bg-yellow-300 rounded-lg items-center justify-center'>${day}</p>`
                     break
                 case publicHolidays.some((item) => item.month == month && item.date == day && item.year == year):
-                    html += `<p class='text-red-600 rounded-lg bg-red-300 items-center justify-center'>${day}</p>`
+                    html += `<p class='text-red-600 bg-red-300 rounded-lg items-center justify-center'>${day}</p>`
                     break
                 default:
                     html += `<p>${day}</p>`

@@ -48,7 +48,8 @@ function callApiGetEvents(id, url) {
                     headerToolbar: {
                         left: '', //'prev,next today',
                         center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                        right: 'timeGridWeek,listWeek',
+                        // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
                     },
                     views: {
                         week: {
@@ -204,6 +205,7 @@ function callApiGetEvents(id, url) {
                                 <span class='border1 rounded bg-gray-400 block text-center italic'>
                                 ${tagPhase}
                                 </span>
+                                ${remark}
                         </div>`
                         return {
                             html: eventTitleHTML,
