@@ -62,40 +62,47 @@ class Calendar
     }
     public static function renderSubTitle($item)
     {
-        if ($item instanceof Public_holiday) return "";
+        if ($item instanceof Public_holiday) return $item->name;
+        if ($item instanceof Diginet_employee_leave_line)
+            return $item->la_reason . "(" . $item->la_type . ")";
         $nameSubTask = '';
         if ($item->sub_task_id) {
             // $nameSubTask = Pj_sub_task::findOrFail($item->sub_task_id)->name ?? '';
             $nameSubTask = $item->getSubTask->name ?? '';
         }
+        return $nameSubTask;
 
-        $remark = $item->remark ?? '';
-        return "<div>"
-            . ($nameSubTask ? "<div class='text-sm'>{$nameSubTask}</div>" : "")
-            // . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
-            . "</div>";
+        // $remark = $item->remark ?? '';
+        // return "<div>"
+        //     . ($nameSubTask ? "<div class='text-sm'>{$nameSubTask}</div>" : "")
+        //     // . ($remark ? "<div class='text-sm'>{$remark}</div>" : "")
+        //     . "</div>";
     }
     public static function renderTitle($item)
     {
         if ($item instanceof Public_holiday) {
-            return "<div class='h-full'><div>"
-                . "<div class='font-bold text-sm'>Public Holiday</div>"
-                . "<div class='font-semibold'>{$item->name}</div>"
-                . "</div>"
-                . "</div>";
+            return "PublicHoliday";
+            // return "<div class='h-full'><div>"
+            //     . "<div class='font-bold text-sm'>Public Holiday</div>"
+            //     . "<div class='font-semibold'>{$item->name}</div>"
+            //     . "</div>"
+            //     . "</div>";
         }
-        if ($item instanceof Diginet_employee_leave_line) return "<div>"
-            . "<div class='font-bold'>Leave Application</div>"
-            . "<div class='font-semibold text-sm'>{$item->la_reason}</div>"
-            . "<div class='text-sm'>(LA Type: {$item->la_type})</div>"
-            . "</div>";
+        if ($item instanceof Diginet_employee_leave_line)
+            return "Leave Application";
+        //  return "<div>"
+        //     . "<div class='font-bold'>Leave Application</div>"
+        //     . "<div class='font-semibold text-sm'>{$item->la_reason}</div>"
+        //     . "<div class='text-sm'>(LA Type: {$item->la_type})</div>"
+        //     . "</div>";
         // $nameTask = Pj_task::findOrFail($item->task_id)->name;
         $nameTask = $item->getTask->name ?? '';
+        return $nameTask;
 
-        return "<div class='h-full'><div>"
-            . "<div class='font-semibold text-sm'>{$nameTask}</div>"
-            . "</div>"
-            . "</div>";
+        // return "<div class='h-full'><div>"
+        //     . "<div class='font-semibold text-sm'>{$nameTask}</div>"
+        //     . "</div>"
+        //     . "</div>";
     }
     public static function renderTagSubProject($item)
     {
