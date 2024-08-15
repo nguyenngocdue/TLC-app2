@@ -91,4 +91,8 @@ class StringReport
         }
         return $key . '=' . $value;
     }
+
+    public static function makeTitleFilter($string){
+        return  ucwords(str_replace('_', ' ', $string));
+    }
 }

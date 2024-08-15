@@ -1,4 +1,4 @@
-{{-- @dd($currentParams) --}} 
+{{-- @dd($routeFilter)  --}}
 @if($paramsWarning)
     @foreach($paramsWarning as $filter)
         <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
@@ -41,8 +41,8 @@
                             @foreach ($rpFilters as $filter)
                                 @if($filter->is_active)
                                     @php
-                                        $title = $filter->title ? $filter->title : 
-                                        ($filter->is_multiple ? Str::plural($filter->entity_type) : Str::singular($filter->entity_type)); 
+                                        $text = 'App\Utils\Support\StringReport'::makeTitleFilter($filter->entity_type);
+                                        $title = ($x = $filter->title) ? $x : ($filter->is_multiple ? Str::plural($text) : Str::singular($text)); 
                                         
                                         $editedDataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : Str::singular($filter->data_index); 
                                         $selected = $currentParams[$editedDataIndex] ?? [];
@@ -88,7 +88,7 @@
     }
 </script>
 
-<script>
+{{-- <script>
   document.addEventListener('DOMContentLoaded', function() {
         const refreshPage = {!! json_encode($refreshPage) !!};
         const reportId = {!! json_encode($reportId) !!};
@@ -96,4 +96,4 @@
             window.location.href = '{{ route("rp_reports.show", ":id") }}'.replace(':id', reportId);
         }
     });
-</script>
+</script> --}}

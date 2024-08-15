@@ -3,7 +3,9 @@
         <select onchange="redirectToLink(this)" name="{{ $name }}" id="{{ $name }}" class="w-full form-select bg-white border border-gray-300 text-sm rounded-lg block focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
             <option value="#" selected >Select an other report</option>
             @foreach($rpLinks as $value)
-                <option value="{{$linkReports[$value->linked_to_report_id]}}" data-url="{{$linkReports[$value->linked_to_report_id]}}" title="#{{ $value->name }}">
+                <option value="{{$value->id}}" 
+                        data-url="{{$linkReports[$value->id]}}"
+                        title="#{{ $value->id}}">
                     {{ $value->title }}
                 </option>
             @endforeach
@@ -23,7 +25,7 @@ function redirectToLink(select) {
     var selectedOption = select.options[select.selectedIndex];
     var url = selectedOption.getAttribute('data-url');
     if (url) {
-        window.open(url, '_blank');
+        window.location.href = url;
     }
 }
 </script>
