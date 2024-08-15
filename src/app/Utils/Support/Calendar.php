@@ -113,7 +113,7 @@ class Calendar
             $tagPhase = $name;
             // $tagPhase = Blade::render("<x-renderer.tag class='leading-none'>$name</x-renderer.tag>");
         }
-        return $tagPhase ?? '';
+        return $tagPhase ?? 'PHASE ???';
     }
     // public static function renderNameProject($item)
     // {
