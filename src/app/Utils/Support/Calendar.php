@@ -13,10 +13,11 @@ class Calendar
 {
     public static function setColorByWorkModeId($workModelId)
     {
-        return match ($workModelId) {
+        return match ($workModelId * 1) {
             1 => '#14b8a6',
             2 => '#0284c7',
             3 => '#22d3ee',
+            default => '#ff0000',
         };
     }
     public static function getBackGroundColorByWorkplaceId($workplaceIds, $tailwind = false)

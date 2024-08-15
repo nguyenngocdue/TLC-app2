@@ -134,6 +134,8 @@ function callApiGetEvents(id, url) {
                             var subProjectId = document.getElementById('sub_project_id' + suffix).value
                             var lodId = document.getElementById('lod_id' + suffix).value
                             var disciplineId = document.getElementById('discipline_id' + suffix).value
+                            var workModeId = document.getElementById('work_mode_id' + suffix).value
+
                             var dateTime = info.event.startStr
                             var draggedElDiv = info.draggedEl
                             var taskId = draggedElDiv.children[0].getAttribute('id')
@@ -152,6 +154,7 @@ function callApiGetEvents(id, url) {
                                         task_id: taskId,
                                         sub_task_id: subTaskId,
                                         date_time: dateTime,
+                                        work_mode_id: workModeId,
                                         // "all_day": null,
                                         // "timesheetable_type": timesheetableType,
                                         // "timesheetable_id": timesheetableId
@@ -189,7 +192,6 @@ function callApiGetEvents(id, url) {
                         }
                     },
                     eventContent: function (info) {
-                        console.log(info.event.id)
                         var timeText = info.timeText
                         var eventTitle = info.event.title
                         var eventSubTitle = info.event.extendedProps.sub_title || ''
