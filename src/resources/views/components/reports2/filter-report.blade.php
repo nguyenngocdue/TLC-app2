@@ -53,6 +53,14 @@
                                             :filter="$filter"
                                             :selected="$selected"    
                                         />
+                                        @if($filter->default_value && !$filter->is_multiple)
+                                            @php
+                                                $defaultValue = explode(',',$filter->default_value);
+                                            @endphp
+                                            @if(count($defaultValue) > 1)
+                                                <x-renderer.heading level=7 class='text-left text-red-700 border-red-300 bg-red-50 dark:bg-red-200'>(Configuration Error)</x-renderer.heading>
+                                            @endif
+                                        @endif
                                     </div>
                                 @endif
                             @endforeach

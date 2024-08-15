@@ -34,7 +34,6 @@ class FilterReport extends Component
 
     public function render()
     {
-        
         $rp = (object)$this->report;
         $reportId = $rp->id;
         $rpFilters = $rp->getRpFilters;
