@@ -30,18 +30,18 @@ class Dropdown9 extends Component
             if (!Route::has('rp_reports.show')) {
                 dd('rp_reports.show is not defined');
             }
-            $route = route('rp_reports.show', $rpLink->linked_to_report_id);
+            $route = route('rp_reports.show', $rpLink->id);
     
             if (!$route) {
-                dd('Route for rp_reports.show with ID ' . $rpLink->linked_to_report_id . ' is not defined');
+                dd('Route for rp_reports.show with ID ' . $rpLink->id . ' is not defined');
             }
     
             if ($currentParams) {
                 $storedFilterKey = $rpLink ->stored_filter_key;
                 $urlQuery = $this->buildUrl($currentParams);
-                $route .= '?' . $urlQuery.'&stored_filter_key='.$storedFilterKey.'&report_id='.$rpLink->linked_to_report_id;
+                $route .= '?' . $urlQuery.'&stored_filter_key='.$storedFilterKey.'&report_id='.$rpLink->id;
             }
-            $result[$rpLink->linked_to_report_id] = $route;
+            $result[$rpLink->id] = $route;
         }
         return $result;
     }
@@ -68,7 +68,9 @@ class Dropdown9 extends Component
         $filterLinkDetails = (object)$this->filterLinkDetails;
 
         $rpLinks = $filterLinkDetails->map(function ($item) {
-            return $item->getFilterLink;
+            $rpLinkId = $item->getFilterLink->linked_to_report_id;
+            $rpLink = Rp_report::find($rpLinkId);
+            return $rpLink;
         });
 
         $linkReports = $this->createLinkReports($rpLinks,$currentParams);
