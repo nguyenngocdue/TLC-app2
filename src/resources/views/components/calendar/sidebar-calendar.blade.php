@@ -11,8 +11,8 @@
             />
     </div>
     <div id="sidebar_tasklist_container_warning" class="hidden1">
-        <div class="border text-yellow-700 px-4 py-3 rounded relative" role="alert">
-            <strong class="font-bold">Warning!</strong>
+        <div class="border text-sky-500 px-4 py-3 rounded relative" role="alert">
+            {{-- <strong class="font-bold">Warning!</strong> --}}
             <span class="block sm:inline">Please select all filters to view tasks.</span>
         </div>
     </div>
