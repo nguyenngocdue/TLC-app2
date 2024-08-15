@@ -196,13 +196,14 @@ function callApiGetEvents(id, url) {
                         var tagSubProject = info.event.extendedProps.tag_sub_project || ''
                         var tagPhase = info.event.extendedProps.tag_phase || ''
                         // var nameProject = info.event.extendedProps.name_project || "";
-                        var remark = info.event.extendedProps.remark || '(No remark)'
+                        var remark = info.event.extendedProps.remark ? 'Remark: ' + info.event.extendedProps.remark : ''
                         let title = ''
                         if (eventTitle == eventSubTitle) {
-                            title = `${eventTitle}\n${remark}\n#${info.event.id}`
+                            title = `${eventTitle}\n${remark}`
                         } else {
-                            title = `${eventTitle}\n${eventSubTitle}\n${remark}\n#${info.event.id}`
+                            title = `${eventTitle}\n${eventSubTitle}\n${remark}`
                         }
+                        if (info.event.id) title += `\n#${info.event.id}`
                         var eventTitleHTML = `
                         <div class="event-title w-full" title="${title}">
                             <div class="flex items-baseline justify-between" title="${title}">
