@@ -390,23 +390,16 @@ class UpdateUserSettings extends Controller
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInUser = &$settings[$entityType][$entityType2][$storedFilterKey];
             foreach ($filters as $key => $value) {
-                $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : ($value ?? $paramsInUser[$key] ?? $value);
+                $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : $value;
             }
             $paramToUpdate = $paramsInUser;
         } else {
             $paramToUpdate = $filters;
         }
-    
         $settings[$entityType][$entityType2][$storedFilterKey] = $paramToUpdate;
         return $settings;
     }
     
-    private function switchReport2($request, $settings)
-    {
-        $ins = TransferUserSettingReport2::getInstance();
-        return $ins->switchReport2($request, $settings);
-    }
-
     private function updatePerPageReports($request, $settings)
     {
         $entity = $request->input("_entity");
