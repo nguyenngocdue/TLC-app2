@@ -325,30 +325,11 @@ function setTimeEvent(button, type) {
     const url = `${apiUrl}/${timesheetLineId}`
     if (timesheetLineId) {
         var event = calendar.getEventById(timesheetLineId)
-        switch (type) {
-            case 'morning':
-                data = {
-                    start_time: event.startStr,
-                    time_type: 'morning',
-                    user_id: event.extendedProps.user_id,
-                }
-                break
-            case 'afternoon':
-                data = {
-                    start_time: event.startStr,
-                    time_type: 'afternoon',
-                    user_id: event.extendedProps.user_id,
-                }
-                break
-            case 'full_day':
-                data = {
-                    start_time: event.startStr,
-                    time_type: 'full_day',
-                    user_id: event.extendedProps.user_id,
-                }
-                break
-            default:
-                break
+        data = {
+            start_time: event.startStr,
+            time_type: type,
+            user_id: event.extendedProps.user_id,
+            remark: event.extendedProps.remark,
         }
         callApi(
             'patch',
