@@ -12,7 +12,6 @@ class NavigationCalendar extends Component
     function __construct(
         private $timesheetId,
         private $owner,
-        private $year,
     ) {
         //
     }
@@ -37,9 +36,6 @@ class NavigationCalendar extends Component
         $cu = CurrentUser::get();
         $userSettings = $cu->settings;
         $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['owner_id'] = [$this->owner->id];
-        $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['year'] = $this->year;
-        $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['start_date'] = $this->year . "-01-01";
-        $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['end_date'] = $this->year . "-12-31";
 
         $cu->settings = $userSettings;
         $cu->save();

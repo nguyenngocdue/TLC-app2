@@ -65,16 +65,27 @@ trait TraitViewAllFunctions
 
     private function getDataSourceForViewCalendar($filter)
     {
-        if ($filter) {
-            return ($this->typeModel)::query()
-                ->whereIn('owner_id', $filter['owner_id'])
-                ->whereDate('week', '>=', $filter['start_date'])
-                ->whereDate('week', '<=',  $filter['end_date']);
-        }
-        $startDate = Carbon::now()->startOfYear()->toDateString();
-        $endDate = Carbon::now()->endOfYear()->toDateString();
-        return ($this->typeModel)::whereIn('owner_id', [CurrentUser::id()])->whereDate('week', '>=', $startDate)
+        $startDate = isset($filter['start_date']) ? $filter['start_date'] : Carbon::now()->startOfYear()->toDateString();
+        $endDate = isset($filter['end_date']) ? $filter['end_date'] : Carbon::now()->endOfYear()->toDateString();
+        $ownerId = isset($filter['owner_id']) ? $filter['owner_id'] : [CurrentUser::id()];
+
+        return ($this->typeModel)::query()
+            ->whereIn('owner_id', $ownerId)
+            ->whereDate('week', '>=', $startDate)
             ->whereDate('week', '<=',  $endDate);
+        // if ($filter) {
+        //     if(!isset($filter['start_date'])) {
+        //         $filter['start_date'] =  Carbon::now();
+        //     }
+        //     return ($this->typeModel)::query()
+        //         ->whereIn('owner_id', $filter['owner_id'])
+        //         ->whereDate('week', '>=', $filter['start_date'])
+        //         ->whereDate('week', '<=',  $filter['end_date']);
+        // }
+        // $startDate = Carbon::now()->startOfYear()->toDateString();
+        // $endDate = Carbon::now()->endOfYear()->toDateString();
+        // return ($this->typeModel)::whereIn('owner_id', [CurrentUser::id()])->whereDate('week', '>=', $startDate)
+        //     ->whereDate('week', '<=',  $endDate);
     }
 
     public function getDataSource($advanceFilters = null, $trash = false)
