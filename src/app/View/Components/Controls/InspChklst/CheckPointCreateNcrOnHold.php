@@ -70,7 +70,7 @@ class CheckPointCreateNcrOnHold extends Component
             // 'correctable_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_type' => Str::modelPathFrom($this->line->getTable()),
             'parent_id' => $this->line->id,
-            'description' => "During " . $this->line->description . ", ",
+            'description' => "During ", // . $this->line->description . ", ",
             'prod_discipline_id' => $this->line->getSheet->prod_discipline_id,
         ];
         if ($x = $this->line->getProject) $params['project_id'] = $x->id;
