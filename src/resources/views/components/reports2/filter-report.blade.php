@@ -16,12 +16,7 @@
                 </div>
                 <x-reports2.dropdown9 
                     name="report_link" 
-                    entityType="{{$entity_type}}"
-                    entityType2="{{$entityType2}}"
-                    reportId="{{$reportId}}"
-                    routeName="{{$routeFilter}}"
                     :filterLinkDetails="$filterLinkDetails" 
-                    :currentParams="$currentParams" 
                 />
         </div>
     @endif

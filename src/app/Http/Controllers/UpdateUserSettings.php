@@ -375,23 +375,32 @@ class UpdateUserSettings extends Controller
         return $params;
     }
 
+
     private function updateReport2($request, $settings)
     {
         $inputValue = $request->all();
         $entityType = $inputValue['entity_type'];
         $entityType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
-
-        $paramsInput = $this->getFilterReport2($inputValue);
-        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") {
-            $paramsInput = $this->getFilterReport2($inputValue, true);
-        }
-
+        $filters = $this->getFilterReport2($inputValue);
+    
         $storedFilterKey = Rp_report::find($rpId)->getDeep()->getFilterLinkDetails->first()->getFilterLink->stored_filter_key ?? $rpId;
-        $settings[$entityType][$entityType2][$storedFilterKey] = $paramsInput;
+        $keys = [$entityType, $entityType2, $storedFilterKey];
+        $paramToUpdate = [];
+        if (Report::checkKeysExist($settings, $keys)) {
+            $paramsInUser = &$settings[$entityType][$entityType2][$storedFilterKey];
+            foreach ($filters as $key => $value) {
+                $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : ($value ?? $paramsInUser[$key] ?? $value);
+            }
+            $paramToUpdate = $paramsInUser;
+        } else {
+            $paramToUpdate = $filters;
+        }
+    
+        $settings[$entityType][$entityType2][$storedFilterKey] = $paramToUpdate;
         return $settings;
     }
-
+    
     private function switchReport2($request, $settings)
     {
         $ins = TransferUserSettingReport2::getInstance();
@@ -491,9 +500,6 @@ class UpdateUserSettings extends Controller
                 break;
             case 'switchParamsReport':
                 $settings = $this->switchParamsReport($request, $settings);
-                break;
-            case 'switchReport2':
-                $settings = $this->switchReport2($request, $settings);
                 break;
             case 'updatePerPageDocuments':
                 $settings = $this->updatePerPageReports($request, $settings);

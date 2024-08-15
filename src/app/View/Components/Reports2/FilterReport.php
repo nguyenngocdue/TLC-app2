@@ -45,12 +45,8 @@ class FilterReport extends Component
         $entityType2 = $this->entityType2;
         
         $ins = InitUserSettingReport2::getInstance($entityType2);
-        if($paramsUrl = $this->paramsUrl){
-            $currentParams = $ins->initParamsUrlUserSettingRp($entityType, $paramsUrl, $rpFilters);
-        } else {
-            $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters);
-        }
-
+        $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters);
+            
         $paramsWarning = $this->getParamsWarning($rpFilters, $currentParams);
         
         return view('components.reports2.filter-report', [
