@@ -8,13 +8,10 @@ function oneAppRenderer(app, route) {
     result += `${app.title}`
     result += `</span>`
     result += `<span class="right-group">`
-    if (app.hidden)
-        result += `<i class="fa-duotone fa-eye text-blue-600 px-2"></i>`
+    if (app.hidden) result += `<i class="fa-duotone fa-eye text-blue-600 px-2"></i>`
     result += `</span>`
     result += `</a>`
-    const bookmarkBgColor = app.bookmarked
-        ? 'hover:bg-pink-700'
-        : 'hover:bg-blue-700'
+    const bookmarkBgColor = app.bookmarked ? 'hover:bg-pink-700' : 'hover:bg-blue-700'
     result += `<span id="searchModalBookmarkBtnSpan_${app.name}" class="${bookmarkBgColor} rounded px-2 py-2 my-1 cursor-pointer" onclick="toggleBookmark('${app.name}', '${app.sub_package}', '${route}', 'searchModal')">`
     const bookmarkColor = app.bookmarked ? 'text-blue-600' : 'text-gray-400'
     result += `<i id="searchModalBookmarkBtnIcon_${app.name}" class="fa-duotone fa-bookmark ${bookmarkColor}"></i>`
@@ -37,6 +34,7 @@ function searchModelShowFiltered(route, keywords = null) {
         result[key] = {}
         result[key].title = title
         result[key].str = ''
+        result[key].click_count = 0
         const items = allApps[key].items
         for (let i = 0; i < items.length; i++) {
             const app = items[i]
@@ -45,15 +43,21 @@ function searchModelShowFiltered(route, keywords = null) {
                 const str = [app.title, app.name, app.nickname].join(' ')
                 if (regex.test(str)) {
                     result[key].str += fn().outerHTML
+                    result[key].click_count += app.click_count
                     totalResultCount++
                 }
             } else {
                 result[key].str += fn().outerHTML
+                result[key].click_count += app.click_count
                 totalResultCount++
             }
         }
         if (!result[key].str) delete result[key]
     })
+    // console.log('Total result count', totalResultCount)
+    result = Object.values(result).sort((a, b) => b.click_count - a.click_count)
+    // console.log('Result', result)
+
     let finalResult = ''
     Object.keys(result).forEach((key) => {
         finalResult += `<h2 class='font-bold p-1 text-black'>${result[key].title}</h2>`
