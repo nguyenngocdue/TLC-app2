@@ -56,18 +56,22 @@ class FilterReportItem extends Component
         $modelClass = ModelData::initModelByField($entityType);
         if ($modelClass) {
             $db = $modelClass::query();
-            try {
-                $listenReducer = $this->filter->getListenReducer;
-                $triggerName = $listenReducer->triggers;
-                $db = $db->select('id', 'name', 'description', $triggerName)
-                    ->orderBy('name')
-                    ->get();
-            } catch (Exception $e) {
+            $listenReducer = $this->filter->getListenReducer;
+            $triggerName = $listenReducer->triggers ?? '';
+            if($triggerName){
+                $triggerNames = explode(',',$triggerName);
+                foreach($triggerNames as $name) {
+                    $db = $db->select('id', 'name', 'description', $name)
+                        ->orderBy('name')
+                        ->get();
+                    return $db;
+                }
+            }else {
                 $db = $db->select('id', 'name', 'description')
-                    ->orderBy('name')
-                    ->get();
-            };
-            return $db;
+                ->orderBy('name')
+                ->get();
+                return $db;
+            }
         }
         return collect();
     }
