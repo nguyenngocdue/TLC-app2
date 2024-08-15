@@ -44,7 +44,7 @@
         $("#sidebar_tasklist_container_warning").hide();
     }
     function checkIfAnyFilterIsNull(){
-        console.log('checkIfAnyFilterIsNull');
+        // console.log('checkIfAnyFilterIsNull');
 
         const a = ($("#project_id_11111").val());
         const b = ($("#sub_project_id_11111").val());
