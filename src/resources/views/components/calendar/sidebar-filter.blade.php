@@ -6,9 +6,7 @@
 @endphp
 <x-renderer.card title="Task Filter">
     <div class="grid grid-cols-12 gap-y-2">
-        {{-- @php
-            $hidden = App\Utils\Support\CurrentUser::isAdmin() ? '' : 'hidden';
-        @endphp --}}
+
         <div class="hidden col-span-12 2xl:col-span-5 flex1 items-center justify-end pr-2 text-right">Discipline <i class='text-red-400' title='required'>*</i></div> 
         <div class="hidden col-span-12 2xl:col-span-7">
             <x-calendar.SidebarFilterDiscipline readOnly="true" tableName="user_disciplines" name="userSettings[discipline_id]" id="discipline_id_11111" typeToLoadListener="hr_timesheet_officer_line" selected="{{$selectedUserDisciplineId}}"/>
@@ -35,3 +33,36 @@
         </div>
     </div>
 </x-renderer.card>
+
+<script>
+    function hideTaskList(){
+        $("#sidebar_tasklist_container").hide();
+        $("#sidebar_tasklist_container_warning").show();
+    }
+    function showTaskList(){
+        $("#sidebar_tasklist_container").show();
+        $("#sidebar_tasklist_container_warning").hide();
+    }
+    function checkIfAnyFilterIsNull(){
+        console.log('checkIfAnyFilterIsNull');
+
+        const a = ($("#project_id_11111").val());
+        const b = ($("#sub_project_id_11111").val());
+        const c = ($("#lod_id_11111").val());
+        const d = ($("#work_mode_id_11111").val());
+        const enabled = (!a || !b || !c || !d)
+        if(enabled){
+            hideTaskList();
+            // console.log('disable');
+        } else {
+            showTaskList();
+            // console.log('enable');
+        }
+    }
+    $("#project_id_11111").change(()=>checkIfAnyFilterIsNull())
+    $("#sub_project_id_11111").change(()=>checkIfAnyFilterIsNull())
+    $("#lod_id_11111").change(()=>checkIfAnyFilterIsNull())
+    $("#work_mode_id_11111").change(()=>checkIfAnyFilterIsNull())
+    
+    checkIfAnyFilterIsNull()
+</script>
