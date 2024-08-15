@@ -421,7 +421,7 @@ function callApi(type = 'get', url, data = [], info = null, callback = null, cal
         },
         error: (jqXHR, textStatus, errorThrown) => {
             if (info) {
-                info.revert()
+                console.error('Error:', textStatus)
             }
         },
     })
