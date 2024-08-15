@@ -46,20 +46,23 @@ class UpdateUserSettings extends Controller
     }
     private function getStartAndEndFilterByYear($year)
     {
-        if ($year) {
-            return $this->getDurationForFilterCalendar($year);
-        } else {
-            $year = Carbon::now()->year;
-            return $this->getDurationForFilterCalendar($year);
-        }
-    }
-    private function getDurationForFilterCalendar($year)
-    {
-        // $start = DateTimeConcern::getWeekOfYear(($year) . '-' . '01' . '-' . '01');
-        // $end = DateTimeConcern::getWeekOfYear($year . '-' . '12' . '-' . '31');
-        // return DateTimeConcern::formatWeekYear(1, $year, $end, $year);
+        $year = $year ?: Carbon::now()->year;
         return [$year . '-' . '01-01', $year . '-' . '12-31', $year];
+
+        // if ($year) {
+        //     return $this->getDurationForFilterCalendar($year);
+        // } else {
+        //     $year = Carbon::now()->year;
+        //     return $this->getDurationForFilterCalendar($year);
+        // }
     }
+    // private function getDurationForFilterCalendar($year)
+    // {
+    //     // $start = DateTimeConcern::getWeekOfYear(($year) . '-' . '01' . '-' . '01');
+    //     // $end = DateTimeConcern::getWeekOfYear($year . '-' . '12' . '-' . '31');
+    //     // return DateTimeConcern::formatWeekYear(1, $year, $end, $year);
+    //     return [$year . '-' . '01-01', $year . '-' . '12-31', $year];
+    // }
 
     private function updateViewAllMatrix($request, &$settings)
     {
@@ -383,7 +386,7 @@ class UpdateUserSettings extends Controller
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") {
             $paramsInput = $this->getFilterReport2($inputValue, true);
         }
-        
+
         $storedFilterKey = Rp_report::find($rpId)->getDeep()->getFilterLinkDetails->first()->getFilterLink->stored_filter_key ?? $rpId;
         $settings[$entityType][$entityType2][$storedFilterKey] = $paramsInput;
         return $settings;

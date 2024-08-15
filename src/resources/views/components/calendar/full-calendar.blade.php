@@ -1,4 +1,4 @@
-<x-calendar.navigation-calendar timesheetId="{{$timesheetableId}}" :owner="$owner" week="{{}}" />
+<x-calendar.navigation-calendar timesheetId="{{$timesheetableId}}" :owner="$owner" year="{{$year}}" />
 <div id='calendar' component="full-calendar-renderer"></div>
 <x-calendar.modal-click modalId="{{$modalId}}" />
 <x-calendar.modal-click-right />

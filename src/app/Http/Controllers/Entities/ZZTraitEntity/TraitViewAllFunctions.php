@@ -59,14 +59,16 @@ trait TraitViewAllFunctions
 
     private function getEagerLoadParams($eloquentParams)
     {
-        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn ($item) => in_array($item[0], ['belongsTo', 'hasMany', 'morphMany', 'morphTo'])));
+        $eagerLoadParams = array_keys(array_filter($eloquentParams, fn($item) => in_array($item[0], ['belongsTo', 'hasMany', 'morphMany', 'morphTo'])));
         return $eagerLoadParams;
     }
 
     private function getDataSourceForViewCalendar($filter)
     {
         if ($filter) {
-            return ($this->typeModel)::whereIn('owner_id', $filter['owner_id'])->whereDate('week', '>=', $filter['start_date'])
+            return ($this->typeModel)::query()
+                ->whereIn('owner_id', $filter['owner_id'])
+                ->whereDate('week', '>=', $filter['start_date'])
                 ->whereDate('week', '<=',  $filter['end_date']);
         }
         $startDate = Carbon::now()->startOfYear()->toDateString();

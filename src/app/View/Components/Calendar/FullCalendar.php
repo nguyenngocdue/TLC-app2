@@ -36,6 +36,7 @@ class FullCalendar extends Component
         $token = CurrentUser::getTokenForApi();
         $owner = $this->getSheetOwner($this->timesheetableType, $this->timesheetableId);
         // $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
+        $year = ($this->timesheetableType)::findFromCache($this->timesheetableId)->year ?? date('Y');
         $workplace = $owner->workplace;
         $timeBreaks = $this->getTimeBreaksByWorkplace($workplace);
         return view('components.calendar.full-calendar', [
@@ -49,6 +50,7 @@ class FullCalendar extends Component
             'timeBreaks' => $timeBreaks,
             'suffix' => $this->getSuffix(),
             'owner' => $owner,
+            'year' => $year,
         ]);
     }
     private function getTimeBreaksByWorkplace($workplace)
