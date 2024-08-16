@@ -38,25 +38,31 @@
         </div>
     </div>
  --}}
-<div class="relative group inline-block">
-    <a class="group-hover:underline" target="_blank" href="#" title="id :">
-        <span class='px-1'>AAAAA</span>
-        <span class="text-red-400" title="required">*</span>
-    </a>
+<!-- Blade Template -->
 
-    <!-- The nodes that appear on hover -->
-    <div class="absolute hidden group-hover:flex left-full top-0 ml-2 space-x-2">
-        <!-- Node 1 -->
-        <div class="bg-gray-200 p-2 rounded shadow-lg">
-            Node 1 Content
-        </div>
+<!-- Blade Template -->
+<!-- Blade Template -->
+<div class="relative inline-block group">
+    <span class="text-blue-500 cursor-pointer">Hover over me</span>
 
-        <!-- Node 2 -->
-        <div class="bg-gray-200 p-2 rounded shadow-lg">
-            Node 2 Content
-        </div>
+    <!-- Hidden nodes, shown on hover -->
+    <div class="absolute left-0 hidden group-hover:block space-y-2 bg-white p-2 rounded shadow-lg z-10">
+        <a href="https://www.google.com" target="_blank" class="flex items-center bg-blue-100 hover:bg-blue-200 px-4 py-2 w-full text-left rounded text-blue-700">
+            <i class="fas fa-link mr-2"></i> <!-- Font Awesome icon -->
+            <span class="truncate">Node 111111111</span>
+        </a>
+        <a href="https://www.google.com" target="_blank" class="flex items-center bg-green-100 hover:bg-green-200 px-4 py-2 w-full text-left rounded text-green-700">
+            <i class="fas fa-link mr-2"></i> <!-- Font Awesome icon -->
+            <span class="truncate">Node 2111111111</span>
+        </a>
     </div>
 </div>
+
+<!-- Include Font Awesome -->
+
+
+
+
 
 
 @endsection

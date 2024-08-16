@@ -42,12 +42,29 @@
                                         $selected = $currentParams[$editedDataIndex] ?? [];
                                     @endphp
                                     <div class="col-span-2">
-                                        <a class="" target="_blank" href="{{ route('rp_filters.edit', $filter->id) }}" title="Filter Id : {{$filter->id}}">
-                                            <span class='px-1'>{{$title}}</span>
-                                            @if($filter->is_required)
-                                                <span class="text-red-400" title="required">*</span>
+                                        <div class="relative inline-block group">
+                                            <span class="px-1 cursor-pointer">{{$title}}
+                                                @if($filter->is_required)
+                                                    <span class="text-red-400" title="required">*</span>
+                                                @endif
+                                            </span>
+                                            <!-- Hidden nodes, shown on hover -->
+                                            @if (App\Utils\Support\CurrentUser::isAdmin())
+                                                <div class="absolute right-full top-0 hidden group-hover:block space-y-2 bg-gray-500 p-1 rounded shadow-lg z-10">
+                                                    <a target="_blank" href="{{ route('rp_filters.edit', $filter->id) }}" class="flex items-center bg-blue-100 hover:bg-blue-200 px-2 pt-1 w-full text-left rounded text-blue-700">
+                                                        <i class="fas fa-link mr-2"></i>
+                                                        <span class="truncate">Rp Filter</span>
+                                                    </a>
+                                                    @if( $filter->listen_reducer_id)
+                                                        <a target="_blank" href="{{ route('rp_listen_reducers.edit', $filter->listen_reducer_id) }}" class="flex items-center bg-green-100 hover:bg-green-200 px-2 pt-1 pb-1 w-full text-left rounded text-green-700">
+                                                            <i class="fas fa-link mr-2"></i>
+                                                            <span class="truncate">Rp Listen Reducer</span>
+                                                        </a>
+                                                    @endif
+                                                </div>
                                             @endif
-                                        </a>
+                                        </div>
+
                                         <x-renderer.report2.filter-report-item
                                             :filter="$filter"
                                             :selected="$selected"    
@@ -57,7 +74,7 @@
                                                 $defaultValue = explode(',',$filter->default_value);
                                             @endphp
                                             @if(count($defaultValue) > 1)
-                                                <x-renderer.heading level=7 class='text-left text-red-700 border-red-300 bg-red-50 dark:bg-red-200'>(Configuration Error)</x-renderer.heading>
+                                                <x-renderer.heading level=7 class='pt-1 text-left text-red-700 border-red-300'>(Configuration Error)</x-renderer.heading>
                                             @endif
                                         @endif
                                     </div>
