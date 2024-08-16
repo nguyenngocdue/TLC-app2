@@ -39,8 +39,10 @@ class SidebarFilterLod extends Component
         // return [];
 
         $dataSource = Pj_task_phase::select('id', 'name', 'order_no', 'description')
-            // ->where('show_in_task_budget', 1) //this also hide Overhead
-            ->whereNotIn('id', [3, 4])
+            ->whereNotIn('id', [
+                3, // Leave 
+                4, //PH
+            ])
             ->get();
         return $dataSource;
     }

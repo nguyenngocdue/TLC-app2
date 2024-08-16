@@ -33,24 +33,32 @@ class ModalFilterLod extends Component
 
     private function getDataSource()
     {
-        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        // $dataSource = Term::select('id', 'name', 'description')
-        //     ->where('field_id', $field_id)
-        //     ->whereNotIn('id', [221, 222])
-        //     ->orderBy('name')
-        //     ->get();
         $dataSource = Pj_task_phase::select('id', 'name', 'order_no', 'description')
-            // ->where('show_in_task_budget', 1) //this also hide Overhead
-            ->whereNotIn('id', [3, 4])
+            ->whereNotIn('id', [
+                3, // Leave 
+                4, //PH
+            ])
             ->get();
         return $dataSource;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+    private function getListenersOfDropdown2()
+    {
+        $suffix = $this->getSuffix();
+        return [
+            [
+                'listen_action' => 'dot',
+                'column_name' => 'lod_id' . $suffix,
+                'listen_to_attrs' => ['lod_id'],
+                'listen_to_fields' => ['sub_project_id' . $suffix],
+                'listen_to_tables' => ['sub_projects'],
+                'table_name' => 'pj_task_phases',
+                // 'table_name' => 'terms',
+                'triggers' => ['sub_project_id' . $suffix],
+            ],
+        ];
+    }
+
     public function render()
     {
         $this->renderJSForK();
