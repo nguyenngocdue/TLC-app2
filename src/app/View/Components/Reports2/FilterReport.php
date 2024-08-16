@@ -36,7 +36,7 @@ class FilterReport extends Component
     {
         $rp = (object)$this->report;
         $reportId = $rp->id;
-        $rpFilters = $rp->getRpFilters;
+        $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $filterLinkDetails = $rp->getFilterLinkDetails;
         
         $rpName = $rp->name;

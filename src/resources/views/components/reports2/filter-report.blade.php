@@ -42,7 +42,7 @@
                                         $selected = $currentParams[$editedDataIndex] ?? [];
                                     @endphp
                                     <div class="col-span-2">
-                                        <a class="" target="_blank" href="{{ route('rp_filters.edit', $filter->id) }}" title="id : {{$filter->id}}">
+                                        <a class="" target="_blank" href="{{ route('rp_filters.edit', $filter->id) }}" title="Filter Id : {{$filter->id}}">
                                             <span class='px-1'>{{$title}}</span>
                                             @if($filter->is_required)
                                                 <span class="text-red-400" title="required">*</span>

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('column_name')->nullable();
             $table->string('triggers')->nullable();
             $table->string('listen_to_fields')->nullable();
+            $table->string('listen_to_attrs')->nullable();
+            $table->string('listen_to_tables')->nullable();
             $table->string('columns_to_set')->nullable();
             $table->string('attrs_to_compare')->nullable();
 

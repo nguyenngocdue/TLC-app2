@@ -5,11 +5,14 @@ namespace App\View\Components\Renderer\Report2;
 use App\BigThink\HasShowOnScreens;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Prod_routing;
+use App\Models\Prod_routing_link;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Component;
 
 class FilterReportItem extends Component
@@ -55,6 +58,7 @@ class FilterReportItem extends Component
     {
         $controlTypeId = $this->filter->control_type;
         $entityType = $this->filter->entity_type;
+        $table = Str::plural($this->filter->entity_type);
 
         switch($controlTypeId) {
             case 633:
@@ -65,11 +69,42 @@ class FilterReportItem extends Component
                     $triggerName = $listenReducer->triggers ?? '';
                     if($triggerName){
                         $triggerNames = explode(',',$triggerName);
-                        foreach($triggerNames as $name) {
-                            $db = $db->select('id', 'name', 'description', $name)
+                        foreach ($triggerNames as $triggerName) {
+                            if (!empty($triggerName) && Schema::hasColumn($table, $triggerName)) {
+                                $db = $db->select('id', 'name', 'description', $triggerName)
                                 ->orderBy('name')
                                 ->get();
-                            return $db;
+                                return $db;
+                            } else{
+                                switch($entityType){
+                                    case 'prod_routings':
+                                        $db = $modelClass::select('id', 'name', 'description')
+                                        ->with('getSubProjects')
+                                        ->with('getScreensShowMeOn')
+                                        ->orderBy('name')
+                                        ->get();
+                                        foreach ($db as &$item) {
+                                            $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+                                        }
+                                        return $db;
+                                    case 'prod_routing_links':
+                                        $db = Prod_routing_link::select('id', 'name', 'description', 'prod_discipline_id')
+                                        ->with('getProdRoutings')
+                                        ->orderBy('name')
+                                        ->get();
+                                        $newDB = [];
+                                        foreach ($db as $item) {
+                                            $i = (object)[];
+                                            $i->id = $item->id;
+                                            $i->name = $item->name;
+                                            $i->description = $item->description;
+                                            $i->prod_discipline_id = $item->prod_discipline_id;
+                                            $i->prod_routing_id = $item->getProdRoutings->pluck('id');
+                                            $newDB[] = $i;
+                                        }
+                                        return $newDB;
+                                }
+                            }
                         }
                     }else {
                         $db = $db->select('id', 'name', 'description')
@@ -89,7 +124,7 @@ class FilterReportItem extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dd($params);
+        // dump($params);
         return view(
             'components.controls.has-data-source.dropdown2',
             $params
