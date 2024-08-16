@@ -4,19 +4,19 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 Str::macro('appTitle', function (string $s) {
-    $exceptionOfKeepingSingular = ['hse', 'kpi', 'esg', 'ghg', 'hr', 'scm', 'eco'];
+    $exceptionOfKeepingSingular = ['hse', 'kpi', 'esg', 'ghg', 'hr', 'scm', 'eco', 'it', 'diginet_data', 'compliance_data', 'accounting', 'dashboard'];
     $s = in_array($s, $exceptionOfKeepingSingular) ? $s : Str::plural($s);
     $s = Str::headline($s);
 
-    $sources = ['hr', 'erp', 'wir', 'hse', 'esg', 'ghg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod', 'ho', 'ws', 'pj', 'eco'];
+    $sources = ['hr', 'erp', 'wir', 'hse', 'esg', 'ghg', 'scm', 'qaqc', 'dev', 'kpi', 'qs', 'nz', 'dc', 'it', 'qa', 'qc', 'bd', 'prod', 'ho', 'ws', 'pj', 'eco', 'it'];
     // /i is for case insensitive
-    $sources = array_map(fn ($i) => '/\b' . $i . '\b/i', $sources);
-    $target = ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'GHG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD', 'HO', 'WS', 'PJ', 'ECO'];
+    $sources = array_map(fn($i) => '/\b' . $i . '\b/i', $sources);
+    $target = ['HR', 'ERP', 'WIR', 'HSE', 'ESG', 'GHG', 'SCM', 'QAQC', 'DEV', 'KPI', 'QS', 'NZ', 'DC', 'IT', 'QA', 'QC', 'BD', 'PROD', 'HO', 'WS', 'PJ', 'ECO', 'IT'];
     $s = preg_replace($sources, $target, $s);
 
     $sources = ['acct', 'cpl', 'dir', 'fac', 'des', 'fin', 'mgr', 'pln', 'proc', 'proj', 'whs', 'asst'];
     // /u is for whole word
-    $sources = array_map(fn ($i) => '/\b' . $i . '\b/u', $sources);
+    $sources = array_map(fn($i) => '/\b' . $i . '\b/u', $sources);
     $target =  ['Accounting', 'Compliance', 'Director', 'Factory', 'Design', 'Finance', 'Manager', 'Planning', 'Procurement', 'Project', 'Warehouse', 'Assistant'];
     $s = preg_replace($sources, $target, $s);
     return $s;
@@ -40,7 +40,7 @@ Str::macro('modelPathFrom', function (string $table_or_type) {
 //make "" to []
 Str::macro('parseArray', function (?string $values) {
     $array = ($values != "") ? explode(",", $values) : [];
-    return array_map(fn ($s) => trim($s), $array);
+    return array_map(fn($s) => trim($s), $array);
 });
 
 // Str::macro('modelToPretty', function (string $string) {
