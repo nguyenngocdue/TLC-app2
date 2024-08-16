@@ -12,8 +12,15 @@ class Project extends ModelExtended
     use HasShowOnScreens;
 
     protected $fillable = [
-        "id", "name", "description", "slug", "status", "owner_id",
-        "qr_app_source", "show_in_task_budget", "long_description",
+        "id",
+        "name",
+        "description",
+        "slug",
+        "status",
+        "owner_id",
+        "qr_app_source",
+        "show_in_task_budget",
+        "long_description",
     ];
 
     public static $eloquentParams = [
@@ -24,9 +31,16 @@ class Project extends ModelExtended
 
         "getProjectMembers" => ["belongsToMany", User::class, "ym2m_project_user_project_member"],
         "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_project_term_show_me_on"],
+        "getScreensHideMeOn" => ["belongsToMany", Term::class, "ym2m_project_term_hide_me_on"],
     ];
 
     public function getScreensShowMeOn()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getScreensHideMeOn()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

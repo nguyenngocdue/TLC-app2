@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('sub_projects', function (BlueprintExtended $table) {
             $table->id();
@@ -28,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('qr_plate_style_id')->nullable();
 
             $table->boolean('sqb_input_team')->nullable();
-            $table->boolean('hide_in_sts')->default(false);
 
             $table->appendCommonFields();
         });

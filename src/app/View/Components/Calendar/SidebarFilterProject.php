@@ -31,7 +31,11 @@ class SidebarFilterProject extends Component
 
     private function getDataSource()
     {
+        // Needed to query the database
+        // return [];
+        $hide_on_term_id = config("production.projects.hr_timesheet_officer");
         return Project::select('id', 'name', 'description')
+            ->whereDoesntHave("getScreensHideMeOn", fn($q) => $q->where('terms.id', $hide_on_term_id))
             ->orderBy('name')
             ->get();
     }

@@ -59,6 +59,18 @@
         "cancelled": "true",
         "on_hold": "true"
     },
+    "_getSubProjects": {
+        "name": "_getSubProjects",
+        "column_name": "getSubProjects",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
     "_long_description": {
         "name": "_long_description",
         "column_name": "long_description",
@@ -107,6 +119,18 @@
         "cancelled": "true",
         "on_hold": "true"
     },
+    "_getScreensHideMeOn": {
+        "name": "_getScreensHideMeOn",
+        "column_name": "getScreensHideMeOn",
+        "concept": "true",
+        "design": "true",
+        "timesheet_only": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "closed": "true",
+        "cancelled": "true",
+        "on_hold": "true"
+    },
     "_getProjectMembers": {
         "name": "_getProjectMembers",
         "column_name": "getProjectMembers",
@@ -134,18 +158,6 @@
     "_qr_app_source": {
         "name": "_qr_app_source",
         "column_name": "qr_app_source",
-        "concept": "true",
-        "design": "true",
-        "timesheet_only": "true",
-        "manufacturing": "true",
-        "construction_site": "true",
-        "closed": "true",
-        "cancelled": "true",
-        "on_hold": "true"
-    },
-    "_getSubProjects": {
-        "name": "_getSubProjects",
-        "column_name": "getSubProjects",
         "concept": "true",
         "design": "true",
         "timesheet_only": "true",

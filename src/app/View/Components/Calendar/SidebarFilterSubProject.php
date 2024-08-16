@@ -31,13 +31,17 @@ class SidebarFilterSubProject extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
+    //This function is override from ModalFilterSubProject
     private function getDataSource()
     {
-        $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
-            ->whereNot('hide_in_sts', 1)
-            ->orderBy('name')
-            ->get();
-        return $dataSource;
+        // $hide_on_term_id = config("production.sub_projects.hr_timesheet_officer");
+        // $dataSource = Sub_project::select('id', 'name', 'description', 'project_id', 'lod_id')
+        //     // ->whereNot('hide_in_sts', 1)
+        //     // ->whereDoesntHave("getScreensHideMeOn", fn($q) => $q->where('terms.id', $hide_on_term_id))
+        //     ->orderBy('name')
+        //     ->get();
+        // return $dataSource;
+        return [];
     }
 
     public function getSuffix()

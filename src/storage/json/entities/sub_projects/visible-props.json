@@ -143,6 +143,18 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_getScreensHideMeOn": {
+        "name": "_getScreensHideMeOn",
+        "column_name": "getScreensHideMeOn",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_hide_in_sts": {
         "name": "_hide_in_sts",
         "column_name": "hide_in_sts",

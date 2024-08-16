@@ -31,9 +31,12 @@ class ModalFilterProject extends Component
 
     private function getDataSource()
     {
-        return Project::select('id', 'name', 'description')
+        $hide_on_term_id = config("production.projects.hr_timesheet_officer");
+        $result = Project::select('id', 'name', 'description')
+            ->whereDoesntHave("getScreensHideMeOn", fn($q) => $q->where('terms.id', $hide_on_term_id))
             ->orderBy('name')
             ->get();
+        return $result;
     }
 
     /**

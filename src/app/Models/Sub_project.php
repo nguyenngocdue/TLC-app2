@@ -2,14 +2,25 @@
 
 namespace App\Models;
 
+use App\BigThink\HasShowOnScreens;
 use App\BigThink\ModelExtended;
 
 class Sub_project extends ModelExtended
 {
+    use HasShowOnScreens;
+
     protected $fillable = [
-        "id", "name", "description", "slug", "status", "project_id",
-        "qr_plate_style_id", "owner_id", 'lod_id', "client_id",
-        "sqb_input_team", "hide_in_sts",
+        "id",
+        "name",
+        "description",
+        "slug",
+        "status",
+        "project_id",
+        "qr_plate_style_id",
+        "owner_id",
+        'lod_id',
+        "client_id",
+        "sqb_input_team",
     ];
 
     public static $eloquentParams = [
@@ -28,7 +39,15 @@ class Sub_project extends ModelExtended
         "getProjectClientsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_project_client"],
         "getExternalInspectorsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_ext_insp"],
         "getCouncilMembersOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_council_member"],
+
+        "getScreensHideMeOn" => ["belongsToMany", Term::class, "ym2m_sub_project_term_hide_me_on"],
     ];
+
+    public function getScreensHideMeOn()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function attachment_subproject_homeowner_manual()
     {
