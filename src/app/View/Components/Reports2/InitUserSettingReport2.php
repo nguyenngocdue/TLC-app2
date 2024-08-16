@@ -50,7 +50,7 @@ class InitUserSettingReport2
             foreach ($paramsInConfig as $key => $value) {
                 if (in_array($key, $keyParamsInUser)) {
                     if(is_null($paramsInUser[$key]) && is_null($value)) continue;
-                    if (!is_null($paramsInUser[$key])) continue;
+                    if (!is_null($paramsInUser[$key]) && !is_null($paramsInUser[$key][0]) ) continue;
                     else {
                         $paramsToUpdate[$key] = $value;
                     }
@@ -82,6 +82,7 @@ class InitUserSettingReport2
             $paramsInConfig = $this->createDefaultParams($rpFilters);
             $paramsInUser = $settings[$entityType][$this->entityType2][$storedFilterKey];
             $paramsToUpdate = self::getParamsToUpdate($paramsInConfig, $paramsInUser, true);
+            // dump($paramsInConfig, $paramsToUpdate);
             if(!empty($paramsToUpdate)) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
                 $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;

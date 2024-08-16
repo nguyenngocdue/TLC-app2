@@ -25,7 +25,7 @@
         "name": "_rp_report_id",
         "column_name": "rp_report_id",
         "column_type": "bigint unsigned",
-        "label": "Curren Report",
+        "label": "Parent Report",
         "control": "dropdown",
         "align": "",
         "col_span": "",
