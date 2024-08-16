@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\ClassList;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 trait TraitListenerControlReport
 {
@@ -26,36 +26,31 @@ trait TraitListenerControlReport
     //Suffix is for case one form have multiple dropdown but same control (like sub projects in sidebar filter and sub projects in edit modal)
     public function getListenersOfDropdown2()
     {
-        // dd($this->filterDetail);
+        $filter = $this->filter;
+        $listenReducerId = $filter->listen_reducer_id;
 
-        // Log::info($a);
-        $listenersOfDropdown2 = [[
-            'column_name' => 'sub_project_id',
-            'listen_action' => 'reduce',
-            'triggers' => [
-                'project_id',
-            ],
-            'listen_to_fields' => [
-                'sub_project_id',
-            ],
-            'listen_to_attrs' => [
-                'project_id',
-            ],
-            'columns_to_set' => [],
-            'attrs_to_compare' => [
-                'id',
-            ],
-            'expression' => '',
-            'ajax_response_attribute' => '',
-            'ajax_form_attributes' => [],
-            'ajax_item_attributes' => [],
-            'ajax_default_values' => [],
-            'table_name' => 'sub_projects',
-            'listen_to_tables' => [
-                'sub_projects',
-            ],
-        ]];
-        return $listenersOfDropdown2;
+        if($listenReducerId) {
+            $listenReducer = $this ->filter->getListenReducer;
+            // dump($filter, $listenReducer);
+            $listenersOfDropdown2 = [[
+                "ajax_default_values" => [],
+                "ajax_form_attributes" => [],
+                "ajax_item_attributes" => [],
+                "ajax_response_attribute" => "",
+                "attrs_to_compare" => explode(',', $listenReducer->attrs_to_compare),
+                "column_name" => $listenReducer->column_name,
+                "columns_to_set" => $listenReducer->columns_to_set ? explode(',', $listenReducer->columns_to_set) :[],
+                "expression" => "",
+                "listen_action" => "reduce",
+                "listen_to_fields" => explode(',', $listenReducer->listen_to_fields),
+                "listen_to_attrs" => explode(',', $listenReducer->listen_to_attrs),
+                "listen_to_tables" => explode(',', $listenReducer->listen_to_tables),
+                "table_name" => Str::plural($filter->entity_type),
+                "triggers" => explode(',', $listenReducer->triggers)
+                ]];
+                // dump($listenersOfDropdown2);
+            return $listenersOfDropdown2;
+        }
     }
 
     private function renderJSForListener()
@@ -101,7 +96,7 @@ trait TraitListenerControlReport
         }
         $sign = $this->multiple ? '[]' : '';
         return  [
-            'id' => $this->id ?? $this->name,
+            'id' => $this->name ?? $this->id,
             'name' => $this->name . $sign,
             'selected' => $this->formatArrayString($this->selected),
             'multipleStr' => $this->multiple ? "multiple" : "",

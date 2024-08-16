@@ -25,6 +25,32 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_control_type": {
+        "name": "_control_type",
+        "column_name": "control_type",
+        "label": "",
+        "validation": "required",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_data_index": {
         "name": "_data_index",
         "column_name": "data_index",
@@ -51,22 +77,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_bw_list_ids": {
-        "name": "_bw_list_ids",
-        "column_name": "bw_list_ids",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_black_or_white": {
-        "name": "_black_or_white",
-        "column_name": "black_or_white",
+    "_is_active": {
+        "name": "_is_active",
+        "column_name": "is_active",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -90,9 +103,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_default_value": {
-        "name": "_default_value",
-        "column_name": "default_value",
+    "_black_or_white": {
+        "name": "_black_or_white",
+        "column_name": "black_or_white",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -103,9 +116,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_listen_reducer_id": {
-        "name": "_listen_reducer_id",
-        "column_name": "listen_reducer_id",
+    "_bw_list_ids": {
+        "name": "_bw_list_ids",
+        "column_name": "bw_list_ids",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_default_value": {
+        "name": "_default_value",
+        "column_name": "default_value",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -142,9 +168,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_control_type": {
-        "name": "_control_type",
-        "column_name": "control_type",
+    "_listen_reducer_id": {
+        "name": "_listen_reducer_id",
+        "column_name": "listen_reducer_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
