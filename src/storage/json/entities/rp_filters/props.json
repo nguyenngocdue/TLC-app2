@@ -179,7 +179,7 @@
         "name": "_black_or_white",
         "column_name": "black_or_white",
         "column_type": "bigint unsigned",
-        "label": "Black or Whire",
+        "label": "Black or White",
         "control": "toggle",
         "align": "",
         "col_span": "12",

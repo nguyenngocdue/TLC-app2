@@ -5,12 +5,10 @@ namespace App\View\Components\Renderer\Report2;
 use App\BigThink\HasShowOnScreens;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\Prod_routing;
 use App\Models\Prod_routing_link;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
-use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Component;
@@ -49,77 +47,90 @@ class FilterReportItem extends Component
         $this->allowClear = (bool)$filter->allow_clear;
     }
 
-    private function getListenReducer()
-    {
-        return $this->filter->getListenReducer;
-    }
-
     private function getDataSource()
     {
-        $controlTypeId = $this->filter->control_type;
-        $entityType = $this->filter->entity_type;
-        $table = Str::plural($this->filter->entity_type);
+        $filter = $this->filter;
+        $controlTypeId = $filter->control_type;
+        $entityType = $filter->entity_type;
+        $isBlackList = $filter->black_or_white;
+        $bWListIds = explode(',', $filter->bw_list_ids);
 
-        switch($controlTypeId) {
+        switch ($controlTypeId) {
             case 633:
-                $modelClass = ModelData::initModelByField($entityType);    
-                if ($modelClass) {
-                    $db = $modelClass::query();
-                    $listenReducer = $this->filter->getListenReducer;
-                    $triggerName = $listenReducer->triggers ?? '';
-                    if($triggerName){
-                        $triggerNames = explode(',',$triggerName);
-                        foreach ($triggerNames as $triggerName) {
-                            if (!empty($triggerName) && Schema::hasColumn($table, $triggerName)) {
-                                $db = $db->select('id', 'name', 'description', $triggerName)
-                                ->orderBy('name')
-                                ->get();
-                                return $db;
-                            } else{
-                                switch($entityType){
-                                    case 'prod_routings':
-                                        $db = $modelClass::select('id', 'name', 'description')
-                                        ->with('getSubProjects')
-                                        ->with('getScreensShowMeOn')
-                                        ->orderBy('name')
-                                        ->get();
-                                        foreach ($db as &$item) {
-                                            $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
-                                        }
-                                        return $db;
-                                    case 'prod_routing_links':
-                                        $db = Prod_routing_link::select('id', 'name', 'description', 'prod_discipline_id')
-                                        ->with('getProdRoutings')
-                                        ->orderBy('name')
-                                        ->get();
-                                        $newDB = [];
-                                        foreach ($db as $item) {
-                                            $i = (object)[];
-                                            $i->id = $item->id;
-                                            $i->name = $item->name;
-                                            $i->description = $item->description;
-                                            $i->prod_discipline_id = $item->prod_discipline_id;
-                                            $i->prod_routing_id = $item->getProdRoutings->pluck('id');
-                                            $newDB[] = $i;
-                                        }
-                                        return $newDB;
-                                }
-                            }
-                        }
-                    }else {
-                        $db = $db->select('id', 'name', 'description')
-                        ->orderBy('name')
-                        ->get();
-                        return $db;
-                    }
-                }
+                return $this->handleControlType633($entityType, $isBlackList, $bWListIds);
+
             case 631:
-                $statuses = LibStatuses::getFor($entityType);
-                $dt = array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys($statuses), $statuses);
-                return $dt;
+                return $this->getStatuses($entityType);
+
+            default:
+                return [];
         }
-        
     }
+
+    private function handleControlType633($entityType, $isBlackList, $bWListIds)
+    {
+        $modelClass = ModelData::initModelByField($entityType);
+        if (!$modelClass) return [];
+
+        $db = $modelClass::query();
+        $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
+
+        if (!empty($triggerNames)) {
+            foreach ($triggerNames as $triggerName) {
+                if (Schema::hasColumn(Str::plural($entityType), $triggerName)) {
+                    return $this->getFilteredData($db, $triggerName, $isBlackList, $bWListIds);
+                }
+            }
+        }
+
+        return $this->getEntityData($entityType, $db, $isBlackList, $bWListIds);
+    }
+
+    private function getFilteredData($db, $triggerName, $isBlackList, $bWListIds)
+    {
+        return $db->select('id', 'name', 'description', $triggerName)
+            ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+            ->orderBy('name')
+            ->get();
+    }
+
+    private function getEntityData($entityType, $db, $isBlackList, $bWListIds)
+    {
+        if ($entityType === 'prod_routings') {
+            return $db->select('id', 'name', 'description')
+                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+                ->with(['getSubProjects', 'getScreensShowMeOn'])
+                ->orderBy('name')
+                ->get();
+        }
+
+        if ($entityType === 'prod_routing_links') {
+            return Prod_routing_link::select('id', 'name', 'description', 'prod_discipline_id')
+                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+                ->with('getProdRoutings')
+                ->orderBy('name')
+                ->get()
+                ->map(fn($item) => (object)[
+                    'id' => $item->id,
+                    'name' => $item->name,
+                    'description' => $item->description,
+                    'prod_discipline_id' => $item->prod_discipline_id,
+                    'prod_routing_id' => $item->getProdRoutings->pluck('id'),
+                ]);
+        }
+
+        return $db->select('id', 'name', 'description')
+            ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+            ->orderBy('name')
+            ->get();
+    }
+
+    private function getStatuses($entityType)
+    {
+        return array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys(LibStatuses::getFor($entityType)), LibStatuses::getFor($entityType));
+    }
+
+
     public function render()
     {
         $this->renderJSForK();
