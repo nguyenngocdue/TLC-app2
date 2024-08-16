@@ -20,6 +20,7 @@ return new class extends Migration
         $schema->create('it_tickets', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
+            $table->text("trace")->nullable();
             $table->text("description")->nullable();
             $table->unsignedBigInteger("it_ticket_cat_id")->nullable();
             $table->unsignedBigInteger("it_ticket_sub_cat_id")->nullable();

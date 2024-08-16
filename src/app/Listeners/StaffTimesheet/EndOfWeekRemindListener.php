@@ -80,6 +80,8 @@ class EndOfWeekRemindListener
                     'user_name' => $user->name,
                     'url' => route("hr_timesheet_officers.index"),
                 ]);
+                $workplaceName = Workplace::findFromCache($user->current_workplace)->name;
+                $mail->subject = "Weekly Timesheet Reminder - ($workplaceName) - " . date('Y');
                 Mail::to($user->email)
                     // ->cc([])
                     ->bcc(env('MAIL_ARCHIVE_BCC'))

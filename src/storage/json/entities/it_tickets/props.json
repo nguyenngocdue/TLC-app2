@@ -65,6 +65,28 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_trace": {
+        "name": "_trace",
+        "column_name": "trace",
+        "column_type": "text",
+        "label": "Trace",
+        "control": "text",
+        "align": "",
+        "col_span": "",
+        "width": "",
+        "hidden_view_all": "true",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_it_ticket_cat_id": {
         "name": "_it_ticket_cat_id",
         "column_name": "it_ticket_cat_id",

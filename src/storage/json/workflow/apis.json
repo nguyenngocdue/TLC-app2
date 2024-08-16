@@ -309,6 +309,16 @@
     "hse_walkthroughs": {
         "name": "hse_walkthroughs"
     },
+    "it_ticket_cats": {
+        "name": "it_ticket_cats"
+    },
+    "it_ticket_sub_cats": {
+        "name": "it_ticket_sub_cats"
+    },
+    "it_tickets": {
+        "name": "it_tickets",
+        "createNewShort": "true"
+    },
     "kanban_task_buckets": {
         "name": "kanban_task_buckets"
     },
