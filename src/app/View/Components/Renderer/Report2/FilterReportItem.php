@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\Report2;
 
 use App\BigThink\HasShowOnScreens;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
@@ -52,28 +53,37 @@ class FilterReportItem extends Component
 
     private function getDataSource()
     {
+        $controlTypeId = $this->filter->control_type;
         $entityType = $this->filter->entity_type;
-        $modelClass = ModelData::initModelByField($entityType);
-        if ($modelClass) {
-            $db = $modelClass::query();
-            $listenReducer = $this->filter->getListenReducer;
-            $triggerName = $listenReducer->triggers ?? '';
-            if($triggerName){
-                $triggerNames = explode(',',$triggerName);
-                foreach($triggerNames as $name) {
-                    $db = $db->select('id', 'name', 'description', $name)
+
+        switch($controlTypeId) {
+            case 633:
+                $modelClass = ModelData::initModelByField($entityType);    
+                if ($modelClass) {
+                    $db = $modelClass::query();
+                    $listenReducer = $this->filter->getListenReducer;
+                    $triggerName = $listenReducer->triggers ?? '';
+                    if($triggerName){
+                        $triggerNames = explode(',',$triggerName);
+                        foreach($triggerNames as $name) {
+                            $db = $db->select('id', 'name', 'description', $name)
+                                ->orderBy('name')
+                                ->get();
+                            return $db;
+                        }
+                    }else {
+                        $db = $db->select('id', 'name', 'description')
                         ->orderBy('name')
                         ->get();
-                    return $db;
+                        return $db;
+                    }
                 }
-            }else {
-                $db = $db->select('id', 'name', 'description')
-                ->orderBy('name')
-                ->get();
-                return $db;
-            }
+            case 631:
+                $statuses = LibStatuses::getFor($entityType);
+                $dt = array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys($statuses), $statuses);
+                return $dt;
         }
-        return collect();
+        
     }
     public function render()
     {
