@@ -35,9 +35,11 @@ function removeUnrelatedPhase(newProjectId) {
     switch (newProjectId * 1) {
         case 27: //HOF
         case 6: //TF1
-        case 10: //TF2
         case 7: //TF3
             toBeKept = [1]
+            break
+        case 10: //TF2
+            toBeKept = [1, 9]
             break
         case 59: //NZO
             toBeKept = [2]
