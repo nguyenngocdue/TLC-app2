@@ -72,6 +72,20 @@ trait TraitListenerControlReport
         }
     }
 
+    private function formatArrayString($input) {
+        $input = trim($input, '[]');
+        $elements = explode(',', $input);
+        $formattedElements = array_map(function($element) {
+            $element = trim($element);
+            if (is_numeric($element)) {
+                return $element;
+            } else {
+                return "\"$element\"";
+            }
+        }, $elements);
+        return '[' . implode(',', $formattedElements) . ']';
+    }
+
     private function getParamsForHasDataSource()
     {
         switch ($this->control) {
@@ -89,7 +103,7 @@ trait TraitListenerControlReport
         return  [
             'id' => $this->id ?? $this->name,
             'name' => $this->name . $sign,
-            'selected' => $this->selected,
+            'selected' => $this->formatArrayString($this->selected),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'table' => $this->tableName,
             'readOnly' => $this->readOnly,

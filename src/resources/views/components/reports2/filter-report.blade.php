@@ -1,4 +1,3 @@
-{{-- @dd($routeFilter)  --}}
 @if($paramsWarning)
     @foreach($paramsWarning as $filter)
         <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
@@ -33,6 +32,7 @@
                     
                         <div class="grid grid-cols-12 gap-4 items-baseline">
                             @foreach ($rpFilters as $filter)
+
                                 @if($filter->is_active)
                                     @php
                                         $text = 'App\Utils\Support\StringReport'::makeTitleFilter($filter->entity_type);
