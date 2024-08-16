@@ -34,35 +34,4 @@
     </div>
 </x-renderer.card>
 
-<script>
-    function hideTaskList(){
-        $("#sidebar_tasklist_container").hide();
-        $("#sidebar_tasklist_container_warning").show();
-    }
-    function showTaskList(){
-        $("#sidebar_tasklist_container").show();
-        $("#sidebar_tasklist_container_warning").hide();
-    }
-    function checkIfAnyFilterIsNull(){
-        // console.log('checkIfAnyFilterIsNull');
-
-        const a = ($("#project_id_11111").val());
-        const b = ($("#sub_project_id_11111").val());
-        const c = ($("#lod_id_11111").val());
-        const d = ($("#work_mode_id_11111").val());
-        const enabled = (!a || !b || !c || !d)
-        if(enabled){
-            hideTaskList();
-            // console.log('disable');
-        } else {
-            showTaskList();
-            // console.log('enable');
-        }
-    }
-    $("#project_id_11111").change(()=>checkIfAnyFilterIsNull())
-    $("#sub_project_id_11111").change(()=>checkIfAnyFilterIsNull())
-    $("#lod_id_11111").change(()=>checkIfAnyFilterIsNull())
-    $("#work_mode_id_11111").change(()=>checkIfAnyFilterIsNull())
-    
-    checkIfAnyFilterIsNull()
-</script>
+<script src="{{ asset('js/components/FullCalendarEdit-ProjectPhase-20240815.js') }}"></script>

@@ -35,12 +35,9 @@ class SidebarFilterLod extends Component
 
     private function getDataSource()
     {
-        // $field_id = FieldSeeder::getIdFromFieldName('getLodsOfTask');
-        // $dataSource = Term::select('id', 'name', 'description')
-        //     ->where('field_id', $field_id)
-        //     ->whereNotIn('id', [221, 222])
-        //     ->orderBy('name')
-        //     ->get();
+        //Needed to query the database
+        // return [];
+
         $dataSource = Pj_task_phase::select('id', 'name', 'order_no', 'description')
             // ->where('show_in_task_budget', 1) //this also hide Overhead
             ->whereNotIn('id', [3, 4])

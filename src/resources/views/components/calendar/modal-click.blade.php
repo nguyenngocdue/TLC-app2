@@ -72,3 +72,27 @@
         </div> 
     </div>
 </div>
+
+<script>
+$('#lod_id').on('select2:open', function () {
+    const options = $(this).find('option')
+    // console.log(toBeKept, options)
+    options.each((index, option) => {
+        const value = $(option).val()
+        if (!toBeKept.includes(parseInt(value))) {
+            // console.log('hide', value, option)
+            $(option).prop('disabled', true)
+        } else {
+            // console.log('show', value, option)
+            $(option).prop('disabled', false)
+        }
+    })
+
+    // Refresh Select2 to reflect the changes
+    $(this).trigger('change.select2')
+})
+$('#project_id').change(() => {
+    // checkIfAnyFilterIsNull()
+    removeUnrelatedPhase($('#project_id').val())
+})
+</script>
