@@ -200,7 +200,7 @@
         "filter_operator": "=",
         "filter_values": "313",
         "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
+        "let_user_choose_when_one_item": "true",
         "let_user_clear": ""
     },
     "_getProdOrders": {
