@@ -37,8 +37,10 @@ function removeUnrelatedPhase(newProjectId) {
         case 6: //TF1
         case 10: //TF2
         case 7: //TF3
+            toBeKept = [1]
+            break
         case 59: //NZO
-            toBeKept = overheadIds
+            toBeKept = [2]
             break
         default:
             toBeKept = allPhaseIds.filter((phaseId) => overheadIds.includes(phaseId) == false)
