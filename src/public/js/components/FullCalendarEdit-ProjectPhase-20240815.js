@@ -6,7 +6,7 @@ function showTaskList() {
     $('#sidebar_tasklist_container').show()
     $('#sidebar_tasklist_container_warning').hide()
 }
-function checkIfAnyFilterIsNull() {
+function checkIfAnyFilterIsNull_11111() {
     // console.log('checkIfAnyFilterIsNull');
 
     const a = $('#project_id_11111').val()
@@ -66,12 +66,12 @@ $('#lod_id_11111').on('select2:open', function () {
     $(this).trigger('change.select2')
 })
 $('#project_id_11111').change(() => {
-    checkIfAnyFilterIsNull()
+    checkIfAnyFilterIsNull_11111()
     removeUnrelatedPhase($('#project_id_11111').val())
 })
 
-$('#sub_project_id_11111').change(() => checkIfAnyFilterIsNull())
-$('#lod_id_11111').change(() => checkIfAnyFilterIsNull())
-$('#work_mode_id_11111').change(() => checkIfAnyFilterIsNull())
+$('#sub_project_id_11111').change(() => checkIfAnyFilterIsNull_11111())
+$('#lod_id_11111').change(() => checkIfAnyFilterIsNull_11111())
+$('#work_mode_id_11111').change(() => checkIfAnyFilterIsNull_11111())
 
-checkIfAnyFilterIsNull()
+checkIfAnyFilterIsNull_11111()
