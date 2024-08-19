@@ -21,4 +21,5 @@
             @endforeach
         @endif
     </div>
+    {{$slot}}
 </x-renderer.card>

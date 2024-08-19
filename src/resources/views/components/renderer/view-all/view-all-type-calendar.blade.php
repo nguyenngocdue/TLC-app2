@@ -40,7 +40,20 @@
                 </x-renderer.card>
             </div>
             <div class="col-span-12 md:col-span-8 xl:col-span-4">
-                <x-renderer.legend type="{{$type}}" title="{{$titleLegend}}" />
+                <x-renderer.legend type="{{$type}}" title="{{$titleLegend}}">
+                    <hr/>
+                    <div class="flex justify-evenly mt-1">
+                        <div class="text-xs">
+                            <span class="rounded-full font-bold px-4 bg-yellow-300 text-yellow-600 mr-1">.</span> Leave
+                        </div>
+                        <div class="text-xs">
+                            <span class="rounded-full font-bold px-4 bg-red-300 text-red-600 mr-1">.</span> Public hodiday
+                        </div>
+                        <div class="text-xs">
+                            <span class="rounded-full font-bold px-4 bg-gray-500 text-gray-100 mr-1">.</span> Today
+                        </div>
+                    </div>
+                </x-renderer.legend>
             </div>
             <div class="col-span-12 md:col-span-4 xl:col-span-2">
             @php
