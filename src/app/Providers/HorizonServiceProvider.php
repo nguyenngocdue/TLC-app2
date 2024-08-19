@@ -32,7 +32,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         Gate::define('viewHorizon', function ($user) {
             return in_array($user->email, [
                 "admin@tlc.com",
-                "thucvo@tlcmodular.com",
+                ...config('admin_team'),
             ]);
         });
     }

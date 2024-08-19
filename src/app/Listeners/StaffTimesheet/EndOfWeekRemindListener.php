@@ -2,23 +2,19 @@
 
 namespace App\Listeners\StaffTimesheet;
 
-use App\Mail\STS\MailRemindManager;
 use App\Mail\STS\MailRemindStaff;
-use App\Models\Hr_timesheet_officer;
+use App\Mail\STS\MailRemindStaffSummaryAdmin;
 use App\Models\User;
-use App\Models\User_discipline;
 use App\Models\Workplace;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\MailServiceProvider;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use LDAP\Result;
 
 class EndOfWeekRemindListener
 {
+    private $mailSubject = "Reminder: Weekly Timesheet Submission";
     /**
      * Create the event listener.
      */
@@ -71,17 +67,18 @@ class EndOfWeekRemindListener
         return $result;
     }
 
-    private function checkTimesheet($users)
+    private function sendMailToStaff($users)
     {
+        $workplaceNames = [];
         foreach ($users as $user) {
             try {
-
                 $mail = new MailRemindStaff([
                     'user_name' => $user->name,
                     'url' => route("hr_timesheet_officers.index"),
                 ]);
                 $workplaceName = Workplace::findFromCache($user->current_workplace)->name;
-                $mail->subject = "Weekly Timesheet Reminder - ($workplaceName) - " . date('Y');
+                $workplaceNames[] = $workplaceName;
+                $mail->subject = $this->mailSubject . " - ($workplaceName) - " . date('Y');
                 Mail::to($user->email)
                     // ->cc([])
                     ->bcc(env('MAIL_ARCHIVE_BCC'))
@@ -90,6 +87,26 @@ class EndOfWeekRemindListener
                 Log::error(get_class() . " " . $e->getMessage() . $e->getFile() . $e->getLine());
             }
         }
+        return array_unique($workplaceNames);
+    }
+
+    private function sendMailToAdmins($users, $workplaceNames)
+    {
+        $adminTeam = config('admin_team');
+
+        try {
+            $wpNames = join(", ", $workplaceNames);
+            $mail = new MailRemindStaffSummaryAdmin(['userLists' => $users]);
+            $mail->subject($this->mailSubject . " - ($wpNames) - Summary for Admin Team");
+
+            foreach ($adminTeam as $adminEmail) {
+                Mail::to($adminEmail)
+                    ->bcc(env('MAIL_ARCHIVE_BCC'))
+                    ->send($mail);
+            }
+        } catch (\Exception $e) {
+            Log::error(get_class() . " " . $e->getMessage() . $e->getFile() . $e->getLine());
+        }
     }
 
     public function handle(object $event): void
@@ -97,6 +114,7 @@ class EndOfWeekRemindListener
         // Log::info("EndOfWeekRemindListener is triggered.");
         $workplaceIds =  $this->inCronTime();
         $users = $this->makeUseList($workplaceIds);
-        $this->checkTimesheet($users);
+        $workplaceNames = $this->sendMailToStaff($users);
+        $this->sendMailToAdmins($users, $workplaceNames);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Listeners\StaffTimesheet;
 
 use App\Mail\STS\MailRemindManager;
+use App\Mail\STS\MailRemindManagerSummaryAdmin;
 use App\Models\Hr_timesheet_officer;
 use App\Models\User;
 use App\Models\User_discipline;
@@ -10,12 +11,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\MailServiceProvider;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class StartOfWeekRemindListener
 {
+    private $mailSubject = "Reminder: Approve timesheet for the previous week";
     /**
      * Create the event listener.
      */
@@ -115,29 +116,33 @@ class StartOfWeekRemindListener
         foreach ($timesheets as $ts) {
             $result[$ts->owner_id][] = $ts;
         }
-
-        // Log::info($user_ids);
-        // Log::info($timesheet);
         return $result;
     }
 
-    public function handle(object $event): void
+    private function sendMailToAdmins($userLists)
     {
-        //
-        // Log::info("StartOfWeekRemindListener is triggered.");
+        $adminTeam = config('admin_team');
+        try {
+            $mail = new MailRemindManagerSummaryAdmin(['userLists' => $userLists]);
+            $mail->subject($this->mailSubject . " - Summary for Admin Team");
 
-        $userLists = $this->makeUserList();
+            foreach ($adminTeam as $adminEmail) {
+                Mail::to($adminEmail)
+                    ->bcc(env('MAIL_ARCHIVE_BCC'))
+                    ->send($mail);
+            }
+        } catch (\Exception $e) {
+            Log::error(get_class() . " " . $e->getMessage() . $e->getFile() . $e->getLine());
+        }
+    }
 
-        // Log::info($userLists);
-        // $managers = User::query()->where('id', 1)->get();
+    private function sendMailToManagers($userLists)
+    {
         foreach ($userLists as $list) {
             $mail = new MailRemindManager($list);
             $user_name = $list['user_name'];
             $user_email = $list['user_email'];
-            $mail->subject("Reminder: Start of the week timesheet submission - " . $user_name);
-
-            // Log::info($user->email);
-            // Log::info($list['staff_emails']);
+            $mail->subject($this->mailSubject . " - " . $user_name);
 
             try {
                 Mail::to($user_email)
@@ -148,5 +153,13 @@ class StartOfWeekRemindListener
                 Log::error(get_class() . " " . $e->getMessage() . $e->getFile() . $e->getLine());
             }
         }
+    }
+
+    public function handle(object $event): void
+    {
+        // Log::info("StartOfWeekRemindListener is triggered.");
+        $userLists = $this->makeUserList();
+        $this->sendMailToManagers($userLists);
+        $this->sendMailToAdmins($userLists);
     }
 }
