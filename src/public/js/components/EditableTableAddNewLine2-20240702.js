@@ -1,5 +1,4 @@
-const removeEmptinessLine = (tableId) =>
-    $('#' + tableId + '_emptiness').remove()
+const removeEmptinessLine = (tableId) => $('#' + tableId + '_emptiness').remove()
 
 const findParentIdFieldName = (tableId, key_value_as = 'value_as_parent_id') => {
     const { columns } = tableObject[tableId]
@@ -21,10 +20,10 @@ const ajaxAddLineQueue = {}
 
 const getDefaultValueOfSetTableColumnListener = () => {
     const result = {}
-    listenersOfDropdown2.forEach(listener => {
-        if (listener.listen_action === "set_table_column") {
+    listenersOfDropdown2.forEach((listener) => {
+        if (listener.listen_action === 'set_table_column') {
             const { listen_to_fields } = listener
-            listen_to_fields.forEach(field => {
+            listen_to_fields.forEach((field) => {
                 const selectedId = getEById(field).val()
                 result[field] = selectedId
             })
@@ -39,7 +38,7 @@ const getDefaultValueOfSetTableColumnListener = () => {
 }
 
 const addANewLine = (params) => {
-    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1, } = params
+    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1 } = params
     const { tableName, dateTimeControls = [] } = tableObject[tableId]
     // console.log(params, tableName,)
     const orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
@@ -53,17 +52,16 @@ const addANewLine = (params) => {
     const parentType = getEById('entityParentType').val()
     // console.log(parentIdFieldName)
 
-    
-    //Check if edit sequence 
-    if(parentIdFieldName === 'prod_sequence_id') {
+    //Check if edit sequence
+    if (parentIdFieldName === 'prod_sequence_id') {
         const a = tableObject[tableId].tableName
         const b = tableObject[tableId].eloquentFn
         // console.log(a, b)
-        if(a === 'prod_runs') {
-            if(b === 'getProdRuns') {
+        if (a === 'prod_runs') {
+            if (b === 'getProdRuns') {
                 valuesOfOrigin['is_rework'] = 0
             }
-            if(b === 'getProdRunsRework') {
+            if (b === 'getProdRunsRework') {
                 valuesOfOrigin['is_rework'] = 1
             }
         }
@@ -94,8 +92,7 @@ const addANewLine = (params) => {
     const url = '/api/v1/entity/' + tableName + '_storeEmpty'
 
     if (ajaxAddLineQueue[url] == undefined) ajaxAddLineQueue[url] = {}
-    if (ajaxAddLineQueue[url]['data'] == undefined)
-        ajaxAddLineQueue[url]['data'] = []
+    if (ajaxAddLineQueue[url]['data'] == undefined) ajaxAddLineQueue[url]['data'] = []
     // if (ajaxAddLineQueue[url]['rowIndex'] == undefined) ajaxAddLineQueue[url]['rowIndex'] = []
     ajaxAddLineQueue[url]['data'].push(data0)
     // ajaxAddLineQueue[url]['rowIndex'].push(rowIndex)
@@ -107,12 +104,12 @@ const addANewLine = (params) => {
         // console.log('Inserting', data)
 
         const FORMAT = {
-            "picker_datetime": "DD/MM/YYYY hh:mm",
-            "picker_date": "DD/MM/YYYY",
-            "picker_time": "hh:mm",
+            picker_datetime: 'DD/MM/YYYY hh:mm',
+            picker_date: 'DD/MM/YYYY',
+            picker_time: 'hh:mm',
 
-            "picker_month": "MM/YYYY",
-            "picker_year": "YYYY",
+            picker_month: 'MM/YYYY',
+            picker_year: 'YYYY',
         }
 
         $.ajax({
@@ -186,14 +183,13 @@ const addANewLineFull = (params) => {
     // console.log("valuesOfOrigin: ", valuesOfOrigin)
     const insertedId = valuesOfOrigin['id']
     // console.log('addANewLine', tableId, insertedId)
-    const { columns, showNo, showNoR, tableDebugJs, isOrderable } =
-        tableObject[tableId]
+    const { columns, showNo, showNoR, tableDebugJs, isOrderable } = tableObject[tableId]
     // console.log("ADD LINE TO", params, tableDebugJs, isOrderable)
 
     const table = document.getElementById(tableId)
     // console.log(table)
     const row = table.insertRow(-1)
-    const tbody = table.getElementsByTagName("tbody")[0]
+    const tbody = table.getElementsByTagName('tbody')[0]
     tbody.appendChild(row) //<<Make sure the newly inserted row will be above the tfoot
     removeEmptinessLine(tableId) //<< Must remove after insertRow, otherwise it will insert into 2nd thead
     const newRowNo = getAllRows(tableId).length
@@ -226,13 +222,11 @@ const addANewLineFull = (params) => {
         // console.log(column['dataIndex'], column['saveOnChange'])
         const saveOnChange = column['saveOnChange'] ? 1 : 0
 
-        const id =
-            tableId + '[' + column['dataIndex'] + '][' + newRowIndex + ']'
+        const id = tableId + '[' + column['dataIndex'] + '][' + newRowIndex + ']'
         if (column['dataIndex'] === 'action') {
             fingerPrint = getMaxValueOfAColumn(tableId, '[finger_print]') + table_order_no_step
 
-            const fingerPrintName =
-                tableId + '[finger_print][' + newRowIndex + ']'
+            const fingerPrintName = tableId + '[finger_print][' + newRowIndex + ']'
             const fingerPrintInput =
                 '<input readonly class="w-10 bg-gray-300" name="' +
                 fingerPrintName +
@@ -242,23 +236,12 @@ const addANewLineFull = (params) => {
                 (tableDebugJs ? 'text' : 'hidden') +
                 ' />'
 
-            const destroyName =
-                tableId + '[DESTROY_THIS_LINE][' + newRowIndex + ']'
+            const destroyName = tableId + '[DESTROY_THIS_LINE][' + newRowIndex + ']'
             const destroyInput =
-                '<input readonly class="w-10 bg-gray-300" name="' +
-                destroyName +
-                '" type=' +
-                (tableDebugJs ? 'text' : 'hidden') +
-                ' />'
+                '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebugJs ? 'text' : 'hidden') + ' />'
 
             const paramString =
-                "{tableId: '" +
-                tableId +
-                "', control: this, fingerPrint:" +
-                fingerPrint +
-                ', nameIndex:' +
-                newRowIndex +
-                '}'
+                "{tableId: '" + tableId + "', control: this, fingerPrint:" + fingerPrint + ', nameIndex:' + newRowIndex + '}'
 
             const btnUp =
                 '<button value="' +
@@ -306,13 +289,23 @@ const addANewLineFull = (params) => {
             onChangeParams += '}'
 
             const onChangeDropdown4Fn = 'onChangeDropdown4(' + onChangeParams + ');'
-            const makeOnChangeAdvanced = (moreCodeAfter) => '' + '$("[id=\'' + id + "']\").on('change', function(e, dropdownParams){" + moreCodeAfter + '})'
+            const makeOnChangeAdvanced = (moreCodeAfter) =>
+                '' + '$("[id=\'' + id + "']\").on('change', function(e, dropdownParams){" + moreCodeAfter + '})'
             switch (column['renderer']) {
                 case 'read-only-text4':
                     if (column['dataIndex'] === 'id') {
                         if (insertedId) {
                             renderer = "<input id='" + id + "' name='" + id + "' value='" + insertedId + "' type='hidden' />"
-                            renderer += "<div class='text-center'>" + "<a target='_blank' class='text-blue-500' href='" + column['lineTypeRoute'] + insertedId + "/edit" + "'>" + makeId(insertedId) + '</a>' + '</div>'
+                            renderer +=
+                                "<div class='text-center'>" +
+                                "<a target='_blank' class='text-blue-500' href='" +
+                                column['lineTypeRoute'] +
+                                insertedId +
+                                '/edit' +
+                                "'>" +
+                                makeId(insertedId) +
+                                '</a>' +
+                                '</div>'
                             renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                         } else {
                             renderer = "<input id='" + id + "' name='" + id + "' type='hidden' />"
@@ -322,17 +315,27 @@ const addANewLineFull = (params) => {
                     }
                     break
                 case 'dropdown':
-                    if (column['dataIndex'] === 'status') {
+                    if (['status'].includes(column['dataIndex'])) {
                         renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
                         for (let i = 0; i < column['cbbDataSource'].length; i++) {
                             const status = column['cbbDataSource'][i]
                             statusObject = column['cbbDataSourceObject'][status]
                             const selected = i === 0 ? 'selected' : ''
-                            renderer += "<option value='" + status + "' " + selected + '>' + statusObject.title + '</option>'
+                            renderer += "<option value='" + status + "' " + selected + '>' + statusObject?.title + '</option>'
+                        }
+                        renderer += '</select>'
+                    } else if (['entity_type'].includes(column['dataIndex'])) {
+                        renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
+                        console.log(column)
+                        for (let i = 0; i < column['cbbDataSource'].length; i++) {
+                            const status = column['cbbDataSource'][i]
+                            statusObject = column['cbbDataSourceObject'][i]
+                            const selected = i === 0 ? 'selected' : ''
+                            renderer += "<option value='" + status + "' " + selected + '>' + statusObject + '</option>'
                         }
                         renderer += '</select>'
                     } else {
-                        renderer = 'Only STATUS has been implemented for dropdown1.'
+                        renderer = 'Only STATUS, ENTITY_TYPE has been implemented for dropdown1.'
                     }
                     break
                 case 'dropdown4':
@@ -343,21 +346,52 @@ const addANewLineFull = (params) => {
                         renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
                         renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
-                        renderer = "<select id='" + id + "' name='" + id + bracket + "' " + multipleStr + " " + readOnlyStr + " class='" + column['classList'] + "'></select>"
-                        renderer += "<script>getEById('" + id + "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
+                        renderer =
+                            "<select id='" +
+                            id +
+                            "' name='" +
+                            id +
+                            bracket +
+                            "' " +
+                            multipleStr +
+                            ' ' +
+                            readOnlyStr +
+                            " class='" +
+                            column['classList'] +
+                            "'></select>"
+                        renderer +=
+                            "<script>getEById('" +
+                            id +
+                            "').select2({placeholder: 'Please select', templateResult: select2FormatState})</script>"
                     }
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'toggle4':
-                    renderer = '<div class="flex justify-center">\
-                    <label for="' + id + '" class="inline-flex relative items-center cursor-pointer select">\
-                        <input id="' + id + '" name="' + id + '" type="checkbox" class="sr-only peer">\
+                    renderer =
+                        '<div class="flex justify-center">\
+                    <label for="' +
+                        id +
+                        '" class="inline-flex relative items-center cursor-pointer select">\
+                        <input id="' +
+                        id +
+                        '" name="' +
+                        id +
+                        '" type="checkbox" class="sr-only peer">\
                         <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>\
                     </label></div>'
                     break
                 case 'number4':
                     const { numericScale = 0 } = column
-                    renderer = "<input id='" + id + "' name='" + id + "' component='editable/number4' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' />"
+                    renderer =
+                        "<input id='" +
+                        id +
+                        "' name='" +
+                        id +
+                        "' component='editable/number4' " +
+                        (column['readOnly'] ? ' readonly' : '') +
+                        " class='" +
+                        column['classList'] +
+                        "' />"
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
                         const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", dropdownParams)'
@@ -367,21 +401,55 @@ const addANewLineFull = (params) => {
                         const changeBgColorFn = 'changeBgColor(this,"' + tableId + '");'
                         const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
                         const parseNumber4 = 'parseNumber2("' + id + '", getEById("' + id + '").val(), ' + numericScale + ');'
-                        renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue + parseNumber4) + '</script>'
+                        renderer +=
+                            '<script>' +
+                            makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue + parseNumber4) +
+                            '</script>'
                     }
                     break
                 case 'text4':
-                    renderer = "<input id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' />"
+                    renderer =
+                        "<input id='" +
+                        id +
+                        "' name='" +
+                        id +
+                        "' " +
+                        (column['readOnly'] ? ' readonly' : '') +
+                        " class='" +
+                        column['classList'] +
+                        "' />"
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'textarea4':
-                    renderer = "<textarea id='" + id + "' name='" + id + "' " + (column['readOnly'] ? ' readonly' : '') + " class='" + column['classList'] + "' rows='3'></textarea>"
+                    renderer =
+                        "<textarea id='" +
+                        id +
+                        "' name='" +
+                        id +
+                        "' " +
+                        (column['readOnly'] ? ' readonly' : '') +
+                        " class='" +
+                        column['classList'] +
+                        "' rows='3'></textarea>"
                     break
                 case 'picker-all4':
                     const { control } = column
                     // const attributeName = control === 'picker_datetime' ? 'name1' : 'name'
                     const attributeName = 'name' // when create new, this will be submitted with the form, so name not name1
-                    renderer = "<input component='editable/" + control + "' id='" + id + "' " + attributeName + "='" + id + "' placeholder='" + column['placeholder'] + "' class='" + column['classList'] + "'>"
+                    renderer =
+                        "<input component='editable/" +
+                        control +
+                        "' id='" +
+                        id +
+                        "' " +
+                        attributeName +
+                        "='" +
+                        id +
+                        "' placeholder='" +
+                        column['placeholder'] +
+                        "' class='" +
+                        column['classList'] +
+                        "'>"
                     //This line will cause save problem on SQBTS
                     // renderer += "<input type='hidden1' name='"+id+"' id='hidden_"+id+"'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
@@ -441,17 +509,17 @@ const addANewLineFull = (params) => {
                         //     break
                     }
                 }
-                if ((column['readOnly'] && column['deaf'])) {
+                if (column['readOnly'] && column['deaf']) {
                     getEById(id).val(selected)
                     const dataSource = ki[column['tableName']]
                     // console.log(dataSource, dataSource[selected])
 
                     const label = dataSource[selected]?.name
                     getEById(id + '_label').html(label)
-                    toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected, })
+                    toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected })
                     // getEById(id).trigger('change')
                 } else {
-                    toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected, })
+                    toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected })
                 }
                 // console.log("DDDDDD4", column)
                 break
@@ -467,7 +535,7 @@ const addANewLineFull = (params) => {
                 break
             default:
                 const value = valuesOfOrigin[column['dataIndex']]
-                const picker4config = (tableName == 'prod_runs') ? { minDate: moment().subtract(4, 'days').format("YYYY-MM-DD") } : {}
+                const picker4config = tableName == 'prod_runs' ? { minDate: moment().subtract(4, 'days').format('YYYY-MM-DD') } : {}
                 // console.log(picker4config)
                 // console.log("DDDDDD5", column, value)
                 if (column['value_as_parent_type']) {
@@ -503,13 +571,12 @@ const addANewLineFull = (params) => {
                 if (column['renderer'] === 'toggle') {
                     getEById(id)[0].checked = value
                 } else if (column['control'] === 'picker_datetime') {
-                    newFlatPickrDateTime(id, picker4config).setDate(value);
-                    getEById("hidden_" + id).val(value);
+                    newFlatPickrDateTime(id, picker4config).setDate(value)
+                    getEById('hidden_' + id).val(value)
                 } else if (column['control'] === 'picker_date') {
-                    newFlatPickrDate(id, picker4config).setDate(value);
-                }
-                else if (column['control'] === 'picker_time') {
-                    newFlatPickrTime(id/*, picker4config*/).setDate(value);
+                    newFlatPickrDate(id, picker4config).setDate(value)
+                } else if (column['control'] === 'picker_time') {
+                    newFlatPickrTime(id /*, picker4config*/).setDate(value)
                 } else {
                     // console.log("Applying data for", id, value)
                     getEById(id).val(value)
@@ -525,7 +592,7 @@ const addANewLineFull = (params) => {
     //This is to make sure the Listen assign will assign to the existing column
     for (let i = toDoAfterAddedDropdown4.length - 1; i >= 0; i--) {
         // for (let i = 0; i < toDoAfterAddedDropdown4.length; i++) {
-        //<< Have to do from length back to 0, 
+        //<< Have to do from length back to 0,
         //<< as the reduce of the previous dropdown may be overwritten by the later dropdown reloadDataToDropdown4
         //<< E.G: GHG template already reduce metric 1, but when metric 1 load after that, it will load whole list
         const { id, dataSource, tableId, selected } = toDoAfterAddedDropdown4[i]

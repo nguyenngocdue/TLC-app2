@@ -68,7 +68,7 @@ trait TraitTableColumnEditable
                     $newColumn['align'] = 'center';
                     break;
                 case 'entity_type':
-                    $newColumn['cbbDataSourceObject'] = ['', ...Entities::getAllPluralNames()];
+                    $newColumn['cbbDataSourceObject'] = ['', ...array_map(fn($s) => Str::headline($s), Entities::getAllPluralNames())];
                     $newColumn['cbbDataSource'] = ['', ...array_map(fn($s) => Str::snake($s), Entities::getAllPluralNames())];
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
