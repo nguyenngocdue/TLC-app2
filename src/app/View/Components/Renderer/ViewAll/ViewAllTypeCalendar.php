@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ViewAllTypeCalendar extends Component
@@ -35,6 +36,7 @@ class ViewAllTypeCalendar extends Component
         $leaveLines = (new Diginet_employee_leave_line())->getLinesByEmployeeIdAndRange($userCurrentCalendar->employeeid);
         $leaveDates = [];
         foreach ($leaveLines as $line) {
+            if ($line->la_type == 'WFH') continue;
             $leaveDates[] = [
                 'date' => Carbon::parse($line->la_date)->day,
                 'month' => Carbon::parse($line->la_date)->month,
