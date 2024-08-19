@@ -16,6 +16,8 @@ trait TraitCreateSQLReport2
             $value = trim(str_replace('$', '', $value));
             if (isset($params[$value])) {
                 $valueParam =  $params[$value];
+                // dump($matches);
+                // dump($matches, $params, $valueParam);
                 if (is_array($valueParam)) {
                     $itemsIsNumeric = array_filter($valueParam, fn ($item) => is_numeric($item));
                     if (!empty($itemsIsNumeric)) $valueParam = implode(',', $valueParam);
@@ -30,7 +32,7 @@ trait TraitCreateSQLReport2
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             } else {
-                return dd("Param '{$value}' not found in params array", $sqlStr);
+                return dd("Param '{$value}' not found in params array",$params, $sqlStr);
             }
         }
         if (Report::checkParam($params, 'picker_date')) {
@@ -39,7 +41,6 @@ trait TraitCreateSQLReport2
             $sqlStr = str_replace('{{start_date}}', $dates['start'], $sqlStr);
         }
         $sqlStr = str_replace(["\{{", "\}}"], ["{{", "}}"], $sqlStr);
-        // dump($sqlStr);
         return $sqlStr;
     }
     public function getSql($sqlString, $params)
