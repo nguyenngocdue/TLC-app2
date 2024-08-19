@@ -70,6 +70,7 @@ return new class extends Migration
             $table->json("settings");
 
             $table->boolean("unsubscribe_ts_weekly_reminder_for_staff")->nullable();
+            $table->boolean("use_ts_for_payroll")->nullable();
 
             $table->rememberToken();
             $table->appendCommonFields();

@@ -92,6 +92,7 @@ class ViewAllTypeCalendar extends Component
         // dump($leaveDates);
         $publicHolidays = $this->getPublicHolidays($year, $userCurrentCalendar);
         // dump($publicHolidays);
+        $useTsForPayroll = $userCurrentCalendar->use_ts_for_payroll;
 
         return view('components.renderer.view-all.view-all-type-calendar', [
             'allTimesheet' => $allTimesheet,
@@ -110,6 +111,7 @@ class ViewAllTypeCalendar extends Component
             'disableButton' => $this->disableButtonApproveAll($listIdPendingApproval, $userCurrentCalendar),
             'leaveDates' => $leaveDates,
             'publicHolidays' => $publicHolidays,
+            'useTsForPayroll' => $useTsForPayroll,
         ]);
     }
     private function disableButtonApproveAll($listIdPendingApproval, $userCurrentCalendar)

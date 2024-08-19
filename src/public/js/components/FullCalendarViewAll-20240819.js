@@ -120,7 +120,9 @@ function renderHtmlCalendar() {
         for (let j = 0; j < weeks[i].length; j++) {
             const valueWeek = weeks[i][j]
             htmlWeekContentAll = ''
-            if (valueWeek.includes(25) && valueWeek.indexOf(25) < valueWeek.length - 1) {
+            // const needToDivide = valueWeek.includes(25) && valueWeek.indexOf(25) < valueWeek.length - 1
+            const needToDivide = useTsForPayroll ? valueWeek.includes(25) && valueWeek.indexOf(25) < valueWeek.length - 1 : false
+            if (needToDivide) {
                 let index = valueWeek.indexOf(25)
                 let valueWeek_1 = valueWeek.slice(0, index + 1)
                 let valueWeek_2 = valueWeek.slice(index + 1)

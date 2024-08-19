@@ -80,7 +80,7 @@ class RelationshipRenderer2 extends Component
         $hasOrderNoColumnInFillable = in_array('order_no', $fillable);
 
         // Log::info($columns);
-        $allDataIndex = array_map(fn ($c) => $c['dataIndex'] ?? "", $columns);
+        $allDataIndex = array_map(fn($c) => $c['dataIndex'] ?? "", $columns);
         $hasOrderNoColumnInManyLineParams = false !== array_search('order_no', $allDataIndex);
         // dump($columns, $hasOrderNoColumnInManyLineParams);
 

@@ -98,5 +98,7 @@
     const token = @json($token);
     const typeEntity = @json($type);
     const ownerId = @json($ownerId);
+    const useTsForPayroll = @json($useTsForPayroll);
+
 </script>
-<script src="{{ asset('js/components/FullCalendarViewAll-20240814.js') }}"></script>
+<script src="{{ asset('js/components/FullCalendarViewAll-20240819.js') }}"></script>
