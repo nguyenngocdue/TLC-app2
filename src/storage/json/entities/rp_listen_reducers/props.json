@@ -131,28 +131,6 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_listen_to_tables": {
-        "name": "_listen_to_tables",
-        "column_name": "listen_to_tables",
-        "column_type": "varchar(255)",
-        "label": "Listen To Tables",
-        "control": "text",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": "",
-        "frozen_left": "",
-        "frozen_right": "",
-        "nowrap_view_all": ""
-    },
     "_columns_to_set": {
         "name": "_columns_to_set",
         "column_name": "columns_to_set",

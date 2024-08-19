@@ -36,12 +36,11 @@ class FilterReportItem extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
         if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
 
-        $filter = $this->filter;
-
-
+        $listenReducer = $this->filter->getListenReducer;
+        $this->id =  $listenReducer ? $listenReducer->column_name: $filter->name;
+ 
         $entityType = $filter->entity_type;
         $this->tableName = Str::plural($entityType);
-        $this->id = $filter->id;
         $this->multiple = (bool)$filter->is_multiple;
         $this->name = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
         $this->allowClear = (bool)$filter->allow_clear;
@@ -97,26 +96,36 @@ class FilterReportItem extends Component
     private function getEntityData($entityType, $db, $isBlackList, $bWListIds)
     {
         if ($entityType === 'prod_routings') {
-            return $db->select('id', 'name', 'description')
+            $newDB = $db->select('id', 'name', 'description')
                 ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                ->with(['getSubProjects', 'getScreensShowMeOn'])
+                ->with('getSubProjects')
+                ->with('getScreensShowMeOn')
                 ->orderBy('name')
                 ->get();
+            foreach ($newDB as &$item) {
+                $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+            }
+            return $newDB;
         }
 
         if ($entityType === 'prod_routing_links') {
-            return Prod_routing_link::select('id', 'name', 'description', 'prod_discipline_id')
-                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                ->with('getProdRoutings')
-                ->orderBy('name')
-                ->get()
-                ->map(fn($item) => (object)[
-                    'id' => $item->id,
-                    'name' => $item->name,
-                    'description' => $item->description,
-                    'prod_discipline_id' => $item->prod_discipline_id,
-                    'prod_routing_id' => $item->getProdRoutings->pluck('id'),
-                ]);
+            $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
+            ->with('getProdRoutings')
+            ->orderBy('name')
+                ->get();
+
+            $newDB = [];
+            foreach ($db as $item) {
+                $i = (object)[];
+                $i->id = $item->id;
+                $i->name = $item->name;
+                $i->description = $item->description;
+                $i->prod_discipline_id = $item->prod_discipline_id;
+
+                $i->prod_routing_id = $item->getProdRoutings->pluck('id');
+                $newDB[] = $i;
+            }
+            return $newDB;
         }
 
         return $db->select('id', 'name', 'description')
