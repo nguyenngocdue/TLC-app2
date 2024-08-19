@@ -2,15 +2,16 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
 class FilterReport extends Component
 {
 
-    protected $entityType2 = 'report2';
     public $refreshPage = false;
-
+    
+    use TraitFilterReport;
     public function __construct(
         private $report = "",
         private $paramsUrl = [],
@@ -38,21 +39,15 @@ class FilterReport extends Component
         $reportId = $rp->id;
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $filterLinkDetails = $rp->getFilterLinkDetails;
-        
-        $rpName = $rp->name;
-        $entityType = $rp->entity_type;
-        $entityType2 = $this->entityType2;
-        
-        $ins = InitUserSettingReport2::getInstance($entityType2);
-        $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters);
+
+        $currentParams = $this->currentParamsReport();
             
         $paramsWarning = $this->getParamsWarning($rpFilters, $currentParams);
         
         return view('components.reports2.filter-report', [
-            'entityType' => $entityType,
-            'reportName' => $rpName,
-            'entityType2' => $entityType2,
-            'entity_type' => $entityType,
+            'entityType' => $rp->entity_type,
+            'reportName' => $rp->name,
+            'entityType2' =>  $this->entityType2,
             'reportId' => $reportId,
             'currentParams' => $currentParams,
             'routeFilter' => route('filter_report.update', $rp->id),

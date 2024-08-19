@@ -70,12 +70,12 @@ trait TraitDataColumnReport
         return $dataHeader;
     }
 
-    public function getColumns($block, $params, $dataSqlColl = [])
+    public function getColumns($block, $params, $dataQuery = [])
     {
-        if (empty($dataSqlColl)) {
-            $dataSqlColl = $this->getDataSQLString($block, $params);
+        if (empty($dataQuery)) {
+            $dataQuery = $this->getDataSQLString($block, $params);
         }
-        $uniqueFields = $this->getAllUniqueFields($dataSqlColl);
+        $uniqueFields = $this->getAllUniqueFields($dataQuery);
         $lines = $block->getLines()->get()->sortby('order_no');
         $dataHeader = $this->getSecondColumns($block);
 
@@ -87,7 +87,7 @@ trait TraitDataColumnReport
             if ($isActive && !in_array($dataIndex, $processedIndices) && in_array($dataIndex, $uniqueFields)) {
                 $processedIndices[] = $dataIndex;
                 $aagFooter = $this->getTermName($line->agg_footer);
-                $title = $this->createIconPosition($line->name, $line->icon, $line->icon_position);
+                $title = $this->createIconPosition($line->title ?? $line->name, $line->icon, $line->icon_position);
                 $columns[] = [
                     'title' => $title,
                     'dataIndex' => $dataIndex,
@@ -98,6 +98,6 @@ trait TraitDataColumnReport
             }
         }
         if (empty($columns)) $columns = [['dataIndex' => null]];
-        return [$dataSqlColl, $columns, $dataHeader];
+        return [$dataQuery, $columns, $dataHeader];
     }
 }

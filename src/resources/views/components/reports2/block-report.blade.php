@@ -3,7 +3,7 @@
         @php
             $block = $values['blocks'];
             $tableDataSource = $values['tableDataSource'];
-            $tableColumns = $values['tableColumns'];
+            $rawTableColumns = $values['rawTableColumns'];
 
             $rendererType = $block->renderer_type;
             $colSpan = $values['colSpan'] ?? 12;
@@ -23,13 +23,13 @@
 
             @switch($rendererType)
                 @case(641)
-                    <x-reports2.table-block-report reportId="{{ $reportId }}" :rawTableDataSource="$tableDataSource" :rawTableColumns="$tableColumns"
+                    <x-reports2.table-block-report reportId="{{ $reportId }}" :rawTableDataSource="$tableDataSource" :rawTableColumns="$rawTableColumns"
                         :dataHeader="$dataHeader" :block="$block" />
                 @break
 
                 @case(642)
                     <x-reports2.chart-block-report :block="$block" reportId="{{ $reportId }}" :dataQuery="$dataQuery"
-                        :rawTableColumns="$tableColumns" />
+                        :rawTableColumns="$rawTableColumns" />
                 @break
 
                 @case(643)
