@@ -1,7 +1,9 @@
 <x-mail::message>
 # Weekly Staff Timesheet Status Report
 
-Dear Admin member,
+Dear Admin Member,
+
+This is a summary of the managers who received the reminders:
 
 @foreach($userLists as $list)
 @php
