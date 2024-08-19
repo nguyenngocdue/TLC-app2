@@ -115,6 +115,8 @@ class EndOfWeekRemindListener
         $workplaceIds =  $this->inCronTime();
         $users = $this->makeUseList($workplaceIds);
         $workplaceNames = $this->sendMailToStaff($users);
-        $this->sendMailToAdmins($users, $workplaceNames);
+        if (count($users) > 0) {
+            $this->sendMailToAdmins($users, $workplaceNames);
+        }
     }
 }
