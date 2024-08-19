@@ -38,7 +38,7 @@ class TimeSheetOfficerController extends TimesheetController
         // Log::info($user);
         $employeeId = $user->employeeid;
         $x = (new Diginet_employee_leave_line())->getLinesByEmployeeIdAndRange($employeeId);
-        // Log::info($x);
+        $x = $x->filter(fn($y) => $y->la_type != 'WFH');
         return $x;
     }
 
