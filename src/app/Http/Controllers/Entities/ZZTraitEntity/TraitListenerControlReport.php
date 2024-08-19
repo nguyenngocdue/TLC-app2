@@ -28,28 +28,29 @@ trait TraitListenerControlReport
     {
         $filter = $this->filter;
         $listenReducerId = $filter->listen_reducer_id;
-
+        
         if($listenReducerId) {
-            $listenReducer = $this ->filter->getListenReducer;
-            // dump($filter, $listenReducer);
-            $listenersOfDropdown2 = [[
-                "ajax_default_values" => [],
-                "ajax_form_attributes" => [],
-                "ajax_item_attributes" => [],
-                "ajax_response_attribute" => "",
-                "attrs_to_compare" => explode(',', $listenReducer->attrs_to_compare),
-                "column_name" => $listenReducer->column_name,
-                "columns_to_set" => $listenReducer->columns_to_set ? explode(',', $listenReducer->columns_to_set) :[],
-                "expression" => "",
-                "listen_action" => "reduce",
-                "listen_to_fields" => explode(',', $listenReducer->listen_to_fields),
-                "listen_to_attrs" => explode(',', $listenReducer->listen_to_attrs),
-                "listen_to_tables" => explode(',', $listenReducer->listen_to_tables),
-                "table_name" => Str::plural($filter->entity_type),
-                "triggers" => explode(',', $listenReducer->triggers)
-                ]];
-                // dump($listenersOfDropdown2);
-            return $listenersOfDropdown2;
+            $listenReducer = $this ->filter?->getListenReducer;
+            if(!is_null($listenReducer)) {
+                $listenersOfDropdown2 = [[
+                    "ajax_default_values" => [],
+                    "ajax_form_attributes" => [],
+                    "ajax_item_attributes" => [],
+                    "ajax_response_attribute" => "",
+                    "attrs_to_compare" => explode(',', $listenReducer->attrs_to_compare),
+                    "column_name" => $listenReducer->column_name,
+                    "columns_to_set" => $listenReducer->columns_to_set ? explode(',', $listenReducer->columns_to_set) :[],
+                    "expression" => "",
+                    "listen_action" => "reduce",
+                    "listen_to_fields" => ($x = explode(',', $listenReducer->listen_to_fields)),
+                    "listen_to_attrs" => explode(',', $listenReducer->listen_to_attrs),
+                    "table_name" => ($y = Str::plural($filter->entity_type)),
+                    "listen_to_tables" => array_map(fn() => $y,$x),
+                    "triggers" => explode(',', $listenReducer->triggers)
+                    ]];
+                    // dump($listenersOfDropdown2);
+                    return $listenersOfDropdown2;
+            };
         }
     }
 
@@ -78,7 +79,8 @@ trait TraitListenerControlReport
                 return "\"$element\"";
             }
         }, $elements);
-        return '[' . implode(',', $formattedElements) . ']';
+        $val = implode(',', $formattedElements)  === "\"\"" ? '' : implode(',', $formattedElements);
+        return '[' . $val . ']';
     }
 
     private function getParamsForHasDataSource()
@@ -94,9 +96,10 @@ trait TraitListenerControlReport
                 $classList = "border border-gray-200 rounded (Unknown-classList-of-$this->control)";
                 break;
         }
+        // dump($this);
         $sign = $this->multiple ? '[]' : '';
         return  [
-            'id' => $this->name ?? $this->id,
+            'id' => $this->id ?? $this->name,
             'name' => $this->name . $sign,
             'selected' => $this->formatArrayString($this->selected),
             'multipleStr' => $this->multiple ? "multiple" : "",
