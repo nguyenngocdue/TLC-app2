@@ -5,6 +5,8 @@ namespace App\View\Components\Controls\RelationshipRenderer;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\ClassList;
+use App\Utils\Support\Entities;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 trait TraitTableColumnEditable
@@ -59,6 +61,15 @@ trait TraitTableColumnEditable
                 case 'status':
                     $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
                     $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
+                    // $newColumn['renderer'] = 'text';
+                    $newColumn['renderer'] = 'dropdown';
+                    $newColumn['editable'] = true;
+                    $newColumn['classList'] = $classListText;
+                    $newColumn['align'] = 'center';
+                    break;
+                case 'entity_type':
+                    $newColumn['cbbDataSourceObject'] = ['', ...Entities::getAllPluralNames()];
+                    $newColumn['cbbDataSource'] = ['', ...array_map(fn($s) => Str::snake($s), Entities::getAllPluralNames())];
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
