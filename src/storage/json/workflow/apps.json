@@ -991,7 +991,7 @@
         "sub_package": "hr_admin",
         "title": "Leave Application (NZ)",
         "nickname": "lanz",
-        "tutorial_link": null,
+        "tutorial_link": "https:\/\/appcenter.tlcmodular.com\/leave-application\/",
         "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
         "doc_id_format_column": null,
         "status": null,
