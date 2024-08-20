@@ -2,13 +2,11 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Utils\Support\Report;
 use Illuminate\View\Component;
 use App\Models\Term;
 use App\Utils\Support\HrefReport;
-use App\Utils\Support\RegexReport;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TableBlockReport extends Component
 {
@@ -44,9 +42,22 @@ class TableBlockReport extends Component
         return $content;
     }
 
+    private function paginateDataSource($dataSource, $pageLimit)
+    {
+        $page = $_GET['page'] ?? 1;
+        // Convert array to a collection
+        if (!($dataSource instanceof Collection)) {
+            $dataSource = collect($dataSource);
+        }
+        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
+            ->appends(request()->query());
+        return $dataSource;
+    }
 
     private function createTableDataSourceForRow($dataQuery, $keyAndReducedColumns)
     {
+        $dataQuery = $this->paginateDataSource($dataQuery, 10);
+        // dd($dataQuery);
         $result = collect();
         foreach ($dataQuery as $k1 => $dataLine) {
             $re = (object)[];
@@ -55,8 +66,7 @@ class TableBlockReport extends Component
                     $column = $keyAndReducedColumns[$k2];
                     $dataHref = HrefReport::createDataHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
-                    Log::info($content);
-
+                    // Log::info($content);
                     $newValue = (object)[
                         'value' => $content,
                         'cell_href' => $dataHref->first(),
@@ -68,6 +78,7 @@ class TableBlockReport extends Component
             }
             $result->put($k1, $re);
         }
+        // dd($result);
         return $result;
     }
 
