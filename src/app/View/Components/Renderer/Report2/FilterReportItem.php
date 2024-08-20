@@ -76,6 +76,7 @@ class FilterReportItem extends Component
 
         $db = $modelClass::query();
         $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
+        // dump($triggerNames);
 
         if (!empty($triggerNames)) {
             foreach ($triggerNames as $triggerName) {
@@ -98,6 +99,7 @@ class FilterReportItem extends Component
 
     private function getEntityData($entityType, $db, $isBlackList, $bWListIds)
     {
+        // dump($entityType);
         if ($entityType === 'prod_routings') {
             $newDB = $db->select('id', 'name', 'description')
                 ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
@@ -110,7 +112,6 @@ class FilterReportItem extends Component
             }
             return $newDB;
         }
-
         if ($entityType === 'prod_routing_links') {
             $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
             ->with('getProdRoutings')
@@ -128,6 +129,7 @@ class FilterReportItem extends Component
                 $i->prod_routing_id = $item->getProdRoutings->pluck('id');
                 $newDB[] = $i;
             }
+            dd($newDB);
             return $newDB;
         }
         if ($entityType === 'users') {
