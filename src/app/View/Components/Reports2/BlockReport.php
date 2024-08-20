@@ -22,11 +22,15 @@ class BlockReport extends Component
         $blocksDataSource = [];
         $currentPrams = $this->currentParamsReport();
         // dd($currentPrams);
-        
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             $dataQuery = $this->getDataSQLString($block, $currentPrams);
             [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[],[],[]] : $this->getColumns($block, $currentPrams, $dataQuery);
+            // set columns where `dataQuery` were empty.
+            if (empty($rawTableColumns)){
+                $insCol = ColumnReport::getInstance($block);
+                $rawTableColumns = $insCol->defaultColumnsOnEmptyQuery($block);
+            }
             $array = [
                 'colSpan' => $item->col_span,
                 'blocks' => $item->getBlock,
