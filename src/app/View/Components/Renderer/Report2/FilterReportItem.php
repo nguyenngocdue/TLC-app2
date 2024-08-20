@@ -4,9 +4,11 @@ namespace App\View\Components\Renderer\Report2;
 
 use App\BigThink\HasShowOnScreens;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
+use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_routing_link;
 use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
 use Illuminate\Support\Arr;
@@ -17,6 +19,7 @@ class FilterReportItem extends Component
 {
     use HasShowOnScreens;
     use TraitListenerControlReport;
+    use TraitUserCompanyTree;
 
     public function __construct(
         private $filter,
@@ -126,6 +129,23 @@ class FilterReportItem extends Component
                 $newDB[] = $i;
             }
             return $newDB;
+        }
+        if ($entityType === 'users') {
+            $treeData = $this->getDataByCompanyTree();
+            $dataSource = [];
+            $isAdmin = CurrentUser::isAdmin();
+            foreach ($treeData as $value) {
+                $name = $value->resigned ? $value->name0 . ' (RESIGNED)' : $value->name0;
+                $name = $value->show_on_beta ? $name . ' (BETA)' : $name;
+                $addId = $isAdmin ? '(#'.$value->id.')' : '';
+                $dataSource[] = [
+                    'id' => $value->id, 
+                    'name' => $name.' '.$addId,
+                    'department_id' => $value->department,
+                    'workplace_id' => $value->workplace
+                    ] ;
+            }
+            return collect($dataSource);
         }
 
         return $db->select('id', 'name', 'description')
