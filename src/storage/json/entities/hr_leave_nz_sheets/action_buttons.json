@@ -1,24 +1,28 @@
 {
     "new": {
         "name": "new",
+        "status_title": "",
         "label": "Create New",
         "tooltip": "",
         "change_status_multiple": ""
     },
     "pending_approval": {
         "name": "pending_approval",
-        "label": "Request for Approval",
+        "status_title": "",
+        "label": "Submit",
         "tooltip": "",
         "change_status_multiple": ""
     },
     "approval_rejected": {
         "name": "approval_rejected",
-        "label": "Reject Approval",
+        "status_title": "",
+        "label": "Reject",
         "tooltip": "",
         "change_status_multiple": ""
     },
     "approved": {
         "name": "approved",
+        "status_title": "",
         "label": "Approve",
         "tooltip": "",
         "change_status_multiple": ""
