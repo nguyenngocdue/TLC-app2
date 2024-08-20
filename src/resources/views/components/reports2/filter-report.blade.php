@@ -1,5 +1,6 @@
-@if($paramsWarning)
-    @foreach($paramsWarning as $filter)
+{{-- Validation Filters --}}
+@if($paramsError)
+    @foreach($paramsError as $filter)
         <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
     @endforeach
 @endif
@@ -28,7 +29,7 @@
                         <input type="hidden" name='action' value="updateReport2">
                         <input type="hidden" name='entity_type' value="{{$entityType}}">
                         <input type="hidden" name='entity_type2' value="{{$entityType2}}">
-                        <input type="hidden" name='report_id' value="{{$reportId}}">
+                        <input type="hidden" name='report_id' value="{{$rpId}}">
                     
                         <div class="grid grid-cols-12 gap-4 items-baseline">
                             @foreach ($rpFilters as $filter)
@@ -92,7 +93,7 @@
                         </div>
                     </form>
                 @else
-                    <x-renderer.button class="item-center" href="{{ route('rp_reports.edit', $reportId) }}" type="warning" title="{{ $reportName }}">
+                    <x-renderer.button class="item-center" href="{{ route('rp_reports.edit', $rpId) }}" type="warning" title="{{ $reportName }}">
                             Config Filter Details
                     </x-renderer.button>
                 @endif
@@ -106,13 +107,3 @@
             '<input type="hidden" name="form_type" value="resetParamsReport2">')
     }
 </script>
-
-{{-- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-        const refreshPage = {!! json_encode($refreshPage) !!};
-        const reportId = {!! json_encode($reportId) !!};
-        if (refreshPage) {
-            window.location.href = '{{ route("rp_reports.show", ":id") }}'.replace(':id', reportId);
-        }
-    });
-</script> --}}
