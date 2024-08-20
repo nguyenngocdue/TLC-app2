@@ -27,7 +27,7 @@
                     <form action="{{$routeFilter}}" id="{{ $reportName }}" method="POST">
                         @csrf
                         <input type="hidden" name='action' value="updateReport2">
-                        <input type="hidden" name='entity_type' value="{{$entityType}}">
+                    <input type="hidden" name='entity_type' value="{{$entityType}}">
                         <input type="hidden" name='entity_type2' value="{{$entityType2}}">
                         <input type="hidden" name='report_id' value="{{$rpId}}">
                     

@@ -76,42 +76,7 @@ class FilterReportItem extends Component
 
         $db = $modelClass::query();
         $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
-        // dump($triggerNames);
 
-        if (!empty($triggerNames)) {
-            foreach ($triggerNames as $triggerName) {
-                if (Schema::hasColumn(Str::plural($entityType), $triggerName)) {
-                    return $this->getFilteredData($db, $triggerName, $isBlackList, $bWListIds);
-                }
-            }
-        }
-
-        return $this->getEntityData($entityType, $db, $isBlackList, $bWListIds);
-    }
-
-    private function getFilteredData($db, $triggerName, $isBlackList, $bWListIds)
-    {
-        return $db->select('id', 'name', 'description', $triggerName)
-            ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-            ->orderBy('name')
-            ->get();
-    }
-
-    private function getEntityData($entityType, $db, $isBlackList, $bWListIds)
-    {
-        // dump($entityType);
-        if ($entityType === 'prod_routings') {
-            $newDB = $db->select('id', 'name', 'description')
-                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                ->with('getSubProjects')
-                ->with('getScreensShowMeOn')
-                ->orderBy('name')
-                ->get();
-            foreach ($newDB as &$item) {
-                $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
-            }
-            return $newDB;
-        }
         if ($entityType === 'prod_routing_links') {
             $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
             ->with('getProdRoutings')
@@ -129,7 +94,40 @@ class FilterReportItem extends Component
                 $i->prod_routing_id = $item->getProdRoutings->pluck('id');
                 $newDB[] = $i;
             }
-            dd($newDB);
+            return $newDB;
+        }
+        
+        if (!empty($triggerNames)) {
+            foreach ($triggerNames as $triggerName) {
+                if (Schema::hasColumn(Str::plural($entityType), $triggerName)) {
+                    return $this->getFilteredData($db, $triggerName, $isBlackList, $bWListIds);
+                }
+            }
+        }
+        
+        return $this->getEntityData($entityType, $db, $isBlackList, $bWListIds);
+    }
+    
+    private function getFilteredData($db, $triggerName, $isBlackList, $bWListIds)
+    {
+        return $db->select('id', 'name', 'description', $triggerName)
+            ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+            ->orderBy('name')
+            ->get();
+    }
+
+    private function getEntityData($entityType, $db, $isBlackList, $bWListIds)
+    {
+        if ($entityType === 'prod_routings') {
+            $newDB = $db->select('id', 'name', 'description')
+                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+                ->with('getSubProjects')
+                ->with('getScreensShowMeOn')
+                ->orderBy('name')
+                ->get();
+            foreach ($newDB as &$item) {
+                $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+            }
             return $newDB;
         }
         if ($entityType === 'users') {
