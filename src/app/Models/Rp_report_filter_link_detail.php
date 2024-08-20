@@ -38,7 +38,7 @@ class Rp_report_filter_link_detail extends ModelExtended
         return [
             ["dataIndex" => 'id',],
             ["dataIndex" => 'order_no',],
-            ["dataIndex" => 'rp_report_id', 'invisible' => true],
+            ["dataIndex" => 'rp_report_id', /* 'invisible' => true */],
             ["dataIndex" => 'rp_filter_link_id'],
         ];
     }
