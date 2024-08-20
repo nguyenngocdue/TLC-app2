@@ -16,7 +16,6 @@ trait TraitCreateSQLReport2
             $value = trim(str_replace('$', '', $value));
             if (isset($params[$value])) {
                 $valueParam =  $params[$value];
-                // dump($matches);
                 // dump($matches, $params, $valueParam);
                 if (is_array($valueParam)) {
                     $itemsIsNumeric = array_filter($valueParam, fn ($item) => is_numeric($item));
@@ -32,22 +31,18 @@ trait TraitCreateSQLReport2
                 $searchStr = head($matches)[$key];
                 $sqlStr = str_replace($searchStr, $valueParam, $sqlStr);
             } else {
-                return dd("Param '{$value}' not found in params array",$params, $sqlStr);
+                // Change the SQL String to the conrect syntax
+                $variables = reset($matches);
+                foreach ($variables as $key => $value) {
+                    $sqlStr = str_replace("'".$value."'", 'null', $sqlStr);
+                }
             }
-        }
-        if (Report::checkParam($params, 'picker_date')) {
-            $dates = DateReport::separateStrPickerDate($params['picker_date']);
-            $sqlStr = str_replace('{{end_date}}', $dates['end'], $sqlStr);
-            $sqlStr = str_replace('{{start_date}}', $dates['start'], $sqlStr);
         }
         $sqlStr = str_replace(["\{{", "\}}"], ["{{", "}}"], $sqlStr);
         return $sqlStr;
     }
     public function getSql($sqlString, $params)
     {
-        if (isset($params['picker_date']) && $x = $params['picker_date']) {
-            $params['picker_date'] = DateReport::formatDateString($x);
-        }
         $sqlStr = $this->preg_match_all($sqlString, $params);
         return $sqlStr;
     }

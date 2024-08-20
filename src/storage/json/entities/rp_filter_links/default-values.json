@@ -55,7 +55,7 @@
         "name": "_linked_to_report_id",
         "column_name": "linked_to_report_id",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
