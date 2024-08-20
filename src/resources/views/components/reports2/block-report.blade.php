@@ -23,7 +23,10 @@
 
             @switch($rendererType)
                 @case(641)
-                    <x-reports2.table-block-report reportId="{{ $reportId }}" :rawTableDataSource="$tableDataSource" :rawTableColumns="$rawTableColumns"
+                    <x-reports2.table-block-report 
+                        reportId="{{ $reportId }}" 
+                        :rawTableDataSource="$tableDataSource" 
+                        :rawTableColumns="$rawTableColumns"
                         :dataHeader="$dataHeader" :block="$block" />
                 @break
 

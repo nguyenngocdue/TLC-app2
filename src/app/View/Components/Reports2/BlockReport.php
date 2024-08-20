@@ -21,7 +21,7 @@ class BlockReport extends Component
         $blockDetails = $this->blockDetails;
         $blocksDataSource = [];
         $currentPrams = $this->currentParamsReport();
-        // dd($currentPrams);
+        
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             $dataQuery = $this->getDataSQLString($block, $currentPrams);

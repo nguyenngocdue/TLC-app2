@@ -19,19 +19,16 @@ class ColumnReport
         return self::$instance;
     }
 
-    function defaultColumnsOnEmptyQuery(){
-        $columns = $this->block->getLines->where('is_active', true)->select('title', 'data_index');
-        $columns = $columns->map(function($item) {
-            $colunm = [];
-            if(isset($item['title']) && is_null($item['title'])){
-                $colunm['title'] = $item['data_index'];
-            }else {
-                $colunm['title'] = $item['title'];
-            }
-            $colunm['dataIndex'] = $item['data_index'];
-            return $colunm;
-        });
-        return $columns->toArray();
+    function defaultColumnsOnEmptyQuery() {
+        return $this->block->getLines->where('is_active', true)
+            ->select('title', 'data_index')
+            ->map(function($item) {
+                return [
+                    'title' => $item['title'] ?? $item['data_index'],
+                    'dataIndex' => $item['data_index']
+                ];
+            })
+            ->toArray();
     }
     
 }
