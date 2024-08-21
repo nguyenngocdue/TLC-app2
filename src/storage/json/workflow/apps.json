@@ -2659,23 +2659,6 @@
         "hidden_navbar": "true",
         "do_not_send_notification_mails": "true"
     },
-    "rp_report_filter_link_detail": {
-        "name": "rp_report_filter_link_detail",
-        "package_tab": "application",
-        "package": "report",
-        "sub_package": "report",
-        "title": "Report Filter Link Details",
-        "nickname": "rfld",
-        "tutorial_link": null,
-        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
-        "doc_id_format_column": null,
-        "status": "dev",
-        "edit_renderer": null,
-        "show_renderer": null,
-        "hidden": "true",
-        "hidden_navbar": "true",
-        "do_not_send_notification_mails": "true"
-    },
     "setpermissions": {
         "name": "setpermissions",
         "package_tab": "application",

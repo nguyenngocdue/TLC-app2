@@ -87,12 +87,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getFilterLinkDetails": {
-        "name": "_getFilterLinkDetails",
-        "column_name": "getFilterLinkDetails",
-        "column_type": "hasMany",
-        "label": "Report Link Detail",
-        "control": "relationship_renderer",
+    "_entity_type": {
+        "name": "_entity_type",
+        "column_name": "entity_type",
+        "column_type": "varchar(255)",
+        "label": "Entity Type",
+        "control": "entity_type",
         "align": "",
         "col_span": "",
         "width": "",
@@ -104,7 +104,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "true",
+        "new_line": "",
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""
@@ -153,12 +153,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_entity_type": {
-        "name": "_entity_type",
-        "column_name": "entity_type",
-        "column_type": "varchar(255)",
-        "label": "Entity Type",
-        "control": "entity_type",
+    "_getRpFilterLinks": {
+        "name": "_getRpFilterLinks",
+        "column_name": "getRpFilterLinks",
+        "column_type": "hasMany",
+        "label": "Report Link",
+        "control": "relationship_renderer",
         "align": "",
         "col_span": "",
         "width": "",
@@ -170,7 +170,7 @@
         "read_only": "",
         "save_on_change": "",
         "duplicatable": "",
-        "new_line": "",
+        "new_line": "true",
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""

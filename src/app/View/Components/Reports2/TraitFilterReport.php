@@ -13,11 +13,12 @@ trait TraitFilterReport
         $rp = $this->report;
         $reportId = $rp->id;
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
-        $filterLinkDetails = $rp->getFilterLinkDetails;
+        $rpFilterLinks = $rp->getRpFilterLinks;
+        
         $entityType2 = $this->entityType2;
         $entityType = $rp->entity_type;
         $ins = InitUserSettingReport2::getInstance($entityType2);
-        $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $filterLinkDetails, $rpFilters);
+        $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $rpFilterLinks, $rpFilters);
         return $currentParams;
     }
 
