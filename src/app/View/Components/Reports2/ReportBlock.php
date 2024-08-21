@@ -6,7 +6,7 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
-class BlockReport extends Component
+class ReportBlock extends Component
 {
     use TraitDataColumnReport;
     use TraitFilterReport;
@@ -22,18 +22,18 @@ class BlockReport extends Component
         $blockDetails = $this->blockDetails;
         $blocksDataSource = [];
         $currentPrams = $this->currentParamsReport();
-        
+
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             $dataQuery = $this->getDataSQLString($block, $currentPrams);
             //Show sql's error
-            if(method_exists($dataQuery,"getMessage")) {
-                dd('<p>'.$dataQuery->getMessage());
+            if (method_exists($dataQuery, "getMessage")) {
+                dd('<p>' . $dataQuery->getMessage());
                 return;
             };
-            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[],[],[]] : $this->getColumns($block, $currentPrams, $dataQuery);
+            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[], [], []] : $this->getColumns($block, $currentPrams, $dataQuery);
             // set columns where `dataQuery` were empty.
-            if (empty($rawTableColumns)){
+            if (empty($rawTableColumns)) {
                 $insCol = ColumnReport::getInstance($block);
                 $rawTableColumns = $insCol->defaultColumnsOnEmptyQuery($block);
             }
@@ -48,7 +48,7 @@ class BlockReport extends Component
             ];
             $blocksDataSource[] = $array;
         }
-        return view('components.reports2.block-report', [
+        return view('components.reports2.report-block', [
             'blocksDataSource' => $blocksDataSource,
             'reportId' => $this->report->id,
         ]);

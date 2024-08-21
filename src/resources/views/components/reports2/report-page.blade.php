@@ -24,7 +24,7 @@
                 {{-- Blocks --}}
                 <div class="container mx-auto p-5" title="{{ $content['name'] ?? null }}">
                     <div class="grid grid-cols-12 gap-4">
-                        <x-reports2.block-report :blockDetails="$blockDetails" :report="$report" />
+                        <x-reports2.report-block :blockDetails="$blockDetails" :report="$report" />
                     </div>
                 </div>
 
