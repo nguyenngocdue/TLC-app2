@@ -21,7 +21,7 @@ class Rp_report extends ModelExtended
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
         "getRpFilters" => ["hasMany", Rp_filter::class, "report_id"],
 
-        "getRpFilterLinks" => ["hasMany", Rp_filter_link::class, "report_filter_link_id"],
+        "getRpFilterLinks" => ["hasMany", Rp_filter_link::class, "report_id"],
 
     ];
 
