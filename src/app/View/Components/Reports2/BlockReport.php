@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class BlockReport extends Component
@@ -25,6 +26,11 @@ class BlockReport extends Component
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             $dataQuery = $this->getDataSQLString($block, $currentPrams);
+            //Show sql's error
+            if(method_exists($dataQuery,"getMessage")) {
+                dd('<p>'.$dataQuery->getMessage());
+                return;
+            };
             [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[],[],[]] : $this->getColumns($block, $currentPrams, $dataQuery);
             // set columns where `dataQuery` were empty.
             if (empty($rawTableColumns)){

@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use App\Models\Rp_report;
 use DateTime;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -515,6 +516,19 @@ class Report
             $array = $array[$key];
         }
         return true;
+    }
+    
+    public static function getStoredFilterKey($rpId,$rpFilterLinks){
+        $storedFilterKey = $rpId;
+        if ($rpFilterLinks->toArray()) {
+            foreach ($rpFilterLinks as $item) {
+                if ($item->report_id == $rpId) {
+                    $storedFilterKey = $item->stored_filter_key;
+                    break;
+                }
+            }
+        }
+        return $storedFilterKey;
     }
 
 }

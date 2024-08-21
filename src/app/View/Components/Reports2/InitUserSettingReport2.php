@@ -69,20 +69,13 @@ class InitUserSettingReport2
         $user->settings = $settings;
         $u = $user->update();
         // dump($u);
-        if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
+        // if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
     }
 
     public function initParamsUserSettingRp($rpId, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
-        
-        $storedFilterKey = $rpId;
-        if ($rpFilterLinks->toArray()) {
-            $storedFilterKey = $rpFilterLinks->map(function($item, $rpId){
-                if ($item->rp_report_id === $rpId) {
-                    return $item->stored_filter_key  ? $item->stored_filter_key : $rpId;
-                }
-            });
-        }
+        $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
+
         // create default values in the database -> in case that the reports were previously saved in user_setting
         $keys = [$entityType, $this->entityType2, $storedFilterKey];
         $isSave = false;
@@ -103,7 +96,6 @@ class InitUserSettingReport2
             
             $isSave = True;    
         }
-        // dump($isSave);
         if($isSave) {
             // dd($isSave, $settings);
             self::updateUserSettingRp($settings);

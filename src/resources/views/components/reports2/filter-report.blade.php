@@ -38,9 +38,7 @@
                                     @php
                                         $text = 'App\Utils\Support\StringReport'::makeTitleFilter($filter->entity_type);
                                         $title = ($x = $filter->title) ? $x : ($filter->is_multiple ? Str::plural($text) : Str::singular($text)); 
-                                        
-                                        $editedDataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : Str::singular($filter->data_index); 
-                                        $selected = $currentParams[$editedDataIndex] ?? [];
+                                        $selected = $currentParams[$filter->data_index] ?? [];
                                     @endphp
                                     <div class="col-span-2">
                                         <div class="relative inline-block group">
@@ -65,7 +63,6 @@
                                                 </div>
                                             @endif
                                         </div>
-
                                         <x-renderer.report2.filter-report-item
                                             :filter="$filter"
                                             :selected="$selected"    

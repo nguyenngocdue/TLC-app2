@@ -353,7 +353,6 @@ class UpdateUserSettings extends Controller
     private function updateReport($request, $settings)
     {
         $inputValue = $request->all();
-        // dd($inputValue);
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport") {
             return $this->resetParamsReport($request, $settings);
         }
@@ -384,18 +383,10 @@ class UpdateUserSettings extends Controller
         $rpId = $inputValue['report_id'];
         $filters = $this->getFilterReport2($inputValue);
     
-
-        $storedFilterKey = $rpId;
         $rpFilterLinks = Rp_report::find($rpId)->getDeep()->getRpFilterLinks;
-        if ($rpFilterLinks->toArray()) {
-            $storedFilterKey = $rpFilterLinks->map(function($item, $rpId){
-                if ($item->rp_report_id === $rpId) {
-                    return $item->stored_filter_key  ? $item->stored_filter_key : $rpId;
-                }
-            });
-        }
-
-
+        $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
+        // dd($storedFilterKey);
+    
         $keys = [$entityType, $entityType2, $storedFilterKey];
         $paramToUpdate = [];
         if (Report::checkKeysExist($settings, $keys)) {

@@ -2,11 +2,9 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\Http\Controllers\Reports\TraitCreateSQLReport2;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use App\Models\Term;
+use Exception;
 
 trait TraitDataColumnReport
 {
@@ -33,9 +31,13 @@ trait TraitDataColumnReport
         if ($sqlString) {
             $sql = $this->getSql($sqlString, $params);
             if (is_null($sql) || !$sql) return collect();
-            $sqlData = DB::select($sql);
-            $collection = collect($sqlData);
-            return $collection;
+            try {
+                $sqlData = DB::select($sql);
+                $collection = collect($sqlData);
+                return $collection;
+            } catch (Exception $e) {
+                return $e;
+            }
         }
         return collect();
     }
