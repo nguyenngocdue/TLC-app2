@@ -17,6 +17,18 @@ const select2FormatState = (state) => {
     </div>`,
           )
 }
+const select2Matcher = (params, data) => {
+    console.log(params, data)
+    // If there are no search terms, return all of the data.
+    if ($.trim(params.term) === '') return data
+
+    // Check if the primary text or the secondary text matches the search term.
+    if (data.text.toLowerCase().indexOf(params.term.toLowerCase()) > -1 || data.title.toLowerCase().indexOf(params.term.toLowerCase()) > -1)
+        return data
+
+    // If it doesn't match, return null.
+    return null
+}
 const getEById = (id) => $("[id='" + id + "']")
 const dumbIncludes2 = (array, item) => {
     for (let i = 0; i < array.length; i++) {
@@ -646,6 +658,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
             templateResult: select2FormatState,
             // , disabled: true
+            matcher: select2Matcher,
         })
         if (dataSource.length === 1) {
             // console.log("Changes when only one item in data source", id)

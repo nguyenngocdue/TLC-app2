@@ -573,6 +573,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         placeholder: 'Please select',
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
         templateResult: select2FormatState,
+        matcher: select2Matcher,
     })
     if (dataSource.length === 1) theDropdown.trigger('change')
 }
@@ -584,6 +585,7 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLen
             placeholder: 'Please select',
             // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
             templateResult: select2FormatState,
+            matcher: select2Matcher,
         })
         return
     }
