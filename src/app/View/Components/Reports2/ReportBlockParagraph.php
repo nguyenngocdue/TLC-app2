@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class ParagraphBlockReport extends Component
 {
-    use TraitDataColumnReport;
+    use TraitReportDataAndColumn;
     use TraitCreateSQLReport2;
     public function __construct(
         private $block = null,

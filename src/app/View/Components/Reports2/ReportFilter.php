@@ -2,14 +2,13 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
 class ReportFilter extends Component
 {
+    use TraitReportFilter;
     protected $type = "filter_report";
-    use TraitFilterReport;
     public function __construct(
         private $report = "",
     ) {}

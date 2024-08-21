@@ -4,12 +4,11 @@ namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Reports\TraitCreateSQLReport2;
 use Illuminate\Support\Facades\DB;
-use Exception;
 
-trait TraitDataColumnReport
+trait TraitReportDataAndColumn
 {
     use TraitCreateSQLReport2;
-    use TermsBlockReport;
+    use TraitReportTermNames;
 
     public function createIconPosition($content, $icon, $iconPosition)
     {

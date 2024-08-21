@@ -8,8 +8,8 @@ use Illuminate\View\Component;
 
 class ReportBlock extends Component
 {
-    use TraitDataColumnReport;
-    use TraitFilterReport;
+    use TraitReportDataAndColumn;
+    use TraitReportFilter;
     public function __construct(
         private $report,
         private $blockDetails = [],

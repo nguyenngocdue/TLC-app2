@@ -3,7 +3,7 @@
 namespace App\View\Components\Reports2\Charts\Types;
 
 use App\View\Components\Reports2\Charts\TraitTransformationData;
-use App\View\Components\Reports2\TraitDataColumnReport;
+use App\View\Components\Reports2\TraitReportDataAndColumn;
 use Illuminate\View\Component;
 
 class ChartPieDonut extends Component

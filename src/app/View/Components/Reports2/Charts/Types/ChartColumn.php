@@ -4,12 +4,12 @@ namespace App\View\Components\Reports2\Charts\Types;
 
 use App\Http\Controllers\Reports\TraitCreateSQL;
 use App\View\Components\Reports2\Charts\TraitTransformationData;
-use App\View\Components\Reports2\TraitDataColumnReport;
+use App\View\Components\Reports2\TraitReportDataAndColumn;
 use Illuminate\View\Component;
 
 class ChartColumn extends Component
 {
-    use TraitDataColumnReport;
+    use TraitReportDataAndColumn;
     use TraitTransformationData;
     use TraitTransformationData;
 

@@ -10,8 +10,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ReportBlockTable extends Component
 {
-    use TraitDataColumnReport;
-    use TermsBlockReport;
+    use TraitReportDataAndColumn;
+    use TraitReportTermNames;
 
     public function __construct(
         private $reportId,

@@ -5,16 +5,17 @@ namespace App\View\Components\Reports2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
 use Illuminate\Support\Str;
 
-trait TraitFilterReport
+trait TraitReportFilter
 {
     use TraitEntityCRUDShowReport;
-    
-    function currentParamsReport(){
+
+    function currentParamsReport()
+    {
         $rp = $this->report;
         $reportId = $rp->id;
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $rpFilterLinks = $rp->getRpFilterLinks;
-        
+
         $entityType2 = $this->entityType2;
         $entityType = $rp->entity_type;
         $ins = InitUserSettingReport2::getInstance($entityType2);
