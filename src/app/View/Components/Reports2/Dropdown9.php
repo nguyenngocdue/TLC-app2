@@ -23,7 +23,7 @@ class Dropdown9 extends Component
 
         $rpLinks = $rpFilterLinks->map(function ($item) {
             $rpLinkId = $item->report_filter_link_id;
-            $rpLink = Rp_report::find($rpLinkId);
+            $rpLink = Rp_report::find($rpLinkId)->getDeep();
             return $rpLink;
         });
 
