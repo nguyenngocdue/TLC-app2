@@ -21,7 +21,7 @@ class Rp_report extends ModelExtended
         "getPages" => ["hasMany", Rp_page::class, "report_id"],
         "getRpFilters" => ["hasMany", Rp_filter::class, "report_id"],
 
-        "getFilterLinkDetails" => ["hasMany", Rp_report_filter_link_detail::class, "rp_report_id"],
+        "getRpFilterLinks" => ["hasMany", Rp_filter_link::class, "report_filter_link_id"],
 
     ];
 
@@ -43,18 +43,14 @@ class Rp_report extends ModelExtended
                             }]);
                     }]);
             }])
-            ->with(["getFilterLinkDetails" => function ($q4) {
-                $q4->with('getFilterLink');
-            }])
-            ->with("getRpFilters")
+            ->with("getRpFilterLinks")
             ->get()
             ->first();
-        // $rpReport->getPages[10]->getBlockDetails;
         // dd($rpReport);
         return $rpReport;
     }
 
-    public function getFilterLinkDetails()
+    public function getRpFilterLinks()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -67,10 +67,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getFilterLinkDetails": {
-        "name": "_getFilterLinkDetails",
+    "_getRpFilterLinks": {
+        "name": "_getRpFilterLinks",
         "relationship": "hasMany",
-        "control_name": "getFilterLinkDetails",
+        "control_name": "getRpFilterLinks",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

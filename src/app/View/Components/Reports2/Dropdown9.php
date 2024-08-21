@@ -10,7 +10,7 @@ class Dropdown9 extends Component
 {
     //for report 2
     public function __construct(
-        private $filterLinkDetails = [],
+        private $rpFilterLinks = [],
         private $name = 'No name',
         private $allowClear = false,
 
@@ -19,10 +19,10 @@ class Dropdown9 extends Component
 
     public function render()
     {
-        $filterLinkDetails = (object)$this->filterLinkDetails;
+        $rpFilterLinks = (object)$this->rpFilterLinks;
 
-        $rpLinks = $filterLinkDetails->map(function ($item) {
-            $rpLinkId = $item->getFilterLink->linked_to_report_id;
+        $rpLinks = $rpFilterLinks->map(function ($item) {
+            $rpLinkId = $item->report_filter_link_id;
             $rpLink = Rp_report::find($rpLinkId);
             return $rpLink;
         });

@@ -51,11 +51,11 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getFilterLinkDetails": {
-        "name": "_getFilterLinkDetails",
-        "column_name": "getFilterLinkDetails",
+    "_entity_type": {
+        "name": "_entity_type",
+        "column_name": "entity_type",
         "label": "",
-        "validation": "",
+        "validation": "required",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -90,11 +90,11 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_entity_type": {
-        "name": "_entity_type",
-        "column_name": "entity_type",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -103,9 +103,9 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_getRpFilterLinks": {
+        "name": "_getRpFilterLinks",
+        "column_name": "getRpFilterLinks",
         "label": "",
         "validation": "",
         "validation_regex": "",

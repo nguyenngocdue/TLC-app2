@@ -499,7 +499,8 @@
         "storeEmpty_and_updateShort": "true"
     },
     "rp_filter_links": {
-        "name": "rp_filter_links"
+        "name": "rp_filter_links",
+        "storeEmpty_and_updateShort": "true"
     },
     "rp_filters": {
         "name": "rp_filters",
@@ -521,10 +522,6 @@
     },
     "rp_pages": {
         "name": "rp_pages",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "rp_report_filter_link_details": {
-        "name": "rp_report_filter_link_details",
         "storeEmpty_and_updateShort": "true"
     },
     "rp_reports": {

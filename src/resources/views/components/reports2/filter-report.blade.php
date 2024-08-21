@@ -8,19 +8,19 @@
 <div class="no-print justify-end pb-5"></div> 
 <div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
     <!-- Mode Dropdown -->
-    @if(count($filterLinkDetails->toArray()) > 0)
+    @if(count($rpFilterLinks->toArray()) > 0)
         <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
                 <div class="text-left whitespace-nowrap">
                     <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Report Link</span>
                 </div>
                 <x-reports2.dropdown9 
                     name="report_link" 
-                    :filterLinkDetails="$filterLinkDetails" 
+                    :rpFilterLinks="$rpFilterLinks" 
                 />
         </div>
     @endif
         <!-- Advanced Filter Section -->
-        <div class="col-span-{{count($filterLinkDetails->toArray()) > 0 ? 10 : 12 }}">
+        <div class="col-span-{{count($rpFilterLinks->toArray()) > 0 ? 10 : 12 }}">
             <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
                 <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
                 @if($rpFilters->toArray())

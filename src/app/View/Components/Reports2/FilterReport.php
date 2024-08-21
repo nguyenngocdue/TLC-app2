@@ -20,7 +20,7 @@ class FilterReport extends Component
         $rp = (object)$this->report;
         $rpId = $rp->id;
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
-        $filterLinkDetails = $rp->getFilterLinkDetails;
+        $rpFilterLinks = $rp->getRpFilterLinks;
 
         $currentParams = $this->currentParamsReport();
             
@@ -33,7 +33,7 @@ class FilterReport extends Component
             'rpId' => $rpId,
             'currentParams' => $currentParams,
             'routeFilter' => route(Str::plural($this->type).'.update', $rp->id),
-            'filterLinkDetails' => $filterLinkDetails,
+            'rpFilterLinks' => $rpFilterLinks,
             'rpFilters' => $rpFilters,
             'paramsError' => $paramsError,
         ]);

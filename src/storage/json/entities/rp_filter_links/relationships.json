@@ -1,10 +1,27 @@
 {
-    "_getReportLinks": {
-        "name": "_getReportLinks",
+    "_getReport": {
+        "name": "_getReport",
         "relationship": "belongsTo",
-        "control_name": "linked_to_report_id",
-        "renderer_view_all": "column_link",
-        "renderer_view_all_param": "name",
+        "control_name": "report_id",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getRpFilterLink": {
+        "name": "_getRpFilterLink",
+        "relationship": "belongsTo",
+        "control_name": "report_filter_link_id",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
         "renderer_view_all_unit": "",
         "renderer_edit": "",
         "renderer_edit_param": "",
