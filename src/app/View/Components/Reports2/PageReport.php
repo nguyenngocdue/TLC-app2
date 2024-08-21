@@ -9,49 +9,48 @@ class PageReport extends Component
     public function __construct(
         private $page,
         private $report,
-        private $factorPage = 0.75,
+        private $pageScaleFactor = 0.75,
         private $w = 1000,
         private $h = 1410,
-    ) {
-    }
+    ) {}
 
-    private function createLayoutClass($isLandscape, $width, $height, $isFullWidth, $backgroundPagePath)
+    private function createLayoutStyle($isLandscape, $width, $height, $isFullWidth, $pageBackgroundPath)
     {
-        $FullWidthClass = $width  ? "width :{$width}px" : 'w-full';
-        $width = $width ? $width  : $this->w * $this->factorPage;
-        $height = $height ? $height  : $this->h * $this->factorPage;
-        $class = $isFullWidth ? $FullWidthClass : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
-        $class = $backgroundPagePath ? $class . " background-image: url('{$backgroundPagePath}');" : $class;
-        return $class;
+        $fullWidthClass = $width  ? "width :{$width}px" : 'w-full'; //TOFIX w-full
+        $width = $width ? $width  : $this->w * $this->pageScaleFactor;
+        $height = $height ? $height  : $this->h * $this->pageScaleFactor;
+        $style = $isFullWidth ? $fullWidthClass : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
+        $style = $pageBackgroundPath ? $style . " background-image: url('{$pageBackgroundPath}');" : $style;
+        return $style;
     }
 
     public function render()
     {
         $page = $this->page;
-        $pageArray = $page?->toArray();
-        $attachmentBackgroundPage = $page->attachment_background->first()?->toArray();
+        $pageItem = $page?->toArray();
+        $pageBackgroundAttachment = $page->attachment_background->first()?->toArray();
         $blockDetails = $page->getBlockDetails->sortBy('order_no');
 
-        if ($attachmentBackgroundPage) {
-            $backgroundPagePath = env('AWS_ENDPOINT') . '/tlc-app//' . $attachmentBackgroundPage['url_media'];
+        if ($pageBackgroundAttachment) {
+            $pageBackgroundPath = app()->pathMinio() . $pageBackgroundAttachment['url_media'];
         }
 
-        $layoutClass = $this->createLayoutClass(
-            $pageArray['is_landscape'],
-            $pageArray['width'],
-            $pageArray['height'],
-            $pageArray['is_full_width'],
-            $backgroundPagePath ?? ''
+        $layoutStyle = $this->createLayoutStyle(
+            $pageItem['is_landscape'],
+            $pageItem['width'],
+            $pageItem['height'],
+            $pageItem['is_full_width'],
+            $pageBackgroundPath ?? ''
         );
 
         return view('components.reports2.page-report', [
             'report' => $this->report,
-            'layoutClass' => $layoutClass,
-            'letterHeadId' => $pageArray['letter_head_id'],
-            'letterFooterId' => $pageArray['letter_footer_id'],
-            'content' => $pageArray,
+            'layoutClass' => $layoutStyle, //TOFIX
+            'letterHeadId' => $pageItem['letter_head_id'],
+            'letterFooterId' => $pageItem['letter_footer_id'],
+            'content' => $pageItem,
             'blockDetails' => $blockDetails,
-            'backgroundPagePath' => $backgroundPagePath ?? '',
+            'pageBackgroundPath' => $pageBackgroundPath ?? '',
         ]);
     }
 }
