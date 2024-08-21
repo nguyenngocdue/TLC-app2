@@ -6,7 +6,7 @@ use App\View\Components\Reports2\Charts\TraitTransformationData;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
-class ChartBlockReport extends Component
+class ReportBlockChart extends Component
 {
     use TraitDataColumnReport;
     use TraitTransformationData;

@@ -31,7 +31,7 @@
 
             @switch($rendererType)
                 @case($TABLE_TYPE_ID)
-                    <x-reports2.table-block-report 
+                    <x-reports2.report-block-table 
                         reportId="{{ $reportId }}" 
                         :rawTableDataSource="$tableDataSource" 
                         :rawTableColumns="$rawTableColumns"
@@ -39,16 +39,16 @@
                 @break
 
                 @case($CHART_TYPE_ID)
-                    <x-reports2.chart-block-report :block="$block" reportId="{{ $reportId }}" :queriedData="$queriedData"
+                    <x-reports2.report-block-chart :block="$block" reportId="{{ $reportId }}" :queriedData="$queriedData"
                         :rawTableColumns="$rawTableColumns" />
                 @break
 
                 @case($PARAGRAPH_TYPE_ID)
-                    <x-reports2.paragraph-block-report :block="$block" reportId="{{ $reportId }}" />
+                    <x-reports2.report-block-paragraph :block="$block" reportId="{{ $reportId }}" />
                 @break
 
                 @case($DESCRIPTION_TYPE_ID)
-                    <x-reports2.description-block-report :block="$block" reportId="{{ $reportId }}" />
+                    <x-reports2.report-block-description :block="$block" reportId="{{ $reportId }}" />
                 @break
 
                 @default

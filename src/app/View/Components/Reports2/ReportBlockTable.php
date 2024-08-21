@@ -8,7 +8,7 @@ use App\Utils\Support\HrefReport;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class TableBlockReport extends Component
+class ReportBlockTable extends Component
 {
     use TraitDataColumnReport;
     use TermsBlockReport;
@@ -95,7 +95,7 @@ class TableBlockReport extends Component
 
         $newTableDataSource = $this->createTableDataSourceForRows($this->rawTableDataSource, $keyAndColsReduced, $block);
 
-        return view('components.reports2.table-block-report', [
+        return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
             "description" => $block->description,

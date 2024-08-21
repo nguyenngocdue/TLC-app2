@@ -12,8 +12,7 @@ class ParagraphBlockReport extends Component
     use TraitCreateSQLReport2;
     public function __construct(
         private $block = null,
-    ) {
-    }
+    ) {}
 
     private function renderHtml($strHtml, $varsInHtml)
     {
@@ -36,7 +35,7 @@ class ParagraphBlockReport extends Component
         $strHtml = $block->html_content;
         $htmlRender = $this->renderHtml($strHtml, $varsInHtml);
 
-        return view('components.reports2.paragraph-block-report', [
+        return view('components.reports2.report-block-paragraph', [
             'htmlRender' => Blade::render($htmlRender),
             'block' => $block
         ]);
