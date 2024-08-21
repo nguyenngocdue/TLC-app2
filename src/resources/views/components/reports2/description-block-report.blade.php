@@ -1,6 +1,3 @@
-{{-- <x-renderer.report2.title-description-block :block="$block" /> --}}
-
-
 <table class="w-full table-auto border-collapse border border-gray-300">
     <tr class="bg-gray-200">
         <th colspan="4" class="border border-gray-300 p-3 text-left">Basic Information</th>

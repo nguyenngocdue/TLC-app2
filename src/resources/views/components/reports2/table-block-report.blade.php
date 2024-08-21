@@ -1,5 +1,3 @@
-<x-renderer.report2.title-description-block :block="$block" />
-
 {{-- @dump($rotate45Width, $rotate45Height) --}}
 
 {{-- @php

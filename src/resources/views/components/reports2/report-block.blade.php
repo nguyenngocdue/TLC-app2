@@ -27,7 +27,7 @@
             class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : 'bg-gray-50' }} p-4 text-center bg-cover bg-center "
             @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
 
-            {{-- TOFIX: Render Block Title --}}
+            <x-renderer.report2.title-description-block :block="$block" />
 
             @switch($rendererType)
                 @case($TABLE_TYPE_ID)

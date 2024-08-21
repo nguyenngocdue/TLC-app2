@@ -68,10 +68,9 @@ class ChartBlockReport extends Component
         // dump($jsonChart);
 
         if ($viewName) {
-            $titleAndDesc = '<x-renderer.report2.title-description-block :block="$block" />';
             $componentName = "x-reports2.charts.types." . $viewName;
             $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :jsonChart="$jsonChart" :queriedData="$queriedData"/>';
-            $views = $titleAndDesc . $chart;
+            $views =  $chart;
 
             return  Blade::render($views, [
                 'key' => $key,
