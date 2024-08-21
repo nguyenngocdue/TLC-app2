@@ -6,11 +6,11 @@ use App\Http\Controllers\Reports\TraitCreateSQLReport2;
 
 trait TraitTransformationData
 {
-    public function makeRowsToFields($dataQuery, $tableColumns)
+    public function makeRowsToFields($queriedData, $tableColumns)
     {
-        // transform dataQuery to rows to fields format.
+        // transform queriedData to rows to fields format.
         $result = [];
-        foreach ($dataQuery as $row) {
+        foreach ($queriedData as $row) {
             foreach ($tableColumns as $item) {
                 $dataIndex = $item['dataIndex'];
                 if (isset($row->$dataIndex)) {

@@ -124,14 +124,14 @@ class ViewAllTypeCalendar extends Component
     }
     private function getDataCountOfWeek($ownerId)
     {
-        $dataQuery = DB::select("SELECT week , count(*) as count_duplicate
+        $queriedData = DB::select("SELECT week , count(*) as count_duplicate
         FROM $this->type 
         WHERE owner_id = $ownerId
         AND deleted_at is null
         GROUP BY week
         ");
         $result = [];
-        foreach ($dataQuery as $value) {
+        foreach ($queriedData as $value) {
             $result[$value->week] = $value;
         }
         return $result;

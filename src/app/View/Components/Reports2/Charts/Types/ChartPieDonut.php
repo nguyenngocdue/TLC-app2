@@ -13,17 +13,16 @@ class ChartPieDonut extends Component
     protected $chartTypeName = 'pie-donut';
     public function __construct(
         private $chartTypeId,
-        private $dataQuery,
+        private $queriedData,
         private $chartJson,
         private $tableColumns = [],
         private $key
-    ) {
-    }
+    ) {}
 
     public function render()
     {
-        $dataQuery = $this->dataQuery;
-        $series =  $this->makeSeriesChart($dataQuery, $this->tableColumns);
+        $queriedData = $this->queriedData;
+        $series =  $this->makeSeriesChart($queriedData, $this->tableColumns);
         return view('components.reports2.charts.types.chart-pie-donut', [
             'series' => $series,
             'chartType' => $this->chartTypeId,

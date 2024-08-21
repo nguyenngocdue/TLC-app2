@@ -19,8 +19,7 @@ class TableBlockReport extends Component
         private $rawTableDataSource,
         private $rawTableColumns,
         private $dataHeader,
-    ) {
-    }
+    ) {}
 
     private function createKeyColumns($columns, $dataIndexToRender = [])
     {
@@ -42,7 +41,7 @@ class TableBlockReport extends Component
         return $content;
     }
 
-    private function paginateDataSource($dataSource,$hasPagination, $pageLimit)
+    private function paginateDataSource($dataSource, $hasPagination, $pageLimit)
     {
         $page = $_GET['page'] ?? 1;
         // Convert array to a collection
@@ -51,18 +50,18 @@ class TableBlockReport extends Component
         }
         if ($hasPagination) {
             $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
-            ->appends(request()->query());
+                ->appends(request()->query());
         }
         return $dataSource;
     }
 
-    private function createTableDataSourceForRows($dataQuery, $keyAndReducedColumns, $block)
+    private function createTableDataSourceForRows($queriedData, $keyAndReducedColumns, $block)
     {
-        $hasPagination = ($y = $block->has_pagination) ? (boolean)$y : false;
-        $dataQuery = $this->paginateDataSource($dataQuery, $hasPagination,10);
-        // dd($dataQuery);
+        $hasPagination = ($y = $block->has_pagination) ? (bool)$y : false;
+        $queriedData = $this->paginateDataSource($queriedData, $hasPagination, 10);
+        // dd($queriedData);
         $result = collect();
-        foreach ($dataQuery as $k1 => $dataLine) {
+        foreach ($queriedData as $k1 => $dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $keyAndReducedColumns)) {

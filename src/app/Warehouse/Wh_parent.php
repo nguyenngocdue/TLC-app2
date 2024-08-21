@@ -25,11 +25,11 @@ abstract class Wh_parent extends Controller
         $userIdInput = 2;
         $treeData = BuildTree::getTreeByOptions($userIdInput, '', '', false, false);
         $userIds = collect($treeData)->pluck('id')->toArray();
-        $dataQuery = $this->getDataSource($userIds, $month);
+        $queriedData = $this->getDataSource($userIds, $month);
 
         $tableToMark =  DB::table($this->tableName);
         $tableToMark->where('month', $month . '-01')->delete();
-        foreach ($dataQuery as $result) {
+        foreach ($queriedData as $result) {
             $tableToMark->insert((array)$result);
         }
         return $tableToMark;

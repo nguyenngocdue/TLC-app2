@@ -17,25 +17,24 @@ class ChartColumn extends Component
 
     public function __construct(
         private $chartTypeId,
-        private $dataQuery,
+        private $queriedData,
         private $chartJson,
         private $tableColumns = [],
         private $key
-    ) {
-    }
+    ) {}
 
     public function render()
     {
-        $dataQuery = $this->dataQuery;
+        $queriedData = $this->queriedData;
         $tableColumns = $this->tableColumns;
         $typeOfTrans = "rows_to_fields";
 
         switch ($typeOfTrans) {
             case 'rows__to_fields':
-                $transformation = $this->makeRowsToFields($dataQuery, $tableColumns);
+                $transformation = $this->makeRowsToFields($queriedData, $tableColumns);
                 break;
             default:
-                $transformation = $this->groupNames($dataQuery, $tableColumns);
+                $transformation = $this->groupNames($queriedData, $tableColumns);
                 break;
         }
         $chartTypeId = $this->chartTypeId;

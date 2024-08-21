@@ -26,18 +26,18 @@ class ReportBlock extends Component
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             try {
-                $dataQuery = $this->getDataSQLString($block, $currentPrams);
+                $queriedData = $this->getDataSQLString($block, $currentPrams);
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
             //Show sql's error
-            // if (method_exists($dataQuery, "getMessage")) {
-            //     dd('<p>' . $dataQuery->getMessage());
+            // if (method_exists($queriedData, "getMessage")) {
+            //     dd('<p>' . $queriedData->getMessage());
             //     return;
             // };            
-            //tim cach kiem tra $dataQuery->toArray() ma khong dung ham toArray
-            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[], [], []] : $this->getKKKColumns($block, $currentPrams, $dataQuery);
-            // set columns where `dataQuery` were empty.
+            //tim cach kiem tra $queriedData->toArray() ma khong dung ham toArray
+            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($queriedData->toArray()) ? [[], [], []] : $this->getKKKColumns($block, $currentPrams, $queriedData);
+            // set columns where `queriedData` were empty.
 
 
             //Tofix: Check if this is necessary
@@ -50,7 +50,7 @@ class ReportBlock extends Component
                 'colSpan' => $item->col_span,
                 'block' => $item->getBlock,
                 'backgroundBlock' => $item->attachment_background->first(),
-                'dataQuery' => $dataQuery,
+                'queriedData' => $queriedData,
                 'tableDataSource' => $tableDataSource,
                 'rawTableColumns' => $rawTableColumns,
                 'dataHeader' => $dataHeader,

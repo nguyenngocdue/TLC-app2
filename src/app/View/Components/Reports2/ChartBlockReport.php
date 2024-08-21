@@ -13,10 +13,9 @@ class ChartBlockReport extends Component
 
     public function __construct(
         private $block = null,
-        private $dataQuery = null,
+        private $queriedData = null,
         private $rawTableColumns = []
-    ) {
-    }
+    ) {}
 
     private function formatJsonString($longString)
     {
@@ -37,7 +36,7 @@ class ChartBlockReport extends Component
         $chartTypeId = $block->chart_type;
         $jsonChart = $this->formatJsonString($block->chart_json);
 
-        $dataQuery = $this->dataQuery;
+        $queriedData = $this->queriedData;
         $viewName = '';
         $series = [];
         $key = hash('sha256', $chartTypeId . $block->name);;
@@ -50,10 +49,10 @@ class ChartBlockReport extends Component
                 $typeOfTrans = "rows_to_fields";
                 switch ($typeOfTrans) {
                     case 'rows__to_fields':
-                        $transformation = $this->makeRowsToFields($dataQuery, $tableColumns);
+                        $transformation = $this->makeRowsToFields($queriedData, $tableColumns);
                         break;
                     default:
-                        $transformation = $this->groupNames($dataQuery);
+                        $transformation = $this->groupNames($queriedData);
                         break;
                 }
                 $series = $this->makeSeriesChart($transformation);
@@ -71,7 +70,7 @@ class ChartBlockReport extends Component
         if ($viewName) {
             $titleAndDesc = '<x-renderer.report2.title-description-block :block="$block" />';
             $componentName = "x-reports2.charts.types." . $viewName;
-            $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :jsonChart="$jsonChart" :dataQuery="$dataQuery"/>';
+            $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :jsonChart="$jsonChart" :queriedData="$queriedData"/>';
             $views = $titleAndDesc . $chart;
 
             return  Blade::render($views, [
@@ -79,7 +78,7 @@ class ChartBlockReport extends Component
                 'block' => $block,
                 'chartTypeId' => $chartTypeId,
                 'jsonChart' => $jsonChart,
-                'dataQuery' => $dataQuery,
+                'queriedData' => $queriedData,
                 'series' => $series,
                 'tableColumns' => $tableColumns
             ]);

@@ -72,12 +72,12 @@ trait TraitDataColumnReport
         return $dataHeader;
     }
 
-    public function getKKKColumns($block, $params, $dataQuery)
+    public function getKKKColumns($block, $params, $queriedData)
     {
-        if (empty($dataQuery)) {
-            $dataQuery = $this->getDataSQLString($block, $params);
+        if (empty($queriedData)) {
+            $queriedData = $this->getDataSQLString($block, $params);
         }
-        $uniqueFields = $this->getAllUniqueFields($dataQuery);
+        $uniqueFields = $this->getAllUniqueFields($queriedData);
         //To fix getLines()->get()
         $lines = $block->getLines()->get()->sortby('order_no');
         $dataHeader = $this->getSecondColumns($block);
@@ -102,6 +102,6 @@ trait TraitDataColumnReport
             }
         }
         if (empty($columns)) $columns = [['dataIndex' => null]];
-        return [$dataQuery, $columns, $dataHeader];
+        return [$queriedData, $columns, $dataHeader];
     }
 }

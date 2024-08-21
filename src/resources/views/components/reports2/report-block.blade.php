@@ -8,7 +8,7 @@
             $rendererType = $block->renderer_type;
             $colSpan = $blockItem['colSpan'] ?? 12;
 
-            $dataQuery = $blockItem['dataQuery']; 
+            $queriedData = $blockItem['queriedData']; 
 
             $dataHeader = $blockItem['dataHeader'];
 
@@ -31,7 +31,7 @@
                 @break
 
                 @case(642)
-                    <x-reports2.chart-block-report :block="$block" reportId="{{ $reportId }}" :dataQuery="$dataQuery"
+                    <x-reports2.chart-block-report :block="$block" reportId="{{ $reportId }}" :queriedData="$queriedData"
                         :rawTableColumns="$rawTableColumns" />
                 @break
 
@@ -45,7 +45,7 @@
 
                 @default
                     @dump($block->sql_string)
-                    @dump($dataQuery)
+                    @dump($queriedData)
                     <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning" title="{{ $block->name }}">
                         Kindly select a type of renderer for block.
                     </x-renderer.button>

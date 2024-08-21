@@ -176,10 +176,10 @@ class Ghg_sheet_080_dataSource1 extends Controller
         $dataStrSQL = $this->generateStringSQL($params);
         $dataOutput = [];
         foreach ($dataStrSQL as $key => $strSQL) {
-            $dataQuery = DB::select($strSQL);
-            $dataOutput[$key] = $dataQuery;
+            $queriedData = DB::select($strSQL);
+            $dataOutput[$key] = $queriedData;
         }
-        $dataOutput = array_map(fn ($item) => (array)reset($item), $dataOutput);
+        $dataOutput = array_map(fn($item) => (array)reset($item), $dataOutput);
         return $dataOutput;
     }
 }
