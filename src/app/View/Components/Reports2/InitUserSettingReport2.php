@@ -67,7 +67,7 @@ class InitUserSettingReport2
     function updateUserSettingRp($settings) {
         $user = User::find(Auth::id());
         $user->settings = $settings;
-        $u = $user->update();
+        $user->update();
         // dump($u);
         // if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
     }
