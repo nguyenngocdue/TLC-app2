@@ -4,7 +4,7 @@ namespace App\View\Components\Reports2;
 
 use Illuminate\View\Component;
 
-class PageReport extends Component
+class ReportPage extends Component
 {
     public function __construct(
         private $page,
@@ -43,7 +43,7 @@ class PageReport extends Component
             $pageBackgroundPath ?? ''
         );
 
-        return view('components.reports2.page-report', [
+        return view('components.reports2.report-page', [
             'report' => $this->report,
             'layoutClass' => $layoutStyle, //TOFIX
             'letterHeadId' => $pageItem['letter_head_id'],
