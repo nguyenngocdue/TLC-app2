@@ -12,6 +12,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_name": {
         "name": "_name",
         "column_name": "name",
@@ -84,7 +97,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "1",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",

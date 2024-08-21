@@ -42,21 +42,24 @@ class TableBlockReport extends Component
         return $content;
     }
 
-    private function paginateDataSource($dataSource, $pageLimit)
+    private function paginateDataSource($dataSource,$hasPagination, $pageLimit)
     {
         $page = $_GET['page'] ?? 1;
         // Convert array to a collection
         if (!($dataSource instanceof Collection)) {
             $dataSource = collect($dataSource);
         }
-        $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
+        if ($hasPagination) {
+            $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
             ->appends(request()->query());
+        }
         return $dataSource;
     }
 
-    private function createTableDataSourceForRow($dataQuery, $keyAndReducedColumns)
+    private function createTableDataSourceForRows($dataQuery, $keyAndReducedColumns, $block)
     {
-        $dataQuery = $this->paginateDataSource($dataQuery, 10);
+        $hasPagination = ($y = $block->has_pagination) ? (boolean)$y : false;
+        $dataQuery = $this->paginateDataSource($dataQuery, $hasPagination,10);
         // dd($dataQuery);
         $result = collect();
         foreach ($dataQuery as $k1 => $dataLine) {
@@ -89,9 +92,9 @@ class TableBlockReport extends Component
         $columns = $this->block->getLines()->get()->sortby('order_no');
 
         $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
-        $keyAndColumnsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
+        $keyAndColsReduced = $this->createKeyColumns($columns, $dataIndexToRender);
 
-        $newTableDataSource = $this->createTableDataSourceForRow($this->rawTableDataSource, $keyAndColumnsReduced);
+        $newTableDataSource = $this->createTableDataSourceForRows($this->rawTableDataSource, $keyAndColsReduced, $block);
 
         return view('components.reports2.table-block-report', [
             'block' => $block,
