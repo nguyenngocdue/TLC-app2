@@ -6,14 +6,13 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
-class FilterReport extends Component
+class ReportFilter extends Component
 {
     protected $type = "filter_report";
     use TraitFilterReport;
     public function __construct(
         private $report = "",
-    ) {
-    }
+    ) {}
 
     public function render()
     {
@@ -23,16 +22,16 @@ class FilterReport extends Component
         $rpFilterLinks = $rp->getRpFilterLinks;
 
         $currentParams = $this->currentParamsReport();
-            
+
         $paramsError = $this->validateParams($rpFilters, $currentParams);
-        
-        return view('components.reports2.filter-report', [
+
+        return view('components.reports2.report-filter', [
             'entityType' => $rp->entity_type,
             'entityType2' =>  $this->entityType2,
             'reportName' => $rp->name,
             'rpId' => $rpId,
             'currentParams' => $currentParams,
-            'routeFilter' => route(Str::plural($this->type).'.update', $rp->id),
+            'routeFilter' => route(Str::plural($this->type) . '.update', $rp->id),
             'rpFilterLinks' => $rpFilterLinks,
             'rpFilters' => $rpFilters,
             'paramsError' => $paramsError,

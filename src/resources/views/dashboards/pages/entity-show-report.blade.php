@@ -5,7 +5,7 @@
 @section('subTitle', $report->description)
 
 @section('content')
-    <x-reports2.filter-report :paramsUrl="$paramsUrl" :report="$report" />
+    <x-reports2.report-filter :paramsUrl="$paramsUrl" :report="$report" />
     <div class="p-2 bg-body">
         @foreach ($pages as $key => $page)
             <x-reports2.report-page :page="$page" :report="$report"/>
