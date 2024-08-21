@@ -13,13 +13,14 @@ trait TraitDataColumnReport
 
     public function createIconPosition($content, $icon, $iconPosition)
     {
-        $rowIconPosition = $this->getTermName($iconPosition);
+        $rowIconPosition = $this->getIconName($iconPosition);
         if ($rowIconPosition) {
             switch ($rowIconPosition) {
-                case 'Left':
-                    return $icon . ' ' . $content;
                 case 'Right':
                     return $content . ' ' . $icon;
+                case 'Left':
+                default:
+                    return $icon . ' ' . $content;
             }
         }
         return $content;
@@ -30,14 +31,11 @@ trait TraitDataColumnReport
         $sqlString = $block->sql_string;
         if ($sqlString) {
             $sql = $this->getSql($sqlString, $params);
-            if (is_null($sql) || !$sql) return collect();
-            try {
-                $sqlData = DB::select($sql);
-                $collection = collect($sqlData);
-                return $collection;
-            } catch (Exception $e) {
-                return $e;
-            }
+            // if (is_null($sql)) return collect();
+            // if (!$sql) return collect();
+            $sqlData = DB::select($sql);
+            $collection = collect($sqlData);
+            return $collection;
         }
         return collect();
     }
@@ -49,6 +47,8 @@ trait TraitDataColumnReport
         })->reduce(function ($carry, $keys) {
             return $carry === null ? $keys : array_unique(array_merge($carry, $keys));
         }, null);
+        // Tofix: test this
+        // return array_unique(array_keys((array)$collection->first()));
     }
 
 
@@ -56,7 +56,7 @@ trait TraitDataColumnReport
     {
         $dataHeader = [];
         $secHeaderLines = $block->get2ndHeaderLines; #()->getParent();
-        foreach ($secHeaderLines as $key => $column) {
+        foreach ($secHeaderLines as $column) {
             // dd($column);
             $parent  = $column->getParent;
             if ($parent->is_active) {
@@ -72,30 +72,32 @@ trait TraitDataColumnReport
         return $dataHeader;
     }
 
-    public function getColumns($block, $params, $dataQuery = [])
+    public function getKKKColumns($block, $params, $dataQuery)
     {
         if (empty($dataQuery)) {
             $dataQuery = $this->getDataSQLString($block, $params);
         }
         $uniqueFields = $this->getAllUniqueFields($dataQuery);
+        //To fix getLines()->get()
         $lines = $block->getLines()->get()->sortby('order_no');
         $dataHeader = $this->getSecondColumns($block);
 
         $columns = [];
+        //To fix: check if $processedIndices is needed
         $processedIndices = [];
         foreach ($lines as $line) {
             $dataIndex = $line->data_index;
             $isActive = $line->is_active;
             if ($isActive && !in_array($dataIndex, $processedIndices) && in_array($dataIndex, $uniqueFields)) {
                 $processedIndices[] = $dataIndex;
-                $aagFooter = $this->getTermName($line->agg_footer);
+                $aggFooter = $this->getAggName($line->agg_footer);
                 $title = $this->createIconPosition($line->title ?? $line->name, $line->icon, $line->icon_position);
                 $columns[] = [
                     'title' => $title,
                     'dataIndex' => $dataIndex,
                     'width' => $line->width,
                     'colspan' => $line->col_span,
-                    'footer' => $aagFooter,
+                    'footer' => $aggFooter,
                 ];
             }
         }

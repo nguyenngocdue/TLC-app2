@@ -11,8 +11,8 @@ class ReportBlock extends Component
     use TraitDataColumnReport;
     use TraitFilterReport;
     public function __construct(
+        private $report,
         private $blockDetails = [],
-        private $report
     ) {
         $this->entity_type = $this->report->entity_type;
     }
@@ -20,36 +20,45 @@ class ReportBlock extends Component
     public function render()
     {
         $blockDetails = $this->blockDetails;
-        $blocksDataSource = [];
+        $blockDataSource = [];
         $currentPrams = $this->currentParamsReport();
 
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
-            $dataQuery = $this->getDataSQLString($block, $currentPrams);
-            //Show sql's error
-            if (method_exists($dataQuery, "getMessage")) {
-                dd('<p>' . $dataQuery->getMessage());
-                return;
-            };
-            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[], [], []] : $this->getColumns($block, $currentPrams, $dataQuery);
-            // set columns where `dataQuery` were empty.
-            if (empty($rawTableColumns)) {
-                $insCol = ColumnReport::getInstance($block);
-                $rawTableColumns = $insCol->defaultColumnsOnEmptyQuery($block);
+            try {
+                $dataQuery = $this->getDataSQLString($block, $currentPrams);
+            } catch (\Exception $e) {
+                dump($e->getMessage());
             }
-            $array = [
+            //Show sql's error
+            // if (method_exists($dataQuery, "getMessage")) {
+            //     dd('<p>' . $dataQuery->getMessage());
+            //     return;
+            // };            
+            //tim cach kiem tra $dataQuery->toArray() ma khong dung ham toArray
+            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($dataQuery->toArray()) ? [[], [], []] : $this->getKKKColumns($block, $currentPrams, $dataQuery);
+            // set columns where `dataQuery` were empty.
+
+
+            //Tofix: Check if this is necessary
+            // if (empty($rawTableColumns)) {
+            //     $columnInstance = ColumnReport::getInstance($block);
+            //     $rawTableColumns = $columnInstance->defaultColumnsOnEmptyQuery($block);
+            // }
+
+            $blockItem = [
                 'colSpan' => $item->col_span,
-                'blocks' => $item->getBlock,
+                'block' => $item->getBlock,
                 'backgroundBlock' => $item->attachment_background->first(),
                 'dataQuery' => $dataQuery,
                 'tableDataSource' => $tableDataSource,
                 'rawTableColumns' => $rawTableColumns,
                 'dataHeader' => $dataHeader,
             ];
-            $blocksDataSource[] = $array;
+            $blockDataSource[] = $blockItem;
         }
         return view('components.reports2.report-block', [
-            'blocksDataSource' => $blocksDataSource,
+            'blockDataSource' => $blockDataSource,
             'reportId' => $this->report->id,
         ]);
     }

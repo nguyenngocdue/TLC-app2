@@ -8,12 +8,22 @@ use App\Models\Term;
 
 trait TermsBlockReport
 {
-    public function getTermName($id)
+    private function getTermName($id)
     {
         if ($id) {
             $aggName = Term::find($id)->name;
             return $aggName;
         }
         return null;
+    }
+
+    public function getAggName($id)
+    {
+        $this->getTermName($id);
+    }
+
+    public function getIconName($id)
+    {
+        $this->getTermName($id);
     }
 }

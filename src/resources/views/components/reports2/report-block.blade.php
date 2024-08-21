@@ -1,18 +1,18 @@
-@if ($blocksDataSource)
-    @foreach ($blocksDataSource as $key => $values)
+@if ($blockDataSource)
+    @foreach ($blockDataSource as $key => $blockItem)
         @php
-            $block = $values['blocks'];
-            $tableDataSource = $values['tableDataSource'];
-            $rawTableColumns = $values['rawTableColumns'];
+            $block = $blockItem['block'];
+            $tableDataSource = $blockItem['tableDataSource'];
+            $rawTableColumns = $blockItem['rawTableColumns'];
 
             $rendererType = $block->renderer_type;
-            $colSpan = $values['colSpan'] ?? 12;
+            $colSpan = $blockItem['colSpan'] ?? 12;
 
-            $dataQuery = $values['dataQuery'];
+            $dataQuery = $blockItem['dataQuery']; 
 
-            $dataHeader = $values['dataHeader'];
+            $dataHeader = $blockItem['dataHeader'];
 
-            $background = $values['backgroundBlock'];
+            $background = $blockItem['backgroundBlock'];
             $backgroundPath = isset($background->url_media)
                 ? "'" . env('AWS_ENDPOINT') . '/tlc-app//' . $background->url_media . "'"
                 : '';
