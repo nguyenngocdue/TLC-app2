@@ -9,36 +9,36 @@ use Illuminate\Support\Facades\Route;
 class HrefReport
 {
 
-    private static function extractRouteParts($routeString)
-    {
-        preg_match('/route\(([^,]+),\s*(\d+)\)/', $routeString, $matches);
-        return [
-            trim($matches[1], " \t\n\r\0\x0B'\""), $matches[2]
-        ];
-    }
+    // private static function extractRouteParts($routeString)
+    // {
+    //     preg_match('/route\(([^,]+),\s*(\d+)\)/', $routeString, $matches);
+    //     return [
+    //         trim($matches[1], " \t\n\r\0\x0B'\""), $matches[2]
+    //     ];
+    // }
 
     public static function createDataHrefForRow($column, $dataLine)
     {
         $rowHrefFn = $column->row_href_fn;
-        $regexValues = RegexReport::pregLinkRowCell($rowHrefFn);
-        [$variables, $fields]  = $regexValues;
+        $allVariables = RegexReport::getAllVariables($rowHrefFn);
+        [$variables, $fields]  = $allVariables;
 
         $result = array_combine(
             $variables,
-            array_map(fn ($field) => $dataLine->{$field} ?? null, $fields)
+            array_map(fn($field) => $dataLine->{$field} ?? null, $fields)
         );
         $href = str_replace($variables, array_values($result), $rowHrefFn);
-        [$entity, $action] = ["", ""];
+        // [$entity, $action] = ["", ""];
 
-        if (str_contains($href, 'route(')) {
-            [$routeName, $id] = static::extractRouteParts($href);
-            [$entity, $action] = explode('.', $routeName);
-            $href = Route::has($routeName) ? route($routeName, $id) : "#";
-        }
+        // if (str_contains($href, 'route(')) {
+        //     [$routeName, $id] = static::extractRouteParts($href);
+        //     [$entity, $action] = explode('.', $routeName);
+        //     $href = Route::has($routeName) ? route($routeName, $id) : "#";
+        // }
         return collect([
             'href' => $href,
-            'entity' => $entity,
-            'action' => $action,
+            // 'entity' => $entity,
+            // 'action' => $action,
         ]);
     }
 }

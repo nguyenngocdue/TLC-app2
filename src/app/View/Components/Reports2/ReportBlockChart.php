@@ -70,16 +70,15 @@ class ReportBlockChart extends Component
         if ($viewName) {
             $componentName = "x-reports2.charts.types." . $viewName;
             $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :jsonChart="$jsonChart" :queriedData="$queriedData"/>';
-            $views =  $chart;
 
-            return  Blade::render($views, [
+            return  Blade::render($chart, [
                 'key' => $key,
                 'block' => $block,
                 'chartTypeId' => $chartTypeId,
                 'jsonChart' => $jsonChart,
                 'queriedData' => $queriedData,
                 'series' => $series,
-                'tableColumns' => $tableColumns
+                'tableColumns' => $tableColumns,
             ]);
         }
     }

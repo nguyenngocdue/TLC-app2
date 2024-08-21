@@ -13,7 +13,7 @@ class RegexReport
             if (isset($dataLine[$value])) {
                 $valueParam =  $dataLine[$value];
                 if (is_array($valueParam)) {
-                    $itemsIsNumeric = array_filter($valueParam, fn ($item) => is_numeric($item));
+                    $itemsIsNumeric = array_filter($valueParam, fn($item) => is_numeric($item));
                     if (!empty($itemsIsNumeric)) $valueParam = implode(',', $valueParam);
                     else {
                         $str = "";
@@ -32,9 +32,11 @@ class RegexReport
         return $string;
     }
 
-    public static function pregLinkRowCell($string)
+    public static function getAllVariables($string)
     {
+        //Get the variables in the string start with $
         preg_match_all('/\$(\w+)/', $string, $matches);
+
         return $matches;
     }
 }
