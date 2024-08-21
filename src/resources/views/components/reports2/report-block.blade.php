@@ -1,3 +1,9 @@
+@php
+    $TABLE_TYPE_ID = 641;
+    $CHART_TYPE_ID = 642;
+    $PARAGRAPH_TYPE_ID = 643;
+    $DESCRIPTION_TYPE_ID = 644;
+@endphp
 @if ($blockDataSource)
     @foreach ($blockDataSource as $key => $blockItem)
         @php
@@ -14,15 +20,17 @@
 
             $background = $blockItem['backgroundBlock'];
             $backgroundPath = isset($background->url_media)
-                ? "'" . env('AWS_ENDPOINT') . '/tlc-app//' . $background->url_media . "'"
-                : '';
+                ? app()->pathMinio() . $background->url_media 
+                : null;
         @endphp
         <div title="{{ $block->name }}"
             class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : 'bg-gray-50' }} p-4 text-center bg-cover bg-center "
-            @if ($backgroundPath) style="background-image: url({{ $backgroundPath }});" @endif>
+            @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
+
+            {{-- TOFIX: Render Block Title --}}
 
             @switch($rendererType)
-                @case(641)
+                @case($TABLE_TYPE_ID)
                     <x-reports2.table-block-report 
                         reportId="{{ $reportId }}" 
                         :rawTableDataSource="$tableDataSource" 
@@ -30,16 +38,16 @@
                         :dataHeader="$dataHeader" :block="$block" />
                 @break
 
-                @case(642)
+                @case($CHART_TYPE_ID)
                     <x-reports2.chart-block-report :block="$block" reportId="{{ $reportId }}" :queriedData="$queriedData"
                         :rawTableColumns="$rawTableColumns" />
                 @break
 
-                @case(643)
+                @case($PARAGRAPH_TYPE_ID)
                     <x-reports2.paragraph-block-report :block="$block" reportId="{{ $reportId }}" />
                 @break
 
-                @case(644)
+                @case($DESCRIPTION_TYPE_ID)
                     <x-reports2.description-block-report :block="$block" reportId="{{ $reportId }}" />
                 @break
 
