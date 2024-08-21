@@ -3,7 +3,6 @@
 namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
-use Illuminate\Support\Str;
 
 trait TraitReportFilter
 {
@@ -23,14 +22,16 @@ trait TraitReportFilter
         return $currentParams;
     }
 
-    function validateParams($rpFilter, $currentParams)
+    function validateParams($rpFilters, $currentParams)
     {
         $result = [];
-        foreach ($rpFilter as $filter) {
+        foreach ($rpFilters as $filter) {
             if ($filter->is_required) {
-                $dataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
+                // $dataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
+                $dataIndex = $filter->data_index;
+
                 if (!isset($currentParams[$dataIndex]) || is_null($currentParams[$dataIndex])) {
-                    $result[$dataIndex] = $filter->title ? $filter->title : $filter->entity_type;
+                    $result[$dataIndex] = $filter->title ?: $filter->entity_type;
                 }
             }
         }

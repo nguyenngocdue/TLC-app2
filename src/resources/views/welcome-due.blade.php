@@ -29,11 +29,11 @@
         <div class="grid grid-cols-12 gap-4 items-baseline">
             <div id="" class="col-span-2">
                 <span class='px-1'>Project</span>
-                <x-renderer.report2.filter-report-item />
+                <x-renderer.report2.report-filter-item />
             </div>
             <div id="" class="col-span-2">
                 <span class='px-1'>Project</span>
-                <x-renderer.report2.filter-report-item-listener />
+                <x-renderer.report2.report-filter-item-listener />
             </div>
         </div>
     </div>

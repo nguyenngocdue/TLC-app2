@@ -8,9 +8,9 @@ use Illuminate\Support\Str;
 class ReportFilter extends Component
 {
     use TraitReportFilter;
-    protected $type = "filter_report";
+    protected $type = "report_filter";
     public function __construct(
-        private $report = "",
+        private $report = null,
     ) {}
 
     public function render()

@@ -28,7 +28,7 @@ Route::group([], function () {
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
 
-            Route::post("rp_reports/update_filters/{id}", [Rp_reportController::class, 'updateFilters'])->name('filter_reports.update');
+            Route::post("rp_reports/update_filters/{id}", [Rp_reportController::class, 'updateFilters'])->name('report_filters.update');
 
             Route::post("{$entityName}_rs", [EntityCRUDController::class, "restoreMultiple"])->name("{$entityName}.restoreMultiple");
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");

@@ -15,7 +15,7 @@ use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
 
-class FilterReportItemListener extends Component
+class ReportFilterItemListener extends Component
 {
     use TraitListenerControlReport;
     use TraitGetSuffixListenerControl;

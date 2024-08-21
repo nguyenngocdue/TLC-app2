@@ -15,7 +15,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Component;
 
-class FilterReportItem extends Component
+class ReportFilterItem extends Component
 {
     use HasShowOnScreens;
     use TraitListenerControlReport;
@@ -40,8 +40,8 @@ class FilterReportItem extends Component
         if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
 
         $listenReducer = $this->filter->getListenReducer;
-        $this->id =  $listenReducer ? $listenReducer->column_name: $filter->name;
- 
+        $this->id =  $listenReducer ? $listenReducer->column_name : $filter->name;
+
         $entityType = $filter->entity_type;
         $this->tableName = Str::plural($entityType);
         $this->multiple = (bool)$filter->is_multiple;
@@ -79,8 +79,8 @@ class FilterReportItem extends Component
 
         if ($entityType === 'prod_routing_links') {
             $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
-            ->with('getProdRoutings')
-            ->orderBy('name')
+                ->with('getProdRoutings')
+                ->orderBy('name')
                 ->get();
 
             $newDB = [];
@@ -96,7 +96,7 @@ class FilterReportItem extends Component
             }
             return $newDB;
         }
-        
+
         if (!empty($triggerNames)) {
             foreach ($triggerNames as $triggerName) {
                 if (Schema::hasColumn(Str::plural($entityType), $triggerName)) {
@@ -104,10 +104,10 @@ class FilterReportItem extends Component
                 }
             }
         }
-        
+
         return $this->getEntityData($entityType, $db, $isBlackList, $bWListIds);
     }
-    
+
     private function getFilteredData($db, $triggerName, $isBlackList, $bWListIds)
     {
         return $db->select('id', 'name', 'description', $triggerName)
@@ -137,13 +137,13 @@ class FilterReportItem extends Component
             foreach ($treeData as $value) {
                 $name = $value->resigned ? $value->name0 . ' (RESIGNED)' : $value->name0;
                 $name = $value->show_on_beta ? $name . ' (BETA)' : $name;
-                $addId = $isAdmin ? '(#'.$value->id.')' : '';
+                $addId = $isAdmin ? '(#' . $value->id . ')' : '';
                 $dataSource[] = [
-                    'id' => $value->id, 
-                    'name' => $name.' '.$addId,
+                    'id' => $value->id,
+                    'name' => $name . ' ' . $addId,
                     'department_id' => $value->department,
                     'workplace_id' => $value->workplace
-                    ] ;
+                ];
             }
             return collect($dataSource);
         }

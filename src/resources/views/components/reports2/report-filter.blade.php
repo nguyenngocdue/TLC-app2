@@ -11,7 +11,7 @@
     @if(count($rpFilterLinks->toArray()) > 0)
         <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
                 <div class="text-left whitespace-nowrap">
-                    <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Report Link</span>
+                    <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white"></span>
                 </div>
                 <x-reports2.dropdown9 
                     name="report_link" 
@@ -37,7 +37,8 @@
                                 @if($filter->is_active)
                                     @php
                                         $text = 'App\Utils\Support\StringReport'::makeTitleFilter($filter->entity_type);
-                                        $title = ($x = $filter->title) ? $x : ($filter->is_multiple ? Str::plural($text) : Str::singular($text)); 
+                                        // $title = ($x = $filter->title) ? $x : ($filter->is_multiple ? Str::plural($text) : Str::singular($text)); 
+                                        $title = ($x = $filter->title) ? $x : $text;
                                         $selected = $currentParams[$filter->data_index] ?? [];
                                     @endphp
                                     <div class="col-span-2">
@@ -63,7 +64,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <x-renderer.report2.filter-report-item
+                                        <x-renderer.report2.report-filter-item
                                             :filter="$filter"
                                             :selected="$selected"    
                                         />
