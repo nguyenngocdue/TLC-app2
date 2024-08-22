@@ -21,6 +21,9 @@ class ReportFilterItem extends Component
     use TraitListenerControlReport;
     use TraitUserCompanyTree;
 
+    protected $DATASOURCE_TYPE_ID = 633;
+    protected $STATUS_TYPE_ID = 631;
+
     public function __construct(
         private $filter,
         private $id = "",
@@ -58,10 +61,10 @@ class ReportFilterItem extends Component
         $bWListIds = explode(',', $filter->bw_list_ids);
 
         switch ($controlTypeId) {
-            case 633:
-                return $this->handleControlType633($entityType, $isBlackList, $bWListIds);
+            case $this->DATASOURCE_TYPE_ID:
+                return $this->handleDataSourceTypeID($entityType, $isBlackList, $bWListIds);
 
-            case 631:
+            case $this->STATUS_TYPE_ID:
                 return $this->getStatuses($entityType);
 
             default:
@@ -69,68 +72,45 @@ class ReportFilterItem extends Component
         }
     }
 
-    private function handleControlType633($entityType, $isBlackList, $bWListIds)
+    private function getEntityData($db, $isBlackList, $bWListIds, $triggerName = null)
     {
-        $modelClass = ModelData::initModelByField($entityType);
-        if (!$modelClass) return [];
-
-        $db = $modelClass::query();
-        $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
-
-        if ($entityType === 'prod_routing_links') {
-            $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
-                ->with('getProdRoutings')
-                ->orderBy('name')
-                ->get();
-
-            $newDB = [];
-            foreach ($db as $item) {
-                $i = (object)[];
-                $i->id = $item->id;
-                $i->name = $item->name;
-                $i->description = $item->description;
-                $i->prod_discipline_id = $item->prod_discipline_id;
-
-                $i->prod_routing_id = $item->getProdRoutings->pluck('id');
-                $newDB[] = $i;
-            }
-            return $newDB;
-        }
-
-        if (!empty($triggerNames)) {
-            foreach ($triggerNames as $triggerName) {
-                if (Schema::hasColumn(Str::plural($entityType), $triggerName)) {
-                    return $this->getFilteredData($db, $triggerName, $isBlackList, $bWListIds);
-                }
-            }
-        }
-
-        return $this->getEntityData($entityType, $db, $isBlackList, $bWListIds);
-    }
-
-    private function getFilteredData($db, $triggerName, $isBlackList, $bWListIds)
-    {
-        return $db->select('id', 'name', 'description', $triggerName)
-            ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+        $query = $db->select('id', 'name', 'description');
+        if ($triggerName) $query->addSelect($triggerName);
+        return $query
+            ->when($isBlackList, function ($query) use ($bWListIds) {
+                return $query->whereIn('id', $bWListIds);
+            }, function ($query) use ($bWListIds) {
+                return $query->whereNotIn('id', $bWListIds);
+            })
             ->orderBy('name')
             ->get();
     }
 
-    private function getEntityData($entityType, $db, $isBlackList, $bWListIds)
+    private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds)
     {
-        if ($entityType === 'prod_routings') {
-            $newDB = $db->select('id', 'name', 'description')
-                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                ->with('getSubProjects')
-                ->with('getScreensShowMeOn')
-                ->orderBy('name')
-                ->get();
-            foreach ($newDB as &$item) {
-                $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
-            }
-            return $newDB;
-        }
-        if ($entityType === 'users') {
+        $modelClass = ModelData::initModelByField($entityType);
+        if (!$modelClass) return [];
+        $db = $modelClass::query();
+        switch($entityType){
+            case 'prod_routing_links':
+                $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
+                    ->with('getProdRoutings')
+                    ->orderBy('name')
+                    ->get();
+        
+                $newDB = [];
+                foreach ($db as $item) {
+                    $i = (object)[];
+                    $i->id = $item->id;
+                    $i->name = $item->name;
+                    $i->description = $item->description;
+                    $i->prod_discipline_id = $item->prod_discipline_id;
+        
+                    $i->prod_routing_id = $item->getProdRoutings->pluck('id');
+                    $newDB[] = $i;
+                }
+                return $newDB;
+        case 'users':
             $treeData = $this->getDataByCompanyTree();
             $dataSource = [];
             $isAdmin = CurrentUser::isAdmin();
@@ -146,25 +126,29 @@ class ReportFilterItem extends Component
                 ];
             }
             return collect($dataSource);
-        }
+        case 'prod_routings':
+            $newDB = $db->select('id', 'name', 'description')
+                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+                ->with('getSubProjects')
+                ->with('getScreensShowMeOn')
+                ->orderBy('name')
+                ->get();
+            foreach ($newDB as &$item) {
+                $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+            }
+            return $newDB;
 
-        return $db->select('id', 'name', 'description')
-            ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-            ->orderBy('name')
-            ->get();
+                
+        }
+        $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
+        foreach ($triggerNames as $triggerName) return $this->getEntityData($db, $isBlackList, $bWListIds, $triggerName);
     }
 
     private function getStatuses($entityType)
     {
         $lib = LibStatuses::getFor($entityType);
-        return array_map(fn($key, $status) => 
-            [   
-                'id' => $key, 
-                'name' => $status['title']
-                ],
-                array_keys($lib), $lib);
+        return array_map(fn($key, $status) => [  'id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
     }
-
 
     public function render()
     {
