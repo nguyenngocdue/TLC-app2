@@ -20,7 +20,7 @@ class ReportBlockTable extends Component
         private $secondHeaderCols,
     ) {}
 
-    private function createKeyColumns($columns, $dataIndexToRender = [])
+    private function getConfiguredColumns($columns, $dataIndexToRender = [])
     {
         $result = [];
         foreach ($columns as  $column) {
@@ -34,42 +34,22 @@ class ReportBlockTable extends Component
     private function createContentInRowCell($value, $column)
     {
         if ($column->parent_id) {
-            //Tofix: check if getParent if getParent()
-            $column = $column->getParent();
+            $column = $column->getParent;
         }
         $content = $this->createIconPosition($value, $column->row_icon, $column->row_icon_position);
         return $content;
     }
 
-    private function paginateDataSource($dataSource, $hasPagination, $pageLimit)
-    {
-        $page = $_GET['page'] ?? 1;
-        // Convert array to a collection
 
-        //Tofix: check if any case that $dataSource is not a collection
-        if (!($dataSource instanceof Collection)) {
-            $dataSource = collect($dataSource);
-        }
-        if ($hasPagination) {
-            $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page))
-                //Tofix: check if this is necessary
-                // ->appends(request()->query())
-            ;
-        }
-        return $dataSource;
-    }
-
-    private function createTableDataSourceForRows($queriedData, $reducedKeyAndColumns, $block)
+    private function createTableDataSourceForRows($queriedData, $configuredColumns, $block)
     {
-        $hasPagination = ($y = $block->has_pagination) ? (bool)$y : false;
-        $queriedData = $this->paginateDataSource($queriedData, $hasPagination, 10);
-        // dd($queriedData);
+  
         $result = collect();
         foreach ($queriedData as $k1 => $dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
-                if (array_key_exists($k2, $reducedKeyAndColumns)) {
-                    $column = $reducedKeyAndColumns[$k2];
+                if (array_key_exists($k2, $configuredColumns)) {
+                    $column = $configuredColumns[$k2];
                     $dataHref = HrefReport::createDataHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
                     // Log::info($content);
@@ -92,14 +72,12 @@ class ReportBlockTable extends Component
     public function render()
     {
         $block = $this->block;
-
-        //Tofix: do not re-query
-        $columns = $this->block->getLines()->get()->sortby('order_no');
+        $columns = $this->block->getLines->sortby('order_no');
 
         $dataIndexToRender = array_column($this->headerCols, 'dataIndex');
-        $reducedKeyAndCols = $this->createKeyColumns($columns, $dataIndexToRender);
+        $configuredColumns = $this->getConfiguredColumns($columns, $dataIndexToRender);
 
-        $newTableDataSource = $this->createTableDataSourceForRows($this->rawTableDataSource, $reducedKeyAndCols, $block);
+        $newTableDataSource = $this->createTableDataSourceForRows($this->rawTableDataSource, $configuredColumns, $block);
 
         return view('components.reports2.report-block-table', [
             'block' => $block,

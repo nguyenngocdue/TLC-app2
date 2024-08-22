@@ -16,7 +16,7 @@ class ReportPage extends Component
 
     private function createLayoutStyle($isLandscape, $width, $height, $isFullWidth, $pageBackgroundPath)
     {
-        $fullWidthClass = $width  ? "width :{$width}px" : 'w-full'; //TOFIX w-full
+        $fullWidthClass = $width  ? "width :{$width}px" : "width :{$this->w}px";
         $width = $width ? $width  : $this->w * $this->pageScaleFactor;
         $height = $height ? $height  : $this->h * $this->pageScaleFactor;
         $style = $isFullWidth ? $fullWidthClass : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
@@ -45,7 +45,7 @@ class ReportPage extends Component
 
         return view('components.reports2.report-page', [
             'report' => $this->report,
-            'layoutClass' => $layoutStyle, //TOFIX
+            'layoutStyle' => $layoutStyle,
             'letterHeadId' => $pageItem['letter_head_id'],
             'letterFooterId' => $pageItem['letter_footer_id'],
             'content' => $pageItem,

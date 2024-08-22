@@ -1,6 +1,6 @@
 <div class="flex justify-center">
-    <div class="py-4 {{ $layoutClass === 'w-full' ? 'w-full' : '' }}">
-        <div class=" items-center bg-white p-0 flex flex-col justify-between" style="{{ $layoutClass }}">
+    <div class="py-4">
+        <div class=" items-center bg-white p-0 flex flex-col justify-between" style="{{ $layoutStyle }}">
             <!-- Head section with a border -->
             <div class="w-full border-2 border-gray-300 p-2 mb-1">
                 @switch($letterHeadId)
