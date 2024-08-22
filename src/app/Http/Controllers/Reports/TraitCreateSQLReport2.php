@@ -9,28 +9,23 @@ trait TraitCreateSQLReport2
     public function replaceVariableStrs($sqlStr, $params)
     {
         //Match the variable name by {{ $variableName }}
-        //TOFIX: lay toi thieu
         preg_match_all('/(?<!\\\)\{\{\s*([^}]*)\s*\}\}/', $sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
             $value = trim(str_replace('$', '', $value));
             if (isset($params[$value])) {
-                $valueParamArr =  $params[$value];
-                // dd($matches, $params, $valueParamArr);
-                $valueParamStr = "";
-                if (is_array($valueParamArr)) {
-                    $itemsIsNumeric = array_filter($valueParamArr, fn($item) => is_numeric($item));
-                    if (!empty($itemsIsNumeric)) $valueParamStr = implode(',', $valueParamArr);
+                $valOfParam = $params[$value];
+                $tempStr = $params[$value];
+                if (is_array($valOfParam)) {
+                    $itemsIsNumeric = array_filter($valOfParam, fn($item) => is_numeric($item));
+                    if (!empty($itemsIsNumeric)) $tempStr = implode(',', $valOfParam);
                     else {
                         $str = "";
-                        //TOFIX: use array map
-                        array_walk($valueParamArr, function ($item) use (&$str) {
-                            $str .= "'" . $item . "',";
-                        });
-                        $valueParamStr = trim($str, ",");
+                        foreach($valOfParam as $val)$str .= "'" . $val . "',";
+                        $tempStr = trim($str, ",");
                     }
                 }
                 $searchStr = head($matches)[$key];
-                $sqlStr = str_replace($searchStr, $valueParamStr, $sqlStr);
+                $sqlStr = str_replace($searchStr, $tempStr, $sqlStr);
             } else {
                 // Change the SQL String to the conrect syntax
                 $sqlStr = str_replace("'{{" . $value . "}}'", 'null', $sqlStr);

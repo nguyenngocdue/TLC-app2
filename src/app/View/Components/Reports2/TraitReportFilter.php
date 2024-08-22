@@ -27,9 +27,7 @@ trait TraitReportFilter
         $result = [];
         foreach ($rpFilters as $filter) {
             if ($filter->is_required) {
-                // $dataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
                 $dataIndex = $filter->data_index;
-
                 if (!isset($currentParams[$dataIndex]) || is_null($currentParams[$dataIndex])) {
                     $result[$dataIndex] = $filter->title ?: $filter->entity_type;
                 }

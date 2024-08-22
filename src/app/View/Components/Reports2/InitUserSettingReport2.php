@@ -97,7 +97,6 @@ class InitUserSettingReport2
             $isSave = True;    
         }
         if($isSave) {
-            // dd($isSave, $settings);
             self::updateUserSettingRp($settings);
             $isSave = False;    
         }
