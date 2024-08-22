@@ -28,7 +28,7 @@
                         @csrf
                         <input type="hidden" name='action' value="updateReport2">
                     <input type="hidden" name='entity_type' value="{{$entityType}}">
-                        <input type="hidden" name='entity_type2' value="{{$entityType2}}">
+                        <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                         <input type="hidden" name='report_id' value="{{$rpId}}">
                     
                         <div class="grid grid-cols-12 gap-4 items-baseline">

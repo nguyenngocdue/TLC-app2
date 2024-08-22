@@ -26,7 +26,7 @@ class ReportFilter extends Component
 
         return view('components.reports2.report-filter', [
             'entityType' => $rp->entity_type,
-            'entityType2' =>  $this->entityType2,
+            'reportType2' =>  $this->reportType2,
             'reportName' => $rp->name,
             'rpId' => $rpId,
             'currentParams' => $currentParams,

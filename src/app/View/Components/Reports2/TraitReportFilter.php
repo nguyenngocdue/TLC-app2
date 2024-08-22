@@ -15,9 +15,9 @@ trait TraitReportFilter
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $rpFilterLinks = $rp->getRpFilterLinks;
 
-        $entityType2 = $this->entityType2;
+        $reportType2 = $this->reportType2;
         $entityType = $rp->entity_type;
-        $ins = InitUserSettingReport2::getInstance($entityType2);
+        $ins = InitUserSettingReport2::getInstance($reportType2);
         $currentParams = $ins->initParamsUserSettingRp($reportId, $entityType, $rpFilterLinks, $rpFilters);
         return $currentParams;
     }

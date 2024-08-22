@@ -9,16 +9,16 @@ use App\Utils\Support\Report;
 class UserSettingReport2
 {
     private static $instance = null;
-    protected $entityType2;
+    protected $reportType2;
 
-    private function __construct($entityType2)
+    private function __construct($reportType2)
     {
-        $this->entityType2 = $entityType2;
+        $this->reportType2 = $reportType2;
     }
-    public static function getInstance($entityType2)
+    public static function getInstance($reportType2)
     {
         if (self::$instance == null) {
-            self::$instance = new UserSettingReport2($entityType2);
+            self::$instance = new UserSettingReport2($reportType2);
         }
         return self::$instance;
     }
@@ -34,16 +34,16 @@ class UserSettingReport2
     function getCurrentParamsUser($entityType, $storedFilterKey)
     {
         $settings = CurrentUser::getSettings();
-        $entityType2 = $this->entityType2;
-        $keys = [$entityType, $entityType2, $storedFilterKey];
+        $reportType2 = $this->reportType2;
+        $keys = [$entityType, $reportType2, $storedFilterKey];
         if (Report::checkKeysExist($settings, $keys)) {
-            return  $settings[$entityType][$this->entityType2][$storedFilterKey];
+            return  $settings[$entityType][$this->reportType2][$storedFilterKey];
         }
         return [];
     }
 
     function getNewUserSettings($settings, $entityType, $storesKeyFilter)
     {
-        return $settings[$entityType][$this->entityType2][$storesKeyFilter];
+        return $settings[$entityType][$this->reportType2][$storesKeyFilter];
     }
 }

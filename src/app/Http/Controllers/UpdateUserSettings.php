@@ -379,7 +379,7 @@ class UpdateUserSettings extends Controller
     {
         $inputValue = $request->all();
         $entityType = $inputValue['entity_type'];
-        $entityType2 = $inputValue['entity_type2'];
+        $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
         $filters = $this->getFilterReport2($inputValue);
     
@@ -387,10 +387,10 @@ class UpdateUserSettings extends Controller
         $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
         // dd($storedFilterKey);
     
-        $keys = [$entityType, $entityType2, $storedFilterKey];
+        $keys = [$entityType, $reportType2, $storedFilterKey];
         $paramToUpdate = [];
         if (Report::checkKeysExist($settings, $keys)) {
-            $paramsInUser = &$settings[$entityType][$entityType2][$storedFilterKey];
+            $paramsInUser = &$settings[$entityType][$reportType2][$storedFilterKey];
             foreach ($filters as $key => $value) {
                 $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : $value;
             }
@@ -398,7 +398,7 @@ class UpdateUserSettings extends Controller
         } else {
             $paramToUpdate = $filters;
         }
-        $settings[$entityType][$entityType2][$storedFilterKey] = $paramToUpdate;
+        $settings[$entityType][$reportType2][$storedFilterKey] = $paramToUpdate;
         return $settings;
     }
     

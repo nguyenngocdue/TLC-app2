@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 trait TraitEntityCRUDShowReport
 {
     protected $entity_type;
-	protected $entityType2 = 'report2';
+	protected $reportType2 = 'report2';
 	public function showReport(Request $request, $id,  $trashed)
 	{
 		$report = Rp_report::find($id)->getDeep();

@@ -11,16 +11,16 @@ use Illuminate\Support\Str;
 class InitUserSettingReport2
 {
     private static $instance = null;
-    protected $entityType2;
+    protected $reportType2;
 
-    private function __construct($entityType2)
+    private function __construct($reportType2)
     {
-        $this->entityType2 = $entityType2;
+        $this->reportType2 = $reportType2;
     }
-    public static function getInstance($entityType2 = null)
+    public static function getInstance($reportType2 = null)
     {
         if (self::$instance == null) {
-            self::$instance = new InitUserSettingReport2($entityType2);
+            self::$instance = new InitUserSettingReport2($reportType2);
         }
         return self::$instance;
     }
@@ -77,22 +77,22 @@ class InitUserSettingReport2
         $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
 
         // create default values in the database -> in case that the reports were previously saved in user_setting
-        $keys = [$entityType, $this->entityType2, $storedFilterKey];
+        $keys = [$entityType, $this->reportType2, $storedFilterKey];
         $isSave = false;
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInConfig = $this->createDefaultParams($rpFilters);
-            $paramsInUser = $settings[$entityType][$this->entityType2][$storedFilterKey];
+            $paramsInUser = $settings[$entityType][$this->reportType2][$storedFilterKey];
             $paramsToUpdate = self::getParamsToUpdate($paramsInConfig, $paramsInUser, true);
             // dd($paramsInConfig, $paramsToUpdate);
             if(!empty($paramsToUpdate)) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
-                $settings[$entityType][$this->entityType2][$storedFilterKey] = $paramsToUpdate;
+                $settings[$entityType][$this->reportType2][$storedFilterKey] = $paramsToUpdate;
                 $isSave = True;
             }
         } else {
             // create default values in the database -> in case that the reports weren't saved in user_setting
             $defaultParams = $this->createDefaultParams($rpFilters);
-            $settings[$entityType][$this->entityType2][$storedFilterKey] = $defaultParams;
+            $settings[$entityType][$this->reportType2][$storedFilterKey] = $defaultParams;
             
             $isSave = True;    
         }
@@ -100,7 +100,7 @@ class InitUserSettingReport2
             self::updateUserSettingRp($settings);
             $isSave = False;    
         }
-        $params = $settings[$entityType][$this->entityType2][$storedFilterKey] ?? [];
+        $params = $settings[$entityType][$this->reportType2][$storedFilterKey] ?? [];
         return  $params;
     }
 }
