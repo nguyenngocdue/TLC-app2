@@ -18,6 +18,7 @@ RUN apk update && apk add \
     htop \
     supervisor \   
     php-zip \
+    autoconf \
     gnupg \
     sudo \
     unixodbc-dev

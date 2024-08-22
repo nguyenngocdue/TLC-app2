@@ -19,8 +19,7 @@ RUN apk update && apk add --no-cache \
     htop \
     supervisor \
     php-zip \
-    # build-base \
-    # autoconf \
+    autoconf \
     # nodejs \
     # npm && \
     gnupg \
