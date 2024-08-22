@@ -52,6 +52,12 @@ class ReportFilterItem extends Component
         $this->allowClear = (bool)$filter->allow_clear;
     }
 
+    private function getStatuses($entityType)
+    {
+        $lib = LibStatuses::getFor($entityType);
+        return array_map(fn($key, $status) => [  'id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
+    }
+
     private function getDataSource()
     {
         $filter = $this->filter;
@@ -144,12 +150,7 @@ class ReportFilterItem extends Component
         foreach ($triggerNames as $triggerName) return $this->getEntityData($db, $isBlackList, $bWListIds, $triggerName);
     }
 
-    private function getStatuses($entityType)
-    {
-        $lib = LibStatuses::getFor($entityType);
-        return array_map(fn($key, $status) => [  'id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
-    }
-
+ 
     public function render()
     {
         $this->renderJSForK();
