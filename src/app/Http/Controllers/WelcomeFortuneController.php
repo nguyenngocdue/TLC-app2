@@ -29,8 +29,18 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $tables = DB::connection('sqlsrv')->select('SELECT * FROM [TLC_PROD].[dbo].[$ndo$migrations]');
-        dump($tables);
-        return view("welcome-fortune", []);
+        $sql = 'SELECT /* TOP (1000)*/ * 
+        FROM [TLC_PROD].[dbo].[TLC_LLC$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]';
+        $tables = DB::connection('sqlsrv')->select($sql);
+
+        $columns = [
+            ['dataIndex' => 'No_'],
+            ['dataIndex' => 'Description'],
+            ['dataIndex' => 'Search Description'],
+        ];
+        return view("welcome-fortune", [
+            'columns' => $columns,
+            'dataSource' => $tables,
+        ]);
     }
 }
