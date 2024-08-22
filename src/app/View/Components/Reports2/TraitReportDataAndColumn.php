@@ -67,6 +67,12 @@ trait TraitReportDataAndColumn
 
     public function getDataColumns($block, $queriedData)
     {
+        if($queriedData->isEmpty()){
+            $columnInstance = ColumnReport::getInstance($block);
+            $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
+            return [$headerCols, []];
+        } 
+
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from ddmin
         $lines = $block->getLines->sortby('order_no');
@@ -87,7 +93,6 @@ trait TraitReportDataAndColumn
                 ];
             }
         }
-        if (empty($columns)) $columns = [['dataIndex' => null]];
         return [$headerCols, $secondHeaderCols];
     }
 }

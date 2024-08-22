@@ -156,7 +156,13 @@ class ReportFilterItem extends Component
 
     private function getStatuses($entityType)
     {
-        return array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys(LibStatuses::getFor($entityType)), LibStatuses::getFor($entityType));
+        $lib = LibStatuses::getFor($entityType);
+        return array_map(fn($key, $status) => 
+            [   
+                'id' => $key, 
+                'name' => $status['title']
+                ],
+                array_keys($lib), $lib);
     }
 
 

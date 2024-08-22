@@ -42,7 +42,8 @@ class ReportBlock extends Component
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
-            [$headerCols, $secondHeaderCols] =  $queriedData->isEmpty() ? [[], []] : $this->getDataColumns($block, $queriedData);
+            [$headerCols, $secondHeaderCols] = $this->getDataColumns($block, $queriedData);
+
 
             $blockItem = [
                 'colSpan' => $item->col_span,

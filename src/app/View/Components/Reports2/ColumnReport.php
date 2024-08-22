@@ -17,16 +17,16 @@ class ColumnReport
         return self::$instance;
     }
 
-    // function defaultColumnsOnEmptyQuery()
-    // {
-    //     return $this->block->getLines->where('is_active', true)
-    //         ->select('title', 'data_index')
-    //         ->map(function ($item) {
-    //             return [
-    //                 'title' => $item['title'] ?? $item['data_index'],
-    //                 'dataIndex' => $item['data_index']
-    //             ];
-    //         })
-    //         ->toArray();
-    // }
+    function defaultColumnsOnEmptyQuery()
+    {
+        return $this->block->getLines->where('is_active', true)
+            ->select('title', 'data_index')
+            ->map(function ($item) {
+                return [
+                    'title' => $item['title'] ?? $item['data_index'],
+                    'dataIndex' => $item['data_index']
+                ];
+            })
+            ->toArray();
+    }
 }
