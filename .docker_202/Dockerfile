@@ -7,7 +7,10 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.17/community" >> /etc/apk/repo
 
 # Install necessary packages and PHP extensions
 RUN apk update && apk add --no-cache \
+    build-base \
+    shadow \
     curl \
+    libzip-dev \
     libpng-dev \
     libxml2-dev \
     freetype-dev \
@@ -20,8 +23,6 @@ RUN apk update && apk add --no-cache \
     supervisor \
     php-zip \
     autoconf \
-    # nodejs \
-    # npm && \
     gnupg \
     sudo \
     unixodbc-dev

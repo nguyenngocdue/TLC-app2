@@ -5,8 +5,11 @@ WORKDIR /var/www/app
 # Add the community repository
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.17/community" >> /etc/apk/repositories
 
-RUN apk update && apk add \
+RUN apk update && apk add --no-cache \
+    build-base \
+    shadow \
     curl \
+    libzip-dev \
     libpng-dev \
     libxml2-dev \
     freetype-dev \
@@ -16,7 +19,7 @@ RUN apk update && apk add \
     nano \
     mc \
     htop \
-    supervisor \   
+    supervisor \
     php-zip \
     autoconf \
     gnupg \

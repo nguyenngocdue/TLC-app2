@@ -25,15 +25,6 @@ RUN apk update && apk add --no-cache \
     supervisor \
     php-zip \
     autoconf \
-    # nodejs \
-    # npm \
-    # chromium \
-    # chromium-chromedriver \
-    # libgcc \
-    # libstdc++ \
-    # nss \
-    # wget \
-    # git \
     gnupg \
     sudo \
     unixodbc-dev
