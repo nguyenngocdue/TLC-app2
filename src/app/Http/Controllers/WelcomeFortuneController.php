@@ -31,6 +31,9 @@ class WelcomeFortuneController extends Controller
     {
         $sql = 'SELECT /* TOP (1000)*/ * 
         FROM [TLC_PROD].[dbo].[TLC_LLC$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]';
+
+        $sql = 'SELECT * FROM [TLC_PROD].[dbo].[$ndo$migrations]';
+
         $tables = DB::connection('sqlsrv')->select($sql);
 
         $columns = [
