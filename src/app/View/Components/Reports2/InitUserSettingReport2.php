@@ -68,7 +68,7 @@ class InitUserSettingReport2
         $user = User::find(Auth::id());
         $user->settings = $settings;
         $u = $user->update();
-        if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
+        // if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
     }
 
     public function initParamsUserSettingRp($rpId, $entityType, $rpFilterLinks, $rpFilters){
