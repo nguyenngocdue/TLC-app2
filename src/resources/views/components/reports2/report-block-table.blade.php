@@ -17,7 +17,7 @@
     <x-renderer.table 
         headerTop=12 
         showNo=true 
-        :columns="$tableColumns" :dataSource="$tableDataSource" :dataHeader="$dataHeader"
+        :columns="$tableColumns" :dataSource="$tableDataSource" :dataHeader="$secondHeaderCols"
         tableTrueWidth="{{ $tableTrueWidth }}" maxH="{{ $maxHeight }}" rotate45width="{{ $rotate45Width }}"
         rotate45Height="{{ $rotate45Height }}" showPaginationTop="{{ true }}"
         topLeftControl="{!! $topLeftControl !!}" topCenterControl="{!! $topCenterControl !!}"

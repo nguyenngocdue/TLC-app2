@@ -9,14 +9,14 @@
         @php
             $block = $blockItem['block'];
             $tableDataSource = $blockItem['tableDataSource'];
-            $rawTableColumns = $blockItem['rawTableColumns'];
+            $headerCols = $blockItem['headerCols'];
 
             $rendererType = $block->renderer_type;
             $colSpan = $blockItem['colSpan'] ?? 12;
 
             $queriedData = $blockItem['queriedData']; 
 
-            $dataHeader = $blockItem['dataHeader'];
+            $secondHeaderCols = $blockItem['secondHeaderCols'];
 
             $background = $blockItem['backgroundBlock'];
             $backgroundPath = isset($background->url_media)
@@ -34,13 +34,13 @@
                     <x-reports2.report-block-table 
                         reportId="{{ $reportId }}" 
                         :rawTableDataSource="$tableDataSource" 
-                        :rawTableColumns="$rawTableColumns"
-                        :dataHeader="$dataHeader" :block="$block" />
+                        :headerCols="$headerCols"
+                        :secondHeaderCols="$secondHeaderCols" :block="$block" />
                 @break
 
                 @case($CHART_TYPE_ID)
                     <x-reports2.report-block-chart :block="$block" reportId="{{ $reportId }}" :queriedData="$queriedData"
-                        :rawTableColumns="$rawTableColumns" />
+                        :headerCols="$headerCols" />
                 @break
 
                 @case($PARAGRAPH_TYPE_ID)

@@ -14,7 +14,7 @@ class ReportBlockChart extends Component
     public function __construct(
         private $block = null,
         private $queriedData = null,
-        private $rawTableColumns = []
+        private $headerCols = []
     ) {}
 
     private function formatJsonString($longString)
@@ -40,7 +40,7 @@ class ReportBlockChart extends Component
         $viewName = '';
         $series = [];
         $key = hash('sha256', $chartTypeId . $block->name);;
-        $tableColumns = $this->rawTableColumns;
+        $tableColumns = $this->colHeaders;
 
 
         switch ($chartTypeId) {

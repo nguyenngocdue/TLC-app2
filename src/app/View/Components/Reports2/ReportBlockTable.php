@@ -3,7 +3,6 @@
 namespace App\View\Components\Reports2;
 
 use Illuminate\View\Component;
-use App\Models\Term;
 use App\Utils\Support\HrefReport;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -17,8 +16,8 @@ class ReportBlockTable extends Component
         private $reportId,
         private $block,
         private $rawTableDataSource,
-        private $rawTableColumns,
-        private $dataHeader,
+        private $headerCols,
+        private $secondHeaderCols,
     ) {}
 
     private function createKeyColumns($columns, $dataIndexToRender = [])
@@ -97,7 +96,7 @@ class ReportBlockTable extends Component
         //Tofix: do not re-query
         $columns = $this->block->getLines()->get()->sortby('order_no');
 
-        $dataIndexToRender = array_column($this->rawTableColumns, 'dataIndex');
+        $dataIndexToRender = array_column($this->headerCols, 'dataIndex');
         $reducedKeyAndCols = $this->createKeyColumns($columns, $dataIndexToRender);
 
         $newTableDataSource = $this->createTableDataSourceForRows($this->rawTableDataSource, $reducedKeyAndCols, $block);
@@ -107,8 +106,8 @@ class ReportBlockTable extends Component
             "name" => $block->name,
             "description" => $block->description,
             "tableDataSource" => $newTableDataSource,
-            "tableColumns" =>  $this->rawTableColumns,
-            "dataHeader" => $this->dataHeader,
+            "tableColumns" =>  $this->headerCols,
+            "secondHeaderCols" => $this->secondHeaderCols,
 
             "showNo" => $block->showNo,
             "tableTrueWidth" => $block->table_true_width,

@@ -41,13 +41,7 @@ trait TraitReportDataAndColumn
 
     public function getAllUniqueFields($collection)
     {
-        return $collection->map(function ($item) {
-            return array_keys(get_object_vars($item));
-        })->reduce(function ($carry, $keys) {
-            return $carry === null ? $keys : array_unique(array_merge($carry, $keys));
-        }, null);
-        // Tofix: test this
-        // return array_unique(array_keys((array)$collection->first()));
+        return array_unique(array_keys((array)$collection->first()));
     }
 
 
@@ -71,27 +65,20 @@ trait TraitReportDataAndColumn
         return $dataHeader;
     }
 
-    public function getKKKColumns($block, $params, $queriedData)
+    public function getDataColumns($block, $queriedData)
     {
-        if (empty($queriedData)) {
-            $queriedData = $this->getDataSQLString($block, $params);
-        }
         $uniqueFields = $this->getAllUniqueFields($queriedData);
-        //To fix getLines()->get()
-        $lines = $block->getLines()->get()->sortby('order_no');
-        $dataHeader = $this->getSecondColumns($block);
-
-        $columns = [];
-        //To fix: check if $processedIndices is needed
-        $processedIndices = [];
+        // config from ddmin
+        $lines = $block->getLines->sortby('order_no');
+        $secondHeaderCols = $this->getSecondColumns($block);
+        $headerCols = [];
         foreach ($lines as $line) {
             $dataIndex = $line->data_index;
             $isActive = $line->is_active;
-            if ($isActive && !in_array($dataIndex, $processedIndices) && in_array($dataIndex, $uniqueFields)) {
-                $processedIndices[] = $dataIndex;
+            if ($isActive && in_array($dataIndex, $uniqueFields)) {
                 $aggFooter = $this->getAggName($line->agg_footer);
                 $title = $this->createIconPosition($line->title ?? $line->name, $line->icon, $line->icon_position);
-                $columns[] = [
+                $headerCols[] = [
                     'title' => $title,
                     'dataIndex' => $dataIndex,
                     'width' => $line->width,
@@ -101,6 +88,6 @@ trait TraitReportDataAndColumn
             }
         }
         if (empty($columns)) $columns = [['dataIndex' => null]];
-        return [$queriedData, $columns, $dataHeader];
+        return [$headerCols, $secondHeaderCols];
     }
 }

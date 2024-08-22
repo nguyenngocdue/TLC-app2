@@ -30,30 +30,17 @@ class ReportBlock extends Component
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
-            //Show sql's error
-            // if (method_exists($queriedData, "getMessage")) {
-            //     dd('<p>' . $queriedData->getMessage());
-            //     return;
-            // };            
             //tim cach kiem tra $queriedData->toArray() ma khong dung ham toArray
-            [$tableDataSource, $rawTableColumns, $dataHeader] =  empty($queriedData->toArray()) ? [[], [], []] : $this->getKKKColumns($block, $currentPrams, $queriedData);
-            // set columns where `queriedData` were empty.
-
-
-            //Tofix: Check if this is necessary
-            // if (empty($rawTableColumns)) {
-            //     $columnInstance = ColumnReport::getInstance($block);
-            //     $rawTableColumns = $columnInstance->defaultColumnsOnEmptyQuery($block);
-            // }
+            [$headerCols, $secondHeaderCols] =  $queriedData->isEmpty() ? [[], []] : $this->getDataColumns($block, $queriedData);
 
             $blockItem = [
                 'colSpan' => $item->col_span,
                 'block' => $item->getBlock,
                 'backgroundBlock' => $item->attachment_background->first(),
                 'queriedData' => $queriedData,
-                'tableDataSource' => $tableDataSource,
-                'rawTableColumns' => $rawTableColumns,
-                'dataHeader' => $dataHeader,
+                'tableDataSource' => $queriedData,
+                'headerCols' => $headerCols,
+                'secondHeaderCols' => $secondHeaderCols,
             ];
             $blockDataSource[] = $blockItem;
         }
