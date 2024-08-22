@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class InitUserSettingReport2
@@ -31,11 +32,10 @@ class InitUserSettingReport2
         foreach ($rpFilters as $filter) {
             if(!$filter->is_active) continue;
             $defaultVal = $filter->default_value;
-            $dataIndex = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
             if ($defaultVal) {
-                $params[$dataIndex] = $filter->is_multiple ? explode(",", $defaultVal) : $defaultVal;
+                $params[$filter->data_index] = $filter->is_multiple ? explode(",", $defaultVal) : $defaultVal;
             } else {
-                $params[$dataIndex] = $defaultVal;
+                $params[$filter->data_index] = $defaultVal;
             }
         }
         return $params;
@@ -59,7 +59,7 @@ class InitUserSettingReport2
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
-        // dump($paramsInConfig, $paramsToUpdate);
+        // dd($paramsInConfig, $paramsInUser, $paramsToUpdate);
         return $paramsToUpdate;
     }
     
@@ -67,9 +67,8 @@ class InitUserSettingReport2
     function updateUserSettingRp($settings) {
         $user = User::find(Auth::id());
         $user->settings = $settings;
-        $user->update();
-        // dump($u);
-        // if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
+        $u = $user->update();
+        if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
     }
 
     public function initParamsUserSettingRp($rpId, $entityType, $rpFilterLinks, $rpFilters){
@@ -84,6 +83,7 @@ class InitUserSettingReport2
             $paramsInUser = $settings[$entityType][$this->reportType2][$storedFilterKey];
             $paramsToUpdate = self::getParamsToUpdate($paramsInConfig, $paramsInUser, true);
             // dd($paramsInConfig, $paramsToUpdate);
+
             if(!empty($paramsToUpdate)) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
                 $settings[$entityType][$this->reportType2][$storedFilterKey] = $paramsToUpdate;
@@ -97,6 +97,7 @@ class InitUserSettingReport2
             $isSave = True;    
         }
         if($isSave) {
+            Log::info($isSave);
             self::updateUserSettingRp($settings);
             $isSave = False;    
         }

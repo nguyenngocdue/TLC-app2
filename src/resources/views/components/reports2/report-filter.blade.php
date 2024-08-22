@@ -37,7 +37,6 @@
                                 @if($filter->is_active)
                                     @php
                                         $text = 'App\Utils\Support\StringReport'::makeTitleFilter($filter->entity_type);
-                                        // $title = ($x = $filter->title) ? $x : ($filter->is_multiple ? Str::plural($text) : Str::singular($text)); 
                                         $title = ($x = $filter->title) ? $x : $text;
                                         $selected = $currentParams[$filter->data_index] ?? [];
                                     @endphp
