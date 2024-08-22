@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\CleanOrphanAttachment\ListAttachmentService;
 use App\Http\Services\CleanOrphanAttachment\ListFileService;
 use App\Http\Services\CleanOrphanAttachment\ListFolderService;
+use App\Models\Erp_item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -29,12 +30,7 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $sql = 'SELECT /* TOP (1000)*/ * 
-        FROM [TLC_PROD].[dbo].[TLC_LLC$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]';
-
-        // $sql = 'SELECT * FROM [TLC_PROD].[dbo].[$ndo$migrations]';
-
-        $tables = DB::connection('sqlsrv')->select($sql);
+        $tables = Erp_item::query()->paginate(100);
 
         $columns = [
             ['dataIndex' => 'No_'],
