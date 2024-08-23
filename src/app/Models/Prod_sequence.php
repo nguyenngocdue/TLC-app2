@@ -8,21 +8,48 @@ use Illuminate\Support\Facades\Log;
 class Prod_sequence extends ModelExtended
 {
     protected $fillable = [
-        "id", "prod_order_id", "prod_routing_link_id",
-        "status", "expected_start_at", "expected_finish_at",
-        "priority", "uom_id",  "owner_id", "closed_at",
-        "sub_project_id", "prod_routing_id", "prod_discipline_id",
-        "total_uom", "uom_input", "erp_prod_order_name",
+        "id",
+        "prod_order_id",
+        "prod_routing_link_id",
+        "status",
+        "expected_start_at",
+        "expected_finish_at",
+        "priority",
+        "uom_id",
+        "owner_id",
+        "closed_at",
+        "sub_project_id",
+        "prod_routing_id",
+        "prod_discipline_id",
+        "total_uom",
+        "uom_input",
+        "erp_prod_order_name",
 
-        "start_date_0", "start_date_1", "start_date",
-        "end_date_0", "end_date_1", "end_date",
-        "uom_agg_0", "uom_agg_1", "uom_agg",
-        "total_hours_0", "total_hours_1", "total_hours",
-        "worker_number_0", "worker_number_1", "worker_number",
-        "total_man_hours_0", "total_man_hours_1", "total_man_hours",
+        "start_date_0",
+        "start_date_1",
+        "start_date",
+        "end_date_0",
+        "end_date_1",
+        "end_date",
+        "uom_agg_0",
+        "uom_agg_1",
+        "uom_agg",
+        "total_hours_0",
+        "total_hours_1",
+        "total_hours",
+        "worker_number_0",
+        "worker_number_1",
+        "worker_number",
+        "total_man_hours_0",
+        "total_man_hours_1",
+        "total_man_hours",
 
-        "total_calendar_days", "no_of_sundays", "no_of_ph_days",
-        "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
+        "total_calendar_days",
+        "no_of_sundays",
+        "no_of_ph_days",
+        "total_days_no_sun_no_ph",
+        "total_days_have_ts",
+        "total_discrepancy_days",
     ];
 
     public static $nameless = true;
@@ -43,6 +70,7 @@ class Prod_sequence extends ModelExtended
 
         "comment_on_hold_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_cancel_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
+        "comment_na_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
 
     //This is temporary design, will finalize when PPR on board.
@@ -125,6 +153,13 @@ class Prod_sequence extends ModelExtended
     }
 
     public function comment_cancel_reason()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+        return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function comment_na_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
