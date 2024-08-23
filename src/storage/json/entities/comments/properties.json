@@ -77,6 +77,12 @@
         "field_name": "comment_inspector_decision",
         "allowed_to_delete": ""
     },
+    "_comment_na_reason": {
+        "name": "_comment_na_reason",
+        "field_id": "314",
+        "field_name": "comment_na_reason",
+        "allowed_to_delete": ""
+    },
     "_comment_on_hold_reason": {
         "name": "_comment_on_hold_reason",
         "field_id": "189",

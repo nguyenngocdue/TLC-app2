@@ -369,6 +369,16 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
+    "_comment_na_reason": {
+        "name": "_comment_na_reason",
+        "column_name": "comment_na_reason",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

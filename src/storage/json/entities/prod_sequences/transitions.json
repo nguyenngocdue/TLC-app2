@@ -17,7 +17,7 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": ""
+        "not_applicable": "true"
     },
     "finished": {
         "name": "finished",
