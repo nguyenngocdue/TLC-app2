@@ -3,11 +3,10 @@
 namespace App\Utils\Support;
 
 use App\Models\Diginet_employee_leave_line;
+use App\Models\Hr_leave_cat;
+use App\Models\Hr_leave_line;
 use App\Models\Hr_timesheet_officer_line;
 use App\Models\Public_holiday;
-use App\Models\Workplace;
-use App\Utils\Constant;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 
 class Calendar
@@ -30,7 +29,9 @@ class Calendar
             case $item instanceof Diginet_employee_leave_line:
                 return $item->la_reason;
             case $item instanceof Hr_timesheet_officer_line:
-                if ($item->sub_task_id) return $item->getSubTask->name ?? '';
+                if ($item->sub_task_id) return $item->getSubTask->name ?? 'Task Name ???';
+            case $item instanceof Hr_leave_line:
+                return $item->getLeaveType->name ?? 'Leave Type ???';
             default:
                 return 'Unknown Type of Item';
         }
@@ -41,6 +42,7 @@ class Calendar
             case $item instanceof Public_holiday:
                 return "Public Holiday";
             case $item instanceof Diginet_employee_leave_line:
+            case $item instanceof Hr_leave_line:
                 return "Leave Application";
             default:
                 return $item->getTask->name ?? '';
@@ -52,8 +54,10 @@ class Calendar
             case $item instanceof Public_holiday:
                 return "PH";
             case $item instanceof Diginet_employee_leave_line:
-                // Log::info($item);
                 return $item->la_type;
+            case $item instanceof Hr_leave_line:
+                $type = Hr_leave_cat::findFromCache($item->leave_cat_id);
+                return $type->leave_code;
             default:
                 return  $item->getSubProject->name ?? '';
         }
@@ -64,6 +68,7 @@ class Calendar
         switch (true) {
             case $item instanceof Public_holiday:
             case $item instanceof Diginet_employee_leave_line:
+            case $item instanceof Hr_leave_line:
                 return;
             default:
                 return $item->getLod->name ?? 'PHASE ???';

@@ -200,7 +200,7 @@
     "_leave_days": {
         "name": "_leave_days",
         "column_name": "leave_days",
-        "column_type": "double(8,2)",
+        "column_type": "double(8,4)",
         "label": "Days",
         "control": "number",
         "align": "",

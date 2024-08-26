@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('hr_leave_lines', function (BlueprintExtended $table) {
             $table->id();
@@ -28,7 +28,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger("leave_type_id")->nullable();
             $table->float("allowed_days")->nullable();
-            $table->float("leave_days")->nullable();
+            $table->double("leave_days", 8, 4)->nullable();
             $table->float("remaining_days")->nullable();
 
             $table->unsignedBigInteger("workplace_id")->nullable();

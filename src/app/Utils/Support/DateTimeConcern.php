@@ -355,19 +355,17 @@ class DateTimeConcern
      * @param int $duration
      * @return string
      */
-    public static function calTimestampEndFromStartTimeAndDuration($startTime, $duration)
+    public static function calcEndTime($startTime, $duration)
     {
         $startDateTime = Carbon::parse($startTime);
         $endDateTime = $startDateTime->addMinute($duration);
         return self::formatTimestampFromDBtoJS($endDateTime->format('Y-m-d H:i:s'));
     }
 
-
-
-    public static function calTimestampEndFromStartTimeAndDurationForPH($item)
+    public static function calcEndTimeForPH($item)
     {
         $startTime = static::formatTimeForPH($item);
-        return static::calTimestampEndFromStartTimeAndDuration($startTime, ($item->ph_hours * 60 + 60));
+        return static::calcEndTime($startTime, ($item->ph_hours * 60 + 60));
     }
 
     /**

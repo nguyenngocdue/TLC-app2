@@ -15,13 +15,14 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('hr_leave_types', function (BlueprintExtended $table) {
             $table->id();
             $table->string("name")->nullable();
+            $table->string("leave_code")->nullable();
             $table->unsignedBigInteger("workplace_id")->nullable();
-            $table->float("leave_days");
+            $table->double("leave_days", 8, 4);
             $table->string("remark")->nullable();
             // $table->orderable();
             // $table->hasStatus();

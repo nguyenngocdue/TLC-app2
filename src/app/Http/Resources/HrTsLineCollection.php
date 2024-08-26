@@ -8,7 +8,6 @@ use App\Models\Hr_timesheet_officer_line;
 use App\Models\Pj_task;
 use App\Models\Public_holiday;
 use App\Models\User;
-use App\Models\Workplace;
 use App\Utils\Support\Calendar;
 use App\Utils\Support\DateTimeConcern;
 use Carbon\Carbon;
@@ -17,6 +16,25 @@ use Illuminate\Support\Facades\Log;
 
 class HrTsLineCollection extends ResourceCollection
 {
+
+    private function getStartEndForNZ($item)
+    {
+        $la_date = $item->leave_date;
+        $number_of_la_day = $item->leave_days;
+
+        $workplace = User::getFirstBy('id', $item->user_id, ["getWorkplace"])->getWorkplace;
+        $startTime = $la_date . " " . $workplace->standard_start_time;
+        $endTime = Carbon::createFromDate($startTime)
+            ->addMinute($number_of_la_day * 8 * 60);
+        if ($number_of_la_day > 0.5)
+            $endTime = $endTime->addMinute($workplace->break_duration_in_min);
+        $endTime = $endTime->format('Y-m-d H:i:s');
+        // Log::info($startTime . " -> " . $endTime);
+        $s = DateTimeConcern::formatTimestampFromDBtoJS($startTime);
+        $e = DateTimeConcern::formatTimestampFromDBtoJS($endTime);
+        $result = [$s, $e];
+        return $result;
+    }
 
     private function getStartEndFromLADayAndWP($item)
     {
@@ -36,10 +54,11 @@ class HrTsLineCollection extends ResourceCollection
             case 0.44:
                 return [$la_date . 'T05:30:00Z', $la_date . 'T09:00:00Z'];
             case 1:
-                $employeeId = $item->employeeid;
-                $user = User::getByEmployeeId($employeeId);
-                $workplaceId = $user->workplace;
-                $workplace = Workplace::find($workplaceId);
+                // $employeeId = $item->employeeid;
+                // $user = User::getByEmployeeId($employeeId);
+                // $workplaceId = $user->workplace;
+                // $workplace = Workplace::find($workplaceId);
+                $workplace = User::getFirstBy('employeeid', $item->employeeid, ["getWorkplace"])->getWorkplace;
                 // Log::info($workplace);
                 $startTime = $workplace->standard_start_time;
                 $endTime = Carbon::createFromDate($workplace->standard_start_time)
@@ -92,41 +111,46 @@ class HrTsLineCollection extends ResourceCollection
                         $item1['id'] = '';
                         $item1['is_ph_or_la'] = true;
                         $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJSForPH($item);
-                        $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDurationForPH($item);
+                        $item1['end'] = DateTimeConcern::calcEndTimeForPH($item);
                         $item1['color'] = '#BA3C36';
-                        break;
+                        return $item1;
                     case ($item instanceof Diginet_employee_leave_line):
                         $values = $this->getStartEndFromLADayAndWP($item);
                         //In case if leave is standard 0.53 or 0.47 or 0.56 or 0.44 or 1
                         if ($values) {
                             $item1['id'] = '';
                             $item1['is_ph_or_la'] = true;
-                            [$start, $end] = $this->getStartEndFromLADayAndWP($item);
+                            [$start, $end] = $values;
                             $item1['start'] = $start;
                             $item1['end'] = $end;
                             $item1['color'] = '#26C560';
-                        } else {
-                            Log::error("Unexpected number_of_la_day: " . $item->number_of_la_day);
+                        } // no need else
+                        return $item1;
+                    case ($item instanceof Hr_leave_line):
+                        $values = $this->getStartEndForNZ($item);
+                        //In case if leave is standard 0.53 or 0.47 or 0.56 or 0.44 or 1
+                        if ($values) {
+                            $item1['id'] = '';
+                            $item1['is_ph_or_la'] = true;
+                            [$start, $end] = $values;
+                            $item1['start'] = $start;
+                            $item1['end'] = $end;
+                            $item1['color'] = '#26C560';
                         }
-                        break;
+                        return $item1;
                     case ($item instanceof Hr_timesheet_officer_line):
                         $item1['id'] = $item->id;
                         $item1['is_ph_or_la'] = false;
                         $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJS($item->start_time);
-                        $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min);
+                        $item1['end'] = DateTimeConcern::calcEndTime($item->start_time, $item->duration_in_min);
                         $item1['color'] = Calendar::getBkColorByWorkModeId($item->work_mode_id);
                         $item1['title_default'] = Pj_task::findOrFail($item->task_id)->name;
-                        Log::info($item1);
-                        break;
-                    case ($item instanceof Hr_leave_line):
-                        Log::info($item);
-                        break;
+                        // Log::info($item1);
+                        return $item1;
                     default:
                         Log::info("Unexpected class: " . get_class($item));
-                        break;
+                        return $item1;
                 }
-
-                return $item1;
             }),
         ];
     }

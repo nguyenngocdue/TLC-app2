@@ -155,6 +155,13 @@ abstract class ModelExtended extends Model
         return static::getCollectionCache(static::class, $id, $with);
     }
 
+    public static function getFirstBy($columnName, $value, $with = [])
+    {
+        $all = static::query()->where($columnName, $value);
+        if (count($with) > 0) foreach ($with as $w) $all = $all->with($w);
+        return $all->first();
+    }
+
     private static $singletonMorphMany = [];
 
     public static function getCollectionMorphMany($ids, $fieldNameCategory, $modelName, $keyType, $keyId, $useTableField)
