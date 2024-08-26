@@ -22,8 +22,8 @@ class HrTsLineCollection extends ResourceCollection
         $HALF_DAY_AFTERNOON_ID = 3;
         $la_date = $item->leave_date;
         $number_of_la_day = $item->leave_days;
-        Log::info($la_date . " + " . $number_of_la_day);
-        Log::info($number_of_la_day * 8 * 60);
+        // Log::info($la_date . " + " . $number_of_la_day);
+        // Log::info($number_of_la_day * 8 * 60);
 
         $workplace = User::getFirstBy('id', $item->user_id, ["getWorkplace"])->getWorkplace;
         $startTimeStr = $la_date . " " . $workplace->standard_start_time;

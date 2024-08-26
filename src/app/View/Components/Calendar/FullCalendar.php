@@ -66,7 +66,7 @@ class FullCalendar extends Component
                 return ['11:30:00', '12:00:00'];
                 break;
             case 5:
-                return ['1:00:00', '1:30:00'];
+                return ['12:00:00', '12:30:00'];
                 break;
             default:
                 break;
