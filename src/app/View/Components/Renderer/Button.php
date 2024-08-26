@@ -32,6 +32,7 @@ class Button extends Component
         private $target = '_self',
         private $icon = null,
         private $disabled = false,
+        private $badge = null,
     ) {
         // dd($this->type);
         // dump($this->size);
@@ -139,6 +140,7 @@ class Button extends Component
             'target' => $this->target,
             'icon' => $this->icon,
             'disabled' => $this->disabled,
+            'badge' => $this->badge,
         ]);
     }
 }
