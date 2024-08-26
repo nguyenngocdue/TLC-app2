@@ -43,13 +43,15 @@ class TimeSheetOfficerController extends TimesheetController
         $x = (new Diginet_employee_leave_line())->getLinesByEmployeeIdAndRange($employeeId);
         $x = $x->filter(fn($y) => $y->la_type != 'WFH');
 
-        // //For NZ staff:
-        // $y = Hr_leave_line::query()
-        //     ->where("user_id", $ownerId)
-        //     ->get();
-        // // Log::info($x);
-        // Log::info($y);
-        return $x;
+        //For NZ staff:
+        $y = Hr_leave_line::query()
+            ->where("user_id", $ownerId)
+            ->with("getLeaveType")
+            ->get();
+
+        $moreLines = $x;
+        foreach ($y as $z) $moreLines[] = $z;
+        return $moreLines;
     }
 
     public function show(Request $request, $id)

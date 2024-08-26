@@ -75,7 +75,7 @@ function callApiGetEvents(id, url) {
                     hiddenDays: arrHidden,
                     eventClick: function (info) {
                         var extendedProps = info.event._def.extendedProps
-                        if (extendedProps.public_holiday == true) return
+                        if (extendedProps.is_ph_or_la == true) return
                         if (!readOnly) {
                             //indentify location modal
                             var { clientX, clientY } = info.jsEvent
@@ -119,7 +119,7 @@ function callApiGetEvents(id, url) {
                     },
                     eventDidMount: function (info) {
                         var extendedProps = info.event._def.extendedProps
-                        if (extendedProps.public_holiday == true) return
+                        if (extendedProps.is_ph_or_la == true) return
                         if (!readOnly) {
                             //handle click mouse right
                             info.el.addEventListener('contextmenu', function (e) {
@@ -210,7 +210,11 @@ function callApiGetEvents(id, url) {
                         <div class="event-title w-full" title="${title}">
                             <div class="flex items-baseline justify-between" title="${title}">
                                 <div class="" style="font-size:0.65rem">${timeText}</div>
-                                ${tagSubProject}
+                                    <div class='flex items-end justify-between'>
+                                        <span  class="bg-green-200 text-green-800 dark:bg-green-800 dark:text-green-200 leading-none rounded whitespace-nowrap font-semibold text-xs-vw text-xs mx-0.5 px-2 py-1 leading-7 ">
+                                            ${tagSubProject}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div class="font-bold">
                                 ${eventTitle}

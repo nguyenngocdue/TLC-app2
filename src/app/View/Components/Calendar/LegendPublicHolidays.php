@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Calendar;
 
+use App\Http\Resources\HolidayCollection;
 use App\Models\Workplace;
 use App\Utils\Constant;
 use App\Utils\GridCss;
@@ -15,8 +16,7 @@ class LegendPublicHolidays extends Component
      *
      * @return void
      */
-    public function __construct(
-    )
+    public function __construct()
     {
         //
     }
@@ -28,18 +28,18 @@ class LegendPublicHolidays extends Component
      */
     public function render()
     {
-        $workplaces = Workplace::all()->pluck('id','name')->toArray();
-        $workplaces['Workplaces'] = [1,2,3];
+        $workplaces = Workplace::all()->pluck('id', 'name')->toArray();
+        $workplaces['Workplaces'] = [1, 2, 3];
         $match = [];
-        foreach($workplaces as $key => $value){
+        foreach ($workplaces as $key => $value) {
             $match[] = [
                 "name" => $key,
-                "color" => Calendar::getBackGroundColorByWorkplaceId($value,true)
+                "color" => HolidayCollection::getBackGroundColorByWorkplaceId($value, true)
             ];
         }
         $count = count($match);
         $gridCss = GridCss::getGridCss($count);
-        return view('components.calendar.legend-public-holidays',[
+        return view('components.calendar.legend-public-holidays', [
             'dataSource' => $match,
             'title' => "Public Holidays",
             'gridCss' => $gridCss,

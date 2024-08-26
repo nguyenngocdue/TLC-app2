@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use App\Models\Diginet_employee_leave_line;
+use App\Models\Hr_leave_line;
+use App\Models\Hr_timesheet_officer_line;
 use App\Models\Pj_task;
 use App\Models\Public_holiday;
 use App\Models\User;
@@ -48,6 +50,9 @@ class HrTsLineCollection extends ResourceCollection
                 // Log::info($result);
                 return $result;
                 // return ['2024-05-03T01:00:00Z', '2024-05-03T02:00:00Z'];
+            default:
+                Log::info("Unexpected number_of_la_day: $number_of_la_day");
+                return null;
         }
         return null;
     }
@@ -65,8 +70,8 @@ class HrTsLineCollection extends ResourceCollection
                 $item1 =  [
                     'title' => Calendar::renderTitle($item),
                     'sub_title' => Calendar::renderSubTitle($item),
-                    'tag_sub_project' => Calendar::renderTagSubProject($item) ?? '',
-                    'tag_phase' => Calendar::renderTagPhase($item) ?? '',
+                    'tag_sub_project' => Calendar::renderSubProject($item) ?? '',
+                    'tag_phase' => Calendar::renderPhase($item) ?? '',
                     // 'name_project' => Calendar::renderNameProject($item) ?? '',
                     'user_id' => $item->user_id ?? '',
                     'project_id' => $item->project_id ?? '',
@@ -82,30 +87,43 @@ class HrTsLineCollection extends ResourceCollection
                     'status' => $item->status ?? '',
                 ];
 
-                if ($item instanceof Public_holiday) {
-                    $item1['id'] = '';
-                    $item1['public_holiday'] = true;
-                    $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJSForPH($item);
-                    $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDurationForPH($item);
-                    $item1['color'] = '#BA3C36';
-                } elseif ($item instanceof Diginet_employee_leave_line) {
-                    $values = $this->getStartEndFromLADayAndWP($item);
-                    //In case if leave is standard 0.53 or 0.47 or 0.56 or 0.44 or 1
-                    if ($values) {
+                switch (true) {
+                    case ($item instanceof Public_holiday):
                         $item1['id'] = '';
-                        $item1['public_holiday'] = true;
-                        [$start, $end] = $this->getStartEndFromLADayAndWP($item);
-                        $item1['start'] = $start;
-                        $item1['end'] = $end;
-                        $item1['color'] = '#26C560';
-                    }
-                } else {
-                    $item1['id'] = $item->id;
-                    $item1['public_holiday'] = false;
-                    $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJS($item->start_time);
-                    $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min);
-                    $item1['color'] = Calendar::setColorByWorkModeId($item->work_mode_id);
-                    $item1['title_default'] = Pj_task::findOrFail($item->task_id)->name;
+                        $item1['is_ph_or_la'] = true;
+                        $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJSForPH($item);
+                        $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDurationForPH($item);
+                        $item1['color'] = '#BA3C36';
+                        break;
+                    case ($item instanceof Diginet_employee_leave_line):
+                        $values = $this->getStartEndFromLADayAndWP($item);
+                        //In case if leave is standard 0.53 or 0.47 or 0.56 or 0.44 or 1
+                        if ($values) {
+                            $item1['id'] = '';
+                            $item1['is_ph_or_la'] = true;
+                            [$start, $end] = $this->getStartEndFromLADayAndWP($item);
+                            $item1['start'] = $start;
+                            $item1['end'] = $end;
+                            $item1['color'] = '#26C560';
+                        } else {
+                            Log::error("Unexpected number_of_la_day: " . $item->number_of_la_day);
+                        }
+                        break;
+                    case ($item instanceof Hr_timesheet_officer_line):
+                        $item1['id'] = $item->id;
+                        $item1['is_ph_or_la'] = false;
+                        $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJS($item->start_time);
+                        $item1['end'] = DateTimeConcern::calTimestampEndFromStartTimeAndDuration($item->start_time, $item->duration_in_min);
+                        $item1['color'] = Calendar::getBkColorByWorkModeId($item->work_mode_id);
+                        $item1['title_default'] = Pj_task::findOrFail($item->task_id)->name;
+                        Log::info($item1);
+                        break;
+                    case ($item instanceof Hr_leave_line):
+                        Log::info($item);
+                        break;
+                    default:
+                        Log::info("Unexpected class: " . get_class($item));
+                        break;
                 }
 
                 return $item1;
