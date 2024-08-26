@@ -9,8 +9,10 @@
             typeToLoadListener="hr_timesheet_line" 
             readOnly="{{$readOnly}}" 
             />
-        <div class="border rounded p-1 mt-1 hidden">
-            <x-renderer.button click="toggleModal('modal-request-new-task')">Request to add a new Task</x-renderer.button>
+        <div class="flex border rounded p-1 mt-1 hidden justify-center">
+            <x-renderer.button click="toggleModal('modal-request-new-task')" badge="BETA" type="info">
+                Request to add a new Task
+            </x-renderer.button>            
             <x-calendar.modal-request-new-task modalId="modal-request-new-task" />
         </div>
     </div>
