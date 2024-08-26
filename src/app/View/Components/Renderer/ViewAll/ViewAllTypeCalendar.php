@@ -5,6 +5,7 @@ namespace App\View\Components\Renderer\ViewAll;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Diginet_employee_leave_line;
+use App\Models\Hr_leave_line;
 use App\Models\Pj_task;
 use App\Models\Project;
 use App\Models\Public_holiday;
@@ -43,6 +44,21 @@ class ViewAllTypeCalendar extends Component
                 'year' => Carbon::parse($line->la_date)->year,
             ];
         }
+
+        $moreLeaveLines = Hr_leave_line::query()
+            ->where('user_id', $userCurrentCalendar->id)
+            ->get();
+        // dump($moreLeaveLines);
+        foreach ($moreLeaveLines as $line) {
+            $leaveDates[] = [
+                'date' => Carbon::parse($line->leave_date)->day,
+                'month' => Carbon::parse($line->leave_date)->month,
+                'year' => Carbon::parse($line->leave_date)->year,
+            ];
+        }
+
+        // Log::info($leaveDates);
+
         return $leaveDates;
     }
 

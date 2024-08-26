@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1\HR;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Http\Resources\HrTsLineCollection;
 use App\Models\Diginet_employee_leave_line;
+use App\Models\Hr_leave_line;
 use App\Models\Hr_timesheet_officer;
 use App\Models\Public_holiday;
 use App\Models\User;
@@ -37,8 +38,17 @@ class TimeSheetOfficerController extends TimesheetController
         $user = User::findFromCache($ownerId);
         // Log::info($user);
         $employeeId = $user->employeeid;
+
+        //For VIETNAM staff:
         $x = (new Diginet_employee_leave_line())->getLinesByEmployeeIdAndRange($employeeId);
         $x = $x->filter(fn($y) => $y->la_type != 'WFH');
+
+        // //For NZ staff:
+        // $y = Hr_leave_line::query()
+        //     ->where("user_id", $ownerId)
+        //     ->get();
+        // // Log::info($x);
+        // Log::info($y);
         return $x;
     }
 
