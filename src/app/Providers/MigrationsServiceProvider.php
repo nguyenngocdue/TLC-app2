@@ -43,6 +43,7 @@ class MigrationsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($path . "entities/it");
         $this->loadMigrationsFrom($path . "entities/act");
         $this->loadMigrationsFrom($path . "entities/kanban");
+        $this->loadMigrationsFrom($path . "entities/fin");
         // $this->loadMigrationsFrom($path . "dataWarehouses");
         $this->loadMigrationsFrom($path . "cleanOrphanAttachments");
 

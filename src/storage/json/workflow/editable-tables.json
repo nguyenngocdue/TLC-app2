@@ -169,6 +169,16 @@
         "group_datasource": null,
         "foreign_key": null
     },
+    "fin_expense_claims_01": {
+        "name": "fin_expense_claims_01",
+        "entity-type": "fin_expense_claims",
+        "editable-table": "fin_claimable_items",
+        "button_add_a_new_line": "true",
+        "item_datasource": null,
+        "eloquent_function_name": null,
+        "group_datasource": null,
+        "foreign_key": null
+    },
     "ghg_metric_type_1s_01": {
         "name": "ghg_metric_type_1s_01",
         "entity-type": "ghg_metric_type_1s",

@@ -10,11 +10,16 @@ class Attachment extends ModelExtended
     use HasProperties;
 
     protected $fillable = [
-        "url_folder", "url_thumbnail",
-        "extension", "mime_type",
-        "url_media", "filename",
-        "category", "sub_category",
-        'object_id', 'object_type',
+        "url_folder",
+        "url_thumbnail",
+        "extension",
+        "mime_type",
+        "url_media",
+        "filename",
+        "category",
+        "sub_category",
+        'object_id',
+        'object_type',
         "owner_id",
     ];
     public static $nameless = true;

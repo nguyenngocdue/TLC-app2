@@ -817,6 +817,36 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "fin_claimable_item": {
+        "name": "fin_claimable_item",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "finance",
+        "title": "Claimable Items",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
+    "fin_expense_claim": {
+        "name": "fin_expense_claim",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "finance",
+        "title": "Expense Claims",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null
+    },
     "ghg_cat": {
         "name": "ghg_cat",
         "package_tab": "application",

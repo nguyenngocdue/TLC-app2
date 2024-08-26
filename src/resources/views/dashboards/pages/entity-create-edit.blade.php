@@ -2,6 +2,7 @@
 @php
 $user = auth()->user();
 $editType = Str::plural($type);
+if($action === "edit" && !isset($values->id)) abort(404, "This document does not exist.");
 $id = ($action === "edit") ? $values->id : "";
 $status = $status ?? $values->status ?? null;
 $ownerId = $values->owner_id ?? null;
