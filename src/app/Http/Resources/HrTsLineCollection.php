@@ -19,13 +19,27 @@ class HrTsLineCollection extends ResourceCollection
 
     private function getStartEndForNZ($item)
     {
+        $HALF_DAY_AFTERNOON_ID = 3;
         $la_date = $item->leave_date;
         $number_of_la_day = $item->leave_days;
+        Log::info($la_date . " + " . $number_of_la_day);
+        Log::info($number_of_la_day * 8 * 60);
 
         $workplace = User::getFirstBy('id', $item->user_id, ["getWorkplace"])->getWorkplace;
-        $startTime = $la_date . " " . $workplace->standard_start_time;
-        $endTime = Carbon::createFromDate($startTime)
-            ->addMinute($number_of_la_day * 8 * 60);
+        $startTimeStr = $la_date . " " . $workplace->standard_start_time;
+        $startTime = Carbon::createFromFormat('Y-m-d H:i:s', $startTimeStr, 'UTC')
+            ->subDays(1);
+        if ($item->leave_type_id == $HALF_DAY_AFTERNOON_ID) {
+            $startTime = $startTime->addHour(5);
+        }
+
+        $endTime = Carbon::createFromFormat('Y-m-d H:i:s', $startTimeStr, 'UTC')
+            ->addMinute($number_of_la_day * 8 * 60)
+            ->subDays(1);
+        // ->addHour(4);
+        if ($item->leave_type_id == $HALF_DAY_AFTERNOON_ID) {
+            $endTime = $endTime->addHour(5);
+        }
         if ($number_of_la_day > 0.5)
             $endTime = $endTime->addMinute($workplace->break_duration_in_min);
         $endTime = $endTime->format('Y-m-d H:i:s');
