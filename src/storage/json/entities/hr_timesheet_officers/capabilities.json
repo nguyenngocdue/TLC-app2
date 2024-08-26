@@ -170,6 +170,15 @@
         "rejected": "true",
         "approved": ""
     },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "",
+        "rejected": "true",
+        "approved": ""
+    },
     "dir": {
         "name": "dir",
         "name_rendered": "",
