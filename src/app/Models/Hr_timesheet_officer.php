@@ -18,17 +18,10 @@ class Hr_timesheet_officer extends ModelExtended
 
     public static $eloquentParams = [
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
-        // 'getUserTeam' => ['belongsTo', User_team_ot::class, 'team_id'],
         "getHrTsLines" => ["hasMany", Hr_timesheet_officer_line::class, "hr_timesheet_officer_id"],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
-
-    // public function getUserTeam()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
 
     public function getAssignee1()
     {

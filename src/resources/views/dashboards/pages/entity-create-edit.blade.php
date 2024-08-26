@@ -13,9 +13,8 @@ $propsOfMainPage = App\Utils\Support\WorkflowFields::parseFields($props, $values
 $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 
 $formWidth = "md:w-3/4";
-if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])){
-$formWidth = "w-full md:w-3/4 lg:w-1/2";
-}
+if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])) $formWidth = "w-full md:w-3/4 lg:w-1/2";
+
 @endphp
 
 @section('topTitle', $topTitle)
