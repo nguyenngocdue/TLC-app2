@@ -382,18 +382,18 @@ class UpdateUserSettings extends Controller
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
         $filters = $this->getFilterReport2($inputValue);
-    
+        
         $rpFilterLinks = Rp_report::find($rpId)->getDeep()->getRpFilterLinks;
         $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
         // dd($storedFilterKey);
-    
+        
         $keys = [$entityType, $reportType2, $storedFilterKey];
         $paramToUpdate = [];
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInUser = &$settings[$entityType][$reportType2][$storedFilterKey];
             foreach ($filters as $key => $value) {
                 $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : $value;
-            }
+            }            
             $paramToUpdate = $paramsInUser;
         } else {
             $paramToUpdate = $filters;

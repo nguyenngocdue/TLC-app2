@@ -16,18 +16,23 @@
         <div class="grid grid-cols-2 border-b">
             <!-- Left column: From-To fields -->
             <div class="pr-4 border-r border-gray-300">
-                <form method="POST" action="{{ url('/your-action-url') }}">
-                    @csrf <!-- Add CSRF token for Laravel form submission -->
+                <form action="{{$routeFilter}}" method="POST">
+                    @csrf
                     <div class="mb-4">
                         <h2 class="font-semibold text-lg mb-2">Absolute time range</h2>
                         <div class="space-y-2">
                             <div class="relative">
                                 <label class="block text-sm font-medium text-gray-700">From</label>
-                                <input type="text" name="fromDate" id="fromDate" placeholder="now/y" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <input type="hidden" name='action' value="updateReport2">
+                                <input type="hidden" name='entity_type' value="{{$entityType}}">
+                                <input type="hidden" name='entity_type2' value="{{$reportType2}}">
+                                <input type="hidden" name='report_id' value="{{$rp->id}}">
+                                <input type="hidden" name='form_type' value="absolute_time_range">
+                                <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="now/y" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
                             <div class="relative">
                                 <label class="block text-sm font-medium text-gray-700">To</label>
-                                <input type="text" name="toDate" id="toDate" placeholder="now/y" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <input type="text" name="to_date" value="{{$toDate}}" id="to_date" placeholder="now/y" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             </div>
                         </div>
                         <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Apply time range</button>
@@ -69,16 +74,16 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         // Initialize Flatpickr for the 'From' and 'To' date inputs
-        flatpickr("#fromDate", {
-            dateFormat: "Y-m-d",
+        var fromDatePicker =  flatpickr("#from_date", {
+            dateFormat: "Y-m-d 00::00::00",
             allowInput: true,
             onChange: function(selectedDates, dateStr, instance) {
                 // Optional: handle the selected date
             }
         });
 
-        flatpickr("#toDate", {
-            dateFormat: "Y-m-d",
+        var toDatePicker = flatpickr("#to_date", {
+            dateFormat: "Y-m-d 23:59:59",
             allowInput: true,
             onChange: function(selectedDates, dateStr, instance) {
                 // Optional: handle the selected date
