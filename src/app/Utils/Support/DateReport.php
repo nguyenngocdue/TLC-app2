@@ -290,4 +290,25 @@ class DateReport
 
         return $result;
     }
+    public static function convertOffsetToNumber($utcOffset) {
+        // Remove the '+' or '-' sign and split the hours and minutes
+        $sign = substr($utcOffset, 0, 1);
+        $parts = explode(':', substr($utcOffset, 1));
+    
+        $hours = (int) $parts[0];
+        $minutes = (int) $parts[1];
+    
+        // Convert minutes to a fraction of an hour
+        $decimalMinutes = $minutes / 60;
+    
+        // Combine hours and fractional hours
+        $timeAsNumber = $hours + $decimalMinutes;
+    
+        // Apply the sign to the final number
+        if ($sign === '-') {
+            $timeAsNumber *= -1;
+        }
+    
+        return $timeAsNumber;
+    }
 }
