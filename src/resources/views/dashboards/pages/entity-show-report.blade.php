@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="flex justify-end mr-5 mt-4">
-        <x-reports2.report-absolute-range-time />
+        <x-reports2.report-absolute-time-range  :report="$report"/>
     </div>
     <x-reports2.report-filter :paramsUrl="$paramsUrl" :report="$report" />
     <div class="p-2 bg-body">

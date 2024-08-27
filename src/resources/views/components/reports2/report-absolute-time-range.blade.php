@@ -4,7 +4,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v18h16.5V3H3.75zm0 0L12 12m0 0l8.25-9m-8.25 9L3.75 21" />
         </svg>
-        <span class="ml-2">This year</span>
+        <span class="ml-2">Time Range</span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 ml-auto">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 15l-7.5 7.5L4.5 15" />
         </svg>
