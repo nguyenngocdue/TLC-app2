@@ -46,6 +46,27 @@ class ReportAbsoluteTimeRange extends Component
                 $fromDate->modify('first day of January last year')->setTime(0, 0, 0); // Start of last year
                 $toDate->modify('last day of December last year')->setTime(23, 59, 59); // End of last year
                 break;
+            case 'last_5_minutes':
+                $fromDate->modify('-5 minutes'); // 5 minutes ago
+                break;
+            case 'last_15_minutes':
+                $fromDate->modify('-15 minutes'); // 15 minutes ago
+                break;
+            case 'last_30_minutes':
+                $fromDate->modify('-30 minutes'); // 30 minutes ago
+                break;
+            case 'last_1_hour':
+                $fromDate->modify('-1 hour'); // 1 hour ago
+                break;
+            case 'last_3_hours':
+                $fromDate->modify('-3 hours'); // 3 hours ago
+                break;
+            case 'last_6_hours':
+                $fromDate->modify('-6 hours'); // 6 hours ago
+                break;
+            case 'last_12_hours':
+                $fromDate->modify('-12 hours'); // 12 hours ago
+                break;
             default:
                 throw new Exception('Invalid timeframe specified.');
         }
@@ -56,10 +77,10 @@ class ReportAbsoluteTimeRange extends Component
         ];
     }
     
-
-    private function createProSets(){
-        $currentParams = $this->currentParamsReport();
     
+
+    private function createProSets() {
+        $currentParams = $this->currentParamsReport();
         $browserTime = $currentParams['browser_time'];
         $url = "http://worldtimeapi.org/api/timezone/" . $browserTime;
         $response = file_get_contents($url);
@@ -67,22 +88,31 @@ class ReportAbsoluteTimeRange extends Component
         $utcOffset = $data['utc_offset'];
         $timeAsNumber = DateReport::convertOffsetToNumber($utcOffset);
     
-        $toDate = new DateTime(); // Current date and time
-        $fromDate = clone $toDate; // Clone to_date to modify for from_date
-    
-        // Adjust to_date and from_date by the timeAsNumber
+        // Current date and time, adjusted by the timeAsNumber
+        $toDate = new DateTime();
         $toDate->modify("{$timeAsNumber} hours");
-        $fromDate->modify("{$timeAsNumber} hours");
-        
-        return [
-            'today' => $this->generateDateRange('today', $toDate, $fromDate),
-            'yesterday' => $this->generateDateRange('yesterday', $toDate, $fromDate),
-            'last_2_days' => $this->generateDateRange('last_2_days', $toDate, $fromDate),
-            'last_week' => $this->generateDateRange('last_week', $toDate, $fromDate),
-            'last_month' => $this->generateDateRange('last_month', $toDate, $fromDate),
-            'last_year' => $this->generateDateRange('last_year', $toDate, $fromDate),
+    
+        // Cloning fromDate from toDate for each range generation
+        $proSets = [
+            'today' => $this->generateDateRange('today', clone $toDate, clone $toDate),
+            'yesterday' => $this->generateDateRange('yesterday', clone $toDate, clone $toDate),
+            'last_2_days' => $this->generateDateRange('last_2_days', clone $toDate, clone $toDate),
+            'last_week' => $this->generateDateRange('last_week', clone $toDate, clone $toDate),
+            'last_month' => $this->generateDateRange('last_month', clone $toDate, clone $toDate),
+            'last_year' => $this->generateDateRange('last_year', clone $toDate, clone $toDate),
+            'last_5_minutes' => $this->generateDateRange('last_5_minutes', clone $toDate, clone $toDate),
+            'last_15_minutes' => $this->generateDateRange('last_15_minutes', clone $toDate, clone $toDate),
+            'last_30_minutes' => $this->generateDateRange('last_30_minutes', clone $toDate, clone $toDate),
+            'last_1_hour' => $this->generateDateRange('last_1_hour', clone $toDate, clone $toDate),
+            'last_3_hours' => $this->generateDateRange('last_3_hours', clone $toDate, clone $toDate),
+            'last_6_hours' => $this->generateDateRange('last_6_hours', clone $toDate, clone $toDate),
+            'last_12_hours' => $this->generateDateRange('last_12_hours', clone $toDate, clone $toDate),
         ];
+    
+        // dd($proSets);
+        return $proSets;
     }
+        
 
     private function getTimeZone(){
         $url = "http://worldtimeapi.org/api/timezone";
@@ -122,9 +152,9 @@ class ReportAbsoluteTimeRange extends Component
             'fromDate' => $currentParams['from_date'] ?? null,
             'toDate' => $currentParams['to_date'] ?? null,
             'proSets' => $proSets,
-            'proSetTitle' => $currentParams['pro_set_title'] ?? 'Time Range',
+            'proSetTitle' => $currentParams['pro_set_title'],
             'timezoneData' => $timezoneData,
-            'browserTime' => $currentParams['browser_time'] ?? 'Asia/Bangkok',
+            'browserTime' => $currentParams['browser_time'],
         ]
     );
     }

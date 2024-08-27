@@ -49,7 +49,7 @@
 
             <!-- Right column: Quick range selection dropdown -->
             <form action="{{$routeFilter}}" method="POST" id="quickRangeForm">
-                @csrfRepor
+                @csrf
                 <div class="pl-4 pb-2">
                     <input type="text" placeholder="Search quick ranges" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="quickRangeInput">
                     <div class="mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-80 overflow-y-scroll z-10" id="quickRangeDropdown">
@@ -59,12 +59,12 @@
                         <input type="hidden" name="entity_type2" value="{{$reportType2}}">
                         <input type="hidden" name="report_id" value="{{$rp->id}}">
                         <input type="hidden" id="pro_set_title" name="pro_set_title" value="Time Range">
-                        <ul class="py-1 text-gray-700" id="quickRangeList">
+                       <ul class="py-1 text-gray-700" id="quickRangeList">
                             <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
                                 data-value="{{ $proSets['today']['from_date'] }} / {{ $proSets['today']['to_date'] }}">
                                 Today
                             </li>
-                           <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
                                 data-value="{{ $proSets['yesterday']['from_date'] }} / {{ $proSets['yesterday']['to_date'] }}">
                                 Yesterday
                             </li>
@@ -83,6 +83,35 @@
                             <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
                                 data-value="{{ $proSets['last_year']['from_date'] }} / {{ $proSets['last_year']['to_date'] }}">
                                 Last year
+                            </li>
+                            <!-- New time frames -->
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_5_minutes']['from_date'] }} / {{ $proSets['last_5_minutes']['to_date'] }}">
+                                Last 5 minutes
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_15_minutes']['from_date'] }} / {{ $proSets['last_15_minutes']['to_date'] }}">
+                                Last 15 minutes
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_30_minutes']['from_date'] }} / {{ $proSets['last_30_minutes']['to_date'] }}">
+                                Last 30 minutes
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_1_hour']['from_date'] }} / {{ $proSets['last_1_hour']['to_date'] }}">
+                                Last 1 hour
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_3_hours']['from_date'] }} / {{ $proSets['last_3_hours']['to_date'] }}">
+                                Last 3 hours
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_6_hours']['from_date'] }} / {{ $proSets['last_6_hours']['to_date'] }}">
+                                Last 6 hours
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_12_hours']['from_date'] }} / {{ $proSets['last_12_hours']['to_date'] }}">
+                                Last 12 hours
                             </li>
                         </ul>
                     </div>
@@ -108,7 +137,7 @@
                 </div>
 
 
-                <form id="myFormBrowserTime" action="{{$routeFilter}}"  method="POST">
+                <form action="{{$routeFilter}}"  method="POST">
                     @csrf
                     <input type="hidden" name="form_type" value="updateBrowserTime">
                     <input type="hidden" name="action" value="updateReport2">
@@ -135,14 +164,6 @@
 </div>
 
 
-
-
-<script type="text/javascript">
-    function submitForm() {
-        var form = document.getElementById('myFormBrowserTime'); // Thay 'myForm' bằng ID thực của form
-        form.submit();
-    }
-</script>
 
 <script type="text/javascript">
     $('#timezone-select').select2({
