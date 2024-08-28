@@ -39,6 +39,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                         tb2.erp_routing_link_name,
                         tb3.prod_sequence_id,
                         tb2.prod_discipline_id,
+                        -- prs.prod_discipline_id AS prod_discipline_id_line,
                         tb3.prod_sequence_status,
                         NULL AS man_power,
                         NULL AS hours,
@@ -100,6 +101,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                                     FROM prod_sequences pse ) tb3 ON tb1.prod_order_id = tb3.prod_order_id 
                                                             AND tb2.prod_routing_link_id = tb3.prod_routing_link_id
                                                             AND tb2.prod_routing_id = tb3.prod_routing_id
+                            # LEFT JOIN prod_runs prs ON prs.prod_sequence_id = tb3.prod_sequence_id
                             WHERE tb3.prod_sequence_id IS NULL
                                 AND tb1.prod_order_id IS NOT NULL";
         if ($sts = $valOfParams['status']) $sql .= "\n AND tb3.prod_sequence_status IN ( $sts )";
@@ -120,6 +122,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
                     erl.name AS erp_routing_link_name,
                     ps.id AS prod_sequence_id,
                     ps.prod_discipline_id,
+                    # pr.prod_discipline_id AS prod_discipline_id_line,
                     ps.status AS prod_sequence_status,
                     NULL AS man_power,
                     NULL AS hours,

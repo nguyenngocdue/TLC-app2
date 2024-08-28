@@ -7,8 +7,10 @@ use App\Models\Rp_report;
 use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Report;
+use App\View\Components\Reports2\TraitReportFilter;
 use App\View\Components\Reports2\TransferUserSettingReport2;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -20,6 +22,7 @@ use Illuminate\Support\Facades\Session;
 class UpdateUserSettings extends Controller
 {
     use TraitEntityAdvancedFilter;
+
     private function updatePerPage($request, $settings)
     {
         $perPage = $request->input('per_page');
@@ -374,6 +377,17 @@ class UpdateUserSettings extends Controller
         return $params;
     }
 
+    private function updateProSetFilter($inputValue){
+        if(isset($inputValue['pro_set_1'])){
+            $items = explode('/', $inputValue['pro_set_1']);
+            [$fromDate, $toDate] = $items;
+            $inputValue['from_date'] = trim($fromDate);
+            $inputValue['to_date'] = trim($toDate);
+            unset($inputValue['pro_set_1']);
+        }
+        return $inputValue;
+    }
+
 
     private function updateReport2($request, $settings)
     {
@@ -381,19 +395,26 @@ class UpdateUserSettings extends Controller
         $entityType = $inputValue['entity_type'];
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
+
+        
+        // when select "Search Quick Ranges"
+        if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateProSetFilter"){
+           $inputValue = $this->updateProSetFilter($inputValue);
+        }
+
         $filters = $this->getFilterReport2($inputValue);
-    
+        
         $rpFilterLinks = Rp_report::find($rpId)->getDeep()->getRpFilterLinks;
         $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
-        // dd($storedFilterKey);
-    
+        
+        
         $keys = [$entityType, $reportType2, $storedFilterKey];
         $paramToUpdate = [];
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInUser = &$settings[$entityType][$reportType2][$storedFilterKey];
             foreach ($filters as $key => $value) {
                 $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : $value;
-            }
+            }            
             $paramToUpdate = $paramsInUser;
         } else {
             $paramToUpdate = $filters;

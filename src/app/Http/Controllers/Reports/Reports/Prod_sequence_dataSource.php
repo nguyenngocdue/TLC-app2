@@ -41,6 +41,8 @@ class Prod_sequence_dataSource extends Controller
                     prde.erp_routing_link_id AS erp_routing_link_id,
                     pd.id AS prod_discipline_id,
                     pd.name AS prod_discipline_name,
+                    pru.prod_discipline_id AS prod_discipline_line_id,
+                    (SELECT pdisc.name FROM prod_disciplines pdisc WHERE pru.prod_discipline_id =  pdisc.id) AS prod_discipline_line_name,
                     #ps.total_man_hours AS total_man_hours,
                     ps.id AS prod_sequence_id,
                     ps.erp_prod_order_name AS erp_prod_order_name,

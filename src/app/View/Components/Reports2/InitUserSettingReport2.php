@@ -38,6 +38,7 @@ class InitUserSettingReport2
                 $params[$filter->data_index] = $defaultVal;
             }
         }
+        // $params['browser_time'] = 'Asia/Bangkok';
         return $params;
     }
     
@@ -73,8 +74,9 @@ class InitUserSettingReport2
 
     public function initParamsUserSettingRp($rpId, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
+        
         $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
-
+        
         // create default values in the database -> in case that the reports were previously saved in user_setting
         $keys = [$entityType, $this->reportType2, $storedFilterKey];
         $isSave = false;
@@ -83,7 +85,7 @@ class InitUserSettingReport2
             $paramsInUser = $settings[$entityType][$this->reportType2][$storedFilterKey];
             $paramsToUpdate = self::getParamsToUpdate($paramsInConfig, $paramsInUser, true);
             // dd($paramsInConfig, $paramsToUpdate);
-
+            
             if(!empty($paramsToUpdate)) {
                 $paramsToUpdate = array_merge($paramsInUser, $paramsToUpdate);
                 $settings[$entityType][$this->reportType2][$storedFilterKey] = $paramsToUpdate;
@@ -102,6 +104,14 @@ class InitUserSettingReport2
             $isSave = False;    
         }
         $params = $settings[$entityType][$this->reportType2][$storedFilterKey] ?? [];
+
+        if(!isset($params['browser_time'])){
+            $params['browser_time'] = 'Asia/Bangkok';
+        }
+        if(!isset($params['pro_set_title'])){
+            $params['pro_set_title'] = 'Time Range';
+        }
+        
         return  $params;
     }
 }
