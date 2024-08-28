@@ -107,8 +107,9 @@ trait TraitUpdateBasicInfoDataSource
             'sheet_status',
             'sheet_id',
             'qaqc_insp_tmpl_name',
+            'qaqc_insp_chklst_id',
             'qaqc_insp_tmpl_id',
-            'status_chklst_sht'
+            'status_chklst_sht',
 
 
         ] + $fieldInputs;

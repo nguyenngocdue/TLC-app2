@@ -21,6 +21,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                     pr.name AS prod_routing_name,
                     qaqcitmp.id AS qaqc_insp_tmpl_id,
                     qaqcitmp.name AS qaqc_insp_tmpl_name,
+                    qaqcchklst.id AS qaqc_insp_chklst_id,
                     po.id AS prod_order_id,
                     po.name AS prod_order_name,
                     qaqcicls.id AS sheet_id,
@@ -39,6 +40,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                     LEFT JOIN qaqc_insp_chklst_shts qaqcicls ON qaqcicls.qaqc_insp_chklst_id = qaqcicl.id
                     LEFT JOIN qaqc_insp_tmpls qaqcitmp ON qaqcicl.qaqc_insp_tmpl_id = qaqcitmp.id
                     LEFT JOIN prod_disciplines pdl ON pdl.id = qaqcicls.prod_discipline_id
+                    LEFT JOIN qaqc_insp_chklsts qaqcchklst ON qaqcchklst.id = qaqcicls.qaqc_insp_chklst_id
                     WHERE 1 = 1
         ";
 
@@ -106,7 +108,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
             ],
             [
                 "title" => "Checklist Id",
-                "dataIndex" => "qaqc_insp_tmpl_id",
+                "dataIndex" => "qaqc_insp_chklst_id",
                 "align" => "center",
             ],
             [
@@ -156,7 +158,7 @@ class Qaqc_insp_chklst_sht_010 extends Report_ParentReport2Controller
                     'route_name' => 'qaqc_insp_chklst_shts.edit',
                     'renderer' => 'id'
                 ],
-                'qaqc_insp_tmpl_id' => [
+                'qaqc_insp_chklst_id' => [
                     'route_name' => 'qaqc_insp_chklsts.edit',
                     'renderer' => 'id'
                 ],
