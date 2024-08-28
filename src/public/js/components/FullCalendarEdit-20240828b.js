@@ -497,12 +497,12 @@ function renderSummary(allEvents) {
     }
     Object.keys(byDay).map(function (key) {
         const left = `<div class="w-1/2 text-right mr-2">${dayNames[key]}:</div>`
-        const right = `<div class="w-1/2">${byDay[key].toFixed(2)} hours</div>`
+        const right = `<div class="w-1/4 text-right">${byDay[key].toFixed(2)} hours</div>`
         summaryHoursByDay += `<div class="flex items-center">${left}${right}</div>`
     })
 
     const left = `<div class="w-1/2 text-right mr-2">Total:</div>`
-    const right = `<div class="w-1/2">${totalHours.toFixed(2)} hours</div>`
+    const right = `<div class="w-1/4 text-right">${totalHours.toFixed(2)} hours</div>`
 
     summaryHoursByDay += `<hr/>`
     summaryHoursByDay += `<div class="flex items-center font-bold">${left}${right}</div>`
