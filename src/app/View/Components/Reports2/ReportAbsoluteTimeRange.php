@@ -81,13 +81,8 @@ class ReportAbsoluteTimeRange extends Component
 
     private function createProSets() {
         $currentParams = $this->currentParamsReport();
-        $browserTime = $currentParams['browser_time'];
-        $url = "http://worldtimeapi.org/api/timezone/" . $browserTime;
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
-        $utcOffset = $data['utc_offset'];
-        $timeAsNumber = DateReport::convertOffsetToNumber($utcOffset);
-    
+        $timezone = $currentParams['time_zone'];
+        $timeAsNumber = DateReport::getUtcOffset($timezone);
         // Current date and time, adjusted by the timeAsNumber
         $toDate = new DateTime();
         $toDate->modify("{$timeAsNumber} hours");
@@ -154,7 +149,7 @@ class ReportAbsoluteTimeRange extends Component
             'proSets' => $proSets,
             'proSetTitle' => $currentParams['pro_set_title'],
             'timezoneData' => $timezoneData,
-            'browserTime' => $currentParams['browser_time'],
+            'browserTime' => $currentParams['time_zone'],
         ]
     );
     }

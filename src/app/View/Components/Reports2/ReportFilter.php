@@ -34,6 +34,7 @@ class ReportFilter extends Component
             'rpFilterLinks' => $rpFilterLinks,
             'rpFilters' => $rpFilters,
             'paramsError' => $paramsError,
+            'rp' => $rp,
         ]);
     }
 }

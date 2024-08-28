@@ -4,25 +4,28 @@
         <x-feedback.alert type='error' message='You must specify {{$filter}}.'></x-feedback.alert>
     @endforeach
 @endif
+<div class="no-print justify-end pb-2"></div> 
 
-<div class="no-print justify-end pb-5"></div> 
+<div class="flex justify-end px-1 pb-2">
+    <x-reports2.report-absolute-time-range  :report="$rp"/>
+</div>
 <div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
     <!-- Mode Dropdown -->
     @if(count($rpFilterLinks->toArray()) > 0)
-        <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
+        <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-1">
                 <div class="text-left whitespace-nowrap">
-                    <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white"></span>
+                    <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Forwarding Report</span>
+                    <x-reports2.dropdown9 name="report_link"  :rpFilterLinks="$rpFilterLinks" />
                 </div>
-                <x-reports2.dropdown9 
-                    name="report_link" 
-                    :rpFilterLinks="$rpFilterLinks" 
-                />
         </div>
     @endif
         <!-- Advanced Filter Section -->
         <div class="col-span-{{count($rpFilterLinks->toArray()) > 0 ? 10 : 12 }}">
-            <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-3">
-                <label for="" class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
+            <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-1">
+                <div class="flex justify-between pb-2">
+                    <label for="" class="text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
+                </div>
+                
                 @if($rpFilters->toArray())
                     <form action="{{$routeFilter}}" id="{{ $reportName }}" method="POST">
                         @csrf
@@ -30,7 +33,6 @@
                         <input type="hidden" name='entity_type' value="{{$entityType}}">
                         <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                         <input type="hidden" name='report_id' value="{{$rpId}}">
-                    
                         <div class="grid grid-cols-12 gap-4 items-baseline">
                             @foreach ($rpFilters as $filter)
 
@@ -80,7 +82,7 @@
                             @endforeach
                         </div>
                         
-                        <div class="py-2">
+                        <div class="">
                             <x-renderer.button htmlType="submit" type="primary">
                                 <i class="fa-sharp fa-solid fa-check"></i> Apply Filter
                             </x-renderer.button>
