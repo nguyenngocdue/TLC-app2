@@ -15,9 +15,9 @@
         "rejected": "",
         "approved": ""
     },
-    "_team_id": {
-        "name": "_team_id",
-        "column_name": "team_id",
+    "_getHrTsLines": {
+        "name": "_getHrTsLines",
+        "column_name": "getHrTsLines",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
@@ -31,17 +31,17 @@
         "rejected": "true",
         "approved": "true"
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",
         "approved": "true"
     },
-    "_getHrTsLines": {
-        "name": "_getHrTsLines",
-        "column_name": "getHrTsLines",
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
         "new": "true",
         "pending_approval": "true",
         "rejected": "true",

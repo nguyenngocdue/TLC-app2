@@ -15,13 +15,15 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('hr_timesheet_officers', function (BlueprintExtended $table) {
             $table->id();
             $table->date("week");
-            // $table->unsignedBigInteger("team_id")->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->double('total_hours', 8, 4)->nullable();
+
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }

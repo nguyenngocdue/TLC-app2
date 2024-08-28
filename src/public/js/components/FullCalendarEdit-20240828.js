@@ -161,7 +161,7 @@ function callApiGetEvents(id, url) {
                                         // "timesheetable_id": timesheetableId
                                         hr_timesheet_officer_id: timesheetableId,
                                     }
-                                    console.log(data)
+                                    console.log('event Receive', data)
                                     callApi(
                                         'post',
                                         url,
@@ -172,6 +172,7 @@ function callApiGetEvents(id, url) {
                                                 info.event.remove()
                                                 calendar.addEvent(response.data)
                                                 toastr.success('Created new timesheet line successfully!')
+                                                reCalculateTotalHours()
                                             }
                                         },
                                         calendar,
@@ -184,13 +185,15 @@ function callApiGetEvents(id, url) {
                     },
                     eventDrop: function (info) {
                         if (!readOnly) {
-                            console.log('eventDrop', info)
+                            // console.log('eventDrop', info)
                             eventUpdateCalendar(info)
+                            reCalculateTotalHours()
                         }
                     },
                     eventResize: function (info) {
                         if (!readOnly) {
                             eventUpdateCalendar(info)
+                            reCalculateTotalHours()
                         }
                     },
                     eventContent: function (info) {
@@ -234,12 +237,12 @@ function callApiGetEvents(id, url) {
                 })
                 calendar.render()
             }
-            changeBackgroundColorBreakTime()
+            changeBreakTimeBgColor()
         },
         error: function (jqXHR, textStatus, errorThrown) {},
     })
 }
-function changeBackgroundColorBreakTime() {
+function changeBreakTimeBgColor() {
     var trElements = $('td.fc-timegrid-slot')
     trElements.each(function () {
         var dataTimeValue = $(this).attr('data-time')
@@ -273,9 +276,7 @@ function handleContextMenu(info) {
     setFullDayButton.attr('value', info.event.id)
 }
 
-function closeModalEvent() {
-    modal.addClass('hidden')
-}
+const closeModalEvent = () => modal.addClass('hidden')
 
 function handleUpdateModalEvent(info) {
     var updateModalButton = modal.find('.update-modal-button')
@@ -326,7 +327,7 @@ function updateModalEvent(button) {
     }
 }
 
-function setTimeEvent(button, type) {
+function moveEventTo(button, type) {
     var timesheetLineId = button.value
     const url = `${apiUrl}/${timesheetLineId}`
     if (timesheetLineId) {
@@ -354,6 +355,7 @@ function setTimeEvent(button, type) {
                         calendar.addEvent(response.data)
                         toastr.success('Set time for timesheet line successfully!')
                     }
+                    reCalculateTotalHours()
                     modalClickRight.addClass('hidden')
                 }
             },
@@ -379,6 +381,7 @@ function deleteEvent(button) {
             toastr.success('Deleted timesheet line successfully!')
             event.remove()
             modalClickRight.addClass('hidden')
+            reCalculateTotalHours()
         },
         null,
         event,
@@ -398,6 +401,7 @@ function duplicateEvent(button) {
             toastr.success('Duplicated timesheet line successfully!')
             calendar.addEvent(response.data)
             modalClickRight.addClass('hidden')
+            reCalculateTotalHours()
         },
         null,
         calendar,
@@ -427,7 +431,8 @@ function callApi(type = 'get', url, data = [], info = null, callback = null, cal
         },
         error: (jqXHR, textStatus, errorThrown) => {
             if (info) {
-                console.error('Error:', textStatus)
+                toastr.error(jqXHR.responseJSON.message)
+                console.error(jqXHR.responseJSON.message)
             }
         },
     })
@@ -453,4 +458,38 @@ function eventUpdateCalendar(info) {
     } else {
         info.revert()
     }
+}
+
+function reCalculateTotalHours(info) {
+    const allEvents = calendar.getEvents()
+    // console.log('reCalculateTotalHours', allEvents)
+
+    const view = calendar.view
+    const startRange = view.activeStart // Start date of the current calendar view
+    const endRange = view.activeEnd // End date of the current calendar view
+
+    var totalHours = 0
+    allEvents.forEach(function (event) {
+        // Get the start and end times of the event
+        const start = event.start
+        const end = event.end
+
+        // Check if both start and end times are defined
+        if (start && end) {
+            if (start >= startRange && end <= endRange) {
+                // Calculate the duration in milliseconds and convert to hours
+                const durationInHours = (end - start) / (1000 * 60 * 60)
+                totalHours += durationInHours // Add to total
+            }
+        }
+    })
+    console.log('totalHours', totalHours)
+    const url = '/api/v1/entity/' + 'hr_timesheet_officers' + '_updateShort'
+    const data = {
+        lines: [{ id: timesheetableId, fieldName: 'total_hours', value: totalHours }],
+    }
+    callApi('post', url, data, null, function () {
+        toastr.success('Updated total hours successfully!')
+        $('#total_hours').val(totalHours.toFixed(2))
+    })
 }
