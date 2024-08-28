@@ -11,7 +11,8 @@ class NavigationCalendar extends Component
 {
     function __construct(
         private $timesheetId,
-        private $owner,
+        private $sheetOwner,
+        private $hidden = false,
     ) {
         //
     }
@@ -35,7 +36,7 @@ class NavigationCalendar extends Component
     {
         $cu = CurrentUser::get();
         $userSettings = $cu->settings;
-        $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['owner_id'] = [$this->owner->id];
+        $userSettings["hr_timesheet_officers"][Constant::VIEW_ALL]['calendar']['owner_id'] = [$this->sheetOwner->id];
 
         $cu->settings = $userSettings;
         $cu->save();
@@ -44,8 +45,11 @@ class NavigationCalendar extends Component
     function render()
     {
         $this->updateUserSettings();
+
+        if ($this->hidden) return "";
+
         $tss = Hr_timesheet_officer::query()
-            ->where('owner_id', $this->owner->id)
+            ->where('owner_id', $this->sheetOwner->id)
             ->orderBy('week')
             ->get();
         $tss = $this->slice($tss);

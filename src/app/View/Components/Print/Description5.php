@@ -6,6 +6,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\DateTimeConcern;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class Description5 extends Component
@@ -75,14 +76,14 @@ class Description5 extends Component
                 break;
 
             default:
-                # code...
+                //Fortune: Please No code here
                 break;
         }
         $colSpan = $prop['col_span'];
         $newLine = $prop['new_line'];
         $hiddenLabel = $prop['hidden_label'];
         $relationships = $prop['relationships'];
-        return view('components.print.description5', [
+        $params = [
             'label' => $label,
             'colSpan' => $colSpan,
             'content' => $content,
@@ -97,6 +98,8 @@ class Description5 extends Component
             'numberOfEmptyLines' => $this->numberOfEmptyLines,
             'printMode' => $this->printMode,
             'item' => $this->item,
-        ]);
+        ];
+        // Log::info($params);
+        return view('components.print.description5', $params);
     }
 }

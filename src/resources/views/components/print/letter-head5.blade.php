@@ -12,7 +12,7 @@
                 <br>{{$dataSource['company_address']}}
                 <br>Tel: {{$dataSource['company_telephone']}} 
                 <br>Fax: {{$dataSource['company_fax']}}
-                <br>Email: {{$dataSource['company_email']}} Website: {{$dataSource['company_website']}}
+                <br>Email: {{$dataSource['company_email']}} - Website: {{$dataSource['company_website']}}
             </td>
             <td style="width: 20%">
                 <div class="flex flex-row items-center justify-center">

@@ -249,8 +249,10 @@ class RelationshipRenderer2 extends Component
             case "many_icons":
                 return $this->renderManyIcons($colName, $type, $paginatedDataSource, $tableName);
             case "calendar_grid":
-                if (CurrentRoute::getControllerAction() == 'edit') {
-                    return $this->renderCalendarGrid($id, $modelPath, $row, $type);
+                $action = CurrentRoute::getControllerAction();
+                if (in_array($action, ['show', 'edit'])) {
+                    // Log::info("Calendar Grid " . $action);
+                    return $this->renderCalendarGrid($id, $modelPath, $row, $type, $action == 'show');
                 }
                 //fall down to many lines for print
             case "many_lines":

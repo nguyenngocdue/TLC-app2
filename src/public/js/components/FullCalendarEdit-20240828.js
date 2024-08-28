@@ -47,8 +47,8 @@ function callApiGetEvents(id, url) {
                 calendar = new Calendar(calendarEl, {
                     headerToolbar: {
                         left: '', //'prev,next today',
-                        center: 'title',
-                        right: 'timeGridWeek,listWeek',
+                        center: hiddenCalendarHeader ? '' : 'title',
+                        right: hiddenCalendarHeader ? '' : 'timeGridWeek,listWeek',
                         // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
                     },
                     views: {

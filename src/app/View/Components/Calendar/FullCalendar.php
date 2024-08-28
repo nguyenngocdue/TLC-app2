@@ -22,6 +22,8 @@ class FullCalendar extends Component
         private $apiUrl,
         private $readOnly = false,
         private $arrHidden = [],
+        private $sheetOwner = null,
+        private $hiddenCalendarHeader = false,
     ) {
         //
     }
@@ -34,10 +36,10 @@ class FullCalendar extends Component
     public function render()
     {
         $token = CurrentUser::getTokenForApi();
-        $owner = $this->getSheetOwner($this->timesheetableType, $this->timesheetableId);
-        // $ownerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->owner_id ?? CurrentUser::id();
+
+        // $sheetOwnerId = ($this->timesheetableType)::findFromCache($this->timesheetableId)->sheetOwner_id ?? CurrentUser::id();
         // $year = ($this->timesheetableType)::findFromCache($this->timesheetableId)->year ?? date('Y');
-        $workplace = $owner->workplace;
+        $workplace = $this->sheetOwner->workplace;
         $timeBreaks = $this->getTimeBreaksByWorkplace($workplace);
         return view('components.calendar.full-calendar', [
             'modalId' => 'calendar001',
@@ -49,7 +51,8 @@ class FullCalendar extends Component
             'arrHidden' => $this->arrHidden,
             'timeBreaks' => $timeBreaks,
             'suffix' => $this->getSuffix(),
-            'owner' => $owner,
+            'sheetOwner' => $this->sheetOwner,
+            'hiddenCalendarHeader' => $this->hiddenCalendarHeader,
             // 'year' => $year,
         ]);
     }

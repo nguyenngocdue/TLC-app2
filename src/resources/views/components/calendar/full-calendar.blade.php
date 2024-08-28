@@ -1,4 +1,3 @@
-<x-calendar.navigation-calendar timesheetId="{{$timesheetableId}}" :owner="$owner" />
 <div id='calendar' component="full-calendar-renderer"></div>
 <x-calendar.modal-click modalId="{{$modalId}}" />
 <x-calendar.modal-click-right />
@@ -13,6 +12,7 @@
     const apiUrl = @json($apiUrl);
     const token = @json($token);
     const timeBreaks = @json($timeBreaks);
+    const hiddenCalendarHeader = @json($hiddenCalendarHeader);
 </script>
 <script src="{{ asset('js/components/FullCalendarEdit-20240828.js') }}"></script>
 <style type="text/css">

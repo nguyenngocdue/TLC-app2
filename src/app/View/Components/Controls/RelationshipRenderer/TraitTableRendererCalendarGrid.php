@@ -5,10 +5,12 @@ namespace App\View\Components\Controls\RelationshipRenderer;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Utils\Support\DateTimeConcern;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 trait TraitTableRendererCalendarGrid
 {
-    private function renderCalendarGrid($id, $modelPath, $row, $type)
+    private function renderCalendarGrid($id, $modelPath, $row, $type, $readOnly)
     {
         $arrHidden = [];
         $dateTime = Carbon::parse($row->week);
@@ -17,9 +19,9 @@ trait TraitTableRendererCalendarGrid
         // dump($modelPath, $id);
         $timeSheet = $modelPath::findFromCache($id);
         // dump($timeSheet);
-        $timeSheetOwner = User::findFromCache($timeSheet->owner_id);
-        // dump($timeSheetOwner);
-        $useTsForPayroll = $timeSheetOwner->use_ts_for_payroll ?? false;
+        $sheetOwner = User::findFromCache($timeSheet->owner_id);
+        // dump($sheetOwner);
+        $useTsForPayroll = $sheetOwner->use_ts_for_payroll ?? false;
         // dump($useTsForPayroll);
 
         if ($useTsForPayroll) {
@@ -37,8 +39,12 @@ trait TraitTableRendererCalendarGrid
             }
         }
 
-        $index = strpos($type, "_");
-        $typeEdit = substr($type, $index + 1);
+        // $index = strpos($type, "_");
+        // $typeEdit = substr($type, $index + 1);
+        $typePlural = Str::plural($type);
+        $typeEdit = "calendar_" . $typePlural;
+        // Log::info($typeEdit);
+        // dump($typeEdit);
         $apiUrl = route($typeEdit . '.index');
         // $token = CurrentUser::getTokenForApi();
         $statusTimeSheet = $modelPath::findFromCache($id)->status ?? null;
@@ -50,10 +56,12 @@ trait TraitTableRendererCalendarGrid
             'timesheetableType' => $modelPath,
             'timesheetableId' => $id,
             'apiUrl' => $apiUrl,
-            'readOnly' => $this->readOnly,
+            'readOnly' => $this->readOnly || $readOnly,
             'arrHidden' => $arrHidden,
             'type' => $type,
             'hasRenderSidebar' => $hasRenderSidebar,
+            'sheetOwner' => $sheetOwner,
+            "hidden" => $readOnly
         ];
 
         return view('components.calendar.calendar-grid', $params);
