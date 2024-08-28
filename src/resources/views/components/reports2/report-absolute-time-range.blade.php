@@ -10,15 +10,13 @@
             <span class="block">{{$fromDate}}</span>
             <span class="block">to</span>
             <span class="block">{{$toDate}}</span>
-            <span class="block text-orange-600">Local browser time</span>
+            <span class="block text-orange-600">{{$browserTime}}</span>
         </span>
     </button>
 
 
-
-
     <!-- Dropdown Content (Initially Hidden) -->
-    <div id="dropdownContent" class="hidden absolute z-10 mt-2 p-4 bg-white rounded-lg shadow-lg border border-gray-300 w-[500px] transform -translate-x-full left-16">
+    <div id="dropdownContent" class="hidden absolute z-10 mt-1 p-4 bg-white rounded-lg shadow-lg border border-gray-300 w-[500px] transform -translate-x-full left-16">
         <!-- Container for two-column layout -->
         <div class="grid grid-cols-2 border-b">
             <!-- Left column: From-To fields -->
@@ -60,31 +58,7 @@
                         <input type="hidden" name="report_id" value="{{$rp->id}}">
                         <input type="hidden" id="pro_set_title" name="pro_set_title" value="Time Range">
                        <ul class="py-1 text-gray-700" id="quickRangeList">
-                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                                data-value="{{ $proSets['today']['from_date'] }} / {{ $proSets['today']['to_date'] }}">
-                                Today
-                            </li>
-                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                                data-value="{{ $proSets['yesterday']['from_date'] }} / {{ $proSets['yesterday']['to_date'] }}">
-                                Yesterday
-                            </li>
-                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                                data-value="{{ $proSets['last_2_days']['from_date'] }} / {{ $proSets['last_2_days']['to_date'] }}">
-                                Last 2 days
-                            </li>
-                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                                data-value="{{ $proSets['last_week']['from_date'] }} / {{ $proSets['last_week']['to_date'] }}">
-                                Last week
-                            </li>
-                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                                data-value="{{ $proSets['last_month']['from_date'] }} / {{ $proSets['last_month']['to_date'] }}">
-                                Last month
-                            </li>
-                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                                data-value="{{ $proSets['last_year']['from_date'] }} / {{ $proSets['last_year']['to_date'] }}">
-                                Last year
-                            </li>
-                            <!-- New time frames -->
+                             <!-- New time frames -->
                             <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
                                 data-value="{{ $proSets['last_5_minutes']['from_date'] }} / {{ $proSets['last_5_minutes']['to_date'] }}">
                                 Last 5 minutes
@@ -113,6 +87,31 @@
                                 data-value="{{ $proSets['last_12_hours']['from_date'] }} / {{ $proSets['last_12_hours']['to_date'] }}">
                                 Last 12 hours
                             </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['today']['from_date'] }} / {{ $proSets['today']['to_date'] }}">
+                                Today
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['yesterday']['from_date'] }} / {{ $proSets['yesterday']['to_date'] }}">
+                                Yesterday
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_2_days']['from_date'] }} / {{ $proSets['last_2_days']['to_date'] }}">
+                                Last 2 days
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_week']['from_date'] }} / {{ $proSets['last_week']['to_date'] }}">
+                                Last week
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_month']['from_date'] }} / {{ $proSets['last_month']['to_date'] }}">
+                                Last month
+                            </li>
+                            <li name="pro_set_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                                data-value="{{ $proSets['last_year']['from_date'] }} / {{ $proSets['last_year']['to_date'] }}">
+                                Last year
+                            </li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -137,7 +136,7 @@
                 </div>
 
 
-                <form action="{{$routeFilter}}"  method="POST">
+                <form id="myFormBrowserTime" action="{{$routeFilter}}"  method="POST">
                     @csrf
                     <input type="hidden" name="form_type" value="updateBrowserTime">
                     <input type="hidden" name="action" value="updateReport2">
@@ -146,7 +145,7 @@
                     <input type="hidden" name="report_id" value="{{$rp->id}}">
 
                     <select onchange="submitForm()"  id="timezone-select" name='browser_time'  placeholder="Type to search (country, city, abbreviation)">
-                        <option value="UTC">Coordinated Universal Time (UTC, GMT)</option>
+                        <option value="UTC" disabled>Coordinated Universal Time (UTC, GMT)</option>
                         <!-- America -->
                         @foreach($timezoneData as $continent  => $countries)
                             <optgroup label="{{$continent}}">
@@ -163,7 +162,12 @@
     </div>
 </div>
 
-
+<script type="text/javascript">
+    function submitForm() {
+        var form = document.getElementById('myFormBrowserTime'); // Thay 'myForm' bằng ID thực của form
+        form.submit();
+    }
+</script>
 
 <script type="text/javascript">
     $('#timezone-select').select2({
@@ -171,10 +175,10 @@
         allowClear: false,
     });
 
-//     $('#timezone-select').on('change', function () {
-//      var selectedText = $(this).find("option:selected").text();
-//      $('#browsertime-show').text(selectedText);
-//    });
+     $('#timezone-select').on('change', function () {
+      var selectedText = $(this).find("option:selected").text();
+      $('#browsertime-show').text(selectedText);
+    });
 
      // Show the timezone dropdown when the button is clicked
     $('#change-time-settings').on('click', function () {

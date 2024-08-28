@@ -111,7 +111,6 @@ class InitUserSettingReport2
         if(!isset($params['pro_set_title'])){
             $params['pro_set_title'] = 'Time Range';
         }
-        
         return  $params;
     }
 }
