@@ -318,6 +318,8 @@ function updateModalEvent(button) {
                 event.setProp('title', response.data.title)
                 toastr.success('Update data timesheet line successfully!')
                 modal.addClass('hidden')
+
+                reCalculateTotalHours()
             },
             null,
             event,
