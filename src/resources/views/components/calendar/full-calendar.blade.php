@@ -1,4 +1,14 @@
 <div id='calendar' component="full-calendar-renderer"></div>
+
+<div class="flex w-full p-2 gap-2">
+    <x-renderer.card title="Summary By Days" class="w-1/2 border border-gray-300 rounded-lg px-2 py-1 flex items-center">
+        <div id="summaryHoursByDay" class="border bg-gray-100 p-2 rounded w-full">Loading...</div>        
+    </x-renderer.card>
+    <x-renderer.card title="Summary By Sub-Projects" class="w-1/2 border border-gray-300 rounded-lg px-2 py-1 flex items-center">
+        <div id="summaryHoursBySubProject" class="border bg-gray-100 p-2 rounded w-full">Loading...</div>
+    </x-renderer.card>
+</div>
+    
 <x-calendar.modal-click modalId="{{$modalId}}" />
 <x-calendar.modal-click-right />
 
@@ -31,10 +41,5 @@
     }
     .fc .fc-scrollgrid {
         border-radius: 0;
-    }
-    /* This is for slot 00:15:00 */
-    /* .fc .fc-timegrid-slot {
-        height: 1rem;
-        font-size: 0.4rem;
-    } */
+    } 
 </style>

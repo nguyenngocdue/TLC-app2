@@ -236,6 +236,7 @@ function callApiGetEvents(id, url) {
                     },
                 })
                 calendar.render()
+                reCalculateTotalHours()
             }
             changeBreakTimeBgColor()
         },
@@ -460,36 +461,93 @@ function eventUpdateCalendar(info) {
     }
 }
 
-function reCalculateTotalHours(info) {
-    const allEvents = calendar.getEvents()
+function renderSummary(allEvents) {
+    const byDay = {}
+    const bySubProject = {}
+    allEvents
+        .filter(function (event) {
+            return !event._def.extendedProps.is_ph_or_la
+        })
+        .forEach(function (event) {
+            const { durationInHours, weekDay, _def } = event
+            const { tag_sub_project } = _def.extendedProps
+            // console.log(durationInHours, tag_sub_project, weekDay)
+            if (!byDay[weekDay]) byDay[weekDay] = 0
+            byDay[weekDay] += durationInHours
+            if (!bySubProject[tag_sub_project]) bySubProject[tag_sub_project] = 0
+            bySubProject[tag_sub_project] += durationInHours
+        })
+    console.log('byDay', byDay)
+    console.log('bySubProject', bySubProject)
+
+    let summaryHoursByDay = ''
+    const dayNames = {
+        0: 'SUN',
+        1: 'MON',
+        2: 'TUE',
+        3: 'WED',
+        4: 'THU',
+        5: 'FRI',
+        6: 'SAT',
+    }
+    Object.keys(byDay).map(function (key) {
+        const left = `<div class="w-1/2 text-right mr-2">${dayNames[key]}:</div>`
+        const right = `<div class="w-1/2">${byDay[key].toFixed(2)} hours</div>`
+        summaryHoursByDay += `<div class="flex items-center">${left}${right}</div>`
+    })
+
+    let summaryHoursBySubProject = ''
+    Object.keys(bySubProject).map(function (key) {
+        const left = `<div class="w-1/2 text-right mr-2">${key}:</div>`
+        const right = `<div class="w-1/2">${bySubProject[key].toFixed(2)} hours</div>`
+        summaryHoursBySubProject += `<div class="flex items-center">${left}${right}</div>`
+    })
+
+    console.log('summaryHoursByDay', summaryHoursByDay)
+    console.log('summaryHoursBySubProject', summaryHoursBySubProject)
+
+    $('#summaryHoursByDay').html(summaryHoursByDay)
+    $('#summaryHoursBySubProject').html(summaryHoursBySubProject)
+}
+
+function updateTotalHours(allEvents) {
+    var totalHours = 0
+    allEvents.forEach(function (event) {
+        totalHours += event.durationInHours // Add to total
+    })
+    console.log('totalHours', totalHours)
+    const url = '/api/v1/entity/' + 'hr_timesheet_officers' + '_updateShort'
+    const data = { lines: [{ id: timesheetableId, fieldName: 'total_hours', value: totalHours }] }
+    callApi('post', url, data, null, function () {
+        // toastr.success('Updated total hours successfully!')
+        $('#total_hours').val(totalHours.toFixed(2))
+    })
+}
+
+function reCalculateTotalHours() {
     // console.log('reCalculateTotalHours', allEvents)
 
     const view = calendar.view
     const startRange = view.activeStart // Start date of the current calendar view
     const endRange = view.activeEnd // End date of the current calendar view
 
-    var totalHours = 0
-    allEvents.forEach(function (event) {
-        // Get the start and end times of the event
-        const start = event.start
-        const end = event.end
+    const allEvents = calendar
+        .getEvents()
+        .filter(function (event) {
+            // Get the start and end times of the event
+            const start = event.start
+            const end = event.end
 
-        // Check if both start and end times are defined
-        if (start && end) {
-            if (start >= startRange && end <= endRange) {
-                // Calculate the duration in milliseconds and convert to hours
-                const durationInHours = (end - start) / (1000 * 60 * 60)
-                totalHours += durationInHours // Add to total
+            // Check if both start and end times are defined
+            return start && end && start >= startRange && end <= endRange
+        })
+        .map(function (event) {
+            return {
+                ...event,
+                durationInHours: (event.end - event.start) / (1000 * 60 * 60),
+                weekDay: event.start.getDay(),
             }
-        }
-    })
-    console.log('totalHours', totalHours)
-    const url = '/api/v1/entity/' + 'hr_timesheet_officers' + '_updateShort'
-    const data = {
-        lines: [{ id: timesheetableId, fieldName: 'total_hours', value: totalHours }],
-    }
-    callApi('post', url, data, null, function () {
-        // toastr.success('Updated total hours successfully!')
-        $('#total_hours').val(totalHours.toFixed(2))
-    })
+        })
+    updateTotalHours(allEvents)
+    renderSummary(allEvents)
 }
