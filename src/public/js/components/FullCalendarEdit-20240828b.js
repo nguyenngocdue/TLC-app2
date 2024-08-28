@@ -464,10 +464,11 @@ function eventUpdateCalendar(info) {
 function renderSummary(allEvents) {
     const byDay = {}
     const bySubProject = {}
+    let totalHours = 0
     allEvents
-        .filter(function (event) {
-            return !event._def.extendedProps.is_ph_or_la
-        })
+        // .filter(function (event) {
+        //     return !event._def.extendedProps.is_ph_or_la
+        // })
         .forEach(function (event) {
             const { durationInHours, weekDay, _def } = event
             const { tag_sub_project } = _def.extendedProps
@@ -476,6 +477,8 @@ function renderSummary(allEvents) {
             byDay[weekDay] += durationInHours
             if (!bySubProject[tag_sub_project]) bySubProject[tag_sub_project] = 0
             bySubProject[tag_sub_project] += durationInHours
+
+            totalHours += durationInHours
         })
     console.log('byDay', byDay)
     console.log('bySubProject', bySubProject)
@@ -496,15 +499,22 @@ function renderSummary(allEvents) {
         summaryHoursByDay += `<div class="flex items-center">${left}${right}</div>`
     })
 
+    const left = `<div class="w-1/2 text-right mr-2">Total:</div>`
+    const right = `<div class="w-1/2">${totalHours.toFixed(2)} hours</div>`
+
+    summaryHoursByDay += `<hr/>`
+    summaryHoursByDay += `<div class="flex items-center font-bold">${left}${right}</div>`
+
     let summaryHoursBySubProject = ''
     Object.keys(bySubProject).map(function (key) {
+        const percent = ((100 * bySubProject[key]) / totalHours).toFixed(2)
         const left = `<div class="w-1/2 text-right mr-2">${key}:</div>`
-        const right = `<div class="w-1/2">${bySubProject[key].toFixed(2)} hours</div>`
+        const right = `<div class="w-1/4 text-right mr-2">${bySubProject[key].toFixed(2)} hours</div><div class="w-1/4">(${percent}%)</div>`
         summaryHoursBySubProject += `<div class="flex items-center">${left}${right}</div>`
     })
 
-    console.log('summaryHoursByDay', summaryHoursByDay)
-    console.log('summaryHoursBySubProject', summaryHoursBySubProject)
+    // console.log('summaryHoursByDay', summaryHoursByDay)
+    // console.log('summaryHoursBySubProject', summaryHoursBySubProject)
 
     $('#summaryHoursByDay').html(summaryHoursByDay)
     $('#summaryHoursBySubProject').html(summaryHoursBySubProject)

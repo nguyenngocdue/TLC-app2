@@ -2,10 +2,14 @@
 
 <div class="flex w-full p-2 gap-2">
     <x-renderer.card title="Summary By Days" class="w-1/2 border border-gray-300 rounded-lg px-2 py-1 flex items-center">
-        <div id="summaryHoursByDay" class="border bg-gray-100 p-2 rounded w-full">Loading...</div>        
+        <div class="border bg-gray-100 p-2 rounded w-full h-full flex items-center">
+            <div id="summaryHoursByDay" class="w-full">Loading...</div>        
+        </div>
     </x-renderer.card>
     <x-renderer.card title="Summary By Sub-Projects" class="w-1/2 border border-gray-300 rounded-lg px-2 py-1 flex items-center">
-        <div id="summaryHoursBySubProject" class="border bg-gray-100 p-2 rounded w-full">Loading...</div>
+        <div class="border bg-gray-100 p-2 rounded w-full h-full flex items-center">
+            <div id="summaryHoursBySubProject" class="w-full">Loading...</div>
+        </div>
     </x-renderer.card>
 </div>
     
@@ -24,7 +28,7 @@
     const timeBreaks = @json($timeBreaks);
     const hiddenCalendarHeader = @json($hiddenCalendarHeader);
 </script>
-<script src="{{ asset('js/components/FullCalendarEdit-20240828.js') }}"></script>
+<script src="{{ asset('js/components/FullCalendarEdit-20240828b.js') }}"></script>
 <style type="text/css">
     .fc-event-main {
         overflow: hidden;
