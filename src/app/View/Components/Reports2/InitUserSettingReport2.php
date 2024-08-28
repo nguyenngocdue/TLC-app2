@@ -38,7 +38,6 @@ class InitUserSettingReport2
                 $params[$filter->data_index] = $defaultVal;
             }
         }
-        // $params['time_zone'] = 'Asia/Bangkok';
         return $params;
     }
     
@@ -106,10 +105,10 @@ class InitUserSettingReport2
         $params = $settings[$entityType][$this->reportType2][$storedFilterKey] ?? [];
 
         if(!isset($params['time_zone'])){
-            $params['time_zone'] = 'Asia/Bangkok';
+            $params['time_zone'] = 'UTC+7';
         }
-        if(!isset($params['pro_set_title'])){
-            $params['pro_set_title'] = 'Time Range';
+        if(!isset($params['preset_title'])){
+            $params['preset_title'] = 'Time Range';
         }
         return  $params;
     }

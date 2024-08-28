@@ -374,13 +374,13 @@ class UpdateUserSettings extends Controller
         return $params;
     }
 
-    private function updateProSetFilter($inputValue){
-        if(isset($inputValue['pro_set_1'])){
-            $items = explode('/', $inputValue['pro_set_1']);
+    private function updatePresetFilter($inputValue){
+        if(isset($inputValue['preset_1'])){
+            $items = explode('/', $inputValue['preset_1']);
             [$fromDate, $toDate] = $items;
             $inputValue['from_date'] = trim($fromDate);
             $inputValue['to_date'] = trim($toDate);
-            unset($inputValue['pro_set_1']);
+            unset($inputValue['preset_1']);
         }
         return $inputValue;
     }
@@ -408,10 +408,10 @@ class UpdateUserSettings extends Controller
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
 
-        
+
         // when select "Search Quick Ranges"
-        if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateProSetFilter"){
-           $inputValue = $this->updateProSetFilter($inputValue);
+        if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updatePresetFilter"){
+           $inputValue = $this->updatePresetFilter($inputValue);
         }
 
         $filters = $this->getFilterReport2($inputValue);
@@ -428,7 +428,7 @@ class UpdateUserSettings extends Controller
                 $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null :$value;
             }
             
-            if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateBrowserTime"){
+            if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateTimeZone"){
                 $paramsInUser = $this->updateFromTimeToTime($paramsInUser);
             };
         

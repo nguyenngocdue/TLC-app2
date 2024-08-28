@@ -10,11 +10,11 @@
                 <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                 <input type="hidden" name='report_id' value="{{$rp->id}}">
                 <input type="hidden" name='form_type' value="absolute_time_range">
-                <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="now/y" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
             <div class="relative">
                 <label class="block text-sm font-medium text-gray-700">To</label>
-                <input type="text" name="to_date" value="{{$toDate}}" id="to_date" placeholder="now/y" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" name="to_date" value="{{$toDate}}" id="to_date" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
         </div>
         <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Apply time range</button>
@@ -30,11 +30,13 @@
         allowInput: true,
         onChange: function(selectedDates, dateStr, instance) {
             // Optional: handle the selected date
-            var endDate = new Date(selectedDates[0]); // Get the selected date
-            endDate.setHours(23, 59, 59); // Set time to 23:59:59
-            // Manually update the input value with the formatted date
-            var formattedDate = instance.formatDate(endDate, "Y-m-d H:i:S");
-            toDatePicker.setDate(formattedDate); // Update the date picker with the new time
+            if(!toDatePicker.input.value) {
+                var endDate = new Date(selectedDates[0]); // Get the selected date
+                endDate.setHours(23, 59, 59); // Set time to 23:59:59
+                // Manually update the input value with the formatted date
+                var formattedDate = instance.formatDate(endDate, "Y-m-d H:i:S");
+                toDatePicker.setDate(formattedDate); // Update the date picker with the new time
+            }
         }
     });
 
@@ -42,13 +44,13 @@
         dateFormat: "Y-m-d H:i:S",
         allowInput: true,
         onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates.length > 0) {
                 var endDate = new Date(selectedDates[0]); // Get the selected date
                 endDate.setHours(23, 59, 59); // Set time to 23:59:59
                 // Manually update the input value with the formatted date
                 var formattedDate = instance.formatDate(endDate, "Y-m-d H:i:S");
                 instance.setDate(formattedDate); // Update the date picker with the new time
 
+            if (!fromDatePicker.input.value) {
                 // Set the from_date to the same day with time 00:00:00
                 var startDate = new Date(selectedDates[0]); // Copy the selected date
                 startDate.setHours(0, 0, 0); // Set time to 00:00:00

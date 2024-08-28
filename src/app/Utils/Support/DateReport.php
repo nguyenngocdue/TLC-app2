@@ -310,12 +310,45 @@ class DateReport
         }
         return $timeAsNumber;
     }
+    
+    public static function getTimeZones(){
+        $timezones = [
+            "UTC-12" => ["utc_offset" => "-12:00", "timezone" => "UTC-12"],
+            "UTC-11" => ["utc_offset" => "-11:00", "timezone" => "UTC-11"],
+            "UTC-10" => ["utc_offset" => "-10:00", "timezone" => "UTC-10"],
+            "UTC-9"  => ["utc_offset" => "-09:00", "timezone" => "UTC-9"],
+            "UTC-8"  => ["utc_offset" => "-08:00", "timezone" => "UTC-8"],
+            "UTC-7"  => ["utc_offset" => "-07:00", "timezone" => "UTC-7"],
+            "UTC-6"  => ["utc_offset" => "-06:00", "timezone" => "UTC-6"],
+            "UTC-5"  => ["utc_offset" => "-05:00", "timezone" => "UTC-5"],
+            "UTC-4"  => ["utc_offset" => "-04:00", "timezone" => "UTC-4"],
+            "UTC-3"  => ["utc_offset" => "-03:00", "timezone" => "UTC-3"],
+            "UTC-2"  => ["utc_offset" => "-02:00", "timezone" => "UTC-2"],
+            "UTC-1"  => ["utc_offset" => "-01:00", "timezone" => "UTC-1"],
+            "UTC+0"  => ["utc_offset" => "+00:00", "timezone" => "UTC+0"],
+            "UTC+1"  => ["utc_offset" => "+01:00", "timezone" => "UTC+1"],
+            "UTC+2"  => ["utc_offset" => "+02:00", "timezone" => "UTC+2"],
+            "UTC+3"  => ["utc_offset" => "+03:00", "timezone" => "UTC+3"],
+            "UTC+4"  => ["utc_offset" => "+04:00", "timezone" => "UTC+4"],
+            "UTC+5"  => ["utc_offset" => "+05:00", "timezone" => "UTC+5"],
+            "UTC+6"  => ["utc_offset" => "+06:00", "timezone" => "UTC+6"],
+            "UTC+7"  => ["utc_offset" => "+07:00", "timezone" => "UTC+7"],
+            "UTC+8"  => ["utc_offset" => "+08:00", "timezone" => "UTC+8"],
+            "UTC+9"  => ["utc_offset" => "+09:00", "timezone" => "UTC+9"],
+            "UTC+10" => ["utc_offset" => "+10:00", "timezone" => "UTC+10"],
+            "UTC+11" => ["utc_offset" => "+11:00", "timezone" => "UTC+11"],
+            "UTC+12" => ["utc_offset" => "+12:00", "timezone" => "UTC+12"],
+            "UTC+13" => ["utc_offset" => "+13:00", "timezone" => "UTC+13"],
+            "UTC+14" => ["utc_offset" => "+14:00", "timezone" => "UTC+14"],
+        ];
+        return $timezones;
+         
+    }
 
     public static function getUtcOffset($timezone) {
-        $url = "http://worldtimeapi.org/api/timezone/" . $timezone;
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
-        $utcOffset = $data['utc_offset'];
+        $timezones = self::getTimeZones();
+        $timezoneData = $timezones[$timezone];
+        $utcOffset = $timezoneData['utc_offset'];
         $timeAsNumber = DateReport::convertOffsetToNumber($utcOffset);
         return $timeAsNumber;
     }

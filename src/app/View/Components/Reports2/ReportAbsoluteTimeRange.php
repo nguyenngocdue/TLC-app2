@@ -79,16 +79,14 @@ class ReportAbsoluteTimeRange extends Component
     
     
 
-    private function createProSets() {
+    private function createPresets() {
         $currentParams = $this->currentParamsReport();
         $timezone = $currentParams['time_zone'];
         $timeAsNumber = DateReport::getUtcOffset($timezone);
-        // Current date and time, adjusted by the timeAsNumber
         $toDate = new DateTime();
         $toDate->modify("{$timeAsNumber} hours");
-    
-        // Cloning fromDate from toDate for each range generation
-        $proSets = [
+
+        $presets = [
             'today' => $this->generateDateRange('today', clone $toDate, clone $toDate),
             'yesterday' => $this->generateDateRange('yesterday', clone $toDate, clone $toDate),
             'last_2_days' => $this->generateDateRange('last_2_days', clone $toDate, clone $toDate),
@@ -103,41 +101,15 @@ class ReportAbsoluteTimeRange extends Component
             'last_6_hours' => $this->generateDateRange('last_6_hours', clone $toDate, clone $toDate),
             'last_12_hours' => $this->generateDateRange('last_12_hours', clone $toDate, clone $toDate),
         ];
-    
-        // dd($proSets);
-        return $proSets;
+        return $presets;
     }
         
-
-    private function getTimeZone(){
-        $url = "http://worldtimeapi.org/api/timezone";
-        $response = @file_get_contents($url);  // @ suppresses warning; could use more robust error handling
-        if ($response === FALSE) {
-            return ['error' => 'Unable to retrieve data'];
-        }
-    
-        $timezones = json_decode($response, true);
-        $groupedTimeZones = [];
-    
-        foreach ($timezones as $timezone) {
-            $continent = explode('/', $timezone)[0];
-            
-            // Grouping by continent
-            $groupedTimeZones[$continent][] = $timezone;
-        }
-    
-        return $groupedTimeZones;
-    }
-
-    
-
     public function render()
     {
         $rp = $this->report;
         $currentParams = $this->currentParamsReport();
-        $proSets = $this->createProSets(); 
-        $timezoneData = $this->getTimeZone();
-
+        $presets = $this->createPresets(); 
+        $timezoneData = DateReport::getTimeZones();
         return view('components.reports2.report-absolute-time-range', 
         [
             'rp' => $rp,
@@ -146,10 +118,10 @@ class ReportAbsoluteTimeRange extends Component
             'routeFilter' => route('report_filters' . '.update', $rp->id),
             'fromDate' => $currentParams['from_date'] ?? null,
             'toDate' => $currentParams['to_date'] ?? null,
-            'proSets' => $proSets,
-            'proSetTitle' => $currentParams['pro_set_title'],
+            'presets' => $presets,
+            'presetTitle' => $currentParams['preset_title'],
             'timezoneData' => $timezoneData,
-            'browserTime' => $currentParams['time_zone'],
+            'timeZone' => $currentParams['time_zone'],
         ]
     );
     }
