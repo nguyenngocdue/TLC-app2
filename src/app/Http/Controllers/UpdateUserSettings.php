@@ -8,12 +8,9 @@ use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
-use App\Utils\Support\DateTimeConcern;
 use App\Utils\Support\Report;
-use App\View\Components\Reports2\TraitReportFilter;
-use App\View\Components\Reports2\TransferUserSettingReport2;
-use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -388,6 +385,21 @@ class UpdateUserSettings extends Controller
         return $inputValue;
     }
 
+    private function updateFromTimeToTime($paramsInUser) {
+        $timezone = $paramsInUser['time_zone'];
+        $timeAsNumber = DateReport::getUtcOffset($timezone);
+        // Create a DateTime object representing the current time
+        $toDate = new DateTime();
+        // Modify the DateTime object by adding the offset in hours
+        $toDate->modify("{$timeAsNumber} hours");
+        // Clone $toDate to create $fromDate (if you need them to be identical initially)
+        $fromDate = clone $toDate;
+        // Format and store the dates in the $paramsInUser array
+        $paramsInUser['from_date'] = $fromDate->format('Y-m-d H:i:s');
+        $paramsInUser['to_date'] = $toDate->format('Y-m-d H:i:s');
+        // dd($paramsInUser);
+        return $paramsInUser;
+    }
 
     private function updateReport2($request, $settings)
     {
@@ -413,8 +425,13 @@ class UpdateUserSettings extends Controller
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInUser = &$settings[$entityType][$reportType2][$storedFilterKey];
             foreach ($filters as $key => $value) {
-                $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null : $value;
-            }            
+                $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null :$value;
+            }
+            
+            if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateBrowserTime"){
+                $paramsInUser = $this->updateFromTimeToTime($paramsInUser);
+            };
+        
             $paramToUpdate = $paramsInUser;
         } else {
             $paramToUpdate = $filters;

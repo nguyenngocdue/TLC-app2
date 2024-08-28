@@ -308,7 +308,15 @@ class DateReport
         if ($sign === '-') {
             $timeAsNumber *= -1;
         }
-    
+        return $timeAsNumber;
+    }
+
+    public static function getUtcOffset($timezone) {
+        $url = "http://worldtimeapi.org/api/timezone/" . $timezone;
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+        $utcOffset = $data['utc_offset'];
+        $timeAsNumber = DateReport::convertOffsetToNumber($utcOffset);
         return $timeAsNumber;
     }
 }
