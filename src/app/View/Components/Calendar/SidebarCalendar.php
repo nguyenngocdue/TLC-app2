@@ -18,6 +18,7 @@ class SidebarCalendar extends Component
         private $type = null,
         private $timesheetableType = null,
         private $timesheetableId = null,
+        private $hiddenCalendarHeader = false,
     ) {
         //
     }

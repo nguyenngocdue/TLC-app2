@@ -52,6 +52,9 @@ trait TraitTableRendererCalendarGrid
         if ($statusTimeSheet && in_array($statusTimeSheet, ['pending_approval', 'approved'])) {
             $hasRenderSidebar = false;
         }
+        if ($readOnly) {
+            $hasRenderSidebar = false;
+        }
         $params = [
             'timesheetableType' => $modelPath,
             'timesheetableId' => $id,
