@@ -124,6 +124,7 @@ class HrTsLineCollection extends ResourceCollection
                     case ($item instanceof Public_holiday):
                         $item1['id'] = '';
                         $item1['is_ph_or_la'] = true;
+                        $item1['day_count'] = 1;
                         $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJSForPH($item);
                         $item1['end'] = DateTimeConcern::calcEndTimeForPH($item);
                         $item1['color'] = '#BA3C36';
@@ -134,6 +135,7 @@ class HrTsLineCollection extends ResourceCollection
                         if ($values) {
                             $item1['id'] = '';
                             $item1['is_ph_or_la'] = true;
+                            $item1['day_count'] = $item->number_of_la_day;
                             [$start, $end] = $values;
                             $item1['start'] = $start;
                             $item1['end'] = $end;
@@ -146,6 +148,7 @@ class HrTsLineCollection extends ResourceCollection
                         if ($values) {
                             $item1['id'] = '';
                             $item1['is_ph_or_la'] = true;
+                            $item1['day_count'] = $item->leave_days;
                             [$start, $end] = $values;
                             $item1['start'] = $start;
                             $item1['end'] = $end;
@@ -155,6 +158,7 @@ class HrTsLineCollection extends ResourceCollection
                     case ($item instanceof Hr_timesheet_officer_line):
                         $item1['id'] = $item->id;
                         $item1['is_ph_or_la'] = false;
+                        $item1['day_count'] = 99999;
                         $item1['start'] = DateTimeConcern::formatTimestampFromDBtoJS($item->start_time);
                         $item1['end'] = DateTimeConcern::calcEndTime($item->start_time, $item->duration_in_min);
                         $item1['color'] = Calendar::getBkColorByWorkModeId($item->work_mode_id);

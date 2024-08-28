@@ -556,9 +556,12 @@ function reCalculateTotalHours() {
             return start && end && start >= startRange && end <= endRange
         })
         .map(function (event) {
+            const durationInHours = (event.end - event.start) / (1000 * 60 * 60)
+            const day_count = event._def.extendedProps.day_count
+            const is_ph_or_la = event._def.extendedProps.is_ph_or_la
             return {
                 ...event,
-                durationInHours: (event.end - event.start) / (1000 * 60 * 60),
+                durationInHours: is_ph_or_la && day_count == 1 ? durationInHours - 1 : durationInHours,
                 weekDay: event.start.getDay(),
             }
         })
