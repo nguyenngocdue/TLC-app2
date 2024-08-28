@@ -77,7 +77,7 @@ function callApiGetEvents(id, url) {
                         var extendedProps = info.event._def.extendedProps
                         if (extendedProps.is_ph_or_la == true) return
                         if (!readOnly) {
-                            //indentify location modal
+                            //identify modal location
                             var { clientX, clientY } = info.jsEvent
                             var modalTop = clientY / 2
                             var modalLeft = clientX
@@ -130,6 +130,7 @@ function callApiGetEvents(id, url) {
                     },
                     eventReceive: function (info) {
                         if (!readOnly) {
+                            // console.log('eventReceive', info)
                             var projectId = document.getElementById('project_id' + suffix).value
                             var subProjectId = document.getElementById('sub_project_id' + suffix).value
                             var lodId = document.getElementById('lod_id' + suffix).value
@@ -183,6 +184,7 @@ function callApiGetEvents(id, url) {
                     },
                     eventDrop: function (info) {
                         if (!readOnly) {
+                            console.log('eventDrop', info)
                             eventUpdateCalendar(info)
                         }
                     },
@@ -433,6 +435,7 @@ function callApi(type = 'get', url, data = [], info = null, callback = null, cal
 
 function dataUpdate(info) {
     var data = {
+        ...info.event.extendedProps, // for remark
         start_time: info.event.start.toISOString(),
         end_time: info.event.end.toISOString(),
     }

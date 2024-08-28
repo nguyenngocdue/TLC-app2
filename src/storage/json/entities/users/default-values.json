@@ -181,6 +181,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_time_zone": {
+        "name": "_time_zone",
+        "column_name": "time_zone",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "M\u00fai gi\u1edd c\u1ee7a l\u1ea7n \u0111\u0103ng nh\u1eadp g\u1ea7n nh\u1ea5t",
+        "textarea_rows": ""
+    },
     "_featured_image": {
         "name": "_featured_image",
         "column_name": "featured_image",
@@ -230,7 +243,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "",
+        "control_extra": "N\u01a1i l\u00e0m vi\u1ec7c theo h\u1ee3p \u0111\u1ed3ng lao \u0111\u1ed9ng",
         "textarea_rows": ""
     },
     "_current_workplace": {
@@ -243,7 +256,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "",
+        "control_extra": "N\u01a1i l\u00e0m vi\u1ec7c t\u1ea1m th\u1eddi (\u0111i c\u00f4ng tr\u01b0\u1eddng d\u00e0i ng\u00e0y)",
         "textarea_rows": ""
     },
     "_category": {
@@ -334,7 +347,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "",
+        "control_extra": "Ng\u00e0y l\u00e0m vi\u1ec7c \u0111\u1ea7u ti\u00ean",
         "textarea_rows": ""
     },
     "_last_date": {
@@ -360,7 +373,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "",
+        "control_extra": "Ng\u00e0y hi\u1ec7u l\u1ef1c ph\u00e9p",
         "textarea_rows": ""
     },
     "_discipline": {
@@ -477,7 +490,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "",
+        "control_extra": "Ng\u01b0\u1eddi \u0111\u1ea1i di\u1ec7n duy\u1ec7t h\u1ed9",
         "textarea_rows": ""
     },
     "_leaf_uids": {
@@ -597,19 +610,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_time_zone": {
-        "name": "_time_zone",
-        "column_name": "time_zone",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_settings": {
         "name": "_settings",
         "column_name": "settings",
@@ -622,6 +622,32 @@
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": "30"
+    },
+    "_unsubscribe_ts_weekly_reminder_for_staff": {
+        "name": "_unsubscribe_ts_weekly_reminder_for_staff",
+        "column_name": "unsubscribe_ts_weekly_reminder_for_staff",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "Ng\u1eebng nh\u1eadn mail nh\u1eafc l\u00e0m timesheet h\u00e0ng tu\u1ea7n",
+        "textarea_rows": ""
+    },
+    "_use_ts_for_payroll": {
+        "name": "_use_ts_for_payroll",
+        "column_name": "use_ts_for_payroll",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "D\u00f9ng timesheet \u0111\u1ec3 t\u00ednh l\u01b0\u01a1ng",
+        "textarea_rows": ""
     },
     "_remember_token": {
         "name": "_remember_token",
@@ -802,7 +828,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "",
+        "control_extra": "Ch\u1eef k\u00fd m\u1eabu",
         "textarea_rows": ""
     },
     "_getSubProjectsOfExternalInspector": {

@@ -30,11 +30,10 @@ class Calendar
                 return $item->la_reason;
             case $item instanceof Hr_timesheet_officer_line:
                 if ($item->sub_task_id) return $item->getSubTask->name ?? 'Task Name ???';
-            default: // For duplicated sub task and task will eliminate sub task
             case $item instanceof Hr_leave_line:
                 return $item->getLeaveType->name ?? 'Leave Type ???';
-
-                // return 'Unknown Type of Item';
+            default:
+                return ""; // For duplicated sub task and task will eliminate sub task                
         }
     }
     public static function renderTitle($item)

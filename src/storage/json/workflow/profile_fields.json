@@ -407,9 +407,7 @@
     "_time_zone": {
         "name": "_time_zone",
         "profile_hidden": "true",
-        "profile_readonly": "true",
-        "me_hidden": "true",
-        "me_readonly": "true"
+        "profile_readonly": "true"
     },
     "_title": {
         "name": "_title",
@@ -429,6 +427,13 @@
     },
     "_updated_at": {
         "name": "_updated_at",
+        "profile_hidden": "true",
+        "profile_readonly": "true",
+        "me_hidden": "true",
+        "me_readonly": "true"
+    },
+    "_use_ts_for_payroll": {
+        "name": "_use_ts_for_payroll",
         "profile_hidden": "true",
         "profile_readonly": "true",
         "me_hidden": "true",
