@@ -45,12 +45,14 @@ function callApiGetEvents(id, url) {
                     },
                 })
                 calendar = new Calendar(calendarEl, {
-                    headerToolbar: {
-                        left: '', //'prev,next today',
-                        center: hiddenCalendarHeader ? '' : 'title',
-                        right: hiddenCalendarHeader ? '' : 'timeGridWeek,listWeek',
-                        // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-                    },
+                    headerToolbar: hiddenCalendarHeader
+                        ? null
+                        : {
+                              left: '', //'prev,next today',
+                              center: 'title',
+                              right: 'timeGridWeek,listWeek',
+                              // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                          },
                     views: {
                         week: {
                             allDaySlot: false,
@@ -58,9 +60,9 @@ function callApiGetEvents(id, url) {
                     },
                     timeZone: 'local',
                     initialDate: response.meta,
-                    height: 900,
+                    height: 830,
                     // contentHeight: 830,
-                    scrollTime: '06:30:00',
+                    scrollTime: '06:45:00',
                     aspectRatio: 2,
                     initialView: 'timeGridWeek',
                     locale: 'en',
