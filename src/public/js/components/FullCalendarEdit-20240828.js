@@ -489,7 +489,7 @@ function reCalculateTotalHours(info) {
         lines: [{ id: timesheetableId, fieldName: 'total_hours', value: totalHours }],
     }
     callApi('post', url, data, null, function () {
-        toastr.success('Updated total hours successfully!')
+        // toastr.success('Updated total hours successfully!')
         $('#total_hours').val(totalHours.toFixed(2))
     })
 }
