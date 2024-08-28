@@ -10,7 +10,7 @@ trait TraitTableRendererManyIcons
     {
         $colSpan =  Helper::getColSpan($colName, $type);
         $dataSource = $dataSource->filter(fn($u) => !$u['resigned']);
-        $dataSource = $dataSource->filter(fn($u) => !$u['workplace']);
+        $dataSource = $dataSource->filter(fn($u) => $u['workplace']);
         if (app()->isProduction()) {
             $dataSource = $dataSource->filter(fn($u) => !$u['show_on_beta']);
         }
