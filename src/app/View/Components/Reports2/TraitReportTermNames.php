@@ -11,8 +11,8 @@ trait TraitReportTermNames
     private function getTermName($id)
     {
         if ($id) {
-            $aggName = Term::find($id)->name;
-            return $aggName;
+            $name = Term::find($id)->name;
+            return $name;
         }
         return null;
     }

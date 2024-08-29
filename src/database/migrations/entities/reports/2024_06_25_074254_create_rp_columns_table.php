@@ -38,6 +38,7 @@ return new class extends Migration
             $table->unsignedBigInteger('row_icon_position')->nullable();
             $table->text('row_href_fn')->nullable();
             $table->unsignedBigInteger('row_renderer')->nullable();
+            $table->string('entity_type')->nullable();
             $table->unsignedBigInteger('agg_footer')->nullable();
             $table->text('cell_div_class_agg_footer')->nullable();
 
