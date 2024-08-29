@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Reports2;
 
-class ColumnReport
+class ReportColumn
 {
     private static $instance = null;
     protected $block;
@@ -13,7 +13,7 @@ class ColumnReport
 
     public static function getInstance($block)
     {
-        if (self::$instance == null) self::$instance = new ColumnReport($block);
+        if (self::$instance == null) self::$instance = new ReportColumn($block);
         return self::$instance;
     }
 

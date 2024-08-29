@@ -28,17 +28,7 @@ class HrefReport
             array_map(fn($field) => $dataLine->{$field} ?? null, $fields)
         );
         $href = str_replace($variables, array_values($result), $rowHrefFn);
-        // [$entity, $action] = ["", ""];
-
-        // if (str_contains($href, 'route(')) {
-        //     [$routeName, $id] = static::extractRouteParts($href);
-        //     [$entity, $action] = explode('.', $routeName);
-        //     $href = Route::has($routeName) ? route($routeName, $id) : "#";
-        // }
-        return collect([
-            'href' => $href,
-            // 'entity' => $entity,
-            // 'action' => $action,
-        ]);
+        return $href;
+    
     }
 }

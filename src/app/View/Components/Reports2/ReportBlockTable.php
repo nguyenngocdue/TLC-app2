@@ -2,15 +2,20 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\View\Component;
 use App\Utils\Support\HrefReport;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
 
 class ReportBlockTable extends Component
 {
     use TraitReportDataAndColumn;
     use TraitReportTermNames;
+
+    protected $STATUS_ROW_RENDERER_ID = 661;
+    protected $ID_ROW_RENDERER_ID = 662;
 
     public function __construct(
         private $reportId,
@@ -41,23 +46,52 @@ class ReportBlockTable extends Component
     }
 
 
-    private function createTableDataSourceForRows($queriedData, $configuredColumns, $block)
+    private function createTableDataSourceForRows($queriedData, $configuredColumns)
     {
   
         $result = collect();
         foreach ($queriedData as $k1 => $dataLine) {
+            // dd($configuredColumns);
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $configuredColumns)) {
                     $column = $configuredColumns[$k2];
-                    $dataHref = HrefReport::createDataHrefForRow($column, $dataLine);
+                    $href = HrefReport::createDataHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
+
+                    $cellClass = $column->row_cell_class;
+                    $cellDivClass =  $column->row_cell_div_class;
+
+                    
+                    if($column->row_renderer == $this->STATUS_ROW_RENDERER_ID) {
+                        $statuses = LibStatuses::getFor($column->entity_type);
+                        $statusData = $statuses[$value] ?? [];
+                        if($statusData) {
+                            $content = Blade::render("<x-renderer.status>" .$content. "</x-renderer.status>");
+                            $cellClass = 'text-' .$statusData['text_color'];
+                        }
+                    }
+                    if($column->row_renderer == $this->ID_ROW_RENDERER_ID) {
+                        $entityType = $column->entity_type;
+                        $content = '#000.' .$value;
+                        $route = Str::plural($entityType) . ".edit";
+                        $hasRoute = Route::has($route);
+                        if ($hasRoute) {
+                            if (!$value) continue;
+                            $href = route($route, (int)$value);
+                            $cellClass = 'text-blue-600';
+                        } else {
+                            $href = "#RouteNotFound3:$route";
+                            $cellClass = 'text-red-600';
+                        }
+                    }
+
                     // Log::info($content);
                     $newValue = (object)[
                         'value' => $content,
-                        'cell_href' => $dataHref->first(),
-                        'cell_class' => $column->row_cell_class,
-                        'cell_div_class' => $column->row_cell_div_class,
+                        'cell_href' => $href,
+                        'cell_class' => $cellClass,
+                        'cell_div_class' => $cellDivClass,
                     ];
                     $re->$k2 = $newValue;
                 }

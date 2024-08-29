@@ -11,7 +11,7 @@ class Rp_column extends ModelExtended
         "col_span", "row_span",
         "order_no", "name", "width", "cell_div_class_agg_footer", "cell_div_class",
         "cell_class", "icon", "icon_position", "row_cell_div_class", "row_cell_class",
-        "row_icon", "row_icon_position", "row_href_fn", "row_renderer", "agg_footer",
+        "row_icon", "row_icon_position", "row_href_fn", "row_renderer","entity_type", "agg_footer",
         "owner_id"
     ];
 
@@ -56,8 +56,6 @@ class Rp_column extends ModelExtended
     }
     public function getManyLineParams()
     {
-
-
         return [
             ["dataIndex" => 'id'],
             ["dataIndex" => 'order_no', 'invisible' => true,],
@@ -79,6 +77,7 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'row_icon_position'],
             ["dataIndex" => 'row_href_fn'],
             ["dataIndex" => 'row_renderer'],
+            ["dataIndex" => 'entity_type'], // for status
             ["dataIndex" => 'agg_footer'],
             ["dataIndex" => 'cell_div_class_agg_footer'],
         ];
