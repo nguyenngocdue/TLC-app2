@@ -25,6 +25,7 @@
     },
     "require": {
         "php": "^8.2.13",
+        "babenkoivan/elastic-scout-driver": "^4.0",
         "brian2694/laravel-toastr": "^5.57",
         "darkaonline/l5-swagger": "^8.5",
         "directorytree/ldaprecord-laravel": "^2.7.3",
@@ -38,7 +39,7 @@
         "laravel/framework": "^10.0",
         "laravel/horizon": "^5.15",
         "laravel/sanctum": "^3.2",
-        "laravel/scout": "^10.5",
+        "laravel/scout": "^10.11",
         "laravel/socialite": "^5.12.1",
         "laravel/telescope": "^4.17.6",
         "laravel/tinker": "^2.9.0",
