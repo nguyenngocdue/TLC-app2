@@ -1,8 +1,8 @@
 {
-    "_getClaimableItems": {
-        "name": "_getClaimableItems",
+    "_getClaimableLines": {
+        "name": "_getClaimableLines",
         "relationship": "morphMany",
-        "control_name": "getClaimableItems",
+        "control_name": "getClaimableLines",
         "renderer_view_all": "",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

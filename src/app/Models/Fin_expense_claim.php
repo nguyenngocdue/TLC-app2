@@ -15,10 +15,10 @@ class Fin_expense_claim extends ModelExtended
     // public static $statusless = true;
 
     public static $eloquentParams = [
-        "getClaimableItems" => ['morphMany', Fin_claimable_item::class, 'claimable', 'claimable_type', 'claimable_id'],
+        "getClaimableLines" => ['morphMany', Fin_expense_claim_line::class, 'claimable', 'claimable_type', 'claimable_id'],
     ];
 
-    public function getClaimableItems()
+    public function getClaimableLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

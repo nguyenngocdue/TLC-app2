@@ -172,9 +172,9 @@
     "fin_expense_claims_01": {
         "name": "fin_expense_claims_01",
         "entity-type": "fin_expense_claims",
-        "editable-table": "fin_claimable_items",
+        "editable-table": "fin_expense_claim_lines",
         "button_add_a_new_line": "true",
-        "item_datasource": null,
+        "item_datasource": "comments",
         "eloquent_function_name": null,
         "group_datasource": null,
         "foreign_key": null

@@ -36,7 +36,7 @@ trait TraitEntityListenDataSource
         $listeners = Listeners::getAllOf($type);
         foreach ($listeners as $listener) {
             $listen_to_fields0 = $listener['listen_to_fields'];
-            $listen_to_tables[] = array_map(fn ($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
+            $listen_to_tables[] = array_map(fn($i) => $sp['props']["_" . $i]['relationships']['table'], $listen_to_fields0);
             $listen_to_attrs[] = $listener['listen_to_attrs'];
         }
 
@@ -141,14 +141,18 @@ trait TraitEntityListenDataSource
         $notFoundInProps = [];
         foreach ($toBeLoaded as $table) {
             // $props = Props::getAllOf($table);
-            $props = SuperProps::getFor($table)['props'];
+            $props = SuperProps::getFor($table)['props'] ?? null;
+            if (!$props) {
+                dump("Table $table not found in prop.json. Please add it.");
+                continue;
+            }
             $defaultColumns =  ['id', 'name', 'description', 'employeeid',];
             if (isset($extraColumns[$table])) {
                 $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
                 // Log::info($extraColumns[$table]);
             }
             //Make sure all columns in matrix is really exist in the Prop list
-            $availableColumnNames = array_values(array_map(fn ($prop) => $prop['column_name'], $props));
+            $availableColumnNames = array_values(array_map(fn($prop) => $prop['column_name'], $props));
             $matrix[$table] = array_intersect($defaultColumns, $availableColumnNames);
             $diff = array_diff($defaultColumns, $matrix[$table]);
             if (sizeof($diff) > 0) $notFoundInProps[$table] = $diff;
@@ -196,7 +200,7 @@ trait TraitEntityListenDataSource
             }
             $objectRowsMinimal[] = $item;
         }
-        $rows = array_map(fn ($o) => (array)$o, $objectRowsMinimal);
+        $rows = array_map(fn($o) => (array)$o, $objectRowsMinimal);
         return $rows;
     }
 
@@ -205,7 +209,7 @@ trait TraitEntityListenDataSource
         $rows = DB::table($table)->select($columnsWithoutOracy);
         $objectRows = $rows->get();
         $objectRows = $objectRows->toArray();
-        return array_map(fn ($o) => (array)$o, $objectRows);
+        return array_map(fn($o) => (array)$o, $objectRows);
     }
 
     private function renderListenDataSource($types)
@@ -243,7 +247,7 @@ trait TraitEntityListenDataSource
                 if ($table == 'users') {
                     // Log::info($items);
                     if (app()->isProduction()) {
-                        $items = array_filter($items, fn ($item) => !str_contains($item['name'], "(BETA)"));
+                        $items = array_filter($items, fn($item) => !str_contains($item['name'], "(BETA)"));
                         $items = array_values($items);
                     }
                 }
@@ -289,7 +293,7 @@ trait TraitEntityListenDataSource
             } else {
                 $line['table_name'] = $relationships['table'];
             }
-            $line['listen_to_tables'] = array_map(fn ($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
+            $line['listen_to_tables'] = array_map(fn($control) => $sp['props']["_" . $control]['relationships']['table'], $line['listen_to_fields']);
         }
         return $result;
     }

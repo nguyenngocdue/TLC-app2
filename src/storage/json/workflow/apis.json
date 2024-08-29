@@ -174,12 +174,27 @@
     "fields": {
         "name": "fields"
     },
-    "fin_claimable_items": {
-        "name": "fin_claimable_items",
+    "fin_debit_groups": {
+        "name": "fin_debit_groups"
+    },
+    "fin_expense_claim_lines": {
+        "name": "fin_expense_claim_lines",
         "storeEmpty_and_updateShort": "true"
     },
     "fin_expense_claims": {
         "name": "fin_expense_claims"
+    },
+    "fin_expense_items": {
+        "name": "fin_expense_items"
+    },
+    "fin_expense_types": {
+        "name": "fin_expense_types"
+    },
+    "fin_gl_accounts": {
+        "name": "fin_gl_accounts"
+    },
+    "fin_vat_product_posting_groups": {
+        "name": "fin_vat_product_posting_groups"
     },
     "ghg_cats": {
         "name": "ghg_cats"

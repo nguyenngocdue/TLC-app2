@@ -6,6 +6,7 @@ use App\Http\Services\CleanOrphanAttachment\ListAttachmentService;
 use App\Http\Services\CleanOrphanAttachment\ListFileService;
 use App\Http\Services\CleanOrphanAttachment\ListFolderService;
 use App\Models\Erp_item;
+use App\Models\Erp_vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -30,10 +31,14 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $tables = Erp_item::query()->paginate(100);
+        // $tables = Erp_item::query()->paginate(100);
+        $tables = Erp_vendor::query()->paginate(100);
 
         $columns = [
             ['dataIndex' => 'No_'],
+            ['dataIndex' => 'Name'],
+            ['dataIndex' => 'VAT Registration No_'],
+            ['dataIndex' => 'Address'],
             ['dataIndex' => 'Description'],
             ['dataIndex' => 'Search Description'],
         ];

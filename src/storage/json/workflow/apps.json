@@ -817,12 +817,12 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
-    "fin_claimable_item": {
-        "name": "fin_claimable_item",
+    "fin_expense_claim_line": {
+        "name": "fin_expense_claim_line",
         "package_tab": "application",
         "package": "finance",
         "sub_package": "finance",
-        "title": "Claimable Items",
+        "title": "Expense Claim Lines",
         "nickname": null,
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-file\"><\/i>",

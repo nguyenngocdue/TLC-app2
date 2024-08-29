@@ -43,28 +43,6 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_title": {
-        "name": "_title",
-        "column_name": "title",
-        "column_type": "varchar(255)",
-        "label": "Title",
-        "control": "text",
-        "align": "",
-        "col_span": "",
-        "width": "",
-        "hidden_view_all": "",
-        "hidden_edit": "",
-        "hidden_label": "",
-        "hidden_filter": "",
-        "hidden_print": "",
-        "read_only": "",
-        "save_on_change": "",
-        "duplicatable": "",
-        "new_line": "",
-        "frozen_left": "",
-        "frozen_right": "",
-        "nowrap_view_all": ""
-    },
     "_description": {
         "name": "_description",
         "column_name": "description",
@@ -87,9 +65,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_getClaimableItems": {
-        "name": "_getClaimableItems",
-        "column_name": "getClaimableItems",
+    "_getClaimableLines": {
+        "name": "_getClaimableLines",
+        "column_name": "getClaimableLines",
         "column_type": "morphMany",
         "label": "Claim Lines",
         "control": "relationship_renderer",

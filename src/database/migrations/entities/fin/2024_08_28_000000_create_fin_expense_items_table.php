@@ -22,7 +22,11 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('name_vi')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('expense_type_id')->nullable(); // Domestic, International
+
+            $table->unsignedBigInteger('gl_account_id')->nullable();
+            $table->unsignedBigInteger('debit_group_id')->nullable();
+
+            $table->unsignedBigInteger('expense_type_id')->nullable();
             $table->unsignedBigInteger('expense_location_id')->nullable(); // Domestic, International
 
             $table->appendCommonFields();
