@@ -13,7 +13,6 @@
 {{-- @php
     dd($tableDataSource);
 @endphp --}}
-<x-renderer.card title="">
     <x-renderer.table 
         headerTop=12 
         showNo=true 
@@ -23,4 +22,3 @@
         topLeftControl="{!! $topLeftControl !!}" topCenterControl="{!! $topCenterControl !!}"
         topRightControl="{!! $topRightControl !!}" bottomLeftControl="{!! $bottomLeftControl !!}"
         bottomCenterControl="{!! $bottomCenterControl !!}" bottomRightControl="{!! $bottomRightControl !!}" />
-</x-renderer.card>

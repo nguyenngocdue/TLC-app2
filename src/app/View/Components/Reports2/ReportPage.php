@@ -16,10 +16,9 @@ class ReportPage extends Component
 
     private function createLayoutStyle($isLandscape, $width, $height, $isFullWidth, $pageBackgroundPath)
     {
-        $fullWidthClass = $width  ? "width :{$width}px" : "width :{$this->w}px";
         $width = $width ? $width  : $this->w * $this->pageScaleFactor;
         $height = $height ? $height  : $this->h * $this->pageScaleFactor;
-        $style = $isFullWidth ? $fullWidthClass : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
+        $style = $isFullWidth ? 'w-full' : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
         $style = $pageBackgroundPath ? $style . " background-image: url('{$pageBackgroundPath}');" : $style;
         return $style;
     }
