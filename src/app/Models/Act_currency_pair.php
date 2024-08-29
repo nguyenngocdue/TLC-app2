@@ -14,6 +14,7 @@ class Act_currency_pair extends ModelExtended
         'getCountCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
     ];
     public static $nameless = true;
+    public static $statusless = true;
     public function getNameAttribute($value)
     {
         $base = $this->getBaseCurrency;

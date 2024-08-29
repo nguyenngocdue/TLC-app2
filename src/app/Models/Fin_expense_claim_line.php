@@ -20,12 +20,17 @@ class Fin_expense_claim_line extends ModelExtended
         "invoice_no",
         "quantity",
         "unit_price",
-        "document_currency",
+        "document_currency_id",
         "total_amount_0",
         "vat_product_posting_group_id",
         "vat_product_posting_group_value",
         "total_amount_1",
+
+        "currency_pair_id",
+        "rate_exchange_month_id",
+        "counter_currency_id",
         "rate_exchange",
+
         "total_amount_lcy",
         "vendor_id",
         "vendor_name",
@@ -48,8 +53,13 @@ class Fin_expense_claim_line extends ModelExtended
         "getExpenseLocation" => ['belongsTo', Term::class, 'expense_location_id'],
         "getExpenseItem" => ['belongsTo', Fin_expense_item::class, 'expense_item_id'],
         "getGlAccount" => ['belongsTo', Fin_gl_account::class, 'gl_account_id'],
-        "getDocumentCurrency" => ['belongsTo', Act_currency::class, 'document_currency'],
+        "getDocumentCurrency" => ['belongsTo', Act_currency::class, 'document_currency_id'],
         "getVatProductPostingGroup" => ['belongsTo', Fin_vat_product_posting_group::class, 'vat_product_posting_group_id'],
+
+        'getCurrencyPair' => ['belongsTo', Act_currency_pair::class, 'currency_pair_id'],
+        'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
+        'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
+
         // "getRateExchange" => ['belongsTo', ::class, 'rate_exchange'],
         // "getVendor" => ['belongsTo', Erp_vendor::class, 'vendor_id'],
 
@@ -91,6 +101,18 @@ class Fin_expense_claim_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getRateExchangeMonth()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getCounterCurrency()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     // public function getRateExchange()
 
     // public function getVendor()
@@ -116,7 +138,7 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'invoice_no',],
             ['dataIndex' => 'quantity',],
             ['dataIndex' => 'unit_price',],
-            ['dataIndex' => 'document_currency',],
+            ['dataIndex' => 'document_currency_id',],
             ['dataIndex' => 'total_amount_0',],
             ['dataIndex' => 'vat_product_posting_group_id',],
             ['dataIndex' => 'vat_product_posting_group_value',],

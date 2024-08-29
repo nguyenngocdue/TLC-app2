@@ -32,14 +32,18 @@ return new class extends Migration
             $table->double('quantity')->nullable();
             $table->double('unit_price')->nullable();
 
-            $table->unsignedBigInteger('document_currency')->nullable();
+            $table->unsignedBigInteger('document_currency_id')->nullable();
             $table->double('total_amount_0')->nullable();
 
             $table->unsignedBigInteger('vat_product_posting_group_id')->nullable();
             $table->unsignedInteger('vat_product_posting_group_value')->nullable();
             $table->double('total_amount_1')->nullable();
 
-            $table->unsignedBigInteger('rate_exchange')->nullable();
+            $table->unsignedBigInteger("currency_pair_id");
+            $table->unsignedBigInteger("rate_exchange_month_id");
+            $table->unsignedBigInteger("counter_currency_id");
+
+            $table->double('rate_exchange')->nullable();
             $table->double('total_amount_lcy')->nullable();
 
             $table->unsignedBigInteger('vendor_id')->nullable();

@@ -61,6 +61,7 @@ const dataPickerFormatByElements = (nameElement) => {
 }
 const removeLetters = (number) => number.replace(/[^\d.-]/g, '')
 
+// if is convert to something like 1.undefined, it is likely you have use integer instead of float/decimal
 const parseNumber2 = (id, initValue, numericScale = 2) => {
     // console.log('BEGIN', id, initValue, numericScale)
     const inputNumber = $("[id='" + id + "']")

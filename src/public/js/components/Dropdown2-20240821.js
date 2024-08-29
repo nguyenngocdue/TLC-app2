@@ -18,7 +18,7 @@ const select2FormatState = (state) => {
           )
 }
 const select2Matcher = (params, data) => {
-    console.log(params, data)
+    // console.log(params, data)
     // If there are no search terms, return all of the data.
     if ($.trim(params.term) === '') return data
 
