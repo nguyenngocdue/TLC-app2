@@ -17,15 +17,14 @@ return new class extends Migration
         $schema = DB::connection()->getSchemaBuilder();
         $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('fin_claimable_items', function (BlueprintExtended $table) {
+        $schema->create('fin_expense_items', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('name_vi')->nullable();
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('expense_type_id')->nullable(); // Domestic, International
+            $table->unsignedBigInteger('location_id')->nullable(); // Domestic, International
 
-            $table->string('claimable_type')->nullable();
-            $table->unsignedBigInteger('claimable_id')->nullable();
-
-            $table->orderable();
             $table->appendCommonFields();
         });
     }
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fin_claimable_items');
+        Schema::dropIfExists('fin_expense_items');
     }
 };

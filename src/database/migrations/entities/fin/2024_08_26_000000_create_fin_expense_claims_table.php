@@ -20,7 +20,6 @@ return new class extends Migration
         $schema->create('fin_expense_claims', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->appendCommonFields();
         });

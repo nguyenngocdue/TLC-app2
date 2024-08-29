@@ -17,15 +17,11 @@ return new class extends Migration
         $schema = DB::connection()->getSchemaBuilder();
         $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('fin_claimable_items', function (BlueprintExtended $table) {
+        $schema->create('fin_vat_product_posting_groups', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
-
-            $table->string('claimable_type')->nullable();
-            $table->unsignedBigInteger('claimable_id')->nullable();
-
-            $table->orderable();
+            $table->float('value')->nullable();
             $table->appendCommonFields();
         });
     }
@@ -37,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fin_claimable_items');
+        Schema::dropIfExists('fin_vat_product_posting_groups');
     }
 };

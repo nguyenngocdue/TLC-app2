@@ -8,7 +8,6 @@ class Fin_expense_claim extends ModelExtended
 {
     protected $fillable = [
         "name",
-        "title",
         "description",
         "owner_id",
     ];

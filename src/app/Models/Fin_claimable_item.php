@@ -9,7 +9,6 @@ class Fin_claimable_item extends ModelExtended
     protected $fillable = [
         "id",
         "name",
-        "title",
         "description",
         "owner_id",
         "order_no",
@@ -36,7 +35,6 @@ class Fin_claimable_item extends ModelExtended
             ['dataIndex' => 'claimable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
             ['dataIndex' => 'claimable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'title'],
         ];
     }
 }
