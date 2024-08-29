@@ -109,9 +109,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_location_id": {
-        "name": "_location_id",
-        "column_name": "location_id",
+    "_expense_location_id": {
+        "name": "_expense_location_id",
+        "column_name": "expense_location_id",
         "column_type": "bigint unsigned",
         "label": "Location",
         "control": "radio",

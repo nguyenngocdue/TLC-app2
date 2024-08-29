@@ -1,8 +1,8 @@
 {
-    "_getLocation": {
-        "name": "_getLocation",
+    "_getExpenseLocation": {
+        "name": "_getExpenseLocation",
         "relationship": "belongsTo",
-        "control_name": "location_id",
+        "control_name": "expense_location_id",
         "renderer_view_all": "column",
         "renderer_view_all_param": "name",
         "renderer_view_all_unit": "",

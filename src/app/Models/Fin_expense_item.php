@@ -14,14 +14,14 @@ class Fin_expense_item extends ModelExtended
         "owner_id",
 
         "expense_type_id",
-        "location_id",
+        "expense_location_id",
         // "order_no",
     ];
 
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getLocation" => ["belongsTo", Term::class, "location_id"],
+        "getExpenseLocation" => ["belongsTo", Term::class, "expense_location_id"],
         "getExpenseType" => ["belongsTo", Fin_expense_type::class, "expense_type_id"],
     ];
 

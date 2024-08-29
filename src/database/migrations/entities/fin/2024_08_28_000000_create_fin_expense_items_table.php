@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('name_vi')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('expense_type_id')->nullable(); // Domestic, International
-            $table->unsignedBigInteger('location_id')->nullable(); // Domestic, International
+            $table->unsignedBigInteger('expense_location_id')->nullable(); // Domestic, International
 
             $table->appendCommonFields();
         });

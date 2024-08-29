@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
 
+            $table->unsignedBigInteger('expense_location_id')->nullable();
+
             $table->string('claimable_type')->nullable();
             $table->unsignedBigInteger('claimable_id')->nullable();
 
