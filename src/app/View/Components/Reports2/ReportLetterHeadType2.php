@@ -6,7 +6,7 @@ use App\Http\Controllers\Reports2\Rp_page_block_detailController;
 use App\Http\Controllers\Reports2\Rp_pageController;
 use Illuminate\View\Component;
 
-class LetterHeadReportType2 extends Component
+class ReportLetterHeadType2 extends Component
 {
     public function __construct(
         private $width = "",
@@ -19,6 +19,6 @@ class LetterHeadReportType2 extends Component
 
     public function render()
     {
-        return view('components.reports2.letter-head-report-type2', []);
+        return view('components.reports2.report-letter-head-type2', []);
     }
 }

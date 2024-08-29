@@ -1,28 +1,33 @@
+@php
+    $LETTER_HEAD_TYPE_ID = 0;
+    $LETTER_FOOTER_TYPE_ID = 0;
+@endphp
+
 <div class="flex justify-center">
-    <div class="py-4">
-        <div class=" items-center bg-white p-0 flex flex-col justify-between" style="{{ $layoutStyle }}">
+    <div class=" {{$layoutStyle}} py-4">
+        <div class=" w-full items-center bg-white p-0 flex flex-col justify-between" style="{{ $layoutStyle }}">
             <!-- Head section with a border -->
-            <div class="w-full border-2 border-gray-300 p-2 mb-1">
-                @switch($letterHeadId)
+                @switch($LETTER_HEAD_TYPE_ID)
                     @case (1)
-                        <x-reports2.letter-head-report-type1 />
+                        <div class="w-full border-2 border-gray-300 p-2 mb-1">
+                            <x-reports2.report-letter-head-type1 />
+                        <div>
                     @break
-
                     @case (2)
-                        <x-reports2.letter-head-report-type2 />
+                        <div class="w-full border-2 border-gray-300 p-2 mb-1">
+                            <x-reports2.report-letter-head-type2 />
+                        <div>
                     @break
-
                     @default
-                        <x-reports2.letter-head-report-type1 />
                     @break
                 @endswitch
 
             </div>
 
             <!-- Main content area -->
-            <div class="w-full items-center border-2 border-gray-300">
+            <div class="w-full items-center border-2 ">
                 {{-- Blocks --}}
-                <div class="container mx-auto p-5" title="{{ $content['name'] ?? null }}">
+                <div class="{{-- container mx-auto --}}" title="{{ $content['name'] ?? null }}">
                     <div class="grid grid-cols-12 gap-4">
                         <x-reports2.report-block :blockDetails="$blockDetails" :report="$report" />
                     </div>
@@ -31,18 +36,19 @@
             </div>
 
             <!-- Footer section with a border -->
-            <div class="w-full border-2 border-gray-300 p-2">
-                @switch($letterFooterId)
+                @switch($LETTER_FOOTER_TYPE_ID)
                     @case (1)
-                        <x-reports2.letter-footer-report-type1 />
+                        <div class="w-full border-2 border-gray-300 p-2">
+                            <x-reports2.report-letter-footer-type1 />
+                        </div>
                     @break
 
                     @case (2)
-                        <x-reports2.letter-footer-report-type2 />
+                         <div class="w-full border-2 border-gray-300 p-2">
+                            <x-reports2.report-letter-footer-type2 />
+                        </div>
                     @break
-
                     @default
-                        <x-reports2.letter-footer-report-type1 />
                     @break
                 @endswitch
             </div>

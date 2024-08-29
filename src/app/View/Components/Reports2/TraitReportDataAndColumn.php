@@ -68,13 +68,13 @@ trait TraitReportDataAndColumn
     public function getDataColumns($block, $queriedData)
     {
         if($queriedData->isEmpty()){
-            $columnInstance = ColumnReport::getInstance($block);
+            $columnInstance = ReportColumn::getInstance($block);
             $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
             return [$headerCols, []];
         } 
 
         $uniqueFields = $this->getAllUniqueFields($queriedData);
-        // config from ddmin
+        // config from admin
         $lines = $block->getLines->sortby('order_no');
         $secondHeaderCols = $this->getSecondColumns($block);
         $headerCols = [];
