@@ -220,6 +220,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_document_currency": {
+        "name": "_document_currency",
+        "column_name": "document_currency",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_quantity": {
         "name": "_quantity",
         "column_name": "quantity",
@@ -236,19 +249,6 @@
     "_unit_price": {
         "name": "_unit_price",
         "column_name": "unit_price",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_document_currency": {
-        "name": "_document_currency",
-        "column_name": "document_currency",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -279,7 +279,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "4",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
@@ -292,7 +292,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "",
+        "default_value": "10",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",

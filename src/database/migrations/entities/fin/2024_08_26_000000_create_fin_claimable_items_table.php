@@ -40,7 +40,7 @@ return new class extends Migration
             $table->double('total_amount_1')->nullable();
 
             $table->unsignedBigInteger('rate_exchange')->nullable();
-            $table->unsignedBigInteger('total_amount_lcy')->nullable();
+            $table->double('total_amount_lcy')->nullable();
 
             $table->unsignedBigInteger('vendor_id')->nullable();
             $table->string('vendor_name')->nullable();

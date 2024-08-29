@@ -35,6 +35,14 @@ class Fin_expense_claim_line extends ModelExtended
         "claimable_id",
     ];
 
+    public static $nameless = true;
+
+    public function getNameAttribute($value)
+    {
+
+        return "Generated Name";
+    }
+
     public static $eloquentParams = [
         "claimable" => ['morphTo', Fin_expense_claim_line::class, 'claimable_type', 'claimable_id'],
         "getExpenseLocation" => ['belongsTo', Term::class, 'expense_location_id'],
@@ -100,10 +108,10 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'claimable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
             ['dataIndex' => 'claimable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
-            ['dataIndex' => 'name'],
+            ['dataIndex' => 'name', 'invisible' => true],
             ['dataIndex' => 'expense_location_id'],
             ['dataIndex' => 'expense_item_id'],
-            ['dataIndex' => 'gl_account_id', 'invisible' => true],
+            ['dataIndex' => 'gl_account_id', 'invisible' => !true,],
             ['dataIndex' => 'invoice_date',],
             ['dataIndex' => 'invoice_no',],
             ['dataIndex' => 'quantity',],
