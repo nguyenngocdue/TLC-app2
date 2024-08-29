@@ -136,13 +136,13 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'gl_account_id', 'invisible' => !true,],
             ['dataIndex' => 'invoice_date',],
             ['dataIndex' => 'invoice_no',],
-            ['dataIndex' => 'quantity',],
+            ['dataIndex' => 'quantity', 'footer' => 'agg_sum',],
             ['dataIndex' => 'unit_price',],
             ['dataIndex' => 'document_currency_id',],
-            ['dataIndex' => 'total_amount_0',],
+            ['dataIndex' => 'total_amount_0', 'footer' => 'agg_sum',],
             ['dataIndex' => 'vat_product_posting_group_id',],
             ['dataIndex' => 'vat_product_posting_group_value',],
-            ['dataIndex' => 'total_amount_1',],
+            ['dataIndex' => 'total_amount_1', 'footer' => 'agg_sum',],
 
 
             ['dataIndex' => 'counter_currency_id', 'invisible' => true, 'read_only_rr2' => true],
@@ -150,7 +150,7 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'rate_exchange_month_id', 'invisible' => true, 'read_only_rr2' => true],
 
             ['dataIndex' => 'rate_exchange',],
-            ['dataIndex' => 'total_amount_lcy',],
+            ['dataIndex' => 'total_amount_lcy', 'footer' => 'agg_sum',],
             // ['dataIndex' => 'vendor_id',],
             ['dataIndex' => 'vendor_name',],
             ['dataIndex' => 'vendor_address',],
