@@ -18,11 +18,11 @@ class ReportBlock extends Component
         $this->entity_type = $this->report->entity_type;
     }
 
-    private function paginateDataSource($dataSource, $hasPagination, $pageLimit)
+    private function paginateDataSource($dataSource, $hasPagination, $perPage)
     {
         $page = $_GET['page'] ?? 1;
         if ($hasPagination) {
-            $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $pageLimit), $dataSource->count(), $pageLimit, $page));
+            $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $perPage), $dataSource->count(), $perPage, $page));
         }
         return $dataSource;
     }
@@ -32,19 +32,20 @@ class ReportBlock extends Component
     {
         $blockDetails = $this->blockDetails;
         $blockDataSource = [];
-        $currentPrams = $this->currentParamsReport();
-
+        $currentParams = $this->currentParamsReport();
+        $perPage = $currentParams['per_page'] ?? 10;
+        
         foreach ($blockDetails as $item) {
             $block = $item->getBlock;
             try {
-                $queriedData = $this->getDataSQLString($block, $currentPrams);
-                $queriedData = $this->paginateDataSource($queriedData, $block->has_pagination, 10);
+                $queriedData = $this->getDataSQLString($block, $currentParams);
+                $queriedData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
             [$headerCols, $secondHeaderCols] = $this->getDataColumns($block, $queriedData);
-
-
+            
+            
             $blockItem = [
                 'colSpan' => $item->col_span,
                 'block' => $block,
@@ -59,6 +60,7 @@ class ReportBlock extends Component
         return view('components.reports2.report-block', [
             'blockDataSource' => $blockDataSource,
             'reportId' => $this->report->id,
+            'currentParams' => $currentParams,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Rp_report;
 use Illuminate\View\Component;
 use App\Utils\Support\HrefReport;
 use Illuminate\Support\Str;
@@ -14,15 +15,20 @@ class ReportBlockTable extends Component
     use TraitReportDataAndColumn;
     use TraitReportTermNames;
 
+
     protected $STATUS_ROW_RENDERER_ID = 661;
     protected $ID_ROW_RENDERER_ID = 662;
+    protected $EXPORT_TYPE_ID = 621;
+    protected $PAGINATION_TYPE_ID = 622;
 
+    protected $reportType2 = 'report2';
     public function __construct(
         private $reportId,
         private $block,
-        private $rawTableDataSource,
+        private $tableDataSource,
         private $headerCols,
         private $secondHeaderCols,
+        private $currentParams,
     ) {}
 
     private function getConfiguredColumns($columns, $dataIndexToRender = [])
@@ -49,9 +55,7 @@ class ReportBlockTable extends Component
     private function createTableDataSourceForRows($queriedData, $configuredColumns)
     {
   
-        $result = collect();
-        foreach ($queriedData as $k1 => $dataLine) {
-            // dd($configuredColumns);
+        foreach ($queriedData as $k1 => &$dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $configuredColumns)) {
@@ -96,10 +100,30 @@ class ReportBlockTable extends Component
                     $re->$k2 = $newValue;
                 }
             }
-            $result->put($k1, $re);
+            $dataLine = $re;
+            $queriedData->put($k1, $dataLine);
         }
-        // dd($result);
-        return $result;
+        // dd($queriedData);
+        return $queriedData;
+    }
+
+
+    private function getControls($typeId){
+        $rp =Rp_report::find($this->reportId);
+        $reportId = $rp->id;
+        $entityType = $rp->entity_type;
+        $entityType2 = $this->reportType2;
+        $route = route('report_perPages.update');
+        $currentParams = $this->currentParams;
+        $pageLimit = $currentParams['per_page'] ?? 10;
+        switch ($typeId) {
+            case $this->PAGINATION_TYPE_ID:
+                return Blade::render("<x-reports2.per-page-report2 entityType='{$entityType}' reportType2='{$entityType2}' reportId='{$reportId}' route='{$route}' pageLimit='{$pageLimit}' />");
+            case $this->EXPORT_TYPE_ID:
+                return Blade::render("<x-reports.utility-report routeName='report-qaqc_insp_chklst_sht_010'/>");
+            default:
+                break;
+        }
     }
 
 
@@ -111,7 +135,7 @@ class ReportBlockTable extends Component
         $dataIndexToRender = array_column($this->headerCols, 'dataIndex');
         $configuredColumns = $this->getConfiguredColumns($columns, $dataIndexToRender);
 
-        $newTableDataSource = $this->createTableDataSourceForRows($this->rawTableDataSource, $configuredColumns, $block);
+        $newTableDataSource = $this->createTableDataSourceForRows($this->tableDataSource, $configuredColumns, $block);
 
         return view('components.reports2.report-block-table', [
             'block' => $block,
@@ -128,12 +152,12 @@ class ReportBlockTable extends Component
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
 
-            "topLeftControl" => $block->top_left_control,
-            "topCenterControl" => $block->top_center_control,
-            "topRightControl" => $block->top_right_control,
-            "bottomLeftControl" => $block->bottom_left_control,
-            "bottomCenterControl" => $block->bottom_center_control,
-            "bottomRightControl" => $block->bottom_right_control,
+            "topLeftControl" => $this->getControls($block->top_left_control),
+            "topCenterControl" => $this->getControls($block->top_center_control),
+            "topRightControl" =>  $this->getControls($block->top_right_control),
+            "bottomLeftControl" => $this->getControls($block->bottom_left_control),
+            "bottomCenterControl" => $this->getControls($block->bottom_center_control),
+            "bottomRightControl" => $this->getControls($block->bottom_right_control),
         ]);
     }
 }

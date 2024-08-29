@@ -408,7 +408,6 @@ class UpdateUserSettings extends Controller
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
 
-
         // when select "Search Quick Ranges"
         if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updatePresetFilter"){
            $inputValue = $this->updatePresetFilter($inputValue);
@@ -439,7 +438,7 @@ class UpdateUserSettings extends Controller
         $settings[$entityType][$reportType2][$storedFilterKey] = $paramToUpdate;
         return $settings;
     }
-    
+
     private function updatePerPageReports($request, $settings)
     {
         $entity = $request->input("_entity");

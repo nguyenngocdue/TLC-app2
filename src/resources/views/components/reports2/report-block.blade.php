@@ -28,14 +28,17 @@
             @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
 
             <x-renderer.report2.title-description-block :block="$block" />
-
             @switch($rendererType)
                 @case($TABLE_TYPE_ID)
                     <x-reports2.report-block-table 
                         reportId="{{ $reportId }}" 
-                        :rawTableDataSource="$tableDataSource" 
+                        :block="$block"
+                        :tableDataSource="$tableDataSource" 
                         :headerCols="$headerCols"
-                        :secondHeaderCols="$secondHeaderCols" :block="$block" />
+                        :secondHeaderCols="$secondHeaderCols"
+                        :currentParams="$currentParams"
+                        
+                        />
                 @break
 
                 @case($CHART_TYPE_ID)

@@ -16,4 +16,10 @@ class Rp_reportController extends Controller
         (new UpdateUserSettings())($request);
         return redirect()->back();
     }
+
+    public function updatePerPages(Request $request)
+    {
+        (new UpdateUserSettings())($request);
+        return redirect()->back();
+    }
 }
