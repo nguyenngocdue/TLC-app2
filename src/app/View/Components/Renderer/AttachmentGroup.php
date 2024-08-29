@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer;
 
 use App\Models\Term;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class AttachmentGroup extends Component
@@ -42,19 +43,22 @@ class AttachmentGroup extends Component
     private function GroupBySubCat()
     {
         $result = [];
-        if ($this->groups) {
+        if ($this->groups && count($this->groups) > 0) {
             foreach ($this->groups as $groupId => $groupName) {
                 $result[$groupId] = [
                     "name" => $groupName,
                     "items" => [],
                 ];
             }
+            // Log::info("AttachmentGroup: Some groups found");
+            // Log::info($this->groups);
         } else {
             //This is for ICS, sheet that doesn't have group and have no existing attachment
             $result[null] = [
                 "name" => "",
                 "items" => [],
             ];
+            // Log::info("AttachmentGroup: No group found");
         }
         foreach ($this->attachments as $attachment) {
             $subCatId = $attachment['sub_category'];
