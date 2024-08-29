@@ -20,7 +20,7 @@ return new class extends Migration
         $schema->create('fin_expense_items', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('name_vi')->nullable();
+            // $table->string('name_vi')->nullable();
             $table->text('description')->nullable();
 
             $table->unsignedBigInteger('gl_account_id')->nullable();

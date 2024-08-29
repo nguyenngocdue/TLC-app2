@@ -9,7 +9,6 @@ class Fin_expense_item extends ModelExtended
     protected $fillable = [
         "id",
         "name",
-        "name_vi",
         "description",
         "owner_id",
 

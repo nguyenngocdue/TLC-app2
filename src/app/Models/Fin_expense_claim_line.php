@@ -44,8 +44,16 @@ class Fin_expense_claim_line extends ModelExtended
 
     public function getNameAttribute($value)
     {
+        $location = "";
+        if ($this->expense_location_id) {
+            $location = "(" . strtoupper(substr($this->getExpenseLocation->name, 0, 2)) . ")";
+        }
+        if ($this->expense_item_id) {
 
-        return "Generated Name";
+            $item = $this->getExpenseItem;
+            return  $item->name . " | " . $this->description . "|" . $location;
+        }
+        return "";
     }
 
     public static $eloquentParams = [
@@ -113,7 +121,12 @@ class Fin_expense_claim_line extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
-    // public function getRateExchange()
+    public function getCurrencyPair()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
 
     // public function getVendor()
     // {
