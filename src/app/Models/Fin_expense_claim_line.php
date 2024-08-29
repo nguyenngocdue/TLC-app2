@@ -143,6 +143,12 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'vat_product_posting_group_id',],
             ['dataIndex' => 'vat_product_posting_group_value',],
             ['dataIndex' => 'total_amount_1',],
+
+
+            ['dataIndex' => 'counter_currency_id', 'invisible' => true, 'read_only_rr2' => true],
+            ['dataIndex' => 'currency_pair_id', 'invisible' => true,],
+            ['dataIndex' => 'rate_exchange_month_id', 'invisible' => true, 'read_only_rr2' => true],
+
             ['dataIndex' => 'rate_exchange',],
             ['dataIndex' => 'total_amount_lcy',],
             // ['dataIndex' => 'vendor_id',],
