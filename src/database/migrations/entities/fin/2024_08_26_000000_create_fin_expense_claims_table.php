@@ -21,6 +21,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+
+            $table->unsignedBigInteger('rate_exchange_month_id')->nullable();
+            $table->unsignedBigInteger("counter_currency_id")->nullable();
+
             $table->appendCommonFields();
         });
     }

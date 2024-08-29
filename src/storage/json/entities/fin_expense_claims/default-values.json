@@ -38,6 +38,32 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "Exchange rate will get from this month",
+        "textarea_rows": ""
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "6",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_getClaimableLines": {
         "name": "_getClaimableLines",
         "column_name": "getClaimableLines",

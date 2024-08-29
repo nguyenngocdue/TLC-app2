@@ -7,10 +7,22 @@ use App\BigThink\ModelExtended;
 class Act_travel_expense_claim_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "status", "unit_price",
-        "quantity", "currency_id", "travel_expense_claim_id", "total_amount", "currency_pair_id",
-        "rate_exchange", "total_estimated_amount", "order_no", "owner_id",
-        "counter_currency_id", "rate_exchange_month_id",
+        "id",
+        "name",
+        "description",
+        "status",
+        "unit_price",
+        "quantity",
+        "currency_id",
+        "travel_expense_claim_id",
+        "total_amount",
+        "currency_pair_id",
+        "rate_exchange",
+        "total_estimated_amount",
+        "order_no",
+        "owner_id",
+        "counter_currency_id",
+        "rate_exchange_month_id",
     ];
 
     public static $eloquentParams = [
