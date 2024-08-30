@@ -114,8 +114,7 @@ class ReportBlockTable extends Component
         $reportId = $rp->id;
         $entityType = $rp->entity_type;
         $entityType2 = $this->reportType2;
-        $route = route('report_perPages.update');
-        $routeExportExcel = route('report2_exportCSV');
+        $routeExportExcel = route('rp_exportExcel');
         $currentParams = $this->currentParams;
         $pageLimit = $currentParams['per_page'] ?? 10;
         switch ($typeId) {
@@ -124,7 +123,6 @@ class ReportBlockTable extends Component
                                                     entityType='{$entityType}' 
                                                     reportType2='{$entityType2}' 
                                                     reportId='{$reportId}' 
-                                                    route='{$route}' 
                                                     pageLimit='{$pageLimit}'
                                     />");
             case $this->EXPORT_TYPE_ID:

@@ -18,12 +18,6 @@ class Rp_reportController extends Controller
         return redirect()->back();
     }
 
-    public function updatePerPages(Request $request)
-    {
-        (new UpdateUserSettings())($request);
-        return redirect()->back();
-    }
-
     public function exportExcel(Request $request)
     {
         $input = $request->input();
