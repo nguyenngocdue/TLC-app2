@@ -39,19 +39,18 @@ class ReportBlock extends Component
             $block = $item->getBlock;
             try {
                 $queriedData = $this->getDataSQLString($block, $currentParams);
-                $queriedData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
+                $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
             [$headerCols, $secondHeaderCols] = $this->getDataColumns($block, $queriedData);
-            
             
             $blockItem = [
                 'colSpan' => $item->col_span,
                 'block' => $block,
                 'backgroundBlock' => $item->attachment_background->first(),
                 'queriedData' => $queriedData,
-                'tableDataSource' => $queriedData,
+                'tableDataSource' => $queriedPagData,
                 'headerCols' => $headerCols,
                 'secondHeaderCols' => $secondHeaderCols,
             ];

@@ -37,6 +37,7 @@
                         :headerCols="$headerCols"
                         :secondHeaderCols="$secondHeaderCols"
                         :currentParams="$currentParams"
+                        :queriedData="$queriedData"
                         
                         />
                 @break

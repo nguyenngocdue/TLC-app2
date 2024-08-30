@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Rp_report;
 use Illuminate\Http\Request;
@@ -14,14 +15,20 @@ trait TraitEntityCRUDShowReport
 	{
 		$report = Rp_report::find($id)->getDeep();
 		$pages = $report->getPages;
-		$paramsUrl = $request->input();
+		$requestInput = $request->input();
+		
+		//update per_page of table in reports
+		if (isset($requestInput['action']) && $requestInput['action'] =='updateReport2') {
+			(new UpdateUserSettings())($request);
+			return redirect()->back();
+		}
 
 		return view('dashboards.pages.entity-show-report', [
 			'appName' => LibApps::getFor($this->type)['title'],
 			'report' => $report,
 			'pages' => $pages,
 			'reportId' => $id,
-			'paramsUrl' => $paramsUrl,
+			'paramsUrl' => $requestInput,
 		]);
 	}
 }
