@@ -29,9 +29,10 @@ class ReportBlockTable extends Component
         private $headerCols,
         private $secondHeaderCols,
         private $currentParams,
+        private $queriedData,
     ) {}
 
-    private function getConfiguredColumns($columns, $dataIndexToRender = [])
+    private function getConfiguredCols($columns, $dataIndexToRender = [])
     {
         $result = [];
         foreach ($columns as  $column) {
@@ -52,14 +53,14 @@ class ReportBlockTable extends Component
     }
 
 
-    private function createTableDataSourceForRows($queriedData, $configuredColumns)
+    private function createTableDataSourceForRows($queriedData, $configuredCols)
     {
   
         foreach ($queriedData as $k1 => &$dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
-                if (array_key_exists($k2, $configuredColumns)) {
-                    $column = $configuredColumns[$k2];
+                if (array_key_exists($k2, $configuredCols)) {
+                    $column = $configuredCols[$k2];
                     $href = HrefReport::createDataHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
 
@@ -108,19 +109,34 @@ class ReportBlockTable extends Component
     }
 
 
-    private function getControls($typeId){
+    private function getControls($typeId, $queriedData, $configuredCols){
         $rp =Rp_report::find($this->reportId);
         $reportId = $rp->id;
         $entityType = $rp->entity_type;
         $entityType2 = $this->reportType2;
         $route = route('report_perPages.update');
+        $routeExportExcel = route('report2_exportCSV');
         $currentParams = $this->currentParams;
         $pageLimit = $currentParams['per_page'] ?? 10;
         switch ($typeId) {
             case $this->PAGINATION_TYPE_ID:
-                return Blade::render("<x-reports2.per-page-report2 entityType='{$entityType}' reportType2='{$entityType2}' reportId='{$reportId}' route='{$route}' pageLimit='{$pageLimit}' />");
+                return Blade::render("<x-reports2.per-page-report2 
+                                                    entityType='{$entityType}' 
+                                                    reportType2='{$entityType2}' 
+                                                    reportId='{$reportId}' 
+                                                    route='{$route}' 
+                                                    pageLimit='{$pageLimit}'
+                                    />");
             case $this->EXPORT_TYPE_ID:
-                return Blade::render("<x-reports.utility-report routeName='report-qaqc_insp_chklst_sht_010'/>");
+                return Blade::render('<x-reports2.utility-report2 
+                                            :route="$route" 
+                                            :queriedData="$queriedData"
+                                            :configuredCols="$configuredCols"
+                                            />', [
+                    'route' => $routeExportExcel,
+                    'queriedData' => $queriedData,
+                    'configuredCols' => $configuredCols
+                ]);
             default:
                 break;
         }
@@ -133,9 +149,9 @@ class ReportBlockTable extends Component
         $columns = $this->block->getLines->sortby('order_no');
 
         $dataIndexToRender = array_column($this->headerCols, 'dataIndex');
-        $configuredColumns = $this->getConfiguredColumns($columns, $dataIndexToRender);
+        $configuredCols = $this->getConfiguredCols($columns, $dataIndexToRender);
 
-        $newTableDataSource = $this->createTableDataSourceForRows($this->tableDataSource, $configuredColumns, $block);
+        $newTableDataSource = $this->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
 
         return view('components.reports2.report-block-table', [
             'block' => $block,
@@ -152,12 +168,12 @@ class ReportBlockTable extends Component
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
 
-            "topLeftControl" => $this->getControls($block->top_left_control),
-            "topCenterControl" => $this->getControls($block->top_center_control),
-            "topRightControl" =>  $this->getControls($block->top_right_control),
-            "bottomLeftControl" => $this->getControls($block->bottom_left_control),
-            "bottomCenterControl" => $this->getControls($block->bottom_center_control),
-            "bottomRightControl" => $this->getControls($block->bottom_right_control),
+            "topLeftControl" => $this->getControls($block->top_left_control, $this->queriedData, $configuredCols),
+            "topCenterControl" => $this->getControls($block->top_center_control, $this->queriedData, $configuredCols),
+            "topRightControl" =>  $this->getControls($block->top_right_control, $this->queriedData, $configuredCols),
+            "bottomLeftControl" => $this->getControls($block->bottom_left_control, $this->queriedData, $configuredCols),
+            "bottomCenterControl" => $this->getControls($block->bottom_center_control, $this->queriedData, $configuredCols),
+            "bottomRightControl" => $this->getControls($block->bottom_right_control, $this->queriedData, $configuredCols),
         ]);
     }
 }

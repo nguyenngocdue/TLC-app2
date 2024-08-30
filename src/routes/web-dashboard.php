@@ -29,6 +29,7 @@ Route::group([], function () {
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
 
             Route::post("rp_reports/update_filters/{id}", [Rp_reportController::class, 'updateFilters'])->name('report_filters.update');
+            Route::post("rp_reports_ep", [Rp_reportController::class, 'exportExcel'])->name('report2_exportCSV');
             Route::post("rp_reports/update_perPages", [Rp_reportController::class, 'updatePerPages'])->name('report_perPages.update');
 
             Route::post("{$entityName}_rs", [EntityCRUDController::class, "restoreMultiple"])->name("{$entityName}.restoreMultiple");
