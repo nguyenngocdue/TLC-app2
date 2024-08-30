@@ -155,16 +155,20 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 ];
             }
 
-            $columns = [
-                ...$columns,
-                [
-                    'dataIndex' => 'ncr_count',
-                    'title' => 'NCR Count',
-                    'width' => 40,
-                    'discipline_description' => $qaqc_discipline->description,
-                    'discipline_css_class' => $qaqc_discipline->css_class,
-                ],
-            ];
+            $routingId = $matrix['routing']->id;
+            $SHIPPING_CONTAINER_ID = 57;
+            if ($routingId != $SHIPPING_CONTAINER_ID) {
+                $columns = [
+                    ...$columns,
+                    [
+                        'dataIndex' => 'ncr_count',
+                        'title' => 'NCR Count',
+                        'width' => 40,
+                        'discipline_description' => $qaqc_discipline->description,
+                        'discipline_css_class' => $qaqc_discipline->css_class,
+                    ],
+                ];
+            }
 
             if ($matrix['chklst_tmpls']->has_punchlist) {
                 $columns = [
