@@ -429,8 +429,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                     foreach ($tmpls as $tmpl) {
                         $key = $routing->id . "_" . $tmpl->id;
                         $result[$key] = [
-                            'name'  => $routing->name,
-                            'description' => "Checklist Type: " . $tmpl->name,
+                            'name'  => $routing->name . " (" . $tmpl->short_name . ")",
+                            'description' => "", //"Checklist Type: 111 " . $tmpl->name,
                             'name_for_sort_by' => $routing->name . " " . $tmpl->name,
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
