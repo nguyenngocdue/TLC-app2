@@ -22,8 +22,6 @@
                     @break
                 @endswitch
 
-            </div>
-
             <!-- Main content area -->
             <div class="w-full items-center border-2 ">
                 {{-- Blocks --}}

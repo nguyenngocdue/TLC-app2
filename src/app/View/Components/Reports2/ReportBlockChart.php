@@ -11,75 +11,41 @@ class ReportBlockChart extends Component
     use TraitReportDataAndColumn;
     use TraitTransformationData;
 
+    protected $LINE_CHART_TYPE_ID = 688;
+
     public function __construct(
         private $block = null,
         private $queriedData = null,
         private $headerCols = []
     ) {}
 
-    private function formatJsonString($longString)
+    private function changeToJsonOptions(string $options, $queriedData)
     {
-        // Add double quotes around keys
-        $jsonString = preg_replace('#(\w+):#', '"$1":', $longString);
+        preg_match_all('/(?<!\\\)\{\{\s*([^}]*)\s*\}\}/', $options, $matches);
+        foreach (last($matches) as $key => $value) {
+            $keyInDta = trim(str_replace('$', '', $value));
+            $valueInData = $queriedData->pluck($keyInDta)->toArray();
+            $valueInData = '['. implode(',' ,$valueInData) . ']';
 
-        // Remove comments (both single-line and multi-line)
-        // This ensures the JSON string is valid and can be parsed without errors.
-        $jsonString = preg_replace('#//.*|/\*[\s\S]*?\*/#', '', $jsonString);
-        $jsonChart = json_decode($jsonString, 1);
-        $jsonChart = json_encode($jsonChart, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        return $jsonString;
+            $firstMatches = reset($matches);
+            $keyInOptions = $firstMatches[$key];
+            $options = str_replace($keyInOptions, $valueInData, $options);
+        }
+        $jsonOptions = json_decode($options);
+        return $jsonOptions;
     }
 
     public function render()
     {
         $block = $this->block;
         $chartTypeId = $block->chart_type;
-        $jsonChart = $this->formatJsonString($block->chart_json);
-
         $queriedData = $this->queriedData;
-        $viewName = '';
-        $series = [];
-        $key = hash('sha256', $chartTypeId . $block->name);;
-        $tableColumns = $this->colHeaders;
-
-
-        switch ($chartTypeId) {
-            case (684):
-            case (681):
-                $typeOfTrans = "rows_to_fields";
-                switch ($typeOfTrans) {
-                    case 'rows__to_fields':
-                        $transformation = $this->makeRowsToFields($queriedData, $tableColumns);
-                        break;
-                    default:
-                        $transformation = $this->groupNames($queriedData);
-                        break;
-                }
-                $series = $this->makeSeriesChart($transformation);
-                $viewName = 'chart-bar';
-                break;
-            case (682):
-                $viewName = 'chart-pie-donut';
-                break;
-            case (683):
-                $viewName = 'chart-column';
-                break;
-        }
-        // dump($jsonChart);
-
-        if ($viewName) {
-            $componentName = "x-reports2.charts.types." . $viewName;
-            $chart = '<' . $componentName . ' key="{{$key}}" chartTypeId="{{$chartTypeId}}" :tableColumns="$tableColumns" :series="$series" :jsonChart="$jsonChart" :queriedData="$queriedData"/>';
-
-            return  Blade::render($chart, [
-                'key' => $key,
-                'block' => $block,
-                'chartTypeId' => $chartTypeId,
-                'jsonChart' => $jsonChart,
-                'queriedData' => $queriedData,
-                'series' => $series,
-                'tableColumns' => $tableColumns,
-            ]);
-        }
+        $jsonOptions = $this->changeToJsonOptions($block->chart_json, $queriedData);
+        
+        $key = hash('sha256', $chartTypeId . $block->name);
+        return Blade::render('<x-reports2.report-chart ' . 'key="{{$key}}" :jsonOptions="$jsonOptions" />', [
+            'key' => $key,
+            'jsonOptions' => $jsonOptions,
+        ]);
     }
 }
