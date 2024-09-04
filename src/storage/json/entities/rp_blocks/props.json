@@ -425,7 +425,7 @@
         "control": "textarea",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "400",
         "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",

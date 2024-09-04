@@ -4,7 +4,7 @@
 <script>
     var key = '{{$key}}';
     var options = @json($jsonOptions);
-    //console.log(options, key)
+    console.log(options, key)
     var chart = new ApexCharts(document.getElementById(key), options);
     chart.render();
 </script>
