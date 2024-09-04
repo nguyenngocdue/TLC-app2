@@ -11,8 +11,6 @@ class ReportBlockChart extends Component
     use TraitReportDataAndColumn;
     use TraitTransformationData;
 
-    protected $LINE_CHART_TYPE_ID = 688;
-
     public function __construct(
         private $block = null,
         private $queriedData = null,
@@ -38,11 +36,11 @@ class ReportBlockChart extends Component
     public function render()
     {
         $block = $this->block;
-        $chartTypeId = $block->chart_type;
         $queriedData = $this->queriedData;
         $jsonOptions = $this->changeToJsonOptions($block->chart_json, $queriedData);
         
-        $key = hash('sha256', $chartTypeId . $block->name);
+        $key = hash('sha256', $block->name);
+        //dump($key, $jsonOptions);
         return Blade::render('<x-reports2.report-chart ' . 'key="{{$key}}" :jsonOptions="$jsonOptions" />', [
             'key' => $key,
             'jsonOptions' => $jsonOptions,
