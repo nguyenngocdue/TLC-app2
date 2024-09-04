@@ -40,7 +40,8 @@ class SearchableDialog extends Component
         $id = $this->name;
         $name = $this->multiple ? $this->name . "[]" : $this->name;
 
-        $nameless = (Str::modelPathFrom($table))::$nameless;
+        // $nameless = (Str::modelPathFrom($table))::$nameless;
+        $nameless = false;
         $params = [
             'name' => $name,
             'id' => $id,
@@ -55,7 +56,7 @@ class SearchableDialog extends Component
             'action' => $this->action,
             'letUserChooseWhenOneItem' => $letUserChooseWhenOneItem,
         ];
-        dump($params);
-        // return view('components.controls.has-data-source.dropdown2', $params);
+        // dump($params);
+        return view('components.controls.has-data-source.searchable-dialog', $params);
     }
 }

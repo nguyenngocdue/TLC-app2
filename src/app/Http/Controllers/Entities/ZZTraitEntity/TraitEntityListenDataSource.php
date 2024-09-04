@@ -142,8 +142,10 @@ trait TraitEntityListenDataSource
         foreach ($toBeLoaded as $table) {
             // $props = Props::getAllOf($table);
             $props = SuperProps::getFor($table)['props'] ?? null;
+
+            // if no props, it is high likely that the table is from ERP
             if (!$props) {
-                dump("Table $table not found in prop.json. Please add it.");
+                // dump("Table $table not found in prop.json. Please add it.");
                 continue;
             }
             $defaultColumns =  ['id', 'name', 'description', 'employeeid',];
