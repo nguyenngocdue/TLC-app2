@@ -22,10 +22,8 @@
                     @break
                 @endswitch
 
-            </div>
-
             <!-- Main content area -->
-            <div class="w-full items-center border-2 ">
+            <div class="w-full items-center ">
                 {{-- Blocks --}}
                 <div class="{{-- container mx-auto --}}" title="{{ $content['name'] ?? null }}">
                     <div class="grid grid-cols-12 gap-4">

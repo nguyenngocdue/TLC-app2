@@ -14,7 +14,7 @@ trait TraitEntityCRUDShowReport
 	public function showReport(Request $request, $id,  $trashed)
 	{
 		$report = Rp_report::find($id)->getDeep();
-		$pages = $report->getPages;
+		$pages = $report->getPages->sortBy('order_no');
 		$requestInput = $request->input();
 		
 		//update per_page of table in reports

@@ -235,6 +235,7 @@ class Qaqc_ncr_030_dataSource extends Controller
     public function getDataSource($params)
     {
         $sqls = $this->makeSqlStr($params);
+        // dd($sqls);
         $dataSource = [];
         foreach ($sqls as $key => $sqlStr) {
             if (is_null($sqlStr) || !$sqlStr) return collect();
