@@ -9,6 +9,7 @@ class ManageAppsController extends AbstractManageLibController
     protected $title = "Manage Apps";
     protected $libraryClass = LibApps::class;
     protected $route = "manageApps";
+    protected $groupByLength = 2;
 
     protected function getColumns()
     {

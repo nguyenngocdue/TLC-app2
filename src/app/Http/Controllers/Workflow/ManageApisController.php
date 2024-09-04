@@ -7,6 +7,7 @@ class ManageApisController extends AbstractManageLibController
     protected $title = "Manage Apis";
     protected $libraryClass = LibApis::class;
     protected $route = "manageApis";
+    protected $groupByLength = 2;
 
     protected function getColumns()
     {
@@ -40,6 +41,12 @@ class ManageApisController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => 'changeStatusMultiple',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
+                'dataIndex' => 'searchable',
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',

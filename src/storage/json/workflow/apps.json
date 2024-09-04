@@ -578,6 +578,21 @@
         "show_renderer": null,
         "hidden_navbar": "true"
     },
+    "erp_vendor": {
+        "name": "erp_vendor",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "finance",
+        "title": "Erp Vendors",
+        "nickname": "ev",
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden_navbar": "true"
+    },
     "esg_extra_metric": {
         "name": "esg_extra_metric",
         "package_tab": "application",
@@ -817,22 +832,6 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
-    "fin_expense_claim_line": {
-        "name": "fin_expense_claim_line",
-        "package_tab": "application",
-        "package": "finance",
-        "sub_package": "finance",
-        "title": "Expense Claim Lines",
-        "nickname": null,
-        "tutorial_link": null,
-        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": null,
-        "show_renderer": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
-    },
     "fin_debit_group": {
         "name": "fin_debit_group",
         "package_tab": "application",
@@ -860,6 +859,22 @@
         "status": null,
         "edit_renderer": null,
         "show_renderer": null
+    },
+    "fin_expense_claim_line": {
+        "name": "fin_expense_claim_line",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "finance",
+        "title": "Expense Claim Lines",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "fin_expense_item": {
         "name": "fin_expense_item",

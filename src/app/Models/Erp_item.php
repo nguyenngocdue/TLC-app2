@@ -11,7 +11,7 @@ class Erp_item extends Model
 
     // Specify the table name with special characters
     // protected $table = '[TLC_PROD].[dbo].[TLC_LLC$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]';
-    protected $table = 'TLC_PROD.dbo.TLC_LLC$Item$437dbf0e-84ff-417a-965d-ed2bb9650972';
+    protected $externalTable = 'TLC_PROD.dbo.TLC_LLC$Item$437dbf0e-84ff-417a-965d-ed2bb9650972';
 
     // Disable the default timestamps (created_at, updated_at)
     public $timestamps = false;

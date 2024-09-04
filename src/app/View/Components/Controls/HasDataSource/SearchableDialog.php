@@ -48,7 +48,7 @@ class SearchableDialog extends Component
             'selected' => $this->selected,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'readOnly' => $this->readOnly,
-            'classList' => ClassList::DROPDOWN,
+            'classList' => ClassList::TEXT,
             'table' => $table,
             'saveOnChange' => $this->saveOnChange,
             'allowClear' => $this->allowClear || $letUserClear,

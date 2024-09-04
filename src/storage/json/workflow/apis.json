@@ -118,6 +118,10 @@
     "erp_routing_links": {
         "name": "erp_routing_links"
     },
+    "erp_vendors": {
+        "name": "erp_vendors",
+        "searchable": "true"
+    },
     "esg_extra_metrics": {
         "name": "esg_extra_metrics",
         "storeEmpty_and_updateShort": "true"
@@ -621,7 +625,8 @@
         "name": "user_types"
     },
     "users": {
-        "name": "users"
+        "name": "users",
+        "searchable": "true"
     },
     "wir_descriptions": {
         "name": "wir_descriptions"

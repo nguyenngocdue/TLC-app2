@@ -35,6 +35,6 @@
                 @endif
             </div>
         </div>
+        @yield($modalId.'-javascript')
     </div>
-    @yield($modalId.'-javascript')
 </template>
