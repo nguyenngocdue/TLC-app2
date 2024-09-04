@@ -92,12 +92,23 @@ class ManageProps extends Manage_Parent
     {
         foreach ($json as &$prop) {
             $column_type = $prop['column_type'];
-            if ($column_type === 'static') {
+            if ($column_type == 'static') {
                 $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
                 $prop['control'] = ['value' => $prop['control'] ?? '', 'cbbDS' => JsonControls::getHeadings()];
                 $prop['hidden_view_all'] = 'DO_NOT_RENDER';
             } else {
+
                 $prop['align'] = 'DO_NOT_RENDER';
+            }
+        }
+    }
+
+    private function hideSearchableColumnWhenNotText(&$json)
+    {
+        foreach ($json as &$prop) {
+            $column_type = $prop['column_type'];
+            if (!(Str::startsWith($column_type, "varchar(") || $column_type == "text")) {
+                $prop['searchable'] = 'DO_NOT_RENDER';
             }
         }
     }
@@ -158,6 +169,7 @@ class ManageProps extends Manage_Parent
 
         $this->applyControlListForStaticProps($json);
         $this->applyControlListForMorphTo($json);
+        $this->hideSearchableColumnWhenNotText($json);
 
         $this->attachButtons($json, ['up', 'down', 'right_by_name']);
         return $json;

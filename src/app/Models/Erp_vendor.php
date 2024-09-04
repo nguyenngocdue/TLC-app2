@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Erp_vendor extends ModelExtended
 {
+    protected $fillable = [
+        "name",
+        "description",
+        "reg_no",
+        "address",
+        "owner_id",
+    ];
     // Specify the connection name
     // protected $connection = 'sqlsrv';
 

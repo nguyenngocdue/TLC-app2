@@ -7,6 +7,7 @@ use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Blade;
 
 class SearchableDialog extends Component
 {
@@ -21,6 +22,7 @@ class SearchableDialog extends Component
         private $allowClear = false,
         private $action = null,
     ) {
+        // dump($this->selected);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
@@ -40,12 +42,24 @@ class SearchableDialog extends Component
         $id = $this->name;
         $name = $this->multiple ? $this->name . "[]" : $this->name;
 
-        // $nameless = (Str::modelPathFrom($table))::$nameless;
-        $nameless = false;
+        $nameless = (Str::modelPathFrom($table))::$nameless;
+
+        $model = Str::modelPathFrom($table);
+        $selectedStr = $model::query()
+            // ->select('id', 'name')
+            ->whereIn('id', json_decode($this->selected))
+            ->get()
+            ->pluck('name');
+        // ->toArray();
+
+        // dump($selectedStr);
+        $selectedStr = $selectedStr->map(fn($name) => Blade::render("<x-renderer.tag color='gray'>$name</x-renderer.tag>"))->join("");
+
         $params = [
             'name' => $name,
             'id' => $id,
-            'selected' => $this->selected,
+            'selected' => json_decode($this->selected),
+            'selectedStr' => $selectedStr,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'readOnly' => $this->readOnly,
             'classList' => ClassList::TEXT,

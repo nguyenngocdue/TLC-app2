@@ -44,7 +44,7 @@ trait TraitSupportEntityCRUDCreateEdit2
 
     private function makeTableBluePrint($props)
     {
-        $props = array_values(array_filter($props, fn ($prop) => $prop['control'] == 'relationship_renderer'));
+        $props = array_values(array_filter($props, fn($prop) => $prop['control'] == 'relationship_renderer'));
         $result = [];
         // dump($this->superProps);
         foreach ($props as $index => $prop) {
@@ -115,6 +115,7 @@ trait TraitSupportEntityCRUDCreateEdit2
             switch ($prop['control']) {
                 case 'checkbox_2a':
                 case 'dropdown_multi_2a':
+                case 'searchable_dialog_multi':
                     $item = $original->{$name};
                     if ($item) {
                         $values[$name] =  json_encode($item->pluck('id')->toArray());

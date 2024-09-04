@@ -99,12 +99,13 @@
     @break
 
     @case('picker_time')
-    <x-controls.picker-time2 name={{$columnName}} component="controls/picker_time2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+        <x-controls.picker-time2 name={{$columnName}} component="controls/picker_time2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
+
     @case('picker_datetime')
-    <x-controls.picker-datetime2 name={{$columnName}} component="controls/picker_datetime2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
-    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+        <x-controls.picker-datetime2 name={{$columnName}} component="controls/picker_datetime2" value={{$value}} readOnly={{$readOnly}} dateTimeType="{{$control}}" />
+        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 
     @case('picker_date')

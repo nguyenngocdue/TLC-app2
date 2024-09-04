@@ -34,8 +34,8 @@ class Zunit_test_02 extends ModelExtended
         "checkboxPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_checkbox_pass_fail",],
         "dropdownMultiYesNo" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_dm_yes_no",],
         "dropdownMultiPassFail" => ["belongsToMany", Qaqc_insp_control_value::class, "ym2m_qaqc_insp_control_value_zunit_test_02_dm_pass_fail",],
-        "searchableDialogMultiYesNo" => ["belongsToMany", User::class, "ym2m_qaqc_insp_control_value_zunit_test_02_smd_yes_no",],
-        "searchableDialogMultiPassFail" => ["belongsToMany", Erp_vendor::class, "ym2m_qaqc_insp_control_value_zunit_test_02_smd_pass_fail",],
+        "searchableDialogMultiYesNo" => ["belongsToMany", User::class, "ym2m_user_zunit_test_02_smd_yes_no",],
+        "searchableDialogMultiPassFail" => ["belongsToMany", Erp_vendor::class, "ym2m_erp_vendor_zunit_test_02_smd_pass_fail",],
     ];
 
     public function radioYesNo()

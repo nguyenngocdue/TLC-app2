@@ -135,6 +135,13 @@ trait TraitManagePropColumns
                 'width' => 40,
             ],
             [
+                "dataIndex" => "searchable",
+                "align" => "center",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'width' => 40,
+            ],
+            [
                 "title" => "Dupli-catable",
                 "dataIndex" => "duplicatable",
                 "align" => "center",

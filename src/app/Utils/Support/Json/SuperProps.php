@@ -142,6 +142,7 @@ class SuperProps
                 // "hidden_template_print" => '',
                 "read_only" => '',
                 "save_on_change" => '',
+                "searchable" => '',
                 "duplicatable" => '',
                 "new_line" => '',
 
@@ -351,7 +352,7 @@ class SuperProps
         }
         $type = Str::singular($type);
         $key = "super_prop_$type";
-        $result = CacheToRamForThisSection::get($key, fn () => static::make($type));
+        $result = CacheToRamForThisSection::get($key, fn() => static::make($type));
         return $result;
     }
     public static function invalidateCache($type)
