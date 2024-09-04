@@ -60,6 +60,7 @@
     <script src="{{ asset('js/components/Dropdown0.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown2-20240821.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20240821.js') }}"></script>
+    <script src="{{ asset('js/components/ModalSearchableDialog.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231229.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20240821.js') }}"></script>

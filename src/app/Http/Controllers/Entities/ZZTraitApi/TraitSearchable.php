@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\Log;
 trait TraitSearchable
 {
 	use TraitFailObject;
+	private $pageSize = 100;
 
 	public function searchable(Request $request)
 	{
 		$keyword = $request->keyword;
+		$selectingValues = is_string($request->selectingValues) ? explode(',', $request->selectingValues) : $request->selectingValues;
+
 		// Log::info($request->all());
 		// Log::info($this->type);
 		// Log::info($keyword);
@@ -28,22 +31,33 @@ trait TraitSearchable
 					$fields[] = substr($prop['name'], 1);
 				}
 			}
+
+			if ($this->type == 'user') $fields = array_values(array_unique(["id", "name0", ...$fields]));
+
 			// Log::info($sp['props']);
 			// Log::info($fields);
 
 			$query = $modelPath::query()
 				->select($fields)
-				->where(function ($query) use ($fields, $keyword) {
+				->selectRaw('id in (' . join(",", $selectingValues) . ') as selected')
+				->WhereIn('id', $selectingValues)
+				->orWhere(function ($query) use ($fields, $keyword) {
 					foreach ($fields as $field) {
 						$query->orWhere($field, 'LIKE', '%' . $keyword . '%');
 					}
 				});
+			$query->orderBy('selected', 'desc');
+			if (sizeof($fields) > 1) $query->orderBy($fields[1]);
 			$message = $query->toSql();
 
-			$theRows = $query->get();
+			$countTotal = $query->count();
+			$theRows = $query->limit($this->pageSize)->get();
 			return ResponseObject::responseSuccess(
 				$theRows,
-				[],
+				[
+					'fields' =>	$fields,
+					'countTotal' => $countTotal,
+				],
 				$message,
 			);
 		} catch (\Throwable $th) {

@@ -2,13 +2,13 @@
 @section($modalId.'-header', "Select ".strtoupper($tableName))
 @section($modalId.'-body')
     <div class="m-1 p-1">
-        <div class="font-bold">Keywords: (minimum 3 charactors)</div>
+        <div class="font-bold">Keywords:</div>
         <input id="{{$modalId}}_txtName" type="text" name="name" class="w-full rounded p-1 border-gray-200"/>
         <div class="font-bold">Search Results:</div>
-        <div id="{{$modalId}}_result" class="overflow-y-scroll border1 rounded bg-gray-50 p-1" style="height: 500px;">
-
-        </div>
-        
+        <div id="{{$modalId}}_result" class="overflow-y-scroll border1 rounded bg-gray-50 p-1 border" style="height: 400px;"></div>
+        <div class="font-bold">Selected Value:</div>
+        <input id="{{$modalId}}_selectedValue" value="{{join(",",$selected)}}" />
+        <div id="{{$modalId}}_selectedText" class="rounded border w-full bg-gray-100 p-1"> {!! $selectedStr !!}</div>
     </div>
 @endsection
 
@@ -20,7 +20,6 @@
 @endsection
 
 @section($modalId.'-javascript')
-<script src="{{asset('js/components/ModalSearchableDialog.js')}}"></script>
 <script>    
     $(document).ready(()=>{
         let debounceTimer;
@@ -32,14 +31,19 @@
         $(txtName).focus();
         $(txtName).on('keyup', function(){
             clearTimeout(debounceTimer); // Clear the previous timer
-
+            
             debounceTimer = setTimeout(function() {
-                let inputValue = $(txtName).val();
-                if(inputValue.length < 3) return;
+                const inputValue = $(txtName).val();
+                const selectingValues = $('#'+modalId+'_selectedValue').val();
+                // if(inputValue.length < 3) return;
                 console.log(inputValue);
-                modalSearchableDialogInvoke(url, inputValue, multiple, modalId);
+
+                modalSearchableDialogInvoke(url, inputValue, multiple, selectingValues, modalId);
             }, 500)
         })
+        
+        const selectedValues = @json($selected);
+        modalSearchableDialogInvoke(url, null, multiple, selectedValues, modalId);            
     })   
 </script>
 @endsection

@@ -17,4 +17,6 @@
     modalId="modal-searchable-dialog-{{$id}}"
     tableName="{{$table}}"
     multipleStr="{{$multipleStr}}"
+    selectedStr="{!! $selectedStr !!}"
+    :selected="$selected"
     />
