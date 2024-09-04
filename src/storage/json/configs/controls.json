@@ -63,6 +63,8 @@
         "relationship_renderer",
         "question_answer_renderer",
         "toggle",
+        "searchable_dialog",
+        "searchable_dialog_multi",
         "signature",
         "signature_multi",        
         "status",

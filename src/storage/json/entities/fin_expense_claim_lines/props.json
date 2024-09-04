@@ -598,7 +598,7 @@
         "column_name": "vendor_id",
         "column_type": "bigint unsigned",
         "label": "Vendor Reg. No.",
-        "control": "dropdown",
+        "control": "searchable_dialog",
         "align": "",
         "col_span": "6",
         "width": "",

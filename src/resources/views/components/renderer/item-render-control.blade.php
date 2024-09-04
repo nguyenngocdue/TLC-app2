@@ -73,20 +73,10 @@
         <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 
-    {{-- @case ('dropdown_multi')
-        @if($columnName == 'getRoleSet')
-            {{(isset($item->getRoleSet) && isset($item->getRoleSet[0]) )? $item->getRoleSet[0]->name : ""}}
-            <x-renderer.button href="/dashboard/admin/setrolesets/{{$id}}/edit" target="_blank">Edit RoleSet in popup</x-renderer.button>
-        @else
-            <x-controls.has-data-source.dropdown2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
-            <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-        @endif
-    @break --}}
-
-    {{-- @case('checkbox')
-    <x-controls.has-data-source.radio-or-checkbox2 action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
-    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
-    @break --}}
+    @case('searchable_dialog')
+        <x-controls.has-data-source.searchable-dialog action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} />
+        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+    @break
 
     @case ('dropdown_multi_2a')
         @if($columnName == 'getRoleSet')
@@ -99,8 +89,13 @@
     @break
    
     @case('checkbox_2a')
-    <x-controls.has-data-source.radio-or-checkbox2a action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
-    <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+        <x-controls.has-data-source.radio-or-checkbox2a action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
+        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
+    @break
+
+    @case('searchable_dialog_multi')
+        <x-controls.has-data-source.searchable-dialog action={{$action}} type={{$type}} name={{$columnName}} selected={{$value}} readOnly={{$readOnly}} multiple={{true}} />
+        <x-controls.alert-validation2 name={{$columnName}} label={{$label}} />
     @break
 
     @case('picker_time')

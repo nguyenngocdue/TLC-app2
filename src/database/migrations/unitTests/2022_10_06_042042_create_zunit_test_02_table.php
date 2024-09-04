@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('zunit_test_02s', function (BlueprintExtended $table) {
             $table->id();
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->unsignedBigInteger('radio_pass_fail')->nullable();
             $table->unsignedBigInteger('dropdown_yes_no')->nullable();
             $table->unsignedBigInteger('dropdown_pass_fail')->nullable();
+            $table->unsignedBigInteger('searchable_dialog_yes_no')->nullable();
+            $table->unsignedBigInteger('searchable_dialog_pass_fail')->nullable();
 
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->orderable();
