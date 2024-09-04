@@ -193,7 +193,9 @@ class SidebarCalendarViewAll extends Component
         $active = $value['active'];
         $totalPendingApproval = $value['total_pending_approval'];
         // $userStr = json_encode($user);
-        $userAvatarRender = Blade::render("<x-renderer.avatar-user uid='$user->id'></x-renderer.avatar-user>");
+        $uid = $user->id ?? null;
+
+        $userAvatarRender = $uid ? Blade::render("<x-renderer.avatar-user uid='$user->id'></x-renderer.avatar-user>") : "uid?";
         $badge = '';
         if ($totalPendingApproval > 0) {
             $badge = Blade::render("<x-renderer.badge>$totalPendingApproval</x-renderer.badge>");
