@@ -68,8 +68,7 @@ class Fin_expense_claim_line extends ModelExtended
         'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
         'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
 
-        // "getRateExchange" => ['belongsTo', ::class, 'rate_exchange'],
-        // "getVendor" => ['belongsTo', Erp_vendor::class, 'vendor_id'],
+        "getVendor" => ['belongsTo', User::class, 'vendor_id'],
 
     ];
 
@@ -128,13 +127,11 @@ class Fin_expense_claim_line extends ModelExtended
     }
 
 
-    // public function getVendor()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
-
-
+    public function getVendor()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getManyLineParams()
     {
