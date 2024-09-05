@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\HomeWebPage\HomeWebPageController;
-use App\Http\Controllers\Reports2\Rp_pageController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;

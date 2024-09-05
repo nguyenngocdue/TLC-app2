@@ -7,7 +7,6 @@ use App\Http\Controllers\Admin\AdminSetRoleSetController;
 // use App\Http\Controllers\Api\v1\Social\PostController;
 use App\Http\Controllers\Api\v1\System\NotificationsController as SystemNotificationsController;
 use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\ConvertDataUserPositionController;
 use App\Http\Controllers\PublicHolidaysController;
 use App\Http\Controllers\MyOrgChartController;
 use App\Http\Controllers\Notifications\NotificationsController;
@@ -45,7 +44,7 @@ Route::group([
     Route::get('my-company', [MyCompanyController::class, 'index'])->name("my-company.index");
     Route::get('department-matrix', [DepartmentMatrixController::class, 'index'])->name("department-matrix.index");
 
-    Route::get('reset', fn () => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
+    Route::get('reset', fn() => (new UpdateUserSettings())(new Request(['action' => 'resetAllSettings']), '/'));
     Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications.index');
     Route::get('notifications/{type}/{id}/{idNotification}', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('system/notifications', [SystemNotificationsController::class, 'notifications']);
@@ -61,5 +60,5 @@ Route::group([
 
     Route::get('orphan/attachment', [OrphanAttachmentController::class, 'index'])->name('orphanAttachment.index');
 
-    Route::get('php_info', fn () => phpinfo());
+    Route::get('php_info', fn() => phpinfo());
 });

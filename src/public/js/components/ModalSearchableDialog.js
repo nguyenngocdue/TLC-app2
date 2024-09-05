@@ -45,6 +45,7 @@ function modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, 
     const className = 'sticky top-0 bg-gray-200 font-bold p-1 text-center1'
     let header = ``
     header += `<div class="${className} table-row flex1 justify-around">`
+    header += `<div class="table-cell border" style="width:40;">No.</div>`
     header += `<div class="table-cell" style="width:100px;"></div>`
     header += fields.map((field) => `<div class="table-cell text-center p-1" style="width:${field.width}px;">${field.label}</div>`).join('')
     header += `</div>`
@@ -52,7 +53,7 @@ function modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, 
     return header
 }
 
-function modalSearchableDialogLineRenderer(hit, multipleStr, selectedValues, fields, modalId) {
+function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId) {
     const nameField = fields.length > 0 ? fields[0].name : 'name'
     if (typeof selectedValues == 'string') selectedValues = selectedValues.split(',').map((x) => parseInt(x))
     const checked = selectedValues.includes(hit.id) ? 'checked' : ''
@@ -62,6 +63,7 @@ function modalSearchableDialogLineRenderer(hit, multipleStr, selectedValues, fie
     let line = ''
     line += `<label class="table-row flex1 w-full justify-around items-center hover:bg-gray-200 cursor-pointer">`
 
+    line += `<div class="table-cell border">${index + 1}</div>`
     line += `<div class="table-cell border" style="width:100px;">`
     line += `<input ${checked} name="whatever" type="${type}" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}', '${nameField}')">`
     line += `</div>`
@@ -97,7 +99,9 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
             const objs = []
             objs.push(modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, fields, modalId))
 
-            hits.forEach((hit) => objs.push(modalSearchableDialogLineRenderer(hit, multipleStr, selectedValues, fields, modalId)))
+            hits.forEach((hit, index) =>
+                objs.push(modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId)),
+            )
 
             let andMore = ''
             if (countTotal - pageSize > 0) andMore = `<div class="col-span-12 font-bold ml-5">and ${countTotal - pageSize} more ...</div>`
