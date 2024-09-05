@@ -134,7 +134,7 @@
     "_is_active": {
         "name": "_is_active",
         "column_name": "is_active",
-        "column_type": "int",
+        "column_type": "tinyint(1)",
         "label": "Active",
         "control": "toggle",
         "align": "",

@@ -9,8 +9,10 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_routing_link;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
+use App\Utils\Support\SortData;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Component;
@@ -21,8 +23,13 @@ class ReportFilterItem extends Component
     use TraitListenerControlReport;
     use TraitUserCompanyTree;
 
-    protected $DATASOURCE_TYPE_ID = 633;
     protected $STATUS_TYPE_ID = 631;
+    protected $MONTH_TYPE_ID = 632;
+    protected $DATASOURCE_TYPE_ID = 633;
+    protected $YEAR_TYPE_ID = 634;
+
+    protected $BEGIN_YEAR = 2021;
+    protected $END_YEAR = 2027;
 
     public function __construct(
         private $filter,
@@ -69,10 +76,18 @@ class ReportFilterItem extends Component
         switch ($controlTypeId) {
             case $this->DATASOURCE_TYPE_ID:
                 return $this->handleDataSourceTypeID($entityType, $isBlackList, $bWListIds);
-
             case $this->STATUS_TYPE_ID:
                 return $this->getStatuses($entityType);
-
+            case $this->YEAR_TYPE_ID:
+                return array_map(fn($item) => ['id' => $item, 'name'=> (string)$item], range($this->BEGIN_YEAR, $this->END_YEAR));    
+            case $this->MONTH_TYPE_ID:
+                $months = range(1, 12);
+                sort($months); 
+                $months = array_map(
+                    fn($item) => ['id' => $item, 'name' => DateReport::getMonthAbbreviation2($item)],
+                    $months
+                );
+                return $months;
             default:
                 return [];
         }
