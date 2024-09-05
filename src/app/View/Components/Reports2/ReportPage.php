@@ -20,6 +20,7 @@ class ReportPage extends Component
         $height = $height ? $height  : $this->h * $this->pageScaleFactor;
         $style = $isFullWidth ? 'w-full' : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
         $style = $pageBackgroundPath ? $style . " background-image: url('{$pageBackgroundPath}');" : $style;
+        // dump($style);
         return $style;
     }
 
@@ -27,6 +28,7 @@ class ReportPage extends Component
     {
         $page = $this->page;
         $pageItem = $page?->toArray();
+        // dd($pageItem);
         $pageBackgroundAttachment = $page->attachment_background->first()?->toArray();
         $blockDetails = $page->getBlockDetails->sortBy('order_no');
 
@@ -50,6 +52,7 @@ class ReportPage extends Component
             'content' => $pageItem,
             'blockDetails' => $blockDetails,
             'pageBackgroundPath' => $pageBackgroundPath ?? '',
+
         ]);
     }
 }

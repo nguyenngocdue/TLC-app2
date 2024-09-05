@@ -1,4 +1,4 @@
-<div class=" md:scroll-mt-20 sm:py-0 rounded-lg bg-white dark:border-gray-600">
+<div class=" md:scroll-mt-20 sm:py-0 rounded-lg bg-white dark:border-gray-600 flex-1">
     <div class="border-b p-0 font-medium flex items-center justify-left {{$class}}">
         @php
             $hw = $dimensionImg ? '' : "h-20 w-56";

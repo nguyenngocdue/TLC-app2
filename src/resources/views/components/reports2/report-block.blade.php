@@ -24,7 +24,7 @@
                 : null;
         @endphp
         <div title="{{ $block->name }}"
-            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }} p-4 text-center bg-cover bg-center "
+            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }}"
             @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
 
             <x-renderer.report2.title-description-block :block="$block" />
