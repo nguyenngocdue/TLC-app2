@@ -45,7 +45,7 @@
         "validation": "",
         "validation_regex": "",
         "formula": "",
-        "default_value": "true",
+        "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",

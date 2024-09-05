@@ -63,10 +63,10 @@ class ReportBlockTable extends Component
                     $column = $configuredCols[$k2];
                     $href = HrefReport::createDataHrefForRow($column, $dataLine);
                     $content = $this->createContentInRowCell($value, $column);
-
+                    
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
-
+                    
                     
                     if($column->row_renderer == $this->STATUS_ROW_RENDERER_ID) {
                         $statuses = LibStatuses::getFor($column->entity_type);
@@ -90,6 +90,7 @@ class ReportBlockTable extends Component
                             $cellClass = 'text-red-600';
                         }
                     }
+                    // dd($column);
 
                     // Log::info($content);
                     $newValue = (object)[

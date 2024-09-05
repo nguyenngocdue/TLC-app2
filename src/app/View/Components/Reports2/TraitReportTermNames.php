@@ -19,11 +19,11 @@ trait TraitReportTermNames
 
     public function getAggName($id)
     {
-        $this->getTermName($id);
+        return $this->getTermName($id);
     }
 
     public function getIconName($id)
     {
-        $this->getTermName($id);
+        return $this->getTermName($id);
     }
 }
