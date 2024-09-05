@@ -40,28 +40,40 @@ function modalSearchableDialogOnSelect(id, modalId, multipleStr, nameField) {
     modalSearchableDialogOnSelectHandleText(id, modalId, newIdStrs, nameField)
 }
 
+function modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, fields, modalId) {
+    console.log(fields)
+    const className = 'sticky top-0 bg-gray-200 font-bold p-1 text-center1'
+    let header = ``
+    header += `<div class="${className} table-row flex1 justify-around">`
+    header += `<div class="table-cell" style="width:100px;"></div>`
+    header += fields.map((field) => `<div class="table-cell text-center p-1" style="width:${field.width}px;">${field.label}</div>`).join('')
+    header += `</div>`
+
+    return header
+}
+
 function modalSearchableDialogLineRenderer(hit, multipleStr, selectedValues, fields, modalId) {
-    const nameField = fields.length > 1 ? fields[1] : 'name'
+    const nameField = fields.length > 0 ? fields[0].name : 'name'
     if (typeof selectedValues == 'string') selectedValues = selectedValues.split(',').map((x) => parseInt(x))
     const checked = selectedValues.includes(hit.id) ? 'checked' : ''
     // console.log(selectedValues, hit.id, checked)
-    const labelClass = 'hover:bg-gray-200 cursor-pointer w-full p-1 rounded flex gap-1 items-center justify-between'
+    const type = multipleStr ? 'checkbox' : 'radio'
+
     let line = ''
-    line += `<div class="">`
-    line += `<label class="${labelClass}">`
-    line += `<div class="flex items-center">`
-    if (multipleStr) {
-        line += `<input ${checked} name="id" type="checkbox" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}', '${nameField}')">`
-    } else {
-        line += `<input ${checked} name="id" type="radio" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}', '${nameField}')">`
-    }
-    line += hit[nameField] || hit.id
+    line += `<label class="table-row flex1 w-full justify-around items-center hover:bg-gray-200 cursor-pointer">`
+
+    line += `<div class="table-cell border" style="width:100px;">`
+    line += `<input ${checked} name="whatever" type="${type}" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}', '${nameField}')">`
     line += `</div>`
-    line += `<span>`
-    line += makeId(hit.id)
-    line += `</span>`
-    line += '</label>'
-    line += `</div>`
+
+    line += fields
+        .map((field) => {
+            const value = field.name == 'id' ? makeId(hit[field.name]) : hit[field.name]
+            return `<div class="truncate w-full border table-cell px-2" style="width:${field.width}px;">${value}</div>`
+        })
+        .join('')
+
+    line += `</label>`
     return line
 }
 
@@ -83,9 +95,13 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
             hits.forEach((hit) => (modalSearchableDialogHits[hit.id] = hit))
 
             const objs = []
+            objs.push(modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, fields, modalId))
+
             hits.forEach((hit) => objs.push(modalSearchableDialogLineRenderer(hit, multipleStr, selectedValues, fields, modalId)))
-            if (countTotal - pageSize > 0) objs.push(`<div class="font-bold ml-5">and ${countTotal - pageSize} more ...</div>`)
-            $(`#${modalId}_result`).html(objs.join(''))
+
+            let andMore = ''
+            if (countTotal - pageSize > 0) andMore = `<div class="col-span-12 font-bold ml-5">and ${countTotal - pageSize} more ...</div>`
+            $(`#${modalId}_result`).html(objs.join('') + andMore)
         },
         error: function (data) {
             // console.log(data);
