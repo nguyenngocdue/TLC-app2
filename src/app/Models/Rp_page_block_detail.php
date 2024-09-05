@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_page_block_detail extends ModelExtended
 {
     protected $fillable = [
-        "id", "rp_block_id", "rp_page_id", "col_span",
+        "id", "rp_block_id", "rp_page_id","is_active", "col_span",
         "order_no", "owner_id"
     ];
 
@@ -46,6 +46,7 @@ class Rp_page_block_detail extends ModelExtended
             ["dataIndex" => 'order_no', /* 'invisible' => true, */],
             ["dataIndex" => 'rp_page_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'rp_block_id', /*'renderer' => 'column_link', /*'rendererParam' => 'name'*/],
+            ["dataIndex" => 'is_active'],
             ["dataIndex" => 'col_span'],
             ["dataIndex" => 'attachment_background'],
         ];

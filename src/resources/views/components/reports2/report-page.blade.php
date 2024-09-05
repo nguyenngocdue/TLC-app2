@@ -1,9 +1,10 @@
 @php
+//@dump($layoutStyle)
 @endphp
 
 <div class="flex justify-center">
-    <div class=" {{$layoutStyle}} py-4">
-        <div class=" w-full items-center bg-white p-0 flex flex-col justify-between" style="{{ $layoutStyle }}">
+    <div class=" {{$layoutStyle}} py-4" style="{{ $layoutStyle }}">
+        <div class=" w-full items-center bg-white p-0 flex flex-col justify-between" >
             <!-- Head section with a border -->
                 @switch($letterHeadId)
                     @case (1)
@@ -23,7 +24,7 @@
             <div class="w-full items-center ">
                 {{-- Blocks --}}
                 <div class="{{-- container mx-auto --}}" title="{{ $content['name'] ?? null }}">
-                    <div class="grid grid-cols-12 gap-4 p-8">
+                    <div class="grid grid-cols-12 gap-4 px-8 pb-8">
                         <x-reports2.report-block :blockDetails="$blockDetails" :report="$report" />
                     </div>
                 </div>

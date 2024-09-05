@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->string("title")->nullable();
             $table->unsignedBigInteger("report_id")->nullable();
+            $table->boolean("is_active")->nullable();
             $table->unsignedBigInteger("letter_head_id")->nullable();
             $table->unsignedBigInteger("letter_footer_id")->nullable();
             $table->boolean("is_landscape")->nullable();

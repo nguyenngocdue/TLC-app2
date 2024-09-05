@@ -38,9 +38,35 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_is_active": {
+        "name": "_is_active",
+        "column_name": "is_active",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "true",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_col_span": {
         "name": "_col_span",
         "column_name": "col_span",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_attachment_background": {
+        "name": "_attachment_background",
+        "column_name": "attachment_background",
         "label": "",
         "validation": "",
         "validation_regex": "",

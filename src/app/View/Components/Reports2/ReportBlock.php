@@ -36,6 +36,7 @@ class ReportBlock extends Component
         $perPage = $currentParams['per_page'] ?? 10;
         
         foreach ($blockDetails as $item) {
+            if(!$item->is_active) continue;
             $block = $item->getBlock;
             try {
                 $queriedData = $this->getDataSQLString($block, $currentParams);

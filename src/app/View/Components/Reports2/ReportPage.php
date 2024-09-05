@@ -18,7 +18,10 @@ class ReportPage extends Component
     {
         $width = $width ? $width  : $this->w * $this->pageScaleFactor;
         $height = $height ? $height  : $this->h * $this->pageScaleFactor;
-        $style = $isFullWidth ? 'w-full' : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; height:{$height}px;");
+
+        $height = 0;
+
+        $style = $isFullWidth ? 'w-full' : ($isLandscape ? "width :{$height}px;  height: {$width}px;" : "width :{$width}px; /* height:{$height}px; */");
         $style = $pageBackgroundPath ? $style . " background-image: url('{$pageBackgroundPath}');" : $style;
         // dump($style);
         return $style;

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('is_active')->nullable();
             $table->text('sql_string')->nullable();
             $table->boolean('table_true_width')->nullable();
             $table->unsignedInteger('show_no')->nullable();
