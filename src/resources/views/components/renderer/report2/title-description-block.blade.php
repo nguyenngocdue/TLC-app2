@@ -3,11 +3,13 @@
 
 @endphp
     @if ($isAdmin && !$block->title && !$block->description)
-    <a title='Block configuration' class="block p-2" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
-        <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
-            <i class="text-center fa-solid fa-gear "></i>
-        </span>
-    </a>
+    <div class="absolute left-[20%] no-print">
+        <a title='Block configuration' class="block p-2" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
+            <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
+                <i class="fa-solid fa-gear"></i>
+            </span>
+        </a>
+    </div>
     @endif
 
 @if($block->title)

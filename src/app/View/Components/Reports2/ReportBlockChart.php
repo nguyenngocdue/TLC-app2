@@ -9,7 +9,6 @@ use Illuminate\View\Component;
 class ReportBlockChart extends Component
 {
     use TraitReportDataAndColumn;
-    use TraitTransformationData;
 
     public function __construct(
         private $block = null,

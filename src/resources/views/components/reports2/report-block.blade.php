@@ -48,7 +48,7 @@
                 @break
 
                 @case($PARAGRAPH_TYPE_ID)
-                    <x-reports2.report-block-paragraph :block="$block" reportId="{{ $reportId }}" />
+                    <x-reports2.report-block-paragraph :block="$block" reportId="{{ $reportId }}" :currentParams="$currentParams"/>
                 @break
 
                 @case($DESCRIPTION_TYPE_ID)
