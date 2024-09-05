@@ -1,13 +1,10 @@
-{{-- searchable dialog {{$multipleStr}} {{$selectedStr}} --}}
-@foreach($selected as $item)
-<input id="{{$id}}" name="{{$name}}" type="hidden" readonly1 value="{{$item}}"tabindex="-1" />
-@endforeach
+{{-- searchable dialog {{$multipleStr}} --}}
+<div id="div_value_{{$name}}"></div>
 
 <div class="flex w-full gap-1">
-    <div class="readonly w-full fle1x items-center p-1">
-        {!! $selectedStr !!}
-    </div>
+    <div id="div_text_{{$name}}" class="readonly w-full fle1x items-center p-1"></div>
     <x-renderer.button 
+        class="z-10"
         click="toggleModal('modal-searchable-dialog-{{$id}}')"
         keydownEscape="closeModal('modal-searchable-dialog-{{$id}}')"
         >...</x-renderer.button>
@@ -17,6 +14,12 @@
     modalId="modal-searchable-dialog-{{$id}}"
     tableName="{{$table}}"
     multipleStr="{{$multipleStr}}"
-    selectedStr="{!! $selectedStr !!}"
-    :selected="$selected"
+    divValueName="div_value_{{$name}}"
+    divTextName="div_text_{{$name}}"
+    inputName="{{$name}}"
     />
+
+<script>
+    $(`[id="div_text_{{$name}}"]`).html(@json($selectedArr).map(v=>renderTag(v)).join(''));
+    $(`[id="div_value_{{$name}}"]`).html(@json($selected).map(v=>renderInputField('{{$name}}',v)).join(''));
+</script>

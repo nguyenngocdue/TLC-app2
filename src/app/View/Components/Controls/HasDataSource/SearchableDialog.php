@@ -53,13 +53,13 @@ class SearchableDialog extends Component
         // ->toArray();
 
         // dump($selectedStr);
-        $selectedStr = $selectedStr->map(fn($name) => Blade::render("<x-renderer.tag color='gray'>$name</x-renderer.tag>"))->join("");
+        // $selectedStr = $selectedStr->map(fn($name) => Blade::render("<x-renderer.tag color='gray'>$name</x-renderer.tag>"))->join("");
 
         $params = [
             'name' => $name,
             'id' => $id,
             'selected' => json_decode($this->selected),
-            'selectedStr' => $selectedStr,
+            'selectedArr' => $selectedStr->toArray(),
             'multipleStr' => $this->multiple ? "multiple" : "",
             'readOnly' => $this->readOnly,
             'classList' => ClassList::TEXT,

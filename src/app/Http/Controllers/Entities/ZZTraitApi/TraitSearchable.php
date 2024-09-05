@@ -18,9 +18,6 @@ trait TraitSearchable
 		$keyword = $request->keyword;
 		$selectingValues = is_string($request->selectingValues) ? explode(',', $request->selectingValues) : $request->selectingValues;
 
-		// Log::info($request->all());
-		// Log::info($this->type);
-		// Log::info($keyword);
 		try {
 			$modelPath = Str::modelPathFrom($this->type);
 			$sp = SuperProps::getFor($this->type);
@@ -38,17 +35,26 @@ trait TraitSearchable
 			// Log::info($fields);
 
 			$query = $modelPath::query()
-				->select($fields)
-				->selectRaw('id in (' . join(",", $selectingValues) . ') as selected')
-				->WhereIn('id', $selectingValues)
-				->orWhere(function ($query) use ($fields, $keyword) {
-					foreach ($fields as $field) {
-						$query->orWhere($field, 'LIKE', '%' . $keyword . '%');
-					}
-				});
+				->select($fields)->whereRaw('1=1');
+			if ($selectingValues) {
+				// Log::info($selectingValues);
+				$query = $query->selectRaw('id in (' . join(",", $selectingValues) . ') as selected')
+					->WhereIn('id', $selectingValues);
+			} else {
+				$query = $query->selectRaw('1 as selected');
+			}
+			$query = $query->orWhere(function ($query) use ($fields, $keyword) {
+				foreach ($fields as $field) {
+					$query->orWhere($field, 'LIKE', '%' . $keyword . '%');
+				}
+			});
+
+			if ($this->type == 'user') $query = $query->where('resigned', 0);
+
 			$query->orderBy('selected', 'desc');
 			if (sizeof($fields) > 1) $query->orderBy($fields[1]);
 			$message = $query->toSql();
+			// Log::info($message);
 
 			$countTotal = $query->count();
 			$theRows = $query->limit($this->pageSize)->get();
