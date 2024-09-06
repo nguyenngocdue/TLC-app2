@@ -116,16 +116,18 @@ trait TraitSearchable
 			$fields = $this->getFieldListFromProp($sp);
 
 			[$theRows, $countTotal, $sql1] = $this->searchOnLocalTable($modelPath, $fields, $keyword, $selectingValues);
-			[$moreRows, $moreTotal, $sql2, $columns] = $this->searchOnExternalTable($sp, $keyword);
+			// [$moreRows, $moreTotal, $sql2, $columns] = $this->searchOnExternalTable($sp, $keyword);
 
-			$theRows = $theRows->concat($moreRows);
+			// $theRows = $theRows->concat($moreRows);
 
 			return ResponseObject::responseSuccess($theRows, [
 				'fields' =>	$fields,
-				'columns' => $columns,
-				'countTotal' => $countTotal + $moreTotal,
+				'countTotal1' => $countTotal,
 				'sql1' => $sql1,
-				'sql2' => $sql2,
+				// 'columns2' => $columns,
+				// 'hits2' => $moreRows,
+				// 'countTotal2' => $moreTotal,
+				// 'sql2' => $sql2,
 			]);
 		} catch (\Throwable $th) {
 			Log::error($th);

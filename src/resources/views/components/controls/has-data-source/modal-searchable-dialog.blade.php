@@ -2,14 +2,29 @@
 {{-- @extends("modals.modal-medium") --}}
 @section($modalId.'-header', "Select ".strtoupper($tableName))
 @section($modalId.'-body')
-    <div class="m-1 p-1">
-        <div class="font-bold">Keywords:</div>
-        <input id="{{$modalId}}_txtName" type="text" name="name" class="w-full rounded p-1 border-gray-200"/>
-        <div class="flex justify-between">
-            <div class="font-bold">Search Results:</div>
-            <div id="divSearchResult"></div>
+    <div class="flex">
+        <div class="m-1 p-1 w-3/4">
+            <div class="font-bold">Keywords:</div>
+            <input id="{{$modalId}}_txtName" type="text" name="name" class="w-full rounded p-1 border-gray-200"/>
+            
+            <div class="flex justify-between">
+                <div class="font-bold">Search Results:</div>
+                <div id="divSearchResult"></div>
+            </div>
+            <div id="{{$modalId}}_result" class="overflow-y-scroll border1 rounded bg-gray-50 border fle1x" style="height: 400px;"></div>
+            {{-- <div class="flex justify-between">
+                <div class="font-bold">External Search Results:</div>
+                <div id="divExternalSearchResult"></div>
+            </div>
+            <div id="{{$modalId}}_external_result" class="overflow-y-scroll border1 rounded bg-gray-50 border fle1x" style="height: 200px;"></div> --}}
         </div>
-        <div id="{{$modalId}}_result" class="overflow-y-scroll border1 rounded bg-gray-50 border fle1x" style="height: 400px;"></div>
+        @if($allowCreateNew)
+        <div class="m-1 p-1 w-1/4">
+           <x-controls.has-data-source.modal-searchable-dialog-create-new tableName="{{$tableName}}" modalId="{{$modalId}}"/>
+        </div>
+        @endif
+    </div>
+    <div class="m-1 p-1">
         <div class="font-bold">Selected Value:</div>
         <input id="{{$modalId}}_selectedValue" type="hidden" />
         <div id="{{$modalId}}_selectedText" class="rounded border w-full bg-gray-100 p-1"></div>
@@ -34,6 +49,7 @@
         const divTextName = "{{$divTextName}}"
         const txtName = '#'+ modalId + "_txtName"
         const url = "{{route($tableName.'.searchable')}}";
+        const allowEdit = "{{$allowEdit}}"
 
         $(txtName).focus();
         $(txtName).on('keyup', function(){
@@ -45,7 +61,7 @@
                 // if(inputValue.length < 3) return;
                 // console.log(inputValue);
 
-                modalSearchableDialogInvoke(url, inputValue, multiple, selectingValues, modalId);
+                modalSearchableDialogInvoke(url, inputValue, multiple, selectingValues, modalId, allowEdit);
             }, 500)
         })
 
@@ -76,7 +92,7 @@
             const selectedTexts = getEById(divTextName).html();
             $('#'+modalId+'_selectedText').html(selectedTexts || '&nbsp;');
 
-            modalSearchableDialogInvoke(url, null, multiple, selectedValues, modalId);            
+            modalSearchableDialogInvoke(url, null, multiple, selectedValues, modalId, allowEdit);            
         }
         onLoaded();
     })   

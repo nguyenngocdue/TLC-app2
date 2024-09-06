@@ -8,6 +8,7 @@ use App\Http\Services\CleanOrphanAttachment\ListFolderService;
 use App\Models\Erp_item;
 use App\Models\Erp_vendor;
 use App\Models\Erp_vendor_external;
+use App\Utils\Support\Erp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -34,14 +35,16 @@ class WelcomeFortuneController extends Controller
     {
         $tables = Erp_vendor_external::query()->paginate(100);
 
-        $columns = [
-            ['dataIndex' => 'No_'],
-            ['dataIndex' => 'Name'],
-            ['dataIndex' => 'VAT Registration No_'],
-            ['dataIndex' => 'Address'],
-            ['dataIndex' => 'Description'],
-            ['dataIndex' => 'Search Description'],
-        ];
+        $columns = array_map(fn($c) => ['dataIndex' => $c], Erp::getAllColumns('erp_vendor'));
+
+        // $columns = [
+        //     ['dataIndex' => 'No_'],
+        //     ['dataIndex' => 'Name'],
+        //     ['dataIndex' => 'VAT Registration No_'],
+        //     ['dataIndex' => 'Address'],
+        //     ['dataIndex' => 'Description'],
+        //     ['dataIndex' => 'Search Description'],
+        // ];
         return view("welcome-fortune", [
             'columns' => $columns,
             'dataSource' => $tables,

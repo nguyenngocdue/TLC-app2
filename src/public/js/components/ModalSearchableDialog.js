@@ -40,20 +40,20 @@ function modalSearchableDialogOnSelect(id, modalId, multipleStr, nameField) {
     modalSearchableDialogOnSelectHandleText(id, modalId, newIdStrs, nameField)
 }
 
-function modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, fields, modalId) {
-    console.log(fields)
+function modalSearchableDialogHeaderRenderer(fields, allowEdit) {
     const className = 'sticky top-0 bg-gray-200 font-bold p-1 text-center1'
     let header = ``
     header += `<div class="${className} table-row flex1 justify-around">`
     header += `<div class="table-cell border" style="width:40;">No.</div>`
-    header += `<div class="table-cell" style="width:100px;"></div>`
+    header += `<div class="table-cell" style="width:40px;"></div>`
+    if (allowEdit) header += `<div class="table-cell" style="width:40px;">Edit</div>`
     header += fields.map((field) => `<div class="table-cell text-center p-1" style="width:${field.width}px;">${field.label}</div>`).join('')
     header += `</div>`
 
     return header
 }
 
-function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId) {
+function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId, allowEdit) {
     const nameField = fields.length > 0 ? fields[0].name : 'name'
     if (typeof selectedValues == 'string') selectedValues = selectedValues.split(',').map((x) => parseInt(x))
     const checked = selectedValues.includes(hit.id) ? 'checked' : ''
@@ -63,10 +63,18 @@ function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValu
     let line = ''
     line += `<label class="table-row flex1 w-full justify-around items-center hover:bg-gray-200 cursor-pointer">`
 
-    line += `<div class="table-cell border">${index + 1}</div>`
-    line += `<div class="table-cell border" style="width:100px;">`
+    line += `<div class="table-cell border text-center">${index + 1}</div>`
+    line += `<div class="table-cell border text-center" style="width:40px;">`
     line += `<input ${checked} name="whatever" type="${type}" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}', '${nameField}')">`
     line += `</div>`
+
+    if (allowEdit) {
+        line += `<div class="table-cell border text-center" style="width:40px;">`
+        line += `<button onclick="event.stopPropagation();" type=button class="hover:text-blue-400">`
+        line += `<i class="fas fa-pencil"></i>`
+        line += `</button>`
+        line += `</div>`
+    }
 
     line += fields
         .map((field) => {
@@ -79,7 +87,7 @@ function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValu
     return line
 }
 
-function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, modalId) {
+function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, modalId, allowEdit) {
     // console.log('ModalSearchableDialog.js', url, keyword, modalId)
     $.ajax({
         url,
@@ -90,23 +98,34 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
         },
         success: function (response) {
             const { hits, meta } = response
-            const { countTotal, fields } = meta
+            const { countTotal1, fields } = meta
+            // const { countTotal2, hits2 } = meta
 
             modalSearchableDialogHits = {}
             hits.forEach((hit) => (modalSearchableDialogHits[hit.id] = hit))
 
             const objs = []
-            objs.push(modalSearchableDialogHeaderRenderer(hits, multipleStr, selectedValues, fields, modalId))
-
+            objs.push(modalSearchableDialogHeaderRenderer(fields, allowEdit))
             hits.forEach((hit, index) =>
-                objs.push(modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId)),
+                objs.push(modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId, allowEdit)),
             )
 
-            let andMore = ''
-            if (countTotal - hits.length > 0)
-                andMore = `<div class="col-span-12 font-bold ml-5">and ${countTotal - hits.length} more ...</div>`
-            $(`#${modalId}_result`).html(objs.join('') + andMore)
-            $(`#divSearchResult`).html(hits.length + ' / ' + countTotal + ' items')
+            let andMore1 = ''
+            if (countTotal1 - hits.length > 0)
+                andMore1 = `<div class="col-span-12 font-bold ml-5">and ${countTotal1 - hits.length} more ...</div>`
+            $(`#${modalId}_result`).html(objs.join('') + andMore1)
+            $(`#divSearchResult`).html(hits.length + ' / ' + countTotal1 + ' items')
+
+            // const objs2 = []
+            // objs2.push(modalSearchableDialogHeaderRenderer(fields))
+            // hits2.forEach((hit, index) =>
+            //     objs2.push(modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId)),
+            // )
+            // let andMore2 = ''
+            // if (countTotal2 - hits2.length > 0)
+            //     andMore2 = `<div class="col-span-12 font-bold ml-5">and ${countTotal2 - hits2.length} more ...</div>`
+            // $(`#${modalId}_external_result`).html(objs2.join('') + andMore2)
+            // $(`#divExternalSearchResult`).html(hits2.length + ' / ' + countTotal2 + ' items')
         },
         error: function (data) {
             // console.log(data);

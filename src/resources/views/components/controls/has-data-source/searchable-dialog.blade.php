@@ -17,6 +17,8 @@
     divValueName="div_value_{{$name}}"
     divTextName="div_text_{{$name}}"
     inputName="{{$name}}"
+    allowCreateNew="{{$table == 'users' ? false : true}}"
+    allowEdit="{{$table == 'users' ? false : true}}"
     />
 
 <script>
