@@ -73,7 +73,7 @@
             // $('#'+modalId).hide()
             let selectedValues = $('#'+modalId+'_selectedValue').val();
             selectedValues = selectedValues ? selectedValues.split(",") : [];
-            console.log(divValueName, selectedValues);
+            // console.log(divValueName, selectedValues);
 
             const inputs = []
             selectedValues.forEach(id => inputs.push(renderInputField(inputName, id)));

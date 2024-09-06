@@ -34,7 +34,7 @@ function modalSearchableDialogOnSelectHandleText(modalId) {
 
     const newIdArray = newIdStrs ? newIdStrs.split(',') : []
     const newText = newIdArray.map((id) => renderTag(modalSearchableDialogHits[id][modalSearchableDialogNameField])).join('')
-    console.log('newIdArray', newIdArray, 'newText', newText)
+    // console.log('newIdArray', newIdArray, 'newText', newText)
     $('#' + valueName).html(newText + '&nbsp')
 }
 

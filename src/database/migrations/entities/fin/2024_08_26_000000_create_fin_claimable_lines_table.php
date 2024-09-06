@@ -39,9 +39,9 @@ return new class extends Migration
             $table->unsignedInteger('vat_product_posting_group_value')->nullable();
             $table->double('total_amount_1')->nullable();
 
-            $table->unsignedBigInteger("currency_pair_id");
-            $table->unsignedBigInteger("rate_exchange_month_id");
-            $table->unsignedBigInteger("counter_currency_id");
+            $table->unsignedBigInteger("currency_pair_id")->nullable();
+            $table->unsignedBigInteger("rate_exchange_month_id")->nullable();
+            $table->unsignedBigInteger("counter_currency_id")->nullable();
 
             $table->double('rate_exchange')->nullable();
             $table->double('total_amount_lcy')->nullable();
