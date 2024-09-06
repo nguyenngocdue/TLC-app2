@@ -49,6 +49,10 @@
         const url = "{{route($tableName.'.searchable')}}";
         const allowEdit = "{{$allowEdit}}"
 
+        const rowIndex = {{$rowIndex ?? -1111}}
+        const table01Name = "{{$table01Name ?? 'not_a_table_really'}}"
+        const sd2Or4 = rowIndex == -1111 ? 'sd2' : 'sd4';
+
         getEById(txtName).focus();
         getEById(txtName).on('keyup', function(){
             clearTimeout(debounceTimer); // Clear the previous timer
@@ -71,7 +75,7 @@
             // console.log(divValueName, selectedValues);
 
             const inputs = []
-            selectedValues.forEach(id => inputs.push(renderInputField(inputName, id, !!multiple)));
+            selectedValues.forEach(id => inputs.push(renderInputField(inputName, id,sd2Or4, rowIndex, table01Name)));
             getEById(divValueName).html(inputs.join(''));
 
             const selectedTexts = getEById(modalId+'_selectedText').html();

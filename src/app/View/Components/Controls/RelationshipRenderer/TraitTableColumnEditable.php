@@ -152,7 +152,11 @@ trait TraitTableColumnEditable
                     // $newColumn['renderer'] = "unknown renderer4 [" . $prop['control'] . "]";
                     // break;
             }
-            if (in_array($prop['control'], [/*'dropdown_multi', 'checkbox',*/'dropdown_multi_2a', 'checkbox_2a'])) {
+            if (in_array($prop['control'], [
+                'checkbox_2a',
+                'dropdown_multi_2a',
+                'searchable_dialog_multi',
+            ])) {
                 $newColumn['multiple'] = true;
             }
             if ($newColumn['dataIndex'] === 'order_no') {

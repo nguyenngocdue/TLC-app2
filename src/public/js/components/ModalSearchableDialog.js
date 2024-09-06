@@ -1,19 +1,21 @@
-function renderInputField(name, value, isMultiple) {
+function renderInputField(name, value, sd2Or4, rowIndex, table01Name) {
+    console.log('renderInputField', name, value, sd2Or4, rowIndex, table01Name)
     let input = `<input `
     input += `name="${name}" `
     input += `id="${name}" `
-    input += `type="hidden1" `
+    input += `type="hidden" `
     input += `class="border rounded p-1" `
     input += `readonly1 `
     input += `value="${value}" `
-    if (isMultiple) {
+    if (sd2Or4 == 'sd2') {
+        input += `onchange="onChangeDropdown2({name:'${name}'})" `
+    }
+    if (sd2Or4 == 'sd4') {
         input += `onchange="onChangeDropdown4({ `
         input += `name:'${name}', `
-        input += `table01Name:'table01', `
-        input += `rowIndex:0, `
+        input += `table01Name:'${table01Name}', `
+        input += `rowIndex:${rowIndex}, `
         input += `})" `
-    } else {
-        input += `onchange="onChangeDropdown2({name:'${name}'})" `
     }
     input += `tabindex="-1" />`
     return input

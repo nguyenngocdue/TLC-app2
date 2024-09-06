@@ -19,9 +19,12 @@
     inputName="{{$name}}"
     allowCreateNew="{{$table == 'users' ? false : true}}"
     allowEdit="{{$table == 'users' ? false : true}}"
+
+    rowIndex="{{$rowIndex}}"
+    table01Name="{{$table01Name}}"
     />
 
 <script>
     $(`[id="div_text_{{$name}}"]`).html(@json($selectedArr).map(v=>renderTag(v)).join(''));
-    $(`[id="div_value_{{$name}}"]`).html(@json($selected).map(v=>renderInputField('{{$name}}',v, true)).join(''));
+    $(`[id="div_value_{{$name}}"]`).html(@json($selected).map(v=>renderInputField('{{$name}}',v, 'sd4', {{$rowIndex}}, '{{$table01Name}}')).join(''));
 </script>
