@@ -120,6 +120,7 @@
     },
     "erp_vendors": {
         "name": "erp_vendors",
+        "storeEmpty_and_updateShort": "true",
         "createNewShort": "true",
         "searchable": "true"
     },

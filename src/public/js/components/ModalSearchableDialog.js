@@ -26,20 +26,22 @@ function modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr) {
     return result
 }
 
+let modalSearchableDialogMode = 'createNew'
 let modalSearchableDialogNameField = null
-function modalSearchableDialogOnSelectHandleText(modalId, newIdStrs) {
+function modalSearchableDialogOnSelectHandleText(modalId) {
+    const newIdStrs = $('#' + modalId + '_selectedValue').val()
     const valueName = modalId + '_selectedText'
 
     const newIdArray = newIdStrs ? newIdStrs.split(',') : []
     const newText = newIdArray.map((id) => renderTag(modalSearchableDialogHits[id][modalSearchableDialogNameField])).join('')
+    console.log('newIdArray', newIdArray, 'newText', newText)
     $('#' + valueName).html(newText + '&nbsp')
 }
 
 let modalSearchableDialogHits = {}
 function modalSearchableDialogOnSelect(id, modalId, multipleStr) {
-    const newIdStrs = modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr)
-
-    modalSearchableDialogOnSelectHandleText(modalId, newIdStrs)
+    modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr)
+    modalSearchableDialogOnSelectHandleText(modalId)
 }
 
 function modalSearchableDialogHeaderRenderer(fields, allowEdit) {
@@ -73,7 +75,7 @@ function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValu
 
     if (allowEdit) {
         line += `<div class="table-cell border text-center" style="width:40px;">`
-        line += `<button onclick="event.stopPropagation();" type=button class="hover:text-blue-400">`
+        line += `<button onclick="event.stopPropagation();prepareForUpdate(${hit.id})" type=button class="hover:text-blue-600">`
         line += `<i class="fas fa-pencil"></i>`
         line += `</button>`
         line += `</div>`
@@ -102,7 +104,6 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
         success: function (response) {
             const { hits, meta } = response
             const { countTotal1, fields } = meta
-            // const { countTotal2, hits2 } = meta
 
             modalSearchableDialogHits = {}
             hits.forEach((hit) => (modalSearchableDialogHits[hit.id] = hit))
@@ -119,16 +120,8 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
             $(`#${modalId}_result`).html(objs.join('') + andMore1)
             $(`#divSearchResult`).html(hits.length + ' / ' + countTotal1 + ' items')
 
-            // const objs2 = []
-            // objs2.push(modalSearchableDialogHeaderRenderer(fields))
-            // hits2.forEach((hit, index) =>
-            //     objs2.push(modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId)),
-            // )
-            // let andMore2 = ''
-            // if (countTotal2 - hits2.length > 0)
-            //     andMore2 = `<div class="col-span-12 font-bold ml-5">and ${countTotal2 - hits2.length} more ...</div>`
-            // $(`#${modalId}_external_result`).html(objs2.join('') + andMore2)
-            // $(`#divExternalSearchResult`).html(hits2.length + ' / ' + countTotal2 + ' items')
+            //Update the selected Value Text Tag Box
+            modalSearchableDialogOnSelectHandleText(modalId)
         },
         error: function (data) {
             // console.log(data);
