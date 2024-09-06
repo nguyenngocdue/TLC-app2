@@ -487,7 +487,7 @@
         "column_name": "document_currency_id",
         "column_type": "bigint unsigned",
         "label": "Document Currency",
-        "control": "text",
+        "control": "dropdown",
         "align": "",
         "col_span": "4",
         "width": "",
