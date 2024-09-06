@@ -48,7 +48,7 @@
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "Exchange rate will get from this month",
+        "control_extra": "Select Month to Use for Currency Rates",
         "textarea_rows": ""
     },
     "_counter_currency_id": {
