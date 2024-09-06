@@ -26,18 +26,20 @@ function modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr) {
     return result
 }
 
-function modalSearchableDialogOnSelectHandleText(id, modalId, newIdStrs, nameField) {
+let modalSearchableDialogNameField = null
+function modalSearchableDialogOnSelectHandleText(modalId, newIdStrs) {
     const valueName = modalId + '_selectedText'
 
     const newIdArray = newIdStrs ? newIdStrs.split(',') : []
-    const newText = newIdArray.map((id) => renderTag(modalSearchableDialogHits[id][nameField])).join('')
+    const newText = newIdArray.map((id) => renderTag(modalSearchableDialogHits[id][modalSearchableDialogNameField])).join('')
     $('#' + valueName).html(newText + '&nbsp')
 }
 
 let modalSearchableDialogHits = {}
-function modalSearchableDialogOnSelect(id, modalId, multipleStr, nameField) {
+function modalSearchableDialogOnSelect(id, modalId, multipleStr) {
     const newIdStrs = modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr)
-    modalSearchableDialogOnSelectHandleText(id, modalId, newIdStrs, nameField)
+
+    modalSearchableDialogOnSelectHandleText(modalId, newIdStrs)
 }
 
 function modalSearchableDialogHeaderRenderer(fields, allowEdit) {
@@ -54,7 +56,8 @@ function modalSearchableDialogHeaderRenderer(fields, allowEdit) {
 }
 
 function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValues, fields, modalId, allowEdit) {
-    const nameField = fields.length > 0 ? fields[0].name : 'name'
+    modalSearchableDialogNameField = fields.length > 0 ? fields[0].name : 'name'
+    // console.log('Set nameField to', modalSearchableDialogNameField)
     if (typeof selectedValues == 'string') selectedValues = selectedValues.split(',').map((x) => parseInt(x))
     const checked = selectedValues.includes(hit.id) ? 'checked' : ''
     // console.log(selectedValues, hit.id, checked)
@@ -65,7 +68,7 @@ function modalSearchableDialogLineRenderer(hit, index, multipleStr, selectedValu
 
     line += `<div class="table-cell border text-center">${index + 1}</div>`
     line += `<div class="table-cell border text-center" style="width:40px;">`
-    line += `<input ${checked} name="whatever" type="${type}" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}', '${nameField}')">`
+    line += `<input ${checked} name="whatever" type="${type}" class="mx-1" onchange="modalSearchableDialogOnSelect(${hit.id}, '${modalId}', '${multipleStr}')">`
     line += `</div>`
 
     if (allowEdit) {

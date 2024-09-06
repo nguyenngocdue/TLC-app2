@@ -14,43 +14,43 @@ trait TraitSearchable
 	use TraitFailObject;
 	private $pageSize = 100;
 
-	private function searchOnExternalTable($sp, $keyword)
-	{
-		$modelPath = Erp::getModelPath($this->type);
-		if (!$modelPath) return [[], 0, []];
+	// private function searchOnExternalTable($sp, $keyword)
+	// {
+	// 	$modelPath = Erp::getModelPath($this->type);
+	// 	if (!$modelPath) return [[], 0, []];
 
-		$selectRaws = [];
-		$whereRaws = [];
-		foreach ($sp['props'] as $prop) {
-			if (!$prop['searchable']) continue;
-			if (isset($prop['external_column']) && $prop['external_column']) {
-				$selectRaws[] = '"' . $prop['external_column'] . '" as ' . $prop['column_name'];
-				if ($keyword) {
-					$whereRaws[] = 'CAST("' . $prop['external_column'] . '" as VARCHAR) COLLATE SQL_Latin1_General_CP1_CI_AI LIKE \'%' . $keyword . '%\'';
-				}
-			}
-		}
-		// Log::info($selectRaws);
-		// Log::info($whereRaws);
+	// 	$selectRaws = [];
+	// 	$whereRaws = [];
+	// 	foreach ($sp['props'] as $prop) {
+	// 		if (!$prop['searchable']) continue;
+	// 		if (isset($prop['external_column']) && $prop['external_column']) {
+	// 			$selectRaws[] = '"' . $prop['external_column'] . '" as ' . $prop['column_name'];
+	// 			if ($keyword) {
+	// 				$whereRaws[] = 'CAST("' . $prop['external_column'] . '" as VARCHAR) COLLATE SQL_Latin1_General_CP1_CI_AI LIKE \'%' . $keyword . '%\'';
+	// 			}
+	// 		}
+	// 	}
+	// 	// Log::info($selectRaws);
+	// 	// Log::info($whereRaws);
 
-		$query = $modelPath::query()
-			->selectRaw(join(',', $selectRaws));
-		foreach ($whereRaws as $whereRaw) {
-			$query = $query->orWhereRaw($whereRaw);
-		}
+	// 	$query = $modelPath::query()
+	// 		->selectRaw(join(',', $selectRaws));
+	// 	foreach ($whereRaws as $whereRaw) {
+	// 		$query = $query->orWhereRaw($whereRaw);
+	// 	}
 
-		$query = $query->limit(100);
-		$result = $query->get();
-		$result->each(function ($item) {
-			unset($item->timestamp);
-		});
+	// 	$query = $query->limit(100);
+	// 	$result = $query->get();
+	// 	$result->each(function ($item) {
+	// 		unset($item->timestamp);
+	// 	});
 
-		$columns = Erp::getAllColumns($this->type);
-		$totalCount = $query->count();
-		// dump($result);
+	// 	$columns = Erp::getAllColumns($this->type);
+	// 	$totalCount = $query->count();
+	// 	// dump($result);
 
-		return [$result, $totalCount, $query->toSql(), $columns];
-	}
+	// 	return [$result, $totalCount, $query->toSql(), $columns];
+	// }
 
 	private function searchOnLocalTable($modelPath, $fields, $keyword, $selectingValues)
 	{
@@ -70,6 +70,8 @@ trait TraitSearchable
 					$query->orWhere($field, 'LIKE', '%' . $keyword . '%');
 				}
 			});
+		} else {
+			$query = $query->orWhereRaw('1=1');
 		}
 
 		if ($this->type == 'user') $query = $query->where('resigned', 0);

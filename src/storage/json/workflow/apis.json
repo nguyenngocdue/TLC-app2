@@ -120,6 +120,7 @@
     },
     "erp_vendors": {
         "name": "erp_vendors",
+        "createNewShort": "true",
         "searchable": "true"
     },
     "esg_extra_metrics": {

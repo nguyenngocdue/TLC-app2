@@ -20,7 +20,10 @@
         </div>
         @if($allowCreateNew)
         <div class="m-1 p-1 w-1/4">
-           <x-controls.has-data-source.modal-searchable-dialog-create-new tableName="{{$tableName}}" modalId="{{$modalId}}"/>
+           <x-controls.has-data-source.modal-searchable-dialog-create-new 
+                {{-- tableName="{{$tableName}}"  --}}
+                modalId="{{$modalId}}"
+                />
         </div>
         @endif
     </div>
