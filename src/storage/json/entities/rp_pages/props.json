@@ -118,7 +118,7 @@
         "name": "_is_landscape",
         "column_name": "is_landscape",
         "column_type": "tinyint(1)",
-        "label": "Landscapge",
+        "label": "Is Landscapge",
         "control": "toggle",
         "align": "",
         "col_span": "6",
