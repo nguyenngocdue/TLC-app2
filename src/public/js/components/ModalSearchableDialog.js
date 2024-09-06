@@ -1,5 +1,5 @@
 function renderInputField(name, value) {
-    return `<input name="${name}" type="hidden1" class="border rounded p-1" readonly1 value="${value}" tabindex="-1" />`
+    return `<input name="${name}" type="hidden" class="border rounded p-1" readonly1 value="${value}" tabindex="-1" />`
 }
 
 function renderTag(value) {
@@ -12,7 +12,7 @@ function modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr) {
     const valueName = modalId + '_selectedValue'
     let result = ''
     if (multipleStr) {
-        const currentValues = $('#' + valueName).val()
+        const currentValues = getEById(valueName).val()
         const currentValuesArray = currentValues ? currentValues.split(',') : []
         const index = currentValuesArray.indexOf(id.toString())
         if (index > -1) currentValuesArray.splice(index, 1)
@@ -22,20 +22,20 @@ function modalSearchableDialogOnSelectHandleValue(id, modalId, multipleStr) {
     } else {
         result = id.toString()
     }
-    $('#' + valueName).val(result)
+    getEById(valueName).val(result)
     return result
 }
 
 let modalSearchableDialogMode = 'createNew'
 let modalSearchableDialogNameField = null
 function modalSearchableDialogOnSelectHandleText(modalId) {
-    const newIdStrs = $('#' + modalId + '_selectedValue').val()
+    const newIdStrs = getEById(modalId + '_selectedValue').val()
     const valueName = modalId + '_selectedText'
 
     const newIdArray = newIdStrs ? newIdStrs.split(',') : []
     const newText = newIdArray.map((id) => renderTag(modalSearchableDialogHits[id][modalSearchableDialogNameField])).join('')
     // console.log('newIdArray', newIdArray, 'newText', newText)
-    $('#' + valueName).html(newText + '&nbsp')
+    getEById(valueName).html(newText + '&nbsp')
 }
 
 let modalSearchableDialogHits = {}
@@ -117,7 +117,7 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
             let andMore1 = ''
             if (countTotal1 - hits.length > 0)
                 andMore1 = `<div class="col-span-12 font-bold ml-5">and ${countTotal1 - hits.length} more ...</div>`
-            $(`#${modalId}_result`).html(objs.join('') + andMore1)
+            getEById(`${modalId}_result`).html(objs.join('') + andMore1)
             $(`#divSearchResult`).html(hits.length + ' / ' + countTotal1 + ' items')
 
             //Update the selected Value Text Tag Box

@@ -12,11 +12,6 @@
                 <div id="divSearchResult"></div>
             </div>
             <div id="{{$modalId}}_result" class="overflow-y-scroll border1 rounded bg-gray-50 border fle1x" style="height: 400px;"></div>
-            {{-- <div class="flex justify-between">
-                <div class="font-bold">External Search Results:</div>
-                <div id="divExternalSearchResult"></div>
-            </div>
-            <div id="{{$modalId}}_external_result" class="overflow-y-scroll border1 rounded bg-gray-50 border fle1x" style="height: 200px;"></div> --}}
         </div>
         @if($allowCreateNew)
         <div class="m-1 p-1 w-1/4">
@@ -50,17 +45,17 @@
         const inputName = "{{$inputName}}"
         const divValueName = "{{$divValueName}}"
         const divTextName = "{{$divTextName}}"
-        const txtName = '#'+ modalId + "_txtName"
+        const txtName = modalId + "_txtName"
         const url = "{{route($tableName.'.searchable')}}";
         const allowEdit = "{{$allowEdit}}"
 
-        $(txtName).focus();
-        $(txtName).on('keyup', function(){
+        getEById(txtName).focus();
+        getEById(txtName).on('keyup', function(){
             clearTimeout(debounceTimer); // Clear the previous timer
             
             debounceTimer = setTimeout(function() {
-                const inputValue = $(txtName).val();
-                const selectingValues = $('#'+modalId+'_selectedValue').val();
+                const inputValue = getEById(txtName).val();
+                const selectingValues = getEById(modalId+'_selectedValue').val();
                 // if(inputValue.length < 3) return;
                 // console.log(inputValue);
 
@@ -68,10 +63,10 @@
             }, 500)
         })
 
-        const btnSelect = '#'+ modalId + "_btnSelect"
-        $(btnSelect).on('click',function(){
+        const btnSelect = modalId + "_btnSelect"
+        getEById(btnSelect).on('click',function(){
             // $('#'+modalId).hide()
-            let selectedValues = $('#'+modalId+'_selectedValue').val();
+            let selectedValues = getEById(modalId+'_selectedValue').val();
             selectedValues = selectedValues ? selectedValues.split(",") : [];
             // console.log(divValueName, selectedValues);
 
@@ -79,7 +74,7 @@
             selectedValues.forEach(id => inputs.push(renderInputField(inputName, id)));
             getEById(divValueName).html(inputs.join(''));
 
-            const selectedTexts = $('#'+modalId+'_selectedText').html();
+            const selectedTexts = getEById(modalId+'_selectedText').html();
             // console.log(divTextName, selectedTexts);
             getEById(divTextName).html(selectedTexts);
 
@@ -90,10 +85,10 @@
             const selectedIds = []
             allInputs.each(input=>(selectedIds.push( allInputs[input].value)));
             const selectedValues = selectedIds.join();
-            $('#'+modalId+'_selectedValue').val(selectedValues);
+            getEById(modalId+'_selectedValue').val(selectedValues);
             
             const selectedTexts = getEById(divTextName).html();
-            $('#'+modalId+'_selectedText').html(selectedTexts || '&nbsp;');
+            getEById(modalId+'_selectedText').html(selectedTexts || '&nbsp;');
 
             modalSearchableDialogInvoke(url, null, multiple, selectedValues, modalId, allowEdit);            
         }

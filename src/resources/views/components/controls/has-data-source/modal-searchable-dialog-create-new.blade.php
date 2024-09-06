@@ -79,13 +79,13 @@
                             $('#txtRegNo, #txtName, #txtAddress').val('');
                             validateForm();
     
-                            const seletectValueCtrl = $("#"+modalId+"_selectedValue")
+                            const seletectValueCtrl = getEById(modalId+"_selectedValue")
                             const seletectValueCtrlVal = seletectValueCtrl.val();
                             const newIdStrs = (seletectValueCtrlVal == "")?(insertedId): seletectValueCtrlVal + "," + insertedId;
     
                             seletectValueCtrl.val(newIdStrs);
                             //Reset keyword and reload the table lines
-                            $("#"+modalId+"_txtName").val("").trigger('keyup');
+                            getEById(modalId+"_txtName").val("").trigger('keyup');
                             toastr.success('Vendor created successfully');
                                                         
                                                        
@@ -118,7 +118,7 @@
                             modalSearchableDialogMode = 'createNew';
                             validateForm();
                             
-                            $("#"+modalId+"_txtName").val("").trigger('keyup');
+                            getEById(modalId+"_txtName").val("").trigger('keyup');
                             toastr.success('Vendor updated successfully');
                             console.log(modalSearchableDialogHits)
 
