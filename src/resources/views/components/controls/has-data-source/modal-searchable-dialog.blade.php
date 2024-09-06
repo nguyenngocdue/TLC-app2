@@ -71,13 +71,15 @@
             // console.log(divValueName, selectedValues);
 
             const inputs = []
-            selectedValues.forEach(id => inputs.push(renderInputField(inputName, id)));
+            selectedValues.forEach(id => inputs.push(renderInputField(inputName, id, !!multiple)));
             getEById(divValueName).html(inputs.join(''));
 
             const selectedTexts = getEById(modalId+'_selectedText').html();
             // console.log(divTextName, selectedTexts);
             getEById(divTextName).html(selectedTexts);
 
+            // console.log("Triggered change ", inputName, selectedValues)
+            $(`[name='${inputName}']`).trigger('change');
         })
         
         const onLoaded = () =>{

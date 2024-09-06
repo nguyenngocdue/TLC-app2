@@ -141,8 +141,8 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'claimable_type', 'title' => 'Parent Type', 'invisible' => true, 'value_as_parent_type' => true],
             ['dataIndex' => 'claimable_id', 'title' => 'Parent ID', 'invisible' => true, 'value_as_parent_id' => true],
             ['dataIndex' => 'name', 'invisible' => true],
-            ['dataIndex' => 'expense_location_id'],
-            ['dataIndex' => 'expense_item_id'],
+            ['dataIndex' => 'expense_location_id', 'cloneable' => true,],
+            ['dataIndex' => 'expense_item_id', 'cloneable' => true,],
             ['dataIndex' => 'gl_account_id', 'invisible' => !true,],
             ['dataIndex' => 'invoice_date', 'cloneable' => true,],
             ['dataIndex' => 'invoice_no', 'cloneable' => true,],
@@ -161,7 +161,7 @@ class Fin_expense_claim_line extends ModelExtended
 
             ['dataIndex' => 'rate_exchange',],
             ['dataIndex' => 'total_amount_lcy', 'footer' => 'agg_sum',],
-            ['dataIndex' => 'vendor_id',],
+            ['dataIndex' => 'vendor_id', 'cloneable' => true,],
             ['dataIndex' => 'vendor_name',],
             ['dataIndex' => 'vendor_address',],
         ];

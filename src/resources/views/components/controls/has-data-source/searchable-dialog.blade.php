@@ -23,5 +23,5 @@
 
 <script>
     $(`[id="div_text_{{$name}}"]`).html(@json($selectedArr).map(v=>renderTag(v)).join(''));
-    $(`[id="div_value_{{$name}}"]`).html(@json($selected).map(v=>renderInputField('{{$name}}',v)).join(''));
+    $(`[id="div_value_{{$name}}"]`).html(@json($selected).map(v=>renderInputField('{{$name}}',v, false)).join(''));
 </script>

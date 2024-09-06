@@ -458,6 +458,9 @@ const addANewLineFull = (params) => {
                 case 'attachment4':
                     renderer = '<div class="to be implemented"></div>'
                     break
+                case 'searchable-dialog4':
+                    renderer = '<div class="">please save the document</div>'
+                    break
                 default:
                     renderer = 'Unknown how to render ' + column['renderer']
                     break

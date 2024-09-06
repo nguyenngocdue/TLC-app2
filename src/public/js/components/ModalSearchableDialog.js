@@ -1,5 +1,22 @@
-function renderInputField(name, value) {
-    return `<input name="${name}" type="hidden" class="border rounded p-1" readonly1 value="${value}" tabindex="-1" />`
+function renderInputField(name, value, isMultiple) {
+    let input = `<input `
+    input += `name="${name}" `
+    input += `id="${name}" `
+    input += `type="hidden1" `
+    input += `class="border rounded p-1" `
+    input += `readonly1 `
+    input += `value="${value}" `
+    if (isMultiple) {
+        input += `onchange="onChangeDropdown4({ `
+        input += `name:'${name}', `
+        input += `table01Name:'table01', `
+        input += `rowIndex:0, `
+        input += `})" `
+    } else {
+        input += `onchange="onChangeDropdown2({name:'${name}'})" `
+    }
+    input += `tabindex="-1" />`
+    return input
 }
 
 function renderTag(value) {
