@@ -161,7 +161,7 @@ class Fin_expense_claim_line extends ModelExtended
 
             ['dataIndex' => 'rate_exchange',],
             ['dataIndex' => 'total_amount_lcy', 'footer' => 'agg_sum',],
-            // ['dataIndex' => 'vendor_id',],
+            ['dataIndex' => 'vendor_id',],
             ['dataIndex' => 'vendor_name',],
             ['dataIndex' => 'vendor_address',],
         ];

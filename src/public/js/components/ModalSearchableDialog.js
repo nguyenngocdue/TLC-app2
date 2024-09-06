@@ -1,5 +1,5 @@
 function renderInputField(name, value) {
-    return `<input name="${name}" type="hidden" class="border rounded p-1" readonly1 value="${value}" tabindex="-1" />`
+    return `<input name="${name}" type="hidden1" class="border rounded p-1" readonly1 value="${value}" tabindex="-1" />`
 }
 
 function renderTag(value) {

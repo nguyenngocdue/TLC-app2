@@ -30,7 +30,7 @@ trait TableTraitApplyRender
     private function getPropertyRendered($column)
     {
         $properties = $column['properties'] ?? [];
-        array_walk($properties, fn (&$value, $key) => $value = "$key='$value'");
+        array_walk($properties, fn(&$value, $key) => $value = "$key='$value'");
         $propertyRendered = trim(join(" ", $properties));
         return $propertyRendered;
     }
@@ -82,6 +82,24 @@ trait TableTraitApplyRender
         $isEditable = (isset($column['editable']) && $column['editable'] == true);
         $editableStr = $isEditable ? ".editable" : "";
         $tagName = "x-renderer{$editableStr}.{$renderer}";
+        if ($column['renderer'] === 'searchable-dialog4') {
+            $tagName = "x-controls.has-data-source.searchable-dialog4";
+            $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
+
+            // $deaf = (isset($column['deaf']) && $column['deaf'] == true) ? "deaf=true" : "";
+            $saveOnChangeRenderer = (isset($column['saveOnChange']) && $column['saveOnChange'] == true) ? "saveOnChange=true" : "";
+            $batchLength = "batchLength=$batchLength";
+            $rawData = ($rawData instanceof EloquentCollection || $rawData instanceof SupportCollection) ? $rawData = $rawData->pluck('id') : [$rawData];
+            $rawData = json_encode($rawData);
+            $attributes = "$name $typeRender $multiple $propertyRender $rowReadOnly ";
+            // $attributes .= "$deaf ";
+            $attributes .= " $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
+            $output = "<$tagName $attributes></$tagName>";
+            // Log::info($output);
+
+            $blade = Blade::render($output);
+            return $blade;
+        }
         if ($column['renderer'] === 'dropdown4') {
             $tagName = "x-controls.has-data-source.dropdown4";
             $multiple = (isset($column['multiple']) && $column['multiple'] == true) ? "multiple=true" : "";
@@ -92,10 +110,6 @@ trait TableTraitApplyRender
             $rawData = json_encode($rawData);
             $attributes = "$name $typeRender $multiple $deaf $propertyRender $rowReadOnly ";
             $attributes .= " $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
-            // if (App::isLocal()) {
-            //     $styleRender = isset($column['width']) ? 'style="width: ' . $column['width'] . 'px;"' : '';
-            //     $attributes .= "$styleRender ";
-            // }
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);
 

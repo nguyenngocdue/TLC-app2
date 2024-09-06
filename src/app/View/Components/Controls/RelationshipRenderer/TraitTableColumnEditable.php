@@ -76,14 +76,24 @@ trait TraitTableColumnEditable
                     $newColumn['classList'] = $classListText;
                     $newColumn['align'] = 'center';
                     break;
-                case 'dropdown':
-                    // case 'dropdown_multi':
-                    // case 'checkbox':
-                case 'dropdown_multi_2a':
-                case 'checkbox_2a':
                 case 'radio':
+                case 'dropdown':
+                case 'checkbox_2a':
+                case 'dropdown_multi_2a':
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown4';
+                    $newColumn['editable'] = true;
+                    $newColumn['classList'] = $classListText;
+                    $newColumn['type'] = $this->type;
+                    if (isset($prop['relationships']['table'])) {
+                        $newColumn['properties']['tableName'] = $prop['relationships']['table'];
+                    } else {
+                        dd("Cant find table of [" . $prop['name'] . "] when making table column.");
+                    }
+                    break;
+                case 'searchable_dialog':
+                case 'searchable_dialog_multi':
+                    $newColumn['renderer'] = 'searchable-dialog4';
                     $newColumn['editable'] = true;
                     $newColumn['classList'] = $classListText;
                     $newColumn['type'] = $this->type;

@@ -7,7 +7,6 @@ use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Blade;
 
 class SearchableDialog extends Component
 {
