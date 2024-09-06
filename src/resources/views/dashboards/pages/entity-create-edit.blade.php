@@ -14,6 +14,7 @@ $allowed = App\Utils\Support\Json\SuperWorkflows::isAllowed($status, $type);
 
 $formWidth = "md:w-3/4";
 if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])) $formWidth = "w-full md:w-3/4 lg:w-1/2";
+if(in_array($type,["fin_expense_claims"])) $formWidth = "w-full";
 
 @endphp
 
@@ -73,17 +74,19 @@ if(in_array($type,["qaqc_insp_chklst_shts","hse_insp_chklst_shts"])) $formWidth 
                 </div>
                 <x-renderer.item-render-props width='{{$formWidth}}' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
                 @if(!$hasReadOnly)
-                    <div class="fixed right-0">
-                        <x-controls.action-buttons 
-                            isFloatingOnRightSide="true" 
-                            :buttonSave="$buttonSave" 
-                            :action="$action" 
-                            :actionButtons="$actionButtons" 
-                            :propsIntermediate="$propsIntermediate" 
-                            type={{$type}} 
-                            :item="$item"
-                            />
-                    </div>
+                    @if(!in_array($type, ['fin_expense_claims'])) 
+                        <div class="fixed right-0">                        
+                            <x-controls.action-buttons 
+                                isFloatingOnRightSide="true" 
+                                :buttonSave="$buttonSave" 
+                                :action="$action" 
+                                :actionButtons="$actionButtons" 
+                                :propsIntermediate="$propsIntermediate" 
+                                type={{$type}} 
+                                :item="$item"
+                                />
+                        </div>
+                    @endif
                 @endif
             </div>
             @break        
