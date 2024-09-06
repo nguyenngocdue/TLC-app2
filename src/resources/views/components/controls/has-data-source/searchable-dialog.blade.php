@@ -2,9 +2,9 @@
 <div id="div_value_{{$name}}"></div>
 
 <div class="flex w-full gap-1">
-    <div id="div_text_{{$name}}" class="readonly w-full fle1x items-center p-1"></div>
+    <div id="div_text_{{$name}}" class="readonly w-full fle1x items-center p-1 rounded"></div>
     <x-renderer.button 
-        class="z-10"
+        class="z-10 readonly"
         click="toggleModal('modal-searchable-dialog-{{$id}}')"
         keydownEscape="closeModal('modal-searchable-dialog-{{$id}}')"
         >...</x-renderer.button>

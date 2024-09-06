@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Utils;
 
+use App\Utils\Support\CurrentRoute;
+use App\Utils\Support\Erp;
 use App\Utils\Support\JsonControls;
 
 trait TraitManagePropColumns
@@ -9,8 +11,9 @@ trait TraitManagePropColumns
     protected function getColumns()
     {
         $controls = JsonControls::getControls();
+        $externalColumns = Erp::getAllColumns(CurrentRoute::getTypePlural(), 1);
         $isManagePropScreen = (isset($this->routeKey) && $this->routeKey == '_prp');
-        return [
+        $columns = [
             [
                 "dataIndex" => "action",
                 "align" => "center",
@@ -178,5 +181,18 @@ trait TraitManagePropColumns
                 'width' => 40,
             ],
         ];
+
+        if (sizeof($externalColumns)) {
+            $columns[] = [
+                "dataIndex" => "external_column",
+                "editable" => true,
+                "renderer" => "dropdown",
+                "cbbDataSource" => ['', ...$externalColumns],
+                'width' => 250,
+                'properties' => ['strFn' => 'same'],
+            ];
+        }
+
+        return $columns;
     }
 }

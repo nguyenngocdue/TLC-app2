@@ -89,7 +89,6 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
             selectingValues: selectedValues,
         },
         success: function (response) {
-            const pageSize = 100
             const { hits, meta } = response
             const { countTotal, fields } = meta
 
@@ -104,8 +103,10 @@ function modalSearchableDialogInvoke(url, keyword, multipleStr, selectedValues, 
             )
 
             let andMore = ''
-            if (countTotal - pageSize > 0) andMore = `<div class="col-span-12 font-bold ml-5">and ${countTotal - pageSize} more ...</div>`
+            if (countTotal - hits.length > 0)
+                andMore = `<div class="col-span-12 font-bold ml-5">and ${countTotal - hits.length} more ...</div>`
             $(`#${modalId}_result`).html(objs.join('') + andMore)
+            $(`#divSearchResult`).html(hits.length + ' / ' + countTotal + ' items')
         },
         error: function (data) {
             // console.log(data);

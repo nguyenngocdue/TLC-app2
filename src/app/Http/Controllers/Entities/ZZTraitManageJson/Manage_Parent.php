@@ -6,7 +6,6 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\Entities;
 use App\Utils\Support\Json\JsonGetSet;
-use App\Utils\Support\Json\Props;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\Http\Request;
@@ -35,8 +34,7 @@ abstract class Manage_Parent
     function __construct(
         protected $type,
         protected $typeModel,
-    ) {
-    }
+    ) {}
 
     function attachActionButtons(&$dataSource, $key, array $buttons)
     {
@@ -73,7 +71,7 @@ abstract class Manage_Parent
     private function getJavascript()
     {
         $allStatuses = array_keys($this->getColumnSource());
-        $allStatusesStr = "[" . join(", ", array_map(fn ($i) => '"' . $i . '"', $allStatuses)) . "]";
+        $allStatusesStr = "[" . join(", ", array_map(fn($i) => '"' . $i . '"', $allStatuses)) . "]";
         $javascript = "const statuses = $allStatusesStr;";
         $javascript .= "let k_horizon_mode = {}; let k_horizon_value = {};";
         $javascript .= "let k_vertical_mode = {}; let k_vertical_value = {};";
@@ -138,13 +136,13 @@ abstract class Manage_Parent
 
         //Make up the columns
         $columns = $this->getColumns();
-        
+
         $this->makeUpWidthForColumns($columns);
         //Remove all things in blacklist
-        $columns = array_filter($columns, fn ($column) => !in_array($column['dataIndex'], ['action', ...$this->storingBlackList,]));
+        $columns = array_filter($columns, fn($column) => !in_array($column['dataIndex'], ['action', ...$this->storingBlackList,]));
         //Remove all things NOT in whitelist
         if (sizeof($this->storingWhiteList) > 0) {
-            $columns = array_filter($columns, fn ($column) => in_array($column['dataIndex'], $this->storingWhiteList));
+            $columns = array_filter($columns, fn($column) => in_array($column['dataIndex'], $this->storingWhiteList));
         }
         // dd($this->storingWhiteList);
         $result = $jsonGetSet::convertHttpObjectToJson($table01, $columns);

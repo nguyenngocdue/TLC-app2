@@ -5,7 +5,10 @@
     <div class="m-1 p-1">
         <div class="font-bold">Keywords:</div>
         <input id="{{$modalId}}_txtName" type="text" name="name" class="w-full rounded p-1 border-gray-200"/>
-        <div class="font-bold">Search Results:</div>
+        <div class="flex justify-between">
+            <div class="font-bold">Search Results:</div>
+            <div id="divSearchResult"></div>
+        </div>
         <div id="{{$modalId}}_result" class="overflow-y-scroll border1 rounded bg-gray-50 border fle1x" style="height: 400px;"></div>
         <div class="font-bold">Selected Value:</div>
         <input id="{{$modalId}}_selectedValue" type="hidden" />

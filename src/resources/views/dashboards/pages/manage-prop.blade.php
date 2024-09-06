@@ -14,7 +14,7 @@
             showNo=1 
             :columns="$columns" 
             :dataSource="$dataSource" 
-            tableTrueWidth=1 
+            {{-- tableTrueWidth=1  --}}
             maxH=32
             
             rotate45Width=200

@@ -9,7 +9,6 @@ use App\Utils\Support\Json\Props;
 use App\Utils\Support\DBTable;
 use App\Utils\Support\Json\Relationships;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -109,6 +108,7 @@ class ManageProps extends Manage_Parent
             $column_type = $prop['column_type'];
             if (!(Str::startsWith($column_type, "varchar(") || $column_type == "text")) {
                 $prop['searchable'] = 'DO_NOT_RENDER';
+                $prop['external_column'] = 'DO_NOT_RENDER';
             }
         }
     }

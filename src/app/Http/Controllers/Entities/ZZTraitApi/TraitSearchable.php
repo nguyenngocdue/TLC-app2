@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitApi;
 
+use App\Utils\Support\Erp;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
@@ -13,44 +14,49 @@ trait TraitSearchable
 	use TraitFailObject;
 	private $pageSize = 100;
 
-	private function cleanString($string)
+	private function searchOnExternalTable($sp, $keyword)
 	{
-		// Use preg_replace to remove \u0000 and * characters
-		return preg_replace('/\x00|\*/', '', $string);
-	}
+		$modelPath = Erp::getModelPath($this->type);
+		if (!$modelPath) return [[], 0, []];
 
-	private function searchOnExternalTable($modelPath, $keyword)
-	{
-		$modelPath = $modelPath . "_external";
-		if (!class_exists($modelPath)) return [[], 0, []];
+		$selectRaws = [];
+		$whereRaws = [];
+		foreach ($sp['props'] as $prop) {
+			if (!$prop['searchable']) continue;
+			if (isset($prop['external_column']) && $prop['external_column']) {
+				$selectRaws[] = '"' . $prop['external_column'] . '" as ' . $prop['column_name'];
+				if ($keyword) {
+					$whereRaws[] = 'CAST("' . $prop['external_column'] . '" as VARCHAR) COLLATE SQL_Latin1_General_CP1_CI_AI LIKE \'%' . $keyword . '%\'';
+				}
+			}
+		}
+		// Log::info($selectRaws);
+		// Log::info($whereRaws);
 
 		$query = $modelPath::query()
-			->selectRaw('Name as name, Address as address, "VAT Registration No_" as reg_no')
+			->selectRaw(join(',', $selectRaws));
+		foreach ($whereRaws as $whereRaw) {
+			$query = $query->orWhereRaw($whereRaw);
+		}
 
-			->orWhereRaw('Name COLLATE SQL_Latin1_General_CP1_CI_AI LIKE \'%' . $keyword . '%\'')
-			->orWhereRaw('Address COLLATE SQL_Latin1_General_CP1_CI_AI LIKE \'%' . $keyword . '%\'')
-			->orWhereRaw(' CAST("VAT Registration No_" as VARCHAR) LIKE \'%' . $keyword . '%\'');
 		$query = $query->limit(100);
 		$result = $query->get();
 		$result->each(function ($item) {
 			unset($item->timestamp);
 		});
 
-		// Log::info((array)$result->first());
-
-		$columns = $result->count() > 0 ? array_keys((array)$result->first()->getOriginal()) : [];
-		$columns = array_map(fn($col) => $this->cleanString($col), $columns);
+		$columns = Erp::getAllColumns($this->type);
 		$totalCount = $query->count();
 		// dump($result);
 
-		return [$result, $totalCount, $columns];
+		return [$result, $totalCount, $query->toSql(), $columns];
 	}
 
 	private function searchOnLocalTable($modelPath, $fields, $keyword, $selectingValues)
 	{
 		$fieldNames = array_map(fn($field) => $field['name'], $fields);
 		$query = $modelPath::query()
-			->select($fieldNames)->whereRaw('1=1');
+			->select($fieldNames); //->whereRaw('1=1');
 		if ($selectingValues) {
 			// Log::info($selectingValues);
 			$query = $query->selectRaw('id in (' . join(",", $selectingValues) . ') as selected')
@@ -58,22 +64,24 @@ trait TraitSearchable
 		} else {
 			$query = $query->selectRaw('1 as selected');
 		}
-		$query = $query->orWhere(function ($query) use ($fieldNames, $keyword) {
-			foreach ($fieldNames as $field) {
-				$query->orWhere($field, 'LIKE', '%' . $keyword . '%');
-			}
-		});
+		if ($keyword) {
+			$query = $query->orWhere(function ($query) use ($fieldNames, $keyword) {
+				foreach ($fieldNames as $field) {
+					$query->orWhere($field, 'LIKE', '%' . $keyword . '%');
+				}
+			});
+		}
 
 		if ($this->type == 'user') $query = $query->where('resigned', 0);
 
 		$query->orderBy('selected', 'desc');
 		if (sizeof($fieldNames) > 1) $query->orderBy($fieldNames[1]);
-		$message = $query->toSql();
+		$sql = $query->toSql();
 		// Log::info($message);
 
 		$countTotal = $query->count();
 		$theRows = $query->limit($this->pageSize)->get();
-		return [$theRows, $countTotal, $message];
+		return [$theRows, $countTotal, $sql];
 	}
 
 	private function getFieldListFromProp($sp)
@@ -107,8 +115,8 @@ trait TraitSearchable
 
 			$fields = $this->getFieldListFromProp($sp);
 
-			[$theRows, $countTotal, $message] = $this->searchOnLocalTable($modelPath, $fields, $keyword, $selectingValues);
-			[$moreRows, $moreTotal, $columns] = $this->searchOnExternalTable($modelPath, $keyword);
+			[$theRows, $countTotal, $sql1] = $this->searchOnLocalTable($modelPath, $fields, $keyword, $selectingValues);
+			[$moreRows, $moreTotal, $sql2, $columns] = $this->searchOnExternalTable($sp, $keyword);
 
 			$theRows = $theRows->concat($moreRows);
 
@@ -116,7 +124,9 @@ trait TraitSearchable
 				'fields' =>	$fields,
 				'columns' => $columns,
 				'countTotal' => $countTotal + $moreTotal,
-			], $message,);
+				'sql1' => $sql1,
+				'sql2' => $sql2,
+			]);
 		} catch (\Throwable $th) {
 			Log::error($th);
 			return $this->getFailObject($th);

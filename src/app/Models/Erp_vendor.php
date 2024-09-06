@@ -14,5 +14,5 @@ class Erp_vendor extends ModelExtended
         "owner_id",
     ];
 
-    protected static $externalTable = 'TLC_PROD.dbo.TLC_LLC$Vendor$437dbf0e-84ff-417a-965d-ed2bb9650972';
+    // protected static $externalTable = 'TLC_PROD.dbo.TLC_LLC$Vendor$437dbf0e-84ff-417a-965d-ed2bb9650972';
 }
