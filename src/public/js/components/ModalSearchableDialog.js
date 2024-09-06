@@ -1,5 +1,5 @@
 function renderInputField(name, value, sd2Or4, rowIndex, table01Name) {
-    console.log('renderInputField', name, value, sd2Or4, rowIndex, table01Name)
+    // console.log('renderInputField', name, value, sd2Or4, rowIndex, table01Name)
     let input = `<input `
     input += `name="${name}" `
     input += `id="${name}" `

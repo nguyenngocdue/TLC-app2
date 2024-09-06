@@ -2,7 +2,9 @@
 
 namespace App\View\Components\Controls\HasDataSource;
 
+use App\Http\Controllers\Entities\ZZTraitApi\TraitSearchable;
 use App\Utils\ClassList;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
@@ -10,6 +12,8 @@ use Illuminate\Support\Arr;
 class SearchableDialog4 extends Component
 {
     // use HasDataSource;
+    use TraitSearchable;
+
     public function __construct(
         private $name,
         private $selected = null,
@@ -24,16 +28,9 @@ class SearchableDialog4 extends Component
         private $rowIndex = null,
         private $batchLength = 1,
         private $deaf = false,
-        private $selectedArr = null,
     ) {
         // dump($this->selected);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
-
-        $model = Str::modelPathFrom($tableName);
-        // dump($tableName, $model);
-        $this->selectedArr = $model::query()->select("name")->whereIn("id", json_decode($this->selected))->get()->pluck("name")->toArray();
-        // dd($this->selectedArr);
-        // $this->selectedArr = ["1", "2", "3"];
     }
 
     public function render()
@@ -43,11 +40,23 @@ class SearchableDialog4 extends Component
         $name = $this->multiple ? $this->name . "[]" : $this->name;
         $table = $this->tableName;
         $nameless = Str::modelPathFrom($table)::$nameless;
+
+        $fieldList = static::getFieldListFromProp(SuperProps::getFor($table));
+        // Log::info($fieldList);
+
+        $model = Str::modelPathFrom($table);
+        $selectedStr = $model::query()
+            // ->select('id', 'name')
+            ->whereIn('id', json_decode($this->selected))
+            ->get()
+            ->pluck($fieldList[0]['name']);
+        // Log::info($selectedStr);
+
         $params = [
             'name' => $name,
             'id' => $id,
             'selected' => json_decode($this->selected),
-            'selectedArr' => $this->selectedArr,
+            'selectedArr' => $selectedStr,
             'multipleStr' => $this->multiple ? "multiple" : "",
             'readOnlyStr' => $this->readOnly ? "readonly" : "",
 

@@ -2,15 +2,19 @@
 
 namespace App\View\Components\Controls\HasDataSource;
 
+use App\Http\Controllers\Entities\ZZTraitApi\TraitSearchable;
 use App\Utils\ClassList;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class SearchableDialog extends Component
 {
     // use HasDataSource;
+    use TraitSearchable;
+
     public function __construct(
         private $name,
         private $selected = null,
@@ -43,13 +47,16 @@ class SearchableDialog extends Component
 
         $nameless = (Str::modelPathFrom($table))::$nameless;
 
+        $fieldList = static::getFieldListFromProp(SuperProps::getFor($table));
+        // Log::info($fieldList);
+
         $model = Str::modelPathFrom($table);
         $selectedStr = $model::query()
             // ->select('id', 'name')
             ->whereIn('id', json_decode($this->selected))
             ->get()
-            ->pluck('name');
-        // ->toArray();
+            ->pluck($fieldList[0]['name']);
+        // Log::info($selectedStr);
 
         // dump($selectedStr);
         // $selectedStr = $selectedStr->map(fn($name) => Blade::render("<x-renderer.tag color='gray'>$name</x-renderer.tag>"))->join("");

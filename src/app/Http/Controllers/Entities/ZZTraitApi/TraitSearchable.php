@@ -86,7 +86,7 @@ trait TraitSearchable
 		return [$theRows, $countTotal, $sql];
 	}
 
-	private function getFieldListFromProp($sp)
+	public static function getFieldListFromProp($sp)
 	{
 		$fields = [];
 		foreach ($sp['props'] as $id => $prop) {
@@ -115,7 +115,7 @@ trait TraitSearchable
 			$modelPath = Str::modelPathFrom($this->type);
 			$sp = SuperProps::getFor($this->type);
 
-			$fields = $this->getFieldListFromProp($sp);
+			$fields = static::getFieldListFromProp($sp);
 
 			[$theRows, $countTotal, $sql1] = $this->searchOnLocalTable($modelPath, $fields, $keyword, $selectingValues);
 			// [$moreRows, $moreTotal, $sql2, $columns] = $this->searchOnExternalTable($sp, $keyword);
