@@ -12,9 +12,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
-use App\Utils\Support\SortData;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Component;
 
 class ReportFilterItem extends Component
