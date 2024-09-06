@@ -28,7 +28,8 @@ trait TraitCreateSQLReport2
                 $sqlStr = str_replace($searchStr, $tempStr, $sqlStr);
             } else {
                 // Change the SQL String to the conrect syntax
-                $sqlStr = str_replace("'{{" . $value . "}}'", 'null', $sqlStr);
+                // $sqlStr = str_replace("'{{" . $value . "}}'", 'null', $sqlStr);
+                $sqlStr = str_replace("{{" . $value . "}}", 'null', $sqlStr);
             }
         }
         $sqlStr = str_replace(["\{{", "\}}"], ["{{", "}}"], $sqlStr);

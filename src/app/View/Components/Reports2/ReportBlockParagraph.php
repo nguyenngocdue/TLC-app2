@@ -18,9 +18,9 @@ class ReportBlockParagraph extends Component
         private $currentParams,
     ) {}
 
-    private function renderHtml($strHtml, $varsInHtml)
+    private function renderHtml($strHtml, $currentParams)
     {
-        $html = $this->replaceVariableStrs($strHtml, $varsInHtml);
+        $html = $this->replaceVariableStrs($strHtml, $currentParams);
         return $html;
     }
     public function render()

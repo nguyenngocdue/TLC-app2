@@ -13,14 +13,14 @@
     @endif
 
 @if($block->title)
-<x-renderer.heading level=3 title="Name: {{ $block->name }}" class="font-bold text-center pt-2">
+<x-renderer.heading level=3 title="Name: {{ $block->name }}" class="{{-- font-bold  --}} text-center pt-2">
     <a class="items-center" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
         {{ $block->title }}
     </a>
 </x-renderer.heading>
 @endif
 @if( $block->description)
-    <x-renderer.heading level=4 class="font-bold text-center pb-1">
+    <x-renderer.heading level=4 class="{{-- font-bold  --}} text-center {{ $block->title  ? 'py-2' : 'py-4'}}">
         <a class="items-center" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
             {{ $block->description }}
         </a>
