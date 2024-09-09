@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
 
-            $table->hasStatus();
+            // $table->hasStatus();
             $table->appendCommonFields();
         });
     }

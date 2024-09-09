@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('task_id')->nullable();
 
-            $table->hasStatus();
+            // $table->hasStatus();
             $table->appendCommonFields();
         });
     }

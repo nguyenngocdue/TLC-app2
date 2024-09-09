@@ -25,16 +25,70 @@ class Hr_tso_archive_line extends ModelExtended
         'status',
         'owner_id',
     ];
-    // public static $nameless = true;
-    // public static $statusless = true;
 
     public static $eloquentParams = [
-        // "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
+        "getUser" => ['belongsTo', User::class, 'user_id'],
+        "getUserDiscipline" => ['belongsTo', User_discipline::class, 'user_discipline_id'],
+        "getUserCat" => ['belongsTo', User_category::class, 'user_cat_id'],
+        "getProject" => ['belongsTo', Project::class, 'project_id'],
+        "getSubProject" => ['belongsTo', Sub_project::class, 'sub_project_id'],
+        "getLod" => ['belongsTo', Pj_task_phase::class, 'lod_id'],
+        "getTask" => ['belongsTo', Hr_tso_archive_task::class, 'task_id'],
+        "getSubTask" => ['belongsTo', Hr_tso_archive_sub_task::class, 'sub_task_id'],
+        "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
     ];
 
-    // public function getWorkplace()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
+    public function getUser()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getUserDiscipline()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getUserCat()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getProject()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getSubProject()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getLod()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getTask()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getSubTask()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getWorkMode()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 }

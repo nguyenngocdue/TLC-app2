@@ -14,16 +14,8 @@ class Hr_tso_archive_task extends ModelExtended
         'status',
         'owner_id',
     ];
-    // public static $nameless = true;
-    // public static $statusless = true;
 
-    public static $eloquentParams = [
-        // "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
-    ];
+    public static $statusless = true;
 
-    // public function getWorkplace()
-    // {
-    //     $p = static::$eloquentParams[__FUNCTION__];
-    //     return $this->{$p[0]}($p[1], $p[2]);
-    // }
+    public static $eloquentParams = [];
 }
