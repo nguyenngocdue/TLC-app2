@@ -52,7 +52,14 @@ function modalSearchableDialogOnSelectHandleText(modalId) {
     const valueName = modalId + '_selectedText'
 
     const newIdArray = newIdStrs ? newIdStrs.split(',') : []
-    const newText = newIdArray.map((id) => renderTag(modalSearchableDialogHits[id][modalSearchableDialogNameField])).join('')
+    // console.log('newIdArray', newIdArray)
+    const newText = newIdArray
+        .map((id) => {
+            if (modalSearchableDialogHits[id]) return renderTag(modalSearchableDialogHits[id][modalSearchableDialogNameField])
+            else return ''
+        })
+        .join('')
+
     // console.log('newIdArray', newIdArray, 'newText', newText)
     getEById(valueName).html(newText + '&nbsp')
 }
