@@ -96,12 +96,13 @@ trait TraitReportDataAndColumn
         return $dataHeader;
     }
 
-    public function getDataColumnsFromDataSource($queriedData){
+    public function getDataColumnsFromDataSource($queriedData, $fields){
 
         $firstItem = $queriedData->first();
         $columns = [];
         if ($firstItem) {
             foreach(array_keys($firstItem) as $key) {
+                if (in_array($key, $fields)) continue;
                 $columns[] = [
                     'dataIndex' => $key,
                     'align' => 'center'
@@ -118,18 +119,20 @@ trait TraitReportDataAndColumn
             $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
             return [$headerCols, []];
         } 
-        if ($block->is_transformed_data){
-            return [$this->getDataColumnsFromDataSource($queriedData), []];
-        }
+
 
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from admin
-        $lines = $block->getLines->sortby('order_no');
+        $columns = $block->getLines->sortby('order_no');
         $secondHeaderCols = $this->getSecondColumns($block);
         $headerCols = [];
-        foreach ($lines as $line) {
+
+        $fields = [];
+
+        foreach ($columns as $line) {
             $dataIndex = $line->data_index;
             $isActive = $line->is_active;
+            $fields[] = $dataIndex;
             if ($isActive && in_array($dataIndex, $uniqueFields)) {
                 $aggFooter = $this->getAggName($line->agg_footer);
                 $title = $this->createIconPosition($line->title ?? $line->name, $line->icon, $line->icon_position);
@@ -141,6 +144,11 @@ trait TraitReportDataAndColumn
                     'footer' => $aggFooter,
                 ];
             }
+           
+        }
+        if ($block->is_transformed_data){
+            $transformedCols = $this->getDataColumnsFromDataSource($queriedData, $fields);
+            $headerCols = array_merge($headerCols, $transformedCols);
         }
         return [$headerCols, $secondHeaderCols];
     }

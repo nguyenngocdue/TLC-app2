@@ -17,23 +17,13 @@ trait TraitReportMatrixColumn
                 if (!in_array($field, $fields)) $fields[] = $field;
                 $record[$field] = $record[$cellValue];
             }
-    
-            $record = $this->filterAndRenameRow($record, $fields, $row);
             $data[$key] = (object)$record;
         }
     
         $groupedByRow = Report::groupArrayByKey($data, $row);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
-    
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $fields, $valueToSet));
-    
         return array_values($mergedData);
-    }
-    
-    private function filterAndRenameRow($record, $fields, $row) {
-        $irrelevantFields = array_diff(array_keys($record), array_values($fields), [$row]);
-        $filteredRecord = array_diff_key($record, array_flip($irrelevantFields));
-        return $filteredRecord;
     }
     
     private function fillMissingFields(&$value, $fields, $valueToSet) {
