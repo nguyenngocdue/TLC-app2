@@ -15,13 +15,14 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('eco_sheets', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable(); // title
             $table->text('description')->nullable(); //State of Change/Problem
             $table->string('revision_no')->nullable();
+            $table->unsignedInteger('doc_id')->nullable();
             $table->string('slug')->nullable(); //->unique(); ??
             $table->unsignedBigInteger('project_id')->nullable();
             $table->unsignedBigInteger('priority_id')->nullable();
