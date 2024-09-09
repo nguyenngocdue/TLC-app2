@@ -35,11 +35,8 @@ trait TraitReportDataAndColumn
             switch ($type) {
                 case 'grouping_to_matrix':
                     $params = $item['params'];
-                    $column = $params['columns'];
-                    $row = $params['row'];
-                    $cellValue = $params['cell_value'];
-                    $valueToSet = $params['empty_value'];
-                    $transformedData = $this->createMatrix($dataSource, $column, $row, $cellValue, $valueToSet);
+                    $hasTotalCols = $item['has_total_columns'] ?? null;
+                    $transformedData = $this->createMatrix($dataSource, $params, $hasTotalCols);
                     return collect($transformedData);
                 default:
                     dd('unknown type');
@@ -61,7 +58,7 @@ trait TraitReportDataAndColumn
             $collection = collect($sqlData);
 
             if ($block->is_transformed_data){
-                $transformedOption = $block->transformed_data_json;
+                $transformedOption = $block->transformed_data_string;
                 $collection = $this->transformData($collection, $transformedOption);
             }
             // dd($collection);

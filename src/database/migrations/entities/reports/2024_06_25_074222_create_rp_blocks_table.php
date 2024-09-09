@@ -25,7 +25,7 @@ return new class extends Migration
             $table->boolean('is_active')->nullable();
             $table->text('sql_string')->nullable();
             $table->boolean('is_transformed_data')->nullable();
-            $table->text('transformed_data_json')->nullable();
+            $table->text('transformed_data_string')->nullable();
             $table->boolean('table_true_width')->nullable();
             $table->unsignedInteger('show_no')->nullable();
             $table->boolean('max_h')->nullable();

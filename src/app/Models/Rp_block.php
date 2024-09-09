@@ -8,7 +8,7 @@ class Rp_block extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "title", "description",
-        "sql_string", "is_transformed_data","transformed_data_json",
+        "sql_string", "is_transformed_data","transformed_data_string",
         "table_true_width", "max_h", "showNo",
         "rotate_45_width", "rotate_45_height", "renderer_type", "chart_json", "has_pagination",
         "top_left_control", "top_center_control", "top_right_control",

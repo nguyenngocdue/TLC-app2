@@ -6,9 +6,17 @@ use App\Utils\Support\Report;
 
 trait TraitReportMatrixColumn
 {
-    private function createMatrix($data, $column, $row, $cellValue, $valueToSet = null) {
+    private function fillMissingFields(&$value, $fields, $valueToSet) {
+        $missingFields = array_diff($fields, array_keys($value));
+        $value = array_merge($value, array_fill_keys($missingFields, $valueToSet));
+    }
+
+    private function createMatrix($data, $params, $hasTotalCols) {
+        $column = $params['columns'];
+        $row = $params['row'];
+        $cellValue = $params['cell_value'];
+        $valueToSet = $params['empty_value'] ?? null;
         $fields = [];
-    
         foreach ($data as $key => $record) {
             $record = (array)$record;
             
@@ -23,11 +31,18 @@ trait TraitReportMatrixColumn
         $groupedByRow = Report::groupArrayByKey($data, $row);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $fields, $valueToSet));
+
+        if ($hasTotalCols) {
+            foreach ($mergedData as &$values) {
+                $total = 0;
+                foreach ($fields as $type) {
+                    if (!isset($values[$type])) $values[$type] = 0;
+                    else $total += (float)$values[$type];
+                }
+                $values['total'] = $total;
+            }
+        }
         return array_values($mergedData);
     }
     
-    private function fillMissingFields(&$value, $fields, $valueToSet) {
-        $missingFields = array_diff($fields, array_keys($value));
-        $value = array_merge($value, array_fill_keys($missingFields, $valueToSet));
-    }
 }

@@ -137,16 +137,16 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_transformed_data_json": {
-        "name": "_transformed_data_json",
-        "column_name": "transformed_data_json",
+    "_transformed_data_string": {
+        "name": "_transformed_data_string",
+        "column_name": "transformed_data_string",
         "column_type": "text",
-        "label": "Transformed Data Json",
+        "label": "Transformed Data String",
         "control": "textarea",
         "align": "",
         "col_span": "",
         "width": "",
-        "hidden_view_all": "",
+        "hidden_view_all": "true",
         "hidden_edit": "",
         "hidden_label": "",
         "hidden_filter": "",
