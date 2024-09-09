@@ -114,6 +114,29 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
+    "_business_travel_line": {
+        "name": "_business_travel_line",
+        "column_name": "business_travel_line",
+        "column_type": "static_control",
+        "label": "Business Travel Line",
+        "control": "my_new_control",
+        "align": "",
+        "col_span": "12",
+        "width": "",
+        "hidden_view_all": "",
+        "hidden_edit": "",
+        "hidden_label": "",
+        "hidden_filter": "",
+        "hidden_print": "",
+        "read_only": "",
+        "save_on_change": "",
+        "searchable": "",
+        "duplicatable": "",
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
+    },
     "_getClaimableLines": {
         "name": "_getClaimableLines",
         "column_name": "getClaimableLines",
@@ -251,21 +274,5 @@
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""
-    },
-    "_business_travel_line": {
-        "name": "_business_travel_line",
-        "column_name": "business_travel_line",
-        "column_type": "static_heading",
-        "title": "Business Travel Line",
-        "label": "Business Travel Line",
-        "col_span": 12
-    },
-    "_ahihi": {
-        "name": "_ahihi",
-        "column_name": "ahihi",
-        "column_type": "static_control",
-        "title": "Ahihi",
-        "label": "Ahihi",
-        "col_span": 12
     }
 }
