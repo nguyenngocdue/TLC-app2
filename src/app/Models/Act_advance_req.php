@@ -10,6 +10,7 @@ class Act_advance_req extends ModelExtended
         "id",
         "name",
         "title",
+        "title_vn",
         "description",
         "status",
         "user_id",
