@@ -50,11 +50,11 @@ class PrintProps extends Component
 		if (isset($props['_doc_id'])) $propsDocId = $props['_doc_id'];
 		// $hiddenPrintMode = $this->printMode == 'template' ? 'hidden_template_print' : 'hidden_print';
 		$hiddenPrintMode = 'hidden_print';
-		$props = array_filter($props, fn ($item) => ($item[$hiddenPrintMode] ?? false) != true);
+		$props = array_filter($props, fn($item) => ($item[$hiddenPrintMode] ?? false) != true);
 		$node = [];
 		$nodeCount = 0;
 		foreach ($props as $key => $value) {
-			if ($value['column_type'] !== 'static') {
+			if (!in_array($value['column_type'], ['static_heading', 'static_control'])) {
 				if (empty($node)) {
 					$node['node' . $nodeCount]['value'] = null;
 					$node['node' . $nodeCount]['children'][$key] = $value;
@@ -76,7 +76,7 @@ class PrintProps extends Component
 		$propsTemp = $props;
 		if (isset($propsDocId) && !isset($propsTemp['_doc_id'])) $propsTemp['_doc_id'] = $propsDocId;
 		foreach ($propsTemp as $key => $prop) {
-			if ($prop['column_type'] !== 'static') {
+			if (!in_array($prop['column_type'], ['static_heading', 'static_control'])) {
 				if (empty($prop['relationships'])) {
 					$dataSource[$prop['column_name']] = $dataModelCurrent->{$prop['column_name']};
 				} else {

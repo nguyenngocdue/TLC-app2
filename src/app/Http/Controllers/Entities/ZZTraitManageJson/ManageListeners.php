@@ -14,7 +14,7 @@ class ManageListeners extends Manage_Parent
 
     protected function getColumns()
     {
-        $columns = array_values(array_map(fn ($i) => $i['column_name'], Props::getAllOf($this->type)));
+        $columns = array_values(array_map(fn($i) => $i['column_name'], Props::getAllOf($this->type)));
         $columns = array_merge([""], $columns);
         $listen_actions = [
             '',
@@ -156,7 +156,7 @@ class ManageListeners extends Manage_Parent
                 $newItem['columns_to_set'] = 'DO_NOT_RENDER';
             }
 
-            $isStatic = (isset($prop['column_type']) && $prop['column_type'] === 'static');
+            $isStatic = (isset($prop['column_type']) && in_array($prop['column_type'], ['static_heading', 'static_control']));
             if (!$isStatic) $result[] = $newItem;
         }
 

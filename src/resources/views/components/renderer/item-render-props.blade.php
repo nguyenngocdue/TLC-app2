@@ -35,7 +35,8 @@
             <div class='col-span-{{$col_span}} {{$hiddenRow}}'>
                 <div class='grid grid-row-1'>
                     <div class='grid grid-cols-12 items-center content-start'>
-                        @if($columnType === 'static')
+                        @switch($columnType)
+                        @case('static_heading')
                             <div class='col-span-12 text-left'>
                                 <x-renderer.item-render-static 
                                         control="{{$control}}"
@@ -45,7 +46,11 @@
                                         labelExtra="{{$labelExtra}}"
                                     />
                             </div>
-                        @else
+                        @break
+                        @case('static_control')
+                        QWERTYUIOP
+                        @break
+                        @default
                             <div class='col-start-1 col-span-12 sm:{{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-left sm:text-right" }} '>
                                 <x-renderer.item-render-label
                                         :item="$item"
@@ -87,7 +92,8 @@
                                     textareaRows="{{$textareaRows}}"
                                     />
                             </div>
-                        @endif
+                            @break
+                        @endswitch
                     </div>
                 </div>
             </div>

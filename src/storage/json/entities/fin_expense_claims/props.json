@@ -251,5 +251,21 @@
         "frozen_left": "",
         "frozen_right": "",
         "nowrap_view_all": ""
+    },
+    "_business_travel_line": {
+        "name": "_business_travel_line",
+        "column_name": "business_travel_line",
+        "column_type": "static_heading",
+        "title": "Business Travel Line",
+        "label": "Business Travel Line",
+        "col_span": 12
+    },
+    "_ahihi": {
+        "name": "_ahihi",
+        "column_name": "ahihi",
+        "column_type": "static_control",
+        "title": "Ahihi",
+        "label": "Ahihi",
+        "col_span": 12
     }
 }

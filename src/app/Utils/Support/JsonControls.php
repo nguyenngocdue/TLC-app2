@@ -17,7 +17,7 @@ class JsonControls
     private static function getAll()
     {
         $key = "controls_json_of_the_app";
-        return CacheToRamForThisSection::get($key, fn () => static::getAllExpensive());
+        return CacheToRamForThisSection::get($key, fn() => static::getAllExpensive());
     }
 
     public static function getViewAllEloquents()
@@ -63,9 +63,14 @@ class JsonControls
         return self::getAll()['datetime_controls'];
     }
 
-    public static function getHeadings()
+    public static function getPropStaticHeadings()
     {
-        return self::getAll()['headings'];
+        return self::getAll()['prop_static_headings'];
+    }
+
+    public static function getPropStaticControls()
+    {
+        return self::getAll()['prop_static_controls'];
     }
 
     public static function getRendererViewAll()

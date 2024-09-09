@@ -47,7 +47,7 @@ abstract class ManageV_Parent extends Manage_Parent
         ];
 
         $allStatuses = $this->getColumnSource();
-        $columns = array_map(fn ($i) => [
+        $columns = array_map(fn($i) => [
             'dataIndex' => $i['name'],
             'renderer' => 'checkbox',
             'editable' => true,
@@ -90,7 +90,7 @@ abstract class ManageV_Parent extends Manage_Parent
                 }
             }
 
-            if (isset($prop['column_type']) && $prop['column_type'] === 'static') $newItem['row_color'] = "amber";
+            if (isset($prop['column_type']) && in_array($prop['column_type'], ['static_heading', 'static_control'])) $newItem['row_color'] = "amber";
             $result[] = $newItem;
             $index++;
         }

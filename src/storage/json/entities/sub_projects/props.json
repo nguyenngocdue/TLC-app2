@@ -24,7 +24,7 @@
     "_General": {
         "name": "_General",
         "column_name": "General",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "General",
         "control": "z_h4",
         "align": "",
@@ -288,7 +288,7 @@
     "_Attachments": {
         "name": "_Attachments",
         "column_name": "Attachments",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Attachments",
         "control": "z_h4",
         "align": "",
@@ -354,7 +354,7 @@
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider1",
         "control": "z_divider",
         "align": "",
@@ -376,7 +376,7 @@
     "_Members of this Sub Project": {
         "name": "_Members of this Sub Project",
         "column_name": "Members of this Sub Project",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Members Of This SubProject",
         "control": "z_h4",
         "align": "",
@@ -420,7 +420,7 @@
     "_Client of this SubProject": {
         "name": "_Client of this SubProject",
         "column_name": "Client of this SubProject",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Clients Of This SubProject",
         "control": "z_h4",
         "align": "",
@@ -486,7 +486,7 @@
     "_Inspectors of this SubProject": {
         "name": "_Inspectors of this SubProject",
         "column_name": "Inspectors of this SubProject",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Inspectors Of This Subproject",
         "control": "z_h4",
         "align": "",
@@ -530,7 +530,7 @@
     "_Council Members of this Sub Project": {
         "name": "_Council Members of this Sub Project",
         "column_name": "Council Members of this Sub Project",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Council Members Of This SubProject",
         "control": "z_h4",
         "align": "",

@@ -68,7 +68,7 @@
     "_break1": {
         "name": "_break1",
         "column_name": "break1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break1",
         "control": "z_divider",
         "align": "",
@@ -90,7 +90,7 @@
     "_h1": {
         "name": "_h1",
         "column_name": "h1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Listen Reduce 1 -> 1",
         "control": "z_h4",
         "align": "center",
@@ -200,7 +200,7 @@
     "_break2": {
         "name": "_break2",
         "column_name": "break2",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break1",
         "control": "z_divider",
         "align": "",
@@ -222,7 +222,7 @@
     "_h2": {
         "name": "_h2",
         "column_name": "h2",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Listen Reduce 1->1->1->1",
         "control": "z_h4",
         "align": "center",
@@ -332,7 +332,7 @@
     "_break8": {
         "name": "_break8",
         "column_name": "break8",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break8",
         "control": "z_divider",
         "align": "",
@@ -354,7 +354,7 @@
     "_h8": {
         "name": "_h8",
         "column_name": "h8",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Listen A,A1->B1, A,A2->B2",
         "control": "z_h4",
         "align": "center",
@@ -486,7 +486,7 @@
     "_break9": {
         "name": "_break9",
         "column_name": "break9",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break9",
         "control": "z_divider",
         "align": "",
@@ -508,7 +508,7 @@
     "_h9": {
         "name": "_h9",
         "column_name": "h9",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Listen Assign from Custom Matrix",
         "control": "z_h4",
         "align": "center",
@@ -596,7 +596,7 @@
     "_break3": {
         "name": "_break3",
         "column_name": "break3",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break1",
         "control": "z_divider",
         "align": "",
@@ -618,7 +618,7 @@
     "_h3": {
         "name": "_h3",
         "column_name": "h3",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Listen Assign",
         "control": "z_h4",
         "align": "center",
@@ -706,7 +706,7 @@
     "_break4": {
         "name": "_break4",
         "column_name": "break4",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break1",
         "control": "z_divider",
         "align": "",
@@ -728,7 +728,7 @@
     "_h4": {
         "name": "_h4",
         "column_name": "h4",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Listen Dot",
         "control": "z_h4",
         "align": "center",
@@ -838,7 +838,7 @@
     "_break5": {
         "name": "_break5",
         "column_name": "break5",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break1",
         "control": "z_divider",
         "align": "",
@@ -860,7 +860,7 @@
     "_h5": {
         "name": "_h5",
         "column_name": "h5",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Date Offset",
         "control": "z_h4",
         "align": "center",
@@ -926,7 +926,7 @@
     "_break6": {
         "name": "_break6",
         "column_name": "break6",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Break6",
         "control": "z_divider",
         "align": "",
@@ -948,7 +948,7 @@
     "_h6": {
         "name": "_h6",
         "column_name": "h6",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Expression Numbers",
         "control": "z_h4",
         "align": "center",
@@ -1058,7 +1058,7 @@
     "_break7": {
         "name": "_break7",
         "column_name": "break7",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "",
         "control": "z_divider",
         "align": "",
@@ -1080,7 +1080,7 @@
     "_h7": {
         "name": "_h7",
         "column_name": "h7",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Expression Date Time",
         "control": "z_h4",
         "align": "center",

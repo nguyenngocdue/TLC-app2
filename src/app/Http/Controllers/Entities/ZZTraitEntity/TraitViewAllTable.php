@@ -119,11 +119,12 @@ trait TraitViewAllTable
     private function getColumns($type, $columnLimit, $trash = false)
     {
         $props = SuperProps::getFor($type)['props'];
-        $props = array_filter($props, fn ($prop) => !$prop['hidden_view_all']);
-        $props = array_filter($props, fn ($prop) => $prop['column_type'] !== 'static');
+        $props = array_filter($props, fn($prop) => !$prop['hidden_view_all']);
+        $props = array_filter($props, fn($prop) => $prop['column_type'] !== 'static_heading');
+        $props = array_filter($props, fn($prop) => $prop['column_type'] !== 'static_control');
         if ($columnLimit) {
             $allows = array_keys($columnLimit);
-            $props = array_filter($props, fn ($prop) => in_array($prop['name'], $allows));
+            $props = array_filter($props, fn($prop) => in_array($prop['name'], $allows));
         }
         $qrCodeColumn = [
             'label' => "Print",
@@ -164,7 +165,7 @@ trait TraitViewAllTable
             ];
             array_splice($props, 0, 0, [$checkboxColumn, $actionColumn, ...$trashInfoColumn]);
         }
-        $result = array_values(array_map(fn ($prop) => $this->createObject($prop, $type), $props));
+        $result = array_values(array_map(fn($prop) => $this->createObject($prop, $type), $props));
         return $result;
     }
 

@@ -7,9 +7,18 @@ use App\BigThink\ModelExtended;
 class Act_advance_req extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "title", "description", "status", "user_id",
-        "radio_advance_type", "advance_amount", "currency_id",
-        "advance_amount_word", "assignee_1", "owner_id"
+        "id",
+        "name",
+        "title",
+        "description",
+        "status",
+        "user_id",
+        "radio_advance_type",
+        "advance_amount",
+        "currency_id",
+        "advance_amount_word",
+        "assignee_1",
+        "owner_id"
     ];
     protected $with = ["getCurrency"];
     public static $nameless = true;

@@ -16,9 +16,7 @@ class ModalSettings extends Component
      *
      * @return void
      */
-    public function __construct(private $type, private $title = "Settings")
-    {
-    }
+    public function __construct(private $type, private $title = "Settings") {}
 
     /**
      * Get the view / contents that represent the component.
@@ -43,7 +41,7 @@ class ModalSettings extends Component
     {
         $props = SuperProps::getFor($type)['props'];
         return $props = array_filter($props, function ($prop) {
-            return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static';
+            return !$prop['hidden_view_all'] && in_array($prop['column_type'], ['static_heading', 'static_control']);
         });
     }
 }
