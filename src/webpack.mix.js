@@ -1,5 +1,5 @@
 const mix = require('laravel-mix')
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -13,21 +13,19 @@ const TerserPlugin = require('terser-webpack-plugin');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .vue()
-   .postCss('resources/css/app.css', 'public/css', [
-      require('tailwindcss'),
-      require('autoprefixer'),
-   ]).webpackConfig({
-      plugins: [
-         new TerserPlugin({
-            terserOptions: {
-               format: {
-                  semicolons: true,
-               },
-            },
-         }),
-      ],
-   });
+    .vue()
+    .postCss('resources/css/app.css', 'public/css', [require('tailwindcss'), require('autoprefixer')])
+    .webpackConfig({
+        plugins: [
+            new TerserPlugin({
+                terserOptions: {
+                    format: {
+                        semicolons: true,
+                    },
+                },
+            }),
+        ],
+    })
 mix.js('resources/js/antd-vue.js', 'public/js').vue()
 
 // mix.js('resources/js/editable-list.js', 'public/js')
