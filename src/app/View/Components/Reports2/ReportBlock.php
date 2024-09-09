@@ -31,10 +31,10 @@ class ReportBlock extends Component
     public function render()
     {
         $blockDetails = $this->blockDetails;
-        $blockDataSource = [];
         $currentParams = $this->currentParamsReport();
         $perPage = $currentParams['per_page'] ?? 10;
         
+        $blockDataSource = [];
         foreach ($blockDetails as $item) {
             if(!$item->is_active) continue;
             $block = $item->getBlock;
