@@ -10,6 +10,7 @@ trait TraitReportDataAndColumn
 {
     use TraitCreateSQLReport2;
     use TraitReportTermNames;
+    use TraitReportMatrixColumn;
 
     public function createIconPosition($content, $icon, $iconPosition)
     {
@@ -26,36 +27,6 @@ trait TraitReportDataAndColumn
         return $content;
     }
 
-    private function createMatrix($data, $column, $row, $cellValue, $rowTitle, $valueToSet=NUll) {
-        $fields = [];
-        foreach ($data as $key => $record) {
-            if (Report::checkValueOfField((array)$record, $column)) {
-                $field = $record->{$column};
-                if (!in_array($field, $fields)) $fields[] = $field;
-                $record->{$field} = $record->{$cellValue};
-            }
-            $record = (array)$record;
-            $arr =  array_diff(array_keys($record), array_values($fields));
-            $arr = array_diff($arr, [$row]);
-            $flipped_array2 = array_flip($arr);
-            $result = array_diff_key($record, $flipped_array2);
-            if ($rowTitle){
-                $result[$rowTitle] = $result[$row];
-                unset($result[$row]);
-            }
-            $data[$key] = (object) $result;
-        }
-        $row = $rowTitle ? $rowTitle: $row; 
-        $groupedByRow = Report::groupArrayByKey($data, $row);
-        $mergedData = array_map(fn ($item) => array_merge(...$item), $groupedByRow);
-        array_walk($mergedData, function(&$value) use($fields, $valueToSet) {
-            $arrayDiff = array_diff(array_values($fields), array_keys($value));
-            $arrayFill =  array_fill_keys($arrayDiff, $valueToSet);
-            $value =  array_merge($value, $arrayFill);
-        });
-        // dd($mergedData);
-        return array_values($mergedData);
-    }
 
     private function transformData($dataSource, $transformedOption){
         $transformedOption = json_decode($transformedOption, true);
@@ -68,8 +39,7 @@ trait TraitReportDataAndColumn
                     $row = $params['row'];
                     $cellValue = $params['cell_value'];
                     $valueToSet = $params['empty_value'];
-                    $rowTitle = $params['row_title'];
-                    $transformedData = $this->createMatrix($dataSource, $column, $row, $cellValue, $rowTitle, $valueToSet);
+                    $transformedData = $this->createMatrix($dataSource, $column, $row, $cellValue, $valueToSet);
                     return collect($transformedData);
                 default:
                     dd('unknown type');
