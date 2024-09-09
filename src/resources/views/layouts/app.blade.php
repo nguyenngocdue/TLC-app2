@@ -69,46 +69,6 @@
         <x-renderer.button-scroll />
         {!! toastr()->message() !!}
         <script>
-            function numberToWords(number){
-                if(typeof number == 'string') number = number.replace(/[^0-9.\-]/g, '');
-                number = (number*1).toString() * 1;
-                return capitalizeFirstLetter(window.toWords(number) + readDecimalPart(number));
-            }
-            function capitalizeFirstLetter(str) {
-                return str.replace(/(^|\s)\w/g, (match) => match.toUpperCase());
-            }
-            function readDecimalPart(number) {
-                const numberString = number + '';
-                const decimalPart = numberString.split('.')[1];
-                if((decimalPart * 1 == 0)) return '';
-                if (!decimalPart) {
-                    return '';
-                }
-                let result = ['point'];
-                for (let i = 0; i < decimalPart.length; i++) {
-                    const digit = parseInt(decimalPart[i]);
-                    const word = convertDigitToWord(digit);
-                    result.push(word);
-                }
-            return ' ' + result.join(' ');
-            }
-            function convertDigitToWord(digit) {
-            const digitsMap = {
-                '0': 'zero',
-                '1': 'one',
-                '2': 'two',
-                '3': 'three',
-                '4': 'four',
-                '5': 'five',
-                '6': 'six',
-                '7': 'seven',
-                '8': 'eight',
-                '9': 'nine',
-            };
-            return digitsMap[digit];
-            }
-        </script>
-        <script>
             window.Echo.channel('wss-demo-channel')
                 .listen('WssDemoChannel', (e) => {
                     console.log(e.data);

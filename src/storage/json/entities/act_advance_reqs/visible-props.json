@@ -64,6 +64,36 @@
         "column_name": "owner_id",
         "new": "true"
     },
+    "_currency_pair_id": {
+        "name": "_currency_pair_id",
+        "column_name": "currency_pair_id",
+        "new": "true"
+    },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
+        "new": "true"
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
+        "new": "true"
+    },
+    "_rate_exchange": {
+        "name": "_rate_exchange",
+        "column_name": "rate_exchange",
+        "new": "true"
+    },
+    "_advance_amount_lcy": {
+        "name": "_advance_amount_lcy",
+        "column_name": "advance_amount_lcy",
+        "new": "true"
+    },
+    "_advance_amount_lcy_word": {
+        "name": "_advance_amount_lcy_word",
+        "column_name": "advance_amount_lcy_word",
+        "new": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

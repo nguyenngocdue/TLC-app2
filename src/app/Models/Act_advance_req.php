@@ -18,7 +18,14 @@ class Act_advance_req extends ModelExtended
         "currency_id",
         "advance_amount_word",
         "assignee_1",
-        "owner_id"
+        "owner_id",
+
+        "rate_exchange_month_id",
+        "counter_currency_id",
+        "rate_exchange",
+        "currency_pair_id",
+        "advance_amount_lcy",
+        "advance_amount_lcy_word",
     ];
     protected $with = ["getCurrency"];
     public static $nameless = true;
@@ -36,6 +43,10 @@ class Act_advance_req extends ModelExtended
 
         "getMonitors1" => ['belongsToMany', User::class, 'ym2m_act_advance_req_user'],
         "getSubProjectsOfAdvanceReq" => ['belongsToMany', Sub_project::class, 'ym2m_act_advance_req_sub_project'],
+
+        'getCurrencyPair' => ['belongsTo', Act_currency_pair::class, 'currency_pair_id'],
+        'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
+        'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
     ];
 
     public function getUser()
@@ -68,6 +79,25 @@ class Act_advance_req extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+
+    public function getRateExchangeMonth()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getCounterCurrency()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getCurrencyPair()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getManyLineParams()
     {
         return [

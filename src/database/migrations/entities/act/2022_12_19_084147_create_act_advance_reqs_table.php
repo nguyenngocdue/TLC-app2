@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('act_advance_reqs', function (BlueprintExtended $table) {
             $table->id();
@@ -29,6 +29,17 @@ return new class extends Migration
             $table->unsignedBigInteger('currency_id')->nullable();
             $table->string('advance_amount_word')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
+
+            $table->unsignedBigInteger("currency_pair_id")->nullable();
+            $table->unsignedBigInteger("rate_exchange_month_id")->nullable();
+            $table->unsignedBigInteger("counter_currency_id")->nullable();
+
+            $table->double("rate_exchange")->nullable();
+            $table->double("advance_amount_lcy")->nullable();
+
+            $table->string("advance_amount_lcy_word")->nullable();
+
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }
