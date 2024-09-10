@@ -32,13 +32,13 @@
         },
         dataLabels: {
             enabled: true,  // Enable data labels
-            offsetY: -20,   // Optional: Adjust the offset to fine-tune label position
+            offsetY: -20,  
             style: {
                 fontSize: '12px',
-                colors: ['#000'],  // Set the color of the data labels
+                colors: ['#000'], 
             },
             formatter: function (val) {
-                return val;  // Customize the format of the labels if needed
+                return val; 
             }
         },
         stroke: {
