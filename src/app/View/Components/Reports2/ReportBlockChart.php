@@ -45,8 +45,7 @@ class ReportBlockChart extends Component
             foreach (last($matches) as $key => $value) {
                 $keyInDta = trim(str_replace('$', '', $value));
                 $valueInData = $queriedData->pluck($keyInDta)->toArray();
-                $valueInData = '['. implode(',' ,$valueInData) . ']';
-    
+                $valueInData = '['. implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)) . ']';
                 $firstMatches = reset($matches);
                 $keyInOptions = $firstMatches[$key];
                 $options = str_replace($keyInOptions, $valueInData, $options);
