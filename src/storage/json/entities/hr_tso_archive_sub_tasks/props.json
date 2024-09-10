@@ -68,12 +68,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_task_id": {
-        "name": "_task_id",
-        "column_name": "task_id",
-        "column_type": "bigint unsigned",
-        "label": "Task",
-        "control": "dropdown",
+    "_getTasks": {
+        "name": "_getTasks",
+        "column_name": "getTasks",
+        "column_type": "belongsToMany",
+        "label": "Tasks",
+        "control": "dropdown_multi_2a",
         "align": "",
         "col_span": "",
         "width": "",

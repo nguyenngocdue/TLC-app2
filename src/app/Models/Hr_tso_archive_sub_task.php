@@ -19,10 +19,10 @@ class Hr_tso_archive_sub_task extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getTask" => ['belongsTo', Hr_tso_archive_task::class, 'task_id'],
+        "getTasks" => ["belongsToMany", Hr_tso_archive_task::class, "ym2m_hr_tso_archive_sub_task_hr_tso_archive_task"],
     ];
 
-    public function getTask()
+    public function getTasks()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

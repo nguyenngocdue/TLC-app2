@@ -64,6 +64,11 @@
         "column_name": "work_mode_id",
         "new": "true"
     },
+    "_current_workplace_id": {
+        "name": "_current_workplace_id",
+        "column_name": "current_workplace_id",
+        "new": "true"
+    },
     "_remark": {
         "name": "_remark",
         "column_name": "remark",

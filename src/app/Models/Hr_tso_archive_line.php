@@ -20,6 +20,7 @@ class Hr_tso_archive_line extends ModelExtended
         'task_id',
         'sub_task_id',
         'work_mode_id',
+        'current_workplace_id',
         'remark',
 
         'status',
@@ -36,6 +37,7 @@ class Hr_tso_archive_line extends ModelExtended
         "getTask" => ['belongsTo', Hr_tso_archive_task::class, 'task_id'],
         "getSubTask" => ['belongsTo', Hr_tso_archive_sub_task::class, 'sub_task_id'],
         "getWorkMode" => ['belongsTo', Work_mode::class, 'work_mode_id'],
+        "getCurrentWorkplace" => ['belongsTo', Workplace::class, 'current_workplace_id'],
     ];
 
     public function getUser()
@@ -87,6 +89,12 @@ class Hr_tso_archive_line extends ModelExtended
     }
 
     public function getWorkMode()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getCurrentWorkplace()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
