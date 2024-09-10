@@ -2,8 +2,8 @@
     $isAdmin = App\Utils\Support\CurrentUser::isAdmin();
 @endphp
     {{-- @if ($isAdmin && !$block->title && !$block->description) --}}
-    @if ($isAdmin && !App::isProduction())
-    <div class=" no-print" style="bottom : -15%">
+    @if ($isAdmin)
+    <div class="no-print" style="bottom : -15%">
         <a title='Block configuration' class="block p-2" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
             <span class="inline-flex items-center rounded-md bg-purple-50 px-2   py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
                 <i class="fa-solid fa-gear"></i>
