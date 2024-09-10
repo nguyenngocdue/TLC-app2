@@ -141,7 +141,7 @@
         "name": "_transformed_data_string",
         "column_name": "transformed_data_string",
         "column_type": "text",
-        "label": "Transformed Data String",
+        "label": "Transformed Data Option (for Table, Chart)",
         "control": "textarea",
         "align": "",
         "col_span": "",

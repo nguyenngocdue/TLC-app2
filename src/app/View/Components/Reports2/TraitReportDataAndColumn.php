@@ -36,15 +36,14 @@ trait TraitReportDataAndColumn
             // if (is_null($sql)) return collect();
             // if (!$sql) return collect();
             $sqlData = DB::select($sql);
-            $collection = collect($sqlData);
-
+            $queriedData = collect($sqlData);
+            $fieldTransformation = [];
             if ($block->is_transformed_data){
-                $collection = $this->transformData($collection, $block->transformed_data_string);
+                [$queriedData , $fieldTransformation]  = $this->transformData($queriedData, $block->transformed_data_string);
             }
-            // dd($collection);
-            return $collection;
+            return [ $queriedData, $fieldTransformation ];
         }
-        return collect();
+        return [collect(), []];
     }
 
     public function getAllUniqueFields($collection)
@@ -124,8 +123,8 @@ trait TraitReportDataAndColumn
             }
            
         }
-        if ($block->is_transformed_data){
-            $transformedOpt = $this->sortData($block->transformed_data_string, true);
+        if ($block->is_transformed_data && ($x = $block->transformed_data_string)){
+            $transformedOpt = $this->sortData($x, true);
             $transformedCols = $this->getDataColumnsByTransformData($queriedData, $fields, $transformedOpt);
             $headerCols = array_merge($headerCols, $transformedCols);
         }

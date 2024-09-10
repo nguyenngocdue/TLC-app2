@@ -1,5 +1,4 @@
-
- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <div id="column_chart"></div>
 
 <script>
@@ -10,13 +9,16 @@
         },
         series: [{
             name: 'Net Profit',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+            data: [50, 60, 65, 70, 75, 80, 85, 90, 95]
         }, {
             name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+            data: [85, 90, 100, 110, 115, 120, 125, 130, 135]
         }, {
             name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+            data: [40, 45, 50, 55, 60, 65, 70, 75, 80]
+        }, {
+            name: 'Column 1',
+            data: [25, 30, 35, 40, 45, 50, 55, 60, 65]
         }],
         plotOptions: {
             bar: {
