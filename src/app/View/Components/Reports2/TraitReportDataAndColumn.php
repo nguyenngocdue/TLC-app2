@@ -11,6 +11,7 @@ trait TraitReportDataAndColumn
     use TraitCreateSQLReport2;
     use TraitReportTermNames;
     use TraitReportMatrixColumn;
+    use TraitReportTransformedData;
 
     public function createIconPosition($content, $icon, $iconPosition)
     {
@@ -27,26 +28,6 @@ trait TraitReportDataAndColumn
         return $content;
     }
 
-
-    private function transformData($dataSource, $transformedOption){
-        $transformedOption = json_decode($transformedOption, true);
-        uasort($transformedOption, function($a, $b) {return $a['order_no'] <=> $b['order_no'];});
-        foreach($transformedOption as $type => $item) {
-            switch ($type) {
-                case 'grouping_to_matrix':
-                    $params = $item['params'];
-                    $hasTotalCols = $item['has_total_columns'] ?? null;
-                    $transformedData = $this->createMatrix($dataSource, $params, $hasTotalCols);
-                    return collect($transformedData);
-                default:
-                    dd('unknown type');
-            }
-        }
-        // dd($transformedOption);
-        return $dataSource;
-
-    }
-
     public function getDataSQLString($block, $params)
     {
         $sqlString = $block->sql_string;
@@ -58,8 +39,7 @@ trait TraitReportDataAndColumn
             $collection = collect($sqlData);
 
             if ($block->is_transformed_data){
-                $transformedOption = $block->transformed_data_string;
-                $collection = $this->transformData($collection, $transformedOption);
+                $collection = $this->transformData($collection, $block->transformed_data_string);
             }
             // dd($collection);
             return $collection;
@@ -71,7 +51,6 @@ trait TraitReportDataAndColumn
     {
         return array_unique(array_keys((array)$collection->first()));
     }
-
 
     private function getSecondColumns($block)
     {
@@ -93,16 +72,20 @@ trait TraitReportDataAndColumn
         return $dataHeader;
     }
 
-    public function getDataColumnsFromDataSource($queriedData, $fields){
-
+    public function getDataColumnsByTransformData($queriedData, $fields, $transformedOpt){
         $firstItem = $queriedData->first();
         $columns = [];
         if ($firstItem) {
+            $lastTransformedData = last($transformedOpt);
+            if($lastTransformedData && isset($lastTransformedData['footer_agg'])){
+                $footerAgg = $lastTransformedData['footer_agg'];
+            }
             foreach(array_keys($firstItem) as $key) {
                 if (in_array($key, $fields)) continue;
                 $columns[] = [
                     'dataIndex' => $key,
-                    'align' => 'center'
+                    'align' => 'center',
+                    'footer' => $footerAgg ?? '',
                 ];
             }
         }
@@ -116,8 +99,6 @@ trait TraitReportDataAndColumn
             $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
             return [$headerCols, []];
         } 
-
-
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from admin
         $columns = $block->getLines->sortby('order_no');
@@ -144,7 +125,8 @@ trait TraitReportDataAndColumn
            
         }
         if ($block->is_transformed_data){
-            $transformedCols = $this->getDataColumnsFromDataSource($queriedData, $fields);
+            $transformedOpt = $this->sortData($block->transformed_data_string, true);
+            $transformedCols = $this->getDataColumnsByTransformData($queriedData, $fields, $transformedOpt);
             $headerCols = array_merge($headerCols, $transformedCols);
         }
         return [$headerCols, $secondHeaderCols];
