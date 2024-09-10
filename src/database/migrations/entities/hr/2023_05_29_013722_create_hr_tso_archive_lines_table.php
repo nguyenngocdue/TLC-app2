@@ -32,7 +32,8 @@ return new class extends Migration
             $table->unsignedBigInteger('task_id')->nullable();
             $table->unsignedBigInteger('sub_task_id')->nullable();
             $table->unsignedBigInteger('work_mode_id')->nullable();
-            $table->string('remark')->nullable();
+            $table->unsignedBigInteger("current_workplace_id")->nullable();
+            $table->text('remark')->nullable();
 
             $table->hasStatus();
             $table->appendCommonFields();

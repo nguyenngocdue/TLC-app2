@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('hr_timesheet_officer_lines', function (BlueprintExtended $table) {
             $table->id();
@@ -37,6 +37,7 @@ return new class extends Migration
             $table->unsignedBigInteger("sub_task_id")->nullable();
 
             $table->unsignedBigInteger("work_mode_id")->nullable();
+            $table->unsignedBigInteger("current_workplace_id")->nullable();
             $table->text("remark")->nullable();
 
             $table->orderable();
