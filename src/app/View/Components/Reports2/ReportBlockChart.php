@@ -21,18 +21,17 @@ class ReportBlockChart extends Component
         $series = [];
         foreach($fields as $name) {
             $data = $queriedData->pluck($name)->toArray();
+            $data = array_map(function($item) {
+                if(!$item) return null;
+                return (float)$item;
+            }, $data);
             $series[] = [
                 'name' => $name,
                 'data' => $data
             ];
         }
-        $seriesString = json_encode($series);
-        preg_match_all('/(?<!\\\)\{\{\s*([^}]*)\s*\}\}/', $options, $matches);
-        foreach (last($matches) as $key => $value) {
-            $firstMatches = reset($matches);
-            $keyInOptions = $firstMatches[$key];
-            $options = str_replace($keyInOptions, $seriesString, $options);
-        }
+        $seriesJson = json_encode($series);
+        $options = str_replace('{{series}}', $seriesJson, $options);
         return $options;
     }
 

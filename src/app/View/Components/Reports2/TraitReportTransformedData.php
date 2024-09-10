@@ -5,6 +5,8 @@ namespace App\View\Components\Reports2;
 
 trait TraitReportTransformedData
 {
+    use TraitReportMatrixColumn;
+    
     private function sortData($transformedOpt) {
         if (!$transformedOpt) return [];
         if (is_string($transformedOpt)) $transformedOpt = json_decode($transformedOpt, true);

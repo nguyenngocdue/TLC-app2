@@ -36,12 +36,13 @@ trait TraitReportMatrixColumn
             foreach ($mergedData as &$values) {
                 $total = 0;
                 foreach ($fieldOfTransformedCols as $type) {
-                    if (!isset($values[$type])) $values[$type] = 0;
+                    if (!isset($values[$type])) $values[$type] = $valueToSet;
                     else $total += (float)$values[$type];
                 }
                 $values['total'] = $total;
             }
         }
+        // dd($mergedData);
         return [array_values($mergedData), $fieldOfTransformedCols];
     }
     

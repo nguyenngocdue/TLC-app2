@@ -24,11 +24,22 @@
             bar: {
                 horizontal: false,
                 columnWidth: '55%',
-                endingShape: 'rounded'
+                endingShape: 'rounded',
+                dataLabels: {
+                    position: 'top'  // Place data labels on top
+                }
             }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,  // Enable data labels
+            offsetY: -20,   // Optional: Adjust the offset to fine-tune label position
+            style: {
+                fontSize: '12px',
+                colors: ['#000'],  // Set the color of the data labels
+            },
+            formatter: function (val) {
+                return val;  // Customize the format of the labels if needed
+            }
         },
         stroke: {
             show: true,
