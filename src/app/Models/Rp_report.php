@@ -12,6 +12,7 @@ class Rp_report extends ModelExtended
         "title",
         "description",
         "entity_type",
+        "has_time_range",
         "owner_id",
     ];
 

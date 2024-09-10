@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string("title")->nullable();
             $table->text('description')->nullable();
             $table->string('entity_type')->nullable();
+            $table->boolean('has_time_range')->nullable();
+            
 
             $table->appendCommonFields();
         });
