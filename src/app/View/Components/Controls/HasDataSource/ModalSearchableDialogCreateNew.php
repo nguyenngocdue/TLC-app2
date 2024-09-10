@@ -9,6 +9,8 @@ class ModalSearchableDialogCreateNew extends Component
 {
     function __construct(
         private $modalId,
+        private $multipleStr = '',
+        private $tableName = '',
     ) {}
 
     function render()
@@ -17,6 +19,8 @@ class ModalSearchableDialogCreateNew extends Component
         return view('components.controls.has-data-source.modal-searchable-dialog-create-new', [
             'classList' => $classList,
             'modalId' => $this->modalId,
+            'multipleStr' => $this->multipleStr,
+            'tableName' => $this->tableName,
         ]);
     }
 }

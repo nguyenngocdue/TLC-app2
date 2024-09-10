@@ -21,7 +21,7 @@
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Heading 1",
         "control": "z_h1",
         "align": "",
@@ -40,7 +40,7 @@
     "_h2a": {
         "name": "_h2a",
         "column_name": "h2a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Heading 2",
         "control": "z_h2",
         "align": "",
@@ -59,7 +59,7 @@
     "_h4a": {
         "name": "_h4a",
         "column_name": "h4a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Heading 3",
         "control": "z_h3",
         "align": "",
@@ -78,7 +78,7 @@
     "_h5a": {
         "name": "_h5a",
         "column_name": "h5a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Heading 4",
         "control": "z_h4",
         "align": "",
@@ -97,7 +97,7 @@
     "_divider": {
         "name": "_divider",
         "column_name": "divider",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Heading 6",
         "control": "z_h6_base",
         "align": "",
@@ -116,7 +116,7 @@
     "_divider21": {
         "name": "_divider21",
         "column_name": "divider21",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "1 column",
         "control": "z_h4",
         "align": "",
@@ -135,7 +135,7 @@
     "_body2a": {
         "name": "_body2a",
         "column_name": "body2a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
         "control": "z_h6_base",
         "align": "",
@@ -154,7 +154,7 @@
     "_pageBreak": {
         "name": "_pageBreak",
         "column_name": "pageBreak",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "",
         "control": "z_divider",
         "align": "",
@@ -173,7 +173,7 @@
     "_h5b": {
         "name": "_h5b",
         "column_name": "h5b",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "2 columns",
         "control": "z_h4",
         "align": "",
@@ -192,7 +192,7 @@
     "_body1c": {
         "name": "_body1c",
         "column_name": "body1c",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -211,7 +211,7 @@
     "_body2c": {
         "name": "_body2c",
         "column_name": "body2c",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -230,7 +230,7 @@
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Heading 6",
         "control": "z_divider",
         "align": "",
@@ -249,7 +249,7 @@
     "_h5bc": {
         "name": "_h5bc",
         "column_name": "h5bc",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "3 columns",
         "control": "z_h4",
         "align": "",
@@ -268,7 +268,7 @@
     "_body1b": {
         "name": "_body1b",
         "column_name": "body1b",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -287,7 +287,7 @@
     "_body2b": {
         "name": "_body2b",
         "column_name": "body2b",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -306,7 +306,7 @@
     "_body12c": {
         "name": "_body12c",
         "column_name": "body12c",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -325,7 +325,7 @@
     "_body1a": {
         "name": "_body1a",
         "column_name": "body1a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "",
         "control": "z_page_break",
         "align": "",
@@ -344,7 +344,7 @@
     "_h5bcd": {
         "name": "_h5bcd",
         "column_name": "h5bcd",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "4 columns",
         "control": "z_h4",
         "align": "",
@@ -363,7 +363,7 @@
     "_body11a": {
         "name": "_body11a",
         "column_name": "body11a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -382,7 +382,7 @@
     "_body12a": {
         "name": "_body12a",
         "column_name": "body12a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -401,7 +401,7 @@
     "_body13a": {
         "name": "_body13a",
         "column_name": "body13a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -420,7 +420,7 @@
     "_body14a": {
         "name": "_body14a",
         "column_name": "body14a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "control": "z_h6_base",
         "align": "",
@@ -439,7 +439,7 @@
     "_pageBreakb": {
         "name": "_pageBreakb",
         "column_name": "pageBreakb",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "",
         "control": "z_page_break",
         "align": "",

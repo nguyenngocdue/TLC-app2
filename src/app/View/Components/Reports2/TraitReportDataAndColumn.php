@@ -3,12 +3,15 @@
 namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Reports\TraitCreateSQLReport2;
+use App\Utils\Support\Report;
 use Illuminate\Support\Facades\DB;
 
 trait TraitReportDataAndColumn
 {
     use TraitCreateSQLReport2;
     use TraitReportTermNames;
+    use TraitReportMatrixColumn;
+    use TraitReportTransformedData;
 
     public function createIconPosition($content, $icon, $iconPosition)
     {
@@ -33,17 +36,20 @@ trait TraitReportDataAndColumn
             // if (is_null($sql)) return collect();
             // if (!$sql) return collect();
             $sqlData = DB::select($sql);
-            $collection = collect($sqlData);
-            return $collection;
+            $queriedData = collect($sqlData);
+            $fieldTransformation = [];
+            if ($block->is_transformed_data){
+                [$queriedData , $fieldTransformation]  = $this->transformData($queriedData, $block->transformed_data_string);
+            }
+            return [ $queriedData, $fieldTransformation ];
         }
-        return collect();
+        return [collect(), []];
     }
 
     public function getAllUniqueFields($collection)
     {
         return array_unique(array_keys((array)$collection->first()));
     }
-
 
     private function getSecondColumns($block)
     {
@@ -65,6 +71,26 @@ trait TraitReportDataAndColumn
         return $dataHeader;
     }
 
+    public function getDataColumnsByTransformData($queriedData, $fields, $transformedOpt){
+        $firstItem = $queriedData->first();
+        $columns = [];
+        if ($firstItem) {
+            $lastTransformedData = last($transformedOpt);
+            if($lastTransformedData && isset($lastTransformedData['footer_agg'])){
+                $footerAgg = $lastTransformedData['footer_agg'];
+            }
+            foreach(array_keys($firstItem) as $key) {
+                if (in_array($key, $fields)) continue;
+                $columns[] = [
+                    'dataIndex' => $key,
+                    'align' => 'center',
+                    'footer' => $footerAgg ?? '',
+                ];
+            }
+        }
+        return $columns;
+    }
+
     public function getDataColumns($block, $queriedData)
     {
         if($queriedData->isEmpty()){
@@ -72,15 +98,18 @@ trait TraitReportDataAndColumn
             $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
             return [$headerCols, []];
         } 
-
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from admin
-        $lines = $block->getLines->sortby('order_no');
+        $columns = $block->getLines->sortby('order_no');
         $secondHeaderCols = $this->getSecondColumns($block);
         $headerCols = [];
-        foreach ($lines as $line) {
+
+        $fields = [];
+
+        foreach ($columns as $line) {
             $dataIndex = $line->data_index;
             $isActive = $line->is_active;
+            $fields[] = $dataIndex;
             if ($isActive && in_array($dataIndex, $uniqueFields)) {
                 $aggFooter = $this->getAggName($line->agg_footer);
                 $title = $this->createIconPosition($line->title ?? $line->name, $line->icon, $line->icon_position);
@@ -92,6 +121,12 @@ trait TraitReportDataAndColumn
                     'footer' => $aggFooter,
                 ];
             }
+           
+        }
+        if ($block->is_transformed_data && ($x = $block->transformed_data_string)){
+            $transformedOpt = $this->sortData($x, true);
+            $transformedCols = $this->getDataColumnsByTransformData($queriedData, $fields, $transformedOpt);
+            $headerCols = array_merge($headerCols, $transformedCols);
         }
         return [$headerCols, $secondHeaderCols];
     }

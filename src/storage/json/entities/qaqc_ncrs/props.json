@@ -68,7 +68,7 @@
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "SECTION I: GENERAL INFORMATION",
         "control": "z_h4",
         "align": "center",
@@ -420,7 +420,7 @@
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider1",
         "control": "z_divider",
         "align": "",
@@ -442,7 +442,7 @@
     "_h2a": {
         "name": "_h2a",
         "column_name": "h2a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "SECTION II: IDENTIFICATION",
         "control": "z_h4",
         "align": "center",
@@ -640,7 +640,7 @@
     "_page_break1": {
         "name": "_page_break1",
         "column_name": "page_break1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Page Break1",
         "control": "z_page_break",
         "align": "",
@@ -706,7 +706,7 @@
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider2",
         "control": "z_divider",
         "align": "",
@@ -728,7 +728,7 @@
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "SECTION III: CORRECTIVE ACTIONS",
         "control": "z_h4",
         "align": "center",
@@ -860,7 +860,7 @@
     "_divider3": {
         "name": "_divider3",
         "column_name": "divider3",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider3",
         "control": "z_divider",
         "align": "",
@@ -882,7 +882,7 @@
     "_h4a": {
         "name": "_h4a",
         "column_name": "h4a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "SECTION IV: APPROVAL INFORMATION",
         "control": "z_h4",
         "align": "center",

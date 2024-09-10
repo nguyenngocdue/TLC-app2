@@ -6,9 +6,11 @@
 @endif
 <div class="no-print justify-end pb-2"></div> 
 
-<div class="flex justify-end px-1 pb-2">
-    <x-reports2.report-absolute-time-range  :report="$rp"/>
-</div>
+@if($rp->has_time_range)
+    <div class="flex justify-end px-1 pb-2">
+        <x-reports2.report-absolute-time-range  :report="$rp"/>
+    </div>
+@endif
 <div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
     <!-- Mode Dropdown -->
     @if(count($rpFilterLinks->toArray()) > 0)

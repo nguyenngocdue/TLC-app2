@@ -29,7 +29,7 @@
     "apps_have_view_all_kanban": [
         "kanban_task_pages"
     ],    
-    "headings": [
+    "prop_static_headings": [
         "",
         "z_h1",
         "z_h2",
@@ -40,9 +40,14 @@
         "z_divider",
         "z_page_break"
     ],
+    "prop_static_controls": [
+        "",
+        "my_new_control"
+    ],
     "controls": [
         "",
         "attachment",
+        "business_travel_line",
         "comment",
         "checkbox_2a",
         "dropdown",
@@ -166,6 +171,7 @@
         "system_admin",
         "dev_admin",
         "hr_admin",
+        "hr_tso_archive",
         "hr_onboarding",
         "hr",
         "system_configuration",

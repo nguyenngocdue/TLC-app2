@@ -209,7 +209,7 @@
     "_sep01": {
         "name": "_sep01",
         "column_name": "sep01",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Sep01",
         "control": "z_divider",
         "align": "",

@@ -35,6 +35,9 @@
     <script src="{{ asset('js/focus-trap.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/number-to-words.js') }}"></script>
+    <script src="{{ asset('js/number-to-words-vn.js') }}"></script>
+    <script src="{{ asset('js/double-to-words.js') }}"></script>
+    
     <script src="{{ asset('js/lazysizes.js') }}"></script>
     <script src="{{ asset('js/flatpickr@4.6.13.min.js') }}"></script>
     
@@ -61,6 +64,7 @@
     <script src="{{ asset('js/components/Dropdown2-20240821.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown4-20240821.js') }}"></script>
     <script src="{{ asset('js/components/ModalSearchableDialog.js') }}"></script>
+    <script src="{{ asset('js/components/ModalSearchableDialogCreateNew.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231229.js') }}"></script>
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20240821.js') }}"></script>

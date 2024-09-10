@@ -1,0 +1,122 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": ""
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "new": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": ""
+    },
+    "_title": {
+        "name": "_title",
+        "column_name": "title",
+        "new": ""
+    },
+    "_radio_advance_type": {
+        "name": "_radio_advance_type",
+        "column_name": "radio_advance_type",
+        "new": ""
+    },
+    "_getSubProjectsOfAdvanceReq": {
+        "name": "_getSubProjectsOfAdvanceReq",
+        "column_name": "getSubProjectsOfAdvanceReq",
+        "new": ""
+    },
+    "_advance_amount": {
+        "name": "_advance_amount",
+        "column_name": "advance_amount",
+        "new": ""
+    },
+    "_currency_id": {
+        "name": "_currency_id",
+        "column_name": "currency_id",
+        "new": ""
+    },
+    "_advance_amount_word": {
+        "name": "_advance_amount_word",
+        "column_name": "advance_amount_word",
+        "new": ""
+    },
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
+        "new": ""
+    },
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
+        "new": ""
+    },
+    "_rate_exchange": {
+        "name": "_rate_exchange",
+        "column_name": "rate_exchange",
+        "new": ""
+    },
+    "_currency_pair_id": {
+        "name": "_currency_pair_id",
+        "column_name": "currency_pair_id",
+        "new": "true"
+    },
+    "_advance_amount_lcy": {
+        "name": "_advance_amount_lcy",
+        "column_name": "advance_amount_lcy",
+        "new": ""
+    },
+    "_advance_amount_lcy_word": {
+        "name": "_advance_amount_lcy_word",
+        "column_name": "advance_amount_lcy_word",
+        "new": ""
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": ""
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": ""
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": ""
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": ""
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": ""
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "new": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": ""
+    }
+}

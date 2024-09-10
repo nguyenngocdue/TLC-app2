@@ -2,7 +2,7 @@
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "General Section",
         "control": "z_h4",
         "align": "",
@@ -178,7 +178,7 @@
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider1",
         "control": "z_divider",
         "align": "",
@@ -200,7 +200,7 @@
     "_h2a": {
         "name": "_h2a",
         "column_name": "h2a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Advance Section",
         "control": "z_h4",
         "align": "",
@@ -354,7 +354,7 @@
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider2",
         "control": "z_divider",
         "align": "",
@@ -376,7 +376,7 @@
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Allowance Section",
         "control": "z_h4",
         "align": "",
@@ -530,7 +530,7 @@
     "_divider3": {
         "name": "_divider3",
         "column_name": "divider3",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider3",
         "control": "z_divider",
         "align": "",
@@ -552,7 +552,7 @@
     "_h4a": {
         "name": "_h4a",
         "column_name": "h4a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Expense Claim Section",
         "control": "z_h4",
         "align": "",
@@ -706,7 +706,7 @@
     "_divider4": {
         "name": "_divider4",
         "column_name": "divider4",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider4",
         "control": "z_divider",
         "align": "",

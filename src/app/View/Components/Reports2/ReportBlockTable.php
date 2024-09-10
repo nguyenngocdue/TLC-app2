@@ -53,9 +53,8 @@ class ReportBlockTable extends Component
     }
 
 
-    private function createTableDataSourceForRows($queriedData, $configuredCols)
+    private function createTableDataSourceForRows($queriedData, $configuredCols, $block)
     {
-  
         foreach ($queriedData as $k1 => &$dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
@@ -100,6 +99,9 @@ class ReportBlockTable extends Component
                         'cell_div_class' => $cellDivClass,
                     ];
                     $re->$k2 = $newValue;
+                }
+                elseif ($block->is_transformed_data) {
+                    $re->$k2 = $value;
                 }
             }
             $dataLine = $re;

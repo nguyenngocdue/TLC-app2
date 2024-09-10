@@ -137,7 +137,12 @@ trait TraitEntityExportCSV
     {
         $props = SuperProps::getFor($type)['props'];
         return $props = array_filter($props, function ($prop) {
-            return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static' && $prop['control'] !== 'thumbnail';
+            $noHiddenViewAll = !$prop['hidden_view_all'];
+            $noStaticHeading = $prop['column_type'] !== 'static_heading';
+            $noStaticControl = $prop['column_type'] !== 'static_control';
+            $noThumbnail = $prop['control'] !== 'thumbnail';
+            return $noHiddenViewAll && $noStaticHeading && $noStaticControl && $noThumbnail;
+            // return !$prop['hidden_view_all'] && $prop['column_type'] !== 'static_heading' && $prop['control'] !== 'thumbnail';
         });
     }
     private function makeNoColumn($columns)
@@ -181,7 +186,7 @@ trait TraitEntityExportCSV
             if (gettype($key) !== 'integer') $rows[] = [$key];
             foreach ($value as $no => $item) {
                 if (isset($item['name_for_group_by'])) unset($item['name_for_group_by']);
-                $item = array_values(array_map(fn ($item) => isset($item->value) ? strip_tags($item->value) : strip_tags($item), $item));
+                $item = array_values(array_map(fn($item) => isset($item->value) ? strip_tags($item->value) : strip_tags($item), $item));
                 array_unshift($item, ($no + 1));
                 $rows[] = $item;
             }

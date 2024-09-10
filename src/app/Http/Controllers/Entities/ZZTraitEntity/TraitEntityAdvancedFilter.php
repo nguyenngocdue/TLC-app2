@@ -21,7 +21,8 @@ trait TraitEntityAdvancedFilter
         $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'parent_link'];
         $supperProps = SuperProps::getFor($type ?? $this->type);
         $propsFilters = array_filter($supperProps['props'], function ($item) use ($blackList) {
-            if ($item['column_type'] === "static") return false;
+            if ($item['column_type'] === "static_heading") return false;
+            if ($item['column_type'] === "static_control") return false;
             if (in_array($item['control'], $blackList)) return false;
             if ($item['hidden_filter'] === 'true') return false;
             return true;
@@ -44,9 +45,9 @@ trait TraitEntityAdvancedFilter
 
     private function distributeFilter($advanceFilters, $propsFilters)
     {
-        $propsFilters = array_map(fn ($item) => $item['control'], $propsFilters);
+        $propsFilters = array_map(fn($item) => $item['control'], $propsFilters);
         if (!empty($advanceFilters)) {
-            $advanceFilters = array_filter($advanceFilters, fn ($item) => $item !== null);
+            $advanceFilters = array_filter($advanceFilters, fn($item) => $item !== null);
             $result = [];
             foreach ($advanceFilters as $key => $value) {
                 $control = $propsFilters['_' . $key] ?? '';
@@ -122,7 +123,7 @@ trait TraitEntityAdvancedFilter
     public function queryAdvancedFilter($q, $advanceFilters, $propsFilters)
     {
         if ($advanceFilters) {
-            $queryResult = array_filter($advanceFilters, fn ($item) => $item);
+            $queryResult = array_filter($advanceFilters, fn($item) => $item);
             // Log::info($queryResult);
             // Log::info($queryResult);
             array_walk($queryResult, function ($value, $key) use ($q, $propsFilters) {

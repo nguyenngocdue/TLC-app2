@@ -19,6 +19,11 @@
         "column_name": "title",
         "new": "true"
     },
+    "_title_vn": {
+        "name": "_title_vn",
+        "column_name": "title_vn",
+        "new": "true"
+    },
     "_radio_advance_type": {
         "name": "_radio_advance_type",
         "column_name": "radio_advance_type",
@@ -44,24 +49,34 @@
         "column_name": "advance_amount_word",
         "new": "true"
     },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
+    "_counter_currency_id": {
+        "name": "_counter_currency_id",
+        "column_name": "counter_currency_id",
         "new": "true"
     },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
+    "_rate_exchange_month_id": {
+        "name": "_rate_exchange_month_id",
+        "column_name": "rate_exchange_month_id",
         "new": "true"
     },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
-        "column_name": "getMonitors1",
+    "_rate_exchange": {
+        "name": "_rate_exchange",
+        "column_name": "rate_exchange",
         "new": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_currency_pair_id": {
+        "name": "_currency_pair_id",
+        "column_name": "currency_pair_id",
+        "new": "true"
+    },
+    "_advance_amount_lcy": {
+        "name": "_advance_amount_lcy",
+        "column_name": "advance_amount_lcy",
+        "new": "true"
+    },
+    "_advance_amount_lcy_word": {
+        "name": "_advance_amount_lcy_word",
+        "column_name": "advance_amount_lcy_word",
         "new": "true"
     },
     "_status": {
@@ -87,6 +102,26 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "new": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true"
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "true"
     }
 }

@@ -24,7 +24,7 @@
     "_section_01": {
         "name": "_section_01",
         "column_name": "section_01",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Column attributes",
         "control": "z_h4",
         "align": "",
@@ -332,7 +332,7 @@
     "_divider_01": {
         "name": "_divider_01",
         "column_name": "divider_01",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider 01",
         "control": "z_divider",
         "align": "",
@@ -354,7 +354,7 @@
     "_section_02": {
         "name": "_section_02",
         "column_name": "section_02",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Row Attributes",
         "control": "z_h4",
         "align": "",
@@ -530,7 +530,7 @@
     "_divider_02": {
         "name": "_divider_02",
         "column_name": "divider_02",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider 02",
         "control": "z_divider",
         "align": "",
@@ -552,7 +552,7 @@
     "_section_03": {
         "name": "_section_03",
         "column_name": "section_03",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Footer Aggregation",
         "control": "z_h4",
         "align": "",

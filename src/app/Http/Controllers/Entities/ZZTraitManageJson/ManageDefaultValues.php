@@ -34,7 +34,9 @@ class ManageDefaultValues extends Manage_Parent
             }
             if ($prop['control'] != 'textarea') $newItem['textarea_rows'] = 'DO_NOT_RENDER';
             $newItem['label'] = $prop['label'];
-            if (isset($prop['column_type']) && $prop['column_type'] === 'static') $newItem['row_color'] = "amber";
+            if (isset($prop['column_type']) && in_array($prop['column_type'], ['static_heading', 'static_control'])) {
+                $newItem['row_color'] = "amber";
+            }
             if (in_array($prop['name'], $standardDefaultValueKeys)) $newItem['row_color'] = "gray";
             $result[] = $newItem;
         }

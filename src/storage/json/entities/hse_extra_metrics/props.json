@@ -232,7 +232,7 @@
     "_sep01": {
         "name": "_sep01",
         "column_name": "sep01",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Sep01",
         "control": "z_divider",
         "align": "",
@@ -255,7 +255,7 @@
     "_heading01": {
         "name": "_heading01",
         "column_name": "heading01",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Optional",
         "control": "z_h4",
         "align": "",

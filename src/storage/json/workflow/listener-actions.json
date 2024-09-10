@@ -46,7 +46,8 @@
     },
     "number_to_words": {
         "name": "number_to_words",
-        "triggers": "true"
+        "triggers": "true",
+        "expression": "true"
     },
     "reduce": {
         "name": "reduce",

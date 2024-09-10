@@ -24,7 +24,7 @@
     "_section_owner_info": {
         "name": "_section_owner_info",
         "column_name": "section_owner_info",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Requester Infomation",
         "control": "z_h4",
         "align": "",
@@ -46,7 +46,7 @@
     "_section_owner_info_sub": {
         "name": "_section_owner_info_sub",
         "column_name": "section_owner_info_sub",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Complete by Requester",
         "control": "z_h6_base",
         "align": "",
@@ -178,7 +178,7 @@
     "_sep00": {
         "name": "_sep00",
         "column_name": "sep00",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Sep00",
         "control": "z_divider",
         "align": "",
@@ -200,7 +200,7 @@
     "_section_basic_info": {
         "name": "_section_basic_info",
         "column_name": "section_basic_info",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Ticket Information",
         "control": "z_h4",
         "align": "",
@@ -222,7 +222,7 @@
     "_section_basic_info_sub": {
         "name": "_section_basic_info_sub",
         "column_name": "section_basic_info_sub",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Complete by House Owner",
         "control": "z_h6_base",
         "align": "",
@@ -464,7 +464,7 @@
     "_sep01": {
         "name": "_sep01",
         "column_name": "sep01",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Sep01",
         "control": "z_divider",
         "align": "",
@@ -486,7 +486,7 @@
     "_section_appointment": {
         "name": "_section_appointment",
         "column_name": "section_appointment",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Appointment",
         "control": "z_h4",
         "align": "",
@@ -508,7 +508,7 @@
     "_section_appointment_sub": {
         "name": "_section_appointment_sub",
         "column_name": "section_appointment_sub",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Complete by Internals\/Sub-contractor",
         "control": "z_h6_base",
         "align": "",
@@ -684,7 +684,7 @@
     "_sep02": {
         "name": "_sep02",
         "column_name": "sep02",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Sep02",
         "control": "z_divider",
         "align": "",
@@ -706,7 +706,7 @@
     "_section_task": {
         "name": "_section_task",
         "column_name": "section_task",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Task Details",
         "control": "z_h4",
         "align": "",
@@ -728,7 +728,7 @@
     "_section_task_sub": {
         "name": "_section_task_sub",
         "column_name": "section_task_sub",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Complete by Internals\/Sub-contractor",
         "control": "z_h6_base",
         "align": "",

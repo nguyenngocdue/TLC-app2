@@ -48,7 +48,7 @@
     "__h1a": {
         "name": "__h1a",
         "column_name": "_h1a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Basic Information",
         "control": "z_h4",
         "align": "",
@@ -278,7 +278,7 @@
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider1",
         "control": "z_divider",
         "align": "",
@@ -301,7 +301,7 @@
     "_h1b": {
         "name": "_h1b",
         "column_name": "h1b",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Statement Of Change\/Problem",
         "control": "z_h4",
         "align": "",
@@ -370,7 +370,7 @@
     "_divider2": {
         "name": "_divider2",
         "column_name": "divider2",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider2",
         "control": "z_divider",
         "align": "",
@@ -393,7 +393,7 @@
     "_h2a": {
         "name": "_h2a",
         "column_name": "h2a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Actions to be taken",
         "control": "z_h4",
         "align": "",
@@ -439,7 +439,7 @@
     "_divider3": {
         "name": "_divider3",
         "column_name": "divider3",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider3",
         "control": "z_divider",
         "align": "",
@@ -462,7 +462,7 @@
     "_h2b": {
         "name": "_h2b",
         "column_name": "h2b",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Impact Of Change",
         "control": "z_h4",
         "align": "",
@@ -692,7 +692,7 @@
     "_divider4": {
         "name": "_divider4",
         "column_name": "divider4",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider4",
         "control": "z_divider",
         "align": "",
@@ -715,7 +715,7 @@
     "_h3a": {
         "name": "_h3a",
         "column_name": "h3a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Department\/Process Review",
         "control": "z_h4",
         "align": "",
@@ -853,7 +853,7 @@
     "_divider5": {
         "name": "_divider5",
         "column_name": "divider5",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider5",
         "control": "z_divider",
         "align": "",
@@ -899,7 +899,7 @@
     "_h3b": {
         "name": "_h3b",
         "column_name": "h3b",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Change Decision",
         "control": "z_h4",
         "align": "",

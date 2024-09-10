@@ -288,7 +288,7 @@
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Divider1",
         "control": "z_divider",
         "align": "",
@@ -310,7 +310,7 @@
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
-        "column_type": "static",
+        "column_type": "static_heading",
         "label": "Third Party Sign Off",
         "control": "z_h4",
         "align": "",

@@ -43,7 +43,14 @@
                 @break
 
                 @case($CHART_TYPE_ID)
-                    <x-reports2.report-block-chart :block="$block" reportId="{{ $reportId }}" :queriedData="$queriedData"
+                    @php
+                        $fieldTransformation = $blockItem['fieldTransformation'];
+                    @endphp
+                    <x-reports2.report-block-chart 
+                        :block="$block" 
+                        reportId="{{ $reportId }}" 
+                        :queriedData="$queriedData"
+                        :fieldTransformation="$fieldTransformation"
                         :headerCols="$headerCols" />
                 @break
 

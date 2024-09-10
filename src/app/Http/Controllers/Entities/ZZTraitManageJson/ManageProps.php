@@ -91,12 +91,20 @@ class ManageProps extends Manage_Parent
     {
         foreach ($json as &$prop) {
             $column_type = $prop['column_type'];
-            if ($column_type == 'static') {
+            $cbb = [];
+            switch ($column_type) {
+                case 'static_heading':
+                    $cbb = JsonControls::getPropStaticHeadings();
+                    break;
+                case 'static_control':
+                    $cbb = JsonControls::getPropStaticControls();
+                    break;
+            }
+            if (in_array($column_type, ['static_heading', 'static_control'])) {
                 $prop['align'] = ['value' => $prop['align'] ?? '', 'cbbDS' => ['', 'center', 'right']];
-                $prop['control'] = ['value' => $prop['control'] ?? '', 'cbbDS' => JsonControls::getHeadings()];
+                $prop['control'] = ['value' => $prop['control'] ?? '', 'cbbDS' => $cbb];
                 $prop['hidden_view_all'] = 'DO_NOT_RENDER';
             } else {
-
                 $prop['align'] = 'DO_NOT_RENDER';
             }
         }
@@ -156,7 +164,11 @@ class ManageProps extends Manage_Parent
 
         foreach (array_keys($toBeGreen) as $key) $json[$key]['row_color'] = "green";
         foreach (array_keys($toBeRed) as $key) $json[$key]['row_color'] = "red";
-        foreach ($json as &$line) if (isset($line['column_type']) && $line['column_type'] === 'static') $line['row_color'] = "amber";
+
+        foreach ($json as &$line) {
+            $isStatic = isset($line['column_type']) && in_array($line['column_type'], ['static_heading', 'static_control']);
+            if ($isStatic) $line['row_color'] = "amber";
+        }
 
 
         foreach ($result as $key => $rows) {
@@ -184,7 +196,7 @@ class ManageProps extends Manage_Parent
         foreach ($names as $name) $newItems[$name] = [
             'name' => "_" . $name,
             'column_name' => $name,
-            'column_type' => 'static',
+            'column_type' => 'static_heading',
             'title' => Str::headline($name),
             'label' => Str::headline($name),
             'col_span' => 12,

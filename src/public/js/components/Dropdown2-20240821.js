@@ -335,12 +335,15 @@ const onChangeSetTableColumn = (listener, triggerIndex) => {
 }
 
 const onChangeNumberToWords = (listener) => {
-    // console.log("onChangeNumberToWords", listener)
-    const { triggers, column_name } = listener
+    // console.log('onChangeNumberToWords', listener)
+    const { triggers, column_name, expression: lang } = listener
     const number = getValueOfEById(triggers[0])
     let numberWords = ''
     if (number) {
-        numberWords = numberToWords(number)
+        //Remove all comma
+        let cleanedString = number.replace(/,/g, '')
+
+        numberWords = lang == 'vn' ? numberToWordsVn(cleanedString) : numberToWords(cleanedString)
     }
 
     const currency = getValueOfEById(triggers[1])
