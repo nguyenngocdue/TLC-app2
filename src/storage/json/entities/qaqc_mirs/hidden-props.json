@@ -13,13 +13,13 @@
     "_doc_id": {
         "name": "_doc_id",
         "column_name": "doc_id",
-        "new": "true",
-        "assigned": "true",
-        "rejected": "true",
-        "pending_ncr": "true",
-        "inspected": "true",
-        "inspection_rejected": "true",
-        "closed": "true"
+        "new": "",
+        "assigned": "",
+        "rejected": "",
+        "pending_ncr": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
     },
     "_getNcrs": {
         "name": "_getNcrs",
