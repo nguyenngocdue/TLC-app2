@@ -35,8 +35,8 @@ class EntityTypeDropdown2 extends Component
                 $items[$key] = $title;
             }
         }
+        // $items[''] = '';
         uasort($items, fn($a, $b) => strcasecmp($a, $b));
-        $items[''] = '';
 
         // dd($items);
         return view("components.controls.entity-type-dropdown2", [

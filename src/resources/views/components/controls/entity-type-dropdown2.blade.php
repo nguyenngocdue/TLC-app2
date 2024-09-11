@@ -14,7 +14,9 @@
     </div>
 @else
 <div>
+    {{-- @dump($options) --}}
     <select name="{{$name}}" id="select-dropdown-{{$name}}" class="w-full">
+        <option value="0">(None)</option>
         @foreach($options as $key=>$title)
         <option value="{{$key}}" @selected($value===$key)>{{$title}}</option>
         @endforeach
@@ -25,7 +27,6 @@
         placeholder: "Please select"
         , allowClear: false
     });
-
 </script>
 @endif
 

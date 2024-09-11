@@ -77,7 +77,8 @@ trait TraitTableColumnEditable
                         ];
                     }
                     uasort($items, fn($a, $b) => strcasecmp($a['title'], $b['title']));
-                    $newColumn['cbbDataSource'] = $items;
+
+                    $newColumn['cbbDataSource'] = ['' => ['title' => '', 'value' => ''], ...$items];
                     // $newColumn['cbbDataSource'] = ['', ...array_map(fn($s) => Str::snake($s), Entities::getAllPluralNames())];
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
