@@ -30,6 +30,7 @@
                 }
             }
         },
+         colors: ['#1E90FF', '#28A745', '#FFC107', '#474443'],
         dataLabels: {
             enabled: true,  // Enable data labels
             offsetY: -20,  

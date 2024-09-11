@@ -53,7 +53,7 @@ class Qaqc_ncr_dataSource extends Controller
                         ncr.parent_id AS parent_id,
                         ncr.project_id AS project_id,
                         ncr.sub_project_id AS sub_project_id,
-                        ncr.prod_routing_id AS prod_routing_id,ti
+                        ncr.prod_routing_id AS prod_routing_id,
                         ncr.prod_order_id AS prod_order_id,
                         ncr.prod_discipline_id AS prod_discipline_id,
                         ncr.user_team_id AS user_team_id,
