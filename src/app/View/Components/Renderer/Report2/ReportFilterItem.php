@@ -7,6 +7,8 @@ use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_routing_link;
+use App\Models\Qaqc_ncr;
+use App\Models\Term;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
@@ -25,6 +27,11 @@ class ReportFilterItem extends Component
     protected $MONTH_TYPE_ID = 632;
     protected $DATASOURCE_TYPE_ID = 633;
     protected $YEAR_TYPE_ID = 634;
+
+    protected $DEFECT_ROOT_CAUSE_TYPE_ID = 117;
+    protected $DEFECT_REPORT_TYPE_ID = 118;
+    protected $INTER_SUBCON_TYPE_ID = 119;
+
 
     protected $BEGIN_YEAR = 2021;
     protected $END_YEAR = 2027;
@@ -73,7 +80,7 @@ class ReportFilterItem extends Component
 
         switch ($controlTypeId) {
             case $this->DATASOURCE_TYPE_ID:
-                return $this->handleDataSourceTypeID($entityType, $isBlackList, $bWListIds);
+                return $this->handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter);
             case $this->STATUS_TYPE_ID:
                 return $this->getStatuses($entityType);
             case $this->YEAR_TYPE_ID:
@@ -105,12 +112,32 @@ class ReportFilterItem extends Component
             ->get();
     }
 
-    private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds)
+    private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
     {
         $modelClass = ModelData::initModelByField($entityType);
         if (!$modelClass) return [];
         $db = $modelClass::query();
         switch($entityType){
+            case 'terms':
+                $dataIndex = $filter->data_index;
+                $filterId = 0;
+                switch ($dataIndex) {
+                    case 'defect_root_cause_id':
+                            $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
+                        break;
+                    case 'defect_report_type':
+                            $filterId = $this->DEFECT_REPORT_TYPE_ID;;
+                        break;
+                    case 'inter_subcon_id':
+                            $filterId = $this->INTER_SUBCON_TYPE_ID;;
+                        break;
+                   
+                }
+                $db = $modelClass::query()
+                ->where('field_id', $filterId)
+                ->get();
+                return $db;
+
             case 'prod_routing_links':
                 $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
                     ->with('getProdRoutings')
@@ -129,36 +156,34 @@ class ReportFilterItem extends Component
                     $newDB[] = $i;
                 }
                 return $newDB;
-        case 'users':
-            $treeData = $this->getDataByCompanyTree();
-            $dataSource = [];
-            $isAdmin = CurrentUser::isAdmin();
-            foreach ($treeData as $value) {
-                $name = $value->resigned ? $value->name0 . ' (RESIGNED)' : $value->name0;
-                $name = $value->show_on_beta ? $name . ' (BETA)' : $name;
-                $addId = $isAdmin ? '(#' . $value->id . ')' : '';
-                $dataSource[] = [
-                    'id' => $value->id,
-                    'name' => $name . ' ' . $addId,
-                    'department_id' => $value->department,
-                    'workplace_id' => $value->workplace
-                ];
+            case 'users':
+                $treeData = $this->getDataByCompanyTree();
+                $dataSource = [];
+                $isAdmin = CurrentUser::isAdmin();
+                foreach ($treeData as $value) {
+                    $name = $value->resigned ? $value->name0 . ' (RESIGNED)' : $value->name0;
+                    $name = $value->show_on_beta ? $name . ' (BETA)' : $name;
+                    $addId = $isAdmin ? '(#' . $value->id . ')' : '';
+                    $dataSource[] = [
+                        'id' => $value->id,
+                        'name' => $name . ' ' . $addId,
+                        'department_id' => $value->department,
+                        'workplace_id' => $value->workplace
+                    ];
+                }
+                return collect($dataSource);
+            case 'prod_routings':
+                $newDB = $db->select('id', 'name', 'description')
+                    ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+                    ->with('getSubProjects')
+                    ->with('getScreensShowMeOn')
+                    ->orderBy('name')
+                    ->get();
+                foreach ($newDB as &$item) {
+                    $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+                }
+                return $newDB;
             }
-            return collect($dataSource);
-        case 'prod_routings':
-            $newDB = $db->select('id', 'name', 'description')
-                ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                ->with('getSubProjects')
-                ->with('getScreensShowMeOn')
-                ->orderBy('name')
-                ->get();
-            foreach ($newDB as &$item) {
-                $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
-            }
-            return $newDB;
-
-                
-        }
         $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
         foreach ($triggerNames as $triggerName) return $this->getEntityData($db, $isBlackList, $bWListIds, $triggerName);
     }
@@ -166,6 +191,7 @@ class ReportFilterItem extends Component
  
     public function render()
     {
+        // dd($this->report);
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
         // dump($params);
