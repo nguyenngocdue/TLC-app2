@@ -69,7 +69,7 @@
                                         </div>
                                         <x-renderer.report2.report-filter-item
                                             :filter="$filter"
-                                            :selected="$selected"    
+                                            :selected="$selected"
                                         />
                                         @if($filter->default_value && !$filter->is_multiple)
                                             @php
