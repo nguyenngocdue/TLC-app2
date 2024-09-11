@@ -119,6 +119,7 @@ class ReportFilterItem extends Component
             if (!$modelClass) return [];
             $db = $modelClass::query();
             // Log::info($entityType);
+            // dd($entityType);
             switch($entityType){
                 case 'term':
                     $filterId = 0;
@@ -157,7 +158,7 @@ class ReportFilterItem extends Component
                     $newDB[] = $i;
                 }
                 return $newDB;
-            case 'users':
+            case 'user':
                 $treeData = $this->getDataByCompanyTree();
                 $dataSource = [];
                 $isAdmin = CurrentUser::isAdmin();
