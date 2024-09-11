@@ -143,11 +143,12 @@ class ReportBlockTable extends Component
         }
     }
 
-    private function createColsWhenNotFoundRenderType(){
+    private function createColsWhenNotFoundRenderType()
+    {
         $defaultCols = [];
-        $firstRow = $this->tableDataSource->first();
+        $firstRow = $this->queriedData->first();
         $keys = is_array($firstRow) ? array_keys($firstRow) : array_keys((array) $firstRow);
-        if($keys) {
+        if ($keys) {
             $defaultCols = array_map(fn($item) => [
                 'dataIndex' => $item,
             ], $keys);
@@ -155,25 +156,28 @@ class ReportBlockTable extends Component
         return $defaultCols;
     }
 
-
     public function render()
     {
         $block = $this->block;
         $columns = $this->block->getLines->sortby('order_no');
-
+        
         $dataIndexToRender = array_column($this->headerCols, 'dataIndex');
         $configuredCols = $this->getConfiguredCols($columns, $dataIndexToRender);
-
-        if(!$configuredCols) $configuredCols = $this->createColsWhenNotFoundRenderType();
-
-        $newTableDataSource = $this->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
+        
+        $tableDataSource = $this->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
+        $headerCols = $this->headerCols;
+        // render default table
+        if(!$configuredCols) {
+            $tableDataSource = $this->queriedData;
+            $headerCols = $this->createColsWhenNotFoundRenderType();
+        } 
 
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
             "description" => $block->description,
-            "tableDataSource" => $newTableDataSource,
-            "tableColumns" =>  $this->headerCols,
+            "tableDataSource" => $tableDataSource,
+            "tableColumns" =>  $headerCols,
             "secondHeaderCols" => $this->secondHeaderCols,
 
             "showNo" => $block->showNo,
