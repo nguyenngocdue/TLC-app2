@@ -362,7 +362,7 @@ const addANewLineFull = (params) => {
                         renderer +=
                             "<script>getEById('" +
                             id +
-                            "').select2({placeholder: 'Please select', templateResult: select2FormatState, matcher: select2Matcher,})</script>"
+                            "').select2({placeholder: 'Please select', templateResult: select2FormatOption, matcher: select2Matcher,})</script>"
                     }
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break

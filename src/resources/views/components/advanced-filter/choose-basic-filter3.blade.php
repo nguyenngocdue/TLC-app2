@@ -10,6 +10,6 @@
         $('[id="'+"{{$name}}"+'"]').select2({
             placeholder: "Please select..."
             , allowClear: false
-            // , templateResult: select2FormatState
+            // , templateResult: select2FormatOption
         });
 </script>

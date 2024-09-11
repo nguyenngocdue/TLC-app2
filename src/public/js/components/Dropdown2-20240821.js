@@ -481,7 +481,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             placeholder: 'Please select...',
             allowClear,
             // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
-            templateResult: select2FormatState,
+            templateResult: select2FormatOption,
+            // templateSelection: select2FormatSelected,
+            escapeMarkup: (markup) => markup, // Disable escaping of HTML
             // , disabled: true
             matcher: select2Matcher,
         })

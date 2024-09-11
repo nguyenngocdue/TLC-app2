@@ -74,7 +74,7 @@
     $('[id="'+"roles"+'"]').select2({
         placeholder: "Please select..."
         , allowClear: false
-        , templateResult: select2FormatState
+        , templateResult: select2FormatOption
     });
 </script>
 <script>

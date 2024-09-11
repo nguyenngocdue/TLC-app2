@@ -572,7 +572,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
     theDropdown.select2({
         placeholder: 'Please select',
         // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
-        templateResult: select2FormatState,
+        templateResult: select2FormatOption,
         matcher: select2Matcher,
     })
     if (dataSource.length === 1) theDropdown.trigger('change')
@@ -584,7 +584,7 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLen
         getEById(id).select2({
             placeholder: 'Please select',
             // , allowClear: true //<<This make a serious bug when user clear and re-add a multiple dropdown, it created a null element
-            templateResult: select2FormatState,
+            templateResult: select2FormatOption,
             matcher: select2Matcher,
         })
         return

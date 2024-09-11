@@ -6,7 +6,14 @@ let k = {},
 const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) + '.' + String(n).padStart(6, '0').substring(3)
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 // const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
-const select2FormatState = (state) => {
+const select2FormatSelected = (state) => {
+    let s = ''
+    s += state.text
+    if (state.id) s += `<a class="mx-2 text-blue-600" href="console.log(${state.id})"><i class="fa-duotone fa-share-from-square"></i></a>`
+    // if (state.title) s += ' <span class="text-gray-500">(' + state.title + ')</span>'
+    return s
+}
+const select2FormatOption = (state) => {
     return !state.title
         ? $(`<div title="#${state.id}">${state.text}</div>`)
         : $(
@@ -17,6 +24,7 @@ const select2FormatState = (state) => {
     </div>`,
           )
 }
+
 const select2Matcher = (params, data) => {
     // console.log(params, data)
     // If there are no search terms, return all of the data.

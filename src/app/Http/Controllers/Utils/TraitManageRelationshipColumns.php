@@ -111,6 +111,12 @@ trait TraitManageRelationshipColumns
                 "renderer" => "checkbox",
                 'align' => "center",
             ],
+            [
+                "dataIndex" => "let_user_open",
+                "editable" => true,
+                "renderer" => "checkbox",
+                'align' => "center",
+            ],
         ];
     }
 }

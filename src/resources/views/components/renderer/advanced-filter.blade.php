@@ -173,7 +173,7 @@
                                         $('[id="'+"{{$columnName}}"+'"]').select2({
                                             placeholder: "Please select..."
                                             , allowClear: true
-                                            , templateResult: select2FormatState
+                                            , templateResult: select2FormatOption
                                         });
                                 </script>
                             @break
@@ -193,7 +193,7 @@
                                         $('[id="'+"{{$columnName}}"+'"]').select2({
                                             placeholder: "Please select..."
                                             , allowClear: true
-                                            , templateResult: select2FormatState
+                                            , templateResult: select2FormatOption
                                         });
                                 </script>
                             @break
