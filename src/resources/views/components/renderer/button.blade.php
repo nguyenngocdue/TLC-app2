@@ -1,4 +1,4 @@
-@if($href && !$disabled) <a href="{{$href}}" target="{{$target}}"> @endif
+@if($href && !$disabled) <a id="{{$id}}_ahref" href="{{$href}}" target="{{$target}}"> @endif
 @php $innerHTML=($icon?"<i class='$icon mr-1'></i>":"").$slot;  @endphp
 <button type="{{$htmlType}}" id="{{$id}}" name="{{$name}}" value="{{$value}}" 
     title="{{$title}}" class="{{$className}}" style="{{$style}}"

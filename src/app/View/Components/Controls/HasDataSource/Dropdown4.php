@@ -43,11 +43,9 @@ class Dropdown4 extends Component
         $props = $sp['props'];
         $prop = $props["_" . $this->fieldName];
 
-        [
-            'let_user_open' => $let_user_open,
-            'let_user_clear' => $let_user_clear,
-            'let_user_choose_when_one_item' => $let_user_choose_when_one_item,
-        ] = $prop['relationships'];
+        $let_user_open = $prop['relationships']['let_user_open'] ?? false;
+        $let_user_clear = $prop['relationships']['let_user_clear'] ?? false;
+        $let_user_choose_when_one_item = $prop['relationships']['let_user_choose_when_one_item'] ?? false;
 
         $params = [
             'name' => $name,

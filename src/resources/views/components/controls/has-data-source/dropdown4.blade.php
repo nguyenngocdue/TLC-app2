@@ -17,6 +17,13 @@
         </script>
     @endif
 @else
+    @php
+        $selectedId = null;
+        $selectedArray = json_decode($selected);
+        if(sizeof($selectedArray) == 1)$selectedId = $selectedArray[0];  
+        $editHref = route("{$table}.edit", $selectedId);      
+    @endphp
+    <div class="flex">
     <select 
             id='{{$id}}' 
             {{-- letUserClear='{{$let_user_clear}}' --}}
@@ -25,6 +32,16 @@
             {{$multipleStr}} 
             {{$readOnlyStr}} 
             class='{{$classList}}'></select>
+            @if($let_user_open)                
+                <x-renderer.button 
+                    id="{{$id}}_edit_button"
+                    class="h-full"
+                    icon="fa-duotone fa-share-from-square" 
+                    href="{{$editHref}}"
+                    target="_blank"
+                    ></x-renderer.button>
+            @endif
+    </div>
 
     <script>
         $(document).ready(()=>{
@@ -54,6 +71,11 @@
             saveOnChange: {{$saveOnChange?1:0}},
             dropdownParams,
         })
-        // console.log("dropdown4 {{$name}} changed")
+        const letUserOpen = {{$let_user_open?1:0}};
+        if(letUserOpen){
+            const control = getEById("{{$id}}_edit_button_ahref")
+            const href = `/dashboard/rp_blocks/${e.target.value}/edit`
+            control.attr('href', href);
+        }
     })
 </script>
