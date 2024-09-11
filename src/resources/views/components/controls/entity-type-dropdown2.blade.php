@@ -15,8 +15,8 @@
 @else
 <div>
     <select name="{{$name}}" id="select-dropdown-{{$name}}" class="w-full">
-        @foreach($options as $option)
-        <option value="{{$option}}" @selected($value===$option)>{{Str::headline( $option)}}</option>
+        @foreach($options as $key=>$title)
+        <option value="{{$key}}" @selected($value===$key)>{{$title}}</option>
         @endforeach
     </select>
 </div>

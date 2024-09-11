@@ -3,10 +3,10 @@
 
 namespace App\View\Components\Controls\RelationshipRenderer;
 
+use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\ClassList;
 use App\Utils\Support\Entities;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 trait TraitTableColumnEditable
@@ -59,7 +59,6 @@ trait TraitTableColumnEditable
                     $newColumn['align'] = 'center';
                     break;
                 case 'status':
-                    $newColumn['cbbDataSourceObject'] = LibStatuses::getFor($tableName);
                     $newColumn['cbbDataSource'] = array_keys(LibStatuses::getFor($tableName));
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
@@ -68,8 +67,18 @@ trait TraitTableColumnEditable
                     $newColumn['align'] = 'center';
                     break;
                 case 'entity_type':
-                    $newColumn['cbbDataSourceObject'] = ['', ...array_map(fn($s) => Str::headline($s), Entities::getAllPluralNames())];
-                    $newColumn['cbbDataSource'] = ['', ...array_map(fn($s) => Str::snake($s), Entities::getAllPluralNames())];
+                    $newColumn['cbbDataSourceObject'] = ['', ...array_map(fn($s) => LibApps::getFor($s)['title'], Entities::getAllPluralNames())];
+                    $allApps = LibApps::getAll();
+                    $items = [];
+                    foreach ($allApps as $app) {
+                        $items[] = [
+                            'title' => $app['title'],
+                            'value' => $app['name'],
+                        ];
+                    }
+                    uasort($items, fn($a, $b) => strcasecmp($a['title'], $b['title']));
+                    $newColumn['cbbDataSource'] = $items;
+                    // $newColumn['cbbDataSource'] = ['', ...array_map(fn($s) => Str::snake($s), Entities::getAllPluralNames())];
                     // $newColumn['renderer'] = 'text';
                     $newColumn['renderer'] = 'dropdown';
                     $newColumn['editable'] = true;
