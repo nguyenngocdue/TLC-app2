@@ -30,6 +30,7 @@ class Dropdown2a extends Component
         $props = $sp['props'];
         $prop = $props["_" . $this->name];
         $letUserChooseWhenOneItem = ($prop['relationships']['let_user_choose_when_one_item'] ?? false) === "true";
+        $letUserOpen = ($prop['relationships']['let_user_open'] ?? false) === "true";
         $letUserClear = ($prop['relationships']['let_user_clear'] ?? false) === "true";
         // dump($letUserChooseWhenOneItem);
         if (!isset($prop['relationships']['table'])) {
@@ -54,6 +55,7 @@ class Dropdown2a extends Component
             'nameless' => $nameless,
             'action' => $this->action,
             'letUserChooseWhenOneItem' => $letUserChooseWhenOneItem,
+            'letUserOpen' => $letUserOpen,
         ];
         return view('components.controls.has-data-source.dropdown2', $params);
     }

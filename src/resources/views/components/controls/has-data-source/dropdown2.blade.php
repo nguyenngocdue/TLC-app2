@@ -3,6 +3,7 @@
 <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnly ? "readonly" : ""}} controlType='dropdown'
     allowClear={{$allowClear?'true':'false'}}
     letUserChooseWhenOneItem={{($letUserChooseWhenOneItem??false)?'true':'false'}}
+    letUserOpen={{($letUserOpen??false)?'true':'false'}}
     class='{{$classList}}'
     ></select>
 <script>
@@ -13,6 +14,7 @@
         , allowClear: {{$allowClear ?'true':'false'}}
         , action: "{{$action ?? 'create'}}"
         , letUserChooseWhenOneItem: {{($letUserChooseWhenOneItem??false) ?'true':'false'}}
+        , letUserOpen: {{($letUserOpen??false) ?'true':'false'}}
     }
     documentReadyDropdown2(params2)
     // console.log("Document ready dropdown2")

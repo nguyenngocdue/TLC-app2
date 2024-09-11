@@ -108,7 +108,9 @@ trait TableTraitApplyRender
             $batchLength = "batchLength=$batchLength";
             $rawData = ($rawData instanceof EloquentCollection || $rawData instanceof SupportCollection) ? $rawData = $rawData->pluck('id') : [$rawData];
             $rawData = json_encode($rawData);
-            $attributes = "$name $typeRender $multiple $deaf $propertyRender $rowReadOnly ";
+            $fieldName = "fieldName='" . $column['dataIndex'] . "'";
+            $attributes = "";
+            $attributes .= "$name $fieldName $typeRender $multiple $deaf $propertyRender $rowReadOnly ";
             $attributes .= " $rowIndexRender selected='$rawData' $saveOnChangeRenderer $batchLength";
             $output = "<$tagName $attributes></$tagName>";
             // Log::info($output);

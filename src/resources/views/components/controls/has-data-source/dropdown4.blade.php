@@ -17,11 +17,26 @@
         </script>
     @endif
 @else
-    <select id='{{$id}}' name='{{$name}}' {{$multipleStr}} {{$readOnlyStr}} class='{{$classList}}'></select>
+    <select 
+            id='{{$id}}' 
+            {{-- letUserClear='{{$let_user_clear}}' --}}
+            letUserOpen={{($let_user_open??false)?'true':'false'}}
+            name='{{$name}}' 
+            {{$multipleStr}} 
+            {{$readOnlyStr}} 
+            class='{{$classList}}'></select>
+
     <script>
         $(document).ready(()=>{
+            const id = '{{$id}}';
+            const table01Name = '{{$table01Name}}';
+            const selectedJson = '{!! $selected !!}';
+            const table = '{{$table}}';
+            const letUserOpen = {{$let_user_open?1:0}};
+            const letUserClear = {{$let_user_clear?1:0}};
+            const letUserChooseWhenOneItem = {{$let_user_choose_when_one_item?1:0}};
             const dropdownParams = { batchLength: {{$batchLength}}, onLoad:true};
-            const params1 = {id:'{{$id}}', table01Name: '{{$table01Name}}', selectedJson: '{!! $selected !!}', table: '{{$table}}', dropdownParams};
+            const params1 = {id, table01Name, selectedJson, table, letUserClear, letUserChooseWhenOneItem, letUserOpen, dropdownParams};
             documentReadyDropdown4(params1)
             // console.log("Document ready {{$name}}  dropdown4")
         })

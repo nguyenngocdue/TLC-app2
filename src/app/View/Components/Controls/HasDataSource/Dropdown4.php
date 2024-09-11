@@ -3,6 +3,7 @@
 namespace App\View\Components\Controls\HasDataSource;
 
 use App\Utils\ClassList;
+use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
@@ -24,6 +25,7 @@ class Dropdown4 extends Component
         private $rowIndex = null,
         private $batchLength = 1,
         private $deaf = false,
+        private $fieldName = null,
     ) {
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
@@ -35,6 +37,18 @@ class Dropdown4 extends Component
         $name = $this->multiple ? $this->name . "[]" : $this->name;
         $table = $this->tableName;
         $nameless = Str::modelPathFrom($table)::$nameless;
+
+        // dump($this->lineType);
+        $sp = SuperProps::getFor($this->lineType);
+        $props = $sp['props'];
+        $prop = $props["_" . $this->fieldName];
+
+        [
+            'let_user_open' => $let_user_open,
+            'let_user_clear' => $let_user_clear,
+            'let_user_choose_when_one_item' => $let_user_choose_when_one_item,
+        ] = $prop['relationships'];
+
         $params = [
             'name' => $name,
             'id' => $id,
@@ -52,6 +66,10 @@ class Dropdown4 extends Component
             'batchLength' => $this->batchLength,
             'nameless' => $nameless,
             'deaf' => $this->deaf,
+
+            'let_user_open' => !!$let_user_open,
+            'let_user_clear' => !!$let_user_clear,
+            'let_user_choose_when_one_item' => !! $let_user_choose_when_one_item,
         ];
         // dump($params);
         return view('components.controls.has-data-source.dropdown4', $params);
