@@ -65,6 +65,17 @@
                 @default
                     @dump($block->sql_string)
                     @dump($queriedData)
+                    <x-reports2.report-block-table 
+                        reportId="{{ $reportId }}" 
+                        :block="$block"
+                        :tableDataSource="$tableDataSource" 
+                        :headerCols="$headerCols"
+                        :secondHeaderCols="$secondHeaderCols"
+                        :currentParams="$currentParams"
+                        :queriedData="$queriedData"
+                        
+                    />
+
                     <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning" title="{{ $block->name }}">
                         Kindly select a type of renderer for block.
                     </x-renderer.button>

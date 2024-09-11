@@ -143,6 +143,18 @@ class ReportBlockTable extends Component
         }
     }
 
+    private function createColsWhenNotFoundRenderType(){
+        $defaultCols = [];
+        $firstRow = $this->tableDataSource->first();
+        $keys = is_array($firstRow) ? array_keys($firstRow) : array_keys((array) $firstRow);
+        if($keys) {
+            $defaultCols = array_map(fn($item) => [
+                'dataIndex' => $item,
+            ], $keys);
+        }
+        return $defaultCols;
+    }
+
 
     public function render()
     {
@@ -151,6 +163,8 @@ class ReportBlockTable extends Component
 
         $dataIndexToRender = array_column($this->headerCols, 'dataIndex');
         $configuredCols = $this->getConfiguredCols($columns, $dataIndexToRender);
+
+        if(!$configuredCols) $configuredCols = $this->createColsWhenNotFoundRenderType();
 
         $newTableDataSource = $this->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
 

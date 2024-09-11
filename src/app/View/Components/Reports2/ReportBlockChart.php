@@ -41,7 +41,7 @@ class ReportBlockChart extends Component
         if($fieldTransformation) {
             $options = $this->changeToJsonOptionsByTransformation($options, $queriedData, $fieldTransformation);
         } else {
-            preg_match_all('/(?<!\\\)\{\{\s*([^}]*)\s*\}\}/', $options, $matches);
+            preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $options, $matches);
             foreach (last($matches) as $key => $value) {
                 $keyInDta = trim(str_replace('$', '', $value));
                 $valueInData = $queriedData->pluck($keyInDta)->toArray();

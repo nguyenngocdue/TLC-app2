@@ -9,7 +9,8 @@ trait TraitCreateSQLReport2
     public function replaceVariableStrs($sqlStr, $params)
     {
         //Match the variable name by {{ $variableName }}
-        preg_match_all('/(?<!\\\)\{\{\s*([^}]*)\s*\}\}/', $sqlStr, $matches);
+        preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $sqlStr, $matches);
+        // dd($sqlStr, $matches);
         foreach (last($matches) as $key => $value) {
             $value = trim(str_replace('$', '', $value));
             if (isset($params[$value])) {
@@ -29,10 +30,11 @@ trait TraitCreateSQLReport2
             } else {
                 // Change the SQL String to the conrect syntax
                 // $sqlStr = str_replace("'{{" . $value . "}}'", 'null', $sqlStr);
-                $sqlStr = str_replace("{{" . $value . "}}", 'null', $sqlStr);
+                $sqlStr = str_replace("{%" . $value . "%}", 'null', $sqlStr);
             }
         }
-        $sqlStr = str_replace(["\{{", "\}}"], ["{{", "}}"], $sqlStr);
+        $sqlStr = str_replace(["\{%", "\%}"], ["{%", "%}"], $sqlStr);
+        // dd($sqlStr);
         return $sqlStr;
     }
     public function getSql($sqlString, $params)
