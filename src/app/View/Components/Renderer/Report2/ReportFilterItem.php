@@ -15,6 +15,7 @@ use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ReportFilterItem extends Component
@@ -29,7 +30,7 @@ class ReportFilterItem extends Component
     protected $YEAR_TYPE_ID = 634;
 
     protected $DEFECT_ROOT_CAUSE_TYPE_ID = 117;
-    protected $DEFECT_REPORT_TYPE_ID = 118;
+    protected $DEFECT_REPORT_TYPE_ID = 142;
     protected $INTER_SUBCON_TYPE_ID = 119;
 
 
@@ -110,27 +111,27 @@ class ReportFilterItem extends Component
             })
             ->orderBy('name')
             ->get();
-    }
-
-    private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
-    {
-        $modelClass = ModelData::initModelByField($entityType);
-        if (!$modelClass) return [];
-        $db = $modelClass::query();
-        switch($entityType){
-            case 'terms':
-                $dataIndex = $filter->data_index;
-                $filterId = 0;
-                switch ($dataIndex) {
-                    case 'defect_root_cause_id':
-                            $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
-                        break;
-                    case 'defect_report_type':
-                            $filterId = $this->DEFECT_REPORT_TYPE_ID;;
-                        break;
-                    case 'inter_subcon_id':
-                            $filterId = $this->INTER_SUBCON_TYPE_ID;;
-                        break;
+        }
+        
+        private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
+        {
+            $modelClass = ModelData::initModelByField($entityType);
+            if (!$modelClass) return [];
+            $db = $modelClass::query();
+            // Log::info($entityType);
+            switch($entityType){
+                case 'term':
+                    $filterId = 0;
+                    switch ($filter->data_index) {
+                        case 'defect_root_cause_id':
+                                $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
+                            break;
+                        case 'defect_report_type':
+                                $filterId = $this->DEFECT_REPORT_TYPE_ID;;
+                            break;
+                        case 'inter_subcon_id':
+                                $filterId = $this->INTER_SUBCON_TYPE_ID;;
+                            break;
                    
                 }
                 $db = $modelClass::query()
@@ -138,7 +139,7 @@ class ReportFilterItem extends Component
                 ->get();
                 return $db;
 
-            case 'prod_routing_links':
+            case 'prod_routing_link':
                 $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
                     ->with('getProdRoutings')
                     ->orderBy('name')
@@ -172,7 +173,7 @@ class ReportFilterItem extends Component
                     ];
                 }
                 return collect($dataSource);
-            case 'prod_routings':
+            case 'prod_routing':
                 $newDB = $db->select('id', 'name', 'description')
                     ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
                     ->with('getSubProjects')
@@ -191,10 +192,9 @@ class ReportFilterItem extends Component
  
     public function render()
     {
-        // dd($this->report);
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dump($params);
+        // dd($params);
         return view(
             'components.controls.has-data-source.dropdown2',
             $params
