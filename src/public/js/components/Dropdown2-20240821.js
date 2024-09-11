@@ -438,7 +438,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         // console.log(id, dataSource)
         dataSource = dataSource
             .filter((item) => {
-                const isNotResigned = !item.name.includes('(RESIGNED)')
+                const isNotResigned = !item.name?.includes('(RESIGNED)')
                 if (selected) {
                     const isInSelected = selected.includes(item.id)
                     return isNotResigned || isInSelected

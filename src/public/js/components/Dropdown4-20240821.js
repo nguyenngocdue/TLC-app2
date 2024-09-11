@@ -539,7 +539,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
         // console.log(id, dataSource)
         dataSource = dataSource
             .filter((item) => {
-                const isNotResigned = !item.name.includes('(RESIGNED)')
+                const isNotResigned = !item.name?.includes('(RESIGNED)')
                 if (selected) {
                     const isInSelected = selected.includes(item.id)
                     return isNotResigned || isInSelected
