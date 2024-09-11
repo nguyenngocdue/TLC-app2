@@ -119,8 +119,8 @@ class ReportFilterItem extends Component
             if (!$modelClass) return [];
             $db = $modelClass::query();
             // Log::info($entityType);
-            // dd($entityType);
-            switch($entityType){
+            $singularEntityType = Str::singular($entityType);
+            switch($singularEntityType){
                 case 'term':
                     $filterId = 0;
                     switch ($filter->data_index) {
