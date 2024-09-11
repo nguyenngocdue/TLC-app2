@@ -33,8 +33,6 @@ trait TraitReportDataAndColumn
         $sqlString = $block->sql_string;
         if ($sqlString) {
             $sql = $this->getSql($sqlString, $params);
-            // if (is_null($sql)) return collect();
-            // if (!$sql) return collect();
             $sqlData = DB::select($sql);
             $queriedData = collect($sqlData);
             $fieldTransformation = [];

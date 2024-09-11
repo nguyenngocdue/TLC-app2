@@ -77,7 +77,7 @@ class ReportBlockTable extends Component
                     }
                     if($column->row_renderer == $this->ID_ROW_RENDERER_ID) {
                         $entityType = $column->entity_type;
-                        $content = '#000.' .$value;
+                        $content = Str::makeId($value);
                         $route = Str::plural($entityType) . ".edit";
                         $hasRoute = Route::has($route);
                         if ($hasRoute) {
