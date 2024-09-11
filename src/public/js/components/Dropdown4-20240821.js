@@ -548,7 +548,7 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
                 }
             })
 
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => a.name?.localeCompare(b.name))
     }
     if (dataSource?.[0]?.order_no) {
         dataSource = dataSource.sort((a, b) => {

@@ -446,7 +446,7 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
                     return isNotResigned
                 }
             })
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .sort((a, b) => a.name?.localeCompare(b.name))
     }
     if (dataSource?.[0]?.order_no) {
         dataSource = dataSource.sort((a, b) => {
