@@ -9,6 +9,8 @@ use Illuminate\View\Component;
 class ReportBlockChart extends Component
 {
     use TraitReportDataAndColumn;
+    
+    protected $SERIES_VARIABLE = '{%series%}';
 
     public function __construct(
         private $block = null,
@@ -31,7 +33,7 @@ class ReportBlockChart extends Component
             ];
         }
         $seriesJson = json_encode($series);
-        $options = str_replace('{{series}}', $seriesJson, $options);
+        $options = str_replace($this->SERIES_VARIABLE, $seriesJson, $options);
         return $options;
     }
 
