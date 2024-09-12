@@ -120,6 +120,7 @@ class ViewAllTypeCalendar extends Component
             'userCurrentCalendar' => $userCurrentCalendar,
             'titleLegend' => 'Legend',
             'ownerId' => $ownerId,
+            'currentWorkplaceId' => $userCurrentCalendar->current_workplace,
             'nodeProjectTreeArray' => $nodeProjectTreeArray,
             'nodeTaskTreeArray' => $nodeTaskTreeArray,
             'listIdPendingApproval' => $listIdPendingApproval,

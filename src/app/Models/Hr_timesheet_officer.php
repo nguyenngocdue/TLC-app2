@@ -7,7 +7,17 @@ use App\Utils\Constant;
 
 class Hr_timesheet_officer extends ModelExtended
 {
-    protected $fillable = ['id', 'name', 'week', 'assignee_1',  'owner_id', 'status', 'total_hours'];
+    protected $fillable = [
+        'id',
+        'name',
+        'week',
+        'assignee_1',
+        'owner_id',
+        'status',
+        'total_hours',
+        'current_workplace_id',
+    ];
+
     public static $nameless = true;
     public function getNameAttribute($value)
     {
@@ -19,6 +29,7 @@ class Hr_timesheet_officer extends ModelExtended
     public static $eloquentParams = [
         "getAssignee1" => ["belongsTo", User::class, 'assignee_1'],
         "getHrTsLines" => ["hasMany", Hr_timesheet_officer_line::class, "hr_timesheet_officer_id"],
+        "getCurrentWorkplace" => ["belongsTo", Workplace::class, 'current_workplace_id'],
 
         "comment_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
     ];
@@ -40,5 +51,11 @@ class Hr_timesheet_officer extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         $relation = $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
         return $this->morphManyByFieldName($relation, __FUNCTION__, 'category');
+    }
+
+    public function getCurrentWorkplace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

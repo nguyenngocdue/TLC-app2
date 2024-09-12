@@ -48,7 +48,7 @@ function day_of_week(year, month) {
     }
     return day
 }
-function daysGenerater() {
+function generateDays() {
     let days = []
     const dayOfMonth = days_of_month()
     for (let k = 0; k < dayOfMonth.length; k++) {
@@ -64,14 +64,14 @@ function daysGenerater() {
     }
     return days
 }
-function weeksGenerater() {
+function generateWeeks() {
     let weeks = []
     const chunkSize = 7
-    const daysGenerater = this.daysGenerater()
-    for (let k = 0; k < daysGenerater.length; k++) {
+    const generateDays = this.generateDays()
+    for (let k = 0; k < generateDays.length; k++) {
         arr = []
-        for (let i = 0; i <= daysGenerater[k].length; i++) {
-            const chunk = daysGenerater[k].slice(i, i + chunkSize)
+        for (let i = 0; i <= generateDays[k].length; i++) {
+            const chunk = generateDays[k].slice(i, i + chunkSize)
             i += chunkSize - 1
             if (chunk.length > 0) {
                 arr.push(chunk)
@@ -102,7 +102,7 @@ function monthNow(month) {
 }
 function renderHtmlCalendar() {
     calendarContainer.innerHTML = ''
-    weeks = weeksGenerater()
+    weeks = generateWeeks()
     htmlRender = ''
     for (let i = 0; i < month_names.length; i++) {
         // yearCurrent = (i <= 3) ? year - 1 : year;
@@ -154,7 +154,7 @@ function renderHtmlCalendar() {
                                                 </a>
                                             </div>`
                     : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p1y-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
-                                                <a href="javascript:callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}], {caller: 'view-all-calendar'})" onclick="$(this).addClass('disabled');" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800" >
+                                                <a href="javascript:callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:${ownerId},current_workplace_id: ${currentWorkplaceId}}], {caller: 'view-all-calendar'})" onclick="$(this).addClass('disabled');" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800" >
                                                         ${htmlContentWeek}
                                                 </a>
                                             </div>`
@@ -196,7 +196,7 @@ function renderHtmlContentWeekForArrayDivide(array, month, year, routeCreate, al
                     </a>
                     `
         : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="${classHover} col-span-${lengthArr} focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p1y-2 mb-2 ${margin} dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
-                            <a href="javascript:callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:'${ownerId}'}], {caller: 'view-all-calendar'})"  onclick="$(this).addClass('disabled');" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800" >
+                            <a href="javascript:callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:${ownerId},current_workplace_id:${currentWorkplaceId} }], {caller: 'view-all-calendar'})"  onclick="$(this).addClass('disabled');" class="w-full grid grid-cols-${lengthArr} gap-1 font-semibold text-center text-gray-800" >
                                     ${htmlDays}
                             </a>
                         </div>`

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->date("week");
             $table->unsignedBigInteger('assignee_1')->nullable();
+            $table->unsignedBigInteger('current_workplace_id')->nullable();
             $table->double('total_hours', 8, 4)->nullable();
 
             $table->hasStatus();

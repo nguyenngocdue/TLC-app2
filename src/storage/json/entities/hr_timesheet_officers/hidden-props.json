@@ -15,14 +15,6 @@
         "rejected": "",
         "approved": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "true",
-        "pending_approval": "",
-        "rejected": "true",
-        "approved": ""
-    },
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
@@ -31,12 +23,36 @@
         "rejected": "",
         "approved": ""
     },
+    "_total_hours": {
+        "name": "_total_hours",
+        "column_name": "total_hours",
+        "new": "",
+        "pending_approval": "",
+        "rejected": "",
+        "approved": ""
+    },
+    "_current_workplace_id": {
+        "name": "_current_workplace_id",
+        "column_name": "current_workplace_id",
+        "new": "true",
+        "pending_approval": "true",
+        "rejected": "true",
+        "approved": "true"
+    },
     "_getHrTsLines": {
         "name": "_getHrTsLines",
         "column_name": "getHrTsLines",
         "new": "",
         "pending_approval": "",
         "rejected": "",
+        "approved": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true",
+        "pending_approval": "",
+        "rejected": "true",
         "approved": ""
     },
     "_status": {
@@ -86,13 +102,5 @@
         "pending_approval": "",
         "rejected": "",
         "approved": "true"
-    },
-    "_team_id": {
-        "name": "_team_id",
-        "column_name": "team_id",
-        "new": "",
-        "pending_approval": "",
-        "rejected": "",
-        "approved": ""
     }
 }
