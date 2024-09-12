@@ -1,3 +1,4 @@
+{{-- @dump($routeFilter) --}}
 <form action="{{$routeFilter}}" method="POST">
     @csrf
     <div class="mb-4">

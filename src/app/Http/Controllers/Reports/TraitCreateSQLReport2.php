@@ -41,6 +41,7 @@ trait TraitCreateSQLReport2
     public function getSql($sqlString, $params)
     {
         $sqlStr = $this->replaceVariableStrs($sqlString, $params);
+        // dd($sqlStr);
         return $sqlStr;
     }
 }

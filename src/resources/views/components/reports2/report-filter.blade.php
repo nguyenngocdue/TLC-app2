@@ -7,7 +7,7 @@
 <div class="no-print justify-end pb-2"></div> 
 
 @if($rp->has_time_range)
-    <div class="flex justify-end px-1 pb-2">
+    <div class="flex justify-end mr-14 pb-2">
         <x-reports2.report-absolute-time-range  :report="$rp"/>
     </div>
 @endif

@@ -115,7 +115,7 @@ class ReportAbsoluteTimeRange extends Component
             'rp' => $rp,
             'entityType' => $rp->entity_type,
             'reportType2' => $this->reportType2,
-            'routeFilter' => route('rp_filters' . '.update', $rp->id),
+            'routeFilter' => route('report_filters' . '.update', $rp->id),
             'fromDate' => $currentParams['from_date'] ?? null,
             'toDate' => $currentParams['to_date'] ?? null,
             'presets' => $presets,
