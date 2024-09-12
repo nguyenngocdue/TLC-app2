@@ -1,4 +1,4 @@
-{{-- @dd($tableColumns); --}}
+{{-- @dd($headerCols); --}}
 <x-renderer.table 
     headerTop=12 
     showNo=true 

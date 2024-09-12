@@ -61,6 +61,7 @@ class ReportBlock extends Component
             ];
             $blockDataSource[] = $blockItem;
         }
+
         return view('components.reports2.report-block', [
             'blockDataSource' => $blockDataSource,
             'reportId' => $this->report->id,

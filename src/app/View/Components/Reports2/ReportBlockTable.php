@@ -62,7 +62,6 @@ class ReportBlockTable extends Component
         $block = $this->block;
         $columns = $this->block->getLines->sortby('order_no');
         $headerCols = $this->headerCols;
-        
         $dataIndexToRender = array_column($headerCols, 'dataIndex');
         
         $reportTableColumn = ReportTableColumn::getInstance();
