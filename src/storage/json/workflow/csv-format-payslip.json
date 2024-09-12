@@ -80,8 +80,8 @@
       "hidden": ""
     },
     "ps080": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Monthly salary",
       "viet": "Lương giờ công",
@@ -90,8 +90,8 @@
       "hidden": "true"
     },
     "ps090": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Weekday OT salary",
       "viet": "Lương tăng ca ngày thường",
@@ -100,8 +100,8 @@
       "hidden": "true"
     },
     "ps100": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Weekend OT salary",
       "viet": "Lương tăng ca ngày nghỉ",
@@ -110,8 +110,8 @@
       "hidden": "true"
     },
     "ps110": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Public Holiday OT salary",
       "viet": "Lương tăng ca ngày Lễ",
@@ -120,8 +120,8 @@
       "hidden": "true"
     },
     "ps120": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Public Holiday leave hours",
       "viet": "Giờ nghỉ Lễ",
@@ -130,8 +130,8 @@
       "hidden": "true"
     },
     "ps130": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Extra leave hours",
       "viet": "Giờ nghỉ chế độ",
@@ -140,8 +140,8 @@
       "hidden": "true"
     },
     "ps140": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Annual leave hours",
       "viet": "Giờ nghỉ phép năm",
@@ -150,8 +150,8 @@
       "hidden": "true"
     },
     "ps150": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Public Holiday leave salary",
       "viet": "Lương ngày nghỉ Lễ",
@@ -160,8 +160,8 @@
       "hidden": "true"
     },
     "ps160": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Extra leave salary",
       "viet": "Lương nghỉ chế độ",
@@ -170,8 +170,8 @@
       "hidden": "true"
     },
     "ps170": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Annual leave salary",
       "viet": "Lương nghỉ phép năm",
@@ -180,8 +180,8 @@
       "hidden": "true"
     },
     "ps180": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Monthly allowance (Travelling)",
       "viet": "Phụ cấp tháng (Công tác)",
@@ -190,8 +190,8 @@
       "hidden": "true"
     },
     "ps190": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Food allowance",
       "viet": "Phụ cấp cơm",
@@ -200,8 +200,8 @@
       "hidden": ""
     },
     "ps200": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Other allowance (Deligent/Responsibility/Other)",
       "viet": "Trợ cấp/Phụ cấp khác",
@@ -230,8 +230,8 @@
       "hidden": ""
     },
     "ps230": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Safety clothing deduction",
       "viet": "Trừ BHLĐ",
@@ -240,8 +240,8 @@
       "hidden": "true"
     },
     "ps240": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Other penalties",
       "viet": "Khoản phạt khác",
@@ -380,8 +380,8 @@
       "hidden": ""
     },
     "ps330": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "ATTENDANCE RECORD",
       "viet": "CHẤM CÔNG",
@@ -410,8 +410,8 @@
       "hidden": ""
     },
     "ps_blank_030": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "",
       "viet": "",
@@ -430,8 +430,8 @@
       "hidden": ""
     },
     "ps_050": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "",
       "viet": "",
@@ -450,8 +450,8 @@
       "hidden": ""
     },
     "staff_position2": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Chức vụ",
       "viet": "Chức vụ",
@@ -460,21 +460,11 @@
       "hidden": "true"
     },
     "staff_position1": {
-      "group": "",
-      "order": "",
+      "group": "0",
+      "order": "0",
       "formular": "",
       "eng": "Position",
       "viet": "Position",
-      "unit": "",
-      "valueSize": "",
-      "hidden": "true"
-    },
-    "sraff_position2": {
-      "group": "",
-      "order": "",
-      "formular": "",
-      "eng": "Chức vụ",
-      "viet": "Chức vụ",
       "unit": "",
       "valueSize": "",
       "hidden": "true"

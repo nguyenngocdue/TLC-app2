@@ -6,14 +6,13 @@ use App\Http\Controllers\Api\v1\qaqc\ConqaArchiveRendererController;
 use App\View\Components\Renderer\ConqaArchive\ConqaArchive;
 use Illuminate\Http\Request;
 
-class WelcomeFortuneControllerConqa extends Controller
+class WelcomeFortuneConqaController extends Controller
 {
     function __construct(
         // private $exportMode = 'attachment',
         private $newLine = "\n",
         private $exportMode = 'checkpoint',
-    ) {
-    }
+    ) {}
     public function getType()
     {
         return "dashboard";
