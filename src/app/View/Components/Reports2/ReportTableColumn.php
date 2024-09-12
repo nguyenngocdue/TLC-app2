@@ -9,7 +9,6 @@ class ReportTableColumn
     use TraitReportTransformedData;
 
     private static $instance = null;
-    protected $queriedData;
     private function _construct(){
 
     }
@@ -86,7 +85,7 @@ class ReportTableColumn
         return $dataHeader;
     }
 
-    public function getDataColumnsByTransformData($queriedData, $fields, $transformedOpt){
+    public function getDataColumnsByTransformData($queriedData, $fields, $transformedOpt){        
         $firstItem = $queriedData->first();
         $columns = [];
         if ($firstItem) {
@@ -106,10 +105,10 @@ class ReportTableColumn
         return $columns;
     }
 
-    public function createColsWhenNotFoundRenderType()
+    public function createColsWhenNotFoundRenderType($queriedData)
     {
         $defaultCols = [];
-        $firstRow = $this->queriedData->first();
+        $firstRow = $queriedData->first();
         $keys = is_array($firstRow) ? array_keys($firstRow) : array_keys((array) $firstRow);
         if ($keys) $defaultCols = array_map(fn($item) => ['dataIndex' => $item,], $keys);
         return $defaultCols;

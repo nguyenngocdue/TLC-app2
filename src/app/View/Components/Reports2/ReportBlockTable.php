@@ -74,7 +74,7 @@ class ReportBlockTable extends Component
         // render default table
         if(!$configuredCols) {
             $tableDataSource = $this->queriedData;
-            $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType();
+            $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
         } 
 
         return view('components.reports2.report-block-table', [

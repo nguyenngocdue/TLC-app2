@@ -95,6 +95,7 @@ trait TraitReportCreateTableColumn
     public function createColsWhenNotFoundRenderType()
     {
         $defaultCols = [];
+        dd($this->queriedData);
         $firstRow = $this->queriedData->first();
         $keys = is_array($firstRow) ? array_keys($firstRow) : array_keys((array) $firstRow);
         if ($keys) $defaultCols = array_map(fn($item) => ['dataIndex' => $item,], $keys);
