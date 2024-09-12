@@ -4,7 +4,7 @@ namespace App\View\Components\Reports2;
 
 class ReportColumn
 {
-    private static $instance = null;
+    // private static $instance = null;
     protected $block;
     private function __construct($block)
     {
@@ -13,8 +13,8 @@ class ReportColumn
 
     public static function getInstance($block)
     {
-        if (self::$instance == null) self::$instance = new ReportColumn($block);
-        return self::$instance;
+        // if (self::$instance == null) self::$instance = new ReportColumn($block);
+        return new ReportColumn($block);
     }
 
     function defaultColumnsOnEmptyQuery()
@@ -28,7 +28,6 @@ class ReportColumn
             ];
         })
         ->toArray();
-        // dd($this->block);
         return $cols;
     }
 }
