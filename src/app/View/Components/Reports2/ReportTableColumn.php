@@ -25,10 +25,24 @@ class ReportTableColumn
         return array_unique(array_keys((array)$collection->first()));
     }
 
+    function defaultColumnsOnEmptyQuery($block)
+    {
+        $cols = $block->getLines->where('is_active', true)
+        ->select('title', 'data_index')
+        ->map(function ($item) {
+            return [
+                'title' => $item['title'] ?? $item['data_index'],
+                'dataIndex' => $item['data_index']
+            ];
+        })
+        ->toArray();
+        return $cols;
+    }
+
     public function getDataColumns($block, $queriedData)
     {
         if($queriedData->isEmpty()){
-            $columnInstance = ReportColumn::getInstance($block);
+            $columnInstance = ReportTableColumn::getInstance($block);
             $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
             return [$headerCols, []];
         } 
