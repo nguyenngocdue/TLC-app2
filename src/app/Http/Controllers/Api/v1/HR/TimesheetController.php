@@ -47,7 +47,7 @@ abstract class TimesheetController extends Controller
                 $assignee = User_discipline::findOrFail($userDisciplineId)->def_assignee;
                 $definitions = Definitions::getAllOf($this->type)['new'] ?? ['name' => '', 'new' => true];
                 array_shift($definitions);
-                $statuses = array_keys(array_filter($definitions, fn ($item) => $item));
+                $statuses = array_keys(array_filter($definitions, fn($item) => $item));
                 if ($dateStartOfWeek == $week) {
                     $timesheet = ($this->model)::create([
                         'week' => $week,
@@ -131,7 +131,7 @@ abstract class TimesheetController extends Controller
     {
         $resource = new HrTsLineUpdateResource($request);
         $data = $resource->toArray($request);
-        $data = array_filter($data, fn ($item) => $item);
+        $data = array_filter($data, fn($item) => $item);
         if (!isset($data['remark'])) $data['remark'] = ''; // if user clear old remark, force its value here
 
         try {

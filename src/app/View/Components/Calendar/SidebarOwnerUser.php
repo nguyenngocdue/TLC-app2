@@ -35,6 +35,8 @@ class SidebarOwnerUser extends Component
         $owner = $this->getSheetOwner($this->timesheetableType, $this->timesheetableId);
         // $user = json_encode($owner);
         $htmlUserRender = Blade::render("<x-renderer.avatar-user uid='$owner->id'></x-renderer.avatar-user>") ?? '';
-        return "<x-renderer.card title='TimeSheet Owner'>$htmlUserRender</x-renderer.card>";
+        $js = "<script>let sheetOwnerId=" . $owner->id . ";</script>";
+
+        return "$js<x-renderer.card title='TimeSheet Owner'>$htmlUserRender</x-renderer.card>";
     }
 }

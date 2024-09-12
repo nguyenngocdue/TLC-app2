@@ -26,7 +26,7 @@ class Hr_timesheet_officer_line extends ModelExtended
         'status',
         'lod_id',
         'prod_routing_id',
-        'user_id'
+        'user_id',
     ];
     public static $nameless = true;
     public static $statusless = true;

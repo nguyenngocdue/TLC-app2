@@ -161,6 +161,7 @@ function callApiGetEvents(id, url) {
                                         // "all_day": null,
                                         // "timesheetable_type": timesheetableType,
                                         // "timesheetable_id": timesheetableId
+                                        user_id: sheetOwnerId,
                                         hr_timesheet_officer_id: timesheetableId,
                                     }
                                     console.log('event Receive', data)
