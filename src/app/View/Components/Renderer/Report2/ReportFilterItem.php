@@ -151,10 +151,10 @@ class ReportFilterItem extends Component
                         $i->name = $item->name;
                         $i->description = $item->description;
                         $i->prod_discipline_id = $item->prod_discipline_id;
-            
                         $i->prod_routing_id = $item->getProdRoutings->pluck('id');
                         $newDB[] = $i;
                     }
+                    // dd($newDB);
                     return $newDB;
                 case 'user':
                     return collect($db->get()->map(function ($value) {
