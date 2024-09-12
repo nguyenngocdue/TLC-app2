@@ -1,0 +1,482 @@
+{
+    "ps010": {
+      "group": "1",
+      "order": "7",
+      "formular": "",
+      "eng": "Dependent Information",
+      "viet": "Thông tin người phụ thuộc",
+      "unit": "person/người",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_010": {
+      "group": "2",
+      "order": "6",
+      "formular": "ps130+ps140+ps120",
+      "eng": "Annual/Public Holiday/Other leave hours",
+      "viet": "Giờ nghỉ phép năm/nghỉ Lễ/khác",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps020": {
+      "group": "1",
+      "order": "6",
+      "formular": "",
+      "eng": "Gross Salary",
+      "viet": "Mức lương",
+      "unit": "VND",
+      "valueSize": "14",
+      "hidden": ""
+    },
+    "ps030": {
+      "group": "2",
+      "order": "2",
+      "formular": "",
+      "eng": "Standard working days",
+      "viet": "Công chuẩn",
+      "unit": "days/ngày",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps040": {
+      "group": "2",
+      "order": "4",
+      "formular": "",
+      "eng": "Regular working hours",
+      "viet": "Giờ công thường",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps050": {
+      "group": "2",
+      "order": "3",
+      "formular": "",
+      "eng": "Weekday OT hours",
+      "viet": "Giờ tăng ca ngày thường",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps060": {
+      "group": "2",
+      "order": "5",
+      "formular": "",
+      "eng": "Weekend OT hours",
+      "viet": "Giờ tăng ca ngày nghỉ",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps070": {
+      "group": "2",
+      "order": "7",
+      "formular": "",
+      "eng": "Public Holiday OT hours",
+      "viet": "Giờ tăng ca ngày Lễ",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps080": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Monthly salary",
+      "viet": "Lương giờ công",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps090": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Weekday OT salary",
+      "viet": "Lương tăng ca ngày thường",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps100": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Weekend OT salary",
+      "viet": "Lương tăng ca ngày nghỉ",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps110": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Public Holiday OT salary",
+      "viet": "Lương tăng ca ngày Lễ",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps120": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Public Holiday leave hours",
+      "viet": "Giờ nghỉ Lễ",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps130": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Extra leave hours",
+      "viet": "Giờ nghỉ chế độ",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps140": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Annual leave hours",
+      "viet": "Giờ nghỉ phép năm",
+      "unit": "hours/giờ",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps150": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Public Holiday leave salary",
+      "viet": "Lương ngày nghỉ Lễ",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps160": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Extra leave salary",
+      "viet": "Lương nghỉ chế độ",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps170": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Annual leave salary",
+      "viet": "Lương nghỉ phép năm",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps180": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Monthly allowance (Travelling)",
+      "viet": "Phụ cấp tháng (Công tác)",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps190": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Food allowance",
+      "viet": "Phụ cấp cơm",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps200": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Other allowance (Deligent/Responsibility/Other)",
+      "viet": "Trợ cấp/Phụ cấp khác",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps210": {
+      "group": "3",
+      "order": "7",
+      "formular": "",
+      "eng": "Bonus",
+      "viet": "Thưởng",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps220": {
+      "group": "3",
+      "order": "5",
+      "formular": "",
+      "eng": "Salary miscalculation/adjustment",
+      "viet": "Thiếu sót lương/Điều chỉnh lương",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps230": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Safety clothing deduction",
+      "viet": "Trừ BHLĐ",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps240": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Other penalties",
+      "viet": "Khoản phạt khác",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "ps250": {
+      "group": "3",
+      "order": "15",
+      "formular": "",
+      "eng": "Total",
+      "viet": "Tổng Thu Nhập (A)",
+      "unit": "VND",
+      "valueSize": "14",
+      "hidden": ""
+    },
+    "ps260": {
+      "group": "4",
+      "order": "6",
+      "formular": "",
+      "eng": "Advance/On behalf payments",
+      "viet": "Thu tạm ứng/Thu hộ khác",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps270": {
+      "group": "4",
+      "order": "2",
+      "formular": "",
+      "eng": "Social/Health/Unemployment insurances",
+      "viet": "BHXH/BHYT/BHTN (Tổng 10.5%)",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps280": {
+      "group": "4",
+      "order": "3",
+      "formular": "",
+      "eng": "Union fee",
+      "viet": "Phí Công Đoàn",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps290": {
+      "group": "4",
+      "order": "4",
+      "formular": "",
+      "eng": "Personal Income Tax",
+      "viet": "Thuế TNCN",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps300": {
+      "group": "4",
+      "order": "5",
+      "formular": "",
+      "eng": "PIT annual settlement (Refund +/Pay -)",
+      "viet": "Quyết toán thuế TNCN năm (Hoàn +/Thu -)",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps310": {
+      "group": "4",
+      "order": "15",
+      "formular": "",
+      "eng": "Total",
+      "viet": "Tổng Khấu Trừ (B)",
+      "unit": "VND",
+      "valueSize": "14",
+      "hidden": ""
+    },
+    "ps320": {
+      "group": "5",
+      "order": "1",
+      "formular": "",
+      "eng": "Net Income",
+      "viet": "Thực Lãnh",
+      "unit": "VND",
+      "valueSize": "18",
+      "hidden": ""
+    },
+    "ps_020": {
+      "group": "3",
+      "order": "2",
+      "formular": "ps160+ps170+ps080+ps150",
+      "eng": "Monthly Salary",
+      "viet": "Lương chính",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_030": {
+      "group": "3",
+      "order": "6",
+      "formular": "ps230+ps240",
+      "eng": "Safety clothes/Other penalties (-)",
+      "viet": "Trừ BHLĐ/Khoản phạt khác (-)",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "staff_name": {
+      "group": "1",
+      "order": "2",
+      "formular": "",
+      "eng": "Full Name",
+      "viet": "Họ Tên",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "staff_id": {
+      "group": "1",
+      "order": "4",
+      "formular": "",
+      "eng": "TLCM Code",
+      "viet": "Mã TLCM",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "staff_position": {
+      "group": "1",
+      "order": "3",
+      "formular": "staff_position1|staff_position2",
+      "eng": "Position",
+      "viet": "Chức vụ",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps330": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "ATTENDANCE RECORD",
+      "viet": "CHẤM CÔNG",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_blank_010": {
+      "group": "1",
+      "order": "15",
+      "formular": "",
+      "eng": "",
+      "viet": "",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_blank_020": {
+      "group": "4",
+      "order": "14",
+      "formular": "",
+      "eng": " -",
+      "viet": " -",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_blank_030": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "",
+      "viet": "",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_040": {
+      "group": "3",
+      "order": "4",
+      "formular": "ps190+ps200+ps180",
+      "eng": "Allowance",
+      "viet": "Trợ cấp/Phụ cấp",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_050": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "",
+      "viet": "",
+      "unit": "",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "ps_060": {
+      "group": "3",
+      "order": "3",
+      "formular": "ps090+ps100+ps110",
+      "eng": "OT salary",
+      "viet": "Lương tăng ca",
+      "unit": "VND",
+      "valueSize": "",
+      "hidden": ""
+    },
+    "staff_position2": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Chức vụ",
+      "viet": "Chức vụ",
+      "unit": "",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "staff_position1": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Position",
+      "viet": "Position",
+      "unit": "",
+      "valueSize": "",
+      "hidden": "true"
+    },
+    "sraff_position2": {
+      "group": "",
+      "order": "",
+      "formular": "",
+      "eng": "Chức vụ",
+      "viet": "Chức vụ",
+      "unit": "",
+      "valueSize": "",
+      "hidden": "true"
+    }
+  }

@@ -354,7 +354,7 @@
         "name": "_vendor_id",
         "column_name": "vendor_id",
         "label": "",
-        "validation": "required",
+        "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
