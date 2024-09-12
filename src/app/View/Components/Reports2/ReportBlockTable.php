@@ -47,10 +47,12 @@ class ReportBlockTable extends Component
                                             :route="$route" 
                                             :queriedData="$queriedData"
                                             :configuredCols="$configuredCols"
+                                            :blockTitle="$blockTitle"
                                             />', [
                     'route' => $routeExportExcel,
                     'queriedData' => $queriedData,
-                    'configuredCols' => $configuredCols
+                    'configuredCols' => $configuredCols,
+                    'blockTitle' => $this->block->title ? : $this->block->name
                 ]);
             default:
                 break;

@@ -5,13 +5,9 @@ namespace App\Http\Controllers\Reports2;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UpdateUserSettings;
 use Illuminate\Http\Request;
-
-
-
 class Rp_reportController extends Controller
 {
 
-   
     public function updateFilters(Request $request)
     {
         (new UpdateUserSettings())($request);
@@ -32,8 +28,9 @@ class Rp_reportController extends Controller
         $columnNames = array_map(fn($col) => $col['title'] ?? $col['name'], $configuredCols);
 
         $rows = array_map(fn($data) => array_map(fn($key) => $data[$key] ?? '', $columnKeys), $queriedData);
+        // dd($input);
 
-        $fileName = $input['entity_type'].'_'.date('d-m-Y').'.csv';
+        $fileName = $input['block_title'].'_'.date('d-m-Y').'.csv';
         $headers = [
             "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",

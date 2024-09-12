@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Smalot\PdfParser\Parser;
 
-class WelcomeFortuneController extends Controller
+class WelcomeFortunePdfExtractController extends Controller
 {
 
     function getType()
