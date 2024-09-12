@@ -135,59 +135,46 @@ class ReportFilterItem extends Component
                             break;
                    
                 }
-                $db = $modelClass::query()
-                ->where('field_id', $filterId)
-                ->get();
+                $db->where('field_id', $filterId)->get();
                 return $db;
 
-            case 'prod_routing_link':
-                $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
-                    ->with('getProdRoutings')
-                    ->orderBy('name')
-                    ->get();
-        
-                $newDB = [];
-                foreach ($db as $item) {
-                    $i = (object)[];
-                    $i->id = $item->id;
-                    $i->name = $item->name;
-                    $i->description = $item->description;
-                    $i->prod_discipline_id = $item->prod_discipline_id;
-        
-                    $i->prod_routing_id = $item->getProdRoutings->pluck('id');
-                    $newDB[] = $i;
-                }
-                return $newDB;
-            case 'user':
-                $treeData = $this->getDataByCompanyTree();
-                $dataSource = [];
-                $isAdmin = CurrentUser::isAdmin();
-                foreach ($treeData as $value) {
-                    $name = $value->resigned ? $value->name0 . ' (RESIGNED)' : $value->name0;
-                    $name = $value->show_on_beta ? $name . ' (BETA)' : $name;
-                    $addId = $isAdmin ? '(#' . $value->id . ')' : '';
-                    $dataSource[] = [
-                        'id' => $value->id,
-                        'name' => $name . ' ' . $addId,
-                        'department_id' => $value->department,
-                        'workplace_id' => $value->workplace
-                    ];
-                }
-                return collect($dataSource);
-            case 'prod_routing':
-                $newDB = $db->select('id', 'name', 'description')
-                    ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                    ->with('getSubProjects')
-                    ->with('getScreensShowMeOn')
-                    ->orderBy('name')
-                    ->get();
-                foreach ($newDB as &$item) {
-                    $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
-                }
-                return $newDB;
+                case 'prod_routing_link':
+                    $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
+                        ->with('getProdRoutings')
+                        ->orderBy('name')
+                        ->get();
+            
+                    $newDB = [];
+                    foreach ($db as $item) {
+                        $i = (object)[];
+                        $i->id = $item->id;
+                        $i->name = $item->name;
+                        $i->description = $item->description;
+                        $i->prod_discipline_id = $item->prod_discipline_id;
+            
+                        $i->prod_routing_id = $item->getProdRoutings->pluck('id');
+                        $newDB[] = $i;
+                    }
+                    return $newDB;
+                case 'user':
+                    return collect($db->get()->map(function ($value) {
+                        return $value->toArray();
+                    }));
+                case 'prod_routing':
+                    $newDB = $db->select('id', 'name', 'description')
+                        ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
+                        ->with('getSubProjects')
+                        ->with('getScreensShowMeOn')
+                        ->orderBy('name')
+                        ->get();
+                    foreach ($newDB as &$item) {
+                        $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
+                    }
+                    return $newDB;
+                default:
+                    $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
+                    foreach ($triggerNames as $triggerName) return $this->getEntityData($db, $isBlackList, $bWListIds, $triggerName);
             }
-        $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
-        foreach ($triggerNames as $triggerName) return $this->getEntityData($db, $isBlackList, $bWListIds, $triggerName);
     }
 
  
