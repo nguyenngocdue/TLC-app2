@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class ReportBlockParagraph extends Component
 {
-    use TraitReportDataAndColumn;
+    use TraitReportQueriedData;
     use TraitCreateSQLReport2;
     use TraitReportFilter;
 

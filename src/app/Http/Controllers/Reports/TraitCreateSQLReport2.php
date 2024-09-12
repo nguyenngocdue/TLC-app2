@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Reports;
 
+use App\View\Components\Reports2\TraitReportFormatString;
+
 trait TraitCreateSQLReport2
 {
     use TraitGenerateValuesFromParamsReport;
+    use TraitReportFormatString;
 
     public function replaceVariableStrs($sqlStr, $params)
     {
-        //Match the variable name by {{ $variableName }}
-        preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $sqlStr, $matches);
-        // dd($sqlStr, $matches);
-        foreach (last($matches) as $key => $value) {
+        $parsedVariables = $this->parseVariables($sqlStr);
+        foreach (last($parsedVariables) as $key => $value) {
             $value = trim(str_replace('$', '', $value));
             if (isset($params[$value])) {
                 $valOfParam = $params[$value];
@@ -25,11 +26,10 @@ trait TraitCreateSQLReport2
                         $tempStr = trim($str, ",");
                     }
                 }
-                $searchStr = head($matches)[$key];
+                $searchStr = head($parsedVariables)[$key];
                 $sqlStr = str_replace($searchStr, $tempStr, $sqlStr);
             } else {
-                // Change the SQL String to the conrect syntax
-                // $sqlStr = str_replace("'{{" . $value . "}}'", 'null', $sqlStr);
+                // Change the SQL String to the correct syntax
                 $sqlStr = str_replace("{%" . $value . "%}", 'null', $sqlStr);
                 $sqlStr = str_replace("'null'", 'null', $sqlStr);
             }
@@ -37,10 +37,10 @@ trait TraitCreateSQLReport2
         $sqlStr = str_replace(["\{%", "\%}"], ["{%", "%}"], $sqlStr);
         return $sqlStr;
     }
+
     public function getSql($sqlString, $params)
     {
         $sqlStr = $this->replaceVariableStrs($sqlString, $params);
-        // dd($sqlStr);
         return $sqlStr;
     }
 }

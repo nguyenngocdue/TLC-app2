@@ -21,9 +21,8 @@ class ReportFilter extends Component
         $rpFilterLinks = $rp->getRpFilterLinks;
 
         $currentParams = $this->currentParamsReport();
-
         $paramsError = $this->validateParams($rpFilters, $currentParams);
-
+        
         return view('components.reports2.report-filter', [
             'entityType' => $rp->entity_type,
             'reportType2' =>  $this->reportType2,
