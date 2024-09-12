@@ -7,6 +7,7 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\ClassList;
 use App\Utils\Support\Entities;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait TraitTableColumnEditable
@@ -69,11 +70,12 @@ trait TraitTableColumnEditable
                 case 'entity_type':
                     $newColumn['cbbDataSourceObject'] = ['', ...array_map(fn($s) => LibApps::getFor($s)['title'], Entities::getAllPluralNames())];
                     $allApps = LibApps::getAll();
+                    // Log::info($allApps);
                     $items = [];
                     foreach ($allApps as $app) {
                         $items[] = [
                             'title' => $app['title'],
-                            'value' => $app['name'],
+                            'value' => Str::plural($app['name']),
                         ];
                     }
                     uasort($items, fn($a, $b) => strcasecmp($a['title'], $b['title']));
