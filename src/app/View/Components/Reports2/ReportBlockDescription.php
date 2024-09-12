@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 
 class ReportBlockDescription extends Component
 {
-    use TraitReportDataAndColumn;
+    use TraitReportQueriedData;
     public function __construct(
         private $block = null,
     ) {}

@@ -1,5 +1,5 @@
 @php
-    $TABLE_TYPE_ID = 641;
+    //$TABLE_TYPE_ID = 641;
     $CHART_TYPE_ID = 642;
     $PARAGRAPH_TYPE_ID = 643;
     $DESCRIPTION_TYPE_ID = 644;
@@ -29,19 +29,6 @@
 
             <x-renderer.report2.title-description-block :block="$block" />
             @switch($rendererType)
-                @case($TABLE_TYPE_ID)
-                    <x-reports2.report-block-table 
-                        reportId="{{ $reportId }}" 
-                        :block="$block"
-                        :tableDataSource="$tableDataSource" 
-                        :headerCols="$headerCols"
-                        :secondHeaderCols="$secondHeaderCols"
-                        :currentParams="$currentParams"
-                        :queriedData="$queriedData"
-                        
-                        />
-                @break
-
                 @case($CHART_TYPE_ID)
                     @php
                         $fieldTransformation = $blockItem['fieldTransformation'];
@@ -52,15 +39,15 @@
                         :queriedData="$queriedData"
                         :fieldTransformation="$fieldTransformation"
                         :headerCols="$headerCols" />
-                @break
+                    @break
 
                 @case($PARAGRAPH_TYPE_ID)
                     <x-reports2.report-block-paragraph :block="$block" reportId="{{ $reportId }}" :currentParams="$currentParams"/>
-                @break
+                    @break
 
                 @case($DESCRIPTION_TYPE_ID)
                     <x-reports2.report-block-description :block="$block" reportId="{{ $reportId }}" />
-                @break
+                    @break
 
                 @default
                     {{-- @dump($block->sql_string) --}}
@@ -74,11 +61,12 @@
                         :currentParams="$currentParams"
                         :queriedData="$queriedData"
                         
-                    />
-                    <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning" title="{{ $block->name }}">
-                        Kindly select a type of renderer for block.
-                    </x-renderer.button>
-                @break
+                        />
+                    @if(!$block->renderer_type)
+                        <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning" title="{{ $block->name }}">
+                            Kindly select a type of renderer for block.
+                        </x-renderer.button>
+                    @endif
             @endswitch
 
         </div>

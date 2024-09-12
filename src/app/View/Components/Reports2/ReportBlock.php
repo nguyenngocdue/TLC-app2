@@ -9,8 +9,10 @@ use Illuminate\View\Component;
 
 class ReportBlock extends Component
 {
-    use TraitReportDataAndColumn;
+    use TraitReportQueriedData;
     use TraitReportFilter;
+    // use TraitReportCreateTableColumn;
+    
     public function __construct(
         private $report,
         private $blockDetails = [],
@@ -44,7 +46,8 @@ class ReportBlock extends Component
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
-            [$headerCols, $secondHeaderCols] = $this->getDataColumns($block, $queriedData);
+            $reportTableColumn = ReportTableColumn::getInstance();
+            [$headerCols, $secondHeaderCols] = $reportTableColumn->getDataColumns($block, $queriedData);
             
             $blockItem = [
                 'colSpan' => $item->col_span,
@@ -58,6 +61,7 @@ class ReportBlock extends Component
             ];
             $blockDataSource[] = $blockItem;
         }
+
         return view('components.reports2.report-block', [
             'blockDataSource' => $blockDataSource,
             'reportId' => $this->report->id,

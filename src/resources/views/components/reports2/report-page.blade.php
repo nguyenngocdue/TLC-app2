@@ -1,10 +1,22 @@
 @php
-//@dump($layoutStyle)
+    $isAdmin = App\Utils\Support\CurrentUser::isAdmin();
 @endphp
+
 
 <div class="flex justify-center">
     <div class=" {{$layoutStyle}} py-4" style="{{ $layoutStyle }}">
         <div class=" w-full items-center bg-white p-0 flex flex-col justify-between" >
+            {{-- Show Setting Reports --}}
+            @if ($isAdmin)
+                <div class="no-print absolute">
+                    <a title='Edit Mode' class="block p-2" href="{{ route('rp_reports.edit', $report->id) }}" target="blank" >
+                        <span class="inline-flex items-center rounded-md bg-purple-50 px-2   py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
+                            <i class="fa-solid fa-gear"></i>
+                        </span>
+                    </a>
+                </div>
+            @endif
+
             <!-- Head section with a border -->
                 @switch($letterHeadId)
                     @case (1)

@@ -17,10 +17,10 @@ class UserSettingReport2
     }
     public static function getInstance($reportType2)
     {
-        if (self::$instance == null) {
-            self::$instance = new UserSettingReport2($reportType2);
-        }
-        return self::$instance;
+        // if (self::$instance == null) {
+        //     self::$instance = new UserSettingReport2($reportType2);
+        // }
+        return new UserSettingReport2($reportType2);
     }
 
     function getStoredFilterKeyUserSetting($rpId, $rpLinkId = null)

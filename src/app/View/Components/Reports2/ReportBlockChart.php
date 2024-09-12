@@ -2,13 +2,12 @@
 
 namespace App\View\Components\Reports2;
 
-use App\View\Components\Reports2\Charts\TraitTransformationData;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class ReportBlockChart extends Component
 {
-    use TraitReportDataAndColumn;
+    use TraitReportQueriedData;
     
     protected $SERIES_VARIABLE = '{%series%}';
 
@@ -37,24 +36,23 @@ class ReportBlockChart extends Component
         return $options;
     }
 
-    private function changeToJsonOptions(string $options, $queriedData)
+    private function changeToJsonOptions($options, $queriedData)
     {
         $fieldTransformation = $this->fieldTransformation;
         if($fieldTransformation) {
             $options = $this->changeToJsonOptionsByTransformation($options, $queriedData, $fieldTransformation);
         } else {
-            preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $options, $matches);
-            foreach (last($matches) as $key => $value) {
+             $parsedVariables = $this->parseVariables($options);
+            foreach (last($parsedVariables) as $key => $value) {
                 $keyInDta = trim(str_replace('$', '', $value));
                 $valueInData = $queriedData->pluck($keyInDta)->toArray();
                 $valueInData = '['. implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)) . ']';
-                $firstMatches = reset($matches);
+                $firstMatches = reset($parsedVariables);
                 $keyInOptions = $firstMatches[$key];
                 $options = str_replace($keyInOptions, $valueInData, $options);
             }
         }
         $jsonOptions = json_decode($options);
-        // dump($options, $jsonOptions);
         return $jsonOptions;
     }
 
