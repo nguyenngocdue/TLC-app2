@@ -8,6 +8,7 @@
             <input type="hidden" name="entity_type" value="{{$entityType}}">
             <input type="hidden" name="entity_type2" value="{{$reportType2}}">
             <input type="hidden" name="report_id" value="{{$rp->id}}">
+            <input type="hidden" name="time_zone" value="{{$timeZone}}">
             <input type="hidden" id="preset_title" name="preset_title" value="Time Range">
             <ul class="py-1 text-gray-700" id="quickRangeList">
                     <!-- New time frames -->

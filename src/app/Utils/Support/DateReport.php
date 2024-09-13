@@ -355,11 +355,16 @@ class DateReport
     }
 
     public static function convertToTimezone($dateString, $utcOffset) {
-        $date = DateTime::createFromFormat('d-m-Y H:i:s', $dateString);
+        $type = 'd-m-Y H:i:s';
+        $date = DateTime::createFromFormat($type, $dateString);
+        if(!$date) {
+            $type = 'Y-m-d H:i:s';
+            $date = DateTime::createFromFormat($type, $dateString);
+        } 
         if (!$date) return "Invalid date format";
         $timezoneString = sprintf("GMT%+d", $utcOffset);
         $targetTimezone = new DateTimeZone($timezoneString);
         $date->setTimezone($targetTimezone);
-        return $date->format('d-m-Y H:i:s');
+        return $date->format($type);
     }
 }
