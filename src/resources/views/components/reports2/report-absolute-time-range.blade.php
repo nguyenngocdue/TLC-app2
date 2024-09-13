@@ -3,7 +3,7 @@
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
         <i class="fa-solid fa-clock"></i>
         @php
-            $timeTitle = $presetTitle == 'Time Range' ? $fromDate." <i class='fa-solid fa-arrow-right'></i> ".$toDate : $presetTitle;
+            $timeTitle = $presetTitle == 'Time Range' ? $presetTitle : $fromDate." <i class='fa-solid fa-arrow-right'></i> ".$toDate;
         @endphp
 
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
@@ -22,7 +22,7 @@
     </button>
 
     <!-- Dropdown Content (Initially Hidden) -->
-    <div id="dropdownContent" class="hidden absolute z-10 mt-1 p-4 bg-white rounded-lg shadow-lg border border-gray-300 w-[500px] transform -translate-x-full left-16">
+    <div id="dropdownContent" class="hidden absolute z-20 mt-1 p-4 bg-white rounded-lg shadow-lg border border-gray-300 w-[500px] transform -translate-x-full left-16">
         <!-- Container for two-column layout -->
         <div class="grid grid-cols-2 border-b">
             <!-- Left column: From-To fields -->
