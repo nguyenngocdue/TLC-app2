@@ -28,7 +28,7 @@
     const timeBreaks = @json($timeBreaks);
     const hiddenCalendarHeader = @json($hiddenCalendarHeader);
 </script>
-<script src="{{ asset('js/components/FullCalendarEdit-20240828b.js') }}"></script>
+<script src="{{ asset('js/components/FullCalendarEdit-20240913.js') }}"></script>
 <style type="text/css">
     .fc-event-main {
         overflow: hidden;
