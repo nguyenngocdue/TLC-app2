@@ -3,6 +3,7 @@
 namespace App\Providers\Macro;
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Models\Act_currency_xr;
 use App\Models\Project;
 use App\Models\Sub_project;
 use Illuminate\Support\Facades\Log;
@@ -47,21 +48,23 @@ Str::macro('markDocId', function ($dataSource, $type = null) {
         switch ($nameColumnDocIDFormat) {
             case 'project_id':
                 $name = StrDb::getNameByIdOf(Project::class, $dataSource, 'project_id');
-                // $name = Project::find($dataSource['project_id'])->name ?? $dataSource['project_id'] ?? '';
+                $result = [$organizationName, $name, $entityNickName, sprintf('%04d', $docId)];
                 break;
             case 'sub_project_id':
                 $name = StrDb::getNameByIdOf(Sub_project::class, $dataSource, 'sub_project_id');
-                // $name = Sub_project::find($dataSource['sub_project_id'])->name ?? $dataSource['sub_project_id'] ?? '';
+                $result = [$organizationName, $name, $entityNickName, sprintf('%04d', $docId)];
+                break;
+            case 'rate_exchange_month_id':
+                $monthId = $dataSource['rate_exchange_month_id'];
+                // Log::info($dataSource);
+                $name = Act_currency_xr::findFromCache($monthId)->name;
+                $result = [$entityNickName, $name, sprintf('%04d', $docId)];
                 break;
             default:
+                $name = "?$nameColumnDocIDFormat?";
+                $result = [$organizationName, $name, $entityNickName, sprintf('%04d', $docId)];
                 break;
         }
-        $result = [
-            $organizationName,
-            $name,
-            $entityNickName,
-            sprintf('%04d', $docId)
-        ];
         $docIdName = implode('-', $result);
     }
     return $docIdName;

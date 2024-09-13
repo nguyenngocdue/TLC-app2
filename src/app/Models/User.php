@@ -80,6 +80,7 @@ class User extends ModelExtended implements
         "seniority_level",
         "show_on_org_chart",
         "ts_proxy_approver_id",
+        "time_zone",
 
         "unsubscribe_ts_weekly_reminder_for_staff",
         "use_ts_for_payroll",

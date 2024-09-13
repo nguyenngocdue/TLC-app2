@@ -2,10 +2,9 @@
 
 namespace App\View\Components\Formula;
 
-use App\Helpers\Helper;
 use App\Http\Controllers\Workflow\LibApps;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class All_DocId
@@ -17,7 +16,8 @@ class All_DocId
             toastr()->warning('Please set value "Doc Id Format Column" in ManageApps', 'Warning Settings Formula');
         }
         $tableName = Str::plural($type);
-        $maxDocID = DB::table($tableName)->where($nameColumnDocIDFormat, $item[$nameColumnDocIDFormat])->max('doc_id');
+        $query = DB::table($tableName)->where($nameColumnDocIDFormat, $item[$nameColumnDocIDFormat]);
+        $maxDocID = $query->max('doc_id');
         $result = $maxDocID + 1;
         return $result;
     }

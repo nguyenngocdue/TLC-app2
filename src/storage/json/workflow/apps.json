@@ -5,10 +5,10 @@
         "package": "finance",
         "sub_package": "accounting",
         "title": "Advance Requests",
-        "nickname": "aar",
+        "nickname": "ta",
         "tutorial_link": null,
         "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
-        "doc_id_format_column": null,
+        "doc_id_format_column": "rate_exchange_month_id",
         "status": null,
         "edit_renderer": null,
         "show_renderer": null

@@ -20,6 +20,7 @@ class Act_advance_req extends ModelExtended
         "advance_amount_word",
         "assignee_1",
         "owner_id",
+        "doc_id",
 
         "rate_exchange_month_id",
         "counter_currency_id",
