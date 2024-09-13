@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use DateTime;
+use DateTimeZone;
 use Exception;
 
 class DateReport
@@ -351,5 +352,14 @@ class DateReport
         $utcOffset = $timezoneData['utc_offset'];
         $timeAsNumber = DateReport::convertOffsetToNumber($utcOffset);
         return $timeAsNumber;
+    }
+
+    public static function convertToTimezone($dateString, $utcOffset) {
+        $date = DateTime::createFromFormat('d-m-Y H:i:s', $dateString);
+        if (!$date) return "Invalid date format";
+        $timezoneString = sprintf("GMT%+d", $utcOffset);
+        $targetTimezone = new DateTimeZone($timezoneString);
+        $date->setTimezone($targetTimezone);
+        return $date->format('d-m-Y H:i:s');
     }
 }

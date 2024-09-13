@@ -3,6 +3,9 @@
 namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\User;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\HrefReport;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
@@ -56,7 +59,7 @@ class ReportTableRow
                             $cellClass = 'text-' .$statusData['text_color'];
                         }
                     }
-                    if($rowRenderer == $this->ID_ROW_RENDERER_ID) {
+                    elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) {
                         $entityType = $column->entity_type;
                         $content = Str::makeId($value);
                         $route = Str::plural($entityType) . ".edit";
@@ -70,7 +73,12 @@ class ReportTableRow
                             $cellClass = 'text-red-600';
                         }
                     }
-                    if($rowRenderer == $this->ID_ROW_RENDERER_LINK && $href) $cellClass = 'text-blue-600';
+                    elseif($rowRenderer == $this->ROW_RENDERER_LINK_ID && $href) $cellClass = 'text-blue-600';
+                    elseif($rowRenderer == $this->ROW_RENDERER_DATETIME_ID) {
+                        $timeZoneNumber = User::find(CurrentUser::id())->time_zone;
+                        $content = DateReport::convertToTimezone($value, $timeZoneNumber);
+                    }
+
                     $newValue = (object)[
                         'value' => $content,
                         'cell_href' => $href,
