@@ -382,21 +382,23 @@ class UpdateUserSettings extends Controller
             $inputValue['to_date'] = trim($toDate);
             unset($inputValue['preset_1']);
         }
+        $inputValue = $this->updateFromTimeToTime($inputValue);
         return $inputValue;
     }
 
     private function updateFromTimeToTime($paramsInUser) {
-        $timezone = $paramsInUser['time_zone'];
-        $timeAsNumber = DateReport::getUtcOffset($timezone);
-        // Create a DateTime object representing the current time
-        $toDate = new DateTime();
-        // Modify the DateTime object by adding the offset in hours
-        $toDate->modify("{$timeAsNumber} hours");
-        // Clone $toDate to create $fromDate (if you need them to be identical initially)
-        $fromDate = clone $toDate;
-        // Format and store the dates in the $paramsInUser array
-        $paramsInUser['from_date'] = $fromDate->format('Y-m-d H:i:s');
-        $paramsInUser['to_date'] = $toDate->format('Y-m-d H:i:s');
+        $fromDate = $paramsInUser['from_date'] ?? null;
+        $toDate = $paramsInUser['to_date'] ?? null;
+        $timeZone = $paramsInUser['time_zone'] ?? null;
+        if ($timeZone){
+            $timeAsNumber = -1*DateReport::getUtcOffset($timeZone);
+            if ($fromDate) {
+                $paramsInUser['from_date'] = DateReport::convertToTimezone($fromDate, $timeAsNumber);
+            }
+            if ($toDate) {
+                $paramsInUser['to_date'] = DateReport::convertToTimezone($toDate, $timeAsNumber);
+            }
+        }
         // dd($paramsInUser);
         return $paramsInUser;
     }
@@ -410,7 +412,7 @@ class UpdateUserSettings extends Controller
 
         // when select "Search Quick Ranges"
         if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updatePresetFilter"){
-           $inputValue = $this->updatePresetFilter($inputValue);
+            $inputValue = $this->updatePresetFilter($inputValue);
         }
 
         $filters = $this->getFilterReport2($inputValue);
@@ -432,8 +434,10 @@ class UpdateUserSettings extends Controller
             };
         
             $paramToUpdate = $paramsInUser;
-        } else {
-            $paramToUpdate = $filters;
+        } else $paramToUpdate = $filters;
+
+        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "absolute_time_range") {
+            $paramToUpdate = $this->updateFromTimeToTime($paramToUpdate);
         }
         $settings[$entityType][$reportType2][$storedFilterKey] = $paramToUpdate;
         return $settings;

@@ -103,6 +103,23 @@ class ReportAbsoluteTimeRange extends Component
         ];
         return $presets;
     }
+
+    private function createFromDateToDateForHTML($currentParams){
+        $fromDate = $currentParams['from_date'] ?? null;
+        $toDate = $currentParams['to_date'] ?? null;
+        $timeZone = $currentParams['time_zone'] ?? null;
+        if ($timeZone){
+            $timeAsNumber = DateReport::getUtcOffset($timeZone);
+            if ($fromDate) {
+                $fromDate = DateReport::convertToTimezone($fromDate, $timeAsNumber);
+            }
+            if ($toDate) {
+                $toDate = DateReport::convertToTimezone($toDate, $timeAsNumber);
+            }
+        }
+        return [$fromDate, $toDate];
+    }
+
         
     public function render()
     {
@@ -110,14 +127,17 @@ class ReportAbsoluteTimeRange extends Component
         $currentParams = $this->currentParamsReport();
         $presets = $this->createPresets(); 
         $timezoneData = DateReport::getTimeZones();
+
+        [$fromDate, $toDate] = $this->createFromDateToDateForHTML($currentParams);
+
         return view('components.reports2.report-absolute-time-range', 
         [
             'rp' => $rp,
             'entityType' => $rp->entity_type,
             'reportType2' => $this->reportType2,
             'routeFilter' => route('report_filters' . '.update', $rp->id),
-            'fromDate' => $currentParams['from_date'] ?? null,
-            'toDate' => $currentParams['to_date'] ?? null,
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
             'presets' => $presets,
             'presetTitle' => $currentParams['preset_title'],
             'timezoneData' => $timezoneData,

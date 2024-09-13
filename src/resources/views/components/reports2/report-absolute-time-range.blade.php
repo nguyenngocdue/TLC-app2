@@ -3,9 +3,10 @@
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
         <i class="fa-solid fa-clock"></i>
         @php
-            $timeTitle = $presetTitle == 'Time Range' ? $fromDate.' - '.$toDate : $presetTitle;
+            $timeTitle = $presetTitle == 'Time Range' ? $fromDate." <i class='fa-solid fa-arrow-right'></i> ".$toDate : $presetTitle;
         @endphp
-        <span id="timeRangeShow" class="ml-2">{{$timeTitle}}</span>
+
+        <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
         <i class="px-2 fa-solid fa-solid fa-chevron-down "></i>
 
         <!-- Tooltip -->

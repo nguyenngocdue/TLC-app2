@@ -1,4 +1,4 @@
-{{-- @dump($routeFilter) --}}
+{{-- @dump($timeZone)U --}}
 <form action="{{$routeFilter}}" method="POST">
     @csrf
     <div class="mb-4">
@@ -7,6 +7,7 @@
             <div class="relative">
                 <label class="block text-sm font-medium text-gray-700">From</label>
                 <input type="hidden" name='action' value="updateReport2">
+                <input type="hidden" name='time_zone' value="{{$timeZone}}">
                 <input type="hidden" name='entity_type' value="{{$entityType}}">
                 <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                 <input type="hidden" name='report_id' value="{{$rp->id}}">
