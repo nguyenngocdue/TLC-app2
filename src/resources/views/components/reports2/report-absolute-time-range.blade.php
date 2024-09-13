@@ -56,19 +56,20 @@
 
 <!-- JavaScript to toggle dropdown visibility -->
 <script>
+
+        document.addEventListener('click', function(event) {
+            var dropdownContent = document.getElementById('dropdownContent');
+            var dropdownButton = document.getElementById('dropdownButton');
+            // Check if the clicked element is not inside the dropdown content or the button
+            if (!dropdownContent.contains(event.target) && !dropdownButton.contains(event.target)) {
+                // Hide the dropdown if clicked outside
+                dropdownContent.classList.add('hidden');
+            }
+        });
+
     document.getElementById('dropdownButton').addEventListener('click', function() {
         var dropdownContent = document.getElementById('dropdownContent');
         dropdownContent.classList.toggle('hidden');
-    });
-
-     document.addEventListener('click', function(event) {
-        var dropdownContent = document.getElementById('dropdownContent');
-        var dropdownButton = document.getElementById('dropdownButton');
-        var calendar = document.getElementById('calendar');
-        // Check if the clicked element is neither the button nor a descendant of the dropdown content
-        if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target) && !calendar) {
-            dropdownContent.classList.add('hidden');
-        }
     });
 
 </script>
