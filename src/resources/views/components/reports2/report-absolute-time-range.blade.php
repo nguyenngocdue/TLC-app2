@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
     $('#timezone-select').select2({
-        placeholder: 'Type to search (country, city, arrbeviation)',
+        placeholder: 'Type to search time zone',
         allowClear: false,
     });
 
