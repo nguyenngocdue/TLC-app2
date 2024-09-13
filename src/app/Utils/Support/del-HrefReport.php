@@ -2,6 +2,7 @@
 
 namespace App\Utils\Support;
 
+use App\View\Components\Reports2\TraitReportFormatString;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -9,18 +10,12 @@ use Illuminate\Support\Facades\Route;
 class HrefReport
 {
 
-    // private static function extractRouteParts($routeString)
-    // {
-    //     preg_match('/route\(([^,]+),\s*(\d+)\)/', $routeString, $matches);
-    //     return [
-    //         trim($matches[1], " \t\n\r\0\x0B'\""), $matches[2]
-    //     ];
-    // }
-
-    public static function createDataHrefForRow($column, $dataLine)
+    use TraitReportFormatString;
+    public function createDataHrefForRow($column, $dataLine)
     {
         $rowHrefFn = $column->row_href_fn;
-        $allVariables = RegexReport::getAllVariables($rowHrefFn);
+        $string = $this->formatReportHref($rowHrefFn, $dataLine);
+
         [$variables, $fields]  = $allVariables;
 
         $result = array_combine(

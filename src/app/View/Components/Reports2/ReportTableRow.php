@@ -10,7 +10,9 @@ use Illuminate\Support\Str;
 
 class ReportTableRow
 {
+    
     use TraitReportTableContent;
+    use TraitReportFormatString;
 
     private static $instance = null;
     private function _construct(){
@@ -40,14 +42,13 @@ class ReportTableRow
             foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $configuredCols)) {
                     $column = $configuredCols[$k2];
-                    $href = HrefReport::createDataHrefForRow($column, $dataLine);
+                    $href = ($x = $column->row_href_fn) ? $this->formatReportHref($x, $dataLine) : '';
                     $content = $this->createContentInRowCell($value, $column);
-                    
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
+                    $rowRenderer = $column->row_renderer;
                     
-                    
-                    if($column->row_renderer == $this->STATUS_ROW_RENDERER_ID) {
+                    if($rowRenderer == $this->STATUS_ROW_RENDERER_ID) {
                         $statuses = LibStatuses::getFor($column->entity_type);
                         $statusData = $statuses[$value] ?? [];
                         if($statusData) {
@@ -55,7 +56,7 @@ class ReportTableRow
                             $cellClass = 'text-' .$statusData['text_color'];
                         }
                     }
-                    if($column->row_renderer == $this->ID_ROW_RENDERER_ID) {
+                    if($rowRenderer == $this->ID_ROW_RENDERER_ID) {
                         $entityType = $column->entity_type;
                         $content = Str::makeId($value);
                         $route = Str::plural($entityType) . ".edit";
@@ -69,9 +70,7 @@ class ReportTableRow
                             $cellClass = 'text-red-600';
                         }
                     }
-                    // dd($column);
-
-                    // Log::info($content);
+                    if($rowRenderer == $this->ID_ROW_RENDERER_LINK && $href) $cellClass = 'text-blue-600';
                     $newValue = (object)[
                         'value' => $content,
                         'cell_href' => $href,
