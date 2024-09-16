@@ -1,6 +1,6 @@
 {{-- @dd($entityType); --}}
-<div class="w-full lg:w-1/3 p-2 lg:p-0 items-center m-auto no-print">
-    <div class="lg:flex lg:justify-center lg:gap-2 w-max">
+<div class="w-full p-2 lg:p-0  m-auto no-print">
+    <div class="flex {{$class}}">
         <form action="{{$route}}" method="POST">
             @csrf
             <input type="hidden" name='action' value="updateReport2">
