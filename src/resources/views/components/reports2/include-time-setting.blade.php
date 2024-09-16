@@ -23,9 +23,7 @@
             <input type="hidden" name="entity_type2" value="{{$reportType2}}">
             <input type="hidden" name="report_id" value="{{$rp->id}}">
 
-            <select onchange="submitForm()"  id="timezone-select" name='time_zone'  placeholder="Type to search (country, city, abbreviation)">
-                <option value="UTC" disabled>Coordinated Universal Time (UTC, GMT)</option>
-                <!-- America -->
+            <select onchange="submitForm()"  id="timezone-select" name='time_zone'  placeholder="Type to search">
                 @foreach($timezoneData as $_timezone => $item)
                     <option value="{{ $_timezone }}" 
                             data-utc-offset="{{ $item['utc_offset'] }}" 
@@ -49,7 +47,7 @@
 <script>
 $(document).ready(function() {
     $('#timezone-select').select2({
-        placeholder: "Type to search (country, city, abbreviation)",
+        placeholder: "Type to search",
         templateResult: formatTimezoneOption,
         templateSelection: formatTimezoneOption
     });
@@ -61,7 +59,7 @@ $(document).ready(function() {
 
         var $option = $(
             '<div style="display: flex; justify-content: space-between;">' +
-                '<span>' + option.text + '</span>' +
+                '<span style="margin-right: 4px">' + option.text + '</span>' +
                 '<span>' + $(option.element).data('utc-offset') + '</span>' +
             '</div>'
         );
