@@ -27,8 +27,8 @@ class ReportBlockTable extends Component
     }
 
     private function getControls($typeId, $queriedData, $configuredCols){
-        $rp =Rp_report::find($this->reportId);
-        $reportId = $rp->id;
+        $rp =Rp_report::find(($reportId = $this->reportId));
+        $routeRp = route('report_filters'. '.update', $reportId);
         $entityType = $rp->entity_type;
         $entityType2 = $this->reportType2;
         $routeExportExcel = route('rp_exportExcel');
@@ -41,6 +41,7 @@ class ReportBlockTable extends Component
                                                     reportType2='{$entityType2}' 
                                                     reportId='{$reportId}' 
                                                     pageLimit='{$pageLimit}'
+                                                    routeRp='{$routeRp}'
                                     />");
             case $this->EXPORT_TYPE_ID:
                 return Blade::render('<x-reports2.utility-report2 
@@ -92,6 +93,7 @@ class ReportBlockTable extends Component
             "rotate45Width" => $block->rotate_45_width,
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
+            
 
             "topLeftControl" => $this->getControls($block->top_left_control, $this->queriedData, $configuredCols),
             "topCenterControl" => $this->getControls($block->top_center_control, $this->queriedData, $configuredCols),
