@@ -3,7 +3,7 @@
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
         <i class="fa-solid fa-clock"></i>
         @php
-            $timeTitle = $presetTitle == 'Time Range' ? $presetTitle : $fromDate." <i class='fa-solid fa-arrow-right'></i> ".$toDate;
+            $timeTitle = $presetTitle != 'Time Range' ? $presetTitle ." (".$timeZone.")" : $fromDate." <i class='fa-solid fa-arrow-right'></i> ".$toDate ." (".$timeZone.")";
         @endphp
 
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
@@ -57,7 +57,7 @@
 <!-- JavaScript to toggle dropdown visibility -->
 <script>
 
-        document.addEventListener('click', function(event) {
+    document.addEventListener('click', function(event) {
             var dropdownContent = document.getElementById('dropdownContent');
             var dropdownButton = document.getElementById('dropdownButton');
             // Check if the clicked element is not inside the dropdown content or the button
