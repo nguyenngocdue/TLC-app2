@@ -15,11 +15,12 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('diginet_business_trip_lines', function (BlueprintExtended $table) {
 
             $table->id();
+            $table->unsignedBigInteger('finger_print')->nullable();
             $table->string('employeeid')->nullable();
             $table->string('employee_name')->nullable();
             $table->string('company_code')->nullable();

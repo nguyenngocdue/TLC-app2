@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BigThink\Math;
+use App\Models\Diginet_business_trip_line;
 use App\Models\Erp_vendor_external;
 use App\Utils\Support\Erp;
 use Illuminate\Http\Request;
@@ -27,22 +29,31 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $tables = Erp_vendor_external::query()->paginate(100);
+        $all = Diginet_business_trip_line::all();
 
-        $columns = array_map(fn($c) => ['dataIndex' => $c], Erp::getAllColumns('erp_vendor'));
+        foreach ($all as $item) {
+            $item->finger_print = Math::createDiginetFingerprint([$item['employeeid'], $item['tb_date']]);
+            $item->save();
+        }
 
-        $columns = [
-            ['dataIndex' => 'No_'],
-            ['dataIndex' => 'Name'],
-            ['dataIndex' => 'VAT Registration No_'],
-            ['dataIndex' => 'Address'],
-            ['dataIndex' => 'Description'],
-            ['dataIndex' => 'Search Description'],
-        ];
+        echo Math::createDiginetFingerprint(['TLCM00024', 20220101]);
 
-        return view("welcome-fortune", [
-            'columns' => $columns,
-            'dataSource' => $tables,
-        ]);
+        // $tables = Erp_vendor_external::query()->paginate(100);
+
+        // $columns = array_map(fn($c) => ['dataIndex' => $c], Erp::getAllColumns('erp_vendor'));
+
+        // $columns = [
+        //     ['dataIndex' => 'No_'],
+        //     ['dataIndex' => 'Name'],
+        //     ['dataIndex' => 'VAT Registration No_'],
+        //     ['dataIndex' => 'Address'],
+        //     ['dataIndex' => 'Description'],
+        //     ['dataIndex' => 'Search Description'],
+        // ];
+
+        // return view("welcome-fortune", [
+        //     'columns' => $columns,
+        //     'dataSource' => $tables,
+        // ]);
     }
 }
