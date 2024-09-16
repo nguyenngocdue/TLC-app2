@@ -26,7 +26,7 @@ class ReportBlockTable extends Component
     ) {
     }
 
-    private function getControls($typeId, $queriedData, $configuredCols){
+    private function getControls($typeId, $queriedData, $configuredCols, $class){
         $rp =Rp_report::find(($reportId = $this->reportId));
         $routeRp = route('report_filters'. '.update', $reportId);
         $entityType = $rp->entity_type;
@@ -49,11 +49,13 @@ class ReportBlockTable extends Component
                                             :queriedData="$queriedData"
                                             :configuredCols="$configuredCols"
                                             :blockTitle="$blockTitle"
+                                            :class="$class"
                                             />', [
                     'route' => $routeExportExcel,
                     'queriedData' => $queriedData,
                     'configuredCols' => $configuredCols,
-                    'blockTitle' => $this->block->title ? : $this->block->name
+                    'blockTitle' => $this->block->title ? : $this->block->name,
+                    'class' => $class,
                 ]);
             default:
                 break;
@@ -95,12 +97,12 @@ class ReportBlockTable extends Component
             "hasPagination" => $block->has_pagination,
             
 
-            "topLeftControl" => $this->getControls($block->top_left_control, $this->queriedData, $configuredCols),
-            "topCenterControl" => $this->getControls($block->top_center_control, $this->queriedData, $configuredCols),
-            "topRightControl" =>  $this->getControls($block->top_right_control, $this->queriedData, $configuredCols),
-            "bottomLeftControl" => $this->getControls($block->bottom_left_control, $this->queriedData, $configuredCols),
-            "bottomCenterControl" => $this->getControls($block->bottom_center_control, $this->queriedData, $configuredCols),
-            "bottomRightControl" => $this->getControls($block->bottom_right_control, $this->queriedData, $configuredCols),
+            "topLeftControl" => $this->getControls($block->top_left_control, $this->queriedData, $configuredCols, "justify-start"),
+            "topCenterControl" => $this->getControls($block->top_center_control, $this->queriedData, $configuredCols, "justify-center"),
+            "topRightControl" =>  $this->getControls($block->top_right_control, $this->queriedData, $configuredCols, "justify-right"),
+            "bottomLeftControl" => $this->getControls($block->bottom_left_control, $this->queriedData, $configuredCols, "justify-start"),
+            "bottomCenterControl" => $this->getControls($block->bottom_center_control, $this->queriedData, $configuredCols, "justify-center"),
+            "bottomRightControl" => $this->getControls($block->bottom_right_control, $this->queriedData, $configuredCols, "justify-right"),
         ]);
     }
 }
