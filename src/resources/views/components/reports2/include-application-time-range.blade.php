@@ -12,7 +12,7 @@
                 <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                 <input type="hidden" name='report_id' value="{{$rp->id}}">
                 <input type="hidden" name='form_type' value="absolute_time_range">
-                <input type="hidden" name='preset_title' value="Time Range">
+                <input type="hidden" name='preset_title' value="Absolute Time Range">
                 <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
             <div class="relative">
