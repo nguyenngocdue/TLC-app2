@@ -119,7 +119,7 @@
         "column_name": "business_travel_line",
         "column_type": "static_control",
         "label": "Business Travel Line",
-        "control": "my_new_control",
+        "control": "business_travel_line",
         "align": "",
         "col_span": "12",
         "width": "",

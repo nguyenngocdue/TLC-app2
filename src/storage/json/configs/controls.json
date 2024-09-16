@@ -42,7 +42,8 @@
     ],
     "prop_static_controls": [
         "",
-        "my_new_control"
+        "my_new_control",
+        "business_travel_line"
     ],
     "controls": [
         "",

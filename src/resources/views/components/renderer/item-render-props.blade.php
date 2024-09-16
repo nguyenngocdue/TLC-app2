@@ -48,7 +48,17 @@
                             </div>
                         @break
                         @case('static_control')
-                        QWERTYUIOP
+                            @switch($control)
+                                @case("my_new_control")
+                                    My New Control
+                                @break
+                                @case("business_travel_line")
+                                    <x-renderer.custom.business-travel-line/>
+                                    @break
+                                @default
+                                    A custom control is not selected
+                                    @break
+                            @endswitch
                         @break
                         @default
                             <div class='col-start-1 col-span-12 sm:{{$classColSpanLabel}}  {{$prop['new_line'] === 'true' ? "text-left" : "text-left sm:text-right" }} '>
