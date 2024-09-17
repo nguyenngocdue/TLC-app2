@@ -106,16 +106,15 @@ class ReportFilterItem extends Component
         $fields = ['id', 'name', 'description'];
         $existingFields = array_merge($this->getExistingSchemaFields($modelClass, $fields), ['id']);
         try {
-            $query = $db->select($existingFields);
-            $query = $query->when($isBlackList, function ($query) use ($bWListIds) {
-                return $query->whereIn('id', $bWListIds);
-            }, function ($query) use ($bWListIds) {
-                return $query->whereNotIn('id', $bWListIds);
-            })
-                ->orderBy('name')
-                ->get();
+            $query = $db->select($existingFields)
+            ->when($isBlackList, 
+                fn($query) => $query->whereIn('id', $bWListIds), 
+                fn($query) => $query->whereNotIn('id', $bWListIds)
+            )
+            ->orderBy('name')
+            ->get();
         } catch (Exception $e){
-            // dd($query);
+            dump($e->getMessage());
         }
         return $query;
     }
