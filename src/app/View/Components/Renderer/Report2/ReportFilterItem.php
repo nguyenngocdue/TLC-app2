@@ -172,10 +172,9 @@ class ReportFilterItem extends Component
             $triggers = $this->cleanAndExplode($listenReducer->triggers);
             $listenToAttrs = $this->cleanAndExplode($listenReducer->listen_to_attrs);
             
-            $fields = array_merge(['name','description'], $triggers);
+            $fields = array_merge(['name','description'], $triggers, $listenToAttrs);
             $existingFields = $this->getExistingSchemaFields($modelClass, $fields);
             // dump($existingFields);
-            
             $eagerLoadFields = [];
             foreach($listenToAttrs as $value) {
                 if (str_contains($value, 'get')) $eagerLoadFields[] = $value;
@@ -192,9 +191,8 @@ class ReportFilterItem extends Component
                         ->orderBy('name')
                         ->get();
 
-            if ($entityType == 'prod_orders') {
-                // dd($db->select(array_merge($existingFields,['prod_routing_id']))->with(['getProdRouting'])->first()->toArray());
-            }
+            // if ($entityType == 'prod_orders') {
+            // }
 
             $newDB = [];
             foreach ($dbQuery as $item) {
