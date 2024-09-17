@@ -10,7 +10,7 @@ return new class extends Migration
     private $table1Plural = 'diginet_business_trip_lines';
     private $table2Plural = 'fin_expense_claims';
     private $relationshipKey = null;
-    // private $tableName = "rp_page_block_details";
+    private $tableName = "fin_expense_claim_travel_trip_details";
     private $table1IdColumn = 'finger_print';
 
     public function up()

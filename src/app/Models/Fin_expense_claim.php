@@ -25,7 +25,7 @@ class Fin_expense_claim extends ModelExtended
         "getTravelRequestLines" => [
             'belongsToMany',
             Diginet_business_trip_line::class,
-            'ym2m_diginet_business_trip_line_fin_expense_claim',
+            'fin_expense_claim_travel_trip_details',
             'fin_expense_claim_id',
             'diginet_business_trip_line_finger_print',
             'id',
