@@ -77,7 +77,6 @@
     <script src="{{ asset('js/components/SearchModal2.js') }}"></script>
     <script src="{{ asset('js/components/Bookmark2.js') }}"></script>
     <script src="{{ asset('js/components/TopDrawer2.js') }}"></script>
-    {{-- <script src="{{ asset('js/components/SearchModal-20240709.js') }}"></script> --}}
     <script src="{{ asset('js/components/KeyArrowTable.js') }}"></script>
     <script src="{{ asset('js/applayout.js') }}"></script>
     <script src="{{ asset('js/sweetalert2@11.js') }}"></script>

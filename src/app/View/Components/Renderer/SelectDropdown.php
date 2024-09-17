@@ -12,7 +12,6 @@ class SelectDropdown extends Component
      * @return void
      */
     public function __construct(
-        private $name,
         private $id,
         private $dataSource,
     ) {
@@ -29,7 +28,6 @@ class SelectDropdown extends Component
         return view(
             'components.renderer.select-dropdown',
             [
-                'name' => $this->name,
                 'id' => $this->id,
                 'dataSource' => $this->dataSource,
             ]

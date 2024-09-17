@@ -5,11 +5,11 @@ namespace App\View\Components\Navigation;
 use App\Http\Controllers\Reports\ReportIndexController;
 use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Services\MatrixFilterParamService;
+use App\Models\Rp_report;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\JsonControls;
 use App\View\Components\Controls\DisallowedDirectCreationChecker;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -45,10 +45,28 @@ class Breadcrumb extends Component
             }
         }
         foreach ($result as $breadcrumbGroup => &$reports) {
-            usort($reports, fn ($a, $b) => $a["title"] <=> $b["title"]);
+            usort($reports, fn($a, $b) => $a["title"] <=> $b["title"]);
         }
         return $result;
     }
+    private function makeUpReports2($allReports)
+    {
+        $result = [];
+        foreach ($allReports as $report) {
+
+            $breadcrumbGroup = $report['breadcrumbGroup'] ?: "General";
+            $result[$breadcrumbGroup][] = [
+                'title' => $report['title'],
+                'href' => route("rp_reports.show", $report['id']),
+                'icon' => "fa-duotone fa-file-chart-column text-blue-400",
+            ];
+        }
+        foreach ($result as $breadcrumbGroup => &$reports) {
+            usort($reports, fn($a, $b) => $a["title"] <=> $b["title"]);
+        }
+        return $result;
+    }
+
     private function getTitleAndIconForPrintButton($show_renderer)
     {
         switch ($show_renderer) {
@@ -220,13 +238,35 @@ class Breadcrumb extends Component
     //         ];
     //     }
     // }
-    private function showButtonViewReport($type)
+    private function showButtonViewReport($type, $id)
     {
         if ($this->hideForExternal($type)) return;
         $allReports = ReportIndexController::getReportOf($type);
         $allReports = $this->makeUpReports($allReports);
         if (!empty($allReports)) {
-            $this->links[] = ['type' => 'selectDropdown', 'title' => 'View Report', 'dataSource' => $allReports, 'icon' => '<i class="fa-regular fa-file-chart-column"></i>'];
+            $this->links[] = [
+                'id' => $id,
+                'type' => 'selectDropdown',
+                'title' => 'View Report',
+                'dataSource' => $allReports,
+                'icon' => '<i class="fa-regular fa-file-chart-column"></i>'
+            ];
+        }
+    }
+    private function showButtonViewReport2($type, $id)
+    {
+        if ($this->hideForExternal($type)) return;
+        $reports = Rp_report::query()->where('entity_type', $type)->get();
+        if ($reports->count() > 0) {
+            $allReports = $this->makeUpReports2($reports);
+            $this->links[] = [
+                'id' => $id,
+                'type' => 'selectDropdown',
+                'title' => 'View Report (v2)',
+                'dataSource' => $allReports,
+                'icon' => '<i class="fa-regular fa-file-chart-column"></i>',
+                'badge' => 'BETA',
+            ];
         }
     }
     private function showButtonTutorialLink($type)
@@ -276,7 +316,8 @@ class Breadcrumb extends Component
         if ($isAdmin || $isHrManager) $this->showButtonPrintAll($type);
         $this->showButtonAddNew($type);
         // $this->showButtonAddNewByCloning($type);
-        $this->showButtonViewReport($type);
+        $this->showButtonViewReport($type, 'selectDropdownReport1');
+        $this->showButtonViewReport2($type, 'selectDropdownReport2');
         $this->showButtonTutorialLink($type);
         if ($isAdmin) $this->showButtonViewTrash($type);
         if ($isAdmin) $this->showButtonWorkflow($singular);
