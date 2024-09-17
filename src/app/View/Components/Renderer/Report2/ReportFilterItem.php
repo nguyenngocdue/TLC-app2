@@ -15,6 +15,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -100,17 +101,23 @@ class ReportFilterItem extends Component
         }
     }
 
-    private function getEntityData($db, $isBlackList, $bWListIds)
+    private function getEntityData($modelClass, $db, $isBlackList, $bWListIds)
     {
-        $query = $db->select('id', 'name', 'description');
-        return $query
-            ->when($isBlackList, function ($query) use ($bWListIds) {
+        $fields = ['id', 'name', 'description'];
+        $existingFields = array_merge($this->getExistingSchemaFields($modelClass, $fields), ['id']);
+        try {
+            $query = $db->select($existingFields);
+            $query = $query->when($isBlackList, function ($query) use ($bWListIds) {
                 return $query->whereIn('id', $bWListIds);
             }, function ($query) use ($bWListIds) {
                 return $query->whereNotIn('id', $bWListIds);
             })
-            ->orderBy('name')
-            ->get();
+                ->orderBy('name')
+                ->get();
+        } catch (Exception $e){
+            // dd($query);
+        }
+        return $query;
     }
 
 
@@ -126,16 +133,15 @@ class ReportFilterItem extends Component
     
     private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
     {
-        
+        $singularEntityType = Str::singular($entityType);
         $listenReducer = $filter->getListenReducer;
         $modelClass = ModelData::initModelByField($entityType);
         if (!$modelClass) return [];
         
         $triggerNames = $listenReducer?->triggers;
         $db = $modelClass::query();
-        if(is_null($triggerNames)) return $this->getEntityData($db, $isBlackList, $bWListIds);
+        if(is_null($triggerNames) && $singularEntityType != 'user') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);
         
-        $singularEntityType = Str::singular($entityType);
         if ($singularEntityType == 'term') {
             $filterId = 0;
             switch ($filter->data_index) {
@@ -153,7 +159,7 @@ class ReportFilterItem extends Component
                 $db->where('field_id', $filterId)->get();
                     return $db;
         }elseif ($singularEntityType == 'user') {
-                $listenToAttrs = explode(',', str_replace(' ', '' ,$listenReducer->listen_to_attrs));
+                $listenToAttrs = explode(',', str_replace(' ', '' ,$listenReducer?->listen_to_attrs));
                 $db = $db->get();
                 $newDB = [];
                 foreach ($db as $item) {
