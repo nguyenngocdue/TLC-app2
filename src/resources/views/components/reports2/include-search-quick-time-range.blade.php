@@ -64,6 +64,62 @@
                     data-value="{{ $presets['last_year']['from_date'] }} / {{ $presets['last_year']['to_date'] }}">
                     Last year
                 </li>
+
+                {{-- <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['today_so_far']['from_date'] }} / {{ $presets['today_so_far']['to_date'] }}">
+                    Today so far
+                </li> --}}
+
+                
+              {{--   <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_week']['from_date'] }} / {{ $presets['this_week']['to_date'] }}">
+                    This week
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_week_so_far']['from_date'] }} / {{ $presets['this_week_so_far']['to_date'] }}">
+                    This week so far
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_month']['from_date'] }} / {{ $presets['this_month']['to_date'] }}">
+                    This month
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_month_so_far']['from_date'] }} / {{ $presets['this_month_so_far']['to_date'] }}">
+                    This month so far
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_year']['from_date'] }} / {{ $presets['this_year']['to_date'] }}">
+                    This year
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_year_so_far']['from_date'] }} / {{ $presets['this_year_so_far']['to_date'] }}">
+                    This year so far
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_fiscal_quarter_so_far']['from_date'] }} / {{ $presets['this_fiscal_quarter_so_far']['to_date'] }}">
+                    This fiscal quarter so far
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_fiscal_quarter']['from_date'] }} / {{ $presets['this_fiscal_quarter']['to_date'] }}">
+                    This fiscal quarter
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_fiscal_year_so_far']['from_date'] }} / {{ $presets['this_fiscal_year_so_far']['to_date'] }}">
+                    This fiscal year so far
+                </li>
+
+                <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
+                    data-value="{{ $presets['this_fiscal_year']['from_date'] }} / {{ $presets['this_fiscal_year']['to_date'] }}">
+                    This fiscal year
+                </li> --}}
                 
             </ul>
         </div>

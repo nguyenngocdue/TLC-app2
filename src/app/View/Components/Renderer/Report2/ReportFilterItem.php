@@ -153,10 +153,12 @@ class ReportFilterItem extends Component
                 case 'inter_subcon_id':
                         $filterId = $this->INTER_SUBCON_TYPE_ID;;
                     break;
-            
+                default:
+                    $filterId = 0;
+                    break;
                 }
-                $db->where('field_id', $filterId)->get();
-                    return $db;
+            $db->where('field_id', $filterId)->get();
+            return $db;
         }elseif ($singularEntityType == 'user') {
                 $listenToAttrs = explode(',', str_replace(' ', '' ,$listenReducer?->listen_to_attrs));
                 $db = $db->get();
