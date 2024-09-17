@@ -256,7 +256,9 @@ class Breadcrumb extends Component
     private function showButtonViewReport2($type, $id)
     {
         if ($this->hideForExternal($type)) return;
-        $reports = Rp_report::query()->where('entity_type', $type)->get();
+        $reports = Rp_report::query()
+            ->where('entity_type', $type)
+            ->get();
         if ($reports->count() > 0) {
             $allReports = $this->makeUpReports2($reports);
             $this->links[] = [

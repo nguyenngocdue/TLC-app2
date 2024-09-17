@@ -108,9 +108,13 @@ class RelationshipRenderer2 extends Component
             // Log::info($filterOperator);
             // Log::info($filterValues);
 
-            if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
-            elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
-            elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
+            // if (isset($eloquentParam[2])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1], $eloquentParam[2]);
+            // elseif (isset($eloquentParam[1])) $relation = $row->{$eloquentParam[0]}($eloquentParam[1]);
+            // elseif (isset($eloquentParam[0])) $relation = $row->{$eloquentParam[0]}();
+
+            // Dynamically call the Eloquent relationship with all parameters in $eloquentParam
+            $relation = call_user_func_array([$row, $eloquentParam[0]], array_slice($eloquentParam, 1));
+
             $perPage = $showAll ? 10000 : 25;
             $result = $relation->getQuery();
             if (sizeof($filterColumns)) {

@@ -14,7 +14,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCounterCurrency": {
         "name": "_getCounterCurrency",
@@ -31,7 +32,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -48,7 +50,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -65,15 +68,16 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
-    "_getClaimableLines": {
-        "name": "_getClaimableLines",
-        "relationship": "morphMany",
-        "control_name": "getClaimableLines",
-        "renderer_view_all": "",
+    "_getTravelRequestLines": {
+        "name": "_getTravelRequestLines",
+        "relationship": "belongsToMany",
+        "control_name": "getTravelRequestLines",
+        "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
-        "renderer_view_all_unit": "",
+        "renderer_view_all_unit": "line",
         "renderer_edit": "many_lines",
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
@@ -82,6 +86,25 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getClaimableLines": {
+        "name": "_getClaimableLines",
+        "relationship": "morphMany",
+        "control_name": "getClaimableLines",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "line",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

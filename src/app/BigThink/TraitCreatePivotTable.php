@@ -30,8 +30,11 @@ trait TraitCreatePivotTable
         } else {
             $tableName = "ym2m_{$table1Singular}_{$table2Singular}" . ($relationshipKey ? "_$relationshipKey" : '');
         }
-        $table1IdColumn = $table1Singular . '_id';
-        $table2IdColumn = $table2Singular . '_id';
+        $table1PostFix = isset($this->table1IdColumn) ? '_' . $this->table1IdColumn : '_id';
+        $table2PostFix = isset($this->table2IdColumn) ? '_' . $this->table2IdColumn : '_id';
+
+        $table1IdColumn = $table1Singular . $table1PostFix;
+        $table2IdColumn = $table2Singular . $table2PostFix;
 
         return [$tableName, $table1Plural, $table2Plural, $table1IdColumn, $table2IdColumn];
     }
@@ -47,7 +50,7 @@ trait TraitCreatePivotTable
         [$tableName, $table1Plural, $table2Plural, $table1IdColumn, $table2IdColumn] = $this->getNames();
 
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create($tableName, function (BlueprintExtended $table)
         use ($table1Plural, $table2Plural, $table1IdColumn, $table2IdColumn) {
@@ -58,11 +61,13 @@ trait TraitCreatePivotTable
             $key3 = $this->relationshipKey; //"checkbox";
 
             $table->id();
+            $foreignColumn1 = isset($this->table1IdColumn) ? $this->table1IdColumn : 'id';
             $table->unsignedBigInteger($key1)->nullable();
-            $table->foreign($key1, "$key1|$key2|$key3")->references('id')->on($table1)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign($key1, "$key1|$key2|$key3")->references($foreignColumn1)->on($table1)->onDelete('cascade')->onUpdate('cascade');
 
+            $foreignColumn2 = isset($this->table2IdColumn) ? $this->table2IdColumn : 'id';
             $table->unsignedBigInteger($key2)->nullable();
-            $table->foreign($key2, "$key2|$key1|$key3")->references('id')->on($table2)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign($key2, "$key2|$key1|$key3")->references($foreignColumn2)->on($table2)->onDelete('cascade')->onUpdate('cascade');
 
             $table->unique([$key1, $key2], md5($key1 . $key2 . $key3));
 
