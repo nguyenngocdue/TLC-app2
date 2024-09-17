@@ -22,9 +22,9 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_fingerprint": {
-        "name": "_fingerprint",
-        "column_name": "fingerprint",
+    "_finger_print": {
+        "name": "_finger_print",
+        "column_name": "finger_print",
         "column_type": "bigint unsigned",
         "label": "Finger Print",
         "control": "number",
