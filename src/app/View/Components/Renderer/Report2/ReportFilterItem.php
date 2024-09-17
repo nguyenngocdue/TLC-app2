@@ -9,6 +9,7 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_routing_link;
 use App\Models\Qaqc_ncr;
 use App\Models\Term;
+use App\Models\User;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
@@ -56,7 +57,7 @@ class ReportFilterItem extends Component
         if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
 
         $listenReducer = $this->filter->getListenReducer;
-        $this->id =  $listenReducer ? $listenReducer->column_name : $filter->name;
+        $this->id =  $listenReducer ? $this->filter->data_index : $filter->name;
 
         $entityType = $filter->entity_type;
         $this->tableName = Str::plural($entityType);
@@ -99,10 +100,9 @@ class ReportFilterItem extends Component
         }
     }
 
-    private function getEntityData($db, $isBlackList, $bWListIds, $triggerName = null)
+    private function getEntityData($db, $isBlackList, $bWListIds)
     {
         $query = $db->select('id', 'name', 'description');
-        if ($triggerName) $query->addSelect($triggerName);
         return $query
             ->when($isBlackList, function ($query) use ($bWListIds) {
                 return $query->whereIn('id', $bWListIds);
@@ -111,71 +111,117 @@ class ReportFilterItem extends Component
             })
             ->orderBy('name')
             ->get();
-        }
+    }
+
+
+    private function getExistingSchemaFields($modelClass, $fields){
+        $fillable= $modelClass->getFillable();
+        $existingFields = array_merge(['id'],  array_intersect($fillable, $fields));
+        return $existingFields;
+    }
+
+    private function cleanAndExplode($string) {
+        return explode(',', str_replace(' ', '', $string));
+    }
+    
+    private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
+    {
         
-        private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
-        {
-            $modelClass = ModelData::initModelByField($entityType);
-            if (!$modelClass) return [];
-            $db = $modelClass::query();
-            // Log::info($entityType);
-            $singularEntityType = Str::singular($entityType);
-            switch($singularEntityType){
-                case 'term':
-                    $filterId = 0;
-                    switch ($filter->data_index) {
-                        case 'defect_root_cause_id':
-                                $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
-                            break;
-                        case 'defect_report_type':
-                                $filterId = $this->DEFECT_REPORT_TYPE_ID;;
-                            break;
-                        case 'inter_subcon_id':
-                                $filterId = $this->INTER_SUBCON_TYPE_ID;;
-                            break;
-                   
+        $listenReducer = $filter->getListenReducer;
+        $modelClass = ModelData::initModelByField($entityType);
+        if (!$modelClass) return [];
+        
+        $triggerNames = $listenReducer?->triggers;
+        $db = $modelClass::query();
+        if(is_null($triggerNames)) return $this->getEntityData($db, $isBlackList, $bWListIds);
+        
+        $singularEntityType = Str::singular($entityType);
+        if ($singularEntityType == 'term') {
+            $filterId = 0;
+            switch ($filter->data_index) {
+                case 'defect_root_cause_id':
+                        $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
+                    break;
+                case 'defect_report_type':
+                        $filterId = $this->DEFECT_REPORT_TYPE_ID;;
+                    break;
+                case 'inter_subcon_id':
+                        $filterId = $this->INTER_SUBCON_TYPE_ID;;
+                    break;
+            
                 }
                 $db->where('field_id', $filterId)->get();
-                return $db;
-
-                case 'prod_routing_link':
-                    $db = $db->select('id', 'name', 'description', 'prod_discipline_id')
-                        ->with('getProdRoutings')
-                        ->orderBy('name')
-                        ->get();
+                    return $db;
+        }elseif ($singularEntityType == 'user') {
+                $listenToAttrs = explode(',', str_replace(' ', '' ,$listenReducer->listen_to_attrs));
+                $db = $db->get();
+                $newDB = [];
+                foreach ($db as $item) {
+                    $i = (object)[];
+                    $i->id = $item->id;
+                    $i->name = $item->name;
+                    $i->description = $item?->description;
+                    foreach ($listenToAttrs as $value) {
+                        $i->{$value} = $item->{$value};
+                    }
+                    $newDB[] = $i;
+                }
+                return $newDB;
+        } 
+        else {
+            $triggers = $this->cleanAndExplode($listenReducer->triggers);
+            $listenToAttrs = $this->cleanAndExplode($listenReducer->listen_to_attrs);
             
-                    $newDB = [];
-                    foreach ($db as $item) {
-                        $i = (object)[];
-                        $i->id = $item->id;
-                        $i->name = $item->name;
-                        $i->description = $item->description;
-                        $i->prod_discipline_id = $item->prod_discipline_id;
-                        $i->prod_routing_id = $item->getProdRoutings->pluck('id');
-                        $newDB[] = $i;
-                    }
-                    // dd($newDB);
-                    return $newDB;
-                case 'user':
-                    return collect($db->get()->map(function ($value) {
-                        return $value->toArray();
-                    }));
-                case 'prod_routing':
-                    $newDB = $db->select('id', 'name', 'description')
-                        ->when($isBlackList, fn($query) => $query->whereIn('id', $bWListIds), fn($query) => $query->whereNotIn('id', $bWListIds))
-                        ->with('getSubProjects')
-                        ->with('getScreensShowMeOn')
+            $fields = array_merge(['name','description'], $triggers);
+            $existingFields = $this->getExistingSchemaFields($modelClass, $fields);
+            // dump($existingFields);
+            
+            $eagerLoadFields = [];
+            foreach($listenToAttrs as $value) {
+                if (str_contains($value, 'get')) $eagerLoadFields[] = $value;
+                else $existingFields[] = $value;
+            }
+            // dump($existingFields);
+
+            $dbQuery = $db->select(/* $existingFields */)
+                        ->when($isBlackList, 
+                            fn($query) => $query->whereIn('id', $bWListIds), 
+                            fn($query) => $query->whereNotIn('id', $bWListIds)
+                        )
+                        ->with($eagerLoadFields)
                         ->orderBy('name')
                         ->get();
-                    foreach ($newDB as &$item) {
-                        $item->getSubProjects = $item->getSubProjects->pluck('id')->toArray();
-                    }
-                    return $newDB;
-                default:
-                    $triggerNames = explode(',', $this->filter->getListenReducer->triggers ?? '');
-                    foreach ($triggerNames as $triggerName) return $this->getEntityData($db, $isBlackList, $bWListIds, $triggerName);
+
+            if ($entityType == 'prod_orders') {
+                // dd($db->select(array_merge($existingFields,['prod_routing_id']))->with(['getProdRouting'])->first()->toArray());
             }
-    }
+
+            $newDB = [];
+            foreach ($dbQuery as $item) {
+                $processedItem = (object)[];
+                // Assign existing fields
+                foreach ($existingFields as $field) $processedItem->$field = $item->$field;
+                // Assign relationship data or direct attribute based on trigger
+                foreach ($listenToAttrs as $key => $attr) {
+                    if (str_contains($attr, 'get')) {
+                        // TO DEBUG
+                        // if ($entityType == 'prod_orders') {
+                        //     // dd($attr, $item);
+                        // }
+                        $processedItem->{$attr} = ($x = $item->$attr) ? $x->pluck('id')->toArray() : [];
+                    } 
+                    else $processedItem->{$triggers[$key]} = $item->$attr;
+                }
+                $newDB[] = $processedItem;
+            }
+            // TO DEBUG
+            if ($entityType == 'prod_orders') {
+                // dump($newDB);
+            }
+
+            return $newDB;
+        } 
+    }  
 
  
     public function render()

@@ -38,7 +38,7 @@ trait TraitListenerControlReport
                     "ajax_item_attributes" => [],
                     "ajax_response_attribute" => "",
                     "attrs_to_compare" => explode(',', $listenReducer->attrs_to_compare),
-                    "column_name" => $listenReducer->column_name,
+                    "column_name" => $filter->data_index,
                     "columns_to_set" => $listenReducer->columns_to_set ? explode(',', $listenReducer->columns_to_set) :[],
                     "expression" => "",
                     "listen_action" => "reduce",
