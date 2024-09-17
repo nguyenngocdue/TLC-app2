@@ -187,6 +187,10 @@
         "name": "fin_expense_claim_lines",
         "storeEmpty_and_updateShort": "true"
     },
+    "fin_expense_claim_travel_details": {
+        "name": "fin_expense_claim_travel_details",
+        "storeEmpty_and_updateShort": "true"
+    },
     "fin_expense_claims": {
         "name": "fin_expense_claims"
     },
@@ -288,6 +292,15 @@
         "name": "hr_timesheet_workers",
         "storeEmpty_and_updateShort": "true",
         "changeStatusMultiple": "true"
+    },
+    "hr_tso_archive_lines": {
+        "name": "hr_tso_archive_lines"
+    },
+    "hr_tso_archive_sub_tasks": {
+        "name": "hr_tso_archive_sub_tasks"
+    },
+    "hr_tso_archive_tasks": {
+        "name": "hr_tso_archive_tasks"
     },
     "hse_audits": {
         "name": "hse_audits"

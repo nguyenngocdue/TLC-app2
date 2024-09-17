@@ -71,10 +71,10 @@
         "let_user_clear": "",
         "let_user_open": ""
     },
-    "_getTravelRequestLines": {
-        "name": "_getTravelRequestLines",
-        "relationship": "belongsToMany",
-        "control_name": "getTravelRequestLines",
+    "_getTravelLines": {
+        "name": "_getTravelLines",
+        "relationship": "hasMany",
+        "control_name": "getTravelLines",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "line",
