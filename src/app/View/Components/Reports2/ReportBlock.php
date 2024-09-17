@@ -41,7 +41,7 @@ class ReportBlock extends Component
             if(!$item->is_active) continue;
             $block = $item->getBlock;
             try {
-                [$queriedData, $fieldTransformation] = $this->getDataSQLString($block, $currentParams);
+                [$queriedData, $fieldTransformation, $sqlString] = $this->getDataSQLString($block, $currentParams);
                 $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
             } catch (\Exception $e) {
                 dump($e->getMessage());
@@ -58,6 +58,7 @@ class ReportBlock extends Component
                 'headerCols' => $headerCols,
                 'secondHeaderCols' => $secondHeaderCols,
                 'fieldTransformation' => $fieldTransformation,
+                'sqlString' => $sqlString,
             ];
             $blockDataSource[] = $blockItem;
         }

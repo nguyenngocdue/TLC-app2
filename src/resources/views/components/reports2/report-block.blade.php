@@ -8,6 +8,8 @@
     @foreach ($blockDataSource as $key => $blockItem)
         @php
             $block = $blockItem['block'];
+            $sqlString = $blockItem['sqlString'];
+
             $tableDataSource = $blockItem['tableDataSource'];
             $headerCols = $blockItem['headerCols'];
 
@@ -51,7 +53,7 @@
 
                 @default
                     @if (!$rendererType)
-                        @dump($block->sql_string)
+                        @dump($sqlString)
                         @dump($queriedData)
                     @endif
                     <x-reports2.report-block-table 

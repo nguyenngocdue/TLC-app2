@@ -13,6 +13,7 @@ trait TraitReportQueriedData
     public function getDataSQLString($block, $params)
     {
         $sqlString = $block->sql_string;
+        $sql ='';
         if ($sqlString) {
             $sql = $this->getSql($sqlString, $params);
             $sqlData = DB::select($sql);
@@ -21,8 +22,8 @@ trait TraitReportQueriedData
             if ($block->is_transformed_data){
                 [$queriedData , $fieldTransformation]  = $this->transformData($queriedData, $block->transformed_data_string);
             }
-            return [ $queriedData, $fieldTransformation ];
+            return [ $queriedData, $fieldTransformation, $sql];
         }
-        return [collect(), []];
+        return [collect(), [], $sql];
     }
 }
