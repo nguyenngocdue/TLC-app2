@@ -50,8 +50,10 @@
                     @break
 
                 @default
-                    {{-- @dump($block->sql_string) --}}
-                    {{-- @dump($queriedData) --}}
+                    @if (!$rendererType)
+                        @dump($block->sql_string)
+                        @dump($queriedData)
+                    @endif
                     <x-reports2.report-block-table 
                         reportId="{{ $reportId }}" 
                         :block="$block"
