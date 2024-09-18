@@ -25,7 +25,8 @@ return new class extends Migration
 
     public function schemaPivot(BlueprintExtended $table)
     {
-        // $table->integer('col_span')->nullable();
+        $table->unsignedInteger('day_count')->nullable();
+        $table->date('travel_date')->nullable();
         $table->orderable();
         $table->unsignedBigInteger('deleted_by')->nullable();
         $table->softDeletes();

@@ -112,7 +112,7 @@
         "entity-type": "fin_expense_claims",
         "editable-table": "fin_expense_claim_travel_details",
         "button_add_from_a_list": "true",
-        "modal_body_name": "parent-id7-tree",
+        "modal_body_name": "parent-id7-tree-fin-expense-travel-lines",
         "foreign_key": "diginet_business_trip_line_finger_print"
     },
     "ghg_metric_type_1s_01": {

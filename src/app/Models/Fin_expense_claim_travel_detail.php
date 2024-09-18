@@ -11,16 +11,20 @@ class Fin_expense_claim_travel_detail extends ModelExtended
         "name",
         "diginet_business_trip_line_finger_print",
         "fin_expense_claim_id",
+
+        "travel_date",
+        "day_count",
+
         "owner_id",
         "order_no",
     ];
 
     public static $statusless = true;
     public static $nameless = true;
-    public function getNameAttribute($value)
-    {
-        return "Ahihi";
-    }
+    // public function getNameAttribute($value)
+    // {
+    //     return "Ahihi";
+    // }
 
     public static $eloquentParams = [];
 
@@ -29,9 +33,11 @@ class Fin_expense_claim_travel_detail extends ModelExtended
         return [
             ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'fin_expense_claim_id', 'value_as_parent_id' => true,  'invisible' => true],
+
             ['dataIndex' => 'diginet_business_trip_line_finger_print'],
-            ['dataIndex' => 'fin_expense_claim_id'],
-            ['dataIndex' => 'owner_id'],
+            ['dataIndex' => 'travel_date'],
+            ['dataIndex' => 'day_count'],
         ];
     }
 }
