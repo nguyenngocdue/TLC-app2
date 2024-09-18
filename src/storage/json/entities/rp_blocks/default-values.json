@@ -64,6 +64,32 @@
         "control_extra": "",
         "textarea_rows": "30"
     },
+    "_is_transformed_data": {
+        "name": "_is_transformed_data",
+        "column_name": "is_transformed_data",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_transformed_data_string": {
+        "name": "_transformed_data_string",
+        "column_name": "transformed_data_string",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": "15"
+    },
     "_renderer_type": {
         "name": "_renderer_type",
         "column_name": "renderer_type",
@@ -257,7 +283,7 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
-        "textarea_rows": ""
+        "textarea_rows": "30"
     },
     "_html_content": {
         "name": "_html_content",
@@ -270,7 +296,7 @@
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
-        "textarea_rows": ""
+        "textarea_rows": "10"
     },
     "_owner_id": {
         "name": "_owner_id",
