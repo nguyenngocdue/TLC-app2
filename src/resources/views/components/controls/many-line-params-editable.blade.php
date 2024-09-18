@@ -32,9 +32,6 @@
         @endif
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
             @php
-                // $eloquentFunctionName = $tableSettings['eloquent_function_name'] ?? null;
-                // $groupDataSourceName = $tableSettings['group_datasource'] ?? null;
-                // $itemDataSourceName = $tableSettings['item_datasource'];
                 $modalBodyName = $tableSettings['modal_body_name'];
                 $xxxForeignKey = $tableSettings['foreign_key'];
             @endphp
@@ -42,9 +39,6 @@
             <x-modals.modal-add-from-a-list
                 modalId='modal-add-from-a-list-of-{{$table01Name}}' 
                 table01Name='{{$table01Name}}' 
-                {{-- eloquentFunctionName='{{$eloquentFunctionName}}' --}}
-                {{-- groupDataSourceName='{{$groupDataSourceName}}'                 --}}
-                {{-- itemDataSourceName='{{$itemDataSourceName}}' --}}
                 xxxForeignKey='{{$xxxForeignKey}}'
                 modalBodyName='{{$modalBodyName}}'
                 />

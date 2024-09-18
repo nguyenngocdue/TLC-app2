@@ -10,10 +10,6 @@ class ModalAddFromAList extends Component
     public function __construct(
         private $modalId = null,
         private $table01Name = null,
-
-        // private $eloquentFunctionName = null,
-        // private $groupDataSourceName = null,
-        // private $itemDataSourceName = null,
         private $xxxForeignKey = null,
         private $modalBodyName = null,
     ) {}
@@ -23,10 +19,6 @@ class ModalAddFromAList extends Component
         $params = [
             'modalId' => $this->modalId,
             'table01Name' => $this->table01Name,
-
-            // 'eloquentFunctionName' => $this->eloquentFunctionName,
-            // 'groupDataSourceName' => $this->groupDataSourceName,
-            // 'itemDataSourceName' => $this->itemDataSourceName,
             'xxxForeignKey' => $this->xxxForeignKey,
             'modalBodyName' => $this->modalBodyName,
         ];

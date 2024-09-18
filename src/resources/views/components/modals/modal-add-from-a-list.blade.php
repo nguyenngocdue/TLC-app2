@@ -2,36 +2,11 @@
 
 @section($modalId.'-header', "Select Items from a List")
 
-@php
-    // $groupIdName = $table01Name . '_modal_group_id_' . $groupDataSourceName;
-    // $groupTableName = $table01Name . '_modal_group_' . $groupDataSourceName;
-
-    $fieldIdName = $table01Name . '_modal_input';// . $itemDataSourceName;
-    // $fieldTableName = $table01Name . '_modal_items_' . $itemDataSourceName;
-@endphp
-
 @section($modalId.'-body')
     <div class="h-4"></div>
-    {{-- @if($groupDataSourceName)    
-    <x-modals.parent-type7-generic 
-        name='{{$groupIdName}}' 
-        tableName="{{$groupTableName}}" 
-        dataSourceTableName="{{$groupDataSourceName}}"
-        />
-    @endif --}}
-    
-    {{-- <div class="py-2">
-        <x-renderer.button onClick="radioOrCheckboxSelectAll('{{$fieldIdName}}')">Select All</x-renderer.button>
-        <x-renderer.button onClick="radioOrCheckboxDeselectAll('{{$fieldIdName}}')">Deselect All</x-renderer.button>
-    </div> --}}
-    {{-- // tableName='{$fieldTableName}' 
-    // groupIdName='{$groupIdName}'
-    // dataSourceTableName='{$itemDataSourceName}'
-    // eloquentFunctionName='{$eloquentFunctionName}' --}}
     @php
-        $view = "<x-modals.parent-id7.{$modalBodyName}
-            inputId='{$fieldIdName}'
-        />";
+        $fieldIdName = $table01Name . '_modal_input';
+        $view = "<x-modals.parent-id7.{$modalBodyName} inputId='{$fieldIdName}' />";
         echo Blade::render($view);
 
         $hidden = (app()->isLocal()) ? '' : 'hidden';
