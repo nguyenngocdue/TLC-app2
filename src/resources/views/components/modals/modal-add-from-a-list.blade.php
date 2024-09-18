@@ -6,7 +6,7 @@
     // $groupIdName = $table01Name . '_modal_group_id_' . $groupDataSourceName;
     // $groupTableName = $table01Name . '_modal_group_' . $groupDataSourceName;
 
-    $fieldIdName = $table01Name . '_modal_items_id_';// . $itemDataSourceName;
+    $fieldIdName = $table01Name . '_modal_input';// . $itemDataSourceName;
     // $fieldTableName = $table01Name . '_modal_items_' . $itemDataSourceName;
 @endphp
 
@@ -30,10 +30,8 @@
     // dataSourceTableName='{$itemDataSourceName}'
     // eloquentFunctionName='{$eloquentFunctionName}' --}}
     @php
-        $view = "<x-modals.parent-id7.{$modalBodyName} 
-            name='{$fieldIdName}' 
-            multiple=1
-            control='radio-or-checkbox2a'
+        $view = "<x-modals.parent-id7.{$modalBodyName}
+            inputId='{$fieldIdName}'
         />";
         echo Blade::render($view);
     @endphp
@@ -41,6 +39,10 @@
 
 @section($modalId.'-footer')
 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
+    <input id="{{$fieldIdName}}" 
+        type="hidden" 
+        class="bg-pink-400 p-1 mr-2 border rounded w-full" 
+        />
     <x-renderer.button 
         click="closeModal('{{$modalId}}')"
         >Cancel</x-renderer.button>
@@ -54,13 +56,9 @@
 
 @section($modalId.'-javascript')
 <script>
-const addLinesToTableFormModalList = (listId, tableId, xxxForeignKey) => {
-    const x = $("input[name='" + listId + "[]']")
-    const result = []
-    for (let i = 0; i < x.length; i++) {
-        if (x[i].checked) result.push(x[i].value)
-    }
-    console.log("Adding result now:",result)
+addLinesToTableFormModalList = (listId, tableId, xxxForeignKey, modalId) => {
+    const result = $("#{{$fieldIdName}}").val().split(',')
+    // console.log("Adding result now:",result)
     for (let i = 0; i < result.length; i++) {        
         // const today = moment().format('DD/MM/YYYY')
         const valuesOfOrigin = { [xxxForeignKey]: result[i]}

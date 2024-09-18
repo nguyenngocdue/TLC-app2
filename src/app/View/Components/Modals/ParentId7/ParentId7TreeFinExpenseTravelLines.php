@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
 {
-    protected $jsScriptName = 'parentId7TreeFinExpenseTravelLines.js';
+    protected $jsFileName = 'parentId7TreeFinExpenseTravelLines.js';
 
     function getDataSource()
     {

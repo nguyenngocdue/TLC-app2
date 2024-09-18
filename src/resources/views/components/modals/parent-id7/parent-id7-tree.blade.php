@@ -1,4 +1,8 @@
 {{-- @dump($treeSource) --}}
-<script>const jsonTree = @json($treeSource);</script>
+<script>
+jsonTree = @json($treeSource);
+inputId = '{{$inputId}}';
+</script>
 <div id="json_tree_1" ></div>
-<script src="{{asset('js/modals/'.$jsScriptName)}}"></script>
+
+<script src="{{asset('js/modals/'.$jsFileName)}}"></script>

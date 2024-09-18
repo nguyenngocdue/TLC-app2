@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class ParentId7TreeReportBlocks extends ParentId7Tree
 {
-    protected $jsScriptName = 'parentId7TreeReportBlocks.js';
+    protected $jsFileName = 'parentId7TreeReportBlocks.js';
 
     private function createLinkedId($type, $id)
     {
