@@ -20,11 +20,10 @@
         />
     @endif --}}
     
-    <div class="py-2">
+    {{-- <div class="py-2">
         <x-renderer.button onClick="radioOrCheckboxSelectAll('{{$fieldIdName}}')">Select All</x-renderer.button>
         <x-renderer.button onClick="radioOrCheckboxDeselectAll('{{$fieldIdName}}')">Deselect All</x-renderer.button>
-        {{-- <x-renderer.button onClick="radioOrCheckboxChangeOrder('ot_user_id', 'ot_users', '{{$groupIdName}}')">Sort by StaffID Order</x-renderer.button> --}}
-    </div>
+    </div> --}}
     {{-- // tableName='{$fieldTableName}' 
     // groupIdName='{$groupIdName}'
     // dataSourceTableName='{$itemDataSourceName}'
