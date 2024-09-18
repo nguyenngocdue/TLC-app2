@@ -1,11 +1,15 @@
-const table_order_no_step = 1;
+const table_order_no_step = 1
 const debugEditable = false
-const editableColumns = {}, dateTimeControls = {}, tableObject = {}, tableObjectColName = {}, entityId = null
+const editableColumns = {},
+    dateTimeControls = {},
+    tableObject = {},
+    tableObjectColName = {},
+    entityId = null
 const getNameIndexOfRowIndex = (tableId, rowIndex) => {
     // const debugEditable = true
-    const rows = $("#" + tableId + " > tbody")[0].children
+    const rows = $('#' + tableId + ' > tbody')[0].children
     const row = rows[rowIndex]
-    if (debugEditable) console.log("row", row)
+    if (debugEditable) console.log('row', row)
     for (let i = 0; i < row.childNodes.length; i++) {
         const td = row.childNodes[i]
         for (let j = 0; j < td.childNodes.length; j++) {
@@ -13,8 +17,8 @@ const getNameIndexOfRowIndex = (tableId, rowIndex) => {
             if (debugEditable) console.log(td, td.childNodes[j], td.childNodes[j].name)
             const tdName = td.childNodes[j].name
             if (debugEditable) console.log(tdName, tdName.startsWith(tableId))
-            if (tdName.startsWith(tableId + "[finger_print]")) {
-                const result = tdName.substring(tableId.length + "[finger_print][".length, tdName.length - 1)
+            if (tdName.startsWith(tableId + '[finger_print]')) {
+                const result = tdName.substring(tableId.length + '[finger_print]['.length, tdName.length - 1)
                 if (debugEditable) console.log(result)
                 return result
             }
@@ -22,7 +26,7 @@ const getNameIndexOfRowIndex = (tableId, rowIndex) => {
     }
     return -1
 }
-const getAllRows = (tableId) => $("#" + tableId + " > tbody")[0].children
+const getAllRows = (tableId) => $('#' + tableId + ' > tbody')[0].children
 const getValueOfTrByName = (aRow, fieldName) => {
     let result = null
     aRow.childNodes.forEach((td) => {
@@ -40,7 +44,7 @@ const getValueOfTrByName = (aRow, fieldName) => {
     return result
 }
 const setValueOfTrByName = (aRow, fieldName, value) => {
-    fieldName = "[" + fieldName + "]"
+    fieldName = '[' + fieldName + ']'
     aRow.childNodes.forEach((td) => {
         td.childNodes.forEach((control) => {
             const name = control.name
@@ -54,54 +58,53 @@ const setValueOfTrByName = (aRow, fieldName, value) => {
         })
     })
 }
-const getValueById = (id, renderer) => (renderer === 'toggle') ? getEById(id)[0].checked : getEById(id).val()
+const getValueById = (id, renderer) => (renderer === 'toggle4' ? getEById(id)[0].checked : getEById(id).val())
 const setValueById = (id, value) => getEById(id).val(value)
 
 const getCellValueByName = (tableId, columnName, rowIndex) => {
-    const rows = $("#" + tableId + " > tbody")[0].children
+    const rows = $('#' + tableId + ' > tbody')[0].children
     // console.log(rows, tableId, columnName, rowIndex, rows[rowIndex])
     return getValueOfTrByName(rows[rowIndex], columnName)
 }
 const setCellValueByName = (tableId, columnName, rowIndex, value) => {
     // console.log("setCellValueByName", columnName, "to", value)
-    const rows = $("#" + tableId + " > tbody")[0].children
+    const rows = $('#' + tableId + ' > tbody')[0].children
     setValueOfTrByName(rows[rowIndex], columnName, value)
 }
-
 
 const reRenderQueue = {}
 const reRenderTableBaseOnNewOrder = (tableId, dropdownParams = {}) => {
     // const debugEditable = true
     const { batchLength = 1 } = dropdownParams
-    if (debugEditable) console.log("reRenderTableBaseOnNewOrder", tableId, batchLength)
+    if (debugEditable) console.log('reRenderTableBaseOnNewOrder', tableId, batchLength)
     if (reRenderQueue[tableId] === undefined) reRenderQueue[tableId] = 1
     if (reRenderQueue[tableId] < batchLength) {
-        if (debugEditable) console.log("Enqueue and wait...")
-        reRenderQueue[tableId]++;
+        if (debugEditable) console.log('Enqueue and wait...')
+        reRenderQueue[tableId]++
     } else {
         delete reRenderQueue[tableId]
 
-        var colIndex = -1;
-        $("#" + tableId + " th").each(function (index) {
-            if ($(this).attr("id") === tableId + "_th_" + "order_no") {
-                colIndex = index;
-                return false; // Exit the loop once found
+        var colIndex = -1
+        $('#' + tableId + ' th').each(function (index) {
+            if ($(this).attr('id') === tableId + '_th_' + 'order_no') {
+                colIndex = index
+                return false // Exit the loop once found
             }
-        });
+        })
 
         // Sort the table rows based on the values in the selected column
-        var tbody = $('#' + tableId + ' tbody');
-        var rows = tbody.children('tr').get();
+        var tbody = $('#' + tableId + ' tbody')
+        var rows = tbody.children('tr').get()
         rows.sort(function (a, b) {
-            var aVal = parseFloat($(a).children('td').eq(colIndex).find('input').val());
-            var bVal = parseFloat($(b).children('td').eq(colIndex).find('input').val());
-            return aVal - bVal;
-        });
+            var aVal = parseFloat($(a).children('td').eq(colIndex).find('input').val())
+            var bVal = parseFloat($(b).children('td').eq(colIndex).find('input').val())
+            return aVal - bVal
+        })
 
         // Clear the table body and re-append the sorted rows
         $.each(rows, function (index, row) {
-            tbody.append(row);
-        });
+            tbody.append(row)
+        })
     }
 }
 
@@ -113,7 +116,7 @@ const getIndexFromFingerPrint = (tableId, fingerPrint) => {
         // console.log(cell, fingerPrint)
         if (cell === fingerPrint) return i
     }
-    console.error("Can not find FingerPrint #", fingerPrint, "in all rows")
+    console.error('Can not find FingerPrint #', fingerPrint, 'in all rows')
     return -1
 }
 
@@ -143,16 +146,16 @@ const getMinValueOfAColumn = (tableId, columnName) => {
 
 const moveUpEditableTable = (params) => {
     // const debugEditable = true
-    if (debugEditable) console.log("Moving up editable table", params)
+    if (debugEditable) console.log('Moving up editable table', params)
     const { control, fingerPrint } = params
     const tableId = control.value
     const firstRowFingerPrintValue = 1 * getCellValueByName(tableId, '[finger_print]', 0)
     if (debugEditable) console.log(tableId, fingerPrint, firstRowFingerPrintValue)
     if (fingerPrint === firstRowFingerPrintValue) {
-        const max = getMaxValueOfAColumn(tableId, "[order_no]")
+        const max = getMaxValueOfAColumn(tableId, '[order_no]')
         // if (debugEditable) console.log("FIRST ROW, max of order_no", max)
         setCellValueByName(tableId, 'order_no', 0, max + table_order_no_step)
-        if (debugEditable) console.log("First ROW, move up, make it to MAX=", max + table_order_no_step)
+        if (debugEditable) console.log('First ROW, move up, make it to MAX=', max + table_order_no_step)
     } else {
         // if (debugEditable) console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
@@ -165,24 +168,24 @@ const moveUpEditableTable = (params) => {
         const tmp = myPreviousValue
         setCellValueByName(tableId, 'order_no', previousRowIndex, myValue)
         setCellValueByName(tableId, 'order_no', myRowIndex, tmp)
-        if (debugEditable) console.log("Normal ROW, move up, swap [", previousRowIndex, "]=", myValue, "with [", myRowIndex, "]=", tmp)
+        if (debugEditable) console.log('Normal ROW, move up, swap [', previousRowIndex, ']=', myValue, 'with [', myRowIndex, ']=', tmp)
     }
     reRenderTableBaseOnNewOrder(tableId)
 }
 
 const moveDownEditableTable = (params) => {
     // const debugEditable = true
-    if (debugEditable) console.log("Moving down editable table", params)
+    if (debugEditable) console.log('Moving down editable table', params)
     const { control, fingerPrint } = params
     const tableId = control.value
     const length = getAllRows(tableId).length
     const lastRowFingerPrintValue = 1 * getCellValueByName(tableId, '[finger_print]', length - 1)
     // console.log(tableId, fingerPrint, lastRowFingerPrintValue)
     if (fingerPrint === lastRowFingerPrintValue) {
-        const min = getMinValueOfAColumn(tableId, "[order_no]")
+        const min = getMinValueOfAColumn(tableId, '[order_no]')
         // console.log("FIRST ROW, min of order_by", min)
         setCellValueByName(tableId, 'order_no', length - 1, min - table_order_no_step)
-        if (debugEditable) console.log("First ROW, move up, make it to MIN=", min - table_order_no_step)
+        if (debugEditable) console.log('First ROW, move up, make it to MIN=', min - table_order_no_step)
     } else {
         // console.log("NORMAL ROW")
         const myRowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
@@ -195,7 +198,7 @@ const moveDownEditableTable = (params) => {
         const tmp = myNextValue
         setCellValueByName(tableId, 'order_no', nextRowIndex, myValue)
         setCellValueByName(tableId, 'order_no', myRowIndex, tmp)
-        if (debugEditable) console.log("Normal ROW, move up, swap [", nextRowIndex, "]=", myValue, "with [", myRowIndex, "]=", tmp)
+        if (debugEditable) console.log('Normal ROW, move up, swap [', nextRowIndex, ']=', myValue, 'with [', myRowIndex, ']=', tmp)
     }
     reRenderTableBaseOnNewOrder(tableId)
 }
@@ -211,17 +214,16 @@ const duplicateLineEditableTable = (params) => {
         const column = columns[i]
         //Do not duplicate those columns
         if (['action', 'id', 'order_no'].includes(column.dataIndex)) continue
-        let name = tableId + "[" + column['dataIndex'] + "][" + nameIndex + "]"
+        let name = tableId + '[' + column['dataIndex'] + '][' + nameIndex + ']'
         // console.log(column, column['properties'])
         if (column['properties']?.['control'] == 'picker_datetime' || column['control'] == 'picker_datetime') {
-            name = "hidden_" + name
+            name = 'hidden_' + name
             // console.log("Get from hidden filed", name)
         }
         let value = getValueById(name, column['renderer'])
         // console.log(column, value)
-        if(column['renderer'] == 'toggle4')
-            value = value == 'on' ? 1 : 0
-        
+        if (column['renderer'] == 'toggle4') value = value == 'on' ? 1 : 0
+
         valuesOfOrigin[column['dataIndex']] = value
     }
     // console.log(valuesOfOrigin)
@@ -239,7 +241,7 @@ const trashEditableTable = (params) => {
 
     const rowIndex = getIndexFromFingerPrint(tableId, fingerPrint)
     const value = getCellValueByName(tableId, '[DESTROY_THIS_LINE]', rowIndex) === 'true'
-    const isDeleted = !value;
+    const isDeleted = !value
     setCellValueByName(tableId, 'DESTROY_THIS_LINE', rowIndex, isDeleted)
     const icon_i_tag = button.firstChild
     // console.log(button, icon_i_tag)
@@ -257,16 +259,16 @@ const trashEditableTable = (params) => {
 const refreshCalculation = (tableId) => {
     // const debugEditable = true
     const length = getAllRows(tableId).length
-    if (debugEditable) console.log(tableId, "length", length)
+    if (debugEditable) console.log(tableId, 'length', length)
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, 'id', i)
         getEById(id).trigger('change', { batchLength: length })
-        if (debugEditable) console.log("Triggered change", id)
+        if (debugEditable) console.log('Triggered change', id)
     }
 }
 
 const refreshCalculationRO = (tableId) => {
-    const tableColumns = tableObjectColumns[tableId]//+ "RO"]
+    const tableColumns = tableObjectColumns[tableId] //+ "RO"]
     // console.log(tableColumns, tableId)
     for (let i = 0; i < tableColumns.length; i++) {
         if (tableColumns[i]['footer']) {
@@ -288,32 +290,31 @@ const cloneFirstLineDown = (dataIndex, tableId, renderer) => {
     const nameIndex = getNameIndexOfRowIndex(tableId, 0)
     if (debugEditable) console.log(nameIndex, renderer)
     const column = tableObjectIndexedColumns[tableId]
-    const control = (column[dataIndex]['properties']['control'])
-    const name = tableId + "[" + dataIndex + "][" + nameIndex + "]"
+    const control = column[dataIndex]['properties']['control']
+    const name = tableId + '[' + dataIndex + '][' + nameIndex + ']'
     const value = getValueById(name, renderer)
     // const value = getCellValueByName(tableId, '[' + dataIndex + ']', 0)
-    if (debugEditable) console.log(tableId, dataIndex, '=', value)
+    // if (debugEditable) console.log(tableId, dataIndex, '=', value)
     const length = getAllRows(tableId).length
 
     for (let i = 0; i < length; i++) {
         const id = makeIdFrom(tableId, dataIndex, i)
         if ($(`#${tableId} tr`).eq(i).attr('readonly') /* === 'readonly */) {
-            console.log("Skipped cloning of line ", i)
+            console.log('Skipped cloning of line ', i)
             continue
         }
 
-        if (renderer === 'toggle') {
+        if (renderer === 'toggle4') {
             getEById(id)[0].checked = value
         } else if (control === 'picker_datetime') {
-            newFlatPickrDateTime(id).setDate(value);
-            getEById("hidden_" + id).val(value);
+            newFlatPickrDateTime(id).setDate(value)
+            getEById('hidden_' + id).val(value)
             getEById(id).trigger('change', { batchLength: length })
         } else if (control === 'picker_date') {
-            newFlatPickrDate(id).setDate(value);
+            newFlatPickrDate(id).setDate(value)
             getEById(id).trigger('change', { batchLength: length })
-        }
-        else if (control === 'picker_time') {
-            newFlatPickrTime(id).setDate(value);
+        } else if (control === 'picker_time') {
+            newFlatPickrTime(id).setDate(value)
             getEById(id).trigger('change', { batchLength: length })
         } else {
             // console.log("Applying data for", id, value)
