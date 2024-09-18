@@ -147,5 +147,12 @@
         "title": "PHP INFO",
         "href": "\/php_info",
         "icon_fa": "fa-brands fa-php"
+    },
+    "apex-chart": {
+        "name": "apex-chart",
+        "group": "report",
+        "title": "ApexChart",
+        "href": "https://apexcharts.com/",
+        "icon_fa": "fa-sharp fa-solid fa-chart-simple"
     }
 }
