@@ -51,7 +51,7 @@ class ParentId7Tree extends Component
                     "id" => "user_" . $user->id,
                     "parent" => $user->company . "_department_" . $user->department,
                     "text" => "<span class='flex -mt-6'>" . $img . $user->name . "</span>",
-                    'data' => ['type' => 'user'],
+                    'data' => ['type' => 'user', 'user_id' => $user->id],
                     "icon" => '',
                 ];
                 $tree[] = $item;

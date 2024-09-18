@@ -33,14 +33,16 @@
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
             @php
                 $modalBodyName = $tableSettings['modal_body_name'];
-                $xxxForeignKey = $tableSettings['foreign_key'];
+                $xxxForeignKeys = $tableSettings['foreign_keys'];
+                $dataTypeToGetId = $tableSettings['data_type_to_get_id'];
             @endphp
             <x-renderer.button disabled="{{$readOnly}}" id="btnAddFromAList_{{$table01Name}}" click="toggleModal('modal-add-from-a-list-of-{{$table01Name}}')" keydownEscape="closeModal('{{$table01Name}}')" type="success">Add From A List</x-renderer.button>
             <x-modals.modal-add-from-a-list
                 modalId='modal-add-from-a-list-of-{{$table01Name}}' 
                 table01Name='{{$table01Name}}' 
-                xxxForeignKey='{{$xxxForeignKey}}'
+                xxxForeignKeys='{{$xxxForeignKeys}}'
                 modalBodyName='{{$modalBodyName}}'
+                dataTypeToGetId='{{$dataTypeToGetId}}'
                 />
         @endif
         {{-- @if(isset($tableSettings['button_get_lines']) && $tableSettings['button_get_lines'])

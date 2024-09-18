@@ -62,7 +62,7 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
                 'id' => "block_id_$block->id",
                 'parent' => "orphan_blocks",
                 'text' => $block->name . " " . $this->createLinkedId('rp_blocks', $block->id),
-                'data' => ['type' => 'block'],
+                'data' => ['type' => 'block', 'rp_block_id' => $block->id],
             ];
         }
     }
@@ -104,7 +104,7 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
                         'id' => "block_id_$block->id",
                         'parent' => "page_id_$page->id",
                         'text' => $block->name . " " . $this->createLinkedId('rp_blocks', $block->id),
-                        'data' => ['type' => 'block'],
+                        'data' => ['type' => 'block', 'rp_block_id' => $block->id],
                     ];
                 }
                 $pageItem = [

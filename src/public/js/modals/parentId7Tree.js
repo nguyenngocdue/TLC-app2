@@ -13,7 +13,7 @@ $(document).ready(() => {
                     const { type } = data
                     // console.log('Current node:', id, type)
                     if (['user'].includes(type)) {
-                        console.log('User:', id)
+                        // console.log('User:', id)
                         result.push(id.substring('user_'.length))
                     }
                     // console.log('Current all status:', data.instance.get_node(data.selected[i]).id)

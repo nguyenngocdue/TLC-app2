@@ -25,22 +25,11 @@
     <x-renderer.button 
         class="mx-2" 
         type='success' 
-        click="loadListToTable(addLinesToTableFormModalList, '{{$fieldIdName}}', '{{$table01Name}}', '{{$xxxForeignKey}}', '{{$modalId}}')"
+        click="loadListToTable(addLinesToTableFormModalList, '{{$fieldIdName}}', '{{$table01Name}}', '{{$xxxForeignKeys}}', '{{$dataTypeToGetId}}', '{{$modalId}}')"
         >Populate</x-renderer.button>
 </div>
 @endsection
 
 @section($modalId.'-javascript')
-<script>
-addLinesToTableFormModalList = (listId, tableId, xxxForeignKey, modalId) => {
-    const result = $("#{{$fieldIdName}}").val().split(',')
-    // console.log("Adding result now:",result)
-    for (let i = 0; i < result.length; i++) {        
-        // const today = moment().format('DD/MM/YYYY')
-        const valuesOfOrigin = { [xxxForeignKey]: result[i]}
-        // console.log("Add line", tableId, valuesOfOrigin)
-        addANewLine({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList:true, batchLength: result.length })
-    }
-}
-</script>
+<script src="{{asset('js/modals/modal-add-from-a-list.js')}}"></script>
 @endsection

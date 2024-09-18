@@ -113,7 +113,8 @@
         "editable-table": "fin_expense_claim_travel_details",
         "button_add_from_a_list": "true",
         "modal_body_name": "parent-id7-tree-fin-expense-travel-lines",
-        "foreign_key": "diginet_business_trip_line_finger_print"
+        "foreign_keys": "diginet_business_trip_line_finger_print, travel_date, day_count, reason",
+        "data_type_to_get_id": "travel_line"
     },
     "ghg_metric_type_1s_01": {
         "name": "ghg_metric_type_1s_01",
@@ -294,7 +295,8 @@
         "editable-table": "rp_page_block_details",
         "button_add_from_a_list": "true",
         "modal_body_name": "parent-id7-tree-report-blocks",
-        "foreign_key": "rp_block_id"
+        "foreign_keys": "rp_block_id",
+        "data_type_to_get_id": "block"
     },
     "rp_reports_01": {
         "name": "rp_reports_01",
@@ -355,7 +357,8 @@
         "editable-table": "zunit_test_14_user_details",
         "button_add_from_a_list": "true",
         "modal_body_name": "parent-id7-tree",
-        "foreign_key": "user_id"
+        "foreign_keys": "user_id",
+        "data_type_to_get_id": "user"
     },
     "zunit_test_15s_01": {
         "name": "zunit_test_15s_01",

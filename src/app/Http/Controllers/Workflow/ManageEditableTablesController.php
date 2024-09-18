@@ -70,27 +70,6 @@ class ManageEditableTablesController extends AbstractManageLibController
                 'align' => "center",
                 'width' => 60,
             ],
-            // [
-            //     "dataIndex" => "item_datasource",
-            //     "renderer"  => 'dropdown',
-            //     'editable' => true,
-            //     'cbbDataSource' => $entities,
-            //     'width' => 250,
-            // ],
-            // [
-            //     "dataIndex" => "eloquent_function_name",
-            //     "renderer"  => 'text4',
-            //     'editable' => true,
-            //     'width' => 200,
-            // ],
-            // [
-            //     "dataIndex" => "group_datasource",
-            //     "renderer"  => 'dropdown',
-            //     'editable' => true,
-            //     'cbbDataSource' => $entities,
-            //     'width' => 250,
-            // ],
-
             [
                 "dataIndex" => "modal_body_name",
                 "renderer"  => 'dropdown',
@@ -99,12 +78,17 @@ class ManageEditableTablesController extends AbstractManageLibController
                 'cbbDataSource' => JsonControls::getModalBodyName(),
             ],
             [
-                "dataIndex" => "foreign_key",
-                "renderer"  => 'text4',
+                "dataIndex" => "foreign_keys",
+                "renderer"  => 'textarea4',
                 'editable' => true,
                 'width' => 300,
             ],
-
+            [
+                "dataIndex" => "data_type_to_get_id",
+                "renderer"  => 'textarea4',
+                'editable' => true,
+                'width' => 200,
+            ],
         ];
     }
 
@@ -113,11 +97,9 @@ class ManageEditableTablesController extends AbstractManageLibController
         $dataSource = parent::getDataSource();
         foreach ($dataSource as &$data) {
             if (!isset($data['button_add_from_a_list'])) {
-                // $data['item_datasource'] = 'DO_NOT_RENDER';
-                // $data['eloquent_function_name'] = 'DO_NOT_RENDER';
-                // $data['group_datasource'] = 'DO_NOT_RENDER';
                 $data['modal_body_name'] = 'DO_NOT_RENDER';
-                $data['foreign_key'] = 'DO_NOT_RENDER';
+                $data['foreign_keys'] = 'DO_NOT_RENDER';
+                $data['data_type_to_get_id'] = 'DO_NOT_RENDER';
             }
         }
         return $dataSource;

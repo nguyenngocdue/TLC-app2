@@ -42,13 +42,11 @@
     ],
     "prop_static_controls": [
         "",
-        "my_new_control",
-        "business_travel_line"
+        "my_new_control"
     ],
     "controls": [
         "",
         "attachment",
-        "business_travel_line",
         "comment",
         "checkbox_2a",
         "dropdown",

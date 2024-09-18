@@ -35,9 +35,9 @@ class Fin_expense_claim_travel_detail extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'fin_expense_claim_id', 'value_as_parent_id' => true,  'invisible' => true],
 
-            ['dataIndex' => 'diginet_business_trip_line_finger_print'],
-            ['dataIndex' => 'travel_date'],
-            ['dataIndex' => 'day_count'],
+            ['dataIndex' => 'diginet_business_trip_line_finger_print', 'read_only_rr2' => true, 'invisible' => true],
+            ['dataIndex' => 'travel_date', 'read_only_rr2' => true,],
+            ['dataIndex' => 'day_count', 'read_only_rr2' => true, 'footer' => 'agg_sum'],
         ];
     }
 }

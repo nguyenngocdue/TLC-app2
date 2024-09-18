@@ -3,7 +3,6 @@
 namespace App\View\Components\Modals\ParentId7;
 
 use App\Models\Diginet_business_trip_line;
-use Barryvdh\Debugbar\Twig\Extension\Dump;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -61,7 +60,13 @@ class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
                     'id' => "travel_line_" . $item->id,
                     'text' => $item->tb_date . " - " . $item->tb_reason,
                     'parent' => Str::slug($groupText),
-                    'data' => ['type' => 'travel_line', 'finger_print' => $item->finger_print],
+                    'data' => [
+                        'type' => 'travel_line',
+                        'diginet_business_trip_line_finger_print' => $item->finger_print,
+                        'travel_date' => $item->tb_date,
+                        'day_count' => $item->number_of_tb_day,
+                        'reason' => $item->tb_reason,
+                    ],
                 ];
             }
             $result[] = [

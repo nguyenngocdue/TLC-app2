@@ -5,10 +5,7 @@ function alpineData() {
             return JSON.parse(window.localStorage.getItem('dark'))
         }
         // else return their preferences
-        return (
-            !!window.matchMedia &&
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-        )
+        return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     }
 
     function setThemeToLocalStorage(value) {
@@ -45,14 +42,14 @@ function alpineData() {
         closeProfileMenu() {
             this.isProfileMenuOpen = false
         },
-         ///////////////////////////////////
-         isThemeMenuOpen: false,
-         toggleThemeMenu() {
-             this.isThemeMenuOpen = !this.isThemeMenuOpen
-         },
-         closeThemeMenu() {
-             this.isThemeMenuOpen = false
-         },
+        ///////////////////////////////////
+        isThemeMenuOpen: false,
+        toggleThemeMenu() {
+            this.isThemeMenuOpen = !this.isThemeMenuOpen
+        },
+        closeThemeMenu() {
+            this.isThemeMenuOpen = false
+        },
         ///////////////////////////////////
         isProjectMenuOpen: false,
         toggleProjectMenu() {
@@ -118,9 +115,7 @@ function alpineData() {
         ///////////////////////////
         isIntermediateOpen: {},
         toggleIntermediate(type) {
-            const status =
-                document.getElementById('status') ??
-                document.getElementById('select-dropdown-status')
+            const status = document.getElementById('status') ?? document.getElementById('select-dropdown-status')
             status.value = type
             this.isIntermediateOpen[type] = !this.isIntermediateOpen[type]
         },
@@ -128,14 +123,12 @@ function alpineData() {
             this.isIntermediateOpen[type] = false
         },
         changeStatus(type) {
-            const status =
-                document.getElementById('status') ??
-                document.getElementById('select-dropdown-status')
+            const status = document.getElementById('status') ?? document.getElementById('select-dropdown-status')
             status.value = type
         },
 
-        loadListToTable(fn, listId, table01Name, xxxForeignKey, modalId) {
-            fn(listId, table01Name, xxxForeignKey)
+        loadListToTable(fn, listId, table01Name, xxxForeignKeys, dataTypeToGetId, modalId) {
+            fn(listId, table01Name, xxxForeignKeys, dataTypeToGetId, modalId)
             this.closeModal(modalId)
             // this.closeListingTable(modalId)
         },

@@ -96,7 +96,7 @@
         "column_name": "travel_date",
         "column_type": "date",
         "label": "Travel Date",
-        "control": "picker_datetime",
+        "control": "picker_date",
         "align": "",
         "col_span": "",
         "width": "",
