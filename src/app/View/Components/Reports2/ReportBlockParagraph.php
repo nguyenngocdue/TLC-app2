@@ -31,6 +31,7 @@ class ReportBlockParagraph extends Component
     private function formatDateWithTimezone($date, $timeZoneNumber, $dateDisplayFormat) {
         $date = DateReport::convertToTimezone($date, $timeZoneNumber);
         $date = new DateTime($date);
+        // dump($date,  $date->format('Y-m-d H:i:s'));
         return $date->format($dateDisplayFormat);
     }
     private function formatFromAndToDate($currentParams) {
