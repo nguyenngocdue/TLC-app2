@@ -150,7 +150,7 @@
     },
     "apex-chart": {
         "name": "apex-chart",
-        "group": "report",
+        "group": "third_party",
         "title": "ApexChart",
         "href": "https://apexcharts.com/",
         "icon_fa": "fa-solid fa-asterisk"
