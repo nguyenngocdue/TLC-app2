@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\BigThink\Math;
 use App\Models\Diginet_business_trip_line;
 use App\Models\Erp_vendor_external;
+use App\Models\Rp_block;
+use App\Models\Rp_report;
 use App\Utils\Support\Erp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -29,14 +31,29 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $all = Diginet_business_trip_line::all();
+        $result = [];
 
-        foreach ($all as $item) {
-            $item->finger_print = Math::createDiginetFingerprint([$item['employeeid'], $item['tb_date']]);
-            $item->save();
+        $allReports = Rp_report::query()
+            ->with('getPages.getBlockDetails.getBlock')
+            ->get();
+
+        foreach ($allReports as $report) {
+            $result[$report->id] = [
+                'item' => $report,
+                'children' => [],
+            ];
+            foreach ($report->getPages as $page) {
+                $result[$report->id]['children'][$page->id]['item'] = $page;
+                $result[$report->id]['children'][$page->id]['children'] = [];
+                foreach ($page->getBlockDetails as $blockDetail) {
+                    $block = $blockDetail->getBlock;
+                    $result[$report->id]['children'][$page->id]['children'][$block->id]['item'] = $block;
+                }
+            }
         }
 
-        echo Math::createDiginetFingerprint(['TLCM00024', 20220101]);
+
+        dump(array_pop($result));
 
         // $tables = Erp_vendor_external::query()->paginate(100);
 

@@ -261,5 +261,10 @@
         "accounting",
         "finance",
         "planning"
+    ],
+    "modal_body_name":[
+        "parent-id7-tree",
+        "parent-id7-tree-fin-expense-travel-lines",
+        "parent-id7-tree-report-blocks"
     ]
 }

@@ -3,251 +3,147 @@
         "name": "act_currency_xrs_01",
         "entity-type": "act_currency_xrs",
         "editable-table": "act_currency_xr_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "act_travel_expense_claims_01": {
         "name": "act_travel_expense_claims_01",
         "entity-type": "act_travel_expense_claims",
         "editable-table": "act_travel_expense_claim_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "act_travel_reqs_01": {
         "name": "act_travel_reqs_01",
         "entity-type": "act_travel_reqs",
         "editable-table": "act_travel_req_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "crm_ticketings_01": {
         "name": "crm_ticketings_01",
         "entity-type": "crm_ticketings",
         "editable-table": "crm_ticketing_tasks",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "department_skill_groups_01": {
         "name": "department_skill_groups_01",
         "entity-type": "department_skill_groups",
         "editable-table": "department_skills",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "eco_sheets_01": {
         "name": "eco_sheets_01",
         "entity-type": "eco_sheets",
         "editable-table": "eco_effectiveness_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "eco_sheets_02": {
         "name": "eco_sheets_02",
         "entity-type": "eco_sheets",
         "editable-table": "eco_taken_actions",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "eco_sheets_03": {
         "name": "eco_sheets_03",
         "entity-type": "eco_sheets",
         "editable-table": "eco_labor_impacts",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "eco_sheets_04": {
         "name": "eco_sheets_04",
         "entity-type": "eco_sheets",
         "editable-table": "eco_material_impact_adds",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "eco_sheets_05": {
         "name": "eco_sheets_05",
         "entity-type": "eco_sheets",
         "editable-table": "eco_material_impact_removes",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "esg_inductions_01": {
         "name": "esg_inductions_01",
         "entity-type": "esg_inductions",
         "editable-table": "esg_induction_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "esg_master_sheets_01": {
         "name": "esg_master_sheets_01",
         "entity-type": "esg_master_sheets",
         "editable-table": "esg_sheets",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null,
         "button_clone_from_tmpl": "true"
     },
     "esg_sheets_01": {
         "name": "esg_sheets_01",
         "entity-type": "esg_sheets",
         "editable-table": "esg_sheet_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "esg_tmpls_01": {
         "name": "esg_tmpls_01",
         "entity-type": "esg_tmpls",
         "editable-table": "esg_tmpl_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "exam_sheets_01": {
         "name": "exam_sheets_01",
         "entity-type": "exam_sheets",
         "editable-table": "exam_sheet_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "exam_tmpls_01": {
         "name": "exam_tmpls_01",
         "entity-type": "exam_tmpls",
         "editable-table": "exam_tmpl_questions",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "exam_tmpls_02": {
         "name": "exam_tmpls_02",
         "entity-type": "exam_tmpls",
         "editable-table": "exam_tmpl_groups",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "fin_expense_claims_01": {
         "name": "fin_expense_claims_01",
         "entity-type": "fin_expense_claims",
         "editable-table": "fin_expense_claim_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
-    },
-    "fin_expense_claims_02": {
-        "name": "fin_expense_claims_02",
-        "entity-type": "fin_expense_claims",
-        "editable-table": "diginet_business_trip_lines",
-        "item_datasource": "diginet_business_trip_lines",
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": "diginet_business_trip_line_finger_print",
-        "button_add_from_a_list": "true"
+        "button_add_a_new_line": "true"
     },
     "fin_expense_claims_03": {
         "name": "fin_expense_claims_03",
         "entity-type": "fin_expense_claims",
         "editable-table": "fin_expense_claim_travel_details",
-        "item_datasource": "diginet_business_trip_lines",
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": "diginet_business_trip_line_finger_print",
-        "button_add_from_a_list": "true"
+        "button_add_from_a_list": "true",
+        "modal_body_name": "parent-id7-tree",
+        "foreign_key": "diginet_business_trip_line_finger_print"
     },
     "ghg_metric_type_1s_01": {
         "name": "ghg_metric_type_1s_01",
         "entity-type": "ghg_metric_type_1s",
         "editable-table": "ghg_metric_type_2s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "ghg_metric_types_01": {
         "name": "ghg_metric_types_01",
         "entity-type": "ghg_metric_types",
         "editable-table": "ghg_metric_type_1s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "ghg_sheets_01": {
         "name": "ghg_sheets_01",
         "entity-type": "ghg_sheets",
         "editable-table": "ghg_sheet_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "ghg_tmpls_01": {
         "name": "ghg_tmpls_01",
         "entity-type": "ghg_tmpls",
         "editable-table": "ghg_tmpl_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hr_leave_nz_sheet_01": {
         "name": "hr_leave_nz_sheet_01",
         "entity-type": "hr_leave_nz_sheets",
         "editable-table": "hr_leave_lines",
         "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null,
         "button_recalculate": "true"
     },
     "hr_leave_sg_sheet_01": {
@@ -255,354 +151,214 @@
         "entity-type": "hr_leave_sg_sheets",
         "editable-table": "hr_leave_lines",
         "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null,
         "button_recalculate": "true"
     },
     "hr_leave_tpto_01": {
         "name": "hr_leave_tpto_01",
         "entity-type": "hr_leave_tptos",
         "editable-table": "hr_leave_tpto_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": "users",
-        "eloquent_function_name": "getThstTeams",
-        "group_datasource": "user_team_tshts",
-        "foreign_key": "user_id",
-        "button_add_from_a_list": "true"
+        "button_add_a_new_line": "true"
     },
     "hr_onboardings_01": {
         "name": "hr_onboardings_01",
         "entity-type": "hr_onboardings",
         "editable-table": "hr_onboarding_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hr_overtime_requests_01": {
         "name": "hr_overtime_requests_01",
         "entity-type": "hr_overtime_requests",
         "editable-table": "hr_overtime_request_lines",
         "button_add_a_new_line": "true",
-        "item_datasource": "users",
-        "eloquent_function_name": "getOtTeams",
-        "group_datasource": "user_team_ots",
-        "foreign_key": "user_id",
-        "button_add_from_a_list": "true",
         "button_recalculate": "true"
     },
     "hr_timesheet_officers_01": {
         "name": "hr_timesheet_officers_01",
         "entity-type": "hr_timesheet_officers",
         "editable-table": "hr_timesheet_officer_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hr_timesheet_workers_01": {
         "name": "hr_timesheet_workers_01",
         "entity-type": "hr_timesheet_workers",
         "editable-table": "hr_timesheet_worker_lines",
         "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null,
         "button_recalculate": "true"
     },
     "hse_audit_01": {
         "name": "hse_audit_01",
         "entity-type": "hse_audits",
         "editable-table": "hse_corrective_actions",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hse_incident_reports_01": {
         "name": "hse_incident_reports_01",
         "entity-type": "hse_incident_reports",
         "editable-table": "hse_corrective_actions",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hse_insp_chklst_shts_01": {
         "name": "hse_insp_chklst_shts_01",
         "entity-type": "hse_insp_chklst_shts",
         "editable-table": "hse_insp_chklst_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hse_insp_tmpl_shts_01": {
         "name": "hse_insp_tmpl_shts_01",
         "entity-type": "hse_insp_tmpl_shts",
         "editable-table": "hse_insp_tmpl_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "hse_walkthroughs_01": {
         "name": "hse_walkthroughs_01",
         "entity-type": "hse_walkthroughs",
         "editable-table": "hse_corrective_actions",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "pj_task_budgets_01": {
         "name": "pj_task_budgets_01",
         "entity-type": "pj_task_budgets",
         "editable-table": "pj_task_budget_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "prod_orders_01": {
         "name": "prod_orders_01",
         "entity-type": "prod_orders",
-        "editable-table": "prod_sequences",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "editable-table": "prod_sequences"
     },
     "prod_routings_01": {
         "name": "prod_routings_01",
         "entity-type": "prod_routings",
         "editable-table": "prod_routing_details",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "prod_sequences_01": {
         "name": "prod_sequences_01",
         "entity-type": "prod_sequences",
         "editable-table": "prod_runs",
         "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null,
         "button_recalculate": "true"
     },
     "projects_01": {
         "name": "projects_01",
         "entity-type": "projects",
         "editable-table": "sub_projects",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "qaqc_insp_chklst_shts_01": {
         "name": "qaqc_insp_chklst_shts_01",
         "entity-type": "qaqc_insp_chklst_shts",
         "editable-table": "qaqc_insp_chklst_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "qaqc_insp_tmpl_shts_01": {
         "name": "qaqc_insp_tmpl_shts_01",
         "entity-type": "qaqc_insp_tmpl_shts",
         "editable-table": "qaqc_insp_tmpl_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "qaqc_insp_tmpls_01": {
         "name": "qaqc_insp_tmpls_01",
         "entity-type": "qaqc_insp_tmpls",
         "editable-table": "qaqc_insp_tmpl_shts",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "qaqc_ncrs_01": {
         "name": "qaqc_ncrs_01",
         "entity-type": "qaqc_ncrs",
         "editable-table": "qaqc_cars",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "qaqc_punchlist_01": {
         "name": "qaqc_punchlist_01",
         "entity-type": "qaqc_punchlists",
         "editable-table": "qaqc_punchlist_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "qaqc_wirs_01": {
         "name": "qaqc_wirs_01",
         "entity-type": "qaqc_wirs",
         "editable-table": "qaqc_wir_lines",
         "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null,
         "button_recalculate": "true"
     },
     "rp_blocks_01": {
         "name": "rp_blocks_01",
         "entity-type": "rp_blocks",
         "editable-table": "rp_columns",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "rp_pages_01": {
         "name": "rp_pages_01",
         "entity-type": "rp_pages",
         "editable-table": "rp_page_block_details",
-        "item_datasource": "rp_blocks",
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": "rp_block_id",
-        "button_add_from_a_list": "true"
+        "button_add_from_a_list": "true",
+        "modal_body_name": "parent-id7-tree-report-blocks",
+        "foreign_key": "rp_block_id"
     },
     "rp_reports_01": {
         "name": "rp_reports_01",
         "entity-type": "rp_reports",
         "editable-table": "rp_pages",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "rp_reports_02": {
         "name": "rp_reports_02",
         "entity-type": "rp_reports",
         "editable-table": "rp_filter_links",
-        "button_add_a_new_line": "true",
-        "item_datasource": "rp_filter_links",
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "rp_reports_03": {
         "name": "rp_reports_03",
         "entity-type": "rp_reports",
         "editable-table": "rp_filters",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "site_daily_assignments_01": {
         "name": "site_daily_assignments_01",
         "entity-type": "site_daily_assignments",
         "editable-table": "site_daily_assignment_lines",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "zunit_test_06s_01": {
         "name": "zunit_test_06s_01",
         "entity-type": "zunit_test_06s",
         "editable-table": "prod_discipline_1s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "zunit_test_11s_01": {
         "name": "zunit_test_11s_01",
         "entity-type": "zunit_test_11s",
         "editable-table": "zunit_test_01s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "zunit_test_11s_02": {
         "name": "zunit_test_11s_02",
         "entity-type": "zunit_test_11s",
-        "editable-table": "departments",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "editable-table": "departments"
     },
     "zunit_test_12s_01": {
         "name": "zunit_test_12s_01",
         "entity-type": "zunit_test_12s",
         "editable-table": "zunit_test_02s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "zunit_test_13s_01": {
         "name": "zunit_test_13s_01",
         "entity-type": "zunit_test_13s",
         "editable-table": "zunit_test_03s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "zunit_test_15s_01": {
         "name": "zunit_test_15s_01",
         "entity-type": "zunit_test_15s",
         "editable-table": "zunit_test_05s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     },
     "zunit_test_19s_01": {
         "name": "zunit_test_19s_01",
         "entity-type": "zunit_test_19s",
         "editable-table": "zunit_test_09s",
-        "button_add_a_new_line": "true",
-        "item_datasource": null,
-        "eloquent_function_name": null,
-        "group_datasource": null,
-        "foreign_key": null
+        "button_add_a_new_line": "true"
     }
 }

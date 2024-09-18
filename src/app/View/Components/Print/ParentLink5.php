@@ -12,9 +12,7 @@ class ParentLink5 extends Component
      *
      * @return void
      */
-    public function __construct(private $dataSource)
-    {
-    }
+    public function __construct(private $dataSource) {}
 
     /**
      * Get the view / contents that represent the component.

@@ -160,4 +160,8 @@ class JsonControls
     {
         return self::getAll()['view_all_tab_taxonomy'];
     }
+    public static function getModalBodyName()
+    {
+        return self::getAll()['modal_body_name'];
+    }
 }

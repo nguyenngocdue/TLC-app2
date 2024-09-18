@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Modals;
+namespace App\View\Components\Modals\ParentId7;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControl;
 use Illuminate\View\Component;
@@ -34,15 +34,15 @@ class ParentId7Generic extends Component
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
     }
 
-    private function getDataSource()
+    protected function getDataSource()
     {
 
         $modalPath = Str::modelPathFrom($this->dataSourceTableName);
         $all = $modalPath::query();
 
-        if (method_exists($modalPath, $this->eloquentFunctionName)) {
-            $all = $all->with($this->eloquentFunctionName);
-        }
+        // if (method_exists($modalPath, $this->eloquentFunctionName)) {
+        // $all = $all->with($this->eloquentFunctionName);
+        // }
         switch ($this->dataSourceTableName) {
             case 'users':
                 $all = $all->whereNot('resigned', 1);

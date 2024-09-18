@@ -14,7 +14,8 @@
         "filter_values": "308",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getRendererType": {
         "name": "_getRendererType",
@@ -31,7 +32,8 @@
         "filter_values": "304",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getControl": {
         "name": "_getControl",
@@ -48,7 +50,8 @@
         "filter_values": "302",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getControl2": {
         "name": "_getControl2",
@@ -65,7 +68,8 @@
         "filter_values": "302",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getControl3": {
         "name": "_getControl3",
@@ -82,7 +86,8 @@
         "filter_values": "302",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getControl4": {
         "name": "_getControl4",
@@ -99,7 +104,8 @@
         "filter_values": "302",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getControl5": {
         "name": "_getControl5",
@@ -116,7 +122,8 @@
         "filter_values": "302",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getControl6": {
         "name": "_getControl6",
@@ -133,7 +140,8 @@
         "filter_values": "302",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -150,7 +158,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -167,7 +176,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getLines": {
         "name": "_getLines",
@@ -184,7 +194,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_get2ndHeaderLines": {
         "name": "_get2ndHeaderLines",
@@ -201,7 +212,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getPageDetails": {
+        "name": "_getPageDetails",
+        "relationship": "hasMany",
+        "control_name": "getPageDetails",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "page",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_html_attachment": {
         "name": "_html_attachment",
@@ -218,6 +248,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

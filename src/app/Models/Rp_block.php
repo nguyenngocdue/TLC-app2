@@ -7,13 +7,30 @@ use App\BigThink\ModelExtended;
 class Rp_block extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "title", "description",
-        "sql_string", "is_transformed_data","transformed_data_string",
-        "table_true_width", "max_h", "showNo",
-        "rotate_45_width", "rotate_45_height", "renderer_type", "chart_json", "has_pagination",
-        "top_left_control", "top_center_control", "top_right_control",
-        "bottom_left_control", "bottom_center_control", "bottom_right_control",
-        "chart_type", "html_content","owner_id",
+        "id",
+        "name",
+        "title",
+        "description",
+        "sql_string",
+        "is_transformed_data",
+        "transformed_data_string",
+        "table_true_width",
+        "max_h",
+        "showNo",
+        "rotate_45_width",
+        "rotate_45_height",
+        "renderer_type",
+        "chart_json",
+        "has_pagination",
+        "top_left_control",
+        "top_center_control",
+        "top_right_control",
+        "bottom_left_control",
+        "bottom_center_control",
+        "bottom_right_control",
+        "chart_type",
+        "html_content",
+        "owner_id",
     ];
 
     public static $statusless = true;
@@ -32,6 +49,9 @@ class Rp_block extends ModelExtended
         "get2ndHeaderLines" => ["hasMany", Rp_column::class, "block_id"],
 
         "html_attachment" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
+
+        "getPageDetails" => ["hasMany", Rp_page_block_detail::class, "rp_block_id"],
+        // "getBlockDetails" => ["hasMany", Rp_page_block_detail::class, "rp_page_id"],
     ];
 
     public function getChartType()
@@ -95,5 +115,11 @@ class Rp_block extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2])->whereNotNull('parent_id');
+    }
+
+    public function getPageDetails()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

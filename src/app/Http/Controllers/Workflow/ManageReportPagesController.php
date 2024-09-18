@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Workflow;
 
-use App\Utils\Support\JsonControls;
-
 class ManageReportPagesController extends AbstractManageLibController
 {
     protected $title = 'Manage Report Pages';
@@ -13,8 +11,8 @@ class ManageReportPagesController extends AbstractManageLibController
 
     protected function getColumns()
     {
-        $packages = JsonControls::getPackages();
-        $breadcrumbGroups = JsonControls::getBreadcrumbGroup();
+        // $packages = JsonControls::getPackages();
+        // $breadcrumbGroups = JsonControls::getBreadcrumbGroup();
         // $subPackages = JsonControls::getSubPackages();
         // $subPackages = Entities::getAllPluralNames();
         return   [

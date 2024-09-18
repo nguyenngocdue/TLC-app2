@@ -39,9 +39,15 @@ abstract class AbstractManageLibController extends Controller
         return $result;
     }
 
-    public function getDataSource()
+    protected function getDataSource()
     {
         $result = array_values($this->libraryClass::getAll());
+        return $result;
+    }
+
+    protected function renderDataSource()
+    {
+        $result = $this->getDataSource();
         foreach ($result as &$value) {
             $key = $value['name'];
             $value['action'] = Blade::render("<div class='whitespace-nowrap'>
@@ -56,7 +62,7 @@ abstract class AbstractManageLibController extends Controller
         if (app()->isProduction()) abort(403, "All Manage Lib Screens are not available on production.");
         return view("dashboards.pages.manage-library", [
             'columns' => $this->getColumns(),
-            'dataSource' => $this->getDataSource(),
+            'dataSource' => $this->renderDataSource(),
             'route' => $this->route,
             'title' => '',
             'topTitle' => $this->title,
