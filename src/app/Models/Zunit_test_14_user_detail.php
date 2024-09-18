@@ -31,7 +31,7 @@ class Zunit_test_14_user_detail extends ModelExtended
     public function getManyLineParams()
     {
         return [
-            ["dataIndex" => 'id', 'invisible' => !true,],
+            ["dataIndex" => 'id', 'invisible' => true,],
             ["dataIndex" => 'order_no',  'invisible' => true,],
             ["dataIndex" => 'zunit_test_14_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'user_id',],
