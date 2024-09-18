@@ -30,5 +30,7 @@ return new class extends Migration
         $table->orderable();
         $table->unsignedBigInteger('deleted_by')->nullable();
         $table->softDeletes();
+
+        $table->index('finger_print');
     }
 };
