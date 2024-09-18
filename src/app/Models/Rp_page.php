@@ -59,7 +59,7 @@ class Rp_page extends ModelExtended
             ["dataIndex" => 'id', /* 'invisible' => true, */],
             ["dataIndex" => 'order_no',/*  'invisible' => true, */],
             ["dataIndex" => 'report_id', 'value_as_parent_id' => true, 'invisible' => true,],
-            ["dataIndex" => 'is_active'],
+            ["dataIndex" => 'is_active', 'cloneable' => true,],
             ["dataIndex" => 'name'],
             ["dataIndex" => 'letter_head_id'],
             ["dataIndex" => 'letter_footer_id'],

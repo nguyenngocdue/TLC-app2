@@ -60,7 +60,7 @@ class Rp_filter extends ModelExtended
             ["dataIndex" => 'order_no',],
             ["dataIndex" => 'title',],
             ["dataIndex" => 'report_id', 'value_as_parent_id' => true, 'invisible' => true, ],
-            ["dataIndex" => 'is_active',],
+            ["dataIndex" => 'is_active', 'cloneable' => true, ],
             ["dataIndex" => 'data_index'],
             ["dataIndex" => 'entity_type'],
             ["dataIndex" => 'bw_list_ids'],

@@ -51,7 +51,7 @@ class Rp_page_block_detail extends ModelExtended
             ["dataIndex" => 'order_no', /* 'invisible' => true, */],
             ["dataIndex" => 'rp_page_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'rp_block_id', /*'read_only_rr2' => 1*/],
-            ["dataIndex" => 'is_active'],
+            ["dataIndex" => 'is_active', 'cloneable' => true,],
             ["dataIndex" => 'col_span'],
             ["dataIndex" => 'attachment_background'],
         ];

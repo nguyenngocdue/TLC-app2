@@ -62,7 +62,7 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'block_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'title'],
             ["dataIndex" => 'name'],
-            ["dataIndex" => 'is_active'],
+            ["dataIndex" => 'is_active', 'cloneable' => true],
             ["dataIndex" => 'data_index'],
             ["dataIndex" => 'col_span'],
             ["dataIndex" => 'row_span'],
