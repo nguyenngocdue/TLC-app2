@@ -48,6 +48,7 @@ class MigrationsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom($path . "cleanOrphanAttachments");
 
         $this->loadMigrationsFrom($path . "pivots");
+        $this->loadMigrationsFrom($path . "pivot-details");
         $this->loadMigrationsFrom($path . "foreignKeys");
 
         $this->loadMigrationsFrom($path . "views");

@@ -699,6 +699,13 @@
     "zunit_test_13s": {
         "name": "zunit_test_13s"
     },
+    "zunit_test_14_user_details": {
+        "name": "zunit_test_14_user_details",
+        "storeEmpty_and_updateShort": "true"
+    },
+    "zunit_test_14s": {
+        "name": "zunit_test_14s"
+    },
     "zunit_test_15s": {
         "name": "zunit_test_15s"
     },

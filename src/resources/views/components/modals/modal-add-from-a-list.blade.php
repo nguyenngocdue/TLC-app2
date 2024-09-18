@@ -34,13 +34,15 @@
             inputId='{$fieldIdName}'
         />";
         echo Blade::render($view);
+
+        $hidden = (app()->isLocal()) ? '' : 'hidden';
     @endphp
 @endsection
 
 @section($modalId.'-footer')
 <div class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 dark:border-gray-600 p-2">
     <input id="{{$fieldIdName}}" 
-        type="hidden" 
+        type="{{$hidden}}" 
         class="bg-pink-400 p-1 mr-2 border rounded w-full" 
         />
     <x-renderer.button 

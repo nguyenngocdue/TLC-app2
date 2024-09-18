@@ -34,12 +34,8 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
                 'id' => "entity_type_$entityType",
                 'parent' => "#",
                 'text' => $title,
-                'state' => [
-                    'opened' => 0,
-                ],
-                'data' => [
-                    'type' => 'entity'
-                ],
+                'state' => ['opened' => 0,],
+                'data' => ['type' => 'entity'],
             ];
         }
     }
@@ -57,12 +53,8 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
             'id' => "orphan_blocks",
             'parent' => "#",
             'text' => "(Orphan blocks)",
-            'state' => [
-                'opened' => 0,
-            ],
-            'data' => [
-                'type' => 'entity'
-            ],
+            'state' => ['opened' => 0,],
+            'data' => ['type' => 'entity'],
         ]);
 
         foreach ($blocks as $block) {
@@ -70,9 +62,7 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
                 'id' => "block_id_$block->id",
                 'parent' => "orphan_blocks",
                 'text' => $block->name . " " . $this->createLinkedId('rp_blocks', $block->id),
-                'data' => [
-                    'type' => 'block'
-                ],
+                'data' => ['type' => 'block'],
             ];
         }
     }
@@ -114,22 +104,16 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
                         'id' => "block_id_$block->id",
                         'parent' => "page_id_$page->id",
                         'text' => $block->name . " " . $this->createLinkedId('rp_blocks', $block->id),
-                        'data' => [
-                            'type' => 'block'
-                        ],
+                        'data' => ['type' => 'block'],
                     ];
                 }
                 $pageItem = [
                     'id' => "page_id_{$page->id}",
                     'parent' => "report_id_$report->id",
                     'text' => $page->name . " " . $this->createLinkedId('rp_pages', $page->id),
-                    'state' => [
-                        'opened' => 1,
-                    ],
+                    'state' => ['opened' => 1,],
                     'icon' => "fa-regular fa-file text-green-400",
-                    'data' => [
-                        'type' => 'page'
-                    ],
+                    'data' => ['type' => 'page'],
                 ];
                 if ($blockCount == 0) {
                     $pageItem['icon'] = "fa-regular fa-file-xmark text-pink-400";
@@ -140,12 +124,8 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
                 'id' => "report_id_{$report->id}",
                 'parent' => "entity_type_{$report->entity_type}",
                 'text' => $report->name . " " . $this->createLinkedId('rp_reports', $report->id),
-                'state' => [
-                    'opened' => 1,
-                ],
-                'data' => [
-                    'type' => 'report'
-                ],
+                'state' => ['opened' => 1,],
+                'data' => ['type' => 'report'],
                 'icon' => "text-blue-400 fa-regular fa-file-chart-column",
             ];
         }

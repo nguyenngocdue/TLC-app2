@@ -349,6 +349,14 @@
         "editable-table": "zunit_test_03s",
         "button_add_a_new_line": "true"
     },
+    "zunit_test_14s_01": {
+        "name": "zunit_test_14s_01",
+        "entity-type": "zunit_test_14s",
+        "editable-table": "zunit_test_14_user_details",
+        "button_add_from_a_list": "true",
+        "modal_body_name": "parent-id7-tree",
+        "foreign_key": "user_id"
+    },
     "zunit_test_15s_01": {
         "name": "zunit_test_15s_01",
         "entity-type": "zunit_test_15s",

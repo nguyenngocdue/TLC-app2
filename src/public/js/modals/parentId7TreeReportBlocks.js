@@ -1,6 +1,9 @@
 $(document).ready(() => {
     $('#json_tree_1')
-        .jstree({ core: { data: jsonTree }, plugins: ['wholerow', 'checkbox'] })
+        .jstree({
+            core: { data: jsonTree },
+            plugins: ['wholerow', 'checkbox'],
+        })
         .on('changed.jstree', (e, selectedNode) => {
             if (!!inputId) {
                 const result = []

@@ -3494,6 +3494,38 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "zunit_test_14": {
+        "name": "zunit_test_14",
+        "package_tab": "application",
+        "package": "unit_test",
+        "sub_package": "unit_test",
+        "title": "UT14 (Add from a Modal)",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
+    "zunit_test_14_user_detail": {
+        "name": "zunit_test_14_user_detail",
+        "package_tab": "application",
+        "package": "unit_test",
+        "sub_package": "unit_test",
+        "title": "UT14 User Details",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "zunit_test_15": {
         "name": "zunit_test_15",
         "package_tab": "application",
