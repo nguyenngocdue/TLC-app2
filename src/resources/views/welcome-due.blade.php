@@ -3,53 +3,13 @@
 @section('title', '')
 
 @section('content')
- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<div id="chart"></div>
 
-<script>
-    var options = {
-        chart: {
-            type: 'line',
-            height: 350
-        },
-        series: [
-            {
-                name: 'Open Issues',
-                data: [5, 8, 6, 1, 4, 3, 1, 2, 6, 5, 1, 8],
-                color: '#00E396'
-            },
-            {
-                name: 'Closed Issues',
-                data: [0, 1, 1, 3, 0, 1, 1, 2, 2, 1, 0, 3],
-                color: '#008FFB'
-            }
-        ],
-        xaxis: {
-            categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-        },
-        yaxis: {
-            title: {
-                text: 'Issues (qty)'
-            },
-            min: 0,
-            max: 15,
-        },
-        markers: {
-            size: 4
-        },
-        dataLabels: {
-            enabled: true,
-        },
-        title: {
-            text: 'Issues Reported Over the Year',
-            align: 'left'
-        },
-        legend: {
-            position: 'bottom'
-        }
-    };
+@php 
+$currentDate = str_replace('Nguyen', 'Mr.', 'Nguyen Ngoc Due');
+$fromDate = new DateTime('2024-09-18 08:58:59');
+$fromDate = $fromDate->format('Y-m-d');
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
-</script>
+@endphp
+<x-renderer.heading level=1 class="italic text-center">Hello {{$currentDate}}</x-renderer.heading>
+<x-renderer.heading level=1 class="italic text-center">Salary Period: from {{$fromDate}}</x-renderer.heading>
 @endsection

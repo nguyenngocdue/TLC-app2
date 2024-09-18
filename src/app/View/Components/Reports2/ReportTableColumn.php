@@ -114,6 +114,7 @@ class ReportTableColumn
                     'dataIndex' => $key,
                     'align' => $lastTransformedData['align'] ?? 'center',
                     'footer' => $lastTransformedData['footer'] ?? '',
+                    'width' => $lastTransformedData['width'] ?? 100,
                 ];
             }
             if ($customCols) {
@@ -124,6 +125,7 @@ class ReportTableColumn
                         'dataIndex' => $value['data_index'],
                         'align' => $value['align'] ?? 'center',
                         'footer' => $value['footer'] ?? '',
+                        'width' => $value['width'] ?? 100,
                     ];
                     // set position columns
                     $position = $value['position'] ?? count($columns);
