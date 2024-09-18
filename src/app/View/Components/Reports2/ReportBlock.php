@@ -41,13 +41,14 @@ class ReportBlock extends Component
             if(!$item->is_active) continue;
             $block = $item->getBlock;
             try {
-                [$queriedData, $fieldTransformation, $sqlString] = $this->getDataSQLString($block, $currentParams);
+                [$queriedData, $transformedFields, $sqlString] = $this->getDataSQLString($block, $currentParams);
                 $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
+
             $reportTableColumn = ReportTableColumn::getInstance();
-            [$headerCols, $secondHeaderCols] = $reportTableColumn->getDataColumns($block, $queriedData);
+            [$headerCols, $secondHeaderCols] = $reportTableColumn->getDataColumns($block, $queriedData, $transformedFields);
             
             $blockItem = [
                 'colSpan' => $item->col_span,
@@ -57,7 +58,7 @@ class ReportBlock extends Component
                 'tableDataSource' => $queriedPagData,
                 'headerCols' => $headerCols,
                 'secondHeaderCols' => $secondHeaderCols,
-                'fieldTransformation' => $fieldTransformation,
+                'transformedFields' => $transformedFields,
                 'sqlString' => $sqlString,
             ];
             $blockDataSource[] = $blockItem;

@@ -1,4 +1,4 @@
-{{-- @dd($hasPagination); --}}
+{{-- @dd($tableColumns); --}}
 <x-renderer.table 
     headerTop=12 
     showNo=true 

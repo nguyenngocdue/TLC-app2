@@ -79,7 +79,9 @@ class ReportBlockTable extends Component
         if(!$configuredCols) {
             $tableDataSource = $this->queriedData;
             $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
-        } 
+        }
+
+        // dd($headerCols);
 
         return view('components.reports2.report-block-table', [
             'block' => $block,

@@ -10,8 +10,15 @@ trait TraitReportTransformedData
     private function sortData($transformedOpt) {
         if (!$transformedOpt) return [];
         if (is_string($transformedOpt)) $transformedOpt = json_decode($transformedOpt, true);
-        uasort($transformedOpt, function($a, $b) {return $a['order_no'] <=> $b['order_no'];});
-        return $transformedOpt;
+        if ($transformedOpt) {
+            uasort($transformedOpt, function($a, $b) {
+                if (isset($a['order_no']) && isset($b['order_no'])) {
+                    return $a['order_no'] <=> $b['order_no'];
+                }
+            });
+            return $transformedOpt;
+        }
+        return [];
     }
 
     public function transformData($dataSource, $transformedOpt){
@@ -21,11 +28,12 @@ trait TraitReportTransformedData
             switch ($type) {
                 case 'grouping_to_matrix':
                     $params = $item['params'];
-                    $hasTotalCols = $item['has_total_columns'] ?? null;
-                    [$transformedData, $fieldsOfTransformedCols] = $this->createMatrix($dataSource, $params, $hasTotalCols);
-                    return [collect($transformedData), $fieldsOfTransformedCols];
+                    $customCols = $item['custom_columns'] ?? null;
+                    [$transformedData, $transformedFields] = $this->createMatrix($dataSource, $params, $customCols);
+                    return [collect($transformedData), $transformedFields];
                 case "reduce":
-                    $params = $item['params'];
+                    // $params = $item['params'];
+
 
                 case "filter":
                 default:

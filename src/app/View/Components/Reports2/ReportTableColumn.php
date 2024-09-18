@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Utils\Support\Report;
+
 class ReportTableColumn
 {
     use TraitReportTermNames;
@@ -39,7 +41,7 @@ class ReportTableColumn
         return $cols;
     }
 
-    public function getDataColumns($block, $queriedData)
+    public function getDataColumns($block, $queriedData, $transformedFields)
     {
         if($queriedData->isEmpty()){
             $columnInstance = ReportTableColumn::getInstance($block);
@@ -73,7 +75,7 @@ class ReportTableColumn
         }
         if ($block->is_transformed_data && ($x = $block->transformed_data_string)){
             $transformedOpt = $this->sortData($x, true);
-            $transformedCols = $this->getDataColumnsByTransformData($queriedData, $fields, $transformedOpt);
+            $transformedCols = $this->getTransformedDataCols($queriedData, $fields, $transformedOpt , $transformedFields);
             $headerCols = array_merge($headerCols, $transformedCols);
         }
         return [$headerCols, $secondHeaderCols];
@@ -99,23 +101,38 @@ class ReportTableColumn
         return $dataHeader;
     }
 
-    public function getDataColumnsByTransformData($queriedData, $fields, $transformedOpt){        
-        $firstItem = $queriedData->first();
+    public function getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields){        
+        $firstItem = $transformedFields;
         $columns = [];
         if ($firstItem) {
             $lastTransformedData = last($transformedOpt);
-            if($lastTransformedData && isset($lastTransformedData['footer_agg'])){
-                $footerAgg = $lastTransformedData['footer_agg'];
-            }
-            foreach(array_keys($firstItem) as $key) {
-                if (in_array($key, $fields)) continue;
+            $customCols = $lastTransformedData['custom_columns'] ?? [];
+            $customColFields = array_map(fn($item) => $item['data_index'], $customCols);
+            foreach($firstItem as $key) {
+                if (in_array($key, $fields) || in_array($key, $customColFields)) continue;
                 $columns[] = [
                     'dataIndex' => $key,
-                    'align' => 'center',
-                    'footer' => $footerAgg ?? '',
+                    'align' => $lastTransformedData['align'] ?? 'center',
+                    'footer' => $lastTransformedData['footer'] ?? '',
                 ];
             }
+            if ($customCols) {
+                foreach ($customCols as $value) {
+                    if (in_array($value['data_index'], $fields) && !$value['display']) continue;
+                    $newColumn = [
+                        'title' => $value['title'] ?? $value['data_index'],
+                        'dataIndex' => $value['data_index'],
+                        'align' => $value['align'] ?? 'center',
+                        'footer' => $value['footer'] ?? '',
+                    ];
+                    // set position columns
+                    $position = $value['position'] ?? count($columns);
+                    $position = is_numeric($position) ?  $position : ($position == 'end' ? count($columns) : 0 );
+                    array_splice($columns, $position, 1, [$newColumn]);
+                }
+            }
         }
+        // dd($columns);
         return $columns;
     }
 

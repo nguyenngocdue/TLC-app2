@@ -15,7 +15,7 @@ class ReportBlockChart extends Component
         private $block = null,
         private $queriedData = null,
         private $headerCols = [],
-        private $fieldTransformation = [],
+        private $transformedFields = [],
     ) {}
 
     private function changeToJsonOptionsByTransformation($options, $queriedData, $fields){
@@ -38,9 +38,9 @@ class ReportBlockChart extends Component
 
     private function changeToJsonOptions($options, $queriedData)
     {
-        $fieldTransformation = $this->fieldTransformation;
-        if($fieldTransformation) {
-            $options = $this->changeToJsonOptionsByTransformation($options, $queriedData, $fieldTransformation);
+        $transformedFields = $this->transformedFields;
+        if($transformedFields) {
+            $options = $this->changeToJsonOptionsByTransformation($options, $queriedData, $transformedFields);
         } else {
              $parsedVariables = $this->parseVariables($options);
             foreach (last($parsedVariables) as $key => $value) {
