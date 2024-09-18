@@ -190,6 +190,7 @@ trait TableTraitFooter
             // dump($result0);
             return join("", $result0);
         } catch (\Exception $e) {
+            dump($column);
             dump("Error during making footer aggregation, line " . $e->getLine());
             dd($e->getMessage());
         }

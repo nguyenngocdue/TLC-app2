@@ -18,11 +18,11 @@ trait TraitReportQueriedData
             $sql = $this->getSql($sqlString, $params);
             $sqlData = DB::select($sql);
             $queriedData = collect($sqlData);
-            $fieldTransformation = [];
+            $transformedFields = [];
             if ($block->is_transformed_data){
-                [$queriedData , $fieldTransformation]  = $this->transformData($queriedData, $block->transformed_data_string);
+                [$queriedData , $transformedFields]  = $this->transformData($queriedData, $block->transformed_data_string);
             }
-            return [ $queriedData, $fieldTransformation, $sql];
+            return [ $queriedData, $transformedFields, $sql];
         }
         return [collect(), [], $sql];
     }

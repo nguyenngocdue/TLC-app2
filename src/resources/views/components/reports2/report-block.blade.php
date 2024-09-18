@@ -33,13 +33,13 @@
             @switch($rendererType)
                 @case($CHART_TYPE_ID)
                     @php
-                        $fieldTransformation = $blockItem['fieldTransformation'];
+                        $transformedFields = $blockItem['transformedFields'];
                     @endphp
                     <x-reports2.report-block-chart 
                         :block="$block" 
                         reportId="{{ $reportId }}" 
                         :queriedData="$queriedData"
-                        :fieldTransformation="$fieldTransformation"
+                        :transformedFields="$transformedFields"
                         :headerCols="$headerCols" />
                     @break
 
@@ -52,6 +52,7 @@
                     @break
 
                 @default
+                   
                     @if (!$rendererType)
                         @dump($sqlString)
                         @dump($queriedData)
@@ -64,7 +65,6 @@
                         :secondHeaderCols="$secondHeaderCols"
                         :currentParams="$currentParams"
                         :queriedData="$queriedData"
-                        
                         />
                     @if(!$block->renderer_type)
                         <x-renderer.button href="{{ route('rp_blocks.edit', $block->id) }}" type="warning" title="{{ $block->name }}">
