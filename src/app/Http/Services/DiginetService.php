@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\BigThink\Math;
 use App\Events\ButtonClickEvent;
 use App\Http\Controllers\DiginetHR\PageController\DiginetDataController;
 use App\Utils\Support\APIDiginet;
@@ -71,7 +72,6 @@ class DiginetService
         $modelIns = new $modelPath;
         $fieldsToMap = array_slice($m = $modelIns->getFillable(), 1, count($m) - 3);
         $tableName = $modelIns->getTable();
-
         // sent API request
         $data = APIDiginet::getDatasourceFromAPI($endpointName, $params);
         if (isset($data->original) && isset($data->original['error'])) {
@@ -104,7 +104,17 @@ class DiginetService
             $response['message'] = "{$del} rows were deleted from {$tableName} from $fromDate to $toDate";
 
             foreach ($data as &$item) {
+                if ($tableName === 'diginet_business_trip_lines') {
+                    $array = ['finger_print' => Math::createDiginetFingerprint([$item['EmployeeID'], $item['TBDate']])];
+                    $item = array_merge($array, $item);
+                }
                 $item = $this->changeFields($item, $fieldsToMap, $conFieldName);
+
+                // TO DEBUG
+                // if ($tableName === 'diginet_business_trip_lines') {
+                //     dd($item);
+                // }
+
                 if (isset($item['field_error'])) {
                     $response['status'] = 'error';
                     $response['period'] = $fromDate . ' - ' . $toDate;
