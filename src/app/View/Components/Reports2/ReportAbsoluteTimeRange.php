@@ -163,6 +163,7 @@ class ReportAbsoluteTimeRange extends Component
             'presetTitle' => $currentParams['preset_title'],
             'timezoneData' => $timezoneData,
             'timeZone' => $currentParams['time_zone'],
+            'dateDisplayFormat' => $currentParams['date_display_format'] ?? 'y-m-d H:i:s',
         ]
     );
     }

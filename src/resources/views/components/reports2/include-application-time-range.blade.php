@@ -19,10 +19,18 @@
                 <label class="block text-sm font-medium text-gray-700">To</label>
                 <input type="text" name="to_date" value="{{$toDate}}" id="to_date" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
+            
+             {{-- Date Display Format --}}
+            <div class="relative">
+                <label class="block text-sm font-medium text-gray-700">Select date format to display</label>
+                <input type="text" name="date_display_format" value="{{$dateDisplayFormat}}" id="date_display_format" placeholder="Select type of format" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
         </div>
         <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Apply time range</button>
     </div>
 </form>
+
+
 
  <!-- Add Flatpickr JS -->
 {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
