@@ -46,6 +46,7 @@ class ReportBlock extends Component
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
+
             $reportTableColumn = ReportTableColumn::getInstance();
             [$headerCols, $secondHeaderCols] = $reportTableColumn->getDataColumns($block, $queriedData, $transformedFields);
             

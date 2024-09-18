@@ -53,40 +53,42 @@ trait TraitReportMatrixColumn
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
         
-
-        foreach ($customCols as $key => $col){
-            $aggType = $col['footer_row'] ?? '';
-            $dataIndex  = isset($col['data_index']) ? $col['data_index'] :'';
-            switch ($aggType) {
-                case 'agg_sum':
-                    foreach ($mergedData as &$values) {
-                        $total = 0;
-                        foreach ($transformedFields as $type) {
-                            if (!isset($values[$type])) $values[$type] = $valueToSet;
-                            else $total += (float)$values[$type];
+        if ($customCols) {
+            foreach ($customCols as $key => $col){
+                $aggType = $col['footer_row'] ?? '';
+                $dataIndex  = isset($col['data_index']) ? $col['data_index'] :'';
+    
+                switch ($aggType) {
+                    case 'agg_sum':
+                        foreach ($mergedData as &$values) {
+                            $total = 0;
+                            foreach ($transformedFields as $type) {
+                                if (!isset($values[$type])) $values[$type] = $valueToSet;
+                                else $total += (float)$values[$type];
+                            }
+                            $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
                         }
-                        $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
-                    }
-                    break;
-                case "agg_count_unique_values":
-                    foreach ($mergedData as &$values) {
-                        $intersect = $this->getIntersectingValues($values, $transformedFields);
-                        $filteredArray = $this->filterValidValues($intersect);
-                        $uniqueValues = array_unique(array_values($filteredArray));
-                        $count = count($uniqueValues);
-                        $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
-                    }
-                    break;
-                case "agg_count_all":
-                    foreach ($mergedData as &$values) {
-                        $intersect = $this->getIntersectingValues($values, $transformedFields);
-                        $filteredArray = $this->filterValidValues($intersect);
-                        $count = count($filteredArray);
-                        $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                    case "agg_count_unique_values":
+                        foreach ($mergedData as &$values) {
+                            $intersect = $this->getIntersectingValues($values, $transformedFields);
+                            $filteredArray = $this->filterValidValues($intersect);
+                            $uniqueValues = array_unique(array_values($filteredArray));
+                            $count = count($uniqueValues);
+                            $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
+                        }
+                        break;
+                    case "agg_count_all":
+                        foreach ($mergedData as &$values) {
+                            $intersect = $this->getIntersectingValues($values, $transformedFields);
+                            $filteredArray = $this->filterValidValues($intersect);
+                            $count = count($filteredArray);
+                            $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         sort($transformedFields);

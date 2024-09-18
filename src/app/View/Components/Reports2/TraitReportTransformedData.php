@@ -32,7 +32,8 @@ trait TraitReportTransformedData
                     [$transformedData, $transformedFields] = $this->createMatrix($dataSource, $params, $customCols);
                     return [collect($transformedData), $transformedFields];
                 case "reduce":
-                    $params = $item['params'];
+                    // $params = $item['params'];
+
 
                 case "filter":
                 default:
