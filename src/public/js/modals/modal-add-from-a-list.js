@@ -3,10 +3,10 @@ addLinesToTableFormModalList = (listId, tableId, xxxForeignKeys, dataTypeToGetId
         .val()
         .split(',')
         .map((x) => x * 1)
-    // console.log('Adding result now:', listId, result)
+    console.log('Adding result now:', listId, result)
     const xxxForeignKeyArray = xxxForeignKeys.split(',').map((x) => x.trim())
-    // console.log('xxxForeignKeyArray', xxxForeignKeyArray)
-    // console.log('dataTypeToGetId', dataTypeToGetId)
+    console.log('xxxForeignKeyArray', xxxForeignKeyArray)
+    console.log('dataTypeToGetId', dataTypeToGetId)
     // console.log('jsonTree', jsonTree)
 
     const linesOfCorrectType = []
@@ -15,7 +15,7 @@ addLinesToTableFormModalList = (listId, tableId, xxxForeignKeys, dataTypeToGetId
             linesOfCorrectType.push(jsonTree[i])
         }
     }
-    // console.log("linesOfCorrectType", linesOfCorrectType)
+    console.log('linesOfCorrectType', linesOfCorrectType)
 
     const strongKey = xxxForeignKeyArray[0] // can be ID or finger_print
     const toBeAdded = []
@@ -27,7 +27,7 @@ addLinesToTableFormModalList = (listId, tableId, xxxForeignKeys, dataTypeToGetId
             toBeAdded.push(line)
         }
     }
-    // console.log('toBeAdded', toBeAdded)
+    console.log('toBeAdded', toBeAdded)
 
     for (let i = 0; i < toBeAdded.length; i++) {
         // const today = moment().format('DD/MM/YYYY')
@@ -36,7 +36,7 @@ addLinesToTableFormModalList = (listId, tableId, xxxForeignKeys, dataTypeToGetId
         for (let j = 0; j < xxxForeignKeyArray.length; j++) {
             valuesOfOrigin[xxxForeignKeyArray[j]] = toBeAdded[i].data[xxxForeignKeyArray[j]]
         }
-        // console.log('Add line', tableId, valuesOfOrigin)
+        console.log('Add line', tableId, valuesOfOrigin)
         addANewLine({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList: true, batchLength: toBeAdded.length })
     }
 }
