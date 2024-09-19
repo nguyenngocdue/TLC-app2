@@ -553,7 +553,10 @@ class UpdateUserSettings extends Controller
         $user->settings = $settings;
         $user->update();
         toastr()->success('User Settings Saved Successfully', 'Successfully');
-        if (is_null($redirectTo)) return redirect()->back();
+        if (is_null($redirectTo)) {
+            dump(url()->previous());
+            return redirect()->back();
+            }
         return redirect($redirectTo);
     }
 }
