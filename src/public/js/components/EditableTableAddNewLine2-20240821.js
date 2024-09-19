@@ -315,7 +315,6 @@ const addANewLineFull = (params) => {
                     break
                 case 'dropdown4':
                     multipleStr = column?.multiple ? 'multiple' : ''
-                    readOnlyStr = column?.readOnly ? 'readonly' : ''
                     bracket = column?.multiple ? '[]' : ''
                     if (column['readOnly'] && column['deaf']) {
                         renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"

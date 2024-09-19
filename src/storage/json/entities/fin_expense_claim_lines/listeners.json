@@ -89,6 +89,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_vat_amount": {
+        "name": "_vat_amount",
+        "column_name": "vat_amount",
+        "listen_action": "expression",
+        "triggers": "total_amount_0,vat_product_posting_group_value",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "total_amount_0 * vat_product_posting_group_value \/ 100",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_total_amount_1": {
         "name": "_total_amount_1",
         "column_name": "total_amount_1",

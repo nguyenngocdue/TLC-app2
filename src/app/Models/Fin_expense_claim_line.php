@@ -24,6 +24,7 @@ class Fin_expense_claim_line extends ModelExtended
         "total_amount_0",
         "vat_product_posting_group_id",
         "vat_product_posting_group_value",
+        "vat_amount",
         "total_amount_1",
 
         "currency_pair_id",
@@ -144,16 +145,17 @@ class Fin_expense_claim_line extends ModelExtended
             ['dataIndex' => 'expense_location_id', 'cloneable' => true,],
             ['dataIndex' => 'expense_item_id', 'cloneable' => true,],
             ['dataIndex' => 'gl_account_id', 'invisible' => !true,],
-            ['dataIndex' => 'invoice_date', 'cloneable' => true,],
-            ['dataIndex' => 'invoice_no', 'cloneable' => true,],
-            ['dataIndex' => 'quantity', 'footer' => 'agg_sum',],
-            ['dataIndex' => 'unit_price',],
-            ['dataIndex' => 'document_currency_id', 'cloneable' => true,],
+            ['dataIndex' => 'name', 'title' => 'Description'],
+            ['dataIndex' => 'invoice_date', 'cloneable' => true, "no_print" => true],
+            ['dataIndex' => 'invoice_no', 'cloneable' => true, "no_print" => true],
+            ['dataIndex' => 'quantity', 'footer' => 'agg_sum', "no_print" => true],
+            ['dataIndex' => 'unit_price', "no_print" => true],
             ['dataIndex' => 'total_amount_0', 'footer' => 'agg_sum',],
-            ['dataIndex' => 'vat_product_posting_group_id', 'cloneable' => true,],
-            ['dataIndex' => 'vat_product_posting_group_value',],
+            ['dataIndex' => 'document_currency_id', 'cloneable' => true,],
+            ['dataIndex' => 'vat_product_posting_group_id', 'cloneable' => true, "no_print" => true],
+            ['dataIndex' => 'vat_product_posting_group_value', "no_print" => true],
+            ['dataIndex' => 'vat_amount', 'footer' => 'agg_sum',],
             ['dataIndex' => 'total_amount_1', 'footer' => 'agg_sum',],
-
 
             ['dataIndex' => 'counter_currency_id', 'invisible' => true, 'read_only_rr2' => true],
             ['dataIndex' => 'currency_pair_id', 'invisible' => true,],
@@ -161,9 +163,9 @@ class Fin_expense_claim_line extends ModelExtended
 
             ['dataIndex' => 'rate_exchange',],
             ['dataIndex' => 'total_amount_lcy', 'footer' => 'agg_sum',],
-            ['dataIndex' => 'vendor_id', 'cloneable' => true,],
-            ['dataIndex' => 'vendor_name',],
-            ['dataIndex' => 'vendor_address',],
+            ['dataIndex' => 'vendor_id', 'cloneable' => true, "no_print" => true],
+            ['dataIndex' => 'vendor_name', "no_print" => true],
+            ['dataIndex' => 'vendor_address', "no_print" => true],
         ];
     }
 }

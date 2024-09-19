@@ -37,6 +37,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('vat_product_posting_group_id')->nullable();
             $table->unsignedInteger('vat_product_posting_group_value')->nullable();
+            $table->double('vat_amount')->nullable();
             $table->double('total_amount_1')->nullable();
 
             $table->unsignedBigInteger("currency_pair_id")->nullable();
