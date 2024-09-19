@@ -1,20 +1,13 @@
 <?php
 
-namespace App\View\Components\Modals\ParentId7;
+namespace App\Http\Services\GetLineForModal;
 
 use App\Models\User_company;
 use Illuminate\Support\Facades\Log;
-use Illuminate\View\Component;
 
-class ParentId7Tree extends Component
+class UserGetLineService extends _GetLineService
 {
-    protected $jsFileName = 'parentId7Tree.js';
-
-    public function __construct(
-        private $inputId,
-    ) {}
-
-    protected function getDataSource()
+    public function getLines()
     {
         $allCompanies = User_company::query()
             ->with(['getUsers' => function ($query) {
@@ -61,18 +54,5 @@ class ParentId7Tree extends Component
             $tree[] = $comItem;
         }
         return $tree;
-    }
-
-    function render()
-    {
-        return view(
-            'components.modals.parent-id7.parent-id7-tree',
-            [
-                'jsFileName' => $this->jsFileName,
-                'inputId' => $this->inputId,
-
-                'treeSource' => $this->getDataSource(),
-            ]
-        );
     }
 }

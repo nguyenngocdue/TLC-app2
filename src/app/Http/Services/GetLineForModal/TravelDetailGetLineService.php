@@ -1,16 +1,14 @@
 <?php
 
-namespace App\View\Components\Modals\ParentId7;
+namespace App\Http\Services\GetLineForModal;
 
 use App\Models\Diginet_business_trip_line;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
-class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
+class TravelDetailGetLineService extends _GetLineService
 {
-    protected $jsFileName = 'parentId7TreeFinExpenseTravelLines.js';
-
     private function clusterIntoGroups($lines)
     {
         $groups = [];
@@ -37,7 +35,7 @@ class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
         return $groups;
     }
 
-    function getDataSource()
+    public function getLines()
     {
         $result = [];
 
@@ -53,7 +51,7 @@ class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
         $groups = $this->clusterIntoGroups($lines);
 
         foreach ($groups as $index => $group) {
-            $groupText = "Business Trip #" . ($index + 1);
+            $groupText = "Unclaimed Business Trip #" . ($index + 1);
             $groupData = [];
             foreach ($group as $item) {
                 $groupData[] = [
@@ -78,9 +76,6 @@ class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
             ];
             $result = array_merge($result, $groupData);
         }
-
-        // Log::info($result);
-
         return $result;
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitChangeStatusMultiple;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitCreateNewShort;
-use App\Http\Controllers\Entities\ZZTraitApi\TraitGetLines;
+// use App\Http\Controllers\Entities\ZZTraitApi\TraitGetLines;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitKanban;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitSearchable;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitStoreEmpty;
@@ -26,7 +26,7 @@ class EntityCRUDControllerForApi extends Controller
 	use TraitStoreEmpty;
 	use TraitUpdateShort;
 	use TraitChangeStatusMultiple;
-	use TraitGetLines;
+	// use TraitGetLines;
 	use TraitSearchable;
 	use TraitKanban;
 

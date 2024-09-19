@@ -1,17 +1,15 @@
 <?php
 
-namespace App\View\Components\Modals\ParentId7;
+namespace App\Http\Services\GetLineForModal;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Models\Rp_block;
 use App\Models\Rp_report;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
-class ParentId7TreeReportBlocks extends ParentId7Tree
+class BlockDetailGetLineService extends _GetLineService
 {
-    protected $jsFileName = 'parentId7TreeReportBlocks.js';
-
     private function createLinkedId($type, $id)
     {
         $route = route($type . ".edit", $id);
@@ -67,7 +65,7 @@ class ParentId7TreeReportBlocks extends ParentId7Tree
         }
     }
 
-    function getDataSource()
+    function getLines()
     {
         $result = [];
 

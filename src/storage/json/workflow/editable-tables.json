@@ -112,7 +112,7 @@
         "entity-type": "fin_expense_claims",
         "editable-table": "fin_expense_claim_travel_details",
         "button_add_from_a_list": "true",
-        "modal_body_name": "parent-id7-tree-fin-expense-travel-lines",
+        "modal_body_name": "travel_detail_get_line_service",
         "foreign_keys": "diginet_business_trip_line_finger_print, travel_date, day_count, travel_reason",
         "data_type_to_get_id": "travel_line"
     },
@@ -294,7 +294,7 @@
         "entity-type": "rp_pages",
         "editable-table": "rp_page_block_details",
         "button_add_from_a_list": "true",
-        "modal_body_name": "parent-id7-tree-report-blocks",
+        "modal_body_name": "block_detail_get_line_service",
         "foreign_keys": "rp_block_id",
         "data_type_to_get_id": "block"
     },
@@ -356,7 +356,7 @@
         "entity-type": "zunit_test_14s",
         "editable-table": "zunit_test_14_user_details",
         "button_add_from_a_list": "true",
-        "modal_body_name": "parent-id7-tree",
+        "modal_body_name": "user_get_line_service",
         "foreign_keys": "user_id",
         "data_type_to_get_id": "user"
     },
