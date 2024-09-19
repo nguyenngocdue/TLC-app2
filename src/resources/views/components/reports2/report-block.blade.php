@@ -40,7 +40,9 @@
                         reportId="{{ $reportId }}" 
                         :queriedData="$queriedData"
                         :transformedFields="$transformedFields"
-                        :headerCols="$headerCols" />
+                        :headerCols="$headerCols"
+                        :currentParams="$currentParams"
+                        />
                     @break
 
                 @case($PARAGRAPH_TYPE_ID)
