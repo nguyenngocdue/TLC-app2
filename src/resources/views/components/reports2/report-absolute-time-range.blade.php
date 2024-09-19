@@ -4,7 +4,7 @@
         <i class="text-orange-600 fa-solid fa-clock"></i>
         @php
             $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : '<strong>Time Range</strong>';
-            $timeTitle = $presetTitle != 'Absolute Time Range'  ? $presetTitle ." (".$timeZone.")" : "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")";
+            $timeTitle = $presetTitle != 'Absolute Time Range'  ? "<strong>$presetTitle</strong>" ." (".$timeZone.")" : "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")";
         @endphp
 
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
