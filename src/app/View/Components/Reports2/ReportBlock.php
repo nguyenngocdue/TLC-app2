@@ -24,6 +24,7 @@ class ReportBlock extends Component
         if ($hasPagination) {
             $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $perPage), $dataSource->count(), $perPage, $page));
         }
+        
         return $dataSource;
     }
 

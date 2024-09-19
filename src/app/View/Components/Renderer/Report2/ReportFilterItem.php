@@ -155,9 +155,15 @@ class ReportFilterItem extends Component
             return $db;
         }elseif ($singularEntityType == 'user') {
                 $listenToAttrs = explode(',', str_replace(' ', '' ,$listenReducer?->listen_to_attrs));
-                $db = $db->get();
+                $dbQuery = $db->select()
+                    ->when($isBlackList, 
+                        fn($query) => $query->whereIn('id', $bWListIds), 
+                        fn($query) => $query->whereNotIn('id', $bWListIds)
+                    )
+                    ->orderBy('name')
+                    ->get();
                 $newDB = [];
-                foreach ($db as $item) {
+                foreach ($dbQuery as $item) {
                     $i = (object)[];
                     $i->id = $item->id;
                     $i->name = $item->name;
