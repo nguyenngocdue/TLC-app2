@@ -14,7 +14,7 @@ trait TraitReportFilter
 
     protected $DATETIME_FORMAT = 'y-m-d H:i:s';
 
-    public function currentParamsReport()
+    public function currentParamsReport() // not using timezone
     {
         $rp = $this->report;
         $reportId = $rp->id;
@@ -48,9 +48,10 @@ trait TraitReportFilter
         // dump($date,  $date->format('Y-m-d H:i:s'));
         return $date->format($dateDisplayFormat);
     }
-    public function formatFromAndToDate($currentParams) {
+
+    public function formatFromAndToDate($currentParams, $formatType='') {
         $timeZoneNum = User::find(CurrentUser::id())->time_zone;
-        $dateFormat = $currentParams['date_display_format'] ?? $this->DATETIME_FORMAT;
+        $dateFormat = $formatType ? $formatType : ($currentParams['date_display_format'] ?? $this->DATETIME_FORMAT);
         if ($dateFormat) {
             $currentParams['from_date'] = $this->formatDateWithTimezone( $currentParams['from_date'], $timeZoneNum, $dateFormat);
             $currentParams['to_date'] = $this->formatDateWithTimezone($currentParams['to_date'],$timeZoneNum,$dateFormat);

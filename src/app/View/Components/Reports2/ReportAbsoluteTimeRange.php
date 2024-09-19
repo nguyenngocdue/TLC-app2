@@ -125,23 +125,8 @@ class ReportAbsoluteTimeRange extends Component
         return $presets;
     }
 
-    private function createFromDateToDateForHTML($currentParams){
-        $fromDate = $currentParams['from_date'] ?? null;
-        $toDate = $currentParams['to_date'] ?? null;
-        $timeZone = $currentParams['time_zone'] ?? null;
-        if ($timeZone){
-            $timeAsNumber = DateReport::getUtcOffset($timeZone);
-            if ($fromDate) {
-                $fromDate = DateReport::convertToTimezone($fromDate, $timeAsNumber);
-            }
-            if ($toDate) {
-                $toDate = DateReport::convertToTimezone($toDate, $timeAsNumber);
-            }
-        }
-        return [$fromDate, $toDate];
-    }
 
-        
+  
     public function render()
     {
         $rp = $this->report;
@@ -149,16 +134,16 @@ class ReportAbsoluteTimeRange extends Component
         $presets = $this->createPresets(); 
         $timezoneData = DateReport::getTimeZones();
 
-        [$fromDate, $toDate] = $this->createFromDateToDateForHTML($currentParams);
-
+        $currentParams = $this->formatFromAndToDate($currentParams, 'Y-m-d H:i:s');
+        
         return view('components.reports2.report-absolute-time-range', 
         [
             'rp' => $rp,
             'entityType' => $rp->entity_type,
             'reportType2' => $this->reportType2,
             'routeFilter' => route('report_filters' . '.update', $rp->id),
-            'fromDate' => $fromDate,
-            'toDate' => $toDate,
+            'fromDate' => $currentParams['from_date'],
+            'toDate' => $currentParams['to_date'],
             'presets' => $presets,
             'presetTitle' => $currentParams['preset_title'],
             'timezoneData' => $timezoneData,
