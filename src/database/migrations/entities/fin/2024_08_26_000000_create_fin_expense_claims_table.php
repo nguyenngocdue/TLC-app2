@@ -25,6 +25,19 @@ return new class extends Migration
             $table->unsignedBigInteger('rate_exchange_month_id')->nullable();
             $table->unsignedBigInteger("counter_currency_id")->nullable();
 
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("travel_from_place_id")->nullable();
+            $table->unsignedBigInteger("travel_to_place_id")->nullable();
+            $table->unsignedBigInteger("travel_place_pair_id")->nullable();
+            $table->double("travel_allowance_per_day")->nullable();
+
+            $table->date("travel_from_date")->nullable();
+            $table->date("travel_to_date")->nullable();
+            $table->double("travel_day_count")->nullable();
+            $table->double("hr_adjusted_date_count_0")->nullable();
+            $table->double("hr_adjusted_date_count_1")->nullable();
+            $table->double("travel_allowance_total")->nullable();
+
             $table->appendCommonFields();
         });
     }

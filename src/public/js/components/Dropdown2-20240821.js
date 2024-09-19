@@ -230,7 +230,7 @@ const onChangeDropdown2Expression = (listener) => {
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
+        if (['Math', 'abs', 'floor', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
         let varValue = (getEById(varName).val() || 0) + '' //<< toString
         varValue = convertStrToNumber(varValue)
 

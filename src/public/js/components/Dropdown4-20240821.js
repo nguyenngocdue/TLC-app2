@@ -218,7 +218,7 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLengt
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        if (['Math', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
+        if (['Math', 'abs', 'floor', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
         const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
         let varValue = (getEById(varNameFull).val() || 0) + '' //<< toString
         varValue = convertStrToNumber(varValue)

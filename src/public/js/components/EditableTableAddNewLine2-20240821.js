@@ -243,40 +243,14 @@ const addANewLineFull = (params) => {
             const paramString =
                 "{tableId: '" + tableId + "', control: this, fingerPrint:" + fingerPrint + ', nameIndex:' + newRowIndex + '}'
 
-            const btnUp =
-                '<button value="' +
-                tableId +
-                '" onClick="moveUpEditableTable(' +
-                paramString +
-                ')" type="button" class="px-1.5 py-1 border-2 border-gray-200 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>'
-            const btnDown =
-                '<button value="' +
-                tableId +
-                '" onClick="moveDownEditableTable(' +
-                paramString +
-                ')" type="button" class="px-1.5 py-1 border-2 border-gray-200 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>'
-            const btnDuplicate =
-                '<button value = "' +
-                tableId +
-                '" onClick = "duplicateLineEditableTable(' +
-                paramString +
-                ')" type = "button" class="px-1.5 py-1 border-2 border-blue-600 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg"> <i class="fa fa-copy"></i></button >'
-            const btnTrash =
-                '<button value="' +
-                tableId +
-                '" onClick="trashEditableTable(' +
-                paramString +
-                ')" type="button" class="px-1.5 py-1 border-2 border-red-600 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" ><i class="fa fa-trash"></i></button>'
-            renderer =
-                '' +
-                fingerPrintInput +
-                destroyInput +
-                '<div class="whitespace-nowrap flex justify-center">' +
-                (isOrderable ? btnUp : '') +
-                (isOrderable ? btnDown : '') +
-                btnDuplicate +
-                btnTrash +
-                '</div>'
+            const btnUp = `<button value="${tableId}" onClick="moveUpEditableTable('${paramString}')" type="button" class="px-1.5 py-1 border-2 border-gray-200 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>`
+            const btnDown = `<button value="${tableId}" onClick="moveDownEditableTable('${paramString}')" type="button" class="px-1.5 py-1 border-2 border-gray-200 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>`
+            const btnDuplicate = `<button value = "${tableId}" onClick = "duplicateLineEditableTable('${paramString}')" type="button" class="px-1.5 py-1 border-2 border-blue-600 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none active:bg-blue-800 active:shadow-lg"><i class="fa fa-copy"></i></button >`
+            const btnTrash = `<button value="${tableId}" onClick="trashEditableTable('${paramString}')" type="button" class="px-1.5 py-1 border-2 border-red-600 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" ><i class="fa fa-trash"></i></button>`
+            renderer = `${fingerPrintInput} ${destroyInput}`
+            renderer += `<div class="whitespace-nowrap flex justify-center">
+                ${isOrderable ? btnUp : ''} ${isOrderable ? btnDown : ''} ${btnDuplicate} ${btnTrash}
+            </div>`
         } else {
             // console.log("Rendering", column)
             let onChangeParams = '{'
@@ -291,6 +265,7 @@ const addANewLineFull = (params) => {
             const onChangeDropdown4Fn = 'onChangeDropdown4(' + onChangeParams + ');'
             const makeOnChangeAdvanced = (moreCodeAfter) =>
                 '' + '$("[id=\'' + id + "']\").on('change', function(e, dropdownParams){" + moreCodeAfter + '})'
+            const readOnlyStr = column['readOnly'] ? ' readonly ' : ''
             switch (column['renderer']) {
                 case 'read-only-text4':
                     if (column['dataIndex'] === 'id') {
@@ -346,52 +321,22 @@ const addANewLineFull = (params) => {
                         renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
                         renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
-                        renderer =
-                            "<select id='" +
-                            id +
-                            "' name='" +
-                            id +
-                            bracket +
-                            "' " +
-                            multipleStr +
-                            ' ' +
-                            readOnlyStr +
-                            " class='" +
-                            column['classList'] +
-                            "'></select>"
-                        renderer +=
-                            "<script>getEById('" +
-                            id +
-                            "').select2({placeholder: 'Please select', templateResult: select2FormatOption, matcher: select2Matcher,})</script>"
+                        renderer = `<select id='${id}' name='${id} ${bracket}' ${multipleStr} ${readOnlyStr} class='${column['classList']}'></select>`
+                        renderer += `<script>getEById('${id}').select2({placeholder: 'Please select', templateResult: select2FormatOption, matcher: select2Matcher,})</script>`
                     }
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'toggle4':
-                    renderer =
-                        '<div class="flex justify-center">\
-                    <label for="' +
-                        id +
-                        '" class="inline-flex relative items-center cursor-pointer select">\
-                        <input id="' +
-                        id +
-                        '" name="' +
-                        id +
-                        '" type="checkbox" class="sr-only peer">\
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>\
-                    </label></div>'
+                    renderer = `<div class="flex justify-center">
+                        <label for="${id}" class="inline-flex relative items-center cursor-pointer select">
+                            <input id="${id}" name="${id}" type="checkbox" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[\'\'] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>\
+                        </label>
+                    </div>`
                     break
                 case 'number4':
                     const { numericScale = 0 } = column
-                    renderer =
-                        "<input id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' component='editable/number4' " +
-                        (column['readOnly'] ? ' readonly' : '') +
-                        " class='" +
-                        column['classList'] +
-                        "' />"
+                    renderer = `<input id='${id}' name='${id}' component='editable/number4' ${readOnlyStr} class='${column['classList']} ${readOnlyStr}' />`
                     if (column['dataIndex'] === 'order_no') {
                         orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
                         const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", dropdownParams)'
@@ -408,48 +353,24 @@ const addANewLineFull = (params) => {
                     }
                     break
                 case 'text4':
-                    renderer =
-                        "<input id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' " +
-                        (column['readOnly'] ? ' readonly' : '') +
-                        " class='" +
-                        column['classList'] +
-                        "' />"
+                    renderer = `<input id='${id}' name='${id}' ${readOnlyStr} class='${column['classList']} ${readOnlyStr}' />`
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                     break
                 case 'textarea4':
-                    renderer =
-                        "<textarea id='" +
-                        id +
-                        "' name='" +
-                        id +
-                        "' " +
-                        (column['readOnly'] ? ' readonly' : '') +
-                        " class='" +
-                        column['classList'] +
-                        "' rows='3'></textarea>"
+                    renderer = `<textarea id='${id}' name='${id}' ${readOnlyStr} class='${column['classList']}' rows='3'></textarea>`
                     break
                 case 'picker-all4':
                     const { control } = column
                     // const attributeName = control === 'picker_datetime' ? 'name1' : 'name'
                     const attributeName = 'name' // when create new, this will be submitted with the form, so name not name1
-                    renderer =
-                        "<input component='editable/" +
-                        control +
-                        "' id='" +
-                        id +
-                        "' " +
-                        attributeName +
-                        "='" +
-                        id +
-                        "' placeholder='" +
-                        column['placeholder'] +
-                        "' class='" +
-                        column['classList'] +
-                        "'>"
+                    renderer = `<input 
+                    component='editable/${control}' 
+                    id='${id}' 
+                    ${attributeName}='${id}' 
+                    placeholder='${column['placeholder']}' 
+                    class='${column['classList']} ${readOnlyStr}'
+                    ${column['readOnly'] ? ' disabled ' : ''}
+                    >`
                     //This line will cause save problem on SQBTS
                     // renderer += "<input type='hidden1' name='"+id+"' id='hidden_"+id+"'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
