@@ -3,7 +3,6 @@
 use App\Http\Controllers\Entities\EntityCRUDController;
 use App\Http\Controllers\Entities\ViewAllController;
 use App\Http\Controllers\Entities\ViewAllInvokerController;
-use App\Http\Controllers\Reports2\RefreshReportController;
 use App\Http\Controllers\Reports2\Rp_reportController;
 use App\Utils\Support\Entities;
 use App\Utils\Support\JsonControls;
