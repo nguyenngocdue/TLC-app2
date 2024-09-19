@@ -16,6 +16,7 @@ class ReportBlockChart extends Component
         private $queriedData = null,
         private $headerCols = [],
         private $transformedFields = [],
+        private $currentParams= [],
     ) {}
 
     private function changeToJsonOptionsByTransformation($options, $queriedData, $fields){
@@ -44,15 +45,23 @@ class ReportBlockChart extends Component
         } else {
              $parsedVariables = $this->parseVariables($options);
             foreach (last($parsedVariables) as $key => $value) {
-                $keyInDta = trim(str_replace('$', '', $value));
-                $valueInData = $queriedData->pluck($keyInDta)->toArray();
-                $valueInData = '['. implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)) . ']';
+                $variable = trim(str_replace('$', '', $value));
                 $firstMatches = reset($parsedVariables);
                 $keyInOptions = $firstMatches[$key];
-                $options = str_replace($keyInOptions, $valueInData, $options);
+                if (str_contains($variable, 'QRY_'))  {
+                    $variable = str_replace('QRY_', '', $variable);
+                    $valueInData = $queriedData->pluck($variable)->toArray();
+                    $valueInData = '['. implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)) . ']';
+                    $options = str_replace($keyInOptions, $valueInData, $options);
+                }else {
+                    $currentParams = $this->currentParams;
+                    $changedVal = isset($currentParams[$variable]) ? $currentParams[$variable] : '';
+                    $options = str_replace($keyInOptions, $changedVal, $options);
+                }
             }
         }
         $jsonOptions = json_decode($options);
+        if (is_null($jsonOptions))dump($options);
         return $jsonOptions;
     }
 
