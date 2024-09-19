@@ -1,10 +1,10 @@
 <div class="relative inline-block text-left z-10">
     <!-- Dropdown Button -->
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-lg bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
-        <i class="fa-solid fa-clock"></i>
+        <i class="text-orange-600 fa-solid fa-clock"></i>
         @php
-            $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : 'Time Range';
-            $timeTitle = $presetTitle != 'Absolute Time Range'  ? $presetTitle ." (".$timeZone.")" : $fromDate." <i class='fa-solid fa-arrow-right'></i> ".$toDate ." (".$timeZone.")";
+            $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : '<strong>Time Range</strong>';
+            $timeTitle = $presetTitle != 'Absolute Time Range'  ? $presetTitle ." (".$timeZone.")" : "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")";
         @endphp
 
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
