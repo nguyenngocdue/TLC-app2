@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 trait TraitEntityCRUDDestroy
 {
     use TraitSupportPermissionGate;
-    public function destroyMultiple(Request $request)
+    public function destroyMultiple(Request $request, $hardDelete = false)
     {
         try {
             $strIds = $request->ids;
@@ -19,7 +19,11 @@ trait TraitEntityCRUDDestroy
             $arrFail = $this->checkPermissionUsingGateForDeleteMultiple($ids, 'delete');
             // Log::info("Arr Fail " . join(",", $arrFail));
             $arrDelete = array_diff($ids, $arrFail);
-            $this->modelPath::whereIn('id', $arrDelete)->delete();
+            if ($hardDelete) {
+                $this->modelPath::whereIn('id', $arrDelete)->forceDelete();
+            } else {
+                $this->modelPath::whereIn('id', $arrDelete)->delete();
+            }
             return ResponseObject::responseSuccess(
                 $arrDelete,
                 [$arrFail],
