@@ -1,8 +1,31 @@
+<style>
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Show scrollbar when scrolling */
+.scrollbar-show::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar-show::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+</style>
+
 <form action="{{$routeFilter}}" method="POST" id="quickRangeForm">
     @csrf
     <div class="pl-4 pb-2">
         <input type="text" placeholder="Search quick ranges" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" id="quickRangeInput">
-        <div class="mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-80 overflow-y-scroll z-10" id="quickRangeDropdown">
+        <div class="mt-2 w-full bg-white max-h-80 overflow-y-scroll z-10 scrollbar-hide" id="quickRangeDropdown">
             <input type="hidden" name="form_type" value="updatePresetFilter">
             <input type="hidden" name="action" value="updateReport2">
             <input type="hidden" name="entity_type" value="{{$entityType}}">
@@ -57,7 +80,6 @@
                     data-value="{{ $presets['second_half_year']['from_date'] }} / {{ $presets['second_half_year']['to_date'] }}">
                     2nd half of the curent year
                 </li>
-
 
 
                 <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
@@ -146,10 +168,18 @@
 
 {{-- Search quick ranges --}}
 <script>
+
+    const quickRangeDropdown = document.getElementById('quickRangeDropdown');
+    quickRangeDropdown.addEventListener('scroll', function() {
+        if (!quickRangeDropdown.classList.contains('scrollbar-show')) {
+            quickRangeDropdown.classList.add('scrollbar-show');
+            quickRangeDropdown.classList.remove('scrollbar-hide');
+        }
+    });
+
     document.getElementById('quickRangeInput').addEventListener('input', function() {
     const filter = this.value.toLowerCase();
     const listItems = document.querySelectorAll('#quickRangeList li');
-    
     listItems.forEach(function(item) {
         const text = item.textContent.toLowerCase();
         if (text.includes(filter)) {
@@ -160,7 +190,6 @@
     });
 });
 </script>
-
 
 <script>
     document.querySelectorAll('#quickRangeList li').forEach(item => {
@@ -188,17 +217,3 @@
         });
     });
 </script>
-
-<style>
-#quickRangeDropdown {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
-    transition: scrollbar-width 0.5s, -ms-overflow-style 0.5s, -webkit-scrollbar 0.5s; /* Add transition for smooth effect */
-}
-
-#quickRangeDropdown::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-    transition: opacity 0.5s ease-in-out; /* Smooth transition for Chrome/Safari */
-    opacity: 0; /* Start hidden */
-}
-</style>
