@@ -65,7 +65,7 @@ class ParentId7TreeFinExpenseTravelLines extends ParentId7Tree
                         'diginet_business_trip_line_finger_print' => $item->finger_print,
                         'travel_date' => $item->tb_date,
                         'day_count' => $item->number_of_tb_day,
-                        'reason' => $item->tb_reason,
+                        'travel_reason' => $item->tb_reason,
                     ],
                 ];
             }

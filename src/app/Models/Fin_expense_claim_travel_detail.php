@@ -14,6 +14,7 @@ class Fin_expense_claim_travel_detail extends ModelExtended
 
         "travel_date",
         "day_count",
+        "travel_reason",
 
         "owner_id",
         "order_no",
@@ -38,6 +39,7 @@ class Fin_expense_claim_travel_detail extends ModelExtended
             ['dataIndex' => 'diginet_business_trip_line_finger_print', 'read_only_rr2' => true, 'invisible' => true],
             ['dataIndex' => 'travel_date', 'read_only_rr2' => true, 'footer' => 'agg_none'],
             ['dataIndex' => 'day_count', 'read_only_rr2' => true, 'footer' => 'agg_sum'],
+            ['dataIndex' => 'travel_reason', 'read_only_rr2' => true,],
         ];
     }
 }

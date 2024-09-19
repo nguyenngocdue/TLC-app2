@@ -27,6 +27,7 @@ return new class extends Migration
     {
         $table->unsignedInteger('day_count')->nullable();
         $table->date('travel_date')->nullable();
+        $table->string('travel_reason')->nullable();
         $table->orderable();
         $table->unsignedBigInteger('deleted_by')->nullable();
         $table->softDeletes();
