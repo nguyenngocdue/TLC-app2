@@ -2,9 +2,7 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class ReportBlock extends Component
@@ -63,6 +61,9 @@ class ReportBlock extends Component
             ];
             $blockDataSource[] = $blockItem;
         }
+
+        // Update currentParams to use UTC time
+        $currentParams = $this->formatFromAndToDate($currentParams);
 
         return view('components.reports2.report-block', [
             'blockDataSource' => $blockDataSource,

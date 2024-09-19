@@ -28,37 +28,11 @@ class ReportBlockParagraph extends Component
         return $html;
     }
 
-    private function formatDateWithTimezone($date, $timeZoneNumber, $dateDisplayFormat) {
-        $date = DateReport::convertToTimezone($date, $timeZoneNumber);
-        $date = new DateTime($date);
-        // dump($date,  $date->format('Y-m-d H:i:s'));
-        return $date->format($dateDisplayFormat);
-    }
-    private function formatFromAndToDate($currentParams) {
-        $timeZoneNumber = User::find(CurrentUser::id())->time_zone;
-        $dateDisplayFormat = $currentParams['date_display_format'] ?? '';
-        if ($dateDisplayFormat) {
-            // Format both from and to dates using a helper method
-            $currentParams['from_date'] = $this->formatDateWithTimezone(
-                $currentParams['from_date'],
-                $timeZoneNumber,
-                $dateDisplayFormat
-            );
-            $currentParams['to_date'] = $this->formatDateWithTimezone(
-                $currentParams['to_date'],
-                $timeZoneNumber,
-                $dateDisplayFormat
-            );
-        }
-        return $currentParams;
-    }
-    
     public function render()
     {
         $block = $this->block;
         $currentParams = $this->currentParams;
-        $currentParams = $this->formatFromAndToDate($currentParams);
-
+       
         $strHtml = $block->html_content;
         $htmlRender = $this->renderHtml($strHtml, $currentParams);
 

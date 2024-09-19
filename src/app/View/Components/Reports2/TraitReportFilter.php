@@ -3,12 +3,18 @@
 namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
+use App\Models\User;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
+use DateTime;
 
 trait TraitReportFilter
 {
     use TraitEntityCRUDShowReport;
 
-    function currentParamsReport()
+    protected $DATETIME_FORMAT = 'y-m-d H:i:s';
+
+    public function currentParamsReport()
     {
         $rp = $this->report;
         $reportId = $rp->id;
@@ -22,7 +28,7 @@ trait TraitReportFilter
         return $currentParams;
     }
 
-    function validateParams($rpFilters, $currentParams)
+    public function validateParams($rpFilters, $currentParams)
     {
         $result = [];
         foreach ($rpFilters as $filter) {
@@ -34,5 +40,21 @@ trait TraitReportFilter
             }
         }
         return $result;
+    }
+
+    private function formatDateWithTimezone($date, $timeZoneNumber, $dateDisplayFormat) {
+        $date = DateReport::convertToTimezone($date, $timeZoneNumber);
+        $date = new DateTime($date);
+        // dump($date,  $date->format('Y-m-d H:i:s'));
+        return $date->format($dateDisplayFormat);
+    }
+    public function formatFromAndToDate($currentParams) {
+        $timeZoneNum = User::find(CurrentUser::id())->time_zone;
+        $dateFormat = $currentParams['date_display_format'] ?? $this->DATETIME_FORMAT;
+        if ($dateFormat) {
+            $currentParams['from_date'] = $this->formatDateWithTimezone( $currentParams['from_date'], $timeZoneNum, $dateFormat);
+            $currentParams['to_date'] = $this->formatDateWithTimezone($currentParams['to_date'],$timeZoneNum,$dateFormat);
+        }
+        return $currentParams;
     }
 }
