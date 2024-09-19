@@ -52,8 +52,10 @@ trait TraitReportFilter
     public function formatFromAndToDate($currentParams, $formatType='') {
         $timeZoneNum = User::find(CurrentUser::id())->time_zone;
         $dateFormat = $formatType ? $formatType : ($currentParams['date_display_format'] ?? $this->DATETIME_FORMAT);
-        if ($dateFormat && isset($currentParams['from_date']) && isset($currentParams['from_date'])) {
+        if ($dateFormat && isset($currentParams['from_date'])) {
             $currentParams['from_date'] = $this->formatDateWithTimezone( $currentParams['from_date'], $timeZoneNum, $dateFormat);
+        }
+        if ($dateFormat && isset($currentParams['to_date'])) {
             $currentParams['to_date'] = $this->formatDateWithTimezone($currentParams['to_date'],$timeZoneNum,$dateFormat);
         }
         return $currentParams;
