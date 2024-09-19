@@ -6,18 +6,12 @@ use App\BigThink\HasShowOnScreens;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\Prod_routing_link;
-use App\Models\Qaqc_ncr;
-use App\Models\Term;
-use App\Models\User;
 use App\Utils\Support\CurrentRoute;
-use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
 use Exception;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class ReportFilterItem extends Component
@@ -233,9 +227,9 @@ class ReportFilterItem extends Component
     {
         $this->renderJSForK();
         $params = $this->getParamsForHasDataSource();
-        // dd($params);
+        // dump($params);
         return view(
-            'components.controls.has-data-source.dropdown2',
+            'components.controls.has-data-source.dropdown5',
             $params
         );
     }
