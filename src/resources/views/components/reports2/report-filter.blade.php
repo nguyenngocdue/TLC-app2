@@ -35,7 +35,6 @@
                         <input type="hidden" name='entity_type' value="{{$entityType}}">
                         <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                         <input type="hidden" name='report_id' value="{{$rpId}}">
-                        <input type="hidden" name='per_page' value="1">
                         <div class="grid grid-cols-12 gap-4 items-baseline">
                             @foreach ($rpFilters as $filter)
 

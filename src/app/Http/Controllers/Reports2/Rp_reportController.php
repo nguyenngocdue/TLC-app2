@@ -10,8 +10,11 @@ class Rp_reportController extends Controller
 
     public function updateFilters(Request $request)
     {
+        $inputValue = $request->input();
+        $rpId = $inputValue['report_id'];
+        $rpRoute = route('rp_reports.show', $rpId);
         (new UpdateUserSettings())($request);
-        return redirect()->back();
+        return redirect()->to($rpRoute);
     }
 
     public function exportExcel(Request $request)
