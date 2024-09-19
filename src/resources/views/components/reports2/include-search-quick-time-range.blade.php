@@ -214,6 +214,9 @@
             document.getElementById('preset_title').value = this.textContent.trim();
             // Submit the form
             document.getElementById('quickRangeForm').submit();
+            var dropdownContent = document.getElementById('dropdownContent');
+            dropdownContent.classList.add('hidden');
+
         });
     });
 </script>
