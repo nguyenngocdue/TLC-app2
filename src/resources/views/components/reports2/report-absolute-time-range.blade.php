@@ -1,6 +1,6 @@
 <div class="relative inline-block text-left z-10">
     <!-- Dropdown Button -->
-    <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
+    <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-lg bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
         <i class="fa-solid fa-clock"></i>
         @php
             $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : 'Time Range';
