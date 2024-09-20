@@ -12,7 +12,7 @@ trait TraitFailObject
         $message = $th->getMessage();
         if (str_contains($message, 'Integrity constraint violation: 1062 Duplicate entry')) {
             Log::info($message);
-            $message = "DUPLICATED: This document is exist, please refresh the page to load the latest matrix.";
+            $message = "DUPLICATED: You have just added or created a duplicated record!";
         }
         return ResponseObject::responseFail($message,);
     }

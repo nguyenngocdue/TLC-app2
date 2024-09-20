@@ -11,10 +11,10 @@ $(document).ready(() => {
                     for (let i = 0; i < selectedNode.selected.length; i++) {
                         const node = selectedNode.instance.get_node(selectedNode.selected[i])
                         const { id, data } = node
-                        const { type, act_adv_req_id } = data
+                        const { type, act_advance_req_id } = data
                         // console.log('Current node:', id, type)
                         if (['adv_line'].includes(type)) {
-                            result.push(act_adv_req_id)
+                            result.push(act_advance_req_id)
                         }
                         // console.log('Current all status:', data.instance.get_node(data.selected[i]).id)
                     }

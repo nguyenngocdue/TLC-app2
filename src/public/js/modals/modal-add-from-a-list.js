@@ -26,7 +26,9 @@ addLinesToTableFormModalList = (listId, tableId, xxxForeignKeys, dataTypeToGetId
             // console.log("Adding line", line)
             toBeAdded.push(line)
         }
+        // console.log('result', line.data[strongKey], result)
     }
+
     console.log('toBeAdded', toBeAdded, 'with strongKey', strongKey)
 
     for (let i = 0; i < toBeAdded.length; i++) {

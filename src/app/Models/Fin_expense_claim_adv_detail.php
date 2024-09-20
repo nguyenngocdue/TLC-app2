@@ -59,9 +59,9 @@ class Fin_expense_claim_adv_detail extends ModelExtended
             ['dataIndex' => 'user_id',],
             ['dataIndex' => 'act_advance_req_id', 'read_only_rr2' => true, 'invisible' => true],
             ['dataIndex' => 'adv_date', 'read_only_rr2' => true, 'footer' => 'agg_none'],
+            ['dataIndex' => 'adv_reason', 'read_only_rr2' => true,],
             ['dataIndex' => 'adv_amount', 'read_only_rr2' => true, 'footer' => 'agg_sum'],
             ['dataIndex' => 'adv_currency_id', 'read_only_rr2' => true,],
-            ['dataIndex' => 'adv_reason', 'read_only_rr2' => true,],
         ];
     }
 }

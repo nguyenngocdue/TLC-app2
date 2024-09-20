@@ -33,7 +33,7 @@ class AdvanceDetailGetLineService
                     'type' => 'adv_line',
                     'user_id' => $line->user_id,
                     'employee_id' => $line->employee_id,
-                    'act_adv_req_id' => $line->id,
+                    'act_advance_req_id' => $line->id,
                     'adv_date' => $line->created_at,
                     'adv_amount' => $line->advance_amount,
                     'adv_currency_id' => $line->counter_currency_id,

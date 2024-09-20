@@ -111,15 +111,17 @@
         "name": "fin_expense_claims_02",
         "entity-type": "fin_expense_claims",
         "editable-table": "fin_expense_claim_adv_details",
+        "button_recalculate": "true",
         "button_add_from_a_list": "true",
         "modal_body_name": "advance_detail_get_line_service",
-        "foreign_keys": "act_adv_req_id, adv_date, adv_amount, adv_currency_id, adv_reason, employee_id, user_id",
+        "foreign_keys": "act_advance_req_id, adv_date, adv_amount, adv_currency_id, adv_reason, employee_id, user_id",
         "data_type_to_get_id": "adv_line"
     },
     "fin_expense_claims_03": {
         "name": "fin_expense_claims_03",
         "entity-type": "fin_expense_claims",
         "editable-table": "fin_expense_claim_travel_details",
+        "button_recalculate": "true",
         "button_add_from_a_list": "true",
         "modal_body_name": "travel_detail_get_line_service",
         "foreign_keys": "diginet_business_trip_line_finger_print, travel_date, day_count, travel_reason, employee_id, user_id",
