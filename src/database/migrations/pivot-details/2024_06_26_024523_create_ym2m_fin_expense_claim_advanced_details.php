@@ -24,7 +24,7 @@ return new class extends Migration
 
     public function schemaPivot(BlueprintExtended $table)
     {
-        $table->double('adv_amount')->nullable();
+        $table->double('adv_amount_lcy')->nullable();
         $table->unsignedBigInteger('adv_currency_id')->nullable();
         $table->date('adv_date')->nullable();
         $table->string('adv_reason')->nullable();

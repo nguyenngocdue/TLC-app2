@@ -91,15 +91,15 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_adv_amount": {
-        "name": "_adv_amount",
-        "column_name": "adv_amount",
+    "_adv_amount_lcy": {
+        "name": "_adv_amount_lcy",
+        "column_name": "adv_amount_lcy",
         "column_type": "double",
-        "label": "Adv Amount",
+        "label": "Adv Amount LCY",
         "control": "number",
         "align": "",
         "col_span": "6",
-        "width": "120",
+        "width": "150",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",

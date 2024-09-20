@@ -114,7 +114,7 @@
         "button_recalculate": "true",
         "button_add_from_a_list": "true",
         "modal_body_name": "advance_detail_get_line_service",
-        "foreign_keys": "act_advance_req_id, adv_date, adv_amount, adv_currency_id, adv_reason, employee_id, user_id",
+        "foreign_keys": "act_advance_req_id, adv_date, adv_amount_lcy, adv_currency_id, adv_reason, employee_id, user_id",
         "data_type_to_get_id": "adv_line"
     },
     "fin_expense_claims_03": {

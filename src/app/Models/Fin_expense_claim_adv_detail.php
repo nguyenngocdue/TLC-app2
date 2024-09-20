@@ -13,7 +13,7 @@ class Fin_expense_claim_adv_detail extends ModelExtended
         "fin_expense_claim_id",
 
         "adv_date",
-        "adv_amount",
+        "adv_amount_lcy",
         "adv_currency_id",
         "adv_reason",
 
@@ -60,7 +60,7 @@ class Fin_expense_claim_adv_detail extends ModelExtended
             ['dataIndex' => 'act_advance_req_id', 'read_only_rr2' => true, 'invisible' => true],
             ['dataIndex' => 'adv_date', 'read_only_rr2' => true, 'footer' => 'agg_none'],
             ['dataIndex' => 'adv_reason', 'read_only_rr2' => true,],
-            ['dataIndex' => 'adv_amount', 'read_only_rr2' => true, 'footer' => 'agg_sum'],
+            ['dataIndex' => 'adv_amount_lcy', 'read_only_rr2' => true, 'footer' => 'agg_sum'],
             ['dataIndex' => 'adv_currency_id', 'read_only_rr2' => true,],
         ];
     }

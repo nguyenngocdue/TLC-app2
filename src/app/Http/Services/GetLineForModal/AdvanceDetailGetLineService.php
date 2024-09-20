@@ -28,14 +28,14 @@ class AdvanceDetailGetLineService
             $item = [
                 'id' => 'adv_req_' . $line->id,
                 'parent' => "#",
-                'text' => $line->title . " | " . $line->title_vn . ": " . $line->advance_amount,
+                'text' => $line->title . " | " . $line->title_vn . ": " . $line->advance_amount_lcy,
                 'data' => [
                     'type' => 'adv_line',
                     'user_id' => $line->user_id,
                     'employee_id' => $line->employee_id,
                     'act_advance_req_id' => $line->id,
                     'adv_date' => $line->created_at,
-                    'adv_amount' => $line->advance_amount,
+                    'adv_amount_lcy' => $line->advance_amount_lcy,
                     'adv_currency_id' => $line->counter_currency_id,
                     'adv_reason' => $line->description,
                 ],

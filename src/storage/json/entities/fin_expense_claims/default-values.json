@@ -436,7 +436,7 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
-        "label_extra": "",
+        "label_extra": "(SECTION 3+4-2)",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
