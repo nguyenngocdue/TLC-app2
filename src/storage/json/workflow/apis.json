@@ -183,6 +183,10 @@
     "fin_debit_groups": {
         "name": "fin_debit_groups"
     },
+    "fin_expense_claim_adv_details": {
+        "name": "fin_expense_claim_adv_details",
+        "storeEmpty_and_updateShort": "true"
+    },
     "fin_expense_claim_lines": {
         "name": "fin_expense_claim_lines",
         "storeEmpty_and_updateShort": "true"

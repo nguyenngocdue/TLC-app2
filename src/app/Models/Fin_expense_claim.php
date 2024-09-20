@@ -37,7 +37,9 @@ class Fin_expense_claim extends ModelExtended
         'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
         'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
 
+        "getAdvanceLines" => ["hasMany", Fin_expense_claim_adv_detail::class, "fin_expense_claim_id"],
         "getTravelLines" => ["hasMany", Fin_expense_claim_travel_detail::class, "fin_expense_claim_id"],
+
         "getRequester" => ['belongsTo', User::class, 'user_id'],
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'user_discipline_id'],
         "getTravelFromPlace" => ['belongsTo', Act_travel_place::class, 'travel_from_place_id'],
@@ -59,6 +61,12 @@ class Fin_expense_claim extends ModelExtended
     }
 
     public function getCounterCurrency()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAdvanceLines()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

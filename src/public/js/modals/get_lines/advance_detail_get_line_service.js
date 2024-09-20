@@ -11,11 +11,10 @@ $(document).ready(() => {
                     for (let i = 0; i < selectedNode.selected.length; i++) {
                         const node = selectedNode.instance.get_node(selectedNode.selected[i])
                         const { id, data } = node
-                        const { type } = data
+                        const { type, act_adv_req_id } = data
                         // console.log('Current node:', id, type)
-                        if (['user'].includes(type)) {
-                            // console.log('User:', id)
-                            result.push(id.substring('user_'.length))
+                        if (['adv_line'].includes(type)) {
+                            result.push(act_adv_req_id)
                         }
                         // console.log('Current all status:', data.instance.get_node(data.selected[i]).id)
                     }
@@ -23,14 +22,11 @@ $(document).ready(() => {
                     $('#' + inputId).val(result.join())
                 }
             })
-            .on('select_node.jstree', (e, data) => {
-                console.log('Checked: ', data.instance.get_node(data.node).id)
-            })
-            .on('deselect_node.jstree', (e, data) => {
-                console.log('Un-Checked: ', data.instance.get_node(data.node).id)
-            })
     }
     const ajaxLoadData = (url) => {
+        userId = $('#user_id').val()
+        console.log('userId', userId)
+        url = url + '?user_id=' + userId
         $.ajax({
             url,
             success: (data) => {
@@ -42,6 +38,6 @@ $(document).ready(() => {
         })
     }
 
-    ajaxLoadData('/api/v1/custom_modal/user_get_line_service')
-    console.log('user_get_line_service.js')
+    ajaxLoadData('/api/v1/custom_modal/advance_detail_get_line_service')
+    console.log('advance_detail_get_line_service.js')
 })

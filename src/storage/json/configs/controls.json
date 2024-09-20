@@ -261,8 +261,10 @@
         "planning"
     ],
     "modal_body_name":[
+        "",
         "user_get_line_service",
         "travel_detail_get_line_service",
+        "advance_detail_get_line_service",
         "block_detail_get_line_service"
     ]
 }

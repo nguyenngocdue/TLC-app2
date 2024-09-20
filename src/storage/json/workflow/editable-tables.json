@@ -107,6 +107,15 @@
         "editable-table": "fin_expense_claim_lines",
         "button_add_a_new_line": "true"
     },
+    "fin_expense_claims_02": {
+        "name": "fin_expense_claims_02",
+        "entity-type": "fin_expense_claims",
+        "editable-table": "fin_expense_claim_adv_details",
+        "button_add_from_a_list": "true",
+        "modal_body_name": "advance_detail_get_line_service",
+        "foreign_keys": "act_adv_req_id, adv_date, adv_amount, adv_currency_id, adv_reason, employee_id, user_id",
+        "data_type_to_get_id": "adv_line"
+    },
     "fin_expense_claims_03": {
         "name": "fin_expense_claims_03",
         "entity-type": "fin_expense_claims",

@@ -37,5 +37,5 @@ $(document).ready(() => {
     }
 
     ajaxLoadData('/api/v1/custom_modal/block_detail_get_line_service')
-    console.log('parentId7TreeReportBlocks.js')
+    console.log('block_detail_get_line_service.js')
 })

@@ -161,6 +161,24 @@
         "let_user_clear": "",
         "let_user_open": ""
     },
+    "_getAdvanceLines": {
+        "name": "_getAdvanceLines",
+        "relationship": "hasMany",
+        "control_name": "getAdvanceLines",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "line",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParams",
+        "control": "relationship_renderer",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
     "_getTravelLines": {
         "name": "_getTravelLines",
         "relationship": "hasMany",

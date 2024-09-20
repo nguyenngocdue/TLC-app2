@@ -27,7 +27,7 @@ addLinesToTableFormModalList = (listId, tableId, xxxForeignKeys, dataTypeToGetId
             toBeAdded.push(line)
         }
     }
-    console.log('toBeAdded', toBeAdded)
+    console.log('toBeAdded', toBeAdded, 'with strongKey', strongKey)
 
     for (let i = 0; i < toBeAdded.length; i++) {
         // const today = moment().format('DD/MM/YYYY')

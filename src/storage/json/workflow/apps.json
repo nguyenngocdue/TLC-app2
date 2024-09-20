@@ -860,6 +860,22 @@
         "edit_renderer": null,
         "show_renderer": null
     },
+    "fin_expense_claim_adv_detail": {
+        "name": "fin_expense_claim_adv_detail",
+        "package_tab": "application",
+        "package": "finance",
+        "sub_package": "finance",
+        "title": "Expense Claim Advanced Details",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "fin_expense_claim_line": {
         "name": "fin_expense_claim_line",
         "package_tab": "application",

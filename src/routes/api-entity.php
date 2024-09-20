@@ -44,5 +44,6 @@ Route::group([
 ], function () {
     Route::get("user_get_line_service", [App\Http\Services\GetLineForModal\UserGetLineService::class, 'getLines'])->name("user_get_line_service");
     Route::get("travel_detail_get_line_service", [App\Http\Services\GetLineForModal\TravelDetailGetLineService::class, 'getLines'])->name("travel_detail_get_line_service");
+    Route::get("advance_detail_get_line_service", [App\Http\Services\GetLineForModal\AdvanceDetailGetLineService::class, 'getLines'])->name("advance_detail_get_line_service");
     Route::get("block_detail_get_line_service", [App\Http\Services\GetLineForModal\BlockDetailGetLineService::class, 'getLines'])->name("block_detail_get_line_service");
 });

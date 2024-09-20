@@ -39,5 +39,5 @@ $(document).ready(() => {
     }
 
     ajaxLoadData('/api/v1/custom_modal/travel_detail_get_line_service')
-    console.log('parentId7TreeFinExpenseTravelLines 2024-09-18T17:51:45.js')
+    console.log('travel_detail_get_line_service.js')
 })
