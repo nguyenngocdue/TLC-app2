@@ -5,9 +5,10 @@ namespace App\Http\Services\GetLineForModal;
 use App\Models\Diginet_business_trip_line;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class TravelDetailGetLineService extends _GetLineService
+class TravelDetailGetLineService
 {
     private function clusterIntoGroups($lines)
     {
@@ -35,14 +36,15 @@ class TravelDetailGetLineService extends _GetLineService
         return $groups;
     }
 
-    public function getLines()
+    public function getLines(Request $request)
     {
+        Log::info($request);
+        $employeeId = $request->employee_id;
+        Log::info("Employee ID: " . $employeeId);
         $result = [];
 
         $lines = Diginet_business_trip_line::query()
-            // ->where('employeeid', 'TLCM00024') //cuong
-            ->where('employeeid', 'TLCM01034')
-            // ->groupBy('tb_document_id')
+            ->where('employeeid', $employeeId)
             ->get()
             ->sort(function ($a, $b) {
                 return $a->tb_date <=> $b->tb_date;

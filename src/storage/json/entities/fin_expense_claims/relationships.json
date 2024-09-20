@@ -53,6 +53,24 @@
         "let_user_clear": "",
         "let_user_open": ""
     },
+    "_getUserDiscipline": {
+        "name": "_getUserDiscipline",
+        "relationship": "belongsTo",
+        "control_name": "user_discipline_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
     "_getTravelFromPlace": {
         "name": "_getTravelFromPlace",
         "relationship": "belongsTo",

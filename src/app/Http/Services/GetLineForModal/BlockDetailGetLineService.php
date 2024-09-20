@@ -8,7 +8,7 @@ use App\Models\Rp_report;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
-class BlockDetailGetLineService extends _GetLineService
+class BlockDetailGetLineService
 {
     private function createLinkedId($type, $id)
     {

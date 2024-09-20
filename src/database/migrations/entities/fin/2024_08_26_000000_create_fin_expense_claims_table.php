@@ -26,6 +26,9 @@ return new class extends Migration
             $table->unsignedBigInteger("counter_currency_id")->nullable();
 
             $table->unsignedBigInteger("user_id")->nullable();
+            $table->string("employee_id")->nullable();
+            $table->unsignedBigInteger("user_discipline_id")->nullable();
+
             $table->unsignedBigInteger("travel_from_place_id")->nullable();
             $table->unsignedBigInteger("travel_to_place_id")->nullable();
             $table->unsignedBigInteger("travel_place_pair_id")->nullable();

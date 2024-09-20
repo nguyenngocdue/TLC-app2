@@ -24,6 +24,9 @@ $(document).ready(() => {
             })
     }
     const ajaxLoadData = (url) => {
+        employeeId = $('#employee_id').val()
+        console.log('employeeId', employeeId)
+        url = url + '?employee_id=' + employeeId
         $.ajax({
             url,
             success: (data) => {

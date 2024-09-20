@@ -11,6 +11,8 @@ class Fin_expense_claim extends ModelExtended
         "description",
         "owner_id",
         "user_id",
+        "employee_id",
+        "user_discipline_id",
 
         "travel_from_place_id",
         "travel_to_place_id",
@@ -37,6 +39,7 @@ class Fin_expense_claim extends ModelExtended
 
         "getTravelLines" => ["hasMany", Fin_expense_claim_travel_detail::class, "fin_expense_claim_id"],
         "getRequester" => ['belongsTo', User::class, 'user_id'],
+        "getUserDiscipline" => ['belongsTo', User_discipline::class, 'user_discipline_id'],
         "getTravelFromPlace" => ['belongsTo', Act_travel_place::class, 'travel_from_place_id'],
         "getTravelToPlace" => ['belongsTo', Act_travel_place::class, 'travel_to_place_id'],
         "getTravelPlacePair" => ['belongsTo', Act_travel_place_pair::class, 'travel_place_pair_id'],
@@ -68,6 +71,12 @@ class Fin_expense_claim extends ModelExtended
     }
 
     public function getRequester()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getUserDiscipline()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

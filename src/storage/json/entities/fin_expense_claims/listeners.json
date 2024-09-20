@@ -44,6 +44,36 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_employee_id": {
+        "name": "_employee_id",
+        "column_name": "employee_id",
+        "listen_action": "dot",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
+        "listen_to_attrs": "employeeid",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_user_discipline_id": {
+        "name": "_user_discipline_id",
+        "column_name": "user_discipline_id",
+        "listen_action": "dot",
+        "triggers": "user_id",
+        "listen_to_fields": "user_id",
+        "listen_to_attrs": "discipline",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_travel_allowance_per_day": {
         "name": "_travel_allowance_per_day",
         "column_name": "travel_allowance_per_day",
@@ -239,21 +269,6 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
     "_travel_from_place_id": {
         "name": "_travel_from_place_id",
         "column_name": "travel_from_place_id",
@@ -332,6 +347,21 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "listen_action": "",
+        "triggers": "",
+        "listen_to_fields": "",
+        "listen_to_attrs": "",
+        "columns_to_set": "",
+        "attrs_to_compare": "",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",

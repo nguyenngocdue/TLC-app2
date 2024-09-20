@@ -5,7 +5,7 @@ namespace App\Http\Services\GetLineForModal;
 use App\Models\User_company;
 use Illuminate\Support\Facades\Log;
 
-class UserGetLineService extends _GetLineService
+class UserGetLineService
 {
     public function getLines()
     {
