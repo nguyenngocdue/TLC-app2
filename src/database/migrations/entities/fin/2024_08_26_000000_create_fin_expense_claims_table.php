@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
             $table->string("employee_id")->nullable();
             $table->unsignedBigInteger("user_discipline_id")->nullable();
+            $table->unsignedBigInteger("receiving_method_id")->nullable();
 
             $table->unsignedBigInteger("travel_from_place_id")->nullable();
             $table->unsignedBigInteger("travel_to_place_id")->nullable();
@@ -39,7 +40,13 @@ return new class extends Migration
             $table->double("travel_day_count")->nullable();
             $table->double("hr_adjusted_date_count_0")->nullable();
             $table->double("hr_adjusted_date_count_1")->nullable();
+
+            $table->double("advance_total")->nullable();
             $table->double("travel_allowance_total")->nullable();
+            $table->double("expense_total")->nullable();
+            $table->double("total_reimbursed")->nullable();
+            $table->string("total_reimbursed_in_words_0")->nullable();
+            $table->string("total_reimbursed_in_words_1")->nullable();
 
             $table->appendCommonFields();
         });

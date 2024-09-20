@@ -30,7 +30,11 @@ $(document).ready(() => {
             success: (data) => {
                 $('#divModalDataLoading').hide()
                 jsonTree = data
-                renderTree(data)
+                if (jsonTree.length == 0) {
+                    $('#divModalDataLoading').html('No data found').show()
+                } else {
+                    renderTree(data)
+                }
             },
             error: (error) => toastr.error('Error: ' + error.responseJSON.message),
         })

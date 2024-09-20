@@ -13,6 +13,7 @@ class Fin_expense_claim extends ModelExtended
         "user_id",
         "employee_id",
         "user_discipline_id",
+        "receiving_method_id",
 
         "travel_from_place_id",
         "travel_to_place_id",
@@ -24,10 +25,16 @@ class Fin_expense_claim extends ModelExtended
         "travel_day_count",
         "hr_adjusted_date_count_0",
         "hr_adjusted_date_count_1",
-        "travel_allowance_total",
 
         "rate_exchange_month_id",
         'counter_currency_id',
+
+        "advance_total",
+        "travel_allowance_total",
+        "expense_total",
+        "total_reimbursed",
+        "total_reimbursed_in_words_0",
+        "total_reimbursed_in_words_1",
     ];
 
     // public static $statusless = true;
@@ -36,6 +43,7 @@ class Fin_expense_claim extends ModelExtended
         "getClaimableLines" => ['morphMany', Fin_expense_claim_line::class, 'claimable', 'claimable_type', 'claimable_id'],
         'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
         'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
+        'getReceivingMethod' => ['belongsTo', Term::class, 'receiving_method_id'],
 
         "getAdvanceLines" => ["hasMany", Fin_expense_claim_adv_detail::class, "fin_expense_claim_id"],
         "getTravelLines" => ["hasMany", Fin_expense_claim_travel_detail::class, "fin_expense_claim_id"],
@@ -49,6 +57,12 @@ class Fin_expense_claim extends ModelExtended
     ];
 
     public function getClaimableLines()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getReceivingMethod()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

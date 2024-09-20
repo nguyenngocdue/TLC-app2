@@ -35,6 +35,24 @@
         "let_user_clear": "",
         "let_user_open": ""
     },
+    "_getReceivingMethod": {
+        "name": "_getReceivingMethod",
+        "relationship": "belongsTo",
+        "control_name": "receiving_method_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "radio",
+        "filter_columns": "field_id",
+        "filter_operator": "=",
+        "filter_values": "316",
+        "radio_checkbox_colspan": "6",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
     "_getRequester": {
         "name": "_getRequester",
         "relationship": "belongsTo",
