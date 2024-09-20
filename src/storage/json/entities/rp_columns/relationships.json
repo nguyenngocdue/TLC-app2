@@ -14,7 +14,8 @@
         "filter_values": "301",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getRowIconPosition": {
         "name": "_getRowIconPosition",
@@ -31,7 +32,8 @@
         "filter_values": "301",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getRowRenderer": {
         "name": "_getRowRenderer",
@@ -48,7 +50,8 @@
         "filter_values": "306",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getAggFooter": {
         "name": "_getAggFooter",
@@ -65,7 +68,8 @@
         "filter_values": "305",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getBlock": {
         "name": "_getBlock",
@@ -82,7 +86,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getParent": {
         "name": "_getParent",
@@ -99,7 +104,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
+    },
+    "_getFixedCol": {
+        "name": "_getFixedCol",
+        "relationship": "belongsTo",
+        "control_name": "fixed",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "field_id",
+        "filter_operator": "=",
+        "filter_values": "301",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -116,7 +140,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -133,6 +158,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

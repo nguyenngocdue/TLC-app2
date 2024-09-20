@@ -51,7 +51,7 @@ class ReportTableColumn
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from admin
         $columns = $block->getLines->sortby('order_no');
-        $secondHeaderCols = $this->getSecondColumns($block);
+        $secondHeaderCols = $this->get2ndCols($block);
         $headerCols = [];
 
         $fields = [];
@@ -68,6 +68,7 @@ class ReportTableColumn
                     'dataIndex' => $dataIndex,
                     'width' => $line->width,
                     'colspan' => $line->col_span,
+                    'fixed' => strtolower($this->getTermName($line->fixed)) ?? null,
                     'footer' => $aggFooter,
                 ];
             }
@@ -78,27 +79,29 @@ class ReportTableColumn
             $transformedCols = $this->getTransformedDataCols($queriedData, $fields, $transformedOpt , $transformedFields);
             $headerCols = array_merge($headerCols, $transformedCols);
         }
+        // dd($headerCols);
         return [$headerCols, $secondHeaderCols];
     }
 
-    private function getSecondColumns($block)
+    private function get2ndCols($block)
     {
-        $dataHeader = [];
-        $secHeaderLines = $block->get2ndHeaderLines; #()->getParent();
-        foreach ($secHeaderLines as $column) {
+        $data2ndHeader = [];
+        $headerLines = $block->get2ndHeaderLines; #()->getParent();
+        foreach ($headerLines as $column) {
             // dd($column);
             $parent  = $column->getParent;
             if ($parent->is_active) {
                 $content = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
-                $dataHeader[$parent->data_index] = (object)[
+                $data2ndHeader[$parent->data_index] = (object)[
                     'value' => $content,
                     'cell_class' => $column?->cell_class,
                     'cell_div_class' =>  $column?->cell_div_class,
-
+                    
                 ];
             }
         }
-        return $dataHeader;
+        // dd($data2ndHeader);
+        return $data2ndHeader;
     }
 
     public function getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields){        

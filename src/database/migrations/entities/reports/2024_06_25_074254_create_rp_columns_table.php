@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('is_active')->nullable();
             $table->string('data_index')->nullable();
             $table->unsignedInteger('col_span')->nullable();
+            $table->unsignedBigInteger('fixed')->nullable();
             $table->unsignedInteger('row_span')->nullable();
             $table->unsignedInteger('width')->nullable();
             $table->text('cell_div_class')->nullable();

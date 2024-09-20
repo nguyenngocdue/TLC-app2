@@ -8,7 +8,7 @@ class Rp_column extends ModelExtended
 {
     protected $fillable = [
         "id", "name", "title", "block_id", "parent_id", "is_active", "data_index",
-        "col_span", "row_span",
+        "col_span", "fixed", "row_span",
         "order_no", "name", "width", "cell_div_class_agg_footer", "cell_div_class",
         "cell_class", "icon", "icon_position", "row_cell_div_class", "row_cell_class",
         "row_icon", "row_icon_position", "row_href_fn", "row_renderer","entity_type", "agg_footer",
@@ -22,6 +22,7 @@ class Rp_column extends ModelExtended
         'getAggFooter' => ['belongsTo', Term::class, 'agg_footer'],
         "getBlock" => ['belongsTo', Rp_block::class, 'block_id'],
         "getParent" => ['belongsTo', Rp_column::class, 'parent_id'],
+        "getFixedCol" => ['belongsTo', Term::class, 'fixed'],
     ];
 
     public function getIconPosition()
@@ -54,6 +55,11 @@ class Rp_column extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getFixedCol()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
     public function getManyLineParams()
     {
         return [
@@ -65,6 +71,7 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'is_active', 'cloneable' => true],
             ["dataIndex" => 'data_index'],
             ["dataIndex" => 'col_span'],
+            ["dataIndex" => 'fixed'],
             ["dataIndex" => 'row_span'],
             ["dataIndex" => 'width'],
             ["dataIndex" => 'cell_class'],
@@ -89,10 +96,11 @@ class Rp_column extends ModelExtended
             ["dataIndex" => 'order_no', 'invisible' => true,],
             ["dataIndex" => 'block_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'parent_id',],
+            ["dataIndex" => 'title'],
             ["dataIndex" => 'name'],
-            // ["dataIndex" => 'is_active'],
-            // ["dataIndex" => 'data_index'],
-            // ["dataIndex" => 'width'],
+            ["dataIndex" => 'is_active', 'cloneable' => true,],
+            ["dataIndex" => 'data_index'],
+            ["dataIndex" => 'width'],
             ["dataIndex" => 'cell_div_class'],
             ["dataIndex" => 'cell_class'],
             ["dataIndex" => 'icon'],

@@ -1,4 +1,4 @@
-{{-- @dd($tableDataSource, $tableColumns) --}}
+{{-- @dd($tableDataHeader, $tableColumns) --}}
 <x-renderer.table 
     maxH="{{$maxH}}"  
     showNo={{true}} 
