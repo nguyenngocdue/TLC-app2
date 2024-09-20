@@ -109,9 +109,19 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
-    "_getProdRunsRework": {
-        "name": "_getProdRunsRework",
-        "column_name": "getProdRunsRework",
+    "_getProdRunsRework1": {
+        "name": "_getProdRunsRework1",
+        "column_name": "getProdRunsRework1",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_getProdRunsRework2": {
+        "name": "_getProdRunsRework2",
+        "column_name": "getProdRunsRework2",
         "new": "true",
         "in_progress": "true",
         "finished": "true",
@@ -238,6 +248,66 @@
         "on_hold": "true",
         "cancelled": "true",
         "not_applicable": "true"
+    },
+    "_start_date_2": {
+        "name": "_start_date_2",
+        "column_name": "start_date_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_end_date_2": {
+        "name": "_end_date_2",
+        "column_name": "end_date_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_uom_agg_2": {
+        "name": "_uom_agg_2",
+        "column_name": "uom_agg_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_hours_2": {
+        "name": "_total_hours_2",
+        "column_name": "total_hours_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_worker_number_2": {
+        "name": "_worker_number_2",
+        "column_name": "worker_number_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_man_hours_2": {
+        "name": "_total_man_hours_2",
+        "column_name": "total_man_hours_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
     },
     "_start_date": {
         "name": "_start_date",

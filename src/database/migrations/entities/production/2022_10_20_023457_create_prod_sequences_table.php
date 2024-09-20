@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('prod_sequences', function (BlueprintExtended $table) {
             $table->id();
@@ -26,16 +26,42 @@ return new class extends Migration
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
 
             $table->integer('priority')->nullable();
+
+            $table->double('total_hours_0')->nullable();
+            $table->double('total_hours_1')->nullable();
+            $table->double('total_hours_2')->nullable();
             $table->double('total_hours')->nullable();
+
+            $table->double('worker_number_0', 8, 2)->nullable();
+            $table->double('worker_number_1', 8, 2)->nullable();
+            $table->double('worker_number_2', 8, 2)->nullable();
             $table->double('worker_number', 8, 2)->nullable();
+
+            $table->double('total_man_hours_0')->nullable();
+            $table->double('total_man_hours_1')->nullable();
+            $table->double('total_man_hours_2')->nullable();
             $table->double('total_man_hours')->nullable();
+
+            $table->dateTime('start_date_0')->nullable();
+            $table->dateTime('start_date_1')->nullable();
+            $table->dateTime('start_date_2')->nullable();
             $table->dateTime('start_date')->nullable();
+
+            $table->dateTime('end_date_0')->nullable();
+            $table->dateTime('end_date_1')->nullable();
+            $table->dateTime('end_date_2')->nullable();
             $table->dateTime('end_date')->nullable();
+
             $table->dateTime('expected_start_at')->nullable();
             $table->dateTime('expected_finish_at')->nullable();
             $table->unsignedBigInteger('uom_id')->nullable();
             $table->float('uom_input')->nullable();
+
+            $table->float('uom_agg_0')->nullable();
+            $table->float('uom_agg_1')->nullable();
+            $table->float('uom_agg_2')->nullable();
             $table->float('uom_agg')->nullable();
+
             $table->float('total_uom')->nullable();
             $table->string('erp_prod_order_name')->nullable();
 

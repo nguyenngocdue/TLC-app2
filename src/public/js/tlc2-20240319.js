@@ -14,10 +14,8 @@ const callApiStoreEmpty = (url, data, meta, callback = null) => {
             } else {
                 toastr.success(response.message)
                 const href = response?.hits?.[0]?.['redirect_edit_href']
-                if (href)
-                    window.location.href = href
-                else
-                    toastr.error("No redirect_edit_href found in hits[0]")
+                if (href) window.location.href = href
+                else toastr.error('No redirect_edit_href found in hits[0]')
             }
         },
         error: function (jqXHR) {
@@ -92,18 +90,18 @@ const changeStatusAll = (url, ids, nextStatus, nextStatusLabel) => {
 }
 
 const convertToLocalTimezone = (datetimeString) => {
-    const now = new Date();
-    const timezoneOffset = now.getTimezoneOffset(); // in minutes
+    const now = new Date()
+    const timezoneOffset = now.getTimezoneOffset() // in minutes
 
-    const datetime = new Date(datetimeString);
-    const localTime = new Date(datetime.getTime() - timezoneOffset * 60 * 1000);
-    return localTime;
+    const datetime = new Date(datetimeString)
+    const localTime = new Date(datetime.getTime() - timezoneOffset * 60 * 1000)
+    return localTime
 }
 
 const convertToServerTimezoneStr = (datetimeString) => {
-    const datetime = new Date(datetimeString);
-    const str = datetime.toISOString().substring(0, 19).replace("T", " ");
-    return str;
+    const datetime = new Date(datetimeString)
+    const str = datetime.toISOString().substring(0, 19).replace('T', ' ')
+    return str
 }
 
 // function a() {
@@ -120,12 +118,12 @@ const flatpickrHandleChange = (name, selectedDates) => {
     // console.log(selectedDates)
     const date = selectedDates[0]
     const result = convertToServerTimezoneStr(date)
-    const hiddenInput = document.getElementById('hidden_' + name);
-    if(hiddenInput){
-        hiddenInput.value = result;
+    const hiddenInput = document.getElementById('hidden_' + name)
+    if (hiddenInput) {
+        hiddenInput.value = result
     } else {
-        const input = document.getElementById(name);
-        input.value = result;
+        const input = document.getElementById(name)
+        input.value = result
     }
 }
 
@@ -135,7 +133,7 @@ const newFlatPickrDateTime = (id, config) => {
     return flatpickr(element, {
         enableTime: true,
         altInput: true,
-        altFormat: "d/m/Y H:i",
+        altFormat: 'd/m/Y H:i',
         dateFormat: 'Y-m-d H:i:S',
         weekNumbers: true,
         time_24hr: true,
@@ -143,8 +141,8 @@ const newFlatPickrDateTime = (id, config) => {
         parseDate: newFlatPickrDateTimeParseDate,
         onChange: (selectedDates, dateStr, instance) => {
             flatpickrHandleChange(id, selectedDates)
-        }
-    });
+        },
+    })
 }
 
 const newFlatPickrTime = (id, config) => {
@@ -153,23 +151,25 @@ const newFlatPickrTime = (id, config) => {
         noCalendar: true,
         enableTime: true,
         altInput: true,
-        altFormat: "H:i",
+        altFormat: 'H:i',
         dateFormat: 'H:i:S',
         weekNumbers: true,
         time_24hr: true,
         ...config,
-    });
+    })
 }
 
 const newFlatPickrDate = (id, config) => {
     const element = document.getElementById(id)
-    return flatpickr(element, {
+    const params = {
         // enableTime: true,
         altInput: true,
-        altFormat: "d/m/Y",
+        altFormat: 'd/m/Y',
         dateFormat: 'Y-m-d',
         weekNumbers: true,
         time_24hr: true,
         ...config,
-    });
+    }
+    console.log('newFlatPickrDate', id, params, element)
+    return flatpickr(element, params)
 }

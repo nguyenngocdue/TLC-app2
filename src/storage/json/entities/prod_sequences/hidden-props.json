@@ -109,9 +109,19 @@
         "cancelled": "",
         "not_applicable": ""
     },
-    "_getProdRunsRework": {
-        "name": "_getProdRunsRework",
-        "column_name": "getProdRunsRework",
+    "_getProdRunsRework1": {
+        "name": "_getProdRunsRework1",
+        "column_name": "getProdRunsRework1",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_getProdRunsRework2": {
+        "name": "_getProdRunsRework2",
+        "column_name": "getProdRunsRework2",
         "new": "",
         "in_progress": "",
         "finished": "",

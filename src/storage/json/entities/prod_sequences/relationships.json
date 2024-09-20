@@ -169,10 +169,10 @@
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""
     },
-    "_getProdRunsRework": {
-        "name": "_getProdRunsRework",
+    "_getProdRunsRework1": {
+        "name": "_getProdRunsRework1",
         "relationship": "hasMany",
-        "control_name": "getProdRunsRework",
+        "control_name": "getProdRunsRework1",
         "renderer_view_all": "agg_count",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "line",
@@ -182,6 +182,23 @@
         "filter_columns": "is_rework",
         "filter_operator": "=",
         "filter_values": "1",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": ""
+    },
+    "_getProdRunsRework2": {
+        "name": "_getProdRunsRework2",
+        "relationship": "hasMany",
+        "control_name": "getProdRunsRework2",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "line",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsRework",
+        "control": "relationship_renderer",
+        "filter_columns": "is_rework",
+        "filter_operator": "=",
+        "filter_values": "2",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
         "let_user_clear": ""

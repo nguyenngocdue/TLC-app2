@@ -7,10 +7,20 @@ use App\BigThink\ModelExtended;
 class Prod_run extends ModelExtended
 {
     protected $fillable = [
-        "id", "prod_sequence_id", "date", "start", "end", "owner_id",
-        "total_hours", "total_man_hours",
-        "worker_number", "worker_number_count", "worker_number_input",
-        "remark", "production_output", "is_rework",
+        "id",
+        "prod_sequence_id",
+        "date",
+        "start",
+        "end",
+        "owner_id",
+        "total_hours",
+        "total_man_hours",
+        "worker_number",
+        "worker_number_count",
+        "worker_number_input",
+        "remark",
+        "production_output",
+        "is_rework",
         "prod_discipline_id",
     ];
 

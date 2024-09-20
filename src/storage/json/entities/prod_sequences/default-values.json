@@ -142,9 +142,22 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getProdRunsRework": {
-        "name": "_getProdRunsRework",
-        "column_name": "getProdRunsRework",
+    "_getProdRunsRework1": {
+        "name": "_getProdRunsRework1",
+        "column_name": "getProdRunsRework1",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_getProdRunsRework2": {
+        "name": "_getProdRunsRework2",
+        "column_name": "getProdRunsRework2",
         "label": "",
         "validation": "",
         "validation_regex": "",

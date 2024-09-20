@@ -27,21 +27,38 @@ class Prod_sequence extends ModelExtended
 
         "start_date_0",
         "start_date_1",
+        "start_date_2",
+        // ALTER TABLE `prod_sequences` ADD `start_date_2` DATE NULL DEFAULT NULL AFTER `start_date_1`;
         "start_date",
+
         "end_date_0",
         "end_date_1",
+        "end_date_2",
+        //ALTER TABLE `prod_sequences` ADD `end_date_2` DATE NULL DEFAULT NULL AFTER `end_date_1`;
         "end_date",
+
         "uom_agg_0",
         "uom_agg_1",
+        "uom_agg_2",
+        //ALTER TABLE `prod_sequences` ADD `uom_agg_2` DATE NULL DEFAULT NULL AFTER `uom_agg_1`;
         "uom_agg",
+
         "total_hours_0",
         "total_hours_1",
+        "total_hours_2",
+        //ALTER TABLE `prod_sequences` ADD `total_hours_2` DATE NULL DEFAULT NULL AFTER `total_hours_1`;
         "total_hours",
+
         "worker_number_0",
         "worker_number_1",
+        "worker_number_2",
+        // ALTER TABLE `prod_sequences` ADD `worker_number_2` DATE NULL DEFAULT NULL AFTER `worker_number_1`;
         "worker_number",
+
         "total_man_hours_0",
         "total_man_hours_1",
+        "total_man_hours_2",
+        //ALTER TABLE `prod_sequences` ADD `total_man_hours_2` DATE NULL DEFAULT NULL AFTER `total_man_hours_1`;
         "total_man_hours",
 
         "total_calendar_days",
@@ -60,7 +77,8 @@ class Prod_sequence extends ModelExtended
         "getUomId" => ["belongsTo", Term::class, 'uom_id'],
 
         "getProdRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
-        "getProdRunsRework" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRunsRework1" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRunsRework2" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
         "getProdRoutingDetail" => ['belongsTo', Prod_routing_detail::class, "prod_routing_id", "prod_routing_id"],
 
@@ -112,13 +130,19 @@ class Prod_sequence extends ModelExtended
     public function getProdRuns()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2])->whereNot('is_rework', 1);
+        return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 0);
     }
 
-    public function getProdRunsRework()
+    public function getProdRunsRework1()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 1);
+    }
+
+    public function getProdRunsRework2()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 2);
     }
 
     // public function getProdRoutingDetails()

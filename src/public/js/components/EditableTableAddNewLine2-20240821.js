@@ -56,13 +56,15 @@ const addANewLine = (params) => {
     if (parentIdFieldName === 'prod_sequence_id') {
         const a = tableObject[tableId].tableName
         const b = tableObject[tableId].eloquentFn
-        // console.log(a, b)
         if (a === 'prod_runs') {
             if (b === 'getProdRuns') {
                 valuesOfOrigin['is_rework'] = 0
             }
-            if (b === 'getProdRunsRework') {
+            if (b === 'getProdRunsRework1') {
                 valuesOfOrigin['is_rework'] = 1
+            }
+            if (b === 'getProdRunsRework2') {
+                valuesOfOrigin['is_rework'] = 2
             }
         }
     }
@@ -122,46 +124,6 @@ const addANewLine = (params) => {
                 // console.log(dateTimeControls)
                 for (let i = 0; i < batchLength; i++) {
                     const valuesOfOrigin = response['hits'][i]
-                    // Object.keys(dateTimeControls).forEach(key => {
-                    //     if (undefined !== valuesOfOrigin[key]) {
-                    //         const picker_type = dateTimeControls[key]
-                    //         // console.log(key, picker_type)
-                    //         if (FORMAT[picker_type] === undefined)
-                    //             console.log("Unknown how to format " + picker_type + " for " + key)
-                    //         else {
-                    //             // console.log("Converting " + valuesOfOrigin[key])
-                    //             switch (picker_type) {
-                    //                 case "picker_time":
-                    //                     //check not null, otherwise Invalid Date
-                    //                     if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key], "HH:mm:ss").format("HH:mm")
-                    //                     break
-                    //                 // case "picker_datetime":
-                    //                 //     console.log(key, valuesOfOrigin[key])
-                    //                 //     break
-                    //                 default:
-                    //                     if (valuesOfOrigin[key]) valuesOfOrigin[key] = moment(valuesOfOrigin[key]).format(FORMAT[picker_type])
-                    //                     break
-                    //             }
-                    //             // console.log("Converted to " + picker_type + key + valuesOfOrigin[key])
-                    //         }
-                    //     } else {
-                    //         // console.log("Date time has value ", key, valuesOfOrigin[key])
-                    //     }
-                    // })
-                    // valuesOfOrigin['id'] = line.id
-
-                    //Find a way to run from default values
-                    // console.log("tableName", tableName)
-                    // if (tableName === "hr_overtime_request_lines") {
-                    //     // console.log("OT_DATE", valuesOfOrigin['ot_date'])
-                    //     if (undefined === valuesOfOrigin['ot_date']) {
-                    //         valuesOfOrigin['ot_date'] = moment().format('DD/MM/YYYY')
-                    //     }
-
-                    //     valuesOfOrigin['break_time'] = 0
-                    // }
-
-                    // console.log("Add line to table from ajax respond", valuesOfOrigin)
                     addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, tableName })
                 }
                 getEById(btnAddANewLineId).show()
@@ -374,6 +336,7 @@ const addANewLineFull = (params) => {
                     // renderer += "<input type='hidden1' name='"+id+"' id='hidden_"+id+"'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
                     renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) + '</script>'
+
                     break
                 case 'attachment4':
                     renderer = '<div class="to be implemented"></div>'
