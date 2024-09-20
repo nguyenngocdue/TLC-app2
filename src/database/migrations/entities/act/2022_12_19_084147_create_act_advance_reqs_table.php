@@ -20,10 +20,13 @@ return new class extends Migration
         $schema->create('act_advance_reqs', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->unsignedInteger('doc_id')->nullable();
             $table->string('title')->nullable();
             $table->string('title_vn')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('employee_id')->nullable();
+            $table->unsignedBigInteger('user_discipline_id')->nullable();
             // $table->unsignedBigInteger('sub_project_id')->nullable();
             $table->unsignedBigInteger('radio_advance_type')->nullable();
             $table->decimal('advance_amount', 20, 6)->nullable();

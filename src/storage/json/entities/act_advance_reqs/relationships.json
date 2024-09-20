@@ -14,7 +14,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getUserDiscipline": {
+        "name": "_getUserDiscipline",
+        "relationship": "belongsTo",
+        "control_name": "user_discipline_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCurrency": {
         "name": "_getCurrency",
@@ -31,7 +50,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getAssignee1": {
         "name": "_getAssignee1",
@@ -48,7 +68,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_radioAdvanceType": {
         "name": "_radioAdvanceType",
@@ -65,7 +86,8 @@
         "filter_values": "167",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCurrencyPair": {
         "name": "_getCurrencyPair",
@@ -82,7 +104,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getRateExchangeMonth": {
         "name": "_getRateExchangeMonth",
@@ -99,7 +122,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCounterCurrency": {
         "name": "_getCounterCurrency",
@@ -116,7 +140,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -133,7 +158,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -146,11 +172,12 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
-        "filter_operator": "=",
+        "filter_operator": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getMonitors1": {
         "name": "_getMonitors1",
@@ -167,7 +194,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSubProjectsOfAdvanceReq": {
         "name": "_getSubProjectsOfAdvanceReq",
@@ -184,6 +212,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

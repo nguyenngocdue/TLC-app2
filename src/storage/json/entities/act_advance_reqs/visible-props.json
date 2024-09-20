@@ -4,15 +4,10 @@
         "column_name": "id",
         "new": "true"
     },
-    "_user_id": {
-        "name": "_user_id",
-        "column_name": "user_id",
-        "new": "true"
-    },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "new": "true"
+    "_doc_id": {
+        "name": "_doc_id",
+        "column_name": "doc_id",
+        "new": ""
     },
     "_title": {
         "name": "_title",
@@ -22,6 +17,26 @@
     "_title_vn": {
         "name": "_title_vn",
         "column_name": "title_vn",
+        "new": "true"
+    },
+    "_user_id": {
+        "name": "_user_id",
+        "column_name": "user_id",
+        "new": "true"
+    },
+    "_employee_id": {
+        "name": "_employee_id",
+        "column_name": "employee_id",
+        "new": "true"
+    },
+    "_user_discipline_id": {
+        "name": "_user_discipline_id",
+        "column_name": "user_discipline_id",
+        "new": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "new": "true"
     },
     "_radio_advance_type": {
@@ -79,6 +94,26 @@
         "column_name": "advance_amount_lcy_word",
         "new": "true"
     },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true"
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "new": "true"
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",
@@ -102,26 +137,6 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "new": "true"
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "new": "true"
-    },
-    "_assignee_1": {
-        "name": "_assignee_1",
-        "column_name": "assignee_1",
-        "new": "true"
-    },
-    "_getMonitors1": {
-        "name": "_getMonitors1",
-        "column_name": "getMonitors1",
-        "new": "true"
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
         "new": "true"
     }
 }

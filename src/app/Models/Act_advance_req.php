@@ -13,7 +13,11 @@ class Act_advance_req extends ModelExtended
         "title_vn",
         "description",
         "status",
+
         "user_id",
+        "employee_id",
+        "user_discipline_id",
+
         "radio_advance_type",
         "advance_amount",
         "currency_id",
@@ -39,6 +43,7 @@ class Act_advance_req extends ModelExtended
 
     public static $eloquentParams = [
         'getUser' => ['belongsTo', User::class, 'user_id'],
+        'getUserDiscipline' => ['belongsTo', User_discipline::class, 'user_discipline_id'],
         'getCurrency' => ['belongsTo', Act_currency::class, 'currency_id'],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         "radioAdvanceType" => ['belongsTo', Term::class, 'radio_advance_type'],
@@ -52,6 +57,11 @@ class Act_advance_req extends ModelExtended
     ];
 
     public function getUser()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getUserDiscipline()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
