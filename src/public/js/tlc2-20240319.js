@@ -147,6 +147,7 @@ const newFlatPickrDateTime = (id, config) => {
 
 const newFlatPickrTime = (id, config) => {
     const element = document.getElementById(id)
+
     return flatpickr(element, {
         noCalendar: true,
         enableTime: true,
@@ -170,6 +171,10 @@ const newFlatPickrDate = (id, config) => {
         time_24hr: true,
         ...config,
     }
-    console.log('newFlatPickrDate', id, params, element)
-    return flatpickr(element, params)
+    if (!element) {
+        toastr.error('element not found', id)
+    } else {
+        // console.log('newFlatPickrDate', id, params, element)
+        return flatpickr(element, params)
+    }
 }

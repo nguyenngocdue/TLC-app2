@@ -28,37 +28,31 @@ class Prod_sequence extends ModelExtended
         "start_date_0",
         "start_date_1",
         "start_date_2",
-        // ALTER TABLE `prod_sequences` ADD `start_date_2` DATE NULL DEFAULT NULL AFTER `start_date_1`;
         "start_date",
 
         "end_date_0",
         "end_date_1",
         "end_date_2",
-        //ALTER TABLE `prod_sequences` ADD `end_date_2` DATE NULL DEFAULT NULL AFTER `end_date_1`;
         "end_date",
 
         "uom_agg_0",
         "uom_agg_1",
         "uom_agg_2",
-        //ALTER TABLE `prod_sequences` ADD `uom_agg_2` DATE NULL DEFAULT NULL AFTER `uom_agg_1`;
         "uom_agg",
 
         "total_hours_0",
         "total_hours_1",
         "total_hours_2",
-        //ALTER TABLE `prod_sequences` ADD `total_hours_2` DATE NULL DEFAULT NULL AFTER `total_hours_1`;
         "total_hours",
 
         "worker_number_0",
         "worker_number_1",
         "worker_number_2",
-        // ALTER TABLE `prod_sequences` ADD `worker_number_2` DATE NULL DEFAULT NULL AFTER `worker_number_1`;
         "worker_number",
 
         "total_man_hours_0",
         "total_man_hours_1",
         "total_man_hours_2",
-        //ALTER TABLE `prod_sequences` ADD `total_man_hours_2` DATE NULL DEFAULT NULL AFTER `total_man_hours_1`;
         "total_man_hours",
 
         "total_calendar_days",
