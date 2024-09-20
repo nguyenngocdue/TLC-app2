@@ -58,7 +58,7 @@ function numberToWordsVn(number) {
                 8: 'tám',
                 9: 'chín',
             }
-            return digitsMap[digit]
+            return digitsMap[digit] || '(âm)'
         }
         const numberString = number + ''
         const decimalPart = numberString.split('.')[1]
@@ -78,8 +78,14 @@ function numberToWordsVn(number) {
     if (typeof number == 'string') number = number.replace(/[^0-9.\-]/g, '')
     number = (number * 1).toString()
 
+    let dau = ''
+    if (number[0] == '-') {
+        dau = '(TRỪ) '
+        number = number.substring(1)
+    }
     const nguyen = VNnum2words(number.substring(0, number.indexOf('.')))
     const thapphan = readDecimalPart(number.substring(number.indexOf('.')))
-    // console.log(nguyen, thapphan)
-    return capitalizeFirstLetter(nguyen + thapphan)
+
+    console.log(dau, nguyen, thapphan)
+    return capitalizeFirstLetter(dau + nguyen + thapphan)
 }

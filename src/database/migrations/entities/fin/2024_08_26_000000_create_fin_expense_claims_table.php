@@ -41,6 +41,11 @@ return new class extends Migration
             $table->double("hr_adjusted_date_count_0")->nullable();
             $table->double("hr_adjusted_date_count_1")->nullable();
 
+            $table->unsignedBigInteger("travel_currency_id");
+            $table->unsignedBigInteger("currency_pair_id");
+            $table->double("travel_rate_exchange");
+            $table->double("travel_allowance_amount");
+
             $table->double("advance_total")->nullable();
             $table->double("travel_allowance_total")->nullable();
             $table->double("expense_total")->nullable();

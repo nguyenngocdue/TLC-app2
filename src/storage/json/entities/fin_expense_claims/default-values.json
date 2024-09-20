@@ -324,6 +324,58 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_travel_currency_id": {
+        "name": "_travel_currency_id",
+        "column_name": "travel_currency_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "5",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_currency_pair_id": {
+        "name": "_currency_pair_id",
+        "column_name": "currency_pair_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_travel_rate_exchange": {
+        "name": "_travel_rate_exchange",
+        "column_name": "travel_rate_exchange",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_travel_allowance_amount": {
+        "name": "_travel_allowance_amount",
+        "column_name": "travel_allowance_amount",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_sep04": {
         "name": "_sep04",
         "column_name": "sep04",

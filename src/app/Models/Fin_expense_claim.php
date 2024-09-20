@@ -28,6 +28,10 @@ class Fin_expense_claim extends ModelExtended
 
         "rate_exchange_month_id",
         'counter_currency_id',
+        "travel_currency_id",
+        "currency_pair_id",
+        "travel_rate_exchange",
+        "travel_allowance_amount",
 
         "advance_total",
         "travel_allowance_total",
@@ -47,6 +51,9 @@ class Fin_expense_claim extends ModelExtended
 
         "getAdvanceLines" => ["hasMany", Fin_expense_claim_adv_detail::class, "fin_expense_claim_id"],
         "getTravelLines" => ["hasMany", Fin_expense_claim_travel_detail::class, "fin_expense_claim_id"],
+
+        "getTravelCurrency" => ['belongsTo', Act_currency::class, 'travel_currency_id'],
+        "getCurrencyPair" => ['belongsTo', Act_currency_pair::class, 'currency_pair_id'],
 
         "getRequester" => ['belongsTo', User::class, 'user_id'],
         "getUserDiscipline" => ['belongsTo', User_discipline::class, 'user_discipline_id'],
