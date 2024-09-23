@@ -7,7 +7,7 @@
         <x-renderer.heading level=3 class='text-center'>{{$section->name}}</x-renderer.heading>
         <br/>
         
-        @foreach($section->checkpoints as $checkpointId)
+        @foreach($section->checkpoints as $index => $checkpointId)
             <div class="border my-2">
                 @php
                     $checkpoint = $checkpoints->{$checkpointId}; 
@@ -15,7 +15,7 @@
                     $checkpointAttachmentIds = $checkpointData->attachments;
                 @endphp
                
-                <div class="w-full bg-gray-200 p-1 font-semibold text-lg">{{$checkpoint->name}}</div>                
+                <div class="w-full bg-gray-200 p-1 font-semibold text-lg">{{$index+1}}. {{$checkpoint->name}}</div>                
                 <div class="p-4">
                     @switch($checkpoint->type)
                         @case("pass-fail")
