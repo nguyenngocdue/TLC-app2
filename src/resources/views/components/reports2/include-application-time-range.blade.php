@@ -40,7 +40,7 @@
 <script type="text/javascript">
     document.addEventListener('click', function(event) {
             var btbResetTimeRange = document.getElementById('resetTimeRange');
-            if (btbResetTimeRange.contains(event.target)) {
+            if (btbResetTimeRange?.contains(event.target)) {
                  $('[id="' + "{{ $entityType }}" + '"]').append('<input type="hidden" name="form_type" value="resetAbsoluteTimeRange">')
             };
     });
