@@ -61,7 +61,7 @@ class ReportTableRow
                     }
                     elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) {
                         $entityType = $column->entity_type;
-                        $content = Str::makeId($value);
+                        $content = $value ? Str::makeId($value) : $value;
                         $route = Str::plural($entityType) . ".edit";
                         $hasRoute = Route::has($route);
                         if ($hasRoute) {
