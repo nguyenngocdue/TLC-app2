@@ -56,7 +56,7 @@ trait TraitReportMatrixColumn
                     if($statusData) {
                         $content = Blade::render("<x-renderer.status>" .$queriedValue. "</x-renderer.status>");
                         $cellClass = 'text-' .$statusData['text_color'];
-                        $href = route($rowRenderer['entity_type'].'.'.$rowRenderer['method'], $rowRenderer['route_id_field']) ?? '';
+                        $href = route($rowRenderer['entity_type'].'.'.$rowRenderer['method'], $record[$rowRenderer['route_id_field']]) ?? '';
                         $queriedValue = (object)[
                             'value' => $content,
                             'cell_class' => $cellClass ?? '',
