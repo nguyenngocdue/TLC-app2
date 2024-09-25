@@ -2,7 +2,9 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Blade;
 
 trait TraitReportMatrixColumn
 {
@@ -37,6 +39,7 @@ trait TraitReportMatrixColumn
         $row = $params['row'];
         $cellValue = $params['cell_value'];
         $valueToSet = $params['empty_value'] ?? null;
+        $rowRenderer = $params['row_renderer'] ?? null;
         $transformedFields = [];
         foreach ($data as $key => $record) {
             $record = (array)$record;
@@ -44,7 +47,24 @@ trait TraitReportMatrixColumn
             if (Report::checkValueOfField($record, $column)) {
                 $field = $record[$column];
                 if (!in_array($field, $transformedFields)) $transformedFields[] = $field;
-                $record[$field] = $record[$cellValue];
+
+                // render status for transfer data
+                $queriedValue = $record[$cellValue];
+                if($rowRenderer && isset($rowRenderer['type']) && $rowRenderer['type'] == 'status') {
+                    $statuses = isset($rowRenderer['entity_type']) ? LibStatuses::getFor($rowRenderer['entity_type']) : '';
+                    $statusData = $statuses[$queriedValue] ?? [];
+                    if($statusData) {
+                        $content = Blade::render("<x-renderer.status>" .$queriedValue. "</x-renderer.status>");
+                        $cellClass = 'text-' .$statusData['text_color'];
+                        $href = route($rowRenderer['entity_type'].'.'.$rowRenderer['method'], $rowRenderer['route_id_field']) ?? '';
+                        $queriedValue = (object)[
+                            'value' => $content,
+                            'cell_class' => $cellClass ?? '',
+                            'cell_href' => $href,
+                        ];
+                    }
+                }
+                $record[$field] = $queriedValue;
             }
             $data[$key] = (object)$record;
         }
@@ -92,6 +112,7 @@ trait TraitReportMatrixColumn
             }
         }
         sort($transformedFields);
+        // dd($mergedData);
         return [array_values($mergedData), $transformedFields];
     }
     
