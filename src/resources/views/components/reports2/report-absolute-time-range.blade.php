@@ -4,7 +4,11 @@
         <i class="text-green-400 fa-solid fa-clock"></i>
         @php
             $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : '<strong>Time Range</strong>';
-            $timeTitle = $presetTitle != 'Absolute Time Range'  ? "<strong>$presetTitle</strong>" ." (".$timeZone.")" : "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")";
+            $timeTitle = $presetTitle != 'Absolute Time Range'  ? 
+                                "<strong>$presetTitle</strong>" ." (".$timeZone.")" :
+                                 ($fromDate && $toDate ?
+                                 "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")"
+                                 : '<strong>Time Range</strong>');
         @endphp
 
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
@@ -61,11 +65,18 @@
     document.addEventListener('click', function(event) {
             var dropdownContent = document.getElementById('dropdownContent');
             var dropdownButton = document.getElementById('dropdownButton');
+            var calendarTop = document.getElementsByClassName('flatpickr-calendar animate open arrowTop');
+            var calendarBot = document.getElementsByClassName('flatpickr-calendar animate open arrowBottom');
             // Check if the clicked element is not inside the dropdown content or the button
-            if (!dropdownContent.contains(event.target) && !dropdownButton.contains(event.target)) {
+             if (!dropdownContent.contains(event.target) 
+                    && !dropdownButton.contains(event.target) 
+                    && !calendarTop[0].contains(event.target)
+                    && !calendarBot[0].contains(event.target)
+                 ) {
                 // Hide the dropdown if clicked outside
                 dropdownContent.classList.add('hidden');
-            }
+            } 
+           
         });
 
     document.getElementById('dropdownButton').addEventListener('click', function() {
@@ -74,3 +85,4 @@
     });
 
 </script>
+
