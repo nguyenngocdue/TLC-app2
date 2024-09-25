@@ -1,7 +1,7 @@
 <div class="relative inline-block text-left z-10">
     <!-- Dropdown Button -->
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-lg bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
-        <i class="text-green-400 fa-solid fa-clock"></i>
+        <i class="text-green-700 fa-solid fa-clock"></i>
         @php
             $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : '<strong>Time Range</strong>';
             $timeTitle = $presetTitle != 'Absolute Time Range'  ? 
@@ -20,7 +20,7 @@
                 <span class="block">{{$fromDate}}</span>
                 <span class="block">to</span>
                 <span class="block">{{$toDate}}</span>
-                <span class="block text-green-400">{{$timeZone}}</span>
+                <span class="block text-green-700 font-bold">{{$timeZone}}</span>
 
             </span>
         @endif

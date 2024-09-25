@@ -5,6 +5,9 @@ namespace App\View\Components\Reports2;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Report;
+use App\Utils\Support\ReportPreset;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -68,13 +71,23 @@ class InitUserSettingReport2
         $user = User::find(Auth::id());
         $user->settings = $settings;
         $u = $user->update();
-        // if ($u) toastr()->success('Due: User Settings Saved Successfully', 'Successfully');
+        // if ($u) toastr()->success('User Settings Saved Successfully', 'Successfully');
     }
 
-    public function initParamsUserSettingRp($rpId, $entityType, $rpFilterLinks, $rpFilters){
+    function updateDefaultValueFromDateToDate($params) {
+        $timezone =  $params['time_zone'];
+        $timezoneObj = new DateTimeZone(ReportPreset::getTimezoneFromOffset($timezone));
+        $toDate = new DateTime('now', $timezoneObj);
+        $presets = ReportPreset::getDateThisQuarter($timezone, $toDate);
+        $params = array_merge($params, $presets);        
+        $params['preset_title'] = 'Absolute Time Range';
+        return $params;
+    }
+
+    public function initParamsUserSettingRp($rp, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
         
-        $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
+        $storedFilterKey = Report::getStoredFilterKey($rp->id,$rpFilterLinks);
         
         // create default values in the database -> in case that the reports were previously saved in user_setting
         $keys = [$entityType, $this->reportType2, $storedFilterKey];
@@ -110,6 +123,19 @@ class InitUserSettingReport2
         if(!isset($params['preset_title'])){
             $params['preset_title'] = 'Time Range';
         }
+
+
+        // set default value for Time Range
+        if ($rp->has_time_range) {
+            if(!isset($params['from_date']) || !isset($params['to_date']) || !$params['from_date'] || !$params['from_date'] ){
+                $params = $this->updateDefaultValueFromDateToDate($params);
+                $settings[$entityType][$this->reportType2][$storedFilterKey] = $params;
+                self::updateUserSettingRp($settings);
+
+            }
+        }
+
+
         return  $params;
     }
 }

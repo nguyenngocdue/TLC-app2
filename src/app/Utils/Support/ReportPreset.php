@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 class ReportPreset
 {
-    private static function getTimezoneFromOffset($timezone) {
+    public static function getTimezoneFromOffset($timezone) {
         if (preg_match('/UTC([+-])(\d+)/', $timezone, $matches)) {
             $sign = $matches[1] === '+' ? '-' : '+';
             return 'Etc/GMT' . $sign . $matches[2];
