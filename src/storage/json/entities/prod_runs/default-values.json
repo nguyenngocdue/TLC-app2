@@ -12,6 +12,19 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_prod_discipline_id": {
+        "name": "_prod_discipline_id",
+        "column_name": "prod_discipline_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_prod_sequence_id": {
         "name": "_prod_sequence_id",
         "column_name": "prod_sequence_id",
@@ -81,7 +94,7 @@
         "name": "_worker_number_input",
         "column_name": "worker_number_input",
         "label": "",
-        "validation": "numeric|not_in:0",
+        "validation": "numeric|min:0|not_in:0",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
@@ -106,19 +119,6 @@
     "_worker_number_count": {
         "name": "_worker_number_count",
         "column_name": "worker_number_count",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -210,6 +210,19 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
