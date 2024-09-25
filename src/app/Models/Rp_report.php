@@ -13,6 +13,10 @@ class Rp_report extends ModelExtended
         "description",
         "entity_type",
         "has_time_range",
+        "is_active",
+        "breadcrumb_group",
+        "sub_package",
+        "icon",
         "owner_id",
     ];
 

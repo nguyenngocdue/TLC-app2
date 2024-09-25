@@ -183,11 +183,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_package": {
-        "name": "_package",
-        "column_name": "package",
+    "_sub_package": {
+        "name": "_sub_package",
+        "column_name": "sub_package",
         "column_type": "varchar(255)",
-        "label": "Package",
+        "label": "Sub-Package",
         "control": "text",
         "align": "",
         "col_span": "",
