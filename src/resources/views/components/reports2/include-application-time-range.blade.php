@@ -26,7 +26,7 @@
                 <input type="text" name="date_display_format" value="{{$dateDisplayFormat}}" id="date_display_format" placeholder="Select type of format" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
         </div>
-        <div class="flex gap-2 pt-2 justify-evenly">
+        <div class="flex gap-2 pt-8 justify-evenly">
              <x-renderer.button htmlType="submit"  id="applyTimeRange" type="primary"><i class="fa-sharp fa-solid fa-check"></i> Apply Time</x-renderer.button>
              <x-renderer.button htmlType="submit" id="resetTimeRange" type="button" type="secondary"><i
                 class="fa-sharp fa-solid fa-circle-xmark pr-1"></i>Reset</x-renderer.button>
