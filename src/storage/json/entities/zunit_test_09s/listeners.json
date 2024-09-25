@@ -209,6 +209,21 @@
         "ajax_item_attributes": "",
         "ajax_default_values": ""
     },
+    "_prod_routing_1": {
+        "name": "_prod_routing_1",
+        "column_name": "prod_routing_1",
+        "listen_action": "reduce",
+        "triggers": "sub_project_1",
+        "listen_to_fields": "prod_routing_1",
+        "listen_to_attrs": "getSubProjects",
+        "columns_to_set": "",
+        "attrs_to_compare": "id",
+        "expression": "",
+        "ajax_response_attribute": "",
+        "ajax_form_attributes": "",
+        "ajax_item_attributes": "",
+        "ajax_default_values": ""
+    },
     "_prod_order_1": {
         "name": "_prod_order_1",
         "column_name": "prod_order_1",
@@ -332,21 +347,6 @@
     "_project_1": {
         "name": "_project_1",
         "column_name": "project_1",
-        "listen_action": "",
-        "triggers": "",
-        "listen_to_fields": "",
-        "listen_to_attrs": "",
-        "columns_to_set": "",
-        "attrs_to_compare": "",
-        "expression": "",
-        "ajax_response_attribute": "",
-        "ajax_form_attributes": "",
-        "ajax_item_attributes": "",
-        "ajax_default_values": ""
-    },
-    "_prod_routing_1": {
-        "name": "_prod_routing_1",
-        "column_name": "prod_routing_1",
         "listen_action": "",
         "triggers": "",
         "listen_to_fields": "",
