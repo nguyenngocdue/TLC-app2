@@ -67,11 +67,15 @@
             var dropdownButton = document.getElementById('dropdownButton');
             var calendarTop = document.getElementsByClassName('flatpickr-calendar animate open arrowTop');
             var calendarBot = document.getElementsByClassName('flatpickr-calendar animate open arrowBottom');
+            var btnReset = document.getElementById('resetTimeRange');
+            var btnApply = document.getElementById('applyTimeRange');
             // Check if the clicked element is not inside the dropdown content or the button
              if (!dropdownContent.contains(event.target) 
                     && !dropdownButton.contains(event.target) 
                     && !calendarTop[0].contains(event.target)
                     && !calendarBot[0].contains(event.target)
+                    || btnReset.contains(event.target)
+                    || btnApply.contains(event.target)
                  ) {
                 // Hide the dropdown if clicked outside
                 dropdownContent.classList.add('hidden');

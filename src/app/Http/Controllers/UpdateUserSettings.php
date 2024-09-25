@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
+use App\Utils\Support\DefaultValueReport;
 use App\Utils\Support\Report;
+use App\View\Components\Reports2\InitUserSettingReport2;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
@@ -415,6 +417,11 @@ class UpdateUserSettings extends Controller
             $inputValue = $this->updatePresetFilter($inputValue);
         }
 
+        if(isset($inputValue['form_type']) && $inputValue['form_type'] === "resetAbsoluteTimeRange"){
+            $inputValue = DefaultValueReport::updateDefaultValueFromDateToDate($inputValue);
+        }
+
+    
         $filters = $this->getFilterReport2($inputValue);
         
         $rpFilterLinks = Rp_report::find($rpId)->getDeep()->getRpFilterLinks;
@@ -436,7 +443,7 @@ class UpdateUserSettings extends Controller
             $paramToUpdate = $paramsInUser;
         } else $paramToUpdate = $filters;
 
-        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "absolute_time_range") {
+        if (isset($inputValue['form_type']) && $inputValue['form_type'] === "updateAbsoluteTimeRange") {
             $paramToUpdate = $this->updateFromTimeToTime($paramToUpdate);
         }
         $settings[$entityType][$reportType2][$storedFilterKey] = $paramToUpdate;

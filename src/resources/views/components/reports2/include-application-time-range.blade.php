@@ -1,5 +1,5 @@
 {{-- @dump($timeZone)U --}}
-<form action="{{$routeFilter}}" method="POST">
+<form action="{{$routeFilter}}" method="POST" id="{{ $entityType }}">
     @csrf
     <div class="mb-4">
         <h2 class="font-semibold text-lg mb-2">Absolute time range</h2>
@@ -11,7 +11,7 @@
                 <input type="hidden" name='entity_type' value="{{$entityType}}">
                 <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                 <input type="hidden" name='report_id' value="{{$rp->id}}">
-                <input type="hidden" name='form_type' value="absolute_time_range">
+                <input type="hidden" name='form_type' value="updateAbsoluteTimeRange">
                 <input type="hidden" name='preset_title' value="Absolute Time Range">
                 <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
@@ -26,9 +26,25 @@
                 <input type="text" name="date_display_format" value="{{$dateDisplayFormat}}" id="date_display_format" placeholder="Select type of format" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
         </div>
-        <button type="submit" class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Apply time range</button>
+        <div class="flex gap-2 pt-2 justify-evenly">
+             <x-renderer.button htmlType="submit"  id="applyTimeRange" type="primary"><i class="fa-sharp fa-solid fa-check"></i> Apply Time</x-renderer.button>
+             <x-renderer.button htmlType="submit" id="resetTimeRange" type="button" type="secondary"><i
+                class="fa-sharp fa-solid fa-circle-xmark pr-1"></i>Reset</x-renderer.button>
+        </div>
+
     </div>
 </form>
+
+
+{{-- Rest Time Range --}}
+<script type="text/javascript">
+    document.addEventListener('click', function(event) {
+            var btbResetTimeRange = document.getElementById('resetTimeRange');
+            if (btbResetTimeRange.contains(event.target)) {
+                 $('[id="' + "{{ $entityType }}" + '"]').append('<input type="hidden" name="form_type" value="resetAbsoluteTimeRange">')
+            };
+    });
+</script>
 
 
 

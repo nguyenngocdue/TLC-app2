@@ -4,6 +4,7 @@ namespace App\View\Components\Reports2;
 
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DefaultValueReport;
 use App\Utils\Support\Report;
 use App\Utils\Support\ReportPreset;
 use DateTime;
@@ -74,16 +75,6 @@ class InitUserSettingReport2
         // if ($u) toastr()->success('User Settings Saved Successfully', 'Successfully');
     }
 
-    function updateDefaultValueFromDateToDate($params) {
-        $timezone =  $params['time_zone'];
-        $timezoneObj = new DateTimeZone(ReportPreset::getTimezoneFromOffset($timezone));
-        $toDate = new DateTime('now', $timezoneObj);
-        $presets = ReportPreset::getDateThisQuarter($timezone, $toDate);
-        $params = array_merge($params, $presets);        
-        $params['preset_title'] = 'Absolute Time Range';
-        return $params;
-    }
-
     public function initParamsUserSettingRp($rp, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
         
@@ -128,7 +119,7 @@ class InitUserSettingReport2
         // set default value for Time Range
         if ($rp->has_time_range) {
             if(!isset($params['from_date']) || !isset($params['to_date']) || !$params['from_date'] || !$params['from_date'] ){
-                $params = $this->updateDefaultValueFromDateToDate($params);
+                $params = DefaultValueReport::updateDefaultValueFromDateToDate($params);
                 $settings[$entityType][$this->reportType2][$storedFilterKey] = $params;
                 self::updateUserSettingRp($settings);
 
