@@ -48,6 +48,7 @@ trait TraitReportMatrixColumn
                 $field = $record[$column];
                 if (!in_array($field, $transformedFields)) $transformedFields[] = $field;
 
+                #TOFIX
                 // render status for transfer data
                 $queriedValue = $record[$cellValue];
                 if($rowRenderer && isset($rowRenderer['type']) && $rowRenderer['type'] == 'status') {
