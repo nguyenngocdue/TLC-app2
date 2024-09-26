@@ -42,18 +42,18 @@ trait TraitReportMatrixColumn
         $valueToSet = $params['empty_value'] ?? null;
         $rowConfigs = $params['row_renderer'] ?? null;
         $transformedFields = [];
-        foreach ($data as $key => $record) {
-            $record = (array)$record;
+        foreach ($data as $key => $rowData) {
+            $rowData = (array)$rowData;
             
-            if (Report::checkValueOfField($record, $column)) {
-                $targetField = $record[$column];
+            if (Report::checkValueOfField($rowData, $column)) {
+                $targetField = $rowData[$column];
                 if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
                 // To display row's value from 'grouping_to_matrix'
                 if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
-                    $record = $this->makeValueEachRow($record, $rowConfigs, $cellValue, $targetField);
+                    $rowData = $this->makeValueEachRow($rowData, $rowConfigs, $cellValue, $targetField);
                 }
             }
-            $data[$key] = (object)$record;
+            $data[$key] = (object)$rowData;
         }
         
         $groupedByRow = Report::groupArrayByKey($data, $row);
