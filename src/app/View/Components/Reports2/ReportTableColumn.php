@@ -208,7 +208,7 @@ class ReportTableColumn
         // dd($headerCols, $columns);
 
         $columns = [];
-        foreach ($headerCols as $key => $value) {
+        foreach ($headerCols as $value) {
             $columns[$value['dataIndex']] = [
                 "name" =>  $value['title'] ?? $value['dataIndex'],
             ];
