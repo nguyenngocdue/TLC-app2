@@ -4,6 +4,8 @@ namespace App\View\Components\Reports2;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 trait TraitReportRowRendererType
 {
@@ -43,4 +45,30 @@ trait TraitReportRowRendererType
         $rowData->$targetField = $queriedValue;
         return $rowData;
    }
+
+   public function makeStatusForEachRow($entityType, $targetValue, $content){
+        $cellClass = '';
+        $statuses = LibStatuses::getFor($entityType);
+        $statusData = $statuses[$targetValue] ?? [];
+        if($statusData) {
+            $content = Blade::render("<x-renderer.status>" .$content. "</x-renderer.status>");
+            $cellClass = 'text-' .$statusData['text_color'];
+        }
+        return [$content, $cellClass];
+    }
+
+    public function makeIdForEachRow($entityType, $targetValue, $content) {
+        $content = $targetValue ? Str::makeId($targetValue) : $targetValue;
+        $route = Str::plural($entityType) . ".edit";
+        try {
+            if (Route::has($route) && $targetValue) {
+                $href = route($route, (int) $targetValue);
+                $cellClass = 'text-blue-600';
+            }
+        } catch (\Exception $e) {
+            $href = "#RouteNotFound3:$route";
+            $cellClass = 'text-red-600';
+        }
+        return [$content, $cellClass, $href];
+    }
 }

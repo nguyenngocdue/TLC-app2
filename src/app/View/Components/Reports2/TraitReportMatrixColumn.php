@@ -57,7 +57,7 @@ trait TraitReportMatrixColumn
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
         
         if ($customCols) {
-            foreach ($customCols as $key => $col){
+            foreach ($customCols as $col){
                 $aggType = $col['footer_row'] ?? '';
                 $dataIndex  = isset($col['data_index']) ? $col['data_index'] :'';
     
