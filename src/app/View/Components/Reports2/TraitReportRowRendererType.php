@@ -15,7 +15,7 @@ trait TraitReportRowRendererType
                 "route_id_field"=> "sheet_document"  // field to get value that will be triggered for route() 
             ]
     */
-    public function makeValueEachRow($rowData, $rowConfigs, $sourceField, $targetField){
+    public function makeValueForEachRow($rowData, $rowConfigs, $sourceField, $targetField){
         if (!is_array($rowData)) $rowData = (object)$rowData;
         $queriedValue = $rowData->$sourceField;
         if($rowConfigs && isset($rowConfigs['type'])) {
