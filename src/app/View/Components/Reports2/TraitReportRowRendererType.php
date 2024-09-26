@@ -16,7 +16,8 @@ trait TraitReportRowRendererType
             ]
     */
     public function makeValueEachRow($rowData, $rowConfigs, $sourceField, $targetField){
-        $queriedValue = $rowData[$sourceField];
+        if (!is_array($rowData)) $rowData = (object)$rowData;
+        $queriedValue = $rowData->$sourceField;
         if($rowConfigs && isset($rowConfigs['type'])) {
             $type = $rowConfigs['type'];
             switch ($type) {
@@ -26,7 +27,7 @@ trait TraitReportRowRendererType
                     if($statusData) {
                         $content = Blade::render("<x-renderer.status>" .$queriedValue. "</x-renderer.status>");
                         $cellClass = 'text-' .$statusData['text_color'];
-                        $href = route($rowConfigs['entity_type'].'.'.$rowConfigs['method'], $rowData[$rowConfigs['route_id_field']]) ?? '';
+                        $href = route($rowConfigs['entity_type'].'.'.$rowConfigs['method'], $rowData->{$rowConfigs['route_id_field']}) ?? '';
                         $queriedValue = (object)[
                             'value' => $content,
                             'cell_class' => $cellClass ?? '',
@@ -39,7 +40,7 @@ trait TraitReportRowRendererType
                     break;
             }
         }
-        $rowData[$targetField] = $queriedValue;
+        $rowData->$targetField = $queriedValue;
         return $rowData;
    }
 }

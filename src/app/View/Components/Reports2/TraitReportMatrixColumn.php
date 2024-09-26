@@ -42,20 +42,16 @@ trait TraitReportMatrixColumn
         $valueToSet = $params['empty_value'] ?? null;
         $rowConfigs = $params['row_renderer'] ?? null;
         $transformedFields = [];
-        foreach ($data as $key => $rowData) {
-            $rowData = (array)$rowData;
-            
+        foreach ($data as &$rowData) {
             if (Report::checkValueOfField($rowData, $column)) {
-                $targetField = $rowData[$column];
+                $targetField = $rowData->$column;
                 if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
                 // To display row's value from 'grouping_to_matrix'
                 if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
                     $rowData = $this->makeValueEachRow($rowData, $rowConfigs, $cellValue, $targetField);
                 }
             }
-            $data[$key] = (object)$rowData;
         }
-        
         $groupedByRow = Report::groupArrayByKey($data, $row);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
