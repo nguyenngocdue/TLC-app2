@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Blade;
 
 trait TraitReportMatrixColumn
 {
+    use TraitReportRowRendererType;
     private function fillMissingFields(&$value, $fields, $valueToSet) {
         $missingFields = array_diff($fields, array_keys($value));
         $value = array_merge($value, array_fill_keys($missingFields, $valueToSet));
@@ -39,33 +40,18 @@ trait TraitReportMatrixColumn
         $row = $params['row'];
         $cellValue = $params['cell_value'];
         $valueToSet = $params['empty_value'] ?? null;
-        $rowRenderer = $params['row_renderer'] ?? null;
+        $rowConfigs = $params['row_renderer'] ?? null;
         $transformedFields = [];
         foreach ($data as $key => $record) {
             $record = (array)$record;
             
             if (Report::checkValueOfField($record, $column)) {
-                $field = $record[$column];
-                if (!in_array($field, $transformedFields)) $transformedFields[] = $field;
-
-                #TOFIX
-                // render status for transfer data
-                $queriedValue = $record[$cellValue];
-                if($rowRenderer && isset($rowRenderer['type']) && $rowRenderer['type'] == 'status') {
-                    $statuses = isset($rowRenderer['entity_type']) ? LibStatuses::getFor($rowRenderer['entity_type']) : '';
-                    $statusData = $statuses[$queriedValue] ?? [];
-                    if($statusData) {
-                        $content = Blade::render("<x-renderer.status>" .$queriedValue. "</x-renderer.status>");
-                        $cellClass = 'text-' .$statusData['text_color'];
-                        $href = route($rowRenderer['entity_type'].'.'.$rowRenderer['method'], $record[$rowRenderer['route_id_field']]) ?? '';
-                        $queriedValue = (object)[
-                            'value' => $content,
-                            'cell_class' => $cellClass ?? '',
-                            'cell_href' => $href,
-                        ];
-                    }
+                $targetField = $record[$column];
+                if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
+                // To display row's value from 'grouping_to_matrix'
+                if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
+                    $record = $this->makeValueEachRow($record, $rowConfigs, $cellValue, $targetField);
                 }
-                $record[$field] = $queriedValue;
             }
             $data[$key] = (object)$record;
         }
