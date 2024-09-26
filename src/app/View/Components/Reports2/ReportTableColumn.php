@@ -98,6 +98,7 @@ class ReportTableColumn
                     'cell_div_class' =>  $column?->cell_div_class,
                     
                 ];
+                // $this->setCellValue($data2ndHeader,$parent->data_index, $content, $column?->cell_class, $column?->cell_div_class );
             }
         }
         // dd($data2ndHeader);
