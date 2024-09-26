@@ -45,7 +45,6 @@ class Rp_reportController extends Controller
             }, 
             $columnKeys), $queriedData);
 
-
         $fileName = $input['block_title'].'_'.date('d-m-Y').'.csv';
         $headers = [
             "Content-type"        => "text/csv",

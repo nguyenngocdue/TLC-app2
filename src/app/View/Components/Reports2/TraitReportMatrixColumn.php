@@ -21,6 +21,7 @@ trait TraitReportMatrixColumn
     }
     private function setCellValue(&$values, $dataIndex, $cellValue, $cellClass) {
         $values[$dataIndex] = (object)[
+            'original_value' => $cellValue, // to export excel
             'value' => $cellValue,
             'cell_class' => $cellClass ?? '',
         ];

@@ -68,6 +68,7 @@ class ReportBlockTable extends Component
         $columns = $this->block->getLines->sortby('order_no');
         $headerCols = $this->headerCols;
         $dataIndexToRender = array_column($headerCols, 'dataIndex');
+        $queriedData = $this->queriedData;
         
         $reportTableColumn = ReportTableColumn::getInstance();
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
@@ -102,12 +103,12 @@ class ReportBlockTable extends Component
             "hasPagination" => $block->has_pagination,
             
 
-            "topLeftControl" => $this->getControls($block->top_left_control, $this->queriedData, $configuredCols, "justify-start"),
-            "topCenterControl" => $this->getControls($block->top_center_control, $this->queriedData, $configuredCols, "justify-center"),
-            "topRightControl" =>  $this->getControls($block->top_right_control, $this->queriedData, $configuredCols, "justify-right"),
-            "bottomLeftControl" => $this->getControls($block->bottom_left_control, $this->queriedData, $configuredCols, "justify-start"),
-            "bottomCenterControl" => $this->getControls($block->bottom_center_control, $this->queriedData, $configuredCols, "justify-center"),
-            "bottomRightControl" => $this->getControls($block->bottom_right_control, $this->queriedData, $configuredCols, "justify-right"),
+            "topLeftControl" => $this->getControls($block->top_left_control, $queriedData, $configuredCols, "justify-start"),
+            "topCenterControl" => $this->getControls($block->top_center_control, $queriedData, $configuredCols, "justify-center"),
+            "topRightControl" =>  $this->getControls($block->top_right_control, $queriedData, $configuredCols, "justify-right"),
+            "bottomLeftControl" => $this->getControls($block->bottom_left_control, $queriedData, $configuredCols, "justify-start"),
+            "bottomCenterControl" => $this->getControls($block->bottom_center_control, $queriedData, $configuredCols, "justify-center"),
+            "bottomRightControl" => $this->getControls($block->bottom_right_control, $queriedData, $configuredCols, "justify-right"),
         ]);
     }
 }
