@@ -48,7 +48,7 @@ trait TraitReportMatrixColumn
                 if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
                 // To display row's value from 'grouping_to_matrix'
                 if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
-                    $rowData = $this->makeValueEachRow($rowData, $rowConfigs, $cellValue, $targetField);
+                    $rowData = $this->makeValueForEachRow($rowData, $rowConfigs, $cellValue, $targetField);
                 }
             }
         }
