@@ -19,7 +19,13 @@ trait TraitReportMatrixColumn
             return !is_null($value) && $value !== "";
         });
     }
-
+    // private function setCellValue(&$values, $dataIndex, $cellValue, $cellClass) {
+    //     $values[$dataIndex] = (object)[
+    //         'original_value' => $cellValue, // to export excel
+    //         'value' => $cellValue,
+    //         'cell_class' => $cellClass ?? '',
+    //     ];
+    // }
 
     private function getIntersectingValues($values, $transformedFields) {
         return array_filter($values, function($key) use ($transformedFields) {
@@ -76,14 +82,15 @@ trait TraitReportMatrixColumn
                             $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
                         }
                         break;
+                    case "agg_count_all":
+                        foreach ($mergedData as &$values) {
+                            $intersect = $this->getIntersectingValues($values, $transformedFields);
+                            $filteredArray = $this->filterValidValues($intersect);
+                            $num = count($filteredArray);
+                            $this->setCellValue($values, $dataIndex, $num, $col['cell_class']);
+                        }
+                        break;
                     default:
-                        case "agg_count_all":
-                            foreach ($mergedData as &$values) {
-                                $intersect = $this->getIntersectingValues($values, $transformedFields);
-                                $filteredArray = $this->filterValidValues($intersect);
-                                $num = count($filteredArray);
-                                $this->setCellValue($values, $dataIndex, $num, $col['cell_class']);
-                            }
                         break;
                 }
             }

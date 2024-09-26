@@ -17,7 +17,7 @@ trait TraitReportTableCell
 
     // to initialize $dataIndex in $Values
     public function setCellValue(&$values, $dataIndex, $content, $cellClass) {
-        $values[$dataIndex] = $this->makeCellValue($values,$values, $content,$cellClass);
+        $values[$dataIndex] = $this->makeCellValue([],$content, $content,$cellClass);
     }
 
 }
