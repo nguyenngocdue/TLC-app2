@@ -2,10 +2,13 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Blade;
 
 trait TraitReportMatrixColumn
 {
+    use TraitReportRowRendererType;
     private function fillMissingFields(&$value, $fields, $valueToSet) {
         $missingFields = array_diff($fields, array_keys($value));
         $value = array_merge($value, array_fill_keys($missingFields, $valueToSet));
@@ -37,24 +40,24 @@ trait TraitReportMatrixColumn
         $row = $params['row'];
         $cellValue = $params['cell_value'];
         $valueToSet = $params['empty_value'] ?? null;
+        $rowConfigs = $params['row_renderer'] ?? null;
         $transformedFields = [];
-        foreach ($data as $key => $record) {
-            $record = (array)$record;
-            
-            if (Report::checkValueOfField($record, $column)) {
-                $field = $record[$column];
-                if (!in_array($field, $transformedFields)) $transformedFields[] = $field;
-                $record[$field] = $record[$cellValue];
+        foreach ($data as &$rowData) {
+            if (Report::checkValueOfField($rowData, $column)) {
+                $targetField = $rowData->$column;
+                if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
+                // To display row's value from 'grouping_to_matrix'
+                if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
+                    $rowData = $this->makeValueForEachRow($rowData, $rowConfigs, $cellValue, $targetField);
+                }
             }
-            $data[$key] = (object)$record;
         }
-        
         $groupedByRow = Report::groupArrayByKey($data, $row);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
         
         if ($customCols) {
-            foreach ($customCols as $key => $col){
+            foreach ($customCols as $col){
                 $aggType = $col['footer_row'] ?? '';
                 $dataIndex  = isset($col['data_index']) ? $col['data_index'] :'';
     
@@ -92,6 +95,7 @@ trait TraitReportMatrixColumn
             }
         }
         sort($transformedFields);
+        // dd($mergedData);
         return [array_values($mergedData), $transformedFields];
     }
     

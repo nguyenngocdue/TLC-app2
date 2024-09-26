@@ -363,9 +363,10 @@ class Report
         });
         return $data;
     }
-    public static function checkValueOfField($array, $fieldName)
+    public static function checkValueOfField($data, $fieldName)
     {
-        return isset($array[$fieldName]) && $array[$fieldName] !== "";
+        if (!is_array($data)) $data = (array)$data;
+        return isset($data[$fieldName]) && $data[$fieldName] !== "";
     }
 
     public static function checkParam($array, $fieldName)

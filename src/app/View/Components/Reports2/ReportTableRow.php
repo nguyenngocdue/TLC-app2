@@ -16,6 +16,7 @@ class ReportTableRow
     
     use TraitReportTableContent;
     use TraitReportFormatString;
+    use TraitReportRowRendererType;
 
     private static $instance = null;
     private function _construct(){
@@ -45,6 +46,7 @@ class ReportTableRow
             foreach ($dataLine as $k2 => $value) {
                 if (array_key_exists($k2, $configuredCols)) {
                     $column = $configuredCols[$k2];
+                    $entityType = $column->entity_type;
                     $href = ($x = $column->row_href_fn) ? $this->formatReportHref($x, $dataLine) : '';
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
@@ -52,26 +54,10 @@ class ReportTableRow
                     $rowRenderer = $column->row_renderer;
                     
                     if($rowRenderer == $this->STATUS_ROW_RENDERER_ID) {
-                        $statuses = LibStatuses::getFor($column->entity_type);
-                        $statusData = $statuses[$value] ?? [];
-                        if($statusData) {
-                            $content = Blade::render("<x-renderer.status>" .$content. "</x-renderer.status>");
-                            $cellClass = 'text-' .$statusData['text_color'];
-                        }
+                       [$content, $cellClass] =  $this->makeStatusForEachRow($entityType, $value, $content);
                     }
                     elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) {
-                        $entityType = $column->entity_type;
-                        $content = $value ? Str::makeId($value) : $value;
-                        $route = Str::plural($entityType) . ".edit";
-                        $hasRoute = Route::has($route);
-                        if ($hasRoute) {
-                            if (!$value) continue;
-                            $href = route($route, (int)$value);
-                            $cellClass = 'text-blue-600';
-                        } else {
-                            $href = "#RouteNotFound3:$route";
-                            $cellClass = 'text-red-600';
-                        }
+                        [$content, $cellClass, $href] = $this->makeIdForEachRow($entityType, $value, $content);
                     }
                     elseif($rowRenderer == $this->ROW_RENDERER_LINK_ID && $href) $cellClass = 'text-blue-600';
                     elseif($rowRenderer == $this->ROW_RENDERER_DATETIME_ID) {

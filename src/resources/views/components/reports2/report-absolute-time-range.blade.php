@@ -1,4 +1,4 @@
-<div class="relative inline-block text-left z-10">
+<div class="relative inline-block text-left z-30">
     <!-- Dropdown Button -->
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-lg bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
         <i class="text-green-700 fa-solid fa-clock"></i>
@@ -72,10 +72,10 @@
             // Check if the clicked element is not inside the dropdown content or the button
              if (!dropdownContent.contains(event.target) 
                     && !dropdownButton.contains(event.target) 
-                    && !calendarTop[0].contains(event.target)
-                    && !calendarBot[0].contains(event.target)
-                    || btnReset.contains(event.target)
-                    || btnApply.contains(event.target)
+                    && !calendarTop[0]?.contains(event.target)
+                    && !calendarBot[0]?.contains(event.target)
+                    || btnReset?.contains(event.target)
+                    || btnApply?.contains(event.target)
                  ) {
                 // Hide the dropdown if clicked outside
                 dropdownContent.classList.add('hidden');

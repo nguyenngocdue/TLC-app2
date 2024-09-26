@@ -103,19 +103,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_package": {
-        "name": "_package",
-        "column_name": "package",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_icon": {
         "name": "_icon",
         "column_name": "icon",
@@ -223,6 +210,19 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_sub_package": {
+        "name": "_sub_package",
+        "column_name": "sub_package",
         "label": "",
         "validation": "",
         "validation_regex": "",
