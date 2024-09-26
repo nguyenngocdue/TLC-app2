@@ -66,6 +66,7 @@ class ReportTableRow
                     }
 
                     $newValue = (object)[
+                        'original_value' => $value, // to export excel
                         'value' => $content,
                         'cell_href' => $href,
                         'cell_class' => $cellClass,

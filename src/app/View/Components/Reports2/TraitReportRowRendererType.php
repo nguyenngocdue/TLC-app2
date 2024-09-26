@@ -31,6 +31,7 @@ trait TraitReportRowRendererType
                         $cellClass = 'text-' .$statusData['text_color'];
                         $href = route($rowConfigs['entity_type'].'.'.$rowConfigs['method'], $rowData->{$rowConfigs['route_id_field']}) ?? '';
                         $queriedValue = (object)[
+                            'original_value' => $queriedValue,
                             'value' => $content,
                             'cell_class' => $cellClass ?? '',
                             'cell_href' => $href,

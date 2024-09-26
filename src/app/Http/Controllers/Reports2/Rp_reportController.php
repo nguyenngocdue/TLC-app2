@@ -21,17 +21,30 @@ class Rp_reportController extends Controller
     {
         $input = $request->input();
         $queriedData = json_decode($input['queriedData'], true);
-
+        
         if (empty($queriedData) || !is_array($queriedData)) {
             return response()->json(['error' => 'No data available for export'], 400);
         }
-
+        
         $configuredCols = json_decode($input['configuredCols'], true);
+
         $columnKeys = array_keys($configuredCols);
         $columnNames = array_map(fn($col) => $col['title'] ?? $col['name'], $configuredCols);
+        
 
-        $rows = array_map(fn($data) => array_map(fn($key) => $data[$key] ?? '', $columnKeys), $queriedData);
-        // dd($input);
+        $rows = array_map(fn($data) => array_map(
+            function($key) use ($data) {
+                if (isset($data[$key])) {
+                    if(is_array($data[$key])) {
+                        return $data[$key]['original_value'] ?? '';
+                    } else {
+                        return $data[$key];
+                    }
+                }
+                return '';
+            }, 
+            $columnKeys), $queriedData);
+
 
         $fileName = $input['block_title'].'_'.date('d-m-Y').'.csv';
         $headers = [

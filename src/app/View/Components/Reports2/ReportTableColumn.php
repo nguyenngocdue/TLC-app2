@@ -161,5 +161,49 @@ class ReportTableColumn
         return $result;
     }
 
+    public function updatedConfiguredCols($configuredCols, $tableDataSource, $block){
+        $firstItem = $tableDataSource->first();
+        $keys = array_keys((array) $firstItem);
+        $lastKey = array_key_last($configuredCols);
+        $anchor = array_search($lastKey,$keys);
+        $lackCols = array_slice($keys, $anchor + 1);
+        
+        $transformedDataCols = [];
+        if ($block->is_transformed_data && ($x = $block->transformed_data_string)){
+            if (is_string($x)) $data = json_decode($x, true);
+            foreach($data as $item) {
+                if (isset($item['custom_columns'])){
+                    $customCol = $item['custom_columns'];
+                    foreach ($customCol as $item) {
+                        $transformedDataCols[$item['data_index']] = [
+                            'title' => $item['title'] ?? $item['data_index'],
+                        ];
+                    }
+                }
+            }
+        }
+        $updatedFields = array_merge($keys, $lackCols);
+
+
+        $columns = [];
+        foreach ($updatedFields as $value) {
+            if (isset($firstItem ->{$value})) {
+                $name = '';
+                if(isset($configuredCols[$value])) {
+                    if($m = $configuredCols[$value]->title) {
+                        $name = $m;
+                    } else {
+                        $name = $configuredCols[$value]->name;
+                    }
+                }
+                $columns[$value] = [
+                    'name' => $name ? $name: $value
+                ];
+            }
+        }
+        $columns = $transformedDataCols ? array_merge($columns, $transformedDataCols) : $columns;
+        return $columns;
+    }
+
 
 }
