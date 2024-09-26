@@ -83,7 +83,7 @@ class ReportBlockTable extends Component
         }
         
         if($block->is_transformed_data) {
-            $configuredCols = $reportTableColumn->updatedConfiguredCols($configuredCols, $tableDataSource, $block, $headerCols);
+            $configuredCols = $reportTableColumn->updatedConfiguredCols($headerCols);
         }
         
         return view('components.reports2.report-block-table', [
