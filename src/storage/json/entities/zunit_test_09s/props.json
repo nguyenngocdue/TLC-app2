@@ -355,7 +355,7 @@
         "name": "_h8",
         "column_name": "h8",
         "column_type": "static_heading",
-        "label": "Listen A,A1->B1, A,A2->B2",
+        "label": "Listen Reduce (A,A1)->B1, (A,A2)->B2",
         "control": "z_h4",
         "align": "center",
         "col_span": "",

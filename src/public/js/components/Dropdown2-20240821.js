@@ -59,7 +59,8 @@ const onChangeDropdown2Reduce = (listener) => {
     if (debugListener) console.log('dataSource in k of', table_name, dataSource)
 
     const constraintsValues = triggers.map((trigger) => getValueOfEById(trigger))
-    if (debugListener) console.log(triggers, constraintsValues)
+    // if (debugListener)
+    console.log(triggers, constraintsValues)
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]

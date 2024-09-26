@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('zunit_test_09s', function (BlueprintExtended $table) {
             $table->id();
@@ -33,6 +33,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_project_1')->nullable();
             $table->unsignedBigInteger('prod_routing_1')->nullable();
             $table->unsignedBigInteger('prod_order_1')->nullable();
+
             //Reduce (A,A1)=>B1,(A,A2=>B2)
             $table->unsignedBigInteger('currency1_id')->nullable();
             $table->unsignedBigInteger('currency_pair1_id')->nullable();
@@ -42,6 +43,7 @@ return new class extends Migration
             $table->unsignedBigInteger('rate_exchange_month_id')->nullable();
             $table->float('rate_exchange_value_1')->nullable();
             $table->float('rate_exchange_value_2')->nullable();
+
             //Assign
             $table->unsignedBigInteger('prod_discipline_1')->nullable();
             $table->unsignedBigInteger('assignee_1')->nullable();
