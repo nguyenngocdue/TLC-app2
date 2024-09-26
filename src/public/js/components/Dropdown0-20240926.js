@@ -6,6 +6,10 @@ let k = {},
 const makeIdForNumber = (n) => '#' + String(n).padStart(6, '0').substring(0, 3) + '.' + String(n).padStart(6, '0').substring(3)
 const makeId = (n) => (isNaN(n) ? '' : makeIdForNumber(n))
 // const makePrefix = () => isNaN(state.id) ? state.id : makeId(state.id)
+const intersect = (arr1, arr2) => {
+    const set2 = new Set(arr2)
+    return arr1.filter((item) => set2.has(item))
+}
 const select2FormatSelected = (state) => {
     let s = ''
     s += state.text

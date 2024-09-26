@@ -19,6 +19,7 @@ class ManageListeners extends Manage_Parent
         $listen_actions = [
             '',
             'reduce',
+            'reduce_union',
             'assign',
             'dot',
             'expression',
@@ -55,6 +56,7 @@ class ManageListeners extends Manage_Parent
                 "cbbDataSource" => $listen_actions,
                 "sortBy" => 'value',
                 "properties" => ["strFn" => 'same'],
+                'width' => 200,
             ],
             [
                 "dataIndex" => "triggers",

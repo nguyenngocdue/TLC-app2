@@ -600,7 +600,7 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLen
     $(document).ready(() => {
         listenersOfDropdown4s[table01Name].forEach((listener) => {
             const fieldName = getFieldNameInTable01FormatJS(id, table01Name)
-            if (listener.triggers.includes(fieldName) && listener.listen_action === 'reduce') {
+            if (listener.triggers.includes(fieldName) && ['reduce', 'reduce_union'].includes(listener.listen_action)) {
                 // console.log("I am a trigger of reduce, I have to trigger myself when form load ", id)
                 getEById(id).trigger('change', { batchLength, onLoad: true })
             }

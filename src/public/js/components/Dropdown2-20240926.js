@@ -23,6 +23,29 @@ const smartFilter2 = (dataSource, column, operator, value) => {
                     result = row[column] != value
                 }
                 return result
+            case 'IN_UNION':
+                // console.log(row[column], column, operator, value)
+                if (Array.isArray(row[column])) {
+                    if (Array.isArray(value)) {
+                        result = value.some((v) => dumbIncludes2(row[column], v))
+                    } else {
+                        result = dumbIncludes2(row[column], value)
+                    }
+                } else {
+                    console.error('REDUCE_UNION is only for array, but ', column, 'is not an array')
+                }
+                return result
+            case 'IN_INTERSECT':
+                if (Array.isArray(row[column])) {
+                    if (Array.isArray(value)) {
+                        result = value.every((v) => dumbIncludes2(row[column], v))
+                    } else {
+                        result = dumbIncludes2(row[column], value)
+                    }
+                } else {
+                    console.error('REDUCE_INTERSECT is only for array, but ', column, 'is not an array')
+                }
+                return result
             default:
                 console.error('Unknown operator', operator)
                 return false
@@ -51,29 +74,39 @@ const filterDropdown2 = (column_name, dataSource) => {
     return dataSource
 }
 
-const onChangeDropdown2Reduce = (listener) => {
+const onChangeDropdown2Reduce = (listener, is_union) => {
     // const debugListener = true
     if (debugListener) console.log('Reduce listener', listener)
     const { column_name, table_name, listen_to_attrs, triggers, attrs_to_compare } = listener
     let dataSource = k[table_name]
     if (debugListener) console.log('dataSource in k of', table_name, dataSource)
 
-    const constraintsValues = triggers.map((trigger) => getValueOfEById(trigger))
-    // if (debugListener)
-    console.log(triggers, constraintsValues)
+    const selectedValues = triggers.map((trigger) => getValueOfEById(trigger))
+    if (debugListener) console.log(triggers, selectedValues)
 
     for (let i = 0; i < triggers.length; i++) {
-        const value = constraintsValues[i]
-        if (!value) continue
-        // console.log("value of trigger[", i, "]", value)
+        const selectedValue = selectedValues[i]
+        if (!selectedValue) continue
+        // console.log("selectedValue of trigger[", i, "]", selectedValue)
 
+        // console.log(triggers[i], Array.isArray(selectedValue) ? 'Array' : 'Not Array')
         const column = listen_to_attrs[i]
         if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
-        if (debugListener) console.log('Applying', column, value, 'to', table_name)
-        dataSource = smartFilter2(dataSource, column, '=', value)
+        if (debugListener) console.log('Applying', column, selectedValue, 'to', table_name, dataSource)
+
+        if (Array.isArray(selectedValue)) {
+            if (is_union) {
+                dataSource = smartFilter2(dataSource, column, 'IN_UNION', selectedValue)
+                // console.log('dataSource after union', column_name, dataSource)
+            } else {
+                dataSource = smartFilter2(dataSource, column, 'IN_INTERSECT', selectedValue)
+            }
+        } else {
+            dataSource = smartFilter2(dataSource, column, '=', selectedValue)
+        }
     }
 
-    if (debugListener) console.log('DataSource AFTER reduce', dataSource)
+    // if (debugListener) console.log('DataSource AFTER reduce', dataSource)
     // console.log('onChangeDropdown2Reduce')
     let lastSelected = getValueOfEById(column_name)
     // console.log(column_name, lastSelected)
@@ -81,30 +114,10 @@ const onChangeDropdown2Reduce = (listener) => {
     if (!Array.isArray(lastSelected)) lastSelected = [lastSelected]
     // console.log(column_name, lastSelected, dataSource)
 
-    // const lastSelected1 = []
-    // //Try to delete the data if the new dataSource doesn't have it
-    // for (let i = 0; i < dataSource.length; i++) {
-    //     for (let j = 0; j < lastSelected.length; j++) {
-    //         // console.log("comparing", dataSource[i]['id'], lastSelected[j])
-    //         if (dataSource[i]['id'] == lastSelected[j]) {
-    //             lastSelected1.push(lastSelected[j]);
-    //         }
-    //     }
-    // }
-    // console.log("lastSelected", lastSelected)
-    // console.log("lastSelected1", lastSelected1)
-
-    // const lastSelected1 = (Array.isArray(lastSelected) && lastSelected.length == 0) ? [] : lastSelected
-    // console.log("Selected of", column_name, "is", lastSelected)
-    // console.log(attrs_to_compare)
     const allowClear = getAllowClear(column_name)
     const letUserChooseWhenOneItem = getLetUserChooseWhenOneItem(column_name)
     // console.log(column_name, allowClear, false)
     reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, letUserChooseWhenOneItem, allowClear)
-
-    // console.log("Set to ", column_name, lastSelected1)
-    // setValueOfEById(column_name, lastSelected1)
-    // getEById(column_name).trigger('change')
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -386,7 +399,10 @@ const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
                 // console.log("listen_action", listen_action)
                 switch (listen_action) {
                     case 'reduce':
-                        onChangeDropdown2Reduce(listener)
+                        onChangeDropdown2Reduce(listener, false)
+                        break
+                    case 'reduce_union':
+                        onChangeDropdown2Reduce(listener, true)
                         break
                     case 'assign':
                         onChangeDropdown2Assign(listener, onLoad)
@@ -510,94 +526,53 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             } else {
                 selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, item.id) ? 'checked' : ''
             }
-            // console.log(selected, itemId, selectedStr)
-            // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
-            // console.log(item)
+            disabled = item['disabled'] ? 'disabled' : ''
             const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
-            option =
-                '<div class="items-center bg-white-50 flex align-center rounded-md ' +
-                bgColor +
-                ' ' +
-                colSpan +
-                ' ' +
-                '" ' +
-                'item_name="' +
-                item['name'] +
-                '" ' +
-                'item_description="' +
-                item['description'] +
-                '" ' +
-                '">'
+            const classNames1 = `items-center bg-white-50 flex align-center rounded-md ${bgColor} ${colSpan}`
             const cursor = item['disabled'] ? 'cursor-not-allowed' : 'cursor-pointer'
             const inputBg = item['disabled'] ? 'bg-gray-300' : ''
-            option += '<label class="truncate px-1 ' + cursor + ' rounded-md hover:bg-gray-100 w-full h-full" title="' + title + '">'
-            option += "<div class='flex align-middle'>"
-            option +=
-                '<input ' +
-                (item['disabled'] ? 'disabled ' : '') +
-                readonly +
-                ' ' +
-                'class="w-3.5 h-3.5 mr-1 mt-0.5 ' +
-                inputBg +
-                ' ' +
-                cursor +
-                '" ' +
-                'type="' +
-                radio_or_checkbox +
-                '" ' +
-                'name="' +
-                control_name +
-                '" ' +
-                'value="' +
-                itemId +
-                '" ' +
-                selectedStr +
-                ' ' +
-                '>'
-            if (item['avatar']) option += ' ' + '<img class="w-10 h-10 mr-1 rounded" src="' + item['avatar'] + '" />'
-            option += '<div>'
-            option += ' ' + item['name']
-            if (item['subtitle']) option += '<br/>' + item['subtitle']
-            option += '</div>'
-            option += '</div>'
-            option += '</label>'
-            option += '</div>'
+            const classNames2 = `truncate px-1 ${cursor} rounded-md hover:bg-gray-100 w-full h-full`
+            const classNames3 = `w-3.5 h-3.5 mr-1 mt-0.5 ${inputBg} ${cursor}`
+            const avatar = item['avatar'] ? `<img class="w-10 h-10 mr-1 rounded" src="${item['avatar']}" />` : ''
+            const subtitle = item['subtitle'] ? `<br/>${item['subtitle']}` : ''
+
+            option = `<div class="${classNames1}" item_name="${item['name']}" item_description="${item['description']}">
+                        <label class="${classNames2}" title="${title}">
+                            <div class='flex align-middle'>
+                                <input ${disabled} ${readonly} class="${classNames3}" type="${radio_or_checkbox}" name="${control_name}" value="${itemId}" ${selectedStr}>
+                                ${avatar}
+                                <div>
+                                    ${item['name']}
+                                    ${subtitle}
+                                </div>
+                            </div>
+                        </label>
+                    </div>`
             options.push(option)
         }
         getEById(id).append(options)
     } else if (control_type === 'draggable_event') {
-        // const control = getEById(id)
-        // const isMultiple = control[0].hasAttribute("multiple")
-        // const isMultiple = getIsMultipleOfE(id)
-        // const radio_or_checkbox = isMultiple ? 'checkbox' : 'radio'
-        // const control_name = isMultiple ? id + '[]' : id
         const colSpan = getColSpanOfE(id)
         const readOnly = getReadOnlyOfE(id)
-        // console.log(attr_to_compare)
-        // console.log('Here ne Canh', dataSource)
         for (let i = 0; i < dataSource.length; i++) {
             let item = dataSource[i]
             const itemId = item[attr_to_compare]
-            // selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, itemId) ? 'checked' : ''
-            // console.log(selected, itemId, selectedStr)
-            // console.log(readOnly)
             readonly = readOnly ? 'onclick="return false;"' : ''
             classEvent = readOnly ? '' : 'fc-event'
-            // console.log(item)
-            // const title = item['description'] + ' (#' + itemId + ')'
             const bgColor = item['bgColor'] || ''
+            const classNames1 = `relative w-full fc-event-main123 bg-sky-500 text-white cursor-pointer rounded mt-0.5 px-2 py-0.5`
+            const subtitle = item['subtitle'] ? '<br/>' + item['subtitle'] : ''
             option = ''
 
-            option += '<div task-id="' + itemId + '"'
+            option += `<div task-id="${itemId}"`
             option += ` onMouseOver="$('.sub-task-of-${itemId}').show()"`
             option += ` onMouseOut="$('.sub-task-of-${itemId}').hide()"`
-
-            option += ' class="relative w-full fc-event-main123 bg-sky-500 text-white cursor-pointer rounded mt-0.5 px-2 py-0.5"'
-            option += ' component="draggable-dropdown2">'
-            option += ' ' + item['name']
-            if (item['subtitle']) option += '<br/>' + item['subtitle']
+            option += ` class="${classNames1}"`
+            option += ` component="draggable-dropdown2">`
+            option += ` ${item['name']}`
+            option += ` ${subtitle}`
 
             option += `<div class="absolute w-3/4 right-0 top-0 bg-gray-100 p-1 rounded z-50 sub-task-of-${itemId}" style="display:none">`
             const { get_children_sub_tasks } = item
@@ -628,29 +603,18 @@ const documentReadyDropdown2 = (params) => {
     // console.log(params)
     const { id, selectedJson, table, allowClear = false, action, letUserChooseWhenOneItem } = params
 
-    // selectedJson = '{!! $selected !!}'
     const selectedJson1 = selectedJson.replace(/\\/g, '\\\\') //<< Replace \ to \\ EG. ["App\Models\Qaqc_mir"] to ["App\\Models\\Qaqc_mir"]
     const selectedArray = JSON.parse(selectedJson1)
     // console.log(selectedArray)
-    // table = "{{$table}}"
     dataSourceDropdown = k[table]
     if (dataSourceDropdown === undefined) console.error('key ' + table + ' not found in k[]')
     let attr_to_compare = 'id'
-    // for (let i = 0; i < listenersOfDropdown2.length; i++) {
-    //     if (listenersOfDropdown2[i].column_name === id) {
-    //         console.log(listenersOfDropdown2[i], attrs_to_compare[0])
-    //         attr_to_compare = listenersOfDropdown2[i].attrs_to_compare[0]
-    //         break
-    //     }
-    // }
-    // console.log(id, listenersOfDropdown2, attr_to_compare, dataSourceDropdown)
-    // console.log(id, attr_to_compare, dataSourceDropdown, selectedJson)
     reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, letUserChooseWhenOneItem, allowClear)
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
             listenersOfDropdown2.forEach((listener) => {
-                const list = action === 'create' ? ['reduce', 'assign'] : ['reduce' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
+                const list = action === 'create' ? ['reduce', 'reduce_union', 'assign'] : ['reduce', 'reduce_union' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
                 if (listener.triggers.includes(id) && list.includes(listener.listen_action)) {
                     // console.log("I am a trigger of ", listener.listen_action, ", I have to trigger myself when form load [", id, "]",)
                     getEById(id).trigger('change', { onLoad: true })

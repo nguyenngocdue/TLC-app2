@@ -56,6 +56,13 @@
         "listen_to_attrs": "true",
         "attrs_to_compare": "true"
     },
+    "reduce_union": {
+        "name": "reduce_union",
+        "triggers": "true",
+        "listen_to_fields": "true",
+        "listen_to_attrs": "true",
+        "attrs_to_compare": "true"
+    },
     "set_table_column": {
         "name": "set_table_column",
         "triggers": "true",
