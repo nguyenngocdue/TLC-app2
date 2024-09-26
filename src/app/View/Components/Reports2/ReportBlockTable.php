@@ -75,7 +75,6 @@ class ReportBlockTable extends Component
         
         $reportTableRow = ReportTableRow::getInstance();
         $tableDataSource = $reportTableRow->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
-        
 
         // render default table
         if(!$configuredCols) {
@@ -84,7 +83,7 @@ class ReportBlockTable extends Component
         }
         
         if($block->is_transformed_data) {
-            $configuredCols = $reportTableColumn->updatedConfiguredCols($configuredCols, $tableDataSource, $block);
+            $configuredCols = $reportTableColumn->updatedConfiguredCols($configuredCols, $tableDataSource, $block, $headerCols);
         }
         
         return view('components.reports2.report-block-table', [
