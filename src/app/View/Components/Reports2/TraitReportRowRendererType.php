@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 trait TraitReportRowRendererType
 {
+    use TraitReportTableCell;
     /* <Example Data>
         $rowConfigs = [
                 "type"=> "status", // => id, link
@@ -30,12 +31,7 @@ trait TraitReportRowRendererType
                         $content = Blade::render("<x-renderer.status>" .$queriedValue. "</x-renderer.status>");
                         $cellClass = 'text-' .$statusData['text_color'];
                         $href = route($rowConfigs['entity_type'].'.'.$rowConfigs['method'], $rowData->{$rowConfigs['route_id_field']}) ?? '';
-                        $queriedValue = (object)[
-                            'original_value' => $queriedValue,
-                            'value' => $content,
-                            'cell_class' => $cellClass ?? '',
-                            'cell_href' => $href,
-                        ];
+                        $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $content,$cellClass, $href);
                     }
                     break;
                 default:
