@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Reports2;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UpdateUserSettings;
+use App\Models\User;
+use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
+use App\View\Components\Reports2\TraitReportTableContent;
 use Illuminate\Http\Request;
 class Rp_reportController extends Controller
 {
 
+    use TraitReportTableContent;
     public function updateFilters(Request $request)
     {
         $inputValue = $request->input();
@@ -33,15 +38,19 @@ class Rp_reportController extends Controller
         
 
         $rows = array_map(fn($data) => array_map(
-            function($key) use ($data) {
+            function($key) use ($data, $configuredCols) {
+                $content = '';
                 if (isset($data[$key])) {
                     if(is_array($data[$key])) {
-                        return $data[$key]['original_value'] ?? '';
-                    } else {
-                        return $data[$key];
-                    }
+                        $content =  $data[$key]['original_value'] ?? '';
+                    } else $content = $data[$key];
                 }
-                return '';
+
+                if (isset($configuredCols[$key]) && $configuredCols[$key]['row_renderer'] ===  $this->ROW_RENDERER_DATETIME_ID ) {
+                    $timeZoneNumber = User::find(CurrentUser::id())->time_zone;
+                    $content = DateReport::convertToTimezone($content, $timeZoneNumber);
+                }
+                return $content;
             }, 
             $columnKeys), $queriedData);
 
