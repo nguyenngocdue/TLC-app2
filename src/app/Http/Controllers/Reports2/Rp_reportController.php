@@ -45,7 +45,6 @@ class Rp_reportController extends Controller
                         $content =  $data[$key]['original_value'] ?? '';
                     } else $content = $data[$key];
                 }
-
                 if (isset($configuredCols[$key]) && $configuredCols[$key]['row_renderer'] ===  $this->ROW_RENDERER_DATETIME_ID ) {
                     $timeZoneNumber = User::find(CurrentUser::id())->time_zone;
                     $content = DateReport::convertToTimezone($content, $timeZoneNumber);
