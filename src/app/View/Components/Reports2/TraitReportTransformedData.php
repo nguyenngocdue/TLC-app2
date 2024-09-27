@@ -29,7 +29,7 @@ trait TraitReportTransformedData
                 case 'grouping_to_matrix':
                     $params = $item['params'];
                     $customCols = $item['custom_columns'] ?? null;
-                    [$transformedData, $transformedFields] = $this->createMatrix($dataSource, $params, $customCols);
+                    [$transformedData, $transformedFields] = $this->createMatrix($item, $dataSource, $params, $customCols);
                     return [collect($transformedData), $transformedFields];
                 case "reduce":
                     // $params = $item['params'];

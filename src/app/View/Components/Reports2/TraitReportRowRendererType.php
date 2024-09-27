@@ -18,9 +18,10 @@ trait TraitReportRowRendererType
                 "route_id_field"=> "sheet_document"  // field to get value that will be triggered for route() 
             ]
     */
-    public function makeValueForEachRow($rowData, $rowConfigs, $sourceField, $targetField){
+    public function makeValueForEachRow($configs, $rowData, $rowConfigs, $sourceField, $targetField){
         if (!is_array($rowData)) $rowData = (object)$rowData;
         $queriedValue = $rowData->$sourceField;
+        $cellClass = isset($configs['cell_class']) ? $configs['cell_class'] : 'pr-2';
         if($rowConfigs && isset($rowConfigs['type'])) {
             $type = $rowConfigs['type'];
             switch ($type) {
@@ -35,11 +36,11 @@ trait TraitReportRowRendererType
                     }
                     break;
                 default:
-                        $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue);
+                        $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue, $cellClass);
                     break;
             }
         } else {
-            $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue);
+            $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue,$cellClass);
         }
         $rowData->$targetField = $queriedValue;
         // dd($rowData);

@@ -37,7 +37,7 @@ trait TraitReportMatrixColumn
     
     
 
-    private function createMatrix($data, $params, $customCols) {
+    private function createMatrix($configs,$data, $params, $customCols) {
         $column = $params['columns'];
         $row = $params['row'];
         $cellValue = $params['cell_value'];
@@ -50,7 +50,7 @@ trait TraitReportMatrixColumn
                 if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
                 // To display row's value from 'grouping_to_matrix'
                 // if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
-                    $rowData = $this->makeValueForEachRow($rowData, $rowConfigs, $cellValue, $targetField);
+                    $rowData = $this->makeValueForEachRow($configs, $rowData, $rowConfigs, $cellValue, $targetField);
                 // }
             }
         }
