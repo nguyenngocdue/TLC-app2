@@ -39,7 +39,6 @@ trait TraitReportMatrixColumn
         $row = $params['row'];
         $cellValue = $params['cell_value'];
         $valueToSet = $params['empty_value'] ?? null;
-        $rowConfigs = $params['row_renderer'] ?? null;
         $transformedFields = [];
         foreach ($data as &$rowData) {
             if (Report::checkValueOfField($rowData, $column)) {

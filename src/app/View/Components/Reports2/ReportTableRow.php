@@ -54,7 +54,7 @@ class ReportTableRow
                     }
                     elseif($rowRenderer == $this->ROW_RENDERER_LINK_ID && $href) $cellClass = 'text-blue-600';
                     elseif($rowRenderer == $this->ROW_RENDERER_DATETIME_ID) {
-                        $content = DateFormat::getValueDatetimeByCurrentUser($value);
+                        // $content = DateFormat::getValueDatetimeByCurrentUser($value);
                     }
 
                     $newValue = (object)[

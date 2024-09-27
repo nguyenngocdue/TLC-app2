@@ -2,10 +2,12 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Utils\Support\DateFormat;
 
 trait TraitReportTransformedData
 {
     use TraitReportMatrixColumn;
+    use TraitReportTableContent;
     
     private function sortData($transformedOpt) {
         if (!$transformedOpt) return [];
@@ -33,8 +35,6 @@ trait TraitReportTransformedData
                     return [collect($transformedData), $transformedFields];
                 case "reduce":
                     // $params = $item['params'];
-
-
                 case "filter":
                 default:
                     return [$dataSource, []];
@@ -42,4 +42,24 @@ trait TraitReportTransformedData
         }
     }
 
+    public function getNormalData($dataSource, $block) {
+        $columns = $block->getLines;
+        $colToSets = [];
+        foreach ($columns as $column) {
+            if ($column['is_active'] && $column['row_renderer']) {
+                $colToSets[$column['data_index']] = [
+                    'dataIndex' => $column['data_index'],
+                    'row_renderer' => $column['row_renderer'],
+                ];
+            }
+        }
+        foreach ($dataSource as &$item) {
+            foreach ($item as $key => &$value) {
+                if (isset($colToSets[$key]) && $colToSets[$key]['row_renderer'] === $this->ROW_RENDERER_DATETIME_ID) {
+                    $value = DateFormat::getValueDatetimeByCurrentUser($value);
+                }
+            }
+        }
+        return $dataSource;
+    }
 }

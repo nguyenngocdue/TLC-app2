@@ -21,6 +21,8 @@ trait TraitReportQueriedData
             $transformedFields = [];
             if ($block->is_transformed_data){
                 [$queriedData , $transformedFields]  = $this->transformData($queriedData, $block->transformed_data_string);
+            }else {
+                $queriedData = $this->getNormalData($queriedData, $block);
             }
             return [ $queriedData, $transformedFields, $sql];
         }

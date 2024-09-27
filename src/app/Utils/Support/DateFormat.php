@@ -39,5 +39,17 @@ class DateFormat
         }
         return $dateString;
     }
+
+    public static function formatDateTime($dateString , $formatType=''){
+        if ($formatType) {
+            $date = DateTime::createFromFormat('d-m-Y H:i:s', $dateString);
+            if ($date) {
+                return $date->format($formatType);
+            } else {
+                return $dateString;
+            }
+        }
+        return $dateString;
+    }
     
 }

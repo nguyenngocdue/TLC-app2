@@ -27,7 +27,7 @@ class Rp_reportController extends Controller
     {
         $input = $request->input();
         $queriedData = json_decode($input['queriedData'], true);
-        
+
         if (empty($queriedData) || !is_array($queriedData)) {
             return response()->json(['error' => 'No data available for export'], 400);
         }
@@ -44,11 +44,6 @@ class Rp_reportController extends Controller
                     if(is_array($data[$key])) {
                         $content =  $data[$key]['original_value'] ?? '';
                     } else $content = $data[$key];
-                }
-                if (isset($configuredCols[$key]) && $configuredCols[$key]) {
-                    if (isset($configuredCols['row_renderer']) && $configuredCols['row_renderer'] ===  $this->ROW_RENDERER_DATETIME_ID) {
-                        $content = DateFormat::getValueDatetimeByCurrentUser($content);
-                    }
                 }
                 return $content;
             }, 
