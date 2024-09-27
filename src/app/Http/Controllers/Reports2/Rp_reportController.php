@@ -25,17 +25,16 @@ class Rp_reportController extends Controller
         if (empty($queriedData) || !is_array($queriedData)) {
             return response()->json(['error' => 'No data available for export'], 400);
         }
-        // dd($queriedData);
         
         $configuredCols = json_decode($input['configuredCols'], true);
 
         $columnKeys = array_keys($configuredCols);
-        $columnNames = array_map(fn($col) => $col['title'] ?? $col['dataIndex'], $configuredCols);
+        $columnNames = array_map(fn($col) => $col['title'] ?? $col['name'], $configuredCols);
+        
 
         $rows = array_map(fn($data) => array_map(
             function($key) use ($data) {
                 if (isset($data[$key])) {
-                    dd($key);
                     if(is_array($data[$key])) {
                         return $data[$key]['original_value'] ?? '';
                     } else {
@@ -45,7 +44,6 @@ class Rp_reportController extends Controller
                 return '';
             }, 
             $columnKeys), $queriedData);
-            
 
         $fileName = $input['block_title'].'_'.date('d-m-Y').'.csv';
         $headers = [
