@@ -21,10 +21,11 @@ trait TraitReportMatrixColumn
     }
     // private function setCellValue(&$values, $dataIndex, $cellValue, $cellClass) {
     //     $values[$dataIndex] = (object)[
-    //         'original_value' => $cellValue, // to export excel
+    //         // 'original_value' => $cellValue, // to export excel
     //         'value' => $cellValue,
     //         'cell_class' => $cellClass ?? '',
     //     ];
+    //     // dump($values);
     // }
 
     private function getIntersectingValues($values, $transformedFields) {
@@ -48,55 +49,68 @@ trait TraitReportMatrixColumn
                 $targetField = $rowData->$column;
                 if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
                 // To display row's value from 'grouping_to_matrix'
-                if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
+                // if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
                     $rowData = $this->makeValueForEachRow($rowData, $rowConfigs, $cellValue, $targetField);
-                }
+                // }
             }
         }
+
         $groupedByRow = Report::groupArrayByKey($data, $row);
+        // dd($groupedByRow['TLCM00009']);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
-        
+        // dd($data->first(), $customCols);
         if ($customCols) {
             foreach ($customCols as $col){
                 $aggType = $col['footer_row'] ?? '';
                 $dataIndex  = isset($col['data_index']) ? $col['data_index'] :'';
-    
-                switch ($aggType) {
-                    case 'agg_sum':
-                        foreach ($mergedData as &$values) {
-                            $total = 0;
-                            foreach ($transformedFields as $type) {
-                                if (!isset($values[$type])) $values[$type] = $valueToSet;
-                                else $total += (float)$values[$type];
+                try {
+                    switch ($aggType) {
+                        case 'agg_sum':
+                            foreach ($mergedData as &$values) {
+                                $total = 0;
+                                
+                                foreach ($transformedFields as $type) {
+                                    if (!isset($values[$type])) $values[$type] = $valueToSet;
+                                    else {
+                                        $q = $values[$type];
+                                        if (isset($q->value)) {
+                                            $val = is_numeric($q->value) ? (float)$q->value : 0;
+                                            $total += $val;
+                                        }
+
+                                    } 
+                                }
+                                $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
+                                // $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
                             }
-                            $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
-                        }
-                        break;
-                    case "agg_count_unique_values":
-                        foreach ($mergedData as &$values) {
-                            $intersect = $this->getIntersectingValues($values, $transformedFields);
-                            $filteredArray = $this->filterValidValues($intersect);
-                            $uniqueValues = array_unique(array_values($filteredArray));
-                            $count = count($uniqueValues);
-                            $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
-                        }
-                        break;
-                    case "agg_count_all":
-                        foreach ($mergedData as &$values) {
-                            $intersect = $this->getIntersectingValues($values, $transformedFields);
-                            $filteredArray = $this->filterValidValues($intersect);
-                            $num = count($filteredArray);
-                            $this->setCellValue($values, $dataIndex, $num, $col['cell_class']);
-                        }
-                        break;
-                    default:
-                        break;
+                            break;
+                        case "agg_count_unique_values":
+                            foreach ($mergedData as &$values) {
+                                $intersect = $this->getIntersectingValues($values, $transformedFields);
+                                $filteredArray = $this->filterValidValues($intersect);
+                                $uniqueValues = array_unique(array_values($filteredArray));
+                                $count = count($uniqueValues);
+                                $this->setCellValue($values, $dataIndex, $count, $col['cell_class']);
+                            }
+                            break;
+                        case "agg_count_all":
+                            foreach ($mergedData as &$values) {
+                                $intersect = $this->getIntersectingValues($values, $transformedFields);
+                                $filteredArray = $this->filterValidValues($intersect);
+                                $num = count($filteredArray);
+                                $this->setCellValue($values, $dataIndex, $num, $col['cell_class']);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (\Exception $e) {
+                    dump($e->getMessage());
                 }
             }
         }
         sort($transformedFields);
-        // dd($mergedData);
         return [array_values($mergedData), $transformedFields];
     }
     

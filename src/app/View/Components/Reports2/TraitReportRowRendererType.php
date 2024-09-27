@@ -35,11 +35,14 @@ trait TraitReportRowRendererType
                     }
                     break;
                 default:
-                    $queriedValue = $queriedValue;
+                        $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue);
                     break;
             }
+        } else {
+            $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue);
         }
         $rowData->$targetField = $queriedValue;
+        // dd($rowData);
         return $rowData;
    }
 

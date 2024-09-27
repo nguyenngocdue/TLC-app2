@@ -169,7 +169,6 @@ class ReportTableColumn
             $columns[$value['dataIndex']] = [
                 "name" =>  $value['title'] ?? $value['dataIndex'],
             ];
-
         }
         return $columns;
     }
