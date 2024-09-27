@@ -40,7 +40,7 @@ trait TraitReportTransformationRowData
     }
 
 
-    public function makeValueForEachRow($configs, $rowData, $rowConfigs, $cellValue, $column){
+    public function makeValueForEachRow($configs, $rowData, $cellValue, $column){
         /* <Example Data>
             $rowConfigs = [
                     "type"=> "status", // => id, link
@@ -51,13 +51,13 @@ trait TraitReportTransformationRowData
         */
         if (!is_array($rowData)) $rowData = (object)$rowData;
         $queriedValue = $rowData->$cellValue;
-        if($rowConfigs && isset($rowConfigs['type'])) {
-            $queriedValue = $this->changedAttrCellsByTransferData($rowData, $rowConfigs, $cellValue);
-        } else {
-            $queriedValue = $this->makeCellValue($queriedValue,$queriedValue, $queriedValue,($configs['cell_class'] ?? ''));
-        }
-        $rowData->$column = $queriedValue;
-        return $rowData;
+
+        $queriedValue = isset($configs['params'], $rowConfigs['params']['row_renderer']['type']) 
+        ? $this->changedAttrCellsByTransferData($rowData, $rowConfigs, $cellValue) 
+        : $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $configs['cell_class'] ?? '');
+    
+    $rowData->$column = $queriedValue;
+    return $rowData;
    }
 
    public function makeStatusForEachRow($entityType, $targetValue, $content){

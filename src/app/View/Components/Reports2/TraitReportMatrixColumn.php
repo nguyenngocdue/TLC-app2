@@ -46,7 +46,7 @@ trait TraitReportMatrixColumn
                 $col = $rowData->$column;
                 if (!in_array($col, $transformedFields)) $transformedFields[] = $col;
                 // To display row's value from 'grouping_to_matrix'
-                    $rowData = $this->makeValueForEachRow($configs, $rowData, $rowConfigs, $cellValue, $col);
+                    $rowData = $this->makeValueForEachRow($configs, $rowData, $cellValue, $col);
             }
         }
 
