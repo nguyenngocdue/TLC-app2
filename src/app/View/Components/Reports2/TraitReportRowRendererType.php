@@ -21,7 +21,7 @@ trait TraitReportRowRendererType
     public function makeValueForEachRow($configs, $rowData, $rowConfigs, $sourceField, $targetField){
         if (!is_array($rowData)) $rowData = (object)$rowData;
         $queriedValue = $rowData->$sourceField;
-        $cellClass = isset($configs['cell_class']) ? $configs['cell_class'] : 'pr-2';
+        $cellClass = isset($configs['cell_class']) ? $configs['cell_class'] : '';
         if($rowConfigs && isset($rowConfigs['type'])) {
             $type = $rowConfigs['type'];
             switch ($type) {
