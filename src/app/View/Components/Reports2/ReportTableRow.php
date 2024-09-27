@@ -8,7 +8,7 @@ class ReportTableRow
     
     use TraitReportTableContent;
     use TraitReportFormatString;
-    use TraitReportTransformationRowData;
+    use TraitReportTransformedRowData;
 
     private static $instance = null;
     private function _construct(){

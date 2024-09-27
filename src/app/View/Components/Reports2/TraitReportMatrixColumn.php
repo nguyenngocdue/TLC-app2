@@ -6,7 +6,7 @@ use App\Utils\Support\Report;
 
 trait TraitReportMatrixColumn
 {
-    use TraitReportTransformationRowData;
+    use TraitReportTransformedRowData;
     use TraitReportTableCell;
     
     private function fillMissingFields(&$value, $fields, $valueToSet) {

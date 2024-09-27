@@ -5,7 +5,7 @@ namespace App\View\Components\Reports2;
 
 trait TraitReportTableCell
 {
-    public function makeCellValue($values,$originalValue, $content, $cellClass = '', $cellDivClass='', $href ='') {
+    public function makeCellValue($values,$originalValue, $content, $cellClass = '',$href ='', $cellDivClass='') {
         $values = (object)[
             'original_value' => $originalValue, // to export excel
             'value' => $content,
@@ -18,7 +18,7 @@ trait TraitReportTableCell
 
     // to initialize $dataIndex in $Values
     public function setCellValue(&$values, $dataIndex, $content, $cellClass='', $cellDivClass='', $href = '') {
-        $values[$dataIndex] = $this->makeCellValue([],$content, $content,$cellClass, $cellDivClass, $href);
+        $values[$dataIndex] = $this->makeCellValue([],$content, $content,$cellClass, $href, $cellDivClass,);
     }
 
 }

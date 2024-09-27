@@ -8,15 +8,24 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-trait TraitReportTransformationRowData
+trait TraitReportTransformedRowData
 {
     use TraitReportTableCell;
+
+    private function getHref($rowConfigs, $rowData) {
+        try {
+            return route($rowConfigs['entity_type'] . '.' . $rowConfigs['method'], $rowData->{$rowConfigs['route_id_field']}) ?? '';
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 
     public function changedAttrCellsByTransferData($rowData, $rowConfigs, $cellValue)
     {
         $type = $rowConfigs['type'];
         $queriedValue = $rowData->$cellValue;
         $cellClass = isset($rowConfigs['cell_class']) ? $rowConfigs['cell_class'] : '';
+        $href = self::getHref($rowConfigs, $rowData);
         switch ($type) {
             case 'status':
                 $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
@@ -24,14 +33,14 @@ trait TraitReportTransformationRowData
                 if ($statusData) {
                     $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
                     $cellClass = 'text-' . $statusData['text_color'];
-                    $href = route($rowConfigs['entity_type'] . '.' . $rowConfigs['method'], $rowData->{$rowConfigs['route_id_field']}) ?? '';
                     $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href);
+                    // dd($queriedValue);
                 }
                 break;
             case 'datetime':
                 $formatType = isset($rowConfigs['format_datetime']) ? $rowConfigs['format_datetime'] : '';
                 $dateTimeValue = DateFormat::getValueDatetimeByCurrentUser($queriedValue, $formatType);
-                $queriedValue = $this->makeCellValue($dateTimeValue, $dateTimeValue, $dateTimeValue, $cellClass);
+                $queriedValue = $this->makeCellValue($dateTimeValue, $dateTimeValue, $dateTimeValue, $cellClass, $href);
                 break;
             default:
                 $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $cellClass);
