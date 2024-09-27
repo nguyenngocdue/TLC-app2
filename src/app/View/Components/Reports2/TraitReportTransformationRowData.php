@@ -16,7 +16,7 @@ trait TraitReportTransformationRowData
     {
         $type = $rowConfigs['type'];
         $queriedValue = $rowData->$cellValue;
-        $cellClass = isset($configs['cell_class']) ? $configs['cell_class'] : '';
+        $cellClass = isset($rowConfigs['cell_class']) ? $rowConfigs['cell_class'] : '';
         switch ($type) {
             case 'status':
                 $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
