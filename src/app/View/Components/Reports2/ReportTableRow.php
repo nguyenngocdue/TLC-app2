@@ -2,21 +2,13 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Http\Controllers\Workflow\LibStatuses;
-use App\Models\User;
-use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateReport;
-use App\Utils\Support\HrefReport;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
-
+use App\Utils\Support\DateFormat;
 class ReportTableRow
 {
     
     use TraitReportTableContent;
     use TraitReportFormatString;
-    use TraitReportRowRendererType;
+    use TraitReportTransformationRowData;
 
     private static $instance = null;
     private function _construct(){
@@ -41,6 +33,7 @@ class ReportTableRow
 
     public function createTableDataSourceForRows($queriedData, $configuredCols, $block)
     {
+        // Data retrieved from SQL query
         foreach ($queriedData as $k1 => &$dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
@@ -61,8 +54,7 @@ class ReportTableRow
                     }
                     elseif($rowRenderer == $this->ROW_RENDERER_LINK_ID && $href) $cellClass = 'text-blue-600';
                     elseif($rowRenderer == $this->ROW_RENDERER_DATETIME_ID) {
-                        $timeZoneNumber = User::find(CurrentUser::id())->time_zone;
-                        $content = DateReport::convertToTimezone($value, $timeZoneNumber);
+                        $content = DateFormat::getValueDatetimeByCurrentUser($value);
                     }
 
                     $newValue = (object)[

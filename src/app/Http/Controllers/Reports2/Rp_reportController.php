@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateFormat;
 use App\Utils\Support\DateReport;
 use App\View\Components\Reports2\TraitReportTableContent;
 use Illuminate\Http\Request;
@@ -36,7 +37,6 @@ class Rp_reportController extends Controller
         $columnKeys = array_keys($configuredCols);
         $columnNames = array_map(fn($col) => $col['title'] ?? $col['name'], $configuredCols);
         
-
         $rows = array_map(fn($data) => array_map(
             function($key) use ($data, $configuredCols) {
                 $content = '';
@@ -45,9 +45,10 @@ class Rp_reportController extends Controller
                         $content =  $data[$key]['original_value'] ?? '';
                     } else $content = $data[$key];
                 }
-                if (isset($configuredCols[$key]) && $configuredCols[$key]['row_renderer'] ===  $this->ROW_RENDERER_DATETIME_ID ) {
-                    $timeZoneNumber = User::find(CurrentUser::id())->time_zone;
-                    $content = DateReport::convertToTimezone($content, $timeZoneNumber);
+                if (isset($configuredCols[$key]) && $configuredCols[$key]) {
+                    if (isset($configuredCols['row_renderer']) && $configuredCols['row_renderer'] ===  $this->ROW_RENDERER_DATETIME_ID) {
+                        $content = DateFormat::getValueDatetimeByCurrentUser($content);
+                    }
                 }
                 return $content;
             }, 

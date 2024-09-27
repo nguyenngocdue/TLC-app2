@@ -6,7 +6,7 @@ use App\Utils\Support\Report;
 
 trait TraitReportMatrixColumn
 {
-    use TraitReportRowRendererType;
+    use TraitReportTransformationRowData;
     use TraitReportTableCell;
     
     private function fillMissingFields(&$value, $fields, $valueToSet) {
@@ -34,9 +34,6 @@ trait TraitReportMatrixColumn
         }, ARRAY_FILTER_USE_KEY);
     }
     
-    
-    
-
     private function createMatrix($configs,$data, $params, $customCols) {
         $column = $params['columns'];
         $row = $params['row'];
@@ -46,12 +43,10 @@ trait TraitReportMatrixColumn
         $transformedFields = [];
         foreach ($data as &$rowData) {
             if (Report::checkValueOfField($rowData, $column)) {
-                $targetField = $rowData->$column;
-                if (!in_array($targetField, $transformedFields)) $transformedFields[] = $targetField;
+                $col = $rowData->$column;
+                if (!in_array($col, $transformedFields)) $transformedFields[] = $col;
                 // To display row's value from 'grouping_to_matrix'
-                // if($rowConfigs && isset($rowConfigs['type']) && $rowConfigs['type'] == 'status') {
-                    $rowData = $this->makeValueForEachRow($configs, $rowData, $rowConfigs, $cellValue, $targetField);
-                // }
+                    $rowData = $this->makeValueForEachRow($configs, $rowData, $rowConfigs, $cellValue, $col);
             }
         }
 
@@ -82,7 +77,6 @@ trait TraitReportMatrixColumn
                                     } 
                                 }
                                 $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
-                                // $this->setCellValue($values, $dataIndex, $total, $col['cell_class']);
                             }
                             break;
                         case "agg_count_unique_values":

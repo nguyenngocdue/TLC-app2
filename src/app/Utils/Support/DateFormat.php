@@ -2,6 +2,8 @@
 
 namespace App\Utils\Support;
 
+use App\Models\User;
+
 class DateFormat
 {
     public static function getMonthAbbreviation($month)
@@ -22,4 +24,10 @@ class DateFormat
             'last_date' => $lastYear . '-' .  sprintf('%02d', $lastMonth) . '-25'
         ];
     }
+
+    public static function getValueDatetimeByCurrentUser($dateTimeValue){
+        $currentUserTimeZone = User::find(CurrentUser::id())->time_zone;
+        return DateReport::convertToTimezone($dateTimeValue, $currentUserTimeZone);
+    }
+    
 }
