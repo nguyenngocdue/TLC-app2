@@ -3,6 +3,7 @@
 namespace App\Utils\Support;
 
 use App\Models\User;
+use DateTime;
 
 class DateFormat
 {
@@ -25,9 +26,18 @@ class DateFormat
         ];
     }
 
-    public static function getValueDatetimeByCurrentUser($dateTimeValue){
+    public static function getValueDatetimeByCurrentUser($dateTimeValue , $formatType=''){
         $currentUserTimeZone = User::find(CurrentUser::id())->time_zone;
-        return DateReport::convertToTimezone($dateTimeValue, $currentUserTimeZone);
+        $dateString = DateReport::convertToTimezone($dateTimeValue, $currentUserTimeZone);
+        if ($formatType) {
+            $date = DateTime::createFromFormat('d-m-Y H:i:s', $dateString);
+            if ($date) {
+                return $date->format($formatType);
+            } else {
+                return $dateString;
+            }
+        }
+        return $dateString;
     }
     
 }

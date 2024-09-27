@@ -29,7 +29,8 @@ trait TraitReportTransformationRowData
                 }
                 break;
             case 'datetime':
-                $dateTimeValue = DateFormat::getValueDatetimeByCurrentUser($queriedValue);
+                $formatType = isset($rowConfigs['format_datetime']) ? $rowConfigs['format_datetime'] : '';
+                $dateTimeValue = DateFormat::getValueDatetimeByCurrentUser($queriedValue, $formatType);
                 $queriedValue = $this->makeCellValue($dateTimeValue, $dateTimeValue, $dateTimeValue, $cellClass);
                 break;
             default:
@@ -52,8 +53,8 @@ trait TraitReportTransformationRowData
         if (!is_array($rowData)) $rowData = (object)$rowData;
         $queriedValue = $rowData->$cellValue;
 
-        $queriedValue = isset($configs['params'], $rowConfigs['params']['row_renderer']['type']) 
-        ? $this->changedAttrCellsByTransferData($rowData, $rowConfigs, $cellValue) 
+        $queriedValue = isset($configs['params'], $configs['params']['row_renderer'],$configs['params']['row_renderer']['type']) 
+        ? $this->changedAttrCellsByTransferData($rowData, $configs['params']['row_renderer'], $cellValue) 
         : $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $configs['cell_class'] ?? '');
     
     $rowData->$column = $queriedValue;
