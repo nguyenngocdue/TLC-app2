@@ -38,7 +38,7 @@ class Rp_reportController extends Controller
         $columnNames = array_map(fn($col) => $col['title'] ?? $col['name'], $configuredCols);
         
         $rows = array_map(fn($data) => array_map(
-            function($key) use ($data, $configuredCols) {
+            function($key) use ($data) {
                 $content = '';
                 if (isset($data[$key])) {
                     if(is_array($data[$key])) {
