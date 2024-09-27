@@ -9,9 +9,10 @@ trait TraitReportTransformedData
     use TraitReportMatrixColumn;
     use TraitReportTableContent;
     
-    private function sortData($transformedOpt) {
-        if (!$transformedOpt) return [];
-        if (is_string($transformedOpt)) $transformedOpt = json_decode($transformedOpt, true);
+    private function sortData($strJson) {
+        if (!$strJson) return [];
+        $transformedOpt = json_decode($strJson, true);
+        if(is_null($transformedOpt)) dd($strJson);
         if ($transformedOpt) {
             uasort($transformedOpt, function($a, $b) {
                 if (isset($a['order_no']) && isset($b['order_no'])) {

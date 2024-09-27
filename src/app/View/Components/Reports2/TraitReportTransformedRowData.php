@@ -34,7 +34,6 @@ trait TraitReportTransformedRowData
                     $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
                     $cellClass = 'text-' . $statusData['text_color'];
                     $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href);
-                    // dd($queriedValue);
                 }
                 break;
             case 'datetime':
