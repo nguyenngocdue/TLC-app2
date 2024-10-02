@@ -20,6 +20,29 @@ trait TraitReportTransformedRowData
         }
     }
 
+    private function processStatusCell($rowConfigs, $queriedValue, $type, $href = null) {
+        $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
+        $statusData = $statuses[$queriedValue] ?? [];
+        if ($statusData) {
+            $cellTitle = 'Open this document (' . $statusData['title'] . ')';
+    
+            // Handle rendering based on the type (status or other)
+            if ($type == 'status') {
+                $cellClass = 'text-' . $statusData['text_color'];
+                $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
+            } else {
+                $content = $statusData['icon'];
+                $cellClass = 'bg-' . $statusData['bg_color'] . ' text-center';
+                $cellDivClass = 'text-' . $statusData['text_color'];
+            }
+    
+            // Return the formatted cell value
+            return $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTitle);
+        }
+        return $queriedValue; 
+    }
+
+
     public function changedAttrCellsByTransferData($rowData, $rowConfigs, $cellValue)
     {
         $type = $rowConfigs['type'];
@@ -29,20 +52,7 @@ trait TraitReportTransformedRowData
         switch ($type) {
             case 'icon':
             case 'status':
-                $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
-                $statusData = $statuses[$queriedValue] ?? [];
-                if ($statusData) {
-                    $cellTitle = 'Open this document (' . $statusData['title'] . ')';
-                    if ($type == 'status') {
-                        $cellClass = 'text-' . $statusData['text_color'];
-                        $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
-                    }else {
-                        $content = $statusData['icon'];
-                        $cellClass = 'bg-'.$statusData['bg_color'].' text-center';
-                        $cellDivClass =  'text-' . $statusData['text_color'];
-                    }
-                    $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTitle);
-                }
+                $queriedValue = $this->processStatusCell($rowConfigs, $queriedValue, $type, $href);
                 break;
             case 'datetime':
                 $formatType = isset($rowConfigs['format_datetime']) ? $rowConfigs['format_datetime'] : '';

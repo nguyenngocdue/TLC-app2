@@ -46,7 +46,7 @@ trait TraitReportMatrixColumn
     function processOtherColumns($addedCols, &$progresses, $config) {
         foreach ($addedCols as $key => $value) {
             $total = isset($value['total']) ? $value['total'] : 0;
-            $countedItem = isset($value['counted']) ? $value['counted'] : 1; // Default to 1 to avoid division by zero
+            $countedItem = isset($value['counted']) ? $value['counted'] : 0; // Default to 1 to avoid division by zero
     
             $percent = ($countedItem > 0) ? number_format($total / $countedItem, 2) : '0.00';
             $content = "<strong>{$percent}%</strong>";
@@ -70,7 +70,7 @@ trait TraitReportMatrixColumn
             $elementAll = array_diff(array_values($values), $excludedParts);
             $total = count($elementAll);
             foreach($values as $value)if (in_array($value, $includedParts))$temp += 1;
-            $progress = (round($temp/$total, 2))*100;
+            $progress = $total > 0 ? (round($temp/$total, 2))*100 : 0;
             $progressStr = (string)number_format($progress, 2) .'%';
             if (isset($col['data_index'])) $this->setCellValue($item, $col['data_index'],$progress, $progressStr, $col['cell_class']);
         }
