@@ -27,13 +27,21 @@ trait TraitReportTransformedRowData
         $cellClass = isset($rowConfigs['cell_class']) ? $rowConfigs['cell_class'] : '';
         $href = self::getHref($rowConfigs, $rowData);
         switch ($type) {
+            case 'icon':
             case 'status':
                 $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
                 $statusData = $statuses[$queriedValue] ?? [];
                 if ($statusData) {
-                    $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
-                    $cellClass = 'text-' . $statusData['text_color'];
-                    $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href);
+                    $cellTitle = 'Open this document (' . $statusData['title'] . ')';
+                    if ($type == 'status') {
+                        $cellClass = 'text-' . $statusData['text_color'];
+                        $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
+                    }else {
+                        $content = $statusData['icon'];
+                        $cellClass = 'bg-'.$statusData['bg_color'].' text-center';
+                        $cellDivClass =  'text-' . $statusData['text_color'];
+                    }
+                    $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTitle);
                 }
                 break;
             case 'datetime':
@@ -41,6 +49,7 @@ trait TraitReportTransformedRowData
                 $dateTimeValue = DateFormat::getValueDatetimeByCurrentUser($queriedValue, $formatType);
                 $queriedValue = $this->makeCellValue($dateTimeValue, $dateTimeValue, $dateTimeValue, $cellClass, $href);
                 break;
+               
             default:
                 $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $cellClass);
                 break;
