@@ -31,7 +31,7 @@ class ReportBlockTable extends Component
         $routeRp = route('report_filters'. '.update', $reportId);
         $entityType = $rp->entity_type;
         $entityType2 = $this->reportType2;
-        $routeExportExcel = route('rp_exportExcel');
+        $routeExExcel = route('rp_exportExcel');
         $currentParams = $this->currentParams;
         $pageLimit = $currentParams['per_page'] ?? 10;
         switch ($typeId) {
@@ -51,7 +51,7 @@ class ReportBlockTable extends Component
                                             :blockTitle="$blockTitle"
                                             :class="$class"
                                             />', [
-                    'route' => $routeExportExcel,
+                    'route' => $routeExExcel,
                     'queriedData' => $queriedData,
                     'configuredCols' => $configuredCols,
                     'blockTitle' => $this->block->title ? : $this->block->name,
@@ -83,6 +83,7 @@ class ReportBlockTable extends Component
             $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
         }   
         
+        //Transformed Data Option
         if($block->is_transformed_data) {
             $configuredCols = $reportTableColumn->updatedConfiguredCols($headerCols);
         }

@@ -41,7 +41,7 @@ class ReportTableColumn
         return $cols;
     }
 
-    public function getDataColumns($block, $queriedData, $transformedFields)
+    public function getColData($block, $queriedData, $transformedFields)
     {
         if($queriedData->isEmpty()){
             $columnInstance = ReportTableColumn::getInstance($block);
