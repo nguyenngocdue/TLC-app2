@@ -15,8 +15,10 @@
 @endif
 <div class="grid grid-cols-12 gap-4 items-baseline px-4 skeleton">
     <!-- Mode Dropdown -->
-    {{-- TOFIX --}}
-    @if(count($rpFilterLinks->toArray()) > 0)
+    @php
+        $rpFilterLinkArr = $rpFilterLinks->toArray()
+    @endphp
+    @if(count($rpFilterLinkArr) > 0)
         <div class="col-span-2 w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-4">
                 <div class="text-left whitespace-nowrap">
                     <span class="flex flex-1 text-gray-700 text-lg font-bold dark:text-white">Mode</span>
@@ -25,7 +27,7 @@
         </div>
     @endif
         <!-- Advanced Filter Section -->
-        <div class="col-span-{{count($rpFilterLinks->toArray()) > 0 ? 10 : 12 }}">
+        <div class="col-span-{{count($rpFilterLinkArr) > 0 ? 10 : 12 }}">
             <div class="w-full no-print rounded-lg border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 mb-5 p-4">
                 <div class="flex justify-between pb-2">
                     <label for="" class="text-gray-700 text-lg font-bold dark:text-white">Advanced Filter</label>
