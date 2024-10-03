@@ -20,7 +20,7 @@ trait TraitReportTransformedRowData
         }
     }
 
-    private function processStatusCell($rowConfigs, $queriedValue, $type, $href = null) {
+    private function processStatusCell($rowConfigs, $queriedValue, $href = null) {
         $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
         $statusData = $statuses[$queriedValue] ?? [];
         if ($statusData) {
@@ -28,13 +28,13 @@ trait TraitReportTransformedRowData
             $cellTitle = $statusData['title'];
     
             // Handle rendering based on the type (status or other)
-            switch ($type) {
-                case 'status':
+            switch ($rowConfigs['type']) {
+                case 'tag':
                     $cellClass = 'text-' . $statusData['text_color'];
                     $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
                     break;
                 
-                case 'status_icon':
+                case 'tag_icon':
                     $icon = $statusData['icon'];
                     $content = Blade::render(
                         "<x-renderer.status-icon href='{$href}', tooltip='{$cellTooltip}' title='{$cellTitle}'>{$icon}</x-renderer.status-icon"
@@ -45,8 +45,6 @@ trait TraitReportTransformedRowData
                 default:
                     // No renderer type has been selected
                     break;
-                
-
             }
     
             // Return the formatted cell value
@@ -56,16 +54,15 @@ trait TraitReportTransformedRowData
     }
 
 
-    public function changedAttrCellsByTransferData($rowData, $rowConfigs, $cellValue)
+    public function changedAttrCellsByTransferData($rowData, $rowConfigs, $queriedValue)
     {
         $type = $rowConfigs['type'];
-        $queriedValue = $rowData->$cellValue;
         $cellClass = isset($rowConfigs['cell_class']) ? $rowConfigs['cell_class'] : '';
         $href = self::getHref($rowConfigs, $rowData);
         switch ($type) {
-            case 'status_icon':
-            case 'status':
-                $queriedValue = $this->processStatusCell($rowConfigs, $queriedValue, $type, $href);
+            case 'tag_icon':
+            case 'tag':
+                $queriedValue = $this->processStatusCell($rowConfigs, $queriedValue, $href);
                 break;
             case 'datetime':
                 $formatType = isset($rowConfigs['format_datetime']) ? $rowConfigs['format_datetime'] : '';
@@ -94,23 +91,12 @@ trait TraitReportTransformedRowData
         $queriedValue = $rowData->$cellValue;
 
         $queriedValue = isset($configs['params'], $configs['params']['row_renderer'],$configs['params']['row_renderer']['type']) 
-        ? $this->changedAttrCellsByTransferData($rowData, $configs['params']['row_renderer'], $cellValue) 
+        ? $this->changedAttrCellsByTransferData($rowData, $configs['params']['row_renderer'], $queriedValue) 
         : $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $configs['cell_class'] ?? '');
     
     $rowData->$column = $queriedValue;
     return $rowData;
    }
-
-   public function makeStatusForEachRow($entityType, $targetValue, $content){
-        $cellClass = '';
-        $statuses = LibStatuses::getFor($entityType);
-        $statusData = $statuses[$targetValue] ?? [];
-        if($statusData) {
-            $content = Blade::render("<x-renderer.status>" .$content. "</x-renderer.status>");
-            $cellClass = 'text-' .$statusData['text_color'];
-        }
-        return [$content, $cellClass];
-    }
 
     public function makeIdForEachRow($entityType, $targetValue, $content) {
         $content = $targetValue ? Str::makeId($targetValue) : $targetValue;

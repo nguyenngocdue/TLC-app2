@@ -2,13 +2,13 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Utils\Support\DateFormat;
 class ReportTableRow
 {
     
     use TraitReportTableContent;
     use TraitReportFormatString;
     use TraitReportTransformedRowData;
+    use TraitReportRendererType;
 
     private static $instance = null;
     private function _construct(){
@@ -46,10 +46,13 @@ class ReportTableRow
                     $cellDivClass =  $column->row_cell_div_class;
                     $rowRenderer = $column->row_renderer;
                     
-                    if($rowRenderer == $this->STATUS_ROW_RENDERER_ID) {
-                       [$content, $cellClass] =  $this->makeStatusForEachRow($entityType, $value, $content);
+                    if($rowRenderer == ($rendererType = $this->STATUS_ROW_RENDERER_ID)) { // Render Status
+                       [$content, $cellClass] =  $this->getRendererType($rendererType, $entityType, $content, $href);
                     }
-                    elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) {
+                    elseif ($rowRenderer == ($rendererType = $this->STATUS_ICON_ROW_RENDERER_ID)) {
+                       [$content, $cellClass] =  $this->getRendererType($rendererType, $entityType, $content, $href);
+                    }
+                    elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) { // Render Id
                         [$content, $cellClass, $href] = $this->makeIdForEachRow($entityType, $value, $content);
                     }
                     elseif($rowRenderer == $this->ROW_RENDERER_LINK_ID && $href) $cellClass = 'text-blue-600';

@@ -13,6 +13,7 @@ trait TraitReportTableContent
     protected $ROW_RENDERER_LINK_ID = 664;
     
     protected $STATUS_ROW_RENDERER_ID = 661;
+    protected $STATUS_ICON_ROW_RENDERER_ID = 665;
     protected $PAGINATION_TYPE_ID = 622;
 
     public function createIconPosition($content, $icon, $iconPosition)
