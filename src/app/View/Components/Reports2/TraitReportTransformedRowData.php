@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 trait TraitReportTransformedRowData
 {
     use TraitReportTableCell;
+    use TraitReportRendererType;
 
     private function getHref($rowConfigs, $rowData) {
         try {
@@ -21,33 +22,13 @@ trait TraitReportTransformedRowData
     }
 
     private function processStatusCell($rowConfigs, $queriedValue, $href = null) {
-        $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
-        $statusData = $statuses[$queriedValue] ?? [];
-        if ($statusData) {
-            $cellTooltip = 'Open this document (' . $statusData['title'] . ')';
-            $cellTitle = $statusData['title'];
-    
-            // Handle rendering based on the type (status or other)
-            switch ($rowConfigs['type']) {
-                case 'tag':
-                    $cellClass = 'text-' . $statusData['text_color'];
-                    $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
-                    break;
-                
-                case 'tag_icon':
-                    $icon = $statusData['icon'];
-                    $content = Blade::render(
-                        "<x-renderer.status-icon href='{$href}', tooltip='{$cellTooltip}' title='{$cellTitle}'>{$icon}</x-renderer.status-icon"
-                    );
-                    $cellClass = 'bg-' . $statusData['bg_color'] . ' text-center';
-                    $cellDivClass = 'text-' . $statusData['text_color'];
-                    break;
-                default:
-                    // No renderer type has been selected
-                    break;
-            }
-    
-            // Return the formatted cell value
+        
+        if ($rowConfigs) {
+            [$content, $cellClass, $cellDivClass, $cellTooltip] = $this->getRendererType(
+                $rowConfigs['type'], 
+                $rowConfigs['entity_type'], 
+                $queriedValue, 
+            $href);
             return $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTooltip);
         }
         return $queriedValue; 

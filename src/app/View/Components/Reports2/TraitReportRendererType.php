@@ -35,7 +35,7 @@ trait TraitReportRendererType
                 // No renderer type has been selected
                 break;
         }
-        return [$content, $cellClass, $cellDivClass];
+        return [$content, $cellClass, $cellDivClass, $cellTooltip];
     }
 
 }
