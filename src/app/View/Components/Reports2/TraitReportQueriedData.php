@@ -10,7 +10,7 @@ trait TraitReportQueriedData
     use TraitReportTransformedData;
     use TraitCreateSQLReport2;
 
-    public function getDataSQLString($block, $params)
+    public function _getDataSQLString($block, $params)
     {
         $sqlString = $block->sql_string;
         $sql = '';
@@ -27,5 +27,17 @@ trait TraitReportQueriedData
             return [$queriedData, $transformedFields, $sql];
         }
         return [collect(), [], $sql];
+    }
+
+    public function getDataSQLString($block, $params)
+    {
+        $sqlString = $block->sql_string;
+        if ($sqlString) {
+            $sql = $this->getSql($sqlString, $params);
+            $sqlData = DB::select($sql);
+            $queriedData = collect($sqlData);
+            return $queriedData;
+        }
+        return collect();
     }
 }

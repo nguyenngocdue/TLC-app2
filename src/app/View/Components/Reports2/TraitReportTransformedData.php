@@ -25,8 +25,9 @@ trait TraitReportTransformedData
         return [];
     }
 
-    private function getTransformedData($dataSource, $transformedOpt)
+    private function getTransformedData($dataSource, $block)
     {
+        $transformedOpt = $block->transformed_data_string;
         $transformedOpt = $this->sortData($transformedOpt);
         if (!$transformedOpt) return $dataSource;
         foreach ($transformedOpt as $type => $item) {

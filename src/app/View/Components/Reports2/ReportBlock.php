@@ -39,10 +39,13 @@ class ReportBlock extends Component
         foreach ($blockDetails as $item) {
             if (!$item->is_active) continue;
             $block = $item->getBlock;
+            $transformedFields = [];
+            $sqlString = $block->sql_string;
             try {
-                [$queriedData, $transformedFields, $sqlString] = $this->getDataSQLString($block, $currentParams);
-                // TOFIX : split transformData 
-                // $this->transformData();
+                $queriedData = $this->getDataSQLString($block, $currentParams);
+                if ($block->transformed_data_string) {
+                    [$queriedData, $transformedFields] = $this->getTransformedData($queriedData, $block);
+                }
                 $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
             } catch (\Exception $e) {
                 dump($e->getMessage());
