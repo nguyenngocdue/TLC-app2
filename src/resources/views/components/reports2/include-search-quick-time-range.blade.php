@@ -33,7 +33,6 @@
             <input type="hidden" name="report_id" value="{{$rp->id}}">
             <input type="hidden" name="time_zone" value="{{$timeZone}}">
             <input type="hidden" id="preset_title" name="preset_title" value="Time Range">
-            {{-- TOFIX: foreach of the preset array --}}
             <ul class="py-1 text-gray-700" id="quickRangeList">
                 @foreach($presets as $key => $preset)
                     <li name="preset_1" class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
