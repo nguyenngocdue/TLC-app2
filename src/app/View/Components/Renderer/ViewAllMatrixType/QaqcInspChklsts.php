@@ -72,6 +72,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
         $result = [];
         $data = Qaqc_insp_tmpl::query()
             ->with("getProdRoutingsOfInspTmpl")
+            ->orderBy('order_no')
             ->get();
         // dump($data[0]);
         foreach ($data as $line) {

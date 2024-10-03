@@ -155,9 +155,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 ];
             }
 
-            $routingId = $matrix['routing']->id;
-            $SHIPPING_CONTAINER_ID = 57;
-            if ($routingId != $SHIPPING_CONTAINER_ID) {
+            // $routingId = $matrix['routing']->id;
+            // $SHIPPING_CONTAINER_ID = 57;
+            // if ($routingId != $SHIPPING_CONTAINER_ID) {
+            if (!$matrix['chklst_tmpls']->hide_ncr_count) {
                 $columns = [
                     ...$columns,
                     [
@@ -428,14 +429,14 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             }
             $showOnScreenIds = $routing->getScreensShowMeOn->pluck('id');
             if ($showOnScreenIds->contains($show_on_ics_id)) {
-                $tmpls = $routing->getChklstTmpls;
+                $tmpls = $routing->getChklstTmpls()->orderBy('order_no')->get();
                 if ($tmpls->count() > 0) {
                     foreach ($tmpls as $tmpl) {
                         $key = $routing->id . "_" . $tmpl->id;
                         $result[$key] = [
                             'name'  => $routing->name . " (" . $tmpl->short_name . ")",
                             'description' => "", //"Checklist Type: 111 " . $tmpl->name,
-                            'name_for_sort_by' => $routing->name . " " . $tmpl->name,
+                            // 'name_for_sort_by' => $routing->name . " " . $tmpl->name,
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
 
@@ -445,9 +446,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 }
             }
         }
-        uasort($result, function ($a, $b) {
-            return $a['name_for_sort_by'] <=> $b['name_for_sort_by'];
-        });
+        // uasort($result, function ($a, $b) {
+        //     return $a['name_for_sort_by'] <=> $b['name_for_sort_by'];
+        // });
         // dump($result);
         return $result;
     }
