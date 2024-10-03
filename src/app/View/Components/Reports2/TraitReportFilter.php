@@ -42,21 +42,23 @@ trait TraitReportFilter
         return $result;
     }
 
-    private function formatDateWithTimezone($date, $timeZoneNumber, $dateDisplayFormat) {
+    private function formatDateWithTimezone($date, $timeZoneNumber, $dateDisplayFormat)
+    {
         $date = DateReport::convertToTimezone($date, $timeZoneNumber);
         $date = new DateTime($date);
         // dump($date,  $date->format('Y-m-d H:i:s'));
         return $date->format($dateDisplayFormat);
     }
 
-    public function formatFromAndToDate($currentParams, $formatType='') {
-        $timeZoneNum = User::find(CurrentUser::id())->time_zone;
+    public function formatFromAndToDate($currentParams, $formatType = '')
+    {
+        $timeZoneNum = CurrentUser::get()->time_zone;
         $dateFormat = $formatType ? $formatType : ($currentParams['date_display_format'] ?? $this->DATETIME_FORMAT);
         if ($dateFormat && isset($currentParams['from_date'])) {
-            $currentParams['from_date'] = $this->formatDateWithTimezone( $currentParams['from_date'], $timeZoneNum, $dateFormat);
+            $currentParams['from_date'] = $this->formatDateWithTimezone($currentParams['from_date'], $timeZoneNum, $dateFormat);
         }
         if ($dateFormat && isset($currentParams['to_date'])) {
-            $currentParams['to_date'] = $this->formatDateWithTimezone($currentParams['to_date'],$timeZoneNum,$dateFormat);
+            $currentParams['to_date'] = $this->formatDateWithTimezone($currentParams['to_date'], $timeZoneNum, $dateFormat);
         }
         return $currentParams;
     }

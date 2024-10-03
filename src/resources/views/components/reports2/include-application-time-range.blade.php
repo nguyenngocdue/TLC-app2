@@ -55,6 +55,7 @@
     var fromDatePicker = flatpickr("#from_date", {
         dateFormat: "Y-m-d H:i:S",
         allowInput: true,
+        enableTime: true,
         onChange: function(selectedDates, dateStr, instance) {
             // Optional: handle the selected date
             if(!toDatePicker.input.value) {
@@ -70,6 +71,7 @@
     var toDatePicker = flatpickr("#to_date", {
         dateFormat: "Y-m-d H:i:S",
         allowInput: true,
+        enableTime: true,
         onChange: function(selectedDates, dateStr, instance) {
                 var endDate = new Date(selectedDates[0]); // Get the selected date
                 endDate.setHours(23, 59, 59); // Set time to 23:59:59

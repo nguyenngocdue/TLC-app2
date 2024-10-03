@@ -2,11 +2,9 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\ReportPreset;
 use DateTime;
-use Exception;
 use Illuminate\View\Component;
 use Illuminate\Support\Str;
 
@@ -18,9 +16,10 @@ class ReportAbsoluteTimeRange extends Component
     protected $reportType2 = 'report2';
     public function __construct(
         private $report = null
-    ){}
+    ) {}
 
-    private function generateDateRange($timeFrame, $toDate, $fromDate) {
+    private function generateDateRange($timeFrame, $toDate, $fromDate)
+    {
         switch ($timeFrame) {
             case 'today':
                 $fromDate->setTime(0, 0, 0); // Start of today
@@ -28,24 +27,24 @@ class ReportAbsoluteTimeRange extends Component
                 break;
             case 'yesterday':
                 $fromDate->modify('-1 day');
-                $toDate->modify('-1 day')->setTime(23, 59, 59); 
-                $fromDate->setTime(0, 0, 0); 
+                $toDate->modify('-1 day')->setTime(23, 59, 59);
+                $fromDate->setTime(0, 0, 0);
                 break;
             case 'last_2_days':
-                $fromDate->modify('-2 days')->setTime(0, 0, 0); 
-                $toDate->setTime(23, 59, 59); 
+                $fromDate->modify('-2 days')->setTime(0, 0, 0);
+                $toDate->setTime(23, 59, 59);
                 break;
             case 'last_week':
-                $fromDate->modify('last week')->setTime(0, 0, 0); 
-                $toDate->modify('last week +6 days')->setTime(23, 59, 59); 
+                $fromDate->modify('last week')->setTime(0, 0, 0);
+                $toDate->modify('last week +6 days')->setTime(23, 59, 59);
                 break;
             case 'last_month':
-                $fromDate->modify('first day of last month')->setTime(0, 0, 0); 
-                $toDate->modify('last day of last month')->setTime(23, 59, 59); 
+                $fromDate->modify('first day of last month')->setTime(0, 0, 0);
+                $toDate->modify('last day of last month')->setTime(23, 59, 59);
                 break;
             case 'last_year':
-                $fromDate->modify('first day of January last year')->setTime(0, 0, 0); 
-                $toDate->modify('last day of December last year')->setTime(23, 59, 59); 
+                $fromDate->modify('first day of January last year')->setTime(0, 0, 0);
+                $toDate->modify('last day of December last year')->setTime(23, 59, 59);
                 break;
             case 'last_2_years':
                 $fromDate->modify('first day of January')->modify('-2 years')->setTime(0, 0, 0);
@@ -75,22 +74,23 @@ class ReportAbsoluteTimeRange extends Component
             default:
                 $fromDate = $fromDate;
         }
-    
+
         return [
             'from_date' => $fromDate->format('Y-m-d H:i:s'),
             'to_date' => $toDate->format('Y-m-d H:i:s'),
         ];
     }
-    
-    
 
-    private function createPresets() {
+
+
+    private function createPresets()
+    {
         $currentParams = $this->currentParamsReport();
         $timezone = $currentParams['time_zone'];
         $utcOffset = DateReport::getUtcOffset($timezone);
         $toDate = new DateTime();
         $toDate->modify("{$utcOffset} hours");
- 
+
         $presets = [
 
             // // New presets based on your request
@@ -100,10 +100,10 @@ class ReportAbsoluteTimeRange extends Component
 
             'this_month' => ReportPreset::getDateOfThisMonth($timezone),
             'this_month_so_far' =>  ReportPreset::getDateOfThisMonth($timezone, clone $toDate),
-            
+
             'this_year' => ReportPreset::getDateOfThisYear($timezone),
             'this_year_so_far' => ReportPreset::getDateOfThisYear($timezone, clone $toDate),
-            
+
             'first_half_year' => ReportPreset::getDateOfHalfYear('first_half', $timezone),
             'second_half_year' => ReportPreset::getDateOfHalfYear('second_half', $timezone),
 
@@ -124,7 +124,7 @@ class ReportAbsoluteTimeRange extends Component
             'last_month' => $this->generateDateRange('last_month', clone $toDate, clone $toDate),
             'last_year' => $this->generateDateRange('last_year', clone $toDate, clone $toDate),
             'last_2_years' => $this->generateDateRange('last_2_years', clone $toDate, clone $toDate),
-        
+
             'last_5_minutes' => $this->generateDateRange('last_5_minutes', clone $toDate, clone $toDate),
             'last_15_minutes' => $this->generateDateRange('last_15_minutes', clone $toDate, clone $toDate),
             'last_30_minutes' => $this->generateDateRange('last_30_minutes', clone $toDate, clone $toDate),
@@ -132,37 +132,38 @@ class ReportAbsoluteTimeRange extends Component
             'last_3_hours' => $this->generateDateRange('last_3_hours', clone $toDate, clone $toDate),
             'last_6_hours' => $this->generateDateRange('last_6_hours', clone $toDate, clone $toDate),
             'last_12_hours' => $this->generateDateRange('last_12_hours', clone $toDate, clone $toDate),
-        
+
         ];
-        
+
         return $presets;
     }
 
 
-  
+
     public function render()
     {
         $rp = $this->report;
         $currentParams = $this->currentParamsReport();
-        $presets = $this->createPresets(); 
+        $presets = $this->createPresets();
         $timezoneData = DateReport::getTimeZones();
 
         $currentParams = $this->formatFromAndToDate($currentParams, 'Y-m-d H:i:s');
 
-        return view('components.reports2.report-absolute-time-range', 
-        [
-            'rp' => $rp,
-            'entityType' => $rp->entity_type,
-            'reportType2' => $this->reportType2,
-            'routeFilter' => route('report_filters' . '.update', $rp->id),
-            'fromDate' => $currentParams['from_date'] ?? '',
-            'toDate' => $currentParams['to_date'] ?? '',
-            'presets' => $presets,
-            'presetTitle' => $currentParams['preset_title'],
-            'timezoneData' => $timezoneData,
-            'timeZone' => $currentParams['time_zone'],
-            'dateDisplayFormat' => $currentParams['date_display_format'] ?? 'y-m-d H:i:s',
-        ]
-    );
+        return view(
+            'components.reports2.report-absolute-time-range',
+            [
+                'rp' => $rp,
+                'entityType' => $rp->entity_type,
+                'reportType2' => $this->reportType2,
+                'routeFilter' => route('report_filters' . '.update', $rp->id),
+                'fromDate' => $currentParams['from_date'] ?? '',
+                'toDate' => $currentParams['to_date'] ?? '',
+                'presets' => $presets,
+                'presetTitle' => $currentParams['preset_title'],
+                'timezoneData' => $timezoneData,
+                'timeZone' => $currentParams['time_zone'],
+                'dateDisplayFormat' => $currentParams['date_display_format'] ?? 'y-m-d H:i:s',
+            ]
+        );
     }
 }

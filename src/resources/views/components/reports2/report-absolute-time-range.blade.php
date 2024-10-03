@@ -1,9 +1,23 @@
-<div class="relative inline-block text-left z-20">
+<div class="relative inline-block text-left z-20 text-sm">
     <!-- Dropdown Button -->
     <button id="dropdownButton" class="relative flex items-center justify-between p-2 border border-gray-300 rounded-md shadow-lg bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group">
         <i class="text-green-700 fa-solid fa-clock"></i>
         @php
-            $presetTitle = $presetTitle || $fromDate || $toDate ? $presetTitle : '<strong>Time Range</strong>';
+            $presetTitle = ($presetTitle || $fromDate || $toDate) ? $presetTitle : '<strong>Time Range</strong>';
+            // TOFIX
+            // switch(true){
+            //     case $presetTitle != 'Absolute Time Range':
+            //         "<strong>$presetTitle</strong>" ." (".$timeZone.")";
+            //         break;
+            //     case $fromDate && $toDate:
+            //         "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")"
+            //         break;
+            //     default:
+            //         '<strong>Time Range</strong>'
+            //         break;
+            // }
+
+            
             $timeTitle = $presetTitle != 'Absolute Time Range'  ? 
                                 "<strong>$presetTitle</strong>" ." (".$timeZone.")" :
                                  ($fromDate && $toDate ?
