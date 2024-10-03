@@ -11,7 +11,6 @@ class ReportTableColumn
     use TraitReportTransformedData;
 
     private static $instance = null;
-    private function _construct() {}
 
     public static function getInstance()
     {
@@ -74,7 +73,7 @@ class ReportTableColumn
         }
         if ($block->is_transformed_data && ($x = $block->transformed_data_string)) {
             $transformedOpt = $this->sortData($x, true);
-            $transformedCols = $this->getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields);
+            $transformedCols = $this->getTransformedDataCols($fields, $transformedOpt, $transformedFields);
             $headerCols = array_merge($headerCols, $transformedCols);
         }
         // dd($headerCols);
@@ -103,15 +102,14 @@ class ReportTableColumn
         return $data2ndHeader;
     }
 
-    public function getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields)
+    public function getTransformedDataCols($fields, $transformedOpt, $transformedFields)
     {
-        $firstItem = $transformedFields;
         $columns = [];
-        if ($firstItem) {
+        if ($transformedFields) {
             $lastTransformedData = last($transformedOpt);
             $customCols = $lastTransformedData['custom_columns'] ?? [];
             $customColFields = array_map(fn($item) => $item['data_index'], $customCols);
-            foreach ($firstItem as $key) {
+            foreach ($transformedFields as $key) {
                 if (in_array($key, $fields) || in_array($key, $customColFields)) continue;
                 $columns[] = [
                     'dataIndex' => $key,
@@ -133,11 +131,10 @@ class ReportTableColumn
                     // set position columns
                     $position = $value['position'] ?? count($columns);
                     $position = is_numeric($position) ?  $position : ($position == 'end' ? count($columns) : 0);
-                    array_splice($columns, $position, 1, [$newColumn]);
+                    array_splice($columns, $position, 0, [$newColumn]);
                 }
             }
         }
-        // dd($columns);
         return $columns;
     }
 

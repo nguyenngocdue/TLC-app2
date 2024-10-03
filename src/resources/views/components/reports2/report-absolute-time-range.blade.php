@@ -4,25 +4,17 @@
         <i class="text-green-700 fa-solid fa-clock"></i>
         @php
             $presetTitle = ($presetTitle || $fromDate || $toDate) ? $presetTitle : '<strong>Time Range</strong>';
-            // TOFIX
-            // switch(true){
-            //     case $presetTitle != 'Absolute Time Range':
-            //         "<strong>$presetTitle</strong>" ." (".$timeZone.")";
-            //         break;
-            //     case $fromDate && $toDate:
-            //         "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")"
-            //         break;
-            //     default:
-            //         '<strong>Time Range</strong>'
-            //         break;
-            // }
-
-            
-            $timeTitle = $presetTitle != 'Absolute Time Range'  ? 
-                                "<strong>$presetTitle</strong>" ." (".$timeZone.")" :
-                                 ($fromDate && $toDate ?
-                                 "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone.")"
-                                 : '<strong>Time Range</strong>');
+            switch(true){
+                case $presetTitle != 'Absolute Time Range':
+                    $timeTitle = "<strong>$presetTitle</strong>" ." (".$timeZone.")";
+                    break;
+                case $fromDate && $toDate:
+                    $timeTitle = "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone. ")";
+                    break;
+                default:
+                    $timeTitle = '<strong>Time Range</strong>';
+                    break;
+             }
         @endphp
 
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>

@@ -433,7 +433,7 @@ class UpdateUserSettings extends Controller
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInUser = &$settings[$entityType][$reportType2][$storedFilterKey];
             foreach ($filters as $key => $value) {
-                $paramsInUser[$key] = (isset($inputValue['form_type']) && $inputValue['form_type'] === "resetParamsReport2") ? null :$value;
+                $paramsInUser[$key] = isset($inputValue['form_type']) && $inputValue['form_type'] == "resetParamsReport2" ? null :$value;
             }
             
             if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateTimeZone"){

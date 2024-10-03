@@ -36,11 +36,13 @@ class ReportBlock extends Component
         $perPage = $currentParams['per_page'] ?? 10;
 
         $blockDataSource = [];
+        $queriedPagData = $queriedData = collect();
         foreach ($blockDetails as $item) {
             if (!$item->is_active) continue;
             $block = $item->getBlock;
             $transformedFields = [];
             $sqlString = $block->sql_string;
+            if (!$sqlString) continue;
             try {
                 $queriedData = $this->getDataSQLString($block, $currentParams);
                 if ($block->transformed_data_string) {
@@ -50,7 +52,6 @@ class ReportBlock extends Component
             } catch (\Exception $e) {
                 dump($e->getMessage());
             }
-
             $rpTableCols = ReportTableColumn::getInstance();
             [$headerCols, $secondHeaderCols] = $rpTableCols->getColData($block, $queriedData, $transformedFields);
 

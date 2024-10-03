@@ -24,20 +24,33 @@ trait TraitReportTransformedRowData
         $statuses = isset($rowConfigs['entity_type']) ? LibStatuses::getFor($rowConfigs['entity_type']) : '';
         $statusData = $statuses[$queriedValue] ?? [];
         if ($statusData) {
-            $cellTitle = 'Open this document (' . $statusData['title'] . ')';
+            $cellTooltip = 'Open this document (' . $statusData['title'] . ')';
+            $cellTitle = $statusData['title'];
     
             // Handle rendering based on the type (status or other)
-            if ($type == 'status') {
-                $cellClass = 'text-' . $statusData['text_color'];
-                $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
-            } else {
-                $content = $statusData['icon'];
-                $cellClass = 'bg-' . $statusData['bg_color'] . ' text-center';
-                $cellDivClass = 'text-' . $statusData['text_color'];
+            switch ($type) {
+                case 'status':
+                    $cellClass = 'text-' . $statusData['text_color'];
+                    $content = Blade::render("<x-renderer.status>" . $queriedValue . "</x-renderer.status>");
+                    break;
+                
+                case 'status_icon':
+                    $icon = $statusData['icon'];
+                    $content = Blade::render(
+                        "<x-renderer.status-icon href='{$href}', tooltip='{$cellTooltip}' title='{$cellTitle}'>{$icon}</x-renderer.status-icon"
+                    );
+                    $cellClass = 'bg-' . $statusData['bg_color'] . ' text-center';
+                    $cellDivClass = 'text-' . $statusData['text_color'];
+                    break;
+                default:
+                    // No renderer type has been selected
+                    break;
+                
+
             }
     
             // Return the formatted cell value
-            return $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTitle);
+            return $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTooltip);
         }
         return $queriedValue; 
     }
@@ -50,7 +63,7 @@ trait TraitReportTransformedRowData
         $cellClass = isset($rowConfigs['cell_class']) ? $rowConfigs['cell_class'] : '';
         $href = self::getHref($rowConfigs, $rowData);
         switch ($type) {
-            case 'icon':
+            case 'status_icon':
             case 'status':
                 $queriedValue = $this->processStatusCell($rowConfigs, $queriedValue, $type, $href);
                 break;
