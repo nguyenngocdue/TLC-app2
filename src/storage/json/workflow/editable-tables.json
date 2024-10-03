@@ -350,6 +350,11 @@
         "entity-type": "zunit_test_11s",
         "editable-table": "departments"
     },
+    "zunit_test_11s_03": {
+        "name": "zunit_test_11s_03",
+        "entity-type": "zunit_test_11s",
+        "editable-table": "qaqc_insp_tmpls"
+    },
     "zunit_test_12s_01": {
         "name": "zunit_test_12s_01",
         "entity-type": "zunit_test_12s",

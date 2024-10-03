@@ -13,6 +13,7 @@ class Zunit_test_11 extends ModelExtended
     public static $eloquentParams = [
         "getUT1" => ['hasMany', Zunit_test_01::class, 'parent_id'],
         "getDepartments" => ['hasMany', Department::class, 'parent_id'],
+        "getQaqcInspTmpl" => ['hasMany', Qaqc_insp_tmpl::class, 'parent_id'],
     ];
 
     public function getUT1()
@@ -22,6 +23,12 @@ class Zunit_test_11 extends ModelExtended
     }
 
     public function getDepartments()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getQaqcInspTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

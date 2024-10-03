@@ -7,9 +7,17 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_tmpl extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "short_name", "owner_id",
+        "id",
+        "name",
+        "description",
+        "short_name",
+        "owner_id",
         "has_punchlist",
+        "hide_ncr_count",
+        "order_no",
+        "parent_id",
     ];
+
     public static $statusless = true;
 
     public static $eloquentParams = [
@@ -49,5 +57,15 @@ class Qaqc_insp_tmpl extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => !true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'parent_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ['dataIndex' => 'name',],
+        ];
     }
 }

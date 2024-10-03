@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('departments', function (BlueprintExtended $table) {
             $table->id();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('head_of_department')->nullable();
             $table->boolean('hide_in_org_chart')->nullable();
             $table->boolean('hide_in_survey')->nullable();
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->default(1); //To load into UT11
             $table->string('slug')->unique();
 
             $table->boolean('show_in_task_budget')->nullable();

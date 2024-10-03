@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('qaqc_insp_tmpls', function (BlueprintExtended $table) {
             $table->id();
@@ -23,8 +23,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('short_name')->nullable();
             $table->boolean('has_punchlist')->default(false);
+            $table->boolean('hide_ncr_count')->default(false);
+            $table->unsignedBigInteger('parent_id')->default(1); //To load into UT11
 
-            // $table->unsignedBigInteger('prod_routing_id');
+            $table->orderable();
             $table->appendCommonFields();
         });
     }
