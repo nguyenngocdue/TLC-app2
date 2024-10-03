@@ -12,6 +12,15 @@ use Illuminate\Support\Str;
 Route::group([], function () {
     $entities = Entities::getAll();
     $apps_have_qr = JsonControls::getAppsHaveQrLandingPage();
+
+    Route::group([
+        'prefix' => 'dashboard',
+        'middleware' => ['auth', 'impersonate'],
+    ], function () {
+        Route::post("rp_reports/update_filters/{id}", [Rp_reportController::class, 'updateFilters'])->name('report_filters.update');
+        Route::post("rp_reports_ep", [Rp_reportController::class, 'exportExcel'])->name('rp_exportExcel');
+    });
+
     foreach ($entities as $entity) {
         $entityName = Str::getEntityName($entity);
         $entitySingular = Str::singular($entityName);
@@ -27,8 +36,6 @@ Route::group([], function () {
             Route::resource("{$entityName}", EntityCRUDController::class)->only('create', 'store', 'edit', 'update', 'show', 'destroy');
             Route::delete("{$entityName}", [EntityCRUDController::class, "destroyMultiple"])->name("{$entityName}.destroyMultiple");
 
-            Route::post("rp_reports/update_filters/{id}", [Rp_reportController::class, 'updateFilters'])->name('report_filters.update');
-            Route::post("rp_reports_ep", [Rp_reportController::class, 'exportExcel'])->name('rp_exportExcel');
 
             Route::post("{$entityName}_rs", [EntityCRUDController::class, "restoreMultiple"])->name("{$entityName}.restoreMultiple");
             Route::post("{$entityName}_dp", [ViewAllInvokerController::class, "duplicateMultiple"])->name("{$entityName}_dp.duplicateMultiple");

@@ -9,7 +9,7 @@
             {{-- Show Setting Reports --}}
             @if ($isAdmin)
                 <div class="no-print absolute">
-                    <a title='Edit Mode' class="block p-2" href="{{ route('rp_reports.edit', $report->id) }}" target="blank" >
+                    <a title='Edit Report' class="block p-2" href="{{ route('rp_reports.edit', $report->id) }}" target="blank" >
                         <span class="inline-flex items-center rounded-md bg-purple-50 px-2   py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
                             <i class="fa-solid fa-gear"></i>
                         </span>
@@ -18,6 +18,7 @@
             @endif
 
             <!-- Head section with a border -->
+            {{-- TOFIX --}}
                 @switch($letterHeadId)
                     @case (1)
                         <div class="self-start pt-4 px-4 py-2 w-full">
@@ -30,6 +31,7 @@
                         <div>
                     @break
                     @default
+                        {{-- No letter head --}}
                     @break
                 @endswitch
             <!-- Main content area -->
@@ -43,6 +45,7 @@
 
             </div>
             <!-- Footer section with a border -->
+            {{-- TOFIX --}}
             <div>
                 @switch($letterFooterId)
                     @case (1)

@@ -8,13 +8,14 @@ trait TraitReportTransformedData
 {
     use TraitReportMatrixColumn;
     use TraitReportTableContent;
-    
-    private function sortData($strJson) {
+
+    private function sortData($strJson)
+    {
         if (!$strJson) return [];
         $transformedOpt = json_decode($strJson, true);
-        if(is_null($transformedOpt)) dd($strJson);
+        if (is_null($transformedOpt)) dd($strJson);
         if ($transformedOpt) {
-            uasort($transformedOpt, function($a, $b) {
+            uasort($transformedOpt, function ($a, $b) {
                 if (isset($a['order_no']) && isset($b['order_no'])) {
                     return $a['order_no'] <=> $b['order_no'];
                 }
@@ -24,10 +25,11 @@ trait TraitReportTransformedData
         return [];
     }
 
-    public function transformData($dataSource, $transformedOpt){
+    private function getTransformedData($dataSource, $transformedOpt)
+    {
         $transformedOpt = $this->sortData($transformedOpt);
         if (!$transformedOpt) return $dataSource;
-        foreach($transformedOpt as $type => $item) {
+        foreach ($transformedOpt as $type => $item) {
             switch ($type) {
                 case 'grouping_to_matrix':
                     $params = $item['params'];
@@ -43,7 +45,8 @@ trait TraitReportTransformedData
         }
     }
 
-    public function getNormalData($dataSource, $block) {
+    private function getNormalData($dataSource, $block)
+    {
         $columns = $block->getLines;
         $colToSets = [];
         foreach ($columns as $column) {

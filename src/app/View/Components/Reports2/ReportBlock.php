@@ -10,7 +10,7 @@ class ReportBlock extends Component
     use TraitReportQueriedData;
     use TraitReportFilter;
     // use TraitReportCreateTableColumn;
-    
+
     public function __construct(
         private $report,
         private $blockDetails = [],
@@ -24,7 +24,7 @@ class ReportBlock extends Component
         if ($hasPagination) {
             $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $perPage), $dataSource->count(), $perPage, $page));
         }
-        
+
         return $dataSource;
     }
 
@@ -34,13 +34,15 @@ class ReportBlock extends Component
         $blockDetails = $this->blockDetails;
         $currentParams = $this->currentParamsReport();
         $perPage = $currentParams['per_page'] ?? 10;
-        
+
         $blockDataSource = [];
         foreach ($blockDetails as $item) {
-            if(!$item->is_active) continue;
+            if (!$item->is_active) continue;
             $block = $item->getBlock;
             try {
                 [$queriedData, $transformedFields, $sqlString] = $this->getDataSQLString($block, $currentParams);
+                // TOFIX : split transformData 
+                // $this->transformData();
                 $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
             } catch (\Exception $e) {
                 dump($e->getMessage());
@@ -48,7 +50,7 @@ class ReportBlock extends Component
 
             $rpTableCols = ReportTableColumn::getInstance();
             [$headerCols, $secondHeaderCols] = $rpTableCols->getColData($block, $queriedData, $transformedFields);
-            
+
             $blockItem = [
                 'colSpan' => $item->col_span,
                 'block' => $block,

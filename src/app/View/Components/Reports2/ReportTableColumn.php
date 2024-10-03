@@ -11,17 +11,16 @@ class ReportTableColumn
     use TraitReportTransformedData;
 
     private static $instance = null;
-    private function _construct(){
+    private function _construct() {}
 
-    }
-
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance == null) {
             self::$instance = new ReportTableColumn();
         }
         return self::$instance;
     }
-    
+
     private function getAllUniqueFields($collection)
     {
         return array_unique(array_keys((array)$collection->first()));
@@ -30,24 +29,24 @@ class ReportTableColumn
     function defaultColumnsOnEmptyQuery($block)
     {
         $cols = $block->getLines->where('is_active', true)
-        ->select('title', 'data_index')
-        ->map(function ($item) {
-            return [
-                'title' => $item['title'] ?? $item['data_index'],
-                'dataIndex' => $item['data_index']
-            ];
-        })
-        ->toArray();
+            ->select('title', 'data_index')
+            ->map(function ($item) {
+                return [
+                    'title' => $item['title'] ?? $item['data_index'],
+                    'dataIndex' => $item['data_index']
+                ];
+            })
+            ->toArray();
         return $cols;
     }
 
     public function getColData($block, $queriedData, $transformedFields)
     {
-        if($queriedData->isEmpty()){
-            $columnInstance = ReportTableColumn::getInstance($block);
+        if ($queriedData->isEmpty()) {
+            $columnInstance = ReportTableColumn::getInstance();
             $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
             return [$headerCols, []];
-        } 
+        }
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from admin
         $columns = $block->getLines->sortby('order_no');
@@ -72,11 +71,10 @@ class ReportTableColumn
                     'footer' => $aggFooter,
                 ];
             }
-           
         }
-        if ($block->is_transformed_data && ($x = $block->transformed_data_string)){
+        if ($block->is_transformed_data && ($x = $block->transformed_data_string)) {
             $transformedOpt = $this->sortData($x, true);
-            $transformedCols = $this->getTransformedDataCols($queriedData, $fields, $transformedOpt , $transformedFields);
+            $transformedCols = $this->getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields);
             $headerCols = array_merge($headerCols, $transformedCols);
         }
         // dd($headerCols);
@@ -96,7 +94,7 @@ class ReportTableColumn
                     'value' => $content,
                     'cell_class' => $column?->cell_class,
                     'cell_div_class' =>  $column?->cell_div_class,
-                    
+
                 ];
                 // $this->setCellValue($data2ndHeader,$parent->data_index, $content, $column?->cell_class, $column?->cell_div_class );
             }
@@ -105,14 +103,15 @@ class ReportTableColumn
         return $data2ndHeader;
     }
 
-    public function getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields){        
+    public function getTransformedDataCols($queriedData, $fields, $transformedOpt, $transformedFields)
+    {
         $firstItem = $transformedFields;
         $columns = [];
         if ($firstItem) {
             $lastTransformedData = last($transformedOpt);
             $customCols = $lastTransformedData['custom_columns'] ?? [];
             $customColFields = array_map(fn($item) => $item['data_index'], $customCols);
-            foreach($firstItem as $key) {
+            foreach ($firstItem as $key) {
                 if (in_array($key, $fields) || in_array($key, $customColFields)) continue;
                 $columns[] = [
                     'dataIndex' => $key,
@@ -133,7 +132,7 @@ class ReportTableColumn
                     ];
                     // set position columns
                     $position = $value['position'] ?? count($columns);
-                    $position = is_numeric($position) ?  $position : ($position == 'end' ? count($columns) : 0 );
+                    $position = is_numeric($position) ?  $position : ($position == 'end' ? count($columns) : 0);
                     array_splice($columns, $position, 1, [$newColumn]);
                 }
             }
@@ -155,7 +154,7 @@ class ReportTableColumn
     {
         $result = [];
         foreach ($columns as  $column) {
-            if(!$column->is_active) continue;
+            if (!$column->is_active) continue;
             if (in_array($column->data_index, $dataIndexToRender)) {
                 $result[$column->data_index] = $column;
             }
@@ -163,7 +162,8 @@ class ReportTableColumn
         return $result;
     }
 
-    public function updatedConfiguredCols($headerCols){
+    public function updateConfiguredCols($headerCols)
+    {
         $columns = [];
         foreach ($headerCols as $value) {
             $columns[$value['dataIndex']] = [
@@ -172,6 +172,4 @@ class ReportTableColumn
         }
         return $columns;
     }
-
-
 }

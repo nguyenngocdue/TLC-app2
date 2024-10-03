@@ -5,13 +5,14 @@ namespace App\View\Components\Reports2;
 use App\Models\Rp_report;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Blade;
+
 class ReportBlockTable extends Component
 {
     use TraitReportQueriedData;
     use TraitReportTermNames;
     // use TraitReportCreateTableColumn;
     // use TraitReportCreateTableRow;
-    
+
     use TraitReportTableContent;
 
     protected $reportType2 = 'report2';
@@ -23,12 +24,12 @@ class ReportBlockTable extends Component
         private $secondHeaderCols,
         private $currentParams,
         private $queriedData,
-    ) {
-    }
+    ) {}
 
-    private function getControls($typeId, $queriedData, $configuredCols, $class){
-        $rp =Rp_report::find(($reportId = $this->reportId));
-        $routeRp = route('report_filters'. '.update', $reportId);
+    private function getControls($typeId, $queriedData, $configuredCols, $class)
+    {
+        $rp = Rp_report::find(($reportId = $this->reportId));
+        $routeRp = route('report_filters' . '.update', $reportId);
         $entityType = $rp->entity_type;
         $entityType2 = $this->reportType2;
         $routeExExcel = route('rp_exportExcel');
@@ -54,10 +55,14 @@ class ReportBlockTable extends Component
                     'route' => $routeExExcel,
                     'queriedData' => $queriedData,
                     'configuredCols' => $configuredCols,
-                    'blockTitle' => $this->block->title ? : $this->block->name,
+                    'blockTitle' => $this->block->title ?: $this->block->name,
                     'class' => $class,
                 ]);
+            case "":
+                // There is no selected control
+                break;
             default:
+                dump("Unsupported control type [" . $typeId . "]");
                 break;
         }
     }
@@ -69,25 +74,25 @@ class ReportBlockTable extends Component
         $headerCols = $this->headerCols;
         $dataIndexToRender = array_column($headerCols, 'dataIndex');
         $queriedData = $this->queriedData;
-        
+
         $reportTableColumn = ReportTableColumn::getInstance();
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
-        
+
         $reportTableRow = ReportTableRow::getInstance();
         $tableDataSource = $reportTableRow->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
         // dd($queriedData->first(), $tableDataSource);
 
         // render default table
-        if(!$configuredCols) {
+        if (!$configuredCols) {
             $tableDataSource = $this->queriedData;
             $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
-        }   
-        
-        //Transformed Data Option
-        if($block->is_transformed_data) {
-            $configuredCols = $reportTableColumn->updatedConfiguredCols($headerCols);
         }
-        
+
+        //Transformed Data Option
+        if ($block->is_transformed_data) {
+            $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
+        }
+
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
@@ -102,7 +107,7 @@ class ReportBlockTable extends Component
             "rotate45Width" => $block->rotate_45_width,
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
-            
+
 
             "topLeftControl" => $this->getControls($block->top_left_control, $queriedData, $configuredCols, "justify-start"),
             "topCenterControl" => $this->getControls($block->top_center_control, $queriedData, $configuredCols, "justify-center"),
