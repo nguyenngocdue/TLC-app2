@@ -392,7 +392,9 @@ class User extends ModelExtended implements
 
     public function isProjectClient()
     {
-        return in_array($this->discipline, [128]); //128: Project Client
+        return in_array($this->discipline, [
+            128, //128: Project Client
+        ]);
     }
 
     public function isApartmentOwner()
@@ -402,7 +404,9 @@ class User extends ModelExtended implements
 
     public function isCouncilMember()
     {
-        return in_array($this->discipline, [169]); //169: Council Member
+        return in_array($this->discipline, [
+            169, //169: Council Member
+        ]);
     }
 
     public function isExternal()
