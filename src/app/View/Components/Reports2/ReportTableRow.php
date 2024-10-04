@@ -40,24 +40,35 @@ class ReportTableRow
                 if (array_key_exists($k2, $configuredCols)) {
                     $column = $configuredCols[$k2];
                     $entityType = $column->entity_type;
-                    $href = ($x = $column->row_href_fn) ? $this->formatReportHref($x, $dataLine) : '';
+                    $href = ($x = $column->row_href_fn) ? $x: '';
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
                     $rowRenderer = $column->row_renderer;
                     
-                    if($rowRenderer == ($rendererType = $this->TAG_ROW_RENDERER_ID)) { // Render Status
-                       [$content, $cellClass] =  $this->getRendererType($rendererType, $entityType, $content, $href);
-                    }
-                    elseif ($rowRenderer == ($rendererType = $this->TAG_ICON_ROW_RENDERER_ID)) {
-                       [$content, $cellClass] =  $this->getRendererType($rendererType, $entityType, $content, $href);
-                    }
-                    elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) { // Render Id
-                        [$content, $cellClass, $href] = $this->makeIdForEachRow($entityType, $value, $content);
-                    }
-                    elseif($rowRenderer == $this->ROW_RENDERER_LINK_ID && $href) $cellClass = 'text-blue-600';
-                    elseif($rowRenderer == $this->ROW_RENDERER_DATETIME_ID) {
-                        // $content = DateFormat::getValueDatetimeByCurrentUser($value);
+                    switch ($rowRenderer) {
+                        case $this->TAG_ROW_RENDERER_ID: // Render Status
+                        case $this->TAG_ICON_ROW_RENDERER_ID:
+                            [$content, $cellClass] = $this->getRendererType($rowRenderer, $entityType, $content, $href);
+                            break;
+                    
+                        case $this->ID_ROW_RENDERER_ID: // Render ID
+                            [$content, $cellClass, $href] = $this->makeIdForEachRow($entityType, $value, $content);
+                            break;
+                    
+                        case $this->ROW_RENDERER_LINK_ID:
+                            if ($href) {
+                                $cellClass = 'text-blue-600';
+                            }
+                            break;
+                    
+                        case $this->ROW_RENDERER_DATETIME_ID:
+                            // $content = DateFormat::getValueDatetimeByCurrentUser($value);
+                            break;
+                    
+                        default:
+                            // Handle other cases or do nothing
+                            break;
                     }
 
                     $newValue = (object)[

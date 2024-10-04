@@ -27,8 +27,9 @@ trait TraitReportTransformedRowData
             [$content, $cellClass, $cellDivClass, $cellTooltip] = $this->getRendererType(
                 $rowConfigs['type'], 
                 $rowConfigs['entity_type'], 
-                $queriedValue, 
-            $href);
+                $queriedValue,
+                $href,
+                $rowConfigs['id_link']);
             return $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTooltip);
         }
         return $queriedValue; 
@@ -43,6 +44,8 @@ trait TraitReportTransformedRowData
         switch ($type) {
             case 'tag_icon':
             case 'tag':
+                $idLink = ((array)$rowData)[$rowConfigs['route_id_field']];
+                $rowConfigs['id_link'] = $idLink;
                 $queriedValue = $this->processStatusCell($rowConfigs, $queriedValue, $href);
                 break;
             case 'datetime':

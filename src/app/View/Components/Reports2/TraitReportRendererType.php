@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Blade;
 
 trait TraitReportRendererType
 {
-    private function getRendererType($type, $entityType, $targetValue, $href)
+    private function getRendererType($type, $entityType, $targetValue,$href, $idLink=null)
     {
         $statuses = isset($entityType) ? LibStatuses::getFor($entityType) : '';
         $statusData = $statuses[$targetValue] ?? [];
         if (!$statusData) return [];
         $cellTooltip = 'Open this document (' . $statusData['title'] . ')';
-        $cellTitle = $statusData['title'];
+        $cellTitle = "(#{$idLink}) ".$statusData['title'];
         $cellDivClass = '';
         switch ($type) {
             case 'tag':
