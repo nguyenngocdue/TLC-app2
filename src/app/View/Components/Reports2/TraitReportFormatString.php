@@ -4,13 +4,13 @@ namespace App\View\Components\Reports2;
 
 trait TraitReportFormatString
 {
-    public function parseVariables($sqlStr)
+    function parseVariables($sqlStr)
     {
         preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $sqlStr, $parsedVariables);
         return $parsedVariables;
     }
 
-    public function formatReportHref($string, $dataLine)
+    function formatReportHref($string, $dataLine)
     {
         $parsedVariables = $this->parseVariables($string);
         foreach (last($parsedVariables) as $key => $value) {
