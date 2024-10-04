@@ -147,6 +147,7 @@ class CurrentUser
             case static::get()->isProjectClient():
                 return Constant::DASHBOARD_PROJECT_CLIENT;
             case static::get()->isExternalInspector():
+            case static::get()->isShippingAgent():
                 return Constant::DASHBOARD_EXTERNAL_INSPECTOR;
             case static::get()->isApartmentOwner():
                 return Constant::DASHBOARD_APARTMENT_OWNER;

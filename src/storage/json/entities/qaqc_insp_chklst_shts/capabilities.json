@@ -208,6 +208,17 @@
         "pending_audit": "",
         "audited": ""
     },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "not_applicable": "",
+        "in_progress": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
     "dir": {
         "name": "dir",
         "name_rendered": "",
@@ -631,7 +642,7 @@
         "name_rendered": "",
         "toggle": "",
         "not_applicable": "",
-        "in_progress": "",
+        "in_progress": "true",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "true",

@@ -40,11 +40,12 @@ class ActionButtons extends Component
      */
     public function render()
     {
+        $cu = CurrentUser::get();
         if ($this->type == 'qaqc_insp_chklst_shts') {
             // if (CurrentUser::get()->isExternalInspector()) return "";
             // if (CurrentUser::get()->isProjectClient()) return "";
             // if (CurrentUser::get()->isCouncilMember()) return "";
-            if (CurrentUser::get()->isExternal()) return "";
+            if ($cu->isExternal() && !$cu->isShippingAgent()) return "";
         }
         if (in_array($this->type, ['conqa_archives'])) return;
 

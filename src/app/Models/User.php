@@ -386,6 +386,13 @@ class User extends ModelExtended implements
     {
         return in_array($this->discipline, [
             138, //138: External Inspector
+            // 180, //180: Shipping Agent
+        ]);
+    }
+
+    function isShippingAgent()
+    {
+        return in_array($this->discipline, [
             180, //180: Shipping Agent
         ]);
     }
@@ -411,7 +418,7 @@ class User extends ModelExtended implements
 
     public function isExternal()
     {
-        return $this->isExternalInspector() || $this->isProjectClient() || $this->isCouncilMember();
+        return $this->isExternalInspector() || $this->isShippingAgent() || $this->isProjectClient() || $this->isCouncilMember();
     }
 
     public function isNewcomer()
