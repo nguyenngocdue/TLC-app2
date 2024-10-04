@@ -8,7 +8,8 @@ use Illuminate\View\Component;
 class ReportBlockChart extends Component
 {
     use TraitReportQueriedData;
-    
+    use TraitReportDetectVariableChanges;
+
     protected $SERIES_VARIABLE = '{%series%}';
 
     public function __construct(
@@ -37,31 +38,16 @@ class ReportBlockChart extends Component
         return $options;
     }
 
-    private function changeToJsonOptions($options, $queriedData)
+    private function changeToJsonOptions($optionStr, $queriedData)
     {
         $transformedFields = $this->transformedFields;
         if($transformedFields) {
-            $options = $this->changeToJsonOptionsByTransformation($options, $queriedData, $transformedFields);
+            $optionStr = $this->changeToJsonOptionsByTransformation($optionStr, $queriedData, $transformedFields);
         } else {
-             $parsedVariables = $this->parseVariables($options);
-            foreach (last($parsedVariables) as $key => $value) {
-                $variable = trim(str_replace('$', '', $value));
-                $firstMatches = reset($parsedVariables);
-                $keyInOptions = $firstMatches[$key];
-                if (str_contains($variable, 'QRY_'))  {
-                    $variable = str_replace('QRY_', '', $variable);
-                    $valueInData = $queriedData->pluck($variable)->toArray();
-                    $valueInData = '['. implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)) . ']';
-                    $options = str_replace($keyInOptions, $valueInData, $options);
-                }else {
-                    $currentParams = $this->currentParams;
-                    $changedVal = isset($currentParams[$variable]) ? $currentParams[$variable] : '';
-                    $options = str_replace($keyInOptions, $changedVal, $options);
-                }
-            }
+            $optionStr = $this->detectVariables($optionStr, $this->currentParams, $queriedData);
         }
-        $jsonOptions = json_decode($options);
-        if (is_null($jsonOptions))dump($options);
+        $jsonOptions = json_decode($optionStr);
+        if (is_null($jsonOptions))dump($optionStr);
         return $jsonOptions;
     }
 
