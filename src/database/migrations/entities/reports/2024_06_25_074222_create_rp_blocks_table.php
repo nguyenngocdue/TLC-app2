@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
+            $table->text('legend_entity_type')->nullable();
             $table->boolean('is_active')->nullable();
             $table->text('sql_string')->nullable();
             $table->boolean('is_transformed_data')->nullable();

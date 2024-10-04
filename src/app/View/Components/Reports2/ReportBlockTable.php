@@ -93,6 +93,7 @@ class ReportBlockTable extends Component
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
 
+
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
@@ -108,6 +109,7 @@ class ReportBlockTable extends Component
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
 
+            "legendEntityType" => $block->legend_entity_type ? $block->legend_entity_type : null,
 
             "topLeftControl" => $this->getControls($block->top_left_control, $queriedData, $configuredCols, "justify-start"),
             "topCenterControl" => $this->getControls($block->top_center_control, $queriedData, $configuredCols, "justify-center"),

@@ -12,3 +12,8 @@
     topRightControl="{!! $topRightControl !!}" bottomLeftControl="{!! $bottomLeftControl !!}"
     bottomCenterControl="{!! $bottomCenterControl !!}" bottomRightControl="{!! $bottomRightControl !!}" 
     />
+
+@if($legendEntityType)
+    <x-renderer.legend type="{{$legendEntityType}}" title="Legend of Status" />
+    <br/>
+@endif

@@ -11,6 +11,7 @@ class Rp_block extends ModelExtended
         "name",
         "title",
         "description",
+        "legend_entity_type",
         "sql_string",
         "is_transformed_data",
         "transformed_data_string",
