@@ -59,7 +59,7 @@ class OrgChartRendererExternal extends Component
                 $idStr = " (<a href='$href' class='text-blue-500'>$idStr</a>)";
                 $jsonTree[$key3] = [
                     'id' => $key3,
-                    'text' => "<span class='flex -mt-6'>" . $img . $user->name . $idStr .  "</span>",
+                    'text' => "<span class='flex -mt-6'>" . $img . $user->name . " - " . $user->email .  $idStr .  "</span>",
                     'parent' => $key2,
                     // 'state' => ['opened' => true],
                 ];
