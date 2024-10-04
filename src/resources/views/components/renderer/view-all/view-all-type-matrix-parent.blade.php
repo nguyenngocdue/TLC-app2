@@ -4,6 +4,9 @@
 
 @foreach($matrixes as $matrixValue)
 @php
+    //In case shipping agent, not show the empty matrix of Module Checklist
+    if($matrixValue['dataSource']->total() == 0) continue;
+
     $name = $matrixValue['name'];
     $description = $matrixValue['description'];
     $columns = $matrixValue['columns'];
