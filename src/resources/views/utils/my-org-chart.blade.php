@@ -8,26 +8,17 @@
 @endonce
 
 <div class="px-4">
-    @if($isAdmin)
-    {{-- <div class='p-2 no-print'>
-        <x-renderer.button href="/my-org-chart" type="{{$viewSettings['approval_view'] ? '' : 'secondary'}}">Position ORG Chart </x-renderer.button>
-        <x-renderer.button href="/my-org-chart?approval-tree=true" type="{{$viewSettings['approval_view'] ? 'secondary' : ''}}">Approval Tree</x-renderer.button>
-    </div> --}}
-    @endif
-    
     <div class='p-2 no-print'>
-        <x-renderer.button href="/my-org-chart" type="{{$viewSettings['org_chart_mode']=='standard-mode' ? 'secondary' : ''}}">Standard Mode</x-renderer.button>
-        <x-renderer.button href="/my-org-chart?advanced-mode=true" type="{{$viewSettings['org_chart_mode']=='advanced-mode' ? 'secondary' : ''}}">Advanced Mode</x-renderer.button>
+        <x-renderer.button href="/my-org-chart?mode=standard" type="{{$viewSettings['org_chart_mode']=='standard' ? 'secondary' : ''}}">Standard Mode</x-renderer.button>
+        <x-renderer.button href="/my-org-chart?mode=advanced" type="{{$viewSettings['org_chart_mode']=='advanced' ? 'secondary' : ''}}">Advanced Mode</x-renderer.button>
+        <x-renderer.button href="/my-org-chart?mode=external" type="{{$viewSettings['org_chart_mode']=='external' ? 'secondary' : ''}}">External Mode</x-renderer.button>
     </div>
 
     @switch($viewSettings['org_chart_mode'])
-    @case('standard-mode')
+    @case('standard')
         <x-renderer.org-chart.org-chart-renderer 
-            id="0" 
-            departmentId='2' 
+            id="0" departmentId='2' isPrintMode=1 zoomToFit=1
             :options="['loadResigned' => [0], 'loadWorker' => [], 'loadOnlyBod' => [1],]" 
-            isPrintMode=1
-            zoomToFit=1
             />
         @foreach($departments as $department)
             <x-renderer.org-chart.org-chart-renderer 
@@ -40,7 +31,7 @@
                 />
         @endforeach
     @break
-    @case('advanced-mode')
+    @case('advanced')
         <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
         <div class="flex items-center justify-center no-print">
             <x-controls.text2 type="search" class="w-[550px] mr-1 my-2" name="mySearch_0"
@@ -49,6 +40,9 @@
             <x-renderer.button type="secondary" onClick="searchDiagram(0)" class="w-20" >Search</x-renderer.button>
         </div>
         <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{false}}" zoomToFit="{{false}}"/>
+    @break
+    @case('external')
+        <x-renderer.org-chart.org-chart-renderer-external id=0/>
     @break
     @default
         Mode not found [{{$viewSettings['org_chart_mode']}}]

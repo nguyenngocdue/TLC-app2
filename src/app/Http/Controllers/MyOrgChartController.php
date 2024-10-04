@@ -22,8 +22,8 @@ class MyOrgChartController extends Controller
     }
     public function index(Request $request)
     {
-        $orgChartMode = 'standard-mode';
-        if ($request->has('advanced-mode')) $orgChartMode = 'advanced-mode';
+        $orgChartMode = 'standard';
+        if ($request->has('mode')) $orgChartMode = $request->mode;
 
         $viewSettings = $this->getUserSettings($orgChartMode);
 
