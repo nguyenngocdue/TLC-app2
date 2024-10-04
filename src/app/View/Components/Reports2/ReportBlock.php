@@ -42,7 +42,6 @@ class ReportBlock extends Component
             $block = $item->getBlock;
             $transformedFields = [];
             $sqlString = $block->sql_string;
-            if (!$sqlString) continue;
             try {
                 $queriedData = $this->getDataSQLString($block, $currentParams);
                 if ($block->transformed_data_string) {
@@ -64,7 +63,7 @@ class ReportBlock extends Component
                 'headerCols' => $headerCols,
                 'secondHeaderCols' => $secondHeaderCols,
                 'transformedFields' => $transformedFields,
-                'sqlString' => $sqlString,
+                'sqlString' => $block->sql_string,
             ];
             $blockDataSource[] = $blockItem;
         }
