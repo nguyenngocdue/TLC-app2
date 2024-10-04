@@ -57,12 +57,16 @@ class ActionButtons extends Component
         if ($isSignOff && $isPendingApproval) {
             // dump("The case");
             if (!CurrentUser::isAdmin()) {
-                if (!in_array(CurrentUser::get()->id, $monitors1)) {
+                if (!in_array($cu->id, $monitors1)) {
                     // dump("Is not a signoff admin");
                     return;
                 }
             }
         }
+
+        $showSaveAndReturn = true;
+        if ($this->type == 'users') $showSaveAndReturn = false;
+        if ($cu->isExternal()) $showSaveAndReturn = false; // go to dashboard not view all
 
         return view('components.controls.action-buttons', [
             'buttonSave' => $this->buttonSave,
@@ -70,7 +74,7 @@ class ActionButtons extends Component
             'actionButtons' => $this->actionButtons,
             'propsIntermediate' => $this->propsIntermediate,
             'isFloatingOnRightSide' => $this->isFloatingOnRightSide,
-            'showSaveAndReturn' => ($this->type != 'users'),
+            'showSaveAndReturn' => $showSaveAndReturn,
         ]);
     }
 }
