@@ -30,6 +30,13 @@
             @endphp
             <x-renderer.button disabled="{{$readOnly}}" type="success" href="{!! $href !!}">Clone From Template</x-renderer.button>
         @endif
+        @if(isset($tableSettings['button_create_item']))
+            @php
+                $buttonCreateItem = $tableSettings['button_create_item'];
+                $href = route("{$buttonCreateItem}.create");
+            @endphp
+            <x-renderer.button disabled="{{$readOnly}}" type="success" target="_blank" href="{!! $href !!}"><i class="fa-solid fa-circle-plus"></i></x-renderer.button>
+        @endif
         @if(isset($tableSettings['button_add_from_a_list']) && $tableSettings['button_add_from_a_list'])
             @php
                 $modalBodyName = $tableSettings['modal_body_name'];

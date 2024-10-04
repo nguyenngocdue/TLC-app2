@@ -99,6 +99,18 @@ class Fin_expense_claim extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getTravelCurrency()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getCurrencyPair()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getRequester()
     {
         $p = static::$eloquentParams[__FUNCTION__];

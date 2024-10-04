@@ -32,7 +32,7 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "renderer"  => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => $entities,
-                'width' => 250,
+                'width' => 225,
             ],
             [
                 'dataIndex' => "editable-table",
@@ -40,35 +40,35 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "renderer"  => 'dropdown',
                 'editable' => true,
                 'cbbDataSource' => $entities,
-                'width' => 250,
+                'width' => 225,
             ],
             [
                 'dataIndex' => "button_add_a_new_line",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
-                'width' => 60,
+                'width' => 40,
             ],
             [
                 'dataIndex' => "button_clone_from_tmpl",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
-                'width' => 60,
+                'width' => 40,
             ],
             [
                 'dataIndex' => "button_recalculate",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
-                'width' => 60,
+                'width' => 40,
             ],
             [
                 'dataIndex' => "button_add_from_a_list",
                 "renderer"  => 'checkbox',
                 'editable' => true,
                 'align' => "center",
-                'width' => 60,
+                'width' => 40,
             ],
             [
                 "dataIndex" => "modal_body_name",
@@ -87,7 +87,15 @@ class ManageEditableTablesController extends AbstractManageLibController
                 "dataIndex" => "data_type_to_get_id",
                 "renderer"  => 'textarea4',
                 'editable' => true,
-                'width' => 200,
+                'width' => 100,
+            ],
+            [
+                "dataIndex" => "button_create_item",
+                "renderer"  => 'dropdown',
+                'editable' => true,
+                'align' => "center",
+                'cbbDataSource' => $entities,
+                'width' => 225,
             ],
         ];
     }
@@ -100,6 +108,7 @@ class ManageEditableTablesController extends AbstractManageLibController
                 $data['modal_body_name'] = 'DO_NOT_RENDER';
                 $data['foreign_keys'] = 'DO_NOT_RENDER';
                 $data['data_type_to_get_id'] = 'DO_NOT_RENDER';
+                $data['button_create_item'] = 'DO_NOT_RENDER';
             }
         }
         return $dataSource;
