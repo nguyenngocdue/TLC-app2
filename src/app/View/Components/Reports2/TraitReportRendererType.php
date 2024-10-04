@@ -17,13 +17,13 @@ trait TraitReportRendererType
         $cellDivClass = '';
         switch ($type) {
             case 'tag':
-            case $this->STATUS_ROW_RENDERER_ID:
+            case $this->TAG_ROW_RENDERER_ID:
                 $cellClass = 'text-' . $statusData['text_color'];
                 $content = Blade::render("<x-renderer.status>" . $targetValue . "</x-renderer.status>");
                 break;
 
             case 'tag_icon':
-            case $this->STATUS_ICON_ROW_RENDERER_ID:
+            case $this->TAG_ICON_ROW_RENDERER_ID:
                 $icon = $statusData['icon'];
                 $content = Blade::render(
                     "<x-renderer.status-icon href='{$href}', tooltip='{$cellTooltip}' title='{$cellTitle}'>{$icon}</x-renderer.status-icon"

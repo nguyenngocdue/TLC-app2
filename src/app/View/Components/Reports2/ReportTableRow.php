@@ -46,10 +46,10 @@ class ReportTableRow
                     $cellDivClass =  $column->row_cell_div_class;
                     $rowRenderer = $column->row_renderer;
                     
-                    if($rowRenderer == ($rendererType = $this->STATUS_ROW_RENDERER_ID)) { // Render Status
+                    if($rowRenderer == ($rendererType = $this->TAG_ROW_RENDERER_ID)) { // Render Status
                        [$content, $cellClass] =  $this->getRendererType($rendererType, $entityType, $content, $href);
                     }
-                    elseif ($rowRenderer == ($rendererType = $this->STATUS_ICON_ROW_RENDERER_ID)) {
+                    elseif ($rowRenderer == ($rendererType = $this->TAG_ICON_ROW_RENDERER_ID)) {
                        [$content, $cellClass] =  $this->getRendererType($rendererType, $entityType, $content, $href);
                     }
                     elseif($rowRenderer == $this->ID_ROW_RENDERER_ID) { // Render Id
