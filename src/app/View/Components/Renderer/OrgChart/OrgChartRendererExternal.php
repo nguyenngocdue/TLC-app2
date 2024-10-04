@@ -54,9 +54,12 @@ class OrgChartRendererExternal extends Component
             $userId = $user->id;
             $key3 = $key2 . '_user_' . $userId;
             if (!isset($jsonTree[$key3])) {
+                $idStr = Str::makeId($userId);
+                $href = route('users.edit', $userId);
+                $idStr = " (<a href='$href' class='text-blue-500'>$idStr</a>)";
                 $jsonTree[$key3] = [
                     'id' => $key3,
-                    'text' => "<span class='flex -mt-6'>" . $img . $user->name . " (" . Str::makeId($userId) . ")" .  "</span>",
+                    'text' => "<span class='flex -mt-6'>" . $img . $user->name . $idStr .  "</span>",
                     'parent' => $key2,
                     // 'state' => ['opened' => true],
                 ];
