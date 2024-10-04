@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer\OrgChart;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 
 class OrgChartRendererExternal extends Component
@@ -55,7 +56,7 @@ class OrgChartRendererExternal extends Component
             if (!isset($jsonTree[$key3])) {
                 $jsonTree[$key3] = [
                     'id' => $key3,
-                    'text' => "<span class='flex -mt-6'>" . $img . $user->name . "</span>",
+                    'text' => "<span class='flex -mt-6'>" . $img . $user->name . " (" . Str::makeId($userId) . ")" .  "</span>",
                     'parent' => $key2,
                     // 'state' => ['opened' => true],
                 ];
