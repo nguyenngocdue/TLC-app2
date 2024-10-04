@@ -37,19 +37,22 @@ class ReportBlock extends Component
 
         $blockDataSource = [];
         $queriedPagData = $queriedData = collect();
+        $formattedSqlStr = '';
         foreach ($blockDetails as $item) {
             if (!$item->is_active) continue;
             $block = $item->getBlock;
             $transformedFields = [];
-            $sqlString = $block->sql_string;
-            try {
-                $queriedData = $this->getDataSQLString($block, $currentParams);
-                if ($block->transformed_data_string) {
-                    [$queriedData, $transformedFields] = $this->getTransformedData($queriedData, $block);
+            $formattedSqlStr = $this->getSql($block->sql_string, $currentParams);
+            if ($formattedSqlStr) {
+                try {
+                    $queriedData = $this->getDataSQLString($formattedSqlStr);
+                    if ($block->transformed_data_string) {
+                        [$queriedData, $transformedFields] = $this->getTransformedData($queriedData, $block);
+                    }
+                    $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
+                } catch (\Exception $e) {
+                    dump($e->getMessage());
                 }
-                $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
-            } catch (\Exception $e) {
-                dump($e->getMessage());
             }
             $rpTableCols = ReportTableColumn::getInstance();
             [$headerCols, $secondHeaderCols] = $rpTableCols->getColData($block, $queriedData, $transformedFields);
@@ -63,7 +66,7 @@ class ReportBlock extends Component
                 'headerCols' => $headerCols,
                 'secondHeaderCols' => $secondHeaderCols,
                 'transformedFields' => $transformedFields,
-                'sqlString' => $block->sql_string,
+                'sqlString' => $formattedSqlStr,
             ];
             $blockDataSource[] = $blockItem;
         }

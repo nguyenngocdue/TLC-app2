@@ -10,31 +10,25 @@ trait TraitReportQueriedData
     use TraitReportTransformedData;
     use TraitCreateSQLReport2;
 
-    public function _getDataSQLString($block, $params)
-    {
-        $sqlString = $block->sql_string;
-        $sql = '';
-        if ($sqlString) {
-            $sql = $this->getSql($sqlString, $params);
-            $sqlData = DB::select($sql);
-            $queriedData = collect($sqlData);
-            $transformedFields = [];
-            if ($block->is_transformed_data) {
-                [$queriedData, $transformedFields]  = $this->getTransformedData($queriedData, $block->transformed_data_string);
-            } else {
-                $queriedData = $this->getNormalData($queriedData, $block);
-            }
-            return [$queriedData, $transformedFields, $sql];
-        }
-        return [collect(), [], $sql];
-    }
+    // public function getDataSQLString($block, $params)
+    // {
+    //     $sqlString = $block->sql_string;
+    //     $formattedSqlString = '';
+    //     if ($sqlString) {
+    //         $sql = $this->getSql($sqlString, $params);
+    //         $formattedSqlString = $sql;
+    //         $sqlData = DB::select($sql);
+    //         $queriedData = collect($sqlData);
+    //         return $queriedData;
+    //     }
+    //     return [collect(), $formattedSqlString];
+    // }
 
-    public function getDataSQLString($block, $params)
+
+    public function getDataSQLString($sqlString)
     {
-        $sqlString = $block->sql_string;
         if ($sqlString) {
-            $sql = $this->getSql($sqlString, $params);
-            $sqlData = DB::select($sql);
+            $sqlData = DB::select($sqlString);
             $queriedData = collect($sqlData);
             return $queriedData;
         }

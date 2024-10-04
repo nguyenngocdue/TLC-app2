@@ -7,6 +7,7 @@ trait TraitReportDetectVariableChanges
 {
 
     use  TraitReportTermNames;
+    use TraitReportFormatString;
 
     function formatStrByRendererType($valueInData, $rendererType){
         $formattedValue = '';
@@ -23,7 +24,6 @@ trait TraitReportDetectVariableChanges
         return $formattedValue;
     }
 
-    use TraitReportFormatString;
     function detectVariables($string, $currentParams, $queriedData)
     {
         $rendererType = $this->block->renderer_type;
