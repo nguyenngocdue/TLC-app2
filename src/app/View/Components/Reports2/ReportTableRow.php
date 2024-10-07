@@ -70,14 +70,14 @@ class ReportTableRow
                             // Handle other cases or do nothing
                             break;
                     }
-
-                    $newValue = (object)[
-                        'original_value' => $value, // to export excel
-                        'value' => $content,
-                        'cell_href' => $href,
-                        'cell_class' => $cellClass,
-                        'cell_div_class' => $cellDivClass,
-                    ];
+                    $newValue = $this->makeCellValue($value,$value, $content, $cellClass,$href, $cellDivClass);
+                    // $newValue = (object)[
+                    //     'original_value' => $value, // to export excel
+                    //     'value' => $content,
+                    //     'cell_href' => $href,
+                    //     'cell_class' => $cellClass,
+                    //     'cell_div_class' => $cellDivClass,
+                    // ];
                     $re->$k2 = $newValue;
                 }
                 elseif ($block->is_transformed_data) {
