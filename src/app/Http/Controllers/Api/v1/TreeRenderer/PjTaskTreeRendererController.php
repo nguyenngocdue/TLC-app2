@@ -8,11 +8,10 @@ use App\Models\Pj_task;
 use App\Models\Pj_task_phase;
 use App\Models\User;
 use App\Models\User_discipline;
-use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class PjTaskRendererController extends Controller
+class PjTaskTreeRendererController extends _TreeRendererController
 {
     private function getTasks($treeBodyObjectId)
     {
@@ -96,10 +95,5 @@ class PjTaskRendererController extends Controller
             'dataSource' => $this->getDataSourceFromTasks($tasks),
         ]);
         return $renderer;
-    }
-
-    function renderToJson(Request $request)
-    {
-        return ResponseObject::responseSuccess(htmlspecialchars($this->render($request) . ""));
     }
 }
