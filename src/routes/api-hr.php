@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\v1\HR\LeaveLineController;
 use App\Http\Controllers\Api\v1\HR\PublicHolidaysControllerApi;
 use App\Http\Controllers\Api\v1\HR\OvertimeRequestLineController;
 use App\Http\Controllers\Api\v1\HR\TimeSheetOfficerController;
-use App\Http\Controllers\Api\v1\HR\TaskManagerTreeExplorerRendererController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -18,6 +17,4 @@ Route::group([
 
     Route::post('overtime_request_line2', [OvertimeRequestLineController::class, 'getRemainingHours2']);
     Route::post('leave_line', [LeaveLineController::class, 'getRemainingDays']);
-
-    Route::get("render_task_manager_tree_explorer", [TaskManagerTreeExplorerRendererController::class, 'renderToJson'])->name("render_task_manager_tree_explorer");
 });

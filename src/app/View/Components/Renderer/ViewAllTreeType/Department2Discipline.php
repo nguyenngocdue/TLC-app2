@@ -1,14 +1,18 @@
 <?php
 
-namespace App\View\Components\Renderer\ViewAll;
+namespace App\View\Components\Renderer\ViewAllTreeType;
 
 use App\Models\User;
 use App\Models\User_discipline;
 use App\Utils\Support\CurrentUser;
-use Illuminate\View\Component;
 
-class ViewAllTypeTreeExplorer extends Component
+class Department2Discipline extends ViewAllTypeTreeExplorer
 {
+    protected function getApiRoute()
+    {
+        return route("pj_task_tree_explorer");
+    }
+
     private function getImageFromSrc($src, $title)
     {
         return  "<img title='$title' class='rounded-full mx-1' height='24' width='24' src='$src'></img>";
@@ -40,7 +44,7 @@ class ViewAllTypeTreeExplorer extends Component
             ->get();
 
         $getAllUserNeedTsoIds = $getAllUserNeedTso->pluck('id')->toArray();
-        $usersInLeaf = (collect($usersInLeaf)->flatMap(fn ($c) => $c));
+        $usersInLeaf = (collect($usersInLeaf)->flatMap(fn($c) => $c));
         $usersInLeafIds = $usersInLeaf->pluck('id')->toArray();
 
         // dump(sizeof($getAllUserNeedTsoIds));
@@ -59,7 +63,7 @@ class ViewAllTypeTreeExplorer extends Component
         }
     }
 
-    function getDepartmentTree()
+    function getTree()
     {
         $getUserFn = function ($query) {
             $query
@@ -140,13 +144,5 @@ class ViewAllTypeTreeExplorer extends Component
         $departments = array_values($departments);
         // dump($departments);
         return $departments;
-    }
-
-    function render()
-    {
-        return view('components.renderer.view-all.view-all-type-tree-explorer', [
-            'tree' => $this->getDepartmentTree(),
-            'route' => route("render_task_manager_tree_explorer"),
-        ]);
     }
 }

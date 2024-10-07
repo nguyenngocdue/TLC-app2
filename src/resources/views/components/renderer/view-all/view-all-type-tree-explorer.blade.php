@@ -11,12 +11,12 @@
 </div>
 
 <script>
-    function loadRenderer(disciplineId) {
+    function loadRenderer(treeBodyObjectId) {
         const url = "{{$route}}";
         $.ajax({
             url,
             data: {
-                disciplineId,
+                treeBodyObjectId,
             },
         }).then(res=>{
             var element = document.createElement('textarea');
@@ -37,10 +37,10 @@
             // console.log(data.selected);
             if(Array.isArray(data.selected)){
                 // console.log(data.selected);
-                const disciplineId = data.selected[0]
+                const treeBodyObjectId = data.selected[0]
                 //No load if user click on the department
-                if(!isNaN(disciplineId) && !isNaN(parseFloat(disciplineId))){
-                    loadRenderer(disciplineId)
+                if(!isNaN(treeBodyObjectId) && !isNaN(parseFloat(treeBodyObjectId))){
+                    loadRenderer(treeBodyObjectId)
                 }
             }
         });

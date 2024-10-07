@@ -24,7 +24,8 @@
         "qaqc_insp_chklst_shts"
     ],
     "apps_have_view_all_tree_explorer": [
-        "pj_tasks"
+        "pj_tasks",
+        "pp_procedure_policies"
     ],
     "apps_have_view_all_kanban": [
         "kanban_task_pages"

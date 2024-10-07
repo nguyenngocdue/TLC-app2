@@ -51,7 +51,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path("routes/api-hr.php"))
                 ->group(base_path("routes/api-prod.php"))
                 ->group(base_path("routes/api-qaqc.php"))
-                ->group(base_path("routes/api-system.php"));
+                ->group(base_path("routes/api-system.php"))
+                ->group(base_path("routes/api-tree.php"));
 
             Route::middleware("web")
                 ->namespace($this->namespace)

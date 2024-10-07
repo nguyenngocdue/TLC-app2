@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\HR;
+namespace App\Http\Controllers\Api\v1\TreeRenderer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pj_sub_task;
@@ -12,12 +12,12 @@ use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class TaskManagerTreeExplorerRendererController extends Controller
+class PjTaskRendererController extends Controller
 {
-    private function getTasks($disciplineId)
+    private function getTasks($treeBodyObjectId)
     {
         $discipline = User_discipline::query()
-            ->where('id', $disciplineId)
+            ->where('id', $treeBodyObjectId)
             ->with("getTasksOfDiscipline")
             ->first();
         $taskIds = $discipline->getTasksOfDiscipline->pluck('id')->toArray();
@@ -76,18 +76,18 @@ class TaskManagerTreeExplorerRendererController extends Controller
 
     function render(Request $request)
     {
-        $disciplineId = $request->input('disciplineId');
+        $treeBodyObjectId = $request->input('treeBodyObjectId');
         $users = User::query()
-            ->where('discipline', $disciplineId)
+            ->where('discipline', $treeBodyObjectId)
             ->where('resigned', false)
             ->where('time_keeping_type', 2)
             ->with("getAvatar")
             ->get();
 
-        $tasks = $this->getTasks($disciplineId);
+        $tasks = $this->getTasks($treeBodyObjectId);
 
-        $renderer = view("components.renderer.view-all-tree-explorer.task-manager-renderer", [
-            'disciplineId' => $disciplineId,
+        $renderer = view("components.renderer.view-all-tree-explorer.pj-task-renderer", [
+            'treeBodyObjectId' => $treeBodyObjectId,
             'tasks' => $tasks,
             'users' => $users,
             'minioPath' => app()->pathMinio(),
