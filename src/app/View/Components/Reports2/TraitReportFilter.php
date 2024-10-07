@@ -17,7 +17,6 @@ trait TraitReportFilter
     public function currentParamsReport() // not using timezone
     {
         $rp = $this->report;
-        $reportId = $rp->id;
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $rpFilterLinks = $rp->getRpFilterLinks;
 
