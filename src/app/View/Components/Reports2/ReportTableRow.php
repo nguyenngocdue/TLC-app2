@@ -50,7 +50,9 @@ class ReportTableRow
                     switch ($rowRenderer) {
                         case $this->TAG_ROW_RENDERER_ID: // Render Status
                         case $this->TAG_ICON_ROW_RENDERER_ID:
-                            [$content, $cellClass, $cellDivClass, $cellTitle] = $this->getRendererType($rowRenderer, $entityType, $content, $href);
+                            [$content, $_cellClass, $_cellDivClass, $cellTitle] = $this->getRendererType($rowRenderer, $entityType, $content, $href);
+                            $cellClass = $cellClass . ' '. $_cellClass;
+                            $cellDivClass =  $cellDivClass. ' '. $_cellDivClass;
                             break;
                     
                         case $this->ID_ROW_RENDERER_ID: // Render ID
