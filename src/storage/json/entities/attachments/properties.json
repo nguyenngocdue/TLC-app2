@@ -371,6 +371,18 @@
         "hide_upload_date": "",
         "show_url": ""
     },
+    "_attachment_procedure_policy": {
+        "name": "_attachment_procedure_policy",
+        "field_id": "317",
+        "field_name": "",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "only_non_media",
+        "group_array": "",
+        "hide_uploader": "",
+        "hide_upload_date": "",
+        "show_url": ""
+    },
     "_attachment_subproject_homeowner_manual": {
         "name": "_attachment_subproject_homeowner_manual",
         "field_id": "225",

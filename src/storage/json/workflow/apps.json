@@ -2171,6 +2171,20 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "pp_procedure_policy": {
+        "name": "pp_procedure_policy",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "procedure_policy",
+        "title": "Procedures & Policies",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null
+    },
     "priority": {
         "name": "priority",
         "package_tab": "application",

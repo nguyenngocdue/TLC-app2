@@ -179,7 +179,8 @@
         "task_management",
         "exam",
         "diginet_data",        
-        "report"
+        "report",
+        "procedure_policy"
     ],
     "assignees": [
         "assignee_1",
