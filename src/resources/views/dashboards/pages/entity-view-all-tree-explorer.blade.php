@@ -24,7 +24,7 @@
                 @break
         @case('pp_procedure_policies')
                 <x-renderer.view-all-tree-type.PpProcedurePolicy 
-                        {{-- type="{{$type}}" --}}
+                        type="{{$type}}"
                         />
                 @break
         @default

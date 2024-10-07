@@ -426,6 +426,11 @@
     "posts": {
         "name": "posts"
     },
+    "pp_procedure_policies": {
+        "name": "pp_procedure_policies",
+        "createNewShort": "true",
+        "updateShortSingle": "true"
+    },
     "priorities": {
         "name": "priorities"
     },

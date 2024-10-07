@@ -28,6 +28,12 @@ class ManageApisController extends AbstractManageLibController
                 'align' => 'center',
             ],
             [
+                'dataIndex' => 'updateShortSingle',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
                 'dataIndex' => 'storeEmpty_and_updateShort',
                 'renderer' => 'checkbox',
                 'editable' => true,
