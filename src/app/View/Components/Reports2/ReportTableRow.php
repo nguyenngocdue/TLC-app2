@@ -44,7 +44,7 @@ class ReportTableRow
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
-                    $rowRenderer = $column->row_renderer;
+                    $rowRenderer = $column->row_rReportenderer;
                     
                     switch ($rowRenderer) {
                         case $this->TAG_ROW_RENDERER_ID: // Render Status

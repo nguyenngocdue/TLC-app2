@@ -126,7 +126,6 @@ class InitUserSettingReport2
             }
         }
 
-
         return  $params;
     }
 }

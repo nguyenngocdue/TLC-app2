@@ -11,7 +11,7 @@ trait TraitReportRendererType
     {
         $statuses = isset($entityType) ? LibStatuses::getFor($entityType) : '';
         $statusData = $statuses[$targetValue] ?? [];
-        if (!$statusData) return [];
+        if (!$statusData) return [null, null,null, null];
         $cellTooltip = 'Open this document (' . $statusData['title'] . ')';
         $cellTitle = "(#{$idLink}) ".$statusData['title'];
         $cellDivClass = '';

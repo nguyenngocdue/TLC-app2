@@ -23,7 +23,7 @@ trait TraitCreateSQLReport2
                     else {
                         $str = "";
                         foreach($valOfParam as $val)$str .= "'" . $val . "',";
-                        $tempStr = trim($str, ",");
+                        $tempStr = str_replace('\'', '',trim($str, ","));
                     }
                 }
                 $searchStr = head($parsedVariables)[$key];
