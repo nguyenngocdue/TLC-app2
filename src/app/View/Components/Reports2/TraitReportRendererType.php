@@ -7,11 +7,15 @@ use Illuminate\Support\Facades\Blade;
 
 trait TraitReportRendererType
 {
+    use TraitReportTermNames;
+
     private function getRendererType($type, $entityType, $targetValue,$href, $idLink=null)
     {
         $statuses = isset($entityType) ? LibStatuses::getFor($entityType) : '';
         $statusData = $statuses[$targetValue] ?? [];
-        if (!$statusData) return [null, null,null, null];
+        if (!$statusData) {
+            return [$targetValue, null,null, "(No status found in entity type)"];
+        } 
         $cellTooltip = 'Open this document (' . $statusData['title'] . ')';
         $cellTitle = "(#{$idLink}) ".$statusData['title'];
         $cellDivClass = '';

@@ -44,12 +44,13 @@ class ReportTableRow
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
-                    $rowRenderer = $column->row_rReportenderer;
+                    $rowRenderer = $column->row_renderer;
+                    $cellTitle = '';
                     
                     switch ($rowRenderer) {
                         case $this->TAG_ROW_RENDERER_ID: // Render Status
                         case $this->TAG_ICON_ROW_RENDERER_ID:
-                            [$content, $cellClass] = $this->getRendererType($rowRenderer, $entityType, $content, $href);
+                            [$content, $cellClass, $cellDivClass, $cellTitle] = $this->getRendererType($rowRenderer, $entityType, $content, $href);
                             break;
                     
                         case $this->ID_ROW_RENDERER_ID: // Render ID
@@ -70,7 +71,7 @@ class ReportTableRow
                             // Handle other cases or do nothing
                             break;
                     }
-                    $newValue = $this->makeCellValue($value,$value, $content, $cellClass,$href, $cellDivClass);
+                    $newValue = $this->makeCellValue($value,$value, $content, $cellClass,$href, $cellDivClass, $cellTitle);
                     // $newValue = (object)[
                     //     'original_value' => $value, // to export excel
                     //     'value' => $content,
