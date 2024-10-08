@@ -209,20 +209,24 @@ class ReportFilterItem extends Component
                 // Assign relationship data or direct attribute based on trigger
                 foreach ($listenToAttrs as $key => $attr) {
                     if (str_contains($attr, 'get')) {
-                        // TO DEBUG
-                        // if ($entityType == 'prod_orders') {
-                        //     // dd($attr, $item);
+                        // // TO DEBUG
+                        // if ($entityType == 'prod_routing_links') {
+                        //     dd($attr, $item);
                         // }
                         $processedItem->{$attr} = ($x = $item->$attr) ? $x->pluck('id')->toArray() : [];
                     } 
                     else $processedItem->{$triggers[$key]} = $item->$attr;
+                    // TO DEBUG
+                    // if ($entityType == 'prod_routing_links') {
+                    //     dump($attr);
+                    // }
                 }
                 $newDB[] = $processedItem;
             }
-            // TO DEBUG
-            if ($entityType == 'prod_orders') {
-                // dump($newDB);
-            }
+            // // TO DEBUG
+            // if ($entityType == 'prod_routing_links') {
+            //     dump($newDB);
+            // }
 
             return $newDB;
         } 
