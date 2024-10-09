@@ -203,6 +203,7 @@ class ReportFilterItem extends Component
 
             $newDB = [];
             foreach ($dbQuery as $item) {
+                if (str_contains($item->name, 'available')) continue;
                 $processedItem = (object)[];
                 // Assign existing fields
                 foreach ($existingFields as $field) $processedItem->$field = $item->$field;
