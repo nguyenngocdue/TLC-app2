@@ -8,7 +8,7 @@
                 <option value="{{$value->id}}" 
                         data-url="{{route('rp_reports.show', $value->id)}}"
                         title="#{{ $value->id}}">
-                    {{ $value->title ?? '(No title)' }}                    
+                    {{ $rpFilterLink->title ?? '(No title)' }}                    
                     @if($rpFilterLink)
                         🔗
                     @endif
