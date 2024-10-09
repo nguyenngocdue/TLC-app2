@@ -67,6 +67,7 @@ class Rp_filter extends ModelExtended
             ["dataIndex" => 'black_or_white', 'cloneable' => true,],
             ["dataIndex" => 'is_required', 'cloneable' => true,],
             ["dataIndex" => 'default_value'],
+            ["dataIndex" => 'listen_reducer_id'],
             ["dataIndex" => 'allow_clear', 'cloneable' => true,],
             ["dataIndex" => 'is_multiple', 'cloneable' => true,],
             ["dataIndex" => 'control_type', 'cloneable' => true,],
