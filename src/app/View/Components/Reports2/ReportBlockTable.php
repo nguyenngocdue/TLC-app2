@@ -10,8 +10,6 @@ class ReportBlockTable extends Component
 {
     use TraitReportQueriedData;
     use TraitReportTermNames;
-    // use TraitReportCreateTableColumn;
-    // use TraitReportCreateTableRow;
 
     use TraitReportTableContent;
 
@@ -74,6 +72,7 @@ class ReportBlockTable extends Component
         $headerCols = $this->headerCols;
         $dataIndexToRender = array_column($headerCols, 'dataIndex');
         $queriedData = $this->queriedData;
+        $currentParams = $this->currentParams;
 
         $reportTableColumn = ReportTableColumn::getInstance();
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);

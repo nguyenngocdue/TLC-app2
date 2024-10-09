@@ -31,6 +31,21 @@ class ReportTableRow
         return $content;
     }
 
+    private function createHref($href, $dataLine) {
+        if ($href) {
+            $parsedVariables = $this->parseVariables($href);
+            foreach (last($parsedVariables) as $key => $value) {
+                $variable = trim(str_replace('$', '', $value));
+                $firstMatches = reset($parsedVariables);
+                $keyInOptions = $firstMatches[$key];
+                if (!is_array($dataLine)) $dataLine = (array)$dataLine;
+                $changedVal = isset($dataLine[$variable]) ? $dataLine[$variable] : '';
+                $href = str_replace($keyInOptions, $changedVal, $href);
+            }
+        }
+        return $href;
+    }
+
     public function createTableDataSourceForRows($queriedData, $configuredCols, $block)
     {
         // Data retrieved from SQL query
@@ -61,6 +76,7 @@ class ReportTableRow
                     
                         case $this->ROW_RENDERER_LINK_ID:
                             if ($href) {
+                                $href = $this->createHref($href,$dataLine);
                                 $cellClass = 'text-blue-600';
                             }
                             break;
