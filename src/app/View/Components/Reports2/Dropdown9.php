@@ -19,13 +19,14 @@ class Dropdown9 extends Component
 
     public function render()
     {
-        $rpFilterLinks = (object)$this->rpFilterLinks;
-
-        $rpLinks = $rpFilterLinks->map(function ($item) {
-            $rpLinkId = $item->report_filter_link_id;
-            $rpLink = Rp_report::find($rpLinkId)->getDeep();
-            return $rpLink;
-        });
+        $rpLinks = (object)$this->rpFilterLinks;
+        
+        // $rpLinks = $rpFilterLinks->map(function ($item) {
+        //     $rpLinkId = $item->report_filter_link_id;
+        //     $rpLink = Rp_report::find($rpLinkId)->getDeep();
+        //     return $rpLink;
+        // });
+        // dd($rpFilterLinks, $rpLinks);
 
         return view('components.reports2.dropdown9', [
             'rpLinks' =>  $rpLinks,

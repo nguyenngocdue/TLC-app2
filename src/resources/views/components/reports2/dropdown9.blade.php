@@ -3,13 +3,13 @@
             <option value="#" selected disabled>Select another report</option>
             @foreach($rpLinks as $value)
                 @php
-                    $rpFilterLink = $value->getRpFilterLinks?->first();
+                    //$rpFilterLink = $value->getRpFilterLinks?->first();
                 @endphp
-                <option value="{{$value->id}}" 
-                        data-url="{{route('rp_reports.show', $value->id)}}"
-                        title="#{{ $value->id}}">
-                    {{ $rpFilterLink->title ?? '(No title)' }}                    
-                    @if($rpFilterLink)
+                <option value="{{$value->report_filter_link_id}}" 
+                        data-url="{{route('rp_reports.show', $value->report_filter_link_id)}}"
+                        title="#{{ $value->report_filter_link_id}}">
+                    {{ $value->title ?? '(No title)' }}                    
+                    @if($value)
                         🔗
                     @endif
                 </option>
