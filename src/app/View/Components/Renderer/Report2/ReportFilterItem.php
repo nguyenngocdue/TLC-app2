@@ -66,7 +66,7 @@ class ReportFilterItem extends Component
     private function getStatuses($entityType)
     {
         $lib = LibStatuses::getFor($entityType);
-        return array_map(fn($key, $status) => [  'id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
+        return array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
     }
 
     private function getDataSource()
@@ -83,10 +83,10 @@ class ReportFilterItem extends Component
             case $this->STATUS_TYPE_ID:
                 return $this->getStatuses($entityType);
             case $this->YEAR_TYPE_ID:
-                return array_map(fn($item) => ['id' => $item, 'name'=> (string)$item], range($this->BEGIN_YEAR, $this->END_YEAR));    
+                return array_map(fn($item) => ['id' => $item, 'name' => (string)$item], range($this->BEGIN_YEAR, $this->END_YEAR));
             case $this->MONTH_TYPE_ID:
                 $months = range(1, 12);
-                sort($months); 
+                sort($months);
                 $months = array_map(
                     fn($item) => ['id' => $item, 'name' => DateReport::getMonthAbbreviation2($item)],
                     $months
@@ -102,109 +102,139 @@ class ReportFilterItem extends Component
         $fields = ['id', 'name', 'description'];
         $existingFields = array_merge($this->getExistingSchemaFields($modelClass, $fields), ['id']);
         try {
-            $query = $db->select($existingFields);
-            if(isset($modelClass::$eloquentParams['getScreensShowMeOn'])) {
-                $query->whereHas('getScreensShowMeOn');
-            };
-            $query = $query->when($isBlackList, 
-                fn($query) => $query->whereIn('id', $bWListIds), 
+            $dbQuery = $db->select($existingFields);
+            switch (true) {
+                case isset($modelClass::$eloquentParams['getScreensShowMeOn']):
+                    $dbQuery = $dbQuery->whereHas('getScreensShowMeOn');
+                    break;
+                case isset($modelClass::$eloquentParams['getScreensHideMeOn']):
+                    $dbQuery = $dbQuery->whereHas('getScreensHideMeOn');
+                    break;
+                default:
+                    // Skip checking items from eloquentParams.  
+                    break;
+            }
+            $dbQuery = $dbQuery->when(
+                $isBlackList,
+                fn($query) => $query->whereIn('id', $bWListIds),
                 fn($query) => $query->whereNotIn('id', $bWListIds)
             );
-            $query = $query->orderBy('name')->get();
-        } catch (Exception $e){
+            $dbQuery = $dbQuery->orderBy('name')->get();
+        } catch (Exception $e) {
             dump($e->getMessage());
         }
-        return $query;
+        return $dbQuery;
     }
 
 
-    private function getExistingSchemaFields($modelClass, $fields){
-        $fillable= $modelClass->getFillable();
+    private function getExistingSchemaFields($modelClass, $fields)
+    {
+        $fillable = $modelClass->getFillable();
         $existingFields = array_merge(['id'],  array_intersect($fillable, $fields));
         return $existingFields;
     }
 
-    private function cleanAndExplode($string) {
+    private function cleanAndExplode($string)
+    {
         return explode(',', str_replace(' ', '', $string));
     }
-    
+
     private function handleDataSourceTypeID($entityType, $isBlackList, $bWListIds, $filter)
     {
         $singularEntityType = Str::singular($entityType);
         $listenReducer = $filter->getListenReducer;
         $modelClass = ModelData::initModelByField($entityType);
         if (!$modelClass) return [];
-        
+
         $triggerNames = $listenReducer?->triggers;
         $db = $modelClass::query();
-        if(is_null($triggerNames) && $singularEntityType != 'user') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);
-        
+        if (is_null($triggerNames) && $singularEntityType != 'user') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);
+
         if ($singularEntityType == 'term') {
             $filterId = 0;
             switch ($filter->data_index) {
                 case 'defect_root_cause_id':
-                        $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
+                    $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
                     break;
                 case 'defect_report_type':
-                        $filterId = $this->DEFECT_REPORT_TYPE_ID;;
+                    $filterId = $this->DEFECT_REPORT_TYPE_ID;;
                     break;
                 case 'inter_subcon_id':
-                        $filterId = $this->INTER_SUBCON_TYPE_ID;;
+                    $filterId = $this->INTER_SUBCON_TYPE_ID;;
                     break;
                 default:
                     $filterId = 0;
                     break;
-                }
+            }
             $db->where('field_id', $filterId)->get();
             return $db;
-        }elseif ($singularEntityType == 'user') {
-                $listenToAttrs = explode(',', str_replace(' ', '' ,$listenReducer?->listen_to_attrs));
-                $dbQuery = $db->select()
-                    ->when($isBlackList, 
-                        fn($query) => $query->whereIn('id', $bWListIds), 
-                        fn($query) => $query->whereNotIn('id', $bWListIds)
-                    )
-                    ->when(App::isProduction(),
-                        fn($query) => $query->where('show_on_beta',0)
-                    )
-                    ->orderBy('name')
-                    ->get();
-                $newDB = [];
-                foreach ($dbQuery as $item) {
-                    $i = (object)[];
-                    $i->id = $item->id;
-                    $i->name = $item->name . " (#{$item->id})";
-                    $i->description = $item?->description;
-                    foreach ($listenToAttrs as $value) {
-                        $i->{$value} = $item->{$value};
-                    }
-                    $newDB[] = $i;
+        } elseif ($singularEntityType == 'user') {
+            $listenToAttrs = explode(',', str_replace(' ', '', $listenReducer?->listen_to_attrs));
+            $dbQuery = $db->select()
+                ->when(
+                    $isBlackList,
+                    fn($query) => $query->whereIn('id', $bWListIds),
+                    fn($query) => $query->whereNotIn('id', $bWListIds)
+                )
+                ->when(
+                    App::isProduction(),
+                    fn($query) => $query->where('show_on_beta', 0)
+                )
+                ->orderBy('name')
+                ->get();
+            $newDB = [];
+            foreach ($dbQuery as $item) {
+                $i = (object)[];
+                $i->id = $item->id;
+                $i->name = $item->name . " (#{$item->id})";
+                $i->description = $item?->description;
+                foreach ($listenToAttrs as $value) {
+                    $i->{$value} = $item->{$value};
                 }
-                return $newDB;
-        } 
-        else {
+                $newDB[] = $i;
+            }
+            return $newDB;
+        } else {
             $triggers = $this->cleanAndExplode($listenReducer->triggers);
             $listenToAttrs = $this->cleanAndExplode($listenReducer->listen_to_attrs);
-            $fields = array_merge(['name','description'], $triggers, $listenToAttrs);
+            $fields = array_merge(['name', 'description'], $triggers, $listenToAttrs);
             $existingFields = $this->getExistingSchemaFields($modelClass, $fields);
             $eagerLoadFields = [];
-            foreach($listenToAttrs as $value) {
+            foreach ($listenToAttrs as $value) {
                 if (str_contains($value, 'get')) $eagerLoadFields[] = $value;
                 else $existingFields[] = $value;
             }
 
+            // Initialize the query builder.
             $dbQuery = $db->select();
-            if(isset($modelClass::$eloquentParams['getScreensShowMeOn'])) {
+            $fillable = $modelClass->getFillable();
+            $eloquentParams = $modelClass::$eloquentParams;
+
+            // Apply conditions based on the 'status' field if it exists.
+            if (in_array('status', $fillable)) {
+                $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site']);
+            }
+
+            // Apply the 'getScreensShowMeOn' condition if defined in eloquentParams.
+            if (!empty($eloquentParams['getScreensShowMeOn'])) {
                 $dbQuery = $dbQuery->whereHas('getScreensShowMeOn');
-            };
-            $dbQuery = $dbQuery->when($isBlackList, 
-                            fn($query) => $query->whereIn('id', $bWListIds), 
-                            fn($query) => $query->whereNotIn('id', $bWListIds)
-                        )
-                        ->with($eagerLoadFields)
-                        ->orderBy('name')
-                        ->get()
-                        ;
+            }
+
+            // Apply the 'getScreensHideMeOn' condition if defined in eloquentParams.
+            if (!empty($eloquentParams['getScreensHideMeOn'])) {
+                $dbQuery = $dbQuery->whereDoesntHave('getScreensHideMeOn');
+            }
+
+            // Apply blacklist or whitelist conditions and eager load fields.
+            $dbQuery = $dbQuery->when(
+                $isBlackList,
+                fn($query) => $query->whereIn('id', $bWListIds),
+                fn($query) => $query->whereNotIn('id', $bWListIds)
+            )
+                ->with($eagerLoadFields)
+                ->orderBy('name')
+                ->get();
+
 
             $newDB = [];
             foreach ($dbQuery as $item) {
@@ -220,16 +250,15 @@ class ReportFilterItem extends Component
                         //     dd($attr, $item);
                         // }
                         $processedItem->{$attr} = ($x = $item->$attr) ? $x->pluck('id')->toArray() : [];
-                    } 
-                    else $processedItem->{$triggers[$key]} = $item->$attr;
+                    } else $processedItem->{$triggers[$key]} = $item->$attr;
                 }
                 $newDB[] = $processedItem;
             }
             return $newDB;
-        } 
-    }  
+        }
+    }
 
- 
+
     public function render()
     {
         $this->renderJSForK();
