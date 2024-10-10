@@ -7,10 +7,31 @@ use App\BigThink\ModelExtended;
 class Pj_module extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug",  "pj_building_id", "pj_level_id", "pj_module_type_id",
-        "pj_name_id", "pj_character_id", "pj_unit_id", "pj_shipment_id", "owner_id",
-        "sub_project_id", "length",  "width", "height", "weight", "manufactured_year", "plot_number",
-        "insp_chklst_link", "shipping_doc_link",
+        "id",
+        "name",
+        "description",
+        "slug",
+        "pj_building_id",
+        "pj_level_id",
+        "pj_module_type_id",
+        "pj_name_id",
+        "pj_character_id",
+        "pj_unit_id",
+        "pj_shipment_id",
+        "owner_id",
+        "sub_project_id",
+        "length",
+        "width",
+        "height",
+        "weight",
+        "manufactured_year",
+        "plot_number",
+        "insp_chklst_link",
+        "shipping_doc_link",
+
+        "str_drawing_type_id",
+        "arc_drawing_type_id",
+        "mepf_drawing_type_id",
     ];
 
     public static $statusless = true;
@@ -23,6 +44,10 @@ class Pj_module extends ModelExtended
         'getPjCharacter' => ['belongsTo', Term::class, 'pj_character_id'],
         'getPjUnit' => ['belongsTo', Pj_unit::class, 'pj_unit_id'],
         'getPjShipment' => ['belongsTo', Pj_shipment::class, 'pj_shipment_id'],
+
+        'getDrawingStrType' => ['belongsTo', Pj_drawing_str_type::class, 'drawing_str_type_id'],
+        'getDrawingArcType' => ['belongsTo', Pj_drawing_arc_type::class, 'drawing_arc_type_id'],
+        'getDrawingMepfType' => ['belongsTo', Pj_drawing_mepf_type::class, 'drawing_mepf_type_id'],
 
         'getPjPods' => ['hasMany', Pj_pod::class, 'pj_module_id'],
 
@@ -80,6 +105,24 @@ class Pj_module extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getPjShipment()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getDrawingStrType()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getDrawingArcType()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getDrawingMepfType()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

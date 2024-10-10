@@ -13,7 +13,8 @@ trait TraitReportTransformedRowData
     use TraitReportTableCell;
     use TraitReportRendererType;
 
-    private function getHref($rowConfigs, $rowData) {
+    private function getHref($rowConfigs, $rowData)
+    {
         try {
             return route($rowConfigs['entity_type'] . '.' . $rowConfigs['method'], $rowData->{$rowConfigs['route_id_field']}) ?? '';
         } catch (\Exception $e) {
@@ -21,18 +22,20 @@ trait TraitReportTransformedRowData
         }
     }
 
-    private function processStatusCell($rowConfigs, $queriedValue, $href = null) {
-        
+    private function processStatusCell($rowConfigs, $queriedValue, $href = null)
+    {
+
         if ($rowConfigs) {
             [$content, $cellClass, $cellDivClass, $cellTooltip] = $this->getRendererType(
-                $rowConfigs['type'], 
-                $rowConfigs['entity_type'], 
+                $rowConfigs['type'],
+                $rowConfigs['entity_type'],
                 $queriedValue,
                 $href,
-                $rowConfigs['id_link']);
+                $rowConfigs['id_link']
+            );
             return $this->makeCellValue($queriedValue, $queriedValue, $content, $cellClass, $href, $cellDivClass ?? '', $cellTooltip);
         }
-        return $queriedValue; 
+        return $queriedValue;
     }
 
 
@@ -53,7 +56,7 @@ trait TraitReportTransformedRowData
                 $dateTimeValue = DateFormat::getValueDatetimeByCurrentUser($queriedValue, $formatType);
                 $queriedValue = $this->makeCellValue($dateTimeValue, $dateTimeValue, $dateTimeValue, $cellClass, $href);
                 break;
-               
+
             default:
                 $queriedValue = $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $cellClass);
                 break;
@@ -62,7 +65,8 @@ trait TraitReportTransformedRowData
     }
 
 
-    public function makeValueForEachRow($configs, $rowData, $cellValue, $column){
+    public function makeValueForEachRow($configs, $rowData, $cellValue, $column)
+    {
         /* <Example Data>
             $rowConfigs = [
                     "type"=> "status", // => id, link
@@ -74,15 +78,16 @@ trait TraitReportTransformedRowData
         if (!is_array($rowData)) $rowData = (object)$rowData;
         $queriedValue = $rowData->$cellValue;
 
-        $queriedValue = isset($configs['params'], $configs['params']['row_renderer'],$configs['params']['row_renderer']['type']) 
-        ? $this->changedAttrCellsByTransferData($rowData, $configs['params']['row_renderer'], $queriedValue) 
-        : $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $configs['cell_class'] ?? '');
-    
-    $rowData->$column = $queriedValue;
-    return $rowData;
-   }
+        $queriedValue = isset($configs['params'], $configs['params']['row_renderer'], $configs['params']['row_renderer']['type'])
+            ? $this->changedAttrCellsByTransferData($rowData, $configs['params']['row_renderer'], $queriedValue)
+            : $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $configs['cell_class'] ?? '');
 
-    public function makeIdForEachRow($entityType, $targetValue, $content) {
+        $rowData->$column = $queriedValue;
+        return $rowData;
+    }
+
+    public function makeIdForEachRow($entityType, $targetValue, $content)
+    {
         $content = $targetValue ? Str::makeId($targetValue) : $targetValue;
         $route = Str::plural($entityType) . ".edit";
         try {
@@ -91,7 +96,7 @@ trait TraitReportTransformedRowData
                 $cellClass = 'text-blue-600';
             }
         } catch (\Exception $e) {
-            $href = "#RouteNotFound3:$route";
+            $href = "#RouteNotFound4:$route";
             $cellClass = 'text-red-600';
         }
         return [$content, $cellClass, $href];
