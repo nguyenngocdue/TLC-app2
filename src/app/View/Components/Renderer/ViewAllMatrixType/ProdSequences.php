@@ -83,9 +83,19 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $yAxis = $this->yAxis::query()
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting)
-            ->with('getRoomType')
+            ->with([
+                'getRoomType' => fn($q) => $q,
+                'getMeta' => function ($q) {
+                    $q->with([
+                        'getDrawingStrType',
+                        'getDrawingArcType',
+                        'getDrawingMepfType',
+                    ]);
+                },
+            ])
             ->orderBy('name')
             ->get();
+        // dump($yAxis);
         return $yAxis;
     }
 
@@ -193,10 +203,15 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $columns = [
             ['dataIndex' => 'production_name',  'width' => 300, 'fixed' => 'left',],
+
+            ['dataIndex' => 'str_type', "title" => "STR Type", 'width' => 50, 'fixed' => 'left',],
+            // ['dataIndex' => 'arc_type', "title" => "ARC Type", 'width' => 50, 'fixed' => 'left',],
+            // ['dataIndex' => 'mepf_type', "title" => "MEPF Type",  'width' => 50, 'fixed' => 'left',],
+
             ['dataIndex' => 'quantity', 'align' => 'right', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'prod_sequence_progress',  'title' => "Progress (%)", 'width' => 300, 'fixed' => 'left',],
             ['dataIndex' => 'status',  'align' => 'center', 'width' => 50, 'fixed' => 'left-no-bg', "title" => "Summary", 'colspan' => 4],
-            ['dataIndex' => 'room_type',  'align' => 'center', 'width' => 50, 'fixed' => 'left',],
+            // ['dataIndex' => 'room_type',  'align' => 'center', 'width' => 50, 'fixed' => 'left',],
             ['dataIndex' => 'started_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
             ['dataIndex' => 'finished_at', 'align' => 'right', 'width' => 150, 'fixed' => 'left',],
 
@@ -231,6 +246,18 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $status_object = $this->makeStatus($y, false);
         $status_object->cell_href = route("prod_orders" . ".edit", $y->id);
         $result = [
+            'str_type' => (object)[
+                'cell_div_class' => 'p-2 whitespace-nowrap',
+                'value' => $y->{Prod_order::class}?->getDrawingStrType?->name,
+            ],
+            // 'arc_type' => (object)[
+            //     'cell_div_class' => 'p-2 whitespace-nowrap',
+            //     'value' => $y->{Prod_order::class}?->getDrawingArcType?->name,
+            // ],
+            // 'mepf_type' => (object)[
+            //     'cell_div_class' => 'p-2 whitespace-nowrap',
+            //     'value' => $y->{Prod_order::class}?->getDrawingMepfType?->name,
+            // ],
             'prod_sequence_progress' => (object)[
                 'cell_div_class' => 'p-2 text-right',
                 'value' => ($v = $y->prod_sequence_progress) ? number_format($v, 2) : ""
@@ -241,10 +268,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ],
             'quantity' => ($v = $y->quantity) ? $v : "",
             'status' => $status_object,
-            'room_type' => (object)[
-                'cell_div_class' => 'p-2 whitespace-nowrap',
-                'value' => ($y->getRoomType) ? $y->getRoomType->name : ""
-            ],
+            // 'room_type' => (object)[
+            //     'cell_div_class' => 'p-2 whitespace-nowrap',
+            //     'value' => ($y->getRoomType) ? $y->getRoomType->name : ""
+            // ],
             'started_at' => substr($started_at, 0, 10),
             'finished_at' => $finished_at,
             // 'finished_at' => ($y->status === 'finished') ? substr($finished_at, 0, 10) : "",
