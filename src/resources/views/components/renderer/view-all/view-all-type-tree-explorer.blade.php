@@ -58,6 +58,19 @@
             error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
         })
     }
+
+    function ajaxDeleteItem(nodeId, owner_id){
+        $.ajax({
+            url: "{{$updateRoute}}",
+            method: "POST",
+            data: {
+                id: nodeId,
+                deleted_by: owner_id,
+                deleted_at: new Date().toISOString(),
+            },
+            error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
+        })
+    }
 </script>
 
 <script>
@@ -66,13 +79,25 @@
     $(function () { 
         $('#json_tree_1').jstree({ 
             'core' : {
-                'data' : jsonTree,
-                "check_callback" : true,
+                'data' : jsonTree,                
+                'check_callback': function(operation, node, parent, position, more) {
+                    // Control Draggable and Droppable in a unified way
+                    if (operation === "move_node") {
+                        // Check if the node itself is draggable
+                        if (node.data && node.data.draggable == false) return false; // Disable dragging for non-draggable nodes
+                        // Check if the target parent is droppable
+                        if (parent && parent.data && parent.data.droppable == false) return false; // Disable dropping on non-droppable nodes
+                        if (parent.id === "#") return false; // Prevent dropping at the root level                    
+                    }
+                    return true; // Allow all other operations
+                },
             },
-            'plugins' : ["contextmenu"],
+            'plugins' : ["contextmenu", "wholerow", "dnd"],
             'contextmenu': {
                 'items': function(node) {
                     var tree = $("#json_tree_1").jstree(true);
+                    // const menu = {}
+                    
                     return {
                         "Create": {
                             "label": "Create New",
@@ -84,12 +109,10 @@
                         },
                         "Delete": {
                             "label": "Delete",
-                            "action": function (obj) {
-                                tree.delete_node(node);
-                                console.log("Deleting",node)
-                            },
+                            "action": (obj) => tree.delete_node(node),                            
                             "_disabled": function(node) {
-                                return node.parent === "#"; // Disable delete for root nodes    }
+                                // Disable delete for root nodes
+                                return node.parent == "#"; 
                             }
                         }
                     }
@@ -102,7 +125,7 @@
             if(Array.isArray(data.selected)){
                 // console.log(data.selected);
                 const treeBodyObjectId = data.selected[0]
-                //No load if user click on the department
+                //Dispatch API call if the selected node is a number
                 if(!isNaN(treeBodyObjectId) && (!isNaN(parseFloat(treeBodyObjectId))) )loadRenderer(treeBodyObjectId)
                 else console.log("Selected ID is Not a number:", treeBodyObjectId)
             }
@@ -110,13 +133,18 @@
 
         $('#json_tree_1').on('rename_node.jstree', function(e, data) {
             var newName = data.text; // New name after renaming
-            var nodeId = data.node.id; // Node ID
-            console.log(data.node)
-            console.log("Node renamed, ID: " + nodeId + ", New Name: " + newName);
-
-            // Now send the new name to your server via AJAX
-            //In case rename an existing node
             if(data.node?.data?.item_id) ajaxRenameItem(data.node.data.item_id, newName);
+        });
+
+        $('#json_tree_1').on('move_node.jstree', function(e, data) {
+            console.log("Moved", data);
+        });
+
+        $('#json_tree_1').on('delete_node.jstree', function(e, data) {
+            const id = data.node?.data?.item_id
+            console.log("deleting",id);
+            if(id) ajaxDeleteItem(id, owner_id);
+            console.log("Deleted", id);
         });
     });
 </script>

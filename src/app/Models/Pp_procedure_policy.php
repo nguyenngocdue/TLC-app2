@@ -15,6 +15,8 @@ class Pp_procedure_policy extends ModelExtended
         "notify_schedule",
 
         "owner_id",
+        "deleted_by",
+        "deleted_at",
     ];
 
     public static $statusless = true;

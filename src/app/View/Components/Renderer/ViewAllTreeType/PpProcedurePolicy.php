@@ -25,6 +25,7 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
                 "data" => [
                     "item_id" => $department->id,
                     "parent_01" => 'department',
+                    "draggable" => false,
                 ],
             ];
         }
@@ -34,17 +35,19 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
     private function getProcedureFiles()
     {
         $procedureItems = \App\Models\Pp_procedure_policy::query()
-            // ->with(['getDepartment'])
+            ->orderBy('name')
             ->get();
         $result = [];
         foreach ($procedureItems as $procedure) {
             if (!$procedure->department_id) continue;
             $result[] = [
-                "id" => 'procedure_' . $procedure->id,
+                "id" => $procedure->id,
                 "text" => $procedure->name,
                 'parent' => 'department_' . $procedure->department_id,
+                'icon' => "fa-regular fa-file text-blue-400",
                 "data" => [
                     "item_id" => $procedure->id,
+                    "droppable" => false,
                     // "parent_01" => '',
                 ],
             ];
@@ -61,12 +64,14 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
                 "text" => "Cooperate Policies",
                 'parent' => '#',
                 'state' => ['opened' => true],
+                "data" => ['draggable' => false, 'droppable' => false],
             ],
             [
                 "id" => 'procedure',
                 "text" => "Department Procedures",
                 'parent' => '#',
                 'state' => ['opened' => true],
+                "data" => ['draggable' => false, 'droppable' => false],
             ],
         ];
 
