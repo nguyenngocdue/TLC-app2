@@ -53,12 +53,14 @@ class Breadcrumb extends Component
     {
         $result = [];
         foreach ($allReports as $report) {
+            if (!$report->is_active) continue;
 
-            $breadcrumbGroup = $report['breadcrumbGroup'] ?: "General";
+            $breadcrumbGroup = $report['breadcrumb_group'] ?: "General";
             $result[$breadcrumbGroup][] = [
                 'title' => $report['title'],
                 'href' => route("rp_reports.show", $report['id']),
-                'icon' => "fa-duotone fa-file-chart-column text-blue-400",
+                "icon" => $report['icon'],
+                // 'icon' => "fa-duotone fa-file-chart-column text-blue-400",
             ];
         }
         foreach ($result as $breadcrumbGroup => &$reports) {

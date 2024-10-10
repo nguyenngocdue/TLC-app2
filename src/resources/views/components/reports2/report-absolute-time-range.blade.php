@@ -33,15 +33,17 @@
     </button>
 
     <!-- Dropdown Content (Initially Hidden) -->
-    <div id="dropdownContent" class="hidden absolute z-20 mt-1 p-4 bg-white rounded-lg shadow-lg border border-gray-300 w-[500px] transform -translate-x-full left-16">
+    <div id="dropdownContent" style="width: 600px;" class="hidden absolute z-20 mt-1 p-4 bg-white rounded-lg shadow-lg border border-gray-300 transform -translate-x-full left-16">
         <!-- Container for two-column layout -->
-        <div class="grid grid-cols-2 border-b">
+        <div class="grid grid-cols-12 border-b">
             <!-- Left column: From-To fields -->
-            <div id="calendar" class="pr-4 border-r border-gray-300">
+            <div id="calendar" class="col-span-7 pr-4 border-r border-gray-300">
                @include('components.reports2.include-application-time-range')
             </div>
             <!-- Right column: Quick range selection dropdown -->
-               @include('components.reports2.include-search-quick-time-range')
+            <div class="col-span-5">
+                @include('components.reports2.include-search-quick-time-range')
+            </div>
         </div>
          @include('components.reports2.include-time-setting')
     </div>

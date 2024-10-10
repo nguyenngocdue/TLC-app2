@@ -1,8 +1,8 @@
 {{-- @dump($timeZone)U --}}
 <form action="{{$routeFilter}}" method="POST" id="{{ $entityType }}">
     @csrf
-    <div class="mb-4">
-        <h2 class="font-semibold text-lg mb-2">Absolute time range</h2>
+    <div class="mb-4 w-3/4">
+        <h2 class="font-semibold text-lg mb-2">Absolute Time Range</h2>
         <div class="space-y-2">
             <div class="relative">
                 <label class="block text-sm font-medium text-gray-700">From</label>

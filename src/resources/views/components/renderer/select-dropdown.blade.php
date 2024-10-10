@@ -9,7 +9,12 @@
             @foreach( $lines as $line)
                 <li title="{{$line['tooltip'] ?? ''}}">
                     <a href="{{$line['href']}}" class="text-left block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                        <i class="{{$line['icon']}}"></i>
+                        @if(isset($line['icon']) && str_starts_with($line['icon'], "<i"))
+                            {!! $line['icon'] !!}
+                            {{-- This could be removed after report 1 is obsolete  --}}
+                        @else
+                            <i class="{{$line['icon']}}"></i>
+                        @endif
                         {{$line['title']}}
                     </a>
                 </li>
