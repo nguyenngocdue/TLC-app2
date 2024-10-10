@@ -21,7 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('project_id')->nullable();
+            // $table->unsignedBigInteger('project_id')->nullable();
             $table->appendCommonFields();
         });
     }

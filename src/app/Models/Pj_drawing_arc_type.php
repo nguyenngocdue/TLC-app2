@@ -9,7 +9,7 @@ class Pj_drawing_arc_type extends ModelExtended
     protected $fillable = [
         "id",
         "name",
-        "project_id",
+        // "project_id",
         "description",
         "owner_id",
     ];
@@ -17,8 +17,8 @@ class Pj_drawing_arc_type extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        'getProject' => ['belongsTo', Project::class, 'project_id'],
-        "getModules" => ['hasMany', Pj_module::class, 'pj_module_type_id'],
+        // 'getProject' => ['belongsTo', Project::class, 'project_id'],
+        "getModules" => ['hasMany', Pj_module::class, 'drawing_arc_type_id'],
     ];
 
     public function getModules()

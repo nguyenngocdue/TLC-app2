@@ -29,9 +29,9 @@ class Pj_module extends ModelExtended
         "insp_chklst_link",
         "shipping_doc_link",
 
-        "str_drawing_type_id",
-        "arc_drawing_type_id",
-        "mepf_drawing_type_id",
+        "drawing_str_type_id",
+        "drawing_arc_type_id",
+        "drawing_mepf_type_id",
     ];
 
     public static $statusless = true;
@@ -126,5 +126,14 @@ class Pj_module extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getManyLineParams()
+    {
+        return [
+            // ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'id', 'invisible' => !true],
+            ["dataIndex" => 'name',],
+        ];
     }
 }
