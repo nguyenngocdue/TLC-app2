@@ -138,7 +138,8 @@ class ReportFilterItem extends Component
                 $isBlackList,
                 fn($query) => $query->whereIn('id', $bWListIds),
                 fn($query) => $query->whereNotIn('id', $bWListIds)
-            );
+            )
+            ->where('name','not like','%-- available%');
             $dbQuery = $dbQuery->orderBy('name')->get();
         } catch (Exception $e) {
             dump($e->getMessage());
