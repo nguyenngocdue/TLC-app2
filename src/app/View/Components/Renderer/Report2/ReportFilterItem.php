@@ -214,15 +214,20 @@ class ReportFilterItem extends Component
             if (in_array('status', $fillable)) {
                 $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site']);
             }
+            // Apply 'whereHas' conditions based on eloquentParams.
+            $relationships = [ 
+                'getSubProjects', 'getProdRoutingsOfSubProject', 'getScreensShowMeOn',
+            ];
 
-            // Apply the 'getScreensShowMeOn' condition if defined in eloquentParams.
-            if (!empty($eloquentParams['getScreensShowMeOn'])) {
-                $dbQuery = $dbQuery->whereHas('getScreensShowMeOn');
+            foreach ($relationships as $relation) {
+                if (isset($eloquentParams[$relation])) {
+                    $dbQuery->whereHas($relation);
+                }
             }
-
-            // Apply the 'getScreensHideMeOn' condition if defined in eloquentParams.
-            if (!empty($eloquentParams['getScreensHideMeOn'])) {
-                $dbQuery = $dbQuery->whereDoesntHave('getScreensHideMeOn');
+            
+            // Apply the 'whereDoesntHave' condition if 'getScreensHideMeOn' is defined.
+            if (isset($eloquentParams['getScreensHideMeOn'])) {
+                $dbQuery->whereDoesntHave('getScreensHideMeOn');
             }
 
             // Apply blacklist or whitelist conditions and eager load fields.
