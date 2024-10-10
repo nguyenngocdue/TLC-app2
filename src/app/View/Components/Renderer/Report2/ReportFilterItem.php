@@ -97,23 +97,41 @@ class ReportFilterItem extends Component
         }
     }
 
+    private function getDbQuery($dbQuery, $modelClass){        
+        $fillable = $modelClass->getFillable();
+        $eloquentParams = $modelClass::$eloquentParams;
+        // Apply conditions based on the 'status' field if it exists.
+        if (in_array('status', $fillable)) {
+            $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site']);
+        }
+
+        $relationships = [ 'getSubProjects','getScreensShowMeOn', 'getProdRoutingsOfSubProject'];
+
+        foreach ($relationships as $relation) {
+            // $table = $modelClass->getTable();
+            // if ($table =='prod_routing_links' && $relation == 'getScreensShowMeOn') {
+            //     continue;
+            // }
+            if (isset($eloquentParams[$relation])) {
+                $dbQuery->whereHas($relation);
+            }
+        }
+        // Apply the 'whereDoesntHave' condition if 'getScreensHideMeOn' is defined.
+        if (isset($eloquentParams['getScreensHideMeOn'])) {
+            $dbQuery->whereDoesntHave('getScreensHideMeOn');
+        }
+
+
+        return $dbQuery;
+    }
+
     private function getEntityData($modelClass, $db, $isBlackList, $bWListIds)
     {
         $fields = ['id', 'name', 'description'];
         $existingFields = array_merge($this->getExistingSchemaFields($modelClass, $fields), ['id']);
         try {
             $dbQuery = $db->select($existingFields);
-            switch (true) {
-                case isset($modelClass::$eloquentParams['getScreensShowMeOn']):
-                    $dbQuery = $dbQuery->whereHas('getScreensShowMeOn');
-                    break;
-                case isset($modelClass::$eloquentParams['getScreensHideMeOn']):
-                    $dbQuery = $dbQuery->whereHas('getScreensHideMeOn');
-                    break;
-                default:
-                    // Skip checking items from eloquentParams.  
-                    break;
-            }
+            $dbQuery = $this->getDbQuery($dbQuery, $modelClass);
             $dbQuery = $dbQuery->when(
                 $isBlackList,
                 fn($query) => $query->whereIn('id', $bWListIds),
@@ -207,29 +225,7 @@ class ReportFilterItem extends Component
 
             // Initialize the query builder.
             $dbQuery = $db->select();
-            $fillable = $modelClass->getFillable();
-            $eloquentParams = $modelClass::$eloquentParams;
-
-            // Apply conditions based on the 'status' field if it exists.
-            if (in_array('status', $fillable)) {
-                $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site']);
-            }
-            // Apply 'whereHas' conditions based on eloquentParams.
-            $relationships = [ 
-                'getSubProjects', 'getProdRoutingsOfSubProject', 'getScreensShowMeOn',
-            ];
-
-            foreach ($relationships as $relation) {
-                if (isset($eloquentParams[$relation])) {
-                    $dbQuery->whereHas($relation);
-                }
-            }
-            
-            // Apply the 'whereDoesntHave' condition if 'getScreensHideMeOn' is defined.
-            if (isset($eloquentParams['getScreensHideMeOn'])) {
-                $dbQuery->whereDoesntHave('getScreensHideMeOn');
-            }
-
+            $dbQuery = $this->getDbQuery($dbQuery, $modelClass);
             // Apply blacklist or whitelist conditions and eager load fields.
             $dbQuery = $dbQuery->when(
                 $isBlackList,
@@ -250,10 +246,6 @@ class ReportFilterItem extends Component
                 // Assign relationship data or direct attribute based on trigger
                 foreach ($listenToAttrs as $key => $attr) {
                     if (str_contains($attr, 'get')) {
-                        // // TO DEBUG
-                        // if ($entityType == 'prod_routing_links') {
-                        //     dd($attr, $item);
-                        // }
                         $processedItem->{$attr} = ($x = $item->$attr) ? $x->pluck('id')->toArray() : [];
                     } else $processedItem->{$triggers[$key]} = $item->$attr;
                 }
