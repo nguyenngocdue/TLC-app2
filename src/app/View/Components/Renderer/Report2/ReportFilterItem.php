@@ -105,13 +105,15 @@ class ReportFilterItem extends Component
             $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site']);
         }
 
-        $relationships = [ 'getSubProjects','getScreensShowMeOn', 'getProdRoutingsOfSubProject'];
+        $relationships = [ 
+            'getSubProjects','getScreensShowMeOn', 'getProdRoutingsOfSubProject'
+        ];
 
         foreach ($relationships as $relation) {
-            // $table = $modelClass->getTable();
-            // if ($table =='prod_routing_links' && $relation == 'getScreensShowMeOn') {
-            //     continue;
-            // }
+            $table = $modelClass->getTable();
+            if ($table =='prod_routing_links' && $relation == 'getScreensShowMeOn') {
+                continue;
+            }
             if (isset($eloquentParams[$relation])) {
                 $dbQuery->whereHas($relation);
             }
