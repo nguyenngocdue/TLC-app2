@@ -11,9 +11,9 @@ class DefaultValueReport
         $timezone =  $params['time_zone'];
         $timezoneObj = new DateTimeZone(ReportPreset::getTimezoneFromOffset($timezone));
         $toDate = new DateTime('now', $timezoneObj);
-        $presets = ReportPreset::getDateOf3PreviousMonth(null, $toDate) ;
+        $presets = ReportPreset::getDateOfPrevious3Months(null, $toDate) ;
         $params = array_merge($params, $presets);        
-        $params['preset_title'] = 'Absolute Time Range';
+        $params['preset_title'] = 'The Past Three Months';
         return $params;
     }
 

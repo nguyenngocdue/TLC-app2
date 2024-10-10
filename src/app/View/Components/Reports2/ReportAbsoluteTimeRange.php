@@ -95,11 +95,13 @@ class ReportAbsoluteTimeRange extends Component
 
             // // New presets based on your request
             'today_so_far' => ReportPreset::getDateOfToday($timezone, clone $toDate),
+            
             'this_week' => ReportPreset::getDateOfThisWeek($timezone),
             'this_week_so_far' => ReportPreset::getDateOfThisWeek($timezone, clone $toDate),
-
+            
             'this_month' => ReportPreset::getDateOfThisMonth($timezone),
             'this_month_so_far' =>  ReportPreset::getDateOfThisMonth($timezone, clone $toDate),
+            'the_past_three_months' =>  ReportPreset::getDateOfPrevious3Months($timezone, clone $toDate),
 
             'this_year' => ReportPreset::getDateOfThisYear($timezone),
             'this_year_so_far' => ReportPreset::getDateOfThisYear($timezone, clone $toDate),

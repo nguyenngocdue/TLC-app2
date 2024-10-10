@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
 
 class ReportFilterItem extends Component
@@ -160,13 +161,16 @@ class ReportFilterItem extends Component
                         fn($query) => $query->whereIn('id', $bWListIds), 
                         fn($query) => $query->whereNotIn('id', $bWListIds)
                     )
+                    ->when(App::isProduction(),
+                        fn($query) => $query->where('show_on_beta',0)
+                    )
                     ->orderBy('name')
                     ->get();
                 $newDB = [];
                 foreach ($dbQuery as $item) {
                     $i = (object)[];
                     $i->id = $item->id;
-                    $i->name = $item->name;
+                    $i->name = $item->name . " (#{$item->id})";
                     $i->description = $item?->description;
                     foreach ($listenToAttrs as $value) {
                         $i->{$value} = $item->{$value};

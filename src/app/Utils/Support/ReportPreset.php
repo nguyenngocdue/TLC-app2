@@ -70,7 +70,7 @@ class ReportPreset
         ];
     }
 
-    public static function getDateOf3PreviousMonth($timezone = null, $toDate = null) {
+    public static function getDateOfPrevious3Months($timezone = null, $toDate = null) {
         $timezoneObj = $timezone ? new DateTimeZone(self::getTimezoneFromOffset($timezone)) : new DateTimeZone(date_default_timezone_get());
         $toDate = new DateTime('now', $timezoneObj);
         $fromDate = (clone $toDate)->modify('-3 months');
@@ -80,7 +80,6 @@ class ReportPreset
             'to_date' => $toDate->format('Y-m-d H:i:s'),
         ];
     }
-    
     
 
     public static function getDateThisQuarter($timezone = null, $toDate = null) {
