@@ -6,6 +6,7 @@ use App\BigThink\HasShowOnScreens;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitListenerControlReport;
 use App\Http\Controllers\Reports\TraitUserCompanyTree;
 use App\Http\Controllers\Workflow\LibStatuses;
+use App\Models\Prod_discipline;
 use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
@@ -101,13 +102,15 @@ class ReportFilterItem extends Component
         $fields = ['id', 'name', 'description'];
         $existingFields = array_merge($this->getExistingSchemaFields($modelClass, $fields), ['id']);
         try {
-            $query = $db->select($existingFields)
-            ->when($isBlackList, 
+            $query = $db->select($existingFields);
+            if(isset($modelClass::$eloquentParams['getScreensShowMeOn'])) {
+                $query->whereHas('getScreensShowMeOn');
+            };
+            $query = $query->when($isBlackList, 
                 fn($query) => $query->whereIn('id', $bWListIds), 
                 fn($query) => $query->whereNotIn('id', $bWListIds)
-            )
-            ->orderBy('name')
-            ->get();
+            );
+            $query = $query->orderBy('name')->get();
         } catch (Exception $e){
             dump($e->getMessage());
         }
@@ -182,28 +185,26 @@ class ReportFilterItem extends Component
         else {
             $triggers = $this->cleanAndExplode($listenReducer->triggers);
             $listenToAttrs = $this->cleanAndExplode($listenReducer->listen_to_attrs);
-            
             $fields = array_merge(['name','description'], $triggers, $listenToAttrs);
             $existingFields = $this->getExistingSchemaFields($modelClass, $fields);
-            // dump($existingFields);
             $eagerLoadFields = [];
             foreach($listenToAttrs as $value) {
                 if (str_contains($value, 'get')) $eagerLoadFields[] = $value;
                 else $existingFields[] = $value;
             }
-            // dump($existingFields);
 
-            $dbQuery = $db->select(/* $existingFields */)
-                        ->when($isBlackList, 
+            $dbQuery = $db->select();
+            if(isset($modelClass::$eloquentParams['getScreensShowMeOn'])) {
+                $dbQuery = $dbQuery->whereHas('getScreensShowMeOn');
+            };
+            $dbQuery = $dbQuery->when($isBlackList, 
                             fn($query) => $query->whereIn('id', $bWListIds), 
                             fn($query) => $query->whereNotIn('id', $bWListIds)
                         )
                         ->with($eagerLoadFields)
                         ->orderBy('name')
-                        ->get();
-
-            // if ($entityType == 'prod_orders') {
-            // }
+                        ->get()
+                        ;
 
             $newDB = [];
             foreach ($dbQuery as $item) {
@@ -221,18 +222,9 @@ class ReportFilterItem extends Component
                         $processedItem->{$attr} = ($x = $item->$attr) ? $x->pluck('id')->toArray() : [];
                     } 
                     else $processedItem->{$triggers[$key]} = $item->$attr;
-                    // TO DEBUG
-                    // if ($entityType == 'prod_routing_links') {
-                    //     dump($attr);
-                    // }
                 }
                 $newDB[] = $processedItem;
             }
-            // // TO DEBUG
-            // if ($entityType == 'prod_routing_links') {
-            //     dump($newDB);
-            // }
-
             return $newDB;
         } 
     }  
