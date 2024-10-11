@@ -6,6 +6,8 @@ use App\Models\Department;
 
 class PpProcedurePolicy extends ViewAllTypeTreeExplorer
 {
+    protected $showSearch = true;
+
     protected function getApiRoute()
     {
         return route("pp_procedure_policy_tree_explorer");

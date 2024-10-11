@@ -65,10 +65,32 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
 
     function render(Request $request)
     {
+        $versions = [
+            [
+                "fileName" => "file version 01.pdf",
+                'avatar' => '/images/avatar.jpg',
+                'uploaded_by' => "user 1",
+                'uploaded_at' => '01/02/2023',
+            ],
+            [
+                "fileName" => "file version 02.pdf",
+                'avatar' => '/images/avatar.jpg',
+                'uploaded_by' => "user 1",
+                'uploaded_at' => '01/02/2023',
+            ],
+            [
+                "fileName" => "file version 03.pdf",
+                'avatar' => '/images/avatar.jpg',
+                'uploaded_by' => "user 1",
+                'uploaded_at' => '01/02/2023',
+            ],
+        ];
         $notifyTo = $this->getNotifyToTree();
+        // Log::info($notifyTo);
 
         return view('components.renderer.view-all-tree-explorer.pp-procedure-policy', [
             'notifyTo' => $notifyTo,
+            'versions' => $versions,
         ]);
     }
 }

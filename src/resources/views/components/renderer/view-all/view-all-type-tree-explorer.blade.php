@@ -3,6 +3,12 @@
 
 <div class="grid grid-cols-12 gap-2">
     <div class="col-span-4 border rounded p-2 mt-2 overflow-x-auto">
+        @if($showSearch)
+            <div class="flex border rounded">                
+                <input id="txt-search-box" class="p-2 w-full" placeholder="Search Tree"/>
+                <button disabled class="p-2 bg-blue-500 text-white rounded"><i class="fa fa-search"></i></button>
+            </div>
+        @endif
         <div id="json_tree_1"></div>
     </div>
     <div class="col-span-8 border rounded p-2 mt-2 overflow-x-auto">
@@ -76,11 +82,14 @@
 <script>
     const jsonTree = @json($tree);
     const owner_id = {{$ownerId}};
+    const showSearch = {{$showSearch}} ? 1 : 0;
     $(function () { 
+        const plugins = ["contextmenu", "wholerow", "dnd"]
+        if(showSearch) plugins.push("search")
         $('#json_tree_1').jstree({ 
-            'core' : {
-                'data' : jsonTree,                
-                'check_callback': function(operation, node, parent, position, more) {
+            core : {
+                data : jsonTree,                
+                check_callback: function(operation, node, parent, position, more) {
                     // Control Draggable and Droppable in a unified way
                     if (operation === "move_node") {
                         // Check if the node itself is draggable
@@ -92,9 +101,9 @@
                     return true; // Allow all other operations
                 },
             },
-            'plugins' : ["contextmenu", "wholerow", "dnd"],
-            'contextmenu': {
-                'items': function(node) {
+            plugins,
+            contextmenu: {
+                items: function(node) {
                     var tree = $("#json_tree_1").jstree(true);
                     // const menu = {}
                     
@@ -119,6 +128,17 @@
                 }
             }
         });
+
+        if(showSearch){
+            var to = false;
+            $('#txt-search-box').keyup(function () {
+                if(to) { clearTimeout(to); }
+                to = setTimeout(function () {
+                    var v = $('#txt-search-box').val();
+                    $('#json_tree_1').jstree(true).search(v);
+                }, 250);
+            });
+        }
 
         $('#json_tree_1').on("changed.jstree", function (e, data) {
             console.log(data.selected);
