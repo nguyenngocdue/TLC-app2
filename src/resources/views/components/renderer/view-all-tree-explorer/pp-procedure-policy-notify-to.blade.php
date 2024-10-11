@@ -14,17 +14,48 @@
 </div>
 
 <script>
+    notifyToId = {{$notifyToId}};
+    notifyToHodExcluded = @json($notifyToHodExcluded);
+    notifyToMemberExcluded = @json($notifyToMemberExcluded);
     jsonTree2 = @json($notifyToTree);    
-    $('#json_tree_2').jstree({ 
-        core : {
-            data : jsonTree2,
-        },
-        plugins: ['wholerow', 'checkbox', 'search'],
-    });
+    function loadJsonOntoTree(notifyToId){
+        var jsonTree2a = JSON.parse(JSON.stringify(jsonTree2));
 
-    $('#json_tree_2').on('ready.jstree', function() {
-        $('#json_tree_2').jstree('check_all');
-    });
+        console.log("notifyToId", notifyToId, notifyToHodExcluded, notifyToMemberExcluded);
+
+        $('#json_tree_2').jstree({ 
+            core : {
+                data : jsonTree2a,
+            },
+            plugins: ['wholerow', 'checkbox', 'search'],
+        });
+    
+        $('#json_tree_2').on('ready.jstree', function() {
+            $('#json_tree_2').jstree('check_all');
+            notifyToHodExcluded.forEach(function(id) {
+                $('#json_tree_2').jstree('uncheck_node', "hod_"+id);
+            });
+            notifyToMemberExcluded.forEach(function(id) {
+                $('#json_tree_2').jstree('uncheck_node', "member_"+id);
+            });
+        });
+
+        $('#json_tree_2').on('changed.jstree', function (e, selectedNode) {    
+            // console.log("selectedNode", selectedNode);
+            // for (let i = 0; i < selectedNode.selected.length; i++) {
+            //     const node = selectedNode.instance.get_node(selectedNode.selected[i])
+            // }
+            console.log("Selected nodes:", selectedNode.selected); // This still gives selected nodes
+    
+            const allNodes = $('#json_tree_2').jstree(true).get_json('#', { 'flat': true });
+            const uncheckedNodes = allNodes
+                .filter(node => !selectedNode.selected.includes(node.id))
+                .filter(node => node.id.startsWith('member_') || node.id.startsWith('hod_'))
+
+            console.log("Unchecked nodes:", uncheckedNodes.map(node => node.id));
+        })  
+    }
+    loadJsonOntoTree(notifyToId);
 
     var to = false;
     $('#txt-search-box-2').keyup(function () {
@@ -35,4 +66,5 @@
         }, 250);
     });
     
+     
 </script>

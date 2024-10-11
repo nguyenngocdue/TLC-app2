@@ -44,6 +44,9 @@
         </x-renderer.card>
         <x-renderer.card title="Notify To">
             <x-renderer.view-all-tree-explorer.pp-procedure-policy-notify-to
+                :notifyToId="$notifyToId"
+                :notifyToHodExcluded="$notifyToHodExcluded"
+                :notifyToMemberExcluded="$notifyToMemberExcluded"
                 :notifyTo="$notifyTo"
                 :notifyToTree="$notifyToTree"
                 />

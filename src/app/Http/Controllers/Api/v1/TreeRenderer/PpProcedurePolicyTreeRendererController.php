@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\TreeRenderer;
 
 use App\Models\Department;
+use App\Models\Pp_procedure_policy;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -44,7 +45,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                 'icon' => false,
             ];
             $tree[] = [
-                'id' => "hod_of_" . $department->id,
+                'id' => "hod_" . $department->getHOD->id,
                 // 'text' => $department->getHOD->name,
                 'text' => "<span class='flex -mt-6'>" . $src . $department->getHOD->name . "</span>",
                 'parent' => "department" . $department->id,
@@ -81,9 +82,9 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
         return $tree;
     }
 
-    function render(Request $request)
+    private function getVersions()
     {
-        $versions = [
+        return   [
             [
                 "fileName" => "file version 01.pdf",
                 'avatar' => '/images/avatar.jpg',
@@ -103,14 +104,32 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                 'uploaded_at' => '01/02/2023',
             ],
         ];
-        $notifyTo = Term::query()
-            ->where('field_id', 318)
-            ->get();
+    }
 
-        // Log::info($notifyTo);
+    private function getNotifyToId(Request $request)
+    {
+        $procedureId = $request->input('treeBodyObjectId');
+        $procedure = Pp_procedure_policy::query()
+            ->where('id', $procedureId)
+            ->first();
+        return [
+            $procedure->notify_to_id ?? 756,
+            $procedure->getNotifyToHodExcluded->pluck('id')->toArray(),
+            $procedure->getNotifyToMemberExcluded->pluck('id')->toArray(),
+        ];
+    }
+
+    function render(Request $request)
+    {
+        [$notifyToId, $notifyToHodExcluded, $notifyToMemberExcluded] = $this->getNotifyToId($request);
+        $versions = $this->getVersions();
+        $notifyTo = Term::query()->where('field_id', 318)->get();
         $notifyToTree = $this->getNotifyToTree();
 
         return view('components.renderer.view-all-tree-explorer.pp-procedure-policy', [
+            'notifyToId' => $notifyToId,
+            'notifyToHodExcluded' => $notifyToHodExcluded,
+            'notifyToMemberExcluded' => $notifyToMemberExcluded,
             'notifyTo' => $notifyTo,
             'notifyToTree' => $notifyToTree,
             'versions' => $versions,

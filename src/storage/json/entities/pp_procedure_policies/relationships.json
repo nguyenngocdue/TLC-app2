@@ -89,10 +89,28 @@
         "let_user_clear": "",
         "let_user_open": ""
     },
-    "_getNotifyToExcluded": {
-        "name": "_getNotifyToExcluded",
+    "_getNotifyToHodExcluded": {
+        "name": "_getNotifyToHodExcluded",
         "relationship": "belongsToMany",
-        "control_name": "getNotifyToExcluded",
+        "control_name": "getNotifyToHodExcluded",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getNotifyToMemberExcluded": {
+        "name": "_getNotifyToMemberExcluded",
+        "relationship": "belongsToMany",
+        "control_name": "getNotifyToMemberExcluded",
         "renderer_view_all": "avatar_user",
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "",

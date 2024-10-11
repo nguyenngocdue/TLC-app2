@@ -8,7 +8,7 @@ return new class extends Migration
     use TraitCreatePivotTable;
     private $table1Plural = 'pp_procedure_policies';
     private $table2Plural = 'users';
-    private $relationshipKey = 'notify_to_excluded';
+    private $relationshipKey = 'notify_to_hod_excluded';
 
     public function up()
     {
