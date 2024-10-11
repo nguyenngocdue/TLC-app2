@@ -106,11 +106,10 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
         ];
     }
 
-    private function getNotifyToId(Request $request)
+    private function getNotifyToId($ppId)
     {
-        $procedureId = $request->input('treeBodyObjectId');
         $procedure = Pp_procedure_policy::query()
-            ->where('id', $procedureId)
+            ->where('id', $ppId)
             ->first();
         return [
             $procedure->notify_to_id ?? 756,
@@ -121,18 +120,21 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
 
     function render(Request $request)
     {
-        [$notifyToId, $notifyToHodExcluded, $notifyToMemberExcluded] = $this->getNotifyToId($request);
+        $ppId = $request->input('treeBodyObjectId');
+        [$notifyToId, $notifyToHodExcluded, $notifyToMemberExcluded] = $this->getNotifyToId($ppId);
         $versions = $this->getVersions();
         $notifyTo = Term::query()->where('field_id', 318)->get();
         $notifyToTree = $this->getNotifyToTree();
 
         return view('components.renderer.view-all-tree-explorer.pp-procedure-policy', [
+            'ppId' => $ppId,
             'notifyToId' => $notifyToId,
             'notifyToHodExcluded' => $notifyToHodExcluded,
             'notifyToMemberExcluded' => $notifyToMemberExcluded,
             'notifyTo' => $notifyTo,
             'notifyToTree' => $notifyToTree,
             'versions' => $versions,
+            'updatePPRoute' => route("pp_procedure_policies.updateShortSingle"),
         ]);
     }
 }
