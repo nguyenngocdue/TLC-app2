@@ -72,12 +72,13 @@ class ReportBlock extends Component
         }
 
         // Update currentParams to use UTC time
-        $currentParams = $this->formatFromAndToDate($currentParams);
+        $currentFormattedParams = $this->formatFromAndToDate($currentParams);
 
         return view('components.reports2.report-block', [
             'blockDataSource' => $blockDataSource,
             'reportId' => $this->report->id,
             'currentParams' => $currentParams,
+            'currentFormattedParams' => $currentFormattedParams,
         ]);
     }
 }
