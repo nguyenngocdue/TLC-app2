@@ -27,7 +27,8 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->default(1); //To load into UT11
             $table->string('slug')->unique();
 
-            $table->boolean('show_in_task_budget')->nullable();
+            $table->boolean('show_in_task_budget')->default(0);
+            $table->boolean('hide_in_pp')->default(0);
             $table->orderable();
             $table->appendCommonFields();
         });

@@ -16,6 +16,7 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
     private function getDepartments()
     {
         $departments = Department::query()
+            ->where('hide_in_pp', 0)
             ->orderBy('name')
             ->get();
         $result = [];

@@ -18,6 +18,7 @@ class Department extends ModelExtended
         "order_no",
         "parent_id",
         "show_in_task_budget",
+        "hide_in_pp",
     ];
 
     public static $statusless = true;
