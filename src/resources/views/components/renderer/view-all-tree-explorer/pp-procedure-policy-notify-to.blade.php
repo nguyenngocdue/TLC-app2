@@ -1,6 +1,6 @@
-<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />All Head of Departments (HOD)</label><br/>
+<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />Everyone</label><br/>
+<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />All Head of Departments</label><br/>
 <label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />All Team Members</label><br/>
-<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />All HOD + Team Members</label><br/>
 
 <div class="my-2 rounded border">
     <div class="flex border rounded">                
@@ -17,6 +17,10 @@
             data : jsonTree2,
         },
         plugins: ['wholerow', 'checkbox', 'search'],
+    });
+
+    $('#json_tree_2').on('ready.jstree', function() {
+        $('#json_tree_2').jstree('check_all');
     });
 
     var to = false;
