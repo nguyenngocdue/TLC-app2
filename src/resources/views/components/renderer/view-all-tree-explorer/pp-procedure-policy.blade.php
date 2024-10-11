@@ -46,11 +46,9 @@
             <x-renderer.view-all-tree-explorer.pp-procedure-policy-notify-to
                 ppId="{{$ppId}}"
                 updatePPRoute="{{$updatePPRoute}}"
+                loadDynamicNotifyToTree="{{$loadDynamicNotifyToTree}}"
                 :notifyToId="$notifyToId"
-                :notifyToHodExcluded="$notifyToHodExcluded"
-                :notifyToMemberExcluded="$notifyToMemberExcluded"
                 :notifyTo="$notifyTo"
-                :notifyToTree="$notifyToTree"
                 />
         </x-renderer.card>
     </div>

@@ -141,7 +141,7 @@
         }
 
         $('#json_tree_1').on("changed.jstree", function (e, data) {
-            console.log(data.selected);
+            // console.log(data.selected);
             if(Array.isArray(data.selected)){
                 // console.log(data.selected);
                 const treeBodyObjectId = data.selected[0]

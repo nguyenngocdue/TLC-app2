@@ -4,7 +4,7 @@
             class="mx-1" 
             name="notify_to" 
             value="{{$notifyToItem->id}}" 
-            onchange="updateNotifyTo({{$notifyToItem->id}})"
+            onchange="reloadNotifyTo({{$notifyToItem->id}})"
             id="{{$notifyToItem->id}}"/>
         {{$notifyToItem->name}}
     </label>
@@ -21,13 +21,11 @@
 
 <script>
     updatePPRoute = '{{$updatePPRoute}}';
+    loadDynamicNotifyToTree = '{{$loadDynamicNotifyToTree}}'
     ppId = {{$ppId}};
     notifyToId = {{$notifyToId}};
-    notifyToHodExcluded = @json($notifyToHodExcluded);
-    notifyToMemberExcluded = @json($notifyToMemberExcluded);
-    jsonTree2 = @json($notifyToTree);  
     
-    function updateNotifyTo(notifyToId){
+    function updateNotifyTo(notifyToId, jsonTree2, notifyToHodExcluded, notifyToMemberExcluded){
         console.log("notifyToId", notifyToId);
         var jsonTree2a = null
         switch(notifyToId){
@@ -59,7 +57,7 @@
                 return;
         }
         
-        console.log("new jsonTree2a", jsonTree2a);
+        // console.log("new jsonTree2a", jsonTree2a);
         $('#json_tree_2').jstree({ 
             core : {
                 data : jsonTree2a,
@@ -98,9 +96,9 @@
                     .filter(node => node.id.startsWith('member_'))
                     .map(node => 1 * node.id.substr("member_".length))
 
-                console.log("Unchecked HOD nodes:", uncheckedHodNodes);
-                console.log("Unchecked Member nodes:", uncheckedMemberNodes);
-                console.log(updatePPRoute, ppId)
+                // console.log("Unchecked HOD nodes:", uncheckedHodNodes);
+                // console.log("Unchecked Member nodes:", uncheckedMemberNodes);
+                // console.log(updatePPRoute, ppId)
                 
                 $.ajax({
                     url: updatePPRoute,
@@ -114,10 +112,27 @@
                         console.log("response", response);
                     },
                     error: function(error) {
-                        toastr.error("error", error);
+                        toastr.error("error", error.responseJSON.message);
                     }
                 })
             })  
         });  
     } 
+    function reloadNotifyTo(notifyToId){
+        // console.log("reloadNotifyTo", notifyToId);
+        $.ajax({
+            url: loadDynamicNotifyToTree,
+            type: 'GET',
+            data:{
+                ppId,
+            },
+            success: function(response){
+                const {jsonTree, notifyToHodExcluded, notifyToMemberExcluded} = response;
+                updateNotifyTo(notifyToId, jsonTree, notifyToHodExcluded, notifyToMemberExcluded);
+            },
+            error: function(error) {
+                toastr.error("error", error.responseJSON.message);
+            }
+        })
+    }
 </script>
