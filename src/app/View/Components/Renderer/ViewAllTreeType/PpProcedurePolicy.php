@@ -17,19 +17,23 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
     {
         $departments = Department::query()
             ->where('hide_in_pp', 0)
+            ->with(['getHOD' => fn($q) => $q->with(["getAvatar"])])
             ->orderBy('name')
             ->get();
         $result = [];
         foreach ($departments as $department) {
+            $avatar = $department->getHOD->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
+            $src = "<img class='rounded-full ml-2 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
             $result[] = [
                 "id" => 'department_' . $department->id,
-                "text" => $department->name,
+                "text" => "<span class='flex'>" . $src . $department->name . "</span>",
                 'parent' => 'procedure',
                 "data" => [
                     "item_id" => $department->id,
                     "parent_01" => 'department',
                     "draggable" => false,
                 ],
+                'icon' => false,
             ];
         }
         return $result;

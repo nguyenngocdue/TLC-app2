@@ -33,31 +33,42 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
 
         $tree = [];
         foreach ($departments as $department) {
+            $avatar = $department->getHOD->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
+            $src = "<img class='rounded-full ml-6 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
             $tree[] = [
                 'id' => "department" . $department->id,
-                'text' => $department->name,
+                'text' => "<span class='flex -mt-6'>" . $src . $department->name . "</span>",
                 'parent' => '#',
                 'data' => ["type" => "department"],
+                'icon' => false,
             ];
             $tree[] = [
                 'id' => "hod_of_" . $department->id,
-                'text' => $department->getHOD->name,
+                // 'text' => $department->getHOD->name,
+                'text' => "<span class='flex -mt-6'>" . $src . $department->getHOD->name . "</span>",
                 'parent' => "department" . $department->id,
                 'data' => ["type" => "hod"],
+                'icon' => false,
             ];
             $tree[] = [
                 'id' => "members_of_" . $department->id,
                 'text' => "Members",
                 'parent' => "department" . $department->id,
                 'data' => ["type" => "members"],
+                'state' => ["opened" => true],
             ];
             foreach ($department->getMembers as $member) {
                 if ($member->id == $department->head_of_department) continue;
+                $avatar = $member->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
+                $src = "<img class='rounded-full ml-12 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
+
                 $tree[] = [
                     'id' => "member_" . $member->id,
-                    'text' => $member->name,
+                    // 'text' => $member->name,
+                    'text' => "<span class='flex -mt-6'>" . $src . $member->name . "</span>",
                     'parent' => "members_of_" . $department->id,
                     'data' => ["type" => "member"],
+                    'icon' => false,
                 ];
             }
         }
