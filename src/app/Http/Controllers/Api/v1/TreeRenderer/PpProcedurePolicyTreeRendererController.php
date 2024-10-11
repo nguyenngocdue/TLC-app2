@@ -39,10 +39,11 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             $src = "<img class='rounded-full ml-6 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
             $tree[] = [
                 'id' => "department_" . $department->id,
-                'text' => "<span class='flex -mt-6'>" . $src . $department->name . "</span>",
+                // 'text' => "<span class='flex -mt-6'>" . $src . $department->name . "</span>",
+                'text' => $department->name,
                 'parent' => '#',
                 'data' => ["type" => "department"],
-                'icon' => false,
+                // 'icon' => false,
             ];
             $tree[] = [
                 'id' => "hod_" . $department->getHOD->id,
