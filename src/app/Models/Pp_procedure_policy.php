@@ -25,6 +25,7 @@ class Pp_procedure_policy extends ModelExtended
         "getDepartment" => ['belongsTo', Department::class, 'department_id'],
         "getNotifyTo" => ['belongsTo', Term::class, 'notify_to'],
         "getNotifySchedule" => ['belongsTo', Term::class, 'notify_schedule'],
+        "getNotifyToExcluded" => ['belongsToMany', User::class, 'ym2m_pp_procedure_policy_user_notify_to_excluded'],
 
         "attachment_procedure_policy" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
     ];
@@ -42,6 +43,12 @@ class Pp_procedure_policy extends ModelExtended
     }
 
     public function getNotifySchedule()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getNotifyToExcluded()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

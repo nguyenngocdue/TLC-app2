@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\TreeRenderer;
 
 use App\Models\Department;
+use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -102,11 +103,16 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                 'uploaded_at' => '01/02/2023',
             ],
         ];
-        $notifyTo = $this->getNotifyToTree();
+        $notifyTo = Term::query()
+            ->where('field_id', 318)
+            ->get();
+
         // Log::info($notifyTo);
+        $notifyToTree = $this->getNotifyToTree();
 
         return view('components.renderer.view-all-tree-explorer.pp-procedure-policy', [
             'notifyTo' => $notifyTo,
+            'notifyToTree' => $notifyToTree,
             'versions' => $versions,
         ]);
     }

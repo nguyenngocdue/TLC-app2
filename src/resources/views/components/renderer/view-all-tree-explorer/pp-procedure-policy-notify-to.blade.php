@@ -1,19 +1,9 @@
-<label class="cursor-pointer">
-    <input type="radio" class="mx-1" name="notify_to" />None
-</label>
-<br/>
-<label class="cursor-pointer">
-    <input type="radio" class="mx-1" name="notify_to" />Everyone in the list below
-</label>
-<br/>
-<label class="cursor-pointer">
-    <input type="radio" class="mx-1" name="notify_to" />All Head of Departments in the list below
-</label>
-<br/>
-<label class="cursor-pointer">
-    <input type="radio" class="mx-1" name="notify_to" />All Team Members in the list below
-</label>
-<br/>
+@foreach($notifyTo as $notifyToItem)
+    <label class="cursor-pointer">
+        <input type="radio" class="mx-1" name="notify_to" value="{{$notifyToItem->id}}" id="{{$notifyToItem->id}}"/>{{$notifyToItem->name}}
+    </label>
+    <br/>    
+@endforeach
 
 <div class="my-2 rounded border">
     <div class="flex border rounded">                
@@ -24,7 +14,7 @@
 </div>
 
 <script>
-    jsonTree2 = @json($notifyTo);    
+    jsonTree2 = @json($notifyToTree);    
     $('#json_tree_2').jstree({ 
         core : {
             data : jsonTree2,
