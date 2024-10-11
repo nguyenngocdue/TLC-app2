@@ -20,6 +20,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
     function getNotifyToTree()
     {
         $departments = Department::query()
+            ->where('hide_in_pp', 0)
             ->with('getHOD')
             ->with(['getMembers' => function ($q) {
                 $q->where('resigned', 0)
@@ -27,6 +28,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                     ->where('email', 'like', '%@%')
                     ->with(['getAvatar']);
             }])
+            ->orderBy('name')
             ->get();
 
         $tree = [];
