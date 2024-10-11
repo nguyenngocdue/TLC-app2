@@ -93,17 +93,14 @@ class PpProcedurePolicyNotifyToTreeRendererController //extends _TreeRendererCon
 
     function renderToJson(Request $request)
     {
-        return [
-            "Hello" => "World",
-        ];
         $ppId = $request->input('ppId');
         [$notifyToHodExcluded, $notifyToMemberExcluded] = $this->getNotifyToId($ppId);
-        // $jsonTree = $this->getNotifyToTree();
+        $jsonTree = $this->getNotifyToTree();
 
         $result = [
             'notifyToHodExcluded' => $notifyToHodExcluded,
             'notifyToMemberExcluded' => $notifyToMemberExcluded,
-            // 'jsonTree' => $jsonTree,
+            'jsonTree' => $jsonTree,
         ];
 
         return $result;
