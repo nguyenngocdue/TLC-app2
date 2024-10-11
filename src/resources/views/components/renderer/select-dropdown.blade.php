@@ -1,4 +1,4 @@
-<div id="{{$id}}" style="z-index: 11;" class="bg-gray-50 hidden divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+<div id="{{$id}}" style="z-index: 21;" class="bg-gray-50 hidden divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{$id}}Button">
         @foreach($dataSource as $name => $lines)
             <div class="relative flex py-2 items-center">
