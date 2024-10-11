@@ -20,15 +20,16 @@ class ReportBlockParagraph extends Component
         private $block,
         private $reportId,
         private $currentParams,
+        private $currentFormattedParams,
     ) {}
 
     public function render()
     {
         $block = $this->block;
-        $currentParams = $this->currentParams;
+        $currentFormattedParams = $this->currentFormattedParams;
         $queriedData = $this->queriedData;
         $strHtml = $block->html_content;
-        $htmlRender = $this->detectVariables($strHtml, $currentParams, $queriedData);
+        $htmlRender = $this->detectVariables($strHtml, $currentFormattedParams, $queriedData);
 
         return view('components.reports2.report-block-paragraph', [
             'htmlRender' => Blade::render($htmlRender),

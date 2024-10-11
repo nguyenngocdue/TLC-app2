@@ -46,7 +46,14 @@
                     @break
 
                 @case($PARAGRAPH_TYPE_ID)
-                    <x-reports2.report-block-paragraph :queriedData="$queriedData" :block="$block" reportId="{{ $reportId }}" :currentParams="$currentParams"/>
+                    <x-reports2.report-block-paragraph 
+                        :queriedData="$queriedData" 
+                        :block="$block" 
+                        reportId="{{ $reportId }}" 
+                        :currentParams="$currentParams"
+                        :currentFormattedParams="$currentFormattedParams"
+                        
+                        />
                     @break
 
                 @case($DESCRIPTION_TYPE_ID)
@@ -66,6 +73,7 @@
                         :headerCols="$headerCols"
                         :secondHeaderCols="$secondHeaderCols"
                         :currentParams="$currentParams"
+                        :currentFormattedParams="$currentFormattedParams"
                         :queriedData="$queriedData"
                         />
                     @if(!$block->renderer_type)

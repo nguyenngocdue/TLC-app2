@@ -21,6 +21,7 @@ class ReportBlockTable extends Component
         private $headerCols,
         private $secondHeaderCols,
         private $currentParams,
+        private $currentFormattedParams,
         private $queriedData,
     ) {}
 
@@ -78,7 +79,7 @@ class ReportBlockTable extends Component
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
 
         $reportTableRow = ReportTableRow::getInstance();
-        $tableDataSource = $reportTableRow->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block);
+        $tableDataSource = $reportTableRow->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block, $currentParams);
         // dd($queriedData->first(), $tableDataSource);
 
         // render default table

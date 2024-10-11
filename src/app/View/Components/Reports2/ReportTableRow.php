@@ -9,6 +9,7 @@ class ReportTableRow
     use TraitReportFormatString;
     use TraitReportTransformedRowData;
     use TraitReportRendererType;
+    use TraitReportFilter;
 
     private static $instance = null;
     private function _construct(){
@@ -31,7 +32,7 @@ class ReportTableRow
         return $content;
     }
 
-    private function createHref($href, $dataLine) {
+    private function createHref($href, $dataLine, $currentParams) {
         if ($href) {
             $parsedVariables = $this->parseVariables($href);
             foreach (last($parsedVariables) as $key => $value) {
@@ -39,14 +40,14 @@ class ReportTableRow
                 $firstMatches = reset($parsedVariables);
                 $keyInOptions = $firstMatches[$key];
                 if (!is_array($dataLine)) $dataLine = (array)$dataLine;
-                $changedVal = isset($dataLine[$variable]) ? $dataLine[$variable] : '';
+                $changedVal = isset($dataLine[$variable]) ? $dataLine[$variable] : (isset($currentParams[$variable]) ? $currentParams[$variable] : '');
                 $href = str_replace($keyInOptions, $changedVal, $href);
             }
         }
         return $href;
     }
 
-    public function createTableDataSourceForRows($queriedData, $configuredCols, $block)
+    public function createTableDataSourceForRows($queriedData, $configuredCols, $block, $currentParams)
     {
         // Data retrieved from SQL query
         foreach ($queriedData as $k1 => &$dataLine) {
@@ -76,7 +77,7 @@ class ReportTableRow
                     
                         case $this->ROW_RENDERER_LINK_ID:
                             if ($href) {
-                                $href = $this->createHref($href,$dataLine);
+                                $href = $this->createHref($href,$dataLine, $currentParams);
                                 $cellClass = 'text-blue-600';
                             }
                             break;
