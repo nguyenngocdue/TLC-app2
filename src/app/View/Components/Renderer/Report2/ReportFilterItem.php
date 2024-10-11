@@ -175,12 +175,15 @@ class ReportFilterItem extends Component
             $filterId = 0;
             switch ($filter->data_index) {
                 case 'defect_root_cause_id':
+                case 'defect_root_cause_ids':
                     $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
                     break;
-                case 'defect_report_type':
+                case 'defect_report_type_id':
+                case 'defect_report_type_ids':
                     $filterId = $this->DEFECT_REPORT_TYPE_ID;;
                     break;
                 case 'inter_subcon_id':
+                case 'inter_subcon_ids':
                     $filterId = $this->INTER_SUBCON_TYPE_ID;;
                     break;
                 default:
