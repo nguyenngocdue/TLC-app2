@@ -8,6 +8,9 @@
         </x-renderer.card>
         
         <x-renderer.card title="Published Version">
+            <button class="px-2 mx-2 bg-blue-500 text-white rounded">
+                <i class="fa fa-upload"></i> Upload File...
+            </button>
             <table class="w-full">
                 <tr>
                     <th>Published</th>

@@ -50,7 +50,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                 'data' => ["type" => "hod"],
                 'icon' => false,
             ];
-            Log::info($department->name . " " . $department->getMembers->count());
+            // Log::info($department->name . " " . $department->getMembers->count());
             if ($department->getMembers->count() > 1) {
                 $tree[] = [
                     'id' => "members_of_" . $department->id,

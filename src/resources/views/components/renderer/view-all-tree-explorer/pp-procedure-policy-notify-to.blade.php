@@ -1,6 +1,19 @@
-<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />Everyone</label><br/>
-<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />All Head of Departments</label><br/>
-<label class="cursor-pointer"><input type="radio" class="mx-1" name="notify_to" />All Team Members</label><br/>
+<label class="cursor-pointer">
+    <input type="radio" class="mx-1" name="notify_to" />None
+</label>
+<br/>
+<label class="cursor-pointer">
+    <input type="radio" class="mx-1" name="notify_to" />Everyone in the list below
+</label>
+<br/>
+<label class="cursor-pointer">
+    <input type="radio" class="mx-1" name="notify_to" />All Head of Departments in the list below
+</label>
+<br/>
+<label class="cursor-pointer">
+    <input type="radio" class="mx-1" name="notify_to" />All Team Members in the list below
+</label>
+<br/>
 
 <div class="my-2 rounded border">
     <div class="flex border rounded">                
