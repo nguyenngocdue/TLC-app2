@@ -38,7 +38,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
         $procedure = Pp_procedure_policy::query()
             ->where('id', $ppId)
             ->first();
-        return $procedure->notify_to_id ?? 756;
+        return $procedure->notify_to ?? 756;
     }
 
     function render(Request $request)
