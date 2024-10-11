@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\v1\TreeRenderer\PpProcedurePolicyTreeRendererContro
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'v1/hr',
+    'prefix' => 'v1/tree',
     'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
     Route::get("pj_task_tree_explorer", [PjTaskTreeRendererController::class, 'renderToJson'])->name("pj_task_tree_explorer");
