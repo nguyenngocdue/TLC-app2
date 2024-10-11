@@ -16,9 +16,14 @@ trait TraitEntityCRUDShowReport
 		$report = Rp_report::find($id)->getDeep();
 		$pages = $report->getPages->sortBy('order_no');
 		$requestInput = $request->input();
-		
 		//update per_page of table in reports
 		if (isset($requestInput['action']) && $requestInput['action'] =='updateReport2') {
+			$request->merge([
+				'entity_type' => $report->entity_type,
+				'entity_type2' => $this->reportType2,
+				'report_id' => $id,
+			]);
+			// dd($request->input());
 			(new UpdateUserSettings())($request);
 			return redirect()->back();
 		}
