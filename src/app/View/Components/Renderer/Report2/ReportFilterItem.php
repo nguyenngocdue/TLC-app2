@@ -178,8 +178,8 @@ class ReportFilterItem extends Component
                 case 'defect_root_cause_ids':
                     $filterId = $this->DEFECT_ROOT_CAUSE_TYPE_ID;
                     break;
-                case 'defect_report_type':
-                case 'defect_report_types':
+                case 'defect_report_type_id':
+                case 'defect_report_type_ids':
                     $filterId = $this->DEFECT_REPORT_TYPE_ID;;
                     break;
                 case 'inter_subcon_id':
