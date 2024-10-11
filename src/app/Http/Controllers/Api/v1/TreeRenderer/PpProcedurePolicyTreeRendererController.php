@@ -38,7 +38,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             $avatar = $department->getHOD->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
             $src = "<img class='rounded-full ml-6 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
             $tree[] = [
-                'id' => "department" . $department->id,
+                'id' => "department_" . $department->id,
                 'text' => "<span class='flex -mt-6'>" . $src . $department->name . "</span>",
                 'parent' => '#',
                 'data' => ["type" => "department"],
@@ -48,7 +48,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                 'id' => "hod_" . $department->getHOD->id,
                 // 'text' => $department->getHOD->name,
                 'text' => "<span class='flex -mt-6'>" . $src . $department->getHOD->name . "</span>",
-                'parent' => "department" . $department->id,
+                'parent' => "department_" . $department->id,
                 'data' => ["type" => "hod"],
                 'icon' => false,
             ];
@@ -57,7 +57,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
                 $tree[] = [
                     'id' => "members_of_" . $department->id,
                     'text' => "Members",
-                    'parent' => "department" . $department->id,
+                    'parent' => "department_" . $department->id,
                     'data' => ["type" => "members"],
                     'state' => ["opened" => true],
                 ];
