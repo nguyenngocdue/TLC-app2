@@ -60,7 +60,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             foreach ($department->getMembers as $member) {
                 if ($member->id == $department->head_of_department) continue;
                 $avatar = $member->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
-                $src = "<img class='rounded-full ml-12 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
+                $src = "<img class='rounded-full ml-6 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
 
                 $tree[] = [
                     'id' => "member_" . $member->id,
