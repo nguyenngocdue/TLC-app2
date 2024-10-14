@@ -10,9 +10,9 @@
 {{-- <div class="xs:hidden"></div>
 <div class="xs:block"></div> --}}
 
-<div class="border-dotted"/>
-<div class="border-dashed"/>
-<div class="border-double"/>
+<div class="border-dotted hover:border-dotted hover:border"/>
+<div class="border-dashed hover:border-dashed "/>
+<div class="border-double hover:border-double"/>
 
 {{-- editable select --}}
 <div class="focus-visible:border-none" ></div> 

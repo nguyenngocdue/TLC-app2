@@ -4,8 +4,8 @@
 
 <script>
      function loadPDF(pdfUrl, versionId) {
-        $(".version-td").removeClass('border border-blue-300')
-        $("#td-version-" + versionId).addClass('border border-blue-300')
+        $(".version-td").removeClass('bg-blue-300')
+        $("#td-version-" + versionId).addClass('bg-blue-300')
         $('#pdfEmbed').attr('src', pdfUrl);
     }
 </script>
@@ -19,7 +19,7 @@
         </tr>
         @foreach($versions as $version)
             <tr>
-                <td id="td-version-{{$version['id']}}" class="version-td p-1 cursor-pointer hover:bg-blue-200 border-dashed rounded">
+                <td id="td-version-{{$version['id']}}" class="version-td p-1 cursor-pointer hover:border hover:border-blue-400 hover:border-dashed r1ounded">
                     <span class="" onclick="loadPDF('{!! $version['src'] !!}', {{$version['id']}})">
                         {{ $version['fileName'] }}
                         <br/>
