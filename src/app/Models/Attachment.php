@@ -29,6 +29,7 @@ class Attachment extends ModelExtended
         "getCategory" => ['belongsTo', Field::class, 'category'],
         "getSubCategory" => ['belongsTo', Term::class, 'sub_category'],
         "attachable" => ['morphTo', Attachment::class, 'object_type', 'object_id'],
+        "getUploader" => ['belongsTo', User::class, 'owner_id'],
     ];
 
     public function getCategory()
@@ -47,5 +48,11 @@ class Attachment extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
+    }
+
+    public function getUploader()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
     }
 }

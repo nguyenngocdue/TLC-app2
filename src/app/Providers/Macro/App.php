@@ -30,8 +30,8 @@ App::macro('backgroundImage', function () {
     return $images;
 });
 
-App::macro('pathMinio', function () {
-    return env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/';
+App::macro('pathMinio', function ($src = "") {
+    return env('AWS_ENDPOINT') . '/' . env('AWS_BUCKET') . '/' . $src;
 });
 
 App::macro('textBanner', function () {

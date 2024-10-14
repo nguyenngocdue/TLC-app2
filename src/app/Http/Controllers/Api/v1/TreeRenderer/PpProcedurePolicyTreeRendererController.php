@@ -9,43 +9,38 @@ use Illuminate\Support\Facades\Log;
 
 class PpProcedurePolicyTreeRendererController extends _TreeRendererController
 {
-    private function getVersions()
+    private function getVersions(Pp_procedure_policy $pp)
     {
-        return   [
-            [
-                "fileName" => "file version 01.pdf",
-                'avatar' => '/images/avatar.jpg',
-                'uploaded_by' => "user 1",
-                'uploaded_at' => '01/02/2023',
-            ],
-            [
-                "fileName" => "file version 02.pdf",
-                'avatar' => '/images/avatar.jpg',
-                'uploaded_by' => "user 1",
-                'uploaded_at' => '01/02/2023',
-            ],
-            [
-                "fileName" => "file version 03.pdf",
-                'avatar' => '/images/avatar.jpg',
-                'uploaded_by' => "user 1",
-                'uploaded_at' => '01/02/2023',
-            ],
-        ];
-    }
-
-    private function getNotifyToId($ppId)
-    {
-        $procedure = Pp_procedure_policy::query()
-            ->where('id', $ppId)
-            ->first();
-        return $procedure->notify_to ?? 756;
+        $attachments = $pp->attachment_procedure_policy;
+        return $attachments->map(function ($att) {
+            $avatar = $att->getUploader->getAvatar;
+            $src = $avatar ? $avatar->url_thumbnail : '/images/avatar.jpg';
+            $src = app()->pathMinio($src);
+            return [
+                "fileName" => $att->filename,
+                'avatar' => $src,
+                "src" => app()->pathMinio($att->url_media),
+                'uploaded_by' => $att->getUploader->first_name,
+                'uploaded_at' => $att->created_at->format('d/m/Y'),
+            ];
+        });
     }
 
     function render(Request $request)
     {
         $ppId = $request->input('treeBodyObjectId');
-        $notifyToId = $this->getNotifyToId($ppId);
-        $versions = $this->getVersions();
+        $pp = Pp_procedure_policy::query()
+            ->where('id', $ppId)
+            ->with([
+                'attachment_procedure_policy' => function ($q) {
+                    $q->with(["getUploader" => function ($q) {
+                        $q->with("getAvatar");
+                    }]);
+                },
+            ])
+            ->first();
+        $notifyToId = $pp->notify_to ?? 756;
+        $versions = $this->getVersions($pp);
         $notifyTo = Term::query()->where('field_id', 318)->get();
 
         return view('components.renderer.view-all-tree-explorer.pp-procedure-policy', [
@@ -53,6 +48,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             'notifyToId' => $notifyToId,
             'notifyTo' => $notifyTo,
             'versions' => $versions,
+            'editPPRoute' => route("pp_procedure_policies.edit", $ppId),
             'updatePPRoute' => route("pp_procedure_policies.updateShortSingle"),
             'loadDynamicNotifyToTree' => route("pp_procedure_policy_notify_to_tree_explorer"),
         ]);

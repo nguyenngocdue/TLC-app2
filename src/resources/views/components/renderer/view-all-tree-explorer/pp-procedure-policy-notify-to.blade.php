@@ -14,7 +14,7 @@
     <br/>    
 @endforeach
 
-<div id="json_tree_2_container" class="my-2 rounded border">
+<div id="json_tree_2_container" class="my-2 rounded border hidden">
     <div class="flex border rounded">                
         <input id="txt-search-box-2" class="p-2 w-full" placeholder="Search Tree"/>
         <button disabled class="p-2 bg-blue-500 text-white rounded"><i class="fa fa-search"></i></button>
