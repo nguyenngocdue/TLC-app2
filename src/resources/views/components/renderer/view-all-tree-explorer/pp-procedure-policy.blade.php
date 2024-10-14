@@ -12,10 +12,9 @@
             <x-renderer.view-all-tree-explorer.pp-procedure-policy-published-version
                 ppId="{{$ppId}}"
                 versionId="{{$versionId}}"
-                updatePPRoute="{{$updatePPRoute}}"
                 uploadPPRoute="{{$uploadPPRoute}}"
-
-                :versions="$versions"
+                updatePPRoute="{{$updatePPRoute}}"
+                loadDynamicPublishedVersion="{{$loadDynamicPublishedVersion}}"
                 />
         </x-renderer.card>
         <x-renderer.card title="Notify To">

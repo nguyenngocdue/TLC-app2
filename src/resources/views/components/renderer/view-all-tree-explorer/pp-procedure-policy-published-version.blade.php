@@ -1,89 +1,122 @@
-<div class="flex" id="divUpload">
-    <label class="px-2 mx-2 bg-blue-500 text-white rounded flex" for="aaabbb"> <i class="fa fa-upload"></i> Upload</label>
-    <input id="aaabbb" type="file" multiple />
-</div>
+
+
+<div id="version-table"></div>
 
 <script>
-    $('#aaabbb').on('change', function () {
-        $("#divUpload").html("Uploading...");
-        var formData = new FormData();
-        formData.append('id', '{{$ppId}}');
+    function onFileSelected(){
+        $('#aaabbbccc').on('change', function () {
+            $("#divUpload").html("Uploading...");
+            $("#tableVersion").html("");
+            var formData = new FormData();
+            formData.append('id', '{{$ppId}}');
 
-        // Add all selected files to the FormData object
-        $.each(this.files, function (index, file) {
-            formData.append('attachment_procedure_policy[toBeUploaded][0][]', file);
-        });
+            // Add all selected files to the FormData object
+            $.each(this.files, function (index, file) {
+                formData.append('attachment_procedure_policy[toBeUploaded][0][]', file);
+            });
 
-        // AJAX request to upload the files
-        $.ajax({
-            url: "{{$uploadPPRoute}}",
-            type: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                // Handle success response
-                toastr.success(response.message);
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr);
-                toastr.error(xhr.responseJSON);
-            }
+            // AJAX request to upload the files
+            $.ajax({
+                url: "{{$uploadPPRoute}}",
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    // Handle success response
+                    // toastr.success(response.message);
+                    loadDynamicPublishedVersion('{{$ppId}}');
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr);
+                    toastr.error(xhr.responseJSON);
+                }
+            });
         });
-    });
+    }
 </script>
 
 <script>
      function loadPDF(pdfUrl, versionId) {
         $(".version-td").removeClass('bg-blue-300')
+        console.log("hightling version id: ", versionId)
         $("#td-version-" + versionId).addClass('bg-blue-300')
         $('#pdfEmbed').attr('src', pdfUrl);
     }
 </script>
 
-@if($versions->count())
-    <table class="w-full">
-        <tr>
-            <th>File Name</th>
-            <th>Published</th>
-            <th></th>
-        </tr>
-        @foreach($versions as $version)
-            <tr>
-                <td id="td-version-{{$version['id']}}" class="version-td p-1 cursor-pointer hover:border hover:border-blue-400 hover:border-dashed r1ounded">
-                    <span class="" onclick="loadPDF('{!! $version['src'] !!}', {{$version['id']}})">
-                        {{ $version['fileName'] }}
-                        <br/>
-                        <span class="flex gap-2">
-                            <img class="w-6 h-6 rounded-full" src="{{$version['avatar']}}" />
-                            {{$version['uploaded_by']}}
-                            ({{$version['uploaded_at']}})
-                        </span>
-                    </span>                                
-                </td>
-                <td class="text-center">
-                    <input name="published_version" 
-                        type="radio"
-                        @checked($versionId == $version['id'])
-                        class="p-1 m-2 cursor-pointer hover:underline" 
-                        onclick="setPublishedVersion('{{$version['id']}}')"                        
-                        /> 
-                </td>
-                <td>
-                    <button class="px-2 mx-2 bg-red-500 text-white rounded"><i class="fa fa-trash"></i></button>
-                </td>
-            </tr>
-        @if($versionId == $version['id'])
-            <script>
-                loadPDF('{!! $version['src'] !!}', '{{$version['id']}}');
-            </script>
-        @endif
-        @endforeach            
-    </table>
-@endif
 
 <script>
-   
+    ppId = {{$ppId}}
+    function renderVersionTable(hits, selectedVersionId) {
+        if(hits.length == 0) return
+        let trs = ""
+        hits.forEach(hit=>{
+            let tr = `<tr>`
+            tr += `<td id="td-version-${hit['id']}" class="version-td p-1 cursor-pointer hover:border hover:border-blue-400 hover:border-dashed r1ounded">
+                    <span onclick="loadPDF('${hit['src']}', ${hit['id']})">
+                        ${hit['fileName']}
+                        <br/>
+                        <span class="flex gap-2">
+                            <img class="w-6 h-6 rounded-full" src="${hit['avatar']}" />
+                            ${hit['uploaded_by']}
+                            (${hit['uploaded_at']})
+                        </span>
+                    </span>                                
+                </td>`
+            tr += `<td class="text-center">
+                    <input name="published_version" 
+                        type="radio"                        
+                        class="p-1 m-2 cursor-pointer hover:underline" 
+                        ${hit['id'] == selectedVersionId ? 'checked' : ''}
+                        onclick="setPublishedVersion('${hit['id']}')"
+                        /> 
+                </td>`
+            tr += `<td>
+                    <button class="px-2 mx-2 bg-red-500 text-white rounded"><i class="fa fa-trash"></i></button>
+                </td>`
+            tr += `</tr>`
+
+            trs += tr
+        })
+        
+        const uploadBtn = `<div class="flex justify-center" id="divUpload">
+            <label class="w-full justify-center px-2 py-1 mx-2 bg-blue-500 text-white rounded flex cursor-pointer" for="aaabbbccc"> <i class="mx-1 fa fa-upload"></i> Upload PDF files...</label>
+            <input id="aaabbbccc" type="file" class="hidden" multiple />
+        </div>`
+
+        const table = `<table id="tableVersion" class="w-full">
+            <tr>
+                <th>File Name</th>
+                <th>Published</th>
+                <th></th>
+            </tr>
+            ${trs}
+        </table>`
+        $('#version-table').html(uploadBtn + table)
+
+        //This has to be done after the table is rendered
+        hits.forEach(hit=>{
+            if(hit['id'] == selectedVersionId) loadPDF(hit['src'], hit['id']);
+        })
+        onFileSelected()
+    }
+
+    function loadDynamicPublishedVersion(id){
+        $.ajax({
+            url: '{{$loadDynamicPublishedVersion}}',
+            type: 'GET',
+            data: {
+                ppId: id,
+            },
+            success: function(response) {
+                renderVersionTable(response.hits, response.selectedVersionId);
+            },
+            error: function(xhr, status, error) {
+                toastr.error(xhr.responseJSON);
+            }
+        });
+   }
 
     function setPublishedVersion(versionId) {
         $.ajax({
@@ -98,4 +131,6 @@
             }
         });
     }
+
+    loadDynamicPublishedVersion(ppId);
 </script>
