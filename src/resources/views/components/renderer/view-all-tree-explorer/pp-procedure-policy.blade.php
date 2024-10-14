@@ -5,13 +5,13 @@
     </div>
     <div class="col-span-4 border rounded bg-blue-100 p-2">
         <x-renderer.card title="Owning Department">
-            Accounting 
-            <a href="{{$editPPRoute}}">(Edit)</a>
+            Accounting             
         </x-renderer.card>
         
         <x-renderer.card title="Published Version">
             <x-renderer.view-all-tree-explorer.pp-procedure-policy-published-version
                 ppId="{{$ppId}}"
+                versionId="{{$versionId}}"
                 updatePPRoute="{{$updatePPRoute}}"
                 :versions="$versions"
                 />

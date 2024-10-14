@@ -41,14 +41,19 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             ])
             ->first();
         $notifyToId = $pp->notify_to ?? 756;
+        $versionId = $pp->version_id;
         $versions = $this->getVersions($pp);
         $notifyTo = Term::query()->where('field_id', 318)->get();
 
         return view('components.renderer.view-all-tree-explorer.pp-procedure-policy', [
             'ppId' => $ppId,
+
             'notifyToId' => $notifyToId,
             'notifyTo' => $notifyTo,
+
+            'versionId' => $versionId,
             'versions' => $versions,
+
             'editPPRoute' => route("pp_procedure_policies.edit", $ppId),
             'updatePPRoute' => route("pp_procedure_policies.updateShortSingle"),
             'loadDynamicNotifyToTree' => route("pp_procedure_policy_notify_to_tree_explorer"),
