@@ -49,7 +49,15 @@
 <script>
     ppId = {{$ppId}}
     function renderVersionTable(hits, selectedVersionId) {
-        if(hits.length == 0) return
+        const uploadBtn = `<div class="flex justify-center" id="divUpload">
+            <label class="w-full justify-center px-2 py-1 mx-2 bg-blue-500 text-white rounded flex cursor-pointer" for="aaabbbccc"> <i class="mx-1 fa fa-upload"></i> Upload PDF files...</label>
+            <input id="aaabbbccc" type="file" class="hidden" multiple />
+        </div>`
+        if(hits.length == 0) {
+            $('#version-table').html(uploadBtn)
+            onFileSelected()
+            return
+        }
         let trs = ""
         hits.forEach(hit=>{
             let tr = `<tr>`
@@ -80,10 +88,7 @@
             trs += tr
         })
         
-        const uploadBtn = `<div class="flex justify-center" id="divUpload">
-            <label class="w-full justify-center px-2 py-1 mx-2 bg-blue-500 text-white rounded flex cursor-pointer" for="aaabbbccc"> <i class="mx-1 fa fa-upload"></i> Upload PDF files...</label>
-            <input id="aaabbbccc" type="file" class="hidden" multiple />
-        </div>`
+       
 
         const table = `<table id="tableVersion" class="w-full">
             <tr>
