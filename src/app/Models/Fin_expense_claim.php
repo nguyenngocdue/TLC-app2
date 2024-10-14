@@ -149,24 +149,24 @@ class Fin_expense_claim extends ModelExtended
     public function comment_asm_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
     public function comment_insp_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
     public function comment_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 
     public function attachment_doc_travel_expense_claim()
     {
         $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
     }
 }
