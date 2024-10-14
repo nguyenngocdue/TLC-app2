@@ -53,6 +53,10 @@ return new class extends Migration
             $table->string("total_reimbursed_in_words_0")->nullable();
             $table->string("total_reimbursed_in_words_1")->nullable();
 
+            $table->unsignedBigInteger("assignee_1")->nullable();
+            $table->unsignedBigInteger("assignee_2")->nullable();
+            $table->unsignedBigInteger("assignee_3")->nullable();
+
             $table->hasStatus();
             $table->appendCommonFields();
         });

@@ -40,6 +40,10 @@ class Fin_expense_claim extends ModelExtended
         "total_reimbursed",
         "total_reimbursed_in_words_0",
         "total_reimbursed_in_words_1",
+
+        "assignee_1",
+        "assignee_2",
+        "assignee_3",
     ];
 
     // public static $statusless = true;
@@ -61,6 +65,10 @@ class Fin_expense_claim extends ModelExtended
         "getTravelFromPlace" => ['belongsTo', Act_travel_place::class, 'travel_from_place_id'],
         "getTravelToPlace" => ['belongsTo', Act_travel_place::class, 'travel_to_place_id'],
         "getTravelPlacePair" => ['belongsTo', Act_travel_place_pair::class, 'travel_place_pair_id'],
+
+        "getAssignee1" => ['belongsTo', User::class, 'assignee_1'],
+        "getAssignee2" => ['belongsTo', User::class, 'assignee_2'],
+        "getAssignee3" => ['belongsTo', User::class, 'assignee_3'],
 
         "comment_asm_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
@@ -142,6 +150,24 @@ class Fin_expense_claim extends ModelExtended
     }
 
     public function getTravelPlacePair()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAssignee1()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAssignee2()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAssignee3()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
