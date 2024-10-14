@@ -27,9 +27,3 @@
         </x-renderer.card>
     </div>
 </div>
-
-<script>
-    function loadPDF(pdfUrl) {
-        $('#pdfEmbed').attr('src', pdfUrl);
-    }
-</script>

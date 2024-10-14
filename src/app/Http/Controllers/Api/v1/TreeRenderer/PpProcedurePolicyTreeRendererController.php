@@ -17,6 +17,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             $src = $avatar ? $avatar->url_thumbnail : '/images/avatar.jpg';
             $src = app()->pathMinio($src);
             return [
+                "id" => $att->id,
                 "fileName" => $att->filename,
                 'avatar' => $src,
                 "src" => app()->pathMinio($att->url_media),

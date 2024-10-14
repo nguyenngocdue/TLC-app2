@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text("description")->nullable();
 
             $table->unsignedBigInteger("department_id")->nullable();
+            $table->unsignedBigInteger("version_id")->nullable();
             $table->unsignedBigInteger("notify_to")->nullable();
             $table->unsignedBigInteger("notify_schedule")->nullable();
 

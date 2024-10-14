@@ -13,6 +13,7 @@ class Pp_procedure_policy extends ModelExtended
         "department_id",
         "notify_to",
         "notify_schedule",
+        "version_id",
 
         "owner_id",
         "deleted_by",

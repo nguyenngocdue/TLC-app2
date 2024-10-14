@@ -22,7 +22,11 @@
                     </span>                                
                 </td>
                 <td class="text-center">
-                    <input class="p-1 m-2 cursor-pointer hover:underline" name="published_version" type="radio" class=""/> 
+                    <input name="published_version" 
+                        type="radio"
+                        class="p-1 m-2 cursor-pointer hover:underline" 
+                        onclick="setPublishedVersion('{{$version['id']}}')"                        
+                        /> 
                 </td>
                 <td>
                     <button class="px-2 mx-2 bg-red-500 text-white rounded"><i class="fa fa-trash"></i></button>
@@ -31,3 +35,23 @@
         @endforeach            
     </table>
 @endif
+
+<script>
+    function loadPDF(pdfUrl) {
+        $('#pdfEmbed').attr('src', pdfUrl);
+    }
+
+    function setPublishedVersion(versionId) {
+        $.ajax({
+            url: '{{$updatePPRoute}}',
+            type: 'POST',
+            data: {
+                id: '{{$ppId}}',
+                version_id: versionId
+            },
+            success: function(response) {
+                console.log(response);
+            }
+        });
+    }
+</script>

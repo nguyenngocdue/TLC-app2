@@ -11,7 +11,7 @@
         {{$notifyToItem->name}}
     </label>
     {{-- {{$notifyToItem->id ." ". $notifyToId}} --}}
-    <br/>    
+    <br/>
 @endforeach
 
 <div id="json_tree_2_container" class="my-2 rounded border hidden">
@@ -48,7 +48,7 @@
                 // console.log("filter only HOD", jsonTree2a);
                 $('#json_tree_2_container').show();                
                 break;
-                case 759: // Member
+            case 759: // Member
                 $('#json_tree_2').jstree("destroy").empty();
                 jsonTree2a = JSON.parse(JSON.stringify(jsonTree2))
                 .filter(node => node.id.startsWith('member') || node.id.startsWith('department_'));//Both members_ and member_

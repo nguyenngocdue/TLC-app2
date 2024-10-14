@@ -3,6 +3,7 @@
 namespace App\View\Components\Renderer\ViewAllTreeType;
 
 use App\Models\Department;
+use App\Utils\Support\CurrentUser;
 
 class PpProcedurePolicy extends ViewAllTypeTreeExplorer
 {
@@ -47,9 +48,11 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
         $result = [];
         foreach ($procedureItems as $procedure) {
             if (!$procedure->department_id) continue;
+            $route = (CurrentUser::isAdmin()) ? route('pp_procedure_policies.edit', $procedure->id) : '';
+            $link = $route ? "<a href='$route' class='text-blue-400 ml-2' target='_blank'><i class='fa-regular fa-edit'></i></a>" : '';
             $result[] = [
                 "id" => $procedure->id,
-                "text" => $procedure->name,
+                "text" => $procedure->name . $link,
                 'parent' => 'department_' . $procedure->department_id,
                 'icon' => "fa-regular fa-file text-blue-400",
                 "data" => [
