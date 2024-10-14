@@ -54,6 +54,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             'versionId' => $versionId,
             'versions' => $versions,
 
+            'uploadPPRoute' => route("pp_procedure_policies.uploadShortSingle"),
             'editPPRoute' => route("pp_procedure_policies.edit", $ppId),
             'updatePPRoute' => route("pp_procedure_policies.updateShortSingle"),
             'loadDynamicNotifyToTree' => route("pp_procedure_policy_notify_to_tree_explorer"),

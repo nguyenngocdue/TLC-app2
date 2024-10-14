@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitChangeStatusMultiple;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitCreateNewShort;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitUpdateShortSingle;
-// use App\Http\Controllers\Entities\ZZTraitApi\TraitGetLines;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitKanban;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitSearchable;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitStoreEmpty;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitUpdateShort;
+use App\Http\Controllers\Entities\ZZTraitApi\TraitUploadShortSingle;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSupportEntityCRUDCreateEdit2;
@@ -25,11 +25,11 @@ class EntityCRUDControllerForApi extends Controller
 
 	use TraitCreateNewShort;
 	use TraitUpdateShortSingle;
+	use TraitUploadShortSingle;
 
 	use TraitStoreEmpty;
 	use TraitUpdateShort;
 	use TraitChangeStatusMultiple;
-	// use TraitGetLines;
 	use TraitSearchable;
 	use TraitKanban;
 

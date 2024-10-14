@@ -13,6 +13,8 @@
                 ppId="{{$ppId}}"
                 versionId="{{$versionId}}"
                 updatePPRoute="{{$updatePPRoute}}"
+                uploadPPRoute="{{$uploadPPRoute}}"
+
                 :versions="$versions"
                 />
         </x-renderer.card>

@@ -65,6 +65,7 @@ class UploadService2
             $attachmentRows = [];
             foreach ($filesUpload as $fieldName => $files) {
                 $files = $files['toBeUploaded'];
+                // Log::info($fieldName);
                 $isGrouped = array_keys($files)[0] != 0; // If no grouped, the keys will be 0, 1, 2, ...
                 foreach ($files as $groupId => $groupItems) {
                     $property = Properties::getFor('attachment', '_' . $fieldName);
@@ -133,6 +134,7 @@ class UploadService2
                     }
                 }
             }
+            // Log::info($attachmentRows);
             // dd($attachmentRows);
             $invertedFields = array_flip($fields);
             $result = [];
@@ -145,6 +147,7 @@ class UploadService2
         } catch (ValidationException $ve) {
             toastr()->warning($ve->getMessage() . "<br/>", 'Upload File Failed');
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             dd($e);
             // toastr()->warning($e, 'Upload File Warning');
         }

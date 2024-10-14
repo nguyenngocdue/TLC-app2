@@ -1,6 +1,37 @@
-<button class="px-2 mx-2 bg-blue-500 text-white rounded">
-    <i class="fa fa-upload"></i> Upload File...
-</button>
+<div class="flex" id="divUpload">
+    <label class="px-2 mx-2 bg-blue-500 text-white rounded flex" for="aaabbb"> <i class="fa fa-upload"></i> Upload</label>
+    <input id="aaabbb" type="file" multiple />
+</div>
+
+<script>
+    $('#aaabbb').on('change', function () {
+        $("#divUpload").html("Uploading...");
+        var formData = new FormData();
+        formData.append('id', '{{$ppId}}');
+
+        // Add all selected files to the FormData object
+        $.each(this.files, function (index, file) {
+            formData.append('attachment_procedure_policy[toBeUploaded][0][]', file);
+        });
+
+        // AJAX request to upload the files
+        $.ajax({
+            url: "{{$uploadPPRoute}}",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                // Handle success response
+                toastr.success(response.message);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr);
+                toastr.error(xhr.responseJSON);
+            }
+        });
+    });
+</script>
 
 <script>
      function loadPDF(pdfUrl, versionId) {

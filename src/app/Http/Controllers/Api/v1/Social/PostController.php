@@ -4,18 +4,14 @@ namespace App\Http\Controllers\Api\v1\Social;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityAttachment2;
-use App\Http\Services\UploadService2;
 use App\Models\Post;
 use App\Utils\Support\CurrentUser;
-use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     use TraitEntityAttachment2;
-    public function index()
-    {
-    }
+    public function index() {}
     public function store(Request $request)
     {
         try {
