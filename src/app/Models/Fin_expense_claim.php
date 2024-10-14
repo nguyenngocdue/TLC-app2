@@ -11,6 +11,7 @@ class Fin_expense_claim extends ModelExtended
         "description",
         "owner_id",
         "user_id",
+        "status",
         "employee_id",
         "user_discipline_id",
         "receiving_method_id",

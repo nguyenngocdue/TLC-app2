@@ -53,6 +53,7 @@ return new class extends Migration
             $table->string("total_reimbursed_in_words_0")->nullable();
             $table->string("total_reimbursed_in_words_1")->nullable();
 
+            $table->hasStatus();
             $table->appendCommonFields();
         });
     }
