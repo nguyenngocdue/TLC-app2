@@ -1,0 +1,58 @@
+{
+    "new": {
+        "name": "new",
+        "status_title": "",
+        "label": "Create New",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "pending_endorsement": {
+        "name": "pending_endorsement",
+        "status_title": "",
+        "label": "Submit to Line Manager",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "endorsement_rejected": {
+        "name": "endorsement_rejected",
+        "status_title": "",
+        "label": "Reject Endorsement",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "status_title": "",
+        "label": "Request for HR Verification",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "verification_rejected": {
+        "name": "verification_rejected",
+        "status_title": "",
+        "label": "Reject Verification",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "status_title": "",
+        "label": "Request for ACC Approval",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "status_title": "",
+        "label": "Reject Approval",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "closed": {
+        "name": "closed",
+        "status_title": "",
+        "label": "Close",
+        "tooltip": "",
+        "change_status_multiple": ""
+    }
+}

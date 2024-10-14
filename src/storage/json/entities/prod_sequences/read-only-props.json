@@ -109,12 +109,22 @@
         "cancelled": "",
         "not_applicable": ""
     },
-    "_getProdRunsRework": {
-        "name": "_getProdRunsRework",
-        "column_name": "getProdRunsRework",
+    "_getProdRunsRework1": {
+        "name": "_getProdRunsRework1",
+        "column_name": "getProdRunsRework1",
         "new": "",
         "in_progress": "",
-        "finished": "true",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_getProdRunsRework2": {
+        "name": "_getProdRunsRework2",
+        "column_name": "getProdRunsRework2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
         "on_hold": "",
         "cancelled": "",
         "not_applicable": ""
@@ -232,6 +242,66 @@
     "_total_man_hours_1": {
         "name": "_total_man_hours_1",
         "column_name": "total_man_hours_1",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_start_date_2": {
+        "name": "_start_date_2",
+        "column_name": "start_date_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_end_date_2": {
+        "name": "_end_date_2",
+        "column_name": "end_date_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_uom_agg_2": {
+        "name": "_uom_agg_2",
+        "column_name": "uom_agg_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_hours_2": {
+        "name": "_total_hours_2",
+        "column_name": "total_hours_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_worker_number_2": {
+        "name": "_worker_number_2",
+        "column_name": "worker_number_2",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_total_man_hours_2": {
+        "name": "_total_man_hours_2",
+        "column_name": "total_man_hours_2",
         "new": "",
         "in_progress": "",
         "finished": "",
@@ -362,6 +432,16 @@
     "_comment_cancel_reason": {
         "name": "_comment_cancel_reason",
         "column_name": "comment_cancel_reason",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": ""
+    },
+    "_comment_na_reason": {
+        "name": "_comment_na_reason",
+        "column_name": "comment_na_reason",
         "new": "",
         "in_progress": "",
         "finished": "",

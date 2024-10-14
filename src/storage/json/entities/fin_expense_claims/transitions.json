@@ -1,0 +1,98 @@
+{
+    "new": {
+        "name": "new",
+        "location": "-460.00 0.00",
+        "new": "",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "pending_endorsement": {
+        "name": "pending_endorsement",
+        "location": "-270.00 0.00",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "true",
+        "pending_verification": "true",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "endorsement_rejected": {
+        "name": "endorsement_rejected",
+        "location": "-270.00 -90.00",
+        "new": "",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "location": "-80.00 0.00",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "verification_rejected": {
+        "name": "verification_rejected",
+        "location": "-80.00 -90.00",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "true",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "location": "130.00 0.00",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "true",
+        "closed": "true"
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "location": "130.00 -90.00",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "closed": {
+        "name": "closed",
+        "location": "320.00 0.00",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    }
+}

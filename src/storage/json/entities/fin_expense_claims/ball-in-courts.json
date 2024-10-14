@@ -1,0 +1,58 @@
+{
+    "new": {
+        "name": "new",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "pending_endorsement": {
+        "name": "pending_endorsement",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "endorsement_rejected": {
+        "name": "endorsement_rejected",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "pending_verification": {
+        "name": "pending_verification",
+        "ball-in-court-assignee": "assignee_2",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "verification_rejected": {
+        "name": "verification_rejected",
+        "ball-in-court-assignee": "assignee_1",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "pending_approval": {
+        "name": "pending_approval",
+        "ball-in-court-assignee": "assignee_3",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "approval_rejected": {
+        "name": "approval_rejected",
+        "ball-in-court-assignee": "assignee_2",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "closed": {
+        "name": "closed",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    }
+}
