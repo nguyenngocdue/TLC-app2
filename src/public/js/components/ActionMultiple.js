@@ -3,19 +3,19 @@ const actionCheckboxAll = (type) => {
     $(queryStr).prop('checked', !$(queryStr).prop('checked'))
 }
 
-const actionConfirmObject = (checkedValues, action) => ({
-    title: 'Are you sure?',
-    text:
-        'You are about to ' +
-        action +
-        ' the following item(s): ' +
-        checkedValues.join(', '),
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonText: 'OK',
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-})
+const actionConfirmObject = (checkedValues, action) => {
+    const item = checkedValues.length > 1 ? 'items' : 'item'
+    const x = {
+        title: 'Are you sure?',
+        html: `You are about to ${action} the following ${item}: ` + checkedValues.map((e) => `<li>${e}</li>`).join(''),
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+    }
+    return x
+}
 
 const actionSuccessObject = (message, action) => ({
     title: action + ' Successfully',
@@ -46,31 +46,21 @@ const ajaxSendRequest = (type = 'get', url, strIds, name = 'Duplicated') => {
         success: function (response) {
             if (response.success) {
                 if (response.hits.length > 0) {
-                    var duplicateSuccess =
-                        response.hits.length > 0 ? response.hits : 'empty'
+                    var duplicateSuccess = response.hits.length > 0 ? response.hits : 'empty'
                     var message = `Document ID(s): ${duplicateSuccess}`
-                    Swal.fire(actionSuccessObject(message, name)).then(() =>
-                        setTimeout(location.reload.bind(location), 500)
-                    )
+                    Swal.fire(actionSuccessObject(message, name)).then(() => setTimeout(location.reload.bind(location), 500))
                 }
                 if (response.meta[0].length > 0) {
-                    var duplicateFail =
-                        response.meta[0].length > 0 ? response.meta[0] : 'empty'
+                    var duplicateFail = response.meta[0].length > 0 ? response.meta[0] : 'empty'
                     var message = `Document ID: ${duplicateFail}. Please check setting and permission!`
-                    Swal.fire(actionFailObject(message, name)).then(() =>
-                        setTimeout(location.reload.bind(location), 500)
-                    )
+                    Swal.fire(actionFailObject(message, name)).then(() => setTimeout(location.reload.bind(location), 500))
                 }
             } else {
-                Swal.fire(actionFailObject(response.message, name)).then(() =>
-                    setTimeout(location.reload.bind(location), 500)
-                )
+                Swal.fire(actionFailObject(response.message, name)).then(() => setTimeout(location.reload.bind(location), 500))
             }
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            Swal.fire(actionFailObject(jqXHR.responseJSON.message, name)).then(
-                () => setTimeout(location.reload.bind(location), 500)
-            )
+        error: function (jqXHR) {
+            Swal.fire(actionFailObject(jqXHR.responseJSON.message, name)).then(() => setTimeout(location.reload.bind(location), 500))
         },
     })
 }
@@ -86,12 +76,7 @@ const getCheckedValues = (type) => {
     return checkedValues.filter(($item) => $item !== 'none')
 }
 
-const actionMultiple = (
-    type,
-    url,
-    actionFunc = 'duplicated',
-    checkedValues = []
-) => {
+const actionMultiple = (type, url, actionFunc = 'duplicated', checkedValues = []) => {
     switch (actionFunc) {
         case 'deleted':
             method = 'delete'
@@ -120,14 +105,12 @@ const actionMultiple = (
     }
     if (checkedValues.length > 0) {
         var strIds = checkedValues.join(',') ?? ''
-
-        Swal.fire(actionConfirmObject(checkedValues, nameConfirm)).then(
-            (result) => {
-                if (result.isConfirmed) {
-                    ajaxSendRequest(method, url, strIds, nameSendRequest)
-                }
+        // var strIds = checkedValues.map((e) => `<li>${e}</li>`) //join(',') ?? ''
+        Swal.fire(actionConfirmObject(checkedValues, nameConfirm)).then((result) => {
+            if (result.isConfirmed) {
+                ajaxSendRequest(method, url, strIds, nameSendRequest)
             }
-        )
+        })
     } else {
         Swal.fire(actionNotFoundObject(nameNotFound))
     }
