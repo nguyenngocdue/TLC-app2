@@ -36,7 +36,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/number-to-words.js') }}"></script>
     <script src="{{ asset('js/number-to-words-vn.js') }}"></script>
-    <script src="{{ asset('js/double-to-words.js') }}"></script>
+    <script src="{{ asset('js/double-to-words-20241015.js') }}"></script>
     
     <script src="{{ asset('js/lazysizes.js') }}"></script>
     <script src="{{ asset('js/flatpickr@4.6.13.min.js') }}"></script>
