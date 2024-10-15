@@ -24,9 +24,12 @@ class Breadcrumb extends Component
         'permission_matrix'
     ];
     private $action = null;
+    private $type = null;
+
     public function __construct()
     {
         $this->action = CurrentRoute::getControllerAction();
+        $this->type = CurrentRoute::getTypePlural();
     }
 
     private function makeUpReports($allReports)
@@ -35,6 +38,8 @@ class Breadcrumb extends Component
         $result = [];
         foreach ($allReports as $reportType => $reports) {
             foreach ($reports as $mode => $report) {
+                if ($this->type == 'eco_sheets') continue;
+
                 $breadcrumbGroup = $report['breadcrumbGroup'] ?: "General";
                 $result[$breadcrumbGroup][] = [
                     'title' => $report['title'],
