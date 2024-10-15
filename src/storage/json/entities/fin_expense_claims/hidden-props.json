@@ -227,18 +227,6 @@
         "approval_rejected": "",
         "closed": ""
     },
-    "_travel_allowance_per_day": {
-        "name": "_travel_allowance_per_day",
-        "column_name": "travel_allowance_per_day",
-        "new": "",
-        "pending_endorsement": "",
-        "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
-    },
     "_travel_from_date": {
         "name": "_travel_from_date",
         "column_name": "travel_from_date",
@@ -254,6 +242,30 @@
     "_travel_to_date": {
         "name": "_travel_to_date",
         "column_name": "travel_to_date",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "_travel_allowance_per_day": {
+        "name": "_travel_allowance_per_day",
+        "column_name": "travel_allowance_per_day",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "_travel_currency_id": {
+        "name": "_travel_currency_id",
+        "column_name": "travel_currency_id",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
@@ -290,18 +302,6 @@
     "_hr_adjusted_date_count_1": {
         "name": "_hr_adjusted_date_count_1",
         "column_name": "hr_adjusted_date_count_1",
-        "new": "",
-        "pending_endorsement": "",
-        "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
-    },
-    "_travel_currency_id": {
-        "name": "_travel_currency_id",
-        "column_name": "travel_currency_id",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
@@ -573,7 +573,7 @@
         "verification_rejected": "true",
         "pending_approval": "true",
         "approval_rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "_comment_insp_rejected_reason": {
         "name": "_comment_insp_rejected_reason",
@@ -585,7 +585,7 @@
         "verification_rejected": "true",
         "pending_approval": "true",
         "approval_rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -597,7 +597,7 @@
         "verification_rejected": "true",
         "pending_approval": "",
         "approval_rejected": "true",
-        "closed": "true"
+        "closed": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
