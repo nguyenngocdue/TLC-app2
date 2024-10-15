@@ -16,6 +16,7 @@ trait TraitManageDefaultValueColumns
                 "dataIndex" => "column_name",
                 "renderer" => "read-only-text4",
                 "editable" => true,
+                "width" => 150,
             ],
             [
                 "dataIndex" => "label",
@@ -28,6 +29,7 @@ trait TraitManageDefaultValueColumns
                 "renderer" => "text4",
                 'title' => "Validation Rules<br/><a class='text-blue-700 underline' target='_blank' href='https://laravel.com/docs/9.x/validation#available-validation-rules'>Open Laravel Doc</a>",
                 'subTitle' => 'required|date_format:Y-m-d<br/>required|date_format:H:i:s<br/>nullable|date_format:Y-m-d H:i:s',
+                "width" => 200,
             ],
             [
                 "dataIndex" => "validation_regex",
@@ -35,6 +37,7 @@ trait TraitManageDefaultValueColumns
                 "renderer" => "text4",
                 'title' => "Validation Regex<br/><a class='text-blue-700 underline' target='_blank' href='https://regex101.com/'>Open Regex101</a>",
                 "properties" => ['placeholder' => '/^[0-9]+$/'],
+                "width" => 200,
             ],
             [
                 "dataIndex" => "formula",
@@ -56,6 +59,7 @@ trait TraitManageDefaultValueColumns
                     '(not-yet)format_compliance',
                 ],
                 "properties" => ['strFn' => 'same'],
+                "width" => 200,
             ],
             [
                 "dataIndex" => "default_value",
@@ -91,6 +95,7 @@ trait TraitManageDefaultValueColumns
                 "renderer" => "number4",
                 "editable" => true,
                 "properties" => ["placeholder" => 5],
+                "width" => 50,
             ],
         ];
     }
