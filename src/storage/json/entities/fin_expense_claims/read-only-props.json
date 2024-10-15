@@ -28,7 +28,7 @@
         "column_name": "user_id",
         "new": "",
         "pending_endorsement": "true",
-        "endorsement_rejected": "",
+        "endorsement_rejected": "true",
         "pending_verification": "true",
         "verification_rejected": "true",
         "pending_approval": "true",

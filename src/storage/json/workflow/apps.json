@@ -76,36 +76,6 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
-    "act_travel_expense_claim": {
-        "name": "act_travel_expense_claim",
-        "package_tab": "application",
-        "package": "finance",
-        "sub_package": "accounting",
-        "title": "Travel Expense Claims",
-        "nickname": "tec",
-        "tutorial_link": null,
-        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": null,
-        "show_renderer": null
-    },
-    "act_travel_expense_claim_line": {
-        "name": "act_travel_expense_claim_line",
-        "package_tab": "application",
-        "package": "finance",
-        "sub_package": "accounting",
-        "title": "Travel Expense Claim Lines",
-        "nickname": "tecl",
-        "tutorial_link": null,
-        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
-        "doc_id_format_column": null,
-        "status": null,
-        "edit_renderer": null,
-        "show_renderer": null,
-        "hidden": "true",
-        "hidden_navbar": "true"
-    },
     "act_travel_place": {
         "name": "act_travel_place",
         "package_tab": "application",

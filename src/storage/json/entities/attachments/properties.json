@@ -119,6 +119,18 @@
         "hide_upload_date": "",
         "show_url": ""
     },
+    "_attachment_doc_travel_expense_claim": {
+        "name": "_attachment_doc_travel_expense_claim",
+        "field_id": "173",
+        "field_name": "attachment_doc_travel_expense_claim",
+        "max_file_size": "10",
+        "max_file_count": "10",
+        "allowed_file_types": "all_supported",
+        "group_array": "",
+        "hide_uploader": "",
+        "hide_upload_date": "",
+        "show_url": ""
+    },
     "_attachment_eco_sht": {
         "name": "_attachment_eco_sht",
         "field_id": "160",
@@ -374,7 +386,7 @@
     "_attachment_procedure_policy": {
         "name": "_attachment_procedure_policy",
         "field_id": "317",
-        "field_name": "",
+        "field_name": "attachment_procedure_policy",
         "max_file_size": "10",
         "max_file_count": "10",
         "allowed_file_types": "only_non_media",
