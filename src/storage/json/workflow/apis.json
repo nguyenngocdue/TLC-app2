@@ -388,6 +388,15 @@
     "loggers": {
         "name": "loggers"
     },
+    "pj_drawing_arc_types": {
+        "name": "pj_drawing_arc_types"
+    },
+    "pj_drawing_mepf_types": {
+        "name": "pj_drawing_mepf_types"
+    },
+    "pj_drawing_str_types": {
+        "name": "pj_drawing_str_types"
+    },
     "pj_module_types": {
         "name": "pj_module_types"
     },
@@ -429,7 +438,9 @@
     "pp_procedure_policies": {
         "name": "pp_procedure_policies",
         "createNewShort": "true",
-        "updateShortSingle": "true"
+        "updateShortSingle": "true",
+        "uploadFileShortSingle": "true",
+        "deleteFileShortSingle": "true"
     },
     "priorities": {
         "name": "priorities"

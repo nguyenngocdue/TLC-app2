@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Entities;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitChangeStatusMultiple;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitCreateNewShort;
+use App\Http\Controllers\Entities\ZZTraitApi\TraitDeleteFileShortSingle;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitUpdateShortSingle;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitKanban;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitSearchable;
@@ -26,6 +27,7 @@ class EntityCRUDControllerForApi extends Controller
 	use TraitCreateNewShort;
 	use TraitUpdateShortSingle;
 	use TraitUploadFileShortSingle;
+	use TraitDeleteFileShortSingle;
 
 	use TraitStoreEmpty;
 	use TraitUpdateShort;

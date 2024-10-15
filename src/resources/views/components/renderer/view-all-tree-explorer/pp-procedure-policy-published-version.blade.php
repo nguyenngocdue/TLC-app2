@@ -40,7 +40,22 @@
         Swal.fire(actionConfirmObject([fileName], "DELETE")).then(
             (result) => {
                 if (result.isConfirmed) {
-                    ajaxSendRequest(method, url, strIds, nameSendRequest)
+                    $.ajax({
+                        url: "{{$deleteFilePPRoute}}",
+                        type: 'POST',
+                        data: {
+                            id: versionId
+                        },
+                        success: function (response) {
+                            // Handle success response
+                            // toastr.success(response.message);
+                            loadDynamicPublishedVersion('{{$ppId}}');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            toastr.error(xhr.responseJSON);
+                        }
+                    });
                 }
             }
         )

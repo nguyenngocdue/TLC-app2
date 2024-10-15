@@ -16,10 +16,10 @@ Route::group([
     foreach ($apps as $app) {
         $tableName = $app['name'];
         if ($app['createNewShort'] ?? false) Route::post("{$tableName}_createNewShort", [EntityCRUDControllerForApi::class, 'createNewShort'])->name($tableName . ".createNewShort");
-        if ($app['updateShortSingle'] ?? false) {
-            Route::post("{$tableName}_updateShortSingle", [EntityCRUDControllerForApi::class, 'updateShortSingle'])->name($tableName . ".updateShortSingle");
-            Route::post("{$tableName}_uploadFileShortSingle", [EntityCRUDControllerForApi::class, 'uploadFileShortSingle'])->name($tableName . ".uploadFileShortSingle");
-        }
+        if ($app['updateShortSingle'] ?? false) Route::post("{$tableName}_updateShortSingle", [EntityCRUDControllerForApi::class, 'updateShortSingle'])->name($tableName . ".updateShortSingle");
+
+        if ($app['uploadFileShortSingle'] ?? false) Route::post("{$tableName}_uploadFileShortSingle", [EntityCRUDControllerForApi::class, 'uploadFileShortSingle'])->name($tableName . ".uploadFileShortSingle");
+        if ($app['deleteFileShortSingle'] ?? false) Route::post("{$tableName}_deleteFileShortSingle", [EntityCRUDControllerForApi::class, 'deleteFileShortSingle'])->name($tableName . ".deleteFileShortSingle");
 
         if ($app['storeEmpty_and_updateShort'] ?? false) Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");
         if ($app['storeEmpty_and_updateShort'] ?? false) Route::post("{$tableName}_updateShort", [EntityCRUDControllerForApi::class, 'updateShort'])->name($tableName . ".updateShort");

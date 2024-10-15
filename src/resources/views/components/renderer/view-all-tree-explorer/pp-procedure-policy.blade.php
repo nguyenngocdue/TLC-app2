@@ -9,6 +9,7 @@
                 ppId="{{$ppId}}"
                 versionId="{{$versionId}}"
                 uploadFilePPRoute="{{$uploadFilePPRoute}}"
+                deleteFilePPRoute="{{$deleteFilePPRoute}}"
                 updatePPRoute="{{$updatePPRoute}}"
                 loadDynamicPublishedVersion="{{$loadDynamicPublishedVersion}}"
                 />
