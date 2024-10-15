@@ -76,7 +76,7 @@ class EndOfWeekRemindListener
                     'user_name' => $user->name,
                     'url' => route("hr_timesheet_officers.index"),
                 ]);
-                $workplaceName = Workplace::findFromCache($user->current_workplace)->name;
+                $workplaceName = Workplace::findFromCache($user->current_workplace)->name ?? "Orphan Workplace";
                 $workplaceNames[] = $workplaceName;
                 $mail->subject = $this->mailSubject . " - ($workplaceName) - " . date('Y');
                 Mail::to($user->email)
