@@ -18,7 +18,7 @@ class ManageDefaultValues extends Manage_Parent
     public function getDataSource()
     {
         $allProps = Props::getAllOf($this->type);
-        $dataInJson = DefaultValues::getAllOf($this->type);
+        $dataInJson = DefaultValues::getAllOfRaw($this->type);
         $standardDefaultValues = LibStandardDefaultValues::getAll();
         $standardDefaultValueKeys = array_keys($standardDefaultValues);
         $result = [];

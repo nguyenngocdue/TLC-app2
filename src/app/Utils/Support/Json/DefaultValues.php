@@ -9,6 +9,12 @@ class DefaultValues extends JsonGetSet
 {
     protected static $filename = "default-values.json";
 
+    public static function getAllOfRaw($type)
+    {
+        $rawValues = parent::getAllOf($type);
+        return $rawValues;
+    }
+
     public static function getAllOf($type)
     {
         $rawValues = parent::getAllOf($type);
