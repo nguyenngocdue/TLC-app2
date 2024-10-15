@@ -14,14 +14,7 @@
     },
     "act_currency_xrs": {
         "name": "act_currency_xrs"
-    },
-    "act_travel_expense_claim_lines": {
-        "name": "act_travel_expense_claim_lines",
-        "storeEmpty_and_updateShort": "true"
-    },
-    "act_travel_expense_claims": {
-        "name": "act_travel_expense_claims"
-    },
+    },   
     "act_travel_place_pairs": {
         "name": "act_travel_place_pairs"
     },
