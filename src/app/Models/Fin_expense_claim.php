@@ -69,6 +69,7 @@ class Fin_expense_claim extends ModelExtended
         "getAssignee1" => ['belongsTo', User::class, 'assignee_1'],
         "getAssignee2" => ['belongsTo', User::class, 'assignee_2'],
         "getAssignee3" => ['belongsTo', User::class, 'assignee_3'],
+        "getMonitors1" => ['belongsToMany', User::class, 'ym2m_fin_expense_claim_user_monitor_1'],
 
         "comment_asm_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "comment_insp_rejected_reason" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
@@ -168,6 +169,12 @@ class Fin_expense_claim extends ModelExtended
     }
 
     public function getAssignee3()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getMonitors1()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
