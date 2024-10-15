@@ -64,6 +64,7 @@ class CommentGroup2a extends Component
         $currentUser = CurrentUser::get();
         $params = [];
         foreach ($comments as $comment) {
+            if ($comment->category != $category_id) continue;
             $user = User::findFromCache($comment->owner_id);
             $item = $this->getAnEmptyLine($counter, $index);
             $item['id']['value'] = $comment->id;
@@ -120,6 +121,7 @@ class CommentGroup2a extends Component
             if (is_null($this->commentIds)) {
                 $comments = $commentableItem->{$this->category};
             } else {
+                //This is comment of checkpoint in ICS
                 $comments = $commentableItem->getMorphManyByIds($this->commentIds, $this->category);
             }
         }
