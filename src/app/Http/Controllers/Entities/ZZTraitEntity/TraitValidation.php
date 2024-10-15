@@ -33,7 +33,7 @@ trait TraitValidation
     {
         $result = [];
         if ($action === 'store') {
-            $sp = $this->superProps;
+            $sp = $this->superProps();
             foreach ($sp['tables'] as $functions) {
                 foreach ($functions as $function) {
                     $result[] = '_' . $function;
@@ -45,12 +45,12 @@ trait TraitValidation
 
     private function getPropsInIntermediateScreen($oldStatus, $newStatus)
     {
-        $sp = $this->superProps;
+        $sp = $this->superProps();
         $intermediate = $sp["intermediate"];
         //In case comment is a fakeRequest, it wont have next status
         $transitions = isset($sp['statuses'][$oldStatus]) ? $sp['statuses'][$oldStatus]['transitions'] : [];
         //Remove the current transition
-        $transitions = array_filter($transitions, fn ($item) => $item != $newStatus);
+        $transitions = array_filter($transitions, fn($item) => $item != $newStatus);
         // dump($transitions);
         // dump($sp);
         // dump($intermediate);
@@ -85,8 +85,9 @@ trait TraitValidation
         if ($hasStatusColumn) {
             $result = $workflows[$oldStatus]['visible'];
         } else {
-            $props =  $this->superProps['props'];
-            $array = array_filter($props, fn ($prop) => $prop["hidden_edit"] !== 'true');
+            $superProps = $this->superProps();
+            $props =  $superProps['props'];
+            $array = array_filter($props, fn($prop) => $prop["hidden_edit"] !== 'true');
             $result = array_keys($array);
         }
         // dump($result);
@@ -97,7 +98,8 @@ trait TraitValidation
     {
         $result = [];
         $requiredProps = $hasStatusColumn ? $workflows[$oldStatus]['required'] : [];
-        foreach ($this->superProps['props'] as $prop) {
+        $superProps = $this->superProps();
+        foreach ($superProps['props'] as $prop) {
             $propName = $prop['name'];
             $rules = $this->getValidationInDefaultValuesScreen($prop);
             // dump($propName, $rules);

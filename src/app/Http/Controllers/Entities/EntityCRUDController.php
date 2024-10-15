@@ -20,6 +20,7 @@ use App\Http\Controllers\Workflow\LibApps;
 use App\Http\Services\UploadService2;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class EntityCRUDController extends Controller
 {
@@ -42,7 +43,6 @@ class EntityCRUDController extends Controller
 
 	protected $type;
 	protected $modelPath;
-	protected $superProps;
 
 	protected $uploadService2;
 	protected $permissionMiddleware;
@@ -56,7 +56,15 @@ class EntityCRUDController extends Controller
 		$this->middleware("permission:{$this->permissionMiddleware['create']}")->only('create');
 		$this->middleware("permission:{$this->permissionMiddleware['edit']}")->only('edit', 'store', 'update');
 		$this->middleware("permission:{$this->permissionMiddleware['delete']}")->only('destroy', 'destroyMultiple');
+		// Log::info(Auth::user());
+		// Log::info($request->getUser());
 		$this->postConstruct();
+	}
+
+
+	protected function superProps()
+	{
+		return SuperProps::getFor($this->type);
 	}
 
 	public function init($tableName)
@@ -68,7 +76,7 @@ class EntityCRUDController extends Controller
 	private function postConstruct()
 	{
 		$this->uploadService2 = new UploadService2($this->modelPath);
-		$this->superProps = SuperProps::getFor($this->type);
+		// $this->superProps = SuperProps::getFor($this->type);
 	}
 
 	public function getType()

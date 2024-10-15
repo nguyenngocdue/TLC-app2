@@ -60,7 +60,7 @@ trait TraitManageDefaultValueColumns
             [
                 "dataIndex" => "default_value",
                 "renderer" => "text4",
-                "subTitle" => "0<br/>1,2,3<br/>[ ]<br/>+7days<br/>16:00:00<br/>A String<br/>cuid()",
+                "subTitle" => "Number:0 | 1,2,3<br/>Array: [ ]<br/>Date: +7days<br/>Time: 16:00:00<br/>String: A String<br/>cu-id() <br/> cu-workplace-id() <br/> cu-employeeid-text() <br/> cu-position-id() <br/> cu-hod-id() <br/> cu-dda-id() <br/>cu-discipline-id()",
                 "editable" => true,
             ],
             [

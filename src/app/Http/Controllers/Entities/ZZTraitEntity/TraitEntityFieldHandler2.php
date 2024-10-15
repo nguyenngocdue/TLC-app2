@@ -37,7 +37,8 @@ trait TraitEntityFieldHandler2
         ];
 
         $dateTimeControls = JsonControls::getDateTimeControls();
-        foreach ($this->superProps['props'] as $prop) {
+        $superProps = $this->superProps();
+        foreach ($superProps['props'] as $prop) {
             if ($prop['hidden_edit']) continue;
             if (in_array($prop['control'], $dateTimeControls)) {
                 $column_type = 'datetime';
@@ -68,7 +69,7 @@ trait TraitEntityFieldHandler2
             }
         }
 
-        foreach ($this->superProps['props'] as $prop) {
+        foreach ($superProps['props'] as $prop) {
             // Log::info($prop['relationships']);
             $control_name = $prop['relationships']['control_name'] ?? false;
             // Log::info($control_name);
@@ -92,7 +93,7 @@ trait TraitEntityFieldHandler2
 
         //This is for Inspection Checklist Sheet screen
         $arrayCheck = ['qaqc_insp_chklst_sht', 'hse_insp_chklst_sht'];
-        if (in_array($this->superProps['type'], $arrayCheck)) {
+        if (in_array($superProps['type'], $arrayCheck)) {
             $result['editable_table'] = [
                 'table01' => '_getLines',
             ];
@@ -103,7 +104,8 @@ trait TraitEntityFieldHandler2
 
     private function handleToggle($dataSource)
     {
-        foreach ($this->superProps['props'] as $prop) {
+        $superProps = $this->superProps();
+        foreach ($superProps['props'] as $prop) {
             if ($prop['control'] === 'toggle') {
                 $column_name = $prop['column_name'];
                 $value = isset($dataSource[$column_name]) && $dataSource[$column_name];
@@ -115,7 +117,8 @@ trait TraitEntityFieldHandler2
 
     private function handleTextArea($dataSource, $action)
     {
-        foreach ($this->superProps['props'] as $prop) {
+        $superProps = $this->superProps();
+        foreach ($superProps['props'] as $prop) {
             if ($prop['control'] === 'textarea' && $prop['column_type'] === 'json') {
                 $column_name = $prop['column_name'];
                 $text = $dataSource[$column_name];
@@ -162,46 +165,14 @@ trait TraitEntityFieldHandler2
             $propNames[] = $propName;
         }
         if (!is_null($getManyLineParams)) {
-            $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
-            $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
+            $getManyLineParamsDataIndex = array_map(fn($i) => $i['dataIndex'], $getManyLineParams);
+            $propNames = array_filter($propNames, fn($i) => in_array($i, $getManyLineParamsDataIndex));
         }
         foreach ($propNames as $propName) {
             $values = $request->input($propName);
             $theRow->{$propName}()->syncWithPivotValues($values, ['owner_id' => $uid]);
         }
     }
-
-    // private function handleCheckboxAndDropdownMulti(Request $request, $theRow, array $oracyProps, array $getManyLineParams = null)
-    // {
-    //     // Log::info($this->type);
-    //     $propNames = [];
-    //     foreach ($oracyProps as $prop) {
-    //         $propName = substr($prop, 1); //Remove first "_"
-    //         $propNames[] = $propName;
-    //     }
-    //     // Log::info("PropNames to be modify m2m: " . join(", ", $propNames));
-
-    //     if (!is_null($getManyLineParams)) {
-    //         // Log::info("Filter oracy props according to getManyLineParams");
-    //         // Log::info($oracyProps);
-    //         // Log::info($getManyLineParams);
-    //         $getManyLineParamsDataIndex = array_map(fn ($i) => $i['dataIndex'], $getManyLineParams);
-    //         // Log::info($getManyLineParamsDataIndex);
-    //         $propNames = array_filter($propNames, fn ($i) => in_array($i, $getManyLineParamsDataIndex));
-    //     }
-    //     // Log::info("PropNames to be updated: " . join(", ", $propNames));
-
-    //     foreach ($propNames as $propName) {
-    //         $relatedModel = $this->superProps['props']['_' . $propName]['relationships']['oracyParams'][1];
-    //         $ids = $request->input($propName);
-    //         if (is_null($ids)) $ids = []; // Make sure it sync when unchecked all
-    //         $ids = array_map(fn ($id) => $id * 1, $ids);
-
-    //         $fieldName = substr($propName, 0, strlen($propName) - 2); //Remove parenthesis ()
-    //         $theRow->syncCheck($fieldName, $relatedModel, $ids);
-    //         $this->dump1("handleCheckboxAndDropdownMulti $propName", $ids, __LINE__);
-    //     }
-    // }
 
     private function removeAttachmentForFields(&$fields, $keyRemoves, $isFakeRequest, $allTable01Names)
     {
@@ -272,7 +243,7 @@ trait TraitEntityFieldHandler2
     {
         $tableNames = $request->input('tableNames');
         array_shift($tableNames); //Remove table00 (the_form)
-        $sp = $this->superProps;
+        $sp = $this->superProps();
         foreach ($tableNames as $table01Name => $tableName) {
             if ($request->input($table01Name)) { //User has submit at least one line
                 if (isset($sp['tables'][$tableName])) {
@@ -287,7 +258,8 @@ trait TraitEntityFieldHandler2
 
     private function makeUpAttachmentFieldForRequired($item, Request $request)
     {
-        $attachments = $this->superProps['attachments'];
+        $superProps = $this->superProps();
+        $attachments = $superProps['attachments'];
         // dump($attachments);
         foreach ($attachments as $attachment) {
             $function = substr($attachment, 1); //Remove leading underscore
@@ -321,7 +293,7 @@ trait TraitEntityFieldHandler2
         }
         // dump($result);
 
-        $result = array_filter($result, fn ($i) => $i);
+        $result = array_filter($result, fn($i) => $i);
         // dump($result);
 
         foreach ($result as $fieldName => $count) {
