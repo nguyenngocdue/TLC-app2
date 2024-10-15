@@ -60,6 +60,7 @@ trait TraitManageDefaultValueColumns
             [
                 "dataIndex" => "default_value",
                 "renderer" => "text4",
+                "subTitle" => "0<br/>1,2,3<br/>[ ]<br/>+7days<br/>16:00:00<br/>A String<br/>cuid()",
                 "editable" => true,
             ],
             [

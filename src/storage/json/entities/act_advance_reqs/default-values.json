@@ -19,15 +19,28 @@
         "validation": "required",
         "validation_regex": "",
         "formula": "",
+        "default_value": "cuid()",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_employee_id": {
+        "name": "_employee_id",
+        "column_name": "employee_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
         "default_value": "",
         "label_extra": "",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
+    "_user_discipline_id": {
+        "name": "_user_discipline_id",
+        "column_name": "user_discipline_id",
         "label": "",
         "validation": "",
         "validation_regex": "",
@@ -67,6 +80,19 @@
     "_title_vn": {
         "name": "_title_vn",
         "column_name": "title_vn",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
         "label": "",
         "validation": "",
         "validation_regex": "",

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Entities;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDCreateEdit2;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDCreate2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDDestroy;
+use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDEdit2;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklstSht;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowChklst;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowProject;
@@ -30,7 +31,9 @@ class EntityCRUDController extends Controller
 	use TraitEntityCRUDShowChklst;
 	use TraitEntityCRUDShowChklstSht;
 
-	use TraitEntityCRUDCreateEdit2;
+	use TraitEntityCRUDCreate2;
+	use TraitEntityCRUDEdit2;
+
 	use TraitEntityCRUDStore2;
 	use TraitEntityCRUDUpdate2;
 
