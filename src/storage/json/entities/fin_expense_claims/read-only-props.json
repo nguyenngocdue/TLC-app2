@@ -26,7 +26,7 @@
     "_user_id": {
         "name": "_user_id",
         "column_name": "user_id",
-        "new": "",
+        "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
         "pending_verification": "true",
@@ -491,18 +491,6 @@
         "approval_rejected": "true",
         "closed": "true"
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
-        "new": "",
-        "pending_endorsement": "",
-        "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
-    },
     "_comment_asm_rejected_reason": {
         "name": "_comment_asm_rejected_reason",
         "column_name": "comment_asm_rejected_reason",
@@ -530,6 +518,18 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",

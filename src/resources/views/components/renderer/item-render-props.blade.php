@@ -1,6 +1,6 @@
 <div class="p-2 sm:p-4 w-full {{$width}} {{$hiddenComponent}} grid grid-cols-12 bg-white dark:bg-gray-800 rounded-lg">
     @foreach($dataSource as $prop)
-    {{-- @php dump($prop) @endphp --}}
+    {{-- @dump($prop) --}}
     @php
     if($prop){
         $label = $prop['label'];
@@ -27,11 +27,16 @@
         $hiddenLabel = $prop['hiddenLabel'];
         $readOnly = $prop['readOnly'];
         $isRequired = $prop['isRequired'];
+        $cannotBeReadonlyDuringCreate = $prop['cannotBeReadonlyDuringCreate'];
     }
     @endphp
     {{-- @php $prop ? extract($prop) : null; @endphp --}}
         @if($prop)
-            @php $readOnly = $hasReadOnly || $readOnly; @endphp
+            @php 
+                $readOnly = $hasReadOnly || $readOnly; 
+                if($cannotBeReadonlyDuringCreate && $action === 'create') $readOnly = false;                
+            @endphp
+
             <div class='col-span-{{$col_span}} {{$hiddenRow}}'>
                 <div class='grid grid-row-1'>
                     <div class='grid grid-cols-12 items-center content-start'>

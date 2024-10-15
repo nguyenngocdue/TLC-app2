@@ -64,6 +64,13 @@ trait TraitManageDefaultValueColumns
                 "editable" => true,
             ],
             [
+                "dataIndex" => "cannot_be_readonly_during_create",
+                "renderer" => "checkbox",
+                "editable" => true,
+                "align" => "center",
+                "width" => 50,
+            ],
+            [
                 "dataIndex" => "label_extra",
                 "renderer" => "text4",
                 "editable" => true,

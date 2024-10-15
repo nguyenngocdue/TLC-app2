@@ -4,7 +4,6 @@ namespace App\Utils\Support;
 
 use App\Http\Controllers\Workflow\LibApps;
 use App\Utils\Support\Json\SuperDefinitions;
-use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\Json\SuperWorkflows;
 use Illuminate\Support\Facades\Log;
 
@@ -191,6 +190,7 @@ class WorkflowFields
         $result['placeholder'] = $defaultValue['placeholder'] ?? "";
         $result['controlExtra'] = $defaultValue['control_extra'] ?? "";
         $result['textareaRows'] = $defaultValue['textarea_rows'] ?? 5;
+        $result['cannotBeReadonlyDuringCreate'] = $defaultValue['cannot_be_readonly_during_create'] ?? false;
 
         // $realtime = $realtimes[$key] ?? [];
         // $result['realtimeType'] = $realtime["realtime_type"] ?? "";
