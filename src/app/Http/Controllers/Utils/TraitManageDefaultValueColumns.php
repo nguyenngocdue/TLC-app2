@@ -62,6 +62,7 @@ trait TraitManageDefaultValueColumns
                 "renderer" => "text4",
                 "subTitle" => "Number:0 | 1,2,3<br/>Array: [ ]<br/>Date: +7days<br/>Time: 16:00:00<br/>String: A String<br/>cu-id() <br/> cu-workplace-id() <br/> cu-employeeid-text() <br/> cu-position-id() <br/> cu-hod-id() <br/> cu-dda-id() <br/>cu-discipline-id()",
                 "editable" => true,
+                "width" => 150,
             ],
             [
                 "dataIndex" => "cannot_be_readonly_during_create",
