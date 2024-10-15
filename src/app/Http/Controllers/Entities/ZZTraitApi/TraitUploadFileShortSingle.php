@@ -8,12 +8,12 @@ use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-trait TraitUploadShortSingle
+trait TraitUploadFileShortSingle
 {
 	use TraitEntityFieldHandler2;
 	use TraitFailObject;
 
-	public function uploadShortSingle(Request $request)
+	public function uploadFileShortSingle(Request $request)
 	{
 		try {
 			$params = $request->input();

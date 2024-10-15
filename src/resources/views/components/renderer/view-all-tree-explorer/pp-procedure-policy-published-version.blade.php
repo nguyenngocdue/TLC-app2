@@ -17,7 +17,7 @@
 
             // AJAX request to upload the files
             $.ajax({
-                url: "{{$uploadPPRoute}}",
+                url: "{{$uploadFilePPRoute}}",
                 type: 'POST',
                 data: formData,
                 contentType: false,

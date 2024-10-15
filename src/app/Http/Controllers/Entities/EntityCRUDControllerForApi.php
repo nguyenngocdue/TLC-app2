@@ -10,7 +10,7 @@ use App\Http\Controllers\Entities\ZZTraitApi\TraitKanban;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitSearchable;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitStoreEmpty;
 use App\Http\Controllers\Entities\ZZTraitApi\TraitUpdateShort;
-use App\Http\Controllers\Entities\ZZTraitApi\TraitUploadShortSingle;
+use App\Http\Controllers\Entities\ZZTraitApi\TraitUploadFileShortSingle;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityDynamicType;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityFormula;
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitSupportEntityCRUDCreateEdit2;
@@ -25,7 +25,7 @@ class EntityCRUDControllerForApi extends Controller
 
 	use TraitCreateNewShort;
 	use TraitUpdateShortSingle;
-	use TraitUploadShortSingle;
+	use TraitUploadFileShortSingle;
 
 	use TraitStoreEmpty;
 	use TraitUpdateShort;

@@ -18,7 +18,7 @@ Route::group([
         if ($app['createNewShort'] ?? false) Route::post("{$tableName}_createNewShort", [EntityCRUDControllerForApi::class, 'createNewShort'])->name($tableName . ".createNewShort");
         if ($app['updateShortSingle'] ?? false) {
             Route::post("{$tableName}_updateShortSingle", [EntityCRUDControllerForApi::class, 'updateShortSingle'])->name($tableName . ".updateShortSingle");
-            Route::post("{$tableName}_uploadShortSingle", [EntityCRUDControllerForApi::class, 'uploadShortSingle'])->name($tableName . ".uploadShortSingle");
+            Route::post("{$tableName}_uploadFileShortSingle", [EntityCRUDControllerForApi::class, 'uploadFileShortSingle'])->name($tableName . ".uploadFileShortSingle");
         }
 
         if ($app['storeEmpty_and_updateShort'] ?? false) Route::post("{$tableName}_storeEmpty", [EntityCRUDControllerForApi::class, 'storeEmpty'])->name($tableName . ".storeEmpty");

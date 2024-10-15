@@ -8,7 +8,7 @@
             <x-renderer.view-all-tree-explorer.pp-procedure-policy-published-version
                 ppId="{{$ppId}}"
                 versionId="{{$versionId}}"
-                uploadPPRoute="{{$uploadPPRoute}}"
+                uploadFilePPRoute="{{$uploadFilePPRoute}}"
                 updatePPRoute="{{$updatePPRoute}}"
                 loadDynamicPublishedVersion="{{$loadDynamicPublishedVersion}}"
                 />
