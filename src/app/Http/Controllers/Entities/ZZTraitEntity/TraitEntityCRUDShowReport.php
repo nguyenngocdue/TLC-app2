@@ -21,11 +21,9 @@ trait TraitEntityCRUDShowReport
 			$request->merge([
 				'entity_type' => $report->entity_type,
 				'entity_type2' => $this->reportType2,
-				'report_id' => $id,
 			]);
-			// dd($request->input());
 			(new UpdateUserSettings())($request);
-			return redirect()->back();
+			return redirect()->to(route('rp_reports.show', $requestInput['report_id']));
 		}
 
 		return view('dashboards.pages.entity-show-report', [
