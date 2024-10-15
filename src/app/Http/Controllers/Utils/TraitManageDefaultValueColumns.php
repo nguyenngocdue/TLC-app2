@@ -12,11 +12,12 @@ trait TraitManageDefaultValueColumns
                 "renderer" => "read-only-text4",
                 "editable" => true,
             ],
-            // [
-            //     "dataIndex" => "column_name",
-            //     "renderer" => "read-only-text4",
-            //     "editable" => true,
-            // ],
+            [
+                "dataIndex" => "column_name",
+                "renderer" => "read-only-text4",
+                "editable" => true,
+                "width" => 150,
+            ],
             [
                 "dataIndex" => "label",
                 "renderer" => "text",
