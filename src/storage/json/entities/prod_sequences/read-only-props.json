@@ -114,7 +114,7 @@
         "column_name": "getProdRunsRework1",
         "new": "",
         "in_progress": "",
-        "finished": "",
+        "finished": "true",
         "on_hold": "",
         "cancelled": "",
         "not_applicable": ""
@@ -124,7 +124,7 @@
         "column_name": "getProdRunsRework2",
         "new": "",
         "in_progress": "",
-        "finished": "",
+        "finished": "true",
         "on_hold": "",
         "cancelled": "",
         "not_applicable": ""

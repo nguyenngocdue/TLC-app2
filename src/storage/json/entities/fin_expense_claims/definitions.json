@@ -1,0 +1,57 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": "true"
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": "true"
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_verification": "",
+        "verification_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "closed": ""
+    }
+}

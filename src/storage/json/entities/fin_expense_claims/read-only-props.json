@@ -27,13 +27,13 @@
         "name": "_user_id",
         "column_name": "user_id",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_employee_id": {
         "name": "_employee_id",
@@ -63,13 +63,13 @@
         "name": "_rate_exchange_month_id",
         "column_name": "rate_exchange_month_id",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_counter_currency_id": {
         "name": "_counter_currency_id",
@@ -87,37 +87,37 @@
         "name": "_receiving_method_id",
         "column_name": "receiving_method_id",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_name": {
         "name": "_name",
         "column_name": "name",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_description": {
         "name": "_description",
         "column_name": "description",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_sep02": {
         "name": "_sep02",
@@ -147,13 +147,13 @@
         "name": "_getAdvanceLines",
         "column_name": "getAdvanceLines",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_sep03": {
         "name": "_sep03",
@@ -183,13 +183,13 @@
         "name": "_getTravelLines",
         "column_name": "getTravelLines",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_travel_place_pair_id": {
         "name": "_travel_place_pair_id",
@@ -207,25 +207,25 @@
         "name": "_travel_from_place_id",
         "column_name": "travel_from_place_id",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_travel_to_place_id": {
         "name": "_travel_to_place_id",
         "column_name": "travel_to_place_id",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_travel_allowance_per_day": {
         "name": "_travel_allowance_per_day",
@@ -375,13 +375,13 @@
         "name": "_getClaimableLines",
         "column_name": "getClaimableLines",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_sep05": {
         "name": "_sep05",
@@ -483,13 +483,13 @@
         "name": "_attachment_doc_travel_expense_claim",
         "column_name": "attachment_doc_travel_expense_claim",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_status": {
         "name": "_status",
@@ -567,7 +567,7 @@
         "name": "_comment_asm_rejected_reason",
         "column_name": "comment_asm_rejected_reason",
         "new": "",
-        "pending_endorsement": "endorsement_rejected",
+        "pending_endorsement": "",
         "endorsement_rejected": "",
         "pending_verification": "",
         "verification_rejected": "",
@@ -581,7 +581,7 @@
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
-        "pending_verification": "verification_rejected",
+        "pending_verification": "",
         "verification_rejected": "",
         "pending_approval": "",
         "approval_rejected": "",
@@ -595,7 +595,7 @@
         "endorsement_rejected": "",
         "pending_verification": "",
         "verification_rejected": "",
-        "pending_approval": "approval_rejected",
+        "pending_approval": "",
         "approval_rejected": "",
         "closed": ""
     },
@@ -603,13 +603,13 @@
         "name": "_assignee_1",
         "column_name": "assignee_1",
         "new": "",
-        "pending_endorsement": "",
+        "pending_endorsement": "true",
         "endorsement_rejected": "",
-        "pending_verification": "",
-        "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_verification": "true",
+        "verification_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -617,11 +617,11 @@
         "new": "",
         "pending_endorsement": "",
         "endorsement_rejected": "",
-        "pending_verification": "",
+        "pending_verification": "true",
         "verification_rejected": "",
-        "pending_approval": "",
-        "approval_rejected": "",
-        "closed": ""
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "closed": "true"
     },
     "_assignee_3": {
         "name": "_assignee_3",
@@ -631,8 +631,8 @@
         "endorsement_rejected": "",
         "pending_verification": "",
         "verification_rejected": "",
-        "pending_approval": "",
+        "pending_approval": "true",
         "approval_rejected": "",
-        "closed": ""
+        "closed": "true"
     }
 }

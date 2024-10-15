@@ -58,10 +58,10 @@
         "new": "true",
         "pending_endorsement": "true",
         "endorsement_rejected": "true",
-        "pending_verification": "",
+        "pending_verification": "true",
         "verification_rejected": "true",
-        "pending_approval": "",
-        "approval_rejected": "",
+        "pending_approval": "true",
+        "approval_rejected": "true",
         "closed": "true"
     },
     "apartment_owner": {
