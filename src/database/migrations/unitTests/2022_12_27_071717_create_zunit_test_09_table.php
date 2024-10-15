@@ -72,6 +72,12 @@ return new class extends Migration
             $table->time('time_2')->nullable();
             $table->bigInteger('time_3')->nullable();
 
+            $table->float('number')->nullable();
+            $table->unsignedBigInteger('currency_id')->nullable();
+
+            $table->string('in_words_0')->nullable();
+            $table->string('in_words_1')->nullable();
+
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->orderable();
             $table->appendCommonFields();

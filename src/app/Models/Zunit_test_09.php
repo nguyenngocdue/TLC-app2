@@ -60,6 +60,12 @@ class Zunit_test_09 extends ModelExtended
         'time_2',
         'time_3',
 
+        'number',
+        'currency_id',
+
+        'in_words_0',
+        'in_words_1',
+
         'parent_id',
         "order_no",
         'owner_id',
@@ -92,6 +98,8 @@ class Zunit_test_09 extends ModelExtended
         'getCurrency2' => ['belongsTo', Act_currency::class, 'currency2_id'],
         'getCurrencyPair2' => ['belongsTo', Act_currency_pair::class, 'currency_pair2_id'],
         'getCounterCurrency' => ['belongsTo', Act_currency::class, 'counter_currency_id'],
+
+        "getCurrency" => ['belongsTo', Act_currency::class, 'currency_id'],
 
         'getRateExchangeMonth' => ['belongsTo', Act_currency_xr::class, 'rate_exchange_month_id'],
 
@@ -302,6 +310,11 @@ class Zunit_test_09 extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getCounterCurrency()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getCurrency()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

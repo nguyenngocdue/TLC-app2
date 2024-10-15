@@ -83,9 +83,23 @@ function numberToWordsVn(number) {
         dau = '(TRỪ) '
         number = number.substring(1)
     }
-    const nguyen = VNnum2words(number.substring(0, number.indexOf('.')))
-    const thapphan = readDecimalPart(number.substring(number.indexOf('.')))
 
-    console.log(dau, nguyen, thapphan)
-    return capitalizeFirstLetter(dau + nguyen + thapphan)
+    let number0 = '',
+        number1 = ''
+    if (number.indexOf('.') !== -1) {
+        number0 = number.substring(0, number.indexOf('.'))
+        number1 = number.substring(number.indexOf('.'))
+    } else {
+        number0 = number
+        number1 = ''
+    }
+    // const number0 = number.substring(0, number.indexOf('.'))
+    // const number1 = number.substring(number.indexOf('.'))
+    // console.log(`Sau khi bo dau di: [${number}], [${number0}], [${number1}]`)
+
+    const int = VNnum2words(number0)
+    const decimal = readDecimalPart(number1)
+
+    // console.log(`${dau} - ${int} - ${decimal}`)
+    return capitalizeFirstLetter(dau + int + decimal)
 }
