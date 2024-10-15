@@ -78,6 +78,7 @@ class ReportTableRow
                         case $this->ROW_RENDERER_LINK_ID:
                             if ($href) {
                                 $href = $this->createHref($href,$dataLine, $currentParams);
+                                $href .= '&action=updateReport2';
                                 $cellClass = 'text-blue-600';
                             }
                             break;
