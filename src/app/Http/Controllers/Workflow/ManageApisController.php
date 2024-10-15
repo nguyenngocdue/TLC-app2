@@ -34,6 +34,18 @@ class ManageApisController extends AbstractManageLibController
                 'align' => 'center',
             ],
             [
+                'dataIndex' => 'uploadFileShortSingle',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
+                'dataIndex' => 'deleteFileShortSingle',
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+            ],
+            [
                 'dataIndex' => 'storeEmpty_and_updateShort',
                 'renderer' => 'checkbox',
                 'editable' => true,

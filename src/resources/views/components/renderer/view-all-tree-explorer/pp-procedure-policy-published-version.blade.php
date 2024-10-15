@@ -17,7 +17,7 @@
 
             // AJAX request to upload the files
             $.ajax({
-                url: "{{$uploadPPRoute}}",
+                url: "{{$uploadFilePPRoute}}",
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -33,6 +33,32 @@
                 }
             });
         });
+    }
+
+    function onBtnDeleteClicked(versionId, fileName){
+        // console.log("Delete button clicked", versionId, fileName)
+        Swal.fire(actionConfirmObject([fileName], "DELETE")).then(
+            (result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{$deleteFilePPRoute}}",
+                        type: 'POST',
+                        data: {
+                            id: versionId
+                        },
+                        success: function (response) {
+                            // Handle success response
+                            // toastr.success(response.message);
+                            loadDynamicPublishedVersion('{{$ppId}}');
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            toastr.error(xhr.responseJSON);
+                        }
+                    });
+                }
+            }
+        )
     }
 </script>
 
@@ -81,14 +107,16 @@
                         /> 
                 </td>`
             tr += `<td>
-                    <button class="px-2 mx-2 bg-red-500 text-white rounded"><i class="fa fa-trash"></i></button>
+                    <button class="px-2 py-1 mx-2 text-red-500 bg-white hover:bg-red-500 hover:text-white rounded" 
+                        onclick="onBtnDeleteClicked(${hit['id']}, '${hit['fileName']}')"
+                        >
+                        <i class="fa fa-trash"></i>
+                    </button>
                 </td>`
             tr += `</tr>`
 
             trs += tr
         })
-        
-       
 
         const table = `<table id="tableVersion" class="w-full">
             <tr>

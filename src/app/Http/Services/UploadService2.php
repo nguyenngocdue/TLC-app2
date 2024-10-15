@@ -22,14 +22,18 @@ class UploadService2
     {
         $this->model = $model;
     }
-    public function destroy($toBeDeletedIds)
+    public function destroy($toBeDeletedIds, $isHardDelete = false)
     {
         try {
             foreach ($toBeDeletedIds as $id) {
                 $attachment = Attachment::find($id);
                 Storage::disk('s3')->delete($attachment->url_thumbnail);
                 Storage::disk('s3')->delete($attachment->url_media);
-                $attachment->delete();
+                if ($isHardDelete) {
+                    $attachment->forceDelete();
+                } else {
+                    $attachment->delete();
+                }
             }
         } catch (\Exception $e) {
             dd($e->getMessage());

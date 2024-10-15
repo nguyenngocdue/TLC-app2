@@ -4,13 +4,7 @@
         "entity-type": "act_currency_xrs",
         "editable-table": "act_currency_xr_lines",
         "button_add_a_new_line": "true"
-    },
-    "act_travel_expense_claims_01": {
-        "name": "act_travel_expense_claims_01",
-        "entity-type": "act_travel_expense_claims",
-        "editable-table": "act_travel_expense_claim_lines",
-        "button_add_a_new_line": "true"
-    },
+    },    
     "act_travel_reqs_01": {
         "name": "act_travel_reqs_01",
         "entity-type": "act_travel_reqs",

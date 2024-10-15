@@ -8,23 +8,23 @@ use App\Utils\System\Api\ResponseObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-trait TraitUploadShortSingle
+trait TraitDeleteFileShortSingle
 {
 	use TraitEntityFieldHandler2;
 	use TraitFailObject;
 
-	public function uploadShortSingle(Request $request)
+	public function deleteFileShortSingle(Request $request)
 	{
 		try {
 			$params = $request->input();
 			$id = $params['id'];
-			$message = 'Short Upload successfully';
+			$message = 'Short Deleted successfully';
 
 			$uploadService2 = new UploadService2($this->modelPath);
-			$inserted = $uploadService2->store($request, $this->modelPath, $id);
+			$deleted = $uploadService2->destroy([$id], true);
 
 			return ResponseObject::responseSuccess(
-				$inserted,
+				$deleted,
 				[
 					$params,
 				],
