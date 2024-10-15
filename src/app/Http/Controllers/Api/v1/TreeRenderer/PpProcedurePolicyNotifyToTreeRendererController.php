@@ -32,7 +32,15 @@ class PpProcedurePolicyNotifyToTreeRendererController //extends _TreeRendererCon
             ->orderBy('name')
             ->get();
 
-        $tree = [];
+        $tree = [
+            [
+                'id' => 'root',
+                'text' => 'TLC Modular',
+                'parent' => '#',
+                'data' => ["type" => "root"],
+                'state' => ["opened" => true],
+            ]
+        ];
         foreach ($departments as $department) {
             $avatar = $department->getHOD->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
             $src = "<img class='rounded-full ml-6 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
@@ -40,7 +48,7 @@ class PpProcedurePolicyNotifyToTreeRendererController //extends _TreeRendererCon
                 'id' => "department_" . $department->id,
                 // 'text' => "<span class='flex -mt-6'>" . $src . $department->name . "</span>",
                 'text' => $department->name,
-                'parent' => '#',
+                'parent' => 'root',
                 'data' => ["type" => "department"],
                 // 'icon' => false,
             ];

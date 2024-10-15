@@ -44,14 +44,14 @@
             case 758: // HOD
                 $('#json_tree_2').jstree("destroy").empty();
                 jsonTree2a = JSON.parse(JSON.stringify(jsonTree2))
-                    .filter(node => node.id.startsWith('hod_') || node.id.startsWith('department_'));
+                    .filter(node => node.id.startsWith('hod_') || node.id.startsWith('department_')||node.id.startsWith('root'));//Both hod_ and department_
                 // console.log("filter only HOD", jsonTree2a);
                 $('#json_tree_2_container').show();                
                 break;
             case 759: // Member
                 $('#json_tree_2').jstree("destroy").empty();
                 jsonTree2a = JSON.parse(JSON.stringify(jsonTree2))
-                .filter(node => node.id.startsWith('member') || node.id.startsWith('department_'));//Both members_ and member_
+                .filter(node => node.id.startsWith('member') || node.id.startsWith('department_')||node.id.startsWith('root'));//Both hod_ and department_//Both members_ and member_
                 // console.log("filter only Members", jsonTree2a);
                 $('#json_tree_2_container').show();                
                 break;
