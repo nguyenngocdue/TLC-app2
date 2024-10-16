@@ -101,9 +101,9 @@ class ReportFilterItem extends Component
         $fillable = $modelClass->getFillable();
         $eloquentParams = $modelClass::$eloquentParams;
         // Apply conditions based on the 'status' field if it exists.
-        if (in_array('status', $fillable)) {
-            // $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site', 'design']);
-        }
+        // if (in_array('status', $fillable)) {
+        //     $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site', 'design']);
+        // }
 
         $relationships = [ 
             'getSubProjects','getScreensShowMeOn', 'getProdRoutingsOfSubProject'
@@ -118,9 +118,9 @@ class ReportFilterItem extends Component
                 // $dbQuery->whereHas($relation); // TOFIX
             }
         }
-        // Apply the 'whereDoesNotHave' condition if 'getScreensHideMeOn' is defined.
+        // Apply the 'whereDoesntHave' condition if 'getScreensHideMeOn' is defined.
         if (isset($eloquentParams['getScreensHideMeOn'])) {
-            $dbQuery->whereDoesNotHave('getScreensHideMeOn');
+            $dbQuery->whereDoesntHave('getScreensHideMeOn');
         }
 
         return $dbQuery;
