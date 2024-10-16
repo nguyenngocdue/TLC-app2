@@ -69,10 +69,13 @@ trait TraitReportMatrixColumn
             $values = array_map(fn($element) => isset($element->original_value) ? $element->original_value : 'null', array_values($intersects));
             $elementAll = array_diff(array_values($values), $excludedParts);
             $total = count($elementAll);
-            foreach($values as $value)if (in_array($value, $includedParts))$temp += 1;
+            foreach($values as $value) if (in_array($value, $includedParts))$temp += 1;
             $progress = $total > 0 ? ($temp/$total)*100 : 0;
             $progressStr = (string)number_format($progress, 2) .'%';
-            if (isset($col['data_index'])) $this->setCellValue($item, $col['data_index'],$progress, $progressStr, $col['cell_class']);
+            if (isset($col['data_index'])) {
+                $tooltip = "({$temp}/{$total})*100 = {$progressStr}";
+                $this->setCellValue($item, $col['data_index'],$progress, $progressStr, $col['cell_class'], '', '', $tooltip);
+            } 
         }
         return $mergedData;
     }
