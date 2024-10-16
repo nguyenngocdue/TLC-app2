@@ -65,7 +65,7 @@ trait TraitReportTransformedRowData
     }
 
 
-    public function makeValueForEachRow($configs, $rowData, $cellValue, $column)
+    public function makeValueForEachRow($configs, $rowData, $cellValue, $column, $valueToSet)
     {
         /* <Example Data>
             $rowConfigs = [
@@ -81,7 +81,11 @@ trait TraitReportTransformedRowData
         $queriedValue = isset($configs['params'], $configs['params']['row_renderer'], $configs['params']['row_renderer']['type'])
             ? $this->changedAttrCellsByTransferData($rowData, $configs['params']['row_renderer'], $queriedValue)
             : $this->makeCellValue($queriedValue, $queriedValue, $queriedValue, $configs['cell_class'] ?? '');
-
+        // set value when value is null
+        if (!$queriedValue->original_value) {
+            $queriedValue->original_value = $valueToSet;
+            $queriedValue->value = $valueToSet;
+        }
         $rowData->$column = $queriedValue;
         return $rowData;
     }

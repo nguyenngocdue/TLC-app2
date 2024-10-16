@@ -70,7 +70,7 @@ trait TraitReportMatrixColumn
             $elementAll = array_diff(array_values($values), $excludedParts);
             $total = count($elementAll);
             foreach($values as $value)if (in_array($value, $includedParts))$temp += 1;
-            $progress = $total > 0 ? (round($temp/$total, 2))*100 : 0;
+            $progress = $total > 0 ? ($temp/$total)*100 : 0;
             $progressStr = (string)number_format($progress, 2) .'%';
             if (isset($col['data_index'])) $this->setCellValue($item, $col['data_index'],$progress, $progressStr, $col['cell_class']);
         }
@@ -171,7 +171,7 @@ trait TraitReportMatrixColumn
                 $col = $rowData->$column;
                 if (!in_array($col, $transformedFields)) $transformedFields[] = $col;
                 // To display row's value from 'grouping_to_matrix'
-                $rowData = $this->makeValueForEachRow($configs, $rowData, $cellValue, $col);
+                $rowData = $this->makeValueForEachRow($configs, $rowData, $cellValue, $col, $valueToSet);
             }
         }
 
@@ -182,7 +182,7 @@ trait TraitReportMatrixColumn
         // dd($data->first(), $customCols);
         if ($customCols) {
             foreach ($customCols as $col) {
-                $aggType = $col['footer_row'] ?? '';
+                $aggType = $col['agg_row'] ?? '';
                 $dataIndex  = isset($col['data_index']) ? $col['data_index'] : '';
                 try {
                     switch ($aggType) {
