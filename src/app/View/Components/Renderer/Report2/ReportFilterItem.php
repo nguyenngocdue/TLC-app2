@@ -101,9 +101,9 @@ class ReportFilterItem extends Component
         $fillable = $modelClass->getFillable();
         $eloquentParams = $modelClass::$eloquentParams;
         // Apply conditions based on the 'status' field if it exists.
-        // if (in_array('status', $fillable)) {
-        //     $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site', 'design']);
-        // }
+        if (in_array('status', $fillable)) {
+            $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site', 'design']);
+        }
 
         $relationships = [ 
             'getSubProjects','getScreensShowMeOn', 'getProdRoutingsOfSubProject'
