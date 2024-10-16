@@ -311,6 +311,30 @@
         "cancelled": "true",
         "timesheet_only": "true"
     },
+    "_Shipping Agents": {
+        "name": "_Shipping Agents",
+        "column_name": "Shipping Agents",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
+    "_getShippingAgentsOfSubProject": {
+        "name": "_getShippingAgentsOfSubProject",
+        "column_name": "getShippingAgentsOfSubProject",
+        "concept": "true",
+        "design": "true",
+        "manufacturing": "true",
+        "construction_site": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "timesheet_only": "true"
+    },
     "_status": {
         "name": "_status",
         "column_name": "status",

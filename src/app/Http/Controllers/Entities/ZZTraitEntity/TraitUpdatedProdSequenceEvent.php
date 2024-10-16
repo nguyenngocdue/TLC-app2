@@ -64,8 +64,11 @@ trait TraitUpdatedProdSequenceEvent
 
                 $newCouncilList = $request['council_member_list'];
                 $councilListFn = "council_member_list";
+
+                $newShippingAgentList = $request['shipping_agent_list'];
+                $shippingAgentListFn = "shipping_agent_list";
                 // Log::info($newCouncilList);
-                event(new UpdatedQaqcChklstSheetEvent($id, $newSignOffList, $nominatedListFn, $signatureFn, $newCouncilList, $councilListFn));
+                event(new UpdatedQaqcChklstSheetEvent($id, $newSignOffList, $nominatedListFn, $signatureFn, $newCouncilList, $councilListFn, $newShippingAgentList, $shippingAgentListFn));
                 break;
             case 'qaqc_punchlist':
                 $mailContent = $this->getSubmittedMail($request, $id);

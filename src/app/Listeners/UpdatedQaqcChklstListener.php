@@ -31,6 +31,7 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         // $ids = $this->getIdChklst($event->subProjectId);
         $bookId = $event->sheet->qaqc_insp_chklst_id;
         $book = Qaqc_insp_chklst::find($bookId);
+        // Log::info($book);
 
         $newSignOffList = $event->newSignOffList;
         $nominatedListFn = $event->nominatedListFn;
@@ -38,7 +39,8 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         $newCouncilList = $event->newCouncilList;
         $councilListFn = $event->councilListFn;
 
-        // Log::info($book);
+        $newShippingAgentList = $event->newShippingAgentList;
+        $shippingAgentListFn = $event->shippingAgentListFn;
 
         $theTemplate = $book->getQaqcInspTmpl()->first();
         // Log::info($theTemplate);
@@ -89,6 +91,10 @@ class UpdatedQaqcChklstListener //implements ShouldQueue // MUST NOT QUEUE
         $this->subProjectService->update($book->sub_project_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfSubProject");
         $this->prodRoutingService->update($book->prod_routing_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfProdRouting");
         $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newSignOffList, $nominatedListFn, "getExternalInspectorsOfQaqcInspTmpl");
+
+        $this->subProjectService->update($book->sub_project_id, $newShippingAgentList, $shippingAgentListFn, "getShippingAgentsOfSubProject");
+        $this->prodRoutingService->update($book->prod_routing_id, $newShippingAgentList, $shippingAgentListFn, "getShippingAgentsOfProdRouting");
+        $this->qaqcInspTmplService->update($book->qaqc_insp_tmpl_id, $newShippingAgentList, $shippingAgentListFn, "getShippingAgentsOfQaqcInspTmpl");
 
         $this->subProjectService->update($book->sub_project_id, $newCouncilList, $councilListFn, "getCouncilMembersOfSubProject");
         $this->prodRoutingService->update($book->prod_routing_id, $newCouncilList, $councilListFn, "getCouncilMembersOfProdRouting");

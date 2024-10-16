@@ -27,6 +27,7 @@ class Qaqc_insp_tmpl extends ModelExtended
         "getProdRoutingsOfInspTmpl" => ["belongsToMany", Prod_routing::class, "ym2m_prod_routing_qaqc_insp_tmpl"],
         "getExternalInspectorsOfQaqcInspTmpl" => ['belongsToMany', User::class, "ym2m_qaqc_insp_tmpl_user_ext_insp"],
         "getCouncilMembersOfQaqcInspTmpl" => ['belongsToMany', User::class, "ym2m_qaqc_insp_tmpl_user_council_member"],
+        "getShippingAgentsOfQaqcInspTmpl" => ['belongsToMany', User::class, "ym2m_qaqc_insp_tmpl_user_shipping_agent"],
     ];
 
     public function getSheets()
@@ -54,6 +55,12 @@ class Qaqc_insp_tmpl extends ModelExtended
     }
 
     public function getCouncilMembersOfQaqcInspTmpl()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getShippingAgentsOfQaqcInspTmpl()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -24,6 +24,8 @@ class UpdatedQaqcChklstSheetEvent
         public $signatureFn,
         public $newCouncilList,
         public $councilListFn,
+        public $newShippingAgentList,
+        public $shippingAgentListFn,
     ) {
         //
         // Log::info("UpdatedQaqcChklstSheetEvent " . $sheet);

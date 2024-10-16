@@ -19,10 +19,15 @@ class UpdatedQaqcChklstEvent
      */
     public function __construct(
         public $sheet,
+
         public $newSignOffList,
         public $nominatedListFn,
+
         public $newCouncilList,
         public $councilListFn,
+
+        public $newShippingAgentList,
+        public $shippingAgentListFn,
     ) {
         //
         // Log::info('UpdatedQaqcChklstEvent');

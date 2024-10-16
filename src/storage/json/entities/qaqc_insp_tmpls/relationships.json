@@ -10,10 +10,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -26,10 +28,12 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingsOfInspTmpl": {
         "name": "_getProdRoutingsOfInspTmpl",
@@ -42,10 +46,12 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getExternalInspectorsOfQaqcInspTmpl": {
         "name": "_getExternalInspectorsOfQaqcInspTmpl",
@@ -58,10 +64,12 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCouncilMembersOfQaqcInspTmpl": {
         "name": "_getCouncilMembersOfQaqcInspTmpl",
@@ -74,10 +82,30 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getShippingAgentsOfQaqcInspTmpl": {
+        "name": "_getShippingAgentsOfQaqcInspTmpl",
+        "relationship": "belongsToMany",
+        "control_name": "getShippingAgentsOfQaqcInspTmpl",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSheets": {
         "name": "_getSheets",
@@ -90,10 +118,12 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getQaqcInspChklsts": {
         "name": "_getQaqcInspChklsts",
@@ -106,9 +136,11 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

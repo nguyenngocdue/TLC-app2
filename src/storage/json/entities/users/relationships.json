@@ -14,7 +14,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getCurrentWorkplace": {
         "name": "_getCurrentWorkplace",
@@ -31,7 +32,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getUserType": {
         "name": "_getUserType",
@@ -48,7 +50,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserCompany": {
         "name": "_getUserCompany",
@@ -65,7 +68,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserCat": {
         "name": "_getUserCat",
@@ -82,7 +86,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getPosition": {
         "name": "_getPosition",
@@ -99,7 +104,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserSeniorityLevel": {
         "name": "_getUserSeniorityLevel",
@@ -116,7 +122,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserErpSubCat": {
         "name": "_getUserErpSubCat",
@@ -133,7 +140,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserErpSite": {
         "name": "_getUserErpSite",
@@ -150,7 +158,8 @@
         "filter_values": "247",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserErpCashflow": {
         "name": "_getUserErpCashflow",
@@ -167,7 +176,8 @@
         "filter_values": "248",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserDiscipline": {
         "name": "_getUserDiscipline",
@@ -184,7 +194,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserOrgChart": {
         "name": "_getUserOrgChart",
@@ -201,7 +212,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getTSProxyApprover": {
         "name": "_getTSProxyApprover",
@@ -218,7 +230,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUserDepartment": {
         "name": "_getUserDepartment",
@@ -235,7 +248,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getTimeKeepType": {
         "name": "_getTimeKeepType",
@@ -252,7 +266,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -269,7 +284,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -286,7 +302,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOtTeams": {
         "name": "_getOtTeams",
@@ -303,7 +320,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getTshtTeams": {
         "name": "_getTshtTeams",
@@ -320,7 +338,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSiteTeams": {
         "name": "_getSiteTeams",
@@ -337,7 +356,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSubProjectsOfCouncilMember": {
         "name": "_getSubProjectsOfCouncilMember",
@@ -354,7 +374,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSubProjectsOfProjectClient": {
         "name": "_getSubProjectsOfProjectClient",
@@ -371,7 +392,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSubProjectsOfExternalInspector": {
         "name": "_getSubProjectsOfExternalInspector",
@@ -388,7 +410,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getSubProjectsOfShippingAgent": {
+        "name": "_getSubProjectsOfShippingAgent",
+        "relationship": "belongsToMany",
+        "control_name": "getSubProjectsOfShippingAgent",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getQaqcInspTmplsOfExternalInspector": {
         "name": "_getQaqcInspTmplsOfExternalInspector",
@@ -405,7 +446,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getQaqcInspTmplsOfCouncilMember": {
         "name": "_getQaqcInspTmplsOfCouncilMember",
@@ -422,7 +464,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getQaqcInspTmplsOfShippingAgent": {
+        "name": "_getQaqcInspTmplsOfShippingAgent",
+        "relationship": "belongsToMany",
+        "control_name": "getQaqcInspTmplsOfShippingAgent",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingsOfExternalInspector": {
         "name": "_getProdRoutingsOfExternalInspector",
@@ -439,7 +500,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingsOfCouncilMember": {
         "name": "_getProdRoutingsOfCouncilMember",
@@ -456,7 +518,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getProdRoutingsOfShippingAgent": {
+        "name": "_getProdRoutingsOfShippingAgent",
+        "relationship": "belongsToMany",
+        "control_name": "getProdRoutingsOfShippingAgent",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getPosts": {
         "name": "_getPosts",
@@ -473,7 +554,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_attachment": {
         "name": "_attachment",
@@ -490,7 +572,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_featured_image": {
         "name": "_featured_image",
@@ -507,7 +590,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getAvatar": {
         "name": "_getAvatar",
@@ -524,7 +608,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getRoleSet": {
         "name": "_getRoleSet",
@@ -541,6 +626,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

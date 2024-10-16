@@ -39,6 +39,7 @@ class Sub_project extends ModelExtended
         "getProjectClientsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_project_client"],
         "getExternalInspectorsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_ext_insp"],
         "getCouncilMembersOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_council_member"],
+        "getShippingAgentsOfSubProject" => ['belongsToMany', User::class, "ym2m_sub_project_user_shipping_agent"],
 
         "getScreensHideMeOn" => ["belongsToMany", Term::class, "ym2m_sub_project_term_hide_me_on"],
     ];
@@ -91,6 +92,12 @@ class Sub_project extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getProjectClientsOfSubProject()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getShippingAgentsOfSubProject()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

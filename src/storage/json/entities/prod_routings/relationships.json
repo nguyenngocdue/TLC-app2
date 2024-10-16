@@ -10,10 +10,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -26,10 +28,12 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
@@ -42,10 +46,12 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getWirDescriptions": {
         "name": "_getWirDescriptions",
@@ -58,10 +64,12 @@
         "renderer_edit_param": "",
         "control": "checkbox_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "12",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getChklstTmpls": {
         "name": "_getChklstTmpls",
@@ -74,10 +82,12 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSubProjects": {
         "name": "_getSubProjects",
@@ -90,10 +100,12 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getScreensShowMeOn": {
         "name": "_getScreensShowMeOn",
@@ -106,10 +118,12 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "field_id",
+        "filter_operator": "=",
         "filter_values": "194",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getExternalInspectorsOfProdRouting": {
         "name": "_getExternalInspectorsOfProdRouting",
@@ -122,10 +136,12 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCouncilMembersOfProdRouting": {
         "name": "_getCouncilMembersOfProdRouting",
@@ -138,10 +154,30 @@
         "renderer_edit_param": "",
         "control": "dropdown_multi_2a",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getShippingAgentsOfProdRouting": {
+        "name": "_getShippingAgentsOfProdRouting",
+        "relationship": "belongsToMany",
+        "control_name": "getShippingAgentsOfProdRouting",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdOrders": {
         "name": "_getProdOrders",
@@ -154,10 +190,12 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
@@ -170,10 +208,12 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdSequences": {
         "name": "_getProdSequences",
@@ -186,9 +226,11 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

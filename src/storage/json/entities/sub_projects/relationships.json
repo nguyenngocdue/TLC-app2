@@ -14,7 +14,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCurrentLod": {
         "name": "_getCurrentLod",
@@ -31,7 +32,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getClient": {
         "name": "_getClient",
@@ -48,7 +50,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getQrPlateStyle": {
         "name": "_getQrPlateStyle",
@@ -65,7 +68,8 @@
         "filter_values": "226",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -82,7 +86,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -99,7 +104,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProjectMembers": {
         "name": "_getProjectMembers",
@@ -116,7 +122,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingsOfSubProject": {
         "name": "_getProdRoutingsOfSubProject",
@@ -133,7 +140,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProjectClientsOfSubProject": {
         "name": "_getProjectClientsOfSubProject",
@@ -150,7 +158,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getExternalInspectorsOfSubProject": {
         "name": "_getExternalInspectorsOfSubProject",
@@ -167,7 +176,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getCouncilMembersOfSubProject": {
         "name": "_getCouncilMembersOfSubProject",
@@ -184,7 +194,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getShippingAgentsOfSubProject": {
+        "name": "_getShippingAgentsOfSubProject",
+        "relationship": "belongsToMany",
+        "control_name": "getShippingAgentsOfSubProject",
+        "renderer_view_all": "avatar_user",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown_multi_2a",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getScreensHideMeOn": {
         "name": "_getScreensHideMeOn",
@@ -201,7 +230,8 @@
         "filter_values": "313",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "true",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdOrders": {
         "name": "_getProdOrders",
@@ -218,7 +248,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_attachment_subproject_homeowner_manual": {
         "name": "_attachment_subproject_homeowner_manual",
@@ -235,7 +266,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_attachment_subproject_project_plans": {
         "name": "_attachment_subproject_project_plans",
@@ -252,6 +284,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

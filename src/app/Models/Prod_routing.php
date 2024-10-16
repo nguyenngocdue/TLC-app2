@@ -10,7 +10,10 @@ class Prod_routing extends ModelExtended
     use HasShowOnScreens;
 
     protected $fillable = [
-        "name", "description", "slug", "owner_id",
+        "name",
+        "description",
+        "slug",
+        "owner_id",
     ];
 
     public static $statusless = true;
@@ -28,6 +31,7 @@ class Prod_routing extends ModelExtended
         "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_prod_routing_term_show_me_on"],
         "getExternalInspectorsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_ext_insp"],
         "getCouncilMembersOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_council_member"],
+        "getShippingAgentsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_shipping_agent"],
     ];
 
     public function getProdRoutingLinks()
@@ -79,6 +83,12 @@ class Prod_routing extends ModelExtended
     }
 
     public function getCouncilMembersOfProdRouting()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getShippingAgentsOfProdRouting()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
