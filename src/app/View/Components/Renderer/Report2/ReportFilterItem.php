@@ -118,9 +118,9 @@ class ReportFilterItem extends Component
                 // $dbQuery->whereHas($relation); // TOFIX
             }
         }
-        // Apply the 'whereDoesntHave' condition if 'getScreensHideMeOn' is defined.
+        // Apply the 'whereDoesNotHave' condition if 'getScreensHideMeOn' is defined.
         if (isset($eloquentParams['getScreensHideMeOn'])) {
-            $dbQuery->whereDoesntHave('getScreensHideMeOn');
+            $dbQuery->whereDoesNotHave('getScreensHideMeOn');
         }
 
         return $dbQuery;
