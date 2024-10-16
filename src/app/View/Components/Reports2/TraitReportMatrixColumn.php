@@ -182,7 +182,6 @@ trait TraitReportMatrixColumn
         // dd($groupedByRow['TLCM00009']);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
-        // dd($data->first(), $customCols);
         if ($customCols) {
             foreach ($customCols as $col) {
                 $aggType = $col['agg_row'] ?? '';

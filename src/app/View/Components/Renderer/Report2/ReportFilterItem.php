@@ -101,9 +101,9 @@ class ReportFilterItem extends Component
         $fillable = $modelClass->getFillable();
         $eloquentParams = $modelClass::$eloquentParams;
         // Apply conditions based on the 'status' field if it exists.
-        if (in_array('status', $fillable)) {
-            $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site']);
-        }
+        // if (in_array('status', $fillable)) {
+        //     $dbQuery = $dbQuery->whereIn('status', ['manufacturing', 'construction_site', 'design']);
+        // }
 
         $relationships = [ 
             'getSubProjects','getScreensShowMeOn', 'getProdRoutingsOfSubProject'
@@ -115,14 +115,13 @@ class ReportFilterItem extends Component
                 continue;
             }
             if (isset($eloquentParams[$relation])) {
-                $dbQuery->whereHas($relation);
+                // $dbQuery->whereHas($relation); // TOFIX
             }
         }
         // Apply the 'whereDoesntHave' condition if 'getScreensHideMeOn' is defined.
         if (isset($eloquentParams['getScreensHideMeOn'])) {
             $dbQuery->whereDoesntHave('getScreensHideMeOn');
         }
-
 
         return $dbQuery;
     }
@@ -228,21 +227,22 @@ class ReportFilterItem extends Component
                 if (str_contains($value, 'get')) $eagerLoadFields[] = $value;
                 else $existingFields[] = $value;
             }
-
+            
             // Initialize the query builder.
             $dbQuery = $db->select();
             $dbQuery = $this->getDbQuery($dbQuery, $modelClass);
+            
             // Apply blacklist or whitelist conditions and eager load fields.
             $dbQuery = $dbQuery->when(
                 $isBlackList,
                 fn($query) => $query->whereIn('id', $bWListIds),
                 fn($query) => $query->whereNotIn('id', $bWListIds)
-            )
+                )
                 ->with($eagerLoadFields)
                 ->orderBy('name')
                 ->get();
-
-
+                
+                
             $newDB = [];
             foreach ($dbQuery as $item) {
                 if (str_contains($item->name, 'available')) continue;
