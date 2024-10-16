@@ -31,6 +31,8 @@ class ReportFilterItem extends Component
     protected $DEFECT_REPORT_TYPE_ID = 142;
     protected $INTER_SUBCON_TYPE_ID = 119;
 
+    protected $MODE_COMPLETION_MATRIX_TYPE_ID = 321;
+
 
     protected $BEGIN_YEAR = 2021;
     protected $END_YEAR = 2027;
@@ -168,7 +170,7 @@ class ReportFilterItem extends Component
 
         $triggerNames = $listenReducer?->triggers;
         $db = $modelClass::query();
-        if (is_null($triggerNames) && $singularEntityType != 'user') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);
+        if (is_null($triggerNames) && $singularEntityType != 'user' && $singularEntityType != 'term') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);
 
         if ($singularEntityType == 'term') {
             $filterId = 0;
@@ -185,11 +187,15 @@ class ReportFilterItem extends Component
                 case 'inter_subcon_ids':
                     $filterId = $this->INTER_SUBCON_TYPE_ID;;
                     break;
+                case 'mode_completion_matrix_id':
+                    $filterId = $this->MODE_COMPLETION_MATRIX_TYPE_ID;
+                    break;
                 default:
                     $filterId = 0;
                     break;
             }
-            $db->where('field_id', $filterId)->get();
+            $db = $db->where('field_id', $filterId);
+            $db = $db->get();
             return $db;
         } elseif ($singularEntityType == 'user') {
             $listenToAttrs = explode(',', str_replace(' ', '', $listenReducer?->listen_to_attrs));
