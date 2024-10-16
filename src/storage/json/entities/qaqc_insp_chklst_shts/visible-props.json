@@ -2,8 +2,8 @@
     "_id": {
         "name": "_id",
         "column_name": "id",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -12,8 +12,8 @@
     "_name": {
         "name": "_name",
         "column_name": "name",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -22,8 +22,8 @@
     "_progress": {
         "name": "_progress",
         "column_name": "progress",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -32,8 +32,8 @@
     "_assignee_1": {
         "name": "_assignee_1",
         "column_name": "assignee_1",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -42,8 +42,8 @@
     "_assignee_2": {
         "name": "_assignee_2",
         "column_name": "assignee_2",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -52,8 +52,8 @@
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -62,8 +62,18 @@
     "_council_member_list": {
         "name": "_council_member_list",
         "column_name": "council_member_list",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
+        "reviewed": "true",
+        "inspected": "true",
+        "pending_audit": "true",
+        "audited": "true"
+    },
+    "_shipping_agent_list": {
+        "name": "_shipping_agent_list",
+        "column_name": "shipping_agent_list",
+        "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -72,8 +82,8 @@
     "_description": {
         "name": "_description",
         "column_name": "description",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -82,8 +92,8 @@
     "_getLines": {
         "name": "_getLines",
         "column_name": "getLines",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -92,8 +102,8 @@
     "_slug": {
         "name": "_slug",
         "column_name": "slug",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -102,8 +112,8 @@
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
         "column_name": "qaqc_insp_chklst_id",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -112,8 +122,8 @@
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",
         "column_name": "qaqc_insp_tmpl_sht_id",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -122,8 +132,8 @@
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
         "column_name": "prod_discipline_id",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -132,8 +142,8 @@
     "_divider1": {
         "name": "_divider1",
         "column_name": "divider1",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -142,8 +152,8 @@
     "_h1a": {
         "name": "_h1a",
         "column_name": "h1a",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -152,8 +162,8 @@
     "_signature_qaqc_chklst_3rd_party_list": {
         "name": "_signature_qaqc_chklst_3rd_party_list",
         "column_name": "signature_qaqc_chklst_3rd_party_list",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -162,8 +172,8 @@
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
         "column_name": "signature_qaqc_chklst_3rd_party",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -172,8 +182,8 @@
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
         "column_name": "comment_rejected_reason",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -182,8 +192,8 @@
     "_owner_id": {
         "name": "_owner_id",
         "column_name": "owner_id",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -192,8 +202,8 @@
     "_status": {
         "name": "_status",
         "column_name": "status",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -202,8 +212,8 @@
     "_created_at": {
         "name": "_created_at",
         "column_name": "created_at",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -212,8 +222,8 @@
     "_updated_at": {
         "name": "_updated_at",
         "column_name": "updated_at",
-        "in_progress": "true",
         "not_applicable": "true",
+        "in_progress": "true",
         "reviewed": "true",
         "inspected": "true",
         "pending_audit": "true",
@@ -222,8 +232,8 @@
     "_deleted_by": {
         "name": "_deleted_by",
         "column_name": "deleted_by",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
@@ -232,8 +242,8 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",
@@ -242,8 +252,8 @@
     "_order_no": {
         "name": "_order_no",
         "column_name": "order_no",
-        "in_progress": "",
         "not_applicable": "",
+        "in_progress": "",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "",

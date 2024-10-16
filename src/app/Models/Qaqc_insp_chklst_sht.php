@@ -7,10 +7,19 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_chklst_sht extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "slug", "owner_id",
-        "qaqc_insp_chklst_id", "qaqc_insp_tmpl_sht_id", "prod_discipline_id",
-        'progress', 'status', 'order_no',
-        "assignee_1", "assignee_2",
+        "id",
+        "name",
+        "description",
+        "slug",
+        "owner_id",
+        "qaqc_insp_chklst_id",
+        "qaqc_insp_tmpl_sht_id",
+        "prod_discipline_id",
+        'progress',
+        'status',
+        'order_no',
+        "assignee_1",
+        "assignee_2",
     ];
 
     public static $eloquentParams = [
@@ -28,6 +37,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         //Many to many
         "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_monitor_1"],
         "council_member_list" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_council_member"],
+        "shipping_agent_list" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_shipping_agent"],
         "signature_qaqc_chklst_3rd_party_list"  => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_3rd_party"],
     ];
 
@@ -108,6 +118,12 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function signature_qaqc_chklst_3rd_party_list()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function shipping_agent_list()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
