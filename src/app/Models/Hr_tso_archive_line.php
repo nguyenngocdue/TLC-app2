@@ -9,7 +9,7 @@ class Hr_tso_archive_line extends ModelExtended
     protected $fillable = [
         'tso_archive_id',
         'user_id',
-
+        'employee_id',
         'user_discipline_id',
         'user_cat_id',
         'date_time',

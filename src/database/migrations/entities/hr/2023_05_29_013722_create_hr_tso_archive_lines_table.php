@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tso_archive_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('employee_id')->nullable();
 
             $table->unsignedBigInteger('user_discipline_id')->nullable();
             $table->unsignedBigInteger('user_cat_id')->nullable();

@@ -24,6 +24,16 @@
         "column_name": "user_cat_id",
         "new": "true"
     },
+    "_employee_id": {
+        "name": "_employee_id",
+        "column_name": "employee_id",
+        "new": "true"
+    },
+    "_current_workplace_id": {
+        "name": "_current_workplace_id",
+        "column_name": "current_workplace_id",
+        "new": "true"
+    },
     "_date_time": {
         "name": "_date_time",
         "column_name": "date_time",
@@ -62,11 +72,6 @@
     "_work_mode_id": {
         "name": "_work_mode_id",
         "column_name": "work_mode_id",
-        "new": "true"
-    },
-    "_current_workplace_id": {
-        "name": "_current_workplace_id",
-        "column_name": "current_workplace_id",
         "new": "true"
     },
     "_remark": {
