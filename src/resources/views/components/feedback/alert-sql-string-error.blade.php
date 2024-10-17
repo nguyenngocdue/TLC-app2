@@ -1,7 +1,7 @@
 <!-- Trigger Button -->
 <div class="flex justify-center mt-10">
     <x-renderer.button id="openModal" htmlType="submit" type="danger">
-        SQL Error
+        <i class="text-red-200 fa-solid fa-bomb"></i> SQL Error
     </x-renderer.button>
 </div>
 
