@@ -138,7 +138,7 @@ function calculateFooterValue(table01Name, eloquentFn, fieldName, control) {
 
     for (let i = 0; i < footerAggList.length; i++) {
         const agg = footerAggList[i]
-        console.log(agg)
+        // console.log(agg)
         const footerName = eloquentFn + '[footer][' + fieldName + '][' + agg + ']'
         // console.log(footerName, result[agg])
         getEById(footerName).val(agg == 'agg_none' ? '' : result[agg])
