@@ -265,6 +265,20 @@
         "pending_ack": "",
         "active": ""
     },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_endorsement": "",
+        "endorsement_rejected": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "pending_ack": "",
+        "active": ""
+    },
     "dir": {
         "name": "dir",
         "name_rendered": "",
@@ -815,14 +829,14 @@
         "name": "supreme_manage",
         "name_rendered": "",
         "toggle": "",
-        "new": "",
-        "pending_endorsement": "",
-        "endorsement_rejected": "",
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
         "pending_review": "true",
-        "review_rejected": "",
-        "pending_approval": "",
+        "review_rejected": "true",
+        "pending_approval": "true",
         "approval_rejected": "true",
-        "pending_ack": "",
+        "pending_ack": "true",
         "active": ""
     },
     "vendor": {
