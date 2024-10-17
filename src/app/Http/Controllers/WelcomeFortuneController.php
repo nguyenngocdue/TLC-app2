@@ -10,6 +10,7 @@ use App\Models\Rp_report;
 use App\Utils\Support\Erp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Spatie\PdfToText\Pdf;
 
 class WelcomeFortuneController extends Controller
 {
@@ -33,27 +34,10 @@ class WelcomeFortuneController extends Controller
     {
         $result = [];
 
-        $allReports = Rp_report::query()
-            ->with('getPages.getBlockDetails.getBlock')
-            ->get();
-
-        foreach ($allReports as $report) {
-            $result[$report->id] = [
-                'item' => $report,
-                'children' => [],
-            ];
-            foreach ($report->getPages as $page) {
-                $result[$report->id]['children'][$page->id]['item'] = $page;
-                $result[$report->id]['children'][$page->id]['children'] = [];
-                foreach ($page->getBlockDetails as $blockDetail) {
-                    $block = $blockDetail->getBlock;
-                    $result[$report->id]['children'][$page->id]['children'][$block->id]['item'] = $block;
-                }
-            }
-        }
-
-
-        dump(array_pop($result));
+        $pdfText = (new Pdf())
+            ->setPdf('path_to_your_pdf.pdf')
+            ->text();
+        dump($pdfText);
 
         // $tables = Erp_vendor_external::query()->paginate(100);
 
