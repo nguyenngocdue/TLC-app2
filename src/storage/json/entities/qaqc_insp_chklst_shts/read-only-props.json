@@ -62,12 +62,22 @@
     "_council_member_list": {
         "name": "_council_member_list",
         "column_name": "council_member_list",
-        "not_applicable": "",
+        "not_applicable": "true",
         "in_progress": "",
-        "reviewed": "",
+        "reviewed": "true",
         "inspected": "",
-        "pending_audit": "",
-        "audited": ""
+        "pending_audit": "true",
+        "audited": "true"
+    },
+    "_shipping_agent_list": {
+        "name": "_shipping_agent_list",
+        "column_name": "shipping_agent_list",
+        "not_applicable": "true",
+        "in_progress": "",
+        "reviewed": "true",
+        "inspected": "",
+        "pending_audit": "true",
+        "audited": "true"
     },
     "_description": {
         "name": "_description",
