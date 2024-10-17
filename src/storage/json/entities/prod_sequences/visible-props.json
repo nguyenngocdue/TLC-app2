@@ -109,6 +109,26 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
+    "_sep01": {
+        "name": "_sep01",
+        "column_name": "sep01",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_heading01": {
+        "name": "_heading01",
+        "column_name": "heading01",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
     "_getProdRunsRework1": {
         "name": "_getProdRunsRework1",
         "column_name": "getProdRunsRework1",
@@ -119,9 +139,49 @@
         "cancelled": "true",
         "not_applicable": "true"
     },
+    "_sep02": {
+        "name": "_sep02",
+        "column_name": "sep02",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_heading02": {
+        "name": "_heading02",
+        "column_name": "heading02",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
     "_getProdRunsRework2": {
         "name": "_getProdRunsRework2",
         "column_name": "getProdRunsRework2",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_sep03": {
+        "name": "_sep03",
+        "column_name": "sep03",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true"
+    },
+    "_heading03": {
+        "name": "_heading03",
+        "column_name": "heading03",
         "new": "true",
         "in_progress": "true",
         "finished": "true",
