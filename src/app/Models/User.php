@@ -159,6 +159,8 @@ class User extends ModelExtended implements
         "getTshtTeams" => ["belongsToMany", User_team_tsht::class, "ym2m_user_team_tsht_user_tsht_member"],
         "getSiteTeams" => ["belongsToMany", User_team_site::class, "ym2m_user_team_site_user_site_member"],
 
+        "getAccessibleProjects" => ['belongsToMany', Project::class, "ym2m_project_user_accessible"],
+
         "getSubProjectsOfCouncilMember" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_council_member"],
         "getSubProjectsOfProjectClient" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_project_client"],
         "getSubProjectsOfExternalInspector" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_ext_insp"],
@@ -186,6 +188,12 @@ class User extends ModelExtended implements
     }
 
     public function getSiteTeams()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAccessibleProjects()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

@@ -32,6 +32,8 @@ class Project extends ModelExtended
         "getProjectMembers" => ["belongsToMany", User::class, "ym2m_project_user_project_member"],
         "getScreensShowMeOn" => ["belongsToMany", Term::class, "ym2m_project_term_show_me_on"],
         "getScreensHideMeOn" => ["belongsToMany", Term::class, "ym2m_project_term_hide_me_on"],
+
+        "getAccessibleUsers" => ["belongsToMany", User::class, "ym2m_project_user_accessible"],
     ];
 
     public function getScreensShowMeOn()
@@ -77,6 +79,12 @@ class Project extends ModelExtended
     }
 
     public function getQrAppSource()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getAccessibleUsers()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
