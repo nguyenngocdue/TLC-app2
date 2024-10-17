@@ -64,7 +64,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_name": {
         "name": "_name",
@@ -131,7 +132,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_progress": {
         "name": "_progress",
@@ -198,7 +200,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_assignee_1": {
         "name": "_assignee_1",
@@ -265,7 +268,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_assignee_2": {
         "name": "_assignee_2",
@@ -332,7 +336,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_getMonitors1": {
         "name": "_getMonitors1",
@@ -399,7 +404,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_council_member_list": {
         "name": "_council_member_list",
@@ -466,7 +472,76 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
+    },
+    "_shipping_agent_list": {
+        "name": "_shipping_agent_list",
+        "column_name": "shipping_agent_list",
+        "admin": "",
+        "acct_manager": "",
+        "acct_member": "",
+        "bd_manager": "",
+        "bd_member": "",
+        "cpl_member": "",
+        "dc_manager": "",
+        "dc_ho": "",
+        "des_manager": "",
+        "des_member": "",
+        "dir": "",
+        "hr_manager": "",
+        "hr_member": "",
+        "it_manager": "",
+        "it_member": "",
+        "pln_admin": "",
+        "proc_manager": "",
+        "proc_member": "",
+        "proj_manager": "",
+        "proj_member": "",
+        "qs_manager": "",
+        "qs_member": "",
+        "supreme_manage": "",
+        "guest": "",
+        "newcomer": "",
+        "hse_manager": "",
+        "hse_member": "",
+        "dc_ws": "",
+        "fac_admin": "",
+        "prod_manager": "",
+        "prod_member": "",
+        "qaqc_manager": "",
+        "qaqc_member": "",
+        "whs_manager": "",
+        "whs_member": "",
+        "worker": "",
+        "mgr_asst_nz": "",
+        "acct_manager_nz": "",
+        "acct_member_nz": "",
+        "cpl_manager_nz": "",
+        "dir_nz": "",
+        "prod_manager_nz": "",
+        "prod_member_nz": "",
+        "fin_member_nz": "",
+        "hr_member_nz": "",
+        "proc_member_nz": "",
+        "proj_manager_nz": "",
+        "proj_member_nz": "",
+        "qs_member_nz": "",
+        "external_inspector": "",
+        "qaqc_member_nz": "",
+        "proj_admin": "",
+        "ppc_admin": "",
+        "ppc_manager": "",
+        "ppc_member": "",
+        "proj_supervisor_nz": "",
+        "shipping_agent": "",
+        "client": "",
+        "apartment_owner": "",
+        "consultant": "",
+        "contractor": "",
+        "vendor": "",
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_description": {
         "name": "_description",
@@ -533,7 +608,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_getLines": {
         "name": "_getLines",
@@ -600,7 +676,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_slug": {
         "name": "_slug",
@@ -667,7 +744,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_qaqc_insp_chklst_id": {
         "name": "_qaqc_insp_chklst_id",
@@ -734,7 +812,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_qaqc_insp_tmpl_sht_id": {
         "name": "_qaqc_insp_tmpl_sht_id",
@@ -801,7 +880,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_prod_discipline_id": {
         "name": "_prod_discipline_id",
@@ -868,7 +948,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_divider1": {
         "name": "_divider1",
@@ -935,7 +1016,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_h1a": {
         "name": "_h1a",
@@ -1002,7 +1084,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_signature_qaqc_chklst_3rd_party_list": {
         "name": "_signature_qaqc_chklst_3rd_party_list",
@@ -1069,7 +1152,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_signature_qaqc_chklst_3rd_party": {
         "name": "_signature_qaqc_chklst_3rd_party",
@@ -1136,7 +1220,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_comment_rejected_reason": {
         "name": "_comment_rejected_reason",
@@ -1203,7 +1288,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -1270,7 +1356,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_status": {
         "name": "_status",
@@ -1337,7 +1424,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -1404,7 +1492,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -1471,7 +1560,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -1538,7 +1628,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -1605,7 +1696,8 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -1672,6 +1764,7 @@
         "consultant": "",
         "contractor": "",
         "vendor": "",
-        "council_member": ""
+        "council_member": "",
+        "des_member_nz": ""
     }
 }
