@@ -3,7 +3,9 @@
 namespace App\View\Components\Homepage;
 
 use App\Models\Project;
+use App\Scopes\AccessibleProjectScope;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class MenuProjectDropdown extends Component
@@ -18,13 +20,21 @@ class MenuProjectDropdown extends Component
         $this->cu = CurrentUser::get();
 
         $this->allProjects = Project::query()
-            ->whereHas('getAccessibleUsers', function ($query) {
-                $query->where('user_id', $this->cu->id);
-            })
-            ->orWhere('id', $this->ALL_PROJECTS_ID)
+            // ->whereHas('getAccessibleUsers', function ($query) {
+            //     $query->where('user_id', $this->cu->id);
+            // })
+            ->whereIn('status', config("project.active_statuses.projects"))
             ->with('getAvatar')
-            ->orderByRaw('id = 81 DESC')
+            ->orderBy('name')
             ->get();
+
+        $this->itemAllProject = Project::query()
+            ->withoutGlobalScope(AccessibleProjectScope::class)
+            ->where('id', $this->ALL_PROJECTS_ID)
+            ->with('getAvatar')
+            ->get();
+
+        $this->allProjects = $this->itemAllProject->merge($this->allProjects);
 
         foreach ($this->allProjects as &$project) {
             $path = ($project->getAvatar ? app()->pathMinio() . $project->getAvatar->url_thumbnail : '/images/modules.png');
@@ -37,14 +47,15 @@ class MenuProjectDropdown extends Component
     private function getSelectedProject()
     {
         $selectedProjectId = $this->cu->settings["global"]["selected-project-id"] ?? null;
-        if ($selectedProjectId) return $this->allProjects->where('id', $selectedProjectId)->first();
+        if ($selectedProjectId) {
+            $tmp = $this->allProjects->where('id', $selectedProjectId)->first();
+            if ($tmp) return $tmp;
+        }
         return $this->itemAllProject;
     }
 
     public function render()
     {
-        // $allProjects = $this->getAccessibleProjects();
-        // dd($allProjects);
         return view('components.homepage.menu-project-dropdown', [
             'projects' => $this->allProjects,
             'selectedProject' => $this->getSelectedProject(),

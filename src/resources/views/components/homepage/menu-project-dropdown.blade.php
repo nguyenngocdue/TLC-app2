@@ -3,9 +3,9 @@
     {{-- <i class="fa-solid fa-city"></i>
     <span class="font-semibold">{{$selectedProjectName}}</span> --}}
     <x-renderer.avatar-item 
-            title="{{$selectedProject->name}}"
+            title="{{$selectedProject?->name}}"
             {{-- description="{{$selectedProject->description}}" --}}
-            avatar="{{$selectedProject->src}}"
+            avatar="{{$selectedProject?->src}}"
             shape="round"
             />
         </button>
@@ -23,7 +23,7 @@
             <x-homepage.menu-project-dropdown-item 
                 route="{{$route}}" 
                 :project='$project' 
-                selectedProjectId="{{$selectedProject->id}}"
+                selectedProjectId="{{$selectedProject?->id}}"
                 />
         @endforeach
 

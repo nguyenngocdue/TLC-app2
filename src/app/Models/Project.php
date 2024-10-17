@@ -5,6 +5,7 @@ namespace App\Models;
 use App\BigThink\HasCachedAvatar;
 use App\BigThink\HasShowOnScreens;
 use App\BigThink\ModelExtended;
+use App\Scopes\AccessibleProjectScope;
 
 class Project extends ModelExtended
 {
@@ -110,5 +111,11 @@ class Project extends ModelExtended
         }
         // dd($tree);
         return $tree;
+    }
+
+    protected static function booted()
+    {
+        // Apply the accessible project scope globally
+        static::addGlobalScope(new AccessibleProjectScope);
     }
 }
