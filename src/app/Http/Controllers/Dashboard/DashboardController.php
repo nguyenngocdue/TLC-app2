@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\QaqcInsp\DashboardCouncilMemberController;
 use App\Http\Controllers\Dashboard\QaqcInsp\DashboardExternalInspectorController;
 use App\Http\Controllers\Dashboard\QaqcInsp\DashboardProjectClientController;
+use App\Http\Controllers\Dashboard\QaqcInsp\DashboardShippingAgentController;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
@@ -44,6 +45,8 @@ class DashboardController extends Controller
                 return (new DashboardProjectClientController())->index($request);
             case "-council-member":
                 return (new DashboardCouncilMemberController())->index($request);
+            case "-shipping-agent":
+                return (new DashboardShippingAgentController())->index($request);
             case "-newcomer":
                 return (new DashboardNewcomerController())->index($request);
             case "":

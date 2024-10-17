@@ -35,6 +35,7 @@ class Constant
     const DASHBOARD_EXTERNAL_INSPECTOR = "-external-inspector";
     const DASHBOARD_APARTMENT_OWNER = "-apartment-owner";
     const DASHBOARD_COUNCIL_MEMBER = "-council-member";
+    const DASHBOARD_SHIPPING_AGENT = "-shipping-agent";
     const DASHBOARD_NEWCOMER = "-newcomer";
 
     const COLOR_PUBLIC_HOLIDAY = ["teal", "cyan", "yellow", "blue", "pink", "violet", "green"];

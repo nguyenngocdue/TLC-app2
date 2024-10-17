@@ -642,7 +642,7 @@
         "name_rendered": "",
         "toggle": "",
         "not_applicable": "",
-        "in_progress": "",
+        "in_progress": "true",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "true",
