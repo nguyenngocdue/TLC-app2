@@ -42,6 +42,11 @@ $routeSrc = Route::has($viewAll.".index") ? route($viewAll.".index") : "#NotFoun
                 <li class="flex border1" title="Projects">
                     <x-homepage.menu-project-filter/>
                 </li>
+                @roleset('admin')
+                <li class="flex border1" title="Projects">
+                    <x-homepage.menu-project-dropdown/>
+                </li>
+                @endroleset
                 <li class="relative border1">
                     <x-homepage.menu-profile/>
                 </li>

@@ -59,6 +59,14 @@ function alpineData() {
             this.isProjectMenuOpen = false
         },
         ///////////////////////////////////
+        isProjectDropdownOpen: false,
+        toggleProjectDropdown() {
+            this.isProjectDropdownOpen = !this.isProjectDropdownOpen
+        },
+        closeProjectDropdown() {
+            this.isProjectDropdownOpen = false
+        },
+        ///////////////////////////////////
         isTopDrawerOpen: false,
         toggleTopDrawer() {
             this.isTopDrawerOpen = !this.isTopDrawerOpen
