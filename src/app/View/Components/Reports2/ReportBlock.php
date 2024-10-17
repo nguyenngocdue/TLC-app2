@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class ReportBlock extends Component
@@ -51,7 +52,15 @@ class ReportBlock extends Component
                     }
                     $queriedPagData = $this->paginateDataSource($queriedData, $block->has_pagination, $perPage);
                 } catch (\Exception $e) {
-                    dump($e->getMessage());
+                    $message = $e->getMessage();
+                    $blockHref = route('rp_blocks.edit', $block->id);
+                    echo Blade::render(
+                        '<x-feedback.alert-sql-string-error message="{{$message}}" btnHref="{{$blockHref}}" />',
+                        [
+                            'message' => $message,
+                            'blockHref' => $blockHref,
+                        ]
+                    );
                 }
             }
             $rpTableCols = ReportTableColumn::getInstance();
