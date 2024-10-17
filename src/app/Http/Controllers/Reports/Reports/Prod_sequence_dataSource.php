@@ -49,7 +49,7 @@ class Prod_sequence_dataSource extends Controller
                     ps.status AS prod_sequence_status,
                     SUBSTR(pru.date, 1,7) AS month_prod_run,
                     pru.date AS date_prod_run,
-                    IF(pru.is_rework = 0, '', 'Rework') AS is_rework,
+                    IF(pru.is_rework = 0, 'Rework 1', 'Rework 2') AS is_rework,
                     '{$valOfParams["picker_date"]["start"]}' AS from_date,
                     '{$valOfParams["picker_date"]["end"]}' AS to_date,
 
