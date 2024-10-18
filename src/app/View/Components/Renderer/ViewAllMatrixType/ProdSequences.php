@@ -10,7 +10,6 @@ use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
@@ -32,6 +31,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $headerTop = 20;
     protected $groupBy = null;
     protected $mode = 'detail';
+    protected $maxH = 50;
 
     protected $showAdvancedDays = !true;
     /**
