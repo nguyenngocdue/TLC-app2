@@ -19,32 +19,36 @@ trait TraitEntityCRUDShowChklst
         // $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);;
         // $modelPath = Qaqc_insp_chklst::class;
         // $entity = ($this->modelPath)::query()
-        $entity = Qaqc_insp_chklst::class::query()
+        // dump($this->type);
+        $modalPath = Str::modelPathFrom($this->type);
+        $entity = $modalPath::query()
             ->where('id', $id)
             ->with([
                 "getSheets" => function ($query) {
-                    $query
-                        ->whereNot('status', 'not_applicable')
-                        ->with([
-                            "getLines" => function ($query) {
-                                $query->with([
-                                    "getControlGroup",
-                                    "getControlType",
-                                    "getControlValue",
-                                    "getGroup",
+                    if ($this->type == "qaqc_insp_chklst") {
+                        $query = $query
+                            ->whereNot('status', 'not_applicable')
+                            ->with([
+                                "getLines" => function ($query) {
+                                    $query->with([
+                                        "getControlGroup",
+                                        "getControlType",
+                                        "getControlValue",
+                                        "getGroup",
 
-                                    "insp_photos",
-                                    "insp_comments",
-                                ])
-                                    ->orderBy('order_no');
-                            }
-                        ])
-                        ->with($this->nominatedListFn)
-                        ->with('getChklst.getProdOrder.getSubProject.getProject');
+                                        "insp_photos",
+                                        "insp_comments",
+                                    ])
+                                        ->orderBy('order_no');
+                                }
+                            ])
+                            ->with($this->nominatedListFn)
+                            ->with('getChklst.getProdOrder.getSubProject.getProject');
+                    }
                 },
-                // "getProdOrder.getSubProject.getProject",
             ])
             ->first();
+        if (!$entity) return abort(404, "The requested entity was not found.");
 
         $entityShts = $entity->getSheets;
 
