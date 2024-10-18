@@ -1,7 +1,7 @@
 <!-- Trigger Button -->
-<div class="flex justify-center mt-10">
+<div class="flex justify-center mt-10 z-50">
     <x-renderer.button id="openModal" htmlType="submit" type="danger">
-        <i class="text-red-200 fa-solid fa-bomb"></i> SQL Error
+        <i class="text-red-200 fa-solid fa-bomb"></i> Error
     </x-renderer.button>
 </div>
 
@@ -14,7 +14,7 @@
         </button>
         
         <h2 class="text-xl font-semibold text-red-600">
-            Error <i class="text-red-600 fa-solid fa-bomb"></i>
+            <i class="text-red-600 fa-solid fa-bomb"></i> Error 
         </h2>
         <!-- Updated Message Box -->
         <div class="mt-4 bg-black text-green-500 whitespace-pre-wrap overflow-y-auto max-h-[500px] p-4 rounded-lg border-2 shadow-lg shadow-slate-400">

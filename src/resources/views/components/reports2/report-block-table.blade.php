@@ -1,9 +1,3 @@
-{{-- @php
-    $rotate45Width = 300;
-    $rotate45Height = 250;
-    $tableTrueWidth = 1;
-    $lineIgnoreNo=1
-@endphp --}}
 <x-renderer.table 
     headerTop=12 
     showNo=true 
@@ -17,7 +11,6 @@
     topLeftControl="{!! $topLeftControl !!}" topCenterControl="{!! $topCenterControl !!}"
     topRightControl="{!! $topRightControl !!}" bottomLeftControl="{!! $bottomLeftControl !!}"
     bottomCenterControl="{!! $bottomCenterControl !!}" bottomRightControl="{!! $bottomRightControl !!}" 
-    {{-- lineIgnoreNo=1 --}}
     />
 
 @if($legendEntityType)

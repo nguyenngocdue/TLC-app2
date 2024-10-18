@@ -184,54 +184,62 @@ trait TraitReportMatrixColumn
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
         if ($customCols) {
             foreach ($customCols as $col) {
-                $aggType = $col['agg_row'] ?? '';
-                $dataIndex  = isset($col['data_index']) ? $col['data_index'] : '';
                 try {
-                    switch ($aggType) {
-                        case 'agg_sum':
-                            foreach ($mergedData as &$values) {
-                                $total = 0;
+                    $aggType = $col['agg_row'];
+                    $dataIndex  = isset($col['data_index']) ? $col['data_index'] : '';
+                        switch ($aggType) {
+                            case 'agg_sum':
+                                foreach ($mergedData as &$values) {
+                                    $total = 0;
 
-                                foreach ($transformedFields as $type) {
-                                    if (!isset($values[$type])) $values[$type] = $valueToSet;
-                                    else {
-                                        $q = $values[$type];
-                                        if (isset($q->value)) {
-                                            $val = is_numeric($q->value) ? (float)$q->value : 0;
-                                            $total += $val;
+                                    foreach ($transformedFields as $type) {
+                                        if (!isset($values[$type])) $values[$type] = $valueToSet;
+                                        else {
+                                            $q = $values[$type];
+                                            if (isset($q->value)) {
+                                                $val = is_numeric($q->value) ? (float)$q->value : 0;
+                                                $total += $val;
+                                            }
                                         }
                                     }
+                                    $this->setCellValue($values, $dataIndex, $total, $total, $col['cell_class']);
                                 }
-                                $this->setCellValue($values, $dataIndex, $total, $total, $col['cell_class']);
-                            }
-                            break;
-                        case "agg_count_unique_values":
-                            foreach ($mergedData as &$values) {
-                                $intersect = $this->getIntersectingValues($values, $transformedFields);
-                                $filteredArray = $this->filterValidValues($intersect);
-                                $uniqueValues = array_unique(array_values($filteredArray));
-                                $count = count($uniqueValues);
-                                $this->setCellValue($values, $dataIndex, $count,$count, $col['cell_class']);
-                            }
-                            break;
-                        case "agg_count_all":
-                            foreach ($mergedData as &$values) {
-                                $intersect = $this->getIntersectingValues($values, $transformedFields);
-                                $filteredArray = $this->filterValidValues($intersect);
-                                $num = count($filteredArray);
-                                $this->setCellValue($values, $dataIndex, $num, $num, $col['cell_class']);
-                            }
-                            break;
+                                break;
+                            case "agg_count_unique_values":
+                                foreach ($mergedData as &$values) {
+                                    $intersect = $this->getIntersectingValues($values, $transformedFields);
+                                    $filteredArray = $this->filterValidValues($intersect);
+                                    $uniqueValues = array_unique(array_values($filteredArray));
+                                    $count = count($uniqueValues);
+                                    $this->setCellValue($values, $dataIndex, $count,$count, $col['cell_class']);
+                                }
+                                break;
+                            case "agg_count_all":
+                                foreach ($mergedData as &$values) {
+                                    $intersect = $this->getIntersectingValues($values, $transformedFields);
+                                    $filteredArray = $this->filterValidValues($intersect);
+                                    $num = count($filteredArray);
+                                    $this->setCellValue($values, $dataIndex, $num, $num, $col['cell_class']);
+                                }
+                                break;
 
-                        case "agg_progress": // for rows
-                            $mergedData = $this->makeAggProgressRows($mergedData, $transformedFields, $col);
-                            break;
+                            case "agg_progress": // for rows
+                                $mergedData = $this->makeAggProgressRows($mergedData, $transformedFields, $col);
+                                break;
 
-                        default:
-                            break;
-                    }
+                            default:
+                                break;
+                        }
                 } catch (\Exception $e) {
-                    dump($e->getMessage());
+                    $message = $e->getMessage();
+                    // Format the $col array into a more readable JSON string with line breaks after commas
+                    $colStr = json_encode($col, JSON_PRETTY_PRINT);
+                    // Build a more informative error message
+                    $text = "An error occurred: " . $message;
+                    $text .= "\n\nPlease verify your block configuration in 'Transformed Data Option (for Table, Chart)'.\n";
+                    $text .= "The configuration provided is:\n";
+                    $text .= $colStr; 
+                    throw new \ErrorException($text);
                 }
             }
         }
