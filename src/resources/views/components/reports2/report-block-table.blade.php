@@ -17,7 +17,7 @@
     topLeftControl="{!! $topLeftControl !!}" topCenterControl="{!! $topCenterControl !!}"
     topRightControl="{!! $topRightControl !!}" bottomLeftControl="{!! $bottomLeftControl !!}"
     bottomCenterControl="{!! $bottomCenterControl !!}" bottomRightControl="{!! $bottomRightControl !!}" 
-    lineIgnoreNo=1
+    {{-- lineIgnoreNo=1 --}}
     />
 
 @if($legendEntityType)
