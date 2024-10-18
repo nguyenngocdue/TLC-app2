@@ -27,7 +27,7 @@ trait TraitSupportPermissionGate
     private function getListOwnerIds($user)
     {
         $value = $this->getCompanyTree($user);
-        $result = array_map(fn ($item) => $item->id, $value);
+        $result = array_map(fn($item) => $item->id, $value);
         $result[] = $user->id;
         return array_unique($result) ?? [];
     }
@@ -36,7 +36,7 @@ trait TraitSupportPermissionGate
         $value = $this->getCompanyTree($user, false);
         return $value;
     }
-    private function isUseTree($type)
+    private function isTreeUsed($type)
     {
         return LibApps::getFor($type)['apply_approval_tree'] ?? false;
     }

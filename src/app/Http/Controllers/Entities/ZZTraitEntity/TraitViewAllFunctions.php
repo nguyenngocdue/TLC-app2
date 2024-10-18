@@ -98,8 +98,8 @@ trait TraitViewAllFunctions
         $eloquentParams = $model::$eloquentParams;
         $eagerLoadParams = $this->getEagerLoadParams($eloquentParams);
         if (!CurrentUser::isAdmin()) {
-            $isUseTree = $this->isUseTree($this->type);
-            if ($isUseTree) {
+            $isTreeUsed = $this->isTreeUsed($this->type);
+            if ($isTreeUsed) {
                 $ids = $this->getListOwnerIds(CurrentUser::get());
                 $result = $instance
                     ->query(function ($q) use ($ids, $advanceFilters, $propsFilters, $eagerLoadParams, $trash) {
@@ -127,14 +127,14 @@ trait TraitViewAllFunctions
             });
         return $result;
     }
-    private function handleWhereIn(&$model, $ids)
+    private function handleWhereIn(&$builder, $ids)
     {
         $currentUserRoleSet = CurrentUser::getRoleSet();
         if ($this->type == "user_position" && $currentUserRoleSet != "hr_manager") {
             $positions = $this->getPositionsEntityUserPositionOfCurrentUser();
-            $model->whereIn('name', array_unique($positions));
+            $builder->whereIn('name', array_unique($positions));
         } else {
-            $model->whereIn('owner_id', $ids);
+            $builder->whereIn('owner_id', $ids);
         }
     }
 }

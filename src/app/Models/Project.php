@@ -116,6 +116,8 @@ class Project extends ModelExtended
     protected static function booted()
     {
         // Apply the accessible project scope globally
-        static::addGlobalScope(new AccessibleProjectScope);
+        if (env('PROJECT_SCOPE')) {
+            static::addGlobalScope(new AccessibleProjectScope);
+        }
     }
 }

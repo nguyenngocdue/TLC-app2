@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
+use App\Scopes\AccessibleProjectScope;
 use App\Utils\Support\Json\Listeners;
 use App\Utils\Support\Json\SuperProps;
 use App\Utils\Support\JsonControls;
@@ -168,18 +169,25 @@ trait TraitEntityListenDataSource
     private function mapGetNameForNameless($table, $columnsWithoutOracy)
     {
         $modelPath = Str::modelPathFrom($table);
-        $rows = $modelPath::query(); //->select($columnsWithoutOracy);
+        $builder = $modelPath::query(); //->select($columnsWithoutOracy);
 
         $eloquent = JsonControls::getViewAllEloquents();
         foreach ($columnsWithoutOracy as $column) {
             $column_type = $column['column_type'];
             $columnName = $column['name'];
-            if (in_array($column_type, $eloquent)) $rows->with($columnName);
+            if (in_array($column_type, $eloquent)) $builder->with($columnName);
         }
 
         $nameless = $modelPath::$nameless;
-        if (!$nameless) $rows = $rows->orderBy('name');
-        $objectRows = $rows->get();
+        if (env('PROJECT_SCOPE')) {
+            if ($this->type == 'user') {
+                if ($table == 'projects') {
+                    $builder->withoutGlobalScope(AccessibleProjectScope::class);
+                }
+            }
+        }
+        if (!$nameless) $builder = $builder->orderBy('name');
+        $objectRows = $builder->get();
         // dump($table, sizeof($objectRows));
         // if ($nameless) {
         //     $max = 5000;
@@ -256,25 +264,6 @@ trait TraitEntityListenDataSource
                 $result[$table] = $items;
             }
         }
-
-        // $this->dump2("columnsWithOracy", $columnsWithOracy, __LINE__);
-        // foreach ($columnsWithOracy as $table => $listOfFn) {
-        //     // $modelPath = "App\\Models\\" . Str::singular($table);
-        //     $modelPath = Str::modelPathFrom($table);
-        //     if (sizeof($listOfFn) > 0) {
-        //         foreach ($listOfFn as $fn) {
-        //             $fn_no_parenthesis = substr($fn, 0, strlen($fn) - 2); //Remove ()
-
-        //             foreach ($result[$table] as &$row) {
-        //                 $model = new $modelPath(); //<<new $modelPath(['id' => $row['id']) doesn't work;
-        //                 $model->id = $row['id'];
-        //                 // $model = $modelPath::find($row['id']); //<<Don't have to actually init the model object to save ram
-        //                 $row[$fn] = $model->getCheckedByField($fn_no_parenthesis)->pluck('id')->toArray();
-        //             }
-        //         }
-        //     }
-        // }
-
         // if table act_currency_xrs in the list, make more columns for it
         $result = $this->attachCurrencyXr($result);
 

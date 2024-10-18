@@ -20,9 +20,6 @@ class MenuProjectDropdown extends Component
         $this->cu = CurrentUser::get();
 
         $this->allProjects = Project::query()
-            // ->whereHas('getAccessibleUsers', function ($query) {
-            //     $query->where('user_id', $this->cu->id);
-            // })
             ->whereIn('status', config("project.active_statuses.projects"))
             ->with('getAvatar')
             ->orderBy('name')
