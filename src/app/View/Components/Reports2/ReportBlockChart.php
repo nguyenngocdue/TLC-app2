@@ -26,7 +26,11 @@ class ReportBlockChart extends Component
             $data = $queriedData->pluck($name)->toArray();
             $data = array_map(function($item) {
                 if(!$item) return null;
-                return (float)$item;
+                if (is_object($item)) {
+                    return $item->original_value;
+                } else {
+                    return $item;
+                }
             }, $data);
             $series[] = [
                 'name' => $name,
