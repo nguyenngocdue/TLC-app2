@@ -18,9 +18,10 @@ class CoverPage extends Component
         $template = $checklist->getQaqcInspTmpl;
         $routing = $checklist->getProdRouting;
         $prodOrder = $checklist->getProdOrder;
-        $subProject = $this->headerDataSource->getProdOrder->getSubProject;
-        $project = $subProject->getProject;
-        if ($project->getAvatar) {
+        $subProject = $this->headerDataSource->getProdOrder?->getSubProject;
+
+        $project = $subProject?->getProject;
+        if ($project?->getAvatar) {
             $src = app()->pathMinio() . $project->getAvatar?->url_media;
         } else {
             $src = '/images/modules.png';

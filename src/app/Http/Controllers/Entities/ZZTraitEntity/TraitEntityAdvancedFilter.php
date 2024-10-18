@@ -18,7 +18,13 @@ trait TraitEntityAdvancedFilter
 
     private function advanceFilter($type = null)
     {
-        $blackList = ['attachment', 'comment', 'relationship_renderer', 'thumbnail', 'parent_link'];
+        $blackList = [
+            'attachment',
+            'comment',
+            'relationship_renderer',
+            'thumbnail',
+            'parent_link'
+        ];
         $supperProps = SuperProps::getFor($type ?? $this->type);
         $propsFilters = array_filter($supperProps['props'], function ($item) use ($blackList) {
             if ($item['column_type'] === "static_heading") return false;
@@ -43,7 +49,7 @@ trait TraitEntityAdvancedFilter
         return $propsFilters;
     }
 
-    private function distributeFilter($advanceFilters, $propsFilters)
+    private function groupFilter($advanceFilters, $propsFilters)
     {
         $propsFilters = array_map(fn($item) => $item['control'], $propsFilters);
         if (!empty($advanceFilters)) {

@@ -91,7 +91,7 @@ trait TraitViewAllFunctions
     public function getDataSource($advanceFilters = null, $trash = false)
     {
         $propsFilters = $this->advanceFilter();
-        $advanceFilters = $this->distributeFilter($advanceFilters, $propsFilters);
+        $advanceFilters = $this->groupFilter($advanceFilters, $propsFilters);
         $model = $this->typeModel;
         $instance = App::make($model);
         $instance = $instance->search(); //<< has to be here even scout is database

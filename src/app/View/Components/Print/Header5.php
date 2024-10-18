@@ -76,7 +76,7 @@ class Header5 extends Component
                 $prodOrder = $dataSource->getProdOrder;
                 break;
             case "qaqc_insp_chklst_shts":
-                $prodOrder = $dataSource->getChklst->getProdOrder;
+                $prodOrder = $dataSource->getChklst?->getProdOrder;
                 break;
             default:
                 return "Unknown how to render [$this->type]";
