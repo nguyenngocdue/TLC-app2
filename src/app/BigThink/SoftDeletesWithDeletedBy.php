@@ -3,6 +3,7 @@
 namespace App\BigThink;
 
 use App\Models\Comment;
+use App\Scopes\SoftDeletingScopeCustom;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
@@ -86,7 +87,8 @@ trait SoftDeletesWithDeletedBy
 
     public function getDeletedByColumn()
     {
-        return defined('static::DELETED_BY') ? static::DELETED_BY : 'deleted_by';
+        return 'deleted_by';
+        // return defined('static::DELETED_BY') ? static::DELETED_BY : 'deleted_by';
     }
     /**
      * Get the fully qualified "deleted at" column.
