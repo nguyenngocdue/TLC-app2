@@ -41,6 +41,7 @@ return new class extends Migration
             $table->unsignedBigInteger('bottom_left_control')->nullable();
             $table->unsignedBigInteger('bottom_center_control')->nullable();
             $table->unsignedBigInteger('bottom_right_control')->nullable();
+            $table->text('div_class')->nullable();
             $table->unsignedBigInteger('chart_type')->nullable();
             $table->text('html_content')->nullable();
 

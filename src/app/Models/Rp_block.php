@@ -29,6 +29,7 @@ class Rp_block extends ModelExtended
         "bottom_left_control",
         "bottom_center_control",
         "bottom_right_control",
+        "div_class",
         "chart_type",
         "html_content",
         "owner_id",

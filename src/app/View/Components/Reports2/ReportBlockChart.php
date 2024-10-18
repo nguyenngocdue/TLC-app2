@@ -59,10 +59,12 @@ class ReportBlockChart extends Component
         $jsonOptions = $this->changeToJsonOptions($block->chart_json, $queriedData);
         
         $key = hash('sha256', $block->name);
+        $divClass = $block->div_class;
         // dump($key, $jsonOptions);
-        return Blade::render('<x-reports2.report-chart ' . 'key="{{$key}}" :jsonOptions="$jsonOptions" />', [
+        return Blade::render('<x-reports2.report-chart ' . 'key="{{$key}}" :jsonOptions="$jsonOptions" class="{{$divClass}}"/>', [
             'key' => $key,
             'jsonOptions' => $jsonOptions,
+            'divClass' => $divClass,
         ]);
     }
 }
