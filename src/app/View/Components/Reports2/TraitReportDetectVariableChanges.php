@@ -13,7 +13,7 @@ trait TraitReportDetectVariableChanges
         $formattedValue = '';
         switch($rendererType){
             case $this->CHART_TYPE_ID:
-                $formattedValue = '['. implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)) . ']';
+                $formattedValue = '['. implode(',' , array_map(fn($item) => is_numeric($item) ? $item : "\"{$item}\"",$valueInData)) . ']';
                 break;
             case $this->PARAGRAPH_TYPE_ID:
                 $formattedValue = trim(implode(',' , array_map(fn($item) => "\"{$item}\"",$valueInData)), '"');
@@ -42,6 +42,7 @@ trait TraitReportDetectVariableChanges
                 $string = str_replace($keyInOptions, $changedVal, $string);
             }
         }
+        // dd($string);
         return $string;
     }
 
