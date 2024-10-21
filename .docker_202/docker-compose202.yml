@@ -64,7 +64,7 @@ services:
       - laravel202
 
   mysql:
-    image: mysql
+    image: mysql:8.2
     container_name: laravel202_mysql
     restart: unless-stopped
     tty: true

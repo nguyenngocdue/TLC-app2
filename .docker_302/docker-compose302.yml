@@ -66,7 +66,7 @@ services:
       - laravel302
 
   mysql:
-    image: mysql
+    image: mysql:8.2
     container_name: laravel302_mysql
     restart: unless-stopped
     tty: true
