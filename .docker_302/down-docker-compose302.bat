@@ -1,1 +1,1 @@
-docker-compose -f docker-compose302.yml down --remove-orphans
+docker compose -f docker-compose302.yml down --remove-orphans

@@ -1,1 +1,1 @@
-docker-compose -f docker-compose202.yml down --remove-orphans
+docker compose -f docker-compose202.yml down --remove-orphans
