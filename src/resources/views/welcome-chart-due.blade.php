@@ -1,61 +1,88 @@
-@extends('layouts.app')
-@section('topTitle', 'Welcome')
-@section('title', '')
-
-@section('content')
-
-    <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@latest/dist/apexcharts.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApexCharts Column Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        #chart {
+            max-width: 900px;
+            margin: 35px auto;
+        }
+    </style>
+</head>
+<body>
     <div id="chart"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var horizontal = false;
-            
         var options = {
-          series: [44, 55, 41, 17, 15],
-          chart: {
-          width: 380,
-          type: 'donut',
-        },
-        plotOptions: {
-          pie: {
-            startAngle: -90,
-            endAngle: 270
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        fill: {
-          type: 'gradient',
-        },
-        legend: {
-          formatter: function(val, opts) {
-            return val + " - " + opts.w.globals.series[opts.seriesIndex]
-          }
-        },
-        title: {
-          text: 'Gradient Donut with custom Start-angle'
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
             chart: {
-              width: 200
+                type: 'bar',
+                height: 500,
+                stacked: false,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '60%',
+                    endingShape: 'flat',
+                    dataLabels: {
+                        position: 'top'
+                    }
+                }
+            },
+            colors: ['#1f77b4', '#ff7f0e'],
+            dataLabels: {
+                enabled: true,
+                style: {
+                    fontSize: '13px',
+                    colors: ['#000']
+                },
+                offsetY: -20
+            },
+            series: [{
+                name: 'design',
+                data: [120138, 307, 836, 2759, 654, 0, 4676]
+            }, {
+                name: 'workmanship',
+                data: [14, 27, 27, 148, 27, 76, 430]
+            }],
+            xaxis: {
+                categories: ['PPR', 'STRUCTURE', 'MEP', 'FIT OUT', 'TILING', 'QAQC', 'TOTAL'],
+                labels: {
+                    style: {
+                        fontSize: '13px'
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        fontSize: '13px'
+                    }
+                },
+                title: {
+                    text: 'Number of Defects',
+                    style: {
+                        fontSize: '14px'
+                    }
+                }
             },
             legend: {
-              position: 'bottom'
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontSize: '13px'
+            },
+            grid: {
+                borderColor: '#e0e0e0'
             }
-          }
-        }]
         };
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-        });
     </script>
-
-@endsection
+</body>
+</html>
