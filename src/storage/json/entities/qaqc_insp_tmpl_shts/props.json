@@ -179,7 +179,7 @@
         "name": "_getLines",
         "column_name": "getLines",
         "column_type": "hasMany",
-        "label": "Template Lines (Check Points)",
+        "label": "Check Points (Template Lines)",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

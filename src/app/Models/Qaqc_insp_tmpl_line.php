@@ -7,9 +7,18 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_tmpl_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "control_type_id",
-        "qaqc_insp_group_id", "qaqc_insp_control_group_id", "owner_id", "qaqc_insp_tmpl_sht_id",
-        "order_no"
+        "id",
+        "name",
+        "description",
+        "control_type_id",
+        "qaqc_insp_group_id",
+        "qaqc_insp_control_group_id",
+        "owner_id",
+        "qaqc_insp_tmpl_sht_id",
+        "col_span",
+        "checkpoint_level",
+
+        "order_no",
     ];
     public static $statusless = true;
 
@@ -55,6 +64,8 @@ class Qaqc_insp_tmpl_line extends ModelExtended
             // ['dataIndex' => 'description'],
             ['dataIndex' => 'control_type_id', 'cloneable' => true],
             ['dataIndex' => 'qaqc_insp_control_group_id', 'cloneable' => true],
+            ['dataIndex' => 'col_span', 'cloneable' => true],
+            ['dataIndex' => 'checkpoint_level', 'cloneable' => true],
         ];
     }
 }

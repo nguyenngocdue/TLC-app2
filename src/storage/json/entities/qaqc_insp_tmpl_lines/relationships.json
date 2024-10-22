@@ -10,8 +10,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSheet": {
         "name": "_getSheet",
@@ -24,8 +28,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getControlType": {
         "name": "_getControlType",
@@ -38,8 +46,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getControlGroup": {
         "name": "_getControlGroup",
@@ -52,8 +64,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -66,8 +82,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -80,7 +100,11 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": ""
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

@@ -15,7 +15,10 @@
         <div class="flex justify-center mb-2">
             @switch($line->control_type_id)
             @case (1) {{-- 1 => "text" --}}
-            <x-controls.insp_chklst.check-point-text readOnly="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
+                <x-controls.insp_chklst.check-point-text readOnly="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
+            @break
+            @case (2)
+                <x-controls.insp_chklst.check-point-textarea readOnly="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
             @break
             @case (4) {{-- 4 => "radio" --}}
             <div class="w-full">
@@ -27,7 +30,9 @@
             <x-controls.insp_chklst.check-point-signature readOnly="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
             @break
             @default
-            Unknown control_type_id {{$line->control_type_id}} ({{$controlType[$line->control_type_id]}})
+            <div class="border bg-pink-400 p-2 rounded w-full text-center font-bold">
+                Unknown control_type_id [#{{$line->control_type_id}}] ({{$controlType[$line->control_type_id]}})
+            </div>
             @break
             @endswitch
         </div>

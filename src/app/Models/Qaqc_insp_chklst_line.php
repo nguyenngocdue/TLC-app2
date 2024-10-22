@@ -7,9 +7,22 @@ use App\BigThink\ModelExtended;
 class Qaqc_insp_chklst_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "control_type_id", "value", "value_on_hold", "order_no",
-        "qaqc_insp_chklst_sht_id", "qaqc_insp_group_id",
-        "qaqc_insp_control_value_id", "qaqc_insp_control_group_id", "owner_id", "inspector_id"
+        "id",
+        "name",
+        "description",
+        "control_type_id",
+        "value",
+        "value_on_hold",
+        "order_no",
+        "qaqc_insp_chklst_sht_id",
+        "qaqc_insp_group_id",
+        "qaqc_insp_control_value_id",
+        "qaqc_insp_control_group_id",
+        "owner_id",
+        "col_span",
+        "checkpoint_level",
+
+        "inspector_id"
     ];
     public static $statusless = true;
 
@@ -127,6 +140,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
             ['dataIndex' => 'qaqc_insp_control_value_id',],
             ['dataIndex' => 'value'],
             ['dataIndex' => 'value_on_hold'],
+            // ['dataIndex' => 'col_span']
         ];
     }
 }

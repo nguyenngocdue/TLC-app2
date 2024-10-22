@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('qaqc_insp_tmpl_lines', function (BlueprintExtended $table) {
             $table->id();
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_tmpl_sht_id');
             $table->unsignedBigInteger('qaqc_insp_group_id')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id')->nullable();
+            $table->unsignedInteger('col_span')->nullable()->default(12);
+            $table->unsignedInteger('checkpoint_level')->nullable()->default(12);
 
             $table->orderable();
             $table->appendCommonFields();
