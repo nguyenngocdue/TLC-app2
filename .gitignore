@@ -6,6 +6,7 @@ yarn-error.log
 src/db_export102
 src/db_import202
 src/laravel.sql
+src/laravel.zip
 
 # Laravel 4 specific
 bootstrap/compiled.php
