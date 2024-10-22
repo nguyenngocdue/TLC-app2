@@ -7,4 +7,4 @@ echo DROP DATABASE IF EXISTS laravel | docker exec -i laravel302_mysql /usr/bin/
 echo CREATE new larvel DATABASE
 echo CREATE DATABASE laravel | docker exec -i laravel302_mysql /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9
 echo Importing data - approximately 80 seconds...
-time cat laravel.sql | docker exec -i laravel302_mysql /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9 laravel
+time pv laravel.sql | docker exec -i laravel302_mysql /usr/bin/mysql -u tlc_app_2 --password=DLTedTfrVzYbrYv9 laravel
