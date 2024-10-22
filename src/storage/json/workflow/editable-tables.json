@@ -4,7 +4,7 @@
         "entity-type": "act_currency_xrs",
         "editable-table": "act_currency_xr_lines",
         "button_add_a_new_line": "true"
-    },    
+    },
     "act_travel_reqs_01": {
         "name": "act_travel_reqs_01",
         "entity-type": "act_travel_reqs",
@@ -257,6 +257,12 @@
         "name": "qaqc_insp_chklst_shts_01",
         "entity-type": "qaqc_insp_chklst_shts",
         "editable-table": "qaqc_insp_chklst_lines",
+        "button_add_a_new_line": "true"
+    },
+    "qaqc_insp_control_groups_01": {
+        "name": "qaqc_insp_control_groups_01",
+        "entity-type": "qaqc_insp_control_groups",
+        "editable-table": "qaqc_insp_control_values",
         "button_add_a_new_line": "true"
     },
     "qaqc_insp_tmpl_shts_01": {

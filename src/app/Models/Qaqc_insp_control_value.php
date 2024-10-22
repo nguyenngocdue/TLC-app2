@@ -6,7 +6,15 @@ use App\BigThink\ModelExtended;
 
 class Qaqc_insp_control_value extends ModelExtended
 {
-    protected $fillable = ["id", "control_group", "name", "description", 'qaqc_insp_control_group_id', 'owner_id'];
+    protected $fillable = [
+        "id",
+        "control_group",
+        "name",
+        "description",
+        'qaqc_insp_control_group_id',
+        'owner_id',
+        "order_no",
+    ];
     public static $statusless = true;
 
     public static $eloquentParams = [
@@ -24,5 +32,16 @@ class Qaqc_insp_control_value extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getManyLineParams()
+    {
+        return [
+            ['dataIndex' => 'order_no', 'invisible' => true],
+            ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'qaqc_insp_control_group_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
+        ];
     }
 }
