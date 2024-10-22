@@ -14,7 +14,7 @@
     },
     "act_currency_xrs": {
         "name": "act_currency_xrs"
-    },   
+    },
     "act_travel_place_pairs": {
         "name": "act_travel_place_pairs"
     },
@@ -501,7 +501,8 @@
         "name": "qaqc_insp_control_groups"
     },
     "qaqc_insp_control_values": {
-        "name": "qaqc_insp_control_values"
+        "name": "qaqc_insp_control_values",
+        "storeEmpty_and_updateShort": "true"
     },
     "qaqc_insp_groups": {
         "name": "qaqc_insp_groups"

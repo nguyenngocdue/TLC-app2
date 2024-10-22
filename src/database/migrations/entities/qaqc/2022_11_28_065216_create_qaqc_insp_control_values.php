@@ -19,7 +19,7 @@ return new class extends Migration
 
         $schema->create('qaqc_insp_control_values', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id');
 
