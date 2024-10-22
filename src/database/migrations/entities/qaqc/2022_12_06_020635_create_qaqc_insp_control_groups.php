@@ -15,13 +15,13 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('qaqc_insp_control_groups', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            // $table->string('slug')->unique();
             $table->appendCommonFields();
         });
     }

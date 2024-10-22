@@ -7,9 +7,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -19,9 +21,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
@@ -31,21 +35,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
-    },
-    "_slug": {
-        "name": "_slug",
-        "column_name": "slug",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "All_SlugifyByName",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -55,9 +49,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getControlValues": {
         "name": "_getControlValues",
@@ -67,9 +63,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -79,9 +77,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -91,9 +91,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -103,9 +105,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -115,8 +119,10 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }
