@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllTreeType;
 
 use App\Models\Department;
 use App\Utils\Support\CurrentUser;
+use Illuminate\Support\Facades\Log;
 
 class PpProcedurePolicy extends ViewAllTypeTreeExplorer
 {
@@ -40,14 +41,16 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
         return $result;
     }
 
-    private function getProcedureFiles()
+    private function getProcedureFiles($allowedDepartments)
     {
+        $allowedDepartmentIds = (array_map(fn($i) => $i['id'], $allowedDepartments));
         $procedureItems = \App\Models\Pp_procedure_policy::query()
             ->orderBy('name')
             ->get();
         $result = [];
         foreach ($procedureItems as $procedure) {
             if (!$procedure->department_id) continue;
+            if (!in_array($procedure->department_id, $allowedDepartmentIds)) continue;
             $route = (CurrentUser::isAdmin()) ? route('pp_procedure_policies.edit', $procedure->id) : '';
             $link = $route ? "<a href='$route' class='text-blue-400 ml-2' target='_blank'><i class='fa-regular fa-edit'></i></a>" : '';
             $result[] = [
@@ -187,12 +190,18 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
             ['iso_3_09' => "10. Environmental Mission"],
         ]);
 
+        $departments = $this->getDepartments();
+        // Log::info($departments);
+
+        $procedureFiles = $this->getProcedureFiles($departments);
+        // Log::info($procedureFiles);
+
         return [
             ...$roots,
             ...$policySubFolders,
             ...$statementSubFolders,
             ...$this->getDepartments(),
-            ...$this->getProcedureFiles(),
+            ...$procedureFiles,
         ];
     }
 }
