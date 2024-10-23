@@ -18,6 +18,7 @@ class Rp_filter_link extends ModelExtended
     ];
 
     public static $statusless = true;
+    public static $nameLess = true;
 
     public static $eloquentParams = [
         "getReport" => ['belongsTo', Rp_report::class, 'report_id'],
