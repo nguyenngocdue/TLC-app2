@@ -18,7 +18,7 @@ class Rp_page_block_detail extends ModelExtended
     ];
 
     public static $statusless = true;
-    public static $nameLess = true;
+    public static $nameless = true;
 
     public static $eloquentParams = [
         "getBlock" => ['belongsTo', Rp_block::class, 'rp_block_id'],
