@@ -95,6 +95,12 @@
         "editable-table": "exam_tmpl_groups",
         "button_add_a_new_line": "true"
     },
+    "fields_01": {
+        "name": "fields_01",
+        "entity-type": "fields",
+        "editable-table": "terms",
+        "button_add_a_new_line": "true"
+    },
     "fin_expense_claims_01": {
         "name": "fin_expense_claims_01",
         "entity-type": "fin_expense_claims",

@@ -41,23 +41,23 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_owner_id": {
-        "name": "_owner_id",
-        "column_name": "owner_id",
+    "_getControlValues": {
+        "name": "_getControlValues",
+        "column_name": "getControlValues",
         "label": "",
         "validation": "",
         "validation_regex": "",
         "formula": "",
         "default_value": "",
         "cannot_be_readonly_during_create": "",
-        "label_extra": "",
+        "label_extra": "Available Colors: slate|zinc|neutral|stone|amber|yellow|lime|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|green|orange|red|gray",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_getControlValues": {
-        "name": "_getControlValues",
-        "column_name": "getControlValues",
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
         "label": "",
         "validation": "",
         "validation_regex": "",

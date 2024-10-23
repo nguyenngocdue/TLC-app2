@@ -73,6 +73,7 @@
     <script src="{{ asset('js/components/ViewAllMatrix-20240401.js') }}"></script>
 
     <script src="{{ asset('js/components/Diginet-20240307.js') }}"></script>
+    <script src="{{ asset('js/components/QaqcChecklist-20241022.js') }}"></script>
 
     <script src="{{ asset('js/components/SearchModal2.js') }}"></script>
     <script src="{{ asset('js/components/Bookmark2.js') }}"></script>

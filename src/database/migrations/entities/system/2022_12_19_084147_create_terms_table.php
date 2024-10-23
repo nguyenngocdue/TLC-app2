@@ -15,18 +15,20 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('terms', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            // $table->string('slug')->unique();
             $table->unsignedBigInteger('field_id');
             $table->unsignedBigInteger('parent1_id')->nullable();
             $table->unsignedBigInteger('parent2_id')->nullable();
             $table->unsignedBigInteger('parent3_id')->nullable();
             $table->unsignedBigInteger('parent4_id')->nullable();
+
+            $table->orderable();
             $table->appendCommonFields();
         });
     }

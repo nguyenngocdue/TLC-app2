@@ -8,8 +8,8 @@ use App\Utils\Support\Json\SuperProps;
 use Database\Seeders\FieldSeeder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 use Laravel\Scout\Searchable;
 
 abstract class ModelExtended extends Model

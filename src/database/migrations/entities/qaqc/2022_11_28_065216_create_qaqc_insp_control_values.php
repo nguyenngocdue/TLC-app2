@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('qaqc_insp_control_group_id');
+            $table->string('color')->nullable();
+            $table->unsignedBigInteger('behavior_of')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();

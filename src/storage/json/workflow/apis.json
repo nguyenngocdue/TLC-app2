@@ -597,7 +597,8 @@
         "name": "sub_projects"
     },
     "terms": {
-        "name": "terms"
+        "name": "terms",
+        "storeEmpty_and_updateShort": "true"
     },
     "user_categories": {
         "name": "user_categories"

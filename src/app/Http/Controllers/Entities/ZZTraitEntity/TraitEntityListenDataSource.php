@@ -149,7 +149,7 @@ trait TraitEntityListenDataSource
                 // dump("Table $table not found in prop.json. Please add it.");
                 continue;
             }
-            $defaultColumns =  ['id', 'name', 'description', 'employeeid',];
+            $defaultColumns =  ['id', 'name', 'description', 'employeeid', 'order_no',];
             if (isset($extraColumns[$table])) {
                 $defaultColumns = [...$defaultColumns, ...$extraColumns[$table]];
                 // Log::info($extraColumns[$table]);
@@ -186,17 +186,14 @@ trait TraitEntityListenDataSource
                 }
             }
         }
-        if (!$nameless) $builder = $builder->orderBy('name');
+        if (!$nameless) {
+            $builder = $builder->orderBy('name');
+        }
+
         $objectRows = $builder->get();
-        // dump($table, sizeof($objectRows));
-        // if ($nameless) {
-        //     $max = 5000;
-        //     if (sizeof($objectRows) <= $max) {
-        //         foreach ($objectRows as $objectRow) $objectRow->name = $objectRow->getName();
-        //     } else {
-        //         Log::info("$table has more than $max lines, skipping making name as it will overflow ram.");
-        //     }
-        // }
+
+        // Log::info($builder->toSql());
+        // Log::info($objectRows);
 
         $objectRowsMinimal = [];
         foreach ($objectRows as $row) {
