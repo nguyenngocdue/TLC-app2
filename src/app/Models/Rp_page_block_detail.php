@@ -8,6 +8,7 @@ class Rp_page_block_detail extends ModelExtended
 {
     protected $fillable = [
         "id",
+        "name",
         "rp_block_id",
         "rp_page_id",
         "is_active",

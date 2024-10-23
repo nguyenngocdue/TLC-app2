@@ -19,6 +19,7 @@ return new class extends Migration
 
         $schema->create('rp_filter_links', function (BlueprintExtended $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->string('title')->nullable();
             $table->string('stored_filter_key')->nullable();
             $table->unsignedBigInteger('report_id')->nullable();

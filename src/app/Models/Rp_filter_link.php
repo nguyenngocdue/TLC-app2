@@ -8,6 +8,7 @@ class Rp_filter_link extends ModelExtended
 {
     protected $fillable = [
         "id",
+        "name",
         "title",
         "stored_filter_key",
         "report_id",
