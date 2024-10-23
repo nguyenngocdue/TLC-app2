@@ -56,6 +56,7 @@ Str::macro('makeId', function (string $id) {
 });
 Str::macro('limitWords', function (string $str, $count = 10, $maxLen = 50) {
     if (str_starts_with($str, "<svg",)) return $str;
+    if (str_starts_with($str, "<i",)) return $str;
     $i = $c = 0;
     while ($i < strlen($str)) {
         if ($str[$i] === ' ' && ++$c === $count) return substr($str, 0, $i) . " ...";
