@@ -24,7 +24,8 @@ class Rp_filter extends ModelExtended
         "order_no",
         "owner_id",
     ];
-
+    public static $nameless = true;
+    
     public static $eloquentParams = [
         'getBlackOrWhite' => ['belongsTo', Term::class, 'black_or_white'],
         'getControlType' => ['belongsTo', Term::class, 'control_type'],
