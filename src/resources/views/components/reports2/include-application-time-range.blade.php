@@ -1,11 +1,9 @@
-{{-- @dump($timeZone)U --}}
 <form action="{{$routeFilter}}" method="POST" id="{{ $entityType }}">
     @csrf
     <div class="mb-4 w-3/4">
         <h2 class="font-semibold text-lg mb-2">Absolute Time Range</h2>
         <div class="space-y-2">
             <div class="relative">
-                <label class="block text-sm font-medium text-gray-700">From</label>
                 <input type="hidden" name='action' value="updateReport2">
                 <input type="hidden" name='time_zone' value="{{$timeZone}}">
                 <input type="hidden" name='entity_type' value="{{$entityType}}">
@@ -13,13 +11,18 @@
                 <input type="hidden" name='report_id' value="{{$rp->id}}">
                 <input type="hidden" name='form_type' value="updateAbsoluteTimeRange">
                 <input type="hidden" name='preset_title' value="Absolute Time Range">
-                <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
-            <div class="relative">
-                <label class="block text-sm font-medium text-gray-700">To</label>
-                <input type="text" name="to_date" value="{{$toDate}}" id="to_date" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-            
+
+            @if (!$rp->disable_from_date)
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700">From</label>
+                    <input type="text" name="from_date" id="from_date" value="{{$fromDate}}" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            @endif
+                <div class="relative">
+                    <label class="block text-sm font-medium text-gray-700">To</label>
+                    <input type="text" name="to_date" value="{{$toDate}}" id="to_date" placeholder="Select a day" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
              {{-- Date Display Format --}}
             <div class="relative">
                 <label class="block text-sm font-medium text-gray-700">Select date format to display</label>
