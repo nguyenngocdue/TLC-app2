@@ -9,7 +9,7 @@
             Tank Length: 
         </td>
         <td>
-            <input type="number" id="tank_length" class="rounded" onchange="recalc()"/>
+            <input type="number" id="tank_length" class="rounded" onchange="recalc()" value="600"/>
         </td>
         <td>
             (mm)
@@ -20,7 +20,7 @@
             Tank Width: 
         </td>
         <td>
-            <input type="number" id="tank_width" class="rounded" onchange="recalc()"/>
+            <input type="number" id="tank_width" class="rounded" onchange="recalc()" value="400"/>
         </td>
         <td>
             (mm)
@@ -31,7 +31,7 @@
             Tank Height: 
         </td>
         <td>
-            <input type="number" id="tank_height" class="rounded" onchange="recalc()"/>
+            <input type="number" id="tank_height" class="rounded" onchange="recalc()" value="400"/>
         </td>
         <td>
             (mm)
@@ -42,13 +42,16 @@
             Water Depth: 
         </td>
         <td>
-            <input type="number" id="water_depth" class="rounded" onchange="recalc()"/>
+            <input type="number" id="water_depth" class="rounded" onchange="recalc()" value="350"/>
         </td>
         <td>
             (mm)
         </td>
     </tr>
-    <tr></tr>
+    <tr>
+
+    </tr>
+    <tr>
         <td>            
             Maximun Water Pressure:
         </td>
@@ -69,7 +72,7 @@
     </tr>
     <tr>
         <td>            
-            Maximun Allowable Stress for Acrylic Cast: 
+            Maximum Allowable Stress for Acrylic Cast: 
         </td>
         <td>
             <input type="number" id="max_allowable_stress" class="rounded readonly" value="750" readonly/>
@@ -91,10 +94,10 @@
             Water Volume:
         </td>
         <td>
-            <input type="number" id="water_volume" class="rounded" readonly/> 
+            <input type="number" id="water_volume" class="rounded readonly" readonly/> 
         </td>
         <td>
-            (mm)
+            (L)
         </td>
     </tr>
     <tr>
@@ -102,7 +105,7 @@
             Minimum Thickness with Brace: 
         </td>
         <td>
-            <input type="number" id="min_thickness_with_brace" class="rounded" readonly/> 
+            <input type="number" id="min_thickness_with_brace" class="rounded readonly" readonly/> 
         </td>
         <td>
             (mm)
@@ -113,23 +116,29 @@
             Minimum Thickness rimless: 
         </td>
         <td>
-            <input type="number" id="min_thickness_rimless" class="rounded" readonly/> 
+            <input type="number" id="min_thickness_rimless" class="rounded readonly" readonly/> 
         </td>
         <td>
             (mm)
         </td>
     </tr>
 </table>
-@endsection
+
 
 <script>
 function recalc(){
-    var tank_length = document.getElementById('tank_length').value;
-    var tank_width = document.getElementById('tank_width').value;
-    var tank_height = document.getElementById('tank_height').value;
-    var water_depth = document.getElementById('water_depth').value;
+    var mm_to_in = 0.0393701;
+    var tank_length = document.getElementById('tank_length').value * mm_to_in;
+    var tank_width = document.getElementById('tank_width').value * mm_to_in;
+    var tank_height = document.getElementById('tank_height').value * mm_to_in;
+    var water_depth = document.getElementById('water_depth').value * mm_to_in;
 
-    var max_water_pressure = 0.0361 * water_depth;
+    // var P = 1000 * 9.81 / 6894.76 / 3.28084 = 0.0361;
+    // P = ρ * g * h / 6894.76 / 3.28084
+    // 6894.76 = 1 PSI in Pascal
+    // 3.28084 = 1 meter in feet
+
+    var max_water_pressure = (0.0361 * water_depth);
     var l_h = water_depth == 0 ? 0 : tank_length / water_depth;
     var max_allowable_stress = document.getElementById('max_allowable_stress').value;
     if(l_h == 0) {
@@ -138,18 +147,27 @@ function recalc(){
         if(l_h > 4) {
             var b = 0.94;
         } else {
-            var b = -0.005 * Math.pow(l_h, 5) + 0.0606 * Math.pow(l_h, 4) - 0.2725 * Math.pow(l_h, 3) + 0.4849 * Math.pow(l_h, 2) + 0.0553 * l_h - 0.0021;
+            var b = -0.005 * Math.pow(l_h, 5) 
+                + 0.0606 * Math.pow(l_h, 4) 
+                - 0.2725 * Math.pow(l_h, 3) 
+                + 0.4849 * Math.pow(l_h, 2) 
+                + 0.0553 * Math.pow(l_h, 1)
+                - 0.0021;            
         }        
     }
     var min_thickness_with_brace = Math.pow(b * max_water_pressure * Math.pow(tank_height, 2) / max_allowable_stress, 0.5);    
-    var min_thickness_rimless = 1.5 * Math.pow(b * max_water_pressure * Math.pow(tank_height, 2) / max_allowable_stress, 0.5);
+    var min_thickness_rimless = 1.5 * min_thickness_with_brace;
     
-    document.getElementById('max_water_pressure').value = max_water_pressure;
-    document.getElementById('l_h').value = l_h;
+    document.getElementById('max_water_pressure').value = max_water_pressure.toFixed(3);
+    document.getElementById('l_h').value = l_h.toFixed(3);
     document.getElementById('max_allowable_stress').value = max_allowable_stress;
-    document.getElementById('b').value = b;
-    document.getElementById('water_volume').value = tank_length * tank_width * water_depth;
-    document.getElementById('min_thickness_with_brace').value = min_thickness_with_brace;
-    document.getElementById('min_thickness_rimless').value = min_thickness_rimless;
+    document.getElementById('b').value = b.toFixed(3);
+    document.getElementById('water_volume').value = ((tank_length/mm_to_in/100) * (tank_width/mm_to_in/100) * (water_depth/mm_to_in/100)).toFixed(3);
+    document.getElementById('min_thickness_with_brace').value = (min_thickness_with_brace / mm_to_in).toFixed(3);
+    document.getElementById('min_thickness_rimless').value = (min_thickness_rimless / mm_to_in).toFixed(3);
 }
+
+recalc()
 </script>
+
+@endsection
