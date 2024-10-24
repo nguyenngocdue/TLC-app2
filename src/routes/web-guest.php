@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComponentDemo\ComponentDemo;
 use App\Http\Controllers\HomeWebPage\HomeWebPageController;
+use App\Http\Controllers\TankCalculationController;
 use App\Http\Controllers\Utils\ParserController;
 use App\Http\Controllers\WelcomeCanhController;
 use App\Http\Controllers\WelcomeDueController;
@@ -26,3 +27,5 @@ Route::get('components', [ComponentDemo::class, 'index'])->name("components.inde
 
 Route::get('login/google', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [App\Http\Controllers\Auth\SocialiteAuthController::class, 'handleGoogleCallback']);
+
+Route::get("/tank-calculation", [TankCalculationController::class, 'index'])->name("tank-calculation.index");

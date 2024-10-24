@@ -58,7 +58,11 @@ switch($control){
         <script>newFlatPickrDateTime("{{$name}}", {{!!$minDateStr!!}});</script>
         @break
         @case('picker_date')
-        <script>newFlatPickrDate("{{$name}}", {{!!$minDateStr!!}});</script>
+            @if(App\Utils\Support\CurrentUser::isAdmin())
+                <script>newFlatPickrDate("{{$name}}");</script>
+            @else
+                <script>newFlatPickrDate("{{$name}}", {{!!$minDateStr!!}});</script>
+            @endif
         @break
         @case('picker_time')
         <script>newFlatPickrTime("{{$name}}");</script>
