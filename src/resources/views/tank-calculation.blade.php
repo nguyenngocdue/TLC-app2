@@ -192,7 +192,7 @@ function recalc(){
     var tank_height_mm = document.getElementById('tank_height').value;
     var water_depth_mm = document.getElementById('water_depth').value;
 
-    var tank_length = tank_height_mm * mm_to_in;
+    var tank_length = tank_length_mm * mm_to_in;
     var tank_width = tank_width_mm * mm_to_in;
     var tank_height = tank_height_mm * mm_to_in;
     var water_depth = water_depth_mm * mm_to_in;
@@ -219,7 +219,7 @@ function recalc(){
                 - 0.0021;            
         }        
     }
-    var min_thickness_with_brace = Math.pow(b * max_water_pressure * Math.pow(tank_height, 2) / max_allowable_stress, 0.5);    
+    var min_thickness_with_brace = Math.pow(b * max_water_pressure * Math.pow(water_depth, 2) / max_allowable_stress, 0.5);    
     var min_thickness_rimless = 1.5 * min_thickness_with_brace;
 
     var min_thickness_with_brace_mm = (min_thickness_with_brace / mm_to_in).toFixed(2)
