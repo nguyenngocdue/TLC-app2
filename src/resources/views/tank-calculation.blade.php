@@ -230,7 +230,7 @@ function recalc(){
     var side = (tank_width_mm * tank_height_mm);
     var bottom = (tank_length_mm * tank_width_mm);
 
-    var validValues = [1, 2, 3, 4, 5, 8, 10, 12, 15];
+    var validValues = [1, 2, 3, 4, 5, 8, 10, 12, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100];
 
     var thickness_material_with_brace = findClosestValue(Math.round(min_thickness_with_brace_mm), validValues);
     var thickness_material_rimless = findClosestValue(Math.round(min_thickness_rimless_mm), validValues);
