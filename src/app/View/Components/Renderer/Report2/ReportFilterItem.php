@@ -263,6 +263,7 @@ class ReportFilterItem extends Component
                 }
                 $newDB[] = $processedItem;
             }
+            // dump($newDB);
             return $newDB;
         }
     }

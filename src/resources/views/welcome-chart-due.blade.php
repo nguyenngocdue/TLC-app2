@@ -62,7 +62,10 @@
                 labels: {
                     style: {
                         fontSize: '13px'
-                    }
+                    },
+                    formatter: function (value) {
+      return value + "$";
+    }
                 },
                 title: {
                     text: 'Number of Defects',

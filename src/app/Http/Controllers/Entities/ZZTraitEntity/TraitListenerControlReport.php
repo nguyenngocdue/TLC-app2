@@ -96,10 +96,10 @@ trait TraitListenerControlReport
                 $classList = "border border-gray-200 rounded (Unknown-classList-of-$this->control)";
                 break;
         }
-        // dump($this);
         $sign = $this->multiple ? '[]' : '';
         return  [
-            'id' => $this->id ?? $this->name,
+            // 'id' => $this->id ?? $this->name,
+            'id' => $this->name,
             'name' => $this->name . $sign,
             'selected' => $this->formatArrayString($this->selected),
             'multipleStr' => $this->multiple ? "multiple" : "",
