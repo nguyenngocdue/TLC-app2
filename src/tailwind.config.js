@@ -1,18 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: 'class',
-    content: [
-        './resources/**/*.blade.php',
-        './resources/**/*.js',
-        './resources/**/*.vue',
-        'node_modules/preline/dist/*.js',
-    ],
+    content: ['./resources/**/*.blade.php', './resources/**/*.js', './resources/**/*.vue', 'node_modules/preline/dist/*.js'],
     safelist: [
         //  variants: ['lg', 'hover', 'focus', 'lg:hover'],
         {
             pattern:
                 /(border|text|bg)-(slate|zinc|neutral|stone|amber|yellow|lime|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|green|orange|red|gray)-(50|100|200|300|400|500|600|700|800|900|950)/,
-            variants: ['hover', 'dark', 'focus', 'active'],
+            variants: ['hover', 'dark', 'focus', 'active', 'peer-checked'],
         },
         {
             pattern: /(grid-cols|col-span)-(1|2|3|4|5|6|7|8|9|10|11|12)/,
@@ -23,8 +18,7 @@ module.exports = {
             variants: ['disabled'],
         },
         {
-            pattern:
-                /top-(0|1|2|3|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40)/,
+            pattern: /top-(0|1|2|3|4|5|6|7|8|9|10|11|12|14|16|20|24|28|32|36|40)/,
         },
         {
             pattern:
@@ -101,27 +95,9 @@ module.exports = {
         },
     },
     variants: {
-        backgroundColor: [
-            'hover',
-            'focus',
-            'active',
-            'odd',
-            'dark',
-            'dark:hover',
-            'dark:focus',
-            'dark:active',
-            'dark:odd',
-        ],
+        backgroundColor: ['hover', 'focus', 'active', 'odd', 'dark', 'dark:hover', 'dark:focus', 'dark:active', 'dark:odd'],
         display: ['responsive', 'dark'],
-        textColor: [
-            'focus-within',
-            'hover',
-            'active',
-            'dark',
-            'dark:focus-within',
-            'dark:hover',
-            'dark:active',
-        ],
+        textColor: ['focus-within', 'hover', 'active', 'dark', 'dark:focus-within', 'dark:hover', 'dark:active'],
         placeholderColor: ['focus', 'dark', 'dark:focus'],
         borderColor: ['focus', 'hover', 'dark', 'dark:focus', 'dark:hover'],
         divideColor: ['dark'],
