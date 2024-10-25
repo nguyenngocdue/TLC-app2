@@ -114,12 +114,12 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_color": {
-        "name": "_color",
-        "column_name": "color",
-        "column_type": "varchar(255)",
+    "_color_id": {
+        "name": "_color_id",
+        "column_name": "color_id",
+        "column_type": "bigint unsigned",
         "label": "Color",
-        "control": "text",
+        "control": "dropdown",
         "align": "",
         "col_span": "",
         "width": "",

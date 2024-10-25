@@ -249,8 +249,8 @@ function recalc(){
     document.getElementById('thickness_material_with_brace').value = thickness_material_with_brace;
     document.getElementById('thickness_material_rimless').value = thickness_material_rimless;
 
-    document.getElementById('price_with_brace').value = price_with_brace.toFixed(0);
-    document.getElementById('price_rimless').value = price_rimless.toFixed(0);
+    document.getElementById('price_with_brace').value = (Math.round(price_with_brace/10000)* 10000).toFixed(0);
+    document.getElementById('price_rimless').value = (Math.round(price_rimless/10000)*10000).toFixed(0);
 }
 
 recalc()

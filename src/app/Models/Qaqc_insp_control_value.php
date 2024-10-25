@@ -12,7 +12,7 @@ class Qaqc_insp_control_value extends ModelExtended
         "name",
         "description",
         'qaqc_insp_control_group_id',
-        "color",
+        "color_id",
         "behavior_of",
 
         'owner_id',
@@ -24,6 +24,8 @@ class Qaqc_insp_control_value extends ModelExtended
         "getBehaviorOf" => ["belongsTo", Term::class, "behavior_of"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getValues" => ["hasMany", Qaqc_insp_value::class, "qaqc_insp_control_value_id"],
+
+        "getColor" => ["belongsTo", Term::class, "color_id"],
     ];
 
     public function getBehaviorOf()
@@ -44,6 +46,12 @@ class Qaqc_insp_control_value extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getColor()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getManyLineParams()
     {
         return [
@@ -51,7 +59,7 @@ class Qaqc_insp_control_value extends ModelExtended
             ['dataIndex' => 'id', 'invisible' => true],
             ['dataIndex' => 'qaqc_insp_control_group_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ['dataIndex' => 'name'],
-            ['dataIndex' => 'color'],
+            ['dataIndex' => 'color_id'],
             ['dataIndex' => 'behavior_of'],
         ];
     }

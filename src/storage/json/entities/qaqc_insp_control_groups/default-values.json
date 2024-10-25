@@ -50,7 +50,7 @@
         "formula": "",
         "default_value": "",
         "cannot_be_readonly_during_create": "",
-        "label_extra": "Available Colors: slate|zinc|neutral|stone|amber|yellow|lime|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|green|orange|red|gray",
+        "label_extra": "",
         "placeholder": "",
         "control_extra": "",
         "textarea_rows": ""
