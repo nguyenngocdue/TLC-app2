@@ -36,6 +36,7 @@ class Term extends ModelExtended
     {
         return [
             ['dataIndex' => 'id', 'invisible' => true],
+            ['dataIndex' => 'order_no', 'invisible' => true],
             ['dataIndex' => 'field_id', 'value_as_parent_id' => true, 'invisible' => true],
             ['dataIndex' => 'name'],
             ['dataIndex' => 'parent1_id'],
