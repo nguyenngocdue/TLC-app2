@@ -7,9 +7,18 @@ use App\BigThink\ModelExtended;
 class Hse_insp_chklst_line extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "description", "control_type_id", "value", "order_no",
-        "hse_insp_chklst_sht_id", "hse_insp_group_id",
-        "hse_insp_control_value_id", "hse_insp_control_group_id", "owner_id"
+        "id",
+        "name",
+        "description",
+        "control_type_id",
+        "value",
+        "order_no",
+        "hse_insp_chklst_sht_id",
+        "hse_insp_group_id",
+        "hse_insp_control_value_id",
+        "hse_insp_control_group_id",
+
+        "owner_id"
     ];
     public static $statusless = true;
 
@@ -19,6 +28,8 @@ class Hse_insp_chklst_line extends ModelExtended
         "getControlGroup" => ["belongsTo", Hse_insp_control_group::class, "hse_insp_control_group_id"],
         "getControlValue" => ["belongsTo", Hse_insp_control_value::class, "hse_insp_control_value_id"],
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
+        "getInspector" => ["belongsTo", User::class, "inspector_id"],
+
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "insp_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "getCorrectiveActions" => ['morphMany', Hse_corrective_action::class, 'correctable', 'correctable_type', 'correctable_id'],

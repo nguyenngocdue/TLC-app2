@@ -14,6 +14,7 @@ class Qaqc_insp_control_value extends ModelExtended
         'qaqc_insp_control_group_id',
         "color_id",
         "behavior_of",
+        "icon_str",
 
         'owner_id',
         "order_no",
@@ -21,18 +22,12 @@ class Qaqc_insp_control_value extends ModelExtended
     public static $statusless = true;
 
     public static $eloquentParams = [
-        "getBehaviorOf" => ["belongsTo", Term::class, "behavior_of"],
         "getControlGroup" => ["belongsTo", Qaqc_insp_control_group::class, "qaqc_insp_control_group_id"],
         "getValues" => ["hasMany", Qaqc_insp_value::class, "qaqc_insp_control_value_id"],
 
         "getColor" => ["belongsTo", Term::class, "color_id"],
+        "getBehaviorOf" => ["belongsTo", Term::class, "behavior_of"],
     ];
-
-    public function getBehaviorOf()
-    {
-        $p = static::$eloquentParams[__FUNCTION__];
-        return $this->{$p[0]}($p[1], $p[2]);
-    }
 
     public function getValues()
     {
@@ -47,6 +42,12 @@ class Qaqc_insp_control_value extends ModelExtended
     }
 
     public function getColor()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getBehaviorOf()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
