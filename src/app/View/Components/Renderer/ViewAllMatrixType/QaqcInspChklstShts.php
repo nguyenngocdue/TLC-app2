@@ -27,7 +27,7 @@ class FakeQaqcPunchlist
     public function getCreateNewParams($x, $y)
     {
         return [
-            'project_id' => $y->getProject->id,
+            'project_id' => $y->getProject?->id,
             'sub_project_id' => $y->sub_project_id,
             'status' => 'new',
             'qaqc_insp_chklst_id' => $y->id,
