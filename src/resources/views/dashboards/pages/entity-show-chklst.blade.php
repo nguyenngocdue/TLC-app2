@@ -11,7 +11,7 @@
     $sheets = $entity->getSheets;
 @endphp
 
-<div class="flex1 justify-center bg-body bg-only-print print-responsive">
+<div class="flex1 justify-center bg-only-print print-responsive">
    
     <x-print.insp-chklst.cover-page2 avatar="{{$coverAvatar}}" title="{{$coverTitle}}" :dataSource="$coverDataSource"/>
     <x-renderer.page-break /> 

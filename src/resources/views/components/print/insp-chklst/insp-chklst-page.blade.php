@@ -1,4 +1,4 @@
-<div class="flex justify-center bg-body bg-only-print print-responsive">
+<div class="flex justify-center bg-only-print print-responsive">
     <div class="p-4vw w-90vw mx-auto bg-white">
         <div id="{{Str::slug($sheet->name)."_".$sheet->id}}"></div>
         <x-print.letter-head5 showId="{{$sheet->id}}" type="{{$type}}"  />
