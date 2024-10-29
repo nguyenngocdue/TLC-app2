@@ -1,7 +1,7 @@
 <div class="border1 p-4vw">
     {{-- <div class="text-5xl">OPTION 4</div> --}}
     <div class="p-4vw">
-        <img class="w-7/12 mx-auto" src="{{ asset('logo/tlc_logo_mail.png') }}">
+        <img class="w-7/12 mx-auto" src="{{ asset('logo/tlc.png') }}">
         <div class="w-full text-center font-bold text-2xl-vw">{{config('company.name')}}</div>
     </div>
 

@@ -15,7 +15,7 @@ class LetterHead5 extends Component
     public function __construct(
         private $type,
         private $showId,
-        private $dataSource,
+        private $dataSource = null,
     ) {
         //
     }

@@ -7,9 +7,15 @@ use App\BigThink\ModelExtended;
 class Signature extends ModelExtended
 {
     protected $fillable = [
-        "id", "value", "user_id", "owner_id",
-        'category', 'signable_type', 'signable_id',
-        'signature_comment', 'signature_decision',
+        "id",
+        "value",
+        "user_id",
+        "owner_id",
+        'category',
+        'signable_type',
+        'signable_id',
+        'signature_comment',
+        'signature_decision',
     ];
 
     public static $nameless = true;
