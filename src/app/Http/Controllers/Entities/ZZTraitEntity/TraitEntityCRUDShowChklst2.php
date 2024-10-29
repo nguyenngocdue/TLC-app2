@@ -14,17 +14,22 @@ trait TraitEntityCRUDShowChklst2
 
     public function showChklst2($id, $trashed)
     {
-        $entity = Qaqc_insp_chklst::query();
+        $entity = $this->modelPath::query();
         if ($trashed) $entity = $entity->withTrashed();
         $entity = $entity
             ->where('id', $id)
             ->with([
                 'getSheets',
+            ]);
+        if ($this->modelPath == Qaqc_insp_chklst::class) {
+            $entity = $entity->with([
                 'getProdOrder.getSubProject.getProject',
                 'getProdRouting',
                 'getQaqcInspTmpl',
-            ])
-            ->first();
+            ]);
+        }
+
+        $entity = $entity->first();
         // dump($entity);
 
         if ($this->type == 'qaqc_insp_chklst_sht') {
@@ -33,7 +38,8 @@ trait TraitEntityCRUDShowChklst2
         }
 
         $project = $entity->getProdOrder->getSubProject->getProject ?? null;
-        if ($project->getAvatar) {
+
+        if ($project?->getAvatar) {
             $coverAvatar = app()->pathMinio() . $project->getAvatar->url_media;
         } else {
             $coverAvatar = "/images/modules.png";
@@ -41,9 +47,9 @@ trait TraitEntityCRUDShowChklst2
 
         $coverPageTitle = $project ? $project->description . " (" . $project->name . ")" : "Unknown Project";
         $coverPageDataSource = [
-            'Checklist Name' => $entity->getQaqcInspTmpl->short_name,
-            'Product Type' => $entity->getProdRouting->name,
-            'Product Name' => $entity->getProdOrder->name,
+            'Checklist Name' => $entity->getQaqcInspTmpl->short_name ?? "Unknown Checklist Name",
+            'Product Type' => $entity->getProdRouting->name ?? "Unknown Product Type",
+            'Product Name' => $entity->getProdOrder->name ?? "Unknown Product Name",
         ];
 
         return view("dashboards.pages.entity-show-chklst", [

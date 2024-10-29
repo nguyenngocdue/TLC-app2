@@ -23,9 +23,9 @@ class InspChklstToc extends Component
     {
         $projectBox = [
             "Organization" => config("company.name"),
-            "Project" => $this->entity->getSubProject->getProject->description,
-            "Sub Project" => $this->entity->getSubProject->name,
-            "Production Name" => $this->entity->getProdOrder->compliance_name,
+            "Project" => $this->entity->getSubProject->getProject->description ?? "Unknown Project",
+            "Sub Project" => $this->entity->getSubProject->name ?? "Unknown Sub Project",
+            "Production Name" => $this->entity->getProdOrder->compliance_name ?? "Unknown Production Name",
         ];
         // dump($projectBox);
 
@@ -35,7 +35,7 @@ class InspChklstToc extends Component
             "type" => $this->type,
             "topTitle" => CurrentRoute::getTitleOf($this->type),
             "projectBox" => $projectBox,
-            "templateName" => $this->entity->getQaqcInspTmpl->name,
+            "templateName" => $this->entity->getQaqcInspTmpl->name ?? "Unknown Template Name",
         ]);
     }
 }

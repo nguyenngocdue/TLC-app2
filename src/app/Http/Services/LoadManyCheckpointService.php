@@ -10,7 +10,7 @@ class LoadManyCheckpointService
 {
     public static function getAttachmentGroups($sheet)
     {
-        $isAttachmentGrouped = $sheet->getTmplSheet->is_attachment_grouped;
+        $isAttachmentGrouped = $sheet->getTmplSheet->is_attachment_grouped ?? false;
         $groups = null;
         if ($isAttachmentGrouped) {
             $roomList = $sheet->getChklst->getProdOrder->{Prod_order::class}->getPjType->getRoomList;
@@ -31,8 +31,8 @@ class LoadManyCheckpointService
             ->with([
                 'getGroup' => fn($q) => $q, // To get the group name
                 'getSheet' => function ($q) use ($lineModelPath) {
-                    $q->with('getTmplSheet');
                     if ($lineModelPath == Qaqc_insp_chklst_line::class) {
+                        $q->with('getTmplSheet');
                         $q->with([
                             'getChklst' => function ($q) {
                                 $q->with(['getProdOrder' => function ($q) {
@@ -54,13 +54,16 @@ class LoadManyCheckpointService
                 },
 
 
-                'getControlValue' => fn($q) => $q, // Selected Value: Pass/Fail/NA - for showing NCR/CAR Box
                 'getControlGroup' => function ($q) {
                     $q->with(['getControlValues' => function ($q) {
                         $q->with(['getColor', 'getBehaviorOf']);
                     }]);
                 },
                 'getControlType' => fn($q) => $q, // Text or Radio or Signature
+            ]);
+        if ($lineModelPath == Qaqc_insp_chklst_line::class) {
+            $builder->with([
+                'getControlValue' => fn($q) => $q, // Selected Value: Pass/Fail/NA - for showing NCR/CAR Box
                 'getInspector' => function ($q) {
                     $q->with(['getAvatar']);
                 },
@@ -75,6 +78,7 @@ class LoadManyCheckpointService
                     }]);
                 },
             ]);
+        }
 
         $columnGroupId = "";
         $categoryName = "";

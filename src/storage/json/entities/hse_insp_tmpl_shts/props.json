@@ -245,7 +245,7 @@
         "name": "_getLines",
         "column_name": "getLines",
         "column_type": "hasMany",
-        "label": "Template Liness",
+        "label": "Template Lines",
         "control": "relationship_renderer",
         "align": "",
         "col_span": "",

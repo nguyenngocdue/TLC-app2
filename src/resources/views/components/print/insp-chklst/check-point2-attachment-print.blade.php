@@ -1,4 +1,4 @@
-@if(!$checkpoint->insp_photos->isEmpty())
+@if(isset($checkpoint->insp_photos) && !$checkpoint->insp_photos->isEmpty())
     <x-renderer.attachment-group 
         openType="_blank" 
         name="attachment" 

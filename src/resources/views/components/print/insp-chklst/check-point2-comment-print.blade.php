@@ -1,4 +1,4 @@
-@if(!$checkpoint->insp_comments->isEmpty())
+@if(isset($checkpoint->insp_comments) && !$checkpoint->insp_comments->isEmpty())
     {{-- @dump($checkpoint->insp_comments) --}}
     @foreach($checkpoint->insp_comments as $comment)
         @php

@@ -5,8 +5,12 @@ namespace App\View\Components\Print\InspChklst;
 use App\Http\Services\LoadManyCheckpointService;
 use App\Models\Hse_insp_chklst_line;
 use App\Models\Hse_insp_chklst_sht;
+use App\Models\Hse_insp_tmpl_line;
+use App\Models\Hse_insp_tmpl_sht;
 use App\Models\Qaqc_insp_chklst_line;
 use App\Models\Qaqc_insp_chklst_sht;
+use App\Models\Qaqc_insp_tmpl_line;
+use App\Models\Qaqc_insp_tmpl_sht;
 use App\Utils\Support\CurrentRoute;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -59,10 +63,10 @@ class InspChklstPage extends Component
     function getProjectBoxHse($sheet)
     {
         $projectBox = [
-            "Location" => $sheet->getWorkplace->name,
-            "Start Date" => $sheet->start_date,
-            "Inspector" => $sheet->getOwner->name,
-            "Person Incharge" => $sheet->getAssignee1->name,
+            "Location" => $sheet->getWorkplace->name ?? "Unknown Location",
+            "Start Date" => $sheet->start_date ?? "Unknown Date",
+            "Inspector" => $sheet->getOwner->name ?? "Unknown Inspector",
+            "Person Incharge" => $sheet->getAssignee1->name ?? "Unknown Person Incharge",
         ];
         return $projectBox;
     }
@@ -82,6 +86,9 @@ class InspChklstPage extends Component
                 $lineModelPath = Hse_insp_chklst_line::class;
                 $projectBox = $this->getProjectBoxHse($this->sheet);
                 break;
+            case Hse_insp_tmpl_sht::class:
+                $lineModelPath = Hse_insp_tmpl_line::class;
+                break;
             case Qaqc_insp_chklst_sht::class:
                 $lineModelPath = Qaqc_insp_chklst_line::class;
                 $projectBox = $this->getProjectBoxQaqc();
@@ -100,6 +107,9 @@ class InspChklstPage extends Component
                     // 'council_member',
                     // 'getChklst.getSubProject.getProject',
                 ]);
+                break;
+            case Qaqc_insp_tmpl_sht::class:
+                $lineModelPath = Qaqc_insp_tmpl_line::class;
                 break;
             default:
                 dd("Error: Model Path not found - " . $this->modelPath);
