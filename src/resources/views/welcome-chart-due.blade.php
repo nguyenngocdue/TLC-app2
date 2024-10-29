@@ -23,7 +23,18 @@
                 stacked: false,
                 toolbar: {
                     show: false
-                }
+                },
+                events: {
+                    "click": function(event, chartContext, config) {
+                        if (typeof config.dataPointIndex !== 'undefined' && config.dataPointIndex >= 0) {
+                            var seriesIndex = config.seriesIndex;
+                            var dataPointIndex = config.dataPointIndex;
+                            var value = chartContext.w.config.series[seriesIndex].data[dataPointIndex];
+                            console.log('Value:', chartContext.w.config.xaxis);
+                            console.log('Value:', chartContext.w.config.xaxis.categories[dataPointIndex]);
+                        }
+                    }
+        }
             },
             plotOptions: {
                 bar: {
@@ -52,6 +63,7 @@
             }],
             xaxis: {
                 categories: ['PPR', 'STRUCTURE', 'MEP', 'FIT OUT', 'TILING', 'QAQC', 'TOTAL'],
+                categories_id: [1, 2, 3, 4, 5, 6, 7],
                 labels: {
                     style: {
                         fontSize: '13px'
@@ -63,9 +75,7 @@
                     style: {
                         fontSize: '13px'
                     },
-                    formatter: function (value) {
-      return value + "$";
-    }
+                    formatter: function (value) { return value === 150000 ? '' :  value;}
                 },
                 title: {
                     text: 'Number of Defects',

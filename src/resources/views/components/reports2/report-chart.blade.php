@@ -30,6 +30,16 @@
         options.tooltip.y.formatter = eval("(" + options.tooltip.y.formatter + ")");
     }
 
+    // add event handler from string to JavaScript function
+    if (typeof options.chart?.events?.click === 'string') {
+        options.chart.events.click = eval("(" + options.chart.events.click + ")");
+    }
+
+    // Hidden label of Y axis
+    if (typeof options.yaxis?.labels?.formatter === 'string') {
+        options.yaxis.labels.formatter = eval("(" + options.yaxis.labels.formatter + ")");
+    }
+
     var chart = new ApexCharts(document.getElementById(key), options);
     chart.render();
 </script>
