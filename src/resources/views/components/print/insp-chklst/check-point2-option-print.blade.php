@@ -33,13 +33,26 @@
     </div>
 </div>
 
-@if(!$checkpoint->getNcrs->isEmpty())
+@if(isset($checkpoint->getNcrs) && !$checkpoint->getNcrs->isEmpty())
     <div class="font-bold">
         NCR(s):
     </div>
     @foreach($checkpoint->getNcrs as $ncr)
     <li>
         <a class="text-blue-500 cursor-pointer" href="{{route('qaqc_ncrs.show', $ncr->id)}}" target="_blank">            
+            {{$ncr->name}} - Creator: {{$ncr->getOwner?->name}}
+        </a>
+    </li>
+    @endforeach
+@endif
+
+@if(isset($checkpoint->getCorrectiveActions) && !$checkpoint->getCorrectiveActions->isEmpty())
+    <div class="font-bold">
+        Corrective Action(s):
+    </div>
+    @foreach($checkpoint->getCorrectiveActions as $ncr)
+    <li>
+        <a class="text-blue-500 cursor-pointer" href="{{route('hse_corrective_actions.show', $ncr->id)}}" target="_blank">            
             {{$ncr->name}} - Creator: {{$ncr->getOwner?->name}}
         </a>
     </li>

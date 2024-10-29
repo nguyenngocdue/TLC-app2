@@ -14,8 +14,6 @@ trait TraitEntityCRUDShowChklst2
 
     public function showChklst2($id, $trashed)
     {
-
-
         $entity = Qaqc_insp_chklst::query();
         if ($trashed) $entity = $entity->withTrashed();
         $entity = $entity
@@ -29,12 +27,23 @@ trait TraitEntityCRUDShowChklst2
             ->first();
         // dump($entity);
 
+        if ($this->type == 'qaqc_insp_chklst_sht') {
+            $this->checkIsExternalInspectorAndNominated($entity);
+            $this->checkIsCouncilMemberAndNominated($entity);
+        }
+
         $project = $entity->getProdOrder->getSubProject->getProject ?? null;
-        $coverPageTitle = $project ? $project->name . " (" . $project->description . ")" : "Unknown Project";
+        if ($project->getAvatar) {
+            $coverAvatar = app()->pathMinio() . $project->getAvatar->url_media;
+        } else {
+            $coverAvatar = "/images/modules.png";
+        }
+
+        $coverPageTitle = $project ? $project->description . " (" . $project->name . ")" : "Unknown Project";
         $coverPageDataSource = [
-            'checklist_name' => $entity->getQaqcInspTmpl->short_name,
-            'product_type' => $entity->getProdRouting->name,
-            'product_name' => $entity->getProdOrder->name,
+            'Checklist Name' => $entity->getQaqcInspTmpl->short_name,
+            'Product Type' => $entity->getProdRouting->name,
+            'Product Name' => $entity->getProdOrder->name,
         ];
 
         return view("dashboards.pages.entity-show-chklst", [
@@ -42,7 +51,7 @@ trait TraitEntityCRUDShowChklst2
             'type' => $this->type,
             'entity' => $entity,
 
-            'coverAvatar' => "/images/modules.png",
+            'coverAvatar' => $coverAvatar,
             'coverTitle' => $coverPageTitle,
             'coverDataSource' => $coverPageDataSource,
         ]);

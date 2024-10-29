@@ -13,6 +13,11 @@ trait TraitEntityCRUDShowChklstSht2
     {
         $entity = $trashed ? ($this->modelPath)::withTrashed()->findOrFail($id) : ($this->modelPath)::findOrFail($id);
 
+        if ($this->type == 'qaqc_insp_chklst_sht') {
+            $this->checkIsExternalInspectorAndNominated($entity);
+            $this->checkIsCouncilMemberAndNominated($entity);
+        }
+
         return view("dashboards.pages.entity-show-chklst-sht", [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'modelPath' => $this->modelPath,

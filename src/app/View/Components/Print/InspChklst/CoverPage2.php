@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Print;
+namespace App\View\Components\Print\InspChklst;
 
 use Illuminate\View\Component;
 
@@ -20,6 +20,6 @@ class CoverPage2 extends Component
             'dataSource' => $this->dataSource,
         ];
         // dump($params);
-        return view('components.print.cover-page2', $params);
+        return view('components.print.insp-chklst.cover-page2', $params);
     }
 }

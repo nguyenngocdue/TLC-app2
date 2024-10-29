@@ -1,4 +1,4 @@
-@if(!$signOff->isEmpty())
+@if(isset($signOff) && !$signOff->isEmpty())
     <br/>
     <div class="uppercase font-bold w-full text-lg-vw text-gray-600 bg-gray-200 p-2 border border-gray-600">
         Third Party Sign-off

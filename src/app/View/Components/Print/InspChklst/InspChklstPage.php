@@ -45,6 +45,28 @@ class InspChklstPage extends Component
         return array_values($count);
     }
 
+    function getProjectBoxQaqc()
+    {
+        $projectBox = [
+            "Organization" => config("company.name"),
+            "Project" => $this->sheet->getChklst?->getSubProject->getProject->description,
+            "Sub Project" => $this->sheet->getChklst?->getSubProject->name,
+            "Production Name" => $this->sheet->getChklst?->getProdOrder->compliance_name,
+        ];
+        return $projectBox;
+    }
+
+    function getProjectBoxHse($sheet)
+    {
+        $projectBox = [
+            "Location" => $sheet->getWorkplace->name,
+            "Start Date" => $sheet->start_date,
+            "Inspector" => $sheet->getOwner->name,
+            "Person Incharge" => $sheet->getAssignee1->name,
+        ];
+        return $projectBox;
+    }
+
     function render()
     {
         $entity = $this->modelPath::query();
@@ -54,12 +76,16 @@ class InspChklstPage extends Component
         $lineModelPath = "";
         $signOffSignatureFn = "";
         $signOffUserFn = "";
+        $projectBox = [];
         switch ($this->modelPath) {
             case Hse_insp_chklst_sht::class:
                 $lineModelPath = Hse_insp_chklst_line::class;
+                $projectBox = $this->getProjectBoxHse($this->sheet);
                 break;
             case Qaqc_insp_chklst_sht::class:
                 $lineModelPath = Qaqc_insp_chklst_line::class;
+                $projectBox = $this->getProjectBoxQaqc();
+
                 $signOffSignatureFn = "signature_qaqc_chklst_3rd_party";
                 $signOffUserFn = "signature_qaqc_chklst_3rd_party_list";
 
@@ -89,27 +115,18 @@ class InspChklstPage extends Component
         $entityLines = $service->getCheckpointDataSource($entity->getLines->sortBy('order_no'), $lineModelPath);
         ['groupedCheckpoints' => $groupedCheckpoints, 'checkPoints' => $checkPoints] = $entityLines;
 
-        $nominatedUserIds = $entity->{$signOffUserFn}->pluck('id')->toArray();
+        $nominatedUserIds = $entity->{$signOffUserFn}?->pluck('id')->toArray();
         // dump($nominatedUserIds);
-        $signOff = $entity->{$signOffSignatureFn}->filter(function ($item) use ($nominatedUserIds) {
+        $signOff = $entity->{$signOffSignatureFn}?->filter(function ($item) use ($nominatedUserIds) {
             return in_array($item->user_id, $nominatedUserIds);
         });
         // dump($signOff);
-
-        $projectBox = [
-            "Organization" => config("company.name"),
-            "Project" => $this->sheet->getChklst->getSubProject->getProject->description,
-            "Sub Project" => $this->sheet->getChklst->getSubProject->name,
-            "Production Name" => $this->sheet->getChklst->getProdOrder->compliance_name,
-        ];
-        // dump($projectBox);
 
         $progressData = $this->getProgressData($checkPoints);
 
         $type = $this->sheet->getTable();
 
         return view("components.print.insp-chklst.insp-chklst-page", [
-            "qrCodeId" => $this->sheet->id,
             "type" => $type,
             "topTitle" => CurrentRoute::getTitleOf($type),
             "projectBox" => $projectBox,
@@ -117,7 +134,6 @@ class InspChklstPage extends Component
             "progressData" => $progressData,
             "groupedCheckpoints" => $groupedCheckpoints,
             "signOff" => $signOff,
-            "headerDataSource" => config("company.letter_head"),
         ]);
     }
 }
