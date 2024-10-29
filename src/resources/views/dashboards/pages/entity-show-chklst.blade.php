@@ -21,6 +21,7 @@
 
     {{-- Tried to load by bundle of sheetIds but will take 4s instead of 3s --}}
     @foreach($sheets as $sheet)
+        @if($sheet->status == 'not_applicable') @continue @endif
         <x-print.insp-chklst.insp-chklst-page :sheet="$sheet"/>
         <x-renderer.page-break /> 
     @endforeach
