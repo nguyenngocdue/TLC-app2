@@ -40,6 +40,10 @@
         options.yaxis.labels.formatter = eval("(" + options.yaxis.labels.formatter + ")");
     }
 
+    // Change Total's color 
+    if(typeof options.colors[0] == 'string' && options.colors[0].includes('function')) {
+        options.colors[0] = eval("(" + options.colors[0] + ")")
+    }
     var chart = new ApexCharts(document.getElementById(key), options);
     chart.render();
 </script>

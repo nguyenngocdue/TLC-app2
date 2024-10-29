@@ -45,7 +45,18 @@
                     }
                 }
             },
-            colors: ['#1f77b4', '#ff7f0e'],
+            colors: [
+
+
+            function({ seriesIndex, dataPointIndex, w }) {
+                if (w.config.xaxis.categories[dataPointIndex] === "TOTAL") {
+                    return ["#A020F0", "#18de5e"][seriesIndex]; 
+                } else {
+                    return seriesIndex === 0 ? "#008FFB" : "#FF4560";  
+                }
+            }
+
+            ],
             dataLabels: {
                 enabled: true,
                 style: {
