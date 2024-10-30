@@ -63,7 +63,8 @@ class Breadcrumb extends Component
             $breadcrumbGroup = $report['breadcrumb_group'] ?: "General";
             $result[$breadcrumbGroup][] = [
                 'title' => $report['title'],
-                'href' => route("rp_reports.show", $report['id']),
+                'href' => route("reports.v2", Str::slug($report['name'])),
+                // 'href' => route("rp_reports.show", $report['id']),
                 "icon" => $report['icon'],
                 // 'icon' => "fa-duotone fa-file-chart-column text-blue-400",
             ];

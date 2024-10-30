@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 
 trait TraitEntityCRUDShowReport
 {
-    protected $entity_type;
+	protected $entity_type;
 	protected $reportType2 = 'report2';
-	public function showReport(Request $request, $id,  $trashed)
+	public function showReport(Request $request, $id)
 	{
 		$report = Rp_report::find($id)->getDeep();
 		$pages = $report->getPages->sortBy('order_no');
 		$requestInput = $request->input();
 		//update per_page of table in reports
-		if (isset($requestInput['action']) && $requestInput['action'] =='updateReport2') {
+		if (isset($requestInput['action']) && $requestInput['action'] == 'updateReport2') {
 			$request->merge([
 				'entity_type' => $report->entity_type,
 				'entity_type2' => $this->reportType2,

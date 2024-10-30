@@ -66,7 +66,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path("routes/web-database.php"))
                 ->group(base_path("routes/web-guest.php"))
                 ->group(base_path("routes/web-permission.php"))
+
                 ->group(base_path("routes/web-report.php"))
+                ->group(base_path("routes/web-report2.php"))
+
                 ->group(base_path("routes/web-pivot-report.php"))
                 ->group(base_path("routes/web-exam-question.php"))
                 ->group(base_path("routes/web-diginet.php"))
