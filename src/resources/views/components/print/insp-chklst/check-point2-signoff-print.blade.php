@@ -5,7 +5,7 @@
     </div>
     {{-- This fail when only 1 signature is present --}}
     {{-- @php $count = $signOff->count(); $count = $count > 3 ? 3 : $count; @endphp --}}
-    <div class="border border-gray-500 grid grid-cols-3 ">
+    <div class="border border-gray-500 p-2 w-full flex justify-center">
         @foreach($signOff as $signature)
             @php
                 $stamp = null;
@@ -13,7 +13,7 @@
                     $stamp = asset('stamps/'.$signature->signature_decision.'.png');
                 }
             @endphp
-            <div class="text-center border border-gray-500">
+            <div class="text-center border border-gray-500 w-1/3">
                 @if($stamp)
                     <img src="{{$stamp}}" class="w-1/2 mx-auto" />
                 @else
