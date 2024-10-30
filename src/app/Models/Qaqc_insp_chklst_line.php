@@ -18,11 +18,11 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "qaqc_insp_group_id",
         "qaqc_insp_control_value_id",
         "qaqc_insp_control_group_id",
+        "owner_id",
         "col_span",
         "checkpoint_level",
 
-        "inspector_id",
-        "owner_id",
+        "inspector_id"
     ];
     public static $statusless = true;
 
@@ -34,9 +34,13 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "getControlType" => ["belongsTo", Control_type::class, "control_type_id"],
         "getInspector" => ["belongsTo", User::class, "inspector_id"],
 
+        // "getProject" => ["morphMany", Project::class, "complex"],
+        // "getSubProject" => ["morphMany", Sub_Project::class, "complex"],
+        // "getProdRouting" => ["morphMany", Prod_routing::class, "complex"],
+        // "getProdOrder" => ["morphMany", Prod_order::class, "complex"],
+        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
         "insp_photos" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
         "insp_comments" => ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
-        "getNcrs" => ['morphMany', Qaqc_ncr::class, 'parent', 'parent_type', 'parent_id'],
     ];
 
     public function insp_photos()

@@ -97,7 +97,6 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         $relation = $tmp->belongsTo(Prod_order::class, 'prod_order_id');
         return $relation;
     }
-    //To be removed with check point 1
     public function getRoomListFromModuleType()
     {
         $prodOrder = $this->getChklst->getProdOrder;

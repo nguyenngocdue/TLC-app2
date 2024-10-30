@@ -15,17 +15,13 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('hse_insp_control_values', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('hse_insp_control_group_id');
-            $table->unsignedBigInteger('color_id')->nullable();
-            $table->unsignedBigInteger('behavior_of')->nullable();
-            $table->string('icon_str')->nullable();
-
             $table->appendCommonFields();
         });
     }

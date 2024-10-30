@@ -10,48 +10,8 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
-        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
-        "let_user_open": ""
-    },
-    "_getColor": {
-        "name": "_getColor",
-        "relationship": "belongsTo",
-        "control_name": "color_id",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_operator": "=",
-        "filter_values": "323",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
-        "let_user_open": ""
-    },
-    "_getBehaviorOf": {
-        "name": "_getBehaviorOf",
-        "relationship": "belongsTo",
-        "control_name": "behavior_of",
-        "renderer_view_all": "column",
-        "renderer_view_all_param": "name",
-        "renderer_view_all_unit": "",
-        "renderer_edit": "",
-        "renderer_edit_param": "",
-        "control": "dropdown",
-        "filter_columns": "field_id",
-        "filter_operator": "=",
-        "filter_values": "322",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
-        "let_user_open": ""
+        "radio_checkbox_colspan": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -64,12 +24,8 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
-        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
-        "let_user_open": ""
+        "radio_checkbox_colspan": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -82,12 +38,8 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
-        "filter_operator": "",
         "filter_values": "",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
-        "let_user_open": ""
+        "radio_checkbox_colspan": ""
     },
     "_getValues": {
         "name": "_getValues",
@@ -100,11 +52,7 @@
         "renderer_edit_param": "getManyLineParams",
         "control": "relationship_renderer",
         "filter_columns": "",
-        "filter_operator": "=",
         "filter_values": "",
-        "radio_checkbox_colspan": "",
-        "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
-        "let_user_open": ""
+        "radio_checkbox_colspan": ""
     }
 }

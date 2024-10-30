@@ -30,7 +30,7 @@ class Comment2a extends Component
         $humanReadable = "now";
         if (!is_null($this->comment['id']['value'])) {
             $humanReadable = Carbon::createFromFormat(Constant::FORMAT_DATETIME_MYSQL, $created_at)->diffForHumans();
-            $title .= " $humanReadable said";
+            $title .= " at $humanReadable";
         }
         $title .= ":";
         return [$title, $humanReadable];

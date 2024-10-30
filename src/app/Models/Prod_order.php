@@ -7,33 +7,11 @@ use App\BigThink\ModelExtended;
 class Prod_order extends ModelExtended
 {
     protected $fillable = [
-        "id",
-        "slug",
-        "name",
-        "status",
-        "description",
-        "quantity",
-        "sub_project_id",
-        "prod_routing_id",
-        "status",
-        "meta_type",
-        "meta_id",
-        "owner_id",
-        "started_at",
-        "finished_at",
-        "total_hours",
-        "total_man_hours",
-        "room_type_id",
-        "production_name",
-        "compliance_name",
-        "erp_name",
-        "sheet_count",
-        "total_calendar_days",
-        "no_of_sundays",
-        "no_of_ph_days",
-        "total_days_no_sun_no_ph",
-        "total_days_have_ts",
-        "total_discrepancy_days",
+        "id", "slug", "name", "status", "description", "quantity",
+        "sub_project_id", "prod_routing_id", "status", "meta_type", "meta_id", "owner_id",
+        "started_at", "finished_at", "total_hours", "total_man_hours", "room_type_id",
+        "production_name", "compliance_name", "erp_name", "sheet_count",
+        "total_calendar_days", "no_of_sundays", "no_of_ph_days", "total_days_no_sun_no_ph", "total_days_have_ts", "total_discrepancy_days",
         "prod_sequence_progress",
     ];
 
@@ -58,7 +36,6 @@ class Prod_order extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3]);
-        // return $this->morphTo(Prod_order::class, 'meta_type', 'meta_id');
     }
 
     public function getProdRouting()
