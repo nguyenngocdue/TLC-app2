@@ -13,16 +13,15 @@ $fromDate = $fromDate->format('Y-m-d');
 @php
 $entityType = '1a';
 @endphp
-<div id="{{$entityType}}">Hello</div>
-<x-renderer.heading level=1 class="italic text-center">Hello {{$currentDate}}</x-renderer.heading>
-<x-renderer.heading level=1 class="italic text-center">Salary Period: from {{$fromDate}}</x-renderer.heading>
-<x-renderer.button htmlType="button" click="resetFilter()" type="secondary"><i  class="fa-sharp fa-solid fa-circle-xmark pr-1"></i> Reset</x-renderer.button>
+<html :class="{ 'dark': isDark }" x-data="alpineData()" x-ref="alpineRef"  lang="en">
+
+
 {{-- Rest Time Range --}}
 <script>
-    function resetFilter() {
-      $('[id="' + "{{ $entityType }}" + '"]').append(
-            '<input type="" name="form_type" value="resetParamsReport">')
-    }
+
+
+   console.log(13, document.querySelector('[x-ref="alpineRef"]'))
+
 </script>
 
 

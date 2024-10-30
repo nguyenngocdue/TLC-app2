@@ -1,18 +1,32 @@
-{{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<div class="border-2 border-gray-600 p-1 {{$class}}">
-    <div id="{{$key}}"></div>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
-    var key = '{{$key}}';
-    var options = @json($jsonOptions);
-    //console.log(options, key)
-    var chart = new ApexCharts(document.getElementById(key), options);
-    chart.render();
-</script> --}}
+    function showModal(data) {
+        const alpineRef = document.querySelector('[x-ref="alpineRef"]');
+        const alpineComponent = alpineRef.__x.$data.toggleModal('modal-report-chart');
+        const {tableName} = data;
+        const url = "/api/v1/entity/"+tableName+"_renderTable";
+        $.ajax({
+            type:'POST',
+            url,
+            data,
+            success: (response)=>{
+                $("#divMain").html(response.hits)
+            },
+            error:(response)=>{
+                // console.log(response.responseJSON.message)
+                const message = response.responseJSON.message
+                $("#divMain").html("<b class='text-red-500'>"+message+"</b>")
+            }
+        })
+    }
+</script>
+
+<x-modals.modal-report-chart modalId="modal-report-chart"/>
 
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
 <div class="border-2 border-gray-600 p-1 {{$class}}">
     <div id="{{$key}}"></div>
 </div>
@@ -32,6 +46,7 @@
 
     // add event handler from string to JavaScript function
     if (typeof options.chart?.events?.click === 'string') {
+
         options.chart.events.click = eval("(" + options.chart.events.click + ")");
     }
 

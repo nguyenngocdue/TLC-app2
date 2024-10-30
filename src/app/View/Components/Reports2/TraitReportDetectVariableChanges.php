@@ -38,7 +38,7 @@ trait TraitReportDetectVariableChanges
                 $formattedValue = $this->formatStrByRendererType($valueInData, $rendererType);
                 $string = trim(str_replace($keyInOptions, $formattedValue, $string),'"');
             }else {
-                $changedVal = isset($currentParams[$variable]) ? $currentParams[$variable] : '';
+                $changedVal = isset($currentParams[$variable]) ? $currentParams[$variable] : 'null';
                 $string = str_replace($keyInOptions, $changedVal, $string);
             }
         }
