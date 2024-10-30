@@ -2,19 +2,21 @@ const reRenderCheckpoint2 = (lineId, id, behaviorOf) => {
     $('#divSubOptionNCR_' + lineId).hide()
     // $("#divSubOptionOnHold_" + lineId).hide()
     const checked = $(`#radio_${lineId}_${id}`).prop('checked')
-    console.log('reRenderCheckpoint2', lineId, id, behaviorOf, checked)
+    // console.log('reRenderCheckpoint2', lineId, id, behaviorOf, checked)
+
+    $('#divSubOptionNCR_' + lineId).hide()
+    $('#divSubOptionOnHold_' + lineId).hide()
+
     switch (behaviorOf) {
         case 785: // Pass/Yes
             break
         case 786: // Fail/No
             if (checked) $('#divSubOptionNCR_' + lineId).show()
-            else $('#divSubOptionNCR_' + lineId).hide()
             break
         case 787: // N/A
             break
         case 788: // On Hold
             if (checked) $('#divSubOptionOnHold_' + lineId).show()
-            else $('#divSubOptionOnHold_' + lineId).hide()
             break
         default:
             console.log('Unknown behaviorOf ', behaviorOf)

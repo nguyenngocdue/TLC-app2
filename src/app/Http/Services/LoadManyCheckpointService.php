@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Hse_insp_chklst_line;
+use App\Models\Pj_module;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst_line;
 
@@ -36,17 +37,20 @@ class LoadManyCheckpointService
                         $q->with([
                             'getChklst' => function ($q) {
                                 $q->with(['getProdOrder' => function ($q) {
-                                    $q->with([
-                                        'getMeta' => function ($q) {
-                                            $q->with(['getPjType' => function ($q) {
-                                                $q->with('getRoomList');
-                                            }]);
-                                        },
-                                        // 'getSubProject' => function ($q) {
-                                        //     $q->with('getProject');
-                                        // },
-                                        // 'getProdRouting' => fn($q) => $q,
-                                    ]);
+                                    $q
+                                        ->where('meta_type', Pj_module::class)
+                                        ->with([
+                                            'getMeta' => function ($q) {
+                                                $q
+                                                    ->with(['getPjType' => function ($q) {
+                                                        $q->with('getRoomList');
+                                                    }]);
+                                            },
+                                            // 'getSubProject' => function ($q) {
+                                            //     $q->with('getProject');
+                                            // },
+                                            // 'getProdRouting' => fn($q) => $q,
+                                        ]);
                                 }]);
                             }
                         ]);

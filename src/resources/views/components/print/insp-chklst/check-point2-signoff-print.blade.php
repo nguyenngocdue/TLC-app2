@@ -3,8 +3,9 @@
     <div class="uppercase font-bold w-full text-lg-vw text-gray-600 bg-gray-200 p-2 border border-gray-600">
         Third Party Sign-off
     </div>
-    @php $count = $signOff->count(); $count = $count > 3 ? 3 : $count; @endphp
-    <div class="grid grid-cols-{{$count}} ">
+    {{-- This fail when only 1 signature is present --}}
+    {{-- @php $count = $signOff->count(); $count = $count > 3 ? 3 : $count; @endphp --}}
+    <div class="border border-gray-500 grid grid-cols-3 ">
         @foreach($signOff as $signature)
             @php
                 $stamp = null;

@@ -8,7 +8,7 @@
     @php
         $src = ($avatar = $user?->getAvatar?->url_thumbnail) ? app()->pathMinio($avatar): "/images/avatar.jpg";
         @endphp
-    <img src="{{$src}}" class="ml-2 mr-1 rounded-full" style="width: 14%;">
+    <img src="{{$src}}" class="ml-2 mr-1 rounded-full" style="width: 15%;">
     <div class="text-xs-vw font-bold">
         <div>
             {{$user?->name}}

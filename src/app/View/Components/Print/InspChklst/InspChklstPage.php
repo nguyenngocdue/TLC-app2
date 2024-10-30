@@ -28,7 +28,6 @@ class InspChklstPage extends Component
     private function getProgressData($checkPoints)
     {
         $total = 0;
-        $count = [];
         foreach ($checkPoints as $checkpoint) {
             if (!in_array($checkpoint->getControlType->slug, ['radio'])) continue;
             $total++;
@@ -41,12 +40,27 @@ class InspChklstPage extends Component
                 ];
             }
 
-            $value = ++$count[$key]['value'];
-            $count[$key]['percent'] = ($total > 0) ? round(100 * $value / $total, 2) . '%' : "0%";
-            $count[$key]['label'] = config("insp_chklst." . $key) . "<br/>$value/$total";
+            $count[$key]['value']++;
         }
 
-        return array_values($count);
+        foreach ($count as $key => $item) {
+            $count[$key]['percent'] = ($total > 0) ? round(100 * $item['value'] / $total, 2) . '%' : "0%";
+            if ($count[$key]['id']) {
+                $count[$key]['label'] = config("insp_chklst." . $key) . "<br/>" . $item['value'] . "/$total";
+            }
+        }
+
+        $result =  array_values($count);
+        usort($result, function ($a, $b) {
+            // If $a['id'] is null, push it to the end
+            if ($a['id'] === null) return 1;
+            // If $b['id'] is null, push it to the end
+            if ($b['id'] === null) return -1;
+
+            return $a['id'] <=> $b['id'];
+        });
+
+        return $result;
     }
 
     function getProjectBoxQaqc()

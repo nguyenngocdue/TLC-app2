@@ -30,6 +30,7 @@ class Signature2a extends Component
         private $signatureId = null,
         // private $signatureUserId = null,
         private $isSignOffAdmin = null,
+        private $lineId = null,
     ) {
         static::$count++;
         $this->debug = !!$debug;
@@ -64,6 +65,7 @@ class Signature2a extends Component
                 'input_or_hidden' => $this->debug ? "text" : "hidden",
                 'title' => $this->title,
                 'signatureId' => $this->signatureId,
+                'lineId' => $this->lineId,
 
                 'value' => $this->value,
                 'value_decoded' => $value_decoded,
