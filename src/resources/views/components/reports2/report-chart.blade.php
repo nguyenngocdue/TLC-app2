@@ -1,4 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
     function showModal(data) {
@@ -24,41 +23,54 @@
 
 <x-modals.modal-report-chart modalId="modal-report-chart"/>
 
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="border-2 border-gray-600 p-1 {{$class}}">
-    <div id="{{$key}}"></div>
+
+    @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')
+        @php
+            $height = $jsonOptions->options->height ?? 450;
+        @endphp
+        <canvas id="{{ $key }}" height={{$height}}></canvas>
+    @else
+        <div id="{{ $key }}"></div> 
+    @endif
 </div>
 
 <script>
-    var key = '{{$key}}';
-    var options = @json($jsonOptions);
-    
-    // change formatter from string to JavaScript function 
-    if (typeof options?.dataLabels?.formatter === 'string') {
-        options.dataLabels.formatter = eval("(" + options.dataLabels.formatter + ")");
-    }
+    var key = {!! json_encode($key) !!} ; 
+    var options = {!! json_encode($jsonOptions) !!};
 
-    if (typeof options?.tooltip?.y?.formatter === 'string') {
-        options.tooltip.y.formatter = eval("(" + options.tooltip.y.formatter + ")");
-    }
+    var chartElement = document.querySelector("#" + CSS.escape(key));
+    if (options?.libraryType?.toLowerCase() === 'chartjs') {
+        var ctx = chartElement.getContext('2d');
+        var myPieChart = new Chart(ctx, options);
+    } else {
+            // change formatter from string to JavaScript function 
+        if (typeof options?.dataLabels?.formatter === 'string') {
+            options.dataLabels.formatter = eval("(" + options.dataLabels.formatter + ")");
+        }
 
-    // add event handler from string to JavaScript function
-    if (typeof options.chart?.events?.click === 'string') {
+        if (typeof options?.tooltip?.y?.formatter === 'string') {
+            options.tooltip.y.formatter = eval("(" + options.tooltip.y.formatter + ")");
+        }
 
-        options.chart.events.click = eval("(" + options.chart.events.click + ")");
-    }
+        // add event handler from string to JavaScript function
+        if (typeof options.chart?.events?.click === 'string') {
 
-    // Hidden label of Y axis
-    if (typeof options.yaxis?.labels?.formatter === 'string') {
-        options.yaxis.labels.formatter = eval("(" + options.yaxis.labels.formatter + ")");
-    }
+            options.chart.events.click = eval("(" + options.chart.events.click + ")");
+        }
 
-    // Change Total's color 
-    if(Array.isArray(options?.colors) && typeof options.colors[0] === 'string' && options.colors[0].trim().startsWith('function')) {
-        options.colors[0] = eval("(" + options.colors[0] + ")")
+        // Hidden label of Y axis
+        if (typeof options.yaxis?.labels?.formatter === 'string') {
+            options.yaxis.labels.formatter = eval("(" + options.yaxis.labels.formatter + ")");
+        }
+        // Change Total's color 
+        if(Array.isArray(options?.colors) && typeof options.colors[0] === 'string' && options.colors[0].trim().startsWith('function')) {
+            options.colors[0] = eval("(" + options.colors[0] + ")")
+        }
+        var chart = new ApexCharts(chartElement, options);
+        chart.render();
     }
-    var chart = new ApexCharts(document.getElementById(key), options);
-    chart.render();
 </script>
+
