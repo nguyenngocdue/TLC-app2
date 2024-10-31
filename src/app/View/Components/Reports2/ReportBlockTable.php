@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use App\Models\Rp_report;
+use App\Utils\Support\DateFormat;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Blade;
 
@@ -66,6 +67,27 @@ class ReportBlockTable extends Component
         }
     }
 
+    function updateTimezone($queriedData, $currentParams, $columns){
+        $datetimeCols = array_values(array_filter($columns->toArray(), fn($item) => $item['row_renderer'] === $this->ROW_RENDERER_DATETIME_ID));
+        foreach($queriedData as &$value) {
+            if ($datetimeCols) {
+                foreach ($datetimeCols as $datetimeCol) {
+                    $dataIndex = isset($datetimeCol['data_index']) ?  $datetimeCol['data_index'] : null;
+                    if ($dataIndex) {
+                        $val = $value->{$dataIndex};
+                        $updatedVal = DateFormat::getValueDatetimeByCurrentUser($val);
+                        if (isset($datetimeCol['row_renderer_params'])){
+                            $rowParam = $datetimeCol['row_renderer_params'];
+                            $updatedVal = DateFormat::formatDateTime($updatedVal, $rowParam, 'Y-m-d H:m:s');
+                        }
+                        $value->{$dataIndex} = $updatedVal;                        
+                    }
+                }
+            }
+        }
+        return $queriedData;
+    }
+
     public function render()
     {
         $block = $this->block;
@@ -74,6 +96,7 @@ class ReportBlockTable extends Component
         $dataIndexToRender = array_column($headerCols, 'dataIndex');
         $queriedData = $this->queriedData;
         $currentParams = $this->currentParams;
+        $queriedData = $this->updateTimezone($queriedData, $currentParams, $columns);
 
         $reportTableColumn = ReportTableColumn::getInstance();
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
@@ -92,6 +115,7 @@ class ReportBlockTable extends Component
         if ($block->is_transformed_data) {
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
+
 
 
         return view('components.reports2.report-block-table', [

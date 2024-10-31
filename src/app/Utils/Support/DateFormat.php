@@ -40,11 +40,11 @@ class DateFormat
         return $dateString;
     }
 
-    public static function formatDateTime($dateString , $formatType=''){
-        if ($formatType) {
-            $date = DateTime::createFromFormat('d-m-Y H:i:s', $dateString);
+    public static function formatDateTime($dateString , $typeFormat='', $originalFormat='d-m-Y H:i:s'){
+        if ($typeFormat) {
+            $date = DateTime::createFromFormat($originalFormat, $dateString);
             if ($date) {
-                return $date->format($formatType);
+                return $date->format($typeFormat);
             } else {
                 return $dateString;
             }

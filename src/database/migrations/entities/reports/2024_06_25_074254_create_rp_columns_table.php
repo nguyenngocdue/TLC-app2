@@ -37,7 +37,7 @@ return new class extends Migration
             $table->text('row_cell_class')->nullable();
             $table->text('row_icon')->nullable();
             $table->unsignedBigInteger('row_icon_position')->nullable();
-            $table->text('row_href_fn')->nullable();
+            $table->text('row_renderer_params')->nullable();
             $table->unsignedBigInteger('row_renderer')->nullable();
             $table->string('entity_type')->nullable();
             $table->unsignedBigInteger('agg_footer')->nullable();

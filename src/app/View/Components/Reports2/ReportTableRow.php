@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Utils\Support\DateFormat;
+
 class ReportTableRow
 {
     
@@ -56,7 +58,7 @@ class ReportTableRow
                 if (array_key_exists($k2, $configuredCols)) {
                     $column = $configuredCols[$k2];
                     $entityType = $column->entity_type;
-                    $href = ($x = $column->row_href_fn) ? $x: '';
+                    $href = ($x = $column->row_renderer_params) ? $x: '';
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
@@ -83,9 +85,9 @@ class ReportTableRow
                             }
                             break;
                     
-                        case $this->ROW_RENDERER_DATETIME_ID:
-                            // $content = DateFormat::getValueDatetimeByCurrentUser($value);
-                            break;
+                        // case $this->ROW_RENDERER_DATETIME_ID:
+                        //     $content = DateFormat::getValueDatetimeByCurrentUser($value);
+                        //     break;
                     
                         default:
                             // Handle other cases or do nothing
