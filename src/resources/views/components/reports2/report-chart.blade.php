@@ -23,29 +23,53 @@
 
 <x-modals.modal-report-chart modalId="modal-report-chart"/>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="border-2 border-gray-600 p-1 {{$class}}">
 
     @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')
+        @once
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+
+            {{-- <script src="path/to/chartjs/dist/chart.min.js"></script> --}}
+            <script src="path/to/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
+
+        @endonce
         @php
             $height = $jsonOptions->options->height ?? 450;
         @endphp
         <canvas id="{{ $key }}" height={{$height}}></canvas>
     @else
+        @once
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        @endonce
         <div id="{{ $key }}"></div> 
     @endif
 </div>
 
 <script>
     var key = {!! json_encode($key) !!} ; 
-    var options = {!! json_encode($jsonOptions) !!};
+    var optionCons = {!! json_encode($jsonOptions) !!};
 
     var chartElement = document.querySelector("#" + CSS.escape(key));
-    if (options?.libraryType?.toLowerCase() === 'chartjs') {
+    if (optionCons?.libraryType?.toLowerCase() === 'chartjs') {
+
+        Chart.register(ChartDataLabels);
+        
         var ctx = chartElement.getContext('2d');
-        var myPieChart = new Chart(ctx, options);
+
+        if (typeof optionCons?.options?.plugins?.datalabels?.formatter === 'string') {
+            optionCons.options.plugins.datalabels.formatter = eval("(" + optionCons.options.plugins.datalabels.formatter + ")");
+        }
+        if (typeof optionCons?.options?.plugins?.tooltip?.callbacks?.label === 'string') {
+            optionCons.options.plugins.tooltip.callbacks.label = eval("(" + optionCons.options.plugins.tooltip.callbacks.label + ")");
+        }
+
+
+        var myPieChart = new Chart(ctx, optionCons);
     } else {
+        var options = optionCons;
             // change formatter from string to JavaScript function 
         if (typeof options?.dataLabels?.formatter === 'string') {
             options.dataLabels.formatter = eval("(" + options.dataLabels.formatter + ")");
