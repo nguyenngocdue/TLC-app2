@@ -37,9 +37,10 @@
 
         @endonce
         @php
-            $height = $jsonOptions->options->height ?? 450;
+            $height = $jsonOptions->options->height ?? 400;
+            $width = $jsonOptions->options->width ?? 400;
         @endphp
-        <canvas id="{{ $key }}" height={{$height}}></canvas>
+        <canvas id="{{ $key }}" height={{$height}} width={{$width}}></canvas>
     @else
         @once
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -64,6 +65,11 @@
         }
         if (typeof optionCons?.options?.plugins?.tooltip?.callbacks?.label === 'string') {
             optionCons.options.plugins.tooltip.callbacks.label = eval("(" + optionCons.options.plugins.tooltip.callbacks.label + ")");
+        }
+
+        if (typeof optionCons?.data?.datasets === 'object') {
+            console.log(  optionCons.data.datasets);
+           // optionCons.data.datasets = eval("(" + optionCons.data.datasets + ")");
         }
 
 

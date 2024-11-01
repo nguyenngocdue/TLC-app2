@@ -151,8 +151,15 @@
     "apex-chart": {
         "name": "apex-chart",
         "group": "third_party",
-        "title": "ApexChart",
+        "title": "ApexChart (Prototype)",
         "href": "https://apexcharts.com/",
         "icon_fa": "fa-solid fa-asterisk"
+    },
+    "chart-js": {
+        "name": "chart-js",
+        "group": "third_party",
+        "title": "ChartJS (v4.4.6)",
+        "href": "https://www.chartjs.org/docs/4.4.6/",
+        "icon_fa": "fa-solid fa-circle-half-stroke"
     }
 }
