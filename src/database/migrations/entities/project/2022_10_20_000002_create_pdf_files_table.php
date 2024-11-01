@@ -15,14 +15,15 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
-        $schema->create('pdfs', function (BlueprintExtended $table) {
+        $schema->create('pdf_files', function (BlueprintExtended $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->string('finger_print')->nullable();
 
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->appendCommonFields();
         });
     }
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pdfs');
+        Schema::dropIfExists('pdf_files');
     }
 };

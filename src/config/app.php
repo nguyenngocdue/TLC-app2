@@ -192,6 +192,7 @@ return [
         App\Providers\MigrationsServiceProvider::class,
 
         App\Providers\MobileDetectServiceProvider::class,
+        MongoDB\Laravel\MongoDBBusServiceProvider::class,
     ],
 
     /*

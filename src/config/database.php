@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
+// use MongoDB\Driver\ServerApi;
 
 return [
     /*
@@ -138,6 +139,17 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'true'),
         ],
+
+        // 'mongodb' => [
+        //     'driver' => 'mongodb',
+        //     'dsn' => env('MONGODB_DSN'),
+        //     'database' => env('MONGODB_DATABASE'),
+        //     'options' => [
+        // 'serverApi' => [
+        //     'version' => ServerApi::V1
+        // ]
+        // ],
+        // ],
 
     ],
 

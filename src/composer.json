@@ -47,6 +47,8 @@
         "league/flysystem-aws-s3-v3": "3.0.22",
         "lkaemmerling/laravel-horizon-prometheus-exporter": "^1.7",
         "mobiledetect/mobiledetectlib": "^2.8",
+        "mongodb/laravel-mongodb": "^5.1",
+        "mongodb/mongodb": "^1.20",
         "ndc/spatie-custom": "@dev",
         "nuwave/lighthouse": "^5.61",
         "phpoffice/phpword": "^1.2",

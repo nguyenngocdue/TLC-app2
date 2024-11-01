@@ -39,10 +39,22 @@ RUN curl -sSLf -o /usr/local/bin/install-php-extensions https://github.com/mloca
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j$(nproc) gd && \
     docker-php-ext-install zip && \
-    docker-php-ext-install pcntl && \
-    pecl install apcu && \
+    docker-php-ext-install pcntl
+
+RUN pecl install apcu && \
     pecl install sqlsrv && \
     pecl install pdo_sqlsrv
+
+# This section need to be seperated for MongoDB Client support SSL
+RUN apk update && \
+    apk add --no-cache \
+    openssl-dev \
+    autoconf \
+    g++ \
+    make \
+    libtool \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 # ln -s /usr/bin/node /usr/local/bin/node && \
 # ln -s /usr/bin/npm /usr/local/bin/npm
