@@ -67,9 +67,8 @@
             optionCons.options.plugins.tooltip.callbacks.label = eval("(" + optionCons.options.plugins.tooltip.callbacks.label + ")");
         }
 
-        if (typeof optionCons?.data?.datasets === 'object') {
-            console.log(  optionCons.data.datasets);
-           // optionCons.data.datasets = eval("(" + optionCons.data.datasets + ")");
+        if (typeof optionCons?.options?.onClick === 'string') {
+            optionCons.options.onClick = eval("(" + optionCons.options.onClick  + ")");
         }
 
 
