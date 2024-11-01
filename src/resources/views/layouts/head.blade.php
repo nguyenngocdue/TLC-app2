@@ -104,6 +104,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
+    <script src="{{ asset('js/report2/chart-options-chartjs.js') }}"></script>
     
 </head>
 

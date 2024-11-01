@@ -21,174 +21,63 @@ $entityType = '1a';
    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 @endonce
+<div class="w-1/2">
+     <canvas id="reworkChart" width="800" height="400"></canvas>
+</div>
 
-<canvas id="myBarChart" width="600" height="400"></canvas>
+    <script>
+        const ctx = document.getElementById('reworkChart').getContext('2d');
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const ctx = document.getElementById("myBarChart").getContext("2d");
-
-    const data = {
-        labels: ["Engineering", "Quality Control", "Manufacturing", "Logistics", "Project Management"],
-        datasets: [
-            {
-                label: "Design",
-                data: [120, 150, 90, 200, 130],
-                backgroundColor: "#33dea2",
-                borderColor: "transparent",
-                borderWidth: 2,
-                borderRadius: 5
-            },
-            {
-                label: "Workmanship",
-                data: [80, 110, 75, 180, 95],
-                backgroundColor: "#0526ff",
-                borderColor: "transparent",
-                borderWidth: 2,
-                borderRadius: 5
-            }
-        ]
-    };
-
-    const options = {
-        height: 415,
-        responsive: true,
-        layout: {
-            padding: {
-                top: 15,
-                bottom: 10
-            }
-        },
-        maintainAspectRatio: false,
-        indexAxis: "x",
-        params : {
-            filterParams: {
-                sub_project_id:107,
-                prod_routing_id:49,
-                prod_discipline_id:null
-            },
-            labelIds : [1,2,3,4,5],
-            dataIndexLabel : "prod_discipline_id"            
-        },
-        scales: {
-            x: {
-                title: {
-                    display: true,
-                    text: "Disciplines",
-                    font: {
-                        size: 12,
-                        weight: "bold"
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    "001. PPR", "002. Structural", "003.1 Fit Out", "003.2 Finishing", 
+                    "003.3 FFE", "003.4 Tiling", "003.5 Subcon", "004.1 MEP 1st", 
+                    "004.2 MEP 2nd", "003.6 PAW", "Total"
+                ],
+                datasets: [
+                    {
+                        label: 'Design',
+                        data: [82, 0, 846, 0, 0, 566, 34, 236, 17, 0, 1781],
+                        backgroundColor: function(context) {return createColorCols(context, "#7e22e0")},
                     },
-                    color: "#3E3E3F"
+                    {
+                        label: 'Workmanship',
+                        data: [10, 30, 0, 0, 0, 0, 0, 0, 0, 0, 40], // Placeholder data
+                        backgroundColor: function(context) {return createColorCols(context, "#E615A3", "#38e022")},
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Total Rework Hours (Design/Workmanship) by Discipline'
+                    }
                 },
-                ticks: {
-                    autoSkip: false
-                }
-            },
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: "Hours",
-                    font: {
-                        size: 12,
-                        weight: "bold"
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Hours'
+                        }
                     },
-                    color: "#3E3E3F"
-                }
-            }
-        },
-        plugins: {
-            legend: {
-                position: "bottom"
-            },
-            tooltip: {
-                callbacks: {
-                    label: function (context) {
-                        let val = context.raw;
-                        return val === 0 ? '' : val.toFixed(0) + ' hours';
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Disciplines'
+                        }
                     }
                 }
-            },
-            title: {
-                display: true,
-                text: "Total Rework Hours (Design/Workmanship) by Discipline",
-                align: "center",
-                color: "#373D3F",
-                font: {
-                    size: 18,
-                    weight: "bold"
-                },
-                padding: {
-                    bottom: 20
-                }
-            },
-            datalabels: {
-                display: true,
-                color: "#304758",
-                font: {
-                    size: 12,
-                    weight: "bold"
-                },
-                anchor: "end",
-                align: "start",
-                offset: -20,
-                formatter: function (value) {
-                    return value === 0 ? '' : value;
-                }
-            },
-            zoom: {
-                pan: {
-                    enabled: true,
-                    mode: "x"
-                },
-                zoom: {
-                    wheel: {
-                        enabled: true
-                    },
-                    pinch: {
-                        enabled: true
-                    },
-                    mode: "x"
-                }
             }
-        },
-        onClick: function (event, elements, configs) {
-            const [clickedElement] = elements;
-            if (!clickedElement) return;
-
-            const { index: dataPointIndex, datasetIndex } = clickedElement;
-            console.log(clickedElement);
-
-            // Extract data and configuration objects with clearer naming
-            const { labels } = this.data;
-            const { filterParams, labelIds, dataIndexLabel } = configs.config._config.options.params;
-            const labelIdForDataPoint = labelIds[dataPointIndex];
-            const { datasets } = configs.config._config.data;
-            const selectedDatasetLabel = datasets[datasetIndex].label;
-
-            // Define parameters object with names that clarify their purpose
-            const requestParams = {
-                ...filterParams,
-                label_id: labelIdForDataPoint,
-                data_index_label: dataIndexLabel,
-                dataset_name: selectedDatasetLabel,
-            };
-
-            console.log(requestParams);
-        }
-
-    };
-
-
-    new Chart(ctx, {
-        type: "bar",
-        data: data,
-        options: options,
-        plugins: [ChartDataLabels]
-    });
-});
-</script>
+        });
+    </script>
 
 
 
