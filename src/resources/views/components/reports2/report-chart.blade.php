@@ -1,28 +1,3 @@
-
-<script>
-    function showModal(data) {
-        const alpineRef = document.querySelector('[x-ref="alpineRef"]');
-        const alpineComponent = alpineRef.__x.$data.toggleModal('modal-report-chart');
-        const {tableName} = data;
-        const url = "/api/v1/entity/"+tableName+"_renderTable";
-        $.ajax({
-            type:'POST',
-            url,
-            data,
-            success: (response)=>{
-                $("#divMain").html(response.hits)
-            },
-            error:(response)=>{
-                // console.log(response.responseJSON.message)
-                const message = response.responseJSON.message
-                $("#divMain").html("<b class='text-red-500'>"+message+"</b>")
-            }
-        })
-    }
-</script>
-
-<x-modals.modal-report-chart modalId="modal-report-chart"/>
-
 <div class="border-2 border-gray-600 p-1 {{$class}}">
 
     @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')

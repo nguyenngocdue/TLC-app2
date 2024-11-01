@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Entities\EntityCRUDControllerForApi;
+use App\Http\Controllers\Entities\EntityCRUDControllerForApiBlock;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiClone;
 use App\Http\Controllers\Entities\EntityCRUDControllerForApiRenderer;
 use App\Http\Controllers\Workflow\LibApis;
@@ -12,6 +13,9 @@ Route::group([
     // 'middleware' => ['throttle:600,1'],
     'middleware' => ['auth:sanctum', 'throttle:600,1'],
 ], function () {
+
+    Route::get("render_block", [EntityCRUDControllerForApiBlock::class, 'renderBlock'])->name("render_block");
+
     $apps = LibApis::getAll();
     foreach ($apps as $app) {
         $tableName = $app['name'];

@@ -13,7 +13,6 @@ class ModalReportChart extends Component
      */
     public function __construct(
         private $modalId = null,
-        private $params = null,
     ) {
         //
     }
@@ -26,11 +25,11 @@ class ModalReportChart extends Component
     public function render()
     {
         // dd($this->params);
-        return view('components.modals.modal-report-chart',
+        return view(
+            'components.modals.modal-report-chart',
             [
                 'modalId' => $this->modalId,
-            ]);
+            ]
+        );
     }
 }
-
-

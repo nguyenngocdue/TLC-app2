@@ -210,7 +210,7 @@ var tableObjectIndexedColumns = {};
   return maxWidth;
 }
 
-const applyFixedColumnWidth = (tableName, columns) => {
+applyFixedColumnWidth = (tableName, columns) => {
     tableObjectColumns[tableName] = []
     let accumulated = 0
     columns.forEach((column, index) => {

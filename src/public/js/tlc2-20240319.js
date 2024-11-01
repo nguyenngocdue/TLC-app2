@@ -178,3 +178,12 @@ const newFlatPickrDate = (id, config) => {
         return flatpickr(element, params)
     }
 }
+
+const getModalParams = (modalId) => {
+    const alpineRef = document.querySelector('[x-ref="alpineRef"]')
+    const alpineComponent = alpineRef.__x.$data.modalParams[modalId]
+
+    const clone = { ...alpineComponent }
+    console.log('clone', clone)
+    return clone
+}
