@@ -7,9 +7,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_name": {
         "name": "_name",
@@ -19,9 +21,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_slug": {
         "name": "_slug",
@@ -31,9 +35,11 @@
         "validation_regex": "",
         "formula": "All_SlugifyByName",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_production_name": {
         "name": "_production_name",
@@ -43,9 +49,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_compliance_name": {
         "name": "_compliance_name",
@@ -55,9 +63,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_erp_name": {
         "name": "_erp_name",
@@ -67,9 +77,25 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_product_type_on_chklst": {
+        "name": "_product_type_on_chklst",
+        "column_name": "product_type_on_chklst",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "If empty, cover will load Routing Name",
+        "textarea_rows": ""
     },
     "_description": {
         "name": "_description",
@@ -79,21 +105,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
-    },
-    "_room_type_id": {
-        "name": "_room_type_id",
-        "column_name": "room_type_id",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_quantity": {
         "name": "_quantity",
@@ -103,9 +119,25 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_room_type_id": {
+        "name": "_room_type_id",
+        "column_name": "room_type_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_started_at": {
         "name": "_started_at",
@@ -115,9 +147,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets",
+        "textarea_rows": ""
     },
     "_finished_at": {
         "name": "_finished_at",
@@ -127,9 +161,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets",
+        "textarea_rows": ""
     },
     "_total_hours": {
         "name": "_total_hours",
@@ -139,9 +175,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets",
+        "textarea_rows": ""
     },
     "_total_man_hours": {
         "name": "_total_man_hours",
@@ -151,9 +189,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": "This data is consolidated from Sequence-based Timesheets"
+        "control_extra": "This data is consolidated from Sequence-based Timesheets",
+        "textarea_rows": ""
     },
     "_sub_project_id": {
         "name": "_sub_project_id",
@@ -163,9 +203,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_prod_routing_id": {
         "name": "_prod_routing_id",
@@ -175,9 +217,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_meta_type": {
         "name": "_meta_type",
@@ -187,9 +231,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_meta_id": {
         "name": "_meta_id",
@@ -199,9 +245,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getProdSequences": {
         "name": "_getProdSequences",
@@ -211,9 +259,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getQaqcInspChklsts": {
         "name": "_getQaqcInspChklsts",
@@ -223,9 +273,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_getMeta": {
         "name": "_getMeta",
@@ -235,9 +287,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -247,9 +301,11 @@
         "validation_regex": "",
         "formula": "All_OwnerId",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_status": {
         "name": "_status",
@@ -259,9 +315,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -271,9 +329,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -283,9 +343,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -295,9 +357,11 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -307,8 +371,122 @@
         "validation_regex": "",
         "formula": "",
         "default_value": "",
+        "cannot_be_readonly_during_create": "",
         "label_extra": "",
         "placeholder": "",
-        "control_extra": ""
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_prod_sequence_progress": {
+        "name": "_prod_sequence_progress",
+        "column_name": "prod_sequence_progress",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_sheet_count": {
+        "name": "_sheet_count",
+        "column_name": "sheet_count",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_total_calendar_days": {
+        "name": "_total_calendar_days",
+        "column_name": "total_calendar_days",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_no_of_sundays": {
+        "name": "_no_of_sundays",
+        "column_name": "no_of_sundays",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_no_of_ph_days": {
+        "name": "_no_of_ph_days",
+        "column_name": "no_of_ph_days",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_total_days_no_sun_no_ph": {
+        "name": "_total_days_no_sun_no_ph",
+        "column_name": "total_days_no_sun_no_ph",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_total_days_have_ts": {
+        "name": "_total_days_have_ts",
+        "column_name": "total_days_have_ts",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_total_discrepancy_days": {
+        "name": "_total_discrepancy_days",
+        "column_name": "total_discrepancy_days",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('prod_orders', function (BlueprintExtended $table) {
             $table->id();
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('production_name');
             $table->string('compliance_name')->nullable();
             $table->string('erp_name')->nullable();
+            $table->string('product_type_on_chklst')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('quantity')->nullable();
             $table->float('prod_sequence_progress')->nullable();

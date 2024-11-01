@@ -17,11 +17,11 @@
             
             <div class="text-center font-semibold mx-auto text-lg-vw "> 
                 @foreach($dataSource as $key => $value)
-                <div class="flex mx-auto w-3/4">
-                    <span class="w-1/3 text-right" title="">{{$key}}:</span>
-                    <span class="w-2/3">{{$value}}</span>
+                <div class="flex mx-auto w-3/4 gap-4 border1">
+                    <span class="w-1/2 text-right" title="">{{$key}}:</span>
+                    <span class="w-1/2 text-left">{{$value}}</span>
                 </div>
-                @endforeach     
+                @endforeach
             </div>
 
             <div class="p-8vw block" role="divider"></div>

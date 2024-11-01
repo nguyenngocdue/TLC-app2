@@ -46,10 +46,17 @@ trait TraitEntityCRUDShowChklst2
         }
 
         $coverPageTitle = $project ? $project->description . " (" . $project->name . ")" : "Unknown Project";
+
+        if ($entity->getProdOrder->product_type_on_chklst) $productType = $entity->getProdOrder->product_type_on_chklst;
+        else $productType = $entity->getProdRouting->name ?? "Unknown Product Type";
+
+        if ($entity->getProdOrder->name) $productName = $entity->getProdOrder->name . " " . $entity->getProdOrder->description;
+        else $productName = "Unknown Product Name";
+
         $coverPageDataSource = [
             'Checklist Name' => $entity->getQaqcInspTmpl->short_name ?? "Unknown Checklist Name",
-            'Product Type' => $entity->getProdRouting->name ?? "Unknown Product Type",
-            'Product Name' => $entity->getProdOrder->name ?? "Unknown Product Name",
+            'Product Type' => $productType,
+            'Product Name' => $productName,
         ];
 
         return view("dashboards.pages.entity-show-chklst", [

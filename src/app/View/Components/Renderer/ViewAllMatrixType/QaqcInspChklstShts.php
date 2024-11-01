@@ -239,11 +239,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             'width' => 50,
             /* 'fixed' => 'left',*/
         ];
-        if ($this->metaShowComplianceName) $result[] = [
-            'dataIndex' => 'compliance_name',
-            'width' => 300,
-            /*'fixed' => 'left',*/
-        ];
+        if ($this->metaShowComplianceName) {
+            $result[] = ['dataIndex' => 'compliance_name', 'width' => 300,];
+            $result[] = ['dataIndex' => 'description', 'width' => 50,];
+        }
         if ($this->metaShowProgress) $result[] = [
             'dataIndex' => 'progress',
             "title" => 'Progress (%)',
@@ -276,23 +275,23 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return $status_object;
     }
 
-    private function makeOpenPrintPageWhenClickName($y)
-    {
-        $name = [
-            'value' => $y->name,
-            'cell_title' => "(#" . $y->id . ")",
-        ];
+    // private function makeOpenPrintPageWhenClickName($y)
+    // {
+    //     $name = [
+    //         'value' => $y->name,
+    //         'cell_title' => "(#" . $y->id . ")",
+    //     ];
 
-        if ($this->metaShowPrint) {
-            $name['cell_href'] = route("qaqc_insp_chklsts.show", $y->id);
-            $name['cell_class'] = "text-blue-800 bg-white";
-            $name['cell_div_class'] = 'p-2 whitespace-nowrap cursor-pointer';
-        } else {
-            $name['cell_div_class'] = 'p-2 whitespace-nowrap';
-            $name['cell_class'] = "bg-white";
-        }
-        return $name;
-    }
+    //     if ($this->metaShowPrint) {
+    //         $name['cell_href'] = route("qaqc_insp_chklsts.show", $y->id);
+    //         $name['cell_class'] = "text-blue-800 bg-white";
+    //         $name['cell_div_class'] = 'p-2 whitespace-nowrap cursor-pointer';
+    //     } else {
+    //         $name['cell_div_class'] = 'p-2 whitespace-nowrap';
+    //         $name['cell_class'] = "bg-white";
+    //     }
+    //     return $name;
+    // }
 
     private function makeIdStatusLink($prod_order_id, $product_id = null)
     {
@@ -369,13 +368,25 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         $status_object = $this->makeStatusObjectForPunchlist($y, $matrixKey);
         $compliance_name = $y->getProdOrder->compliance_name ?: "";
-        $name = $this->makeOpenPrintPageWhenClickName($y);
+        $description = $y->getProdOrder->description ?: "";
+        // $name = $this->makeOpenPrintPageWhenClickName($y);
         $ncr_count = $this->makeNcrCount($y);
 
         $result = [
-            'name' => (object)$name,
+            // 'name' => $y->name,
+            'name' => (object)[
+                'value' => $y->name,
+                'cell_class' => 'whitespace-nowrap'
+            ],
             'compliance_name' => (object)[
                 'value' => $compliance_name,
+                'cell_class' => 'whitespace-nowrap',
+
+                'cell_class' => "text-blue-800 bg-white",
+                'cell_href' => route("qaqc_insp_chklsts.show", $y->id),
+            ],
+            'description' => (object)[
+                'value' => $description,
                 'cell_class' => 'whitespace-nowrap'
             ],
             'progress' => $y->progress ?: 0,

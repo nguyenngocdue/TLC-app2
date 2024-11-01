@@ -111,7 +111,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
     protected function getCreateNewParams($x, $y)
     {
         $params = parent::getCreateNewParams($x, $y);
-        $shortName = $x['description'];
+        // $shortName = $x['description'];
         $params['name'] = $y->name; //. " ($shortName)";
         $params['status'] =  'new';
         // $params['project_id'] =  $this->project;
@@ -126,7 +126,7 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
     {
         return [
             ['dataIndex' => 'compliance_name',  'width' => 300, /*'fixed' => 'left',*/],
-            // ['dataIndex' => 'progress', "title" => 'Progress (%)', 'align' => 'right', 'width' => 50,/* 'fixed' => 'left',*/],
+            ['dataIndex' => 'description', 'width' => 50,/* 'fixed' => 'left',*/],
         ];
     }
 
@@ -139,7 +139,10 @@ class QaqcInspChklsts extends ViewAllTypeMatrixParent
                 'value' => $y->compliance_name,
                 'cell_div_class' => 'p-2 whitespace-nowrap',
             ],
-            // 'progress' => $y->progress,
+            'description' => (object)[
+                'value' => $y->description,
+                'cell_div_class' => 'p-2 whitespace-nowrap',
+            ],
         ];
 
         return $result;

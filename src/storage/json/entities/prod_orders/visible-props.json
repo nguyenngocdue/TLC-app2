@@ -53,6 +53,15 @@
         "finished": "true",
         "cancelled": "true"
     },
+    "_product_type_on_chklst": {
+        "name": "_product_type_on_chklst",
+        "column_name": "product_type_on_chklst",
+        "new": "true",
+        "in_progress": "true",
+        "on_hold": "true",
+        "finished": "true",
+        "cancelled": "true"
+    },
     "_description": {
         "name": "_description",
         "column_name": "description",
@@ -62,18 +71,18 @@
         "finished": "true",
         "cancelled": "true"
     },
-    "_room_type_id": {
-        "name": "_room_type_id",
-        "column_name": "room_type_id",
+    "_quantity": {
+        "name": "_quantity",
+        "column_name": "quantity",
         "new": "true",
         "in_progress": "true",
         "on_hold": "true",
         "finished": "true",
         "cancelled": "true"
     },
-    "_quantity": {
-        "name": "_quantity",
-        "column_name": "quantity",
+    "_room_type_id": {
+        "name": "_room_type_id",
+        "column_name": "room_type_id",
         "new": "true",
         "in_progress": "true",
         "on_hold": "true",
@@ -227,6 +236,78 @@
     "_deleted_at": {
         "name": "_deleted_at",
         "column_name": "deleted_at",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_prod_sequence_progress": {
+        "name": "_prod_sequence_progress",
+        "column_name": "prod_sequence_progress",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_sheet_count": {
+        "name": "_sheet_count",
+        "column_name": "sheet_count",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_total_calendar_days": {
+        "name": "_total_calendar_days",
+        "column_name": "total_calendar_days",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_no_of_sundays": {
+        "name": "_no_of_sundays",
+        "column_name": "no_of_sundays",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_no_of_ph_days": {
+        "name": "_no_of_ph_days",
+        "column_name": "no_of_ph_days",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_total_days_no_sun_no_ph": {
+        "name": "_total_days_no_sun_no_ph",
+        "column_name": "total_days_no_sun_no_ph",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_total_days_have_ts": {
+        "name": "_total_days_have_ts",
+        "column_name": "total_days_have_ts",
+        "new": "",
+        "in_progress": "",
+        "on_hold": "",
+        "finished": "",
+        "cancelled": ""
+    },
+    "_total_discrepancy_days": {
+        "name": "_total_discrepancy_days",
+        "column_name": "total_discrepancy_days",
         "new": "",
         "in_progress": "",
         "on_hold": "",
