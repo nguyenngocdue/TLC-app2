@@ -13,7 +13,7 @@ class EntityCRUDControllerForApiBlock extends Controller
 	function renderBlock(Request $request)
 	{
 		// Log::info("renderBlock");
-		Log::info($request->all());
+		// Log::info($request->all());
 
 		$columns = [
 			["dataIndex" => "name", "title" => "Name"],

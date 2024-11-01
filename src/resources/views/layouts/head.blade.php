@@ -49,7 +49,7 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     <script src="{{ asset('js/jsdelivr.net.chart.js') }}"></script>
 
-    <script src="{{ asset('js/tlc2-20240319.js') }}"></script>
+    <script src="{{ asset('js/tlc2-20241101.js') }}"></script>
     <script src="{{ asset('js/parseNumber-20240312.js') }}"></script>
     <script src="{{ asset('js/textarea-diff-20240312.js') }}"></script>
     <script src="{{ asset('js/listenSubmitForm-20240312.js') }}"></script>
