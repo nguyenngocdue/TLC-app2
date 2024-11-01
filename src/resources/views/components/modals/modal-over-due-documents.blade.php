@@ -26,8 +26,6 @@
 @section($modalId.'-header', "Document List")
 
 @section($modalId.'-body')
-<input id="textToBeLoadedIds" type="hidden" x-bind:value="modalParams['{{$modalId}}']['ids']">
-<input id="textToBeLoadedTableName" type="hidden" x-bind:value="modalParams['{{$modalId}}']['tableName']">
 <div id="divMain" class="m-2 text-center">
     <div class="my-60">
         <i class="fa-duotone fa-spinner fa-spin text-green-500 mx-2"></i>Loading <span x-html="modalParams['{{$modalId}}']['count']"></span> item(s)...
@@ -40,12 +38,7 @@
 
 @section($modalId.'-javascript')
 <script>
-    setTimeout(()=>{
-        const ids = $("#textToBeLoadedIds").val()
-        const tableName = $("#textToBeLoadedTableName").val()
-
-        loadDocs({ids, tableName})
-    }, 100)
+    setTimeout(()=> loadDocs(getModalParams('{{$modalId}}')), 100)
 </script>
 @endsection
 

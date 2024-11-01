@@ -35,7 +35,7 @@ class EntityCRUDControllerForApiRenderer extends Controller
 	{
 		$tableName = $request->input('tableName');
 		$ids = $request->input('ids');
-		if ($ids) $ids = explode(",", $ids);
+		// if ($ids) $ids = explode(",", $ids);
 
 		$columns = [
 			['dataIndex' => 'id', 'renderer' => 'id', 'type' => $tableName, /*'align' => 'center',*/ 'width' => 100],
