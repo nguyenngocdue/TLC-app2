@@ -30,8 +30,6 @@
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
 
-            {{-- <script src="path/to/chartjs/dist/chart.min.js"></script> --}}
-            <script src="path/to/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 
@@ -70,6 +68,19 @@
         if (typeof optionCons?.options?.onClick === 'string') {
             optionCons.options.onClick = eval("(" + optionCons.options.onClick  + ")");
         }
+
+        // set colors for columns
+       if (Array.isArray(optionCons.data.datasets)) {
+            const datasets = optionCons.data.datasets;
+            if (Array.isArray(datasets)) {
+                datasets.forEach((item) => {
+                    if (typeof item.backgroundColor === "string") {
+                        item.backgroundColor = new Function("context", item.backgroundColor.replace(/^function\(context\) \{/, '').replace(/\}$/, ''));
+                    }
+                });
+            }
+        }
+
         var chart = new Chart(ctx, optionCons);
 
     } else {

@@ -1,5 +1,6 @@
 <head>
     <script src="{{ asset('windmill_assets/js/init-alpine20240320.js') }}"></script>
+
     <script src="{{ asset('js/alpine.min.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="The master layout G4T">
@@ -72,6 +73,9 @@
     
     <script src="{{ asset('js/components/ViewAllMatrix-20240401.js') }}"></script>
 
+    <script src="{{ asset('js/report2/ChartOptions-chartjs.js') }}"></script>
+
+
     <script src="{{ asset('js/components/Diginet-20240307.js') }}"></script>
     <script src="{{ asset('js/components/QaqcChecklist-20241022.js') }}"></script>
 
@@ -104,8 +108,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
-    <script src="{{ asset('js/report2/chart-options-chartjs.js') }}"></script>
-    
 </head>
 
 <style>
