@@ -2,7 +2,6 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
-use App\Models\User;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateTimeConcern;
 use Illuminate\View\Component;

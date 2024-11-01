@@ -15,8 +15,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_name": {
         "name": "_name",
@@ -26,7 +30,7 @@
         "control": "textarea",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "700",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
@@ -34,8 +38,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_description": {
         "name": "_description",
@@ -53,8 +61,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_control_type_id": {
         "name": "_control_type_id",
@@ -64,7 +76,7 @@
         "control": "dropdown",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "150",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
@@ -72,8 +84,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_hse_insp_tmpl_sht_id": {
         "name": "_hse_insp_tmpl_sht_id",
@@ -91,8 +107,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_hse_insp_group_id": {
         "name": "_hse_insp_group_id",
@@ -110,8 +130,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_hse_insp_control_group_id": {
         "name": "_hse_insp_control_group_id",
@@ -121,7 +145,7 @@
         "control": "dropdown",
         "align": "",
         "col_span": "",
-        "width": "",
+        "width": "150",
         "hidden_view_all": "",
         "hidden_edit": "",
         "hidden_label": "",
@@ -129,8 +153,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_order_no": {
         "name": "_order_no",
@@ -148,8 +176,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_owner_id": {
         "name": "_owner_id",
@@ -167,8 +199,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_status": {
         "name": "_status",
@@ -186,8 +222,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_created_at": {
         "name": "_created_at",
@@ -205,8 +245,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_updated_at": {
         "name": "_updated_at",
@@ -224,8 +268,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_by": {
         "name": "_deleted_by",
@@ -243,8 +291,12 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     },
     "_deleted_at": {
         "name": "_deleted_at",
@@ -262,7 +314,11 @@
         "hidden_print": "",
         "read_only": "",
         "save_on_change": "",
+        "searchable": "",
         "duplicatable": "",
-        "new_line": ""
+        "new_line": "",
+        "frozen_left": "",
+        "frozen_right": "",
+        "nowrap_view_all": ""
     }
 }

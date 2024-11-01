@@ -94,7 +94,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 
 @once
 <script>
-const registerSignature = (id, name, count, readOnly, svgContent) => {
+const registerSignature = (id, name, count, readOnly, svgContent, lineId) => {
     const canvasId = "canvas_"+id
     // console.log(name, id, canvasId)
     const signaturePad = new SignaturePad(getEById(canvasId)[0])
@@ -109,6 +109,7 @@ const registerSignature = (id, name, count, readOnly, svgContent) => {
             signaturePad.clear()
             signaturePad.on()
             getEById(name).val('')
+            if(lineId) getEById("inspector_id_" + lineId).val('')
         })
         signaturePad.addEventListener("endStroke", () => {
             const svg = signaturePad._toSVG()
@@ -121,5 +122,5 @@ const registerSignature = (id, name, count, readOnly, svgContent) => {
 
 <script>
     svgContent = '{!! $value_decoded !!}'
-    registerSignature('{{$id}}','{{$name}}', {{$count}}, {{$readOnly ? 'true' : 'false'}}, svgContent)
+    registerSignature('{{$id}}','{{$name}}', {{$count}}, {{$readOnly ? 'true' : 'false'}}, svgContent, "{{$lineId}}")
 </script>

@@ -10,6 +10,7 @@
                     signatureUserId="{{$uid}}"
 
                     readOnly="{{$readOnly}}"
+                    lineId="{{$line->id}}"
                />
                @if(!$line->value)
                <input type="hidden" name="{{$table01Name}}[inspector_id][{{$rowIndex}}]" value="{{$cuid}}" />

@@ -14,7 +14,7 @@ use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererSameAsVi
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyIcons;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyLines;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererCalendarGrid;
-use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyCheckpoints;
+use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyCheckpoints2;
 use App\View\Components\Controls\RelationshipRenderer\TraitTableRendererManyToManyMatrix;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
@@ -31,7 +31,7 @@ class RelationshipRenderer2 extends Component
     use TraitTableRendererManyIcons;
     use TraitTableRendererManyLines;
     use TraitTableRendererManyToManyMatrix;
-    use TraitTableRendererManyCheckpoints;
+    use TraitTableRendererManyCheckpoints2;
     use TraitTableRendererCalendarGrid;
 
     private static $table00Count = 1;
@@ -266,7 +266,7 @@ class RelationshipRenderer2 extends Component
                 // case "many_to_many_lines":
                 // return $this-
             case "many_checkpoints":
-                return $this->renderManyCheckpoints($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter);
+                return $this->renderManyCheckpoints2($tableName, $paginatedDataSource, $lineModelPath, $columns, $editable, $instance, $isOrderable, $colName, $tableFooter);
             default:
                 return "Unknown renderer_edit [$renderer_edit] in Relationship Screen, pls select ManyIcons or ManyLines";
         }
