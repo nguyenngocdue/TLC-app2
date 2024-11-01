@@ -40,6 +40,17 @@ RUN curl -sSLf -o /usr/local/bin/install-php-extensions https://github.com/mloca
     pecl install sqlsrv && \
     pecl install pdo_sqlsrv
 
+# This section need to be seperated for MongoDB Client support SSL
+RUN apk update && \
+    apk add --no-cache \
+    openssl-dev \
+    autoconf \
+    g++ \
+    make \
+    libtool \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb
+
 COPY ./configs/php.ini /usr/local/etc/php/
 
 # Copy Composer from the official Composer image
