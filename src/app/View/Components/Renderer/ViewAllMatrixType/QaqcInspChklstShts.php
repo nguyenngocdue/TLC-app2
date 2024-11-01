@@ -380,9 +380,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             ],
             'compliance_name' => (object)[
                 'value' => $compliance_name,
-                'cell_class' => 'whitespace-nowrap',
-
-                'cell_class' => "text-blue-800 bg-white",
+                'cell_class' => 'whitespace-nowrap text-blue-800 bg-white',
                 'cell_href' => route("qaqc_insp_chklsts.show", $y->id),
             ],
             'description' => (object)[

@@ -50,7 +50,7 @@ trait TraitEntityCRUDShowChklst2
         if ($entity->getProdOrder->product_type_on_chklst) $productType = $entity->getProdOrder->product_type_on_chklst;
         else $productType = $entity->getProdRouting->name ?? "Unknown Product Type";
 
-        if ($entity->getProdOrder->name) $productName = $entity->getProdOrder->name . " " . $entity->getProdOrder->description;
+        if ($entity->getProdOrder->name) $productName = $entity->getProdOrder->compliance_name; //. " " . $entity->getProdOrder->description;
         else $productName = "Unknown Product Name";
 
         $coverPageDataSource = [
