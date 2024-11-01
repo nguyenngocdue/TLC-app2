@@ -70,7 +70,7 @@
         if (typeof optionCons?.options?.onClick === 'string') {
             optionCons.options.onClick = eval("(" + optionCons.options.onClick  + ")");
         }
-        var myChart = new Chart(ctx, optionCons);
+        var chart = new Chart(ctx, optionCons);
 
     } else {
         var options = optionCons;
