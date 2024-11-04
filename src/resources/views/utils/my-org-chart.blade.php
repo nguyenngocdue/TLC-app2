@@ -9,9 +9,21 @@
 
 <div class="px-4">
     <div class='p-2 no-print'>
-        <x-renderer.button href="/my-org-chart?mode=standard" type="{{$viewSettings['org_chart_mode']=='standard' ? 'secondary' : ''}}">Standard Mode</x-renderer.button>
-        <x-renderer.button href="/my-org-chart?mode=advanced" type="{{$viewSettings['org_chart_mode']=='advanced' ? 'secondary' : ''}}">Advanced Mode</x-renderer.button>
-        <x-renderer.button href="/my-org-chart?mode=external" type="{{$viewSettings['org_chart_mode']=='external' ? 'secondary' : ''}}">External Mode</x-renderer.button>
+        @php
+            $modes = [
+                "standard" => "Standard Mode",
+                "advanced" => "Advanced Mode",
+                "external" => "External Users",
+            ];
+            if( !app()->isProduction()) $modes["test"] = "Test Accounts";
+        @endphp
+        @foreach($modes as $mode => $text)
+            @php
+                $href = "/my-org-chart?mode=".$mode;
+                $type = $viewSettings['org_chart_mode']==$mode ? 'secondary' : '';                
+            @endphp
+            <x-renderer.button href="{{$href}}" type="{{$type}}">{{$text}}</x-renderer.button>
+        @endforeach
     </div>
 
     @switch($viewSettings['org_chart_mode'])

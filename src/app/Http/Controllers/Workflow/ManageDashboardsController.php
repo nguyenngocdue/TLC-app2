@@ -20,6 +20,7 @@ class ManageDashboardsController extends AbstractManageLibController
             ],
             [
                 'dataIndex' => "name",
+                'title' => "Discipline ID",
                 "renderer"  => 'read-only-text4',
                 'editable' => true,
             ],

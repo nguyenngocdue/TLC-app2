@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Entities\ZZTraitEntity\TraitViewAllFunctions;
 use App\Models\Department;
-use App\Models\User_category;
-use App\Models\User_time_keep_type;
-use App\Models\Workplace;
 use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +17,39 @@ class MyOrgChartController extends Controller
     {
         return "dashboard";
     }
+
+    private function getUserSettings($orgChartMode)
+    {
+        $settings = CurrentUser::getSettings();
+        $settings['org_chart']['org_chart_mode'] = $orgChartMode;
+        return $settings['org_chart'];
+    }
+
+    private function getOptionsRenderByUserSetting($showOptions)
+    {
+        $results = [
+            'loadResigned' => [0],
+            'loadWorker' => [],
+            'loadOnlyBod' => [0, 1],
+        ];
+        foreach ($showOptions as $key => $value) {
+            switch ($key) {
+                case 'loadResigned':
+                    if ($value == 'true') $results['loadResigned'] = [0, 1];
+                    break;
+                case 'loadWorker':
+                    if ($value == 'true') $results['loadWorker'] = [$this::TSW_ID]; //#1: TSW
+                    break;
+                case 'loadOnlyBod':
+                    if ($value == 'true') $results['loadOnlyBod'] = [1];
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $results;
+    }
+
     public function index(Request $request)
     {
         $orgChartMode = 'standard';
@@ -53,37 +83,5 @@ class MyOrgChartController extends Controller
                 'topTitle' => 'Company ORG Chart'
             ]
         );
-    }
-
-    private function getUserSettings($orgChartMode)
-    {
-        $settings = CurrentUser::getSettings();
-        $settings['org_chart']['org_chart_mode'] = $orgChartMode;
-        return $settings['org_chart'];
-    }
-
-    private function getOptionsRenderByUserSetting($showOptions)
-    {
-        $results = [
-            'loadResigned' => [0],
-            'loadWorker' => [],
-            'loadOnlyBod' => [0, 1],
-        ];
-        foreach ($showOptions as $key => $value) {
-            switch ($key) {
-                case 'loadResigned':
-                    if ($value == 'true') $results['loadResigned'] = [0, 1];
-                    break;
-                case 'loadWorker':
-                    if ($value == 'true') $results['loadWorker'] = [$this::TSW_ID]; //#1: TSW
-                    break;
-                case 'loadOnlyBod':
-                    if ($value == 'true') $results['loadOnlyBod'] = [1];
-                    break;
-                default:
-                    break;
-            }
-        }
-        return $results;
     }
 }

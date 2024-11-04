@@ -77,7 +77,7 @@ class OrgChartRendererExternal extends Component
                 'id' => "project_" . $project->id,
                 'text' => $project->name,
                 'parent' => '#',
-                'state' => ['opened' => true],
+                // 'state' => ['opened' => true],
             ];
 
 
