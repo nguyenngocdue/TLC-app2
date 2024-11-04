@@ -785,7 +785,7 @@
         "name": "_show_on_beta",
         "column_name": "show_on_beta",
         "column_type": "tinyint(1)",
-        "label": "Show On Beta",
+        "label": "Show Only On Beta",
         "control": "toggle",
         "align": "",
         "col_span": "6",
