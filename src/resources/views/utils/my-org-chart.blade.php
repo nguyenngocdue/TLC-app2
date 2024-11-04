@@ -56,6 +56,9 @@
     @case('external')
         <x-renderer.org-chart.org-chart-renderer-external id=0/>
     @break
+    @case ('test')
+        <x-renderer.org-chart.org-chart-renderer-test id=0/>
+    @break
     @default
         Mode not found [{{$viewSettings['org_chart_mode']}}]
     @break
