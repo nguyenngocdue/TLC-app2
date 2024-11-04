@@ -90,7 +90,7 @@ class OrgChartRendererTest extends Component
                     'id' => "department_" . $department->id,
                     'text' => $department->name,
                     'parent' => "#",
-                    'state' => ['opened' => !true,],
+                    'state' => ['opened' => true,],
                 ];
             }
         }
