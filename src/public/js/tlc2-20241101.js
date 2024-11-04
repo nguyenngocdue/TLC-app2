@@ -184,6 +184,6 @@ const getModalParams = (modalId) => {
     const alpineComponent = alpineRef.__x.$data.modalParams[modalId]
 
     const clone = { ...alpineComponent }
-    console.log('clone', clone)
+    // console.log('clone', clone)
     return clone
 }
