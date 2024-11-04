@@ -13,16 +13,13 @@ $fromDate = $fromDate->format('Y-m-d');
 @php
 $entityType = '1a';
 @endphp
-<html :class="{ 'dark': isDark }" x-data="alpineData()" x-ref="alpineRef"  lang="en">
 
+    <iframe 
+        src="{{ url('/dashboard/rp_reports/65') }}" 
+        style="width:100%; height: 800px; border:none;"
+        title="Embedded Report Page">
+    </iframe>
 
-{{-- Rest Time Range --}}
-<script>
-
-
-   console.log(13, document.querySelector('[x-ref="alpineRef"]'))
-
-</script>
 
 
                 

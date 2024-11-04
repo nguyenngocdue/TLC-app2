@@ -6,6 +6,8 @@ use Illuminate\View\Component;
 
 class ReportPage extends Component
 {
+    use TraitReportFilter;
+
     public function __construct(
         private $page,
         private $report,
@@ -47,6 +49,8 @@ class ReportPage extends Component
             $pageBackgroundPath ?? ''
         );
 
+        $currentParams = $this->currentParamsReport();
+
         return view('components.reports2.report-page', [
             'report' => $this->report,
             'layoutStyle' => $layoutStyle,
@@ -55,6 +59,7 @@ class ReportPage extends Component
             'content' => $pageItem,
             'blockDetails' => $blockDetails,
             'pageBackgroundPath' => $pageBackgroundPath ?? '',
+            'currentParams' => $currentParams
 
         ]);
     }

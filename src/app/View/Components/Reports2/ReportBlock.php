@@ -15,6 +15,7 @@ class ReportBlock extends Component
     public function __construct(
         private $report,
         private $blockDetails = [],
+        private $currentParams = [],
     ) {
         $this->entity_type = $this->report->entity_type;
     }
@@ -33,7 +34,7 @@ class ReportBlock extends Component
     public function render()
     {
         $blockDetails = $this->blockDetails;
-        $currentParams = $this->currentParamsReport();
+        $currentParams = $this->currentParams;
         $perPage = $currentParams['per_page'] ?? 10;
 
         $blockDataSource = [];
