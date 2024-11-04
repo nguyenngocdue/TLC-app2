@@ -30,11 +30,6 @@ class OrgChartRendererTest extends Component
             foreach ($users as $user) {
                 if ($user->department) {
                     $departments[$user->department] = $user->getUserDepartment;
-
-                    // $departments[$user->department] = [
-                    //     'item' => $user->getUserDepartment,
-                    //     'name' => $user->getUserDepartment->name,
-                    // ];
                 }
             }
         }
@@ -78,7 +73,7 @@ class OrgChartRendererTest extends Component
                     'id' => "department_" . $department->id,
                     'text' => $department->name,
                     'parent' => "#",
-                    'state' => ['opened' => true,],
+                    'state' => ['opened' => !true,],
                 ];
             }
         }
