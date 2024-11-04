@@ -14,6 +14,7 @@ class OrgChartRendererTest extends Component
 
     public function render()
     {
+        $maxAvatar = 40;
         $roleSets = RoleSet::query()
             ->with(['users' => function ($q) {
                 $q //->where('show_on_beta', 1)
@@ -63,11 +64,16 @@ class OrgChartRendererTest extends Component
                 if (count($userOfDepartment)) {
                     $img = [];
                     $users_show_on_app = ($users->where('show_on_beta', 0));
+                    $avatarCount = 0;
                     foreach ($users_show_on_app as $user) {
+                        if ($avatarCount++ >= $maxAvatar) break;
                         $src = $user->getAvatar ? app()->pathMinio() . $user->getAvatar->url_thumbnail : "/images/avatar.jpg";
                         $route = route('users.edit', $user->id);
                         $name = $user->name . " - #" . $user->id;
                         $img[] = "<a href='$route' title='$name'><img src='$src' class='w-8 h-8 rounded-full border-2 border-white'></a>";
+                    }
+                    if ($users_show_on_app->count() > $maxAvatar) {
+                        $img[] = " <a href='#' class='text-blue-500'> and " . ($users_show_on_app->count() - $maxAvatar) . "more ...</a>";
                     }
 
                     $jsonTree[] = [
