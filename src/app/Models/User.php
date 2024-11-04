@@ -411,26 +411,22 @@ class User extends ModelExtended implements
     //     return static::getCollection()[$id] ?? null;
     // }
 
+    private static $externalUserDisciplines = [138];
     function isExternalInspector()
     {
-        return in_array($this->discipline, [
-            138, //138: External Inspector
-            // 180, //180: Shipping Agent
-        ]);
+        return in_array($this->discipline, static::$externalUserDisciplines);
     }
 
+    private static $shippingAgentDisciplines = [180];
     function isShippingAgent()
     {
-        return in_array($this->discipline, [
-            180, //180: Shipping Agent
-        ]);
+        return in_array($this->discipline, static::$shippingAgentDisciplines);
     }
 
+    private static $projectClientDisciplines = [128];
     public function isProjectClient()
     {
-        return in_array($this->discipline, [
-            128, //128: Project Client
-        ]);
+        return in_array($this->discipline, static::$projectClientDisciplines);
     }
 
     public function isApartmentOwner()
@@ -438,11 +434,20 @@ class User extends ModelExtended implements
         return in_array($this->discipline, []); //: 
     }
 
+    private static $councilMemberDisciplines = [169];
     public function isCouncilMember()
     {
-        return in_array($this->discipline, [
-            169, //169: Council Member
-        ]);
+        return in_array($this->discipline, static::$councilMemberDisciplines);
+    }
+
+    public static function get3rdPartyDisciplineIds()
+    {
+        return [
+            ...static::$externalUserDisciplines,
+            ...static::$shippingAgentDisciplines,
+            ...static::$projectClientDisciplines,
+            ...static::$councilMemberDisciplines
+        ];
     }
 
     public function isExternal()

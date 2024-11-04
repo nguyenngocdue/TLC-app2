@@ -107,7 +107,7 @@
         "show_renderer": null,
         "hidden": "true",
         "hidden_navbar": "true"
-    },    
+    },
     "attachment": {
         "name": "attachment",
         "package_tab": "application",
@@ -1750,6 +1750,22 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "manageDashboards": {
+        "name": "manageDashboards",
+        "package_tab": "manage_admin",
+        "package": "system",
+        "sub_package": "system_configuration",
+        "title": "Manage Dashboards",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
+    },
     "manageEditableTables": {
         "name": "manageEditableTables",
         "package_tab": "manage_admin",
@@ -1768,7 +1784,7 @@
     },
     "manageListenerActions": {
         "name": "manageListenerActions",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Listener Actions",
@@ -1784,7 +1800,7 @@
     },
     "manageNavbars": {
         "name": "manageNavbars",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Navbars",
@@ -1800,7 +1816,7 @@
     },
     "managePivotTables": {
         "name": "managePivotTables",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Pivot Tables",
@@ -1816,7 +1832,7 @@
     },
     "manageProfileFields": {
         "name": "manageProfileFields",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Profile Fields",
@@ -1832,7 +1848,7 @@
     },
     "manageReports": {
         "name": "manageReports",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Reports",
@@ -1848,7 +1864,7 @@
     },
     "manageStandardDefaultValues": {
         "name": "manageStandardDefaultValues",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Standard Default Values",
@@ -1864,7 +1880,7 @@
     },
     "manageStandardProps": {
         "name": "manageStandardProps",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Standard Props",
@@ -1880,7 +1896,7 @@
     },
     "manageStatuses": {
         "name": "manageStatuses",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Statuses",
@@ -1896,7 +1912,7 @@
     },
     "manageWidgets": {
         "name": "manageWidgets",
-        "package_tab": "application",
+        "package_tab": "manage_admin",
         "package": "system",
         "sub_package": "system_configuration",
         "title": "Manage Widgets",

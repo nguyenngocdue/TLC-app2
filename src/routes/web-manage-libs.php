@@ -3,6 +3,7 @@
 use App\Http\Controllers\Workflow\ManageApisController;
 use App\Http\Controllers\Workflow\ManageAppCreationsController;
 use App\Http\Controllers\Workflow\ManageAppsController;
+use App\Http\Controllers\Workflow\ManageDashboardsController;
 use App\Http\Controllers\Workflow\ManageReportBlocksController;
 use App\Http\Controllers\Workflow\ManageReportBlockTypesController;
 use App\Http\Controllers\Workflow\ManageReportColumnsController;
@@ -31,6 +32,7 @@ Route::group([
     Route::resource('managePivotTables', ManagePivotTablesController::class)->only('index', 'store', 'create');
     Route::resource('manageApps', ManageAppsController::class)->only('index', 'store', 'create');
     Route::resource('manageReports', ManageReportsController::class)->only('index', 'store', 'create');
+    Route::resource('manageDashboards', ManageDashboardsController::class)->only('index', 'store', 'create');
 
     Route::resource('manageReportColumns', ManageReportColumnsController::class)->only('index', 'store', 'create');
     Route::resource('manageReportBlockTypes', ManageReportBlockTypesController::class)->only('index', 'store', 'create');
