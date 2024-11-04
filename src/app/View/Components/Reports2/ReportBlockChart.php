@@ -14,6 +14,7 @@ class ReportBlockChart extends Component
 
     public function __construct(
         private $block = null,
+        private $reportId  = null,
         private $queriedData = null,
         private $headerCols = [],
         private $transformedFields = [],
@@ -65,10 +66,11 @@ class ReportBlockChart extends Component
         $key = hash('sha256', $block->name);
         $divClass = $block->div_class;
         // dump($key, $jsonOptions);
-        return Blade::render('<x-reports2.report-chart ' . 'key="{{$key}}" :jsonOptions="$jsonOptions" class="{{$divClass}}"/>', [
+        return Blade::render('<x-reports2.report-chart ' . 'key="{{$key}}" reportId="{{$reportId}}" :jsonOptions="$jsonOptions" class="{{$divClass}}"/>', [
             'key' => $key,
             'jsonOptions' => $jsonOptions,
             'divClass' => $divClass,
+            'reportId' => $this->reportId
         ]);
     }
 }

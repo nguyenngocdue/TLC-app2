@@ -37,7 +37,7 @@
                     @endphp
                     <x-reports2.report-block-chart 
                         :block="$block" 
-                        reportId="{{ $reportId }}" 
+                        reportId="{{$reportId}}" 
                         :queriedData="$queriedData"
                         :transformedFields="$transformedFields"
                         :headerCols="$headerCols"
@@ -49,7 +49,7 @@
                     <x-reports2.report-block-paragraph 
                         :queriedData="$queriedData" 
                         :block="$block" 
-                        reportId="{{ $reportId }}" 
+                        reportId="{{$reportId}}" 
                         :currentParams="$currentParams"
                         :currentFormattedParams="$currentFormattedParams"
                         

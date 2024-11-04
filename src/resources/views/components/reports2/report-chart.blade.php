@@ -1,5 +1,4 @@
 <div class="border-2 border-gray-600 p-1 {{$class}}">
-
     @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')
         @once
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
@@ -25,6 +24,7 @@
 <script>
     var key = {!! json_encode($key) !!} ; 
     var optionCons = {!! json_encode($jsonOptions) !!};
+    var rpId = {!! json_encode($reportId) !!};
 
     var chartElement = document.querySelector("#" + CSS.escape(key));
     if (optionCons?.libraryType?.toLowerCase() === 'chartjs') {
@@ -32,12 +32,16 @@
         Chart.register(ChartDataLabels);
         
         var ctx = chartElement.getContext('2d');
-
+    
         if (typeof optionCons?.options?.plugins?.datalabels?.formatter === 'string') {
             optionCons.options.plugins.datalabels.formatter = eval("(" + optionCons.options.plugins.datalabels.formatter + ")");
         }
         if (typeof optionCons?.options?.plugins?.tooltip?.callbacks?.label === 'string') {
             optionCons.options.plugins.tooltip.callbacks.label = eval("(" + optionCons.options.plugins.tooltip.callbacks.label + ")");
+        }
+
+        if (typeof optionCons?.options?.params?.filterParams === 'object') {
+            optionCons.options.params.filterParams['original_rp'] = rpId;
         }
 
         if (typeof optionCons?.options?.onClick === 'string') {
