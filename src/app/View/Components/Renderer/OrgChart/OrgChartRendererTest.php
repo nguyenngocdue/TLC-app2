@@ -17,6 +17,7 @@ class OrgChartRendererTest extends Component
         $roleSets = RoleSet::query()
             ->with(['users' => function ($q) {
                 $q->where('show_on_beta', 1)
+                    ->where('resigned', 0)
                     ->with('getUserDepartment')
                     ->orderBy('name0');
             }])
@@ -29,12 +30,21 @@ class OrgChartRendererTest extends Component
             foreach ($users as $user) {
                 if ($user->department) {
                     $departments[$user->department] = $user->getUserDepartment;
+
+                    // $departments[$user->department] = [
+                    //     'item' => $user->getUserDepartment,
+                    //     'name' => $user->getUserDepartment->name,
+                    // ];
                 }
             }
         }
 
-        foreach ($departments as $department) {
+        usort($departments, function ($a, $b) {
+            return $a->name <=> $b->name;
+        });
 
+        foreach ($departments as $department) {
+            // $department = $departmentObj['item'];
             $count = 0;
             foreach ($roleSets as $roleSet) {
                 $users = $roleSet->users;
