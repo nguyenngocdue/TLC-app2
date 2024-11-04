@@ -15,7 +15,7 @@
                 "advanced" => "Advanced Mode",
                 "external" => "External Users",
             ];
-            if( !app()->isProduction()) $modes["test"] = "Test Accounts";
+            if(App\Utils\Support\CurrentUser::isAdmin()) $modes["test"] = "Test Accounts";
         @endphp
         @foreach($modes as $mode => $text)
             @php
