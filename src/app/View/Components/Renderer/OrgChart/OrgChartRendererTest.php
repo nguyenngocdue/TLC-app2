@@ -16,9 +16,9 @@ class OrgChartRendererTest extends Component
     {
         $roleSets = RoleSet::query()
             ->with(['users' => function ($q) {
-                $q->where('show_on_beta', 1)
+                $q //->where('show_on_beta', 1)
                     ->where('resigned', 0)
-                    ->with('getUserDepartment')
+                    ->with(['getUserDepartment', 'getAvatar'])
                     ->orderBy('name0');
             }])
             ->orderBy('name')
@@ -28,8 +28,10 @@ class OrgChartRendererTest extends Component
         foreach ($roleSets as $roleSet) {
             $users = $roleSet->users;
             foreach ($users as $user) {
-                if ($user->department) {
-                    $departments[$user->department] = $user->getUserDepartment;
+                if ($user->show_on_beta == 1) {
+                    if ($user->department) {
+                        $departments[$user->department] = $user->getUserDepartment;
+                    }
                 }
             }
         }
@@ -39,13 +41,13 @@ class OrgChartRendererTest extends Component
         });
 
         foreach ($departments as $department) {
-            // $department = $departmentObj['item'];
             $count = 0;
             foreach ($roleSets as $roleSet) {
                 $users = $roleSet->users;
                 $userOfDepartment = [];
                 foreach ($users as $user) {
                     if ($user->department != $department->id) continue;
+                    if ($user->show_on_beta != 1) continue;
                     $userOfDepartment[] = $user;
                     $idStr = Str::makeId($user->id);
                     $href = route('users.edit', $user->id);
@@ -59,9 +61,18 @@ class OrgChartRendererTest extends Component
                 }
 
                 if (count($userOfDepartment)) {
+                    $img = [];
+                    $users_show_on_app = ($users->where('show_on_beta', 0));
+                    foreach ($users_show_on_app as $user) {
+                        $src = $user->getAvatar ? app()->pathMinio() . $user->getAvatar->url_thumbnail : "/images/avatar.jpg";
+                        $route = route('users.edit', $user->id);
+                        $name = $user->name . " - #" . $user->id;
+                        $img[] = "<a href='$route' title='$name'><img src='$src' class='w-8 h-8 rounded-full border-2 border-white'></a>";
+                    }
+
                     $jsonTree[] = [
                         'id' => $department->id . "roleSet_" . $roleSet->id,
-                        'text' => $roleSet->name,
+                        'text' => "<div class='flex -mt-7 ml-6 items-center'>" . $roleSet->name . " " . join(" ", $img) . "</div>",
                         'parent' => "department_" . $department->id,
                         'state' => ['opened' => true,],
                     ];
