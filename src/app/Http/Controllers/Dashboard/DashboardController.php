@@ -39,6 +39,12 @@ class DashboardController extends Controller
     {
         $controller = CurrentUser::getViewSuffix();
         switch ($controller) {
+                // case "-external-inspector":
+                // case "-project-client":
+                // case "-council-member":
+                // case "-shipping-agent":
+            case "-dashboard-tester":
+                return (new DashboardInspMatrixController())->index($request);
             case "-external-inspector":
                 return (new DashboardExternalInspectorController())->index($request);
             case "-project-client":

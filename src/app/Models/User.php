@@ -452,6 +452,12 @@ class User extends ModelExtended implements
         return in_array($this->discipline, static::$vendorDisciplines);
     }
 
+    private static $dashboardTesterDisciplines = [185];
+    public function isDashboardTester()
+    {
+        return in_array($this->discipline, static::$dashboardTesterDisciplines);
+    }
+
     public static function get3rdPartyDisciplineIds()
     {
         return [
@@ -459,6 +465,7 @@ class User extends ModelExtended implements
             ...static::$shippingAgentDisciplines,
             ...static::$projectClientDisciplines,
             ...static::$councilMemberDisciplines,
+            ...static::$dashboardTesterDisciplines,
 
             // ...static::$houseOwnerDisciplines,
             // ...static::$vendorDisciplines,

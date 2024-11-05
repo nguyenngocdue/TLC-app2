@@ -1,18 +1,41 @@
 {
     "138": {
         "name": "138",
-        "title": "External Inspectors"
+        "title": "External Inspectors",
+        "show_some_ics_by_sign_off_box": "true",
+        "be_able_to_checkpoint_change": "true",
+        "be_able_to_checkpoint_comment": "true"
     },
     "180": {
         "name": "180",
-        "title": "Shipping Agents"
+        "title": "Shipping Agents",
+        "show_some_ics_by_sign_off_box": "true",
+        "be_able_to_checkpoint_change": "true",
+        "be_able_to_checkpoint_comment": "true",
+        "show_some_ics_by_shipping_agent_box": "true",
+        "be_able_to_checkpoint_upload_photo": "true"
     },
     "169": {
         "name": "169",
-        "title": "Council Members"
+        "title": "Council Members",
+        "show_some_ics_by_council_member_box": "true"
     },
     "128": {
         "name": "128",
-        "title": "Project Clients"
+        "title": "Project Clients",
+        "show_all_ics_by_sub_project": "true",
+        "show_some_routings_by_prod_routing": "true"
+    },
+    "185": {
+        "name": "185",
+        "title": "Third Party Dashboard Tester",
+        "show_some_ics_by_sign_off_box": "true",
+        "be_able_to_checkpoint_change": "true",
+        "be_able_to_checkpoint_comment": "true",
+        "show_some_ics_by_shipping_agent_box": "true",
+        "be_able_to_checkpoint_upload_photo": "true",
+        "show_some_ics_by_council_member_box": "true",
+        "show_all_ics_by_sub_project": "true",
+        "show_some_routings_by_prod_routing": "true"
     }
 }

@@ -156,6 +156,8 @@ class CurrentUser
                 return Constant::DASHBOARD_COUNCIL_MEMBER;
             case static::get()->isShippingAgent():
                 return Constant::DASHBOARD_SHIPPING_AGENT;
+            case static::get()->isDashboardTester():
+                return Constant::DASHBOARD_TESTER;
             default:
                 return "";
         }
