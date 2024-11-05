@@ -20,12 +20,12 @@ class ReportFilter extends Component
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $rpFilterLinks = $rp->getRpFilterLinks;
 
-        $currentParams = $this->currentParamsReport();
+        $currentParams = $this->currentParamsReport($rp);
         $paramsError = $this->validateParams($rpFilters, $currentParams);
 
         return view('components.reports2.report-filter', [
             'entityType' => $rp->entity_type,
-            'reportType2' =>  $this->reportType2,
+            'reportType2' =>  $rp->reportType2,
             'reportName' => $rp->name,
             'rpId' => $rpId,
             'currentParams' => $currentParams,

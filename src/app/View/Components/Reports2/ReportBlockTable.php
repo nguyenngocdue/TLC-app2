@@ -78,7 +78,7 @@ class ReportBlockTable extends Component
                         $updatedVal = DateFormat::getValueDatetimeByCurrentUser($val);
                         if (isset($datetimeCol['row_renderer_params'])){
                             $rowParam = $datetimeCol['row_renderer_params'];
-                            $updatedVal = DateFormat::formatDateTime($updatedVal, $rowParam, 'Y-m-d H:m:s');
+                            $updatedVal = DateFormat::formatDateTime($updatedVal, $rowParam, 'Y-m-d H:i:s');
                         }
                         $value->{$dataIndex} = $updatedVal;                        
                     }

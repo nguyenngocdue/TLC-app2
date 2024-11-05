@@ -27,10 +27,8 @@ class EntityCRUDControllerForApiBlock extends Controller
 		$entityType2 = 'report2';
 
 		$popupRpId = $userInput['pop_up_report_id'];
-		$rpPageId = $userInput['pop_up_report_page_id'];
 
 		$popupRp = Rp_report::find($popupRpId);
-		$blockDetails = Rp_page::find($rpPageId)->getBlockDetails;
 
 		// set value when call onclick 
 		$fieldToFilter = $userInput['data_index_label'];
@@ -42,15 +40,24 @@ class EntityCRUDControllerForApiBlock extends Controller
 		$dataset = $userInput["dataset"];
 		$filterPrams["dataset"] = $dataset;
 
-		$blade = '<x-reports2.report-block :blockDetails="$blockDetails" :report="$report" :currentParams="$currentParams" ></x-reports2.report-block>'; 
-		$result = Blade::render($blade, [
-			'blockDetails' => $blockDetails,
-			'report' => $popupRp,
-			'currentParams' => $filterPrams,
-		]);
 
+		$pagesOfPopupRp = $popupRp->getPages->sortBy('order_no');
+		$results = [];
+		foreach ($pagesOfPopupRp as $key => $page) {
+			if(!$page->is_active) continue;
+			$blade = '<x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams" ></x-reports2.report-page>'; 
+			if(($key + 1) != count($pagesOfPopupRp))    {
+				$blade .= "<x-renderer.page-break />";
+			}        
+			$results[$key] = Blade::render($blade, [
+				'page' => $page,
+				'report' => $popupRp,
+				'currentParams' => $filterPrams,
+			]);
+			
+		}		
 		return ResponseObject::responseSuccess(
-			$result,
+			$results,
 		);
 	}
 }

@@ -11,6 +11,7 @@ class ReportPage extends Component
     public function __construct(
         private $page,
         private $report,
+        private $currentParams,
         private $pageScaleFactor = 0.75,
         private $w = 1000,
         private $h = 1410,
@@ -49,7 +50,6 @@ class ReportPage extends Component
             $pageBackgroundPath ?? ''
         );
 
-        $currentParams = $this->currentParamsReport();
 
         return view('components.reports2.report-page', [
             'report' => $this->report,
@@ -59,7 +59,7 @@ class ReportPage extends Component
             'content' => $pageItem,
             'blockDetails' => $blockDetails,
             'pageBackgroundPath' => $pageBackgroundPath ?? '',
-            'currentParams' => $currentParams
+            'currentParams' => $this->currentParams
 
         ]);
     }

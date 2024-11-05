@@ -13,7 +13,6 @@ class ReportAbsoluteTimeRange extends Component
 {
     use TraitReportFilter;
 
-    protected $reportType2 = 'report2';
     public function __construct(
         private $report = null
     ) {}
@@ -83,9 +82,8 @@ class ReportAbsoluteTimeRange extends Component
 
 
 
-    private function createPresets()
+    private function createPresets($currentParams)
     {
-        $currentParams = $this->currentParamsReport();
         $timezone = $currentParams['time_zone'];
         $utcOffset = DateReport::getUtcOffset($timezone);
         $toDate = new DateTime();
@@ -145,8 +143,8 @@ class ReportAbsoluteTimeRange extends Component
     public function render()
     {
         $rp = $this->report;
-        $currentParams = $this->currentParamsReport();
-        $presets = $this->createPresets();
+        $currentParams = $this->currentParamsReport($rp);
+        $presets = $this->createPresets($currentParams);
         $timezoneData = DateReport::getTimeZones();
 
         $currentParams = $this->formatFromAndToDate($currentParams, 'Y-m-d H:i:s');
@@ -156,7 +154,7 @@ class ReportAbsoluteTimeRange extends Component
             [
                 'rp' => $rp,
                 'entityType' => $rp->entity_type,
-                'reportType2' => $this->reportType2,
+                'reportType2' => $rp->reportType2,
                 'routeFilter' => route('report_filters' . '.update', $rp->id),
                 'fromDate' => $currentParams['from_date'] ?? '',
                 'toDate' => $currentParams['to_date'] ?? '',
