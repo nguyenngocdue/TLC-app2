@@ -301,7 +301,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "CO2 Emission Report",
-        "title": "Monthly CO2 Emission Report"
+        "title": "Monthly CO2 Emission Report",
+        "hidden": "true"
     },
     "report-hr_overtime_request_010": {
         "name": "report-hr_overtime_request_010",
@@ -318,46 +319,6 @@
         "breadcrumb-group": null,
         "top_title": null,
         "title": "Overtime Daily Report"
-    },
-    "report-hr_timesheet_line_010": {
-        "name": "report-hr_timesheet_line_010",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": "Project\/Date"
-    },
-    "report-hr_timesheet_line_020": {
-        "name": "report-hr_timesheet_line_020",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": "Employee\/Project"
-    },
-    "report-hr_timesheet_line_030": {
-        "name": "report-hr_timesheet_line_030",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": "Employee\/Date"
-    },
-    "report-hr_timesheet_line_040": {
-        "name": "report-hr_timesheet_line_040",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": "Team\/Project"
-    },
-    "report-hr_timesheet_line_100": {
-        "name": "report-hr_timesheet_line_100",
-        "package_tab": "report",
-        "package": "hr_&_admin",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": "Timesheet Lines"
     },
     "report-hse_incident_report_010": {
         "name": "report-hse_incident_report_010",

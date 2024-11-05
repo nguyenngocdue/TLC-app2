@@ -92,6 +92,8 @@ class ReportAbsoluteTimeRange extends Component
         $presets = [
 
             // // New presets based on your request
+            'all_the_time' => ReportPreset::getAllTime($timezone, $toDate), // from_date: 1997-08-30 00:00:00
+
             'today_so_far' => ReportPreset::getDateOfToday($timezone, clone $toDate),
             
             'this_week' => ReportPreset::getDateOfThisWeek($timezone),
@@ -115,7 +117,6 @@ class ReportAbsoluteTimeRange extends Component
             'third_quarter' => ReportPreset::getDateForQuarter(3, $timezone),
             'fourth_quarter' => ReportPreset::getDateForQuarter(4, $timezone),
             
-            'all_time' => ReportPreset::getAllTime($timezone, $toDate), // from_date: 1997-08-30 00:00:00
 
             // Already provided presets
             'today' => $this->generateDateRange('today', clone $toDate, clone $toDate),
