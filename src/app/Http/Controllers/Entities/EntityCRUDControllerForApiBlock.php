@@ -24,7 +24,6 @@ class EntityCRUDControllerForApiBlock extends Controller
 		$originalRpId = $userInput['original_rp'];
 		$originalReport = Rp_report::find($originalRpId);
 		$entityType = $originalReport->entity_type;
-		$entityType2 = 'report2';
 
 		$popupRpId = $userInput['pop_up_report_id'];
 
@@ -34,7 +33,7 @@ class EntityCRUDControllerForApiBlock extends Controller
 		$fieldToFilter = $userInput['data_index_label'];
 		$valueToFilter = $userInput['label_id'];
 		
-		$filterPrams = CurrentUser::getSettings()[$entityType][$entityType2][$originalRpId];
+		$filterPrams = CurrentUser::getSettings()[$entityType][$originalReport->entityType2][$originalRpId];
 		$filterPrams[$fieldToFilter] = $valueToFilter;
 
 		$dataset = $userInput["dataset"];
