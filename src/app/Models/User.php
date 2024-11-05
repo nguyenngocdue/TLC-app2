@@ -440,13 +440,28 @@ class User extends ModelExtended implements
         return in_array($this->discipline, static::$councilMemberDisciplines);
     }
 
+    private static $houseOwnerDisciplines = [183];
+    public function isHouseOwner()
+    {
+        return in_array($this->discipline, static::$houseOwnerDisciplines);
+    }
+
+    private static $vendorDisciplines = [184];
+    public function isVendor()
+    {
+        return in_array($this->discipline, static::$vendorDisciplines);
+    }
+
     public static function get3rdPartyDisciplineIds()
     {
         return [
             ...static::$externalUserDisciplines,
             ...static::$shippingAgentDisciplines,
             ...static::$projectClientDisciplines,
-            ...static::$councilMemberDisciplines
+            ...static::$councilMemberDisciplines,
+
+            // ...static::$houseOwnerDisciplines,
+            // ...static::$vendorDisciplines,
         ];
     }
 

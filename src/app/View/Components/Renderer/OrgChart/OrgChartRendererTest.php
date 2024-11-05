@@ -72,7 +72,8 @@ class OrgChartRendererTest extends Component
                     $avatarCount = 0;
                     foreach ($users_show_on_app as $user) {
                         if ($avatarCount++ >= $maxAvatar) break;
-                        $src = $user->getAvatar ? app()->pathMinio() . $user->getAvatar->url_thumbnail : "/images/avatar.jpg";
+                        $g_avatar = "https://ui-avatars.com/api/?name=" . $user->name . "&background=0D8ABC&color=fff";
+                        $src = $user->getAvatar ? app()->pathMinio() . $user->getAvatar->url_thumbnail : $g_avatar;
                         $route = route('users.edit', $user->id);
                         $name = $user->name . " - #" . $user->id;
                         $img[] = "<a href='$route' title='$name'><img src='$src' class='w-8 h-8 rounded-full border-2 border-white'></a>";
