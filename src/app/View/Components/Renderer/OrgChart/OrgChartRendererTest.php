@@ -19,7 +19,11 @@ class OrgChartRendererTest extends Component
             ->with(['users' => function ($q) {
                 $q //->where('show_on_beta', 1)
                     ->where('resigned', 0)
-                    ->with(['getUserDepartment', 'getAvatar'])
+                    ->with([
+                        'getUserDepartment',
+                        'getAvatar',
+                        'getUserDiscipline',
+                    ])
                     ->orderBy('name0');
             }])
             ->orderBy('name')
@@ -53,10 +57,11 @@ class OrgChartRendererTest extends Component
                     $idStr = Str::makeId($user->id);
                     $href = route('users.edit', $user->id);
                     $idStr = " (<a href='$href' class='text-blue-500'>$idStr</a>)";
+                    $disciplineStr = $user->getUserDiscipline->name;
 
                     $jsonTree[] = [
                         'id' => $user->id,
-                        'text' => $user->name . " - " . $user->email . " - " . $idStr,
+                        'text' => $user->name . " - " . $user->email . " - " . $idStr . " - Discipline: " . $disciplineStr,
                         'parent' =>  $department->id . "roleSet_" . $roleSet->id,
                     ];
                 }
