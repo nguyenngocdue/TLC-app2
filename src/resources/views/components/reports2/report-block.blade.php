@@ -28,7 +28,6 @@
         <div title="{{ $block->name }}"
             class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }}"
             @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
-
             <x-renderer.report2.title-description-block :block="$block" />
             @switch($rendererType)
                 @case($CHART_TYPE_ID)
