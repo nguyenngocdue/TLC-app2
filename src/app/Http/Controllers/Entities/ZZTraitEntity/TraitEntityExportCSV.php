@@ -186,7 +186,14 @@ trait TraitEntityExportCSV
             if (gettype($key) !== 'integer') $rows[] = [$key];
             foreach ($value as $no => $item) {
                 if (isset($item['name_for_group_by'])) unset($item['name_for_group_by']);
-                $item = array_values(array_map(fn($item) => isset($item->value) ? strip_tags($item->value) : strip_tags($item), $item));
+                $item = array_values(array_map(function ($item) {
+                    $nullValueObject = is_object($item) && ($item->value ?? null) === null;
+                    if (isset($item->value) || $nullValueObject) {
+                        return strip_tags($item->value);
+                    } else {
+                        return strip_tags($item);
+                    }
+                }, $item));
                 array_unshift($item, ($no + 1));
                 $rows[] = $item;
             }

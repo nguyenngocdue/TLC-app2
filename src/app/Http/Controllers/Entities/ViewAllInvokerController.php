@@ -49,40 +49,45 @@ class ViewAllInvokerController extends Controller
             $rows[] = $this->makeRowData($columns, $dataLine, $no + 1);
         }
         $fileName = $this->type . '.csv';
-        $columns = array_values(array_map(fn ($item) => $item['label'], $columns));
+        $columns = array_values(array_map(fn($item) => $item['label'], $columns));
         $headers = Excel::header($fileName);
         $callback = Excel::export($columns, $rows);
         return response()->stream($callback, 200, $headers);
     }
     public function exportCsvViewAllMatrix(Request $request)
     {
-        try {
-            $key = $request->input('key');
-            $modelPath = $this->getModelPath();
-            [, $columns, $dataSource] = (new ($modelPath))->getViewAllMatrixParams(true);
+        // try {
+        $key = $request->input('key');
+        $modelPath = $this->getModelPath();
+        [, $columns, $dataSource] = (new ($modelPath))->getViewAllMatrixParams(true);
 
-            if ($key) {
-                $columns = $columns[$key];
-                $dataSource = $dataSource[$key];
-            }
-
-            $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
-            $dataSource = $this->groupByDataSource($request, $dataSource);
-            $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
-            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?
-                Str::headline(strip_tags($item['title']))
-                : Str::headline($item['dataIndex'])), $columns));
-            array_unshift($columns,  'No.');
-            $fileName = $this->type . '_matrix.csv';
-
-            $dataSource = $this->makeDataSourceForViewMatrix($request, $dataSource);
-
-            $headers = Excel::header($fileName);
-            $callback = Excel::export($columns, $dataSource);
-            return response()->stream($callback, 200, $headers);
-        } catch (\Throwable $th) {
-            dd($th->getMessage());
+        if ($key) {
+            $columns = $columns[$key];
+            $dataSource = $dataSource[$key];
         }
+
+        $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
+        $dataSource = $this->groupByDataSource($request, $dataSource);
+        $columns = array_filter($columns, fn($item) => !isset($item['hidden']));
+        $columns = array_values(array_map(function ($item) {
+            if (isset($item['title'])) {
+                return Str::headline(strip_tags($item['title']));
+            } else {
+                return Str::headline($item['dataIndex']);
+            }
+        }, $columns));
+
+        array_unshift($columns,  'No.');
+        $fileName = $this->type . '_matrix.csv';
+
+        $dataSource = $this->makeDataSourceForViewMatrix($request, $dataSource);
+
+        $headers = Excel::header($fileName);
+        $callback = Excel::export($columns, $dataSource);
+        return response()->stream($callback, 200, $headers);
+        // } catch (\Throwable $th) {
+        //     dd($th->getMessage());
+        // }
     }
     public function exportCsvMatrixForReport(Request $request)
     {
@@ -96,7 +101,7 @@ class ViewAllInvokerController extends Controller
 
             $dataSource = $this->sortDataValueByColumns($columns, $dataSource);
             $dataSource = $this->groupByDataSource($request, $dataSource);
-            $columns = array_filter($columns, fn ($item) => !isset($item['hidden']));
+            $columns = array_filter($columns, fn($item) => !isset($item['hidden']));
             $xAxis2ndHeadingArr = [];
             foreach ($columns as $index => $column) {
                 if (isset($xAxis2ndHeading[$column['dataIndex']])) {
@@ -107,7 +112,7 @@ class ViewAllInvokerController extends Controller
                 array_unshift($xAxis2ndHeadingArr, ""); //For Excel spanning.
             }
 
-            $columns = array_values(array_map(fn ($item) => (isset($item['title']) ?
+            $columns = array_values(array_map(fn($item) => (isset($item['title']) ?
                 Str::headline(strip_tags($item['title']))
                 : Str::headline($item['dataIndex'])), $columns));
             array_unshift($columns,  'No.');
@@ -170,6 +175,6 @@ class ViewAllInvokerController extends Controller
     private function getSettingDuplicatable()
     {
         $props =  SuperProps::getFor($this->type)['props'];
-        return array_map(fn ($item) => $item['duplicatable'], $props);
+        return array_map(fn($item) => $item['duplicatable'], $props);
     }
 }
