@@ -33,7 +33,14 @@ class ManageDashboardsController extends AbstractManageLibController
 
             //Dashboard
             [
-                "dataIndex" => "show_all_ics_by_sub_project",
+                "dataIndex" => "show_column_progress",
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
+            [
+                "dataIndex" => "show_all_ics_by_sub_project_project_client_box",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',

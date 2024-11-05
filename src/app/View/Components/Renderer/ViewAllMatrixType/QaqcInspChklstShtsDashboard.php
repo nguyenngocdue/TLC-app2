@@ -2,172 +2,59 @@
 
 namespace App\View\Components\Renderer\ViewAllMatrixType;
 
-use App\Models\Qaqc_insp_chklst_sht;
-use App\Models\Sub_project;
+use App\Http\Controllers\Workflow\LibDashboards;
 use App\Utils\Support\CurrentUser;
 
 class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
 {
-    // use QaqcInspChklstShtsTraits;
+    private $dashboardConfig;
+    protected $allowCreation = false;
 
-    // protected $metaShowPrint = !true;
-    // protected $metaShowProgress = !true;
-
-    // protected $allowCreation = false;
-
-    // private $dataSource = null;
-    // private $projects, $subProjects, $prodRoutings;
-
-    // protected $nominatedFn = "signature_qaqc_chklst_3rd_party_list";
-    // protected $getSubProjectsOfUserFn = "getSubProjectsOfExternalInspector";
-    // protected $getProdRoutingsOfUserFn = "getProdRoutingsOfExternalInspector";
-
-    function  __construct()
+    public function __construct()
     {
-        // $this->dataSource =  $this->getDataSource();
-        dump(CurrentUser::get()->discipline);
+        $cu = CurrentUser::get();
+        $this->dashboardConfig = LibDashboards::getAll()[$cu->discipline] ?? null;
+        if (!$this->dashboardConfig) {
+            abort(404, "Your discipline [#" . ($cu->discipline ?? "?") . "] is not supported for this dashboard - Manage Dashboards.");
+        }
         parent::__construct();
+
+        dump($this->dashboardConfig);
+
+        $this->metaShowProgress = isset($this->dashboardConfig['show_column_progress']);
     }
 
-    // private function getDataSource()
-    // {
-    //     $cu = CurrentUser::get();
-    //     $this->subProjects = $cu->{$this->getSubProjectsOfUserFn};
-    //     if (!$this->subProjects->contains('id', $this->STW_SANDBOX_ID)) {
-    //         $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
-    //     }
+    protected function getSubProjectListForFilter()
+    {
+        $cu = CurrentUser::get();
+        if (!$this->subProjectDatasource) {
+            $sub1 = collect();
+            if (isset($this->dashboardConfig['show_some_ics_by_shipping_agent_box'])) {
+                $sub1 = $cu->getSubProjectsOfShippingAgent;
+            }
 
-    //     $this->prodRoutings = $this->getAllRoutingList();
-    //     $this->projects = $this->getProjectCollectionFromSubProjects();
-    //     $result = [$this->projects, $this->subProjects, $this->prodRoutings];
-    //     // dump($result);
-    //     return $result;
-    // }
+            $sub2 = collect();
+            if (isset($this->dashboardConfig['show_some_ics_by_sign_off_box'])) {
+                $sub2 = $cu->getSubProjectsOfExternalInspector;
+            }
 
-    // protected function getFilterDataSource()
-    // {
-    //     [$projects, $subProjects, $prodRoutings] = $this->dataSource;
-    //     return [
-    //         'projects' => $projects,
-    //         'sub_projects' => $subProjects,
-    //         'prod_routings' => $prodRoutings,
-    //     ];
-    // }
+            $sub3 = collect();
+            if (isset($this->dashboardConfig['show_some_ics_by_council_member_box'])) {
+                $sub3 = $cu->getSubProjectsOfCouncilMember;
+            }
 
-    // protected function getUserSettings()
-    // {
-    //     $userSettings = parent::getUserSettings();
-    //     // dump($userSettings);
-    //     [$project_id, $sub_project_id, $prod_routing_id] = $userSettings;
-    //     [$projects, $subProjects, $prodRoutings] = $this->dataSource;
-    //     $defaultProjects = (sizeof($projects) > 0) ? $projects->first()->id : 72;
-    //     $defaultSubProject = (sizeof($subProjects) > 0) ? $subProjects->first()->id : 112;
-    //     $defaultProdRouting = null;
-    //     $result = [
-    //         $project_id ?: $defaultProjects,
-    //         $sub_project_id ?: $defaultSubProject,
-    //         $prod_routing_id ?: $defaultProdRouting,
-    //     ];
-    //     // dump($result);
-    //     return $result;
-    // }
+            $sub4 = collect();
+            if (isset($this->dashboardConfig['show_all_ics_by_sub_project_project_client_box'])) {
+                $sub4 = $cu->getSubProjectsOfProjectClient;
+            }
 
-    // protected function getViewportParams()
-    // {
-    //     $userSettings = $this->getUserSettings();
-    //     [$project_id, $sub_project_id, $prod_routing_id] = $userSettings;
-    //     $result = [
-    //         'project_id' => $project_id,
-    //         'sub_project_id' => $sub_project_id,
-    //         'prod_routing_id' => $prod_routing_id,
-    //     ];
-    //     // dump($result);
-    //     return $result;
-    // }
+            $all = collect([...$sub1, ...$sub2, ...$sub3, ...$sub4,]);
 
-    // protected function getAllRoutingList()
-    // {
-    //     $cu = CurrentUser::get();
-    //     $prodRoutings = $cu
-    //         ->{$this->getProdRoutingsOfUserFn}()
-    //         ->with("getSubProjects")
-    //         ->get();
-
-    //     foreach ($prodRoutings as &$item) {
-    //         $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();
-    //     }
-
-    //     // dump($prodRoutings);
-    //     return $prodRoutings;
-    // }
-
-    // private static $matrixDataSourceSingleton = null;
-    // public function getMatrixDataSource($xAxis)
-    // {
-    //     // dump($this->matrixes);
-    //     if (is_null(static::$matrixDataSourceSingleton)) {
-    //         $cuid = CurrentUser::id();
-    //         // dump($this->matrixes);
-
-    //         $result = [];
-    //         foreach ($this->matrixes as $key => $matrix) {
-    //             $result[$key] = [];
-    //             $routingId = $matrix['routing']->id;
-    //             $subProjectId = $matrix['sub_project_id'];
-    //             $sheets = Qaqc_insp_chklst_sht::query()
-    //                 ->whereHas('getChklst', function ($query) use ($routingId, $subProjectId) {
-    //                     $query
-    //                         ->where('prod_routing_id', $routingId)
-    //                         ->where('sub_project_id', $subProjectId);
-    //                 })
-    //                 ->with($this->nominatedFn)
-    //                 ->get();
-    //             // Oracy::attach($this->nominatedFn . "()", $sheets);
-
-    //             foreach ($sheets as $sheet) {
-    //                 $extInsp = $sheet->{$this->nominatedFn};
-    //                 if ($extInsp->contains($cuid)) {
-    //                     $result[$key][] = $sheet;
-    //                 }
-    //             }
-    //         }
-    //         static::$matrixDataSourceSingleton = $result;
-    //     }
-    //     // dump($result);
-    //     return static::$matrixDataSourceSingleton;
-    // }
-
-    // protected function getXAxis()
-    // {
-    //     $xAxis = parent::getXAxis();
-    //     $sheets = $this->getMatrixDataSource([]);
-    //     foreach ($this->matrixes as $key => $matrix) {
-    //         if (isset($sheets[$key])) {
-    //             $allowX = array_map(fn($x) => $x['qaqc_insp_tmpl_sht_id'], $sheets[$key]);
-    //             $xAxis[$key] = array_filter($xAxis[$key], fn($x) => in_array($x['dataIndex'], $allowX));
-    //         } else {
-    //             $xAxis[$key] = [];
-    //         }
-    //     }
-
-    //     // dump($xAxis);
-    //     return $xAxis;
-    // }
-
-    // public function getYAxis()
-    // {
-    //     $yAxis = parent::getYAxis();
-    //     $sheets = $this->getMatrixDataSource([]);
-    //     foreach ($this->matrixes as $key => $matrix) {
-    //         if (isset($sheets[$key])) {
-    //             $allowY = array_map(fn($x) => $x['qaqc_insp_chklst_id'], $sheets[$key]);
-    //             $yAxis[$key] = $yAxis[$key]->filter(fn($x) => in_array($x['id'], $allowY));
-    //         } else {
-    //             $yAxis[$key] = [];
-    //         }
-    //     }
-
-    //     // dump($yAxis);
-    //     return $yAxis;
-    // }
+            $this->subProjectDatasource = $all;
+            // dump($all);
+            // } else {
+            //     echo "CACHE HIT - getSubProjectListForFilter";
+        }
+        return $this->subProjectDatasource;
+    }
 }

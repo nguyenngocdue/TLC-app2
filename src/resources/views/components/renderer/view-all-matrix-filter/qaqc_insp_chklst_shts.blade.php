@@ -11,6 +11,7 @@
                     tableName="projects" 
                     name="project_id" 
                     id="project_id" 
+                    typePlural="qaqc_insp_chklst_shts"
                     typeToLoadListener="listener_config" 
                     selected="{{$viewportParams['project_id']}}"
                     :dataSource="$dataSource['projects'] ?? null"

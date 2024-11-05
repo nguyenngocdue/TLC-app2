@@ -19,7 +19,7 @@ const select2FormatSelected = (state) => {
 }
 const select2FormatOption = (state) => {
     return !state.title
-        ? $(`<div title="#${state.id}">${state.text}</div>`)
+        ? $(`<div class="px-1" title="#${state.id}"><span>${state.text}</span></div>`)
         : $(
               `<div class="flex justify-between px-1" title="#${state.id}">
         <span>${state.text}</span>
