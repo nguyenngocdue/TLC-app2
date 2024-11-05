@@ -21,22 +21,23 @@ class EntityCRUDControllerForApiBlock extends Controller
 	function renderBlock(Request $request)
 	{
 		$userInput = $request->input();
-		$originalRpId = $userInput['original_rp'];
+		$originalRpId = $userInput['originalRp'];
 		$originalReport = Rp_report::find($originalRpId);
 		$entityType = $originalReport->entity_type;
 
-		$popupRpId = $userInput['popup_report_id'];
+		$popupRpId = $userInput['popupReportId'];
 
 		$popupRp = Rp_report::find($popupRpId);
 
 		// set value when call onclick 
-		$fieldToFilter = $userInput['data_index_label'];
-		$valueToFilter = $userInput['label_id'];
+		$fieldToFilter = $userInput['dataIndexLabel'];
+		$valueToFilter = $userInput['labelId'];
+		$datasetVariable = $userInput['datasetVariable'];
+		
 
 		$filterPrams = CurrentUser::getSettings()[$entityType][$originalReport->entityType2][$originalRpId];
 		$filterPrams[$fieldToFilter] = $valueToFilter;
-
-		$filterPrams["dataset"] = $userInput["dataset"];
+		$filterPrams[$datasetVariable] = $userInput[$datasetVariable];
 
 
 		$pagesOfPopupRp = $popupRp->getPages->sortBy('order_no');

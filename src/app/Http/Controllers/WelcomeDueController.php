@@ -22,7 +22,7 @@ class WelcomeDueController extends Controller
 
 
 
-        // return view("welcome-chart-due", []);
-        return view("welcome-due", []);
+        return view("welcome-chart-due", []);
+        // return view("welcome-due", []);
     }
 }

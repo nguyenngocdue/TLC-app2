@@ -40,8 +40,8 @@
             optionCons.options.plugins.tooltip.callbacks.label = eval("(" + optionCons.options.plugins.tooltip.callbacks.label + ")");
         }
 
-        if (typeof optionCons?.options?.params?.filterParams === 'object') {
-            optionCons.options.params.filterParams['original_rp'] = rpId;
+        if (typeof optionCons?.options?.params === 'object') {
+            optionCons.options.params['originalRp'] = rpId;
         }
 
         if (typeof optionCons?.options?.onClick === 'string') {
