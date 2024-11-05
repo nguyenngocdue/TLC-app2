@@ -114,7 +114,8 @@ class ReportAbsoluteTimeRange extends Component
             'second_quarter' => ReportPreset::getDateForQuarter(2, $timezone),
             'third_quarter' => ReportPreset::getDateForQuarter(3, $timezone),
             'fourth_quarter' => ReportPreset::getDateForQuarter(4, $timezone),
-
+            
+            'all_time' => ReportPreset::getAllTime($timezone, $toDate), // from_date: 1997-08-30 00:00:00
 
             // Already provided presets
             'today' => $this->generateDateRange('today', clone $toDate, clone $toDate),

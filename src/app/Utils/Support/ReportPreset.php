@@ -184,4 +184,16 @@ class ReportPreset
         ];
     }
 
+
+    public static function getAllTime($timezone = null, $toDate = null) {
+        $timezoneObj = new DateTimeZone(self::getTimezoneFromOffset($timezone));
+        if (!$toDate) $toDate = new DateTime('now', $timezoneObj);
+        return [
+            'from_date' => "1997-08-30 00:00:00",
+            'to_date' => $toDate->format('Y-m-d H:i:s')
+        ];
+    }
+
+
+
 }
