@@ -3,7 +3,7 @@
     showNo=true 
     :columns="$tableColumns" :dataSource="$tableDataSource" :dataHeader="$secondHeaderCols"
     tableTrueWidth="{{ $tableTrueWidth }}" maxH="{{ $maxHeight }}"
-    showPaginationTop="{{$hasPagination}}"
+    showPaginationTop="{{true }}"
     showPaginationBottom={{ true }}
     page-limit="10"
     :rotate45Width="$rotate45Width" 

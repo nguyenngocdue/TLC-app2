@@ -35,15 +35,19 @@ class ReportBlockTable extends Component
         $routeExExcel = route('rp_exportExcel');
         $currentParams = $this->currentParams;
         $pageLimit = $currentParams['per_page'] ?? 10;
+        $hasPagination = $this->block->has_pagination;
         switch ($typeId) {
             case $this->PAGINATION_TYPE_ID:
-                return Blade::render("<x-reports2.per-page-report2 
-                                                    entityType='{$entityType}' 
-                                                    reportType2='{$entityType2}' 
-                                                    reportId='{$reportId}' 
-                                                    pageLimit='{$pageLimit}'
-                                                    routeRp='{$routeRp}'
-                                    />");
+                if ($hasPagination) {
+                    return Blade::render("<x-reports2.per-page-report2 
+                                                        entityType='{$entityType}' 
+                                                        reportType2='{$entityType2}' 
+                                                        reportId='{$reportId}' 
+                                                        pageLimit='{$pageLimit}'
+                                                        routeRp='{$routeRp}'
+                                        />");
+                }
+                break;
             case $this->EXPORT_TYPE_ID:
                 return Blade::render('<x-reports2.utility-report2 
                                             :route="$route" 
