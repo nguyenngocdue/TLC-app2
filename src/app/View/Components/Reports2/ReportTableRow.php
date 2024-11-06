@@ -62,7 +62,8 @@ class ReportTableRow
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
                     $rowRenderer = $column->row_renderer;
-                    [$href, $cellTitle] = ['', ''];
+                    $cellTitle = '';
+                    $href = '';
                     
                     switch ($rowRenderer) {
                         case $this->TAG_ROW_RENDERER_ID: // Render Status
@@ -77,11 +78,10 @@ class ReportTableRow
                             break;
                     
                         case $this->ROW_RENDERER_LINK_ID:
-                            if ($href) {
+                                $href = $column->row_renderer_params;
                                 $href = $this->createHref($href,$dataLine, $currentParams);
                                 // $href .= '&action=updateReport2';
                                 $cellClass = 'text-blue-600';
-                            }
                             break;
                     
                         // case $this->ROW_RENDERER_DATETIME_ID:
