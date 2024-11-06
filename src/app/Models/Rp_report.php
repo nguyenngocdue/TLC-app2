@@ -14,6 +14,7 @@ class Rp_report extends ModelExtended
         "entity_type",
         "has_time_range",
         "disable_from_date",
+        "default_time_range",
         "is_active",
         "breadcrumb_group",
         "sub_package",

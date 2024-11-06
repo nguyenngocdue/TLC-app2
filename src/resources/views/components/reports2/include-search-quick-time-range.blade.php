@@ -35,7 +35,7 @@
             <input type="hidden" id="preset_title" name="preset_title" value="Time Range">
             <ul class="py-1 text-gray-700" id="quickRangeList">
                 @foreach($presets as $key => $preset)
-                    <li name="preset_1" class="px-2 py-1 hover:bg-gray-100 cursor-pointer" 
+                    <li name="preset_1" id="{{$key}}" class="px-2 py-1 hover:bg-gray-100 cursor-pointer" 
                         data-value="{{ $preset['from_date'] }} / {{ $preset['to_date'] }}">
                         {{App\Utils\Support\Report::makeTitle($key)}}
                     </li>

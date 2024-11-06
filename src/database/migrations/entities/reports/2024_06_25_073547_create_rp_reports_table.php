@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('entity_type')->nullable();
             $table->boolean('has_time_range')->nullable();
+            $table->string("default_time_range")->nullable();
             $table->boolean('disable_from_date')->nullable();
             
             $table->boolean('is_active')->nullable();

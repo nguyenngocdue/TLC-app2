@@ -2,8 +2,6 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Http\Controllers\Reports\TraitCreateSQLReport2;
-use App\Models\Field;
 use App\Models\Term;
 
 trait TraitReportTermNames

@@ -4,10 +4,73 @@ namespace App\Utils\Support;
 
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Date;
 use InvalidArgumentException;
 
 class ReportPreset
 {
+    public static function generateDateRange($timeFrame, $toDate, $fromDate)
+    {
+        switch ($timeFrame) {
+            case 'today':
+                $fromDate->setTime(0, 0, 0); // Start of today
+                $toDate->setTime(23, 59, 59); // End of today
+                break;
+            case 'yesterday':
+                $fromDate->modify('-1 day');
+                $toDate->modify('-1 day')->setTime(23, 59, 59);
+                $fromDate->setTime(0, 0, 0);
+                break;
+            case 'last_2_days':
+                $fromDate->modify('-2 days')->setTime(0, 0, 0);
+                $toDate->setTime(23, 59, 59);
+                break;
+            case 'last_week':
+                $fromDate->modify('last week')->setTime(0, 0, 0);
+                $toDate->modify('last week +6 days')->setTime(23, 59, 59);
+                break;
+            case 'last_month':
+                $fromDate->modify('first day of last month')->setTime(0, 0, 0);
+                $toDate->modify('last day of last month')->setTime(23, 59, 59);
+                break;
+            case 'last_year':
+                $fromDate->modify('first day of January last year')->setTime(0, 0, 0);
+                $toDate->modify('last day of December last year')->setTime(23, 59, 59);
+                break;
+            case 'last_2_years':
+                $fromDate->modify('first day of January')->modify('-2 years')->setTime(0, 0, 0);
+                $toDate->modify('last day of December last year')->setTime(23, 59, 59);
+                break;
+            case 'last_5_minutes':
+                $fromDate->modify('-5 minutes'); // 5 minutes ago
+                break;
+            case 'last_15_minutes':
+                $fromDate->modify('-15 minutes'); // 15 minutes ago
+                break;
+            case 'last_30_minutes':
+                $fromDate->modify('-30 minutes'); // 30 minutes ago
+                break;
+            case 'last_1_hour':
+                $fromDate->modify('-1 hour'); // 1 hour ago
+                break;
+            case 'last_3_hours':
+                $fromDate->modify('-3 hours'); // 3 hours ago
+                break;
+            case 'last_6_hours':
+                $fromDate->modify('-6 hours'); // 6 hours ago
+                break;
+            case 'last_12_hours':
+                $fromDate->modify('-12 hours'); // 12 hours ago
+                break;
+            default:
+                $fromDate = $fromDate;
+        }
+
+        return [
+            'from_date' => $fromDate->format('Y-m-d H:i:s'),
+            'to_date' => $toDate->format('Y-m-d H:i:s'),
+        ];
+    }
     public static function getTimezoneFromOffset($timezone) {
         if (preg_match('/UTC([+-])(\d+)/', $timezone, $matches)) {
             $sign = $matches[1] === '+' ? '-' : '+';
@@ -188,11 +251,15 @@ class ReportPreset
     public static function getAllTime($timezone = null, $toDate = null) {
         $timezoneObj = new DateTimeZone(self::getTimezoneFromOffset($timezone));
         if (!$toDate) $toDate = new DateTime('now', $timezoneObj);
+        $fromDate = (new DateTime())->setTimestamp(0);
         return [
-            'from_date' => "1997-08-30 00:00:00",
+            'from_date' => $fromDate->format('Y-m-d H:i:s'),
             'to_date' => $toDate->format('Y-m-d H:i:s')
         ];
     }
+
+
+    
 
 
 

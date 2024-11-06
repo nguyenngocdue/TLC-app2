@@ -2,11 +2,6 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Http\Controllers\Entities\ZZTraitEntity\TraitEntityCRUDShowReport;
-use App\Utils\Support\CurrentUser;
-use App\Utils\Support\DateReport;
-use DateTime;
-use Exception;
 
 trait TraitReportFilter
 {

@@ -416,7 +416,8 @@ class UpdateUserSettings extends Controller
         }
 
         if(isset($inputValue['form_type']) && $inputValue['form_type'] === "resetAbsoluteTimeRange"){
-            $inputValue = DefaultValueReport::updateDefaultValueFromDateToDate($inputValue);
+            $rp = Rp_report::find($rpId);
+            $inputValue = DefaultValueReport::updateDefaultValueFromDateToDate($inputValue, $rp);
         }
 
     

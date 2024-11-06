@@ -6,7 +6,7 @@ namespace App\View\Components\Reports2;
 trait TraitReportDetectVariableChanges 
 {
 
-    use  TraitReportTermNames;
+    use TraitReportTermNames;
     use TraitReportFormatString;
 
     function formatStrByRendererType($valueInData, $rendererType){

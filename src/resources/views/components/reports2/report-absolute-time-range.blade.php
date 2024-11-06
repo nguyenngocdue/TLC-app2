@@ -9,7 +9,11 @@
                     $timeTitle = "<strong>$presetTitle</strong>" ." (".$timeZone.")";
                     break;
                 case $fromDate && $toDate:
-                    $timeTitle = "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone. ")";
+                    if($rp->disable_from_date) {
+                        $timeTitle = "<strong>$toDate</strong>"." (".$timeZone. ")";
+                    } else {
+                        $timeTitle = "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone. ")";
+                    }
                     break;
                 default:
                     $timeTitle = '<strong>Time Range</strong>';

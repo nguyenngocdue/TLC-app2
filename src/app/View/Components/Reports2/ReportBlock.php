@@ -17,7 +17,7 @@ class ReportBlock extends Component
         private $blockDetails = [],
         private $currentParams = [],
     ) {
-        $this->entity_type = $this->report->entity_type;
+        // $this->entity_type = $this->report->entity_type;
     }
 
     private function paginateDataSource($dataSource, $hasPagination, $perPage)
