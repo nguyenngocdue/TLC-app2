@@ -27,6 +27,8 @@ class DateFormat
     }
 
     public static function getValueDatetimeByCurrentUser($dateTimeValue , $formatType=''){
+        $dateTime = new DateTime($dateTimeValue);
+        if ($dateTime) $dateTimeValue = $dateTime->format('Y-m-d H:i:s');
         $currentUserTimeZone = User::find(CurrentUser::id())->time_zone;
         $dateString = DateReport::convertToTimezone($dateTimeValue, $currentUserTimeZone);
         if ($formatType) {
