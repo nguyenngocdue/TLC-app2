@@ -58,12 +58,11 @@ class ReportTableRow
                 if (array_key_exists($k2, $configuredCols)) {
                     $column = $configuredCols[$k2];
                     $entityType = $column->entity_type;
-                    $href = ($x = $column->row_renderer_params) ? $x: '';
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
                     $rowRenderer = $column->row_renderer;
-                    $cellTitle = '';
+                    [$href, $cellTitle] = ['', ''];
                     
                     switch ($rowRenderer) {
                         case $this->TAG_ROW_RENDERER_ID: // Render Status
