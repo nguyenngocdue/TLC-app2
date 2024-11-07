@@ -57,6 +57,7 @@
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/dropdownComponent.js') }}"></script>
     <script src="{{ asset('js/chartComponent-20231110.js') }}"></script>
+    <script src="{{ asset('js/chartReport2-20241107.js') }}"></script>
     <script src="{{ asset('js/components/ActionMultiple.js') }}"></script>
     
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>

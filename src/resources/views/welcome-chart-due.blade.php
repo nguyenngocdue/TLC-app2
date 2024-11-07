@@ -24,38 +24,40 @@
     <canvas id="reworkChart" width="800" height="400"></canvas>
 </div>
 
+
+
 @php
  $months = [1,2,3,4,5,6,7];
 @endphp
 
-<script>
+{{-- <script>
     const ctx = document.getElementById('reworkChart').getContext('2d');
     var months = {!! json_encode($months) !!};
 
-    // Set up placeholder labels and data
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']; // Replace with Utils.months({ count: 7 }) if Utils is available
+   
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
     const data = {
         labels: labels,
         datasets: [
             {
                 label: 'Dataset 1',
-                data: [12, 19, 3, 5, 2, 3, 7], // Replace with Utils.numbers(NUMBER_CFG) if available
-                backgroundColor: 'rgba(255, 99, 132, 0.7)', // Replace with Utils.CHART_COLORS.red if available
+                data: [12, 19, 3, 5, 2, 3, 7],
+                backgroundColor: 'rgba(255, 99, 132, 0.7)',
             },
             {
                 label: 'Dataset 2',
-                data: [8, 11, 13, 7, 10, 6, 9], // Replace with Utils.numbers(NUMBER_CFG) if available
-                backgroundColor: 'rgba(54, 162, 235, 0.7)', // Replace with Utils.CHART_COLORS.blue if available
+                data: [8, 11, 13, 7, 10, 6, 9],
+                backgroundColor: 'rgba(54, 162, 235, 0.7)',
             },
             {
                 label: 'Dataset 3',
-                data: [4, 5, 6, 3, 2, 5, 8], // Replace with Utils.numbers(NUMBER_CFG) if available
-                backgroundColor: 'rgba(75, 192, 192, 0.7)', // Replace with Utils.CHART_COLORS.green if available
+                data: [4, 5, 6, 3, 2, 5, 8],
+                backgroundColor: 'rgba(75, 192, 192, 0.7)',
             },
         ]
     };
 
-    // Chart configuration
+   
     const config = {
         type: 'bar',
         data: data,
@@ -98,8 +100,71 @@
         }
     };
 
-    // Instantiate the Chart
     new Chart(ctx, config);
+</script> --}}
+
+<script>
+    function generateCategories(){
+        return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    }
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <div id="chart"></div>
+    
+<script>
+  // Define the options for the bar chart
+  var options = {
+    series: [{
+      name: 'Sales',
+      data: [450, 650, 850, 400, 0, 700, 900] // Example data
+    },
+    {
+      name: 'Sales2',
+      data: [450, 650, 850, 400, 550, 700, 800] // Example data
+    }
+    ],
+    chart: {
+      type: 'bar',
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '55%',
+        endingShape: 'rounded'
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    yaxis : {
+        max: function(){
+            const allDataPoints = options.series.flatMap(series => series.data);
+            return Math.max(...allDataPoints) * 1.1;
+        }
+    },
+    xaxis: {
+      categories:generateCategories(), // Example categories (months)
+    },
+    title: {
+      text: 'Monthly Sales Data',
+      align: 'center',
+      style: {
+        fontSize: '20px'
+      }
+    },
+    colors: ['#00E396', '#3969FC'] // Customize bar color
+  };
+
+  // Render the chart
+  var chart = new ApexCharts(document.querySelector("#chart"), options);
+  chart.render();
+</script>
+
+
+
+
 
 @endsection
