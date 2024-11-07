@@ -56,6 +56,15 @@
 @endif
 @endforeach
 
+{{-- @if(sizeof($routingsWithEmptyMatrix))
+    <x-renderer.card title="The following routings have no check-sheet">
+        @foreach($routingsWithEmptyMatrix as $value)
+            <li>
+                {{$value}}
+            </li>
+        @endforeach
+    </x-renderer.card>
+@endif --}}
 
 @if($showLegend)
     <x-renderer.legend type="{{$type}}" title="Legend of Status" />

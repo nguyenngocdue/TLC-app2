@@ -4,6 +4,7 @@ namespace App\View\Components\Renderer\ViewAllMatrixType;
 
 use App\Http\Controllers\Workflow\LibDashboards;
 use App\Models\Qaqc_insp_chklst_sht;
+use App\Models\Sub_project;
 use App\Utils\Support\CurrentUser;
 
 class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
@@ -63,7 +64,11 @@ class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
                 $sub4 = $cu->getSubProjectsOfProjectClient;
             }
 
-            $all = collect([...$sub1, ...$sub2, ...$sub3, ...$sub4,]);
+            $defaultSubProjects = Sub_project::query()
+                ->whereIn('id', [$this->SANDBOX_SUB_PROJECT_ID])
+                ->get();
+
+            $all = collect([...$sub1, ...$sub2, ...$sub3, ...$sub4, ...$defaultSubProjects]);
 
             $this->subProjectDatasource = $all;
             // dump($all);
@@ -113,11 +118,18 @@ class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
                     ->with($nominatedFns)
                     ->get();
 
-                foreach ($sheets as $sheet) {
-                    foreach ($nominatedFns as $fn) {
-                        $extInsp = $sheet->{$fn};
-                        if ($extInsp->contains($cuid)) {
-                            $result[$key][] = $sheet;
+                //Only filter sheets when it is not the sandbox sub project(s)
+                if (in_array($subProjectId, [112])) {
+                    foreach ($sheets as $sheet) {
+                        $result[$key][] = $sheet;
+                    }
+                } else {
+                    foreach ($sheets as $sheet) {
+                        foreach ($nominatedFns as $fn) {
+                            $extInsp = $sheet->{$fn};
+                            if ($extInsp->contains($cuid)) {
+                                $result[$key][] = $sheet;
+                            }
                         }
                     }
                 }

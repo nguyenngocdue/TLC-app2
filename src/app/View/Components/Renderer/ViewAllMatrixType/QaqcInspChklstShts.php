@@ -68,8 +68,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     private $fakeQaqcPunchlistObj;
     private $hasPunchlist = false;
 
-    protected $SANDBOX_ID = 72;
-    protected $STW_SANDBOX_ID = 112;
+    protected $SANDBOX_PROJECT_ID = 72;
+    protected $SANDBOX_SUB_PROJECT_ID = 112;
     /**
      * Create a new component instance.
      *
@@ -79,8 +79,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         parent::__construct("qaqc_insp_chklst_shts");
         [$this->projectId, $this->subProjectId, $this->prodRoutingId] = $this->getUserSettings();
-        $this->projectId = $this->projectId ? $this->projectId : $this->SANDBOX_ID;
-        $this->subProjectId = $this->subProjectId ? $this->subProjectId : $this->STW_SANDBOX_ID;
+        $this->projectId = $this->projectId ? $this->projectId : $this->SANDBOX_PROJECT_ID;
+        $this->subProjectId = $this->subProjectId ? $this->subProjectId : $this->SANDBOX_SUB_PROJECT_ID;
         $this->prodRoutingId = $this->prodRoutingId ? $this->prodRoutingId : null;
 
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');

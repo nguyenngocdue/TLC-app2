@@ -45,6 +45,7 @@ abstract class ViewAllTypeMatrixParent extends Component
     protected $multipleMatrix = false;
     protected $matrixes = null;
     protected $showNameColumn = true;
+    protected $routingsWithEmptyMatrix = [];
 
     protected $actionBtnList = [
         'exportSCV' => true,
@@ -515,6 +516,16 @@ abstract class ViewAllTypeMatrixParent extends Component
             $perPageArray = $perPage;
         }
 
+        $routingWithEmptyMatrixKeys = [];
+        foreach ($dataSource as $key => $lengthAware) {
+            if ($lengthAware instanceof LengthAwarePaginator && $lengthAware->count() == 0) {
+                $routingWithEmptyMatrixKeys[] = $key;
+            }
+        }
+        foreach ($routingWithEmptyMatrixKeys as $key) {
+            $this->routingsWithEmptyMatrix[] = $this->matrixes[$key]['name'];
+        }
+
         $filterRenderer = $this->getFilter();
 
 
@@ -568,6 +579,8 @@ abstract class ViewAllTypeMatrixParent extends Component
                 'route' => $this->getRouteAfterSubmit(),
                 'showLegend' => $this->showLegend,
                 'maxH' => $this->maxH,
+
+                'routingsWithEmptyMatrix' => $this->routingsWithEmptyMatrix,
             ],
         );
     }
