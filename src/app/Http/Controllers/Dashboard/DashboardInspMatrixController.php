@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class DashboardInspMatrixController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $controller)
     {
-        return view("dashboards.dashboard-insp-matrix", []);
+        return view("dashboards.dashboard-insp-matrix", [
+            'controller' => $controller,
+        ]);
     }
 }

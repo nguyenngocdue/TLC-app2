@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Log;
 
 trait QaqcInspChklstShtsTraits
 {
-    private $SANDBOX_ID = 72;
-    private $STW_SANDBOX_ID = 112;
+    protected $SANDBOX_ID = 72;
+    protected $STW_SANDBOX_ID = 112;
     // private $STW_TOWNHOUSE_ID = 94;
     // private $STW_INSP_CHK_SHT_ID = 1007;
 
@@ -33,7 +33,7 @@ trait QaqcInspChklstShtsTraits
             ->with('getScreensShowMeOn')
             ->get();
 
-        $prodRoutings = $prodRoutings->filter(fn ($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
+        $prodRoutings = $prodRoutings->filter(fn($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
 
         foreach ($prodRoutings as &$item) {
             $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();

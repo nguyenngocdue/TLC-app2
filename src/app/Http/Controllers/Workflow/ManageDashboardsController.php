@@ -40,14 +40,14 @@ class ManageDashboardsController extends AbstractManageLibController
                 'width' => 50,
             ],
             [
-                "dataIndex" => "show_all_ics_by_sub_project_project_client_box",
+                "dataIndex" => "show_all_ics_by_sub_project_client_box",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
             ],
             [
-                "dataIndex" => "show_some_routings_by_prod_routing",
+                "dataIndex" => "show_some_routings_per_user",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',

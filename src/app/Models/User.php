@@ -161,18 +161,19 @@ class User extends ModelExtended implements
 
         "getAccessibleProjects" => ['belongsToMany', Project::class, "ym2m_project_user_accessible"],
 
-        "getSubProjectsOfCouncilMember" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_council_member"],
-        "getSubProjectsOfProjectClient" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_project_client"],
         "getSubProjectsOfExternalInspector" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_ext_insp"],
         "getSubProjectsOfShippingAgent" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_shipping_agent"],
+        "getSubProjectsOfCouncilMember" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_council_member"],
+        "getSubProjectsOfProjectClient" => ['belongsToMany', Sub_project::class, "ym2m_sub_project_user_project_client"],
 
         "getQaqcInspTmplsOfExternalInspector" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_ext_insp"],
         "getQaqcInspTmplsOfCouncilMember" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_council_member"],
         "getQaqcInspTmplsOfShippingAgent" => ['belongsToMany', Qaqc_insp_tmpl::class, "ym2m_qaqc_insp_tmpl_user_shipping_agent"],
 
         "getProdRoutingsOfExternalInspector" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_ext_insp"],
-        "getProdRoutingsOfCouncilMember" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_council_member"],
         "getProdRoutingsOfShippingAgent" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_shipping_agent"],
+        "getProdRoutingsOfCouncilMember" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_council_member"],
+        "getProdRoutingsPerUser" => ['belongsToMany', Prod_routing::class, "ym2m_prod_routing_user_per_user"],
     ];
 
     public function getOtTeams()
@@ -254,6 +255,12 @@ class User extends ModelExtended implements
     }
 
     function getProdRoutingsOfShippingAgent()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    function getProdRoutingsPerUser()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);

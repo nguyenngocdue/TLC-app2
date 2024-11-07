@@ -7,6 +7,7 @@ use App\Models\Pj_module;
 use App\Models\Pj_unit;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
+use App\Models\Project;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl_sht;
@@ -40,7 +41,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
     use TraitYAxisDiscipline;
 
-    private $project, $subProject, $prodRouting;
+    private $projectId, $subProjectId, $prodRoutingId;
+    protected $projectDatasource, $subProjectDatasource, $prodRoutingDatasource, $prodRoutingMatrixDatasource;
     private $QAQC_DISCIPLINE_ID = 7;
 
     protected $xAxis = Qaqc_insp_chklst_sht::class;
@@ -56,16 +58,18 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $maxH = 60;
     protected $multipleMatrix = true;
 
-    protected $metaShowPrint = true;
+    protected $matrixDataSourceSingleton = null;
+
+    // protected $metaShowPrint = true;
     protected $metaShowProgress = true;
-    protected $metaShowComplianceName = true;
     protected $showNameColumn = false;
 
     private static $punchlistStatuses = null;
     private $fakeQaqcPunchlistObj;
     private $hasPunchlist = false;
 
-
+    protected $SANDBOX_ID = 72;
+    protected $STW_SANDBOX_ID = 112;
     /**
      * Create a new component instance.
      *
@@ -74,15 +78,21 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct("qaqc_insp_chklst_shts");
-        [$this->project, $this->subProject, $this->prodRouting] = $this->getUserSettings();
-        $this->project = $this->project ? $this->project : 72;
-        $this->subProject = $this->subProject ? $this->subProject : 112;
-        $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
+        [$this->projectId, $this->subProjectId, $this->prodRoutingId] = $this->getUserSettings();
+        $this->projectId = $this->projectId ? $this->projectId : $this->SANDBOX_ID;
+        $this->subProjectId = $this->subProjectId ? $this->subProjectId : $this->STW_SANDBOX_ID;
+        $this->prodRoutingId = $this->prodRoutingId ? $this->prodRoutingId : null;
 
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
         $this->fakeQaqcPunchlistObj = new FakeQaqcPunchlist();
 
         $this->matrixes = $this->getMultipleMatrixObjects();
+
+        // dump($this->getProjectListForFilter());
+        // dump($this->getSubProjectListForFilter());
+        // dump($this->getRoutingListForFilter());
+
+        // dump($this->getRoutingListForMatrix());
     }
 
     protected function getUserSettings()
@@ -102,7 +112,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $tmplId = $matrix['chklst_tmpls']->id;
             $routingId = $matrix['routing']->id;
             $yAxis = $this->yAxis::query()
-                ->where('sub_project_id', $this->subProject)
+                ->where('sub_project_id', $this->subProjectId)
                 ->where('qaqc_insp_tmpl_id', $tmplId)
                 //This to enable AOI 1 Mockup Backup
                 ->where('prod_routing_id', $routingId)
@@ -191,29 +201,34 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     public function getMatrixDataSource($xAxis)
     {
-        $result = [];
-        foreach ($this->matrixes as $key => $matrix) {
-            $tmplId = $matrix['chklst_tmpls']->id;
-            $item = Qaqc_insp_chklst_sht::whereHas('getTmplSheet.getTmpl', function ($query) use ($tmplId) {
-                $query->where('qaqc_insp_tmpl_id', $tmplId);
-            })
-                ->with('signature_qaqc_chklst_3rd_party')
-                ->with('signature_qaqc_chklst_3rd_party_list')
-                ->get();
-            // Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $item);
-            $result[$key] = $item;
+        if (is_null($this->matrixDataSourceSingleton)) {
+            $result = [];
+            foreach ($this->matrixes as $key => $matrix) {
+                $tmplId = $matrix['chklst_tmpls']->id;
+                $item = Qaqc_insp_chklst_sht::whereHas('getTmplSheet.getTmpl', function ($query) use ($tmplId) {
+                    $query->where('qaqc_insp_tmpl_id', $tmplId);
+                })
+                    ->with('signature_qaqc_chklst_3rd_party')
+                    ->with('signature_qaqc_chklst_3rd_party_list')
+                    ->get();
+                // Oracy::attach("signature_qaqc_chklst_3rd_party_list()", $item);
+                $result[$key] = $item;
+            }
+            // dump($result);
+            // dd();
+            $this->matrixDataSourceSingleton = $result;
+            // } else {
+            //     echo "CACHE HIT - getMatrixDataSource";
         }
-        // dump($result);
-        // dd();
-        return $result;
+        return $this->matrixDataSourceSingleton;
     }
 
     protected function getViewportParams()
     {
         return [
-            'project_id' => $this->project,
-            'sub_project_id' => $this->subProject,
-            'prod_routing_id' => $this->prodRouting,
+            'project_id' => $this->projectId,
+            'sub_project_id' => $this->subProjectId,
+            'prod_routing_id' => $this->prodRoutingId,
             // 'qaqc_insp_tmpl_id' => $this->qaqcInspTmpl,
         ];
     }
@@ -223,8 +238,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $params = parent::getCreateNewParams($x, $y);
         $params['status'] =  'new';
         // $params['project_id'] =  $this->qaqcInspTmpl;
-        $params['sub_project_id'] =  $this->subProject;
-        $params['prod_routing_id'] =  $this->prodRouting;
+        $params['sub_project_id'] =  $this->subProjectId;
+        $params['prod_routing_id'] =  $this->prodRoutingId;
 
         // $params['prod_discipline_id'] =  $x['prod_discipline_id'];
         return $params;
@@ -239,10 +254,8 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             'width' => 50,
             /* 'fixed' => 'left',*/
         ];
-        if ($this->metaShowComplianceName) {
-            $result[] = ['dataIndex' => 'compliance_name', 'width' => 300,];
-            $result[] = ['dataIndex' => 'description', 'width' => 50,];
-        }
+        $result[] = ['dataIndex' => 'compliance_name', 'width' => 300,];
+        $result[] = ['dataIndex' => 'description', 'width' => 50,];
         if ($this->metaShowProgress) $result[] = [
             'dataIndex' => 'progress',
             "title" => 'Progress (%)',
@@ -413,27 +426,22 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         return $result;
     }
 
-    protected function getAllRoutingList()
-    {
-        return Sub_project::find($this->subProject)->getProdRoutingsOfSubProject;
-    }
-
     protected function getMultipleMatrixObjects()
     {
         $show_on_ics_id = config("production.prod_routings.qaqc_insp_chklsts");
-        if ($this->prodRouting) {
-            $prodRoutings = [Prod_routing::find($this->prodRouting)];
+        if ($this->prodRoutingId) {
+            $prodRoutings = [Prod_routing::find($this->prodRoutingId)];
         } else {
-            $prodRoutings = $this->getAllRoutingList();
+            $prodRoutings = $this->getRoutingListForMatrix();
         }
         $result = [];
         foreach ($prodRoutings as $key => $routing) {
             $allSubProjects = $routing->getSubProjects;
             if ($allSubProjects) {
                 if (is_array($allSubProjects)) {
-                    if (in_array($this->subProject, $allSubProjects)) continue;
+                    if (in_array($this->subProjectId, $allSubProjects)) continue;
                 } else {
-                    if (!$allSubProjects->contains($this->subProject)) continue;
+                    if (!$allSubProjects->contains($this->subProjectId)) continue;
                 }
             }
             $showOnScreenIds = $routing->getScreensShowMeOn->pluck('id');
@@ -449,7 +457,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
 
-                            'sub_project_id' => $this->subProject,
+                            'sub_project_id' => $this->subProjectId,
                         ];
                     }
                 }
@@ -460,5 +468,93 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         // });
         // dump($result);
         return $result;
+    }
+
+    protected function getRoutingListForMatrix()
+    {
+        if (!$this->prodRoutingMatrixDatasource) {
+            $routings = Sub_project::find($this->subProjectId)->getProdRoutingsOfSubProject;
+            // dump($routings);
+            $allowList = $this->getRoutingListForFilter();
+            // dump($allowList);
+            $this->prodRoutingMatrixDatasource = $routings->intersect($allowList);
+        } else {
+            // echo "CACHE HIT - getRoutingListForMatrix";
+        }
+        return $this->prodRoutingMatrixDatasource;
+    }
+
+    protected function enrichRouting($prodRoutings)
+    {
+        //Remove routings that are not allow to show on the screen
+        $prodRoutings = $prodRoutings->filter(fn($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
+
+        //Enrich for listeners sub projects -> routing
+        foreach ($prodRoutings as &$item) {
+            $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();
+        }
+
+        return $prodRoutings;
+    }
+
+    protected function getRoutingListForFilter()
+    {
+        if (!$this->prodRoutingDatasource) {
+            $subProjectDatasource = $this->getSubProjectListForFilter();
+            $routingIds = [];
+            foreach ($subProjectDatasource as $subProject) {
+                $routingIds[] = $subProject->getProdRoutingsOfSubProject->pluck('id')->toArray();
+            }
+            $routingIds = array_unique(array_merge(...$routingIds));
+            $prodRoutings = Prod_routing::query()
+                ->whereIn('id', $routingIds)
+                ->with([
+                    "getSubProjects",
+                    "getScreensShowMeOn",
+                ])
+                ->get();
+
+            $prodRoutings = $this->enrichRouting($prodRoutings);
+            $this->prodRoutingDatasource = $prodRoutings;
+        } else {
+            // echo "CACHE HIT - getRoutingListForFilter";
+        }
+        return $this->prodRoutingDatasource;
+    }
+
+    protected function getSubProjectListForFilter()
+    {
+        if (!$this->subProjectDatasource) {
+            $this->subProjectDatasource = Sub_project::all();
+        } else {
+            // echo "CACHE HIT - getSubProjectListForFilter";
+        }
+        return $this->subProjectDatasource;
+    }
+
+    protected function getProjectListForFilter()
+    {
+        if (!$this->projectDatasource) {
+            $subProjectDatasource = $this->getSubProjectListForFilter();
+            $projectIds = [];
+            foreach ($subProjectDatasource as $subProject) {
+                $projectIds[] = $subProject->project_id;
+            }
+            $this->projectDatasource = Project::query()
+                ->whereIn('id', $projectIds)
+                ->get();
+        } else {
+            // echo "CACHE HIT - getProjectListForFilter";
+        }
+        return $this->projectDatasource;
+    }
+
+    protected function getFilterDataSource()
+    {
+        return [
+            'projects' => $this->getProjectListForFilter(),
+            'sub_projects' => $this->getSubProjectListForFilter(),
+            'prod_routings' => $this->getRoutingListForFilter(),
+        ];
     }
 }

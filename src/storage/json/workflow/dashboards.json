@@ -24,8 +24,8 @@
         "name": "128",
         "title": "Project Clients",
         "show_column_progress": "true",
-        "show_all_ics_by_sub_project_project_client_box": "true",
-        "show_some_routings_by_prod_routing": "true"
+        "show_all_ics_by_sub_project_client_box": "true",
+        "show_some_routings_per_user": "true"
     },
     "185": {
         "name": "185",
@@ -37,7 +37,7 @@
         "be_able_to_checkpoint_upload_photo": "true",
         "show_some_ics_by_council_member_box": "true",
         "show_column_progress": "true",
-        "show_all_ics_by_sub_project_project_client_box": "true",
-        "show_some_routings_by_prod_routing": "true"
+        "show_all_ics_by_sub_project_client_box": "true",
+        "show_some_routings_per_user": "true"
     }
 }
