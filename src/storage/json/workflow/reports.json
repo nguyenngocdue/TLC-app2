@@ -141,7 +141,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "NCR\/DR Report in Chart",
-        "title": "NCR\/DR Report in Chart"
+        "title": "NCR\/DR Report in Chart",
+        "hidden": "true"
     },
     "document-qaqc_ncr_020": {
         "name": "document-qaqc_ncr_020",
@@ -158,7 +159,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "NCR\/DR Monthly Report",
-        "title": "NCR\/DR Monthly Report"
+        "title": "NCR\/DR Monthly Report",
+        "hidden": "true"
     },
     "document-qaqc_wir_010": {
         "name": "document-qaqc_wir_010",
@@ -350,7 +352,8 @@
         "package": "project_management",
         "breadcrumb-group": "accounting",
         "top_title": "Labor Cost Timesheet",
-        "title": "Labor Cost Timesheet"
+        "title": "Labor Cost Timesheet",
+        "hidden": "true"
     },
     "report-prod_sequence_020": {
         "name": "report-prod_sequence_020",
@@ -358,7 +361,8 @@
         "package": "project_management",
         "breadcrumb-group": "accounting",
         "top_title": "Labor Cost Timesheet Detail",
-        "title": "Labor Cost Timesheet Detail"
+        "title": "Labor Cost Timesheet Detail",
+        "hidden": "true"
     },
     "report-prod_sequence_030": {
         "name": "report-prod_sequence_030",
@@ -366,7 +370,8 @@
         "package": "project_management",
         "breadcrumb-group": "finance",
         "top_title": "Sequence-based Timesheet",
-        "title": "Target vs. Actual Detail"
+        "title": "Target vs. Actual Detail",
+        "hidden": "true"
     },
     "report-prod_sequence_040": {
         "name": "report-prod_sequence_040",
@@ -374,7 +379,8 @@
         "package": "project_management",
         "breadcrumb-group": "planning",
         "top_title": "Production Orders Completion Time Statistics",
-        "title": "ProdOrder Completion Statistics"
+        "title": "ProdOrder Completion Statistics",
+        "hidden": "true"
     },
     "report-prod_sequence_050": {
         "name": "report-prod_sequence_050",
@@ -382,7 +388,8 @@
         "package": "project_management",
         "breadcrumb-group": "planning",
         "top_title": "Production Routing Links Completion Time Statistics",
-        "title": "ProdRoutingLink Completion Statistics"
+        "title": "ProdRoutingLink Completion Statistics",
+        "hidden": "true"
     },
     "report-prod_sequence_060": {
         "name": "report-prod_sequence_060",
@@ -425,7 +432,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "NCR\/DR Report in Detail",
-        "title": "NCR\/DR Report in Detail"
+        "title": "NCR\/DR Report in Detail",
+        "hidden": "true"
     },
     "report-site_daily_assignment_010": {
         "name": "report-site_daily_assignment_010",
