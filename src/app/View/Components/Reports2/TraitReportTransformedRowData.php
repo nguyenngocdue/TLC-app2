@@ -94,6 +94,8 @@ trait TraitReportTransformedRowData
     {
         $content = $targetValue ? Str::makeId($targetValue) : $targetValue;
         $route = Str::plural($entityType) . ".edit";
+        $cellClass = '';
+        $href = '';
         try {
             if (Route::has($route) && $targetValue) {
                 $href = route($route, (int) $targetValue);
