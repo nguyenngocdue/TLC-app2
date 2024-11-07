@@ -7,7 +7,8 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": ""
     },
     "in_progress": {
         "name": "in_progress",
@@ -17,7 +18,8 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": ""
     },
     "finished": {
         "name": "finished",
@@ -27,7 +29,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": "true"
     },
     "on_hold": {
         "name": "on_hold",
@@ -37,7 +40,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "cancelled": {
         "name": "cancelled",
@@ -47,7 +51,8 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "not_applicable": {
         "name": "not_applicable",
@@ -57,6 +62,18 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
+    },
+    "rework": {
+        "name": "rework",
+        "location": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "true",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": "",
+        "rework": ""
     }
 }

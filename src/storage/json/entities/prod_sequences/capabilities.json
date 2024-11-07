@@ -8,7 +8,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "acct_manager_nz": {
         "name": "acct_manager_nz",
@@ -19,7 +20,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "acct_member": {
         "name": "acct_member",
@@ -30,7 +32,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "acct_member_nz": {
         "name": "acct_member_nz",
@@ -41,7 +44,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "admin": {
         "name": "admin",
@@ -52,7 +56,8 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "apartment_owner": {
         "name": "apartment_owner",
@@ -63,7 +68,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "bd_manager": {
         "name": "bd_manager",
@@ -74,7 +80,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "bd_member": {
         "name": "bd_member",
@@ -85,7 +92,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "client": {
         "name": "client",
@@ -96,7 +104,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "consultant": {
         "name": "consultant",
@@ -107,7 +116,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "contractor": {
         "name": "contractor",
@@ -118,7 +128,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "council_member": {
         "name": "council_member",
@@ -129,7 +140,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
@@ -140,7 +152,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "cpl_member": {
         "name": "cpl_member",
@@ -151,7 +164,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "dc_ho": {
         "name": "dc_ho",
@@ -162,7 +176,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "dc_manager": {
         "name": "dc_manager",
@@ -173,7 +188,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "dc_ws": {
         "name": "dc_ws",
@@ -184,7 +200,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "des_manager": {
         "name": "des_manager",
@@ -195,7 +212,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "des_member": {
         "name": "des_member",
@@ -206,7 +224,20 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "in_progress": "",
+        "finished": "",
+        "on_hold": "",
+        "cancelled": "",
+        "not_applicable": "",
+        "rework": ""
     },
     "dir": {
         "name": "dir",
@@ -217,7 +248,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "dir_nz": {
         "name": "dir_nz",
@@ -228,7 +260,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "external_inspector": {
         "name": "external_inspector",
@@ -239,7 +272,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "fac_admin": {
         "name": "fac_admin",
@@ -250,7 +284,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "fin_member_nz": {
         "name": "fin_member_nz",
@@ -261,7 +296,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "guest": {
         "name": "guest",
@@ -272,7 +308,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "hr_manager": {
         "name": "hr_manager",
@@ -283,7 +320,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "hr_member": {
         "name": "hr_member",
@@ -294,7 +332,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "hr_member_nz": {
         "name": "hr_member_nz",
@@ -305,7 +344,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "hse_manager": {
         "name": "hse_manager",
@@ -313,10 +353,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "hse_member": {
         "name": "hse_member",
@@ -324,10 +365,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "it_manager": {
         "name": "it_manager",
@@ -338,7 +380,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "it_member": {
         "name": "it_member",
@@ -349,7 +392,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "mgr_asst_nz": {
         "name": "mgr_asst_nz",
@@ -360,7 +404,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "newcomer": {
         "name": "newcomer",
@@ -371,7 +416,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "pln_admin": {
         "name": "pln_admin",
@@ -382,7 +428,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "ppc_admin": {
         "name": "ppc_admin",
@@ -393,7 +440,8 @@
         "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "ppc_manager": {
         "name": "ppc_manager",
@@ -401,10 +449,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "ppc_member": {
         "name": "ppc_member",
@@ -412,10 +461,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "proc_manager": {
         "name": "proc_manager",
@@ -426,7 +476,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "proc_member": {
         "name": "proc_member",
@@ -437,7 +488,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "proc_member_nz": {
         "name": "proc_member_nz",
@@ -448,7 +500,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "prod_manager": {
         "name": "prod_manager",
@@ -456,10 +509,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "prod_manager_nz": {
         "name": "prod_manager_nz",
@@ -470,7 +524,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "prod_member": {
         "name": "prod_member",
@@ -478,10 +533,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "prod_member_nz": {
         "name": "prod_member_nz",
@@ -492,7 +548,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "proj_admin": {
         "name": "proj_admin",
@@ -500,10 +557,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "proj_manager": {
         "name": "proj_manager",
@@ -511,10 +569,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
@@ -525,7 +584,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "proj_member": {
         "name": "proj_member",
@@ -533,10 +593,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
@@ -547,7 +608,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "proj_supervisor_nz": {
         "name": "proj_supervisor_nz",
@@ -555,10 +617,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "qaqc_manager": {
         "name": "qaqc_manager",
@@ -569,7 +632,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "qaqc_member": {
         "name": "qaqc_member",
@@ -580,7 +644,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "qaqc_member_nz": {
         "name": "qaqc_member_nz",
@@ -591,7 +656,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "qs_manager": {
         "name": "qs_manager",
@@ -602,7 +668,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "qs_member": {
         "name": "qs_member",
@@ -613,7 +680,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "qs_member_nz": {
         "name": "qs_member_nz",
@@ -624,7 +692,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "shipping_agent": {
         "name": "shipping_agent",
@@ -635,7 +704,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "supreme_manage": {
         "name": "supreme_manage",
@@ -643,10 +713,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "vendor": {
         "name": "vendor",
@@ -657,7 +728,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "whs_manager": {
         "name": "whs_manager",
@@ -665,10 +737,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "whs_member": {
         "name": "whs_member",
@@ -676,10 +749,11 @@
         "toggle": "",
         "new": "true",
         "in_progress": "true",
-        "finished": "",
+        "finished": "true",
         "on_hold": "true",
         "cancelled": "true",
-        "not_applicable": "true"
+        "not_applicable": "true",
+        "rework": "true"
     },
     "worker": {
         "name": "worker",
@@ -690,6 +764,7 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     }
 }

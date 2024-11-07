@@ -349,6 +349,13 @@
         "color_index": "200",
         "icon": null
     },
+    "rework": {
+        "name": "rework",
+        "title": "Rework",
+        "color": "cyan",
+        "color_index": "200",
+        "icon": "<i class=\"fa-duotone fa-hourglass-end\"><\/i>"
+    },
     "stopped": {
         "name": "stopped",
         "title": "Stopped",

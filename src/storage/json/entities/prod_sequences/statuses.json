@@ -4,5 +4,6 @@
     "finished",
     "on_hold",
     "cancelled",
-    "not_applicable"
+    "not_applicable",
+    "rework"
 ]
