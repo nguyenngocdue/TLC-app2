@@ -43,16 +43,17 @@ class ReportBlockChart extends Component
         return $options;
     }
 
+
     private function changeToJsonOptions($optionStr, $queriedData)
     {
         $transformedFields = $this->transformedFields;
         if($transformedFields) {
             $optionStr = $this->changeToJsonOptionsByTransformation($optionStr, $queriedData, $transformedFields);
-            // $optionStr = $this->detectVariables($optionStr, $this->currentParams, $queriedData);
-        }else {
+            $optionStr = $this->detectVariables($optionStr, $this->currentParams, $queriedData); // TOFIX
+
+        } else {
             $optionStr = $this->detectVariables($optionStr, $this->currentParams, $queriedData);
         }
-        
         $jsonOptions = json_decode($optionStr);
         if (is_null($jsonOptions))dump($optionStr);
         return $jsonOptions;
