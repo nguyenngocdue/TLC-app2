@@ -1,4 +1,8 @@
 <div class="border-2 border-gray-600 p-1 {{$class}}">
+    @php
+        $height = $jsonOptions->options->height ?? 500;
+        $width = $jsonOptions->options->width ?? 400;
+    @endphp
     @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')
         @once
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
@@ -8,11 +12,10 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 
         @endonce
-        @php
-            $height = $jsonOptions->options->height ?? 400;
-            $width = $jsonOptions->options->width ?? 400;
-        @endphp
         <canvas id="{{ $key }}" height={{$height}} width={{$width}}></canvas>
+    @elseif(isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'echart')
+        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <div id="main" style="width: {{$height}}px; height: {{$width}}px;"></div
     @else
         @once
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -64,7 +67,12 @@
 
         var chart = new Chart(ctx, optionCons);
 
-    } else {
+    } 
+    else if (optionCons?.libraryType?.toLowerCase() === 'echart'){
+        var myChart2 = echarts.init(document.getElementById('main'));
+        myChart2.setOption(optionCons);
+    } 
+    else {
         var options = optionCons;
             // change formatter from string to JavaScript function 
         if (typeof options?.dataLabels?.formatter === 'string') {

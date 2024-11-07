@@ -103,7 +103,7 @@
     new Chart(ctx, config);
 </script> --}}
 
-<script>
+{{-- <script>
     function generateCategories(){
         return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
     }
@@ -114,15 +114,14 @@
     <div id="chart"></div>
     
 <script>
-  // Define the options for the bar chart
   var options = {
     series: [{
       name: 'Sales',
-      data: [450, 650, 850, 400, 0, 700, 900] // Example data
+      data: [450, 650, 850, 400, 0, 700, 900] 
     },
     {
       name: 'Sales2',
-      data: [450, 650, 850, 400, 550, 700, 800] // Example data
+      data: [450, 650, 850, 400, 550, 700, 800] 
     }
     ],
     chart: {
@@ -146,7 +145,7 @@
         }
     },
     xaxis: {
-      categories:generateCategories(), // Example categories (months)
+      categories:generateCategories(), 
     },
     title: {
       text: 'Monthly Sales Data',
@@ -155,12 +154,81 @@
         fontSize: '20px'
       }
     },
-    colors: ['#00E396', '#3969FC'] // Customize bar color
+    colors: ['#00E396', '#3969FC'] 
   };
 
-  // Render the chart
+  
   var chart = new ApexCharts(document.querySelector("#chart"), options);
   chart.render();
+</script>
+ --}}
+
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+<!-- Thẻ div để chứa biểu đồ -->
+<div id="main" style="width: 600px; height: 400px;"></div>
+
+<script type="text/javascript">
+    // Khởi tạo một instance của echarts dựa trên thẻ div đã chuẩn bị
+    var myChart2 = echarts.init(document.getElementById('main'));
+
+    // Cấu hình và dữ liệu cho biểu đồ
+    var option = {
+        title: {
+            text: 'ECharts Example with Toolbox'
+        },
+        tooltip: {},
+        legend: {
+            data: ['sales']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {
+                    show: true, // Cho phép lưu biểu đồ dưới dạng hình ảnh
+                    title: 'Save as Image'
+                },
+                dataView: {
+                    show: true,
+                    readOnly: false, // Cho phép người dùng xem và chỉnh sửa dữ liệu
+                    title: 'Data View'
+                },
+                restore: {
+                    show: true, // Cho phép khôi phục lại biểu đồ
+                    title: 'Restore'
+                },
+                magicType: {
+                    show: true, // Cho phép thay đổi loại biểu đồ
+                    type: ['line', 'bar'], // Các loại biểu đồ có thể chuyển đổi
+                    title: {
+                        line: 'Switch to Line Chart',
+                        bar: 'Switch to Bar Chart'
+                    }
+                },
+                dataZoom: {
+                    show: true, // Cho phép phóng to/thu nhỏ
+                    title: {
+                        zoom: 'Zoom In',
+                        back: 'Zoom Out'
+                    }
+                }
+            }
+        },
+        xAxis: {
+            data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: 'sales',
+                type: 'bar',  // Biểu đồ dạng bar
+                data: [5, 20, 36, 10, 10, 20] // Dữ liệu bán hàng
+            }
+        ]
+    };
+
+    // Hiển thị biểu đồ bằng cấu hình đã chỉ định
+    myChart2.setOption(option);
 </script>
 
 
