@@ -21,6 +21,8 @@
     @endif
 </div>
 
+
+
 <script>
     var key = {!! json_encode($key) !!} ; 
     var optionCons = {!! json_encode($jsonOptions) !!};
@@ -72,6 +74,18 @@
         if (typeof options?.tooltip?.y?.formatter === 'string') {
             options.tooltip.y.formatter = eval("(" + options.tooltip.y.formatter + ")");
         }
+
+        // max value for yAxis
+        if (typeof options?.yaxis?.max === 'string') {
+            options.yaxis.max = eval("(" + options.yaxis.max + ")");
+        }
+
+        // categories of xAxis
+        if (typeof options?.xaxis?.categories === 'string') {
+            options.xaxis.categories = eval("(" + options.xaxis.categories + ")");
+            console.log(options.xaxis.categories);
+        }
+
 
         // add event handler from string to JavaScript function
         if (typeof options.chart?.events?.click === 'string') {
