@@ -424,7 +424,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "ICS Report in Detail",
-        "title": "ICS Report in Detail"
+        "title": "ICS Report in Detail",
+        "hidden": "true"
     },
     "report-qaqc_ncr_010": {
         "name": "report-qaqc_ncr_010",
