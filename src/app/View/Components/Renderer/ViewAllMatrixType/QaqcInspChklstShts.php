@@ -449,23 +449,22 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
                 $tmpls = $routing->getChklstTmpls()->orderBy('order_no')->get();
                 if ($tmpls->count() > 0) {
                     foreach ($tmpls as $tmpl) {
-                        $key = $routing->id . "_" . $tmpl->id;
+                        $key = $routing->id . "_xyz_xyz_" . $tmpl->id . "_order_no_" . $tmpl->order_no;
                         $result[$key] = [
                             'name'  => $routing->name . " (" . $tmpl->short_name . ")",
                             'description' => "", //"Checklist Type: 111 " . $tmpl->name,
-                            // 'name_for_sort_by' => $routing->name . " " . $tmpl->name,
                             'routing' =>   $routing,
                             'chklst_tmpls' => $tmpl,
-
+                            'order_no' => $tmpl->order_no,
                             'sub_project_id' => $this->subProjectId,
                         ];
                     }
                 }
             }
         }
-        // uasort($result, function ($a, $b) {
-        //     return $a['name_for_sort_by'] <=> $b['name_for_sort_by'];
-        // });
+        uasort($result, function ($a, $b) {
+            return $a['order_no'] <=> $b['order_no'];
+        });
         // dump($result);
         return $result;
     }
@@ -473,7 +472,9 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected function getRoutingListForMatrix()
     {
         if (!$this->prodRoutingMatrixDatasource) {
-            $routings = Sub_project::find($this->subProjectId)->getProdRoutingsOfSubProject;
+            $routings = Sub_project::find($this->subProjectId)
+                ->getProdRoutingsOfSubProject()
+                ->get();
             // dump($routings);
             $allowList = $this->getRoutingListForFilter();
             // dump($allowList);
