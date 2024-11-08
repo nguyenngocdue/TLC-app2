@@ -21,9 +21,7 @@ trait TraitEntityCRUDShowReport
 	public function showReport(Request $request, $id)
 	{
 		$this->loadReport($id);
-        if (!$this->report) {
-            return abort(404, 'Report not found');
-        }
+        if (!$this->report) return abort(404, 'Report not found');
 
 		$report = $this->report;
 		$pages = $report->getPages->sortBy('order_no');
@@ -46,7 +44,7 @@ trait TraitEntityCRUDShowReport
 			'currentParams' => $currentParams
 		]);
 	}
-	
+
 
 	protected function loadReport($id)
     {
