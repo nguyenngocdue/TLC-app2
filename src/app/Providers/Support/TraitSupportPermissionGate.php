@@ -131,9 +131,13 @@ trait TraitSupportPermissionGate
     {
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
         if (!$isExternalInspector) return;
+
+        $sub_project_id = $item->getChklst->sub_project_id ?? 0;
+        if ($sub_project_id == 112) return; //Ignore sandbox project
+
         $nominatedList = $item->signature_qaqc_chklst_3rd_party_list->pluck('id');
         if (!$nominatedList->contains(CurrentUser::id())) {
-            abort(403, "You are not permitted to view this check sheet (External Inspector has not yet nominated). If you believe this is a mistake, please contact our admin.");
+            abort(403, "You are not permitted to view this check sheet. Reason: External Inspector has not been nominated. If you believe this is a mistake, please contact our admin.");
         }
     }
 
@@ -141,9 +145,13 @@ trait TraitSupportPermissionGate
     {
         $isCouncilMember = CurrentUser::get()->isCouncilMember();
         if (!$isCouncilMember) return;
+
+        $sub_project_id = $item->getChklst->sub_project_id ?? 0;
+        if ($sub_project_id == 112) return; //Ignore sandbox project
+
         $nominatedList = $item->council_member_list->pluck('id');
         if (!$nominatedList->contains(CurrentUser::id())) {
-            abort(403, "You are not permitted to view this check sheet (Council Member has not yet nominated). If you believe this is a mistake, please contact our admin.");
+            abort(403, "You are not permitted to view this check sheet. Reason: Council Member has not been nominated. If you believe this is a mistake, please contact our admin.");
         }
     }
 }
