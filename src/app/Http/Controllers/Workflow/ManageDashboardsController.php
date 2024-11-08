@@ -77,21 +77,21 @@ class ManageDashboardsController extends AbstractManageLibController
             ],
             //Checklist
             [
-                "dataIndex" => "be_able_to_checkpoint_change",
+                "dataIndex" => "be_able_to_change_checkpoint",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
             ],
             [
-                "dataIndex" => "be_able_to_checkpoint_upload_photo",
+                "dataIndex" => "be_able_to_upload_photo_checkpoint",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
             ],
             [
-                "dataIndex" => "be_able_to_checkpoint_comment",
+                "dataIndex" => "be_able_to_comment_checkpoint",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
