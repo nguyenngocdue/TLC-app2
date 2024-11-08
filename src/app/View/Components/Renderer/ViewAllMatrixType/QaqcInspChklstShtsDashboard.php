@@ -70,8 +70,7 @@ class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
 
             $all = collect([...$sub1, ...$sub2, ...$sub3, ...$sub4, ...$defaultSubProjects]);
 
-            $this->subProjectDatasource = $all;
-            // dump($all);
+            $this->subProjectDatasource =  $all->unique('id')->values();
             // } else {
             //     echo "CACHE HIT - getSubProjectListForFilter";
         }
@@ -133,6 +132,7 @@ class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
                         }
                     }
                 }
+                $result[$key] = array_unique($result[$key]);
             }
             $this->matrixDataSourceSingleton = $result;
         }
