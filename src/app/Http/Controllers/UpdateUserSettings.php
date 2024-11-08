@@ -409,18 +409,18 @@ class UpdateUserSettings extends Controller
         $entityType = $inputValue['entity_type'];
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
-
+        
         // when select "Search Quick Ranges"
         if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updatePresetFilter"){
             $inputValue = $this->updatePresetFilter($inputValue);
         }
-
+        
         if(isset($inputValue['form_type']) && $inputValue['form_type'] === "resetAbsoluteTimeRange"){
             $rp = Rp_report::find($rpId);
             $inputValue = DefaultValueReport::updateDefaultValueFromDateToDate($inputValue, $rp);
         }
-
-    
+        
+        
         $filters = $this->getFilterReport2($inputValue);
         
         $rpFilterLinks = Rp_report::find($rpId)->getDeep()->getRpFilterLinks;
@@ -438,10 +438,10 @@ class UpdateUserSettings extends Controller
             if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateTimeZone"){
                 $paramsInUser = $this->updateFromTimeToTime($paramsInUser);
             };
-        
+            
             $paramToUpdate = $paramsInUser;
         } else $paramToUpdate = $filters;
-
+        
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "updateAbsoluteTimeRange") {
             $paramToUpdate = $this->updateFromTimeToTime($paramToUpdate);
         }

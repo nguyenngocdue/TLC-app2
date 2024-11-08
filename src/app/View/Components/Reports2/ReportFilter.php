@@ -22,10 +22,9 @@ class ReportFilter extends Component
 
         $currentParams = $this->currentParamsReport($rp);
         $paramsError = $this->validateParams($rpFilters, $currentParams);
-
         return view('components.reports2.report-filter', [
             'entityType' => $rp->entity_type,
-            'reportType2' =>  $rp->reportType2,
+            'reportType2' =>  'report2',
             'reportName' => $rp->name,
             'rpId' => $rpId,
             'currentParams' => $currentParams,
