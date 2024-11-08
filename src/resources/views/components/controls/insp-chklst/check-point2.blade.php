@@ -47,7 +47,7 @@
                 @if($line->getControlType->slug == "radio") 
                     <x-renderer.attachment-group                 
                         name="{{$table01Name}}[insp_photos][{{$rowIndex}}]" 
-                        readOnly="{{$readOnly}}"
+                        readOnly="{{!$allowToUpload}}"
                         destroyable="{{$destroyable}}"
 
                         :value="$attachments" 
@@ -57,7 +57,7 @@
                     <br />
                 @endif
                 <x-controls.comment.comment-group2a 
-                    readOnly="{{$readOnly}}" 
+                    readOnly="{{!$allowToComment}}" 
                     category="insp_comments" 
                     commentableType="{{$type}}" 
                     commentableId="{{$line->id}}" 
