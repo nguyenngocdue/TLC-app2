@@ -14,27 +14,27 @@ trait TraitEntityCRUDShowReport
 	use TraitReportFilter;
 	use TraitSharedReportUtilities;
 
-	protected $entity_type;
-	protected $reportType2;
+	protected $entityType;
+	protected $reportType2 = 'report2';
 	protected $report;
 	
 	public function showReport(Request $request, $id)
 	{
-		$this->reportType2 = 'report2';
-		$this->report = Rp_report::find($id)->getDeep();
+		$this->loadReport($id);
+        if (!$this->report) {
+            return abort(404, 'Report not found');
+        }
+
 		$report = $this->report;
 		$pages = $report->getPages->sortBy('order_no');
 
 		$requestInput = $request->input();
+
 		//update per_page of table in reports
-		if (isset($requestInput['action']) && $requestInput['action'] == 'updateReport2') {
-			$request->merge([
-				'entity_type' =>  $report->entity_type,
-				'entity_type2' => $this->reportType2,
-			]);
-			(new UpdateUserSettings())($request);
-			return redirect()->to(route('rp_reports.show', $requestInput['report_id']));
-		}
+		if ($this->isUpdateReportAction($requestInput)) {
+            return $this->updateReportSettings($request, $requestInput);
+        }
+
 		$currentParams = $this->currentParamsReport($report);
 
 		return view('dashboards.pages.entity-show-report', [
@@ -46,4 +46,27 @@ trait TraitEntityCRUDShowReport
 			'currentParams' => $currentParams
 		]);
 	}
+	
+
+	protected function loadReport($id)
+    {
+        $this->report = Rp_report::find($id)->getDeep();
+    }
+
+	protected function isUpdateReportAction($requestInput)
+    {
+        return isset($requestInput['action']) && $requestInput['action'] === 'updateReport2';
+    }
+
+	protected function updateReportSettings(Request $request, $requestInput)
+    {
+        $request->merge([
+            'entity_type' => $this->report->entity_type,
+            'entity_type2' => $this->reportType2,
+        ]);
+
+        (new UpdateUserSettings())($request);
+
+        return redirect()->route('rp_reports.show', $requestInput['report_id']);
+    }
 }

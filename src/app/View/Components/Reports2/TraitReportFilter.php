@@ -6,12 +6,10 @@ namespace App\View\Components\Reports2;
 trait TraitReportFilter
 {
     use TraitSharedReportUtilities;
-    protected $reportType2;
     public function currentParamsReport($rp) // not using timezone
     {
         $rpFilters = $rp->getRpFilters->sortBy('order_no');
         $rpFilterLinks = $rp->getRpFilterLinks;
-        $this->reportType2 = 'report2';
         $reportType2 = $this->reportType2;
 
         $entityType = $rp->entity_type;

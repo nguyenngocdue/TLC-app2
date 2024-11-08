@@ -9,6 +9,7 @@ class ReportFilter extends Component
 {
     use TraitReportFilter;
     protected $type = "report_filter";
+    protected $reportType2 = 'report2';
     public function __construct(
         private $report = null,
     ) {}
@@ -24,7 +25,7 @@ class ReportFilter extends Component
         $paramsError = $this->validateParams($rpFilters, $currentParams);
         return view('components.reports2.report-filter', [
             'entityType' => $rp->entity_type,
-            'reportType2' =>  'report2',
+            'reportType2' =>  $this->reportType2,
             'reportName' => $rp->name,
             'rpId' => $rpId,
             'currentParams' => $currentParams,
