@@ -38,7 +38,8 @@ class CheckPoint2 extends Component
         $groups = LoadManyCheckpointService::getAttachmentGroups($sheet);
         $dashboardConfig = LibDashboards::getAll()[CurrentUser::get()->discipline] ?? null;
 
-        $checkPointReadOnly = $allowToUpload = $allowToComment = $this->readOnly;
+        $checkPointReadOnly = $this->readOnly;
+        $allowToUpload = $allowToComment = !$this->readOnly;
         if ($dashboardConfig) {
             $checkPointReadOnly = $this->readOnly || !isset($dashboardConfig['be_able_to_change_checkpoint']);
             $allowToUpload = !$this->readOnly || isset($dashboardConfig['be_able_to_upload_photo_checkpoint']);
