@@ -14,7 +14,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    .postCss('resources/css/app.css', 'public/css', [require('tailwindcss'), require('autoprefixer')])
+    // .postCss('resources/css/app.css', 'public/css', [require('tailwindcss'), require('autoprefixer')])
     .webpackConfig({
         plugins: [
             new TerserPlugin({
@@ -37,4 +37,4 @@ mix.js('resources/js/jsdiff.js', 'public/js')
 mix.js('resources/js/lazysizes.js', 'public/js')
 mix.js('resources/js/lightgallery.js', 'public/js').postCss('resources/css/lightgallery.css', 'public/css')
 
-mix.ts('resources/js/EditableTable3.ts', 'public/js').sourceMaps()
+mix.ts('resources/js/EditableTable/EditableTable3.ts', 'public/js').sourceMaps()

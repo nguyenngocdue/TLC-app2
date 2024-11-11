@@ -21,99 +21,99 @@ var tableObjectIndexedColumns = {};
     </table>
 @else
     <div class="border rounded-lg {{$borderColor}} dark:border-gray-600 ">
-        <div>
-            <div class="inline-block1 w-full sm:px-0 lg:px-0 ">
-                @if ($header)
-                <div class='grid1 border-t bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
-                    {!! $header !!}
-                </div>
-                @endif
-                @if($showPaginationTop)
-                <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
-                    <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
-                        {!! Blade::render($topLeftControl) !!}
-                    </span>
-                    <span class="lg:col-span-4 col-span-12 flex gap-1 justify-center">
-                        {!! Blade::render($topCenterControl) !!}
-                    </span>
-                    <span class="lg:col-span-4 col-span-12 grid grid-cols-12 sm:flex gap-1 justify-end items-center pt-2 sm:pt-0">
-                        <div class="col-span-12 py-1 sm:py-0 mx-auto hidden {{ !!$pagination ? "sm:block" : "sm:hidden"}}">{!! $showing !!}</div>
-                        <div class="col-span-12 py-1 sm:py-0 mx-auto sm:block">{!! $pagination !!}</div>                        
-                        <div class="col-span-12 py-1 sm:py-0 mx-auto1 flex gap-2 items-center justify-end">
-                            <span class="{{ !$pagination ? "" : "sm:hidden"}}">{!! $showing !!}</span>
-                            {!! Blade::render($topRightControl) !!}
-                        </div>
-                    </span>
-                </div>
-                @endif
-                @php 
-                $classH= "";$classTop= "";$styleH = "";$styleT = "";
-                if(!is_numeric($headerTop)) {
-                    $styleH = "height: $headerTop";
-                    $styleT = "top: $headerTop";
-                }else {
-                    $classH= "h-$headerTop";
-                    $classTop= "top-$headerTop";
-                } @endphp
-                <div class="table-wrp block bg-gray-100 {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
-                    <table 
-                            id="{{$tableName}}" 
-                            class='whitespace-no-wrap w-full text-sm text-sm-vw border-separate border-spacing-0 {{$borderColor}}' 
-                            style="table-layout: auto; {{$tableWidth}}"
-                            >
-                        <colgroup>
-                            {!! $colgroup !!}
-                        </colgroup>
-                        <thead class="sticky z-10 top-0">
-                            <tr class="{{$trClassList}} {{$classH}}" style="{{$styleH}}">
-                                {!! $columnsRendered !!}
-                            </tr>
-                        </thead>
-                        @isset($headerRendered)
-                        <thead class="sticky z-10 {{$classTop}}" style="{{$styleT}}">
-                            <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
-                        </thead>
-                        @endisset
-                        <tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
-                            {!! $tr_td !!}
-                        </tbody>
-                        @isset($footerRendered)
-                        <tfoot>
-                            <tr class="{{$trClassList}}">{!! $footerRendered !!}</tr>
-                        </tfoot>
-                        @endif
-                    </table>
-                </div>
-                @if($showPaginationBottom)
-                <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 p1-1vw px-4 py-1.5 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
-                    <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
-                        {!! Blade::render($bottomLeftControl) !!}
-                    </span>
-                    <span class="lg:col-span-4 col-span-12 flex gap-1 justify-center">
-                        {!! Blade::render($bottomCenterControl) !!}
-                    </span>
-                    <span class="lg:col-span-4 col-span-12 grid grid-cols-12 sm:flex gap-1 justify-end items-center pt-2 sm:pt-0">
-                        <div class="col-span-12 py-1 sm:py-0 mx-auto hidden {{ !!$pagination ? "sm:block" : "sm:hidden"}}">{!! $showing !!}</div>
-                        <div class="col-span-12 py-1 sm:py-0 mx-auto sm:block">{!! $pagination !!}</div>                        
-                        <div class="col-span-12 py-1 sm:py-0 mx-auto1 flex gap-2 items-center justify-end">
-                            <span class="{{ !$pagination ? "" : "sm:hidden"}}">{!! $showing !!}</span>
-                            {!! Blade::render($bottomRightControl) !!}
-                        </div>
-                    </span>
-                    {{-- <div class="md:col-span-4 col-span-12 flex gap-1 justify-end">
-                        <div>{!! $showing !!}</div>
-                        <div>{!! $pagination !!}</div>
-                        <div>{!! Blade::render($bottomRightControl) !!}</div>
-                    </div> --}}
-                </div>
-                @endif
-                @if ($footer)
-                <div class='grid1 border-t rounded-b bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
-                    {!! $footer !!}
-                </div>
-                @endif
+        {{-- <div> --}}
+        <div class="inline-block1 w-full sm:px-0 lg:px-0 ">
+            @if ($header)
+            <div class='grid1 border-t bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                {!! $header !!}
             </div>
+            @endif
+            @if($showPaginationTop)
+            <div class='w-full grid grid-cols-12 border-b border-red-50 rounded-t bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
+                    {!! Blade::render($topLeftControl) !!}
+                </span>
+                <span class="lg:col-span-4 col-span-12 flex gap-1 justify-center">
+                    {!! Blade::render($topCenterControl) !!}
+                </span>
+                <span class="lg:col-span-4 col-span-12 grid grid-cols-12 sm:flex gap-1 justify-end items-center pt-2 sm:pt-0">
+                    <div class="col-span-12 py-1 sm:py-0 mx-auto hidden {{ !!$pagination ? "sm:block" : "sm:hidden"}}">{!! $showing !!}</div>
+                    <div class="col-span-12 py-1 sm:py-0 mx-auto sm:block">{!! $pagination !!}</div>                        
+                    <div class="col-span-12 py-1 sm:py-0 mx-auto1 flex gap-2 items-center justify-end">
+                        <span class="{{ !$pagination ? "" : "sm:hidden"}}">{!! $showing !!}</span>
+                        {!! Blade::render($topRightControl) !!}
+                    </div>
+                </span>
+            </div>
+            @endif
+            @php 
+            $classH= "";$classTop= "";$styleH = "";$styleT = "";
+            if(!is_numeric($headerTop)) {
+                $styleH = "height: $headerTop";
+                $styleT = "top: $headerTop";
+            }else {
+                $classH= "h-$headerTop";
+                $classTop= "top-$headerTop";
+            } @endphp
+            <div class="table-wrp block bg-gray-100 {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
+                <table 
+                        id="{{$tableName}}" 
+                        class='whitespace-no-wrap w-full text-sm text-sm-vw border-separate border-spacing-0 {{$borderColor}}' 
+                        style="table-layout: auto; {{$tableWidth}}"
+                        >
+                    <colgroup>
+                        {!! $colgroup !!}
+                    </colgroup>
+                    <thead class="sticky z-10 top-0">
+                        <tr class="{{$trClassList}} {{$classH}}" style="{{$styleH}}">
+                            {!! $columnsRendered !!}
+                        </tr>
+                    </thead>
+                    @isset($headerRendered)
+                    <thead class="sticky z-10 {{$classTop}}" style="{{$styleT}}">
+                        <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
+                    </thead>
+                    @endisset
+                    <tbody class='divide-y bg-white dark:divide-gray-700 dark:bg-gray-800'>
+                        {!! $tr_td !!}
+                    </tbody>
+                    @isset($footerRendered)
+                    <tfoot>
+                        <tr class="{{$trClassList}}">{!! $footerRendered !!}</tr>
+                    </tfoot>
+                    @endif
+                </table>
+            </div>
+            @if($showPaginationBottom)
+            <div class='w-full border-t grid grid-cols-12 border-gray-300 rounded-b-lg bg-gray-100 p1-1vw px-4 py-1.5 text-xs-vw font-semibold1 tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300'>
+                <span class='lg:col-span-4 col-span-12 flex gap-1 justify-start'>
+                    {!! Blade::render($bottomLeftControl) !!}
+                </span>
+                <span class="lg:col-span-4 col-span-12 flex gap-1 justify-center">
+                    {!! Blade::render($bottomCenterControl) !!}
+                </span>
+                <span class="lg:col-span-4 col-span-12 grid grid-cols-12 sm:flex gap-1 justify-end items-center pt-2 sm:pt-0">
+                    <div class="col-span-12 py-1 sm:py-0 mx-auto hidden {{ !!$pagination ? "sm:block" : "sm:hidden"}}">{!! $showing !!}</div>
+                    <div class="col-span-12 py-1 sm:py-0 mx-auto sm:block">{!! $pagination !!}</div>                        
+                    <div class="col-span-12 py-1 sm:py-0 mx-auto1 flex gap-2 items-center justify-end">
+                        <span class="{{ !$pagination ? "" : "sm:hidden"}}">{!! $showing !!}</span>
+                        {!! Blade::render($bottomRightControl) !!}
+                    </div>
+                </span>
+                {{-- <div class="md:col-span-4 col-span-12 flex gap-1 justify-end">
+                    <div>{!! $showing !!}</div>
+                    <div>{!! $pagination !!}</div>
+                    <div>{!! Blade::render($bottomRightControl) !!}</div>
+                </div> --}}
+            </div>
+            @endif
+            @if ($footer)
+            <div class='grid1 border-t rounded-b bg-gray-100 p-1vw px-4 py-3 text-xs-vw font-semibold1 tracking-wide text-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 sm:grid-cols-9'>
+                {!! $footer !!}
+            </div>
+            @endif
         </div>
+        {{-- </div> --}}
     </div>
     <div class="p-1"></div>
     <script>

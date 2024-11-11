@@ -16,8 +16,14 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
-        $columns = [];
-        $tables = [];
+        $columns = [
+            ['dataIndex' => 'name'],
+            ['dataIndex' => 'description'],
+        ];
+        $tables = [
+            ['name' => 'John', 'description' => '35 Phan Chu Trinh'],
+            ['name' => 'Doe', 'description' => '537 Nguyen Thi Dinh'],
+        ];
 
         return view("welcome-fortune", [
             'columns' => $columns,

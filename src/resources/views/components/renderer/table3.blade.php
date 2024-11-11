@@ -16,7 +16,14 @@ var tableObjectIndexedColumns = {};
             'tableName': @json($tableName),
             'columns': @json($columns),
             'dataSource': @json($dataSource),
-          
+
+            'tableConfig': {
+                'showPaginationTop': @json($showPaginationTop),
+                'showPaginationBottom': @json($showPaginationBottom),
+
+                'tableHeader': @json($header),
+                'tableFooter': @json($footer),
+            },
         }
         console.log("Initilizing table {{$tableName}}", {{$tableName}})
         {{$tableName}}_Object = new EditableTable3(params)
