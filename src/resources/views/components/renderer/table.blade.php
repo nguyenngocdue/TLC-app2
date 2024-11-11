@@ -4,6 +4,24 @@ var tableObjectColumns = {};
 var tableObjectIndexedColumns = {};
 </script>
 @endonce
+
+@if(env("EDITABLE3"))
+<div id="{{$tableName}}" >
+    Loading table {{$tableName}}...
+</div>
+
+<script>
+    var {{$tableName}} = null;
+    $(document).ready(function() {
+        {{$tableName}} = {
+            columns: @json($columns),
+            dataSource: @json($dataSource),
+        }        
+    });
+</script>
+
+@endif
+
 @if($noCss)
     @php
         $columnsRendered = preg_replace('/<th class=\'.*?\'/', "<th class='text-center bg-gray-50 border border-gray-400  py-2'", $columnsRendered);

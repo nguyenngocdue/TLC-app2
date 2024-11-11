@@ -72,6 +72,8 @@
     <script src="{{ asset('js/components/EditableTableAddNewLine2-20241017.js') }}"></script>
     <script src="{{ asset('js/components/Footer4-20231219.js') }}"></script>
     
+    <script src="{{ asset('js/components/EditableTable3-20241111.js') }}"></script>
+    
     <script src="{{ asset('js/components/ViewAllMatrix-20240401.js') }}"></script>
 
     <script src="{{ asset('js/report2/ChartOptions-chartjs.js') }}"></script>
