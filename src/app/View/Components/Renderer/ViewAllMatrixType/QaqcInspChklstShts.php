@@ -541,8 +541,10 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             foreach ($subProjectDatasource as $subProject) {
                 $projectIds[] = $subProject->project_id;
             }
+            $statuses = config("project.active_statuses.projects");
             $this->projectDatasource = Project::query()
                 ->whereIn('id', $projectIds)
+                ->whereIn('status', $statuses)
                 ->get();
         } else {
             // echo "CACHE HIT - getProjectListForFilter";
