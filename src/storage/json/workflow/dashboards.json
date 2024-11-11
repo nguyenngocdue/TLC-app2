@@ -23,6 +23,9 @@
     "128": {
         "name": "128",
         "title": "Project Clients",
+        "be_able_to_change_checkpoint_value": "true",
+        "be_able_to_comment_checkpoint": "true",
+        "be_able_to_upload_photo_checkpoint": "true",
         "show_column_progress": "true",
         "show_all_ics_by_sub_project_client_box": "true",
         "show_some_routings_per_user": "true"
