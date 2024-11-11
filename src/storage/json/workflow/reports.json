@@ -328,7 +328,8 @@
         "package": "hr_&_admin",
         "breadcrumb-group": null,
         "top_title": "HSE KPI Report",
-        "title": "HSE Key Performance Indicator"
+        "title": "HSE Key Performance Indicator",
+        "hidden": "true"
     },
     "report-kanban_task_010": {
         "name": "report-kanban_task_010",
