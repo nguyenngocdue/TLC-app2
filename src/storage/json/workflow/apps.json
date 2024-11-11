@@ -1926,6 +1926,20 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
+    "mec_book": {
+        "name": "mec_book",
+        "package_tab": "application",
+        "package": "project_management",
+        "sub_package": "project_management",
+        "title": "MEC Books",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": "project_id",
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null
+    },
     "permissions": {
         "name": "permissions",
         "package_tab": "application",
