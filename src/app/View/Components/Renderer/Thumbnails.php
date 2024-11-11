@@ -29,7 +29,6 @@ class Thumbnails extends Component
         return function (array $data) {
             $max = 100;
             // dump($data['slot']);
-            $path = app()->pathMinio() . '/';
             $cell = json_decode($data['slot']);
             // dump($cell);
             if (is_null($cell)) return "";
@@ -38,11 +37,35 @@ class Thumbnails extends Component
                 $remain = sizeof($cell) - $max;
                 $cell = array_splice($cell, 0, $max);
             }
-            $result = array_map(fn ($item) => [
-                'url_thumbnail' => $path . $item->url_thumbnail,
-                'url_media' => $path . $item->url_media,
-                'filename' => $item->filename,
-            ], $cell);
+
+            $result = array_map(
+                function ($item) {
+                    $path = app()->pathMinio() . '/';
+                    $thumbnail =  $path . $item->url_thumbnail;
+                    if (!$item->url_thumbnail) {
+                        switch ($item->mime_type) {
+                            case 'application/pdf':
+                                $thumbnail = '/images/files/file-pdf.png';
+                                break;
+                            case 'application/zip':
+                                $thumbnail = '/images/files/file-zip.png';
+                                break;
+                            case 'text/csv':
+                                $thumbnail = '/images/files/file-csv.png';
+                                break;
+                            default:
+                                $thumbnail = '/images/files/file-unknown.png';
+                                break;
+                        }
+                    }
+                    return [
+                        'url_thumbnail' => $thumbnail,
+                        'url_media' => $path . $item->url_media,
+                        'filename' => $item->filename,
+                    ];
+                },
+                $cell
+            );
             // $imgs = array_map(fn ($item) => "<x-renderer.image class='rounded' title='{$item['filename']}' src='{$item['url_thumbnail']}' href='{$item['url_media']}'></x-renderer.image>", $result);
             $imgs = [];
             for ($i = 0; $i < sizeof($result); $i++) {
@@ -55,7 +78,7 @@ class Thumbnails extends Component
             if ($remain) {
                 $imgStr .= "<x-renderer.tag color='sky'>+$remain more</x-renderer.tag>";
             }
-            return "<div class='grid grid-cols-5 w-52 gap-0.5' component='thumbnails'>$imgStr</div> ";
+            return "<div class='grid grid-cols-3 gap-0.5' style='width:130px;' component='thumbnails'>$imgStr</div> ";
         };
     }
 }
