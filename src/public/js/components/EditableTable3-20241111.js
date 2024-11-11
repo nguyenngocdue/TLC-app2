@@ -1,7 +1,7 @@
 console.log('EditableTable3')
 
 class EditableTable3 {
-    constructor() {
-        console.log('EditableTable3.constructor')
+    constructor({ tableConfig, columns, dataSource }) {
+        console.log('EditableTable3.constructor', tableConfig, columns, dataSource)
     }
 }

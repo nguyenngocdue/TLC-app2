@@ -5,6 +5,57 @@ var tableObjectIndexedColumns = {};
 </script>
 @endonce
 
+@if(env("EDITABLE3"))
+<div id="{{$tableName}}" >
+    Loading table {{$tableName}}...
+</div>
+
+<script>
+    var {{$tableName}} = null;
+    var {{$tableName}}_Object = null;
+    $(document).ready(function() {
+        {{$tableName}} = {
+            'tableName': @json($tableName),
+            'columns': @json($columns),
+            'dataSource': @json($dataSource),
+            'headerRendered': @json($headerRendered),
+            'footerRendered': @json($footerRendered),
+            'headerTop': @json($headerTop),
+            'columnsRendered': @json($columnsRendered),
+            'tr_td': @json($tr_td),
+            'showing': @json($showing),
+            'pagination': @json($pagination),
+            'header': @json($header),
+            'footer': @json($footer),
+            'colgroup': @json($colgroup),
+            'tableWidth': @json($tableWidth),
+            'maxH': @json($maxH),
+            'tableDebug': @json($tableDebug),
+            'trClassList': @json($trClassList),
+            'noCss': @json($noCss),
+            'showPaginationTop': @json($showPaginationTop),
+            'showPaginationBottom': @json($showPaginationBottom),
+            'topLeftControl': @json($topLeftControl),
+            'topCenterControl': @json($topCenterControl),
+            'topRightControl': @json($topRightControl),
+            'bottomLeftControl': @json($bottomLeftControl),
+            'bottomCenterControl': @json($bottomCenterControl),
+            'bottomRightControl': @json($bottomRightControl),
+            'numberOfEmptyLines': @json($numberOfEmptyLines),
+            'lineIgnoreNo': @json($lineIgnoreNo),
+            'borderColor': @json($borderColor),
+        }
+        console.log("Initilizing table {{$tableName}}", {{$tableName}})
+        {{$tableName}}_Object = new EditableTable3({
+            tableConfig:{},
+            columns: @json($columns),
+            dataSource: @jon($dataSource),
+        })
+    });
+</script>
+
+@endif
+
 @if($noCss)
     @php
         $columnsRendered = preg_replace('/<th class=\'.*?\'/', "<th class='text-center bg-gray-50 border border-gray-400  py-2'", $columnsRendered);
