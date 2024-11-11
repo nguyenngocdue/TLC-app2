@@ -20,8 +20,8 @@
 @if(sizeof($matrixes) > 1)
 <div class="bg-white p-4 mb-4">
     <div class="flex">
-        <div class="w-1/2 text-xl font-semibold">{{$name}}</div>
-        <div class="w-1/2 text-sm text-right italic">{{$description}}</div>
+        <div class="w-full text-xl font-semibold">{{$name}}</div>
+        {{-- <div class="w-1/2 text-sm text-right italic">{{$description}}</div> --}}
     </div>
 @endif
 
@@ -56,6 +56,15 @@
 @endif
 @endforeach
 
+{{-- @if(sizeof($routingsWithEmptyMatrix))
+    <x-renderer.card title="The following routings have no check-sheet">
+        @foreach($routingsWithEmptyMatrix as $value)
+            <li>
+                {{$value}}
+            </li>
+        @endforeach
+    </x-renderer.card>
+@endif --}}
 
 @if($showLegend)
     <x-renderer.legend type="{{$type}}" title="Legend of Status" />

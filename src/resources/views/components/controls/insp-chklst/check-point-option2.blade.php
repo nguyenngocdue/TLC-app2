@@ -1,4 +1,5 @@
 @php
+    // dump($readOnly);
     $idArray = array_keys($options);
     $gridCols = isset($options) ? count($options) : 1;
     $cursor = $readOnly ? "cursor-not-allowed" : "cursor-pointer";

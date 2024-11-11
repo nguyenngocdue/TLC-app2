@@ -1021,6 +1021,20 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_getProdRoutingsPerUser": {
+        "name": "_getProdRoutingsPerUser",
+        "column_name": "getProdRoutingsPerUser",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "This is the WHITELIST, leave it blank to load default routing list.",
+        "textarea_rows": ""
+    },
     "_sep03": {
         "name": "_sep03",
         "column_name": "sep03",

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls\InspChklst;
 
+use App\Http\Controllers\Workflow\LibDashboards;
 use App\Http\Services\LoadManyCheckpointService;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\Properties;
@@ -35,6 +36,15 @@ class CheckPoint2 extends Component
         $destroyable = !CurrentUser::get()->isExternal();
         $sheet = $this->line->getSheet;
         $groups = LoadManyCheckpointService::getAttachmentGroups($sheet);
+        $dashboardConfig = LibDashboards::getAll()[CurrentUser::get()->discipline] ?? null;
+
+        $checkPointReadOnly = $this->readOnly;
+        $allowToUpload = $allowToComment = !$this->readOnly;
+        if ($dashboardConfig) {
+            $checkPointReadOnly = $this->readOnly || !isset($dashboardConfig['be_able_to_change_checkpoint_value']);
+            $allowToUpload = !$this->readOnly || isset($dashboardConfig['be_able_to_upload_photo_checkpoint']);
+            $allowToComment = !$this->readOnly || isset($dashboardConfig['be_able_to_comment_checkpoint']);
+        }
 
         return view('components.controls.insp-chklst.check-point2', [
             'line' => $this->line,
@@ -45,11 +55,13 @@ class CheckPoint2 extends Component
             'debug' => $this->debug,
             'type' => $this->type,
             'attachmentProperties' => Properties::getFor('attachment', "_insp_photos"),
-            'readOnly' => $this->readOnly,
+            'readOnly' => $checkPointReadOnly,
             'index' => $this->index,
             'destroyable' => $destroyable,
             'groups' => $groups,
             'categoryName' => $this->categoryName,
+            'allowToUpload' => $allowToUpload,
+            'allowToComment' => $allowToComment,
         ]);
     }
 }

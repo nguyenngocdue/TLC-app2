@@ -10,7 +10,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
 {
     use QaqcInspChklstShtsTraits;
 
-    protected $metaShowPrint = !true;
+    // protected $metaShowPrint = !true;
     protected $metaShowProgress = !true;
 
     protected $allowCreation = false;
@@ -36,7 +36,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
             $this->subProjects->prepend(Sub_project::findFromCache($this->STW_SANDBOX_ID));
         }
 
-        $this->prodRoutings = $this->getAllRoutingList();
+        $this->prodRoutings = $this->getRoutingListForFilter();
         $this->projects = $this->getProjectCollectionFromSubProjects();
         $result = [$this->projects, $this->subProjects, $this->prodRoutings];
         // dump($result);
@@ -84,7 +84,7 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
         return $result;
     }
 
-    protected function getAllRoutingList()
+    protected function getRoutingListForFilter()
     {
         $cu = CurrentUser::get();
         $prodRoutings = $cu
@@ -142,8 +142,8 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
         $sheets = $this->getMatrixDataSource([]);
         foreach ($this->matrixes as $key => $matrix) {
             if (isset($sheets[$key])) {
-                $allowX = array_map(fn ($x) => $x['qaqc_insp_tmpl_sht_id'], $sheets[$key]);
-                $xAxis[$key] = array_filter($xAxis[$key], fn ($x) => in_array($x['dataIndex'], $allowX));
+                $allowX = array_map(fn($x) => $x['qaqc_insp_tmpl_sht_id'], $sheets[$key]);
+                $xAxis[$key] = array_filter($xAxis[$key], fn($x) => in_array($x['dataIndex'], $allowX));
             } else {
                 $xAxis[$key] = [];
             }
@@ -159,8 +159,8 @@ class QaqcInspChklstShtsInspector extends QaqcInspChklstShts
         $sheets = $this->getMatrixDataSource([]);
         foreach ($this->matrixes as $key => $matrix) {
             if (isset($sheets[$key])) {
-                $allowY = array_map(fn ($x) => $x['qaqc_insp_chklst_id'], $sheets[$key]);
-                $yAxis[$key] = $yAxis[$key]->filter(fn ($x) => in_array($x['id'], $allowY));
+                $allowY = array_map(fn($x) => $x['qaqc_insp_chklst_id'], $sheets[$key]);
+                $yAxis[$key] = $yAxis[$key]->filter(fn($x) => in_array($x['id'], $allowY));
             } else {
                 $yAxis[$key] = [];
             }

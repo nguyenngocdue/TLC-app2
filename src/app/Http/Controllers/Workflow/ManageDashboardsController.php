@@ -40,14 +40,14 @@ class ManageDashboardsController extends AbstractManageLibController
                 'width' => 50,
             ],
             [
-                "dataIndex" => "show_all_ics_by_sub_project_project_client_box",
+                "dataIndex" => "show_all_ics_by_sub_project_client_box",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
             ],
             [
-                "dataIndex" => "show_some_routings_by_prod_routing",
+                "dataIndex" => "show_some_routings_per_user",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
@@ -77,21 +77,21 @@ class ManageDashboardsController extends AbstractManageLibController
             ],
             //Checklist
             [
-                "dataIndex" => "be_able_to_checkpoint_change",
+                "dataIndex" => "be_able_to_change_checkpoint_value",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
             ],
             [
-                "dataIndex" => "be_able_to_checkpoint_upload_photo",
+                "dataIndex" => "be_able_to_upload_photo_checkpoint",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',
                 'width' => 50,
             ],
             [
-                "dataIndex" => "be_able_to_checkpoint_comment",
+                "dataIndex" => "be_able_to_comment_checkpoint",
                 'renderer' => 'checkbox',
                 'editable' => true,
                 'align' => 'center',

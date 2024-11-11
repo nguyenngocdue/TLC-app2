@@ -3,17 +3,17 @@
         "name": "138",
         "title": "External Inspectors",
         "show_some_ics_by_sign_off_box": "true",
-        "be_able_to_checkpoint_change": "true",
-        "be_able_to_checkpoint_comment": "true"
+        "be_able_to_change_checkpoint_value": "true",
+        "be_able_to_comment_checkpoint": "true"
     },
     "180": {
         "name": "180",
         "title": "Shipping Agents",
         "show_some_ics_by_sign_off_box": "true",
-        "be_able_to_checkpoint_change": "true",
-        "be_able_to_checkpoint_comment": "true",
+        "be_able_to_change_checkpoint_value": "true",
+        "be_able_to_comment_checkpoint": "true",
         "show_some_ics_by_shipping_agent_box": "true",
-        "be_able_to_checkpoint_upload_photo": "true"
+        "be_able_to_upload_photo_checkpoint": "true"
     },
     "169": {
         "name": "169",
@@ -23,21 +23,24 @@
     "128": {
         "name": "128",
         "title": "Project Clients",
+        "be_able_to_change_checkpoint_value": "true",
+        "be_able_to_comment_checkpoint": "true",
+        "be_able_to_upload_photo_checkpoint": "true",
         "show_column_progress": "true",
-        "show_all_ics_by_sub_project_project_client_box": "true",
-        "show_some_routings_by_prod_routing": "true"
+        "show_all_ics_by_sub_project_client_box": "true",
+        "show_some_routings_per_user": "true"
     },
     "185": {
         "name": "185",
         "title": "Third Party Dashboard Tester",
         "show_some_ics_by_sign_off_box": "true",
-        "be_able_to_checkpoint_change": "true",
-        "be_able_to_checkpoint_comment": "true",
+        "be_able_to_change_checkpoint_value": "true",
+        "be_able_to_comment_checkpoint": "true",
         "show_some_ics_by_shipping_agent_box": "true",
-        "be_able_to_checkpoint_upload_photo": "true",
+        "be_able_to_upload_photo_checkpoint": "true",
         "show_some_ics_by_council_member_box": "true",
         "show_column_progress": "true",
-        "show_all_ics_by_sub_project_project_client_box": "true",
-        "show_some_routings_by_prod_routing": "true"
+        "show_all_ics_by_sub_project_client_box": "true",
+        "show_some_routings_per_user": "true"
     }
 }

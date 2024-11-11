@@ -32,6 +32,7 @@ class Prod_routing extends ModelExtended
         "getExternalInspectorsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_ext_insp"],
         "getCouncilMembersOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_council_member"],
         "getShippingAgentsOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_shipping_agent"],
+        "getPerUsersOfProdRouting" => ["belongsToMany", User::class, "ym2m_prod_routing_user_per_user"],
     ];
 
     public function getProdRoutingLinks()
@@ -89,6 +90,12 @@ class Prod_routing extends ModelExtended
     }
 
     public function getShippingAgentsOfProdRouting()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getPerUsersOfProdRouting()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
