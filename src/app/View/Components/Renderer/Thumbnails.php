@@ -40,7 +40,7 @@ class Thumbnails extends Component
 
             $result = array_map(
                 function ($item) {
-                    $path = app()->pathMinio() . '/';
+                    $path = app()->pathMinio();
                     $thumbnail =  $path . $item->url_thumbnail;
                     if (!$item->url_thumbnail) {
                         switch ($item->mime_type) {
