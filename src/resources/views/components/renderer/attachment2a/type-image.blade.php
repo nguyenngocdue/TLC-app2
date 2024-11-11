@@ -1,5 +1,5 @@
 {{-- @dump($image) --}}
-<div class="h-full break-inside-avoid">
+{{-- <div class="h-full break-inside-avoid"> --}}
     <div data-id="{{$image['id']}}" name='{{$name}}' class="{{$thumbnailClass}} {{$image['borderColor']}}">
         @if($openType == '_blank') <a class="cursor-pointer w-full" target="_blank" href="{{$path.$image['url_media']}}"> @endif
             <img class="w-full" src="{{$path.$image['url_thumbnail']}}" alt="{{$image['filename']}}" />
@@ -23,4 +23,4 @@
         hideUploader="{{$hideUploader}}" 
         hideUploadDate="{{$hideUploadDate}}" 
         />
-</div>
+{{-- </div> --}}

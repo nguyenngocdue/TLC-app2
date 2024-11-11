@@ -1,6 +1,7 @@
-<div class="flex w-full" component="attachment-group">
+<div class="flex w-full justify-center" component="attachment-group">
     @foreach($attachmentGroups as $groupId => $attachmentGroup)
-        <div class="border rounded p-0.5 m-0.5 {{$width}} ">
+        <div class="border-gray-300 border-2 rounded p-0.5 m-0.5 {{$width}}">
+            {{-- {{$width}} {{$photoPerColumn}} --}}
             <div class="font-bold text-center text-sm" title="#{{$groupId}}">{{$attachmentGroup['name']}}</div>
             <x-renderer.attachment2a 
                 name={{$name}} 
@@ -10,6 +11,7 @@
                 groupMode="{{count($attachmentGroups) > 1}}"
                 groupId="{{$groupId}}"
                 openType="{{$openType}}"
+                photoPerColumn="{{$photoPerColumn}}"
                 />
         </div>
     @endforeach

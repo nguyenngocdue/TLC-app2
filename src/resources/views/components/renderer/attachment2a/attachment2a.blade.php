@@ -1,5 +1,6 @@
 {{-- @dump($groupId) --}}
-<div class="flex flex-col w-full">
+{{-- @dump($photoPerColumn) --}}
+<div class="flex flex-col">
     @if(!sizeof($attachments)) 
         <x-renderer.emptiness p="2" class="border hidden sm:block" message="There is no attachment to be found." />
         <x-renderer.emptiness p="2" class="border sm:hidden" message="File not found." />
@@ -15,16 +16,20 @@
         @endforeach
 
         @if(sizeof($images))
-            <div class="{{$gridCols}} sm:p-1">
+            <div class="grid gap-1 grid-cols-{{$photoPerColumn}}">
                 @foreach($images as $image)
-                    <x-renderer.attachment2a.type-image openType="{{$openType}}" readOnly="{{$readOnly}}" destroyable="{{$destroyable}}" path="{{$path}}" name="{{$name}}" hiddenOrText="{{$hiddenOrText}}" hideUploader="{{$hideUploader}}" hideUploadDate="{{$hideUploadDate}}" thumbnailClass="{{$thumbnailClass}}" :image="$image"/>
+                    <div class="break-inside-avoid">
+                        <x-renderer.attachment2a.type-image openType="{{$openType}}" readOnly="{{$readOnly}}" destroyable="{{$destroyable}}" path="{{$path}}" name="{{$name}}" hiddenOrText="{{$hiddenOrText}}" hideUploader="{{$hideUploader}}" hideUploadDate="{{$hideUploadDate}}" thumbnailClass="{{$thumbnailClass}}" :image="$image"/>
+                    </div>
                 @endforeach
             </div>
         @endif
         @if(sizeof($videos))
-            <div class="{{$gridCols}} sm:p-1">
+            <div class="grid gap-1 grid-cols-{{$photoPerColumn}}">
                 @foreach($videos as $video)
+                <div class="break-inside-avoid">
                     <x-renderer.attachment2a.type-video openType="{{$openType}}" readOnly="{{$readOnly}}" destroyable="{{$destroyable}}" path="{{$path}}" name="{{$name}}" hiddenOrText="{{$hiddenOrText}}" hideUploader="{{$hideUploader}}" hideUploadDate="{{$hideUploadDate}}" thumbnailClass="{{$thumbnailClass}}" :video="$video" />
+                </div>
                 @endforeach
             </div>
         @endif

@@ -50,10 +50,11 @@ class Attachment2a extends Component
         private $label = '',
         private $properties = [],
         private $openType = 'gallery',
-        private $gridCols = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1',
+        // private $gridCols = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1',
         private $groupMode = false,
         private $groupId = null,
         private $hiddenOrText = 'hidden',
+        private $photoPerColumn = 5,
     ) {
         // dump($openType);
         if (is_array($value)) {
@@ -64,7 +65,7 @@ class Attachment2a extends Component
             foreach ($this->attachments as &$attachment) if (is_object($attachment)) $attachment = (array)$attachment;
         }
 
-        if ($this->groupMode) $this->gridCols = "";
+        // if ($this->groupMode) $this->gridCols = "";
 
         // dump($this->attachments);
     }
@@ -187,9 +188,10 @@ class Attachment2a extends Component
             'thumbnailClass' => "relative flex flex-col items-center p1-025vw border border-2 rounded group/item overflow-hidden bg-inherit aspect-square ",
 
             'openType' => $this->openType, // gallery or href
-            'gridCols' => $this->gridCols,
+            // 'gridCols' => $this->gridCols,
             'groupMode' => $this->groupMode,
             'groupId' => $this->groupId,
+            'photoPerColumn' => $this->photoPerColumn,
 
             'hideUploader' => $HIDE_UPLOADER,
             'hideUploadDate' => $HIDE_UPLOAD_DATE,

@@ -20,7 +20,8 @@ class AttachmentGroup extends Component
         private $label = '',
         private $properties = [],
         private $openType = 'gallery',
-        private $gridCols = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1',
+        private $gridCols = 'grid lg:gap-3 md:gap-2 sm:gap-1',
+        // private $gridCols = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-3 md:gap-2 sm:gap-1',
         private $groups = [null => ""],
     ) {
         //
@@ -78,6 +79,7 @@ class AttachmentGroup extends Component
         $this->attachments = $this->GroupBySubCat();
         // dump($this->attachments);
         $colCount = count($this->attachments);
+        $photoPerColumn = 5;
         $span = "w-full";
         switch ($colCount) {
             case 2:
@@ -86,6 +88,24 @@ class AttachmentGroup extends Component
             case 5:
             case 6:
                 $span = "w-1/$colCount";
+                break;
+        }
+
+        switch ($colCount) {
+            case 1:
+                $photoPerColumn = 5;
+                break;
+            case 2:
+                $photoPerColumn = 2;
+                break;
+            case 3:
+                $photoPerColumn = 1;
+                break;
+            case 4:
+            case 5:
+            case 6:
+            default:
+                $photoPerColumn = 1;
                 break;
         }
         // dump($this->readOnly);
@@ -104,6 +124,7 @@ class AttachmentGroup extends Component
             'properties' => $this->properties,
             'openType' => $this->openType,
             'gridCols' => $this->gridCols,
+            'photoPerColumn' => $photoPerColumn,
         ]);
     }
 }
