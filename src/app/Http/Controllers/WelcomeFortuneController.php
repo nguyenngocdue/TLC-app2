@@ -16,12 +16,12 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
+        $columns = [];
+        $tables = [];
 
-
-
-        // return view("welcome-fortune", [
-        //     'columns' => $columns,
-        //     'dataSource' => $tables,
-        // ]);
+        return view("welcome-fortune", [
+            'columns' => $columns,
+            'dataSource' => $tables,
+        ]);
     }
 }

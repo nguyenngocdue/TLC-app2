@@ -36,3 +36,5 @@ mix.js('resources/js/number-to-words.js', 'public/js')
 mix.js('resources/js/jsdiff.js', 'public/js')
 mix.js('resources/js/lazysizes.js', 'public/js')
 mix.js('resources/js/lightgallery.js', 'public/js').postCss('resources/css/lightgallery.css', 'public/css')
+
+mix.ts('resources/js/EditableTable3.ts', 'public/js').sourceMaps()

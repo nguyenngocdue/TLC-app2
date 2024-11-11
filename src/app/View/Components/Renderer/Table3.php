@@ -64,6 +64,15 @@ class Table3 extends Component
    */
   public function render()
   {
+    return view("components.renderer.table3", [
+      'tableName' => $this->tableName,
+      'columns' => $this->columns,
+      'dataSource' => $this->dataSource,
+    ]);
+  }
+
+  public function render1()
+  {
     $columns = $this->columns;
     if (is_null($columns)) return Blade::render("<x-feedback.alert type='warning' message='Columns attribute is missing.' />");
     if (!is_array($columns)) return Blade::render("<x-feedback.alert type='warning' message='Props file is missing.' />");

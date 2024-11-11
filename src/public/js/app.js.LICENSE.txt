@@ -1,28 +1,6 @@
-/*!
- * Pusher JavaScript Library v7.6.0
- * https://pusher.com/
- *
- * Copyright 2020, Pusher
- * Released under the MIT licence.
- */
-
-/*! ./bootstrap */
-
-/*! For license information please see preline.js.LICENSE.txt */
-
-/*! laravel-echo */
-
-/*! preline */
-
-/*! pusher-js */
-
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-
-/*!*******************************!*\
-  !*** ./resources/css/app.css ***!
-  \*******************************/
 
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!

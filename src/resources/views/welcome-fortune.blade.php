@@ -4,7 +4,14 @@
 
 @section('content')
 
-<x-renderer.table
+<script>
+const table = new EditableTable3({ 
+    columns: [],
+    dataSource: [],
+ });
+</script>
+
+<x-renderer.table3
     :dataSource="$dataSource"
     :columns="$columns"
     showPaginationTop="true"
