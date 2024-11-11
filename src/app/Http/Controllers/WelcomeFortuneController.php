@@ -19,10 +19,11 @@ class WelcomeFortuneController extends Controller
         $columns = [
             ['dataIndex' => 'name'],
             ['dataIndex' => 'description'],
+            ['dataIndex' => 'hidden_column', 'invisible' => true],
         ];
         $tables = [
-            ['name' => 'John', 'description' => '35 Phan Chu Trinh'],
-            ['name' => 'Doe', 'description' => '537 Nguyen Thi Dinh'],
+            ['name' => 'John', 'description' => '35 Phan Chu Trinh', 'hidden_column' => 'hidden'],
+            ['name' => 'Doe', 'description' => '537 Nguyen Thi Dinh', 'hidden_column' => 'hidden'],
         ];
 
         return view("welcome-fortune", [

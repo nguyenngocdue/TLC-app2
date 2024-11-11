@@ -4,6 +4,8 @@ export interface TableConfig {
     borderColor?: string
     showPaginationTop?: boolean
     showPaginationBottom?: boolean
+    showNo?: boolean
+    tableDebug?: boolean
 
     tableHeader?: string
     tableFooter?: string

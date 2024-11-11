@@ -1,12 +1,13 @@
-import { TableColumn } from './EditableTable3ColumnType'
-import { TableDataLine } from './EditableTable3DataLineType'
-import { TableConfig } from './EditableTable3ConfigType'
+import { TableConfig } from './Type/EditableTable3ConfigType'
+import { TableParams } from './Type/EditableTable3Type'
 
 import { makeTbody } from './EditableTable3TBody'
 import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
 import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
+import { ColumnNoValue, makeUpDefaultValue } from './EditableTable3DefaultValue'
+import { makeColGroup } from './EditableTable3ColGroup'
 
 class EditableTable3 {
     private defaultConfig: TableConfig = {
@@ -14,20 +15,19 @@ class EditableTable3 {
         borderColor: 'border-gray-300',
     }
 
-    constructor(
-        private params: {
-            tableName: string
-            tableConfig: TableConfig
-            columns: TableColumn[]
-            dataSource: TableDataLine[]
-        },
-    ) {
-        console.log('EditableTable3', params)
+    constructor(private params: TableParams) {
+        this.params.columns = makeUpDefaultValue(params)
+        if (!this.params.tableConfig) this.params.tableConfig = {}
+        console.log('EditableTable3', { ...params, columns: this.params.columns })
+        if (this.params.tableConfig.showNo) {
+            this.params.columns.unshift(ColumnNoValue)
+        }
     }
 
     render() {
-        const { tableName, columns, dataSource, tableConfig = {} } = this.params
+        const { tableName, tableConfig } = this.params
 
+        const tableDebug = tableConfig.tableDebug || false
         const maxH = tableConfig.maxH || this.defaultConfig.maxH
         const borderColor = tableConfig.borderColor || this.defaultConfig.borderColor
         const borderT = tableConfig.showPaginationTop ? `border-t ${borderColor}` : 'rounded-t-lg'
@@ -40,11 +40,11 @@ class EditableTable3 {
         const tableFooter = tableConfig.tableFooter || ''
 
         const tableStr = `<table 
-            class="whitespace-no-wrap w-full text-sm text-sm-vw border-separate border border-spacing-0 ${borderColor}"
-            style="table-layout: auto; ${tableWidth}"
+                class="whitespace-no-wrap w-full text-sm text-sm-vw border-separate border border-spacing-0 ${borderColor}"
+                style="table-layout: auto; ${tableWidth}"
             >
             <colgroup>
-            
+                ${makeColGroup(this.params)}
             </colgroup>
             <thead class="sticky z-10 top-0">
                 ${makeThead(this.params)}
@@ -62,7 +62,9 @@ class EditableTable3 {
             ${tableStr}
         </div>`
 
-        const editableTable = `${tableHeader}${toolbarTop}${wrappingDiv}${toolbarBottom}${tableFooter}`
+        const debugStr = tableDebug ? `<div class="bg-red-600 text-white border font-bold">This table is in DEBUG Mode</div>` : ``
+
+        const editableTable = `${debugStr}${tableHeader}${toolbarTop}${wrappingDiv}${toolbarBottom}${tableFooter}`
 
         const divId = `#${tableName}`
         const div = document.querySelector(divId)

@@ -18,11 +18,22 @@ var tableObjectIndexedColumns = {};
             'dataSource': @json($dataSource),
 
             'tableConfig': {
+                'tableDebug': {{$tableDebug ? "true" : "false"}},
                 'showPaginationTop': @json($showPaginationTop),
                 'showPaginationBottom': @json($showPaginationBottom),
 
+                'topLeftControl': @json($topLeftControl),
+                'topCenterControl': @json($topCenterControl),
+                'topRightControl': @json($topRightControl),
+
+                'bottomLeftControl': @json($bottomLeftControl),
+                'bottomCenterControl': @json($bottomCenterControl),
+                'bottomRightControl': @json($bottomRightControl),
+
                 'tableHeader': @json($header),
                 'tableFooter': @json($footer),
+
+                'showNo': @json($showNo),
             },
         }
         console.log("Initilizing table {{$tableName}}", {{$tableName}})

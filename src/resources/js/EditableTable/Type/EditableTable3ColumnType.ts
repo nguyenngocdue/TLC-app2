@@ -1,9 +1,12 @@
 export interface TableColumn {
-    title?: string
-    renderer?: string
     dataIndex: string | number
-    align?: 'center' | 'right' | 'left'
+    title?: string
     width?: number
+    align?: 'center' | 'right' | 'left'
+    invisible?: boolean
+    tooltip?: string
+
+    renderer?: string
     fixed?: string
     fixedLeft?: number
     fixedRight?: number
@@ -15,7 +18,6 @@ export interface TableColumn {
     target_min_uom?: number
     isExtra?: boolean
     editable?: boolean
-    invisible?: boolean
     no_print?: boolean
     footer?: string
     required?: boolean
@@ -46,5 +48,5 @@ export interface TableColumn {
     cloneable?: boolean
     rendererParam?: string
 
-    mode: 'edit' | 'view' | 'print'
+    mode?: 'edit' | 'view' | 'print'
 }

@@ -20,28 +20,30 @@ class Table3 extends Component
   // public static $borderColor = 'border-gray-600';
 
   public function __construct(
-    private Request $request,
+    // private Request $request,
     private $tableName = 'table01',
     private $columns = null,
     private $dataSource = null,
-    private $dataHeader = null,
-    private $headerTop = null,
+    private $tableDebug = false,
     private $showNo = false,
-    private $showNoR = false,
-    private $groupBy = false,
-    private $groupByLength = 1,
-    private $groupKeepOrder = false,
+    // private $dataHeader = null,
+    // private $showNoR = false,
+    // private $groupBy = false,
+    // private $groupByLength = 1,
+    // private $groupKeepOrder = false,
     private $header = "",
     private $footer = "",
+
     private $maxH = 40,
-    // private $minH = 40,
-    //Editable MODE
-    private $model = null,
-    // private $editable = false,
-    private $tableDebug = false,
-    private $rotate45Width = false,
-    private $rotate45Height = false,
-    private $noCss = false,
+    private $headerTop = null,
+
+    // // private $minH = 40,
+    // //Editable MODE
+    // private $model = null,
+    // // private $editable = false,
+    // private $rotate45Width = false,
+    // private $rotate45Height = false,
+    // private $noCss = false,
     private $showPaginationTop = false,
     private $showPaginationBottom = false,
     private $topLeftControl = null,
@@ -50,11 +52,11 @@ class Table3 extends Component
     private $bottomLeftControl = null,
     private $bottomCenterControl = null,
     private $bottomRightControl = null,
-    private $tableTrueWidth = false,
-    private $editable = false,
-    private $numberOfEmptyLines = 0,
-    private $lineIgnoreNo = 0,
-    private $borderColor = 'border-gray-300',
+    // private $tableTrueWidth = false,
+    // private $editable = false,
+    // private $numberOfEmptyLines = 0,
+    // private $lineIgnoreNo = 0,
+    // private $borderColor = 'border-gray-300',
   ) {}
 
   /**
@@ -68,16 +70,24 @@ class Table3 extends Component
       'tableName' => $this->tableName,
       'columns' => $this->columns,
       'dataSource' => $this->dataSource,
+      'tableDebug' => $this->tableDebug,
 
       'headerTop' => $this->headerTop,
       'header' => $this->header,
       'footer' => $this->footer,
       'maxH' => $this->maxH,
-      'tableDebug' => $this->tableDebug,
 
       'showPaginationTop' => $this->showPaginationTop,
       'showPaginationBottom' => $this->showPaginationBottom,
+      'topLeftControl' => $this->topLeftControl,
+      'topCenterControl' => $this->topCenterControl,
+      'topRightControl' => $this->topRightControl,
+
+      'bottomLeftControl' => $this->bottomLeftControl,
+      'bottomCenterControl' => $this->bottomCenterControl,
+      'bottomRightControl' => $this->bottomRightControl,
       
+      'showNo' => $this->showNo,
     ]);
   }
 

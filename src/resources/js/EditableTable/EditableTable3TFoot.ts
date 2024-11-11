@@ -1,6 +1,5 @@
-import { TableColumn } from './EditableTable3ColumnType'
-import { TableDataLine } from './EditableTable3DataLineType'
+import { TableParams } from './Type/EditableTable3Type'
 
-export const makeTfoot = ({ dataSource, columns }: { dataSource: TableDataLine[]; columns: TableColumn[] }) => {
+export const makeTfoot = ({ dataSource, columns }: TableParams) => {
     return `<tr><td>to be implemented</td></tr>`
 }
