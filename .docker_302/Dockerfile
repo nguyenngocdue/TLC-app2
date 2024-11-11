@@ -56,17 +56,6 @@ RUN apk update && \
     && pecl install mongodb \
     && docker-php-ext-enable mongodb
 
-# ln -s /usr/bin/node /usr/local/bin/node && \
-# ln -s /usr/bin/npm /usr/local/bin/npm
-
-# npm install --location=global --unsafe-perm puppeteer@^17 && \
-# chmod -R o+rx /usr/local/lib/node_modules/puppeteer/.local-chromium
-# pecl install pdo_sqlsrv sqlsrv && \
-# rm -rf /var/cache/apk/*
-
-# Set environment variables for Puppeteer
-# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-# ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Copy PHP configuration file
 COPY ./configs/php.ini /usr/local/etc/php/
@@ -89,12 +78,3 @@ RUN addgroup -g 1000 ndcgp && \
 
 # Switch to the new user
 USER ndc
-
-# Uncomment if needed
-# ENV ENABLE_CRONTAB 1
-# ENV ENABLE_HORIZON 1
-# COPY ./docker-entrypoint.sh /var/www/app/docker-entrypoint.sh
-# RUN chmod +x /var/www/app/docker-entrypoint.sh
-# ENTRYPOINT ["sh", "/var/www/app/docker-entrypoint.sh"]
-
-# CMD ["supervisord -n -c /etc/supervisord.conf"]
