@@ -1,5 +1,23 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
 
+const getFirstRowHeight = (tableId: string) => {
+    const table = document.getElementById(tableId)
+    if (!table) return 0
+    const rows = table.getElementsByTagName('tr')
+    const cell = rows[0].getElementsByTagName('th')[0]
+    if (!cell) return 0
+    const cellHeight = cell.getBoundingClientRect().height
+    return cellHeight
+}
+
+export const applyTopFor2ndHeader = (tableName: string) => {
+    const firstRowHeight = getFirstRowHeight(tableName)
+    console.log('firstRowHeight', firstRowHeight)
+    document.querySelectorAll(`#${tableName} .second-header`).forEach((element) => {
+        element.setAttribute('style', `top: ${firstRowHeight}px`)
+    })
+}
+
 const getColumnWidth = (tableId: string, columnIndex: number) => {
     const table = document.getElementById(tableId)
     if (!table) return 0
@@ -26,12 +44,12 @@ const getColumnWidth = (tableId: string, columnIndex: number) => {
 }
 
 export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[]) => {
-    console.log('applyFixedColumnWidth for', tableName)
+    // console.log('applyFixedColumnWidth for', tableName)
     const arrayOfColumns: TableColumn[] = []
     const cache: any[] = []
 
     columns.forEach((_, index) => (cache[index] = getColumnWidth(tableName, index)))
-    console.log('cache', cache)
+    // console.log('cache', cache)
 
     let accumulated = 0
     columns.forEach((column, index) => {
@@ -81,3 +99,6 @@ export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[])
     //     tableObjectIndexedColumns[tableName][column['dataIndex']] = column
     // }
 }
+
+export const getFirstFixedRightColumnIndex = (columns: TableColumn[]) =>
+    columns.findIndex((column) => column.fixed === 'right')

@@ -1,5 +1,6 @@
 import { Text4 } from './Controls/Text4'
 import { ValueObject4 } from './Controls/ValueObject4'
+import { getFirstFixedRightColumnIndex } from './EditableTable3FixedColumn'
 import { smartTypeOf } from './EditableTable3Str'
 import { TableValueObjectType, TableDataLine } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
@@ -7,6 +8,7 @@ import { TableParams } from './Type/EditableTable3ParamType'
 export const makeTbody = (params: TableParams) => {
     const { dataSource, columns } = params
     const renderRow = (row: TableDataLine, rowIndex: number) => {
+        const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
         return columns
             .map((column, columnIndex) => {
                 const hiddenStr = column.invisible ? 'hidden' : ''
@@ -63,7 +65,9 @@ export const makeTbody = (params: TableParams) => {
                 const fixed = column.fixed
                     ? `table-td-fixed-${column.fixed} table-td-fixed-${column.fixed}-${columnIndex}`
                     : ''
-                const borderStr = `border-b border-r border-gray-300`
+
+                const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
+                const borderStr = `border-b border-r border-gray-300 ${borderL}`
                 const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixed} ${borderStr}`
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''

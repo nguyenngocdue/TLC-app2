@@ -35,8 +35,7 @@ class Table3 extends Component
     private $footer = "",
 
     private $maxH = 40,
-    private $headerTop = null,
-
+    
     // // private $minH = 40,
     // //Editable MODE
     // private $model = null,
@@ -57,13 +56,15 @@ class Table3 extends Component
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
     // private $borderColor = 'border-gray-300',
-  ) {}
-
-  /**
-   * Get the view / contents that represent the component.
-   *
-   * @return \Illuminate\Contracts\View\View|\Closure|string
-   */
+    
+    // private $headerTop = null, // OBSOLETE due to applyTopFor2ndHeader
+    ) {}
+    
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
   public function render()
   {
     $params = [
@@ -74,7 +75,7 @@ class Table3 extends Component
       'tableDebug' => $this->tableDebug,
       'tableTrueWidth' => $this->tableTrueWidth,
 
-      'headerTop' => $this->headerTop,
+      // 'headerTop' => $this->headerTop, // OBSOLETE due to applyTopFor2ndHeader
       'header' => $this->header,
       'footer' => $this->footer,
       'maxH' => $this->maxH,

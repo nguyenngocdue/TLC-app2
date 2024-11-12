@@ -1,8 +1,10 @@
+import { getFirstFixedRightColumnIndex } from './EditableTable3FixedColumn'
 import { Str } from './EditableTable3Str'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeThead = ({ columns }: TableParams) => {
     const renderHeader = () => {
+        const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
         const result = columns.map((column, index) => {
             const niceDataIndex = column.title ? column.title : Str.toHeadline(column.dataIndex)
             const subTitle = column.subTitle
@@ -18,7 +20,10 @@ export const makeThead = ({ columns }: TableParams) => {
             const fixed = column.fixed
                 ? `table-th-fixed-${column.fixed} table-th-fixed-${column.fixed}-${index}`
                 : ''
-            const classList = `${hiddenStr} ${fixed} border-b border-r border-gray-300`
+
+            const borderL = index == firstFixedRightIndex ? 'border-l' : ''
+            const borderStr = `border-b border-r border-gray-300 ${borderL}`
+            const classList = `${hiddenStr} ${fixed} ${borderStr}`
 
             return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">
                 ${niceDataIndex}

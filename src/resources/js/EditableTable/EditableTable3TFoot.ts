@@ -1,7 +1,10 @@
+import { getFirstFixedRightColumnIndex } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => {
     const { tableDebug } = tableConfig
+
+    const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
     const footers = columns.map((column, index) => {
         const hiddenStr = column.invisible ? 'hidden' : ''
         const alignStr = column.align ? `text-${column.align}` : ''
@@ -9,7 +12,10 @@ export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => 
         const fixed = column.fixed
             ? `table-th-fixed-${column.fixed} table-th-fixed-${column.fixed}-${index}`
             : ''
-        const classList = `${hiddenStr} ${alignStr} ${fixed} p-1 border-r border-t border-gray-300`
+
+        const borderL = index == firstFixedRightIndex ? 'border-l' : ''
+        const borderStr = `border-r border-t border-gray-300 ${borderL}`
+        const classList = `${hiddenStr} ${alignStr} ${fixed} ${borderStr} p-1`
 
         if (column.footer) {
             return `<td class="${classList}">${column.footer}</td>`

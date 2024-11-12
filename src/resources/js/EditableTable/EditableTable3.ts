@@ -13,7 +13,7 @@ import {
 } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
-import { applyFixedColumnWidth } from './EditableTable3FixedColumn'
+import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
 
 class EditableTable3 {
     private defaultConfig: TableConfig = {
@@ -59,11 +59,11 @@ class EditableTable3 {
             <colgroup>
                 ${makeColGroup(this.params)}
             </colgroup>
-            <thead class="sticky z-10 bg-gray-100" style="top: 1px;">
+            <thead class="sticky z-10 bg-gray-100" style="top:0px;">
                 ${makeThead(this.params)}
             </thead>
             
-            <thead class="sticky z-10 bg-gray-100" style="top: 60px;">
+            <thead class="sticky z-10 bg-gray-100 second-header">
                 ${makeThead2nd(this.params)}
             </thead>
            
@@ -86,7 +86,14 @@ class EditableTable3 {
             ? `<div class="bg-red-600 text-white border font-bold">${tableName} is in DEBUG Mode</div>`
             : ``
 
-        const editableTable = `${debugStr}${tableHeader}${toolbarTop}${wrappingDiv}${toolbarBottom}${tableFooter}`
+        const editableTable = `
+        ${debugStr}
+        ${tableHeader}
+        ${toolbarTop}
+        ${wrappingDiv}
+        ${toolbarBottom}
+        ${tableFooter}
+        `
 
         const divId = `#${tableName}`
         const div = document.querySelector(divId)
@@ -95,6 +102,7 @@ class EditableTable3 {
         setTimeout(() => {
             //Wait sometime for the browser to finish rendering the table
             applyFixedColumnWidth(tableName, this.params.columns)
+            applyTopFor2ndHeader(tableName)
         }, 1000)
     }
 }
