@@ -1,6 +1,7 @@
 import { Text4 } from './Controls/Text4'
 import { ValueObject4 } from './Controls/ValueObject4'
-import { TableDataLine } from './Type/EditableTable3DataLineType'
+import { smartTypeOf } from './EditableTable3Str'
+import { TableValueObjectType, TableDataLine } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3Type'
 
 export const makeTbody = (params: TableParams) => {
@@ -13,7 +14,7 @@ export const makeTbody = (params: TableParams) => {
 
                 const classList = `${hiddenStr} ${alignStr}`
 
-                let value = row[column.dataIndex]
+                let cellValue = row[column.dataIndex]
                 let rendered, tdClass: any
                 switch (true) {
                     case column.renderer == 'no.':
@@ -24,18 +25,41 @@ export const makeTbody = (params: TableParams) => {
                         break
 
                     //============From here there is no renderer================
-                    case typeof value == 'string':
-                    case typeof value == 'number':
-                    case typeof value == 'boolean':
-                        rendered = value
+                    case smartTypeOf(cellValue) == 'string':
+                    case smartTypeOf(cellValue) == 'number':
+                    case smartTypeOf(cellValue) == 'boolean':
+                        rendered = cellValue
                         break
-                    case typeof value == 'object':
-                        ;[rendered, tdClass] = new ValueObject4(params, row, column, index).render()
+                    case smartTypeOf(cellValue) == 'object':
+                        ;[rendered, tdClass] = new ValueObject4(
+                            cellValue,
+                            params,
+                            row,
+                            column,
+                            index,
+                        ).render()
+                        break
+                    case smartTypeOf(cellValue) == 'array':
+                        const array = cellValue as unknown as TableValueObjectType[]
+
+                        const values = array.map((item) =>
+                            new ValueObject4(item, params, row, column, index).render(),
+                        )
+                        console.log(values)
+                        rendered = values.map((v) => v[0]).join(' ')
+                        tdClass = values[0][1]
+                        break
+
+                    //============From here there is render base on cellValue================
+                    case cellValue === null:
+                    case cellValue === undefined:
+                        rendered = ''
                         break
                     default:
-                        rendered = 'Unknown how to render this item.'
+                        rendered = `Unknown how to render this item: ${cellValue}`
                         break
                 }
+                // console.log(rendered)
                 return `<td class="${classList} ${tdClass}">${rendered}</td>`
             })
             .join('')

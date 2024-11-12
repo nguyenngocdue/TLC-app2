@@ -1,4 +1,4 @@
-export interface TableDataCell {
+export interface TableValueObjectType {
     value: number | string
     cell_class?: string
     cell_href?: string
@@ -7,8 +7,15 @@ export interface TableDataCell {
     cell_onclick?: string
 }
 
+export interface TableCellTypeScalar {
+    value: number | string | TableValueObjectType
+}
+export interface TableCellType {
+    value: number | string | TableValueObjectType | Array<number | string | TableValueObjectType>
+}
+
 export interface TableDataLine {
-    [columnName: string]: [value: TableDataCell | number | string]
+    [columnName: string]: TableCellType
 }
 
 export interface LengthAware {

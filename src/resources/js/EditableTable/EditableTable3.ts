@@ -6,7 +6,11 @@ import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
 import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
-import { ColumnNoValue, convertArrayToLengthAware, makeUpDefaultValue } from './EditableTable3DefaultValue'
+import {
+    ColumnNoValue,
+    convertArrayToLengthAware,
+    makeUpDefaultValue,
+} from './EditableTable3DefaultValue'
 import { makeColGroup } from './EditableTable3ColGroup'
 
 class EditableTable3 {
@@ -18,12 +22,11 @@ class EditableTable3 {
     constructor(private params: TableParams) {
         this.params.columns = makeUpDefaultValue(params)
         if (!this.params.tableConfig) this.params.tableConfig = {}
-        if (Array.isArray(params.dataSource)) {
+        if (Array.isArray(params.dataSource))
             this.params.dataSource = convertArrayToLengthAware(params.dataSource)
-        }
-        if (this.params.tableConfig.showNo) {
-            this.params.columns.unshift(ColumnNoValue)
-        }
+        if (this.params.tableConfig.showNo) this.params.columns.unshift(ColumnNoValue)
+        // makeUpPaginator(this.params.tableConfig, this.params.dataSource)
+
         console.log('EditableTable3', { ...params, columns: this.params.columns })
     }
 
@@ -65,7 +68,9 @@ class EditableTable3 {
             ${tableStr}
         </div>`
 
-        const debugStr = tableDebug ? `<div class="bg-red-600 text-white border font-bold">This table is in DEBUG Mode</div>` : ``
+        const debugStr = tableDebug
+            ? `<div class="bg-red-600 text-white border font-bold">This table is in DEBUG Mode</div>`
+            : ``
 
         const editableTable = `${debugStr}${tableHeader}${toolbarTop}${wrappingDiv}${toolbarBottom}${tableFooter}`
 

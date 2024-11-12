@@ -1,7 +1,15 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
+import { TableConfig } from './Type/EditableTable3ConfigType'
+import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3Type'
 
-export const ColumnNoValue: TableColumn = { title: 'No.', dataIndex: '_no_', renderer: 'no.', width: 50, align: 'center' }
+export const ColumnNoValue: TableColumn = {
+    title: 'No.',
+    dataIndex: '_no_',
+    renderer: 'no.',
+    width: 50,
+    align: 'center',
+}
 
 export const makeUpDefaultValue = ({ columns }: TableParams) => {
     return columns.map((column) => ({ ...column, width: column.width || 100 }))
@@ -24,3 +32,22 @@ export const convertArrayToLengthAware = (dataSource: any[]) => {
         total: dataSource.length,
     }
 }
+
+// export const makeUpPaginator = (tableConfig: TableConfig, dataSource: LengthAware) => {
+//     if (tableConfig.showPaginationTop) {
+//         if (tableConfig.topLeftControl == 'paginator')
+//             tableConfig.topLeftControl = Paginator(dataSource)
+//         if (tableConfig.topCenterControl == 'paginator')
+//             tableConfig.topCenterControl = Paginator(dataSource)
+//         if (tableConfig.topRightControl == 'paginator')
+//             tableConfig.topRightControl = Paginator(dataSource)
+//     }
+//     if (tableConfig.showPaginationBottom) {
+//         if (tableConfig.bottomLeftControl == 'paginator')
+//             tableConfig.bottomLeftControl = Paginator(dataSource)
+//         if (tableConfig.bottomCenterControl == 'paginator')
+//             tableConfig.bottomCenterControl = Paginator(dataSource)
+//         if (tableConfig.bottomRightControl == 'paginator')
+//             tableConfig.bottomRightControl = Paginator(dataSource)
+//     }
+// }

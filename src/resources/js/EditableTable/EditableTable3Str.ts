@@ -22,3 +22,9 @@ export const isObject = (variable: any): variable is Record<string, unknown> => 
 // console.log(isObject("hello"));        // false
 // console.log(isObject(123));            // false
 // console.log(isObject({ key: "value" })); // true
+
+export const smartTypeOf = (variable: any): string => {
+    if (Array.isArray(variable)) return 'array'
+    if (isObject(variable)) return 'object'
+    return typeof variable
+}
