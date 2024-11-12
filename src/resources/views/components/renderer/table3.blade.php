@@ -33,7 +33,7 @@ var tableObjectIndexedColumns = {};
                 'tableHeader': @json($header),
                 'tableFooter': @json($footer),
 
-                'showNo': @json($showNo),
+                'showNo': {{($showNo??0) ? "true" : "false"}},
             },
         }
         console.log("Initilizing table {{$tableName}}", {{$tableName}})

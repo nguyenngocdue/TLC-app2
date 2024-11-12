@@ -17,13 +17,13 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         $columns = [
-            ['dataIndex' => 'name'],
-            ['dataIndex' => 'description'],
+            ['dataIndex' => 'name','renderer'=>'text',],
+            ['dataIndex' => 'description','renderer'=>'text',],
             ['dataIndex' => 'hidden_column', 'invisible' => true],
         ];
         $tables = [
-            ['name' => 'John', 'description' => '35 Phan Chu Trinh', 'hidden_column' => 'hidden'],
-            ['name' => 'Doe', 'description' => '537 Nguyen Thi Dinh', 'hidden_column' => 'hidden'],
+            ['name' => 'John', 'description' => '35 Phan Chu Trinh',  'hidden_column' => 'hidden'],
+            ['name' => 'Doe', 'description' => '537 Nguyen Thi Dinh',  'hidden_column' => 'hidden'],
         ];
 
         return view("welcome-fortune", [
