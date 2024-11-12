@@ -132,8 +132,8 @@ trait TraitSupportPermissionGate
         $isExternalInspector = CurrentUser::get()->isExternalInspector();
         if (!$isExternalInspector) return;
 
-        $sub_project_id = $item->getChklst->sub_project_id ?? 0;
-        if ($sub_project_id == 112) return; //Ignore sandbox project
+        // $sub_project_id = $item->getChklst->sub_project_id ?? 0;
+        // if ($sub_project_id == 112) return; //Ignore sandbox project
 
         $nominatedList = $item->signature_qaqc_chklst_3rd_party_list->pluck('id');
         if (!$nominatedList->contains(CurrentUser::id())) {
@@ -146,8 +146,8 @@ trait TraitSupportPermissionGate
         $isCouncilMember = CurrentUser::get()->isCouncilMember();
         if (!$isCouncilMember) return;
 
-        $sub_project_id = $item->getChklst->sub_project_id ?? 0;
-        if ($sub_project_id == 112) return; //Ignore sandbox project
+        // $sub_project_id = $item->getChklst->sub_project_id ?? 0;
+        // if ($sub_project_id == 112) return; //Ignore sandbox project
 
         $nominatedList = $item->council_member_list->pluck('id');
         if (!$nominatedList->contains(CurrentUser::id())) {

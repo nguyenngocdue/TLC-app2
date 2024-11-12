@@ -70,6 +70,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 
     protected $SANDBOX_PROJECT_ID = 72;
     protected $SANDBOX_SUB_PROJECT_ID = 112;
+    private $noSubProjectGranted = false;
     /**
      * Create a new component instance.
      *
@@ -78,9 +79,20 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct("qaqc_insp_chklst_shts");
+
+        $sub_projects = $this->getSubProjectListForFilter();
+        $defaultSubProject = $sub_projects->first();
+
+        if(is_null($defaultSubProject)) {
+            $this->noSubProjectGranted = true;
+            // return;
+        }
+        $defaultSubProjectId = $defaultSubProject->id ?? 0;
+        $defaultProjectId = $defaultSubProject->project_id ?? 0;
+
         [$this->projectId, $this->subProjectId, $this->prodRoutingId] = $this->getUserSettings();
-        $this->projectId = $this->projectId ? $this->projectId : $this->SANDBOX_PROJECT_ID;
-        $this->subProjectId = $this->subProjectId ? $this->subProjectId : $this->SANDBOX_SUB_PROJECT_ID;
+        $this->projectId = $this->projectId ? $this->projectId : $defaultProjectId;
+        $this->subProjectId = $this->subProjectId ? $this->subProjectId : $defaultSubProjectId;
         $this->prodRoutingId = $this->prodRoutingId ? $this->prodRoutingId : null;
 
         static::$punchlistStatuses = LibStatuses::getFor('qaqc_punchlists');
@@ -435,6 +447,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $prodRoutings = $this->getRoutingListForMatrix();
         }
         $result = [];
+        if(is_null($prodRoutings)) return $result;
         foreach ($prodRoutings as $key => $routing) {
             $allSubProjects = $routing->getSubProjects;
             if ($allSubProjects) {
@@ -473,12 +486,12 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     {
         if (!$this->prodRoutingMatrixDatasource) {
             $routings = Sub_project::find($this->subProjectId)
-                ->getProdRoutingsOfSubProject()
+                ?->getProdRoutingsOfSubProject()
                 ->get();
             // dump($routings);
             $allowList = $this->getRoutingListForFilter();
             // dump($allowList);
-            $this->prodRoutingMatrixDatasource = $routings->intersect($allowList);
+            $this->prodRoutingMatrixDatasource = $routings?->intersect($allowList);
         } else {
             // echo "CACHE HIT - getRoutingListForMatrix";
         }

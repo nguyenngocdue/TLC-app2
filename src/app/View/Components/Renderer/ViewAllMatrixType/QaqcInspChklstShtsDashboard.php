@@ -64,11 +64,11 @@ class QaqcInspChklstShtsDashboard extends QaqcInspChklstShts
                 $sub4 = $cu->getSubProjectsOfProjectClient;
             }
 
-            $defaultSubProjects = Sub_project::query()
-                ->whereIn('id', [$this->SANDBOX_SUB_PROJECT_ID])
-                ->get();
+            // $defaultSubProjects = Sub_project::query()
+            //     ->whereIn('id', [$this->SANDBOX_SUB_PROJECT_ID])
+            //     ->get();
 
-            $all = collect([...$sub1, ...$sub2, ...$sub3, ...$sub4, ...$defaultSubProjects]);
+            $all = collect([...$sub1, ...$sub2, ...$sub3, ...$sub4, /*...$defaultSubProjects */]);
 
             $this->subProjectDatasource =  $all->unique('id')->values();
             // } else {
