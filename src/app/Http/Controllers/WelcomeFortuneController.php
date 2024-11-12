@@ -17,50 +17,28 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
         $columns = [ 
-            ['dataIndex' => 'name',],
-            ['dataIndex' => 'description',],
+            ['dataIndex' => 'name', 'width' => 400,],
+            ['dataIndex' => 'number', 'align' => 'right',],
+            ['dataIndex' => 'text',],
             ['dataIndex' => 'object',],
+            ['dataIndex' => 'icon',],
             ['dataIndex' => 'hidden_column', 'invisible' => true],
         ];
         $tables = [
             [
-                'name' => 'John', 
-                'description' => '35 Phan Chu Trinh',
+                'name' => 'A name and a hidden field (for width calculation)',
                 'hidden_column' => 'hidden',
             ],
             [
-                'name' => 'Doe', 
-                'description' => '537 Nguyen Thi Dinh',
-                'hidden_column' => 'hidden',
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'Number',
-                'object' => 1,              
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'Float',
-                'object' => 3.14159265944,              
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'String',
-                'object' => 'Hello World',              
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'Object',
+                'name' => 'Scalar',
+                'number' => 3.14159265944,              
+                'text' => 'Hello World',              
                 'object' => [
                     'value' => 'an obj',
                     'cell_class' => 'text-white',
                     'cell_div_class' => 'bg-blue-800 p-1',
                 ],              
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'One Icon',
-                'object' => [
+                'icon' => [
                     'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
                     'cell_href' => 'https://www.google.com',
                     'cell_class' => 'bg-green-300 text-red-500',
@@ -68,19 +46,11 @@ class WelcomeFortuneController extends Controller
                     'cell_div_class' => 'p-2 w-11',
                 ],              
             ],
+            
             [
-                'name' => 'Smith',
-                'description' => 'Array of numbers',
-                'object' => [0,1,2,3,4],
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'Array of strings',
-                'object' => ['a', 'b', 'c'],
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'Array of objects',
+                'name' => 'Array of numbers',
+                'number' => [0,1,2,3,4],
+                'text' => ['a', 'b', 'c'],
                 'object' => [
                     [
                         'value' => 'text 1', 
@@ -98,11 +68,7 @@ class WelcomeFortuneController extends Controller
                         'cell_div_class' => 'bg-pink-400 p-1',
                     ],
                 ],
-            ],
-            [
-                'name' => 'Smith',
-                'description' => 'Many Icons',
-                'object' => [
+                'icon' => [
                     [
                         'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
                         'cell_href' => 'https://www.google.com',
@@ -126,6 +92,7 @@ class WelcomeFortuneController extends Controller
                     ],
                 ],              
             ],
+            
         ];
 
         return view("welcome-fortune", [

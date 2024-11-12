@@ -10,6 +10,7 @@
     
     showNo=1
     tableDebug="1"
+    tableTrueWidth="1"
 
     showPaginationTop={{true}}
     topLeftControl="Top left controls"

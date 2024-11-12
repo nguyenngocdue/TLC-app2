@@ -19,6 +19,8 @@ var tableObjectIndexedColumns = {};
 
             'tableConfig': {
                 'tableDebug': {{$tableDebug ? "true" : "false"}},
+                'tableTrueWidth': {{$tableTrueWidth ? "true" : "false"}},
+
                 'showPaginationTop': @json($showPaginationTop),
                 'showPaginationBottom': @json($showPaginationBottom),
 

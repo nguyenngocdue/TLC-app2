@@ -7,13 +7,15 @@ export const makeThead = ({ columns }: TableParams) => {
             if (column.title) return `<th>${column.title}</th>`
             const niceDataIndex = Str.toHeadline(column.dataIndex)
 
-            const hiddenStr = column.invisible ? 'hidden' : ''
-            const classList = `${hiddenStr}`
-
-            const defaultToolTip = `DataIndex: ${column.dataIndex}\nRenderer: ${column.renderer}\nWidth: ${column.width}`
+            const defaultToolTip = `+DataIndex: ${column.dataIndex}\n+Renderer: ${column.renderer}\n+Width: ${column.width}`
             const tooltip = column.tooltip || defaultToolTip
 
-            return `<th class="${classList}" title="${tooltip}">
+            const hiddenStr = column.invisible ? 'hidden' : ''
+            const widthStyle = column.width ? `width: ${column.width}px;` : ''
+
+            const classList = `${hiddenStr}`
+
+            return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">
                 ${niceDataIndex}
             </th>`
         })

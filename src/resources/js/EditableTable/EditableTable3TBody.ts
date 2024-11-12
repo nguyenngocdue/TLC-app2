@@ -12,8 +12,6 @@ export const makeTbody = (params: TableParams) => {
                 const hiddenStr = column.invisible ? 'hidden' : ''
                 const alignStr = column.align ? `text-${column.align}` : ''
 
-                const classList = `${hiddenStr} ${alignStr}`
-
                 let cellValue = row[column.dataIndex]
                 let rendered, tdClass: any
                 switch (true) {
@@ -60,7 +58,11 @@ export const makeTbody = (params: TableParams) => {
                         break
                 }
                 // console.log(rendered)
-                return `<td class="${classList} ${tdClass}">${rendered}</td>`
+                const classList = `${hiddenStr} ${alignStr} ${tdClass} border-b border-r border-gray-300`
+
+                const widthStr = column.width ? `width: ${column.width}px;` : ''
+                const styleList = `${widthStr}`
+                return `<td class="${classList}" style="${styleList}">${rendered}</td>`
             })
             .join('')
     }

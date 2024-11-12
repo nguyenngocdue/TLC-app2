@@ -6,6 +6,7 @@ export interface TableConfig {
     showPaginationBottom?: boolean
     showNo?: boolean
     tableDebug?: boolean
+    tableTrueWidth?: boolean
 
     tableHeader?: string
     tableFooter?: string

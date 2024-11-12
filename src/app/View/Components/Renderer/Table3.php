@@ -52,7 +52,7 @@ class Table3 extends Component
     private $bottomLeftControl = null,
     private $bottomCenterControl = null,
     private $bottomRightControl = null,
-    // private $tableTrueWidth = false,
+    private $tableTrueWidth = false,
     // private $editable = false,
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
@@ -66,11 +66,12 @@ class Table3 extends Component
    */
   public function render()
   {
-    return view("components.renderer.table3", [
+    $params = [
       'tableName' => $this->tableName,
       'columns' => $this->columns,
       'dataSource' => $this->dataSource,
       'tableDebug' => $this->tableDebug,
+      'tableTrueWidth' => $this->tableTrueWidth,
 
       'headerTop' => $this->headerTop,
       'header' => $this->header,
@@ -88,7 +89,9 @@ class Table3 extends Component
       'bottomRightControl' => $this->bottomRightControl,
       
       'showNo' => $this->showNo,
-    ]);
+    ];
+    Log::info($params);
+    return view("components.renderer.table3", $params);
   }
 
   // public function render1()

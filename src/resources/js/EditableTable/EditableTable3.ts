@@ -11,7 +11,7 @@ import {
     convertArrayToLengthAware,
     makeUpDefaultValue,
 } from './EditableTable3DefaultValue'
-import { makeColGroup } from './EditableTable3ColGroup'
+import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 
 class EditableTable3 {
     private defaultConfig: TableConfig = {
@@ -37,7 +37,9 @@ class EditableTable3 {
         const maxH = tableConfig.maxH || this.defaultConfig.maxH
         const borderColor = tableConfig.borderColor || this.defaultConfig.borderColor
         const borderT = tableConfig.showPaginationTop ? `border-t ${borderColor}` : 'rounded-t-lg'
-        const tableWidth = tableConfig.width || 'width: 100%;'
+        const tableWidth = tableConfig.tableTrueWidth
+            ? `width: ${calTableTrueWidth(this.params)}px;`
+            : 'width: 100%;'
 
         const toolbarTop = tableConfig.showPaginationTop ? makeToolBarTop(this.params) : ``
         const toolbarBottom = tableConfig.showPaginationBottom ? makeToolBarBottom(this.params) : ``
