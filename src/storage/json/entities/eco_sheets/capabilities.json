@@ -671,6 +671,20 @@
         "pending_ack": "",
         "active": ""
     },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_endorsement": "true",
+        "endorsement_rejected": "true",
+        "pending_review": "true",
+        "review_rejected": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "pending_ack": "",
+        "active": ""
+    },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",

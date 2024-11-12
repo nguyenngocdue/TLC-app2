@@ -59,6 +59,18 @@
         "pending_verification": "true",
         "closed": "true"
     },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
@@ -73,6 +85,54 @@
     },
     "bd_member": {
         "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "council_member": {
+        "name": "council_member",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -157,6 +217,18 @@
     },
     "des_member": {
         "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -503,6 +575,18 @@
         "pending_verification": "",
         "closed": ""
     },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "true",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
@@ -623,6 +707,18 @@
         "pending_verification": "",
         "closed": ""
     },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
+        "closed": ""
+    },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
@@ -633,6 +729,18 @@
         "pending_review": "true",
         "review_rejected": "true",
         "pending_verification": "true",
+        "closed": ""
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "active": "",
+        "pending_ack": "",
+        "pending_review": "",
+        "review_rejected": "",
+        "pending_verification": "",
         "closed": ""
     },
     "whs_manager": {

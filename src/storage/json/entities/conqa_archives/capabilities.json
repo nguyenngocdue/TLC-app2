@@ -65,6 +65,12 @@
         "toggle": "",
         "new": "true"
     },
+    "council_member": {
+        "name": "council_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
+    },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
@@ -106,6 +112,12 @@
         "name_rendered": "",
         "toggle": "",
         "new": "true"
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": ""
     },
     "dir": {
         "name": "dir",
@@ -271,6 +283,12 @@
     },
     "proj_manager": {
         "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true"
+    },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "true"
