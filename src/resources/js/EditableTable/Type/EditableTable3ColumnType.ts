@@ -1,16 +1,18 @@
 export interface TableColumn {
     dataIndex: string | number
     title?: string
+    subTitle?: string
     width?: number
     align?: 'center' | 'right' | 'left'
     invisible?: boolean
     tooltip?: string
+    footer?: 'agg_sum' | 'agg_avg' | 'agg_count' | 'agg_max' | 'agg_min' | string
+    colspan?: number // when 1st header is a group of many 2nd header columns
+    fixed?: 'left' | 'right'
 
     renderer?: string
-    fixed?: string
     fixedLeft?: number
     fixedRight?: number
-    colspan?: number
     columnIndex?: string
     prod_discipline_id?: number
     target_man_minutes?: number
@@ -19,7 +21,6 @@ export interface TableColumn {
     isExtra?: boolean
     editable?: boolean
     no_print?: boolean
-    footer?: string
     required?: boolean
     cbbDataSource?: (string | null)[]
     type?: string
@@ -38,7 +39,7 @@ export interface TableColumn {
         control?: string
         tableName?: string
     }
-    subTitle?: string
+
     sortBy?: string
     attributes?: {
         color?: string

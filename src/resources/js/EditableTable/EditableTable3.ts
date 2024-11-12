@@ -1,5 +1,5 @@
 import { TableConfig } from './Type/EditableTable3ConfigType'
-import { TableParams } from './Type/EditableTable3Type'
+import { TableParams } from './Type/EditableTable3ParamType'
 
 import { makeTbody } from './EditableTable3TBody'
 import { makeThead } from './EditableTable3THead'
@@ -12,10 +12,11 @@ import {
     makeUpDefaultValue,
 } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
+import { makeThead2nd } from './EditableTable3THead2nd'
+import { applyFixedColumnWidth } from './EditableTable3FixedColumn'
 
 class EditableTable3 {
     private defaultConfig: TableConfig = {
-        maxH: null,
         borderColor: 'border-gray-300',
     }
 
@@ -34,12 +35,16 @@ class EditableTable3 {
         const { tableName, tableConfig } = this.params
 
         const tableDebug = tableConfig.tableDebug || false
-        const maxH = tableConfig.maxH || this.defaultConfig.maxH
         const borderColor = tableConfig.borderColor || this.defaultConfig.borderColor
         const borderT = tableConfig.showPaginationTop ? `border-t ${borderColor}` : 'rounded-t-lg'
-        const tableWidth = tableConfig.tableTrueWidth
-            ? `width: ${calTableTrueWidth(this.params)}px;`
-            : 'width: 100%;'
+
+        let tableWidth = 'width: 100%;'
+        if (tableConfig.tableTrueWidth) tableWidth = `width: ${calTableTrueWidth(this.params)}px;`
+
+        //OLD maxH using REM and tailwind generator, up to 60 REM. 1 REM = 16px
+        const styleMaxH = tableConfig.maxH
+            ? `max-height: ${tableConfig.maxH <= 60 ? tableConfig.maxH * 16 : tableConfig.maxH}px;`
+            : ''
 
         const toolbarTop = tableConfig.showPaginationTop ? makeToolBarTop(this.params) : ``
         const toolbarBottom = tableConfig.showPaginationBottom ? makeToolBarBottom(this.params) : ``
@@ -54,8 +59,12 @@ class EditableTable3 {
             <colgroup>
                 ${makeColGroup(this.params)}
             </colgroup>
-            <thead class="sticky z-10 top-0">
+            <thead class="sticky z-10 bg-gray-100" style="top: 1px;">
                 ${makeThead(this.params)}
+            </thead>
+            
+            <thead class="sticky z-10 bg-gray-100" style="top: 60px;">
+                ${makeThead2nd(this.params)}
             </thead>
            
             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
@@ -66,12 +75,15 @@ class EditableTable3 {
             </tfoot>
         </table>`
 
-        const wrappingDiv = `<div class="table-wrp block bg-gray-100 overflow-x-auto ${maxH} ${borderT}">
+        const classList = `table-wrp block bg-gray-100 overflow-x-auto ${borderT}`
+        const styleList = `${styleMaxH}`
+
+        const wrappingDiv = `<div class="${classList}" style="${styleList}">
             ${tableStr}
         </div>`
 
         const debugStr = tableDebug
-            ? `<div class="bg-red-600 text-white border font-bold">This table is in DEBUG Mode</div>`
+            ? `<div class="bg-red-600 text-white border font-bold">${tableName} is in DEBUG Mode</div>`
             : ``
 
         const editableTable = `${debugStr}${tableHeader}${toolbarTop}${wrappingDiv}${toolbarBottom}${tableFooter}`
@@ -79,6 +91,11 @@ class EditableTable3 {
         const divId = `#${tableName}`
         const div = document.querySelector(divId)
         div && (div.innerHTML = editableTable)
+
+        setTimeout(() => {
+            //Wait sometime for the browser to finish rendering the table
+            applyFixedColumnWidth(tableName, this.params.columns)
+        }, 1000)
     }
 }
 

@@ -1,4 +1,4 @@
-import { TableParams } from './Type/EditableTable3Type'
+import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeColGroup = ({ columns }: TableParams) => {
     return columns

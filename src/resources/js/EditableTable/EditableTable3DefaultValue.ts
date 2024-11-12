@@ -1,14 +1,15 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
 import { TableConfig } from './Type/EditableTable3ConfigType'
 import { LengthAware } from './Type/EditableTable3DataLineType'
-import { TableParams } from './Type/EditableTable3Type'
+import { TableParams } from './Type/EditableTable3ParamType'
 
 export const ColumnNoValue: TableColumn = {
-    title: 'No.',
     dataIndex: '_no_',
-    renderer: 'no.',
     width: 50,
+    title: 'No.',
+    renderer: 'no.',
     align: 'center',
+    fixed: 'left',
 }
 
 export const makeUpDefaultValue = ({ columns }: TableParams) => {

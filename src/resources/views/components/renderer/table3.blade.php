@@ -16,6 +16,7 @@ var tableObjectIndexedColumns = {};
             'tableName': @json($tableName),
             'columns': @json($columns),
             'dataSource': @json($dataSource),
+            'dataHeader': @json($dataHeader),
 
             'tableConfig': {
                 'tableDebug': {{$tableDebug ? "true" : "false"}},
@@ -36,6 +37,8 @@ var tableObjectIndexedColumns = {};
                 'tableFooter': @json($footer),
 
                 'showNo': {{($showNo??0) ? "true" : "false"}},
+
+                'maxH': @json($maxH),
             },
         }
         console.log("Initilizing table {{$tableName}}", {{$tableName}})

@@ -5,7 +5,7 @@ import {
     TableDataLine,
     TableCellType,
 } from '../Type/EditableTable3DataLineType'
-import { TableParams } from '../Type/EditableTable3Type'
+import { TableParams } from '../Type/EditableTable3ParamType'
 
 export class ValueObject4 {
     constructor(

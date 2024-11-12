@@ -1,14 +1,11 @@
 import { Str } from './EditableTable3Str'
 import { TableParams } from './Type/EditableTable3ParamType'
 
-export const makeThead = ({ columns }: TableParams) => {
+export const makeThead2nd = ({ columns, dataHeader }: TableParams) => {
+    if (!dataHeader) return ''
+    // console.log('makeThead2nd', columns, dataHeader)
     const renderHeader = () => {
         const result = columns.map((column, index) => {
-            const niceDataIndex = column.title ? column.title : Str.toHeadline(column.dataIndex)
-            const subTitle = column.subTitle
-                ? `<div class="text-xs text-gray-500">${column.subTitle}</div>`
-                : ''
-
             const defaultToolTip = `+DataIndex: ${column.dataIndex}\n+Renderer: ${column.renderer}\n+Width: ${column.width}`
             const tooltip = column.tooltip || defaultToolTip
 
@@ -19,10 +16,12 @@ export const makeThead = ({ columns }: TableParams) => {
                 ? `table-th-fixed-${column.fixed} table-th-fixed-${column.fixed}-${index}`
                 : ''
             const classList = `${hiddenStr} ${fixed} border-b border-r border-gray-300`
+            let sndHeader = ''
+            if (dataHeader[column.dataIndex])
+                sndHeader = dataHeader[column.dataIndex] as unknown as string
 
             return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">
-                ${niceDataIndex}
-                ${subTitle}
+                ${sndHeader}                
             </th>`
         })
 

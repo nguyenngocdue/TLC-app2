@@ -26,7 +26,7 @@ class Table3 extends Component
     private $dataSource = null,
     private $tableDebug = false,
     private $showNo = false,
-    // private $dataHeader = null,
+    private $dataHeader = null,
     // private $showNoR = false,
     // private $groupBy = false,
     // private $groupByLength = 1,
@@ -70,6 +70,7 @@ class Table3 extends Component
       'tableName' => $this->tableName,
       'columns' => $this->columns,
       'dataSource' => $this->dataSource,
+      'dataHeader' => $this->dataHeader,
       'tableDebug' => $this->tableDebug,
       'tableTrueWidth' => $this->tableTrueWidth,
 
@@ -90,7 +91,7 @@ class Table3 extends Component
       
       'showNo' => $this->showNo,
     ];
-    Log::info($params);
+    // Log::info($params);
     return view("components.renderer.table3", $params);
   }
 

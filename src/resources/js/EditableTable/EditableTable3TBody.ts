@@ -2,24 +2,25 @@ import { Text4 } from './Controls/Text4'
 import { ValueObject4 } from './Controls/ValueObject4'
 import { smartTypeOf } from './EditableTable3Str'
 import { TableValueObjectType, TableDataLine } from './Type/EditableTable3DataLineType'
-import { TableParams } from './Type/EditableTable3Type'
+import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeTbody = (params: TableParams) => {
     const { dataSource, columns } = params
-    const renderRow = (row: TableDataLine, index: number) => {
+    const renderRow = (row: TableDataLine, rowIndex: number) => {
         return columns
-            .map((column) => {
+            .map((column, columnIndex) => {
                 const hiddenStr = column.invisible ? 'hidden' : ''
                 const alignStr = column.align ? `text-${column.align}` : ''
 
                 let cellValue = row[column.dataIndex]
-                let rendered, tdClass: any
+                let rendered: any = ''
+                let tdClass: any = ''
                 switch (true) {
                     case column.renderer == 'no.':
-                        rendered = index + 1
+                        rendered = rowIndex + 1
                         break
                     case column.renderer == 'text':
-                        ;[rendered] = new Text4(params, row, column, index).render()
+                        ;[rendered] = new Text4(params, row, column, rowIndex).render()
                         break
 
                     //============From here there is no renderer================
@@ -34,14 +35,14 @@ export const makeTbody = (params: TableParams) => {
                             params,
                             row,
                             column,
-                            index,
+                            rowIndex,
                         ).render()
                         break
                     case smartTypeOf(cellValue) == 'array':
                         const array = cellValue as unknown as TableValueObjectType[]
 
                         const values = array.map((item) =>
-                            new ValueObject4(item, params, row, column, index).render(),
+                            new ValueObject4(item, params, row, column, rowIndex).render(),
                         )
                         console.log(values)
                         rendered = values.map((v) => v[0]).join(' ')
@@ -58,7 +59,12 @@ export const makeTbody = (params: TableParams) => {
                         break
                 }
                 // console.log(rendered)
-                const classList = `${hiddenStr} ${alignStr} ${tdClass} border-b border-r border-gray-300`
+
+                const fixed = column.fixed
+                    ? `table-td-fixed-${column.fixed} table-td-fixed-${column.fixed}-${columnIndex}`
+                    : ''
+                const borderStr = `border-b border-r border-gray-300`
+                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixed} ${borderStr}`
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''
                 const styleList = `${widthStr}`
@@ -68,5 +74,5 @@ export const makeTbody = (params: TableParams) => {
     }
 
     // return 1
-    return dataSource.data.map((row, index) => `<tr>${renderRow(row, index)}</tr>`).join('')
+    return dataSource.data.map((row, rowIndex) => `<tr>${renderRow(row, rowIndex)}</tr>`).join('')
 }
