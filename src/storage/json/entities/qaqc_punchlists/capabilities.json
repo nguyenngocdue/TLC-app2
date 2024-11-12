@@ -98,6 +98,15 @@
         "inspected": "",
         "not_applicable": ""
     },
+    "council_member": {
+        "name": "council_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
     "cpl_manager_nz": {
         "name": "cpl_manager_nz",
         "name_rendered": "",
@@ -154,6 +163,15 @@
     },
     "des_member": {
         "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -406,6 +424,15 @@
     },
     "proj_manager": {
         "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "true",
+        "inspected": "",
+        "not_applicable": ""
+    },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",

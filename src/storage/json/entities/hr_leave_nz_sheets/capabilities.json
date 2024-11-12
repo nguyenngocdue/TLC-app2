@@ -431,6 +431,15 @@
         "approval_rejected": "",
         "approved": ""
     },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": ""
+    },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",

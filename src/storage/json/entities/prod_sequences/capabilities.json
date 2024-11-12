@@ -575,6 +575,18 @@
         "not_applicable": "true",
         "rework": "true"
     },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true",
+        "rework": "true"
+    },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",

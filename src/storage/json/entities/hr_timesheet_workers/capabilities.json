@@ -44,6 +44,15 @@
         "approval_rejected": "true",
         "approved": "true"
     },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
@@ -55,6 +64,42 @@
     },
     "bd_member": {
         "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "council_member": {
+        "name": "council_member",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -118,6 +163,15 @@
     },
     "des_member": {
         "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -377,6 +431,15 @@
         "approval_rejected": "true",
         "approved": "true"
     },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_approval": "true",
+        "approval_rejected": "true",
+        "approved": "true"
+    },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
@@ -467,6 +530,15 @@
         "approval_rejected": "",
         "approved": ""
     },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
+    },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
@@ -475,6 +547,15 @@
         "pending_approval": "true",
         "approval_rejected": "true",
         "approved": "true"
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_approval": "",
+        "approval_rejected": "",
+        "approved": ""
     },
     "whs_manager": {
         "name": "whs_manager",

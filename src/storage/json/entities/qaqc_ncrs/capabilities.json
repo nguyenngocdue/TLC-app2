@@ -69,6 +69,20 @@
         "inspection_rejected": "true",
         "closed": "true"
     },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "bd_manager": {
         "name": "bd_manager",
         "name_rendered": "",
@@ -85,6 +99,62 @@
     },
     "bd_member": {
         "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "council_member": {
+        "name": "council_member",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -191,6 +261,20 @@
         "assign_rejected": "",
         "resolved": "",
         "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
         "inspected": "",
         "inspection_rejected": "",
         "closed": ""
@@ -587,6 +671,20 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "true",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "true",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "proj_manager_nz": {
         "name": "proj_manager_nz",
         "name_rendered": "",
@@ -617,6 +715,20 @@
     },
     "proj_member_nz": {
         "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
         "name_rendered": "",
         "toggle": "",
         "new": "",
@@ -713,6 +825,20 @@
         "inspection_rejected": "",
         "closed": ""
     },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
+        "closed": ""
+    },
     "supreme_manage": {
         "name": "supreme_manage",
         "name_rendered": "",
@@ -725,6 +851,20 @@
         "rejected": "true",
         "inspected": "true",
         "inspection_rejected": "true",
+        "closed": ""
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_review": "",
+        "assigned": "",
+        "assign_rejected": "",
+        "resolved": "",
+        "rejected": "",
+        "inspected": "",
+        "inspection_rejected": "",
         "closed": ""
     },
     "whs_manager": {
