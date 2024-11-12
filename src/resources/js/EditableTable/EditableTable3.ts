@@ -6,7 +6,7 @@ import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
 import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
-import { ColumnNoValue, makeUpDefaultValue } from './EditableTable3DefaultValue'
+import { ColumnNoValue, convertArrayToLengthAware, makeUpDefaultValue } from './EditableTable3DefaultValue'
 import { makeColGroup } from './EditableTable3ColGroup'
 
 class EditableTable3 {
@@ -18,10 +18,13 @@ class EditableTable3 {
     constructor(private params: TableParams) {
         this.params.columns = makeUpDefaultValue(params)
         if (!this.params.tableConfig) this.params.tableConfig = {}
-        console.log('EditableTable3', { ...params, columns: this.params.columns })
+        if (Array.isArray(params.dataSource)) {
+            this.params.dataSource = convertArrayToLengthAware(params.dataSource)
+        }
         if (this.params.tableConfig.showNo) {
             this.params.columns.unshift(ColumnNoValue)
         }
+        console.log('EditableTable3', { ...params, columns: this.params.columns })
     }
 
     render() {

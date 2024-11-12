@@ -1,10 +1,10 @@
 import { TableColumn } from './EditableTable3ColumnType'
 import { TableConfig } from './EditableTable3ConfigType'
-import { TableDataLine } from './EditableTable3DataLineType'
+import { LengthAware } from './EditableTable3DataLineType'
 
 export interface TableParams {
     tableName: string
     tableConfig: TableConfig
     columns: TableColumn[]
-    dataSource: TableDataLine[]
+    dataSource: LengthAware
 }
