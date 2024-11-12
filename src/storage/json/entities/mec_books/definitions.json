@@ -1,0 +1,37 @@
+{
+    "new": {
+        "name": "new",
+        "new": "true",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "read-only": {
+        "name": "read-only",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": "true"
+    },
+    "hide-save-btn": {
+        "name": "hide-save-btn",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": "true"
+    },
+    "closed": {
+        "name": "closed",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": "true"
+    },
+    "post-closed": {
+        "name": "post-closed",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    }
+}

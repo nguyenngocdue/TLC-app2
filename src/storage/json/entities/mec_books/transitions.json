@@ -1,0 +1,34 @@
+{
+    "new": {
+        "name": "new",
+        "location": "",
+        "new": "",
+        "pending_confirmation": "true",
+        "rejected": "",
+        "active": ""
+    },
+    "pending_confirmation": {
+        "name": "pending_confirmation",
+        "location": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "true",
+        "active": "true"
+    },
+    "rejected": {
+        "name": "rejected",
+        "location": "",
+        "new": "",
+        "pending_confirmation": "true",
+        "rejected": "",
+        "active": ""
+    },
+    "active": {
+        "name": "active",
+        "location": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    }
+}

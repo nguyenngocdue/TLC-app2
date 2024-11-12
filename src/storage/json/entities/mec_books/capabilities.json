@@ -1,0 +1,578 @@
+{
+    "acct_manager": {
+        "name": "acct_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "acct_manager_nz": {
+        "name": "acct_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "acct_member": {
+        "name": "acct_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "acct_member_nz": {
+        "name": "acct_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "admin": {
+        "name": "admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "apartment_owner": {
+        "name": "apartment_owner",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "bd_manager": {
+        "name": "bd_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "bd_member": {
+        "name": "bd_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "client": {
+        "name": "client",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "consultant": {
+        "name": "consultant",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "contractor": {
+        "name": "contractor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "council_member": {
+        "name": "council_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "cpl_manager_nz": {
+        "name": "cpl_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "cpl_member": {
+        "name": "cpl_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "dc_ho": {
+        "name": "dc_ho",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "dc_manager": {
+        "name": "dc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "dc_ws": {
+        "name": "dc_ws",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "des_manager": {
+        "name": "des_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "des_member": {
+        "name": "des_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "des_member_nz": {
+        "name": "des_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "dir": {
+        "name": "dir",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "dir_nz": {
+        "name": "dir_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "external_inspector": {
+        "name": "external_inspector",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "fac_admin": {
+        "name": "fac_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "fin_member_nz": {
+        "name": "fin_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "guest": {
+        "name": "guest",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "hr_manager": {
+        "name": "hr_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "hr_member": {
+        "name": "hr_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "hr_member_nz": {
+        "name": "hr_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "hse_manager": {
+        "name": "hse_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "hse_member": {
+        "name": "hse_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "it_manager": {
+        "name": "it_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "it_member": {
+        "name": "it_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "mgr_asst_nz": {
+        "name": "mgr_asst_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "newcomer": {
+        "name": "newcomer",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "pln_admin": {
+        "name": "pln_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "ppc_admin": {
+        "name": "ppc_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "ppc_manager": {
+        "name": "ppc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "ppc_member": {
+        "name": "ppc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "proc_manager": {
+        "name": "proc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "proc_member": {
+        "name": "proc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "proc_member_nz": {
+        "name": "proc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "prod_manager": {
+        "name": "prod_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "prod_manager_nz": {
+        "name": "prod_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "true",
+        "rejected": "",
+        "active": ""
+    },
+    "prod_member": {
+        "name": "prod_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "prod_member_nz": {
+        "name": "prod_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "proj_admin": {
+        "name": "proj_admin",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_confirmation": "",
+        "rejected": "true",
+        "active": ""
+    },
+    "proj_manager": {
+        "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_confirmation": "",
+        "rejected": "true",
+        "active": ""
+    },
+    "proj_manager_nz": {
+        "name": "proj_manager_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "proj_member": {
+        "name": "proj_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": ""
+    },
+    "proj_member_nz": {
+        "name": "proj_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "proj_supervisor_nz": {
+        "name": "proj_supervisor_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "qaqc_manager": {
+        "name": "qaqc_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "qaqc_member": {
+        "name": "qaqc_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "qaqc_member_nz": {
+        "name": "qaqc_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "qs_manager": {
+        "name": "qs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "qs_member": {
+        "name": "qs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "qs_member_nz": {
+        "name": "qs_member_nz",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "shipping_agent": {
+        "name": "shipping_agent",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "supreme_manage": {
+        "name": "supreme_manage",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "vendor": {
+        "name": "vendor",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "whs_manager": {
+        "name": "whs_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "whs_member": {
+        "name": "whs_member",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "worker": {
+        "name": "worker",
+        "name_rendered": "",
+        "toggle": "",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    }
+}

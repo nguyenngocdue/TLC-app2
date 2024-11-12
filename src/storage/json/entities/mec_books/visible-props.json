@@ -1,0 +1,170 @@
+{
+    "_id": {
+        "name": "_id",
+        "column_name": "id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_doc_id": {
+        "name": "_doc_id",
+        "column_name": "doc_id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_project_id": {
+        "name": "_project_id",
+        "column_name": "project_id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_sub_project_id": {
+        "name": "_sub_project_id",
+        "column_name": "sub_project_id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_priority_id": {
+        "name": "_priority_id",
+        "column_name": "priority_id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_due_date": {
+        "name": "_due_date",
+        "column_name": "due_date",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_assignee_1": {
+        "name": "_assignee_1",
+        "column_name": "assignee_1",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_assignee_2": {
+        "name": "_assignee_2",
+        "column_name": "assignee_2",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "_assignee_3": {
+        "name": "_assignee_3",
+        "column_name": "assignee_3",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "_owner_id": {
+        "name": "_owner_id",
+        "column_name": "owner_id",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": "true"
+    },
+    "_updated_at": {
+        "name": "_updated_at",
+        "column_name": "updated_at",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "_deleted_by": {
+        "name": "_deleted_by",
+        "column_name": "deleted_by",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "_deleted_at": {
+        "name": "_deleted_at",
+        "column_name": "deleted_at",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "_attachment_mec_book": {
+        "name": "_attachment_mec_book",
+        "column_name": "attachment_mec_book",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_getMonitors1": {
+        "name": "_getMonitors1",
+        "column_name": "getMonitors1",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_order_no": {
+        "name": "_order_no",
+        "column_name": "order_no",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
+    },
+    "_closed_at": {
+        "name": "_closed_at",
+        "column_name": "closed_at",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": "true"
+    },
+    "_created_at": {
+        "name": "_created_at",
+        "column_name": "created_at",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_status": {
+        "name": "_status",
+        "column_name": "status",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    }
+}

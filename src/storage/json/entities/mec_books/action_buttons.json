@@ -1,0 +1,30 @@
+{
+    "new": {
+        "name": "new",
+        "status_title": "",
+        "label": "Create New",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "pending_confirmation": {
+        "name": "pending_confirmation",
+        "status_title": "",
+        "label": "Send for Confirmation",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "rejected": {
+        "name": "rejected",
+        "status_title": "",
+        "label": "Reject",
+        "tooltip": "",
+        "change_status_multiple": ""
+    },
+    "active": {
+        "name": "active",
+        "status_title": "",
+        "label": "Confirm",
+        "tooltip": "",
+        "change_status_multiple": ""
+    }
+}
