@@ -15,22 +15,6 @@
         "rejected": "true",
         "active": "true"
     },
-    "_name": {
-        "name": "_name",
-        "column_name": "name",
-        "new": "true",
-        "pending_confirmation": "true",
-        "rejected": "true",
-        "active": "true"
-    },
-    "_description": {
-        "name": "_description",
-        "column_name": "description",
-        "new": "true",
-        "pending_confirmation": "true",
-        "rejected": "true",
-        "active": "true"
-    },
     "_project_id": {
         "name": "_project_id",
         "column_name": "project_id",
@@ -58,6 +42,46 @@
     "_due_date": {
         "name": "_due_date",
         "column_name": "due_date",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_from_department_id": {
+        "name": "_from_department_id",
+        "column_name": "from_department_id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_to_department_id": {
+        "name": "_to_department_id",
+        "column_name": "to_department_id",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_name": {
+        "name": "_name",
+        "column_name": "name",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_description": {
+        "name": "_description",
+        "column_name": "description",
+        "new": "true",
+        "pending_confirmation": "true",
+        "rejected": "true",
+        "active": "true"
+    },
+    "_attachment_mec_book": {
+        "name": "_attachment_mec_book",
+        "column_name": "attachment_mec_book",
         "new": "true",
         "pending_confirmation": "true",
         "rejected": "true",
@@ -119,14 +143,6 @@
         "rejected": "",
         "active": ""
     },
-    "_attachment_mec_book": {
-        "name": "_attachment_mec_book",
-        "column_name": "attachment_mec_book",
-        "new": "true",
-        "pending_confirmation": "true",
-        "rejected": "true",
-        "active": "true"
-    },
     "_getMonitors1": {
         "name": "_getMonitors1",
         "column_name": "getMonitors1",
@@ -166,5 +182,13 @@
         "pending_confirmation": "true",
         "rejected": "true",
         "active": "true"
+    },
+    "_comment_insp_rejected_reason": {
+        "name": "_comment_insp_rejected_reason",
+        "column_name": "comment_insp_rejected_reason",
+        "new": "",
+        "pending_confirmation": "",
+        "rejected": "",
+        "active": ""
     }
 }

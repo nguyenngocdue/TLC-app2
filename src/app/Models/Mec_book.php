@@ -18,6 +18,9 @@ class Mec_book extends ModelExtended
         "project_id",
         "sub_project_id",
 
+        "from_department_id",
+        "to_department_id",
+
         "assignee_1",
         "assignee_2",
         "assignee_3",
@@ -33,12 +36,14 @@ class Mec_book extends ModelExtended
         'getProject' => ['belongsTo', Project::class, 'project_id'],
         'getSubProject' => ['belongsTo', Sub_project::class, 'sub_project_id'],
         'getPriority' => ['belongsTo', Priority::class, 'priority_id'],
+        "getFromDepartment" => ["belongsTo", Department::class, "from_department_id"],
+        "getToDepartment" => ["belongsTo", Department::class, "to_department_id"],
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getAssignee2' => ['belongsTo', User::class, 'assignee_2'],
         'getAssignee3' => ['belongsTo', User::class, 'assignee_3'],
 
+        "comment_insp_rejected_reason" =>  ['morphMany', Comment::class, 'commentable', 'commentable_type', 'commentable_id'],
         "attachment_mec_book" => ['morphMany', Attachment::class, 'attachable', 'object_type', 'object_id'],
-
         "getMonitors1" => ["belongsToMany", User::class, 'ym2m_mec_book_user_monitor_1'],
     ];
 
@@ -55,6 +60,18 @@ class Mec_book extends ModelExtended
     }
 
     public function getPriority()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getFromDepartment()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
+    public function getToDepartment()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
@@ -79,6 +96,12 @@ class Mec_book extends ModelExtended
     }
 
     public function attachment_mec_book()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);
+    }
+
+    public function comment_insp_rejected_reason()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2], $p[3], $p[4]);

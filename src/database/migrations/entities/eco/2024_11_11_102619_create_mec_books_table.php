@@ -28,6 +28,9 @@ return new class extends Migration
             $table->unsignedBigInteger('priority_id')->nullable();
             $table->hasDueDate();
 
+            $table->unsignedBigInteger('from_department_id')->nullable();
+            $table->unsignedBigInteger('to_department_id')->nullable();
+
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('assignee_2')->nullable();
             $table->unsignedBigInteger('assignee_3')->nullable();
