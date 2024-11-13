@@ -19,6 +19,7 @@ class WelcomeFortuneDataSource02
             ['dataIndex' => 'agg_range', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_range'],
             ['dataIndex' => 'agg_count_unique_values', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_count_unique_values'],
             ['dataIndex' => 'agg_unique_values', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_unique_values'],
+            ['dataIndex' => 'status', 'subTitle' => 'fixed-right no-bg', 'fixed' => 'right-no-bg', 'footer' => 'agg_none',],
             ['dataIndex' => 'text', 'subTitle' => 'a string', 'fixed' => 'right'],
             ['dataIndex' => 'date', 'subTitle' => 'a date', 'fixed' => 'right'],
         ];

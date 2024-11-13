@@ -109,7 +109,7 @@ export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[])
 }
 
 export const getFirstFixedRightColumnIndex = (columns: TableColumn[]) =>
-    columns.findIndex((column) => column.fixed === 'right')
+    columns.findIndex((column) => ['right', 'right-no-bg'].includes(column.fixed + ''))
 
 const getShortFixed = (fixed?: string) =>
     fixed === 'left-no-bg' ? 'left' : fixed === 'right-no-bg' ? 'right' : fixed
