@@ -14,7 +14,6 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
-import { em } from '@fullcalendar/core/internal-common'
 
 class EditableTable3 {
     private tableDebug = false

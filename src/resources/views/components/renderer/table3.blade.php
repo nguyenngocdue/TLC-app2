@@ -43,6 +43,9 @@ var tableObjectIndexedColumns = {};
 
                 'rotate45Width': @json($rotate45Width),
                 'rotate45Height': @json($rotate45Height),
+
+                // 'editable': {{($editable??0) ? "true" : "false"}},
+                'classList': @json($classList),
             },
         }
         // console.log("Initilizing table {{$tableName}}", {{$tableName}})

@@ -1,9 +1,13 @@
-import { TableRendererParams } from '../../Type/EditableTable3DataLineType'
+import {
+    TableRenderedValueObject,
+    TableRendererParams,
+} from '../../Type/EditableTable3DataLineType'
 
 export class Text4View {
     constructor(private params: TableRendererParams) {}
 
-    render() {
-        return { rendered: 'Text4 View' }
+    render(): TableRenderedValueObject {
+        const { cellValue } = this.params
+        return { rendered: cellValue as unknown as string }
     }
 }

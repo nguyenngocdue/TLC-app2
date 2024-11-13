@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\ClassList;
 use App\View\Components\Renderer\Table\TableTraitColumns;
 use App\View\Components\Renderer\Table\TableTraitCommon;
 use App\View\Components\Renderer\Table\TableTraitFooter;
@@ -35,7 +36,7 @@ class Table3 extends Component
     private $footer = "",
 
     private $maxH = 40,
-    
+
     // // private $minH = 40,
     // //Editable MODE
     // private $model = null,
@@ -52,21 +53,33 @@ class Table3 extends Component
     private $bottomCenterControl = null,
     private $bottomRightControl = null,
     private $tableTrueWidth = false,
-    // private $editable = false,
+    private $editable = false,
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
     // private $borderColor = 'border-gray-300',
-    
+
     // private $headerTop = null, // OBSOLETE due to applyTopFor2ndHeader
-    ) {}
-    
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
+  ) {}
+
+  /**
+   * Get the view / contents that represent the component.
+   *
+   * @return \Illuminate\Contracts\View\View|\Closure|string
+   */
   public function render()
   {
+    $classList = [
+      'text' => ClassList::TEXT,
+      'textarea' => ClassList::TEXTAREA,
+      'dropdown' => ClassList::DROPDOWN,
+      'toggle' => ClassList::TOGGLE,
+      'button' => ClassList::BUTTON,
+      // 'radio_checkbox' => ClassList::RADIO_CHECKBOX,
+      // 'radio_group' => ClassList::RADIO_GROUP,
+      // 'button2' => ClassList::BUTTON2,
+
+    ];
+
     $params = [
       'tableName' => $this->tableName,
       'columns' => $this->columns,
@@ -90,9 +103,12 @@ class Table3 extends Component
       'bottomLeftControl' => $this->bottomLeftControl,
       'bottomCenterControl' => $this->bottomCenterControl,
       'bottomRightControl' => $this->bottomRightControl,
-      
+
       'rotate45Width' => $this->rotate45Width,
       'rotate45Height' => $this->rotate45Height,
+
+      // 'editable' => $this->editable,
+      'classList' => $classList,
 
     ];
     // Log::info($params);

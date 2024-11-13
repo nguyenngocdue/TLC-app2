@@ -27,37 +27,49 @@ export const makeTCell = (
     let result: TableRenderedValueObject
     const rendererParams = { cellValue, params, dataLine, column, rowIndex }
 
+    // console.log(column.dataIndex, column)
+
     switch (true) {
         case column.renderer == 'no.':
             rendered = rowIndex + 1
             break
 
         case column.renderer == 'text':
+        case column.renderer == 'text4': // this line will be removed for new flexible MODE
             result = new Text4(rendererParams).render()
             rendered = result.rendered
             break
 
         case column.renderer == 'number':
+        case column.renderer == 'number4': // this line will be removed for new flexible MODE
             result = new Number4(rendererParams).render()
+            // result = new Text4(rendererParams).render()
             rendered = result.rendered
             break
 
         case column.renderer == 'dropdown':
             result = new Dropdown4(rendererParams).render()
+            // result = new Text4(rendererParams).render()
             rendered = result.rendered
             break
 
         case column.renderer == 'toggle':
-            result = new Toggle4(rendererParams).render()
+            // result = new Toggle4(rendererParams).render()
+            result = new Text4(rendererParams).render()
             rendered = result.rendered
             break
 
         case column.renderer == 'checkbox':
-            result = new Checkbox4(rendererParams).render()
+            // result = new Checkbox4(rendererParams).render()
+            result = new Text4(rendererParams).render()
             rendered = result.rendered
             break
 
         case column.renderer == 'picker_datetime':
+            break
+
+        case column.renderer != undefined:
+            rendered = `Unknown renderer: ${column.renderer}`
             break
 
         //============From here there is no renderer================
