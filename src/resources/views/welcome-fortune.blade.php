@@ -5,6 +5,22 @@
 @section('content')
 
 <x-renderer.table3
+    tableName="table16"
+    :columns="$table03['columns']"
+    :dataSource="$table03['dataSource']"
+    
+    showNo=1
+    tableDebug="1"
+    tableTrueWidth="1"
+    >
+</x-renderer.table>
+
+<br/>
+<hr/>
+<br/>
+
+
+{{-- <x-renderer.table3
     tableName="table15"
     :columns="$table01['columns']"
     :dataSource="$table01['dataSource']"
@@ -75,7 +91,7 @@
 
 <br/>
 <hr/>
-<br/>
+<br/> --}}
 
 <x-renderer.table3
     tableName="table12"

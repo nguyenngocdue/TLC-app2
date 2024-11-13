@@ -1,6 +1,6 @@
-import { TableColumn } from '../Type/EditableTable3ColumnType'
-import { TableDataLine } from '../Type/EditableTable3DataLineType'
-import { TableParams } from '../Type/EditableTable3ParamType'
+import { TableColumn } from '../../Type/EditableTable3ColumnType'
+import { TableDataLine } from '../../Type/EditableTable3DataLineType'
+import { TableParams } from '../../Type/EditableTable3ParamType'
 
 export class Text4 {
     constructor(

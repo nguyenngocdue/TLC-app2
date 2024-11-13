@@ -15,13 +15,14 @@ export interface TableColumn {
     fixedRight?: number
 
     renderer?: string
+    editable?: boolean
+
     columnIndex?: string
     // prod_discipline_id?: number
     // target_man_minutes?: number
     // target_man_power?: number
     // target_min_uom?: number
     // isExtra?: boolean
-    editable?: boolean
     no_print?: boolean
     required?: boolean
     cbbDataSource?: (string | null)[]

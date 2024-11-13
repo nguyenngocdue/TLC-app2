@@ -119,7 +119,7 @@ class EditableTable3 {
         </div>`
 
         const debugStr = tableDebug
-            ? `<div class="bg-red-600 text-white border font-bold">${tableName} is in DEBUG Mode</div>`
+            ? `<div class="bg-red-600 text-white text-center border font-bold">${tableName} is in DEBUG Mode</div>`
             : ``
 
         const editableTable = `
@@ -160,8 +160,10 @@ class EditableTable3 {
         const div = document.querySelector(divId)
         div && (div.innerHTML = body)
 
-        if (this.tableDebug)
+        if (this.tableDebug) {
             console.log(`└──────────────────${this.params.tableName}──────────────────┘`)
+            console.log('')
+        }
 
         if (columns && dataSource) {
             setTimeout(() => {

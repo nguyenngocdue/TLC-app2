@@ -1,4 +1,4 @@
-import { ValueObject4 } from './Controls/ValueObject4'
+import { ValueObject4 } from './Controls/ViewMode/ValueObject4'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 

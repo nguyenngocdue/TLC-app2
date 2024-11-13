@@ -1,12 +1,12 @@
-import { smartTypeOf } from '../EditableTable3Str'
-import { TableColumn } from '../Type/EditableTable3ColumnType'
+import { smartTypeOf } from '../../EditableTable3Str'
+import { TableColumn } from '../../Type/EditableTable3ColumnType'
 import {
     TableValueObjectType,
     TableDataLine,
     TableCellType,
     TableRenderedValueObject,
-} from '../Type/EditableTable3DataLineType'
-import { TableParams } from '../Type/EditableTable3ParamType'
+} from '../../Type/EditableTable3DataLineType'
+import { TableParams } from '../../Type/EditableTable3ParamType'
 
 export class ValueObject4 {
     constructor(
@@ -26,8 +26,8 @@ export class ValueObject4 {
 
         const theObject = this.cellValue as unknown as TableValueObjectType
         if (!theObject) {
-            console.log(`ValueObject4 theObject is null: ${this.column.dataIndex}`)
-            return { rendered: '' }
+            console.log(`ValueObject4 theObject is null: ${this.column.dataIndex}`, this.cellValue)
+            return { rendered: '', classStr: 'bg-pink-400' }
         }
 
         const { value, cell_class, cell_href, cell_div_class, cell_onclick, cell_title } = theObject

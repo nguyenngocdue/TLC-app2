@@ -10,6 +10,7 @@ class WelcomeFortuneController extends Controller
     function __construct(
         private WelcomeFortuneDataSource01 $dataSource01,
         private WelcomeFortuneDataSource02 $dataSource02,
+        private WelcomeFortuneDataSource03 $dataSource03,
     ) {}
 
     function getType()
@@ -21,10 +22,12 @@ class WelcomeFortuneController extends Controller
     {
         $table01 = $this->dataSource01->getDataSource();
         $table02 = $this->dataSource02->getDataSource();
+        $table03 = $this->dataSource03->getDataSource();
 
         return view("welcome-fortune", [
             'table01' => $table01,
             'table02' => $table02,
+            'table03' => $table03,
         ]);
     }
 }
