@@ -60,8 +60,12 @@ class EditableTable3 {
         const toolbarTop = tableConfig.showPaginationTop ? makeToolBarTop(this.params) : ``
         const toolbarBottom = tableConfig.showPaginationBottom ? makeToolBarBottom(this.params) : ``
 
-        const tableHeader = tableConfig.tableHeader || ''
-        const tableFooter = tableConfig.tableFooter || ''
+        const tableHeader = tableConfig.tableHeader
+            ? `<div component="tableHeader">${tableConfig.tableHeader}</div>`
+            : ''
+        const tableFooter = tableConfig.tableFooter
+            ? `<div component="tableFooter">${tableConfig.tableFooter}</div>`
+            : ''
 
         const body = makeTbody(this.params)
         const emptyTable = `<tr><td class='text-center h-40 text-gray-500' colspan='100%'>No Data</td></tr>`
@@ -90,7 +94,7 @@ class EditableTable3 {
             </tfoot>
         </table>`
 
-        const classList = `table-wrp block bg-gray-100 overflow-x-auto ${borderT}`
+        const classList = `table-wrp block bg-gray-100 overflow-x-auto ${borderT} border-l border-r border-b`
         const styleList = `${styleMaxH}`
 
         const wrappingDiv = `<div class="${classList}" style="${styleList}">

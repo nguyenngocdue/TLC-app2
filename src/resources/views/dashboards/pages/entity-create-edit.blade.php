@@ -75,7 +75,7 @@ if(in_array($type,["fin_expense_claims"])) $formWidth = "w-full";
                 <x-renderer.item-render-props width='{{$formWidth}}' id={{$id}} :item="$item" :dataSource="$propsOfMainPage" status={{$status}} action={{$action}} type={{$type}} modelPath={{$modelPath}} hasReadOnly={{$hasReadOnly}} />
                 @if(!$hasReadOnly)
                     @if(!in_array($type, ['fin_expense_claims'])) 
-                        <div class="fixed right-0">                        
+                        <div class="fixed right-0 z-20">
                             <x-controls.action-buttons 
                                 isFloatingOnRightSide="true" 
                                 :buttonSave="$buttonSave" 

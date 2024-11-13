@@ -5,8 +5,10 @@ var tableObjectIndexedColumns = {};
 </script>
 @endonce
 
-<div id="{{$tableName}}" >
-    Loading table {{$tableName}}...
+<div id="{{$tableName}}" component="editable-table-3" class='my-1'>
+    <div class="border text-center rounded p-4 bg-gray-100">
+        <i class="fa-duotone fa-spinner fa-spin text-green-500 mx-2"></i>Loading table {{$tableName}}...
+    </div>
 </div>
 
 <script>
