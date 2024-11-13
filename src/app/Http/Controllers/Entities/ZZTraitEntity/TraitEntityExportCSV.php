@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Entities\ZZTraitEntity;
 
 use App\Utils\Support\Json\SuperProps;
 use DateTime;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
 
@@ -100,11 +99,16 @@ trait TraitEntityExportCSV
                         case 'morphMany':
                             $collection = $dataLine->{$relationships['control_name_function']};
                             $renderer_view_all = $relationships['renderer_view_all'];
+                            if($renderer_view_all  == 'column_link') $renderer_view_all = 'column';
                             $renderer_view_all_param = $relationships['renderer_view_all_param'];
                             $renderer_view_all_unit = $relationships['renderer_view_all_unit'];
                             $tag = "x-renderer.$renderer_view_all";
                             $slot =  json_encode($collection->toArray());
-                            $output = "<$tag renderRaw=1 rendererParam='$renderer_view_all_param' rendererUnit='$renderer_view_all_unit'>$slot</$tag>";
+                            $output = "<$tag 
+                            renderRaw=1 
+                            rendererParam='$renderer_view_all_param' 
+                            rendererUnit='$renderer_view_all_unit'
+                            >$slot</$tag>";
                             $result[] = Blade::render($output);
 
                             // switch ($relationships['renderer_view_all']) {
