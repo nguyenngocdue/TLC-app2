@@ -117,7 +117,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         if ($this->prodRoutingLink) {
             $data = $data
                 ->whereIn('prod_routing_link_id', $this->prodRoutingLink)
-                ->whereNull('prod_routing_details.deleted_at')
+                // ->whereNull('prod_routing_details.deleted_at')
                 ;
 
         } 
