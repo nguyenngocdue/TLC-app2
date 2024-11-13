@@ -14,7 +14,7 @@ export interface TableColumn {
     fixedLeft?: number
     fixedRight?: number
 
-    renderer?: string
+    renderer?: 'no.' | 'text' | 'number' | 'dropdown' | 'toggle' | 'picker_datetime' | 'checkbox'
     editable?: boolean
 
     columnIndex?: string

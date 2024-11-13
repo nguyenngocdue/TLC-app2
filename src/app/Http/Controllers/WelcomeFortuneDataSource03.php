@@ -7,14 +7,18 @@ class WelcomeFortuneDataSource03
     function getDataSource() {
         $columns = [ 
             ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
-            ['dataIndex' => 'name', 'width' => 200, 'fixed' => 'left'],
-            ['dataIndex' => 'name', 'width' => 200, 'mode' => 'edit'],
-            ['dataIndex' => 'status', ],
-            ['dataIndex' => 'status', 'mode'=> 'edit',],
-          
-            ['dataIndex' => 'number',],
-            ['dataIndex' => 'text','fixed' => 'right'],
-            ['dataIndex' => 'date','fixed' => 'right', 'width'=> 120],
+            ['dataIndex' => 'name', 'renderer' => 'text', 'fixed' => 'left'],
+            ['dataIndex' => 'name', 'renderer' => 'text', 'mode' => 'edit', 'fixed' => 'left',  ],
+            ['dataIndex' => 'bool', 'renderer' => 'toggle'],
+            ['dataIndex' => 'bool', 'renderer' => 'toggle', 'mode'=> 'edit', ],
+            // ['dataIndex' => 'bool', ],
+            ['dataIndex' => 'bool', 'renderer' => 'checkbox', 'mode'=> 'edit',],
+            ['dataIndex' => 'number','renderer' => 'dropdown'],
+            ['dataIndex' => 'number','renderer' => 'dropdown', 'mode'=> 'edit', ],
+            ['dataIndex' => 'status', 'renderer' => 'dropdown'],
+            ['dataIndex' => 'status', 'renderer' => 'dropdown', 'mode'=> 'edit', ],
+            // ['dataIndex' => 'date','fixed' => 'right', 'width'=> 120],
+            // ['dataIndex' => 'date','fixed' => 'right', 'mode'=> 'edit','renderer' => 'dropdown'],
         ];
         
         $tables = [
@@ -23,12 +27,16 @@ class WelcomeFortuneDataSource03
             'status' => 'active',
             'text' => 'a string',
             'date' => '2021-01-01',
+            'bool' => true,
+            'number' => 1.25,
           ],
           [
             'name' => 'Doe',
             'status' => 'new',
             'text' => 'another string',
             'date' => '2021-01-02',
+            'bool' => false,
+            'number' => 1.25,
           ],
         ];
 

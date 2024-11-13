@@ -1,4 +1,4 @@
-import { ValueObject4 } from './Controls/ViewMode/ValueObject4'
+import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 
@@ -18,13 +18,15 @@ export const makeThead2nd = (params: TableParams) => {
             let sndHeader = ''
             let classStr = ''
             if (dataHeader[column.dataIndex]) {
-                const result = new ValueObject4(
-                    dataHeader[column.dataIndex],
+                const cellValue = dataHeader[column.dataIndex]
+                const rendererParams = {
+                    cellValue,
                     params,
-                    {},
+                    dataLine: dataHeader,
                     column,
-                    0,
-                ).render()
+                    rowIndex: 0,
+                }
+                const result = new ValueObject4(rendererParams).render()
                 sndHeader = result.rendered
                 classStr = result.classStr || ''
             }

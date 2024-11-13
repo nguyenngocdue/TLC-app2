@@ -27,6 +27,6 @@ export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => 
     const footerStr = footers.join('')
 
     const classList = `sticky z-10 bg-gray-100`
-    const styleList = `bottom: 0px;`
+    const styleList = `bottom: -1px;`
     return `<tr class="${classList}" style="${styleList}">${footerStr}</tr>`
 }
