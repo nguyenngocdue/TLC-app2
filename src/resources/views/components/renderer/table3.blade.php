@@ -37,8 +37,10 @@ var tableObjectIndexedColumns = {};
                 'tableFooter': @json($footer),
 
                 'showNo': {{($showNo??0) ? "true" : "false"}},
-
                 'maxH': @json($maxH),
+
+                'rotate45Width': @json($rotate45Width),
+                'rotate45Height': @json($rotate45Height),
             },
         }
         console.log("Initilizing table {{$tableName}}", {{$tableName}})

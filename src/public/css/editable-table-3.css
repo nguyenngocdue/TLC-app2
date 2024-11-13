@@ -3,26 +3,6 @@ body {
     overflow-x: hidden;
 }
 
-th.rotated-title-right-th {
-    vertical-align: bottom;
-    text-align: left !important;
-    line-height: 1;
-    padding: 0;
-    border-right: none !important;
-    position: relative;
-}
-
-.rotated-title-right-div {
-    position: absolute;
-    bottom: 0;
-    right: 75%;
-    -webkit-transform-origin: bottom right;
-    transform-origin: bottom right;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    pointer-events: auto;
-}
-
 th.rotated-title-left-th {
     vertical-align: bottom;
     text-align: left !important;
@@ -32,6 +12,39 @@ th.rotated-title-left-th {
     position: relative;
 }
 
+.rotated-title-div-100 {
+    position: absolute;
+    bottom: 50%;
+    left: -10px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-div-200 {
+    position: absolute;
+    bottom: 50%;
+    left: -25px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-div-300 {
+    position: absolute;
+    bottom: 50%;
+    left: -40px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-div-400 {
+    position: absolute;
+    bottom: 50%;
+    left: -53px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+/* From here, 200 300 400 are old */
 .rotated-title-left-div-200 {
     position: absolute;
     bottom: 45%;

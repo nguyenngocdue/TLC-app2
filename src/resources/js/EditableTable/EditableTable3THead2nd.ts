@@ -7,10 +7,10 @@ export const makeThead2nd = (params: TableParams) => {
     if (!dataHeader) return ''
     // console.log('makeThead2nd', columns, dataHeader)
     const renderHeader = () => {
+        let hasActualText = false
         const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
         const result = columns.map((column, index) => {
-            const defaultToolTip = `+DataIndex: ${column.dataIndex}\n+Renderer: ${column.renderer}\n+Width: ${column.width}`
-            const tooltip = column.tooltip || defaultToolTip
+            const tooltip = column.tooltip || ''
 
             const hiddenStr = column.invisible ? 'hidden' : ''
             const widthStyle = column.width ? `width: ${column.width}px;` : ''
@@ -35,14 +35,16 @@ export const makeThead2nd = (params: TableParams) => {
             const borderL = index == firstFixedRightIndex ? 'border-l' : ''
             const borderStr = `border-b border-r border-gray-300 ${borderL}`
             const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${classStr}`
+            hasActualText ||= !!sndHeader
 
             return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">
                 ${sndHeader}                
             </th>`
         })
 
-        return result
+        if (hasActualText) return result.join('')
+        return ''
     }
 
-    return renderHeader().join('')
+    return renderHeader()
 }

@@ -2,9 +2,8 @@ import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3Fixe
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => {
-    const { tableDebug } = tableConfig
-
     const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
+    let hasActualText = false
     const footers = columns.map((column, index) => {
         const hiddenStr = column.invisible ? 'hidden' : ''
         const alignStr = column.align ? `text-${column.align}` : ''
@@ -17,11 +16,13 @@ export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => 
         const classList = `${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} p-1`
 
         if (column.footer) {
+            hasActualText ||= !!column.footer
             return `<th class="${classList}">${column.footer}</td>`
         } else {
             return `<th class="${classList}"></td>`
         }
     })
+    if (!hasActualText) return ''
     // console.log('makeTfoot', footers)
     const footerStr = footers.join('')
 

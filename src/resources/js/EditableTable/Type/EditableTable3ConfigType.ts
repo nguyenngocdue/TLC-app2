@@ -18,4 +18,7 @@ export interface TableConfig {
     bottomLeftControl?: string
     bottomCenterControl?: string
     bottomRightControl?: string
+
+    rotate45Width?: number
+    rotate45Height?: number
 }

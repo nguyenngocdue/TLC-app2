@@ -40,8 +40,8 @@ class Table3 extends Component
     // //Editable MODE
     // private $model = null,
     // // private $editable = false,
-    // private $rotate45Width = false,
-    // private $rotate45Height = false,
+    private $rotate45Width = false,
+    private $rotate45Height = false,
     // private $noCss = false,
     private $showPaginationTop = false,
     private $showPaginationBottom = false,
@@ -79,6 +79,7 @@ class Table3 extends Component
       'header' => $this->header,
       'footer' => $this->footer,
       'maxH' => $this->maxH,
+      'showNo' => $this->showNo,
 
       'showPaginationTop' => $this->showPaginationTop,
       'showPaginationBottom' => $this->showPaginationBottom,
@@ -90,7 +91,9 @@ class Table3 extends Component
       'bottomCenterControl' => $this->bottomCenterControl,
       'bottomRightControl' => $this->bottomRightControl,
       
-      'showNo' => $this->showNo,
+      'rotate45Width' => $this->rotate45Width,
+      'rotate45Height' => $this->rotate45Height,
+
     ];
     // Log::info($params);
     return view("components.renderer.table3", $params);

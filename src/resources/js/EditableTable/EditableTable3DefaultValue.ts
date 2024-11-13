@@ -34,6 +34,17 @@ export const convertArrayToLengthAware = (dataSource: any[]) => {
     }
 }
 
+export const getTooltip = (column: TableColumn) => {
+    if (column.tooltip) return column.tooltip
+    return [
+        column.dataIndex ? `+DataIndex: ${column.dataIndex}` : '',
+        column.renderer ? `+Renderer: ${column.renderer}` : '',
+        column.width ? `+Width: ${column.width}` : '',
+    ]
+        .filter((i) => i)
+        .join('\n')
+}
+
 // export const makeUpPaginator = (tableConfig: TableConfig, dataSource: LengthAware) => {
 //     if (tableConfig.showPaginationTop) {
 //         if (tableConfig.topLeftControl == 'paginator')

@@ -17,12 +17,15 @@ export const makeTbody = (params: TableParams) => {
                 let cellValue = row[column.dataIndex]
                 let rendered: any = ''
                 let tdClass: any = ''
+                let p_2 = false
                 switch (true) {
                     case column.renderer == 'no.':
                         rendered = rowIndex + 1
+                        p_2 = true
                         break
                     case column.renderer == 'text':
                         ;[rendered] = new Text4(params, row, column, rowIndex).render()
+                        p_2 = true
                         break
 
                     //============From here there is no renderer================
@@ -30,6 +33,7 @@ export const makeTbody = (params: TableParams) => {
                     case smartTypeOf(cellValue) == 'number':
                     case smartTypeOf(cellValue) == 'boolean':
                         rendered = cellValue
+                        p_2 = true
                         break
                     case smartTypeOf(cellValue) == 'object':
                         const result = new ValueObject4(
@@ -64,11 +68,12 @@ export const makeTbody = (params: TableParams) => {
                 }
                 // console.log(rendered)
 
+                const p = p_2 ? 'p-2' : ''
                 const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
-                const textStr = `text-sm text-sm-vw text-gray-700`
+                const textStr = `text-sm text-sm-vw 1text-gray-700`
                 const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
                 const borderStr = `border-b border-r border-gray-300 ${borderL}`
-                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} ${textStr} p-2`
+                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} ${textStr} ${p}`
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''
                 const styleList = `${widthStr}`
@@ -78,5 +83,7 @@ export const makeTbody = (params: TableParams) => {
     }
 
     // return 1
-    return dataSource.data.map((row, rowIndex) => `<tr>${renderRow(row, rowIndex)}</tr>`).join('')
+    return dataSource.data
+        .map((row, rowIndex) => `<tr class="hover:bg-gray-100">${renderRow(row, rowIndex)}</tr>`)
+        .join('')
 }

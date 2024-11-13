@@ -42,6 +42,7 @@ class EditableTable3 {
         if (tableConfig.tableTrueWidth) tableWidth = `width: ${calTableTrueWidth(this.params)}px;`
 
         //OLD maxH using REM and tailwind generator, up to 60 REM. 1 REM = 16px
+        //Can be removed if all code use px not rem
         const styleMaxH = tableConfig.maxH
             ? `max-height: ${tableConfig.maxH <= 60 ? tableConfig.maxH * 16 : tableConfig.maxH}px;`
             : ''

@@ -116,5 +116,7 @@ const getShortFixed = (fixed?: string) =>
 
 export const getFixedStr = (fixed?: string, index?: number, th_or_td?: 'th' | 'td') => {
     const shortFixed = getShortFixed(fixed)
-    return `table-${th_or_td}-fixed-${fixed} table-${th_or_td}-fixed-${shortFixed}-${index}`
+    if (shortFixed)
+        return `table-${th_or_td}-fixed-${fixed} table-${th_or_td}-fixed-${shortFixed}-${index}`
+    return ''
 }
