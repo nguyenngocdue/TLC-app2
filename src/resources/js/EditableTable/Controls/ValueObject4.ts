@@ -28,7 +28,7 @@ export class ValueObject4 {
 
         const { value, cell_class, cell_href, cell_div_class, cell_onclick, cell_title } = theObject
         const classStr = cell_class ? `${cell_class}` : ''
-        const hrefStr = cell_href ? `href="${cell_href}"` : ''
+        const hrefStr = cell_href ? `href='${cell_href}'` : ''
         const titleStr = cell_title ? `${cell_title}` : ''
         const divClassStr = cell_div_class ? `${cell_div_class}` : 'p-2'
         const onclickStr = cell_onclick ? `${cell_onclick}` : ''

@@ -14,6 +14,7 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
+import { em } from '@fullcalendar/core/internal-common'
 
 class EditableTable3 {
     private defaultConfig: TableConfig = {
@@ -31,8 +32,17 @@ class EditableTable3 {
         console.log('EditableTable3', { ...params, columns: this.params.columns })
     }
 
-    render() {
-        const { tableName, tableConfig } = this.params
+    renderTable() {
+        const { tableName, tableConfig, columns, dataSource } = this.params
+
+        if (!columns) {
+            const divId = `#${tableName}`
+            const div = document.querySelector(divId)
+            const editableTable = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
+                Columns is required
+            </div>`
+            div && (div.innerHTML = editableTable)
+        }
 
         const tableDebug = tableConfig.tableDebug || false
         const borderColor = tableConfig.borderColor || this.defaultConfig.borderColor
@@ -53,8 +63,11 @@ class EditableTable3 {
         const tableHeader = tableConfig.tableHeader || ''
         const tableFooter = tableConfig.tableFooter || ''
 
+        const body = makeTbody(this.params)
+        const emptyTable = `<tr><td class='text-center h-40 text-gray-500' colspan='100%'>No Data</td></tr>`
+
         const tableStr = `<table 
-                class="whitespace-no-wrap w-full text-sm text-sm-vw border-separate border border-spacing-0 ${borderColor}"
+                class="whitespace-no-wrap w-full text-sm text-sm-vw border-separate 1border border-spacing-0 ${borderColor}"
                 style="table-layout: auto; ${tableWidth}"
             >
             <colgroup>
@@ -69,8 +82,9 @@ class EditableTable3 {
             </thead>
            
             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
-                ${makeTbody(this.params)}
+                ${body ? body : emptyTable}
             </tbody>
+
             <tfoot>
                 ${makeTfoot(this.params)}
             </tfoot>
@@ -96,15 +110,40 @@ class EditableTable3 {
         ${tableFooter}
         `
 
+        return editableTable
+    }
+
+    render() {
+        const { tableName, tableConfig, columns, dataSource } = this.params
+
+        let body = ''
+        if (!columns) {
+            body = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
+            Columns is required
+            </div>`
+        }
+
+        if (columns && !dataSource) {
+            body = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
+            DataSource is required
+            </div>`
+        }
+
+        if (columns && dataSource) {
+            body = this.renderTable()
+        }
+
         const divId = `#${tableName}`
         const div = document.querySelector(divId)
-        div && (div.innerHTML = editableTable)
+        div && (div.innerHTML = body)
 
-        setTimeout(() => {
-            //Wait sometime for the browser to finish rendering the table
-            applyFixedColumnWidth(tableName, this.params.columns)
-            applyTopFor2ndHeader(tableName)
-        }, 1000)
+        if (columns && dataSource) {
+            setTimeout(() => {
+                //Wait sometime for the browser to finish rendering the table
+                applyFixedColumnWidth(tableName, this.params.columns)
+                applyTopFor2ndHeader(tableName)
+            }, 1000)
+        }
     }
 }
 

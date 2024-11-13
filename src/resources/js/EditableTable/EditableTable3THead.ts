@@ -34,7 +34,7 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
         const rotateThStyle = `height: ${rotate45Height}px;`
         const rotateDivStyle = `width: ${tableConfig.rotate45Width}px;`
 
-        const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr}`
+        const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center`
         const styleThStr = `${widthStyle} ${rotateThStyle}`
         const styleDivStr = `${rotateDivStyle}`
 

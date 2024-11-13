@@ -13,7 +13,7 @@ export const ColumnNoValue: TableColumn = {
 }
 
 export const makeUpDefaultValue = ({ columns }: TableParams) => {
-    return columns.map((column) => ({ ...column, width: column.width || 100 }))
+    return columns && columns.map((column) => ({ ...column, width: column.width || 100 }))
 }
 
 export const convertArrayToLengthAware = (dataSource: any[]) => {
