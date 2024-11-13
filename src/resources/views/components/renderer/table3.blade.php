@@ -45,7 +45,7 @@ var tableObjectIndexedColumns = {};
                 'rotate45Height': @json($rotate45Height),
             },
         }
-        console.log("Initilizing table {{$tableName}}", {{$tableName}})
+        // console.log("Initilizing table {{$tableName}}", {{$tableName}})
         {{$tableName}}_Object = new EditableTable3(params)
         {{$tableName}}_Object.render()
     });

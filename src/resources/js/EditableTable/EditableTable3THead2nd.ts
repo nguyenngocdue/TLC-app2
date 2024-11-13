@@ -34,7 +34,7 @@ export const makeThead2nd = (params: TableParams) => {
             const textStr = `text-xs text-xs-vw text-gray-500`
             const borderL = index == firstFixedRightIndex ? 'border-l' : ''
             const borderStr = `border-b border-r border-gray-300 ${borderL}`
-            const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${classStr}`
+            const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${classStr} text-center`
             hasActualText ||= !!sndHeader
 
             return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">

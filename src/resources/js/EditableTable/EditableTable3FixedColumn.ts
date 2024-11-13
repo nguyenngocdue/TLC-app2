@@ -12,7 +12,7 @@ const getFirstRowHeight = (tableId: string) => {
 
 export const applyTopFor2ndHeader = (tableName: string) => {
     const firstRowHeight = getFirstRowHeight(tableName)
-    console.log('firstRowHeight', firstRowHeight)
+    // console.log('firstRowHeight', firstRowHeight)
     document.querySelectorAll(`#${tableName} .second-header`).forEach((element) => {
         element.setAttribute('style', `top: ${firstRowHeight}px`)
     })

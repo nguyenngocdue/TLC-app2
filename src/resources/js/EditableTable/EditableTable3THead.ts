@@ -32,9 +32,11 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
         const rotate45Height =
             tableConfig.rotate45Height || (tableConfig.rotate45Width || 100) / 1.41421 // Math.sqrt(2) side of square
         const rotateThStyle = `height: ${rotate45Height}px;`
-        const rotateDivStyle = `width: ${tableConfig.rotate45Width}px;`
+        const rotateDivStyle = tableConfig.rotate45Width
+            ? `width: ${tableConfig.rotate45Width}px;`
+            : ``
 
-        const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center`
+        const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center px-1`
         const styleThStr = `${widthStyle} ${rotateThStyle}`
         const styleDivStr = `${rotateDivStyle}`
 
@@ -42,7 +44,7 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
             class="${classList}" 
             style="${styleThStr}" 
             title="${tooltipStr}" 
-            colspan="${column.colspan}"
+            colspan="${column.colspan || ''}"
         >
             <div class="${rotateDivStr}" style="${styleDivStr}">
                 ${niceDataIndex}
