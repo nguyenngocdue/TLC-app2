@@ -65,9 +65,10 @@ export const makeTbody = (params: TableParams) => {
                 // console.log(rendered)
 
                 const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
+                const textStr = `text-sm text-sm-vw text-gray-700`
                 const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
                 const borderStr = `border-b border-r border-gray-300 ${borderL}`
-                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} p-2`
+                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} ${textStr} p-2`
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''
                 const styleList = `${widthStr}`

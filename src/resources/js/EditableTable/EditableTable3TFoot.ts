@@ -10,10 +10,11 @@ export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => 
         const alignStr = column.align ? `text-${column.align}` : ''
 
         const fixedStr = getFixedStr(column.fixed, index, 'th')
+        const textStr = `text-xs text-xs-vw`
         const bgStr = `bg-gray-100`
         const borderL = index == firstFixedRightIndex ? 'border-l' : ''
-        const borderStr = `border-r border-t border-gray-300 ${borderL}`
-        const classList = `${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${bgStr} p-1`
+        const borderStr = `border-r border-t border-b border-gray-300 ${borderL}`
+        const classList = `${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} p-1`
 
         if (column.footer) {
             return `<th class="${classList}">${column.footer}</td>`
