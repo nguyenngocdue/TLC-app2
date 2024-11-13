@@ -26,7 +26,7 @@ class Table3 extends Component
     private $dataSource = null,
     private $tableDebug = false,
     private $showNo = false,
-    private $dataHeader = null,
+    private $dataHeader = [],
     // private $showNoR = false,
     // private $groupBy = false,
     // private $groupByLength = 1,

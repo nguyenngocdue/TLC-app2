@@ -1,7 +1,9 @@
+import { ValueObject4 } from './Controls/ValueObject4'
 import { getFirstFixedRightColumnIndex } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 
-export const makeThead2nd = ({ columns, dataHeader }: TableParams) => {
+export const makeThead2nd = (params: TableParams) => {
+    const { columns, dataHeader } = params
     if (!dataHeader) return ''
     // console.log('makeThead2nd', columns, dataHeader)
     const renderHeader = () => {
@@ -17,12 +19,23 @@ export const makeThead2nd = ({ columns, dataHeader }: TableParams) => {
                 ? `table-th-fixed-${column.fixed} table-th-fixed-${column.fixed}-${index}`
                 : ''
 
+            let sndHeader = ''
+            let classStr = ''
+            if (dataHeader[column.dataIndex]) {
+                const result = new ValueObject4(
+                    dataHeader[column.dataIndex],
+                    params,
+                    {},
+                    column,
+                    0,
+                ).render()
+                sndHeader = result.rendered
+                classStr = result.classStr || ''
+            }
+
             const borderL = index == firstFixedRightIndex ? 'border-l' : ''
             const borderStr = `border-b border-r border-gray-300 ${borderL}`
-            const classList = `${hiddenStr} ${fixed} ${borderStr}`
-            let sndHeader = ''
-            if (dataHeader[column.dataIndex])
-                sndHeader = dataHeader[column.dataIndex] as unknown as string
+            const classList = `${hiddenStr} ${fixed} ${borderStr} ${classStr}`
 
             return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">
                 ${sndHeader}                

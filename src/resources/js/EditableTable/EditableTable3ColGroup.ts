@@ -16,7 +16,7 @@ export const calTableTrueWidth = ({ columns }: TableParams) => {
     return columns
         .map((column) => {
             if (column.invisible) return 0
-            if (column.width) return column.width
+            if (column.width) return column.width * 1
             return 0
         })
         .reduce((acc, cur) => acc + cur, 0)

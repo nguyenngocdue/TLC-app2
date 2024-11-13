@@ -32,13 +32,15 @@ export const makeTbody = (params: TableParams) => {
                         rendered = cellValue
                         break
                     case smartTypeOf(cellValue) == 'object':
-                        ;[rendered, tdClass] = new ValueObject4(
+                        const result = new ValueObject4(
                             cellValue,
                             params,
                             row,
                             column,
                             rowIndex,
                         ).render()
+                        rendered = result.rendered
+                        tdClass = result.classStr || ''
                         break
                     case smartTypeOf(cellValue) == 'array':
                         const array = cellValue as unknown as TableValueObjectType[]
@@ -46,9 +48,9 @@ export const makeTbody = (params: TableParams) => {
                         const values = array.map((item) =>
                             new ValueObject4(item, params, row, column, rowIndex).render(),
                         )
-                        console.log(values)
-                        rendered = values.map((v) => v[0]).join(' ')
-                        tdClass = values[0][1]
+                        // console.log(values)
+                        rendered = values.map((v) => v.rendered).join(' ')
+                        tdClass = values[0].classStr || ''
                         break
 
                     //============From here there is render base on cellValue================
@@ -68,7 +70,7 @@ export const makeTbody = (params: TableParams) => {
 
                 const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
                 const borderStr = `border-b border-r border-gray-300 ${borderL}`
-                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixed} ${borderStr}`
+                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixed} ${borderStr} p-2`
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''
                 const styleList = `${widthStr}`

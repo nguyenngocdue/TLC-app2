@@ -4,6 +4,7 @@ import {
     TableValueObjectType,
     TableDataLine,
     TableCellType,
+    TableRenderedValueObject,
 } from '../Type/EditableTable3DataLineType'
 import { TableParams } from '../Type/EditableTable3ParamType'
 
@@ -16,12 +17,12 @@ export class ValueObject4 {
         private index: number,
     ) {}
 
-    render() {
-        if (smartTypeOf(this.cellValue) == 'number') return [this.cellValue.toString(), '']
-        if (smartTypeOf(this.cellValue) == 'string') return [this.cellValue, '']
-        if (smartTypeOf(this.cellValue) == 'boolean') return [this.cellValue.toString(), '']
-        if (smartTypeOf(this.cellValue) == 'null') return ['', '']
-        if (smartTypeOf(this.cellValue) == 'undefined') return ['', '']
+    render(): TableRenderedValueObject {
+        if (smartTypeOf(this.cellValue) == 'number') return { rendered: this.cellValue.toString() }
+        if (smartTypeOf(this.cellValue) == 'string') return { rendered: this.cellValue.toString() }
+        if (smartTypeOf(this.cellValue) == 'boolean') return { rendered: this.cellValue.toString() }
+        if (smartTypeOf(this.cellValue) == 'null') return { rendered: '' }
+        if (smartTypeOf(this.cellValue) == 'undefined') return { rendered: '' }
 
         const theObject = this.cellValue as unknown as TableValueObjectType
 
@@ -31,11 +32,12 @@ export class ValueObject4 {
         const titleStr = cell_title ? `${cell_title}` : ''
         const divClassStr = cell_div_class ? `${cell_div_class}` : ''
         const onclickStr = cell_onclick ? `${cell_onclick}` : ''
+
         const rendered = `<a ${hrefStr} ${divClassStr}>
             <div class="${divClassStr} w-full h-full" title="${titleStr}" onclick="${onclickStr}">
-                ${value ? value : 'null'}
+                ${value ? value : ''}
             </div>
         </a>`
-        return [rendered, classStr]
+        return { rendered, classStr }
     }
 }

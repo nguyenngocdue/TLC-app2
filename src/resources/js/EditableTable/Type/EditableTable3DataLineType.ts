@@ -33,3 +33,8 @@ export interface LengthAware {
     to: number
     total: number
 }
+
+export interface TableRenderedValueObject {
+    rendered: string
+    classStr?: string
+}
