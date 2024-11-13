@@ -64,31 +64,39 @@ export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[])
     // console.log('accumulated', arrayOfColumns)
 
     arrayOfColumns.forEach((column, index) => {
-        const left = column['fixedLeft']
-        document
-            .querySelectorAll(`#${tableName} .table-td-fixed-left-${index}`)
-            .forEach((element) => {
-                element.setAttribute('style', `left: ${left}px`)
-            })
-        document
-            .querySelectorAll(`#${tableName} .table-th-fixed-left-${index}`)
-            .forEach((element) => {
-                element.setAttribute('style', `left: ${left}px`)
-            })
+        const { fixedLeft, fixed } = column
+        const shortFixed = getShortFixed(fixed)
+
+        if (shortFixed && shortFixed == 'left') {
+            document
+                .querySelectorAll(`#${tableName} .table-td-fixed-${shortFixed}-${index}`)
+                .forEach((element) => {
+                    element.setAttribute('style', `left: ${fixedLeft}px`)
+                })
+            document
+                .querySelectorAll(`#${tableName} .table-th-fixed-${shortFixed}-${index}`)
+                .forEach((element) => {
+                    element.setAttribute('style', `left: ${fixedLeft}px`)
+                })
+        }
     })
 
     arrayOfColumns.forEach((column, index) => {
-        const right = column['fixedRight']
-        document
-            .querySelectorAll(`#${tableName} .table-td-fixed-right-${index}`)
-            .forEach((element) => {
-                element.setAttribute('style', `right: ${right}px`)
-            })
-        document
-            .querySelectorAll(`#${tableName} .table-th-fixed-right-${index}`)
-            .forEach((element) => {
-                element.setAttribute('style', `right: ${right}px`)
-            })
+        const { fixedRight, fixed } = column
+        const shortFixed = getShortFixed(fixed)
+
+        if (shortFixed && shortFixed === 'right') {
+            document
+                .querySelectorAll(`#${tableName} .table-td-fixed-${shortFixed}-${index}`)
+                .forEach((element) => {
+                    element.setAttribute('style', `right: ${fixedRight}px`)
+                })
+            document
+                .querySelectorAll(`#${tableName} .table-th-fixed-${shortFixed}-${index}`)
+                .forEach((element) => {
+                    element.setAttribute('style', `right: ${fixedRight}px`)
+                })
+        }
     })
 
     // const allColumns = tableObjectColumns[tableName]
@@ -102,3 +110,11 @@ export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[])
 
 export const getFirstFixedRightColumnIndex = (columns: TableColumn[]) =>
     columns.findIndex((column) => column.fixed === 'right')
+
+const getShortFixed = (fixed?: string) =>
+    fixed === 'left-no-bg' ? 'left' : fixed === 'right-no-bg' ? 'right' : fixed
+
+export const getFixedStr = (fixed?: string, index?: number, th_or_td?: 'th' | 'td') => {
+    const shortFixed = getShortFixed(fixed)
+    return `table-${th_or_td}-fixed-${fixed} table-${th_or_td}-fixed-${shortFixed}-${index}`
+}

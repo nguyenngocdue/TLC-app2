@@ -8,6 +8,7 @@ class WelcomeFortuneDataSource02
         $columns = [ 
             ['dataIndex' => 'name', 'width' => 200, 'fixed' => 'left'],
             ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
+            ['dataIndex' => 'status', 'subTitle' => 'fixed-left no-bg', 'fixed' => 'left-no-bg', 'footer' => 'agg_none',],
             ['dataIndex' => 'agg_none', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_none', 'fixed' => 'left'],    
             ['dataIndex' => 'agg_count_all', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_count_all'],
             ['dataIndex' => 'agg_sum', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_sum'],
@@ -41,6 +42,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 1',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 1,
                 'agg_count_all' => 1,
                 'agg_sum' => 1,
@@ -57,6 +65,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 2',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 2,
                 'agg_count_all' => 2,
                 'agg_sum' => 2,
@@ -73,6 +88,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 3',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 3,
                 'agg_count_all' => 3,
                 'agg_sum' => 3,
@@ -89,6 +111,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 4',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 4,
                 'agg_count_all' => 4,
                 'agg_sum' => 4,
@@ -105,6 +134,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 5',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 5,
                 'agg_count_all' => 5,
                 'agg_sum' => 5,
@@ -121,6 +157,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 6',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 6,
                 'agg_count_all' => 6,
                 'agg_sum' => 6,
@@ -137,6 +180,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 7',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 7,
                 'agg_count_all' => 7,
                 'agg_sum' => 7,
@@ -153,6 +203,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 8',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 8,
                 'agg_count_all' => 8,
                 'agg_sum' => 8,
@@ -169,6 +226,13 @@ class WelcomeFortuneDataSource02
             [
                 'name' => 'Line 9',
                 'hidden_column' => 'hidden',
+                'status' => [
+                    'value' => '<i class="fa-regular fa-circle-plus text-lg"></i>',
+                    'cell_href' => 'https://www.google.com',
+                    'cell_class' => 'bg-green-300 text-red-500',
+                    'cell_title' => 'Create a new item 111',
+                    'cell_div_class' => 'p-2 w-11',
+                ],
                 'agg_none' => 9,
                 'agg_count_all' => 9,
                 'agg_sum' => 9,

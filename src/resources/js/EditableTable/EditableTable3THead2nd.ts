@@ -1,5 +1,5 @@
 import { ValueObject4 } from './Controls/ValueObject4'
-import { getFirstFixedRightColumnIndex } from './EditableTable3FixedColumn'
+import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeThead2nd = (params: TableParams) => {
@@ -15,10 +15,6 @@ export const makeThead2nd = (params: TableParams) => {
             const hiddenStr = column.invisible ? 'hidden' : ''
             const widthStyle = column.width ? `width: ${column.width}px;` : ''
 
-            const fixed = column.fixed
-                ? `table-th-fixed-${column.fixed} table-th-fixed-${column.fixed}-${index}`
-                : ''
-
             let sndHeader = ''
             let classStr = ''
             if (dataHeader[column.dataIndex]) {
@@ -33,9 +29,11 @@ export const makeThead2nd = (params: TableParams) => {
                 classStr = result.classStr || ''
             }
 
+            const fixedStr = getFixedStr(column.fixed, index, 'th')
+            const bgStr = `bg-gray-100`
             const borderL = index == firstFixedRightIndex ? 'border-l' : ''
             const borderStr = `border-b border-r border-gray-300 ${borderL}`
-            const classList = `${hiddenStr} ${fixed} ${borderStr} ${classStr}`
+            const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${classStr}`
 
             return `<th class="${classList}" style="${widthStyle}" title="${tooltip}">
                 ${sndHeader}                
