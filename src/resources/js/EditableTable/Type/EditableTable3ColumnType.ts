@@ -7,8 +7,8 @@ export interface TableColumn {
     invisible?: boolean
     tooltip?: string
     footer?: 'agg_sum' | 'agg_avg' | 'agg_count' | 'agg_max' | 'agg_min' | string
-    colspan?: number // when 1st header is a group of many 2nd header columns
     fixed?: 'left' | 'right' | 'left-no-bg' | 'right-no-bg'
+    colspan?: number // when 1st header is a group of many 2nd header columns
 
     //this is generated on the fly by JS
     fixedLeft?: number

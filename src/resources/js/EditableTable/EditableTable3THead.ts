@@ -5,7 +5,15 @@ import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeThead = ({ columns, tableConfig }: TableParams) => {
     const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
+    let colspanSkipCounter = 0
     const result = columns.map((column, index) => {
+        if (colspanSkipCounter > 0) {
+            colspanSkipCounter--
+            return ''
+        }
+
+        if (column.colspan) colspanSkipCounter = column.colspan - 1
+
         const niceDataIndex = column.title ? column.title : Str.toHeadline(column.dataIndex)
         const tooltipStr = getTooltip(column)
         const hiddenStr = column.invisible ? 'hidden' : ''
@@ -30,7 +38,12 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
         const styleThStr = `${widthStyle} ${rotateThStyle}`
         const styleDivStr = `${rotateDivStyle}`
 
-        return `<th class="${classList}" style="${styleThStr}" title="${tooltipStr}">
+        return `<th 
+            class="${classList}" 
+            style="${styleThStr}" 
+            title="${tooltipStr}" 
+            colspan="${column.colspan}"
+        >
             <div class="${rotateDivStr}" style="${styleDivStr}">
                 ${niceDataIndex}
                 <div class="text-xs text-gray-500">${column.subTitle || ''}</div>
