@@ -5,8 +5,10 @@ var tableObjectIndexedColumns = {};
 </script>
 @endonce
 
-<div id="{{$tableName}}" >
-    Loading table {{$tableName}}...
+<div id="{{$tableName}}" component="editable-table-3" class='my-1'>
+    <div class="border text-center rounded p-4 bg-gray-100">
+        <i class="fa-duotone fa-spinner fa-spin text-green-500 mx-2"></i>Loading table {{$tableName}}...
+    </div>
 </div>
 
 <script>
@@ -16,9 +18,12 @@ var tableObjectIndexedColumns = {};
             'tableName': @json($tableName),
             'columns': @json($columns),
             'dataSource': @json($dataSource),
+            'dataHeader': @json($dataHeader),
 
             'tableConfig': {
                 'tableDebug': {{$tableDebug ? "true" : "false"}},
+                'tableTrueWidth': {{$tableTrueWidth ? "true" : "false"}},
+
                 'showPaginationTop': @json($showPaginationTop),
                 'showPaginationBottom': @json($showPaginationBottom),
 
@@ -34,9 +39,16 @@ var tableObjectIndexedColumns = {};
                 'tableFooter': @json($footer),
 
                 'showNo': {{($showNo??0) ? "true" : "false"}},
+                'maxH': @json($maxH),
+
+                'rotate45Width': @json($rotate45Width),
+                'rotate45Height': @json($rotate45Height),
+
+                // 'editable': {{($editable??0) ? "true" : "false"}},
+                'classList': @json($classList),
             },
         }
-        console.log("Initilizing table {{$tableName}}", {{$tableName}})
+        // console.log("Initilizing table {{$tableName}}", {{$tableName}})
         {{$tableName}}_Object = new EditableTable3(params)
         {{$tableName}}_Object.render()
     });

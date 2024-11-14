@@ -1,0 +1,129 @@
+body {
+    /* When table has width: 2000px, it will show x-scroll for table and for the body. Use this to hide for body*/
+    overflow-x: hidden;
+}
+
+th.rotated-title-left-th {
+    vertical-align: bottom;
+    text-align: left !important;
+    line-height: 1;
+    padding: 0;
+    border-right: none !important;
+    position: relative;
+}
+
+.rotated-title-div-100 {
+    position: absolute;
+    bottom: 50%;
+    left: -10px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-div-200 {
+    position: absolute;
+    bottom: 50%;
+    left: -25px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-div-300 {
+    position: absolute;
+    bottom: 50%;
+    left: -40px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-div-400 {
+    position: absolute;
+    bottom: 50%;
+    left: -53px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+/* From here, 200 300 400 are old */
+.rotated-title-left-div-200 {
+    position: absolute;
+    bottom: 45%;
+    left: -25px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-left-div-300 {
+    position: absolute;
+    bottom: 42%;
+    left: -40px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.rotated-title-left-div-400 {
+    position: absolute;
+    bottom: 47%;
+    left: -53px;
+    z-index: 1;
+    transform: rotate(-45deg);
+}
+
+.table-line-new {
+    background: #00ff7f !important;
+}
+
+.table-line-removed {
+    background: #ff6a6a !important;
+}
+
+@media only screen and (min-width: 800px) {
+    .table-td-fixed-left {
+        position: sticky !important;
+        z-index: 2;
+        background-color: #fff;
+    }
+
+    .table-td-fixed-left-no-bg {
+        position: sticky !important;
+        z-index: 2;
+        /* background-color: #fff; */
+    }
+
+    .table-th-fixed-left {
+        position: sticky !important;
+        z-index: 2;
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+        /*<< bg-gray-100*/
+    }
+
+    .table-th-fixed-left-no-bg {
+        position: sticky !important;
+        z-index: 2;
+    }
+
+    .table-td-fixed-right {
+        position: sticky !important;
+        z-index: 2;
+        background-color: #fff;
+    }
+
+    .table-td-fixed-right-no-bg {
+        position: sticky !important;
+        z-index: 2;
+    }
+
+    .table-th-fixed-right {
+        position: sticky !important;
+        z-index: 2;
+        --tw-bg-opacity: 1;
+        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+        /*<< bg-gray-100*/
+    }
+
+    .table-th-fixed-right-no-bg {
+        position: sticky !important;
+        z-index: 2;
+    }
+}

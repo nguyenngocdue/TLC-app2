@@ -1,3 +1,6 @@
+import { TableColumn } from './EditableTable3ColumnType'
+import { TableParams } from './EditableTable3ParamType'
+
 export interface TableValueObjectType {
     value: number | string
     cell_class?: string
@@ -32,4 +35,17 @@ export interface LengthAware {
     prev_page_url: string | null
     to: number
     total: number
+}
+
+export interface TableRenderedValueObject {
+    rendered: string
+    classStr?: string
+}
+
+export interface TableRendererParams {
+    cellValue: TableCellType
+    params: TableParams
+    dataLine: TableDataLine
+    column: TableColumn
+    rowIndex: number
 }

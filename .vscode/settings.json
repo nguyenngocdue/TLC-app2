@@ -99,5 +99,9 @@
     "zunit"
   ],
   "editor.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
-  "editor.fontLigatures": true
+  "editor.fontLigatures": true,
+  "intelephense.files.associations": [
+    "*.php",
+    "*.blade.php" // Add .blade.php files for Intelephense support
+  ]
 }

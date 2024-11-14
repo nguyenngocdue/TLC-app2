@@ -23,7 +23,8 @@
     {{-- TLC2 will always be the last of CSS List --}}
     <link rel="stylesheet" href="{{ asset('css/select2-canh-20240807.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2-due.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/tlc2-20240722e.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/tlc2-20241113.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/editable-table-3.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/fullcalendar.bundle.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/plugin.bundle.css') }}"> 
 

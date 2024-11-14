@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\ClassList;
 use App\View\Components\Renderer\Table\TableTraitColumns;
 use App\View\Components\Renderer\Table\TableTraitCommon;
 use App\View\Components\Renderer\Table\TableTraitFooter;
@@ -26,7 +27,7 @@ class Table3 extends Component
     private $dataSource = null,
     private $tableDebug = false,
     private $showNo = false,
-    // private $dataHeader = null,
+    private $dataHeader = [],
     // private $showNoR = false,
     // private $groupBy = false,
     // private $groupByLength = 1,
@@ -35,14 +36,13 @@ class Table3 extends Component
     private $footer = "",
 
     private $maxH = 40,
-    private $headerTop = null,
 
     // // private $minH = 40,
     // //Editable MODE
     // private $model = null,
     // // private $editable = false,
-    // private $rotate45Width = false,
-    // private $rotate45Height = false,
+    private $rotate45Width = false,
+    private $rotate45Height = false,
     // private $noCss = false,
     private $showPaginationTop = false,
     private $showPaginationBottom = false,
@@ -52,11 +52,13 @@ class Table3 extends Component
     private $bottomLeftControl = null,
     private $bottomCenterControl = null,
     private $bottomRightControl = null,
-    // private $tableTrueWidth = false,
-    // private $editable = false,
+    private $tableTrueWidth = false,
+    private $editable = false,
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
     // private $borderColor = 'border-gray-300',
+
+    // private $headerTop = null, // OBSOLETE due to applyTopFor2ndHeader
   ) {}
 
   /**
@@ -66,16 +68,31 @@ class Table3 extends Component
    */
   public function render()
   {
-    return view("components.renderer.table3", [
+    $classList = [
+      'text' => ClassList::TEXT,
+      'textarea' => ClassList::TEXTAREA,
+      'dropdown' => ClassList::DROPDOWN,
+      'toggle' => ClassList::TOGGLE,
+      'button' => ClassList::BUTTON,
+      // 'radio_checkbox' => ClassList::RADIO_CHECKBOX,
+      // 'radio_group' => ClassList::RADIO_GROUP,
+      // 'button2' => ClassList::BUTTON2,
+
+    ];
+
+    $params = [
       'tableName' => $this->tableName,
       'columns' => $this->columns,
       'dataSource' => $this->dataSource,
+      'dataHeader' => $this->dataHeader,
       'tableDebug' => $this->tableDebug,
+      'tableTrueWidth' => $this->tableTrueWidth,
 
-      'headerTop' => $this->headerTop,
+      // 'headerTop' => $this->headerTop, // OBSOLETE due to applyTopFor2ndHeader
       'header' => $this->header,
       'footer' => $this->footer,
       'maxH' => $this->maxH,
+      'showNo' => $this->showNo,
 
       'showPaginationTop' => $this->showPaginationTop,
       'showPaginationBottom' => $this->showPaginationBottom,
@@ -86,9 +103,16 @@ class Table3 extends Component
       'bottomLeftControl' => $this->bottomLeftControl,
       'bottomCenterControl' => $this->bottomCenterControl,
       'bottomRightControl' => $this->bottomRightControl,
-      
-      'showNo' => $this->showNo,
-    ]);
+
+      'rotate45Width' => $this->rotate45Width,
+      'rotate45Height' => $this->rotate45Height,
+
+      // 'editable' => $this->editable,
+      'classList' => $classList,
+
+    ];
+    // Log::info($params);
+    return view("components.renderer.table3", $params);
   }
 
   // public function render1()

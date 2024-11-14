@@ -3,59 +3,6 @@ body {
     overflow-x: hidden;
 }
 
-th.rotated-title-right-th {
-    vertical-align: bottom;
-    text-align: left !important;
-    line-height: 1;
-    padding: 0;
-    border-right: none !important;
-    position: relative;
-}
-
-.rotated-title-right-div {
-    position: absolute;
-    bottom: 0;
-    right: 75%;
-    -webkit-transform-origin: bottom right;
-    transform-origin: bottom right;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-    pointer-events: auto;
-}
-
-th.rotated-title-left-th {
-    vertical-align: bottom;
-    text-align: left !important;
-    line-height: 1;
-    padding: 0;
-    border-right: none !important;
-    position: relative;
-}
-
-.rotated-title-left-div-200 {
-    position: absolute;
-    bottom: 45%;
-    left: -25px;
-    z-index: 1;
-    transform: rotate(-45deg);
-}
-
-.rotated-title-left-div-300 {
-    position: absolute;
-    bottom: 42%;
-    left: -40px;
-    z-index: 1;
-    transform: rotate(-45deg);
-}
-
-.rotated-title-left-div-400 {
-    position: absolute;
-    bottom: 47%;
-    left: -53px;
-    z-index: 1;
-    transform: rotate(-45deg);
-}
-
 grammarly-desktop-integration {
     display: none;
 }
@@ -95,19 +42,13 @@ select[readonly].select2-hidden-accessible + .select2-container {
     touch-action: none;
 }
 
-select[readonly].select2-hidden-accessible
-    + .select2-container
-    .select2-selection {
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection {
     background: #f3f4f6; /*bg-gray-100: f3f4f6*/
     box-shadow: none;
 }
 
-select[readonly].select2-hidden-accessible
-    + .select2-container
-    .select2-selection__arrow,
-select[readonly].select2-hidden-accessible
-    + .select2-container
-    .select2-selection__clear {
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection__arrow,
+select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
     display: none;
 }
 /* END OF This allow select2 to be readOnly*/
@@ -121,14 +62,6 @@ select[readonly].select2-hidden-accessible
 /* This is not making the dropdown have different size during dynamic render */
 select + .select2-container {
     width: 100% !important;
-}
-
-.table-line-new {
-    background: #00ff7f !important;
-}
-
-.table-line-removed {
-    background: #ff6a6a !important;
 }
 
 .hr-custom {
@@ -288,58 +221,6 @@ div.scroll-to-month {
         right: 50px;
     }
 }
-
-@media only screen and (min-width: 800px) {
-    .table-td-fixed-left {
-        position: sticky !important;
-        z-index: 2;
-        background-color: #fff;
-    }
-
-    .table-td-fixed-left-no-bg {
-        position: sticky !important;
-        z-index: 2;
-        /* background-color: #fff; */
-    }
-
-    .table-th-fixed-left {
-        position: sticky !important;
-        z-index: 2;
-        --tw-bg-opacity: 1;
-        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-        /*<< bg-gray-100*/
-    }
-
-    .table-th-fixed-left-no-bg {
-        position: sticky !important;
-        z-index: 2;
-    }
-
-    .table-td-fixed-right {
-        position: sticky !important;
-        z-index: 2;
-        background-color: #fff;
-    }
-
-    .table-td-fixed-right-no-bg {
-        position: sticky !important;
-        z-index: 2;
-    }
-
-    .table-th-fixed-right {
-        position: sticky !important;
-        z-index: 2;
-        --tw-bg-opacity: 1;
-        background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-        /*<< bg-gray-100*/
-    }
-
-    .table-th-fixed-right-no-bg {
-        position: sticky !important;
-        z-index: 2;
-    }
-}
-
 .page-break-after {
     page-break-after: always !important;
 }

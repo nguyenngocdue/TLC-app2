@@ -114,7 +114,13 @@ class ProdSequences extends ViewAllTypeMatrixParent
             $toHide = config('prod_discipline.to_hide');
             $data = $data->whereNotIn('prod_discipline_id', $toHide);
         }
-        if ($this->prodRoutingLink) $data = $data->whereIn('prod_routing_link_id', $this->prodRoutingLink);
+        if ($this->prodRoutingLink) {
+            $data = $data
+                ->whereIn('prod_routing_link_id', $this->prodRoutingLink)
+                // ->whereNull('prod_routing_details.deleted_at')
+                ;
+
+        } 
         $data = $data->orderBy('order_no')->get();
         return $data;
     }
@@ -162,6 +168,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
                 $result[] = $item;
             }
         }
+
+        // dump($result);
         // usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
         return $result;
     }

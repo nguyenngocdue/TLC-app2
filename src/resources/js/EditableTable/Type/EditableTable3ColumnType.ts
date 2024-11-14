@@ -1,25 +1,41 @@
 export interface TableColumn {
     dataIndex: string | number
     title?: string
+    subTitle?: string
     width?: number
     align?: 'center' | 'right' | 'left'
     invisible?: boolean
     tooltip?: string
+    footer?: 'agg_sum' | 'agg_avg' | 'agg_count' | 'agg_max' | 'agg_min' | string
+    fixed?: 'left' | 'right' | 'left-no-bg' | 'right-no-bg'
+    colspan?: number // when 1st header is a group of many 2nd header columns
 
-    renderer?: string
-    fixed?: string
+    //this is generated on the fly by JS
     fixedLeft?: number
     fixedRight?: number
-    colspan?: number
-    columnIndex?: string
-    prod_discipline_id?: number
-    target_man_minutes?: number
-    target_man_power?: number
-    target_min_uom?: number
-    isExtra?: boolean
+
+    renderer?:
+        | 'no.'
+        | 'text'
+        | 'number'
+        | 'dropdown'
+        | 'toggle'
+        | 'picker_datetime'
+        | 'checkbox'
+        | 'text4'
+        | 'number4'
+        | 'dropdown4'
+        | 'toggle4'
+        | 'checkbox4'
     editable?: boolean
+
+    columnIndex?: string
+    // prod_discipline_id?: number
+    // target_man_minutes?: number
+    // target_man_power?: number
+    // target_min_uom?: number
+    // isExtra?: boolean
     no_print?: boolean
-    footer?: string
     required?: boolean
     cbbDataSource?: (string | null)[]
     type?: string
@@ -38,7 +54,7 @@ export interface TableColumn {
         control?: string
         tableName?: string
     }
-    subTitle?: string
+
     sortBy?: string
     attributes?: {
         color?: string

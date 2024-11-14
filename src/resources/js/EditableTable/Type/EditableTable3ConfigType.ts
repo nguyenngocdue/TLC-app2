@@ -6,6 +6,7 @@ export interface TableConfig {
     showPaginationBottom?: boolean
     showNo?: boolean
     tableDebug?: boolean
+    tableTrueWidth?: boolean
 
     tableHeader?: string
     tableFooter?: string
@@ -17,4 +18,18 @@ export interface TableConfig {
     bottomLeftControl?: string
     bottomCenterControl?: string
     bottomRightControl?: string
+
+    rotate45Width?: number
+    rotate45Height?: number
+
+    classList?: {
+        text: string
+        textarea: string
+        dropdown: string
+        toggle: string
+        button: string
+    }
+
+    //This will be remove as MODE is more flexible to column level
+    // editable?: boolean
 }

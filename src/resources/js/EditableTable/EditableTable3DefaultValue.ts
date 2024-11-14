@@ -1,18 +1,19 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
 import { TableConfig } from './Type/EditableTable3ConfigType'
 import { LengthAware } from './Type/EditableTable3DataLineType'
-import { TableParams } from './Type/EditableTable3Type'
+import { TableParams } from './Type/EditableTable3ParamType'
 
 export const ColumnNoValue: TableColumn = {
-    title: 'No.',
     dataIndex: '_no_',
-    renderer: 'no.',
     width: 50,
+    title: 'No.',
+    renderer: 'no.',
     align: 'center',
+    fixed: 'left',
 }
 
 export const makeUpDefaultValue = ({ columns }: TableParams) => {
-    return columns.map((column) => ({ ...column, width: column.width || 100 }))
+    return columns && columns.map((column) => ({ ...column, width: column.width || 100 }))
 }
 
 export const convertArrayToLengthAware = (dataSource: any[]) => {
@@ -31,6 +32,17 @@ export const convertArrayToLengthAware = (dataSource: any[]) => {
         to: 1,
         total: dataSource.length,
     }
+}
+
+export const getTooltip = (column: TableColumn) => {
+    if (column.tooltip) return column.tooltip
+    return [
+        column.dataIndex ? `+DataIndex: ${column.dataIndex}` : '',
+        column.renderer ? `+Renderer: ${column.renderer}` : '',
+        column.width ? `+Width: ${column.width}` : '',
+    ]
+        .filter((i) => i)
+        .join('\n')
 }
 
 // export const makeUpPaginator = (tableConfig: TableConfig, dataSource: LengthAware) => {
