@@ -6,7 +6,9 @@ import { Text4Edit } from './Text4Edit'
 import { Text4View } from './Text4View'
 
 export class Text4 {
-    constructor(private params: TableRendererParams) {}
+    constructor(private params: TableRendererParams) {
+        // console.log('Text4', this.params)
+    }
 
     render(): TableRenderedValueObject {
         switch (true) {

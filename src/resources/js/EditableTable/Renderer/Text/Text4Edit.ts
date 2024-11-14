@@ -32,6 +32,6 @@ export class Text4Edit {
         const { cellValue } = this.params
         const control = this.control()
 
-        return { rendered: control }
+        return { rendered: control, classStr: this.params.column.classList || '' }
     }
 }

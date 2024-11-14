@@ -4,6 +4,6 @@ export class Dropdown4View {
     constructor(private params: TableRendererParams) {}
 
     render() {
-        return { rendered: 'Dropdown 4 View' }
+        return { rendered: 'Dropdown 4 View', classStr: this.params.column.classList || '' }
     }
 }

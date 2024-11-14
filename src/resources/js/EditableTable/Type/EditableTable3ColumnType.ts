@@ -1,4 +1,13 @@
-export interface TableColumn {
+import {
+    ControlAttributeCheckbox,
+    ControlAttributeDropdown,
+    ControlAttributeNumber,
+    ControlAttributePickerDatetime,
+    ControlAttributeText,
+    ControlAttributeToggle,
+} from './EditableTable3ControlAttributeType'
+
+interface BaseTableColumn {
     dataIndex: string | number
     title?: string
     subTitle?: string
@@ -14,19 +23,8 @@ export interface TableColumn {
     fixedLeft?: number
     fixedRight?: number
 
-    renderer?:
-        | 'no.'
-        | 'text'
-        | 'number'
-        | 'dropdown'
-        | 'toggle'
-        | 'picker_datetime'
-        | 'checkbox'
-        | 'text4'
-        | 'number4'
-        | 'dropdown4'
-        | 'toggle4'
-        | 'checkbox4'
+    classList?: string
+
     editable?: boolean
 
     columnIndex?: string
@@ -39,7 +37,6 @@ export interface TableColumn {
     required?: boolean
     cbbDataSource?: (string | null)[]
     type?: string
-    classList?: string
     properties?: {
         placeholder?: number | string
         strFn?: string
@@ -66,3 +63,27 @@ export interface TableColumn {
 
     mode?: 'edit' | 'view' | 'print'
 }
+
+export type TableColumn =
+    | (BaseTableColumn & { renderer: 'no.'; rendererAttrs?: {} })
+    | (BaseTableColumn & { renderer: 'text' | 'text4'; rendererAttrs?: ControlAttributeText })
+    | (BaseTableColumn & {
+          renderer: 'number' | 'number4'
+          rendererAttrs?: ControlAttributeNumber
+      })
+    | (BaseTableColumn & {
+          renderer: 'dropdown' | 'dropdown4'
+          rendererAttrs?: ControlAttributeDropdown
+      })
+    | (BaseTableColumn & {
+          renderer: 'toggle' | 'toggle4'
+          rendererAttrs?: ControlAttributeToggle
+      })
+    | (BaseTableColumn & {
+          renderer: 'checkbox' | 'checkbox4'
+          rendererAttrs?: ControlAttributeCheckbox
+      })
+    | (BaseTableColumn & {
+          renderer: 'picker_datetime'
+          rendererAttrs?: ControlAttributePickerDatetime
+      })

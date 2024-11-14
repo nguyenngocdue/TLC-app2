@@ -8,6 +8,9 @@ export class Text4View {
 
     render(): TableRenderedValueObject {
         const { cellValue } = this.params
-        return { rendered: cellValue as unknown as string }
+        return {
+            rendered: cellValue as unknown as string,
+            classStr: this.params.column.classList || '',
+        }
     }
 }

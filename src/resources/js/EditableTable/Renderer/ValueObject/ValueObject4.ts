@@ -17,8 +17,10 @@ export class ValueObject4 {
         if (smartTypeOf(cellValue) == 'boolean')
             return { rendered: cellValue.toString(), classStr: 'p-2' }
 
-        if (smartTypeOf(cellValue) == 'null') return { rendered: '' }
-        if (smartTypeOf(cellValue) == 'undefined') return { rendered: '' }
+        if (smartTypeOf(cellValue) == 'null')
+            return { rendered: '', classStr: this.params.column.classList || '' }
+        if (smartTypeOf(cellValue) == 'undefined')
+            return { rendered: '', classStr: this.params.column.classList || '' }
 
         const theObject = cellValue as unknown as TableValueObjectType
         if (!theObject) {

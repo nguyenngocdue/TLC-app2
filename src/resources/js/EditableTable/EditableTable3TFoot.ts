@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 
@@ -13,7 +14,9 @@ export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => 
         const bgStr = `bg-gray-100`
         const borderL = index == firstFixedRightIndex ? 'border-l' : ''
         const borderStr = `border-r border-t border-b border-gray-300 ${borderL}`
-        const classList = `${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} p-1`
+        const classList = twMerge(
+            `${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} p-1`,
+        )
 
         if (column.footer) {
             hasActualText ||= !!column.footer

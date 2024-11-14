@@ -4,6 +4,6 @@ export class Dropdown4Edit {
     constructor(private params: TableRendererParams) {}
 
     render() {
-        return { rendered: 'Dropdown 4 Edit' }
+        return { rendered: 'Dropdown 4 Edit', classStr: this.params.column.classList || '' }
     }
 }

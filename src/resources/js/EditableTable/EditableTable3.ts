@@ -1,6 +1,5 @@
 import { TableConfig } from './Type/EditableTable3ConfigType'
 import { TableParams } from './Type/EditableTable3ParamType'
-
 import { makeTbody } from './EditableTable3TBody'
 import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'

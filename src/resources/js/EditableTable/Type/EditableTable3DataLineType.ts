@@ -39,7 +39,7 @@ export interface LengthAware {
 
 export interface TableRenderedValueObject {
     rendered: string
-    classStr?: string
+    classStr: string
 }
 
 export interface TableRendererParams {

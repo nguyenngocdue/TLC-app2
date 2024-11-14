@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { makeTCell } from './EditableTable3TCell'
 import { TableDataLine } from './Type/EditableTable3DataLineType'
@@ -14,18 +15,20 @@ export const makeTbody = (params: TableParams) => {
 
                 const tCell = makeTCell(params, row, column, rowIndex)
 
-                const { rendered, tdClass, p_2 } = tCell
+                const { rendered, tdClass, p_2, componentCase } = tCell
 
                 const p = p_2 ? 'p-2' : ''
                 const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
                 const textStr = `text-sm text-sm-vw 1text-gray-700`
                 const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
                 const borderStr = `border-b border-r border-gray-300 ${borderL}`
-                const classList = `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} ${textStr} ${p}`
+                const classList = twMerge(
+                    `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} ${textStr} ${p}`,
+                )
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''
                 const styleList = `${widthStr}`
-                return `<td class="${classList}" style="${styleList}">${rendered}</td>`
+                return `<td class="${classList}" style="${styleList}" componentCase="${componentCase}">${rendered}</td>`
             })
             .join('')
     }

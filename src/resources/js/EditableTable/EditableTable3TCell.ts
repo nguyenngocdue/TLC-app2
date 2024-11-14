@@ -26,18 +26,21 @@ export const makeTCell = (
     let p_2 = true
     let result: TableRenderedValueObject
     const rendererParams = { cellValue, params, dataLine, column, rowIndex }
-
+    let componentCase = ''
     // console.log(column.dataIndex, column)
 
     switch (true) {
         case column.renderer == 'no.':
             rendered = rowIndex + 1
+            componentCase = 'column.renderer.no.'
             break
 
         case column.renderer == 'text':
         case column.renderer == 'text4': // this line will be removed for new flexible MODE
             result = new Text4(rendererParams).render()
             rendered = result.rendered
+            tdClass = result.classStr || ''
+            componentCase = 'column.renderer.text'
             break
 
         case column.renderer == 'number':
@@ -45,38 +48,57 @@ export const makeTCell = (
             result = new Number4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
+            tdClass = result.classStr || ''
+            componentCase = 'column.renderer.number'
             break
 
         case column.renderer == 'dropdown':
             result = new Dropdown4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
+            tdClass = result.classStr || ''
+            componentCase = 'column.renderer.dropdown'
             break
 
         case column.renderer == 'toggle':
             // result = new Toggle4(rendererParams).render()
             result = new Text4(rendererParams).render()
             rendered = result.rendered
+            tdClass = result.classStr || ''
+            componentCase = 'column.renderer.toggle'
             break
 
         case column.renderer == 'checkbox':
             // result = new Checkbox4(rendererParams).render()
             result = new Text4(rendererParams).render()
             rendered = result.rendered
+            tdClass = result.classStr || ''
+            componentCase = 'column.renderer.checkbox'
             break
 
         case column.renderer == 'picker_datetime':
+            rendered = 'Unknown renderer: picker_datetime'
+            //    tdClass = result.classStr || ''
+            componentCase = 'column.renderer.picker_datetime'
             break
 
         case column.renderer != undefined:
             rendered = `Unknown renderer: ${column.renderer}`
+            componentCase = 'column.renderer.undefined'
             break
 
         //============From here there is no renderer================
         case smartTypeOf(cellValue) == 'string':
+            rendered = cellValue
+            componentCase = 'smartTypeOf(cellValue).string'
+            break
         case smartTypeOf(cellValue) == 'number':
+            rendered = cellValue
+            componentCase = 'smartTypeOf(cellValue).number'
+            break
         case smartTypeOf(cellValue) == 'boolean':
             rendered = cellValue
+            componentCase = 'smartTypeOf(cellValue).boolean'
             break
 
         case smartTypeOf(cellValue) == 'object':
@@ -84,6 +106,7 @@ export const makeTCell = (
             rendered = result.rendered
             tdClass = result.classStr || ''
             p_2 = false
+            componentCase = 'smartTypeOf(cellValue).object'
             break
 
         case smartTypeOf(cellValue) == 'array':
@@ -97,18 +120,21 @@ export const makeTCell = (
             rendered = values.map((v) => v.rendered).join(' ')
             tdClass = values[0].classStr || ''
             p_2 = false
+            componentCase = 'smartTypeOf(cellValue).array'
             break
 
         //============From here there is render base on cellValue================
         case cellValue === null:
         case cellValue === undefined:
             rendered = ''
+            componentCase = 'cellValue.null_or_underfined'
             break
 
         default:
             rendered = `Unknown how to render this item: ${cellValue}`
+            componentCase = 'default.unknown'
             break
     }
     // console.log(rendered)
-    return { rendered, tdClass, p_2 }
+    return { rendered, tdClass, p_2, componentCase }
 }

@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge'
 import { getTooltip } from './EditableTable3DefaultValue'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { Str } from './EditableTable3Str'
@@ -36,7 +37,9 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
             ? `width: ${tableConfig.rotate45Width}px;`
             : ``
 
-        const classList = `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center px-1`
+        const classList = twMerge(
+            `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center px-1`,
+        )
         const styleThStr = `${widthStyle} ${rotateThStyle}`
         const styleDivStr = `${rotateDivStyle}`
 
