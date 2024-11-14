@@ -81,7 +81,7 @@
 				},
 			};
 			datasets.forEach(function(dataset, index) {
-				var generatedColors = generateColors(meta.count);
+				var generatedColors = generateColors( meta.numbers.length);
 				dataset.backgroundColor = generatedColors[index];
 			});
 		} else {
