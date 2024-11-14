@@ -32,13 +32,13 @@ export class ValueObject4 {
         const classStr = cell_class ? `${cell_class}` : ''
         const hrefStr = cell_href ? `href='${cell_href}'` : ''
         const titleStr = cell_title ? `${cell_title}` : ''
-        const divClassStr = cell_div_class ? `${cell_div_class}` : 'p-1'
+        const divClassStr = cell_div_class ? `${cell_div_class}` : 'p-1 p-1-ValueObject4'
         const onclickStr = cell_onclick ? `${cell_onclick}` : ''
 
-        const rendered = `<a ${hrefStr} class="min-w-10 block">
-            <div component="ValueObject4" class="${divClassStr} w-full h-full " title="${titleStr}" onclick="${onclickStr}">
+        const rendered = `<a ${hrefStr} class="min-w-10 min-h-5 h-6 my-0.5 p-0.5 inline-block ">
+            <span component="ValueObject4" class="${divClassStr} rounded p-0.5" title="${titleStr}" onclick="${onclickStr}">
                 ${value ? value : ''}
-            </div>
+            </span>
         </a>`
         return { rendered, classStr }
     }

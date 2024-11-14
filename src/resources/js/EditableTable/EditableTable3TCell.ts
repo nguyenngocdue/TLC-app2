@@ -135,7 +135,8 @@ export const makeTCell = (
             })
             // console.log('values', values)
             // rendered = 'aaaaa'
-            rendered = values.map((v) => v.rendered).join(' ')
+            const { arraySeparator = ' ' } = column
+            rendered = values.map((v) => v.rendered).join(arraySeparator)
             tdClass = values[0].classStr
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).array'
