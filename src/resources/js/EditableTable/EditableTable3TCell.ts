@@ -112,7 +112,6 @@ export const makeTCell = (
             result = new ValueObject4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
-            console.log('result', tdClass)
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).object'
             break
@@ -151,6 +150,8 @@ export const makeTCell = (
             componentCase = 'default.unknown'
             break
     }
+
+    if (column.renderer && column.mode == 'edit') p_2 = false
     // console.log(rendered)
     return { rendered, tdClass, p_2, componentCase }
 }

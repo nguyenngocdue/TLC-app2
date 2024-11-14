@@ -12,6 +12,10 @@ var tableObjectIndexedColumns = {};
 </div>
 
 <script>
+
+    k = {...k, "users": @json(\App\Models\User::query()->get()),}
+    k_by = {}
+
     var {{$tableName}}_Object = null;
     $(document).ready(function() {
         const params = {

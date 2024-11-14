@@ -17,13 +17,19 @@ export interface ControlAttributeDropdown {
     allowClear?: boolean
     allowChooseWhenOneItem?: boolean
     allowOpen?: boolean
-    selectedValue?: string
-    dataSource?: Array<any>
+    sortBy?: string
+    dataSource?: { [key11: string]: { [key22: string]: string | number } }
+    dataSourceKey?: string
 
     valueField?: string
     labelField?: string
     descriptionField?: string
     tooltipField?: string
+    avatarField?: string
+
+    filterColumns?: string
+    filterOperator?: string
+    filterValues?: string
 }
 export interface ControlAttributeToggle {}
 export interface ControlAttributeCheckbox {}

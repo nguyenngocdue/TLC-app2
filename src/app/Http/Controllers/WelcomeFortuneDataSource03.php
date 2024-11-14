@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Workflow\LibStatuses;
+
 class WelcomeFortuneDataSource03
 {
   function getDataSource()
   {
+    $statuses = LibStatuses::getAll();
     $columns = [
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
       [
@@ -59,8 +62,49 @@ class WelcomeFortuneDataSource03
           'decimalPlaces' => 3,
         ],
       ],
-      ['dataIndex' => 'status', 'renderer' => 'dropdown'],
-      ['dataIndex' => 'status', 'renderer' => 'dropdown', 'mode' => 'edit',],
+      [
+        'dataIndex' => 'status',
+        'renderer' => 'dropdown',
+        'rendererAttrs' => [
+          'dataSource' => $statuses,
+        ],
+      ],
+      [
+        'dataIndex' => 'status',
+        'renderer' => 'dropdown',
+        'mode' => 'edit',
+        'rendererAttrs' => [
+          'dataSource' => $statuses
+        ],
+      ],
+
+      [
+        'dataIndex' => 'user_id',
+        'classList' => 'whitespace-nowrap',
+        'renderer' => 'dropdown',
+        'rendererAttrs' => [
+          'dataSourceKey' => 'users',
+        ],
+      ],
+      [
+        'dataIndex' => 'user_id',
+        'renderer' => 'dropdown',
+        'mode' => 'edit',
+        'classList' => 'whitespace-nowrap',
+        'rendererAttrs' => [
+          'dataSourceKey' => 'users',
+        ],
+      ],
+      [
+        'dataIndex' => 'user1_id',
+        'renderer' => 'dropdown',
+        // 'mode' => 'edit',
+        'classList' => 'whitespace-nowrap',
+        'rendererAttrs' => [
+          'dataSourceKey' => 'users',
+          'valueField' => 'employeeid',
+        ],
+      ],
       // ['dataIndex' => 'date','fixed' => 'right', 'width'=> 120],
       // ['dataIndex' => 'date','fixed' => 'right', 'mode'=> 'edit','renderer' => 'dropdown'],
     ];
@@ -74,6 +118,8 @@ class WelcomeFortuneDataSource03
         'bool' => true,
         'bool2' => false,
         'number' => 1,
+        'user_id' => 2,
+        'user1_id' => 'TLCM01304',
       ],
       [
         'name' => 'Doe',
@@ -83,6 +129,8 @@ class WelcomeFortuneDataSource03
         'bool' => false,
         'bool2' => true,
         'number' => 02.009,
+        'user_id' => 37,
+        'user1_id' => 'TLCM01069',
       ],
       [
         'name' => 'Doe',
@@ -92,6 +140,8 @@ class WelcomeFortuneDataSource03
         'bool' => false,
         'bool2' => true,
         'number' => -1e-3,
+        'user_id' => 222,
+        'user1_id' => 'TLCM01034',
       ],
     ];
 

@@ -1,6 +1,6 @@
 import { TableRendererParams } from '../../Type/EditableTable3DataLineType'
-import { Text4Edit } from './Text4Edit'
-import { Text4View } from './Text4View'
+import { Text4Edit } from './_4Edit'
+import { Text4View } from './_4View'
 
 export class Text4 {
     constructor(private params: TableRendererParams) {}

@@ -25,6 +25,7 @@ if(in_array($type,["fin_expense_claims"])) $formWidth = "w-full";
 @section('content')
 <script>
     k = @json($listenerDataSource);
+    k_by = {}
     ki = makeKi(k)
 
     listenersOfDropdown2 = @json($listeners2);

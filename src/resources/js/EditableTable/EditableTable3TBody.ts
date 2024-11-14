@@ -17,7 +17,7 @@ export const makeTbody = (params: TableParams) => {
 
                 const { rendered, tdClass, p_2, componentCase } = tCell
 
-                const p = p_2 ? 'p-2' : ''
+                const p = p_2 ? 'p-2 p-2-Tbody' : ''
                 const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
                 const textStr = `text-sm text-sm-vw`
                 const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
