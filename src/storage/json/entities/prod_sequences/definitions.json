@@ -6,7 +6,8 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "read-only": {
         "name": "read-only",
@@ -15,7 +16,8 @@
         "finished": "true",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "hide-save-btn": {
         "name": "hide-save-btn",
@@ -24,16 +26,18 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "closed": {
         "name": "closed",
         "new": "",
         "in_progress": "",
-        "finished": "",
+        "finished": "true",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     },
     "post-closed": {
         "name": "post-closed",
@@ -42,6 +46,7 @@
         "finished": "",
         "on_hold": "",
         "cancelled": "",
-        "not_applicable": ""
+        "not_applicable": "",
+        "rework": ""
     }
 }
