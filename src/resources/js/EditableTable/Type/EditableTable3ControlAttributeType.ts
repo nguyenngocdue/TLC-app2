@@ -30,10 +30,22 @@ export interface ControlAttributeDropdown {
     filterColumns?: string
     filterOperator?: string
     filterValues?: string
+    isMultiple?: boolean
 }
 export interface ControlAttributeToggle {}
 export interface ControlAttributeCheckbox {}
 export interface ControlAttributePickerDatetime {
     align?: 'left' | 'center' | 'right'
-    subType: 'date' | 'time' | 'datetime'
+    pickerType?: 'date' | 'time' | 'datetime' | 'month' | 'year'
+    format?: string
+    minDate?: string
+    maxDate?: string
+}
+
+export interface ControlAttributeAttachment {
+    fileType?: string
+}
+
+export interface ControlAttributeSearchableDialog {
+    isMultiple?: boolean
 }

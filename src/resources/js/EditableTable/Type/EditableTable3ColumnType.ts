@@ -1,9 +1,11 @@
 import {
+    ControlAttributeAttachment,
     ControlAttributeCheckbox,
     ControlAttributeDropdown,
     ControlAttributeNo,
     ControlAttributeNumber,
     ControlAttributePickerDatetime,
+    ControlAttributeSearchableDialog,
     ControlAttributeText,
     ControlAttributeToggle,
 } from './EditableTable3ControlAttributeType'
@@ -62,7 +64,7 @@ interface BaseTableColumn {
     cloneable?: boolean
     rendererParam?: string
 
-    mode?: 'edit' | 'view' | 'print'
+    mode?: 'edit' | 'view' | 'print' | 'csv'
 }
 
 export type TableColumnNo = BaseTableColumn & {
@@ -92,6 +94,14 @@ export type TableColumnCheckbox = BaseTableColumn & {
 export type TableColumnPickerDateTime = BaseTableColumn & {
     renderer: 'picker_datetime'
     rendererAttrs?: ControlAttributePickerDatetime
+}
+export type TableColumnAttachment = BaseTableColumn & {
+    renderer: 'attachment'
+    rendererAttrs?: ControlAttributeAttachment
+}
+export type TableColumnSearchableDialog = BaseTableColumn & {
+    renderer: 'searchable_dialog'
+    rendererAttrs?: ControlAttributeSearchableDialog
 }
 
 export type TableColumn =

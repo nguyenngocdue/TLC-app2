@@ -14,6 +14,7 @@ import { Dropdown4 } from './Renderer/Dropdown/Dropdown4'
 import { Toggle4 } from './Renderer/Toggle/Toggle4'
 import { Number4 } from './Renderer/Number/Number4'
 import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
+import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
 
 export const makeTCell = (
     params: TableParams,
@@ -84,13 +85,15 @@ export const makeTCell = (
             break
 
         case column.renderer == 'picker_datetime':
-            rendered = 'Unknown renderer: picker_datetime'
-            //    tdClass = result.classStr
+            result = new PickerDateTime4(rendererParams).render()
+            rendered = result.rendered
+            tdClass = result.classStr
             componentCase = 'column.renderer.picker_datetime'
             break
 
         case column.renderer != undefined:
             rendered = `Unknown renderer: ${column.renderer}`
+            tdClass = 'bg-red-200'
             componentCase = 'column.renderer.undefined'
             break
 

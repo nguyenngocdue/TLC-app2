@@ -1,5 +1,5 @@
-import { twMerge } from 'tailwind-merge'
-import { TableColumnNumber } from '../../Type/EditableTable3ColumnType'
+import { getDataSource, getNotFound } from '../../Function/CacheKByKey'
+import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { TableRendererParams } from '../../Type/EditableTable3DataLineType'
 
 export class Dropdown4Edit {
@@ -9,30 +9,43 @@ export class Dropdown4Edit {
         // this.tableDebug = this.params.params.tableConfig.tableDebug || false
     }
 
-    control() {
-        const { cellValue } = this.params
-        const { tableName } = this.params.params
-        const { dataIndex } = this.params.column
-        const { rowIndex } = this.params
-        const column = this.params.column as TableColumnNumber
-        const { decimalPlaces = 0 } = column.rendererAttrs || {}
-        const classList = twMerge(`text-right`, this.params.params.tableConfig.classList?.text)
-
-        const name = `${tableName}[${dataIndex}][${rowIndex}]`
-        const debugStr = this.tableDebug ? `${name}` : ``
-        const value = cellValue ? ((cellValue as unknown as number) * 1).toFixed(decimalPlaces) : ''
-        const step = Math.pow(10, -decimalPlaces)
-        // console.log('step', step, decimalPlaces)
-
-        const html = `<input component="text4edit" step="${step}" type="number" class="${classList}" value="${value}" />`
-        return `
-        ${html}
-        ${debugStr}
-        `
-    }
-
     render() {
-        const control = this.control()
-        return { rendered: control, classStr: this.params.column.classList || '' }
+        const cellValue = this.params.cellValue as unknown as string
+        const column = this.params.column as TableColumnDropdown
+        const { rendererAttrs = {}, dataIndex } = column
+        const {
+            // allowClear,
+            // allowChooseWhenOneItem,
+            // allowOpen,
+            valueField = 'id',
+            labelField = 'name',
+            // descriptionField = 'description',
+            tooltipField = valueField,
+            // filterColumns,
+            // filterOperator,
+            // filterValues,
+            // dataSource,
+            // dataSourceKey,
+        } = rendererAttrs
+
+        const cbbDataSource = getDataSource(column)
+        // console.log(dataIndex, cellValue, valueField, cbbDataSource)
+
+        const selectedItem = cbbDataSource[cellValue]
+        // console.log(cellValue, selectedItem)
+
+        let result = ''
+        if (selectedItem) {
+            const label = selectedItem[labelField]
+            const tooltip = selectedItem[tooltipField] || ''
+            result = `<div class="" title="${tooltip}">${label}</div>`
+        } else {
+            result = getNotFound(valueField, cellValue)
+        }
+
+        return {
+            rendered: result,
+            classStr: this.params.column.classList || '',
+        }
     }
 }
