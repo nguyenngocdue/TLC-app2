@@ -31,6 +31,7 @@ export const makeTbody = (params: TableParams) => {
     }
 
     // return 1
+    if (!dataSource.data) return ''
     return dataSource.data
         .map((row, rowIndex) => `<tr class="hover:bg-gray-100">${renderRow(row, rowIndex)}</tr>`)
         .join('')

@@ -5,7 +5,6 @@
 @section('content')
 
 <x-renderer.table3
-    tableName="table16"
     :columns="$table03['columns']"
     :dataSource="$table03['dataSource']"
     
@@ -21,7 +20,6 @@
 
 
 {{-- <x-renderer.table3
-    tableName="table15"
     :columns="$table01['columns']"
     :dataSource="$table01['dataSource']"
     
@@ -39,7 +37,6 @@
 <br/>
 
 <x-renderer.table3
-    tableName="table14"
     :columns="$table01['columns']"
     :dataSource="$table01['dataSource']"
     
@@ -57,7 +54,6 @@
 <br/>
 
 <x-renderer.table3
-    tableName="table13"
     :columns="$table01['columns']"
     :dataSource="$table01['dataSource']"
     
@@ -76,7 +72,6 @@
 
 
 <x-renderer.table3
-    tableName="table16"
     :columns="$table01['columns']"
     :dataSource="$table01['dataSource']"
     
@@ -94,7 +89,6 @@
 <br/> --}}
 
 <x-renderer.table3
-    tableName="table12"
     :columns="$table02['columns']"
     :dataSource="$table02['dataSource']"
     :dataHeader="$table02['sndHeader']"
@@ -126,7 +120,6 @@
 <br/>
 
 <x-renderer.table3
-    tableName="table11"
     :columns="$table01['columns']"
     :dataSource="$table01['dataSource']"
     
@@ -150,9 +143,9 @@
     >
 </x-renderer.table>
 
-<x-renderer.table3 tableName="table01"></x-renderer.table3>
+<x-renderer.table3></x-renderer.table3>
 
-<x-renderer.table3 tableName="table02" :columns="$table01['columns']"></x-renderer.table3>
+<x-renderer.table3 :columns="$table01['columns']"></x-renderer.table3>
 
 
 @endsection 

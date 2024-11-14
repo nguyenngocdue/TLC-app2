@@ -19,10 +19,11 @@ class Table3 extends Component
   use TableTraitRows;
   use TableTraitFooter;
   // public static $borderColor = 'border-gray-600';
+  public static $table11NameCounter = 11;
 
   public function __construct(
     // private Request $request,
-    private $tableName = 'table01',
+    // private $tableName = 'table01',
     private $columns = null,
     private $dataSource = null,
     private $tableDebug = false,
@@ -80,8 +81,10 @@ class Table3 extends Component
 
     ];
 
+    $tableName = 'table' . self::$table11NameCounter++;
+
     $params = [
-      'tableName' => $this->tableName,
+      'tableName' => $tableName,
       'columns' => $this->columns,
       'dataSource' => $this->dataSource,
       'dataHeader' => $this->dataHeader,
