@@ -62,6 +62,11 @@ export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[])
         column['fixedRight'] = accumulated
     })
     // console.log('accumulated', arrayOfColumns)
+    arrayOfColumns.forEach((_, index) => {
+        document.querySelectorAll(`#${tableName} .first-header-${index}`).forEach((element) => {
+            element.setAttribute('true-width-after-load', `${cache[index].toFixed(2)}px`)
+        })
+    })
 
     arrayOfColumns.forEach((column, index) => {
         const { fixedLeft, fixed } = column

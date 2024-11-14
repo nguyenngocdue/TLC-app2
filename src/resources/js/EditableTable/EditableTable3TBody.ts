@@ -19,11 +19,11 @@ export const makeTbody = (params: TableParams) => {
 
                 const p = p_2 ? 'p-2' : ''
                 const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
-                const textStr = `text-sm text-sm-vw 1text-gray-700`
+                const textStr = `text-sm text-sm-vw`
                 const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
                 const borderStr = `border-b border-r border-gray-300 ${borderL}`
                 const classList = twMerge(
-                    `${hiddenStr} ${alignStr} ${tdClass} ${fixedStr} ${borderStr} ${textStr} ${p}`,
+                    `${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${textStr} ${p} ${tdClass}`,
                 )
 
                 const widthStr = column.width ? `width: ${column.width}px;` : ''

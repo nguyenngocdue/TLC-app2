@@ -1,3 +1,7 @@
+export interface ControlAttributeNo {
+    align?: 'left' | 'center' | 'right'
+}
+
 export interface ControlAttributeText {
     align?: 'left' | 'center' | 'right'
 }
@@ -14,7 +18,12 @@ export interface ControlAttributeDropdown {
     allowChooseWhenOneItem?: boolean
     allowOpen?: boolean
     selectedValue?: string
-    dataSource?: Array<{ key: string; value: string }>
+    dataSource?: Array<any>
+
+    valueField?: string
+    labelField?: string
+    descriptionField?: string
+    tooltipField?: string
 }
 export interface ControlAttributeToggle {}
 export interface ControlAttributeCheckbox {}

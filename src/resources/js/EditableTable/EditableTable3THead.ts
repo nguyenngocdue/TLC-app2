@@ -24,7 +24,7 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
         const bgStr = `bg-gray-100`
         const textStr = `text-xs text-xs-vw text-gray-700`
         const borderL = index == firstFixedRightIndex ? 'border-l' : ''
-        const borderStr = `border-b border-r border-gray-300 ${borderL}`
+        const borderStr = `border-b border-r border-t border-gray-300 ${borderL}`
         const rotateThStr = tableConfig.rotate45Width ? 'rotated-title-left-th' : ''
         const rotateDivStr = tableConfig.rotate45Width
             ? `rotated-title-div-${tableConfig.rotate45Width} text-left`
@@ -38,7 +38,7 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
             : ``
 
         const classList = twMerge(
-            `${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center px-1`,
+            `first-header-${index} ${hiddenStr} ${fixedStr} ${borderStr} ${bgStr} ${textStr} ${rotateThStr} text-center px-1`,
         )
         const styleThStr = `${widthStyle} ${rotateThStyle}`
         const styleDivStr = `${rotateDivStyle}`

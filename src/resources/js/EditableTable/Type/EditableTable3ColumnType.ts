@@ -1,6 +1,7 @@
 import {
     ControlAttributeCheckbox,
     ControlAttributeDropdown,
+    ControlAttributeNo,
     ControlAttributeNumber,
     ControlAttributePickerDatetime,
     ControlAttributeText,
@@ -64,26 +65,40 @@ interface BaseTableColumn {
     mode?: 'edit' | 'view' | 'print'
 }
 
+export type TableColumnNo = BaseTableColumn & {
+    renderer: 'no.'
+    rendererAttrs?: ControlAttributeNo
+}
+export type TableColumnText = BaseTableColumn & {
+    renderer: 'text' | 'text4'
+    rendererAttrs?: ControlAttributeText
+}
+export type TableColumnNumber = BaseTableColumn & {
+    renderer: 'number' | 'number4'
+    rendererAttrs?: ControlAttributeNumber
+}
+export type TableColumnDropdown = BaseTableColumn & {
+    renderer: 'dropdown' | 'dropdown4'
+    rendererAttrs?: ControlAttributeDropdown
+}
+export type TableColumnToggle = BaseTableColumn & {
+    renderer: 'toggle' | 'toggle4'
+    rendererAttrs?: ControlAttributeToggle
+}
+export type TableColumnCheckbox = BaseTableColumn & {
+    renderer: 'checkbox' | 'checkbox4'
+    rendererAttrs?: ControlAttributeCheckbox
+}
+export type TableColumnPickerDateTime = BaseTableColumn & {
+    renderer: 'picker_datetime'
+    rendererAttrs?: ControlAttributePickerDatetime
+}
+
 export type TableColumn =
-    | (BaseTableColumn & { renderer: 'no.'; rendererAttrs?: {} })
-    | (BaseTableColumn & { renderer: 'text' | 'text4'; rendererAttrs?: ControlAttributeText })
-    | (BaseTableColumn & {
-          renderer: 'number' | 'number4'
-          rendererAttrs?: ControlAttributeNumber
-      })
-    | (BaseTableColumn & {
-          renderer: 'dropdown' | 'dropdown4'
-          rendererAttrs?: ControlAttributeDropdown
-      })
-    | (BaseTableColumn & {
-          renderer: 'toggle' | 'toggle4'
-          rendererAttrs?: ControlAttributeToggle
-      })
-    | (BaseTableColumn & {
-          renderer: 'checkbox' | 'checkbox4'
-          rendererAttrs?: ControlAttributeCheckbox
-      })
-    | (BaseTableColumn & {
-          renderer: 'picker_datetime'
-          rendererAttrs?: ControlAttributePickerDatetime
-      })
+    | TableColumnNo
+    | TableColumnText
+    | TableColumnNumber
+    | TableColumnDropdown
+    | TableColumnToggle
+    | TableColumnCheckbox
+    | TableColumnPickerDateTime

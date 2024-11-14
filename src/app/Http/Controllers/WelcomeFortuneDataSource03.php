@@ -12,7 +12,7 @@ class WelcomeFortuneDataSource03
         'dataIndex' => 'name',
         'renderer' => 'text',
         'fixed' => 'left',
-        'classList' => 'text-center',
+        'classList' => 'text-center whitespace-nowrap',
         'rendererAttrs' => [],
       ],
       [
@@ -20,14 +20,45 @@ class WelcomeFortuneDataSource03
         'renderer' => 'text',
         'mode' => 'edit',
         'fixed' => 'left',
-        'classList' => 'text-right text-red-500',
+        'classList' => 'text-right text-red-500 bg-green-100 font-bold',
       ],
-      ['dataIndex' => 'bool', 'renderer' => 'toggle'],
-      ['dataIndex' => 'bool', 'renderer' => 'toggle', 'mode' => 'edit',],
-      // ['dataIndex' => 'bool', ],
-      ['dataIndex' => 'bool', 'renderer' => 'checkbox', 'mode' => 'edit',],
-      ['dataIndex' => 'number', 'renderer' => 'number'],
-      ['dataIndex' => 'number', 'renderer' => 'number', 'mode' => 'edit',],
+      [
+        'dataIndex' => 'bool',
+        'renderer' => 'toggle',
+        'subTitle' => 'Boolean View'
+      ],
+      [
+        'dataIndex' => 'bool',
+        'renderer' => 'toggle',
+        'mode' => 'edit',
+        'subTitle' => 'toggle'
+      ],
+      // [
+      //   'dataIndex' => 'bool',
+      //   'renderer' => 'checkbox',
+      //   'subTitle' => 'checkbox'
+      // ],
+      [
+        'dataIndex' => 'bool2',
+        'renderer' => 'checkbox',
+        'mode' => 'edit',
+        'subTitle' => 'checkbox'
+      ],
+      [
+        'dataIndex' => 'number',
+        'renderer' => 'number',
+        'rendererAttrs' => [
+          'decimalPlaces' => 3,
+        ],
+      ],
+      [
+        'dataIndex' => 'number',
+        'renderer' => 'number',
+        'mode' => 'edit',
+        'rendererAttrs' => [
+          'decimalPlaces' => 3,
+        ],
+      ],
       ['dataIndex' => 'status', 'renderer' => 'dropdown'],
       ['dataIndex' => 'status', 'renderer' => 'dropdown', 'mode' => 'edit',],
       // ['dataIndex' => 'date','fixed' => 'right', 'width'=> 120],
@@ -36,12 +67,13 @@ class WelcomeFortuneDataSource03
 
     $tables = [
       [
-        'name' => 'John',
+        'name' => 'John and lots of his friends',
         'status' => 'active',
         'text' => 'a string',
         'date' => '2021-01-01',
         'bool' => true,
-        'number' => 1.25,
+        'bool2' => false,
+        'number' => 1,
       ],
       [
         'name' => 'Doe',
@@ -49,7 +81,17 @@ class WelcomeFortuneDataSource03
         'text' => 'another string',
         'date' => '2021-01-02',
         'bool' => false,
-        'number' => 1.25,
+        'bool2' => true,
+        'number' => 02.009,
+      ],
+      [
+        'name' => 'Doe',
+        'status' => 'new',
+        'text' => 'another string',
+        'date' => '2021-01-02',
+        'bool' => false,
+        'bool2' => true,
+        'number' => -1e-3,
       ],
     ];
 

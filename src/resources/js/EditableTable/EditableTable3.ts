@@ -92,7 +92,7 @@ class EditableTable3 {
             <colgroup>
                 ${colgroupStr}
             </colgroup>
-            <thead class="sticky z-10 bg-gray-100" style="top:0px;">
+            <thead class="sticky z-10 bg-gray-100 first-header" style="top:0px;">
                 ${tHeadStr}
             </thead>
             

@@ -5,6 +5,7 @@ import {
     TableValueObjectType,
     TableDataLine,
     TableRenderedValueObject,
+    TableRendererParams,
 } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
@@ -25,9 +26,15 @@ export const makeTCell = (
     let tdClass: any = ''
     let p_2 = true
     let result: TableRenderedValueObject
-    const rendererParams = { cellValue, params, dataLine, column, rowIndex }
     let componentCase = ''
     // console.log(column.dataIndex, column)
+
+    const { tableName } = params
+    const { dataIndex } = column
+    const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
+    const controlId = `${tableName}_${dataIndex}_${rowIndex}`
+
+    const rendererParams = { controlName, controlId, cellValue, params, dataLine, column, rowIndex }
 
     switch (true) {
         case column.renderer == 'no.':
@@ -39,7 +46,7 @@ export const makeTCell = (
         case column.renderer == 'text4': // this line will be removed for new flexible MODE
             result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr || ''
+            tdClass = result.classStr
             componentCase = 'column.renderer.text'
             break
 
@@ -48,7 +55,7 @@ export const makeTCell = (
             result = new Number4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr || ''
+            tdClass = result.classStr
             componentCase = 'column.renderer.number'
             break
 
@@ -56,29 +63,29 @@ export const makeTCell = (
             result = new Dropdown4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr || ''
+            tdClass = result.classStr
             componentCase = 'column.renderer.dropdown'
             break
 
         case column.renderer == 'toggle':
-            // result = new Toggle4(rendererParams).render()
-            result = new Text4(rendererParams).render()
+            result = new Toggle4(rendererParams).render()
+            // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr || ''
+            tdClass = result.classStr
             componentCase = 'column.renderer.toggle'
             break
 
         case column.renderer == 'checkbox':
-            // result = new Checkbox4(rendererParams).render()
-            result = new Text4(rendererParams).render()
+            result = new Checkbox4(rendererParams).render()
+            // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr || ''
+            tdClass = result.classStr
             componentCase = 'column.renderer.checkbox'
             break
 
         case column.renderer == 'picker_datetime':
             rendered = 'Unknown renderer: picker_datetime'
-            //    tdClass = result.classStr || ''
+            //    tdClass = result.classStr
             componentCase = 'column.renderer.picker_datetime'
             break
 
@@ -104,7 +111,8 @@ export const makeTCell = (
         case smartTypeOf(cellValue) == 'object':
             result = new ValueObject4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr || ''
+            tdClass = result.classStr
+            console.log('result', tdClass)
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).object'
             break
@@ -112,13 +120,21 @@ export const makeTCell = (
         case smartTypeOf(cellValue) == 'array':
             const array = cellValue as unknown as TableValueObjectType[]
             const values = array.map((item) => {
-                const rendererParams1 = { cellValue: item, params, dataLine, column, rowIndex }
+                const rendererParams1: TableRendererParams = {
+                    controlName,
+                    controlId,
+                    cellValue: item,
+                    params,
+                    dataLine,
+                    column,
+                    rowIndex,
+                }
                 return new ValueObject4(rendererParams1).render()
             })
             // console.log('values', values)
             // rendered = 'aaaaa'
             rendered = values.map((v) => v.rendered).join(' ')
-            tdClass = values[0].classStr || ''
+            tdClass = values[0].classStr
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).array'
             break
@@ -127,7 +143,7 @@ export const makeTCell = (
         case cellValue === null:
         case cellValue === undefined:
             rendered = ''
-            componentCase = 'cellValue.null_or_underfined'
+            componentCase = 'cellValue.null_or_undefined'
             break
 
         default:

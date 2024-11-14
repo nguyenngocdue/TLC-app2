@@ -75,6 +75,7 @@ class Table3 extends Component
       'dropdown' => ClassList::DROPDOWN,
       'toggle' => ClassList::TOGGLE,
       'button' => ClassList::BUTTON,
+      'toggle_checkbox' => ClassList::TOGGLE_CHECKBOX,
       // 'radio_checkbox' => ClassList::RADIO_CHECKBOX,
       // 'radio_group' => ClassList::RADIO_GROUP,
       // 'button2' => ClassList::BUTTON2,

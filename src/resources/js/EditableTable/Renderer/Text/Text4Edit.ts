@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge'
 import {
     TableRenderedValueObject,
     TableRendererParams,
@@ -11,15 +12,15 @@ export class Text4Edit {
     }
 
     control() {
-        const { cellValue, rowIndex, params, column } = this.params
-        const { tableName, tableConfig } = params
-        const { dataIndex } = column
-        const classList = tableConfig.classList?.text
+        const { cellValue, params } = this.params
+        const classList = twMerge(
+            `${params.tableConfig.classList?.text} ${this.params.column.classList}`,
+        )
 
-        const name = `${tableName}[${dataIndex}][${rowIndex}]`
-        const debugStr = this.tableDebug ? `${name}` : ``
+        const { controlName, controlId } = this.params
+        const debugStr = this.tableDebug ? `${controlName}` : ``
 
-        const html = `<input component="text4edit" type="text" class="${classList}" value="${
+        const html = `<input component="text4edit" name="${controlName}" id="${controlId}" type="text" class="${classList}" value="${
             cellValue || ''
         }" />`
         return `
@@ -32,6 +33,6 @@ export class Text4Edit {
         const { cellValue } = this.params
         const control = this.control()
 
-        return { rendered: control, classStr: this.params.column.classList || '' }
+        return { rendered: control, classStr: '' }
     }
 }

@@ -1,3 +1,5 @@
+import { twMerge } from 'tailwind-merge'
+import { TableColumnNumber } from '../../Type/EditableTable3ColumnType'
 import {
     TableRenderedValueObject,
     TableRendererParams,
@@ -8,9 +10,14 @@ export class Number4View {
 
     render(): TableRenderedValueObject {
         const { cellValue } = this.params
+        const column = this.params.column as TableColumnNumber
+        const { decimalPlaces } = column.rendererAttrs || {}
+        const value = cellValue ? ((cellValue as unknown as number) * 1).toFixed(decimalPlaces) : ''
+        const classList = `text-right`
+
         return {
-            rendered: cellValue.toString(),
-            classStr: this.params.column.classList || '',
+            rendered: value,
+            classStr: twMerge(classList, this.params.column.classList),
         }
     }
 }

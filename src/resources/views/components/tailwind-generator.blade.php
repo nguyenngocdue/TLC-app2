@@ -141,3 +141,10 @@
 {{-- avatar user --}}
 <div class="-mt-4"></div>
 <div class="align-top"></div>
+
+
+<label for="name" class="inline-flex relative items-center cursor-pointer">
+    <input type="checkbox" id="name" class="sr-only peer" checked>
+    <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-blue-600"></div>
+    <div class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform peer-checked:translate-x-full"></div>
+</label>

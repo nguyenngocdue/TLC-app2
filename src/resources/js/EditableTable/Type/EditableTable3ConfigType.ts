@@ -27,6 +27,7 @@ export interface TableConfig {
         textarea: string
         dropdown: string
         toggle: string
+        toggle_checkbox: string
         button: string
     }
 

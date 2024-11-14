@@ -2,6 +2,7 @@ import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 import { twMerge } from 'tailwind-merge'
+import { TableRendererParams } from './Type/EditableTable3DataLineType'
 
 export const makeThead2nd = (params: TableParams) => {
     const { columns, dataHeader } = params
@@ -20,7 +21,9 @@ export const makeThead2nd = (params: TableParams) => {
             let classStr = ''
             if (dataHeader[column.dataIndex]) {
                 const cellValue = dataHeader[column.dataIndex]
-                const rendererParams = {
+                const rendererParams: TableRendererParams = {
+                    controlName: '2ndHeaderItem',
+                    controlId: '2ndHeaderItem',
                     cellValue,
                     params,
                     dataLine: dataHeader,
