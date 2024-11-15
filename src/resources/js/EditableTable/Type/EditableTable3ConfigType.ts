@@ -35,6 +35,7 @@ export interface TableConfig {
         toggle: string
         toggle_checkbox: string
         button: string
+        dropdown_fake: string
     }
 
     virtualScroll?: VirtualScrollParams

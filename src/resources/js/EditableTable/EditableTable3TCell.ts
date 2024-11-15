@@ -72,6 +72,7 @@ export const makeTCell = (
             break
 
         case column.renderer == 'dropdown':
+        case column.renderer == 'dropdown4': // this line will be removed for new flexible MODE
             result = new Dropdown4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
@@ -81,6 +82,7 @@ export const makeTCell = (
             break
 
         case column.renderer == 'toggle':
+        case column.renderer == 'toggle4': // this line will be removed for new flexible MODE
             result = new Toggle4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
@@ -90,6 +92,7 @@ export const makeTCell = (
             break
 
         case column.renderer == 'checkbox':
+        case column.renderer == 'checkbox4': // this line will be removed for new flexible MODE
             result = new Checkbox4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered

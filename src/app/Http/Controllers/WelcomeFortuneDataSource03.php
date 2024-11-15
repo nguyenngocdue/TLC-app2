@@ -41,6 +41,7 @@ class WelcomeFortuneDataSource03
         'renderer' => 'dropdown',
         'rendererAttrs' => [
           'dataSource' => $statuses,
+          'valueField' => 'name',
         ],
       ],
       [
@@ -123,8 +124,8 @@ class WelcomeFortuneDataSource03
         'bool' => true,
         'bool2' => false,
         'number' => 1,
-        'user_id' => 2,
-        'user_employeeid' => 'TLCM01304',
+        'user_id' => null,
+        'user_employeeid' => null,
       ],
       [
         'name' => 'Doe',
@@ -158,7 +159,8 @@ class WelcomeFortuneDataSource03
       ],
     ];
     $duplicator = [];
-    $expectedLines = 1000;
+    $expectedLines = 100;
+    // $expectedLines = 35000; //loaded fine but challenging to F12
     for ($i = 0; $i < $expectedLines / 3; $i++) {
       $duplicator[] = $tables[0];
       $duplicator[] = $tables[1];

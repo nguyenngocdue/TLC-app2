@@ -4,6 +4,8 @@ import { VirtualScrollParams } from './Type/EditableTable3ConfigType'
 import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
+const cachedTrs: { [k: string]: string } = {}
+
 export const updateVisibleRows = (
     virtualTable: HTMLTableElement,
     dataSource: LengthAware,
@@ -48,15 +50,25 @@ export const updateVisibleRows = (
 
     const visibleRows = slicedData
         .map((row, mapIndex) => {
+            const key = `${tableParams.tableName}__${startIdx + mapIndex}`
             console.log('Making row', row)
-            const emptyTr = new TbodyTr(tableParams, row, startIdx + mapIndex).render().outerHTML
-            // // const rowStr = applyRenderedTRow(tableParams, row, index)
-            console.log(emptyTr)
-            return emptyTr
+            if (!cachedTrs[key]) {
+                cachedTrs[key] = new TbodyTr(
+                    tableParams,
+                    row,
+                    startIdx + mapIndex,
+                ).render().outerHTML
+                cachedTrs[key]
+            } else {
+                console.log('Cached row', key)
+            }
+            // console.log(emptyTr)
+            return cachedTrs[key]
         })
         .join('')
     const result = `${spacerTop.outerHTML}${visibleRows}${spacerBottom.outerHTML}`
     const tbodyElement = virtualTable.querySelector('tbody') as HTMLTableSectionElement
+    //Draw it to the DOM
     tbodyElement.innerHTML = result
     slicedData.forEach((row, index) => {
         applyRenderedTRow(tableParams, row, startIdx + index)

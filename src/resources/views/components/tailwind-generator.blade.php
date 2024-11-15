@@ -41,7 +41,7 @@
 <input class="w-3.5 h-3.5 mt-0.5">
 
 <!-- Make input same height with dropdown-->
-<input class="h-[42px]">
+<input class="h-[42px] px-[10px] py-[10px]">
 
 <th class="border-t-0"></th>
 <input class="truncate w-16" />

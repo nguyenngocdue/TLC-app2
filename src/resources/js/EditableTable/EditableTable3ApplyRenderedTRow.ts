@@ -14,13 +14,9 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
 
     columns.forEach((column) => {
         const tCell = makeTCell(params, row, column, rowIndex)
-
         const { rendered, tdClass, p_2, componentCase, applyPostScript } = tCell
-
         const p = p_2 ? 'p-2 p-2-Tbody' : ''
-
         const cellId = `${tableName}__${column.dataIndex}__${rowIndex}`
-
         const cellTd = document.getElementById(`${cellId}_td`)
         cellTd && (cellTd.className = twMerge(cellTd.className, tdClass, p))
 
@@ -32,6 +28,7 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
             // cellDiv.classList.add('fade-in')
 
             setTimeout(() => {
+                // if (column.dataIndex === 'user_id')
                 applyPostScript()
                 // cellDiv.classList.add('visible')
             }, Math.random() * delayInMs)
