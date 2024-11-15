@@ -36,7 +36,15 @@ export const makeTCell = (
     const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
     const controlId = `${tableName}__${dataIndex}__${rowIndex}`
 
-    const rendererParams = { controlName, controlId, cellValue, params, dataLine, column, rowIndex }
+    const rendererParams = {
+        controlName,
+        controlId,
+        cellValue,
+        params,
+        dataLine,
+        column,
+        rowIndex,
+    }
 
     switch (true) {
         case column.renderer == 'no.':

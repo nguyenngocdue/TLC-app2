@@ -13,9 +13,8 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
-import { applyRenderedTbody } from './EditableTable3TBodyTDRender'
-import { makeTbodyTdEmpty } from './EditableTable3TBodyTDEmpty'
-import { makeTbodyTr } from './EditableTable3TBodyTR'
+import { applyRenderedTbody } from './EditableTable3ApplyRenderedTbody'
+import { TbodyTr } from './EditableTable3TBodyTRow'
 
 class EditableTable3 {
     private tableDebug = false
@@ -78,7 +77,7 @@ class EditableTable3 {
             : ''
 
         if (this.tableDebug) console.log('Start to make Tbody')
-        const body = makeTbodyTr(this.params)
+        const trs = new TbodyTr(this.params).render()
         const emptyTable = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 
         // if (this.tableDebug) console.log('Start to make Colgroup')
@@ -106,7 +105,7 @@ class EditableTable3 {
             </thead>
            
             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
-                ${body ? body : emptyTable}
+                
             </tbody>
 
             <tfoot>
@@ -136,7 +135,7 @@ class EditableTable3 {
 
         if (this.tableDebug) console.log('madeEmptyEditableTable Body')
 
-        return editableTable
+        return { editableTable, trs, emptyTable }
     }
 
     render() {
@@ -155,13 +154,25 @@ class EditableTable3 {
             </div>`
         }
 
+        let trs: HTMLElement[] = []
         if (columns && dataSource) {
-            body = this.renderTable()
+            const x = this.renderTable()
+            if (x.editableTable) {
+                body = x.editableTable
+                trs = x.trs
+            } else {
+                body = x.emptyTable
+            }
         }
 
         const divId = `#${tableName}`
         const div = document.querySelector(divId)
         div && (div.innerHTML = body)
+
+        const tbody = document.querySelector(`${divId} tbody`)
+        if (tbody) {
+            trs.forEach((tr) => tbody.appendChild(tr))
+        }
 
         if (this.tableDebug) {
             console.log(`└──────────────────${this.params.tableName}──────────────────┘`)
