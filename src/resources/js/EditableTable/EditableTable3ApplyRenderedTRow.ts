@@ -7,9 +7,9 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
     const { dataSource, columns, tableName } = params
     if (!dataSource.data) return ''
 
-    const totalCells = dataSource.data.length * columns.length
-    const delayInMs = Math.round(10000 / totalCells)
-    // const delayInMs = 0
+    // const totalCells = dataSource.data.length * columns.length
+    // const delayInMs = Math.round(10000 / totalCells)
+    const delayInMs = 0
     // console.log('totalCells of', tableName, totalCells, delayInMs)
 
     columns.forEach((column) => {
@@ -28,11 +28,12 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
         if (cellDiv) {
             cellDiv.innerHTML = rendered
             cellDiv.setAttribute('data-component-case', componentCase)
-            cellDiv.classList.add('fade-in')
+            cellDiv.classList.add('visible')
+            // cellDiv.classList.add('fade-in')
 
             setTimeout(() => {
                 applyPostScript()
-                cellDiv.classList.add('visible')
+                // cellDiv.classList.add('visible')
             }, Math.random() * delayInMs)
         }
     })

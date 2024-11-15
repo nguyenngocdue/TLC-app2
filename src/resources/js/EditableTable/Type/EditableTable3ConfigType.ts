@@ -1,3 +1,9 @@
+export interface VirtualScrollParams {
+    rowHeight: number
+    viewportHeight: number
+    bufferSize: number
+}
+
 export interface TableConfig {
     width?: number
     maxH?: number | null
@@ -30,6 +36,8 @@ export interface TableConfig {
         toggle_checkbox: string
         button: string
     }
+
+    virtualScroll?: VirtualScrollParams
 
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean

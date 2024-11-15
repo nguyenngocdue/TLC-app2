@@ -12,9 +12,10 @@ import {
 } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
-import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
+import { TbodyTrs } from './EditableTable3TBodyTRows'
+import { updateVisibleRows } from './EditableTable3VirtualScroll'
 import { applyRenderedTbody } from './EditableTable3ApplyRenderedTbody'
-import { TbodyTr } from './EditableTable3TBodyTRow'
+import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
 
 class EditableTable3 {
     private tableDebug = false
@@ -42,7 +43,7 @@ class EditableTable3 {
     }
 
     renderTable() {
-        const { tableName, tableConfig, columns, dataSource } = this.params
+        const { tableName, tableConfig, columns } = this.params
 
         if (!columns) {
             const divId = `#${tableName}`
@@ -77,7 +78,7 @@ class EditableTable3 {
             : ''
 
         if (this.tableDebug) console.log('Start to make Tbody')
-        const trs = new TbodyTr(this.params).render()
+        const trs = new TbodyTrs(this.params).render()
         const emptyTable = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 
         // if (this.tableDebug) console.log('Start to make Colgroup')
@@ -105,7 +106,9 @@ class EditableTable3 {
             </thead>
            
             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
-                
+                <tr id="spacer-top"></tr>
+                <tr id="visible-rows"></tr>
+                <tr id="spacer-bottom"></tr>
             </tbody>
 
             <tfoot>
@@ -154,7 +157,7 @@ class EditableTable3 {
             </div>`
         }
 
-        let trs: HTMLElement[] = []
+        let trs: HTMLTableRowElement[] = []
         if (columns && dataSource) {
             const x = this.renderTable()
             if (x.editableTable) {
@@ -184,17 +187,36 @@ class EditableTable3 {
 
         //when document is ready
         $(() => {
-            if (columns && dataSource) {
-                applyRenderedTbody(this.params)
-                const endTime01 = new Date().getTime()
-                console.log('EditableTable3.applyRenderedTbody() took', endTime01 - endTime00, 'ms')
+            const virtualTable = document.querySelector(`${divId} table`) as HTMLTableElement
+            const tableContainer = virtualTable.parentElement as HTMLElement
+            tableContainer.addEventListener('scroll', () =>
+                updateVisibleRows(
+                    virtualTable,
+                    this.params.dataSource,
+                    this.params,
+                    this.params.tableConfig.virtualScroll,
+                ),
+            )
 
-                setTimeout(() => {
-                    //Wait sometime for the browser to finish rendering the table
-                    applyFixedColumnWidth(tableName, this.params.columns)
-                    applyTopFor2ndHeader(tableName)
-                }, 100)
-            }
+            // Initial render
+            updateVisibleRows(
+                virtualTable,
+                this.params.dataSource,
+                this.params,
+                this.params.tableConfig.virtualScroll,
+            )
+
+            // if (columns && dataSource) {
+            //     applyRenderedTbody(this.params)
+            //     const endTime01 = new Date().getTime()
+            //     console.log('EditableTable3.applyRenderedTbody() took', endTime01 - endTime00, 'ms')
+
+            //     setTimeout(() => {
+            //         //Wait sometime for the browser to finish rendering the table
+            //         applyFixedColumnWidth(tableName, this.params.columns)
+            //         applyTopFor2ndHeader(tableName)
+            //     }, 100)
+            // }
         })
     }
 }

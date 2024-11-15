@@ -50,6 +50,12 @@ var tableObjectIndexedColumns = {};
 
                 // 'editable': {{($editable??0) ? "true" : "false"}},
                 'classList': @json($classList),
+
+                'virtualScroll': {
+                    'rowHeight': 57,
+                    'viewportHeight': 640,
+                    'bufferSize': 5,
+                }
             },
         }
         // console.log("Initilizing table {{$tableName}}", {{$tableName}})
