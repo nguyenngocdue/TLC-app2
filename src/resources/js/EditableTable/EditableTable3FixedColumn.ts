@@ -64,7 +64,7 @@ export const applyFixedColumnWidth = (tableName: string, columns: TableColumn[])
     // console.log('accumulated', arrayOfColumns)
     arrayOfColumns.forEach((_, index) => {
         document.querySelectorAll(`#${tableName} .first-header-${index}`).forEach((element) => {
-            element.setAttribute('true-width-after-load', `${cache[index].toFixed(2)}px`)
+            element.setAttribute('data-true-width-after-load', `${cache[index].toFixed(2)}px`)
         })
     })
 

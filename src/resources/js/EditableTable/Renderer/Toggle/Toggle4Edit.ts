@@ -15,6 +15,9 @@ export class Toggle4Edit extends Renderer4Edit {
 
     render() {
         const control = this.control()
-        return { rendered: control, classStr: this.column.classList || '' }
+        return {
+            rendered: control,
+            classStr: this.column.classList || '',
+        }
     }
 }

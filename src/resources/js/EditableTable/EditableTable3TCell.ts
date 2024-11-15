@@ -28,12 +28,13 @@ export const makeTCell = (
     let p_2 = true
     let result: TableRenderedValueObject
     let componentCase = ''
+    let applyPostScript = () => {}
     // console.log(column.dataIndex, column)
 
     const { tableName } = params
     const { dataIndex } = column
     const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
-    const controlId = `${tableName}_${dataIndex}_${rowIndex}`
+    const controlId = `${tableName}__${dataIndex}__${rowIndex}`
 
     const rendererParams = { controlName, controlId, cellValue, params, dataLine, column, rowIndex }
 
@@ -48,6 +49,7 @@ export const makeTCell = (
             result = new Text4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
+            applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.text'
             break
 
@@ -57,6 +59,7 @@ export const makeTCell = (
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
+            applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.number'
             break
 
@@ -65,6 +68,7 @@ export const makeTCell = (
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
+            applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.dropdown'
             break
 
@@ -73,6 +77,7 @@ export const makeTCell = (
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
+            applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.toggle'
             break
 
@@ -81,6 +86,7 @@ export const makeTCell = (
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
+            applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.checkbox'
             break
 
@@ -88,6 +94,7 @@ export const makeTCell = (
             result = new PickerDateTime4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.classStr
+            applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.picker_datetime'
             break
 
@@ -157,5 +164,5 @@ export const makeTCell = (
 
     if (column.renderer && column.mode == 'edit') p_2 = false
     // console.log(rendered)
-    return { rendered, tdClass, p_2, componentCase }
+    return { rendered, tdClass, p_2, componentCase, applyPostScript }
 }

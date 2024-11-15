@@ -12,6 +12,7 @@ export class Checkbox4Edit extends Renderer4Edit {
     render() {
         const control = this.control()
         const classStr = twMerge(`text-center`, this.column.classList)
+
         return { rendered: control, classStr }
     }
 }

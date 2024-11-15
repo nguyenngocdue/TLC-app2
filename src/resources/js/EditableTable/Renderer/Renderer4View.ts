@@ -30,4 +30,5 @@ export abstract class Renderer4View {
         this.tableConfig = this.params.params.tableConfig
     }
     abstract render(data: any): TableRenderedValueObject
+    applyPostScript(): void {}
 }

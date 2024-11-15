@@ -39,7 +39,9 @@ export class Dropdown4Edit extends Renderer4Edit {
         return `<select>${options.join()}</select>`
     }
 
-    applyScript(): void {}
+    applyPostScript(): void {
+        console.log('Dropdown4Edit.applyPostScript()')
+    }
 
     render() {
         let result = this.control()
@@ -47,6 +49,7 @@ export class Dropdown4Edit extends Renderer4Edit {
         return {
             rendered: result,
             classStr: this.column.classList || '',
+            applyPostScript: this.applyPostScript,
         }
     }
 }

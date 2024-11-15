@@ -40,6 +40,7 @@ export interface LengthAware {
 export interface TableRenderedValueObject {
     rendered: string
     classStr: string
+    applyPostScript?: () => void
 }
 
 export interface TableRendererParams {

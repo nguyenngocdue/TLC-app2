@@ -122,7 +122,7 @@
 <hr/>
 <br/> --}}
 
-{{-- <x-renderer.table3
+<x-renderer.table3
     :columns="$table02['columns']"
     :dataSource="$table02['dataSource']"
     :dataHeader="$table02['sndHeader']"
@@ -179,7 +179,7 @@
 
 <x-renderer.table3></x-renderer.table3>
 
-<x-renderer.table3 :columns="$table01['columns']"></x-renderer.table3> --}}
+<x-renderer.table3 :columns="$table01['columns']"></x-renderer.table3>
 
 
 @endsection 

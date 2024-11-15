@@ -1,6 +1,6 @@
 import { TableConfig } from './Type/EditableTable3ConfigType'
 import { TableParams } from './Type/EditableTable3ParamType'
-import { makeTbody } from './EditableTable3TBody'
+import { makeTbodyEmpty as makeEmptyTbody } from './EditableTable3TBodyEmpty'
 import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
@@ -13,6 +13,7 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
+import { applyRenderedTbody } from './EditableTable3TBodyRender'
 
 class EditableTable3 {
     private tableDebug = false
@@ -73,16 +74,16 @@ class EditableTable3 {
             : ''
 
         if (this.tableDebug) console.log('Start to make Tbody')
-        const body = makeTbody(this.params)
+        const body = makeEmptyTbody(this.params)
         const emptyTable = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 
-        if (this.tableDebug) console.log('Start to make Colgroup')
+        // if (this.tableDebug) console.log('Start to make Colgroup')
         const colgroupStr = makeColGroup(this.params)
-        if (this.tableDebug) console.log('Start to make Thead')
+        // if (this.tableDebug) console.log('Start to make Thead')
         const tHeadStr = makeThead(this.params)
-        if (this.tableDebug) console.log('Start to make Thead2nd')
+        // if (this.tableDebug) console.log('Start to make Thead2nd')
         const tHead2ndStr = makeThead2nd(this.params)
-        if (this.tableDebug) console.log('Start to make Tfoot')
+        // if (this.tableDebug) console.log('Start to make Tfoot')
         const tFootStr = makeTfoot(this.params)
 
         const tableStr = `<table 
@@ -129,7 +130,7 @@ class EditableTable3 {
         ${tableFooter}
         `
 
-        if (this.tableDebug) console.log('makeEditableTable Body')
+        if (this.tableDebug) console.log('madeEmptyEditableTable Body')
 
         return editableTable
     }
@@ -164,11 +165,12 @@ class EditableTable3 {
         }
 
         if (columns && dataSource) {
+            applyRenderedTbody(this.params)
             setTimeout(() => {
                 //Wait sometime for the browser to finish rendering the table
                 applyFixedColumnWidth(tableName, this.params.columns)
                 applyTopFor2ndHeader(tableName)
-            }, 1000)
+            }, 100)
         }
     }
 }
