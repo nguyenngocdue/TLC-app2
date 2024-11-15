@@ -12,10 +12,12 @@ export class TbodyTr {
 
     onmousemove = (e: MouseEvent) => {
         // applyRenderedTRow(this.params, row, rowIndex)
+        console.log('onmousemove', this.row)
     }
 
     onmouseout = (e: MouseEvent) => {
         // applyRenderedTRow(this.params, row, rowIndex)
+        console.log('onmouseout', this.row)
     }
 
     private renderRow = (tableName: string, columns: TableColumn[]) => {

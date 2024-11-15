@@ -50,6 +50,7 @@ var tableObjectIndexedColumns = {};
 
                 // 'editable': {{($editable??0) ? "true" : "false"}},
                 'classList': @json($classList),
+                'animationDelay': @json($animationDelay),
 
                 'virtualScroll': {
                     'rowHeight': 57,

@@ -188,35 +188,42 @@ class EditableTable3 {
         //when document is ready
         $(() => {
             const virtualTable = document.querySelector(`${divId} table`) as HTMLTableElement
-            const tableContainer = virtualTable.parentElement as HTMLElement
-            tableContainer.addEventListener('scroll', () =>
+            // console.log('virtualTable', divId, virtualTable)
+            if (virtualTable) {
+                const tableContainer = virtualTable.parentElement as HTMLElement
+                tableContainer.addEventListener('scroll', () =>
+                    updateVisibleRows(
+                        virtualTable,
+                        this.params.dataSource,
+                        this.params,
+                        this.params.tableConfig.virtualScroll,
+                    ),
+                )
+
+                // Initial render
                 updateVisibleRows(
                     virtualTable,
                     this.params.dataSource,
                     this.params,
                     this.params.tableConfig.virtualScroll,
-                ),
-            )
+                )
+                // } else {
+                //     if (columns && dataSource) {
+                //         applyRenderedTbody(this.params)
+                //         const endTime01 = new Date().getTime()
+                //         console.log(
+                //             'EditableTable3.applyRenderedTbody() took',
+                //             endTime01 - endTime00,
+                //             'ms',
+                //         )
 
-            // Initial render
-            updateVisibleRows(
-                virtualTable,
-                this.params.dataSource,
-                this.params,
-                this.params.tableConfig.virtualScroll,
-            )
-
-            // if (columns && dataSource) {
-            //     applyRenderedTbody(this.params)
-            //     const endTime01 = new Date().getTime()
-            //     console.log('EditableTable3.applyRenderedTbody() took', endTime01 - endTime00, 'ms')
-
-            //     setTimeout(() => {
-            //         //Wait sometime for the browser to finish rendering the table
-            //         applyFixedColumnWidth(tableName, this.params.columns)
-            //         applyTopFor2ndHeader(tableName)
-            //     }, 100)
-            // }
+                //         setTimeout(() => {
+                //             //Wait sometime for the browser to finish rendering the table
+                //             applyFixedColumnWidth(tableName, this.params.columns)
+                //             applyTopFor2ndHeader(tableName)
+                //         }, 100)
+                //     }
+            }
         })
     }
 }

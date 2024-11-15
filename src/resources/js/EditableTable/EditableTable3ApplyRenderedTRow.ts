@@ -4,34 +4,34 @@ import { TableDataLine } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIndex: number) => {
-    const { dataSource, columns, tableName } = params
+    const { dataSource, columns, tableName, tableConfig } = params
     if (!dataSource.data) return ''
-
-    // const totalCells = dataSource.data.length * columns.length
-    // const delayInMs = Math.round(10000 / totalCells)
-    const delayInMs = 0
-    // console.log('totalCells of', tableName, totalCells, delayInMs)
 
     columns.forEach((column) => {
         const tCell = makeTCell(params, row, column, rowIndex)
         const { rendered, tdClass, p_2, componentCase, applyPostScript } = tCell
         const p = p_2 ? 'p-2 p-2-Tbody' : ''
         const cellId = `${tableName}__${column.dataIndex}__${rowIndex}`
-        const cellTd = document.getElementById(`${cellId}_td`)
+        const cellTd = document.getElementById(`${cellId}__td`)
         cellTd && (cellTd.className = twMerge(cellTd.className, tdClass, p))
 
         const cellDiv = document.getElementById(`${cellId}_div`)
         if (cellDiv) {
+            const animationDelay = tableConfig.animationDelay || 0
             cellDiv.innerHTML = rendered
             cellDiv.setAttribute('data-component-case', componentCase)
-            cellDiv.classList.add('visible')
-            // cellDiv.classList.add('fade-in')
+            if (animationDelay) {
+                cellDiv.classList.add('fade-in')
+            } else {
+                cellDiv.classList.add('visible')
+            }
 
             setTimeout(() => {
                 // if (column.dataIndex === 'user_id')
                 applyPostScript()
-                // cellDiv.classList.add('visible')
-            }, Math.random() * delayInMs)
+
+                if (animationDelay) cellDiv.classList.add('visible')
+            }, Math.random() * (tableConfig.animationDelay || 0))
         }
     })
 }

@@ -19,7 +19,7 @@
 <br/>
 <hr/>
 <br/>
-{{-- 
+
 <x-renderer.table3
     :columns="$table03['columns']"
     :dataSource="$table03['dataSource']"
@@ -29,12 +29,13 @@
     tableTrueWidth="1"
 
     header="View Mode"
+    animationDelay=1000
     >
 </x-renderer.table>
 
 <br/>
 <hr/>
-<br/> --}}
+<br/>
 
 {{-- 
 <x-renderer.table3

@@ -12,7 +12,6 @@ export const updateVisibleRows = (
     tableParams: TableParams,
     virtualScroll?: VirtualScrollParams,
 ) => {
-    console.log('updateVisibleRows')
     const { rowHeight = 57, bufferSize = 5, viewportHeight = 640 } = virtualScroll || {}
     const data = dataSource.data
 
@@ -51,7 +50,7 @@ export const updateVisibleRows = (
     const visibleRows = slicedData
         .map((row, mapIndex) => {
             const key = `${tableParams.tableName}__${startIdx + mapIndex}`
-            console.log('Making row', row)
+            // console.log('Making row', row)
             if (!cachedTrs[key]) {
                 cachedTrs[key] = new TbodyTr(
                     tableParams,
@@ -59,8 +58,8 @@ export const updateVisibleRows = (
                     startIdx + mapIndex,
                 ).render().outerHTML
                 cachedTrs[key]
-            } else {
-                console.log('Cached row', key)
+                // } else {
+                // console.log('Cached row', key)
             }
             // console.log(emptyTr)
             return cachedTrs[key]

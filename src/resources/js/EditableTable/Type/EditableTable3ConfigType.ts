@@ -39,6 +39,7 @@ export interface TableConfig {
     }
 
     virtualScroll?: VirtualScrollParams
+    animationDelay?: number
 
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean

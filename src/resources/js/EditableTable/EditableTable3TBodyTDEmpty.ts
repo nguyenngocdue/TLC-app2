@@ -22,7 +22,7 @@ export const makeTbodyTdEmpty = (
     const styleList = `${widthStr}`
     const cellId = `${tableName}__${dataIndex}__${rowIndex}`
     return `<td 
-                    id="${cellId}_td"
+                    id="${cellId}__td"
                     class="${classList}" 
                     style="${styleList}" 
                     ><div id="${cellId}_div" class="min-h-5 fade-in"></div></td>`
