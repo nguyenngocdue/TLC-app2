@@ -1,23 +1,12 @@
 import { twMerge } from 'tailwind-merge'
-import {
-    TableRenderedValueObject,
-    TableRendererParams,
-} from '../../Type/EditableTable3DataLineType'
+import { Renderer4Edit } from '../Renderer4Edit'
 
-export class Text4Edit {
-    private tableDebug = false
-
-    constructor(private params: TableRendererParams) {
-        // this.tableDebug = this.params.params.tableConfig.tableDebug || false
-    }
-
+export class Text4Edit extends Renderer4Edit {
     control() {
-        const { cellValue, params } = this.params
-        const classList = twMerge(
-            `${params.tableConfig.classList?.text} ${this.params.column.classList}`,
-        )
+        const { cellValue, tableConfig, column } = this
+        const classList = twMerge(`${tableConfig.classList?.text} ${column.classList}`)
 
-        const { controlName, controlId } = this.params
+        const { controlName, controlId } = this
         const debugStr = this.tableDebug ? `${controlName}` : ``
 
         const html = `<input component="text4edit" name="${controlName}" id="${controlId}" type="text" class="${classList}" value="${
@@ -27,12 +16,5 @@ export class Text4Edit {
         ${html}
         ${debugStr}
         `
-    }
-
-    render(): TableRenderedValueObject {
-        const { cellValue } = this.params
-        const control = this.control()
-
-        return { rendered: control, classStr: '' }
     }
 }

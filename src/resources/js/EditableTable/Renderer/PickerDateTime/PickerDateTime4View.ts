@@ -1,16 +1,12 @@
 import moment from 'moment'
-import {
-    TableRenderedValueObject,
-    TableRendererParams,
-} from '../../Type/EditableTable3DataLineType'
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { TableColumnPickerDateTime } from '../../Type/EditableTable3ColumnType'
+import { Renderer4View } from '../Renderer4View'
 
-export class PickerDateTime4View {
-    constructor(private params: TableRendererParams) {}
-
+export class PickerDateTime4View extends Renderer4View {
     render(): TableRenderedValueObject {
-        const value = this.params.cellValue as unknown as string
-        const column = this.params.column as TableColumnPickerDateTime
+        const value = this.cellValue as unknown as string
+        const column = this.column as TableColumnPickerDateTime
 
         const pickerType = column.rendererAttrs?.pickerType || 'datetime'
         let rendered = ''
@@ -35,7 +31,7 @@ export class PickerDateTime4View {
                 break
         }
 
-        const classStr = `${this.params.column.classList} text-center`
+        const classStr = `${this.column.classList} text-center`
         return { rendered, classStr }
     }
 }

@@ -1,11 +1,9 @@
-import { TableRendererParams } from '../../Type/EditableTable3DataLineType'
+import { Renderer4Edit } from '../Renderer4Edit'
 
-export class Toggle4Edit {
-    constructor(private params: TableRendererParams) {}
-
+export class Toggle4Edit extends Renderer4Edit {
     control() {
-        const { controlName, controlId, params, cellValue } = this.params
-        const classList = params.tableConfig.classList?.toggle
+        const { controlName, controlId, tableConfig, cellValue } = this
+        const classList = tableConfig.classList?.toggle
         const checked = !!cellValue ? 'checked' : ''
         return `<div class="flex justify-center">
             <label for="${controlId}" class="inline-flex relative items-center cursor-pointer">
@@ -17,6 +15,6 @@ export class Toggle4Edit {
 
     render() {
         const control = this.control()
-        return { rendered: control, classStr: this.params.column.classList || '' }
+        return { rendered: control, classStr: this.column.classList || '' }
     }
 }

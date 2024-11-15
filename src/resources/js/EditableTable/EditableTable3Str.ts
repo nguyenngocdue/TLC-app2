@@ -7,6 +7,13 @@ export class Str {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
     }
+
+    static makeId = (n: number | string) => {
+        if (!n) return ''
+        if (typeof n == 'string') return n
+        const strPad = String(n).padStart(6, '0')
+        return `#${strPad.substring(0, 3)}.${strPad.substring(3)}`
+    }
 }
 // Usage
 // console.log(Str.toHeadline('hello_world_test')) // "Hello World Test"

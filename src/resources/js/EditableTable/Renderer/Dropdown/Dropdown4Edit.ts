@@ -1,17 +1,14 @@
-import { getDataSource, getNotFound } from '../../Function/CacheKByKey'
+import { Str } from '../../EditableTable3Str'
+import { getDataSource } from '../../Function/CacheKByKey'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
-import { TableRendererParams } from '../../Type/EditableTable3DataLineType'
+import { Renderer4Edit } from '../Renderer4Edit'
 
-export class Dropdown4Edit {
-    private tableDebug = false
+export class Dropdown4Edit extends Renderer4Edit {
+    protected tableDebug = false
 
-    constructor(private params: TableRendererParams) {
-        // this.tableDebug = this.params.params.tableConfig.tableDebug || false
-    }
-
-    render() {
-        const cellValue = this.params.cellValue as unknown as string
-        const column = this.params.column as TableColumnDropdown
+    control() {
+        const cellValue = this.cellValue as unknown as string
+        const column = this.column as TableColumnDropdown
         const { rendererAttrs = {}, dataIndex } = column
         const {
             // allowClear,
@@ -20,7 +17,7 @@ export class Dropdown4Edit {
             valueField = 'id',
             labelField = 'name',
             // descriptionField = 'description',
-            tooltipField = valueField,
+            tooltipField = '',
             // filterColumns,
             // filterOperator,
             // filterValues,
@@ -31,21 +28,25 @@ export class Dropdown4Edit {
         const cbbDataSource = getDataSource(column)
         // console.log(dataIndex, cellValue, valueField, cbbDataSource)
 
-        const selectedItem = cbbDataSource[cellValue]
-        // console.log(cellValue, selectedItem)
+        const options = Object.keys(cbbDataSource).map((key) => {
+            const item = cbbDataSource[key]
+            const tooltip = item[tooltipField] || Str.makeId(item[valueField])
+            return `<option value="${item[valueField]}" title="${tooltip}">
+                ${item[labelField]}
+            </option>`
+        })
 
-        let result = ''
-        if (selectedItem) {
-            const label = selectedItem[labelField]
-            const tooltip = selectedItem[tooltipField] || ''
-            result = `<div class="" title="${tooltip}">${label}</div>`
-        } else {
-            result = getNotFound(valueField, cellValue)
-        }
+        return `<select>${options.join()}</select>`
+    }
+
+    applyScript(): void {}
+
+    render() {
+        let result = this.control()
 
         return {
             rendered: result,
-            classStr: this.params.column.classList || '',
+            classStr: this.column.classList || '',
         }
     }
 }

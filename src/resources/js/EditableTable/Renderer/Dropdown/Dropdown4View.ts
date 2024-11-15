@@ -1,13 +1,11 @@
 import { getDataSource, getNotFound } from '../../Function/CacheKByKey'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
-import { TableRendererParams } from '../../Type/EditableTable3DataLineType'
+import { Renderer4View } from '../Renderer4View'
 
-export class Dropdown4View {
-    constructor(private params: TableRendererParams) {}
-
+export class Dropdown4View extends Renderer4View {
     render() {
-        const cellValue = this.params.cellValue as unknown as string
-        const column = this.params.column as TableColumnDropdown
+        const cellValue = this.cellValue as unknown as string
+        const column = this.column as TableColumnDropdown
         const { rendererAttrs = {}, dataIndex } = column
         const {
             // allowClear,
@@ -41,7 +39,7 @@ export class Dropdown4View {
 
         return {
             rendered: result,
-            classStr: this.params.column.classList || '',
+            classStr: this.column.classList || '',
         }
     }
 }
