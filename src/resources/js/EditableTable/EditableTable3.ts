@@ -1,6 +1,6 @@
 import { TableConfig } from './Type/EditableTable3ConfigType'
 import { TableParams } from './Type/EditableTable3ParamType'
-import { makeTbodyEmpty as makeEmptyTbody } from './EditableTable3TBodyEmpty'
+
 import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
@@ -13,10 +13,14 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
-import { applyRenderedTbody } from './EditableTable3TBodyRender'
+import { applyRenderedTbody } from './EditableTable3TBodyTDRender'
+import { makeTbodyTdEmpty } from './EditableTable3TBodyTDEmpty'
+import { makeTbodyTr } from './EditableTable3TBodyTR'
 
 class EditableTable3 {
     private tableDebug = false
+    private startTime = new Date().getTime()
+
     private defaultConfig: TableConfig = {
         borderColor: 'border-gray-300',
     }
@@ -74,7 +78,7 @@ class EditableTable3 {
             : ''
 
         if (this.tableDebug) console.log('Start to make Tbody')
-        const body = makeEmptyTbody(this.params)
+        const body = makeTbodyTr(this.params)
         const emptyTable = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 
         // if (this.tableDebug) console.log('Start to make Colgroup')
@@ -164,14 +168,23 @@ class EditableTable3 {
             console.log('')
         }
 
-        if (columns && dataSource) {
-            applyRenderedTbody(this.params)
-            setTimeout(() => {
-                //Wait sometime for the browser to finish rendering the table
-                applyFixedColumnWidth(tableName, this.params.columns)
-                applyTopFor2ndHeader(tableName)
-            }, 100)
-        }
+        const endTime00 = new Date().getTime()
+        console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
+
+        //when document is ready
+        $(() => {
+            if (columns && dataSource) {
+                applyRenderedTbody(this.params)
+                const endTime01 = new Date().getTime()
+                console.log('EditableTable3.applyRenderedTbody() took', endTime01 - endTime00, 'ms')
+
+                setTimeout(() => {
+                    //Wait sometime for the browser to finish rendering the table
+                    applyFixedColumnWidth(tableName, this.params.columns)
+                    applyTopFor2ndHeader(tableName)
+                }, 100)
+            }
+        })
     }
 }
 

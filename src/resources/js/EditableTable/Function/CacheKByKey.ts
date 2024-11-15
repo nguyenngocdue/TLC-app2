@@ -1,8 +1,8 @@
-import { TableColumnDropdown } from '../Type/EditableTable3ColumnType'
+import { CbbDataSourceType, TableColumnDropdown } from '../Type/EditableTable3ColumnType'
 
 // connect to global variable k, k_by somewhere in JS, before this file is loaded
 declare const k: { [key1: string]: Array<{ [key2: string]: string | number }> }
-declare const k_by: { [key3: string]: { [key4: string]: { [key5: string]: string | number } } }
+declare const k_by: { [key3: string]: CbbDataSourceType }
 
 const getDataSourceFromKBy = (column: TableColumnDropdown) => {
     const { rendererAttrs = {} } = column
@@ -20,12 +20,14 @@ const getDataSourceFromKBy = (column: TableColumnDropdown) => {
                 k_by[finalKey][valueOfKey] = item
             }
         }
+        // } else {
+        // console.log('cache hit', finalKey)
     }
     return k_by[finalKey]
 }
 
 export const getDataSource = (column: TableColumnDropdown) => {
-    let cbbDataSource: { [key: string]: { [key: string]: string | number } } = {}
+    let cbbDataSource: CbbDataSourceType = {}
     const { rendererAttrs = {} } = column
     const { dataSourceKey, dataSource = {} } = rendererAttrs
     if (typeof dataSourceKey == 'string') {

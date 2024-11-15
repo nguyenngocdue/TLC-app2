@@ -1,5 +1,5 @@
 import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
-import { smartTypeOf } from './EditableTable3Str'
+import { smartTypeOf } from './Function/Functions'
 import { TableColumn } from './Type/EditableTable3ColumnType'
 import {
     TableValueObjectType,

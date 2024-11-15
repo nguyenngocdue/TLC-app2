@@ -1,4 +1,4 @@
-import { smartTypeOf } from '../../EditableTable3Str'
+import { smartTypeOf } from '../../Function/Functions'
 import {
     TableValueObjectType,
     TableRenderedValueObject,

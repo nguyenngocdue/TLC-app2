@@ -9,7 +9,8 @@ export const applyRenderedTbody = (params: TableParams) => {
 
     const totalCells = dataSource.data.length * columns.length
     const delayInMs = Math.round(10000 / totalCells)
-    // console.log('totalCells', totalCells, delayInMs)
+    // const delayInMs = 0
+    // console.log('totalCells of', tableName, totalCells, delayInMs)
 
     dataSource.data.forEach((row: TableDataLine, rowIndex: number) => {
         columns.forEach((column) => {
@@ -29,9 +30,9 @@ export const applyRenderedTbody = (params: TableParams) => {
                 cellDiv.innerHTML = rendered
                 cellDiv.setAttribute('data-component-case', componentCase)
                 cellDiv.classList.add('fade-in')
-                applyPostScript()
 
                 setTimeout(() => {
+                    // applyPostScript()
                     cellDiv.classList.add('visible')
                 }, Math.random() * delayInMs)
             }

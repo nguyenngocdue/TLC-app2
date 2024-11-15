@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge'
 import { getTooltip } from './EditableTable3DefaultValue'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
-import { Str } from './EditableTable3Str'
+import { Str } from './Function/Functions'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const makeThead = ({ columns, tableConfig }: TableParams) => {

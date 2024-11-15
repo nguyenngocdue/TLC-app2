@@ -113,3 +113,5 @@ export type TableColumn =
     | TableColumnToggle
     | TableColumnCheckbox
     | TableColumnPickerDateTime
+
+export type CbbDataSourceType = { [key: string]: { [key: string]: string | number } }
