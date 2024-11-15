@@ -60,16 +60,16 @@ trait TableTraitFooter
 
         if (in_array($control, ['picker_date', 'picker_datetime'])) {
             // $items = $items->map(fn ($item) => $item ? Carbon::parse($item)->diffInSeconds('1970-01-01 00:00:00') : 0);
-            $items = $items->map(fn ($item) => $item ? Carbon::parse(DateTimeConcern::convertForSaving($control, $item))->diffInSeconds('1970-01-01 00:00:00') : 0);
+            $items = $items->map(fn($item) => $item ? Carbon::parse(DateTimeConcern::convertForSaving($control, $item))->diffInSeconds('1970-01-01 00:00:00') : 0);
         }
         if (in_array($control, ['picker_time'])) {
-            $items = $items->map(fn ($item) => $item ? Carbon::parse(DateTimeConcern::convertForSaving($control, $item))->diffInSeconds('00:00:00') : 0);
+            $items = $items->map(fn($item) => $item ? Carbon::parse(DateTimeConcern::convertForSaving($control, $item))->diffInSeconds('00:00:00') : 0);
         }
         if (in_array($control, ['picker_month', 'picker_week', 'picker_quarter'])) {
             $items = collect([]); //TO BE IMPLEMENTED
         }
         if (in_array($control, ['picker_year'])) {
-            $items = $items->map(fn ($item) => $item ? substr($item, 0, 4) : 0); //<< Incase year is a empty string, make it 0
+            $items = $items->map(fn($item) => $item ? substr($item, 0, 4) : 0); //<< Incase year is a empty string, make it 0
         }
 
         if ($fieldName == 'status') {
@@ -79,8 +79,9 @@ trait TableTraitFooter
         // dump($items);
         try {
             // $result['agg_sum'] = $items->sum();
-            $items = $items->filter(fn ($i) => is_numeric($i));
-            $result['agg_sum'] = $items->map(fn ($item) => (float) str_replace(',', '', $item))->sum();
+            $items = $items->map(fn($item) => (float) str_replace(',', '', $item));
+            $items = $items->filter(fn($i) => is_numeric($i));
+            $result['agg_sum'] = $items->sum();
             $result['agg_avg'] = ($a = $items->avg()) ? $a : null;
             $result['agg_median'] = ($a = $items->median()) ? $a : null;
             $result['agg_min'] = ($a = $items->min()) ? $a : null;
@@ -186,7 +187,7 @@ trait TableTraitFooter
             }
             if (!$hasFooter) return;
 
-            $result0 = array_map(fn ($c) => "<td>" . $c . "</td>", $result0);
+            $result0 = array_map(fn($c) => "<td>" . $c . "</td>", $result0);
             // dump($result0);
             return join("", $result0);
         } catch (\Exception $e) {
