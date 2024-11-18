@@ -112,6 +112,7 @@ export const updateVisibleRows = (
     dataSource: LengthAware,
     tableParams: TableParams,
     virtualScroll?: VirtualScrollParams,
+    firstLoad = false,
 ) => {
     const { rowHeight = 45, bufferSize = 5, viewportHeight = 640 } = virtualScroll || {}
     const data = dataSource.data
@@ -147,6 +148,16 @@ export const updateVisibleRows = (
     } else {
         renderRows(data, indices.toBeLoaded, tableParams, visibleRowCount, 'top')
         removeRows(indices.toBeRemoved, tableParams.tableName)
+    }
+
+    if (firstLoad) {
+        renderRows(
+            data,
+            { startIdx: 0, endIdx: visibleRowCount },
+            tableParams,
+            visibleRowCount,
+            'bottom',
+        )
     }
 
     lastRenderedStartIdx = startIdx

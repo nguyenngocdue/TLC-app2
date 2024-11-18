@@ -222,6 +222,7 @@ class EditableTable3 {
                     this.params.dataSource,
                     this.params,
                     this.params.tableConfig.virtualScroll,
+                    true,
                 )
                 // } else {
                 //     if (columns && dataSource) {
