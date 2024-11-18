@@ -1,10 +1,10 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/antd-vue.js": "/js/antd-vue.js",
-    "/js/number-to-words.js": "/js/number-to-words.js",
-    "/js/jsdiff.js": "/js/jsdiff.js",
-    "/js/lazysizes.js": "/js/lazysizes.js",
-    "/js/lightgallery.js": "/js/lightgallery.js",
-    "/js/EditableTable3.js": "/js/EditableTable3.js",
-    "/css/lightgallery.css": "/css/lightgallery.css"
+    "/js/app.js": "/js/app.js?id=85a6fc0e550f7357cc26fb89df4fa31b",
+    "/js/antd-vue.js": "/js/antd-vue.js?id=a0381a4da8176f79c2b6253b4f2acde7",
+    "/js/number-to-words.js": "/js/number-to-words.js?id=8cb6719ff53ad5a2612e42ccfc767d98",
+    "/js/jsdiff.js": "/js/jsdiff.js?id=8ba40087bc033df81ee4f3bf38bec651",
+    "/js/lazysizes.js": "/js/lazysizes.js?id=34b667be7912cc8adafdaf32164dcd56",
+    "/js/lightgallery.js": "/js/lightgallery.js?id=34df3cac86ff76d6d8a2549ba4a23e96",
+    "/js/EditableTable3.js": "/js/EditableTable3.js?id=f721de4ca8e192807b8cafe709507f5f",
+    "/css/lightgallery.css": "/css/lightgallery.css?id=df8675831d4b19d8ec93d2b99e19bf7f"
 }
