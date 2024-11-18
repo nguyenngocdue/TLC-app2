@@ -8,4 +8,7 @@ export interface TableParams {
     columns: TableColumn[]
     dataSource: LengthAware
     dataHeader: TableDataLine
+
+    //derived from columns
+    indexedColumns: { [key: string]: TableColumn }
 }

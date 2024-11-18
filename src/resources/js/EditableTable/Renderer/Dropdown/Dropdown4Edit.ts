@@ -1,3 +1,5 @@
+import { DataFormat } from 'select2'
+
 import { Str } from '../../Function/Functions'
 import { getDataSource } from '../../Function/CacheKByKey'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
@@ -6,7 +8,7 @@ import { Renderer4Edit } from '../Renderer4Edit'
 export class Dropdown4Edit extends Renderer4Edit {
     protected tableDebug = false
 
-    getOptionsExpensive = (column: TableColumnDropdown) => {
+    static getOptionsExpensive = (column: TableColumnDropdown) => {
         const { rendererAttrs = {} } = column
         const cbbDataSource = getDataSource(column)
 
@@ -20,11 +22,17 @@ export class Dropdown4Edit extends Renderer4Edit {
         const options = Object.keys(cbbDataSource).map((key) => {
             const item = cbbDataSource[key]
             const tooltip = item[tooltipField] || Str.makeId(item[valueField])
-            return `<option value="${item[valueField]}" title="${tooltip}">
-                ${item[labelField]}
-            </option>`
+
+            const option: DataFormat = {
+                id: item[valueField],
+                text: item[labelField] as string,
+            }
+            return option
+            // return `<option value="${item[valueField]}" title="${tooltip}">
+            //     ${item[labelField]}
+            // </option>`
         })
-        return options.join('')
+        return options
     }
 
     getOptionsCheap = (column: TableColumnDropdown) => {
@@ -67,24 +75,24 @@ export class Dropdown4Edit extends Renderer4Edit {
         </select>`
     }
 
-    applyPostScript = () => {
-        // console.log('Dropdown4Edit.applyPostScript()', this)
-        const column = this.column as TableColumnDropdown
-        const { rendererAttrs = {}, dataIndex } = column
-        const {
-            allowClear,
-            allowChooseWhenOneItem,
-            allowOpen,
-            valueField = 'id',
-            labelField = 'name',
-            // descriptionField = 'description',
-            tooltipField = '',
-        } = rendererAttrs
-        $(`#${this.controlId}`).select2({
-            placeholder: 'Select an option',
-            allowClear,
-        })
-    }
+    // applyPostScript = () => {
+    //     // console.log('Dropdown4Edit.applyPostScript()', this)
+    //     const column = this.column as TableColumnDropdown
+    //     const { rendererAttrs = {}, dataIndex } = column
+    //     const {
+    //         allowClear,
+    //         allowChooseWhenOneItem,
+    //         allowOpen,
+    //         valueField = 'id',
+    //         labelField = 'name',
+    //         // descriptionField = 'description',
+    //         tooltipField = '',
+    //     } = rendererAttrs
+    //     // $(`#${this.controlId}`).select2({
+    //     //     placeholder: 'Select an option',
+    //     //     allowClear,
+    //     // })
+    // }
 
     render() {
         let result = this.control()
@@ -92,7 +100,7 @@ export class Dropdown4Edit extends Renderer4Edit {
         return {
             rendered: result,
             classStr: this.column.classList || '',
-            applyPostScript: this.applyPostScript,
+            // applyPostScript: this.applyPostScript,
         }
     }
 }

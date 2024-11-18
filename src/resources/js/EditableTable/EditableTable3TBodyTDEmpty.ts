@@ -21,11 +21,11 @@ export const makeTbodyTdEmpty = (
     const widthStr = column.width ? `width: ${column.width}px;` : ''
     const styleList = `${widthStr}`
     const cellId = `${tableName}__${dataIndex}__${rowIndex}`
-    return `<td 
-                    id="${cellId}__td"
-                    class="${classList}" 
-                    style="${styleList}" 
-                    data-row="${rowIndex}"
-                    data-col="${columnIndex}"                    
-                    ><div id="${cellId}_div" class="min-h-5 fade-in"></div></td>`
+    return `<td id="${cellId}__td" class="${classList}" style="${styleList}" 
+                data-row="${rowIndex}" 
+                data-col="${columnIndex}"
+                data-column-key="${dataIndex}"
+                >
+                <div id="${cellId}_div" class="min-h-5 fade-in"></div>
+            </td>`
 }

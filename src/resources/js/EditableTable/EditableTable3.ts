@@ -14,8 +14,6 @@ import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { TbodyTrs } from './EditableTable3TBodyTRows'
 import { updateVisibleRows } from './VirtualScrolling/updateVisibleRows'
-import { applyRenderedTbody } from './EditableTable3ApplyRenderedTbody'
-import { applyFixedColumnWidth, applyTopFor2ndHeader } from './EditableTable3FixedColumn'
 import { tdOnMouseMove, tdOnMouseOut } from './VirtualScrolling/tdOnMouseMove'
 
 class EditableTable3 {
@@ -30,7 +28,17 @@ class EditableTable3 {
         this.tableDebug = this.params.tableConfig.tableDebug || false
         if (this.tableDebug)
             console.log(`┌──────────────────${params.tableName}──────────────────┐`)
+
+        //Columns
         this.params.columns = makeUpDefaultValue(params)
+        // console.log(this.params.columns)
+        this.params.indexedColumns = {}
+        if (this.params.columns) {
+            this.params.columns.forEach((column, index) => {
+                this.params.indexedColumns[column.dataIndex] = column
+            })
+        }
+
         if (!this.params.tableConfig) this.params.tableConfig = {}
         if (Array.isArray(params.dataSource)) {
             this.params.dataSource = convertArrayToLengthAware(params.dataSource)
@@ -193,12 +201,8 @@ class EditableTable3 {
                 const tbodyElement = virtualTable.querySelector('tbody')
 
                 if (tbodyElement) {
-                    tbodyElement.addEventListener('mousemove', (e) =>
-                        tdOnMouseMove(e, tableName, tableConfig),
-                    )
-                    tbodyElement.addEventListener('mouseout', (e) =>
-                        tdOnMouseOut(e, tableName, tableConfig),
-                    )
+                    tbodyElement.addEventListener('mousemove', (e) => tdOnMouseMove(e, this.params))
+                    tbodyElement.addEventListener('mouseout', (e) => tdOnMouseOut(e, this.params))
                 }
 
                 const tableContainer = virtualTable.parentElement as HTMLElement
