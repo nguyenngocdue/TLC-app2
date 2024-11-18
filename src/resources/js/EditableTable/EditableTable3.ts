@@ -13,7 +13,7 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { TbodyTrs } from './EditableTable3TBodyTRows'
-import { updateVisibleRows } from './VirtualScrolling/updateVisibleRows'
+import { updateVisibleRows } from './VirtualScrolling/updateVirtualTableVisibleRows'
 import { tdOnMouseMove, tdOnMouseOut } from './VirtualScrolling/tdOnMouseMove'
 
 class EditableTable3 {
@@ -116,7 +116,6 @@ class EditableTable3 {
            
             <tbody class="divide-y bg-white dark:divide-gray-700 dark:bg-gray-800">
                 <tr id="spacer-top"></tr>
-                <tr id="visible-rows"></tr>
                 <tr id="spacer-bottom"></tr>
             </tbody>
 
@@ -180,10 +179,10 @@ class EditableTable3 {
         const div = document.querySelector(divId)
         div && (div.innerHTML = body)
 
-        const tbody = document.querySelector(`${divId} tbody`)
-        if (tbody) {
-            trs.forEach((tr) => tbody.appendChild(tr))
-        }
+        // const tbody = document.querySelector(`${divId} tbody`)
+        // if (tbody) {
+        //     trs.forEach((tr) => tbody.appendChild(tr))
+        // }
 
         if (this.tableDebug) {
             console.log(`└──────────────────${this.params.tableName}──────────────────┘`)
@@ -202,7 +201,9 @@ class EditableTable3 {
 
                 if (tbodyElement) {
                     tbodyElement.addEventListener('mousemove', (e) => tdOnMouseMove(e, this.params))
-                    tbodyElement.addEventListener('mouseout', (e) => tdOnMouseOut(e, this.params))
+
+                    //this make select2 lost focus
+                    // tbodyElement.addEventListener('mouseout', (e) => tdOnMouseOut(e, this.params))
                 }
 
                 const tableContainer = virtualTable.parentElement as HTMLElement

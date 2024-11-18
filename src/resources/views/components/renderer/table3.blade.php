@@ -53,7 +53,7 @@ var tableObjectIndexedColumns = {};
                 'animationDelay': @json($animationDelay),
 
                 'virtualScroll': {
-                    'rowHeight': 57,
+                    'rowHeight': 45,
                     'viewportHeight': 640,
                     'bufferSize': 5,
                 }
