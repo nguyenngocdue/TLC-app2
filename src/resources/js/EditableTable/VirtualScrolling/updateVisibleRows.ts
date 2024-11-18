@@ -1,8 +1,8 @@
-import { applyRenderedTRow } from './EditableTable3ApplyRenderedTRow'
-import { TbodyTr } from './EditableTable3TBodyTRow'
-import { VirtualScrollParams } from './Type/EditableTable3ConfigType'
-import { LengthAware } from './Type/EditableTable3DataLineType'
-import { TableParams } from './Type/EditableTable3ParamType'
+import { applyRenderedTRow } from '../EditableTable3ApplyRenderedTRow'
+import { TbodyTr } from '../EditableTable3TBodyTRow'
+import { VirtualScrollParams } from '../Type/EditableTable3ConfigType'
+import { LengthAware } from '../Type/EditableTable3DataLineType'
+import { TableParams } from '../Type/EditableTable3ParamType'
 
 const cachedTrs: { [k: string]: string } = {}
 

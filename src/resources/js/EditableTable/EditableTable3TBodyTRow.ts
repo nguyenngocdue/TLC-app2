@@ -10,15 +10,15 @@ export class TbodyTr {
         private rowIndex: number,
     ) {}
 
-    onmousemove = (e: MouseEvent) => {
-        // applyRenderedTRow(this.params, row, rowIndex)
-        console.log('onmousemove', this.row)
-    }
+    // onmousemove = (e: MouseEvent) => {
+    //     // applyRenderedTRow(this.params, row, rowIndex)
+    //     console.log('onmousemove', this.row)
+    // }
 
-    onmouseout = (e: MouseEvent) => {
-        // applyRenderedTRow(this.params, row, rowIndex)
-        console.log('onmouseout', this.row)
-    }
+    // onmouseout = (e: MouseEvent) => {
+    //     // applyRenderedTRow(this.params, row, rowIndex)
+    //     console.log('onmouseout', this.row)
+    // }
 
     private renderRow = (tableName: string, columns: TableColumn[]) => {
         const firstFixedRightIndex = columns.findIndex((column) => column.fixed === 'right')
@@ -43,8 +43,11 @@ export class TbodyTr {
         tr.innerHTML = this.renderRow(tableName, columns)
 
         // Attach the onmousemove handler programmatically
-        tr.addEventListener('mousemove', (e) => this.onmousemove(e))
-        tr.addEventListener('mouseout', (e) => this.onmouseout(e))
+        //Does not work when applying virtual scrolling, using TBODY instead
+        // tr.addEventListener('mousemove', (e) => this.onmousemove(e))
+        // tr.addEventListener('mouseout', (e) => this.onmouseout(e))
+
+        // console.log('tr', tr)
 
         return tr
     }

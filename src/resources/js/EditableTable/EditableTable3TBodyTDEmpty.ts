@@ -25,5 +25,7 @@ export const makeTbodyTdEmpty = (
                     id="${cellId}__td"
                     class="${classList}" 
                     style="${styleList}" 
+                    data-row="${rowIndex}"
+                    data-col="${columnIndex}"                    
                     ><div id="${cellId}_div" class="min-h-5 fade-in"></div></td>`
 }

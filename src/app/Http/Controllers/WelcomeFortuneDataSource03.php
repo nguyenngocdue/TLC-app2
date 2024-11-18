@@ -161,10 +161,8 @@ class WelcomeFortuneDataSource03
     $duplicator = [];
     $expectedLines = 100;
     // $expectedLines = 35000; //loaded fine but challenging to F12
-    for ($i = 0; $i < $expectedLines / 3; $i++) {
-      $duplicator[] = $tables[0];
-      $duplicator[] = $tables[1];
-      $duplicator[] = $tables[2];
+    for ($i = 0; $i < $expectedLines; $i++) {
+      $duplicator[] = $tables[$i % 3];
     }
 
     foreach ($duplicator as $key => $row) {
