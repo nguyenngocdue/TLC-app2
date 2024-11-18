@@ -3,18 +3,16 @@ import { TableParams } from '../Type/EditableTable3ParamType'
 
 let lastTd: HTMLTableCellElement | null = null
 
-const allAroundMatrix = [
-    [-1, -1],
-    [-1, 0],
-    [-1, 1],
-    [0, -1],
-    [0, 1],
-    [1, -1],
-    [1, 0],
-    [1, 1],
-]
-
-// const cached: { [key: string]: boolean } = {}
+// const allAroundMatrix = [
+//     [-1, -1],
+//     [-1, 0],
+//     [-1, 1],
+//     [0, -1],
+//     [0, 1],
+//     [1, -1],
+//     [1, 0],
+//     [1, 1],
+// ]
 
 const callApplyPostScript = (
     listToApplyPostScript: HTMLTableCellElement[],
@@ -29,19 +27,11 @@ const callApplyPostScript = (
             case column.renderer == 'dropdown':
             case column.renderer == 'dropdown4':
                 const controlId = `#${params.tableName}__${columnKey}__${tdRowIndex}`
-                // if (!cached[controlId]) {
-                // cached[controlId] = true
-                const startTime = new Date().getTime()
                 const options = Dropdown4Edit.getOptionsExpensive(column)
                 // $(`${controlId}`).html(options.join(''))
                 $(`${controlId}`).select2({
                     data: options,
-                    //Ajax will need to process filter build on the keywords
                 })
-                const endTime = new Date().getTime()
-                console.log('Dropdown4Edit.getOptionsExpensive', controlId, endTime - startTime)
-                // }
-                // console.log('convert dropdown4', controlId)
                 break
         }
     })
@@ -83,31 +73,31 @@ export const tdOnMouseMove = (e: MouseEvent, params: TableParams) => {
     }
 }
 
-export const tdOnMouseOut = (e: MouseEvent, params: TableParams) => {
-    if (e.target) {
-        const target = e.target as HTMLElement
-        const td = target.closest('td')
-        if (td && td === lastTd) {
-            const { tableName, tableConfig } = params
-            // Call your handler
-            // console.log('mouseout td', td)
-            lastTd = null
-            if (tableConfig.tableDebug) td.classList.remove('bg-green-400')
+// export const tdOnMouseOut = (e: MouseEvent, params: TableParams) => {
+//     if (e.target) {
+//         const target = e.target as HTMLElement
+//         const td = target.closest('td')
+//         if (td && td === lastTd) {
+//             const { tableName, tableConfig } = params
+//             // Call your handler
+//             // console.log('mouseout td', td)
+//             lastTd = null
+//             if (tableConfig.tableDebug) td.classList.remove('bg-green-400')
 
-            const row = td.getAttribute('data-row')
-            const col = td.getAttribute('data-col')
+//             const row = td.getAttribute('data-row')
+//             const col = td.getAttribute('data-col')
 
-            if (row && col)
-                allAroundMatrix.forEach((matrix) => {
-                    const rowIdx = parseInt(row) + matrix[0]
-                    const colIdx = parseInt(col) + matrix[1]
-                    const cell = document.querySelector(
-                        `#${tableName} [data-row="${rowIdx}"][data-col="${colIdx}"]`,
-                    )
-                    if (cell) {
-                        if (tableConfig.tableDebug) cell.classList.remove('bg-green-200')
-                    }
-                })
-        }
-    }
-}
+//             if (row && col)
+//                 allAroundMatrix.forEach((matrix) => {
+//                     const rowIdx = parseInt(row) + matrix[0]
+//                     const colIdx = parseInt(col) + matrix[1]
+//                     const cell = document.querySelector(
+//                         `#${tableName} [data-row="${rowIdx}"][data-col="${colIdx}"]`,
+//                     )
+//                     if (cell) {
+//                         if (tableConfig.tableDebug) cell.classList.remove('bg-green-200')
+//                     }
+//                 })
+//         }
+//     }
+// }

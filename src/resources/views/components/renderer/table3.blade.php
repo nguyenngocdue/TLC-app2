@@ -55,7 +55,6 @@ var tableObjectIndexedColumns = {};
                 'virtualScroll': {
                     'rowHeight': 45,
                     'viewportHeight': 640,
-                    'bufferSize': 5,
                 }
             },
         }

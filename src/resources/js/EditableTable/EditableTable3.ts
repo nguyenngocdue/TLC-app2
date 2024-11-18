@@ -14,7 +14,7 @@ import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { TbodyTrs } from './EditableTable3TBodyTRows'
 import { updateVisibleRows } from './VirtualScrolling/updateVirtualTableVisibleRows'
-import { tdOnMouseMove, tdOnMouseOut } from './VirtualScrolling/tdOnMouseMove'
+import { tdOnMouseMove } from './VirtualScrolling/tdOnMouseMove'
 
 class EditableTable3 {
     private tableDebug = false
