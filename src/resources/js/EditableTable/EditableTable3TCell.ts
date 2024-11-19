@@ -17,6 +17,12 @@ import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
 import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
 import { CustomFunction4 } from './Renderer/CustomFunction/CustomFunction4'
 import { IdLink } from './Renderer/Id/IdLink'
+import { LineNo } from './Renderer/Id/LineNo'
+import { ActionPrint } from './Renderer/Id/ActionPrint'
+import { ActionBox } from './Renderer/Id/ActionBox'
+import { ActionCheckbox } from './Renderer/Id/ActionCheckbox'
+import { br } from '@fullcalendar/core/internal-common'
+import { HyperLink4View } from './Renderer/HyperLink/HyperLink4View'
 
 export const makeTCell = (
     params: TableParams,
@@ -31,7 +37,7 @@ export const makeTCell = (
     let tdStyle: { [key: string]: string | number } | undefined = {}
     let divStyle: { [key: string]: string | number } | undefined = {}
     let p_2 = true
-    let result: TableRenderedValueObject
+    let result: TableRenderedValueObject = { rendered: `` }
     let componentCase = 'not-yet-defined'
     let applyPostScript = () => {}
     // console.log(column.dataIndex, column)
@@ -52,27 +58,23 @@ export const makeTCell = (
     }
 
     switch (true) {
-        case column.renderer == 'parent_link':
-        case column.renderer == 'thumbnail':
-        case column.renderer == 'thumbnails':
-        case column.renderer == 'status':
-        case column.renderer == 'avatar_user':
-        case column.renderer == 'agg_count':
-        case column.renderer == 'id_status_link':
-        case column.renderer == 'id_status':
-        case column.renderer == 'column':
-        case column.renderer == 'column_link':
-        case column.renderer == 'hyper-link':
-        case column.renderer == 'doc-id':
-        case column.renderer == 'qr-code':
-        case column.renderer == 'action_checkbox.':
-        case column.renderer == 'action_print.':
-            rendered = `${column.renderer} to be implemented`
+        case renderer == 'parent_link':
+        case renderer == 'thumbnail':
+        case renderer == 'thumbnails':
+        case renderer == 'status':
+        case renderer == 'avatar_user':
+        case renderer == 'agg_count':
+        case renderer == 'id_status_link':
+        case renderer == 'id_status':
+        case renderer == 'column':
+        case renderer == 'column_link':
+
+        case renderer == 'doc-id':
+        case renderer == 'qr-code':
+            rendered = `${renderer} to be implemented`
             tdClass = 'whitespace-nowrap'
-            componentCase = `column.renderer.${column.renderer}`
             break
-        case column.renderer == 'action.':
-        case column.renderer == 'custom_function':
+        case renderer == 'custom_function':
             rendererParams.customRenderFn = () => {
                 return {
                     rendered: `Hello ${cellValue}`,
@@ -84,83 +86,51 @@ export const makeTCell = (
                 }
             }
             result = new CustomFunction4(rendererParams).render()
-            rendered = result.rendered
-            componentCase = 'column.renderer.custom_function'
             break
-        case column.renderer == 'no.':
-            rendered = rowIndex + 1
-            componentCase = 'column.renderer.no.'
+        case renderer == 'no.':
+            result = new LineNo(rendererParams).render()
             break
-        case column.renderer == 'id_link':
+        case renderer == 'id_link':
             result = new IdLink(rendererParams).render()
-            tdClass = result.tdClass
-            rendered = result.rendered
-            componentCase = 'column.renderer.id_link'
             break
-
-        case column.renderer == 'text':
-        case column.renderer == 'text4': // this line will be removed for new flexible MODE
+        case renderer == 'action_print.':
+            result = new ActionPrint(rendererParams).render()
+            break
+        case renderer == 'action.':
+            result = new ActionBox(rendererParams).render()
+            break
+        case renderer == 'action_checkbox.':
+            result = new ActionCheckbox(rendererParams).render()
+            break
+        case renderer == 'hyper-link':
+            result = new HyperLink4View(rendererParams).render()
+            break
+        case renderer == 'text':
+        case renderer == 'text4': // this line will be removed for new flexible MODE
             result = new Text4(rendererParams).render()
-            rendered = result.rendered
-            tdClass = result.tdClass
-            divClass = result.divClass
-            applyPostScript = result.applyPostScript || (() => {})
-            componentCase = 'column.renderer.text'
             break
-
-        case column.renderer == 'number':
-        case column.renderer == 'number4': // this line will be removed for new flexible MODE
+        case renderer == 'number':
+        case renderer == 'number4': // this line will be removed for new flexible MODE
             result = new Number4(rendererParams).render()
-            // result = new Text4(rendererParams).render()
-            rendered = result.rendered
-            tdClass = result.tdClass
-            applyPostScript = result.applyPostScript || (() => {})
-            componentCase = 'column.renderer.number'
             break
-
-        case column.renderer == 'dropdown':
-        case column.renderer == 'dropdown4': // this line will be removed for new flexible MODE
+        case renderer == 'dropdown':
+        case renderer == 'dropdown4': // this line will be removed for new flexible MODE
             result = new Dropdown4(rendererParams).render()
-            // result = new Text4(rendererParams).render()
-            rendered = result.rendered
-            tdClass = result.tdClass
-            applyPostScript = result.applyPostScript || (() => {})
-            componentCase = 'column.renderer.dropdown'
             break
-
-        case column.renderer == 'toggle':
-        case column.renderer == 'toggle4': // this line will be removed for new flexible MODE
+        case renderer == 'toggle':
+        case renderer == 'toggle4': // this line will be removed for new flexible MODE
             result = new Toggle4(rendererParams).render()
-            // result = new Text4(rendererParams).render()
-            rendered = result.rendered
-            tdClass = result.tdClass
-
-            applyPostScript = result.applyPostScript || (() => {})
-            componentCase = 'column.renderer.toggle'
             break
-
-        case column.renderer == 'checkbox':
-        case column.renderer == 'checkbox4': // this line will be removed for new flexible MODE
+        case renderer == 'checkbox':
+        case renderer == 'checkbox4': // this line will be removed for new flexible MODE
             result = new Checkbox4(rendererParams).render()
-            // result = new Text4(rendererParams).render()
-            rendered = result.rendered
-            tdClass = result.tdClass
-            applyPostScript = result.applyPostScript || (() => {})
-            componentCase = 'column.renderer.checkbox'
             break
-
-        case column.renderer == 'picker_datetime':
-        case column.renderer == 'date-time':
+        case renderer == 'picker_datetime':
+        case renderer == 'date-time':
             result = new PickerDateTime4(rendererParams).render()
-            rendered = result.rendered
-            tdClass = result.tdClass
-            divStyle = result.divStyle || {}
-            applyPostScript = result.applyPostScript || (() => {})
-            componentCase = 'column.renderer.picker_datetime'
             break
-
-        case column.renderer != undefined:
-            rendered = `Unknown renderer: ${column.renderer}`
+        case renderer != undefined:
+            rendered = `Unknown renderer: ${renderer}`
             tdClass = 'bg-red-200'
             componentCase = 'column.renderer.undefined'
             break
@@ -212,9 +182,12 @@ export const makeTCell = (
 
         //============From here there is render base on cellValue================
         case cellValue === null:
+            rendered = ''
+            componentCase = 'cellValue.null'
+            break
         case cellValue === undefined:
             rendered = ''
-            componentCase = 'cellValue.null_or_undefined'
+            componentCase = 'cellValue.undefined'
             break
 
         default:
@@ -223,7 +196,16 @@ export const makeTCell = (
             break
     }
 
-    if (column.renderer && column.mode == 'edit') p_2 = false
+    if (renderer) {
+        componentCase = `column.renderer.${renderer}`
+        rendered = result.rendered || rendered
+        tdClass = result.tdClass || tdClass
+        tdStyle = result.tdStyle || tdStyle
+        divClass = result.divClass || divClass
+        divStyle = result.divStyle || divStyle
+        applyPostScript = result.applyPostScript || (() => {})
+        if (column.mode == 'edit') p_2 = false
+    }
     // console.log(rendered)
     if (!divStyle['width']) divStyle['width'] = `${column.width || 100}px`
     return { rendered, tdClass, divClass, tdStyle, divStyle, p_2, componentCase, applyPostScript }

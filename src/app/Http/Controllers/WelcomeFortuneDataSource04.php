@@ -10,10 +10,38 @@ class WelcomeFortuneDataSource04
   {
     $statuses = LibStatuses::getAll();
     $columns = [
-      ['dataIndex' => 'id', 'title' => 'CB', 'renderer' => 'action_checkbox.', 'fixed' => 'left'],
-      ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
-      ['dataIndex' => 'id', 'title' => 'Action', 'renderer' => 'action.', 'fixed' => 'left'],
-      ['dataIndex' => 'id', 'title' => 'Print', 'renderer' => 'action_print.', 'fixed' => 'left'],
+      [
+        'dataIndex' => 'id',
+        'title' => 'CB',
+        'renderer' => 'action_checkbox.',
+        'fixed' => 'left'
+      ],
+      [
+        'dataIndex' => 'id',
+        'title' => 'ID',
+        'renderer' => 'id_link',
+        'fixed' => 'left',
+        'rendererAttrs' => [
+          'entityName' => '/dashboard/users',
+        ],
+      ],
+      [
+        'dataIndex' => 'id',
+        'title' => 'Action',
+        'renderer' => 'action.',
+        'fixed' => 'left',
+        'width' => 100,
+      ],
+      [
+        'dataIndex' => 'id',
+        'title' => 'Print',
+        'renderer' => 'action_print.',
+        'fixed' => 'left',
+        // 'width' => 40,
+        'rendererAttrs' => [
+          'entityName' => '/dashboard/users',
+        ],
+      ],
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
       [
         'dataIndex' => 'name',
@@ -24,13 +52,29 @@ class WelcomeFortuneDataSource04
         'rendererAttrs' => [],
       ],
       [
-        'dataIndex' => 'bool',
-        'renderer' => 'toggle',
-        'subTitle' => 'Boolean View'
+        'dataIndex' => 'hyper_link',
+        'renderer' => 'hyper-link',
       ],
       [
-        'dataIndex' => 'bool2',
-        'renderer' => 'checkbox',
+        'dataIndex' => 'column',
+        'renderer' => 'column',
+      ],
+      [
+        'dataIndex' => 'column_link',
+        'renderer' => 'column_link',
+      ],
+      [
+        'dataIndex' => 'id_status',
+        'renderer' => 'id_status',
+      ],
+      [
+        'dataIndex' => 'id_status_link',
+        'renderer' => 'id_status_link',
+      ],
+
+      [
+        'dataIndex' => 'bool',
+        'renderer' => 'toggle',
         'subTitle' => 'Boolean View'
       ],
       [
@@ -57,60 +101,6 @@ class WelcomeFortuneDataSource04
           'dataSourceKey' => 'users',
         ],
       ],
-      [
-        'dataIndex' => 'user_employeeid',
-        'renderer' => 'dropdown',
-        'width' => 200,
-        'classList' => 'whitespace-nowrap',
-        'rendererAttrs' => [
-          'dataSourceKey' => 'users',
-          'valueField' => 'employeeid',
-          'tooltipField' => 'employeeid',
-        ],
-      ],
-      [
-        'dataIndex' => 'date01',
-        'title' => 'Date Time',
-        'width' => 120,
-        'renderer' => 'picker_datetime',
-        'rendererAttrs' => [],
-      ],
-      [
-        'dataIndex' => 'date02',
-        'title' => 'Date',
-        'width' => 120,
-        'renderer' => 'picker_datetime',
-        'rendererAttrs' => [
-          'pickerType' => 'date',
-        ],
-      ],
-      [
-        'dataIndex' => 'date03',
-        'title' => 'Time',
-        'width' => 120,
-        'renderer' => 'picker_datetime',
-        'rendererAttrs' => [
-          'pickerType' => 'time',
-        ],
-      ],
-      [
-        'dataIndex' => 'date04',
-        'title' => 'Month',
-        'width' => 120,
-        'renderer' => 'picker_datetime',
-        'rendererAttrs' => [
-          'pickerType' => 'month',
-        ],
-      ],
-      [
-        'dataIndex' => 'date05',
-        'title' => 'Year',
-        'width' => 120,
-        'renderer' => 'picker_datetime',
-        'rendererAttrs' => [
-          'pickerType' => 'year',
-        ],
-      ],
 
 
     ];
@@ -118,55 +108,46 @@ class WelcomeFortuneDataSource04
     $tables = [
       [
         'name' => 'John and lots of his friends',
-        'status' => 'active',
-        'text' => 'a string',
-        'date01' => '2021-01-01T00:00:00Z',
-        'date02' => '2021-02-01',
-        'date03' => '2021-03-01 12:00:00',
-        'date04' => '2021-04-01',
-        'date05' => '2021-05-01',
+        'hyper_link' => 'https://www.google.com',
+        'column' => 'John and lots of his friends',
+        'column_link' => 'https://www.google.com',
+        'id_status' => 1,
+        'id_status_link' => 1,
         'bool' => true,
-        'bool2' => false,
         'number' => 1,
-        'user_id' => null,
-        'user_employeeid' => null,
+        'status' => 'active',
+        'user_id' => 1,
       ],
       [
-        'name' => 'Doe',
-        'status' => 'new',
-        'text' => 'another string',
-        'date01' => '2021-01-01T12:00:00Z',
-        'date02' => '2021-02-02',
-        'date03' => '2021-03-03 12:00:00',
-        'date04' => '2021-04-04',
-        'date05' => '2021-05-05',
+        'name' => 'John and lots of his friends',
+        'hyper_link' => 'https://www.google.com',
+        'column' => 'John and lots of his friends',
+        'column_link' => 'https://www.google.com',
+        'id_status' => 2,
+        'id_status_link' => 2,
         'bool' => false,
-        'bool2' => true,
-        'number' => 02.009,
-        'user_id' => 37,
-        'user_employeeid' => 'TLCM01069',
+        'number' => 2,
+        'status' => 'inactive',
+        'user_id' => 2,
       ],
       [
-        'name' => 'Doe',
-        'status' => 'new',
-        'text' => 'another string',
-        'date01' => '2021-01-01T24:00:00Z',
-        'date02' => '2022-02-02',
-        'date03' => '2023-03-03 12:00:00',
-        'date04' => '2024-04-04',
-        'date05' => '2025-05-05',
-        'bool' => false,
-        'bool2' => true,
-        'number' => -1e-3,
-        'user_id' => 222,
-        'user_employeeid' => 'TLCM01034',
+        'name' => 'John and lots of his friends',
+        'hyper_link' => 'https://www.google.com',
+        'column' => 'John and lots of his friends',
+        'column_link' => 'https://www.google.com',
+        'id_status' => 3,
+        'id_status_link' => 3,
+        'bool' => true,
+        'number' => 3,
+        'status' => 'active',
+        'user_id' => 3,
       ],
     ];
     $duplicator = [];
     $expectedLines = 100;
     // $expectedLines = 35000; //loaded fine but challenging to F12
     for ($i = 0; $i < $expectedLines; $i++) {
-      $duplicator[] = $tables[$i % 3];
+      $duplicator[] = $tables[$i % sizeof($tables)];
     }
 
     foreach ($duplicator as $key => $row) {

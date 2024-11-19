@@ -39,5 +39,6 @@ export const getDataSource = (column: TableColumnDropdown) => {
 }
 
 export const getNotFound = (valueField: string, cellValue: string) => {
-    return `<div class="text-orange-300 text-center font-bold bg-orange-700 rounded">NOT FOUND ${valueField} ${cellValue}</div>`
+    return `<div component="CacheKByKey_getNotFound"></div>`
+    // return `<div class="text-orange-300 text-center font-bold bg-orange-700 rounded">NOT FOUND ${valueField} ${cellValue}</div>`
 }

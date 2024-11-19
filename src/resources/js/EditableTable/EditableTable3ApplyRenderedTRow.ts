@@ -11,7 +11,7 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
 
     columns.forEach((column) => {
         const tCell = makeTCell(params, row, column, rowIndex)
-        console.log('making column for row', column, rowIndex, tCell)
+        // console.log('making column for row', column, rowIndex, tCell)
         const {
             rendered,
             tdClass,

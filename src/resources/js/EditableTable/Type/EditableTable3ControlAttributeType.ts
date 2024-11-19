@@ -40,6 +40,7 @@ export interface ControlAttributeColumnLink {
 }
 export interface ControlAttributeHyperLink {
     align?: 'left' | 'center' | 'right'
+    target?: '_blank' | '_self' | '_parent' | '_top'
 }
 export interface ControlAttributeAggCount {
     align?: 'left' | 'center' | 'right'

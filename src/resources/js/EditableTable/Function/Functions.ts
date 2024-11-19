@@ -1,3 +1,5 @@
+import { TableCellType } from '../Type/EditableTable3DataLineType'
+
 export class Str {
     static toHeadline = (text: string | number): string => {
         return text

@@ -7,7 +7,7 @@ export class Dropdown4View extends Renderer4View {
     render(): TableRenderedValueObject {
         const cellValue = this.cellValue as unknown as string
         const column = this.column as TableColumnDropdown
-        const { rendererAttrs = {}, dataIndex } = column
+        const { rendererAttrs = {} } = column
         const {
             // allowClear,
             // allowChooseWhenOneItem,
@@ -30,16 +30,19 @@ export class Dropdown4View extends Renderer4View {
         // console.log(cellValue, selectedItem)
 
         let result = ''
+        let tdClass = ''
         if (selectedItem) {
             const label = selectedItem[labelField]
             const tooltip = selectedItem[tooltipField] || ''
             result = `<div class="" title="${tooltip}">${label}</div>`
         } else {
             result = getNotFound(valueField, cellValue)
+            tdClass = 'bg-gray-50'
         }
 
         return {
             rendered: result,
+            tdClass,
         }
     }
 }
