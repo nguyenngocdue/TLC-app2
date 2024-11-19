@@ -23,16 +23,19 @@ const callApplyPostScript = (
         const tdRowIndex = cell.getAttribute('data-row') as unknown as number
         const column = params.indexedColumns[columnKey]
         // console.log('columnKey', columnKey, column)
-        switch (true) {
-            case column.renderer && column.renderer == 'dropdown':
-            case column.renderer && column.renderer == 'dropdown4':
-                const controlId = `#${params.tableName}__${columnKey}__${tdRowIndex}`
-                const options = Dropdown4Edit.getOptionsExpensive(column)
-                // $(`${controlId}`).html(options.join(''))
-                $(`${controlId}`).select2({
-                    data: options,
-                })
-                break
+        if (column.renderer) {
+            const renderer = column.renderer
+            switch (true) {
+                case renderer == 'dropdown':
+                case renderer == 'dropdown4':
+                    const controlId = `#${params.tableName}__${columnKey}__${renderer}__${tdRowIndex}`
+                    const options = Dropdown4Edit.getOptionsExpensive(column)
+                    // $(`${controlId}`).html(options.join(''))
+                    $(`${controlId}`).select2({
+                        data: options,
+                    })
+                    break
+            }
         }
     })
 }
