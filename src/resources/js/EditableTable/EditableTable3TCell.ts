@@ -51,7 +51,6 @@ export const makeTCell = (
     }
 
     switch (true) {
-        case column.renderer == 'date-time':
         case column.renderer == 'parent_link':
         case column.renderer == 'thumbnail':
         case column.renderer == 'thumbnails':
@@ -145,9 +144,11 @@ export const makeTCell = (
             break
 
         case column.renderer == 'picker_datetime':
+        case column.renderer == 'date-time':
             result = new PickerDateTime4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.tdClass
+            divStyle = result.divStyle || {}
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.picker_datetime'
             break
@@ -218,6 +219,6 @@ export const makeTCell = (
 
     if (column.renderer && column.mode == 'edit') p_2 = false
     // console.log(rendered)
-    divStyle['width'] = `${column.width || 100}px`
+    if (!divStyle['width']) divStyle['width'] = `${column.width || 100}px`
     return { rendered, tdClass, divClass, tdStyle, divStyle, p_2, componentCase, applyPostScript }
 }

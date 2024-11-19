@@ -10,28 +10,37 @@ export class PickerDateTime4View extends Renderer4View {
 
         const pickerType = column.rendererAttrs?.pickerType || 'datetime'
         let rendered = ''
-        switch (pickerType) {
-            case 'datetime':
-                rendered = moment(value).format('DD/MM/YYYY HH:mm')
-                break
-            case 'date':
-                rendered = moment(value).format('DD/MM/YYYY')
-                break
-            case 'time':
-                rendered = moment(value).format('HH:mm')
-                break
-            case 'month':
-                rendered = moment(value).format('MM/YYYY')
-                break
-            case 'year':
-                rendered = moment(value).format('YYYY')
-                break
-            default:
-                rendered = 'unknown how to render pickerType: ' + pickerType
-                break
+        let divStyle: { [key: string]: string | number } = {}
+        //To hide "Invalid date" message
+        if (this.cellValue) {
+            switch (pickerType) {
+                case 'datetime':
+                    rendered = moment(value).format('DD/MM/YYYY HH:mm')
+                    divStyle['width'] = '120px'
+                    break
+                case 'date':
+                    rendered = moment(value).format('DD/MM/YYYY')
+                    divStyle['width'] = '80px'
+                    break
+                case 'time':
+                    rendered = moment(value).format('HH:mm')
+                    divStyle['width'] = '50px'
+                    break
+                case 'month':
+                    rendered = moment(value).format('MM/YYYY')
+                    divStyle['width'] = '60px'
+                    break
+                case 'year':
+                    rendered = moment(value).format('YYYY')
+                    divStyle['width'] = '50px'
+                    break
+                default:
+                    rendered = 'unknown how to render pickerType: ' + pickerType
+                    break
+            }
         }
 
-        const classStr = `text-center`
-        return { rendered, tdClass: classStr }
+        const tdClass = `text-center`
+        return { rendered, tdClass, divStyle }
     }
 }

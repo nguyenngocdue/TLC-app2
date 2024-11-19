@@ -41,8 +41,8 @@ export interface TableRenderedValueObject {
     rendered: string
     tdClass?: string
     divClass?: string
-    tdStyle?: { [key: string]: string }
-    divStyle?: { [key: string]: string }
+    tdStyle?: { [key: string]: string | number }
+    divStyle?: { [key: string]: string | number }
     applyPostScript?: () => void
 }
 
