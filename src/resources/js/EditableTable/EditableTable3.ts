@@ -25,6 +25,7 @@ class EditableTable3 {
     }
 
     constructor(private params: TableParams) {
+        console.log('EditableTable3.constructor()')
         this.tableDebug = this.params.tableConfig.tableDebug || false
         if (this.tableDebug)
             console.log(`┌──────────────────${params.tableName}──────────────────┐`)

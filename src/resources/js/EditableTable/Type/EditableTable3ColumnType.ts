@@ -1,12 +1,30 @@
 import {
+    ControlAttributeAction,
+    ControlAttributeActionCheckbox,
+    ControlAttributeAggCount,
     ControlAttributeAttachment,
+    ControlAttributeAvatarUser,
     ControlAttributeCheckbox,
+    ControlAttributeColumn,
+    ControlAttributeColumnLink,
+    ControlAttributeCustomFunction,
+    ControlAttributeDocId,
     ControlAttributeDropdown,
+    ControlAttributeHyperLink,
+    ControlAttributeIdLink,
+    ControlAttributeIdStatus,
+    ControlAttributeIdStatusLink,
     ControlAttributeNo,
     ControlAttributeNumber,
+    ControlAttributeParentLink,
     ControlAttributePickerDatetime,
+    ControlAttributeQrCode,
     ControlAttributeSearchableDialog,
+    ControlAttributeStatus,
     ControlAttributeText,
+    ControlAttributeTextarea,
+    ControlAttributeThumbnail,
+    ControlAttributeThumbnails,
     ControlAttributeToggle,
 } from './EditableTable3ControlAttributeType'
 
@@ -72,6 +90,75 @@ export type TableColumnNo = BaseTableColumn & {
     renderer: 'no.'
     rendererAttrs?: ControlAttributeNo
 }
+export type TableColumnAction = BaseTableColumn & {
+    renderer: 'action.'
+    rendererAttrs?: ControlAttributeAction
+}
+export type TableColumnActionCheckbox = BaseTableColumn & {
+    renderer: 'action_checkbox.'
+    rendererAttrs?: ControlAttributeActionCheckbox
+}
+export type TableColumnQrCode = BaseTableColumn & {
+    renderer: 'qr-code'
+    rendererAttrs?: ControlAttributeQrCode
+}
+export type TableColumnDocId = BaseTableColumn & {
+    renderer: 'doc-id'
+    rendererAttrs?: ControlAttributeDocId
+}
+export type TableColumnIdLink = BaseTableColumn & {
+    renderer: 'id_link'
+    rendererAttrs?: ControlAttributeIdLink
+}
+export type TableColumnIdStatus = BaseTableColumn & {
+    renderer: 'id_status'
+    rendererAttrs?: ControlAttributeIdStatus
+}
+export type TableColumnStatus = BaseTableColumn & {
+    renderer: 'status'
+    rendererAttrs?: ControlAttributeStatus
+}
+export type TableColumnIdStatusLink = BaseTableColumn & {
+    renderer: 'id_status_link'
+    rendererAttrs?: ControlAttributeIdStatusLink
+}
+export type TableColumnParentLink = BaseTableColumn & {
+    renderer: 'parent_link'
+    rendererAttrs?: ControlAttributeParentLink
+}
+export type TableColumnColumnLink = BaseTableColumn & {
+    renderer: 'column_link'
+    rendererAttrs?: ControlAttributeColumnLink
+}
+export type TableColumnHyperLink = BaseTableColumn & {
+    renderer: 'hyper-link'
+    rendererAttrs?: ControlAttributeHyperLink
+}
+export type TableColumnColumn = BaseTableColumn & {
+    renderer: 'column'
+    rendererAttrs?: ControlAttributeColumn
+}
+export type TableColumnAggCount = BaseTableColumn & {
+    renderer: 'agg_count'
+    rendererAttrs?: ControlAttributeAggCount
+}
+export type TableColumnAvatarUser = BaseTableColumn & {
+    renderer: 'avatar_user'
+    rendererAttrs?: ControlAttributeAvatarUser
+}
+export type TableColumnThumbnail = BaseTableColumn & {
+    renderer: 'thumbnail'
+    rendererAttrs?: ControlAttributeThumbnail
+}
+export type TableColumnThumbnails = BaseTableColumn & {
+    renderer: 'thumbnails'
+    rendererAttrs?: ControlAttributeThumbnails
+}
+export type TableColumnCustomFunction = BaseTableColumn & {
+    renderer: 'custom_function'
+    rendererAttrs?: ControlAttributeCustomFunction
+}
+
 export type TableColumnText = BaseTableColumn & {
     renderer: 'text' | 'text4'
     rendererAttrs?: ControlAttributeText
@@ -96,6 +183,10 @@ export type TableColumnPickerDateTime = BaseTableColumn & {
     renderer: 'picker_datetime'
     rendererAttrs?: ControlAttributePickerDatetime
 }
+export type TableColumnDateTime = BaseTableColumn & {
+    renderer: 'date-time'
+    rendererAttrs?: ControlAttributePickerDatetime
+}
 export type TableColumnAttachment = BaseTableColumn & {
     renderer: 'attachment'
     rendererAttrs?: ControlAttributeAttachment
@@ -107,11 +198,31 @@ export type TableColumnSearchableDialog = BaseTableColumn & {
 
 export type TableColumn =
     | TableColumnNo
+    | TableColumnAction
+    | TableColumnActionCheckbox
     | TableColumnText
     | TableColumnNumber
     | TableColumnDropdown
     | TableColumnToggle
     | TableColumnCheckbox
     | TableColumnPickerDateTime
+    | TableColumnAttachment
+    | TableColumnSearchableDialog
+    | TableColumnColumn
+    | TableColumnQrCode
+    | TableColumnDocId
+    | TableColumnIdStatus
+    | TableColumnIdLink
+    | TableColumnStatus
+    | TableColumnIdStatusLink
+    | TableColumnAggCount
+    | TableColumnAvatarUser
+    | TableColumnDateTime
+    | TableColumnThumbnails
+    | TableColumnThumbnail
+    | TableColumnColumnLink
+    | TableColumnHyperLink
+    | TableColumnParentLink
+    | TableColumnCustomFunction
 
 export type CbbDataSourceType = { [key: string]: { [key: string]: string | number } }

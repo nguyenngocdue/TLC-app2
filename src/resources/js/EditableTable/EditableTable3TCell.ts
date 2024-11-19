@@ -15,6 +15,7 @@ import { Toggle4 } from './Renderer/Toggle/Toggle4'
 import { Number4 } from './Renderer/Number/Number4'
 import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
 import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
+import { co } from '@fullcalendar/core/internal-common'
 
 export const makeTCell = (
     params: TableParams,
@@ -47,6 +48,27 @@ export const makeTCell = (
     }
 
     switch (true) {
+        case column.renderer == 'custom_function':
+        case column.renderer == 'date-time':
+        case column.renderer == 'parent_link':
+        case column.renderer == 'thumbnail':
+        case column.renderer == 'thumbnails':
+        case column.renderer == 'status':
+        case column.renderer == 'avatar_user':
+        case column.renderer == 'agg_count':
+        case column.renderer == 'id_status_link':
+        case column.renderer == 'id_status':
+        case column.renderer == 'id_link':
+        case column.renderer == 'column':
+        case column.renderer == 'column_link':
+        case column.renderer == 'hyper-link':
+        case column.renderer == 'doc-id':
+        case column.renderer == 'qr-code':
+        case column.renderer == 'action.':
+        case column.renderer == 'action_checkbox.':
+            rendered = `${column.renderer} to be implemented`
+            componentCase = `column.renderer.${column.renderer}`
+            break
         case column.renderer == 'no.':
             rendered = rowIndex + 1
             componentCase = 'column.renderer.no.'

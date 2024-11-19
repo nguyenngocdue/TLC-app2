@@ -32,8 +32,8 @@ export class ValueObject4 {
 
         const theObject = cellValue as unknown as TableValueObjectType
         if (!theObject) {
-            console.log(`ValueObject4 theObject is null: ${column.dataIndex}`, cellValue)
-            return { rendered: '', classStr: 'bg-pink-400', applyPostScript: () => {} }
+            // console.log(`ValueObject4 theObject is null: ${column.dataIndex}`, cellValue)
+            return { rendered: '', classStr: 'bg-gray-50', applyPostScript: () => {} }
         }
 
         const { value, cell_class, cell_href, cell_div_class, cell_onclick, cell_title } = theObject

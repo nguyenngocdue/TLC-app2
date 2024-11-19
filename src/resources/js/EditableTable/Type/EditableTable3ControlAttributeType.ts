@@ -1,7 +1,61 @@
 export interface ControlAttributeNo {
     align?: 'left' | 'center' | 'right'
 }
+export interface ControlAttributeAction {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeActionCheckbox {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeQrCode {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeDocId {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeIdLink {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeStatus {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeIdStatus {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeIdStatusLink {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeParentLink {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeColumn {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeColumnLink {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeHyperLink {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeAggCount {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeAggCount {
+    align?: 'left' | 'center' | 'right'
+}
 
+export interface ControlAttributeAvatarUser {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeThumbnail {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeThumbnails {
+    align?: 'left' | 'center' | 'right'
+}
+export interface ControlAttributeCustomFunction {
+    align?: 'left' | 'center' | 'right'
+}
 export interface ControlAttributeText {
     align?: 'left' | 'center' | 'right'
 }

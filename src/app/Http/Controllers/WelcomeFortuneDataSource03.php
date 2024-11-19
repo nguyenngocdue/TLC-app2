@@ -10,6 +10,7 @@ class WelcomeFortuneDataSource03
   {
     $statuses = LibStatuses::getAll();
     $columns = [
+      ['dataIndex' => 'action', 'renderer' => 'action.', 'fixed' => 'left'],
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
       [
         'dataIndex' => 'name',
@@ -159,7 +160,7 @@ class WelcomeFortuneDataSource03
       ],
     ];
     $duplicator = [];
-    $expectedLines = 1000;
+    $expectedLines = 100;
     // $expectedLines = 35000; //loaded fine but challenging to F12
     for ($i = 0; $i < $expectedLines; $i++) {
       $duplicator[] = $tables[$i % 3];
