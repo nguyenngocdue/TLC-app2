@@ -41,7 +41,9 @@ export interface ControlAttributeHyperLink {
     target?: '_blank' | '_self' | '_parent' | '_top'
 }
 export interface ControlAttributeAggCount {
-    align?: 'left' | 'center' | 'right'
+    // align?: 'left' | 'center' | 'right'
+    unit?: string
+    columnToLoad?: string
 }
 export interface ControlAttributeAggCount {
     align?: 'left' | 'center' | 'right'

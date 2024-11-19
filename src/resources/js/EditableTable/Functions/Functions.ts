@@ -1,25 +1,4 @@
-import { TableCellType } from '../Type/EditableTable3DataLineType'
-
-export class Str {
-    static toHeadline = (text: string | number): string => {
-        return text
-            .toString()
-            .toLowerCase()
-            .split(/[\s_]+/) // Split by spaces or underscores
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')
-    }
-
-    static makeId = (n: number | string) => {
-        if (!n) return ''
-        if (typeof n == 'string') return n
-        const strPad = String(n).padStart(6, '0')
-        return `#${strPad.substring(0, 3)}.${strPad.substring(3)}`
-    }
-}
-// Usage
-// console.log(Str.toHeadline('hello_world_test')) // "Hello World Test"
-// console.log(Str.toHeadline('another example_string')) // "Another Example String"
+import { DataSourceItem } from '../Type/EditableTable3DataLineType'
 
 export const isObject = (variable: any): variable is Record<string, unknown> => {
     return variable !== null && typeof variable === 'object' && !Array.isArray(variable)
@@ -73,3 +52,14 @@ export const smartTypeOf = (variable: any): string => {
 //         return parseInt(this.fnv1a_32(str).toString(16), 16) // Convert hash to hexadecimal then back to decimal
 //     }
 // }
+
+export const getForeignObjects = (cellValue: DataSourceItem) => {
+    const foreignObject = cellValue as unknown as DataSourceItem
+    const foreignObjects = cellValue as unknown as DataSourceItem[]
+
+    const isStr = smartTypeOf(foreignObject) == 'string'
+    if (isStr) return []
+
+    const merged = !Array.isArray(foreignObjects) ? [foreignObject] : foreignObjects
+    return merged
+}

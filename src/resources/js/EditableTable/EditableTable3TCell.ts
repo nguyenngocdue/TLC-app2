@@ -1,5 +1,5 @@
 import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
-import { smartTypeOf } from './Function/Functions'
+import { smartTypeOf } from './Functions'
 import { TableColumn } from './Type/EditableTable3ColumnType'
 import {
     TableValueObjectType,
@@ -27,6 +27,7 @@ import { ColumnLink4View } from './Renderer/Column/ColumnLink4View'
 import { IdStatus4View } from './Renderer/IdStatus/IdStatus4View'
 import { IdStatusLink4View } from './Renderer/IdStatus/IdStatusLink4View'
 import { Status4View } from './Renderer/Status/Status4View'
+import { AggCount4View } from './Renderer/Aggerations/AggCount4View'
 
 export const makeTCell = (
     params: TableParams,
@@ -71,7 +72,6 @@ export const makeTCell = (
         case renderer == 'thumbnails':
 
         case renderer == 'avatar_user':
-        case renderer == 'agg_count':
 
         case renderer == 'doc-id':
         case renderer == 'qr-code':
@@ -124,6 +124,12 @@ export const makeTCell = (
         case renderer == 'status':
             result = new Status4View(rendererParams).render()
             break
+        case renderer == 'agg_count':
+            result = new AggCount4View(rendererParams).render()
+            break
+
+        //============From here there is CONTROL renderer================
+
         case renderer == 'text':
         case renderer == 'text4': // this line will be removed for new flexible MODE
             result = new Text4(rendererParams).render()
@@ -220,8 +226,10 @@ export const makeTCell = (
         rendered = result.rendered || rendered
         tdClass = result.tdClass || tdClass
         tdStyle = result.tdStyle || tdStyle
+        tdTooltip = result.tdTooltip || tdTooltip
         divClass = result.divClass || divClass
         divStyle = result.divStyle || divStyle
+        divTooltip = result.divTooltip || divTooltip
         applyPostScript = result.applyPostScript || (() => {})
         if (column.mode == 'edit') p_2 = false
     }

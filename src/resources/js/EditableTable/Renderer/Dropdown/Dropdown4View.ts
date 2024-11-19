@@ -1,4 +1,4 @@
-import { getDataSource, getNotFound } from '../../Function/CacheKByKey'
+import { getDataSource, getNotFound } from '../../Functions/CacheKByKey'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'

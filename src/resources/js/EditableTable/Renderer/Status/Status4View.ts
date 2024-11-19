@@ -1,4 +1,4 @@
-import { getDataSourceFromK } from '../../Function/CacheKByKey'
+import { getDataSourceFromK } from '../../Functions/CacheKByKey'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 

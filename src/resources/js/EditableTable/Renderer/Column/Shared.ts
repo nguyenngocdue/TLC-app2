@@ -1,5 +1,6 @@
 import { DataSourceItem } from '../../Type/EditableTable3DataLineType'
 import { TableColumnColumn } from '../../Type/EditableTable3ColumnType'
+import { getForeignObjects } from '../../Functions'
 
 export const renderColumn4 = (
     column: TableColumnColumn,
@@ -9,11 +10,8 @@ export const renderColumn4 = (
     // const column = column as TableColumnColumn
     const rendererAttrs = column.rendererAttrs || {}
     const { columnToLoad = 'name' } = rendererAttrs
-    const foreignObject = cellValue as unknown as DataSourceItem
-    const foreignObjects = cellValue as unknown as DataSourceItem[]
-    // console.log('Column4View.render', foreignObject, foreignObjects, columnToLoad)
 
-    const merged = !Array.isArray(foreignObjects) ? [foreignObject] : foreignObjects
+    const merged = getForeignObjects(cellValue)
     // console.log(merged)
 
     let arrayOfRendered: string[] = []

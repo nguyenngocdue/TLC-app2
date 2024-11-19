@@ -1,7 +1,6 @@
 import { DataFormat } from 'select2'
 
-import { Str } from '../../Function/Functions'
-import { getDataSource } from '../../Function/CacheKByKey'
+import { Str, getDataSource } from '../../Functions'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'

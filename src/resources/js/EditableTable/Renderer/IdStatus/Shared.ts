@@ -1,7 +1,6 @@
 import { DataSourceItem } from '../../Type/EditableTable3DataLineType'
 import { TableColumnIdStatus } from '../../Type/EditableTable3ColumnType'
-import { Str } from '../../Function/Functions'
-import { getDataSourceFromK } from '../../Function/CacheKByKey'
+import { getDataSourceFromK, Str, getForeignObjects } from '../../Functions'
 
 export const renderColumn4 = (
     column: TableColumnIdStatus,
@@ -11,11 +10,8 @@ export const renderColumn4 = (
     // const column = column as TableColumnColumn
     const rendererAttrs = column.rendererAttrs || {}
     const { statusColumn = 'status', nameColumn = 'name' } = rendererAttrs
-    const foreignObject = cellValue as unknown as DataSourceItem
-    const foreignObjects = cellValue as unknown as DataSourceItem[]
-    // console.log('Column4View.render', foreignObject, foreignObjects, columnToLoad)
 
-    const merged = !Array.isArray(foreignObjects) ? [foreignObject] : foreignObjects
+    const merged = getForeignObjects(cellValue)
     // console.log(merged)
 
     const renderStatus = (foreignObject: DataSourceItem) => {

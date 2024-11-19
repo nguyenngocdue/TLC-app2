@@ -1,4 +1,4 @@
-import { Str } from '../../Function/Functions'
+import { Str } from '../../Functions'
 import { TableColumnIdLink } from '../../Type/EditableTable3ColumnType'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'

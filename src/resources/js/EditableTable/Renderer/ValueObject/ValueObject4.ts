@@ -1,4 +1,4 @@
-import { smartTypeOf } from '../../Function/Functions'
+import { smartTypeOf } from '../../Functions'
 import {
     TableValueObjectType,
     TableRenderedValueObject,

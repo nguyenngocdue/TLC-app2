@@ -50,9 +50,12 @@ export interface LengthAware {
 export interface TableRenderedValueObject {
     rendered: string
     tdClass?: string
-    divClass?: string
     tdStyle?: { [key: string]: string | number }
+    tdTooltip?: string
+    divClass?: string
     divStyle?: { [key: string]: string | number }
+    divTooltip?: string
+
     applyPostScript?: () => void
 }
 

@@ -90,28 +90,34 @@ class WelcomeFortuneDataSource04
         'renderer' => 'id_status_link',
         'width' => 150,
       ],
+      [
+        'dataIndex' => 'column',
+        'title' => 'Agg Count',
+        'renderer' => 'agg_count',
+        'width' => 150,
+      ],
 
-      [
-        'dataIndex' => 'bool',
-        'renderer' => 'toggle',
-        'subTitle' => 'Boolean View'
-      ],
-      [
-        'dataIndex' => 'number',
-        'renderer' => 'number',
-        'rendererAttrs' => [
-          'decimalPlaces' => 3,
-        ],
-      ],
-      [
-        'dataIndex' => 'user_id',
-        'classList' => 'whitespace-nowrap',
-        'renderer' => 'dropdown',
-        'width' => 200,
-        'rendererAttrs' => [
-          'dataSourceKey' => 'users',
-        ],
-      ],
+      // [
+      //   'dataIndex' => 'bool',
+      //   'renderer' => 'toggle',
+      //   'subTitle' => 'Boolean View'
+      // ],
+      // [
+      //   'dataIndex' => 'number',
+      //   'renderer' => 'number',
+      //   'rendererAttrs' => [
+      //     'decimalPlaces' => 3,
+      //   ],
+      // ],
+      // [
+      //   'dataIndex' => 'user_id',
+      //   'classList' => 'whitespace-nowrap',
+      //   'renderer' => 'dropdown',
+      //   'width' => 200,
+      //   'rendererAttrs' => [
+      //     'dataSourceKey' => 'users',
+      //   ],
+      // ],
 
 
     ];
@@ -145,7 +151,7 @@ class WelcomeFortuneDataSource04
         'id_status_link' => 2,
         'bool' => false,
         'number' => 2,
-        'status' => 'inactive',
+        'status' => 'in_progress',
         'user_id' => 2,
         'column' => [
           [
@@ -170,7 +176,7 @@ class WelcomeFortuneDataSource04
         'id_status_link' => 3,
         'bool' => true,
         'number' => 3,
-        'status' => 'active',
+        'status' => 'new',
         'user_id' => 3,
       ],
     ];
