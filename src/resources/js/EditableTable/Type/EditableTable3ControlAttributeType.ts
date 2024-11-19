@@ -33,10 +33,12 @@ export interface ControlAttributeParentLink {
     align?: 'left' | 'center' | 'right'
 }
 export interface ControlAttributeColumn {
-    align?: 'left' | 'center' | 'right'
+    // align?: 'left' | 'center' | 'right'
+    columnToLoad?: string
 }
 export interface ControlAttributeColumnLink {
-    align?: 'left' | 'center' | 'right'
+    // align?: 'left' | 'center' | 'right'
+    columnToLoad?: string
 }
 export interface ControlAttributeHyperLink {
     align?: 'left' | 'center' | 'right'

@@ -1,0 +1,35 @@
+import { DataSourceItem } from '../../Type/EditableTable3DataLineType'
+import { TableColumnColumn } from '../../Type/EditableTable3ColumnType'
+
+export const renderColumn4 = (
+    column: TableColumnColumn,
+    cellValue: DataSourceItem,
+    allowOpen: boolean,
+) => {
+    // const column = column as TableColumnColumn
+    const rendererAttrs = column.rendererAttrs || {}
+    const { columnToLoad = 'name' } = rendererAttrs
+    const foreignObject = cellValue as unknown as DataSourceItem
+    const foreignObjects = cellValue as unknown as DataSourceItem[]
+    // console.log('Column4View.render', foreignObject, foreignObjects, columnToLoad)
+
+    const merged = !Array.isArray(foreignObjects) ? [foreignObject] : foreignObjects
+    // console.log(merged)
+
+    let arrayOfRendered: string[] = []
+    if (columnToLoad) {
+        arrayOfRendered = merged.map((foreignObject) => {
+            const s = foreignObject[columnToLoad] as string
+            if (s) {
+                if (allowOpen) {
+                    return `<a href="${foreignObject.url}">
+                    <button class="rounded px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white">${s}</button>
+                </a>`
+                } else return `${s}`
+            } else return ''
+        })
+    }
+    const rendered = arrayOfRendered.join(`${allowOpen ? ' ' : ', '}`)
+    const tdClass = `whitespace-nowrap`
+    return { rendered, tdClass }
+}

@@ -1,6 +1,10 @@
 import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
 import { smartTypeOf } from './Function/Functions'
-import { TableColumn } from './Type/EditableTable3ColumnType'
+import {
+    TableColumn,
+    TableColumnColumn,
+    TableColumnColumnLink,
+} from './Type/EditableTable3ColumnType'
 import {
     TableValueObjectType,
     TableDataLine,
@@ -23,6 +27,8 @@ import { ActionBox } from './Renderer/Id/ActionBox'
 import { ActionCheckbox } from './Renderer/Id/ActionCheckbox'
 import { br } from '@fullcalendar/core/internal-common'
 import { HyperLink4View } from './Renderer/HyperLink/HyperLink4View'
+import { Column4View } from './Renderer/Column/Column4View'
+import { ColumnLink4View } from './Renderer/Column/ColumnLink4View'
 
 export const makeTCell = (
     params: TableParams,
@@ -66,8 +72,6 @@ export const makeTCell = (
         case renderer == 'agg_count':
         case renderer == 'id_status_link':
         case renderer == 'id_status':
-        case renderer == 'column':
-        case renderer == 'column_link':
 
         case renderer == 'doc-id':
         case renderer == 'qr-code':
@@ -104,6 +108,12 @@ export const makeTCell = (
             break
         case renderer == 'hyper-link':
             result = new HyperLink4View(rendererParams).render()
+            break
+        case renderer == 'column':
+            result = new Column4View(rendererParams).render()
+            break
+        case renderer == 'column_link':
+            result = new ColumnLink4View(rendererParams).render()
             break
         case renderer == 'text':
         case renderer == 'text4': // this line will be removed for new flexible MODE

@@ -13,8 +13,18 @@ export interface TableValueObjectType {
 export interface TableCellTypeScalar {
     value: number | string | TableValueObjectType
 }
+
+export interface DataSourceItem {
+    [key: string]: string | number
+}
+
 export interface TableCellType {
-    value: number | string | TableValueObjectType | Array<number | string | TableValueObjectType>
+    value:
+        | number
+        | string
+        | TableValueObjectType
+        | DataSourceItem
+        | Array<number | string | TableValueObjectType | DataSourceItem>
 }
 
 export interface TableDataLine {

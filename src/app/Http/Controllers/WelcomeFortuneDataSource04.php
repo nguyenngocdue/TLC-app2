@@ -58,10 +58,18 @@ class WelcomeFortuneDataSource04
       [
         'dataIndex' => 'column',
         'renderer' => 'column',
+        'width' => 150,
+        'rendererAttrs' => [
+          'columnToLoad' => 'name',
+        ],
       ],
       [
-        'dataIndex' => 'column_link',
+        'dataIndex' => 'column',
         'renderer' => 'column_link',
+        'width' => 150,
+        'rendererAttrs' => [
+          'columnToLoad' => 'name',
+        ],
       ],
       [
         'dataIndex' => 'id_status',
@@ -117,6 +125,12 @@ class WelcomeFortuneDataSource04
         'number' => 1,
         'status' => 'active',
         'user_id' => 1,
+        'column' => [
+          [
+            'id' => 101,
+            'name' => 'Olivia',
+          ]
+        ],
       ],
       [
         'name' => 'John and lots of his friends',
@@ -129,6 +143,16 @@ class WelcomeFortuneDataSource04
         'number' => 2,
         'status' => 'inactive',
         'user_id' => 2,
+        'column' => [
+          [
+            'id' => 201,
+            'name' => 'Paul',
+          ],
+          [
+            'id' => 201,
+            'name' => 'Sandy',
+          ],
+        ],
       ],
       [
         'name' => 'John and lots of his friends',
