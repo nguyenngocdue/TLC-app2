@@ -7,7 +7,7 @@ import { TableParams } from '../Type/EditableTable3ParamType'
 const bufferSize = 5
 let lastRenderedStartIdx: { [tableName: string]: number } = {}
 let lastRenderedEndIdx: { [tableName: string]: number } = {}
-const visibleRowIds = new Set<string>() // Use a Set to track currently visible row IDs
+const visibleRowIds: { [tableName: string]: Set<string> } = {} // Use a Set to track currently visible row IDs
 
 const updateSpacer = (id: string, height: number, hiddenRows: number, scrollTop: number) => {
     const spacer = document.querySelector(id) as HTMLTableRowElement
@@ -61,6 +61,7 @@ const renderRows = (
     visibleRowCount: number,
     position: 'top' | 'bottom',
 ) => {
+    const tableName = tableParams.tableName
     // console.log('rendering rows', tableParams.tableName, indices.startIdx, indices.endIdx)
     let slicedData = data.slice(indices.startIdx, indices.endIdx)
 
@@ -79,14 +80,15 @@ const renderRows = (
 
     const renderedRows = slicedData
         .map((row, idx) => {
-            const rowId = `${tableParams.tableName}__${indices.startIdx + idx}`
-            visibleRowIds.add(rowId) // Track newly rendered rows
+            const rowId = `${tableName}__${indices.startIdx + idx}`
+
+            visibleRowIds[tableName].add(rowId) // Track newly rendered rows
             // console.log('adding', rowId, 'to', visibleRowIds)
             return new TbodyTr(tableParams, row, indices.startIdx + idx).render().outerHTML
         })
         .join('')
 
-    const spacerId = `#${tableParams.tableName} tbody>tr#spacer-${position}`
+    const spacerId = `#${tableName} tbody>tr#spacer-${position}`
     position === 'bottom' ? $(spacerId).before(renderedRows) : $(spacerId).after(renderedRows)
 
     slicedData.forEach((row, idx) => {
@@ -102,14 +104,14 @@ const removeRows = (indices: { startIdx: number; endIdx: number }, tableName: st
         // const row = document.querySelector(rowId)
         // if (row) row.remove()
         const rowId = `${tableName}__${i}`
-        const hasInSet = visibleRowIds.has(rowId)
+        const hasInSet = visibleRowIds[tableName].has(rowId)
 
         // Remove only if the row is currently visible
         if (hasInSet) {
             const row = document.querySelector(`#${rowId}`)
             if (row) row.remove()
             // console.log('row removed', rowId)
-            visibleRowIds.delete(rowId) // Remove the ID from the visibleRowIds Set
+            visibleRowIds[tableName].delete(rowId) // Remove the ID from the visibleRowIds Set
             // console.log('removing', rowId, 'to', visibleRowIds)
         }
     }
@@ -122,9 +124,12 @@ export const updateVisibleRows = (
     // virtualScroll?: VirtualScrollParams,
     firstLoad = false,
 ) => {
+    const { tableName, tableConfig } = tableParams
     // const { rowHeight = 45, viewportHeight = 640 } = virtualScroll || {}
-    const viewportHeight = tableParams.tableConfig.maxH || 640
-    const rowHeight = tableParams.tableConfig.rowHeight || 45
+    if (!visibleRowIds[tableName]) visibleRowIds[tableName] = new Set()
+
+    const viewportHeight = tableConfig.maxH || 640
+    const rowHeight = tableConfig.rowHeight || 45
     const data = dataSource.data
     const totalRows = data.length
 
@@ -139,7 +144,7 @@ export const updateVisibleRows = (
     tableContainer.setAttribute('data-visible-row-count', `${visibleRowCount}`)
 
     const scrollTop = tableContainer.scrollTop
-    console.log('scrollTop', scrollTop, virtualTable)
+    // console.log('scrollTop', scrollTop, virtualTable)
     const startIdx = Math.max(0, Math.floor(scrollTop / rowHeight) - bufferSize)
     const endIdx = Math.min(totalRows, startIdx + visibleRowCount)
 
@@ -147,22 +152,12 @@ export const updateVisibleRows = (
     //     return // Skip if no changes
     // }
 
-    const isScrollingDown = startIdx > lastRenderedStartIdx[tableParams.tableName]
-    const indices = calculateLoadRemoveIndices(
-        tableParams.tableName,
-        startIdx,
-        endIdx,
-        isScrollingDown,
-    )
+    const isScrollingDown = startIdx > lastRenderedStartIdx[tableName]
+    const indices = calculateLoadRemoveIndices(tableName, startIdx, endIdx, isScrollingDown)
 
+    updateSpacer(`#${tableName} tbody>tr#spacer-top`, startIdx * rowHeight, startIdx, scrollTop)
     updateSpacer(
-        `#${tableParams.tableName} tbody>tr#spacer-top`,
-        startIdx * rowHeight,
-        startIdx,
-        scrollTop,
-    )
-    updateSpacer(
-        `#${tableParams.tableName} tbody>tr#spacer-bottom`,
+        `#${tableName} tbody>tr#spacer-bottom`,
         (totalRows - endIdx) * rowHeight,
         totalRows - endIdx,
         scrollTop,
@@ -174,13 +169,13 @@ export const updateVisibleRows = (
     } else {
         if (isScrollingDown) {
             renderRows(data, indices.toBeLoaded, tableParams, visibleRowCount, 'bottom')
-            removeRows(indices.toBeRemoved, tableParams.tableName)
+            removeRows(indices.toBeRemoved, tableName)
         } else {
             renderRows(data, indices.toBeLoaded, tableParams, visibleRowCount, 'top')
-            removeRows(indices.toBeRemoved, tableParams.tableName)
+            removeRows(indices.toBeRemoved, tableName)
         }
     }
 
-    lastRenderedStartIdx[tableParams.tableName] = startIdx
-    lastRenderedEndIdx[tableParams.tableName] = endIdx
+    lastRenderedStartIdx[tableName] = startIdx
+    lastRenderedEndIdx[tableName] = endIdx
 }

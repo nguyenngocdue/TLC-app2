@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- <x-renderer.table3
+<x-renderer.table3
     :columns="$table05['columns']"
     :dataSource="$table05['dataSource']"
     
@@ -14,13 +14,12 @@
 
     header="View All Mode - Thumbnail and AvatarUser" 
     rowHeight=105
-    maxH=320
     >
 </x-renderer.table>
 
 <br/>
 <hr/>
-<br/> --}}
+<br/>
 
 <x-renderer.table3
     :columns="$table04['columns']"
@@ -31,7 +30,6 @@
     tableTrueWidth="1"
 
     header="View All Mode"
-    maxH=320
     >
 </x-renderer.table>
 
@@ -48,14 +46,13 @@
     tableTrueWidth="1"
 
     header="Edit Mode"
-    maxH=320
     >
 </x-renderer.table>
 
 <br/>
 <hr/>
 <br/>
-{{-- 
+
 <x-renderer.table3
     :columns="$table03['columns']"
     :dataSource="$table03['dataSource']"
@@ -66,15 +63,14 @@
 
     header="View Mode"
     animationDelay=1000
-    maxH=320
     >
 </x-renderer.table>
 
 <br/>
 <hr/>
-<br/> --}}
+<br/>
 
-{{-- 
+
 <x-renderer.table3
     :columns="$table03['columns']"
     :dataSource="$table03['dataSource']"
@@ -89,7 +85,7 @@
 
 <br/>
 <hr/>
-<br/> --}}
+<br/>
 
 
 {{-- <x-renderer.table3

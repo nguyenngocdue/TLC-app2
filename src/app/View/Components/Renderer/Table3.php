@@ -36,7 +36,7 @@ class Table3 extends Component
     private $header = "",
     private $footer = "",
 
-    private $maxH = 40,
+    private $maxH = 640,
 
     // // private $minH = 40,
     // //Editable MODE
