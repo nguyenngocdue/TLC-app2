@@ -18,6 +18,7 @@ export interface ControlAttributeDocId {
 }
 export interface ControlAttributeIdLink {
     align?: 'left' | 'center' | 'right'
+    entityName: string
 }
 export interface ControlAttributeStatus {
     align?: 'left' | 'center' | 'right'

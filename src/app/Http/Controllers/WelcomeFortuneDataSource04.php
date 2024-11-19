@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Workflow\LibStatuses;
 
-class WelcomeFortuneDataSource03
+class WelcomeFortuneDataSource04
 {
   function getDataSource()
   {
     $statuses = LibStatuses::getAll();
     $columns = [
-      // ['dataIndex' => 'id', 'title' => 'CB', 'renderer' => 'action_checkbox.', 'fixed' => 'left'],
-      // ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
-      // ['dataIndex' => 'id', 'title' => 'Action', 'renderer' => 'action.', 'fixed' => 'left'],
-      // ['dataIndex' => 'id', 'title' => 'Print', 'renderer' => 'action_print.', 'fixed' => 'left'],
+      ['dataIndex' => 'id', 'title' => 'CB', 'renderer' => 'action_checkbox.', 'fixed' => 'left'],
+      ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
+      ['dataIndex' => 'id', 'title' => 'Action', 'renderer' => 'action.', 'fixed' => 'left'],
+      ['dataIndex' => 'id', 'title' => 'Print', 'renderer' => 'action_print.', 'fixed' => 'left'],
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
       [
         'dataIndex' => 'name',
@@ -170,6 +170,7 @@ class WelcomeFortuneDataSource03
     }
 
     foreach ($duplicator as $key => $row) {
+      $duplicator[$key]['id'] = $key + 1;
       $duplicator[$key]['name'] .= " " . $key;
     }
 

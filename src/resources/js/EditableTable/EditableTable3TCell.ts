@@ -16,6 +16,7 @@ import { Number4 } from './Renderer/Number/Number4'
 import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
 import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
 import { CustomFunction4 } from './Renderer/CustomFunction/CustomFunction4'
+import { IdLink } from './Renderer/Id/IdLink'
 
 export const makeTCell = (
     params: TableParams,
@@ -59,7 +60,6 @@ export const makeTCell = (
         case column.renderer == 'agg_count':
         case column.renderer == 'id_status_link':
         case column.renderer == 'id_status':
-        case column.renderer == 'id_link':
         case column.renderer == 'column':
         case column.renderer == 'column_link':
         case column.renderer == 'hyper-link':
@@ -90,6 +90,12 @@ export const makeTCell = (
         case column.renderer == 'no.':
             rendered = rowIndex + 1
             componentCase = 'column.renderer.no.'
+            break
+        case column.renderer == 'id_link':
+            result = new IdLink(rendererParams).render()
+            tdClass = result.tdClass
+            rendered = result.rendered
+            componentCase = 'column.renderer.id_link'
             break
 
         case column.renderer == 'text':
