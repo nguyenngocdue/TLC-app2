@@ -23,7 +23,6 @@ import {
     ControlAttributeText,
     ControlAttributeTextarea,
     ControlAttributeThumbnail,
-    ControlAttributeThumbnails,
     ControlAttributeToggle,
 } from './EditableTable3ControlAttributeType'
 
@@ -146,10 +145,7 @@ export type TableColumnThumbnail = BaseTableColumn & {
     renderer: 'thumbnail'
     rendererAttrs?: ControlAttributeThumbnail
 }
-export type TableColumnThumbnails = BaseTableColumn & {
-    renderer: 'thumbnails'
-    rendererAttrs?: ControlAttributeThumbnails
-}
+
 export type TableColumnCustomFunction = BaseTableColumn & {
     renderer: 'custom_function'
     rendererAttrs?: ControlAttributeCustomFunction
@@ -214,7 +210,6 @@ export type TableColumn =
     | TableColumnAggCount
     | TableColumnAvatarUser
     | TableColumnDateTime
-    | TableColumnThumbnails
     | TableColumnThumbnail
     | TableColumnHyperLink
     | TableColumnParentLink

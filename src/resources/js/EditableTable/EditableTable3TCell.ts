@@ -27,7 +27,9 @@ import { ColumnLink4View } from './Renderer/Column/ColumnLink4View'
 import { IdStatus4View } from './Renderer/IdStatus/IdStatus4View'
 import { IdStatusLink4View } from './Renderer/IdStatus/IdStatusLink4View'
 import { Status4View } from './Renderer/Status/Status4View'
-import { AggCount4View } from './Renderer/Aggerations/AggCount4View'
+import { AggCount4View } from './Renderer/Aggregations/AggCount4View'
+import { Thumbnail4View } from './Renderer/Thumbnail/Thumbnail4View'
+import { AvatarUser4View } from './Renderer/AvatarUser/AvatarUser4View'
 
 export const makeTCell = (
     params: TableParams,
@@ -67,14 +69,7 @@ export const makeTCell = (
     }
 
     switch (true) {
-        case renderer == 'parent_link':
-        case renderer == 'thumbnail':
-        case renderer == 'thumbnails':
-
-        case renderer == 'avatar_user':
-
         case renderer == 'doc-id':
-        case renderer == 'qr-code':
             rendered = `${renderer} to be implemented`
             tdClass = 'whitespace-nowrap'
             break
@@ -97,6 +92,7 @@ export const makeTCell = (
         case renderer == 'id_link':
             result = new IdLink(rendererParams).render()
             break
+        case renderer == 'qr-code':
         case renderer == 'action_print.':
             result = new ActionPrint(rendererParams).render()
             break
@@ -112,6 +108,7 @@ export const makeTCell = (
         case renderer == 'column':
             result = new Column4View(rendererParams).render()
             break
+        case renderer == 'parent_link':
         case renderer == 'column_link':
             result = new ColumnLink4View(rendererParams).render()
             break
@@ -123,6 +120,13 @@ export const makeTCell = (
             break
         case renderer == 'status':
             result = new Status4View(rendererParams).render()
+            break
+        case renderer == 'thumbnail':
+            // case renderer == 'thumbnails': // this line will be removed for new flexible MODE
+            result = new Thumbnail4View(rendererParams).render()
+            break
+        case renderer == 'avatar_user':
+            result = new AvatarUser4View(rendererParams).render()
             break
         case renderer == 'agg_count':
             result = new AggCount4View(rendererParams).render()

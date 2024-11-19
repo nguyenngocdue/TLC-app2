@@ -5,6 +5,22 @@
 @section('content')
 
 <x-renderer.table3
+    :columns="$table05['columns']"
+    :dataSource="$table05['dataSource']"
+    
+    showNo=1
+    tableDebug="1"
+    tableTrueWidth="1"
+
+    header="View All Mode - Thumbnail and AvatarUser" 
+    >
+</x-renderer.table>
+
+<br/>
+<hr/>
+<br/>
+
+<x-renderer.table3
     :columns="$table04['columns']"
     :dataSource="$table04['dataSource']"
     

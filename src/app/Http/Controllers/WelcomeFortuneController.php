@@ -12,6 +12,7 @@ class WelcomeFortuneController extends Controller
         private WelcomeFortuneDataSource02 $dataSource02,
         private WelcomeFortuneDataSource03 $dataSource03,
         private WelcomeFortuneDataSource04 $dataSource04,
+        private WelcomeFortuneDataSource05 $dataSource05,
     ) {}
 
     function getType()
@@ -34,6 +35,7 @@ class WelcomeFortuneController extends Controller
         $table03 = $this->dataSource03->getDataSource();
         $table03a = $this->makeEditable($table03);
         $table04 = $this->dataSource04->getDataSource();
+        $table05 = $this->dataSource05->getDataSource();
 
         return view("welcome-fortune", [
             'table01' => $table01,
@@ -41,6 +43,7 @@ class WelcomeFortuneController extends Controller
             'table03' => $table03,
             'table03a' => $table03a,
             'table04' => $table04,
+            'table05' => $table05,
         ]);
     }
 }

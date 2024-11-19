@@ -8,7 +8,6 @@ class WelcomeFortuneDataSource04
 {
   function getDataSource()
   {
-    $statuses = LibStatuses::getAll();
     $columns = [
       [
         'dataIndex' => 'id',
