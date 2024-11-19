@@ -56,6 +56,7 @@ class Table3 extends Component
     private $tableTrueWidth = false,
     private $editable = false,
     private $animationDelay = 0,
+    private $rowHeight = 45,
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
     // private $borderColor = 'border-gray-300',
@@ -116,6 +117,7 @@ class Table3 extends Component
       // 'editable' => $this->editable,
       'classList' => $classList,
       'animationDelay' => $this->animationDelay,
+      'rowHeight' => $this->rowHeight,
 
     ];
     // Log::info($params);

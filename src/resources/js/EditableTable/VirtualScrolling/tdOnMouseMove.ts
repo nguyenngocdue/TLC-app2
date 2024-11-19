@@ -24,8 +24,8 @@ const callApplyPostScript = (
         const column = params.indexedColumns[columnKey]
         // console.log('columnKey', columnKey, column)
         switch (true) {
-            case column.renderer == 'dropdown':
-            case column.renderer == 'dropdown4':
+            case column.renderer && column.renderer == 'dropdown':
+            case column.renderer && column.renderer == 'dropdown4':
                 const controlId = `#${params.tableName}__${columnKey}__${tdRowIndex}`
                 const options = Dropdown4Edit.getOptionsExpensive(column)
                 // $(`${controlId}`).html(options.join(''))

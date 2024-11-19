@@ -101,6 +101,7 @@ class EditableTable3 {
         const tFootStr = makeTfoot(this.params)
 
         const tableStr = `<table 
+                id="${tableName}__table"
                 class="whitespace-no-wrap w-full text-sm text-sm-vw border-separate 1border border-spacing-0 ${borderColor}"
                 style="table-layout: auto; ${tableWidth}"
             >
@@ -213,7 +214,7 @@ class EditableTable3 {
                         virtualTable,
                         this.params.dataSource,
                         this.params,
-                        this.params.tableConfig.virtualScroll,
+                        // this.params.tableConfig.virtualScroll,
                     ),
                 )
 
@@ -222,7 +223,7 @@ class EditableTable3 {
                     virtualTable,
                     this.params.dataSource,
                     this.params,
-                    this.params.tableConfig.virtualScroll,
+                    // this.params.tableConfig.virtualScroll,
                     true,
                 )
                 // } else {

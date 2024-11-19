@@ -1,8 +1,8 @@
-export interface VirtualScrollParams {
-    rowHeight: number
-    viewportHeight: number
-    bufferSize: number
-}
+// export interface VirtualScrollParams {
+//     rowHeight: number
+//     viewportHeight: number
+//     // bufferSize: number
+// }
 
 export interface TableConfig {
     width?: number
@@ -38,8 +38,9 @@ export interface TableConfig {
         dropdown_fake: string
     }
 
-    virtualScroll?: VirtualScrollParams
+    // virtualScroll?: VirtualScrollParams
     animationDelay?: number
+    rowHeight?: number
 
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean
