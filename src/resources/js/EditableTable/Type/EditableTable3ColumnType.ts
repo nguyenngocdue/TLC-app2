@@ -1,6 +1,7 @@
 import {
     ControlAttributeAction,
     ControlAttributeActionCheckbox,
+    ControlAttributeActionPrint,
     ControlAttributeAggCount,
     ControlAttributeAttachment,
     ControlAttributeAvatarUser,
@@ -97,6 +98,10 @@ export type TableColumnAction = BaseTableColumn & {
 export type TableColumnActionCheckbox = BaseTableColumn & {
     renderer: 'action_checkbox.'
     rendererAttrs?: ControlAttributeActionCheckbox
+}
+export type TableColumnActionPrint = BaseTableColumn & {
+    renderer: 'action_print.'
+    rendererAttrs?: ControlAttributeActionPrint
 }
 export type TableColumnQrCode = BaseTableColumn & {
     renderer: 'qr-code'
@@ -200,6 +205,7 @@ export type TableColumn =
     | TableColumnNo
     | TableColumnAction
     | TableColumnActionCheckbox
+    | TableColumnActionPrint
     | TableColumnText
     | TableColumnNumber
     | TableColumnDropdown

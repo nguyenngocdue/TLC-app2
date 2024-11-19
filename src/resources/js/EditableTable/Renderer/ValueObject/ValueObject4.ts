@@ -11,29 +11,29 @@ export class ValueObject4 {
     render(): TableRenderedValueObject {
         const { cellValue, column } = this.params
         if (smartTypeOf(cellValue) == 'number')
-            return { rendered: cellValue.toString(), classStr: 'p-2', applyPostScript: () => {} }
+            return { rendered: cellValue.toString(), tdClass: 'p-2', applyPostScript: () => {} }
         if (smartTypeOf(cellValue) == 'string')
-            return { rendered: cellValue.toString(), classStr: 'p-2', applyPostScript: () => {} }
+            return { rendered: cellValue.toString(), tdClass: 'p-2', applyPostScript: () => {} }
         if (smartTypeOf(cellValue) == 'boolean')
-            return { rendered: cellValue.toString(), classStr: 'p-2', applyPostScript: () => {} }
+            return { rendered: cellValue.toString(), tdClass: 'p-2', applyPostScript: () => {} }
 
         if (smartTypeOf(cellValue) == 'null')
             return {
                 rendered: '',
-                classStr: this.params.column.classList || '',
+                tdClass: this.params.column.classList || '',
                 applyPostScript: () => {},
             }
         if (smartTypeOf(cellValue) == 'undefined')
             return {
                 rendered: '',
-                classStr: this.params.column.classList || '',
+                tdClass: this.params.column.classList || '',
                 applyPostScript: () => {},
             }
 
         const theObject = cellValue as unknown as TableValueObjectType
         if (!theObject) {
             // console.log(`ValueObject4 theObject is null: ${column.dataIndex}`, cellValue)
-            return { rendered: '', classStr: 'bg-gray-50', applyPostScript: () => {} }
+            return { rendered: '', tdClass: 'bg-gray-50', applyPostScript: () => {} }
         }
 
         const { value, cell_class, cell_href, cell_div_class, cell_onclick, cell_title } = theObject
@@ -48,6 +48,6 @@ export class ValueObject4 {
                 ${value ? value : ''}
             </span>
         </a>`
-        return { rendered, classStr, applyPostScript: () => {} }
+        return { rendered, tdClass: classStr, applyPostScript: () => {} }
     }
 }

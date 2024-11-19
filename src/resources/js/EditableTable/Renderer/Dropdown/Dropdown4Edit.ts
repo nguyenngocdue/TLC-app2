@@ -4,6 +4,7 @@ import { Str } from '../../Function/Functions'
 import { getDataSource } from '../../Function/CacheKByKey'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 
 export class Dropdown4Edit extends Renderer4Edit {
     protected tableDebug = false
@@ -94,12 +95,11 @@ export class Dropdown4Edit extends Renderer4Edit {
     //     // })
     // }
 
-    render() {
+    render(): TableRenderedValueObject {
         let result = this.control()
 
         return {
             rendered: result,
-            classStr: this.column.classList || '',
             // applyPostScript: this.applyPostScript,
         }
     }

@@ -13,7 +13,7 @@ export class Number4View extends Renderer4View {
 
         return {
             rendered: value,
-            classStr: twMerge(classList, this.column.classList),
+            tdClass: classList,
         }
     }
 }

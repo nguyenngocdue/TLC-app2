@@ -6,7 +6,8 @@ export class Text4View extends Renderer4View {
         const rendered = this.cellValue as unknown as string
         return {
             rendered,
-            classStr: this.column.classList || '',
+            tdClass: `whitespace-nowrap`,
+            divClass: `w-40 truncate`,
         }
     }
 }

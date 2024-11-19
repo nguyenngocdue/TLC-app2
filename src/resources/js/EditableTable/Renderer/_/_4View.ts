@@ -5,7 +5,6 @@ export class Text4View extends Renderer4View {
     render(): TableRenderedValueObject {
         return {
             rendered: 'Text4 View',
-            classStr: this.column.classList || '',
         }
     }
 }

@@ -39,7 +39,10 @@ export interface LengthAware {
 
 export interface TableRenderedValueObject {
     rendered: string
-    classStr: string
+    tdClass?: string
+    divClass?: string
+    tdStyle?: { [key: string]: string }
+    divStyle?: { [key: string]: string }
     applyPostScript?: () => void
 }
 
@@ -51,4 +54,5 @@ export interface TableRendererParams {
     dataLine: TableDataLine
     column: TableColumn
     rowIndex: number
+    customRenderFn?: () => TableRenderedValueObject
 }

@@ -1,5 +1,5 @@
-import { twMerge } from 'tailwind-merge'
 import { Renderer4Edit } from '../Renderer4Edit'
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 
 export class Checkbox4Edit extends Renderer4Edit {
     control() {
@@ -9,10 +9,10 @@ export class Checkbox4Edit extends Renderer4Edit {
         return `<input name="${controlName}" id="${controlId}" type="checkbox" class="${classList}" ${checked} value="true"/>`
     }
 
-    render() {
+    render(): TableRenderedValueObject {
         const control = this.control()
-        const classStr = twMerge(`text-center`, this.column.classList)
+        const tdClass = `text-center`
 
-        return { rendered: control, classStr }
+        return { rendered: control, tdClass }
     }
 }

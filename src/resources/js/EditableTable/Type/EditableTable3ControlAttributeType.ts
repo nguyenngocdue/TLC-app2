@@ -7,6 +7,9 @@ export interface ControlAttributeAction {
 export interface ControlAttributeActionCheckbox {
     align?: 'left' | 'center' | 'right'
 }
+export interface ControlAttributeActionPrint {
+    align?: 'left' | 'center' | 'right'
+}
 export interface ControlAttributeQrCode {
     align?: 'left' | 'center' | 'right'
 }

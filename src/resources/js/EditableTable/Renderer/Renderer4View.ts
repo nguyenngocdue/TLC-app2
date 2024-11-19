@@ -18,6 +18,7 @@ export abstract class Renderer4View {
     protected controlName: string
     protected controlId: string
     protected tableConfig: TableConfig
+    protected customRenderFn: (() => TableRenderedValueObject) | undefined
     constructor(private params: TableRendererParams) {
         this.cellValue = this.params.cellValue
         this.column = this.params.column
@@ -28,6 +29,7 @@ export abstract class Renderer4View {
         this.controlName = this.params.controlName
         this.controlId = this.params.controlId
         this.tableConfig = this.params.params.tableConfig
+        this.customRenderFn = this.params.customRenderFn
     }
     abstract render(data: any): TableRenderedValueObject
     applyPostScript(): void {}

@@ -11,7 +11,7 @@ export const makeTbodyTdEmpty = (
 ) => {
     const hiddenStr = column.invisible ? 'hidden' : ''
     const alignStr = column.align ? `text-${column.align}` : ''
-    const dataIndex = column.dataIndex
+    const { dataIndex, renderer } = column
     const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
     const textStr = `text-sm text-sm-vw`
     const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
@@ -20,12 +20,12 @@ export const makeTbodyTdEmpty = (
 
     const widthStr = column.width ? `width: ${column.width}px;` : ''
     const styleList = `${widthStr}`
-    const cellId = `${tableName}__${dataIndex}__${rowIndex}`
+    const cellId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
     return `<td id="${cellId}__td" class="${classList}" style="${styleList}" 
                 data-row="${rowIndex}" 
                 data-col="${columnIndex}"
                 data-column-key="${dataIndex}"
                 >
-                <div id="${cellId}_div" class="min-h-5 fade-in"></div>
+                <div id="${cellId}__div" class="min-h-5 fade-in"></div>
             </td>`
 }

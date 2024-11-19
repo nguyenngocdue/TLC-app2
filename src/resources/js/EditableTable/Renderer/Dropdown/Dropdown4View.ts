@@ -1,9 +1,10 @@
 import { getDataSource, getNotFound } from '../../Function/CacheKByKey'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
 export class Dropdown4View extends Renderer4View {
-    render() {
+    render(): TableRenderedValueObject {
         const cellValue = this.cellValue as unknown as string
         const column = this.column as TableColumnDropdown
         const { rendererAttrs = {}, dataIndex } = column
@@ -39,7 +40,6 @@ export class Dropdown4View extends Renderer4View {
 
         return {
             rendered: result,
-            classStr: this.column.classList || '',
         }
     }
 }

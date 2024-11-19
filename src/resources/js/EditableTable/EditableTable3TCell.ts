@@ -15,7 +15,7 @@ import { Toggle4 } from './Renderer/Toggle/Toggle4'
 import { Number4 } from './Renderer/Number/Number4'
 import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
 import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
-import { co } from '@fullcalendar/core/internal-common'
+import { CustomFunction4 } from './Renderer/CustomFunction/CustomFunction4'
 
 export const makeTCell = (
     params: TableParams,
@@ -25,19 +25,22 @@ export const makeTCell = (
 ) => {
     let cellValue = dataLine[column.dataIndex]
     let rendered: any = ''
-    let tdClass: any = ''
+    let tdClass: string | undefined = ''
+    let divClass: string | undefined = ''
+    let tdStyle: { [key: string]: string | number } | undefined = {}
+    let divStyle: { [key: string]: string | number } | undefined = {}
     let p_2 = true
     let result: TableRenderedValueObject
-    let componentCase = ''
+    let componentCase = 'not-yet-defined'
     let applyPostScript = () => {}
     // console.log(column.dataIndex, column)
 
     const { tableName } = params
-    const { dataIndex } = column
+    const { dataIndex, renderer } = column
     const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
-    const controlId = `${tableName}__${dataIndex}__${rowIndex}`
+    const controlId = `${tableName}__${dataIndex}__${rendered}__${rowIndex}`
 
-    const rendererParams = {
+    const rendererParams: TableRendererParams = {
         controlName,
         controlId,
         cellValue,
@@ -48,7 +51,6 @@ export const makeTCell = (
     }
 
     switch (true) {
-        case column.renderer == 'custom_function':
         case column.renderer == 'date-time':
         case column.renderer == 'parent_link':
         case column.renderer == 'thumbnail':
@@ -64,10 +66,27 @@ export const makeTCell = (
         case column.renderer == 'hyper-link':
         case column.renderer == 'doc-id':
         case column.renderer == 'qr-code':
-        case column.renderer == 'action.':
         case column.renderer == 'action_checkbox.':
+        case column.renderer == 'action_print.':
             rendered = `${column.renderer} to be implemented`
+            tdClass = 'whitespace-nowrap'
             componentCase = `column.renderer.${column.renderer}`
+            break
+        case column.renderer == 'action.':
+        case column.renderer == 'custom_function':
+            rendererParams.customRenderFn = () => {
+                return {
+                    rendered: `Hello ${cellValue}`,
+                    tdClass: '',
+                    divClass: '',
+                    tdStyle: {},
+                    divStyle: {},
+                    applyPostScript: () => {},
+                }
+            }
+            result = new CustomFunction4(rendererParams).render()
+            rendered = result.rendered
+            componentCase = 'column.renderer.custom_function'
             break
         case column.renderer == 'no.':
             rendered = rowIndex + 1
@@ -78,7 +97,8 @@ export const makeTCell = (
         case column.renderer == 'text4': // this line will be removed for new flexible MODE
             result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
+            divClass = result.divClass
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.text'
             break
@@ -88,7 +108,7 @@ export const makeTCell = (
             result = new Number4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.number'
             break
@@ -98,7 +118,7 @@ export const makeTCell = (
             result = new Dropdown4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.dropdown'
             break
@@ -108,7 +128,8 @@ export const makeTCell = (
             result = new Toggle4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
+
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.toggle'
             break
@@ -118,7 +139,7 @@ export const makeTCell = (
             result = new Checkbox4(rendererParams).render()
             // result = new Text4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.checkbox'
             break
@@ -126,7 +147,7 @@ export const makeTCell = (
         case column.renderer == 'picker_datetime':
             result = new PickerDateTime4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
             applyPostScript = result.applyPostScript || (() => {})
             componentCase = 'column.renderer.picker_datetime'
             break
@@ -154,7 +175,7 @@ export const makeTCell = (
         case smartTypeOf(cellValue) == 'object':
             result = new ValueObject4(rendererParams).render()
             rendered = result.rendered
-            tdClass = result.classStr
+            tdClass = result.tdClass
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).object'
             break
@@ -177,7 +198,7 @@ export const makeTCell = (
             // rendered = 'aaaaa'
             const { arraySeparator = ' ' } = column
             rendered = values.map((v) => v.rendered).join(arraySeparator)
-            tdClass = values[0].classStr
+            tdClass = values[0].tdClass
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).array'
             break
@@ -197,5 +218,6 @@ export const makeTCell = (
 
     if (column.renderer && column.mode == 'edit') p_2 = false
     // console.log(rendered)
-    return { rendered, tdClass, p_2, componentCase, applyPostScript }
+    divStyle['width'] = `${column.width || 100}px`
+    return { rendered, tdClass, divClass, tdStyle, divStyle, p_2, componentCase, applyPostScript }
 }

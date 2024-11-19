@@ -31,7 +31,7 @@ export class PickerDateTime4View extends Renderer4View {
                 break
         }
 
-        const classStr = `${this.column.classList} text-center`
-        return { rendered, classStr }
+        const classStr = `text-center`
+        return { rendered, tdClass: classStr }
     }
 }

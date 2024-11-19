@@ -1,3 +1,4 @@
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4Edit } from '../Renderer4Edit'
 
 export class Toggle4Edit extends Renderer4Edit {
@@ -13,11 +14,10 @@ export class Toggle4Edit extends Renderer4Edit {
         </div>`
     }
 
-    render() {
+    render(): TableRenderedValueObject {
         const control = this.control()
         return {
             rendered: control,
-            classStr: this.column.classList || '',
         }
     }
 }

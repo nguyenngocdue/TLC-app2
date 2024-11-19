@@ -32,7 +32,7 @@ export const makeThead2nd = (params: TableParams) => {
                 }
                 const result = new ValueObject4(rendererParams).render()
                 sndHeader = result.rendered
-                classStr = result.classStr || ''
+                classStr = result.tdClass || ''
             }
 
             const fixedStr = getFixedStr(column.fixed, index, 'th')
