@@ -12,7 +12,7 @@ export class HyperLink4View extends Renderer4View {
 
         const classList = twMerge(
             tableConfig.classList?.button,
-            `text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded`,
+            `text-xs text-xs-vw font-semibold text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded`,
         )
 
         const value = cellValue

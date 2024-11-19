@@ -120,3 +120,7 @@
         font-family: "ClashGrotesk-Regular", sans-serif;
     }
 </style>
+
+<script>
+    k = {"statuses": @json(array_values(App\Http\Controllers\Workflow\LibStatuses::getAll()))}
+</script>

@@ -1,10 +1,6 @@
 import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
 import { smartTypeOf } from './Function/Functions'
-import {
-    TableColumn,
-    TableColumnColumn,
-    TableColumnColumnLink,
-} from './Type/EditableTable3ColumnType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
 import {
     TableValueObjectType,
     TableDataLine,
@@ -20,15 +16,17 @@ import { Number4 } from './Renderer/Number/Number4'
 import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
 import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
 import { CustomFunction4 } from './Renderer/CustomFunction/CustomFunction4'
-import { IdLink } from './Renderer/Id/IdLink'
-import { LineNo } from './Renderer/Id/LineNo'
-import { ActionPrint } from './Renderer/Id/ActionPrint'
-import { ActionBox } from './Renderer/Id/ActionBox'
-import { ActionCheckbox } from './Renderer/Id/ActionCheckbox'
-import { br } from '@fullcalendar/core/internal-common'
+import { IdLink } from './Renderer/IdAction/IdLink'
+import { LineNo } from './Renderer/IdAction/LineNo'
+import { ActionPrint } from './Renderer/IdAction/ActionPrint'
+import { ActionBox } from './Renderer/IdAction/ActionBox'
+import { ActionCheckbox } from './Renderer/IdAction/ActionCheckbox'
 import { HyperLink4View } from './Renderer/HyperLink/HyperLink4View'
 import { Column4View } from './Renderer/Column/Column4View'
 import { ColumnLink4View } from './Renderer/Column/ColumnLink4View'
+import { IdStatus4View } from './Renderer/IdStatus/IdStatus4View'
+import { IdStatusLink4View } from './Renderer/IdStatus/IdStatusLink4View'
+import { Status4View } from './Renderer/Status/Status4View'
 
 export const makeTCell = (
     params: TableParams,
@@ -39,9 +37,13 @@ export const makeTCell = (
     let cellValue = dataLine[column.dataIndex]
     let rendered: any = ''
     let tdClass: string | undefined = ''
-    let divClass: string | undefined = ''
     let tdStyle: { [key: string]: string | number } | undefined = {}
+    let tdTooltip: string | undefined = ''
+
+    let divClass: string | undefined = ''
     let divStyle: { [key: string]: string | number } | undefined = {}
+    let divTooltip: string | undefined = ''
+
     let p_2 = true
     let result: TableRenderedValueObject = { rendered: `` }
     let componentCase = 'not-yet-defined'
@@ -67,11 +69,9 @@ export const makeTCell = (
         case renderer == 'parent_link':
         case renderer == 'thumbnail':
         case renderer == 'thumbnails':
-        case renderer == 'status':
+
         case renderer == 'avatar_user':
         case renderer == 'agg_count':
-        case renderer == 'id_status_link':
-        case renderer == 'id_status':
 
         case renderer == 'doc-id':
         case renderer == 'qr-code':
@@ -114,6 +114,15 @@ export const makeTCell = (
             break
         case renderer == 'column_link':
             result = new ColumnLink4View(rendererParams).render()
+            break
+        case renderer == 'id_status':
+            result = new IdStatus4View(rendererParams).render()
+            break
+        case renderer == 'id_status_link':
+            result = new IdStatusLink4View(rendererParams).render()
+            break
+        case renderer == 'status':
+            result = new Status4View(rendererParams).render()
             break
         case renderer == 'text':
         case renderer == 'text4': // this line will be removed for new flexible MODE
@@ -218,5 +227,16 @@ export const makeTCell = (
     }
     // console.log(rendered)
     if (!divStyle['width']) divStyle['width'] = `${column.width || 100}px`
-    return { rendered, tdClass, divClass, tdStyle, divStyle, p_2, componentCase, applyPostScript }
+    return {
+        rendered,
+        tdClass,
+        tdStyle,
+        tdTooltip,
+        divClass,
+        divStyle,
+        divTooltip,
+        p_2,
+        componentCase,
+        applyPostScript,
+    }
 }

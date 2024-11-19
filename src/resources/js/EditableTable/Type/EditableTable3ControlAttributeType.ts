@@ -24,11 +24,10 @@ export interface ControlAttributeStatus {
     align?: 'left' | 'center' | 'right'
 }
 export interface ControlAttributeIdStatus {
-    align?: 'left' | 'center' | 'right'
+    statusColumn?: string
+    nameColumn?: string
 }
-export interface ControlAttributeIdStatusLink {
-    align?: 'left' | 'center' | 'right'
-}
+
 export interface ControlAttributeParentLink {
     align?: 'left' | 'center' | 'right'
 }
@@ -36,10 +35,7 @@ export interface ControlAttributeColumn {
     // align?: 'left' | 'center' | 'right'
     columnToLoad?: string
 }
-export interface ControlAttributeColumnLink {
-    // align?: 'left' | 'center' | 'right'
-    columnToLoad?: string
-}
+
 export interface ControlAttributeHyperLink {
     align?: 'left' | 'center' | 'right'
     target?: '_blank' | '_self' | '_parent' | '_top'

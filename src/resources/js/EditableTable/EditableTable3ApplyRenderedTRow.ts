@@ -15,9 +15,11 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
         const {
             rendered,
             tdClass,
-            divClass,
             tdStyle,
+            tdTooltip,
+            divClass,
             divStyle,
+            divTooltip,
             p_2,
             componentCase,
             applyPostScript,
@@ -39,6 +41,7 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
         if (cellTd) {
             cellTd.className = twMerge(cellTd.className, tdClass, p)
             cellTd.style.cssText = tdStyleString
+            cellTd.title = tdTooltip
         }
 
         const cellDiv = document.getElementById(`${cellId}__div`)

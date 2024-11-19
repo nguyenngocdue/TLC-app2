@@ -4,11 +4,7 @@ import { CbbDataSourceType, TableColumnDropdown } from '../Type/EditableTable3Co
 declare const k: { [key1: string]: Array<{ [key2: string]: string | number }> }
 declare const k_by: { [key3: string]: CbbDataSourceType }
 
-const getDataSourceFromKBy = (column: TableColumnDropdown) => {
-    const { rendererAttrs = {} } = column
-    const { dataSourceKey, valueField = 'id' } = rendererAttrs
-
-    if (!dataSourceKey) return {}
+export const getDataSourceFromK = (dataSourceKey: string, valueField: string = 'id') => {
     const finalKey = `${dataSourceKey}_by_${valueField}`
     if (k_by[finalKey] === undefined) {
         k_by[finalKey] = {}
@@ -19,11 +15,24 @@ const getDataSourceFromKBy = (column: TableColumnDropdown) => {
                 // console.log(dataSourceKey, valueOfKey, item)
                 k_by[finalKey][valueOfKey] = item
             }
+        } else {
+            console.error('dataSourceKey not found', dataSourceKey)
         }
         // } else {
         // console.log('cache hit', finalKey)
     }
     return k_by[finalKey]
+}
+
+const getDataSourceFromKBy = (column: TableColumnDropdown) => {
+    const { rendererAttrs = {} } = column
+    const { dataSourceKey, valueField = 'id' } = rendererAttrs
+    if (!dataSourceKey) {
+        console.error('dataSourceKey is not defined', column)
+        return {}
+    }
+
+    return getDataSourceFromK(dataSourceKey, valueField)
 }
 
 export const getDataSource = (column: TableColumnDropdown) => {

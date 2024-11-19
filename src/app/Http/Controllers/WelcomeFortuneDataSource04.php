@@ -52,32 +52,43 @@ class WelcomeFortuneDataSource04
         'rendererAttrs' => [],
       ],
       [
+        'dataIndex' => 'status',
+        'renderer' => 'status',
+        'rendererAttrs' => [
+          // 'dataSource' => $statuses,
+          // 'valueField' => 'name',
+          'dataSourceKey' => 'statuses',
+        ],
+      ],
+      [
         'dataIndex' => 'hyper_link',
         'renderer' => 'hyper-link',
       ],
       [
         'dataIndex' => 'column',
+        'title' => 'Column',
         'renderer' => 'column',
         'width' => 150,
-        'rendererAttrs' => [
-          'columnToLoad' => 'name',
-        ],
+
       ],
       [
         'dataIndex' => 'column',
+        'title' => 'Column Link',
         'renderer' => 'column_link',
         'width' => 150,
-        'rendererAttrs' => [
-          'columnToLoad' => 'name',
-        ],
+
       ],
       [
-        'dataIndex' => 'id_status',
+        'dataIndex' => 'column',
+        'title' => 'ID Status',
         'renderer' => 'id_status',
+        'width' => 150,
       ],
       [
-        'dataIndex' => 'id_status_link',
+        'dataIndex' => 'column',
+        'title' => 'ID Status Link',
         'renderer' => 'id_status_link',
+        'width' => 150,
       ],
 
       [
@@ -90,14 +101,6 @@ class WelcomeFortuneDataSource04
         'renderer' => 'number',
         'rendererAttrs' => [
           'decimalPlaces' => 3,
-        ],
-      ],
-      [
-        'dataIndex' => 'status',
-        'renderer' => 'dropdown',
-        'rendererAttrs' => [
-          'dataSource' => $statuses,
-          'valueField' => 'name',
         ],
       ],
       [
@@ -129,6 +132,7 @@ class WelcomeFortuneDataSource04
           [
             'id' => 101,
             'name' => 'Olivia',
+            'status' => 'new',
           ]
         ],
       ],
@@ -147,10 +151,13 @@ class WelcomeFortuneDataSource04
           [
             'id' => 201,
             'name' => 'Paul',
+            'status' => 'in_progress',
+            'href' => '/dashboard/users/201',
           ],
           [
             'id' => 201,
             'name' => 'Sandy',
+            'status' => 'closed',
           ],
         ],
       ],

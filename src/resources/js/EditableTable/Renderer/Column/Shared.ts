@@ -22,8 +22,9 @@ export const renderColumn4 = (
             const s = foreignObject[columnToLoad] as string
             if (s) {
                 if (allowOpen) {
-                    return `<a href="${foreignObject.url}">
-                    <button class="rounded px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white">${s}</button>
+                    const href = foreignObject.href || 'define-href-in-the-cell'
+                    return `<a href="${href}" target="_blank">
+                    <button class="text-xs text-xs-vw font-semibold rounded px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white">${s}</button>
                 </a>`
                 } else return `${s}`
             } else return ''

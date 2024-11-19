@@ -7,14 +7,12 @@ import {
     ControlAttributeAvatarUser,
     ControlAttributeCheckbox,
     ControlAttributeColumn,
-    ControlAttributeColumnLink,
     ControlAttributeCustomFunction,
     ControlAttributeDocId,
     ControlAttributeDropdown,
     ControlAttributeHyperLink,
     ControlAttributeIdLink,
     ControlAttributeIdStatus,
-    ControlAttributeIdStatusLink,
     ControlAttributeNo,
     ControlAttributeNumber,
     ControlAttributeParentLink,
@@ -115,33 +113,26 @@ export type TableColumnIdLink = BaseTableColumn & {
     renderer: 'id_link'
     rendererAttrs?: ControlAttributeIdLink
 }
+export type TableColumnColumn = BaseTableColumn & {
+    renderer: 'column' | 'column_link'
+    rendererAttrs?: ControlAttributeColumn
+}
 export type TableColumnIdStatus = BaseTableColumn & {
-    renderer: 'id_status'
+    renderer: 'id_status' | 'id_status_link'
     rendererAttrs?: ControlAttributeIdStatus
 }
 export type TableColumnStatus = BaseTableColumn & {
     renderer: 'status'
     rendererAttrs?: ControlAttributeStatus
 }
-export type TableColumnIdStatusLink = BaseTableColumn & {
-    renderer: 'id_status_link'
-    rendererAttrs?: ControlAttributeIdStatusLink
-}
+
 export type TableColumnParentLink = BaseTableColumn & {
     renderer: 'parent_link'
     rendererAttrs?: ControlAttributeParentLink
 }
-export type TableColumnColumnLink = BaseTableColumn & {
-    renderer: 'column_link'
-    rendererAttrs?: ControlAttributeColumnLink
-}
 export type TableColumnHyperLink = BaseTableColumn & {
     renderer: 'hyper-link'
     rendererAttrs?: ControlAttributeHyperLink
-}
-export type TableColumnColumn = BaseTableColumn & {
-    renderer: 'column'
-    rendererAttrs?: ControlAttributeColumn
 }
 export type TableColumnAggCount = BaseTableColumn & {
     renderer: 'agg_count'
@@ -220,13 +211,11 @@ export type TableColumn =
     | TableColumnIdStatus
     | TableColumnIdLink
     | TableColumnStatus
-    | TableColumnIdStatusLink
     | TableColumnAggCount
     | TableColumnAvatarUser
     | TableColumnDateTime
     | TableColumnThumbnails
     | TableColumnThumbnail
-    | TableColumnColumnLink
     | TableColumnHyperLink
     | TableColumnParentLink
     | TableColumnCustomFunction
