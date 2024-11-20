@@ -11,6 +11,8 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
+use App\View\Components\Reports\ModeParams\ParamWeeksOfYear;
+use DateTime;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -26,6 +28,7 @@ class ReportFilterItem extends Component
     protected $MONTH_TYPE_ID = 632;
     protected $DATASOURCE_TYPE_ID = 633;
     protected $YEAR_TYPE_ID = 634;
+    protected $WEEK_OF_YEAR_TYPE_ID = 789;
 
     protected $DEFECT_ROOT_CAUSE_TYPE_ID = 117;
     protected $DEFECT_REPORT_TYPE_ID = 142;
@@ -71,6 +74,31 @@ class ReportFilterItem extends Component
         return array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
     }
 
+    private function getWeekOfYears()
+    {        
+        $years = [2021,2022,2023, 2024];
+        $weeks = [];
+        foreach ($years as $year) {
+            $weeksData = DateReport::getWeeksInYear($year);
+            foreach ($weeksData as $keyWeek => $dates){
+                $dayAndMonths = [];
+                foreach ($dates as $key => $date){
+                    $dateTime = new DateTime($date);
+                    $formattedDate = $dateTime->format('d/m');
+                    $dayAndMonths[$key] = $formattedDate;
+                }
+                $keyWeek = str_pad($keyWeek, 2, '0', STR_PAD_LEFT);
+                $weeks[] = (object)[
+                    'id' =>(int)$keyWeek,
+                    'name'=> 'W'.$keyWeek.'/'.$year.' '.'('.$dayAndMonths['start_date']. '-'.$dayAndMonths['end_date'].')',
+                    'year' => $year,
+                ];
+            }
+        }
+        // dump($weeks);
+        return $weeks;
+    }
+
     private function getDataSource()
     {
         $filter = $this->filter;
@@ -86,6 +114,8 @@ class ReportFilterItem extends Component
                 return $this->getStatuses($entityType);
             case $this->YEAR_TYPE_ID:
                 return array_map(fn($item) => ['id' => $item, 'name' => (string)$item], range($this->BEGIN_YEAR, $this->END_YEAR));
+            case $this->WEEK_OF_YEAR_TYPE_ID:
+                return self::getWeekOfYears("");;
             case $this->MONTH_TYPE_ID:
                 $months = range(1, 12);
                 sort($months);
