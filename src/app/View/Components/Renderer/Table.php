@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\ClassList;
 use App\View\Components\Renderer\Table\TableTraitColumns;
 use App\View\Components\Renderer\Table\TableTraitCommon;
 use App\View\Components\Renderer\Table\TableTraitFooter;
@@ -18,6 +19,7 @@ class Table extends Component
   use TableTraitRows;
   use TableTraitFooter;
   // public static $borderColor = 'border-gray-600';
+  public static $table11NameCounter = 11;
 
   public function __construct(
     private Request $request,
@@ -55,8 +57,8 @@ class Table extends Component
     private $numberOfEmptyLines = 0,
     private $lineIgnoreNo = 0,
     private $borderColor = 'border-gray-300',
-  ) {
-  }
+    private $animationDelay = 0,
+  ) {}
 
   /**
    * Get the view / contents that represent the component.
@@ -100,7 +102,21 @@ class Table extends Component
 
     // return "TABLE";
 
-    return view("components.renderer.table", [
+    $classList = [
+      'text' => ClassList::TEXT,
+      'textarea' => ClassList::TEXTAREA,
+      'dropdown' => ClassList::DROPDOWN,
+      'toggle' => ClassList::TOGGLE,
+      'button' => ClassList::BUTTON,
+      'toggle_checkbox' => ClassList::TOGGLE_CHECKBOX,
+      'dropdown_fake' => ClassList::DROPDOWN_FAKE,
+      // 'radio_checkbox' => ClassList::RADIO_CHECKBOX,
+      // 'radio_group' => ClassList::RADIO_GROUP,
+      // 'button2' => ClassList::BUTTON2,
+
+    ];
+
+    $params =  [
       'tableName' => $this->tableName,
       'columns' => $columns,
       'dataSource' => $dataSource,
@@ -115,7 +131,7 @@ class Table extends Component
       'footer' => $this->footer,
       'colgroup' => $colgroup,
       'tableWidth' => $tableWidth,
-      'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
+      // 'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
       // 'minH' => $this->minH ? "min-h-[{$this->minH}rem]" : "",
       'tableDebug' => $this->tableDebug,
       'trClassList' => 'bg-gray-100 text-center text-xs text-xs-vw font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',
@@ -131,6 +147,24 @@ class Table extends Component
       'numberOfEmptyLines' => $this->numberOfEmptyLines,
       'lineIgnoreNo' => $this->lineIgnoreNo,
       'borderColor' => $this->borderColor,
-    ]);
+
+      //For table3
+      'dataHeader' => $this->dataHeader,
+      'tableTrueWidth' => $this->tableTrueWidth,
+      'maxH' => $this->maxH,
+      'rotate45Width' => $this->rotate45Width,
+      'rotate45Height' => $this->rotate45Height,
+      'classList' => $classList,
+      'animationDelay' => $this->animationDelay,
+    ];
+
+    $table2 = view("components.renderer.table", $params);
+    // return $table2;
+
+    $params['tableName'] = 'table' . self::$table11NameCounter++;
+    $table3 = view("components.renderer.table3", $params);
+    return $table3;
+
+    return $table2 . $table3;
   }
 }
