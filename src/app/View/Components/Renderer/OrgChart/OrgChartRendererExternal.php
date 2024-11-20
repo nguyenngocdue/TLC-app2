@@ -25,13 +25,16 @@ class OrgChartRendererExternal extends Component
                 $idStr = Str::makeId($user->id);
                 $href = route('users.edit', $user->id);
                 $idStr = " (<a href='$href' class='text-blue-500'>$idStr</a>)";
-                $text = "<span class='flex 1-mt-6'>" . $img . $user->name . " - " . $user->email .  $idStr .  "</span>";
+                $text = "<div class='flex 1-mt-6 w-1/3'>" . $img . $user->name . " - " . $user->email .  $idStr .  "</div>";
+                $password = "<div class='w-1/3'>Initial Password: " . $user->user_pin . "</div>";
+                $div = "<div class='flex w-full'>" . $text . $password . "</div>";
                 $item3 = [
                     'id' => $key . "_user_" . $user->id,
-                    'text' => $text,
+                    'text' => $div,
                     'name_for_sort' => $user->name,
                     'parent' => $key,
                     'icon' => false,
+                    'a_attr' => ['class' => "w-full"],
                 ];
                 $result[] = $item3;
             }
@@ -135,7 +138,6 @@ class OrgChartRendererExternal extends Component
             ...array_values($thirdPartyTree),
             ...array_values($userTree),
         ];
-
 
         return view("components.renderer.org-chart.org-chart-renderer-external", [
             'id' => $this->id,

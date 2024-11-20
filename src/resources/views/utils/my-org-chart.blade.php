@@ -10,12 +10,19 @@
 <div class="px-4">
     <div class='p-2 no-print'>
         @php
+            $isAdmin = App\Utils\Support\CurrentUser::isAdmin();
+            $uid = App\Utils\Support\CurrentUser::id();
             $modes = [
-                "standard" => "Standard Mode",
-                "advanced" => "Advanced Mode",
-                "external" => "External Users",
+                "standard_mode" => "Standard Mode",
+                "advanced_mode" => "Advanced Mode",
             ];
-            if(App\Utils\Support\CurrentUser::isAdmin()) $modes["test"] = "Test Accounts";
+            if($isAdmin || in_array($uid, [
+                2, //Vimal
+                26, // Thien Binh
+            ])){
+                $modes["external_users"] = "External Users";
+            }
+            if($isAdmin) $modes["test_accounts"] = "Test Accounts";
         @endphp
         @foreach($modes as $mode => $text)
             @php
@@ -27,7 +34,7 @@
     </div>
 
     @switch($viewSettings['org_chart_mode'])
-    @case('standard')
+    @case('standard_mode')
         <x-renderer.org-chart.org-chart-renderer 
             id="0" departmentId='2' isPrintMode=1 zoomToFit=1
             :options="['loadResigned' => [0], 'loadWorker' => [], 'loadOnlyBod' => [1],]" 
@@ -43,7 +50,7 @@
                 />
         @endforeach
     @break
-    @case('advanced')
+    @case('advanced_mode')
         <x-renderer.org-chart.org-chart-toolbar :showOptions="$showOptions"/>
         <div class="flex items-center justify-center no-print">
             <x-controls.text2 type="search" class="w-[550px] mr-1 my-2" name="mySearch_0"
@@ -53,10 +60,10 @@
         </div>
         <x-renderer.org-chart.org-chart-renderer id="0" departmentId="{{$showOptions['department']??0}}" :options="$options" isPrintMode="{{false}}" zoomToFit="{{false}}"/>
     @break
-    @case('external')
+    @case('external_users')
         <x-renderer.org-chart.org-chart-renderer-external id=0/>
     @break
-    @case ('test')
+    @case ('test_accounts')
         <x-renderer.org-chart.org-chart-renderer-test id=0/>
     @break
     @default
