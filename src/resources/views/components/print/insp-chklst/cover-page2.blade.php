@@ -7,9 +7,9 @@
                 <div class="w-full text-center font-bold text-2xl-vw">{{config('company.name')}}</div>
             </div>
 
-            <div class="p-4vw">
-                <img class="w-11/12 mx-auto rounded shadow-1 " src="{{ $avatar }}">
-            </div>
+            {{-- <div class="p-4vw"> --}}
+                <img class="mx-auto rounded shadow-1 " src="{{ $avatar }}">
+            {{-- </div> --}}
 
             <div class="text-center font-bold text-3xl-vw p-4vw">
                 {{$title}}
