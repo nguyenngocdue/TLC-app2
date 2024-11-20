@@ -30,6 +30,7 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
+        dump($request->all());
         $table01 = $this->dataSource01->getDataSource();
         $table02 = $this->dataSource02->getDataSource();
         $table03 = $this->dataSource03->getDataSource();

@@ -23,7 +23,7 @@ const callApplyPostScript = (
         const tdRowIndex = cell.getAttribute('data-row') as unknown as number
         const column = params.indexedColumns[columnKey]
         // console.log('columnKey', columnKey, column)
-        if (column.renderer) {
+        if (column && column.renderer) {
             const renderer = column.renderer
             switch (true) {
                 case renderer == 'dropdown':
@@ -36,6 +36,9 @@ const callApplyPostScript = (
                     })
                     break
             }
+        } else {
+            const whiteList = [`_no_`]
+            if (!whiteList.includes(columnKey)) console.log(`Column ${columnKey} not found`)
         }
     })
 }

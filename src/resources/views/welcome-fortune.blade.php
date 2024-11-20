@@ -3,7 +3,7 @@
 @section('title', '')
 
 @section('content')
-
+<form>
 {{-- <x-renderer.table3
     :columns="$table05['columns']"
     :dataSource="$table05['dataSource']"
@@ -215,6 +215,6 @@
 <x-renderer.table3></x-renderer.table3>
 
 <x-renderer.table3 :columns="$table01['columns']"></x-renderer.table3> --}}
-
-
+<button class="rounded border p-1 m-1">SUBMIT</button>
+</form>
 @endsection 

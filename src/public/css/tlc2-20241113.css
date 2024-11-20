@@ -441,3 +441,8 @@ span.select2-selection__arrow {
         line-height: calc(10.667vw * 1.5);
     } */
 }
+
+/* select:not([size]) {
+   
+    background-image: none;
+} */

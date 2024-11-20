@@ -8,6 +8,7 @@ export class LineNo extends Renderer4View {
         return {
             rendered: `${rowIndex + 1}`,
             tdClass: `text-center`,
+            divClass: `drag-handle`,
         }
     }
 }

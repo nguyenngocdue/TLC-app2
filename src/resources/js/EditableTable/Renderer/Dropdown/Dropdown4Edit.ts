@@ -69,7 +69,7 @@ export class Dropdown4Edit extends Renderer4Edit {
         return `<select 
             id="${this.controlId}" 
             name="${this.controlName}" 
-            class="${classList}"
+            class="${classList} no-arrow"
             >
             ${optionsStr}
         </select>`

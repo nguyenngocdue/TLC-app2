@@ -55,6 +55,7 @@ class WelcomeFortuneDataSource03
         'width' => 200,
         'rendererAttrs' => [
           'dataSourceKey' => 'users',
+          'labelField' => 'full_name'
         ],
       ],
       [
@@ -66,6 +67,7 @@ class WelcomeFortuneDataSource03
           'dataSourceKey' => 'users',
           'valueField' => 'employeeid',
           'tooltipField' => 'employeeid',
+          'labelField' => 'full_name'
         ],
       ],
       [

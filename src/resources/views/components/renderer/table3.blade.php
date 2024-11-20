@@ -11,9 +11,18 @@ var tableObjectIndexedColumns = {};
     </div>
 </div>
 
+@php
+    $users = \App\Models\User::query()
+        ->select('id', 'full_name' , 'employeeid')
+        ->where('resigned', 0)
+        ->where('show_on_beta', 0)
+        ->orderBy('full_name')
+        ->get();
+@endphp
+
 <script>
 
-    k = {...k, "users": @json(\App\Models\User::query()->get()),}
+    k = {...k, "users": @json($users),}
     k_by = {}
 
     var {{$tableName}}_Object = null;

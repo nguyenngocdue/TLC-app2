@@ -1,3 +1,5 @@
+import Sortable from 'sortablejs'
+
 import { applyRenderedTRow } from '../EditableTable3ApplyRenderedTRow'
 import { TbodyTr } from '../EditableTable3TBodyTRow'
 // import { VirtualScrollParams } from '../Type/EditableTable3ConfigType'
@@ -175,6 +177,16 @@ export const updateVisibleRows = (
             removeRows(indices.toBeRemoved, tableName)
         }
     }
+
+    const tableBody = document.querySelector(`#${tableName} tbody`) as HTMLElement
+    Sortable.create(tableBody, {
+        animation: 150,
+        handle: '.drag-handle', // Use the drag handle for sorting
+        // filter: ':not(.draggable)', // Exclude rows that do not have the "draggable" class
+        onEnd: (evt) => {
+            console.log('Row moved:', evt.oldIndex, '->', evt.newIndex)
+        },
+    })
 
     lastRenderedStartIdx[tableName] = startIdx
     lastRenderedEndIdx[tableName] = endIdx
