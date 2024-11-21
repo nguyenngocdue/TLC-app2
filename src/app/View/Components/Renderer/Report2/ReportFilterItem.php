@@ -60,9 +60,8 @@ class ReportFilterItem extends Component
 
         $listenReducer = $this->filter->getListenReducer;
         $this->id =  $listenReducer ? $this->filter->data_index : $filter->name;
-
         $entityType = $filter->entity_type;
-        $this->tableName = Str::plural($entityType);
+        $this->tableName = $entityType ? Str::plural($entityType) : Str::plural($this->filter->data_index);
         $this->multiple = (bool)$filter->is_multiple;
         $this->name = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
         $this->allowClear = (bool)$filter->allow_clear;
@@ -72,31 +71,6 @@ class ReportFilterItem extends Component
     {
         $lib = LibStatuses::getFor($entityType);
         return array_map(fn($key, $status) => ['id' => $key, 'name' => $status['title']], array_keys($lib), $lib);
-    }
-
-    private function getWeekOfYears()
-    {        
-        $years = [2021,2022,2023, 2024];
-        $weeks = [];
-        foreach ($years as $year) {
-            $weeksData = DateReport::getWeeksInYear($year);
-            foreach ($weeksData as $keyWeek => $dates){
-                $dayAndMonths = [];
-                foreach ($dates as $key => $date){
-                    $dateTime = new DateTime($date);
-                    $formattedDate = $dateTime->format('d/m');
-                    $dayAndMonths[$key] = $formattedDate;
-                }
-                $keyWeek = str_pad($keyWeek, 2, '0', STR_PAD_LEFT);
-                $weeks[] = (object)[
-                    'id' =>(int)$keyWeek,
-                    'name'=> 'W'.$keyWeek.'/'.$year.' '.'('.$dayAndMonths['start_date']. '-'.$dayAndMonths['end_date'].')',
-                    'year' => $year,
-                ];
-            }
-        }
-        // dump($weeks);
-        return $weeks;
     }
 
     private function getDataSource()
@@ -115,7 +89,7 @@ class ReportFilterItem extends Component
             case $this->YEAR_TYPE_ID:
                 return array_map(fn($item) => ['id' => $item, 'name' => (string)$item], range($this->BEGIN_YEAR, $this->END_YEAR));
             case $this->WEEK_OF_YEAR_TYPE_ID:
-                return self::getWeekOfYears("");;
+                return DateReport::getWeekOfYears();
             case $this->MONTH_TYPE_ID:
                 $months = range(1, 12);
                 sort($months);
