@@ -70,7 +70,7 @@ class EntityCRUDControllerForApiRenderer extends Controller
 		// dump($dataSource);
 		// Log::info($doc);
 
-		$blade = '<x-renderer.table :columns="$columns" :dataSource="$dataSource" maxH={{35 * 16}} tableTrueWidth=0 ></x-renderer.table>';
+		$blade = '<x-renderer.table :columns="$columns" :dataSource="$dataSource" maxH={{560}} tableTrueWidth=0 ></x-renderer.table>';
 		$result = Blade::render($blade, [
 			'columns' => $columns,
 			'dataSource' => $dataSource,
