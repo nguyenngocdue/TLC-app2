@@ -14,6 +14,9 @@ class UtilityReport2 extends Component
     public function __construct(
         private $route = '',
         private $queriedData = null,
+        private $class = '',
+        private $blockTitle = '',
+        private $configuredCols = [],
     ) {
         //
     }
@@ -23,7 +26,9 @@ class UtilityReport2 extends Component
         return view('components.reports2.utility-report2', [
             'route' => $this->route,
             'queriedData' => $this->queriedData,
-            'class' => '',
+            'class' => $this->class,
+            'blockTitle' => $this->blockTitle,
+            'configuredCols' => $this->configuredCols,
         ]);
     }
 }
