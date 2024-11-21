@@ -367,4 +367,32 @@ class DateReport
         $date->setTimezone($targetTimezone);
         return $date->format($type);
     }
+
+    public static function getWeekOfYears()
+    {        
+        $years = range(2021, date("Y"));
+
+        $weeks = [];
+        foreach ($years as $year) {
+            $weeksData = DateReport::getWeeksInYear($year);
+            foreach ($weeksData as $keyWeek => $dates){
+                $dayAndMonths = [];
+                foreach ($dates as $key => $date){
+                    $dateTime = new DateTime($date);
+                    $formattedDate = $dateTime->format('d/m');
+                    $dayAndMonths[$key] = $formattedDate;
+                }
+                $keyWeek = str_pad($keyWeek, 2, '0', STR_PAD_LEFT);
+                $weeks[] = (object)[
+                    'id' =>(int)$keyWeek.'_'.$year,
+                    'name'=> 'W'.$keyWeek.'/'.$year.' '.'('.$dayAndMonths['start_date']. '-'.$dayAndMonths['end_date'].')',
+                    'year' => $year,
+                    'from_date' => $dates['start_date'] . ' 00:00:00',
+                    'to_date' => $dates['end_date'] . ' 00:00:00',
+                    'week_number' => (int)$keyWeek,
+                ];
+            }
+        }
+        return $weeks;
+    }
 }
