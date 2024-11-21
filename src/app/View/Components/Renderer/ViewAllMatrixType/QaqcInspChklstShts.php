@@ -52,7 +52,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $rotate45Width = 200;
     protected $rotate45Height = 150;
     protected $tableTrueWidth = true;
-    protected $headerTop = 40;
+    protected $headerTop = 40 * 16;
     protected $groupBy = null;
     protected $apiToCallWhenCreateNew = 'cloneTemplate';
     protected $maxH = 60;
@@ -83,7 +83,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $sub_projects = $this->getSubProjectListForFilter();
         $defaultSubProject = $sub_projects->first();
 
-        if(is_null($defaultSubProject)) {
+        if (is_null($defaultSubProject)) {
             $this->noSubProjectGranted = true;
             // return;
         }
@@ -447,7 +447,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             $prodRoutings = $this->getRoutingListForMatrix();
         }
         $result = [];
-        if(is_null($prodRoutings)) return $result;
+        if (is_null($prodRoutings)) return $result;
         foreach ($prodRoutings as $key => $routing) {
             $allSubProjects = $routing->getSubProjects;
             if ($allSubProjects) {

@@ -9,7 +9,6 @@ class ManageVHiddenWLProps extends ManageV_Parent
 {
     protected $routeKey = "_hdn-wl";
     protected $jsonGetSet = HiddenWLProps::class;
-    // protected $headerTop = 22;
 
     protected function getColumnSource()
     {

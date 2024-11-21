@@ -6,7 +6,7 @@
     :columns="$tableColumns" 
     :dataSource="$tableDataSource" 
     tableTrueWidth={{$tableTrueWidth?1:0}} 
-    headerTop=10
+    headerTop={{10 * 16}}
     
     showPaginationTop="{{$showPaginationTop}}"
     topLeftControl="{!!$topLeftControl!!}" 

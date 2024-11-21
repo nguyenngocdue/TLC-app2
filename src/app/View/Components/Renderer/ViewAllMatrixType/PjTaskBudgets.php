@@ -22,7 +22,7 @@ class PjTaskBudgets extends ViewAllTypeMatrixParent
     protected $rotate45Width = 300;
     protected $rotate45Height = 250;
     protected $tableTrueWidth = true;
-    protected $headerTop = 20;
+    protected $headerTop = 20 * 16;
     protected $groupBy = null;
     // protected $mode = 'status';
 

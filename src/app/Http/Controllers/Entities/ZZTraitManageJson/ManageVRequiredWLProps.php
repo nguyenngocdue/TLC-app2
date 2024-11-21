@@ -9,7 +9,6 @@ class ManageVRequiredWLProps extends ManageV_Parent
 {
     protected $routeKey = "_rqr-wl";
     protected $jsonGetSet = RequiredWLProps::class;
-    // protected $headerTop = 16;
 
     protected function getColumnSource()
     {

@@ -48,13 +48,11 @@ var tableObjectIndexedColumns = {};
             @endif
             @php 
             $classH= "";$classTop= "";$styleH = "";$styleT = "";
-            if(!is_numeric($headerTop)) {
-                $styleH = "height: $headerTop";
-                $styleT = "top: $headerTop";
-            }else {
-                $classH= "h-$headerTop";
-                $classTop= "top-$headerTop";
-            } @endphp
+            if($headerTop){
+                $styleH = "height: {$headerTop}px;";
+                $styleT = "top: {$headerTop}px;";
+            }
+            @endphp
             <div class="table-wrp block bg-gray-100 {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
                 <table 
                         id="{{$tableName}}" 

@@ -26,7 +26,7 @@ class EsgMasterSheets extends ViewAllTypeMatrixParent
     protected $dataIndexY = "esg_tmpl_id";
     // protected $rotate45Width = 400;
     // protected $tableTrueWidth = true;
-    protected $headerTop = 20;
+    protected $headerTop = 20 * 16;
     protected $groupBy = null;
     // protected $mode = 'status';
     protected $attOfCellToRender = "total";

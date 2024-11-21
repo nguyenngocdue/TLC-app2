@@ -15,7 +15,7 @@ class ManageCapabilities extends Manage_Parent
     protected $viewName = "dashboards.pages.manage-capability";
     protected $routeKey = "_cpb";
     protected $jsonGetSet = Capabilities::class;
-    protected $headerTop = 20;
+    protected $headerTop = 20 * 16;
 
     protected $showToggleColumn = true;
 
@@ -43,7 +43,7 @@ class ManageCapabilities extends Manage_Parent
 
         $allStatuses = LibStatuses::getFor($this->type);
         // dump($allStatuses);
-        $columns = array_map(fn ($i) => [
+        $columns = array_map(fn($i) => [
             "dataIndex" => $i['name'],
             'renderer' => 'checkbox',
             'editable' => true,

@@ -15,6 +15,9 @@ abstract class MatrixForReportParent extends Component
     protected $rotate45Width = 400;
     protected $rotate45Height = null;
 
+    protected $headerTop = 40 * 16;
+    protected $maxH = 40;
+
     protected $closedDateColumn = 'closed_at';
 
     protected $statuses;
@@ -127,6 +130,7 @@ abstract class MatrixForReportParent extends Component
                 // 'columnDivStyle' => ['z-index' => 2],
                 // 'width' => 40,
             ];
+            if ($x->width) $column['width'] = $x->width;
             $result[] = $column;
         }
         return $result;
@@ -241,11 +245,11 @@ abstract class MatrixForReportParent extends Component
             if ($mau > 0) {
                 $percent = number_format(100 * $line / $mau) . '%';
                 $line = (object)[
-                    'value' =>  $tu . '/' . $mau . ' <br/>(' . $percent . ")",
-                    'cell_class' => "text-center",
+                    'value' =>  $tu . '/' . $mau . ' <br/>' . $percent . "",
+                    'cell_class' => "text-center text-xs",
                 ];
             } else {
-                $line = "<div class='w-10 text-center'>NA</div>";
+                $line = "<div class='w-10 text-center text-xs'>NA</div>";
             }
         }
 
@@ -348,6 +352,9 @@ abstract class MatrixForReportParent extends Component
             'rotate45Height' => $this->rotate45Height,
             'type' => $this->type,
             'actionButtons' => $this->getActionButtons(),
+
+            'headerTop' => $this->headerTop,
+            'maxH' => $this->maxH,
         ]);
     }
 }
