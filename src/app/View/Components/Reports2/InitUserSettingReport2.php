@@ -7,6 +7,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\DefaultValueReport;
 use App\Utils\Support\Report;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -73,22 +74,23 @@ class InitUserSettingReport2
     }
 
     private function  createDefaultValueWeekOfYear($params,$rpFilters) {
-        $weekOfYear = 1;
+        $date = new DateTime('now');
+        $currentWeek = $date->format('W'); 
         foreach($rpFilters as $value){
             if ($value->data_index === 'week_of_year') {
-                $weekOfYear = ($x = $value->default_value) ?  substr($x, 0, strpos($x, '_')) : $weekOfYear;
+                $currentWeek = ($x = $value->default_value) ?  substr($x, 0, strpos($x, '_')) : $currentWeek;
                 break;
             }
         }
-        $$weekOfYear = $weekOfYear > 0 && $weekOfYear < 53 ? $weekOfYear : 1;
-        $weeksOfYearNum = $weekOfYear.'_' . date('Y');
+        $currentWeek = $currentWeek > 0 && $currentWeek < 53 ? $currentWeek : $currentWeek;
+        $weeksOfYearNum = $currentWeek.'_' . date('Y');
         $dates = DateReport::getWeekOfYearData();
         $date = $dates[$weeksOfYearNum];
         [$toDate1, $toDate2] = [ $date->last_time->to_date, $date->this_time->to_date];
         $params['last_time_to_date'] = $toDate1;
         $params['this_time_to_date'] = $toDate2;
         $params['year'] =  $date->this_time->year;
-        $params['week_number'] = $weekOfYear;
+        $params['week_number'] = $currentWeek;
         $params['week_of_year'] =  $weeksOfYearNum;
         return $params;
     }
