@@ -4,6 +4,7 @@ namespace App\View\Components\Reports2;
 
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\DefaultValueReport;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,26 @@ class InitUserSettingReport2
         // if ($u) toastr()->success('User Settings Saved Successfully', 'Successfully');
     }
 
+    private function  createDefaultValueWeekOfYear($params,$rpFilters) {
+        $weekOfYear = 1;
+        foreach($rpFilters as $value){
+            if ($value->data_index === 'week_of_year') {
+                $weekOfYear = ($x = $value->default_value) ?  substr($x, 0, strpos($x, '_')) : $weekOfYear;
+                break;
+            }
+        }
+        $params['week_of_year'] =  $weekOfYear;
+        $weeksOfYearNum = '10_2024';
+        $dates = DateReport::getWeekOfYearData();
+        $date = $dates[$weeksOfYearNum];
+        [$toDate1, $toDate2] = [ $date->last_time->to_date, $date->this_time->to_date];
+        $params['last_time_to_date'] = $toDate1;
+        $params['this_time_to_date'] = $toDate2;
+        $params['year'] =  $date->this_time->year;
+        $params['week_number'] = $date->this_time->week_number;
+        return $params;
+    }
+
     public function initParamsUserSettingRp($rp, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
         
@@ -103,15 +124,18 @@ class InitUserSettingReport2
             $isSave = False;    
         }
         $params = $settings[$entityType][$this->reportType2][$storedFilterKey] ?? [];
-
+        
         if(!isset($params['time_zone'])){
             $params['time_zone'] = 'UTC+7';
         }
         if(!isset($params['preset_title'])){
             $params['preset_title'] = 'Time Range';
         }
-
-
+        if (!isset($params['week_of_year']) || !isset($params['week_number'])){
+           $params = $this->createDefaultValueWeekOfYear($params, $rpFilters);
+        }
+        
+        
         // set default value for Time Range
         if ($rp->has_time_range) {
             if(!isset($params['from_date']) || !isset($params['to_date']) || !$params['from_date'] || !$params['from_date'] ){

@@ -23,6 +23,7 @@ class UtilityReport2 extends Component
         return view('components.reports2.utility-report2', [
             'route' => $this->route,
             'queriedData' => $this->queriedData,
+            'class' => '',
         ]);
     }
 }
