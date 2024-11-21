@@ -4,7 +4,7 @@ namespace App\View\Components\Homepage;
 
 use Illuminate\View\Component;
 
-class TopDrawer2Application extends Component
+class TopDrawer2Applications extends Component
 {
     public function __construct()
     {
