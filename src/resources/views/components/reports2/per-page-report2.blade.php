@@ -4,7 +4,7 @@
 <form class="">
   <button type="submit"  type="hidden" class="hidden">Submit</button>
 </form>
-<form name="{{$formName}}" action="{{$routeRp}}" method="POST" class="m-0">
+<form name="{{$formName}}" action="{{$route}}" method="POST" class="m-0">
     @csrf
     <div class="flex items-center lg:justify-end no-print">
         <div class="w-28">
