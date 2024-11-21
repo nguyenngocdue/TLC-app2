@@ -43,7 +43,7 @@
         @if ($typeOfView === 'report-pivot')
             <x-renderer.report.pivot-table showNo={{ true }} modeType="{{ $modeType }}" :tableDataHeader="$tableDataHeader"
                 :tableColumns="$tableColumns" :params="$params" :dataSource="$tableDataSource" tableTrueWidth={{ $tableTrueWidth ? 1 : 0 }}
-                page-limit="{{ $pageLimit }}" headerTop={{10 * 16}} maxH="{{ $maxH }}" showPaginationTop="true"
+                page-limit="{{ $pageLimit }}" headerTop={{160}} maxH="{{ $maxH }}" showPaginationTop="true"
                 topLeftControl="{!! $tl !!}" topCenterControl="{!! $tc !!}"
                 topRightControl="{!! $tr !!}" />
         @else

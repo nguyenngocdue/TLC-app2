@@ -47,13 +47,13 @@ var tableObjectIndexedColumns = {};
             </div>
             @endif
             @php 
-            $classH= "";$classTop= "";$styleH = "";$styleT = "";
-            if($headerTop){
-                $styleH = "height: {$headerTop}px;";
-                $styleT = "top: {$headerTop}px;";
-            }
-            @endphp
-            <div class="table-wrp block bg-gray-100 {{ $maxH }} overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}">
+                $styleH = $headerTop ? "height: {$headerTop}px;" : "";
+                $styleT = $headerTop ? "top: {$headerTop}px;" : "";
+                $styleMaxH = $maxH ? "max-height: {$maxH}px;" : ""; 
+            @endphp            
+            <div class="table-wrp block bg-gray-100 overflow-x-auto {{$showPaginationTop ? "border-t $borderColor":"rounded-t-lg"}}"
+                style="{{$styleMaxH}}"
+            >
                 <table 
                         id="{{$tableName}}" 
                         class='whitespace-no-wrap w-full text-sm text-sm-vw border-separate border-spacing-0 {{$borderColor}}' 
@@ -63,12 +63,12 @@ var tableObjectIndexedColumns = {};
                         {!! $colgroup !!}
                     </colgroup>
                     <thead class="sticky z-10 top-0">
-                        <tr class="{{$trClassList}} {{$classH}}" style="{{$styleH}}">
+                        <tr class="{{$trClassList}}" style="{{$styleH}}">
                             {!! $columnsRendered !!}
                         </tr>
                     </thead>
                     @isset($headerRendered)
-                    <thead class="sticky z-10 {{$classTop}}" style="{{$styleT}}">
+                    <thead class="sticky z-10" style="{{$styleT}}">
                         <tr class="{{$trClassList}}">{!! $headerRendered !!}</tr>
                     </thead>
                     @endisset
@@ -167,7 +167,7 @@ var tableObjectIndexedColumns = {};
                     cell = table.rows[pos.r].cells[pos.c]
                     nxFocus = cell.querySelector('input') ||
                         cell.querySelector('select') ||
-                        cell.querySelector('textarea') // get focussable element of <td>
+                        cell.querySelector('textarea') // get focus-able element of <td>
                     if (
                         nxFocus &&
                         cell.style.display !== 'none' &&

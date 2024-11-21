@@ -91,7 +91,7 @@
         <x-renderer.grid colSpan="4" :items="$gridDataSource" itemRenderer="x-renderer.avatar-user" groupBy="name"></x-renderer.grid>
     </x-renderer.card>
     <x-renderer.card title="Tags">
-        <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource" maxH={{60 * 16}}/>
+        <x-renderer.table showNo=true :columns="$tagColumns" :dataSource="$tagDataSource" maxH={{960}}/>
 
             <x-renderer.tag color="slate" colorIndex=900>slate</x-renderer.tag>
             <x-renderer.tag color="zinc">zinc</x-renderer.tag>

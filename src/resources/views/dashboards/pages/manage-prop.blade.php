@@ -15,7 +15,7 @@
             :columns="$columns" 
             :dataSource="$dataSource" 
             {{-- tableTrueWidth=1  --}}
-            maxH={{32 * 16}}
+            maxH={{512}}
             
             rotate45Width=200
             rotate45Height=150

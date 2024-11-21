@@ -1,5 +1,5 @@
 <x-renderer.table 
-    headerTop={{12 * 16}}
+    headerTop={{192}}
     showNo=true 
     :columns="$tableColumns" :dataSource="$tableDataSource" :dataHeader="$secondHeaderCols"
     tableTrueWidth="{{ $tableTrueWidth }}" maxH="{{ $maxHeight }}"
