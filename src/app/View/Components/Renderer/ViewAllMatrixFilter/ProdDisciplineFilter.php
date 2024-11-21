@@ -26,9 +26,11 @@ class ProdDisciplineFilter extends Component
         private $readOnly = false,
         private $allowClear = false,
         // private $typeToLoadListener = null, //<<Add this to load listenersOfDropdown2
+        private $typePlural = null,
     ) {
         // if (old($name)) $this->selected = old($name);
         $this->selected = Arr::normalizeSelected($this->selected, old($name));
+        if (is_null($this->typePlural)) $this->typePlural = CurrentRoute::getTypePlural();
     }
 
     private function getDataSource()
@@ -38,7 +40,7 @@ class ProdDisciplineFilter extends Component
             ->orderBy('name')
             ->get();
 
-        $db = $db->filter(fn ($item) => $item->isShowOn(CurrentRoute::getTypePlural()))->values();
+        $db = $db->filter(fn($item) => $item->isShowOn($this->typePlural))->values();
 
         return $db;
     }

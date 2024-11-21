@@ -5,10 +5,13 @@ namespace App\View\Components\Renderer\MatrixForReport;
 use App\Models\Prod_order;
 use App\Models\Prod_routing;
 use App\Models\Prod_sequence;
+use App\View\Components\Renderer\ViewAllMatrixFilterDataSource\TraitFilterDataSourceForInternal;
 use Illuminate\Support\Facades\Log;
 
 class ProdSequences extends MatrixForReportParent
 {
+    use TraitFilterDataSourceForInternal;
+
     protected $dataIndexX = "prod_routing_link_id";
     protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 300;
@@ -25,9 +28,12 @@ class ProdSequences extends MatrixForReportParent
         private $dateToCompare = null,
         private $sequenceModeId = 2,
         private $prodDisciplineId = null,
+        $allowOpen = true,
     ) {
         parent::__construct("prod_sequences", $dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
+
+        $this->allowOpen = $allowOpen;
     }
 
     function getXAxis()

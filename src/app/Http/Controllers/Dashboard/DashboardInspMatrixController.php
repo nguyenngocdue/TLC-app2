@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\UpdateUserSetting2Service;
+use App\Utils\Support\CurrentUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
 class DashboardInspMatrixController extends Controller
@@ -18,11 +20,29 @@ class DashboardInspMatrixController extends Controller
             UpdateUserSetting2Service::getInstance()
                 ->set("qaqc_insp_chklst_shts.view_all.matrix.$key.page", $page)
                 ->commit();
-            return redirect()->route("dashboard.index");
+
+            $query = $request->query();
+            Arr::pull($query, 'page');
+            Arr::pull($query, 'key');
+            // $query = http_build_query($query);
+            return redirect()->route("dashboard.index", $query);
+        }
+
+        $tab = $request->get('tab', 'ics');
+        $tabs = [
+            ['title' => 'QAQC Progress', 'active' => $tab == 'ics', 'href' => "?tab=ics"],
+        ];
+
+        $cu = CurrentUser::get();
+
+        if ($cu->isProjectClient() || CurrentUser::isAdmin()) {
+            $tabs[] = ['title' => 'Production Progress', 'active' => $tab == 'sqbts', 'href' => "?tab=sqbts"];
         }
 
         return view("dashboards.dashboard-insp-matrix", [
             'controller' => $controller,
+            'tabs' => $tabs,
+            'tab' => $tab,
         ]);
     }
 }

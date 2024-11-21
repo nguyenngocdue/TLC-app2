@@ -27,6 +27,7 @@ abstract class MatrixForReportParent extends Component
 
     protected $groupBy = null;
     protected $groupByLength = null;
+    protected $allowOpen = true;
 
     function __construct(
         private $type,
@@ -42,7 +43,7 @@ abstract class MatrixForReportParent extends Component
     abstract function getYAxis();
     abstract function getDataSource($xAxis, $yAxis);
 
-    function cellRenderer($cell, $xAxis, $yAxis, $dataSource, $forExcel = false, $matrixKey = null)
+    protected function cellRenderer($cell, $xAxis, $yAxis, $dataSource, $forExcel = false, $matrixKey = null)
     {
         if (isset($cell->status)) {
             $id = $cell->id;
@@ -75,12 +76,15 @@ abstract class MatrixForReportParent extends Component
 
             if ($forExcel) return $cell->status;
 
-            return (object)[
+            $result = [
                 "value" => $value, //. " " . $cell->{$this->dataIndexX},
                 'cell_class' => "$cellClass text-center cursor-pointer",
                 'cell_title' => $name . " (" . $statusObj['title'] . ")",
-                'cell_href' => $href,
             ];
+
+            if ($this->allowOpen) $result['cell_href'] = $href;
+
+            return (object) $result;
         }
         return $cell;
     }

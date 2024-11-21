@@ -4,19 +4,20 @@
 @section('title', '')
 
 @section('content')
-@php
-    $showOnlyInvolved=$showOnlyInvolved ?? false;
-@endphp
 
 <div class="px-4 min-h-screen">
     <x-elapse title="Boot the layout: "/>
-    <div class="grid grid-cols-12 gap-3 my-5">
-        <div class="col-span-12">
-            <x-renderer.view-all-matrix-type.QaqcInspChklstShtsDashboard
-                controller="{{$controller}}"
-                />
+    <x-renderer.tab-pane class="" :tabs="$tabs">      
+        <div class="grid grid-cols-12 gap-3 pt-2 mx-4 mb-4">
+            <div class="col-span-12">
+                @if($tab == 'ics')
+                    <x-renderer.view-all-matrix-type.QaqcInspChklstShtsDashboard controller="{{$controller}}" />
+                @elseif($tab == 'sqbts')
+                    <x-renderer.matrix-for-report.ProdSequencesDashboard controller="{{$controller}}" />
+                @endif
+            </div>
         </div>
-    </div>
+    </x-renderer.tab-pane>
 </div>
 
 @endsection

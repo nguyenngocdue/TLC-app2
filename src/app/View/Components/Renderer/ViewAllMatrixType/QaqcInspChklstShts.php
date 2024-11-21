@@ -7,7 +7,6 @@ use App\Models\Pj_module;
 use App\Models\Pj_unit;
 use App\Models\Prod_discipline;
 use App\Models\Prod_routing;
-use App\Models\Project;
 use App\Models\Qaqc_insp_chklst;
 use App\Models\Qaqc_insp_chklst_sht;
 use App\Models\Qaqc_insp_tmpl_sht;
@@ -16,6 +15,7 @@ use App\Models\Sub_project;
 use App\Utils\Constant;
 use App\Utils\Support\CurrentUser;
 use App\View\Components\Renderer\ViewAll\ViewAllTypeMatrixParent;
+use App\View\Components\Renderer\ViewAllMatrixFilterDataSource\TraitFilterDataSourceForInternal;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -40,9 +40,11 @@ class FakeQaqcPunchlist
 class QaqcInspChklstShts extends ViewAllTypeMatrixParent
 {
     use TraitYAxisDiscipline;
+    use TraitFilterDataSourceForInternal;
 
     private $projectId, $subProjectId, $prodRoutingId;
-    protected $projectDatasource, $subProjectDatasource, $prodRoutingDatasource, $prodRoutingMatrixDatasource;
+    protected $projectDatasource, $subProjectDatasource, $prodRoutingDatasource;
+    protected $prodRoutingMatrixDatasource;
     private $QAQC_DISCIPLINE_ID = 7;
 
     protected $xAxis = Qaqc_insp_chklst_sht::class;
@@ -496,73 +498,6 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
             // echo "CACHE HIT - getRoutingListForMatrix";
         }
         return $this->prodRoutingMatrixDatasource;
-    }
-
-    protected function enrichRouting($prodRoutings)
-    {
-        //Remove routings that are not allow to show on the screen
-        $prodRoutings = $prodRoutings->filter(fn($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
-
-        //Enrich for listeners sub projects -> routing
-        foreach ($prodRoutings as &$item) {
-            $item->{"getSubProjects"} = $item->getSubProjects->pluck('id')->toArray();
-        }
-
-        return $prodRoutings;
-    }
-
-    protected function getRoutingListForFilter()
-    {
-        if (!$this->prodRoutingDatasource) {
-            $subProjectDatasource = $this->getSubProjectListForFilter();
-            $routingIds = [];
-            foreach ($subProjectDatasource as $subProject) {
-                $routingIds[] = $subProject->getProdRoutingsOfSubProject->pluck('id')->toArray();
-            }
-            $routingIds = array_unique(array_merge(...$routingIds));
-            $prodRoutings = Prod_routing::query()
-                ->whereIn('id', $routingIds)
-                ->with([
-                    "getSubProjects",
-                    "getScreensShowMeOn",
-                ])
-                ->get();
-
-            $prodRoutings = $this->enrichRouting($prodRoutings);
-            $this->prodRoutingDatasource = $prodRoutings;
-        } else {
-            // echo "CACHE HIT - getRoutingListForFilter";
-        }
-        return $this->prodRoutingDatasource;
-    }
-
-    protected function getSubProjectListForFilter()
-    {
-        if (!$this->subProjectDatasource) {
-            $this->subProjectDatasource = Sub_project::all();
-        } else {
-            // echo "CACHE HIT - getSubProjectListForFilter";
-        }
-        return $this->subProjectDatasource;
-    }
-
-    protected function getProjectListForFilter()
-    {
-        if (!$this->projectDatasource) {
-            $subProjectDatasource = $this->getSubProjectListForFilter();
-            $projectIds = [];
-            foreach ($subProjectDatasource as $subProject) {
-                $projectIds[] = $subProject->project_id;
-            }
-            $statuses = config("project.active_statuses.projects");
-            $this->projectDatasource = Project::query()
-                ->whereIn('id', $projectIds)
-                ->whereIn('status', $statuses)
-                ->get();
-        } else {
-            // echo "CACHE HIT - getProjectListForFilter";
-        }
-        return $this->projectDatasource;
     }
 
     protected function getFilterDataSource()
