@@ -80,15 +80,16 @@ class InitUserSettingReport2
                 break;
             }
         }
-        $params['week_of_year'] =  $weekOfYear;
-        $weeksOfYearNum = '10_2024';
+        $$weekOfYear = $weekOfYear > 0 && $weekOfYear < 53 ? $weekOfYear : 1;
+        $weeksOfYearNum = $weekOfYear.'_' . date('Y');
         $dates = DateReport::getWeekOfYearData();
         $date = $dates[$weeksOfYearNum];
         [$toDate1, $toDate2] = [ $date->last_time->to_date, $date->this_time->to_date];
         $params['last_time_to_date'] = $toDate1;
         $params['this_time_to_date'] = $toDate2;
         $params['year'] =  $date->this_time->year;
-        $params['week_number'] = $date->this_time->week_number;
+        $params['week_number'] = $weekOfYear;
+        $params['week_of_year'] =  $weeksOfYearNum;
         return $params;
     }
 
@@ -131,8 +132,10 @@ class InitUserSettingReport2
         if(!isset($params['preset_title'])){
             $params['preset_title'] = 'Time Range';
         }
-        if (!isset($params['week_of_year']) || !isset($params['week_number'])){
-           $params = $this->createDefaultValueWeekOfYear($params, $rpFilters);
+        if (!isset($params['week_number'])){
+            $params = $this->createDefaultValueWeekOfYear($params, $rpFilters);
+            $settings[$entityType][$this->reportType2][$storedFilterKey] = $params;
+            self::updateUserSettingRp($settings);
         }
         
         
