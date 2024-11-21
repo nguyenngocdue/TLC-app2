@@ -31,7 +31,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $headerTop = 20 * 16;
     protected $groupBy = null;
     protected $mode = 'detail';
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
 
     protected $showAdvancedDays = !true;
     /**

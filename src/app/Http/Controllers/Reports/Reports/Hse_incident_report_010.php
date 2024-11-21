@@ -17,7 +17,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
     use TraitDynamicColumnsTableReport;
     use TraitForwardModeReport;
 
-    protected $maxH = 80;
+    protected $maxH = 80 * 16;
     protected $tableTrueWidth = false;
     protected $pageLimit = 20;
 
@@ -345,7 +345,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
     {
         $number = 0;
         $fullMonths = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-        $yearMonths = array_values(array_map(fn ($item) => $year . '-' . $item, $fullMonths));
+        $yearMonths = array_values(array_map(fn($item) => $year . '-' . $item, $fullMonths));
 
         $numbers = [];
         foreach ($yearMonths as $yearMonth) {
@@ -363,7 +363,7 @@ class Hse_incident_report_010 extends Report_ParentReportController
     protected function transformDataSource($dataSource, $params)
     {
         // dd($dataSource);
-        if (is_object($dataSource)) $dataSource = array_map(fn ($item) => (array)$item, $dataSource->toArray());
+        if (is_object($dataSource)) $dataSource = array_map(fn($item) => (array)$item, $dataSource->toArray());
         if (empty($dataSource)) return collect([]);
 
         $dbWorkplaceIds = DB::table('workplaces')->pluck('id')->toArray();

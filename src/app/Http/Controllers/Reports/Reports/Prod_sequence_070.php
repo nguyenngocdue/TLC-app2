@@ -24,7 +24,7 @@ class Prod_sequence_070 extends Report_ParentReport2Controller
     protected $typeView = 'report-pivot';
     protected $pageLimit = 10;
     protected $tableTrueWidth = true;
-    protected $maxH = 30;
+    protected $maxH = 30 * 16;
     protected $showModeOnParam = true;
 
     private function getSqlStr($params)

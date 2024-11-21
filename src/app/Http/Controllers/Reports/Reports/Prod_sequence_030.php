@@ -18,11 +18,11 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
 
     protected $mode = '030';
     protected $tableTrueWidth = true;
-    protected $maxH = 30;
+    protected $maxH = 30 * 16;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
-    
+
     // DataSource
     public function getSqlStr($params)
     {
@@ -93,21 +93,21 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
                 LEFT JOIN users us ON us.id = pru.owner_id
 
                 WHERE 1 = 1";
-    if (isset($params['project_id'])) $sql .= "\n AND sp.project_id IN ({{project_id}})";
-    if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id IN ({{sub_project_id}})";
+        if (isset($params['project_id'])) $sql .= "\n AND sp.project_id IN ({{project_id}})";
+        if (isset($params['sub_project_id'])) $sql .= "\n AND sp.id IN ({{sub_project_id}})";
 
-    if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
-    if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
-    if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
-    if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
-    elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
+        if (isset($params['prod_order_id'])) $sql .= "\n AND po.id IN ({{prod_order_id}})";
+        if (isset($params['prod_routing_id'])) $sql .= "\n AND po.prod_routing_id = {{prod_routing_id}}";
+        if (isset($params['status'])) $sql .= "\n  AND pose.status IN ({{status}})";
+        if (isset($params['prod_discipline_id'])) $sql .= "\n  AND prl.prod_discipline_id = ({{prod_discipline_id}})";
+        elseif (!isset($params['status'])) $sql .= "\n AND pose.status IN ('in_progress', 'finished', 'on_hold')";
 
-    $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
+        $sql .= "\n     AND po.status IN ('in_progress', 'finished', 'on_hold')
                     AND SUBSTR(pru.date, 1, 10) <= '{{picker_date}}'
                     AND pose.deleted_by IS NULL";
 
-    if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
-    $sql .= "\n GROUP BY prod_order_id, prod_order_name, prod_routing_link_id
+        if (isset($params['prod_routing_link_id'])) $sql .= "\n AND prl.id = {{prod_routing_link_id}}";
+        $sql .= "\n GROUP BY prod_order_id, prod_order_name, prod_routing_link_id
                 ORDER BY sub_project_name, prod_routing_name, order_no, prod_order_name";
         return $sql;
     }
@@ -366,16 +366,16 @@ class Prod_sequence_030 extends Report_ParentReport2Controller
     {
         $items = Report::convertToType($dataSource);
         foreach ($items as &$item) {
-            if(Report::checkValueOfField($item, 'prod_run_owner_name')){
+            if (Report::checkValueOfField($item, 'prod_run_owner_name')) {
                 $item['prod_run_owner_name'] = (object)[
                     'value' => $item['prod_run_owner_name'],
                     'cell_href' => route('prod_runs.edit', $item['prod_run_id']),
                     'cell_class' => 'text-blue-600'
                 ];
             }
-            if(Report::checkValueOfField($item, 'prod_sequence_id')){
+            if (Report::checkValueOfField($item, 'prod_sequence_id')) {
                 $item['prod_sequence_id'] = (object)[
-                    'value' => '#'. $item['prod_sequence_id'],
+                    'value' => '#' . $item['prod_sequence_id'],
                     'cell_href' => route('prod_sequences.edit', $item['prod_sequence_id']),
                     'cell_class' => 'text-blue-600'
                 ];

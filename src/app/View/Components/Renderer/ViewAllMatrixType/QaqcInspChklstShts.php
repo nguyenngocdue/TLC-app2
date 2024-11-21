@@ -55,7 +55,7 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
     protected $headerTop = 40 * 16;
     protected $groupBy = null;
     protected $apiToCallWhenCreateNew = 'cloneTemplate';
-    protected $maxH = 60;
+    protected $maxH = 60 * 16;
     protected $multipleMatrix = true;
 
     protected $matrixDataSourceSingleton = null;

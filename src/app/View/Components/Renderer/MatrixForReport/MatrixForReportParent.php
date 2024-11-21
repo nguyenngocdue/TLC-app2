@@ -16,7 +16,7 @@ abstract class MatrixForReportParent extends Component
     protected $rotate45Height = null;
 
     protected $headerTop = 40 * 16;
-    protected $maxH = 40;
+    protected $maxH = 40 * 16;
 
     protected $closedDateColumn = 'closed_at';
 

@@ -23,8 +23,8 @@ class Qaqc_wir_010 extends Report_ParentRegister2Controller
     protected  $sub_project_id = 107;
     protected  $prod_routing_id = 49;
     protected $mode = '010';
-    protected $maxH = 45;
-    protected $viewName="register-qaqc-wir-010";
+    protected $maxH = 45 * 16;
+    protected $viewName = "register-qaqc-wir-010";
 
     public function getSqlStr($params)
     {
@@ -64,7 +64,7 @@ class Qaqc_wir_010 extends Report_ParentRegister2Controller
         ];
     }
 
-    
+
     protected function getColorLegends()
     {
         $plural = 'qaqc_insp_chklst_shts';

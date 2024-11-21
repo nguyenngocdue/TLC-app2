@@ -10,11 +10,11 @@ class Prod_sequence_110 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $typeView = 'report-pivot';
     protected $modeType = 'prod_sequence_110';
     protected $tableTrueWidth = true;
-    protected $mode='110';
+    protected $mode = '110';
     protected $projectId = 5;
     protected $subProjectId = 21;
     protected $prodRoutingId = 2;
@@ -29,10 +29,9 @@ class Prod_sequence_110 extends Report_Parent2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['picker_date'] =DateReport::defaultPickerDate();
+        $params['picker_date'] = DateReport::defaultPickerDate();
         $params['project_id'] = $this->projectId;
         $params['sub_project_id'] = $this->subProjectId;
         return $params;
     }
-
 }

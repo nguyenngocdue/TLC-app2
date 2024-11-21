@@ -36,7 +36,7 @@ class AdvancedFilter extends Component
         $propsFilters = $this->propsFilterCheckStatusless();
         [,,,,, $basicFilter, $chooseBasicFilter] = $this->getUserSettingsViewAll();
         $count = count($propsFilters) ?? 0;
-        $maxH = round($count / 4) * 3.7 . 'rem';
+        $maxH = round($count / 4) * 3.7  * 16;
         $route = $this->trashed ? route($this->type . '.trashed') : route($this->type . '.index');
         $routeUpdateUserSettings = route('updateUserSettingsFilterApi');
 

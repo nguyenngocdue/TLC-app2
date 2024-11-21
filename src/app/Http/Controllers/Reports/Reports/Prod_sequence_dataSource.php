@@ -16,7 +16,7 @@ class Prod_sequence_dataSource extends Controller
     use TraitCreateSQL;
     use TraitGenerateValuesFromParamsReport;
 
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
 
     public function getSqlStr($params)
     {

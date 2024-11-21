@@ -10,7 +10,7 @@
             topRightControl="{!! $perPage !!}"
             bottomRightControl="{!! $perPage !!}"
             tableTrueWidth={{$tableTrueWidth}}
-            maxH="41"
+            maxH="{{41 * 16}}"
             />
     </div>
 </x-renderer.tab-pane>

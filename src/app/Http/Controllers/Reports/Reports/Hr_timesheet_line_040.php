@@ -9,11 +9,11 @@ class Hr_timesheet_line_040 extends Report_ParentReport2Controller
 
 {
     use TraitForwardModeReport;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $typeView = 'report-pivot';
     protected $modeType = 'hr_timesheet_line_team_project';
     protected $tableTrueWidth = true;
-    protected $mode='040';
+    protected $mode = '040';
 
 
     public function getDataSource($params)

@@ -13,7 +13,7 @@ class Site_daily_assignment_dataSource2 extends Controller
 {
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
 
     public function getSqlStr($params)
     {

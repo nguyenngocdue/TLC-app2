@@ -33,7 +33,7 @@ class Table extends Component
     private $groupKeepOrder = false,
     private $header = "",
     private $footer = "",
-    private $maxH = 40,
+    private $maxH = 40 * 16,
     // private $minH = 40,
     //Editable MODE
     private $model = null,
@@ -55,8 +55,7 @@ class Table extends Component
     private $numberOfEmptyLines = 0,
     private $lineIgnoreNo = 0,
     private $borderColor = 'border-gray-300',
-  ) {
-  }
+  ) {}
 
   /**
    * Get the view / contents that represent the component.
@@ -115,7 +114,7 @@ class Table extends Component
       'footer' => $this->footer,
       'colgroup' => $colgroup,
       'tableWidth' => $tableWidth,
-      'maxH' => $this->maxH ? "max-h-[{$this->maxH}rem]" : "",
+      'maxH' => $this->maxH ?: "", // "max-h-[{$this->maxH}rem]" : "",
       // 'minH' => $this->minH ? "min-h-[{$this->minH}rem]" : "",
       'tableDebug' => $this->tableDebug,
       'trClassList' => 'bg-gray-100 text-center text-xs text-xs-vw font-semibold tracking-wide text-gray-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300',

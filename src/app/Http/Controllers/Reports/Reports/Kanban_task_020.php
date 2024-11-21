@@ -12,17 +12,19 @@ class Kanban_task_020 extends Report_ParentReport2Controller
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = true;
     protected $pageLimit = 10;
-    protected $maxH = 50;
-    protected $mode='020';
+    protected $maxH = 50 * 16;
+    protected $mode = '020';
 
 
-    private function getUserOnOwner(){
+    private function getUserOnOwner()
+    {
         $ins = new ParamUserId();
         $ids = array_column($ins->getDataSource(), 'id');
         return $ids;
     }
 
-    private function getActiveIdTasks(){
+    private function getActiveIdTasks()
+    {
         $ids = array_values(Kanban_task_transition::Where('deleted_by', null)->pluck('kanban_task_id')->unique()->toArray());
         return $ids;
     }
@@ -35,12 +37,12 @@ class Kanban_task_020 extends Report_ParentReport2Controller
         ['start' => $start, 'end' => $end] = $valOfParams['picker_date'];
 
         $activeIdTasks = $this->getActiveIdTasks();
-        $strActiveIdTasks = implode(",",$activeIdTasks);
-        $strActiveIdTasks = isset($params["kanban_task_name_id"]) && $params["kanban_task_name_id"] ? implode(",",$params["kanban_task_name_id"]): $strActiveIdTasks;
+        $strActiveIdTasks = implode(",", $activeIdTasks);
+        $strActiveIdTasks = isset($params["kanban_task_name_id"]) && $params["kanban_task_name_id"] ? implode(",", $params["kanban_task_name_id"]) : $strActiveIdTasks;
         $valOfParams['kanban_task_name_id'] = $strActiveIdTasks;
 
 
-            $sql =" SELECT elapseTimeTb.*, minmaxTb.*,
+        $sql = " SELECT elapseTimeTb.*, minmaxTb.*,
                         TIME_TO_SEC(TIMEDIFF(kanban_task_created_at, index_waiting_time)) AS waiting_time_second
                         FROM (SELECT
                             kanban_task_id, kanban_task_name,kanban_task_deleted_by,kanban_task_created_at,
@@ -96,40 +98,40 @@ class Kanban_task_020 extends Report_ParentReport2Controller
                             LEFT JOIN kanban_task_pages ktp ON ktp.id = ktc.kanban_page_id
                             LEFT JOIN kanban_task_buckets ktb ON ktb.id = ktp.kanban_bucket_id
                             WHERE 1 = 1 ";
-                            #AND us.id= 444
-                            #AND ktc.id  = 15
-                            #AND kt.id  = 144
-                            #AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '2023-01-21'
-                            #AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '2024-01-23'";
+        #AND us.id= 444
+        #AND ktc.id  = 15
+        #AND kt.id  = 144
+        #AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '2023-01-21'
+        #AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '2024-01-23'";
 
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  IN ({$valOfParams['kanban_task_name_id']})";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_cluster')) $sql .= "\n AND ktc.id  = {$valOfParams['kanban_task_cluster']}";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_group')) $sql .= "\n AND ktg.id  = {$valOfParams['kanban_task_group']}";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_page')) $sql .= "\n AND ktp.id  = {$valOfParams['kanban_task_page']}";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_bucket')) $sql .= "\n AND ktb.id  = {$valOfParams['kanban_task_bucket']}";
-                            
-                            if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND wp.id = {$valOfParams['workplace_id']}";
-                            if (Report::checkValueOfField($valOfParams, 'department_id')) $sql .= "\n AND dp.id  = {$valOfParams['department_id']}";
-                            if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
-                                        
-                            if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
-                            if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' OR kt.id  IN ({$valOfParams['kanban_task_name_id']}) AND ktt.end_at IS NULL";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  IN ({$valOfParams['kanban_task_name_id']})";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_cluster')) $sql .= "\n AND ktc.id  = {$valOfParams['kanban_task_cluster']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_group')) $sql .= "\n AND ktg.id  = {$valOfParams['kanban_task_group']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_page')) $sql .= "\n AND ktp.id  = {$valOfParams['kanban_task_page']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_bucket')) $sql .= "\n AND ktb.id  = {$valOfParams['kanban_task_bucket']}";
 
-                            $sql .= "\n ) AS detailTb
+        if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND wp.id = {$valOfParams['workplace_id']}";
+        if (Report::checkValueOfField($valOfParams, 'department_id')) $sql .= "\n AND dp.id  = {$valOfParams['department_id']}";
+        if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
+
+        if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
+        if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' OR kt.id  IN ({$valOfParams['kanban_task_name_id']}) AND ktt.end_at IS NULL";
+
+        $sql .= "\n ) AS detailTb
                             WHERE 1 = 1";
 
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND detailTb.kanban_task_id  IN ({$valOfParams['kanban_task_name_id']})";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_cluster')) $sql .= "\n AND detailTb.kanban_task_cluster_id  = {$valOfParams['kanban_task_cluster']}";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_group')) $sql .= "\n AND detailTb.kanban_task_group_id  = {$valOfParams['kanban_task_group']}";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_page')) $sql .= "\n AND detailTb.kanban_task_page_id  = {$valOfParams['kanban_task_page']}";
-                            if (Report::checkValueOfField($valOfParams, 'kanban_task_bucket')) $sql .= "\n AND detailTb.kanban_task_bucket_id  = {$valOfParams['kanban_task_bucket']}";
-                            
-                            if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND detailTb.workplace_id = {$valOfParams['workplace_id']}";
-                            if (Report::checkValueOfField($valOfParams, 'department_id')) $sql .= "\n AND detailTb.department_id  = {$valOfParams['department_id']}";
-                            if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND detailTb.user_id = {$valOfParams['user_id']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND detailTb.kanban_task_id  IN ({$valOfParams['kanban_task_name_id']})";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_cluster')) $sql .= "\n AND detailTb.kanban_task_cluster_id  = {$valOfParams['kanban_task_cluster']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_group')) $sql .= "\n AND detailTb.kanban_task_group_id  = {$valOfParams['kanban_task_group']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_page')) $sql .= "\n AND detailTb.kanban_task_page_id  = {$valOfParams['kanban_task_page']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_bucket')) $sql .= "\n AND detailTb.kanban_task_bucket_id  = {$valOfParams['kanban_task_bucket']}";
 
-                            
-                            $sql .="\n GROUP BY detailTb.kanban_task_id, detailTb.kanban_task_page_id, detailTb.kanban_task_cluster_id
+        if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND detailTb.workplace_id = {$valOfParams['workplace_id']}";
+        if (Report::checkValueOfField($valOfParams, 'department_id')) $sql .= "\n AND detailTb.department_id  = {$valOfParams['department_id']}";
+        if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND detailTb.user_id = {$valOfParams['user_id']}";
+
+
+        $sql .= "\n GROUP BY detailTb.kanban_task_id, detailTb.kanban_task_page_id, detailTb.kanban_task_cluster_id
                             ) AS elapseTimeTb
                     
                     JOIN 
@@ -199,7 +201,7 @@ class Kanban_task_020 extends Report_ParentReport2Controller
     protected function getTableColumns($params, $dataSource)
     {
         return [
-           
+
             [
                 'title' => 'Task Bucket',
                 'dataIndex' => 'kanban_task_bucket_name',
@@ -347,25 +349,25 @@ class Kanban_task_020 extends Report_ParentReport2Controller
                 "dataIndex" => "kanban_task_name_id",
                 "allowClear" => true,
                 "multiple" => true,
-                
+
             ],
             [
                 "title" => "Task Group",
                 "dataIndex" => "kanban_task_group",
                 "allowClear" => true,
             ],
-            
+
         ];
     }
-     public function changeDataSource($dataSource, $params)
+    public function changeDataSource($dataSource, $params)
     {
-        foreach( $dataSource as &$items) {
-            if (!(float)$items->total_elapsed_second
-            ){
+        foreach ($dataSource as &$items) {
+            if (!(float)$items->total_elapsed_second) {
                 $items->total_elapsed_second = (object)[
                     'value' => 'NYS',
                     'cell_class' => 'bg-blue-50',
-                ];            }
+                ];
+            }
         }
         // dd($dataSource);
         return $dataSource;

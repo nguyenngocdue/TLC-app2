@@ -15,7 +15,7 @@ class Hr_timesheet_line_dataSource extends Controller
     use TraitDynamicColumnsTableReport;
     use TraitCreateSQL;
 
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $mode = '100';
     #protected $rotate45Width = 300;
     protected $libPivotFilters;

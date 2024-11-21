@@ -22,7 +22,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     protected $subProjectId = 107;
     protected $prodRoutingId = 49;
     protected $tableTrueWidth = true;
-    protected $maxH = 30;
+    protected $maxH = 30 * 16;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
@@ -31,7 +31,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
     public function getSqlStr($params)
     {
         $valOfParams = $this->generateValuesFromParamsReport($params);
-        
+
         // dd($valOfParams, $params);
         $sql = "SELECT 
                         DATE_FORMAT(SUBSTR(po.started_at, 1, 10), '%d/%m/%Y') AS started_at_prod_order,
@@ -52,7 +52,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                         ,FORMAT(po.total_hours/8,2) AS net_working_day
                         ,po.total_days_have_ts AS total_days_have_ts
                         ,po.total_discrepancy_days AS total_discrepancy_days";
-                    $sql .= "\n FROM sub_projects sp
+        $sql .= "\n FROM sub_projects sp
                     JOIN prod_orders po ON po.sub_project_id = sp.id
                     LEFT JOIN prod_routings pr ON pr.id = po.prod_routing_id
                     LEFT JOIN projects pj ON sp.project_id = pj.id
@@ -61,7 +61,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id = $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($prodOrder = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN ($prodOrder)";
-        if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
+        if ($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
         elseif (!isset($params['status'])) $sql .= "\n AND po.status IN ('in_progress', 'finished', 'on_hold')";
         $sql .= "\n ORDER BY sub_project_name, prod_order_name";
         return $sql;
@@ -178,7 +178,7 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "align" => "center",
                     "width" => 150,
                 ],
-                
+
                 [
                     "title" => "Quantity",
                     "dataIndex" => "prod_order_quantity",
@@ -221,36 +221,36 @@ class Prod_sequence_040 extends Report_ParentReport2Controller
                     "width" => 150,
                     "footer" => "agg_sum"
                 ],
-               
+
             ];
     }
-    
+
     public function changeDataSource($dataSource, $params)
     {
         $dataSource = Report::getItemsFromDataSource($dataSource);
         $route = route('report-prod_sequence_050');
-        foreach ($dataSource  as $key => &$items){
-            if($items->prod_order_status !== 'closed') {
+        foreach ($dataSource  as $key => &$items) {
+            if ($items->prod_order_status !== 'closed') {
                 $items->finished_at_prod_order = (object)[
                     'value' => $items->finished_at_prod_order,
                     'cell_class' => 'text-gray-300'
-                ];                
+                ];
             }
-            if(isset($items->independent_holiday_sunday_day)){
+            if (isset($items->independent_holiday_sunday_day)) {
                 $projectId = $items->project_id;
                 $subProjectId = $items->sub_project_id;
                 $prodOrderId = $items->prod_order_id;
                 $prodRoutingId = $items->prod_routing_id;
-                $route = $route.'?'
-                                .'project_id='.$projectId
-                                .'&sub_project_id='.$subProjectId
-                                .'&prod_order_id=' .$prodOrderId
-                                .'&prod_routing_id=' .$prodRoutingId;
+                $route = $route . '?'
+                    . 'project_id=' . $projectId
+                    . '&sub_project_id=' . $subProjectId
+                    . '&prod_order_id=' . $prodOrderId
+                    . '&prod_routing_id=' . $prodRoutingId;
                 $items->independent_holiday_sunday_day = (object)[
                     'value' => $items->independent_holiday_sunday_day,
                     'cell_class' => 'text-blue-700',
                     'cell_href' => $route,
-                ];   
+                ];
             }
         }
         return collect($dataSource);
