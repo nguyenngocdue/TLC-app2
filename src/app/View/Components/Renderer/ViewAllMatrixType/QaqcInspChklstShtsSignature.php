@@ -9,7 +9,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected $allowCreation = false;
     protected $allowCreationPlaceholder = "<span class='w-12 block'></span>";
     protected $showLegend = false;
-    protected $headerTop = 40 * 16;
+    protected $headerTop = 150;
 
     protected $tableTopCenterControl =  "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-yellow-500'></div>Not yet Requested</div>"
         . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-blue-500'></div>Requested</div>"

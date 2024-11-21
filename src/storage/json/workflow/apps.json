@@ -1314,7 +1314,9 @@
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": null,
-        "show_renderer": null
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "hr_tso_archive_sub_task": {
         "name": "hr_tso_archive_sub_task",

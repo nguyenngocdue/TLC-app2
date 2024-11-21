@@ -30,7 +30,7 @@ class ProdOrders extends ViewAllTypeMatrixParent
     protected $dataIndexY = "sub_project_id";
     // protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
-    protected $headerTop = 20 * 16;
+    protected $headerTop = 150;
     protected $groupBy = null;
     // protected $mode = 'status';
 
