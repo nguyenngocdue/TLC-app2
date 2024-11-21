@@ -65,7 +65,7 @@ class ReportBlock extends Component
                 }
             }
             $rpTableCols = ReportTableColumn::getInstance();
-            [$headerCols, $secondHeaderCols] = $rpTableCols->getColData($block, $queriedData, $transformedFields);
+            [$headerCols, $secondHeaderCols] = $rpTableCols->getColData($block, $queriedData, $transformedFields, $currentParams);
 
             $blockItem = [
                 'colSpan' => $item->col_span,

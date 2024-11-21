@@ -30,7 +30,7 @@ class ReportTableRow
         if ($column->parent_id) {
             $column = $column->getParent;
         }
-        $content = $this->createIconPosition($value, $column->row_icon, $column->row_icon_position);
+        $content = $this->createHeaderTitle($value, $column->row_icon, $column->row_icon_position);
         return $content;
     }
 
