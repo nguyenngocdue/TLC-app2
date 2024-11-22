@@ -92,7 +92,7 @@
         "name_rendered": "",
         "toggle": "",
         "not_applicable": "",
-        "in_progress": "",
+        "in_progress": "true",
         "reviewed": "",
         "inspected": "",
         "pending_audit": "true",
@@ -518,6 +518,17 @@
     },
     "proj_manager": {
         "name": "proj_manager",
+        "name_rendered": "",
+        "toggle": "",
+        "not_applicable": "",
+        "in_progress": "",
+        "reviewed": "",
+        "inspected": "",
+        "pending_audit": "",
+        "audited": ""
+    },
+    "proj_manager_cons_nz": {
+        "name": "proj_manager_cons_nz",
         "name_rendered": "",
         "toggle": "",
         "not_applicable": "",
