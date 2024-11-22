@@ -146,7 +146,7 @@ class ReportFilterItem extends Component
                 fn($query) => $query->whereIn('id', $bWListIds),
                 fn($query) => $query->whereNotIn('id', $bWListIds)
             )
-            ->where('name','not like','%-- available%');
+            ->where('name','not like','%available%');
             $dbQuery = $dbQuery->orderBy('name')->get();
         } catch (Exception $e) {
             dump($e->getMessage());
@@ -173,7 +173,7 @@ class ReportFilterItem extends Component
         $listenReducer = $filter->getListenReducer;
         $modelClass = ModelData::initModelByField($entityType);
         if (!$modelClass) return [];
-
+        
         $triggerNames = $listenReducer?->triggers;
         $db = $modelClass::query();
         if (is_null($triggerNames) && $singularEntityType != 'user' && $singularEntityType != 'term') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);
