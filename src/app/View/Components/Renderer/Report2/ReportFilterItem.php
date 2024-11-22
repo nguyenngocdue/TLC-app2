@@ -91,11 +91,13 @@ class ReportFilterItem extends Component
             case $this->WEEK_OF_YEAR_TYPE_ID:
                 return DateReport::getWeekOfYears();
             case $this->MONTH_TYPE_ID:
-                $months = range(1, 12);
-                sort($months);
                 $months = array_map(
-                    fn($item) => ['id' => $item, 'name' => DateReport::getMonthAbbreviation2($item)],
-                    $months
+                    fn($item) => [
+                        'id' => $item,
+                        // 'name' => DateReport::getMonthAbbreviation2($item)
+                        'name' => str_pad($item, 2, '0', STR_PAD_LEFT)
+                    ],
+                    range(1, 12)
                 );
                 return $months;
             default:
