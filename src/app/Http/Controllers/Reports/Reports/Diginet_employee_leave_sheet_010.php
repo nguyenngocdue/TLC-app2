@@ -8,7 +8,7 @@ class Diginet_employee_leave_sheet_010 extends Report_ParentReport2Controller
 {
 
     protected $viewName = "report-diginet-data";
-    protected $maxH = 30;
+    protected $maxH = 30 * 16;
     public function getSqlStr($params)
     {
         $sql = "SELECT dgnls.*

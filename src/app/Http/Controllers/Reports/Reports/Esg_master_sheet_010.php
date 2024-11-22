@@ -8,7 +8,7 @@ use App\Utils\Support\Report;
 class Esg_master_sheet_010 extends Report_ParentReport2Controller
 {
     protected $mode = '010';
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = false;
 

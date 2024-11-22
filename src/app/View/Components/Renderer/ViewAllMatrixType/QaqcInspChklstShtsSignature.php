@@ -9,7 +9,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
     protected $allowCreation = false;
     protected $allowCreationPlaceholder = "<span class='w-12 block'></span>";
     protected $showLegend = false;
-    protected $headerTop = 40;
+    protected $headerTop = 150;
 
     protected $tableTopCenterControl =  "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-yellow-500'></div>Not yet Requested</div>"
         . "<div class='flex items-center'><div class='block w-2 p-2 m-1 rounded bg-blue-500'></div>Requested</div>"
@@ -116,7 +116,7 @@ class QaqcInspChklstShtsSignature extends QaqcInspChklstShts
         $signatures = $document->{$signaturesFn};
 
         if (count($nominatedUserIds) == 0) return (object)[];
-        $nominatedUsers = $nominatedUserIds->map(fn ($uid) => User::findFromCache($uid));
+        $nominatedUsers = $nominatedUserIds->map(fn($uid) => User::findFromCache($uid));
         $renderer = $this->renderer($nominatedUsers, $signatures, $document->getTable(), $document->id, $matrixKey);
 
         $openSheet = "<div class='mt-2'><a href='$editRoute' class='bg-blue-600 text-white rounded p-2'>Open</a></div>";

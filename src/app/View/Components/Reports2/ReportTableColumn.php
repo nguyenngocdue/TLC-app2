@@ -39,7 +39,7 @@ class ReportTableColumn
         return $cols;
     }
 
-    public function getColData($block, $queriedData, $transformedFields)
+    public function getColData($block, $queriedData, $transformedFields, $currentParams)
     {
         if ($queriedData->isEmpty()) {
             $columnInstance = ReportTableColumn::getInstance();
@@ -60,7 +60,7 @@ class ReportTableColumn
             $fields[] = $dataIndex;
             if ($isActive && in_array($dataIndex, $uniqueFields)) {
                 $aggFooter = $this->getAggName($line->agg_footer);
-                $title = $this->createIconPosition($line->title ?? $line->name, $line->icon, $line->icon_position);
+                $title = $this->createHeaderTitle($line->title ?? $line->name, $line->icon, $line->icon_position, $currentParams);
                 $headerCols[] = [
                     'title' => $title,
                     'dataIndex' => $dataIndex,
@@ -88,7 +88,7 @@ class ReportTableColumn
             // dd($column);
             $parent  = $column->getParent;
             if ($parent->is_active) {
-                $content = $this->createIconPosition($column->name, $column->icon, $column->icon_position);
+                $content = $this->createHeaderTitle($column->name, $column->icon, $column->icon_position);
                 $data2ndHeader[$parent->data_index] = (object)[
                     'value' => $content,
                     'cell_class' => $column?->cell_class,

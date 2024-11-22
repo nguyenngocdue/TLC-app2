@@ -367,4 +367,89 @@ class DateReport
         $date->setTimezone($targetTimezone);
         return $date->format($type);
     }
+
+    public static function getWeekOfYearData()
+    {
+        $years = range(2021, date("Y"));
+        $weeks = [];
+        $previousTime = null; // Lưu giữ đối tượng trước đó
+    
+        foreach ($years as $year) {
+            $weeksData = DateReport::getWeeksInYear($year);
+    
+            // Nếu là năm đầu tiên và không có thông tin tuần trước đó, lấy tuần cuối cùng của năm trước
+            if ($year == reset($years) && $previousTime === null) {
+                $lastYear = $year - 1;
+                $lastYearWeeks = DateReport::getWeeksInYear($lastYear);
+                if (!empty($lastYearWeeks)) {
+                    $lastWeekNumber = str_pad(array_key_last($lastYearWeeks), 2, '0', STR_PAD_LEFT);
+                    $lastWeekDates = $lastYearWeeks[$lastWeekNumber];
+                    $previousTime = (object)[
+                        'id' => (int)$lastWeekNumber . '_' . $lastYear,
+                        'name' => 'W' . $lastWeekNumber . '/' . $lastYear . ' (' . (new DateTime($lastWeekDates['start_date']))->format('d/m') . '-' . (new DateTime($lastWeekDates['end_date']))->format('d/m') . ')',
+                        'year' => $lastYear,
+                        'from_date' => $lastWeekDates['start_date'],
+                        'to_date' => $lastWeekDates['end_date'],
+                        'week_number' => (int)$lastWeekNumber,
+                    ];
+                }
+            }
+    
+            foreach ($weeksData as $keyWeek => $dates) {
+                $dayAndMonths = [];
+                foreach ($dates as $key => $date) {
+                    $dateTime = new DateTime($date);
+                    $formattedDate = $dateTime->format('d/m');
+                    $dayAndMonths[$key] = $formattedDate;
+                }
+    
+                $keyWeek = str_pad($keyWeek, 2, '0', STR_PAD_LEFT);
+                $thisTime = (object)[
+                    'id' => (int)$keyWeek . '_' . $year,
+                    'name' => 'W' . $keyWeek . '/' . $year . ' (' . $dayAndMonths['start_date'] . '-' . $dayAndMonths['end_date'] . ')',
+                    'year' => $year,
+                    'from_date' => $dates['start_date'] ,
+                    'to_date' => $dates['end_date'],
+                    'week_number' => (int)$keyWeek,
+                ];
+    
+                $weeks[(int)$keyWeek . '_' . $year] = (object)[
+                    'this_time' => $thisTime,
+                    'last_time' => $previousTime // Gán giá trị của đối tượng trước đó
+                ];
+    
+                // Cập nhật previousTime cho lần lặp kế tiếp
+                $previousTime = $thisTime;
+            }
+        }
+        return $weeks;
+    }
+
+    public static function getWeekOfYears()
+    {        
+        $years = range(2021, date("Y"));
+
+        $weeks = [];
+        foreach ($years as $year) {
+            $weeksData = DateReport::getWeeksInYear($year);
+            foreach ($weeksData as $keyWeek => $dates){
+                $dayAndMonths = [];
+                foreach ($dates as $key => $date){
+                    $dateTime = new DateTime($date);
+                    $formattedDate = $dateTime->format('d/m');
+                    $dayAndMonths[$key] = $formattedDate;
+                }
+                $keyWeek = str_pad($keyWeek, 2, '0', STR_PAD_LEFT);
+                $weeks[] = (object)[
+                    'id' =>(int)$keyWeek.'_'.$year,
+                    'name'=> 'W'.$keyWeek.'/'.$year.' '.'('.$dayAndMonths['start_date']. '-'.$dayAndMonths['end_date'].')',
+                    'year' => $year,
+                    'from_date' => $dates['start_date'],
+                    'to_date' => $dates['end_date'],
+                    'week_number' => (int)$keyWeek,
+                ];
+            }
+        }
+        return $weeks;
+    }
 }

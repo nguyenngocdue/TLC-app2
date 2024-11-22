@@ -20,7 +20,7 @@ class Hr_overtime_request_010 extends Report_ParentReportController
 
     protected $groupBy = 'name_render';
     protected $groupByLength = 1;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
 
     public function getSqlStr($params)
     {

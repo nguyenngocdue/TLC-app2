@@ -28,10 +28,10 @@ class ProdSequences extends ViewAllTypeMatrixParent
     protected $dataIndexY = "prod_order_id";
     // protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
-    protected $headerTop = 20;
+    protected $headerTop = 73;
     protected $groupBy = null;
     protected $mode = 'detail';
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
 
     protected $showAdvancedDays = !true;
     /**
@@ -118,9 +118,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
             $data = $data
                 ->whereIn('prod_routing_link_id', $this->prodRoutingLink)
                 // ->whereNull('prod_routing_details.deleted_at')
-                ;
-
-        } 
+            ;
+        }
         $data = $data->orderBy('order_no')->get();
         return $data;
     }

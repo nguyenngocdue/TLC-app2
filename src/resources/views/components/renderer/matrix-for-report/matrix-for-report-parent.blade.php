@@ -10,7 +10,10 @@
                     topRightControl=""
                     tableTrueWidth=1
 
-                    showNo=1 maxH=0 lineIgnoreNo=1
+                    headerTop={{$headerTop}}
+                    maxH={{$maxH}}
+
+                    showNo=1 lineIgnoreNo=1
                     />
 
 <x-renderer.legend type="{{$type}}" title="Legend of Status" />

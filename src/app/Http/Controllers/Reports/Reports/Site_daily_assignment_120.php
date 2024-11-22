@@ -9,11 +9,11 @@ class Site_daily_assignment_120 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $typeView = 'report-pivot';
     protected $modeType = 'site_daily_assignment_120';
     protected $tableTrueWidth = false;
-    protected $mode='120';
+    protected $mode = '120';
 
 
     public function getDataSource($params)
@@ -22,5 +22,4 @@ class Site_daily_assignment_120 extends Report_Parent2Controller
         // $primaryData = array_slice($primaryData->toArray(), 0, 100);
         return collect($primaryData);
     }
-
 }

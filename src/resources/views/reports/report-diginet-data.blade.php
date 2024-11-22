@@ -24,7 +24,7 @@
                     :dataSource="$tableDataSource"  
                     tableTrueWidth={{$tableTrueWidth?1:0}} 
                     page-limit="{{$pageLimit}}" 
-                    headerTop=10
+                    headerTop={{160}}
                     maxH="{{$maxH}}" 
                     
                     showPaginationTop="true"

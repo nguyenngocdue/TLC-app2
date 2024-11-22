@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Reports;
+namespace App\View\Components\Reports2;
 
 use Illuminate\View\Component;
 
@@ -23,7 +23,7 @@ class PerPageReport2 extends Component
             'reportType2' => $this->reportType2,
             'pageLimit' => $this->pageLimit,
             'route' => $this->route,
-            'rpId' => $this->reportId,
+            'reportId' => $this->reportId,
         ]);
     }
 }

@@ -11,6 +11,8 @@ use App\Utils\Support\CurrentRoute;
 use App\Utils\Support\DateReport;
 use Illuminate\Support\Str;
 use App\Utils\Support\ModelData;
+use App\View\Components\Reports\ModeParams\ParamWeeksOfYear;
+use DateTime;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -26,6 +28,7 @@ class ReportFilterItem extends Component
     protected $MONTH_TYPE_ID = 632;
     protected $DATASOURCE_TYPE_ID = 633;
     protected $YEAR_TYPE_ID = 634;
+    protected $WEEK_OF_YEAR_TYPE_ID = 635;
 
     protected $DEFECT_ROOT_CAUSE_TYPE_ID = 117;
     protected $DEFECT_REPORT_TYPE_ID = 142;
@@ -57,9 +60,8 @@ class ReportFilterItem extends Component
 
         $listenReducer = $this->filter->getListenReducer;
         $this->id =  $listenReducer ? $this->filter->data_index : $filter->name;
-
         $entityType = $filter->entity_type;
-        $this->tableName = Str::plural($entityType);
+        $this->tableName = $entityType ? Str::plural($entityType) : Str::plural($this->filter->data_index);
         $this->multiple = (bool)$filter->is_multiple;
         $this->name = $filter->is_multiple ? Str::plural($filter->data_index) : $filter->data_index;
         $this->allowClear = (bool)$filter->allow_clear;
@@ -86,6 +88,8 @@ class ReportFilterItem extends Component
                 return $this->getStatuses($entityType);
             case $this->YEAR_TYPE_ID:
                 return array_map(fn($item) => ['id' => $item, 'name' => (string)$item], range($this->BEGIN_YEAR, $this->END_YEAR));
+            case $this->WEEK_OF_YEAR_TYPE_ID:
+                return DateReport::getWeekOfYears();
             case $this->MONTH_TYPE_ID:
                 $months = range(1, 12);
                 sort($months);

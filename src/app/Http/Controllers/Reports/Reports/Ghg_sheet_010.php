@@ -8,9 +8,9 @@ use App\Utils\Support\Report;
 
 class Ghg_sheet_010 extends Report_ParentReport2Controller
 {
-	use TraitConversionFieldNameGhgReport;
-    protected $mode='010';
-    protected $maxH = 50;
+    use TraitConversionFieldNameGhgReport;
+    protected $mode = '010';
+    protected $maxH = 50 * 16;
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = false;
 
@@ -44,13 +44,13 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                     LEFT JOIN ghg_metric_type_2s ghgmt2 ON ghgmt2.id = ghgsl.ghg_metric_type_2_id
                     LEFT JOIN terms terms ON terms.id = ghgsl.unit
                     WHERE 1 = 1";
-    if(Report::checkParam($valOfParams, 'metric_type')) $sql .= "\n AND ghgmt.id = {{metric_type}}";
-    if(Report::checkParam($valOfParams, 'metric_type1')) $sql .= "\n AND ghgmt1.id = {{metric_type1}}";
-    if(Report::checkParam($valOfParams, 'metric_type2')) $sql .= "\n AND ghgmt2.id = {{metric_type2}}";
+        if (Report::checkParam($valOfParams, 'metric_type')) $sql .= "\n AND ghgmt.id = {{metric_type}}";
+        if (Report::checkParam($valOfParams, 'metric_type1')) $sql .= "\n AND ghgmt1.id = {{metric_type1}}";
+        if (Report::checkParam($valOfParams, 'metric_type2')) $sql .= "\n AND ghgmt2.id = {{metric_type2}}";
 
-    if(Report::checkParam($valOfParams, 'ghg_tmpl')) $sql .= "\n AND ghgtmpls.id IN ({{ghg_tmpl}})";
-    if(Report::checkParam($valOfParams, 'only_month')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 6 , 2) IN ({{only_month}})";
-    if(Report::checkParam($valOfParams, 'year')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 1 , 4) IN ({{year}})";
+        if (Report::checkParam($valOfParams, 'ghg_tmpl')) $sql .= "\n AND ghgtmpls.id IN ({{ghg_tmpl}})";
+        if (Report::checkParam($valOfParams, 'only_month')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 6 , 2) IN ({{only_month}})";
+        if (Report::checkParam($valOfParams, 'year')) $sql .= "\n AND SUBSTR(ghgs.ghg_month, 1 , 4) IN ({{year}})";
         // dump($sql);
         $sql .= "\n ORDER BY ghg_month, ghg_sheet_name";
         return $sql;
@@ -60,16 +60,16 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
     {
         return [
             [
-				'title' => 'Year',
-				'dataIndex' => 'year',
+                'title' => 'Year',
+                'dataIndex' => 'year',
                 'multiple' => true,
-			],
-			[
-				'title' => 'Month',
-				'dataIndex' => 'only_month',
-				'allowClear' => true,
-				'multiple' => true,
-			],
+            ],
+            [
+                'title' => 'Month',
+                'dataIndex' => 'only_month',
+                'allowClear' => true,
+                'multiple' => true,
+            ],
             [
                 'title' => 'CO2 Emission Sheet',
                 'dataIndex' => 'ghg_tmpl',
@@ -105,63 +105,63 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 "title" => "Month",
                 "dataIndex" => "ghg_month",
                 "align" => "right",
-                "width" =>150,
+                "width" => 150,
             ],
             [
                 "title" => "CO2 Emission Sheet",
                 "dataIndex" => "ghg_sheet_name",
                 "align" => "left",
-                "width" =>300,
+                "width" => 300,
             ],
-               [
+            [
                 'title' => 'Metric Type',
                 'dataIndex' => 'ghg_metric_type_name',
                 "align" => "left",
-                "width" =>200,
+                "width" => 200,
             ],
             [
                 "title" => "Metric Type 1",
                 "dataIndex" => "ghg_metric_type_1_name",
                 "align" => "left",
-                "width" =>200,
+                "width" => 200,
             ],
             [
                 "title" => "Metric Type 2",
                 "dataIndex" => "ghg_metric_type_2_name",
                 "align" => "left",
-                "width" =>200,
+                "width" => 200,
             ],
             [
                 "title" => "Unit",
                 "dataIndex" => "unit",
                 "align" => "left",
-                "width" =>120,
+                "width" => 120,
             ],
             [
                 "title" => "Factor",
                 "dataIndex" => "factor",
                 "align" => "right",
-                "width" =>100,
+                "width" => 100,
             ],
             [
                 "title" => "Value",
                 "dataIndex" => "value",
                 "align" => "right",
-                "width" =>100,
+                "width" => 100,
                 "footer" => "agg_sum"
             ],
             [
                 "title" => "Total <br/>(Kg/CO2)",
                 "dataIndex" => "total",
                 "align" => "right",
-                "width" =>100,
+                "width" => 100,
                 "footer" => "agg_sum",
             ],
             [
                 "title" => "Total <br/>(tCO2e)",
                 "dataIndex" => "tCo2e",
                 "align" => "right",
-                "width" =>100,
+                "width" => 100,
                 "footer" => "agg_sum",
                 'decimal' => "3"
             ],
@@ -169,7 +169,7 @@ class Ghg_sheet_010 extends Report_ParentReport2Controller
                 "title" => "Remark",
                 "dataIndex" => "remark",
                 "align" => "left",
-                "width" =>300,
+                "width" => 300,
             ],
         ];
     }

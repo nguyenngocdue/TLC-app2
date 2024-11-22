@@ -24,7 +24,7 @@ class ExamSheets extends ViewAllTypeMatrixParent
     protected $dataIndexY = "owner_id";
     // protected $rotate45Width = 400;
     protected $tableTrueWidth = true;
-    protected $headerTop = 20;
+    protected $headerTop = 150;
     protected $groupBy = 'department_for_group_by';
     protected $groupByLength = 1000;
     // protected $mode = 'status';

@@ -14,7 +14,7 @@ abstract class ManageV_Parent extends Manage_Parent
 {
     protected $viewName = "dashboards.pages.manage-v-parent";
     protected $storingBlackList = ['label', 'toggle'];
-    protected $headerTop = 24; //<<0..10, 11,12,14,16,20,24,28,32,36,40
+    protected $headerTop = 50; //<<0..10, 11,12,14,16,20,24,28,32,36,40
 
     protected $showToggleColumn = true;
     protected $showToggleRow = true;

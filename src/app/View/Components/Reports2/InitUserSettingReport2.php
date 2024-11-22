@@ -4,8 +4,10 @@ namespace App\View\Components\Reports2;
 
 use App\Models\User;
 use App\Utils\Support\CurrentUser;
+use App\Utils\Support\DateReport;
 use App\Utils\Support\DefaultValueReport;
 use App\Utils\Support\Report;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -71,6 +73,28 @@ class InitUserSettingReport2
         // if ($u) toastr()->success('User Settings Saved Successfully', 'Successfully');
     }
 
+    private function  createDefaultValueWeekOfYear($params,$rpFilters) {
+        $date = new DateTime('now');
+        $currentWeek = $date->format('W'); 
+        foreach($rpFilters as $value){
+            if ($value->data_index === 'week_of_year') {
+                $currentWeek = ($x = $value->default_value) ?  substr($x, 0, strpos($x, '_')) : $currentWeek;
+                break;
+            }
+        }
+        $currentWeek = $currentWeek > 0 && $currentWeek < 53 ? $currentWeek : $currentWeek;
+        $weeksOfYearNum = $currentWeek.'_' . date('Y');
+        $dates = DateReport::getWeekOfYearData();
+        $date = $dates[$weeksOfYearNum];
+        [$toDate1, $toDate2] = [ $date->last_time->to_date, $date->this_time->to_date];
+        $params['last_time_to_date'] = $toDate1;
+        $params['this_time_to_date'] = $toDate2;
+        $params['year'] =  $date->this_time->year;
+        $params['week_number'] = $currentWeek;
+        $params['week_of_year'] =  $weeksOfYearNum;
+        return $params;
+    }
+
     public function initParamsUserSettingRp($rp, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
         
@@ -103,15 +127,20 @@ class InitUserSettingReport2
             $isSave = False;    
         }
         $params = $settings[$entityType][$this->reportType2][$storedFilterKey] ?? [];
-
+        
         if(!isset($params['time_zone'])){
             $params['time_zone'] = 'UTC+7';
         }
         if(!isset($params['preset_title'])){
             $params['preset_title'] = 'Time Range';
         }
-
-
+        if (!isset($params['week_number'])){
+            $params = $this->createDefaultValueWeekOfYear($params, $rpFilters);
+            $settings[$entityType][$this->reportType2][$storedFilterKey] = $params;
+            self::updateUserSettingRp($settings);
+        }
+        
+        
         // set default value for Time Range
         if ($rp->has_time_range) {
             if(!isset($params['from_date']) || !isset($params['to_date']) || !$params['from_date'] || !$params['from_date'] ){

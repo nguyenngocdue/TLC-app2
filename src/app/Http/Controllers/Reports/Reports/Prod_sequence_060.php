@@ -21,7 +21,7 @@ class Prod_sequence_060 extends Report_ParentReport2Controller
     protected $subProjectId = 107;
     protected $prodRoutingId = 49;
     protected $tableTrueWidth = true;
-    protected $maxH = 30;
+    protected $maxH = 30 * 16;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
@@ -62,9 +62,9 @@ class Prod_sequence_060 extends Report_ParentReport2Controller
         if ($sub = $valOfParams['sub_project_id']) $sql .= "\n AND po.sub_project_id =  $sub";
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
-        
+
         // if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
-                            $sql .="\n AND pose.deleted_by IS NULL
+        $sql .= "\n AND pose.deleted_by IS NULL
                         GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id";
         return $sql;
     }
@@ -203,7 +203,7 @@ class Prod_sequence_060 extends Report_ParentReport2Controller
                     "width" => 120,
                     "footer" => "agg_sum"
                 ],
-              
+
             ];
     }
 }

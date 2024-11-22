@@ -24,7 +24,8 @@ const callApiStoreEmpty = (url, data, meta, callback = null) => {
     })
 }
 
-const callApiCloneTemplate = (url, data, meta, callback = null) => callApiStoreEmpty(url, data, meta, callback)
+const callApiCloneTemplate = (url, data, meta, callback = null) =>
+    callApiStoreEmpty(url, data, meta, callback)
 // const callApiGetLines = (url, data, meta, callback = null) => callApiStoreEmpty(url, data, meta, callback)
 
 const makeKi = (k) => {
@@ -56,7 +57,9 @@ const appendSaveAndCloseInput = () => {
 
 const confirmChange = (ids, nextStatusLabel) => ({
     title: 'Are you sure?',
-    html: `This action will change status of ${ids.length} item${ids.length > 1 ? 's' : ''} to <b>${nextStatusLabel}</b>.`,
+    html: `This action will change status of ${ids.length} item${
+        ids.length > 1 ? 's' : ''
+    } to <b>${nextStatusLabel}</b>.`,
     icon: 'question',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -187,3 +190,20 @@ const getModalParams = (modalId) => {
     // console.log('clone', clone)
     return clone
 }
+
+//This need some time to migrate all the old code to use this
+// const updateUserSetting2Ajax = (action, key, value, showToast = false) => {
+//     $.ajax({
+//         type: 'get',
+//         url: `/updateUserSettings2?action=${action}&key=${key}&value=${value}`,
+//         success: function (response) {
+//             if (response.success) {
+//                 if (showToast) toastr.success(response.message)
+//                 window.location.reload()
+//             }
+//         },
+//         error: function (jqXHR) {
+//             toastr.error(jqXHR.responseJSON.message)
+//         },
+//     })
+// }

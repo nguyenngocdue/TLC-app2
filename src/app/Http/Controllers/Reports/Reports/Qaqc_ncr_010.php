@@ -11,7 +11,7 @@ class Qaqc_ncr_010 extends Report_ParentReport2Controller
 {
     protected $tableTrueWidth = true;
     protected $typeView = 'report-pivot';
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $projectId = 8;
     protected $subProjectId = 107;
     protected $prodRoutingId = 62;

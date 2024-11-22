@@ -22,7 +22,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
     protected $subProjectId = 107;
     protected $prodRoutingId = 49;
     protected $tableTrueWidth = true;
-    protected $maxH = 30;
+    protected $maxH = 30 * 16;
     protected $typeView = 'report-pivot';
     protected $type = 'prod_sequence';
     protected $pageLimit = 10;
@@ -77,9 +77,9 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
         if ($pr = $valOfParams['prod_routing_id']) $sql .= "\n AND pr.id IN ($pr)";
         if ($prl = $valOfParams['prod_routing_link_id']) $sql .= "\n AND prl.id IN ($prl)";
         if ($po = $valOfParams['prod_order_id']) $sql .= "\n AND po.id IN ($po)";
-        
+
         // if($status = $valOfParams['status']) $sql .= "\n AND po.status IN( $status )";
-                            $sql .="\n AND pose.deleted_by IS NULL
+        $sql .= "\n AND pose.deleted_by IS NULL
                         GROUP BY project_id, sub_project_id,prod_routing_link_id,prod_routing_id,po.id, po.name,po.production_name
                         ORDER BY project_name, sub_project_name, prod_routing_name, prod_discipline_name, order_no, prod_order_name";
         return $sql;
@@ -143,7 +143,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
             'net_working_day' => "<br/><i title='Net Working Days is the number of days which is calculated based on the actual working hours of the production order.'" . $stringIcon,
             'total_discrepancy_days' => "<br/><i title='Downtime Days is the number of days with no production activity for the production order (Column \"Working Days\" deducts Column \"Working Days without Downtime\").'" . $stringIcon,
         ];
-        
+
 
         return
             [
@@ -274,7 +274,7 @@ class Prod_sequence_050 extends Report_ParentReport2Controller
                     "width" => 120,
                     "footer" => "agg_sum"
                 ]
-              
+
             ];
     }
     // public function changeDataSource($dataSource, $params)

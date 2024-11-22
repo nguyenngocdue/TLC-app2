@@ -11,11 +11,12 @@ class Kanban_task_010 extends Report_ParentReport2Controller
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = true;
     protected $pageLimit = 20;
-    protected $maxH = 80;
-    protected $mode='010';
+    protected $maxH = 80 * 16;
+    protected $mode = '010';
 
 
-    private function getUserOnOwner(){
+    private function getUserOnOwner()
+    {
         $ins = new ParamUserId();
         $ids = array_column($ins->getDataSource(), 'id');
         return $ids;
@@ -29,7 +30,7 @@ class Kanban_task_010 extends Report_ParentReport2Controller
         ['start' => $start, 'end' => $end] = $valOfParams['picker_date'];
         // dd($valOfParams);
 
-            $sql = "SELECT
+        $sql = "SELECT
             kt.id AS kanban_task_id,
             NOW() AS date_current,
             kt.name AS kanban_task_name,
@@ -60,11 +61,11 @@ class Kanban_task_010 extends Report_ParentReport2Controller
             LEFT JOIN kanban_task_pages ktp ON ktp.id = ktc.kanban_page_id
             LEFT JOIN workplaces wp ON wp.id = us.workplace
             WHERE 1 = 1";
-            if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND wp.id = {$valOfParams['workplace_id']}";
-            if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  = {$valOfParams['kanban_task_name_id']}";
-            if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
-            if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
-            if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' #OR ktt.end_at IS NULL
+        if (Report::checkValueOfField($valOfParams, 'workplace_id')) $sql .= "\n AND wp.id = {$valOfParams['workplace_id']}";
+        if (Report::checkValueOfField($valOfParams, 'kanban_task_name_id')) $sql .= "\n AND kt.id  = {$valOfParams['kanban_task_name_id']}";
+        if (Report::checkValueOfField($valOfParams, 'user_id')) $sql .= "\n AND us.id= {$valOfParams['user_id']}";
+        if ($start) $sql .= "\n AND DATE_FORMAT(ktt.start_at, '%Y-%m-%d') >= '$start'";
+        if ($end) $sql .= "\n AND DATE_FORMAT(ktt.end_at, '%Y-%m-%d') <= '$end' #OR ktt.end_at IS NULL
             ORDER BY ktt.start_at DESC";
         return $sql;
     }
@@ -98,13 +99,13 @@ class Kanban_task_010 extends Report_ParentReport2Controller
                 'width' => 150
             ],
             [
-            'title' => 'Cluster',
-            'dataIndex' => 'kanban_cluster_name',
+                'title' => 'Cluster',
+                'dataIndex' => 'kanban_cluster_name',
                 'width' => 150
             ],
             [
-            'title' => 'Task Name',
-            'dataIndex' => 'kanban_task_name',
+                'title' => 'Task Name',
+                'dataIndex' => 'kanban_task_name',
                 'width' => 400
             ],
             [
@@ -126,7 +127,7 @@ class Kanban_task_010 extends Report_ParentReport2Controller
                 'title' => 'Elapsed<br/>(min)',
                 'dataIndex' => 'elapsed_seconds',
                 'width' => 140,
-                'align'=> 'right',
+                'align' => 'right',
                 'footer' => 'agg_sum',
             ]
         ];
@@ -157,8 +158,7 @@ class Kanban_task_010 extends Report_ParentReport2Controller
                 "dataIndex" => "kanban_task_name_id",
                 "allowClear" => true,
             ],
-            
+
         ];
     }
-
 }

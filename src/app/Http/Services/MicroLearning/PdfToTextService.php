@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\MicroLearning;
 
 use App\BigThink\Math;
 use App\Models\Pdf_file;

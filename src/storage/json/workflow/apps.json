@@ -1314,7 +1314,9 @@
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": null,
-        "show_renderer": null
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true"
     },
     "hr_tso_archive_sub_task": {
         "name": "hr_tso_archive_sub_task",
@@ -2424,7 +2426,7 @@
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Checklists",
-        "nickname": "ics",
+        "nickname": "icl",
         "tutorial_link": null,
         "icon": "<i class=\"fa-sharp fa-solid fa-ballot-check\"><\/i>",
         "doc_id_format_column": null,
@@ -2456,7 +2458,7 @@
         "package": "project_management",
         "sub_package": "quality_control",
         "title": "Inspection Check Sheets",
-        "nickname": "icss",
+        "nickname": "ics",
         "tutorial_link": null,
         "icon": "<i class=\"fa-solid fa-list-check\"><\/i>",
         "doc_id_format_column": null,

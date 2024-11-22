@@ -24,7 +24,7 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     protected  $sub_project_id = 107;
     protected  $prod_routing_id = 49;
     protected $mode = '010';
-    protected $maxH = 45;
+    protected $maxH = 45 * 16;
     protected $viewName = "register-prod-sequence-010";
     protected $sequence_mode = 2;
 

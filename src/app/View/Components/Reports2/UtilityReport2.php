@@ -1,9 +1,8 @@
 <?php
 
-namespace App\View\Components\Reports;
+namespace App\View\Components\Reports2;
 
 use Illuminate\View\Component;
-use Illuminate\Support\Str;
 
 class UtilityReport2 extends Component
 {
@@ -15,6 +14,9 @@ class UtilityReport2 extends Component
     public function __construct(
         private $route = '',
         private $queriedData = null,
+        private $class = '',
+        private $blockTitle = '',
+        private $configuredCols = [],
     ) {
         //
     }
@@ -24,6 +26,9 @@ class UtilityReport2 extends Component
         return view('components.reports2.utility-report2', [
             'route' => $this->route,
             'queriedData' => $this->queriedData,
+            'class' => $this->class,
+            'blockTitle' => $this->blockTitle,
+            'configuredCols' => $this->configuredCols,
         ]);
     }
 }

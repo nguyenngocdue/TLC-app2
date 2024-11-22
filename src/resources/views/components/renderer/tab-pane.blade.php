@@ -1,17 +1,18 @@
 <x-renderer.card class="{{$class}}">
-    <div id="tabs-{{$id}}" class="inline-flex pt-2 px-0 w-full border-b ">
+    <div id="tabs-{{$id}}" class="inline-flex pt-2 px-0 w-full border-b h-10 mt-2">
         @forelse($tabs as $tab)
 
-        <div id="tab-pan-{{$tab['id'] ?? ''}}" 
-            class="tab-pan cursor-pointer px-2.5 py-1.5 text-gray-800 mx-0.5 rounded-t border-t border-r border-l {{$tab['class'] ?? ""}}"
-            @if(isset($tab['jsOnMouseOver']))
-                onmouseover="{{$tab['jsOnMouseOver']}}"
-            @endif
-            >
-            <a href="{{$tab['href'] ?? "#"}}">{!! $tab['title'] !!}</a>
-        </div>
+            @if(isset($tab['href'])) <a href="{{$tab['href']}}" class=""> @endif
+            <span id="tab-pan-{{$tab['id'] ?? ''}}" 
+                class="tab-pan cursor-pointer px-2.5 py-3 text-gray-800 mx-0.5 rounded-t border-t border-r border-l {{$tab['class'] ?? ''}}"
+                onmouseover="{{$tab['jsOnMouseOver'] ?? ''}}"                
+                >
+                {!! $tab['title'] !!}
+            </span>
+            @if(isset($tab['href'])) </a> @endif
+
         @empty
-        <x-feedback.alert message="TabPane array is empty." type="warning"></x-feedback.alert>
+            <x-feedback.alert message="TabPane array is empty." type="warning"></x-feedback.alert>
         @endforelse
     </div>
     <div class="border border-t-0 rounded-b">

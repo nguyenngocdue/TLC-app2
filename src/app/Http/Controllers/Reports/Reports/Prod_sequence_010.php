@@ -10,11 +10,11 @@ class Prod_sequence_010 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;
-    protected $mode='010';
+    protected $mode = '010';
     protected $modeType = 'prod_sequence_010';
     protected $typeView = 'report-pivot';
     protected $tableTrueWidth = true;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
 
     public function getDataSource($params)
     {
@@ -25,9 +25,7 @@ class Prod_sequence_010 extends Report_Parent2Controller
 
     protected function getDefaultValueParams($params, $request)
     {
-        $params['picker_date'] =DateReport::defaultPickerDate('-3 months');
+        $params['picker_date'] = DateReport::defaultPickerDate('-3 months');
         return $params;
     }
-
-
 }

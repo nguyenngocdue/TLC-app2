@@ -27,8 +27,8 @@ class QaqcWirs extends ViewAllTypeMatrixParent
     protected $rotate45Width = 400;
     protected $groupBy = null;
     protected $tableTrueWidth = true;
-    protected $headerTop = "310px";
-    protected $maxH = 60;
+    protected $headerTop = 310;
+    protected $maxH = 60 * 16;
     /**
      * Create a new component instance.
      *
@@ -77,7 +77,7 @@ class QaqcWirs extends ViewAllTypeMatrixParent
                 'width' => 40,
             ];
         }
-        usort($result, fn ($a, $b) => $a['title'] <=> $b['title']);
+        usort($result, fn($a, $b) => $a['title'] <=> $b['title']);
         // Log::info($result);
         return $result;
     }

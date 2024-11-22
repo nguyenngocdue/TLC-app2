@@ -403,13 +403,29 @@ class UpdateUserSettings extends Controller
         return $paramsInUser;
     }
 
+    private function setWeekOfYear(&$inputValue){
+        $weeksOfYearNum = $inputValue['week_of_year'];
+        $dates = DateReport::getWeekOfYearData();
+        $date = $dates[$weeksOfYearNum];
+        [$toDate1, $toDate2] = [ $date->last_time->to_date, $date->this_time->to_date];
+        $inputValue['last_time_to_date'] = $toDate1;
+        $inputValue['this_time_to_date'] = $toDate2;
+        $inputValue['year'] =  $date->this_time->year;
+        $inputValue['week_number'] = $date->this_time->week_number;
+    }
+
     private function updateReport2($request, $settings)
     {
         $inputValue = $request->all();
         $entityType = $inputValue['entity_type'];
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
-        
+
+
+        if (isset($inputValue['week_of_year']) && $inputValue['week_of_year']){
+           $this->setWeekOfYear($inputValue);
+        }
+
         // when select "Search Quick Ranges"
         if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updatePresetFilter"){
             $inputValue = $this->updatePresetFilter($inputValue);

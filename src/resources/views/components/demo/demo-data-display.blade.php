@@ -77,7 +77,7 @@
         <br />
         <x-renderer.card title="Table with Data and No. and dataHeader">
             showNo= { { true } }
-            <x-renderer.table headerTop=12 maxH=14 :columns="$tableColumns" :dataHeader="$tableDataHeader" :dataSource="$tableDataSource" showNo="{{true}}" />
+            <x-renderer.table headerTop={{192}} maxH={{224}} :columns="$tableColumns" :dataHeader="$tableDataHeader" :dataSource="$tableDataSource" showNo="{{true}}" />
         </x-renderer.card>
         <br />
         <x-renderer.card title="Empty Table">

@@ -104,7 +104,7 @@ class AdminPermissionMatrixController extends Controller
                 'groupByLength' => $this->groupByLength,
                 'tableTrueWidth' => $this->tableTrueWidth,
                 // 'actionButtons' => $actionButtons,
-                'headerTop' => 20,
+                'headerTop' => 20 * 16,
                 // 'tableTopCenterControl' => $this->tableTopCenterControl,
                 // 'route' => $this->getRouteAfterSubmit(),
             ],

@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Controls;
 
+use App\Http\Controllers\Workflow\LibDashboards;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\SuperProps;
 use Illuminate\View\Component;
@@ -42,10 +43,20 @@ class ActionButtons extends Component
     {
         $cu = CurrentUser::get();
         if ($this->type == 'qaqc_insp_chklst_shts') {
+            $dashboardConfig = LibDashboards::getAll()[CurrentUser::get()->discipline] ?? null;
+            if ($dashboardConfig) {
+                if (!isset($dashboardConfig['show_save_box_in_checklist'])) {
+                    return "";
+                }
+            }
             // if (CurrentUser::get()->isExternalInspector()) return "";
             // if (CurrentUser::get()->isProjectClient()) return "";
             // if (CurrentUser::get()->isCouncilMember()) return "";
-            if ($cu->isExternal() && !$cu->isShippingAgent()) return "";
+            // if ($cu->isExternal() && !$cu->isShippingAgent()) return "";
+            // if ($cu->isExternalInspector()) return "";
+            // if ($cu->isCouncilMember()) return "";
+            // if ($cu->isProjectClient()) return "";
+            // if ($cu->isShippingAgent()) return "";
         }
         if (in_array($this->type, ['conqa_archives'])) return;
 

@@ -9,11 +9,11 @@ class Hr_timesheet_line_100 extends Report_Parent2Controller
 
 {
     use TraitForwardModeReport;
-    protected $maxH = 50;
+    protected $maxH = 50 * 16;
     protected $typeView = 'report-pivot';
     protected $modeType = 'datasource_hr_timesheet_line';
     protected $tableTrueWidth = true;
-    protected $mode='100';
+    protected $mode = '100';
 
 
     public function getDataSource($params)
@@ -22,5 +22,4 @@ class Hr_timesheet_line_100 extends Report_Parent2Controller
         // $primaryData = array_slice($primaryData->toArray(), 0, 100);
         return collect($primaryData);
     }
-
 }

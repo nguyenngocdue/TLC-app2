@@ -5,15 +5,20 @@ namespace App\View\Components\Renderer\MatrixForReport;
 use App\Models\Prod_order;
 use App\Models\Prod_routing;
 use App\Models\Prod_sequence;
+use App\View\Components\Renderer\ViewAllMatrixFilterDataSource\TraitFilterDataSourceForInternal;
 use Illuminate\Support\Facades\Log;
 
 class ProdSequences extends MatrixForReportParent
 {
+    use TraitFilterDataSourceForInternal;
+
     protected $dataIndexX = "prod_routing_link_id";
     protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 300;
     protected $rotate45Height = 250;
     protected $closedDateColumn = 'end_date';
+
+    protected $headerTop = 250;
 
     private $showInReportToc = 365; // term_id of report_toc
 
@@ -23,9 +28,12 @@ class ProdSequences extends MatrixForReportParent
         private $dateToCompare = null,
         private $sequenceModeId = 2,
         private $prodDisciplineId = null,
+        $allowOpen = true,
     ) {
         parent::__construct("prod_sequences", $dateToCompare);
         // echo ($prodRoutingId . " - " . $subProjectId);
+
+        $this->allowOpen = $allowOpen;
     }
 
     function getXAxis()
@@ -43,20 +51,22 @@ class ProdSequences extends MatrixForReportParent
         $allRoutingLinkDetails = $result->getProdRoutingDetails;
         // dump($allRoutingLinkDetails[0]);
         $allRoutingLinkDetails = $allRoutingLinkDetails->sortBy("order_no");
-        $allRoutingLinks = $allRoutingLinkDetails->map(fn ($item) => $item->getProdRoutingLink);
+        $allRoutingLinks = $allRoutingLinkDetails->map(fn($item) => $item->getProdRoutingLink);
         // dump($allRoutingLinks[0]);
         if ($this->prodDisciplineId) {
             $disciplineIds = explode(",", $this->prodDisciplineId);
-            $allRoutingLinks = $allRoutingLinks->filter(fn ($item) => (in_array($item->prod_discipline_id, $disciplineIds)));
+            $allRoutingLinks = $allRoutingLinks->filter(fn($item) => (in_array($item->prod_discipline_id, $disciplineIds)));
         }
 
         $toHide = config('prod_discipline.to_hide');
         $result = [];
         switch ($this->sequenceModeId) {
             case 2: // All sequences
-                return $allRoutingLinks->filter(fn ($i) => !in_array($i->prod_discipline_id, $toHide));
+                $result = $allRoutingLinks->filter(fn($i) => !in_array($i->prod_discipline_id, $toHide));
+                break;
             case 3: // PPR-MEPF
-                return $allRoutingLinks->filter(fn ($i) => in_array($i->prod_discipline_id, $toHide));
+                $result = $allRoutingLinks->filter(fn($i) => in_array($i->prod_discipline_id, $toHide));
+                break;
             case 1: // Major sequences
             default:
                 foreach ($allRoutingLinks as $routingLink) {
@@ -65,9 +75,16 @@ class ProdSequences extends MatrixForReportParent
                         $result[] = $routingLink;
                     }
                 }
-                return collect($result);
+                break;
+                // return collect($result);
         }
-        return collect($result);
+        // Log::info($result);
+        $tmp = collect($result);
+        $tmp = $tmp->map(function ($item) {
+            $item->width = 40;
+            return $item;
+        });
+        return $tmp;
     }
 
     function getXAxis2ndHeader($xAxis)
