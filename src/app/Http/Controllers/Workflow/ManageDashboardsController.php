@@ -75,7 +75,21 @@ class ManageDashboardsController extends AbstractManageLibController
                 'align' => 'center',
                 'width' => 50,
             ],
+            [
+                "dataIndex" => "_",
+                'renderer' => 'text',
+                'editable' => false,
+                'align' => 'center',
+                'width' => 50,
+            ],
             //Checklist
+            [
+                "dataIndex" => "show_save_box_in_checklist",
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
             [
                 "dataIndex" => "be_able_to_change_checkpoint_value",
                 'renderer' => 'checkbox',
