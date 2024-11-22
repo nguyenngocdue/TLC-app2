@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 import { getTooltip } from './EditableTable3DefaultValue'
-import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
+import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { Str } from './Functions'
 import { TableParams } from './Type/EditableTable3ParamType'
 

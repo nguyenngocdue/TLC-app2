@@ -89,11 +89,11 @@ export type TableColumnNo = BaseTableColumn & {
     rendererAttrs?: ControlAttributeNo
 }
 export type TableColumnAction = BaseTableColumn & {
-    renderer: 'action.'
+    renderer: 'action.' | 'action_column'
     rendererAttrs?: ControlAttributeAction
 }
 export type TableColumnActionCheckbox = BaseTableColumn & {
-    renderer: 'action_checkbox.'
+    renderer: 'action_checkbox.' | 'checkbox_column'
     rendererAttrs?: ControlAttributeActionCheckbox
 }
 export type TableColumnActionPrint = BaseTableColumn & {
@@ -109,7 +109,7 @@ export type TableColumnDocId = BaseTableColumn & {
     rendererAttrs?: ControlAttributeDocId
 }
 export type TableColumnIdLink = BaseTableColumn & {
-    renderer: 'id_link'
+    renderer: 'id_link' | 'id'
     rendererAttrs?: ControlAttributeIdLink
 }
 export type TableColumnColumn = BaseTableColumn & {
@@ -142,7 +142,7 @@ export type TableColumnAvatarUser = BaseTableColumn & {
     rendererAttrs?: ControlAttributeAvatarUser
 }
 export type TableColumnThumbnail = BaseTableColumn & {
-    renderer: 'thumbnail'
+    renderer: 'thumbnail' | 'thumbnails'
     rendererAttrs?: ControlAttributeThumbnail
 }
 

@@ -18,7 +18,9 @@ export class AggCount4View extends Renderer4View {
 
         let titles = ''
         if (columnToLoad) {
-            titles = merged.map((item) => item[columnToLoad]).join(', ')
+            titles = merged
+                .map((item) => (item && item[columnToLoad] ? item[columnToLoad] : ''))
+                .join(', ')
         }
 
         return { rendered, tdClass: 'text-center', tdTooltip: titles }

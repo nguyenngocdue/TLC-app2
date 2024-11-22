@@ -13,8 +13,11 @@ import {
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { TbodyTrs } from './EditableTable3TBodyTRows'
-import { updateVisibleRows } from './VirtualScrolling/updateVirtualTableVisibleRows'
-import { tdOnMouseMove } from './VirtualScrolling/tdOnMouseMove'
+import { renderRows, visibleRowIds } from './VirtualScrolling/updateVirtualTableVisibleRows'
+import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
+import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
+import { applySortableRow } from './SortableRow/EditableTable3SortableRows'
+import { applyVirtualStatic } from './VirtualScrolling/EditableTable3VirtualStatic'
 
 class EditableTable3 {
     private tableDebug = false
@@ -50,6 +53,8 @@ class EditableTable3 {
 
         if (this.tableDebug)
             console.log('EditableTable3', { ...params, columns: this.params.columns })
+
+        visibleRowIds[this.params.tableName] = new Set<string>()
     }
 
     renderTable() {
@@ -71,11 +76,7 @@ class EditableTable3 {
         let tableWidth = 'width: 100%;'
         if (tableConfig.tableTrueWidth) tableWidth = `width: ${calTableTrueWidth(this.params)}px;`
 
-        //OLD maxH using REM and tailwind generator, up to 60 REM. 1 REM = 16px
-        //Can be removed if all code use px not rem
-        const styleMaxH = tableConfig.maxH
-            ? `max-height: ${tableConfig.maxH <= 60 ? tableConfig.maxH * 16 : tableConfig.maxH}px;`
-            : ''
+        const styleMaxH = tableConfig.maxH ? `max-height: ${tableConfig.maxH}px;` : ''
 
         const toolbarTop = tableConfig.showPaginationTop ? makeToolBarTop(this.params) : ``
         const toolbarBottom = tableConfig.showPaginationBottom ? makeToolBarBottom(this.params) : ``
@@ -88,8 +89,7 @@ class EditableTable3 {
             : ''
 
         if (this.tableDebug) console.log('Start to make Tbody')
-        const trs = new TbodyTrs(this.params).render()
-        const emptyTable = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
+        // const trs = new TbodyTrs(this.params).render()
 
         // if (this.tableDebug) console.log('Start to make Colgroup')
         const colgroupStr = makeColGroup(this.params)
@@ -148,13 +148,14 @@ class EditableTable3 {
 
         if (this.tableDebug) console.log('madeEmptyEditableTable Body')
 
-        return { editableTable, trs, emptyTable }
+        return editableTable
     }
 
     render() {
-        const { tableName, tableConfig, columns, dataSource } = this.params
+        const { tableName, columns, dataSource } = this.params
 
-        let body = ''
+        let body = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
+
         if (!columns) {
             body = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
             Columns is required
@@ -167,24 +168,15 @@ class EditableTable3 {
             </div>`
         }
 
-        let trs: HTMLTableRowElement[] = []
+        // let trs: HTMLTableRowElement[] = []
         if (columns && dataSource) {
-            const x = this.renderTable()
-            body = x.emptyTable
-            if (x.editableTable) {
-                body = x.editableTable
-                trs = x.trs
-            }
+            const tableEmptyRows = this.renderTable()
+            if (tableEmptyRows) body = tableEmptyRows
         }
 
         const divId = `#${tableName}`
         const div = document.querySelector(divId)
         div && (div.innerHTML = body)
-
-        // const tbody = document.querySelector(`${divId} tbody`)
-        // if (tbody) {
-        //     trs.forEach((tr) => tbody.appendChild(tr))
-        // }
 
         if (this.tableDebug) {
             console.log(`└──────────────────${this.params.tableName}──────────────────┘`)
@@ -196,52 +188,15 @@ class EditableTable3 {
 
         //when document is ready
         $(() => {
-            const virtualTable = document.querySelector(`${divId} table`) as HTMLTableElement
-            // console.log('virtualTable', divId, virtualTable)
-            if (virtualTable) {
-                const tbodyElement = virtualTable.querySelector('tbody')
+            //Wait sometime for the browser to finish rendering the table
+            if (dataSource) {
+                setTimeout(() => applyTopFor2ndHeader(tableName), 100)
 
-                if (tbodyElement) {
-                    tbodyElement.addEventListener('mousemove', (e) => tdOnMouseMove(e, this.params))
-
-                    //this make select2 lost focus
-                    // tbodyElement.addEventListener('mouseout', (e) => tdOnMouseOut(e, this.params))
+                if (dataSource.data.length > 10) {
+                    applyVirtualScrolling(this.params)
+                } else {
+                    applyVirtualStatic(this.params)
                 }
-
-                const tableContainer = virtualTable.parentElement as HTMLElement
-                tableContainer.addEventListener('scroll', () =>
-                    updateVisibleRows(
-                        virtualTable,
-                        this.params.dataSource,
-                        this.params,
-                        // this.params.tableConfig.virtualScroll,
-                    ),
-                )
-
-                // Initial render
-                updateVisibleRows(
-                    virtualTable,
-                    this.params.dataSource,
-                    this.params,
-                    // this.params.tableConfig.virtualScroll,
-                    true,
-                )
-                // } else {
-                //     if (columns && dataSource) {
-                //         applyRenderedTbody(this.params)
-                //         const endTime01 = new Date().getTime()
-                //         console.log(
-                //             'EditableTable3.applyRenderedTbody() took',
-                //             endTime01 - endTime00,
-                //             'ms',
-                //         )
-
-                //         setTimeout(() => {
-                //             //Wait sometime for the browser to finish rendering the table
-                //             applyFixedColumnWidth(tableName, this.params.columns)
-                //             applyTopFor2ndHeader(tableName)
-                //         }, 100)
-                //     }
             }
         })
     }

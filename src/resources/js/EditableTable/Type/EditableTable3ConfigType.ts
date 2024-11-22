@@ -42,6 +42,8 @@ export interface TableConfig {
     animationDelay?: number
     rowHeight?: number
 
+    orderable?: boolean
+
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean
 }

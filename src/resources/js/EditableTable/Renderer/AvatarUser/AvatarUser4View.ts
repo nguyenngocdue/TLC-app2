@@ -14,10 +14,11 @@ export class AvatarUser4View extends Renderer4View {
         const divs = merged
             .slice(0, maxToShow)
             .map((item) => {
-                const classList = `h-8 w-8 rounded-full p-1`
+                if (!item) return ''
+                const classList = `h-10 w-10 rounded-full p-1`
                 const img = `<img src="${item.src}" class="${classList}" alt="${item.name}" />`
                 const tooltip = Str.makeId(item.id)
-                return `<div class="flex items-center border" title="${tooltip}">
+                return `<div class="flex items-center border rounded" title="${tooltip}">
                     ${img} 
                     <span class="font-semibold">
                         ${item.name}
@@ -26,11 +27,22 @@ export class AvatarUser4View extends Renderer4View {
             })
             .join('')
         const more = merged.length - maxToShow
-        const rendered = `<div class="">
-                <div class="grid grid-cols-2">
+        const moreTitle = merged
+            .slice(maxToShow)
+            .map((item) => `${Str.makeId(item.id)} - ${item.name}`)
+            .join('\n')
+        const moreClass = `p-1 rounded-full border cursor-pointer`
+        const moreSpan =
+            more > 0 ? `<span class="${moreClass}" title="${moreTitle}">+${more}</span>` : ``
+        const gridClass = `grid grid-cols-${merged.length > 1 ? 2 : 1}`
+        const widthClass = `${merged.length > 1 ? 'w-11/12' : 'w-full'}`
+        const rendered = `<div class="flex items-center gap-1">
+                <div class="${gridClass} ${widthClass}">
                     ${divs}
                 </div>
-                ${more > 0 ? `And ${more} more` : ``}
+                <div>
+                    ${moreSpan}
+                </div>
             </div>`
         return { rendered, tdClass: 'text-center' }
     }

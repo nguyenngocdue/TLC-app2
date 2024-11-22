@@ -17,15 +17,16 @@ export const renderColumn4 = (
     let arrayOfRendered: string[] = []
     if (columnToLoad) {
         arrayOfRendered = merged.map((foreignObject) => {
-            const s = foreignObject[columnToLoad] as string
-            if (s) {
+            if (foreignObject && foreignObject[columnToLoad]) {
+                const s = foreignObject[columnToLoad] as string
                 if (allowOpen) {
                     const href = foreignObject.href || 'define-href-in-the-cell'
                     return `<a href="${href}" target="_blank">
                     <button class="text-xs text-xs-vw font-semibold rounded px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white">${s}</button>
                 </a>`
                 } else return `${s}`
-            } else return ''
+            }
+            return ''
         })
     }
     const rendered = arrayOfRendered.join(`${allowOpen ? ' ' : ', '}`)

@@ -8,23 +8,27 @@ export class Thumbnail4View extends Renderer4View {
         const cellValue = this.cellValue as unknown as DataSourceItem
         const column = this.column as TableColumnThumbnail
 
-        const { maxToShow = 5 } = column.rendererAttrs || {}
+        const { maxToShow = 4 } = column.rendererAttrs || {}
         const merged = getForeignObjects(cellValue)
 
         const imgs = merged
             .slice(0, maxToShow)
             .map((item) => {
                 const src = item.src
-                const classList = `h-10 w-10 p-1 rounded`
+                const classList = `h-10 w-10 p-1 rounded border`
                 return `<img src="${src}" class="${classList}" alt="${item.name}" />`
             })
             .join('')
         const more = merged.length - maxToShow
         const rendered = `<div>
             <div class="flex items-center justify-center">
-                ${imgs}
+            ${imgs}
+            ${
+                more > 0
+                    ? `<div class="h-10 w-10 p-1 rounded border flex items-center justify-center">+${more}</div>`
+                    : ``
+            }
             </div>
-            ${more > 0 ? `And ${more} more` : ``}
         </div>`
 
         return { rendered, tdClass: 'text-center' }

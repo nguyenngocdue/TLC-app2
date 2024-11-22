@@ -1,15 +1,15 @@
-import Sortable from 'sortablejs'
-
 import { applyRenderedTRow } from '../EditableTable3ApplyRenderedTRow'
 import { TbodyTr } from '../EditableTable3TBodyTRow'
 // import { VirtualScrollParams } from '../Type/EditableTable3ConfigType'
 import { LengthAware } from '../Type/EditableTable3DataLineType'
 import { TableParams } from '../Type/EditableTable3ParamType'
+import { applyFixedColumnWidth } from '../FixedColumn/EditableTable3FixedColumn'
+import { applySortableRow } from '../SortableRow/EditableTable3SortableRows'
 
 const bufferSize = 5
 let lastRenderedStartIdx: { [tableName: string]: number } = {}
 let lastRenderedEndIdx: { [tableName: string]: number } = {}
-const visibleRowIds: { [tableName: string]: Set<string> } = {} // Use a Set to track currently visible row IDs
+export const visibleRowIds: { [tableName: string]: Set<string> } = {} // Use a Set to track currently visible row IDs
 
 const updateSpacer = (id: string, height: number, hiddenRows: number, scrollTop: number) => {
     const spacer = document.querySelector(id) as HTMLTableRowElement
@@ -56,7 +56,7 @@ const calculateLoadRemoveIndices = (
     return indices
 }
 
-const renderRows = (
+export const renderRows = (
     data: any[],
     indices: { startIdx: number; endIdx: number },
     tableParams: TableParams,
@@ -123,12 +123,9 @@ export const updateVisibleRows = (
     virtualTable: HTMLTableElement,
     dataSource: LengthAware,
     tableParams: TableParams,
-    // virtualScroll?: VirtualScrollParams,
     firstLoad = false,
 ) => {
     const { tableName, tableConfig } = tableParams
-    // const { rowHeight = 45, viewportHeight = 640 } = virtualScroll || {}
-    if (!visibleRowIds[tableName]) visibleRowIds[tableName] = new Set()
 
     const viewportHeight = tableConfig.maxH || 640
     const rowHeight = tableConfig.rowHeight || 45
@@ -178,15 +175,8 @@ export const updateVisibleRows = (
         }
     }
 
-    const tableBody = document.querySelector(`#${tableName} tbody`) as HTMLElement
-    Sortable.create(tableBody, {
-        animation: 150,
-        handle: '.drag-handle', // Use the drag handle for sorting
-        // filter: ':not(.draggable)', // Exclude rows that do not have the "draggable" class
-        onEnd: (evt) => {
-            console.log('Row moved:', evt.oldIndex, '->', evt.newIndex)
-        },
-    })
+    if (tableConfig.orderable) applySortableRow(tableParams)
+    applyFixedColumnWidth(tableName, tableParams.columns)
 
     lastRenderedStartIdx[tableName] = startIdx
     lastRenderedEndIdx[tableName] = endIdx

@@ -90,6 +90,7 @@ export const makeTCell = (
             result = new LineNo(rendererParams).render()
             break
         case renderer == 'id_link':
+        case renderer == 'id': //Obsolete
             result = new IdLink(rendererParams).render()
             break
         case renderer == 'qr-code':
@@ -97,9 +98,11 @@ export const makeTCell = (
             result = new ActionPrint(rendererParams).render()
             break
         case renderer == 'action.':
+        case renderer == 'action_column': //Obsolete
             result = new ActionBox(rendererParams).render()
             break
         case renderer == 'action_checkbox.':
+        case renderer == 'checkbox_column': //Obsolete
             result = new ActionCheckbox(rendererParams).render()
             break
         case renderer == 'hyper-link':
@@ -122,7 +125,7 @@ export const makeTCell = (
             result = new Status4View(rendererParams).render()
             break
         case renderer == 'thumbnail':
-            // case renderer == 'thumbnails': // this line will be removed for new flexible MODE
+        case renderer == 'thumbnails': // this line will be removed for new flexible MODE
             result = new Thumbnail4View(rendererParams).render()
             break
         case renderer == 'avatar_user':
@@ -182,6 +185,12 @@ export const makeTCell = (
             result = new ValueObject4(rendererParams).render()
             rendered = result.rendered
             tdClass = result.tdClass
+            divClass = result.divClass
+            tdStyle = result.tdStyle || {}
+            divStyle = result.divStyle || {}
+            tdTooltip = result.tdTooltip || ``
+            divTooltip = result.divTooltip || ``
+
             p_2 = false
             componentCase = 'smartTypeOf(cellValue).object'
             break
