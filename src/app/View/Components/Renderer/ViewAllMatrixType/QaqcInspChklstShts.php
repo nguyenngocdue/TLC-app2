@@ -264,19 +264,26 @@ class QaqcInspChklstShts extends ViewAllTypeMatrixParent
         $result = [];
         $result[] = [
             'dataIndex' => 'name',
-            'align' => 'right',
-            'width' => 50,
-            /* 'fixed' => 'left',*/
+            // 'align' => 'center',
+            // 'width' => 210,
+            'fixed' => 'left',
         ];
-        $result[] = ['dataIndex' => 'compliance_name', 'width' => 300,];
-        $result[] = ['dataIndex' => 'description', 'width' => 50,];
+        $result[] = [
+            'dataIndex' => 'compliance_name',
+            'width' => 300,
+            'fixed' => 'left',
+        ];
+        $result[] = [
+            'dataIndex' => 'description',
+            'width' => 50,
+        ];
         if ($this->metaShowProgress) $result[] = [
             'dataIndex' => 'progress',
             "title" => 'Progress (%)',
             'align' => 'right',
             'width' => 50,
             'footer' => 'agg_avg',
-            /* 'fixed' => 'left',*/
+            // 'fixed' => 'left',
         ];
         return $result;
     }

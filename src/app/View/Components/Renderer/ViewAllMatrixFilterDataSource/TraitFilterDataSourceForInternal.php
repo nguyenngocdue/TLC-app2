@@ -12,7 +12,7 @@ trait TraitFilterDataSourceForInternal
     protected function enrichRouting($prodRoutings)
     {
         //Remove routings that are not allow to show on the screen
-        $prodRoutings = $prodRoutings->filter(fn($item) => $item->isShowOn("qaqc_insp_chklst_shts"))->values();
+        $prodRoutings = $prodRoutings->filter(fn($item) => $item->isShowOn($this->type))->values();
 
         //Enrich for listeners sub projects -> routing
         foreach ($prodRoutings as &$item) {
