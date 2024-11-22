@@ -74,7 +74,7 @@ trait TraitListenerControlReport
         $formattedElements = array_map(function($element) {
             $element = trim($element);
             if (is_numeric($element)) {
-                return $element;
+                return (int)$element;
             } else {
                 return "\"$element\"";
             }

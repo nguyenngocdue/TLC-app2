@@ -25,13 +25,16 @@ class ReportTableColumn
         return array_unique(array_keys((array)$collection->first()));
     }
 
-    function defaultColumnsOnEmptyQuery($block)
+    function defaultColumnsOnEmptyQuery($block,$currentParams)
     {
+        // $title = $this->createHeaderTitle($line->title ?? $line->name, $line->icon, $line->icon_position, $currentParams);
         $cols = $block->getLines->where('is_active', true)
-            ->select('title', 'data_index')
-            ->map(function ($item) {
+        ->select('title', 'data_index')
+            ->map(function ($item) use($currentParams) {
+                $title = $item['title'] ?? $item['data_index'];
+                $title = $this->formatReportHref($title, $currentParams);
                 return [
-                    'title' => $item['title'] ?? $item['data_index'],
+                    'title' => $title,
                     'dataIndex' => $item['data_index']
                 ];
             })
@@ -43,7 +46,7 @@ class ReportTableColumn
     {
         if ($queriedData->isEmpty()) {
             $columnInstance = ReportTableColumn::getInstance();
-            $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block);
+            $headerCols = $columnInstance->defaultColumnsOnEmptyQuery($block, $currentParams);
             return [$headerCols, []];
         }
         $uniqueFields = $this->getAllUniqueFields($queriedData);

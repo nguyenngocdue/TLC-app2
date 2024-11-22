@@ -93,7 +93,7 @@ class ReportFilterItem extends Component
             case $this->MONTH_TYPE_ID:
                 $months = array_map(
                     fn($item) => [
-                        'id' => $item,
+                        'id' => str_pad($item, 2, '0', STR_PAD_LEFT),
                         // 'name' => DateReport::getMonthAbbreviation2($item)
                         'name' => str_pad($item, 2, '0', STR_PAD_LEFT)
                     ],
