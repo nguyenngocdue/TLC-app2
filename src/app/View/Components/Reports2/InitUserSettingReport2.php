@@ -52,11 +52,13 @@ class InitUserSettingReport2
             foreach ($paramsInConfig as $key => $value) {
                 if (in_array($key, $keyParamsInUser)) {
                     if(is_null($paramsInUser[$key]) && is_null($value)) continue;
-                    if (!is_null($paramsInUser[$key]) && !is_null($paramsInUser[$key][0]) ) continue;
+                    if (!is_null($paramsInUser[$key])) {
+                        if (is_array($paramsInUser[$key]) && !is_null($paramsInUser[$key][0]) ) continue;
+                    } 
                     else {
                         $paramsToUpdate[$key] = $value;
                     }
-                } 
+                }
             }
         } catch (\Exception $e) {
             dd($e->getMessage());
