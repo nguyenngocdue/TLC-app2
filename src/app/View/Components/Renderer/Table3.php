@@ -57,6 +57,11 @@ class Table3 extends Component
     private $editable = false,
     private $animationDelay = 0,
     private $rowHeight = 45,
+
+    private $orderable = false,
+    private $duplicatable = false,
+    private $deletable = false,
+
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
     // private $borderColor = 'border-gray-300',
@@ -119,6 +124,9 @@ class Table3 extends Component
       'animationDelay' => $this->animationDelay,
       'rowHeight' => $this->rowHeight,
 
+      'orderable' => $this->orderable,
+      'duplicatable' => $this->duplicatable,
+      'deletable' => $this->deletable,
     ];
     // Log::info($params);
     return view("components.renderer.table3", $params);

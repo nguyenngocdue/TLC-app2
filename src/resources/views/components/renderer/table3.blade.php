@@ -66,9 +66,13 @@ var tableObjectIndexedColumns = {};
                 //     'viewportHeight': 640,
                 // }
                 'rowHeight': @json($rowHeight),
+
+                'orderable': {{($orderable??0) ? "true" : "false"}},
+                'duplicatable': {{($duplicatable??0) ? "true" : "false"}},
+                'deletable': {{($deletable??0) ? "true" : "false"}},
             },
         }
-        // console.log("Initilizing table {{$tableName}}", {{$tableName}})
+        // console.log("Initializing table {{$tableName}}", {{$tableName}})
         {{$tableName}}_Object = new EditableTable3(params)
         {{$tableName}}_Object.render()
     });

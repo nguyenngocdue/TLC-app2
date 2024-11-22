@@ -43,7 +43,7 @@ export class ValueObject4 {
         const titleStr = cell_title ? `${cell_title}` : ''
         const onclickStr = cell_onclick ? `${cell_onclick}` : ''
         const divClassStr = cell_div_class ? `${cell_div_class}` : 'p-1 p-1-ValueObject4'
-        const spanClass = twMerge(divClassStr, `rounded p1-0.5`)
+        const spanClass = twMerge(divClassStr, `rounded p-0.5`)
 
         const rendered = `<a ${hrefStr} class="min-w-10 min-h-5 h-6 my-0.5 p-0.5 inline-block ">
             <span component="ValueObject4" class="${spanClass}" title="${titleStr}" onclick="${onclickStr}">

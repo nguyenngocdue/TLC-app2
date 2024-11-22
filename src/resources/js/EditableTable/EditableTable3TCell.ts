@@ -97,7 +97,6 @@ export const makeTCell = (
         case renderer == 'action_print.':
             result = new ActionPrint(rendererParams).render()
             break
-        case renderer == 'action.':
         case renderer == 'action_column': //Obsolete
             result = new ActionBox(rendererParams).render()
             break

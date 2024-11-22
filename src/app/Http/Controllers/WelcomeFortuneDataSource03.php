@@ -12,7 +12,7 @@ class WelcomeFortuneDataSource03
     $columns = [
       // ['dataIndex' => 'id', 'title' => 'CB', 'renderer' => 'action_checkbox.', 'fixed' => 'left'],
       // ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
-      // ['dataIndex' => 'id', 'title' => 'Action', 'renderer' => 'action.', 'fixed' => 'left'],
+      ['dataIndex' => 'id', 'title' => 'Action', 'renderer' => 'action_column', 'fixed' => 'left'],
       // ['dataIndex' => 'id', 'title' => 'Print', 'renderer' => 'action_print.', 'fixed' => 'left'],
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
       [

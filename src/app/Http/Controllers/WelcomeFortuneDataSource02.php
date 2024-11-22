@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 class WelcomeFortuneDataSource02
 {
-    function getDataSource() {
-        $columns = [ 
+    function getDataSource()
+    {
+        $columns = [
+
+            ['dataIndex' => 'action', 'renderer' => 'action_column', 'fixed' => 'left'],
             ['dataIndex' => 'name', 'width' => 200, 'fixed' => 'left'],
             ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
             ['dataIndex' => 'status', 'subTitle' => 'fixed-left no-bg', 'fixed' => 'left-no-bg', 'footer' => 'agg_none',],
-            ['dataIndex' => 'agg_none', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_none', 'fixed' => 'left'],    
+            ['dataIndex' => 'agg_none', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_none', 'fixed' => 'left'],
             ['dataIndex' => 'agg_count_all', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_count_all'],
             ['dataIndex' => 'agg_sum', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_sum'],
             ['dataIndex' => 'agg_avg', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_avg'],
@@ -19,9 +22,9 @@ class WelcomeFortuneDataSource02
             ['dataIndex' => 'agg_range', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_range'],
             ['dataIndex' => 'agg_count_unique_values', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_count_unique_values'],
             ['dataIndex' => 'agg_unique_values', 'subTitle' => 'int / float', 'align' => 'right', 'footer' => 'agg_unique_values'],
-            ['dataIndex' => 'status', 'subTitle' => 'fixed-right no-bg', 'fixed' => 'right-no-bg', 'footer' => 'agg_none',],
+            // ['dataIndex' => 'status', 'subTitle' => 'fixed-right no-bg', 'fixed' => 'right-no-bg', 'footer' => 'agg_none',],
             ['dataIndex' => 'text', 'subTitle' => 'a string', 'fixed' => 'right'],
-            ['dataIndex' => 'date', 'subTitle' => 'a date', 'fixed' => 'right', 'width'=> 120],
+            ['dataIndex' => 'date', 'subTitle' => 'a date', 'fixed' => 'right', 'width' => 120],
         ];
         $sndHeader = [
             // 'name' => 'Line 1',
@@ -61,7 +64,7 @@ class WelcomeFortuneDataSource02
                 'agg_count_unique_values' => 1,
                 'agg_unique_values' => 1,
                 'text' => 'text',
-                'date' => '2021-01-01',                
+                'date' => '2021-01-01',
             ],
             [
                 'name' => 'Line 2',
@@ -84,7 +87,7 @@ class WelcomeFortuneDataSource02
                 'agg_count_unique_values' => 2,
                 'agg_unique_values' => 2,
                 'text' => 'text',
-                'date' => '2021-01-02',                
+                'date' => '2021-01-02',
             ],
             [
                 'name' => 'Line 3',

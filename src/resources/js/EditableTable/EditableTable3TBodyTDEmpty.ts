@@ -14,7 +14,7 @@ export const makeTbodyTdEmpty = (
     const { dataIndex, renderer } = column
     const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
     const textStr = `text-sm text-sm-vw`
-    const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
+    const borderL = columnIndex == firstFixedRightIndex ? 'border-l xxx' : ''
     const borderStr = `border-b border-r border-gray-300 ${borderL}`
     const classList = twMerge(`${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${textStr}`)
 

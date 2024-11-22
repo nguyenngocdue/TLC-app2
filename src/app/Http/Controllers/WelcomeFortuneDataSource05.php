@@ -27,7 +27,7 @@ class WelcomeFortuneDataSource05
       [
         'dataIndex' => 'id',
         'title' => 'Action',
-        'renderer' => 'action.',
+        'renderer' => 'action_column',
         'fixed' => 'left',
         'width' => 100,
       ],

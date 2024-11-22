@@ -13,14 +13,19 @@ export class ActionBox extends Renderer4View {
         const iconCopy = `<i class="fa fa-copy text-xs"></i>`
         const iconTrash = `<i class="fa fa-trash text-xs"></i>`
 
-        const btnMoveUp = `<button class="${classList} px-1.5 py-0.5 rounded bg-blue-500 hover:bg-blue-700 text-white mr-0.5" title="Move Up">${iconMoveUp}</button>`
-        const btnMoveDown = `<button class="${classList} px-1.5 py-0.5 rounded bg-blue-500 hover:bg-blue-700 text-white mr-0.5" title="Move Down">${iconMoveDown}</button>`
-        const btnCopy = `<button class="${classList} px-1.5 py-0.5 rounded bg-blue-500 hover:bg-blue-700 text-white mr-0.5" title="Copy">${iconCopy}</button>`
-        const btnTrash = `<button class="${classList} px-1.5 py-0.5 rounded bg-red-500 hover:bg-red-700 text-white mr-0.5" title="Delete">${iconTrash}</button>`
+        const btnMoveUp = `<button class="${classList} px-1.5 py-0.5 rounded bg-gray-500 hover:bg-gray-700 text-white" title="Move Up">${iconMoveUp}</button>`
+        const btnMoveDown = `<button class="${classList} px-1.5 py-0.5 rounded bg-gray-500 hover:bg-gray-700 text-white" title="Move Down">${iconMoveDown}</button>`
+        const btnCopy = `<button class="${classList} px-1.5 py-0.5 rounded bg-blue-500 hover:bg-blue-700 text-white" title="Copy">${iconCopy}</button>`
+        const btnTrash = `<button class="${classList} px-1.5 py-0.5 rounded bg-red-500 hover:bg-red-700 text-white" title="Delete">${iconTrash}</button>`
 
-        const actionBox = `<div class="flex justify-center">
-            ${btnMoveUp} ${btnMoveDown} ${btnCopy} ${btnTrash}
-        </div>`
+        const rendered = `
+        ${tableConfig.orderable ? btnMoveUp : ''} 
+        ${tableConfig.orderable ? btnMoveDown : ''}
+        ${tableConfig.duplicatable ? btnCopy : ''}
+        ${tableConfig.deletable ? btnTrash : ''}
+        `
+
+        const actionBox = `<div class="flex justify-center gap-0.5">${rendered}</div>`
         // const href = `${entityName}/${this.cellValue}`
 
         return {
