@@ -1,21 +1,21 @@
 <x-renderer.card class="{{$class}}">
-    <div id="tabs-{{$id}}" class="inline-flex pt-2 px-0 w-full border-b h-10 mt-2">
+    <div id="tabs-{{$id}}" class="inline-flex px-0 w-full border-b h-10 mt-2 ">
         @forelse($tabs as $tab)
 
-            @if(isset($tab['href'])) <a href="{{$tab['href']}}" class=""> @endif
             <span id="tab-pan-{{$tab['id'] ?? ''}}" 
-                class="tab-pan cursor-pointer px-2.5 py-3 text-gray-800 mx-0.5 rounded-t border-t border-r border-l {{$tab['class'] ?? ''}}"
-                onmouseover="{{$tab['jsOnMouseOver'] ?? ''}}"                
-                >
-                {!! $tab['title'] !!}
+            class="tab-pan px-2.5 py-1.5 mx-0.5 rounded-t border-t border-r border-l {{$tab['class'] ?? ''}}"
+            onmouseover="{{$tab['jsOnMouseOver'] ?? ''}}"                
+            >
+                @if(isset($tab['href'])) <a href="{{$tab['href']}}" class="cursor-pointer"> @endif
+                    {!! $tab['title'] !!}
+                @if(isset($tab['href'])) </a> @endif
             </span>
-            @if(isset($tab['href'])) </a> @endif
 
         @empty
             <x-feedback.alert message="TabPane array is empty." type="warning"></x-feedback.alert>
         @endforelse
     </div>
-    <div class="border border-t-0 rounded-b">
+    <div class="border border-t-0 rounded-b bg-{{$activeBgColor}}-200">
         {{$slot}}
     </div>
 </x-renderer.card>

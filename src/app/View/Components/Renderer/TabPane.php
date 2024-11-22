@@ -16,6 +16,8 @@ class TabPane extends Component
         private $id = '',
         private $activeTab = '',
         private $class = '',
+        private $activeBgColor = 'gray',
+        private $activeTextColor = 'gray',
     ) {
         //
     }
@@ -29,16 +31,17 @@ class TabPane extends Component
     {
         foreach ($this->tabs as &$tab) {
             if (!isset($tab['class'])) $tab['class'] = "";
-            if ($tab['active'] ?? false) {
-                $tab['class'] .= " bg-white -mb-px";
+            if (isset($tab['active']) && $tab['active']) {
+                $tab['class'] .= " font-bold -mb-px bg-{$this->activeBgColor}-200 text-{$this->activeTextColor}-800";
             } else {
-                $tab['class'] .= " bg-gray-200";
+                $tab['class'] .= " bg-{$this->activeBgColor}-100 text-gray-700 ";
             }
         }
         return view('components.renderer.tab-pane', [
             'tabs' => $this->tabs,
             'id' => $this->id,
             'class' => $this->class,
+            'activeBgColor' => $this->activeBgColor,
         ]);
     }
 }
