@@ -145,6 +145,10 @@ export type TableColumnThumbnail = BaseTableColumn & {
     renderer: 'thumbnail' | 'thumbnails'
     rendererAttrs?: ControlAttributeThumbnail
 }
+export type TableColumnAttachment = BaseTableColumn & {
+    renderer: 'attachment'
+    rendererAttrs?: ControlAttributeAttachment
+}
 
 export type TableColumnCustomFunction = BaseTableColumn & {
     renderer: 'custom_function'
@@ -178,10 +182,6 @@ export type TableColumnPickerDateTime = BaseTableColumn & {
 export type TableColumnDateTime = BaseTableColumn & {
     renderer: 'date-time'
     rendererAttrs?: ControlAttributePickerDatetime
-}
-export type TableColumnAttachment = BaseTableColumn & {
-    renderer: 'attachment'
-    rendererAttrs?: ControlAttributeAttachment
 }
 export type TableColumnSearchableDialog = BaseTableColumn & {
     renderer: 'searchable_dialog'

@@ -12,7 +12,7 @@
 
 <div class="border-dotted hover:border-dotted hover:border"/>
 <div class="border-dashed hover:border-dashed "/>
-<div class="border-double hover:border-double"/>
+<div class="border-double hover:border-double w-fit"/>
 
 {{-- editable select --}}
 <div class="focus-visible:border-none" ></div> 

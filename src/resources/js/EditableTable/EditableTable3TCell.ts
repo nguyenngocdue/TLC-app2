@@ -30,6 +30,7 @@ import { Status4View } from './Renderer/Status/Status4View'
 import { AggCount4View } from './Renderer/Aggregations/AggCount4View'
 import { Thumbnail4View } from './Renderer/Thumbnail/Thumbnail4View'
 import { AvatarUser4View } from './Renderer/AvatarUser/AvatarUser4View'
+import { Attachment4 } from './Renderer/Attachment/Attachment4'
 
 export const makeTCell = (
     params: TableParams,
@@ -123,9 +124,12 @@ export const makeTCell = (
         case renderer == 'status':
             result = new Status4View(rendererParams).render()
             break
-        case renderer == 'thumbnail':
+        case renderer == 'thumbnail': // this line will be removed as overlap with attachment
         case renderer == 'thumbnails': // this line will be removed for new flexible MODE
             result = new Thumbnail4View(rendererParams).render()
+            break
+        case renderer == 'attachment':
+            result = new Attachment4(rendererParams).render()
             break
         case renderer == 'avatar_user':
             result = new AvatarUser4View(rendererParams).render()

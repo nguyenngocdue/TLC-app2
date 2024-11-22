@@ -52,14 +52,14 @@ class WelcomeFortuneDataSource05
       ],
       [
         'dataIndex' => 'thumbnail',
-        'renderer' => 'thumbnail',
+        'renderer' => 'attachment',
         'width' => 200,
         'classList' => 'whitespace-nowrap',
         'rendererAttrs' => [],
       ],
       [
         'dataIndex' => 'thumbnails',
-        'renderer' => 'thumbnail',
+        'renderer' => 'attachment',
         'width' => 200,
         'classList' => 'whitespace-nowrap',
         'rendererAttrs' => [],
@@ -172,7 +172,7 @@ class WelcomeFortuneDataSource05
 
     ];
     $duplicator = [];
-    $expectedLines = 100;
+    $expectedLines = 10;
     // $expectedLines = 35000; //loaded fine but challenging to F12
     for ($i = 0; $i < $expectedLines; $i++) {
       $duplicator[] = $tables[$i % sizeof($tables)];

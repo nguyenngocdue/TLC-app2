@@ -12,20 +12,15 @@ import {
 } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
-import { TbodyTrs } from './EditableTable3TBodyTRows'
-import { renderRows, visibleRowIds } from './VirtualScrolling/updateVirtualTableVisibleRows'
+import { visibleRowIds } from './VirtualScrolling/updateVirtualTableVisibleRows'
 import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
 import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
-import { applySortableRow } from './SortableRow/EditableTable3SortableRows'
 import { applyVirtualStatic } from './VirtualScrolling/EditableTable3VirtualStatic'
 
 class EditableTable3 {
     private tableDebug = false
     private startTime = new Date().getTime()
-
-    private defaultConfig: TableConfig = {
-        borderColor: 'border-gray-300',
-    }
+    private uploadServiceEndpoint = '/upload-service-endpoint'
 
     constructor(private params: TableParams) {
         console.log('EditableTable3.constructor()')
@@ -43,7 +38,12 @@ class EditableTable3 {
             })
         }
 
-        if (!this.params.tableConfig) this.params.tableConfig = {}
+        if (!this.params.tableConfig)
+            this.params.tableConfig = {
+                lineObjectModelPath: 'unset-objectType',
+            }
+        if (!this.params.tableConfig.uploadServiceEndpoint)
+            this.params.tableConfig.uploadServiceEndpoint = this.uploadServiceEndpoint
         if (Array.isArray(params.dataSource)) {
             this.params.dataSource = convertArrayToLengthAware(params.dataSource)
             if (this.tableDebug) console.log('convertArrayToLengthAware', this.params.dataSource)
@@ -70,7 +70,7 @@ class EditableTable3 {
         }
 
         const tableDebug = tableConfig.tableDebug || false
-        const borderColor = tableConfig.borderColor || this.defaultConfig.borderColor
+        const borderColor = tableConfig.borderColor || `border-gray-300`
         const borderT = tableConfig.showPaginationTop ? `border-t ${borderColor}` : 'rounded-t-lg'
 
         let tableWidth = 'width: 100%;'

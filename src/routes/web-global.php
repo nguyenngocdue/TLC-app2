@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileSocialController;
 use App\Http\Controllers\UpdateUserSettings;
 use App\Http\Controllers\UpdateUserSettingsApi;
+use App\Http\Controllers\UploadServiceEndPoint;
 use App\Http\Controllers\Utils\DepartmentMatrixController;
 use App\Http\Controllers\Utils\MyCompanyController;
 use App\Http\Controllers\Utils\OrphanAttachmentController;
@@ -61,4 +62,6 @@ Route::group([
     Route::get('orphan/attachment', [OrphanAttachmentController::class, 'index'])->name('orphanAttachment.index');
 
     Route::get('php_info', fn() => phpinfo());
+
+    Route::post('upload-service-endpoint', [UploadServiceEndPoint::class, 'upload'])->name('upload-service-endpoint');
 });

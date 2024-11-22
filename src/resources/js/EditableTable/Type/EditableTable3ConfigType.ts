@@ -46,6 +46,9 @@ export interface TableConfig {
     duplicatable?: boolean
     deletable?: boolean
 
+    lineObjectModelPath: string
+    uploadServiceEndpoint?: string
+
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean
 }
