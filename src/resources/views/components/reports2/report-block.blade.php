@@ -24,9 +24,10 @@
             $backgroundPath = isset($background->url_media)
                 ? app()->pathMinio() . $background->url_media 
                 : null;
+            $divClass = $block['div_class'] ?? '';
         @endphp
         <div title="{{ $block->name }}"
-            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }}"
+            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }} {{$divClass}}"
             @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
             <x-renderer.report2.title-description-block :block="$block" />
             @switch($rendererType)
