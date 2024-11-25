@@ -2,15 +2,17 @@ import { twMerge } from 'tailwind-merge'
 import { makeTCell } from './EditableTable3TCell'
 import { LengthAware, TableDataLine } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
 
 declare let tableData: { [tableName: string]: LengthAware }
+declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIndex: number) => {
-    const { columns, tableName, tableConfig } = params
+    const { tableName, tableConfig } = params
 
     const dataSource = tableData[tableName]
     if (!dataSource.data) return ''
-
+    const columns = tableColumns[tableName]
     // console.log('applying rendered row', row, rowIndex)
 
     columns.forEach((column) => {

@@ -62,7 +62,7 @@ export interface TableRenderedValueObject {
 }
 
 export interface TableRendererParams {
-    controlName: string
+    // controlName: string
     controlId: string
     cellValue: TableCellType
     params: TableParams

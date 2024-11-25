@@ -38,7 +38,7 @@ class WelcomeFortuneController extends Controller
     {
 
         if (sizeof($request->all())) {
-            dump("Submitted table data:", $request->all());
+            dump("Submitted table data:", $request->input());
         }
         $table01 = $this->dataSource01->getDataSource();
         $table02 = $this->dataSource02->getDataSource();

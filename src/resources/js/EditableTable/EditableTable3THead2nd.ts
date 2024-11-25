@@ -3,9 +3,13 @@ import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/Editab
 import { TableParams } from './Type/EditableTable3ParamType'
 import { twMerge } from 'tailwind-merge'
 import { TableRendererParams } from './Type/EditableTable3DataLineType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
+
+declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 export const makeThead2nd = (params: TableParams) => {
-    const { columns, dataHeader } = params
+    const columns = tableColumns[params.tableName]
+    const { dataHeader } = params
     if (!dataHeader) return ''
     // console.log('makeThead2nd', columns, dataHeader)
 
@@ -22,7 +26,6 @@ export const makeThead2nd = (params: TableParams) => {
         if (dataHeader[column.dataIndex]) {
             const cellValue = dataHeader[column.dataIndex]
             const rendererParams: TableRendererParams = {
-                controlName: '2ndHeaderItem',
                 controlId: '2ndHeaderItem',
                 cellValue,
                 params,

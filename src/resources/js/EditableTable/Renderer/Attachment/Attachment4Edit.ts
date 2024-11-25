@@ -23,7 +23,7 @@ export class Attachment4Edit extends Renderer4Edit {
 
     control() {
         const column = this.column as TableColumnAttachment
-        const { controlId, controlName, tableConfig } = this
+        const { controlId, tableConfig } = this
 
         const {
             fileType = 'image',
@@ -41,7 +41,7 @@ export class Attachment4Edit extends Renderer4Edit {
         const inputId = `${controlId}_file_input`
         const inputElement = document.createElement('input')
         inputElement.id = inputId
-        inputElement.name = controlName
+        // inputElement.name = controlName
         inputElement.type = 'file'
         inputElement.className = classList
         inputElement.accept = `${fileType}/*`

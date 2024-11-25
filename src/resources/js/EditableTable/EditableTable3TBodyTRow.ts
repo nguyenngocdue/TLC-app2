@@ -2,6 +2,8 @@ import { makeTbodyTdEmpty } from './EditableTable3TBodyTDEmpty'
 import { TableColumn } from './Type/EditableTable3ColumnType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
+declare let tableColumns: { [tableName: string]: TableColumn[] }
+
 export class TbodyTr {
     constructor(
         private params: TableParams,
@@ -34,12 +36,12 @@ export class TbodyTr {
             .join('')
     }
     render() {
-        const { columns, tableName } = this.params
+        const { tableName } = this.params
 
         const tr = document.createElement('tr')
         tr.id = `${tableName}__${this.rowIndex}`
         tr.className = '__xyz__'
-        tr.innerHTML = this.renderRow(tableName, columns)
+        tr.innerHTML = this.renderRow(tableName, tableColumns[tableName])
 
         // Attach the onmousemove handler programmatically
         //Does not work when applying virtual scrolling, using TBODY instead

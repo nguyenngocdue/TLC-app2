@@ -57,12 +57,12 @@ export const makeTCell = (
 
     const { tableName } = params
     const { dataIndex, renderer } = column
-    const controlName = `${tableName}[l${rowIndex}][${dataIndex}]`
+    // const controlName = `${tableName}[l${rowIndex}][${dataIndex}]`
     // const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
     const controlId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
 
     const rendererParams: TableRendererParams = {
-        controlName,
+        // controlName,
         controlId,
         cellValue,
         params,
@@ -205,7 +205,6 @@ export const makeTCell = (
             const array = cellValue as unknown as TableValueObjectType[]
             const values = array.map((item) => {
                 const rendererParams1: TableRendererParams = {
-                    controlName,
                     controlId,
                     cellValue: item,
                     params,

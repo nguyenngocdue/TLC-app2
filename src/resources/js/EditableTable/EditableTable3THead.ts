@@ -3,8 +3,12 @@ import { getTooltip } from './EditableTable3DefaultValue'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { Str } from './Functions'
 import { TableParams } from './Type/EditableTable3ParamType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
 
-export const makeThead = ({ columns, tableConfig }: TableParams) => {
+declare let tableColumns: { [tableName: string]: TableColumn[] }
+
+export const makeThead = ({ tableName, tableConfig }: TableParams) => {
+    const columns = tableColumns[tableName]
     const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
     let colspanSkipCounter = 0
     const result = columns.map((column, index) => {

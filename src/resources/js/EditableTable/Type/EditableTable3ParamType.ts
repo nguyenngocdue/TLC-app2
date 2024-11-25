@@ -5,7 +5,7 @@ import { TableDataLine } from './EditableTable3DataLineType'
 export interface TableParams {
     tableName: string
     tableConfig: TableConfig
-    columns: TableColumn[]
+    // columns: TableColumn[]
     // dataSource: LengthAware
     dataHeader: TableDataLine
 

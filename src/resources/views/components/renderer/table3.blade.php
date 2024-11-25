@@ -32,7 +32,6 @@ var tableObjectIndexedColumns = {};
     $(document).ready(function() {
         const params = {
             'tableName': @json($tableName),
-            'columns': @json($columns),
             'dataHeader': @json($dataHeader),
 
             'tableConfig': {

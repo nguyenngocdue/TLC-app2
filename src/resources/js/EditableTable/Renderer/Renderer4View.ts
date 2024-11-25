@@ -16,7 +16,6 @@ export abstract class Renderer4View {
     protected dataIndex: number | string
     protected rowIndex: number
     protected dataLine: TableDataLine
-    protected controlName: string
     protected controlId: string
     protected tableConfig: TableConfig
     protected tableParams: TableParams
@@ -28,7 +27,6 @@ export abstract class Renderer4View {
         this.dataIndex = this.params.column.dataIndex
         this.rowIndex = this.params.rowIndex
         this.dataLine = this.params.dataLine
-        this.controlName = this.params.controlName
         this.controlId = this.params.controlId
         this.tableConfig = this.params.params.tableConfig
         this.tableParams = this.params.params
@@ -39,7 +37,6 @@ export abstract class Renderer4View {
     applyOnMouseMoveScript(): void {}
     protected getTableRendererParams(): TableRendererParams {
         const result: TableRendererParams = {
-            controlName: this.controlName,
             controlId: this.controlId,
             cellValue: this.cellValue,
             params: this.tableParams,

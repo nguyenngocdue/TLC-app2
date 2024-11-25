@@ -1,6 +1,8 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
+declare let tableColumns: { [tableName: string]: TableColumn[] }
+
 export const ColumnNoValue: TableColumn = {
     dataIndex: '_no_',
     width: 50,
@@ -10,7 +12,8 @@ export const ColumnNoValue: TableColumn = {
     fixed: 'left',
 }
 
-export const makeUpDefaultValue = ({ columns }: TableParams) => {
+export const makeUpDefaultValue = ({ tableName }: TableParams) => {
+    const columns = tableColumns[tableName]
     return columns && columns.map((column) => ({ ...column, width: column.width || 100 }))
 }
 

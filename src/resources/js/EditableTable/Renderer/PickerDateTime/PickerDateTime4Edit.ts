@@ -81,7 +81,7 @@ export class PickerDateTime4Edit extends Renderer4Edit {
 
         return `<input 
             type="text" 
-            name="${this.controlName}" 
+            
             id="${this.controlId}" 
             class="${tableConfig.classList?.text}" 
             placeholder="${pickerType} input"

@@ -13,8 +13,10 @@ import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
 import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
 import { applyVirtualStatic } from './VirtualScrolling/EditableTable3VirtualStatic'
 import { LengthAware } from './Type/EditableTable3DataLineType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
+declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 class EditableTable3 {
     private tableDebug = false
@@ -30,11 +32,12 @@ class EditableTable3 {
             console.log(`┌──────────────────${params.tableName}──────────────────┐`)
 
         //Columns
-        this.params.columns = makeUpDefaultValue(params)
+        tableColumns[this.params.tableName] = makeUpDefaultValue(params)
+        const columns = tableColumns[this.params.tableName]
         // console.log(this.params.columns)
         this.params.indexedColumns = {}
-        if (this.params.columns) {
-            this.params.columns.forEach((column) => {
+        if (columns) {
+            columns.forEach((column) => {
                 this.params.indexedColumns[column.dataIndex] = column
             })
         }
@@ -50,17 +53,17 @@ class EditableTable3 {
             tableData[this.tableName] = convertArrayToLengthAware(arrayOfAny)
             if (this.tableDebug) console.log('convertArrayToLengthAware', tableData[this.tableName])
         }
-        if (this.params.tableConfig.showNo) this.params.columns.unshift(ColumnNoValue)
+        if (this.params.tableConfig.showNo) columns.unshift(ColumnNoValue)
         // makeUpPaginator(this.params.tableConfig, this.params.dataSource)
 
-        if (this.tableDebug)
-            console.log('EditableTable3', { ...params, columns: this.params.columns })
+        if (this.tableDebug) console.log('EditableTable3', { ...params, columns })
 
         visibleRowIds[this.params.tableName] = new Set<string>()
     }
 
     renderTable() {
-        const { tableName, tableConfig, columns } = this.params
+        const { tableName, tableConfig } = this.params
+        const columns = tableColumns[tableName]
 
         if (!columns) {
             const divId = `#${tableName}`
@@ -154,7 +157,8 @@ class EditableTable3 {
     }
 
     render() {
-        const { tableName, columns } = this.params
+        const { tableName } = this.params
+        const columns = tableColumns[tableName]
 
         let body = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 

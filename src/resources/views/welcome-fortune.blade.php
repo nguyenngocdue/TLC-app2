@@ -252,11 +252,12 @@
 
 
 <button class="rounded border p-1 m-1">SUBMIT</button>
-</form>
-
 <div id="hidden-input-container">
 HHHHH
 </div>
+
+</form>
+
 
 <script>
 
@@ -264,13 +265,27 @@ function populateHiddenInputs() {
     const form = document.getElementById('virtual-table-form');
     const hiddenInputContainer = document.getElementById('hidden-input-container');
 
+    const tableName = 'table11';
+    console.log(tableData[tableName], tableColumns[tableName])
+
     hiddenInputContainer.innerHTML = '';
-    tableData["table11"].forEach((row, index) => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = `table11[l${index}][value]`;
-        input.value = row.value;
-        hiddenInputContainer.appendChild(input);
+    const allRows = tableData[tableName].data
+    console.log(allRows)
+    const columns = tableColumns[tableName]
+    console.log(columns)
+
+    allRows.forEach((row, rowIndex) => {
+        columns.forEach(column=>{
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `${tableName}[ln_${rowIndex}][${column.dataIndex}]`;
+
+            const {dataIndex} = column;
+            // console.log(row[dataIndex])
+            input.value = row[dataIndex];
+            hiddenInputContainer.appendChild(input);
+        })
+        console.log("created row", rowIndex)
     });
     console.log(hiddenInputContainer)
 }
@@ -280,7 +295,7 @@ const form = document.getElementById("virtual-table-form")
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     populateHiddenInputs();
-    // form.submit();
+    form.submit();
 })
 </script>
 

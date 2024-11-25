@@ -86,8 +86,7 @@ export class Dropdown4Edit extends Renderer4Edit {
 
         // <option class="text-gray-300" value="" disabled selected>Select an option</option>
         return `<select 
-            id="${this.controlId}" 
-            name="${this.controlName}" 
+            id="${this.controlId}"             
             class="${classList} no-arrow"
             >
             ${optionsStr}

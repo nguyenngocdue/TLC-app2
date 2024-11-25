@@ -5,6 +5,9 @@ import { LengthAware } from '../Type/EditableTable3DataLineType'
 import { TableParams } from '../Type/EditableTable3ParamType'
 import { applyFixedColumnWidth } from '../FixedColumn/EditableTable3FixedColumn'
 import { applySortableRow } from '../SortableRow/EditableTable3SortableRows'
+import { TableColumn } from '../Type/EditableTable3ColumnType'
+
+declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 const bufferSize = 5
 let lastRenderedStartIdx: { [tableName: string]: number } = {}
@@ -127,6 +130,7 @@ export const updateVisibleRows = (
 ) => {
     const { tableName, tableConfig } = tableParams
 
+    const columns = tableColumns[tableName]
     const viewportHeight = tableConfig.maxH || 640
     const rowHeight = tableConfig.rowHeight || 45
     const data = dataSource.data
@@ -176,7 +180,7 @@ export const updateVisibleRows = (
     }
 
     if (tableConfig.orderable) applySortableRow(tableParams)
-    applyFixedColumnWidth(tableName, tableParams.columns)
+    applyFixedColumnWidth(tableName, columns)
 
     lastRenderedStartIdx[tableName] = startIdx
     lastRenderedEndIdx[tableName] = endIdx

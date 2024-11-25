@@ -1,6 +1,10 @@
+import { TableColumn } from './Type/EditableTable3ColumnType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
-export const makeColGroup = ({ columns }: TableParams) => {
+declare let tableColumns: { [tableName: string]: TableColumn[] }
+
+export const makeColGroup = ({ tableName }: TableParams) => {
+    const columns = tableColumns[tableName]
     return columns
         .map((column) => {
             if (column.invisible) return null
@@ -12,7 +16,8 @@ export const makeColGroup = ({ columns }: TableParams) => {
         .join('')
 }
 
-export const calTableTrueWidth = ({ columns }: TableParams) => {
+export const calTableTrueWidth = ({ tableName }: TableParams) => {
+    const columns = tableColumns[tableName]
     return columns
         .map((column) => {
             if (column.invisible) return 0
