@@ -20,13 +20,13 @@ export const addOnUploadListener = (
                 const emptyBox = Thumbnail4View.renderThumbnailBox(`${controlId}__${i}`).outerHTML
                 const div = `<div id="${imgContainerId}">${emptyBox}</div>`
                 $(`#${controlId}_thumbnail_div`).append(div)
-                const onProgress = (file: File, percent: number) => {
+                const onProgress = (percent: number) => {
                     const id = `#${controlId}__${i}__progress_bar`
                     $(id).css('width', `${percent}%`)
                     // console.log(id, percent)
                     // console.log('Upload progress:', file.name, percent)
                 }
-                const onDone = (file: File, result: any) => {
+                const onDone = (result: any) => {
                     const id = document.querySelector(`#${imgContainerId}`) as Element
                     const obj: DataSourceItem = Object.values(
                         result,
@@ -53,7 +53,7 @@ export const addOnUploadListener = (
                         dataLine,
                         onProgress,
                     ).then((result) => {
-                        onDone(files[i], result)
+                        onDone(result)
                     })
                 } catch (e) {
                     console.error('Upload error:', e)

@@ -1,8 +1,8 @@
 export const uploadFileWithProgress = (
     url: string,
-    file: File,
+    // file: File,
     formData: FormData,
-    onProgress: (file: File, percent: number) => void,
+    onProgress: (percent: number) => void,
 ) => {
     return new Promise<void>((resolve, reject) => {
         const xhr = new XMLHttpRequest()
@@ -19,7 +19,7 @@ export const uploadFileWithProgress = (
         xhr.upload.onprogress = (event) => {
             if (event.lengthComputable) {
                 const percentComplete = Math.round((event.loaded / event.total) * 100)
-                onProgress(file, percentComplete)
+                onProgress(percentComplete)
             }
         }
 

@@ -1,4 +1,3 @@
-import { twMerge } from 'tailwind-merge'
 import { TableColumnNumber } from '../../Type/EditableTable3ColumnType'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'

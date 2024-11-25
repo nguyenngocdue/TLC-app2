@@ -3,8 +3,10 @@
 @section('title', '')
 
 @section('content')
-<form>
-    <x-renderer.table3
+<form id="virtual-table-form" action="/welcome-fortune" method="POST">
+    @csrf
+    @method('POST')
+{{-- <x-renderer.table3
     :columns="$table05a['columns']"
     :dataSource="$table05a['dataSource']"
     
@@ -24,9 +26,9 @@
 
 <br/>
 <hr/>
-<br/>
+<br/> --}}
 
-<x-renderer.table3
+{{-- <x-renderer.table3
     :columns="$table05['columns']"
     :dataSource="$table05['dataSource']"
     
@@ -41,7 +43,7 @@
 
 <br/>
 <hr/>
-<br/>
+<br/> --}}
 
 {{-- <x-renderer.table3
     :columns="$table04['columns']"
@@ -82,7 +84,7 @@
 
 
 
-<x-renderer.table3
+{{-- <x-renderer.table3
     :columns="$table03['columns']"
     :dataSource="$table03['dataSource']"
     
@@ -97,7 +99,7 @@
 
 <br/>
 <hr/>
-<br/>
+<br/> --}}
 
 {{--
 <x-renderer.table3
@@ -251,4 +253,28 @@
 
 <button class="rounded border p-1 m-1">SUBMIT</button>
 </form>
+
+
+<script>
+const form = document.getElementById("virtual-table-form") 
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    // Serialize the data
+    const jsonData = JSON.stringify(tableData);
+
+    // Send via AJAX
+    fetch(form.action, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: jsonData,
+    })
+})
+</script>
+
+
 @endsection 
+

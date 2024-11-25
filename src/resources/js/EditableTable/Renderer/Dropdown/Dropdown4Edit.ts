@@ -4,7 +4,6 @@ import { Str, getDataSource } from '../../Functions'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
-import { dr } from '@fullcalendar/core/internal-common'
 
 export class Dropdown4Edit extends Renderer4Edit {
     protected tableDebug = false
@@ -17,12 +16,12 @@ export class Dropdown4Edit extends Renderer4Edit {
             valueField = 'id',
             labelField = 'name',
             // descriptionField = 'description',
-            tooltipField = '',
+            // tooltipField = '',
         } = rendererAttrs
 
         const options = Object.keys(cbbDataSource).map((key) => {
             const item = cbbDataSource[key]
-            const tooltip = item[tooltipField] || Str.makeId(item[valueField])
+            // const tooltip = item[tooltipField] || Str.makeId(item[valueField])
 
             const option: DataFormat = {
                 id: item[valueField],

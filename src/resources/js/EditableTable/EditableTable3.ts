@@ -1,4 +1,3 @@
-import { TableConfig } from './Type/EditableTable3ConfigType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 import { makeThead } from './EditableTable3THead'
@@ -33,7 +32,7 @@ class EditableTable3 {
         // console.log(this.params.columns)
         this.params.indexedColumns = {}
         if (this.params.columns) {
-            this.params.columns.forEach((column, index) => {
+            this.params.columns.forEach((column) => {
                 this.params.indexedColumns[column.dataIndex] = column
             })
         }

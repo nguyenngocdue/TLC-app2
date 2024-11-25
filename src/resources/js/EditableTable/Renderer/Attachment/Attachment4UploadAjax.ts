@@ -8,7 +8,7 @@ export const attachment4UploadFileAjax = async (
     fieldName: string,
     groupId: number | null,
     dataLine: TableDataLine,
-    onProgress: (file: File, percent: number) => void,
+    onProgress: (percent: number) => void,
 ) => {
     if (!file) return
 
@@ -18,5 +18,5 @@ export const attachment4UploadFileAjax = async (
     formData.append(`${fieldName}[toBeUploaded][${groupId}][]`, file)
 
     const url = tableConfig.uploadServiceEndpoint || 'no-endpoint'
-    return uploadFileWithProgress(url, file, formData, onProgress)
+    return uploadFileWithProgress(url, formData, onProgress)
 }

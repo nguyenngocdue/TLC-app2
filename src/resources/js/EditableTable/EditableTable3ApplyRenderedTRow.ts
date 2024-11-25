@@ -38,25 +38,27 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
 
         const p = p_2 ? 'p-2 p-2-Tbody' : ''
         const truncate = `overflow-ellipsis overflow-hidden`
-        const cellId = `${tableName}__${column.dataIndex}__${column.renderer}__${rowIndex}`
-        const cellTd = document.getElementById(`${cellId}__td`)
+        const { dataIndex, renderer } = column
+        const controlId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
+        const cellTd = document.getElementById(`${controlId}__td`)
         if (cellTd) {
             cellTd.className = twMerge(cellTd.className, tdClass, p)
             cellTd.style.cssText = tdStyleString
             cellTd.title = tdTooltip
-            cellTd.onmousemove = (e) => {
+            cellTd.onmousemove = () => {
                 // console.log('onmousemove', e)
                 if (applyOnMouseMoveScript) {
-                    applyOnMouseMoveScript(e)
+                    applyOnMouseMoveScript()
                 }
             }
         }
 
-        const cellDiv = document.getElementById(`${cellId}__div`)
+        const cellDiv = document.getElementById(`${controlId}__div`)
         if (cellDiv) {
             // console.log('cellDiv', cellId, truncate, divClass, cellDiv.className)
             cellDiv.className = twMerge(truncate, divClass, cellDiv.className)
             cellDiv.style.cssText = `${divStyleString}`
+            cellDiv.title = divTooltip
 
             const animationDelay = tableConfig.animationDelay || 0
             cellDiv.innerHTML = rendered

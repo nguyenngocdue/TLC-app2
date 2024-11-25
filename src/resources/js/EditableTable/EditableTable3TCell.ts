@@ -52,12 +52,13 @@ export const makeTCell = (
     let result: TableRenderedValueObject = { rendered: `` }
     let componentCase = 'not-yet-defined'
     let applyPostRenderScript = () => {}
-    let applyOnMouseMoveScript = (e: MouseEvent) => {}
+    let applyOnMouseMoveScript = () => {}
     // console.log(column.dataIndex, column)
 
     const { tableName } = params
     const { dataIndex, renderer } = column
-    const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
+    const controlName = `${tableName}[line__${rowIndex}][${dataIndex}]`
+    // const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
     const controlId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
 
     const rendererParams: TableRendererParams = {
@@ -84,7 +85,7 @@ export const makeTCell = (
                     tdStyle: {},
                     divStyle: {},
                     applyPostRenderScript: () => {},
-                    applyOnMouseMoveScript: (e: MouseEvent) => {},
+                    applyOnMouseMoveScript: () => {},
                 }
             }
             result = new CustomFunction4(rendererParams).render()

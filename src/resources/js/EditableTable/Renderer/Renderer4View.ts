@@ -36,7 +36,7 @@ export abstract class Renderer4View {
     }
     abstract render(data: any): TableRenderedValueObject
     applyPostRenderScript(): void {}
-    applyOnMouseMoveScript(e: MouseEvent): void {}
+    applyOnMouseMoveScript(): void {}
     protected getTableRendererParams(): TableRendererParams {
         const result: TableRendererParams = {
             controlName: this.controlName,

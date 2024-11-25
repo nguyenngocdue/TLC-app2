@@ -1,12 +1,11 @@
 import { makeTbodyTdEmpty } from './EditableTable3TBodyTDEmpty'
 import { TableColumn } from './Type/EditableTable3ColumnType'
-import { TableDataLine } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export class TbodyTr {
     constructor(
         private params: TableParams,
-        private row: TableDataLine,
+        // private row: TableDataLine,
         private rowIndex: number,
     ) {}
 

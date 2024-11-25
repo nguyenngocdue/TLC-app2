@@ -28,9 +28,9 @@ export class Attachment4Edit extends Renderer4Edit {
         const {
             fileType = 'image',
             maxFileCount = 1,
-            maxFileSize = 1024,
+            // maxFileSize = 1024,
             uploadable = true,
-            deletable = true,
+            // deletable = true,
             fieldName = column.dataIndex.toString(),
             groupId = null,
         } = column.rendererAttrs || {}

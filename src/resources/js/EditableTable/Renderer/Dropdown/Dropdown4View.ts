@@ -36,7 +36,7 @@ export class Dropdown4View extends Renderer4View {
             const tooltip = selectedItem[tooltipField] || ''
             result = `<div class="" title="${tooltip}">${label}</div>`
         } else {
-            result = getNotFound(valueField, cellValue)
+            result = getNotFound()
             tdClass = 'bg-gray-50'
         }
 

@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { TableParams } from './Type/EditableTable3ParamType'
 
-export const makeTfoot = ({ dataSource, columns, tableConfig }: TableParams) => {
+export const makeTfoot = ({ columns }: TableParams) => {
     const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
     let hasActualText = false
     const footers = columns.map((column, index) => {

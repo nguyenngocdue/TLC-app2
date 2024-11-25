@@ -8,8 +8,8 @@ export class TbodyTrs {
         const { dataSource } = this.params
         if (!dataSource.data) return []
 
-        const result = dataSource.data.map((row, rowIndex) =>
-            new TbodyTr(this.params, row, rowIndex).render(),
+        const result = dataSource.data.map((_, rowIndex) =>
+            new TbodyTr(this.params, rowIndex).render(),
         )
         return result
     }

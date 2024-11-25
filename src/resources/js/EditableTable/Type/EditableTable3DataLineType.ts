@@ -57,7 +57,7 @@ export interface TableRenderedValueObject {
     divStyle?: { [key: string]: string | number }
     divTooltip?: string
 
-    applyOnMouseMoveScript?: (e: MouseEvent) => void
+    applyOnMouseMoveScript?: () => void
     applyPostRenderScript?: () => void
 }
 

@@ -28,8 +28,15 @@ class WelcomeFortuneController extends Controller
         return $table;
     }
 
+    public function store(Request $request)
+    {
+        dump("In STORE");
+        return $this->index($request);
+    }
+
     public function index(Request $request)
     {
+
         if (sizeof($request->all())) {
             dump("Submitted table data:", $request->all());
         }

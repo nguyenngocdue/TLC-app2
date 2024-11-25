@@ -21,7 +21,7 @@ import {
     ControlAttributeSearchableDialog,
     ControlAttributeStatus,
     ControlAttributeText,
-    ControlAttributeTextarea,
+    // ControlAttributeTextarea,
     ControlAttributeToggle,
 } from './EditableTable3ControlAttributeType'
 

@@ -20,12 +20,12 @@ export const makeTbodyTdEmpty = (
 
     const widthStr = column.width ? `width: ${column.width}px;` : ''
     const styleList = `${widthStr}`
-    const cellId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
-    return `<td id="${cellId}__td" class="${classList}" style="${styleList}" 
+    const controlId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
+    return `<td id="${controlId}__td" class="${classList}" style="${styleList}" 
                 data-row="${rowIndex}" 
                 data-col="${columnIndex}"
                 data-column-key="${dataIndex}"
                 >
-                <div id="${cellId}__div" class="min-h-5 fade-in"></div>
+                <div id="${controlId}__div" class="min-h-5 fade-in"></div>
             </td>`
 }

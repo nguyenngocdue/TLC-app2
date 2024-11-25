@@ -1,6 +1,4 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
-import { TableConfig } from './Type/EditableTable3ConfigType'
-import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 export const ColumnNoValue: TableColumn = {

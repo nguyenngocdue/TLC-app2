@@ -81,12 +81,12 @@ export const renderRows = (
     }
 
     const renderedRows = slicedData
-        .map((row, idx) => {
+        .map((_, idx) => {
             const rowId = `${tableName}__${indices.startIdx + idx}`
 
             visibleRowIds[tableName].add(rowId) // Track newly rendered rows
             // console.log('adding', rowId, 'to', visibleRowIds)
-            return new TbodyTr(tableParams, row, indices.startIdx + idx).render().outerHTML
+            return new TbodyTr(tableParams, indices.startIdx + idx).render().outerHTML
         })
         .join('')
 
