@@ -22,7 +22,9 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
             divTooltip,
             p_2,
             componentCase,
-            applyPostScript,
+
+            applyPostRenderScript,
+            applyOnMouseMoveScript,
         } = tCell
         const tdStyleString = Object.entries(tdStyle)
             .map(([key, value]) => `${key}: ${value};`)
@@ -42,15 +44,20 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
             cellTd.className = twMerge(cellTd.className, tdClass, p)
             cellTd.style.cssText = tdStyleString
             cellTd.title = tdTooltip
+            cellTd.onmousemove = (e) => {
+                // console.log('onmousemove', e)
+                if (applyOnMouseMoveScript) {
+                    applyOnMouseMoveScript(e)
+                }
+            }
         }
 
         const cellDiv = document.getElementById(`${cellId}__div`)
         if (cellDiv) {
-            cellDiv.className = twMerge(cellDiv.className, divClass, truncate)
+            // console.log('cellDiv', cellId, truncate, divClass, cellDiv.className)
+            cellDiv.className = twMerge(truncate, divClass, cellDiv.className)
             cellDiv.style.cssText = `${divStyleString}`
-        }
 
-        if (cellDiv) {
             const animationDelay = tableConfig.animationDelay || 0
             cellDiv.innerHTML = rendered
             cellDiv.setAttribute('data-component-case', componentCase)
@@ -62,7 +69,8 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
 
             setTimeout(() => {
                 // if (column.dataIndex === 'user_id')
-                applyPostScript()
+                applyPostRenderScript()
+                // applyOnMouseMoveScript()
 
                 if (animationDelay) cellDiv.classList.add('visible')
             }, Math.random() * (tableConfig.animationDelay || 0))

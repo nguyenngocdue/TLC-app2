@@ -61,10 +61,6 @@ var tableObjectIndexedColumns = {};
                 'classList': @json($classList),
                 'animationDelay': @json($animationDelay),
 
-                // 'virtualScroll': {
-                //     'rowHeight': 45,
-                //     'viewportHeight': 640,
-                // }
                 'rowHeight': @json($rowHeight),
 
                 'orderable': {{($orderable??0) ? "true" : "false"}},

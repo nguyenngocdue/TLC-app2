@@ -51,16 +51,19 @@ class WelcomeFortuneDataSource05
         'rendererAttrs' => [],
       ],
       [
-        'dataIndex' => 'thumbnail',
+        'dataIndex' => 'attachment_1',
         'renderer' => 'attachment',
         'width' => 200,
         'classList' => 'whitespace-nowrap',
-        'rendererAttrs' => [],
+        'rendererAttrs' => [
+          'maxFileCount' => 12,
+          'groupId' => 1,
+        ],
       ],
       [
-        'dataIndex' => 'thumbnails',
+        'dataIndex' => 'attachment_2',
         'renderer' => 'attachment',
-        'width' => 200,
+        'width' => 400,
         'classList' => 'whitespace-nowrap',
         'rendererAttrs' => [],
       ],
@@ -83,11 +86,11 @@ class WelcomeFortuneDataSource05
     $tables = [
       [
         'name' => 'John and lots of his friends',
-        'thumbnail' => [
+        'attachment_1' => [
           'src' => asset('images/numbers/01.png'),
 
         ],
-        'thumbnails' => [
+        'attachment_2' => [
           ['src' => asset('images/numbers/01.png'),],
           ['src' => asset('images/numbers/02.png'),],
           ['src' => asset('images/numbers/03.png'),],

@@ -32,6 +32,7 @@ export interface ControlAttributeAvatarUser {
 }
 export interface ControlAttributeThumbnail {
     maxToShow?: number
+    maxPerLine?: number
 }
 
 export interface ControlAttributeCustomFunction {}
@@ -87,8 +88,8 @@ export interface ControlAttributeAttachment {
 
     uploadable?: boolean
     deletable?: boolean
-    showUploader?: boolean
-    showUploadDate?: boolean
+    // showUploader?: boolean
+    // showUploadDate?: boolean
 }
 export interface ControlAttributeSearchableDialog {
     isMultiple?: boolean

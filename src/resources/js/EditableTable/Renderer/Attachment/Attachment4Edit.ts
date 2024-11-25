@@ -1,53 +1,24 @@
-import { TableColumnAttachment } from '../../Type/EditableTable3ColumnType'
-import { TableConfig } from '../../Type/EditableTable3ConfigType'
+import { TableColumnAttachment, TableColumnThumbnail } from '../../Type/EditableTable3ColumnType'
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4Edit } from '../Renderer4Edit'
+import { Thumbnail4View } from '../Thumbnail/Thumbnail4View'
+import { attachment4UploadFileAjax } from './Attachment4UploadAjax'
 
 export class Attachment4Edit extends Renderer4Edit {
-    // Upload file method
-    async uploadFile(
-        tableConfig: TableConfig,
-        files: FileList | null,
-        fieldName: string,
-        groupId: number,
-    ) {
-        if (!files || files.length === 0) return
-
-        const formData = new FormData()
-        formData.append('object_type', tableConfig.lineObjectModelPath || 'no-objectType')
-        formData.append('object_id', (this.dataLine['id'] as unknown as string) || 'no-objectId')
-
-        // Add files to FormData
-        for (let i = 0; i < files.length; i++) {
-            formData.append(`${fieldName}[toBeUploaded][${groupId}][]`, files[i])
+    private reRenderThumbnail() {
+        const params = this.getTableRendererParams()
+        const thumbnailColumn = params.column as TableColumnThumbnail
+        if (thumbnailColumn.rendererAttrs) {
+            thumbnailColumn.rendererAttrs.maxToShow = Number.MAX_VALUE
+            thumbnailColumn.rendererAttrs.maxPerLine = 5
         }
+        const thumbnailDiv = new Thumbnail4View(params).render().rendered
+        $(`#${this.controlId}_thumbnail_div`).html(thumbnailDiv)
+    }
 
-        try {
-            const url = this.tableConfig.uploadServiceEndpoint || 'no-endpoint'
-
-            const csrfToken = document
-                .querySelector('meta[name="csrf-token"]')
-                ?.getAttribute('content')
-            if (!csrfToken) {
-                throw new Error('CSRF token not found. Ensure the meta tag is present.')
-            }
-
-            const response = await fetch(url, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken, // Attach the CSRF token
-                },
-            })
-
-            if (response.ok) {
-                const result = await response.json()
-                console.log('Upload successful:', result)
-            } else {
-                console.error('Upload failed:', response.statusText)
-            }
-        } catch (error) {
-            console.error('Error during upload:', error)
-        }
+    applyPostRenderScript(): void {
+        // console.log('Attachment4Edit.applyPostScript()')
+        this.reRenderThumbnail()
     }
 
     control() {
@@ -59,11 +30,9 @@ export class Attachment4Edit extends Renderer4Edit {
             maxFileCount = 1,
             maxFileSize = 1024,
             uploadable = true,
-            showUploader = true,
-            showUploadDate = true,
             deletable = true,
-            fieldName = column.dataIndex,
-            groupId = 0,
+            fieldName = column.dataIndex.toString(),
+            groupId = null,
         } = column.rendererAttrs || {}
 
         const classList = `border rounded bg-gray-100 hover:bg-gray-200 p-1 w-full cursor-pointer`
@@ -80,21 +49,41 @@ export class Attachment4Edit extends Renderer4Edit {
         if (maxFileCount > 1) {
             inputElement.multiple = true
         }
-        inputElement.addEventListener('change', (e) => {
+        inputElement.addEventListener('change', async (e) => {
             const files = (e.target as HTMLInputElement).files
-            this.uploadFile(tableConfig, files, fieldName, groupId)
+            // console.log(fieldName, groupId)
+            attachment4UploadFileAjax(tableConfig, files, fieldName, groupId, this.dataLine).then(
+                (result) => {
+                    console.log('Upload result:', result)
+                },
+            )
         })
 
         // Add input element to DOM
         document.body.appendChild(inputElement)
 
         // Generate upload button HTML
-        const uploadButton = `<button 
-            class="btn btn-primary" 
+        const uploadButton = !uploadable
+            ? ''
+            : `<button 
+            class="text-xs border rounded bg-blue-500 hover:bg-blue-700 text-white px-2 py-1" 
             type="button" 
             onclick="document.getElementById('${inputId}').click()"
-        >Upload</button>`
+        ><i class="fa fa-upload"></i></button>`
 
-        return `${uploadButton}`
+        return `<div class="flex items-center gap-0.5">
+        <div id="${controlId}_thumbnail_div"></div>
+        ${uploadButton}
+        </div>`
+    }
+
+    render(): TableRenderedValueObject {
+        return {
+            rendered: this.control(),
+            divClass: `overflow-auto`,
+            tdClass: `overflow-x-auto`,
+
+            applyPostRenderScript: this.applyPostRenderScript.bind(this),
+        }
     }
 }

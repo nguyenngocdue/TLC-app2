@@ -144,7 +144,13 @@ class UploadService2
             $result = [];
             foreach ($attachmentRows as $row) {
                 $insertedRow = Attachment::create($row);
-                $result[$insertedRow['id']] = $invertedFields[$row['category']];
+                $result[$insertedRow['id']] = [
+                    'category' => $invertedFields[$row['category']],
+                    'url_media' => $insertedRow['url_media'],
+                    'url_thumbnail' => $insertedRow['url_thumbnail'],
+                    'filename' => $insertedRow['filename'],
+
+                ];
             }
             // dd($result);
             return $result;

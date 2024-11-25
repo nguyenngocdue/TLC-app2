@@ -26,7 +26,7 @@
 <hr/>
 <br/>
 
-{{-- <x-renderer.table3
+<x-renderer.table3
     :columns="$table05['columns']"
     :dataSource="$table05['dataSource']"
     
@@ -43,7 +43,7 @@
 <hr/>
 <br/>
 
-<x-renderer.table3
+{{-- <x-renderer.table3
     :columns="$table04['columns']"
     :dataSource="$table04['dataSource']"
     
@@ -58,6 +58,7 @@
 <br/>
 <hr/>
 <br/>
+ --}}
 
 <x-renderer.table3
     :columns="$table03a['columns']"
@@ -78,6 +79,8 @@
 <br/>
 <hr/>
 <br/>
+
+{{--
 
 <x-renderer.table3
     :columns="$table03['columns']"

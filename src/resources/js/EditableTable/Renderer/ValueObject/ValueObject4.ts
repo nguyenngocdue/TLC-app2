@@ -10,25 +10,37 @@ export class ValueObject4 {
     constructor(private params: TableRendererParams) {}
 
     render(): TableRenderedValueObject {
-        const { cellValue, column } = this.params
+        const { cellValue } = this.params
         if (smartTypeOf(cellValue) == 'number')
-            return { rendered: cellValue.toString(), tdClass: 'p-2', applyPostScript: () => {} }
+            return {
+                rendered: cellValue.toString(),
+                tdClass: 'p-2',
+                applyOnMouseMoveScript: () => {},
+            }
         if (smartTypeOf(cellValue) == 'string')
-            return { rendered: cellValue.toString(), tdClass: 'p-2', applyPostScript: () => {} }
+            return {
+                rendered: cellValue.toString(),
+                tdClass: 'p-2',
+                applyOnMouseMoveScript: () => {},
+            }
         if (smartTypeOf(cellValue) == 'boolean')
-            return { rendered: cellValue.toString(), tdClass: 'p-2', applyPostScript: () => {} }
+            return {
+                rendered: cellValue.toString(),
+                tdClass: 'p-2',
+                applyOnMouseMoveScript: () => {},
+            }
 
         if (smartTypeOf(cellValue) == 'null')
             return {
                 rendered: '',
                 tdClass: this.params.column.classList || '',
-                applyPostScript: () => {},
+                applyOnMouseMoveScript: () => {},
             }
         if (smartTypeOf(cellValue) == 'undefined')
             return {
                 rendered: '',
                 tdClass: this.params.column.classList || '',
-                applyPostScript: () => {},
+                applyOnMouseMoveScript: () => {},
             }
 
         const theObject = cellValue as unknown as TableValueObjectType

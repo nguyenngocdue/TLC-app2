@@ -51,7 +51,8 @@ export const makeTCell = (
     let p_2 = true
     let result: TableRenderedValueObject = { rendered: `` }
     let componentCase = 'not-yet-defined'
-    let applyPostScript = () => {}
+    let applyPostRenderScript = () => {}
+    let applyOnMouseMoveScript = (e: MouseEvent) => {}
     // console.log(column.dataIndex, column)
 
     const { tableName } = params
@@ -82,7 +83,8 @@ export const makeTCell = (
                     divClass: '',
                     tdStyle: {},
                     divStyle: {},
-                    applyPostScript: () => {},
+                    applyPostRenderScript: () => {},
+                    applyOnMouseMoveScript: (e: MouseEvent) => {},
                 }
             }
             result = new CustomFunction4(rendererParams).render()
@@ -246,7 +248,9 @@ export const makeTCell = (
         divClass = result.divClass || divClass
         divStyle = result.divStyle || divStyle
         divTooltip = result.divTooltip || divTooltip
-        applyPostScript = result.applyPostScript || (() => {})
+
+        applyPostRenderScript = result.applyPostRenderScript || (() => {})
+        applyOnMouseMoveScript = result.applyOnMouseMoveScript || (() => {})
         if (column.mode == 'edit') p_2 = false
     }
     // console.log(rendered)
@@ -261,6 +265,8 @@ export const makeTCell = (
         divTooltip,
         p_2,
         componentCase,
-        applyPostScript,
+
+        applyPostRenderScript,
+        applyOnMouseMoveScript,
     }
 }

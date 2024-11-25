@@ -4,6 +4,7 @@ import { Str, getDataSource } from '../../Functions'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
+import { dr } from '@fullcalendar/core/internal-common'
 
 export class Dropdown4Edit extends Renderer4Edit {
     protected tableDebug = false
@@ -56,6 +57,25 @@ export class Dropdown4Edit extends Renderer4Edit {
         </option>`
     }
 
+    // applyPostRenderScript(): void {
+    //     console.log('Dropdown4Edit.applyPostScript()')
+    // }
+
+    applyOnMouseMoveScript(): void {
+        // console.log('Dropdown4Edit.applyOnMouseMoveScript()')
+        const dropdown = $(`#${this.controlId}`)
+        if (!dropdown.data('select2')) {
+            const column = this.column as TableColumnDropdown
+            const options = Dropdown4Edit.getOptionsExpensive(column)
+
+            $(`#${this.controlId}`).select2({
+                data: options,
+            })
+        } else {
+            // console.log('Dropdown4Edit.applyOnMouseMoveScript() - select2 already initialized')
+        }
+    }
+
     control() {
         const classList = this.tableConfig.classList?.dropdown_fake
         // return this.cellValue as unknown as string
@@ -75,31 +95,14 @@ export class Dropdown4Edit extends Renderer4Edit {
         </select>`
     }
 
-    // applyPostScript = () => {
-    //     // console.log('Dropdown4Edit.applyPostScript()', this)
-    //     const column = this.column as TableColumnDropdown
-    //     const { rendererAttrs = {}, dataIndex } = column
-    //     const {
-    //         allowClear,
-    //         allowChooseWhenOneItem,
-    //         allowOpen,
-    //         valueField = 'id',
-    //         labelField = 'name',
-    //         // descriptionField = 'description',
-    //         tooltipField = '',
-    //     } = rendererAttrs
-    //     // $(`#${this.controlId}`).select2({
-    //     //     placeholder: 'Select an option',
-    //     //     allowClear,
-    //     // })
-    // }
-
     render(): TableRenderedValueObject {
         let result = this.control()
 
         return {
             rendered: result,
-            // applyPostScript: this.applyPostScript,
+
+            applyOnMouseMoveScript: this.applyOnMouseMoveScript.bind(this),
+            // applyPostRenderScript: this.applyPostRenderScript.bind(this),
         }
     }
 }
