@@ -276,11 +276,12 @@ function populateHiddenInputs() {
 
     allRows.forEach((row, rowIndex) => {
         columns.forEach(column=>{
+            const {dataIndex} = column;
+            if(dataIndex === '_no_') return;
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = `${tableName}[ln_${rowIndex}][${column.dataIndex}]`;
 
-            const {dataIndex} = column;
             // console.log(row[dataIndex])
             input.value = row[dataIndex];
             hiddenInputContainer.appendChild(input);

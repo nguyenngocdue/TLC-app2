@@ -59,6 +59,7 @@ export interface TableRenderedValueObject {
 
     applyOnMouseMoveScript?: () => void
     applyPostRenderScript?: () => void
+    applyOnChangeScript?: () => void
 }
 
 export interface TableRendererParams {

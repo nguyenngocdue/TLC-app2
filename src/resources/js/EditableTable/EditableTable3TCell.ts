@@ -53,6 +53,7 @@ export const makeTCell = (
     let componentCase = 'not-yet-defined'
     let applyPostRenderScript = () => {}
     let applyOnMouseMoveScript = () => {}
+    let applyOnChangeScript = () => {}
     // console.log(column.dataIndex, column)
 
     const { tableName } = params
@@ -86,6 +87,7 @@ export const makeTCell = (
                     divStyle: {},
                     applyPostRenderScript: () => {},
                     applyOnMouseMoveScript: () => {},
+                    applyOnChangeScript: () => {},
                 }
             }
             result = new CustomFunction4(rendererParams).render()
@@ -251,6 +253,7 @@ export const makeTCell = (
 
         applyPostRenderScript = result.applyPostRenderScript || (() => {})
         applyOnMouseMoveScript = result.applyOnMouseMoveScript || (() => {})
+        applyOnChangeScript = result.applyOnChangeScript || (() => {})
         if (column.mode == 'edit') p_2 = false
     }
     // console.log(rendered)
@@ -268,5 +271,6 @@ export const makeTCell = (
 
         applyPostRenderScript,
         applyOnMouseMoveScript,
+        applyOnChangeScript,
     }
 }

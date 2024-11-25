@@ -3,12 +3,11 @@ import { DataFormat } from 'select2'
 import { Str, getDataSource } from '../../Functions'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 
 export class Dropdown4Edit extends Renderer4Edit {
     protected tableDebug = false
 
-    static getOptionsExpensive = (column: TableColumnDropdown) => {
+    getOptionsExpensive = (column: TableColumnDropdown) => {
         const { rendererAttrs = {} } = column
         const cbbDataSource = getDataSource(column)
 
@@ -51,25 +50,26 @@ export class Dropdown4Edit extends Renderer4Edit {
         if (!selectedItem) return ``
         const item = cbbDataSource[selectedItem[valueField]]
         const tooltip = item[tooltipField] || Str.makeId(item[valueField])
-        return `<option value="${item[valueField]}" title="${tooltip}">
+        // const fakeOption = `<option value="-1" title="Fake Option">-1</option>`
+        const realOption = `<option value="${item[valueField]}" title="${tooltip}">
             ${item[labelField]}
         </option>`
+        return realOption
     }
 
-    // applyPostRenderScript(): void {
-    //     console.log('Dropdown4Edit.applyPostScript()')
-    // }
+    applyOnChangeScript(): void {
+        $('#' + this.controlId).on('change', () => this.setValueToTableData())
+    }
 
     applyOnMouseMoveScript(): void {
         // console.log('Dropdown4Edit.applyOnMouseMoveScript()')
-        const dropdown = $(`#${this.controlId}`)
+        const dropdown = $('#' + this.controlId)
         if (!dropdown.data('select2')) {
             const column = this.column as TableColumnDropdown
-            const options = Dropdown4Edit.getOptionsExpensive(column)
+            const options = this.getOptionsExpensive(column)
 
-            dropdown.select2({
-                data: options,
-            })
+            dropdown.select2({ data: options })
+            this.applyOnChangeScript()
         } else {
             // console.log('Dropdown4Edit.applyOnMouseMoveScript() - select2 already initialized')
         }
@@ -91,16 +91,5 @@ export class Dropdown4Edit extends Renderer4Edit {
             >
             ${optionsStr}
         </select>`
-    }
-
-    render(): TableRenderedValueObject {
-        let result = this.control()
-
-        return {
-            rendered: result,
-
-            applyOnMouseMoveScript: this.applyOnMouseMoveScript.bind(this),
-            // applyPostRenderScript: this.applyPostRenderScript.bind(this),
-        }
     }
 }

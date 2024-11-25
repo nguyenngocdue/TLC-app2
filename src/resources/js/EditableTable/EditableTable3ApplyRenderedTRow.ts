@@ -31,6 +31,7 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
 
             applyPostRenderScript,
             applyOnMouseMoveScript,
+            applyOnChangeScript,
         } = tCell
         const tdStyleString = Object.entries(tdStyle)
             .map(([key, value]) => `${key}: ${value};`)
@@ -78,6 +79,7 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
             setTimeout(() => {
                 // if (column.dataIndex === 'user_id')
                 applyPostRenderScript()
+                applyOnChangeScript()
                 // applyOnMouseMoveScript()
 
                 if (animationDelay) cellDiv.classList.add('visible')

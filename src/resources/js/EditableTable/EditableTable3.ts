@@ -159,6 +159,7 @@ class EditableTable3 {
     render() {
         const { tableName } = this.params
         const columns = tableColumns[tableName]
+        const dataSource = tableData[tableName] as LengthAware
 
         let body = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 
@@ -168,14 +169,14 @@ class EditableTable3 {
             </div>`
         }
 
-        if (columns && !tableData[tableName]) {
+        if (columns && !dataSource) {
             body = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
             DataSource is required
             </div>`
         }
 
         // let trs: HTMLTableRowElement[] = []
-        if (columns && tableData[tableName]) {
+        if (columns && dataSource) {
             const tableEmptyRows = this.renderTable()
             if (tableEmptyRows) body = tableEmptyRows
         }
@@ -195,11 +196,10 @@ class EditableTable3 {
         //when document is ready
         $(() => {
             //Wait sometime for the browser to finish rendering the table
-            if (tableData[tableName]) {
-                const x = tableData[tableName] as LengthAware
+            if (dataSource) {
                 setTimeout(() => applyTopFor2ndHeader(tableName), 100)
 
-                if (x.data.length > 10) {
+                if (dataSource.data.length > 10) {
                     applyVirtualScrolling(this.params)
                 } else {
                     applyVirtualStatic(this.params)
