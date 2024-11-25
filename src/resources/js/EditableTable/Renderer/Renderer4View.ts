@@ -20,6 +20,10 @@ export abstract class Renderer4View {
     protected tableConfig: TableConfig
     protected tableParams: TableParams
     protected customRenderFn: (() => TableRenderedValueObject) | undefined
+
+    protected tdClass: string
+    protected divClass: string
+
     constructor(private params: TableRendererParams) {
         this.cellValue = this.params.cellValue
         this.column = this.params.column
@@ -31,6 +35,9 @@ export abstract class Renderer4View {
         this.tableConfig = this.params.params.tableConfig
         this.tableParams = this.params.params
         this.customRenderFn = this.params.customRenderFn
+
+        this.tdClass = ''
+        this.divClass = ''
     }
     abstract render(data: any): TableRenderedValueObject
     applyPostRenderScript(): void {}

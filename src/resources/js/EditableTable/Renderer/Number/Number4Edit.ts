@@ -25,8 +25,6 @@ export class Number4Edit extends Renderer4Edit {
             type="number" 
             step="${step}" 
             />`
-        return `
-        ${html}
-        `
+        return html
     }
 }

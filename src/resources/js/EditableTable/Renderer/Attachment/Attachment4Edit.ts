@@ -1,10 +1,12 @@
 import { TableColumnAttachment } from '../../Type/EditableTable3ColumnType'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4Edit } from '../Renderer4Edit'
 import { Thumbnail4View } from '../Thumbnail/Thumbnail4View'
 import { addOnUploadListener } from './Attachment4OnUpload'
 
 export class Attachment4Edit extends Renderer4Edit {
+    protected tdClass = 'overflow-x-auto'
+    protected divClass = 'overflow-auto'
+
     private reRenderThumbnail() {
         const params = this.getTableRendererParams()
         const thumbnailColumn = params.column as TableColumnAttachment
@@ -63,15 +65,5 @@ export class Attachment4Edit extends Renderer4Edit {
         <div id="${controlId}_thumbnail_div_view"></div>
         ${uploadButton}
         </div>`
-    }
-
-    render(): TableRenderedValueObject {
-        return {
-            rendered: this.control(),
-            divClass: `overflow-auto`,
-            tdClass: `overflow-x-auto`,
-
-            applyPostRenderScript: this.applyPostRenderScript.bind(this),
-        }
     }
 }

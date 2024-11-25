@@ -1,18 +1,19 @@
+import { TableCellType } from '../../Type/EditableTable3DataLineType'
 import { Renderer4Edit } from '../Renderer4Edit'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 
 export class Checkbox4Edit extends Renderer4Edit {
+    protected tdClass = 'text-center'
+    applyOnChangeScript(): void {
+        const input = document.getElementById(this.controlId) as HTMLInputElement
+        input &&
+            input.addEventListener('change', () =>
+                this.setValueToTableData(input.checked as unknown as TableCellType),
+            )
+    }
     control() {
         const { controlId, tableConfig, cellValue } = this
         const classList = tableConfig.classList?.toggle_checkbox
         const checked = !!cellValue ? 'checked' : ''
         return `<input id="${controlId}" type="checkbox" class="${classList}" ${checked} value="true"/>`
-    }
-
-    render(): TableRenderedValueObject {
-        const control = this.control()
-        const tdClass = `text-center`
-
-        return { rendered: control, tdClass }
     }
 }
