@@ -73,14 +73,14 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date01',
         'title' => 'Date Time',
-        'width' => 120,
+        'width' => 140,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [],
       ],
       [
         'dataIndex' => 'date02',
         'title' => 'Date',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'date',
@@ -89,7 +89,7 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date03',
         'title' => 'Time',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'time',
@@ -98,7 +98,7 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date04',
         'title' => 'Month',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'month',
@@ -107,7 +107,7 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date05',
         'title' => 'Year',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'year',

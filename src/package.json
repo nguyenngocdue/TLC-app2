@@ -15,6 +15,7 @@
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
         "@prettier/plugin-php": "^0.17.6",
+        "@types/flatpickr": "^3.1.4",
         "@types/select2": "^4.0.63",
         "@types/sortablejs": "^1.15.8",
         "autoprefixer": "^10.4.14",
@@ -47,6 +48,7 @@
         "chartjs-plugin-zoom": "^2.0.1",
         "diff": "^5.2.0",
         "exit": "^0.1.2",
+        "flatpickr": "^4.6.13",
         "highlight-within-textarea": "^2.0.5",
         "lazysizes": "^5.3.2",
         "lightgallery": "^2.7.1",

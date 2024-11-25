@@ -52,6 +52,7 @@ export interface TableRenderedValueObject {
     tdClass?: string
     tdStyle?: { [key: string]: string | number }
     tdTooltip?: string
+
     divClass?: string
     divStyle?: { [key: string]: string | number }
     divTooltip?: string
