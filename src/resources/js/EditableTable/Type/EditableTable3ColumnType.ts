@@ -22,7 +22,6 @@ import {
     ControlAttributeStatus,
     ControlAttributeText,
     ControlAttributeTextarea,
-    ControlAttributeThumbnail,
     ControlAttributeToggle,
 } from './EditableTable3ControlAttributeType'
 
@@ -141,12 +140,8 @@ export type TableColumnAvatarUser = BaseTableColumn & {
     renderer: 'avatar_user'
     rendererAttrs?: ControlAttributeAvatarUser
 }
-export type TableColumnThumbnail = BaseTableColumn & {
-    renderer: 'thumbnail' | 'thumbnails'
-    rendererAttrs?: ControlAttributeThumbnail
-}
 export type TableColumnAttachment = BaseTableColumn & {
-    renderer: 'attachment'
+    renderer: 'thumbnail' | 'thumbnails' | 'attachment'
     rendererAttrs?: ControlAttributeAttachment
 }
 
@@ -210,7 +205,6 @@ export type TableColumn =
     | TableColumnAggCount
     | TableColumnAvatarUser
     | TableColumnDateTime
-    | TableColumnThumbnail
     | TableColumnHyperLink
     | TableColumnParentLink
     | TableColumnCustomFunction

@@ -30,9 +30,27 @@ export interface ControlAttributeAggCount {}
 export interface ControlAttributeAvatarUser {
     maxToShow?: number
 }
-export interface ControlAttributeThumbnail {
+export interface ControlAttributeAttachment {
     maxToShow?: number
     maxPerLine?: number
+
+    fileType?: string
+    maxFileCount?: number
+    maxFileSize?: number
+
+    // categoryId?: number
+    // subCategoryId?: number
+    fieldName?: string
+    groupId?: number
+
+    // objectType: string
+    // objectId: number | string
+    // uploadServiceEndpoint?: string
+
+    uploadable?: boolean
+    deletable?: boolean
+    // showUploader?: boolean
+    // showUploadDate?: boolean
 }
 
 export interface ControlAttributeCustomFunction {}
@@ -72,25 +90,6 @@ export interface ControlAttributePickerDatetime {
     maxDate?: string
 }
 
-export interface ControlAttributeAttachment {
-    fileType?: string
-    maxFileCount?: number
-    maxFileSize?: number
-
-    // categoryId?: number
-    // subCategoryId?: number
-    fieldName?: string
-    groupId?: number
-
-    // objectType: string
-    // objectId: number | string
-    // uploadServiceEndpoint?: string
-
-    uploadable?: boolean
-    deletable?: boolean
-    // showUploader?: boolean
-    // showUploadDate?: boolean
-}
 export interface ControlAttributeSearchableDialog {
     isMultiple?: boolean
 }

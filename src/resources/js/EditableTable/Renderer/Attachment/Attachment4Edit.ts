@@ -1,17 +1,16 @@
-import { TableColumnAttachment, TableColumnThumbnail } from '../../Type/EditableTable3ColumnType'
-import { DataSourceItem, TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
+import { TableColumnAttachment } from '../../Type/EditableTable3ColumnType'
+import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4Edit } from '../Renderer4Edit'
 import { Thumbnail4View } from '../Thumbnail/Thumbnail4View'
 import { addOnUploadListener } from './Attachment4OnUpload'
-import { attachment4UploadFileAjax } from './Attachment4UploadAjax'
 
 export class Attachment4Edit extends Renderer4Edit {
     private reRenderThumbnail() {
         const params = this.getTableRendererParams()
-        const thumbnailColumn = params.column as TableColumnThumbnail
+        const thumbnailColumn = params.column as TableColumnAttachment
         if (thumbnailColumn.rendererAttrs) {
-            thumbnailColumn.rendererAttrs.maxToShow = Number.MAX_VALUE
-            thumbnailColumn.rendererAttrs.maxPerLine = 5
+            // thumbnailColumn.rendererAttrs.maxToShow = Number.MAX_VALUE
+            // thumbnailColumn.rendererAttrs.maxPerLine = 5
         }
         const thumbnailDiv = new Thumbnail4View(params).render().rendered
         $(`#${this.controlId}_thumbnail_div_view`).html(thumbnailDiv)

@@ -57,6 +57,7 @@ class WelcomeFortuneDataSource05
         'classList' => 'whitespace-nowrap',
         'rendererAttrs' => [
           'maxFileCount' => 12,
+          'maxPerLine' => 1,
           'groupId' => 1,
         ],
       ],
@@ -67,6 +68,8 @@ class WelcomeFortuneDataSource05
         'classList' => 'whitespace-nowrap',
         'rendererAttrs' => [
           'maxFileCount' => 12,
+          'maxPerLine' => 5,
+          'maxToShow' => 1000,
           'groupId' => 1,
         ],
       ],

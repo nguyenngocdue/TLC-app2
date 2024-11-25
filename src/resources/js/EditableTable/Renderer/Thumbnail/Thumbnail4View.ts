@@ -1,5 +1,5 @@
 import { getForeignObjects } from '../../Functions'
-import { TableColumnThumbnail } from '../../Type/EditableTable3ColumnType'
+import { TableColumnAttachment } from '../../Type/EditableTable3ColumnType'
 import { DataSourceItem, TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
@@ -53,7 +53,7 @@ export class Thumbnail4View extends Renderer4View {
 
     render(): TableRenderedValueObject {
         const cellValue = this.cellValue as unknown as DataSourceItem
-        const column = this.column as TableColumnThumbnail
+        const column = this.column as TableColumnAttachment
 
         const { maxToShow = 8, maxPerLine = 4 } = column.rendererAttrs || {}
         const merged = getForeignObjects(cellValue)

@@ -16,21 +16,18 @@ export const addOnUploadListener = (
         // console.log(fieldName, groupId)
         if (files) {
             for (let i = 0; i < files.length; i++) {
+                const imgContainerId = `${controlId}__${i}__img_container`
                 const emptyBox = Thumbnail4View.renderThumbnailBox(`${controlId}__${i}`).outerHTML
-                $(`#${controlId}_thumbnail_div`)
-                    .append(`<div id="${controlId}__${i}__img_container">
-                ${emptyBox}
-            </div>`)
+                const div = `<div id="${imgContainerId}">${emptyBox}</div>`
+                $(`#${controlId}_thumbnail_div`).append(div)
                 const onProgress = (file: File, percent: number) => {
                     const id = `#${controlId}__${i}__progress_bar`
                     $(id).css('width', `${percent}%`)
-                    console.log(id, percent)
+                    // console.log(id, percent)
                     // console.log('Upload progress:', file.name, percent)
                 }
                 const onDone = (file: File, result: any) => {
-                    const id = document.querySelector(
-                        `#${controlId}__${i}__img_container`,
-                    ) as Element
+                    const id = document.querySelector(`#${imgContainerId}`) as Element
                     const obj: DataSourceItem = Object.values(
                         result,
                     )[0] as unknown as DataSourceItem
@@ -43,13 +40,8 @@ export const addOnUploadListener = (
                     if (id && id.parentElement) {
                         id.parentElement.append(Thumbnail4View.renderThumbnailBox(item))
                         //remove the img_container
-                        $(`#${controlId}__${i}__img_container`).remove()
+                        $(`#${imgContainerId}`).remove()
                     }
-
-                    // id.setHTMLUnsafe(Thumbnail4View.renderThumbnailBox(item))
-                    // if (id && id.parentElement) {
-                    //     id.parentElement.append(Thumbnail4View.renderThumbnailBox(item))
-                    // }
                 }
 
                 try {
