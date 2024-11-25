@@ -57,7 +57,7 @@ export const makeTCell = (
 
     const { tableName } = params
     const { dataIndex, renderer } = column
-    const controlName = `${tableName}[line__${rowIndex}][${dataIndex}]`
+    const controlName = `${tableName}[l${rowIndex}][${dataIndex}]`
     // const controlName = `${tableName}[${dataIndex}][${rowIndex}]`
     const controlId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
 

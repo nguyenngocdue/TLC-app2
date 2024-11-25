@@ -71,11 +71,7 @@ export class PickerDateTime4Edit extends Renderer4Edit {
         const pickerType = column.rendererAttrs?.pickerType || 'datetime'
         const element = document.getElementById(this.controlId) as HTMLInputElement
 
-        // if (!element._flatpickr) {
-        flatpickr(element, this.getConfigJson(pickerType))
-        // } else {
-        //     console.error('Flatpickr instance already exists')
-        // }
+        if (element) flatpickr(element, this.getConfigJson(pickerType))
     }
 
     control() {

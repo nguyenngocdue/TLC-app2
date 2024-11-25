@@ -4,26 +4,28 @@ import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
 import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
-import {
-    ColumnNoValue,
-    convertArrayToLengthAware,
-    makeUpDefaultValue,
-} from './EditableTable3DefaultValue'
+import { makeUpDefaultValue } from './EditableTable3DefaultValue'
+import { ColumnNoValue, convertArrayToLengthAware } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
 import { visibleRowIds } from './VirtualScrolling/updateVirtualTableVisibleRows'
 import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
 import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
 import { applyVirtualStatic } from './VirtualScrolling/EditableTable3VirtualStatic'
+import { LengthAware } from './Type/EditableTable3DataLineType'
+
+declare let tableData: { [tableName: string]: LengthAware | any[] }
 
 class EditableTable3 {
     private tableDebug = false
     private startTime = new Date().getTime()
     private uploadServiceEndpoint = '/upload-service-endpoint'
+    private tableName: string = ''
 
     constructor(private params: TableParams) {
-        console.log('EditableTable3.constructor()')
+        // console.log('EditableTable3.constructor()')
         this.tableDebug = this.params.tableConfig.tableDebug || false
+        this.tableName = this.params.tableName
         if (this.tableDebug)
             console.log(`┌──────────────────${params.tableName}──────────────────┐`)
 
@@ -43,9 +45,10 @@ class EditableTable3 {
             }
         if (!this.params.tableConfig.uploadServiceEndpoint)
             this.params.tableConfig.uploadServiceEndpoint = this.uploadServiceEndpoint
-        if (Array.isArray(params.dataSource)) {
-            this.params.dataSource = convertArrayToLengthAware(params.dataSource)
-            if (this.tableDebug) console.log('convertArrayToLengthAware', this.params.dataSource)
+        if (Array.isArray(tableData[this.tableName])) {
+            const arrayOfAny = tableData[this.tableName] as any[]
+            tableData[this.tableName] = convertArrayToLengthAware(arrayOfAny)
+            if (this.tableDebug) console.log('convertArrayToLengthAware', tableData[this.tableName])
         }
         if (this.params.tableConfig.showNo) this.params.columns.unshift(ColumnNoValue)
         // makeUpPaginator(this.params.tableConfig, this.params.dataSource)
@@ -151,7 +154,7 @@ class EditableTable3 {
     }
 
     render() {
-        const { tableName, columns, dataSource } = this.params
+        const { tableName, columns } = this.params
 
         let body = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
 
@@ -161,14 +164,14 @@ class EditableTable3 {
             </div>`
         }
 
-        if (columns && !dataSource) {
+        if (columns && !tableData[tableName]) {
             body = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
             DataSource is required
             </div>`
         }
 
         // let trs: HTMLTableRowElement[] = []
-        if (columns && dataSource) {
+        if (columns && tableData[tableName]) {
             const tableEmptyRows = this.renderTable()
             if (tableEmptyRows) body = tableEmptyRows
         }
@@ -188,10 +191,11 @@ class EditableTable3 {
         //when document is ready
         $(() => {
             //Wait sometime for the browser to finish rendering the table
-            if (dataSource) {
+            if (tableData[tableName]) {
+                const x = tableData[tableName] as LengthAware
                 setTimeout(() => applyTopFor2ndHeader(tableName), 100)
 
-                if (dataSource.data.length > 10) {
+                if (x.data.length > 10) {
                     applyVirtualScrolling(this.params)
                 } else {
                     applyVirtualStatic(this.params)

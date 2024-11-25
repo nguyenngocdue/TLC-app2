@@ -25,12 +25,14 @@ var tableObjectIndexedColumns = {};
     k = {...k, "users": @json($users),}
     k_by = {}
 
+    tableData = {...tableData, "{{$tableName}}":  @json($dataSource)}
+    tableColumns = {...tableColumns, "{{$tableName}}": @json($columns)}
+
     var {{$tableName}}_Object = null;
     $(document).ready(function() {
         const params = {
             'tableName': @json($tableName),
             'columns': @json($columns),
-            'dataSource': @json($dataSource),
             'dataHeader': @json($dataHeader),
 
             'tableConfig': {

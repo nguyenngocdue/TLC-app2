@@ -254,24 +254,33 @@
 <button class="rounded border p-1 m-1">SUBMIT</button>
 </form>
 
+<div id="hidden-input-container">
+HHHHH
+</div>
 
 <script>
+
+function populateHiddenInputs() {
+    const form = document.getElementById('virtual-table-form');
+    const hiddenInputContainer = document.getElementById('hidden-input-container');
+
+    hiddenInputContainer.innerHTML = '';
+    tableData["table11"].forEach((row, index) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = `table11[l${index}][value]`;
+        input.value = row.value;
+        hiddenInputContainer.appendChild(input);
+    });
+    console.log(hiddenInputContainer)
+}
+
 const form = document.getElementById("virtual-table-form") 
 
 form.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent default form submission
-
-    // Serialize the data
-    const jsonData = JSON.stringify(tableData);
-
-    // Send via AJAX
-    fetch(form.action, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: jsonData,
-    })
+    event.preventDefault();
+    populateHiddenInputs();
+    // form.submit();
 })
 </script>
 
