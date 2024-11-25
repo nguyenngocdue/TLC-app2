@@ -68,7 +68,7 @@ export class Dropdown4Edit extends Renderer4Edit {
             const column = this.column as TableColumnDropdown
             const options = Dropdown4Edit.getOptionsExpensive(column)
 
-            $(`#${this.controlId}`).select2({
+            dropdown.select2({
                 data: options,
             })
         } else {

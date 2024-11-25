@@ -1,7 +1,8 @@
 import { TableColumnAttachment, TableColumnThumbnail } from '../../Type/EditableTable3ColumnType'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
+import { DataSourceItem, TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4Edit } from '../Renderer4Edit'
 import { Thumbnail4View } from '../Thumbnail/Thumbnail4View'
+import { addOnUploadListener } from './Attachment4OnUpload'
 import { attachment4UploadFileAjax } from './Attachment4UploadAjax'
 
 export class Attachment4Edit extends Renderer4Edit {
@@ -13,7 +14,7 @@ export class Attachment4Edit extends Renderer4Edit {
             thumbnailColumn.rendererAttrs.maxPerLine = 5
         }
         const thumbnailDiv = new Thumbnail4View(params).render().rendered
-        $(`#${this.controlId}_thumbnail_div`).html(thumbnailDiv)
+        $(`#${this.controlId}_thumbnail_div_view`).html(thumbnailDiv)
     }
 
     applyPostRenderScript(): void {
@@ -46,20 +47,8 @@ export class Attachment4Edit extends Renderer4Edit {
         inputElement.className = classList
         inputElement.accept = `${fileType}/*`
         inputElement.style.display = 'none'
-        if (maxFileCount > 1) {
-            inputElement.multiple = true
-        }
-        inputElement.addEventListener('change', async (e) => {
-            const files = (e.target as HTMLInputElement).files
-            // console.log(fieldName, groupId)
-            attachment4UploadFileAjax(tableConfig, files, fieldName, groupId, this.dataLine).then(
-                (result) => {
-                    console.log('Upload result:', result)
-                },
-            )
-        })
-
-        // Add input element to DOM
+        if (maxFileCount > 1) inputElement.multiple = true
+        addOnUploadListener(inputElement, controlId, tableConfig, fieldName, groupId, this.dataLine)
         document.body.appendChild(inputElement)
 
         // Generate upload button HTML
@@ -72,7 +61,7 @@ export class Attachment4Edit extends Renderer4Edit {
         ><i class="fa fa-upload"></i></button>`
 
         return `<div class="flex items-center gap-0.5">
-        <div id="${controlId}_thumbnail_div"></div>
+        <div id="${controlId}_thumbnail_div_view"></div>
         ${uploadButton}
         </div>`
     }

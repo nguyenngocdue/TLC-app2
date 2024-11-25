@@ -160,7 +160,7 @@ class Table extends Component
     ];
 
     $table2 = view("components.renderer.table", $params);
-    // return $table2;
+    return $table2;
 
     $params['tableName'] = 'table' . self::$table11NameCounter++;
     $table3 = view("components.renderer.table3", $params);

@@ -61,11 +61,14 @@ class WelcomeFortuneDataSource05
         ],
       ],
       [
-        'dataIndex' => 'attachment_2',
+        'dataIndex' => 'attachment_3',
         'renderer' => 'attachment',
-        'width' => 400,
+        'width' => 240,
         'classList' => 'whitespace-nowrap',
-        'rendererAttrs' => [],
+        'rendererAttrs' => [
+          'maxFileCount' => 12,
+          'groupId' => 1,
+        ],
       ],
       [
         'dataIndex' => 'avatar_user',
@@ -90,7 +93,7 @@ class WelcomeFortuneDataSource05
           'src' => asset('images/numbers/01.png'),
 
         ],
-        'attachment_2' => [
+        'attachment_3' => [
           ['src' => asset('images/numbers/01.png'),],
           ['src' => asset('images/numbers/02.png'),],
           ['src' => asset('images/numbers/03.png'),],
