@@ -4,8 +4,8 @@
 <label class='peer-checked:bg-gray-300 peer-checked:text-gray-700'></label>
 <label class='peer-checked:bg-orange-300 peer-checked:text-orange-700'></label>
 
-<div class="table-cell"></div>
-<div class="table-row"></div>
+<div class="table-cell cursor-grab"></div>
+<div class="table-row cursor-grabbing"></div>
 
 <div class="top-1/4 left-1/4 translate-x-1/4 -translate-y-1/4"></div>
 {{-- <div class="xs:hidden"></div>

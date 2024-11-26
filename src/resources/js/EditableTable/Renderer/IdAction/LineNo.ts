@@ -5,7 +5,7 @@ export class LineNo extends Renderer4View {
     render(): TableRenderedValueObject {
         const rowIndex = this.rowIndex
         const rendered = (rowIndex + 1).toString()
-        const divClass = this.tableConfig.orderable ? `drag-handle cursor-pointer` : ``
+        const divClass = this.tableConfig.orderable ? `drag-handle cursor-grab` : ``
 
         return {
             rendered,
