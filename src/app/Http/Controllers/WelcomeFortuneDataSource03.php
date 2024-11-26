@@ -119,7 +119,7 @@ class WelcomeFortuneDataSource03
 
     $tables = [
       [
-        'name' => 'John and lots of his friends',
+        'name' => 'Alice',
         'status' => 'active',
         'text' => 'a string',
         'date01' => '2021-01-01 06:00:00',
@@ -134,7 +134,7 @@ class WelcomeFortuneDataSource03
         'user_employeeid' => null,
       ],
       [
-        'name' => 'Doe',
+        'name' => 'Bob',
         'status' => 'new',
         'text' => 'another string',
         'date01' => '2021-01-01 08:00:00',
@@ -149,7 +149,7 @@ class WelcomeFortuneDataSource03
         'user_employeeid' => 'TLCM01069',
       ],
       [
-        'name' => 'Doe',
+        'name' => 'Ceasar',
         'status' => 'new',
         'text' => 'another string',
         'date01' => '2021-01-01 23:00:00',

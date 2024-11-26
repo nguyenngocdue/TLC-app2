@@ -59,6 +59,10 @@ const calculateLoadRemoveIndices = (
     return indices
 }
 
+export const renderOneEmptyRow = (tableParams: TableParams, rowIdx: number) => {
+    return new TbodyTr(tableParams, rowIdx).render()
+}
+
 export const renderRows = (
     data: any[],
     indices: { startIdx: number; endIdx: number },
@@ -67,7 +71,6 @@ export const renderRows = (
     position: 'top' | 'bottom',
 ) => {
     const tableName = tableParams.tableName
-    // console.log('rendering rows', tableParams.tableName, indices.startIdx, indices.endIdx)
     let slicedData = data.slice(indices.startIdx, indices.endIdx)
 
     // Adjust the sliced data based on scrolling direction and visibleRowCount
@@ -83,23 +86,71 @@ export const renderRows = (
         }
     }
 
+    // Generate the rows using `renderOneRow`
     const renderedRows = slicedData
         .map((_, idx) => {
-            const rowId = `${tableName}__${indices.startIdx + idx}`
-
+            const rowIndex = indices.startIdx + idx
+            const rowId = `${tableName}__${rowIndex}`
             visibleRowIds[tableName].add(rowId) // Track newly rendered rows
-            // console.log('adding', rowId, 'to', visibleRowIds)
-            return new TbodyTr(tableParams, indices.startIdx + idx).render().outerHTML
+            return renderOneEmptyRow(tableParams, rowIndex).outerHTML
         })
         .join('')
 
+    // Insert the rendered rows into the table
     const spacerId = `#${tableName} tbody>tr#spacer-${position}`
+
     position === 'bottom' ? $(spacerId).before(renderedRows) : $(spacerId).after(renderedRows)
 
+    // Ensure `applyRenderedTRow` is called after the rows are attached to the DOM
     slicedData.forEach((row, idx) => {
-        applyRenderedTRow(tableParams, row, indices.startIdx + idx)
+        const rowElement = document.getElementById(`${tableName}__${indices.startIdx + idx}`)
+        if (rowElement) {
+            applyRenderedTRow(tableParams, row, indices.startIdx + idx)
+        }
     })
 }
+
+// export const renderRows = (
+//     data: any[],
+//     indices: { startIdx: number; endIdx: number },
+//     tableParams: TableParams,
+//     visibleRowCount: number,
+//     position: 'top' | 'bottom',
+// ) => {
+//     const tableName = tableParams.tableName
+//     // console.log('rendering rows', tableParams.tableName, indices.startIdx, indices.endIdx)
+//     let slicedData = data.slice(indices.startIdx, indices.endIdx)
+
+//     // Adjust the sliced data based on scrolling direction and visibleRowCount
+//     if (slicedData.length > visibleRowCount) {
+//         if (position === 'bottom') {
+//             // Scrolling down, keep only the last visibleRowCount items
+//             slicedData = slicedData.slice(-visibleRowCount)
+//             indices.startIdx = indices.endIdx - visibleRowCount
+//         } else {
+//             // Scrolling up, keep only the first visibleRowCount items
+//             slicedData = slicedData.slice(0, visibleRowCount)
+//             indices.endIdx = indices.startIdx + visibleRowCount
+//         }
+//     }
+
+//     const renderedRows = slicedData
+//         .map((_, idx) => {
+//             const rowId = `${tableName}__${indices.startIdx + idx}`
+
+//             visibleRowIds[tableName].add(rowId) // Track newly rendered rows
+//             // console.log('adding', rowId, 'to', visibleRowIds)
+//             return new TbodyTr(tableParams, indices.startIdx + idx).render().outerHTML
+//         })
+//         .join('')
+
+//     const spacerId = `#${tableName} tbody>tr#spacer-${position}`
+//     position === 'bottom' ? $(spacerId).before(renderedRows) : $(spacerId).after(renderedRows)
+
+//     slicedData.forEach((row, idx) => {
+//         applyRenderedTRow(tableParams, row, indices.startIdx + idx)
+//     })
+// }
 
 const removeRows = (indices: { startIdx: number; endIdx: number }, tableName: string) => {
     if (indices.startIdx == indices.endIdx) return
