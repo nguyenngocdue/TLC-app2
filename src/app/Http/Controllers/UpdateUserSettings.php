@@ -374,8 +374,9 @@ class UpdateUserSettings extends Controller
         return $params;
     }
 
-    private function updatePresetFilter($inputValue){
-        if(isset($inputValue['preset_1'])){
+    private function updatePresetFilter($inputValue)
+    {
+        if (isset($inputValue['preset_1'])) {
             $items = explode('/', $inputValue['preset_1']);
             [$fromDate, $toDate] = $items;
             $inputValue['from_date'] = trim($fromDate);
@@ -386,12 +387,13 @@ class UpdateUserSettings extends Controller
         return $inputValue;
     }
 
-    private function updateFromTimeToTime($paramsInUser) {
+    private function updateFromTimeToTime($paramsInUser)
+    {
         $fromDate = $paramsInUser['from_date'] ?? null;
         $toDate = $paramsInUser['to_date'] ?? null;
         $timeZone = $paramsInUser['time_zone'] ?? null;
-        if ($timeZone){
-            $timeAsNumber = -1*DateReport::getUtcOffset($timeZone);
+        if ($timeZone) {
+            $timeAsNumber = -1 * DateReport::getUtcOffset($timeZone);
             if ($fromDate) {
                 $paramsInUser['from_date'] = DateReport::convertToTimezone($fromDate, $timeAsNumber);
             }
@@ -403,11 +405,12 @@ class UpdateUserSettings extends Controller
         return $paramsInUser;
     }
 
-    private function setWeekOfYear(&$inputValue){
+    private function setWeekOfYear(&$inputValue)
+    {
         $weeksOfYearNum = $inputValue['week_of_year'];
         $dates = DateReport::getWeekOfYearData();
         $date = $dates[$weeksOfYearNum];
-        [$toDate1, $toDate2] = [ $date->last_time->to_date, $date->this_time->to_date];
+        [$toDate1, $toDate2] = [$date->last_time->to_date, $date->this_time->to_date];
         $inputValue['last_time_to_date'] = $toDate1;
         $inputValue['this_time_to_date'] = $toDate2;
         $inputValue['year'] =  $date->this_time->year;
@@ -421,43 +424,45 @@ class UpdateUserSettings extends Controller
         $reportType2 = $inputValue['entity_type2'];
         $rpId = $inputValue['report_id'];
 
-
-        if (isset($inputValue['week_of_year']) && $inputValue['week_of_year']){
-           $this->setWeekOfYear($inputValue);
-        }
-
-        // when select "Search Quick Ranges"
-        if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updatePresetFilter"){
-            $inputValue = $this->updatePresetFilter($inputValue);
+        if (isset($inputValue['week_of_year']) && $inputValue['week_of_year']) {
+            $this->setWeekOfYear($inputValue);
         }
         
-        if(isset($inputValue['form_type']) && $inputValue['form_type'] === "resetAbsoluteTimeRange"){
-            $rp = Rp_report::find($rpId);
-            $inputValue = DefaultValueReport::updateDefaultValueFromDateToDate($inputValue, $rp);
+        $formType1 = isset($inputValue['form_type']) ?  $inputValue['form_type'] : null;
+        switch ($formType1) {
+            case 'updatePresetFilter':
+                $inputValue = $this->updatePresetFilter($inputValue);
+                break;
+            case 'resetAbsoluteTimeRange':
+                $rp = Rp_report::find($rpId);
+                $inputValue = DefaultValueReport::updateDefaultValueFromDateToDate($inputValue, $rp);
+                break;
+            default:
+                // continue
+                break;
         }
-        
-        
         $filters = $this->getFilterReport2($inputValue);
-        
         $rpFilterLinks = Rp_report::find($rpId)->getDeep()->getRpFilterLinks;
-        $storedFilterKey = Report::getStoredFilterKey($rpId,$rpFilterLinks);
-        
-        
+        $storedFilterKey = Report::getStoredFilterKey($rpId, $rpFilterLinks);
         $keys = [$entityType, $reportType2, $storedFilterKey];
         $paramToUpdate = [];
         if (Report::checkKeysExist($settings, $keys)) {
             $paramsInUser = &$settings[$entityType][$reportType2][$storedFilterKey];
-            foreach ($filters as $key => $value) {
-                $paramsInUser[$key] = isset($inputValue['form_type']) && $inputValue['form_type'] == "resetParamsReport2" ? null :$value;
+            $formType = isset($inputValue['form_type']) ? $inputValue['form_type'] : null;
+            switch ($formType) {
+                case 'resetParamsReport2':
+                    $paramsInUser = array_map(fn() => null, $paramsInUser);
+                    break;
+                case 'updateTimeZone':
+                    $paramsInUser = $this->updateFromTimeToTime($paramsInUser);
+                    break;
+                default:
+                    foreach ($filters as $key => $value) $paramsInUser[$key] = $value;
+                    break;
             }
-            
-            if(isset($inputValue['form_type']) && $inputValue['form_type'] === "updateTimeZone"){
-                $paramsInUser = $this->updateFromTimeToTime($paramsInUser);
-            };
-            
             $paramToUpdate = $paramsInUser;
         } else $paramToUpdate = $filters;
-        
+
         if (isset($inputValue['form_type']) && $inputValue['form_type'] === "updateAbsoluteTimeRange") {
             $paramToUpdate = $this->updateFromTimeToTime($paramToUpdate);
         }
