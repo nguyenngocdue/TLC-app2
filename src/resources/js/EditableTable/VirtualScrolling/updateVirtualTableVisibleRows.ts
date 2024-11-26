@@ -6,12 +6,13 @@ import { TableParams } from '../Type/EditableTable3ParamType'
 import { applyFixedColumnWidth } from '../FixedColumn/EditableTable3FixedColumn'
 import { applySortableRow } from '../SortableRow/EditableTable3SortableRows'
 import { TableColumn } from '../Type/EditableTable3ColumnType'
+import { reValueOrderNoColumn } from '../SortableRow/EditableTable3OrderableColumn'
 
 declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 const bufferSize = 5
-let lastRenderedStartIdx: { [tableName: string]: number } = {}
-let lastRenderedEndIdx: { [tableName: string]: number } = {}
+export const lastRenderedStartIdx: { [tableName: string]: number } = {}
+const lastRenderedEndIdx: { [tableName: string]: number } = {}
 export const visibleRowIds: { [tableName: string]: Set<string> } = {} // Use a Set to track currently visible row IDs
 
 const updateSpacer = (id: string, height: number, hiddenRows: number, scrollTop: number) => {
@@ -230,7 +231,10 @@ export const updateVisibleRows = (
         }
     }
 
-    if (tableConfig.orderable) applySortableRow(tableParams)
+    if (tableConfig.orderable) {
+        applySortableRow(tableParams)
+        reValueOrderNoColumn(tableParams)
+    }
     applyFixedColumnWidth(tableName, columns)
 
     lastRenderedStartIdx[tableName] = startIdx

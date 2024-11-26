@@ -16,6 +16,12 @@ class WelcomeFortuneDataSource03
       // ['dataIndex' => 'id', 'title' => 'Print', 'renderer' => 'action_print.', 'fixed' => 'left'],
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
       [
+        'dataIndex' => 'order_no',
+        'renderer' => 'text',
+        'invisible' => !true,
+        'fixed' => 'left'
+      ],
+      [
         'dataIndex' => 'name',
         'renderer' => 'text',
         'fixed' => 'left',
@@ -172,7 +178,7 @@ class WelcomeFortuneDataSource03
     }
 
     foreach ($duplicator as $key => $row) {
-      $duplicator[$key]['name'] .= " " . $key;
+      $duplicator[$key]['name'] .= " " . ($key + 1);
     }
 
     return  [
