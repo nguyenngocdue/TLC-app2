@@ -18,7 +18,7 @@ export class PickerDateTime4Edit extends Renderer4Edit {
             element.addEventListener('change', () => {
                 const value = element.value
                 const date = new Date(value)
-                const newValue = date.toISOString()
+                const newValue = date.toISOString().slice(0, 19).replace('T', ' ')
 
                 this.setValueToTableData(newValue as unknown as TableCellType)
             })
@@ -39,7 +39,7 @@ export class PickerDateTime4Edit extends Renderer4Edit {
         const pickerType = column.rendererAttrs?.pickerType || 'datetime'
 
         return `<input 
-            type="text" 
+            type="hidden" 
             id="${this.controlId}" 
             class="${tableConfig.classList?.text}" 
             placeholder="${pickerType} input"
