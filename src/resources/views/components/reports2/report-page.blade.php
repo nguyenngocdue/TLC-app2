@@ -9,7 +9,7 @@
             {{-- Show Setting Reports --}}
             @if ($isAdmin)
                 <div class="no-print absolute">
-                    <a title='Edit Report' class="block p-2" href="{{ route('rp_reports.edit', $report->id) }}" target="blank" >
+                    <a title='Edit Report' style="top : -30px" class="block p-2 absolute" href="{{ route('rp_reports.edit', $report->id) }}" target="blank" >
                         <span class="inline-flex items-center rounded-md bg-purple-50 px-2   py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
                             <i class="fa-solid fa-gear"></i>
                         </span>

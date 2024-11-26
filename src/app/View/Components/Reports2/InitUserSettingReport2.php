@@ -58,6 +58,8 @@ class InitUserSettingReport2
                     else {
                         $paramsToUpdate[$key] = $value;
                     }
+                }else {
+                    $paramsToUpdate[$key] = $value;
                 }
             }
         } catch (\Exception $e) {
