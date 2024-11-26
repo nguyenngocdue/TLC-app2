@@ -1,14 +1,9 @@
 import { ValueObject4 } from './Renderer/ValueObject/ValueObject4'
 import { smartTypeOf } from './Functions'
 import { TableColumn } from './Type/EditableTable3ColumnType'
-import {
-    TableValueObjectType,
-    TableDataLine,
-    TableRenderedValueObject,
-    TableRendererParams,
-} from './Type/EditableTable3DataLineType'
+import { TableValueObjectType, TableDataLine } from './Type/EditableTable3DataLineType'
+import { TableRenderedValueObject, TableRendererParams } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
-
 import { Text4 } from './Renderer/Text/Text4'
 import { Dropdown4 } from './Renderer/Dropdown/Dropdown4'
 import { Toggle4 } from './Renderer/Toggle/Toggle4'
@@ -19,7 +14,7 @@ import { CustomFunction4 } from './Renderer/CustomFunction/CustomFunction4'
 import { IdLink } from './Renderer/IdAction/IdLink'
 import { LineNo } from './Renderer/IdAction/LineNo'
 import { ActionPrint } from './Renderer/IdAction/ActionPrint'
-import { ActionBox } from './Renderer/IdAction/ActionBox'
+import { ActionColumn } from './Renderer/IdAction/ActionColumn'
 import { ActionCheckbox } from './Renderer/IdAction/ActionCheckbox'
 import { HyperLink4View } from './Renderer/HyperLink/HyperLink4View'
 import { Column4View } from './Renderer/Column/Column4View'
@@ -104,7 +99,7 @@ export const makeTCell = (
             result = new ActionPrint(rendererParams).render()
             break
         case renderer == 'action_column': //Obsolete
-            result = new ActionBox(rendererParams).render()
+            result = new ActionColumn(rendererParams).render()
             break
         case renderer == 'action_checkbox.':
         case renderer == 'checkbox_column': //Obsolete

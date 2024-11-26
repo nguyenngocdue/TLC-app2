@@ -26,39 +26,39 @@ class EditableTable3 {
 
     constructor(private params: TableParams) {
         // console.log('EditableTable3.constructor()')
-        this.tableDebug = this.params.tableConfig.tableDebug || false
-        this.tableName = this.params.tableName
+        this.tableDebug = params.tableConfig.tableDebug || false
+        this.tableName = params.tableName
         if (this.tableDebug)
             console.log(`┌──────────────────${params.tableName}──────────────────┐`)
 
         //Columns
-        tableColumns[this.params.tableName] = makeUpDefaultValue(params)
-        const columns = tableColumns[this.params.tableName]
+        tableColumns[params.tableName] = makeUpDefaultValue(params)
+        const columns = tableColumns[params.tableName]
         // console.log(this.params.columns)
-        this.params.indexedColumns = {}
+        params.indexedColumns = {}
         if (columns) {
             columns.forEach((column) => {
-                this.params.indexedColumns[column.dataIndex] = column
+                params.indexedColumns[column.dataIndex] = column
             })
         }
 
-        if (!this.params.tableConfig)
-            this.params.tableConfig = {
+        if (!params.tableConfig)
+            params.tableConfig = {
                 lineObjectModelPath: 'unset-objectType',
             }
-        if (!this.params.tableConfig.uploadServiceEndpoint)
-            this.params.tableConfig.uploadServiceEndpoint = this.uploadServiceEndpoint
+        if (!params.tableConfig.uploadServiceEndpoint)
+            params.tableConfig.uploadServiceEndpoint = this.uploadServiceEndpoint
         if (Array.isArray(tableData[this.tableName])) {
             const arrayOfAny = tableData[this.tableName] as any[]
             tableData[this.tableName] = convertArrayToLengthAware(arrayOfAny)
             if (this.tableDebug) console.log('convertArrayToLengthAware', tableData[this.tableName])
         }
-        if (this.params.tableConfig.showNo) columns.unshift(ColumnNoValue)
-        // makeUpPaginator(this.params.tableConfig, this.params.dataSource)
+        if (params.tableConfig.showNo) columns.unshift(ColumnNoValue)
+        // makeUpPaginator(params.tableConfig, params.dataSource)
 
         if (this.tableDebug) console.log('EditableTable3', { ...params, columns })
 
-        visibleRowIds[this.params.tableName] = new Set<string>()
+        visibleRowIds[params.tableName] = new Set<string>()
     }
 
     renderTable() {
