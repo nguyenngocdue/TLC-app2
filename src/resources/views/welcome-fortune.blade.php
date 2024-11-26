@@ -62,6 +62,15 @@
 <br/>
  --}}
 
+@php
+    $showButton = [
+        "AddAnItem" => 1,
+        "AddFromList" => 1,
+        "CloneFromTemplate" => 1,
+        "Recalculate" => 1,
+    ];
+@endphp
+
 <x-renderer.table3
     :columns="$table03a['columns']"
     :dataSource="$table03['dataSource']"
@@ -75,6 +84,9 @@
     orderable="1"
     duplicatable="1"
     deletable="1"
+
+    :showButton="$showButton"
+
     >
 </x-renderer.table>
 

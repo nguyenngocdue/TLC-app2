@@ -62,6 +62,8 @@ class Table3 extends Component
     private $duplicatable = false,
     private $deletable = false,
 
+    private $showButton = false,
+
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
     // private $borderColor = 'border-gray-300',
@@ -127,6 +129,8 @@ class Table3 extends Component
       'orderable' => $this->orderable,
       'duplicatable' => $this->duplicatable,
       'deletable' => $this->deletable,
+
+      'showButton' => $this->showButton,
     ];
     // Log::info($params);
     return view("components.renderer.table3", $params);

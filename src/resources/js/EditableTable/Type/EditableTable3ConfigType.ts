@@ -49,10 +49,12 @@ export interface TableConfig {
     lineObjectModelPath: string
     uploadServiceEndpoint?: string
 
-    showButtonAddAnItem?: boolean
-    showButtonAddFromList?: boolean
-    showButtonCloneFromTemplate?: boolean
-    showButtonRecalculate?: boolean
+    showButton?: {
+        AddAnItem?: boolean
+        AddFromList?: boolean
+        CloneFromTemplate?: boolean
+        Recalculate?: boolean
+    }
 
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean

@@ -14,6 +14,8 @@ import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualS
 import { applyVirtualStatic } from './VirtualScrolling/EditableTable3VirtualStatic'
 import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableColumn } from './Type/EditableTable3ColumnType'
+import { ControlButtonGroup } from './ControlButtonGroup/ControlButtonGroup'
+import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
 declare let tableColumns: { [tableName: string]: TableColumn[] }
@@ -138,17 +140,28 @@ class EditableTable3 {
             ${tableStr}
         </div>`
 
-        const debugStr = tableDebug
+        const debugStrTop = tableDebug
             ? `<div class="bg-red-600 text-white text-center border font-bold">${tableName} is in DEBUG Mode</div>`
             : ``
 
+        console.log('this.params.tableConfig', this.params.tableConfig)
+        const debugStrBottom = !tableDebug
+            ? `<div class="bg-red-600 text-white border font-bold">
+                ${TableConfigDiv(this.params)}
+                </div>`
+            : ``
+
+        const controlButtonGroup = ControlButtonGroup(this.params)
+
         const editableTable = `
-        ${debugStr}
+        ${debugStrTop}
         ${tableHeader}
         ${toolbarTop}
         ${wrappingDiv}
         ${toolbarBottom}
         ${tableFooter}
+        ${controlButtonGroup}
+        ${debugStrBottom}
         `
 
         if (this.tableDebug) console.log('madeEmptyEditableTable Body')

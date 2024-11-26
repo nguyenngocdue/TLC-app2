@@ -69,6 +69,7 @@ var tableObjectIndexedColumns = {};
                 'deletable': {{($deletable??0) ? "true" : "false"}},
 
                 'lineObjectModelPath': 'an-object-type',
+                'showButton': @json($showButton),
             },
         }
         // console.log("Initializing table {{$tableName}}", {{$tableName}})
