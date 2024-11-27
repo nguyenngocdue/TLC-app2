@@ -83,7 +83,6 @@ export interface ControlAttributeDropdown {
 export interface ControlAttributeToggle {}
 export interface ControlAttributeCheckbox {}
 export interface ControlAttributePickerDatetime {
-    align?: 'left' | 'center' | 'right'
     pickerType?: 'date' | 'time' | 'datetime' | 'month' | 'year'
     format?: string
     minDate?: string

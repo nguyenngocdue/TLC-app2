@@ -11,10 +11,9 @@ import { makeThead2nd } from './EditableTable3THead2nd'
 import { visibleRowIds } from './VirtualScrolling/updateVirtualTableVisibleRows'
 import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
 import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
-import { applyVirtualStatic } from './VirtualScrolling/EditableTable3VirtualStatic'
 import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableColumn } from './Type/EditableTable3ColumnType'
-import { ControlButtonGroup } from './ControlButtonGroup/ControlButtonGroup'
+import { ControlButtonGroupElement } from './ControlButtonGroup/ControlButtonGroup'
 import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
@@ -151,7 +150,7 @@ class EditableTable3 {
                 </div>`
             : ``
 
-        const controlButtonGroup = ControlButtonGroup(this.params)
+        const controlButtonGroup = `<div id="${tableName}__control_button_group"></div>`
 
         const editableTable = `
         ${debugStrTop}
@@ -212,11 +211,19 @@ class EditableTable3 {
             if (dataSource) {
                 setTimeout(() => applyTopFor2ndHeader(tableName), 100)
 
-                if (dataSource.data.length > 10) {
-                    applyVirtualScrolling(this.params)
-                } else {
-                    applyVirtualStatic(this.params)
-                }
+                applyVirtualScrolling(this.params)
+                // if (dataSource.data.length > 10) {
+                //     applyVirtualScrolling(this.params)
+                // } else {
+                //     applyVirtualStatic(this.params)
+                // }
+
+                //attach control button group to its div
+                const controlButtonGroup = ControlButtonGroupElement(this.params)
+                const controlButtonGroupDiv = document.getElementById(
+                    `${tableName}__control_button_group`,
+                )
+                controlButtonGroupDiv && controlButtonGroupDiv.replaceWith(controlButtonGroup)
             }
         })
     }
