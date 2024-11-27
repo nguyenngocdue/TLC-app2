@@ -1,15 +1,15 @@
-const state: { [tableName: string]: number } = {}
+export const checkboxAllState: { [tableName: string]: number } = {}
 
 export const onClickCheckboxAll = (tableName: string) => {
     const checkboxAll = document.getElementById(`${tableName}__checkbox_all`) as HTMLInputElement
 
-    if (state[tableName] === undefined) {
-        state[tableName] = 0
+    if (checkboxAllState[tableName] === undefined) {
+        checkboxAllState[tableName] = 0
     } else {
-        state[tableName] = (state[tableName] + 1) % 3
+        checkboxAllState[tableName] = (checkboxAllState[tableName] + 1) % 3
     }
 
-    switch (state[tableName]) {
+    switch (checkboxAllState[tableName]) {
         case 0:
             checkboxAll.checked = false
             checkboxAll.indeterminate = false
