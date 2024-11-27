@@ -3,11 +3,9 @@
 @endphp
 {{-- @if ($isAdmin && !$block->title && !$block->description) --}}
 @if ($isAdmin)
-<div class="no-print" style="bottom : -15%">
-    <a title='Edit Block' class="p-2 flex justify-start" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
-        <span class="inline-flex items-center rounded-md bg-purple-50 px-2   py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
-            <i class="fa-solid fa-gear"></i>
-        </span>
+<div class="no-print relative" >
+    <a title='Edit Block' style="top : -10px ; left : -25px;" class="p-2 bg-transparent flex justify-start absolute" href="{{ route('rp_blocks.edit', $block->id) }}" target="blank" >
+        <i class=" text-purple-500 fa-solid fa-gear text-sm "></i>
     </a>
 </div>
 @endif

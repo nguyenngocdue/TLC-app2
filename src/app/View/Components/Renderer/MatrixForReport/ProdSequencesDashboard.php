@@ -16,6 +16,7 @@ class ProdSequencesDashboard extends ProdSequences
     protected $projectDatasource, $subProjectDatasource, $prodRoutingDatasource;
 
     private $dashboardConfig;
+    public $type = "prod_sequences";
 
     public function __construct()
     {

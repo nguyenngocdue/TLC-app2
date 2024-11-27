@@ -91,11 +91,13 @@ class ReportFilterItem extends Component
             case $this->WEEK_OF_YEAR_TYPE_ID:
                 return DateReport::getWeekOfYears();
             case $this->MONTH_TYPE_ID:
-                $months = range(1, 12);
-                sort($months);
                 $months = array_map(
-                    fn($item) => ['id' => $item, 'name' => DateReport::getMonthAbbreviation2($item)],
-                    $months
+                    fn($item) => [
+                        'id' => str_pad($item, 2, '0', STR_PAD_LEFT),
+                        // 'name' => DateReport::getMonthAbbreviation2($item)
+                        'name' => str_pad($item, 2, '0', STR_PAD_LEFT)
+                    ],
+                    range(1, 12)
                 );
                 return $months;
             default:
@@ -144,7 +146,7 @@ class ReportFilterItem extends Component
                 fn($query) => $query->whereIn('id', $bWListIds),
                 fn($query) => $query->whereNotIn('id', $bWListIds)
             )
-            ->where('name','not like','%-- available%');
+            ->where('name','not like','%available%');
             $dbQuery = $dbQuery->orderBy('name')->get();
         } catch (Exception $e) {
             dump($e->getMessage());
@@ -171,7 +173,7 @@ class ReportFilterItem extends Component
         $listenReducer = $filter->getListenReducer;
         $modelClass = ModelData::initModelByField($entityType);
         if (!$modelClass) return [];
-
+        
         $triggerNames = $listenReducer?->triggers;
         $db = $modelClass::query();
         if (is_null($triggerNames) && $singularEntityType != 'user' && $singularEntityType != 'term') return $this->getEntityData($modelClass, $db, $isBlackList, $bWListIds);

@@ -28,16 +28,15 @@ class DashboardInspMatrixController extends Controller
             return redirect()->route("dashboard.index", $query);
         }
 
-        $tab = $request->get('tab', 'ics');
-        $tabs = [
-            ['title' => 'QAQC Progress', 'active' => $tab == 'ics', 'href' => "?tab=ics"],
-        ];
+        $tab = $request->get('tab', 'sqbts');
+        $tabs = [];
 
         $cu = CurrentUser::get();
 
         if ($cu->isProjectClient() || CurrentUser::isAdmin()) {
             $tabs[] = ['title' => 'Production Progress', 'active' => $tab == 'sqbts', 'href' => "?tab=sqbts"];
         }
+        $tabs[] = ['title' => 'QAQC Progress', 'active' => $tab == 'ics', 'href' => "?tab=ics"];
 
         return view("dashboards.dashboard-insp-matrix", [
             'controller' => $controller,

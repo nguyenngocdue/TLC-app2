@@ -34,7 +34,9 @@ trait TraitReportTableContent
             }
         }
         $parsedVariables = $this->parseVariables($content);
-        if ($parsedVariables[0]) $content = $this->formatReportHref($content, $currentParams);
+        if ($parsedVariables[0]) {
+            $content = $this->formatReportHref($content, $currentParams);
+        } 
         return $content;
     }
 }

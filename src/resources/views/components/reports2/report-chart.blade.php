@@ -1,8 +1,10 @@
-<div class="border-2 border-gray-600 p-1 {{$class}}">
-    @php
-        $height = $jsonOptions->options->height ?? 500;
-        $width = $jsonOptions->options->width ?? 400;
-    @endphp
+@php
+    $height = $jsonOptions->options->height ?? 500;
+    $width = $jsonOptions->options->width ?? null;
+    $dimensions = $jsonOptions->dimension ?? null;
+    $align = $dimensions ? $dimensions->align : 'flex justify-center'; 
+@endphp
+<div class="relative border-2 border-gray-600 p-4 {{$class}} {{$align}}">
     @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')
         @once
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
@@ -12,19 +14,24 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
 
         @endonce
-        <canvas id="{{ $key }}" height={{$height}} width={{$width}}></canvas>
+        <canvas id="{{ $key }}" height={{$height}} width={{$width ? $with.'px' : '100%'}}></canvas>
     @elseif(isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'echart')
-        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-        <div id="main" style="width: {{$height}}px; height: {{$width}}px;"></div
+        @once
+            <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        @endonce
+        @php
+            // Deprecated: This code may be removed in future updates.
+            $width = $dimensions?->width ? ($width ? $width.'px' : '100%'): '100%';
+            $height = ($dimensions?->height ?? $height).'px';
+        @endphp
+        <div id="main" style="width: {{$width}}; height: {{$height}};"></div>
     @else
         @once
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         @endonce
-        <div id="{{ $key }}"></div> 
+        <div id="{{ $key }}" style="width: {{$width ? $width.'px' : '100%'}}"></div> 
     @endif
 </div>
-
-
 
 <script>
     var key = {!! json_encode($key) !!} ; 
@@ -69,7 +76,8 @@
 
     } 
     else if (optionCons?.libraryType?.toLowerCase() === 'echart'){
-        var myChart2 = echarts.init(document.getElementById('main'));
+        var main = document.getElementById('main');
+        var myChart2 = echarts.init(main, '');
         myChart2.setOption(optionCons);
     } 
     else {

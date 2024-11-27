@@ -35,6 +35,7 @@ trait TraitCreateSQLReport2
             }
         }
         $sqlStr = str_replace(["\{%", "\%}"], ["{%", "%}"], $sqlStr);
+        $sqlStr = $this->evaluateAGG($sqlStr);
         return $sqlStr;
     }
 

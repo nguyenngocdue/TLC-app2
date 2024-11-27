@@ -36,6 +36,7 @@
                 @if($rpFilters->toArray())
                     <form action="{{$routeFilter}}" id="{{ $reportName }}" method="POST">
                         @csrf
+                        <input type="hidden" name="form_type" value="applyFilterReport2">
                         <input type="hidden" name='action' value="updateReport2">
                         <input type="hidden" name='entity_type' value="{{$entityType}}">
                         <input type="hidden" name='entity_type2' value="{{$reportType2}}">

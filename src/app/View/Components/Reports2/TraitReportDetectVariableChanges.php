@@ -42,6 +42,7 @@ trait TraitReportDetectVariableChanges
                 $changedVal = isset($currentParams[$variable]) ? $currentParams[$variable] : 'null';
                 $string = str_replace($keyInOptions, $changedVal, $string);
             }
+            $string = $this->evaluateAGG($string);
         }
         // dd($string);
         return $string;
