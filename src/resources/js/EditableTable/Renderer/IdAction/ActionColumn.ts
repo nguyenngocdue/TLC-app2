@@ -1,3 +1,4 @@
+import { onDuplicateAnItem } from '../../ControlButtonGroup/onClickDuplicateAnItem'
 import { onClickTrashAnItem } from '../../ControlButtonGroup/onClickTrashAnItem'
 import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
@@ -15,7 +16,7 @@ export class ActionColumn extends Renderer4View {
 
         if (btnCopy) {
             btnCopy.addEventListener('click', () => {
-                onClickTrashAnItem(tableParams, rowIndex)
+                onDuplicateAnItem(tableParams, rowIndex)
             })
         }
 

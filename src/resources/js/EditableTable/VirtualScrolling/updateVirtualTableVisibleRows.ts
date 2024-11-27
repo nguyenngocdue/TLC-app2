@@ -7,6 +7,7 @@ import { applyFixedColumnWidth } from '../FixedColumn/EditableTable3FixedColumn'
 import { applySortableRow } from '../SortableRow/EditableTable3SortableRows'
 import { TableColumn } from '../Type/EditableTable3ColumnType'
 import { reValueOrderNoColumn } from '../SortableRow/EditableTable3OrderableColumn'
+import { addTrAfterTopSpacer, addTrBeforeBtmSpacer } from '../Functions/TableManipulations'
 
 declare let tableColumns: { [tableName: string]: TableColumn[] }
 
@@ -138,9 +139,13 @@ export const renderRows = (
         .join('')
 
     // Insert the rendered rows into the table
-    const spacerId = `#${tableName} tbody>tr#spacer-${position}`
-
-    position === 'bottom' ? $(spacerId).before(renderedRows) : $(spacerId).after(renderedRows)
+    // const spacerId = `#${tableName} tbody>tr#spacer-${position}`
+    // position === 'bottom' ? $(spacerId).before(renderedRows) : $(spacerId).after(renderedRows)
+    if (position === 'bottom') {
+        addTrBeforeBtmSpacer(tableName, renderedRows)
+    } else {
+        addTrAfterTopSpacer(tableName, renderedRows)
+    }
 
     // Ensure `applyRenderedTRow` is called after the rows are attached to the DOM
     slicedData.forEach((row, idx) => {
