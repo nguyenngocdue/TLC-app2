@@ -10,7 +10,6 @@ import { Toggle4 } from './Renderer/Toggle/Toggle4'
 import { Number4 } from './Renderer/Number/Number4'
 import { Checkbox4 } from './Renderer/Checkbox/Checkbox4'
 import { PickerDateTime4 } from './Renderer/PickerDateTime/PickerDateTime4'
-import { CustomFunction4 } from './Renderer/CustomFunction/CustomFunction4'
 import { IdLink } from './Renderer/IdAction/IdLink'
 import { LineNo } from './Renderer/IdAction/LineNo'
 import { ActionPrint } from './Renderer/IdAction/ActionPrint'
@@ -72,21 +71,21 @@ export const makeTCell = (
             rendered = `FAKE-DOC-ID-${cellValue}`
             tdClass = 'whitespace-nowrap'
             break
-        case renderer == 'custom_function':
-            rendererParams.customRenderFn = () => {
-                return {
-                    rendered: `Hello ${cellValue}`,
-                    tdClass: '',
-                    divClass: '',
-                    tdStyle: {},
-                    divStyle: {},
-                    applyPostRenderScript: () => {},
-                    applyOnMouseMoveScript: () => {},
-                    applyOnChangeScript: () => {},
-                }
-            }
-            result = new CustomFunction4(rendererParams).render()
-            break
+        // case renderer == 'custom_function':
+        //     rendererParams.customRenderFn = () => {
+        //         return {
+        //             rendered: `Hello ${cellValue}`,
+        //             tdClass: '',
+        //             divClass: '',
+        //             tdStyle: {},
+        //             divStyle: {},
+        //             applyPostRenderScript: () => {},
+        //             applyOnMouseMoveScript: () => {},
+        //             applyOnChangeScript: () => {},
+        //         }
+        //     }
+        //     result = new CustomFunction4(rendererParams).render()
+        //     break
         case renderer == 'no.':
             result = new LineNo(rendererParams).render()
             break

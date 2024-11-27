@@ -1,9 +1,10 @@
 import { getForeignObjects } from '../../Functions'
 import { TableColumnAttachment } from '../../Type/EditableTable3ColumnType'
-import { DataSourceItem, TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
+import { DataSourceItem } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
 export class Thumbnail4View extends Renderer4View {
+    protected tdClass: string = 'text-center'
     static renderThumbnailBox(item?: DataSourceItem | string): HTMLElement {
         const classList = `h-10 w-10 p-1 rounded border`
 
@@ -51,7 +52,7 @@ export class Thumbnail4View extends Renderer4View {
         }
     }
 
-    render(): TableRenderedValueObject {
+    control() {
         const cellValue = this.cellValue as unknown as DataSourceItem
         const column = this.column as TableColumnAttachment
 
@@ -73,6 +74,6 @@ export class Thumbnail4View extends Renderer4View {
             </div>
         </div>`
 
-        return { rendered, tdClass: 'text-center' }
+        return rendered
     }
 }

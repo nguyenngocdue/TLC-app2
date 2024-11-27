@@ -45,6 +45,5 @@ export const renderColumn4 = (
         return `<a href="${href}" target="_blank">${rendered}</a>`
     })
     const rendered = arrayOfRendered.join(` `)
-    const tdClass = `whitespace-nowrap`
-    return { rendered, tdClass }
+    return rendered
 }

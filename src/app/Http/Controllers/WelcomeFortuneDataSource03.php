@@ -10,7 +10,12 @@ class WelcomeFortuneDataSource03
   {
     $statuses = LibStatuses::getAll();
     $columns = [
-      // ['dataIndex' => 'id', 'title' => 'CB', 'renderer' => 'action_checkbox.', 'fixed' => 'left'],
+      [
+        'dataIndex' => 'id',
+        // 'title' => 'CB',
+        'renderer' => 'action_checkbox.',
+        'fixed' => 'left'
+      ],
       // ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
       [
         'dataIndex' => 'id',

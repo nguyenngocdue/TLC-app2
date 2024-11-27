@@ -20,6 +20,8 @@ export const makeThead = ({ tableName, tableConfig }: TableParams) => {
         if (column.colspan) colspanSkipCounter = column.colspan - 1
 
         const niceDataIndex = column.title ? column.title : Str.toHeadline(column.dataIndex)
+        const checkboxAll = `<input type="checkbox" id="${tableName}__checkbox_all" />`
+        const finalTitle = column.renderer == 'action_checkbox.' ? checkboxAll : niceDataIndex
         const tooltipStr = getTooltip(column)
         const hiddenStr = column.invisible ? 'hidden' : ''
         const widthStyle = column.width ? `width: ${column.width}px;` : ''
@@ -54,7 +56,7 @@ export const makeThead = ({ tableName, tableConfig }: TableParams) => {
             colspan="${column.colspan || ''}"
         >
             <div class="${rotateDivStr}" style="${styleDivStr}">
-                ${niceDataIndex}
+                ${finalTitle}
                 <div class="text-xs text-gray-500">${column.subTitle || ''}</div>
             </div>
         </th>`

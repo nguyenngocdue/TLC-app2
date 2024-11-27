@@ -137,3 +137,8 @@ th.rotated-title-left-th {
 .fade-in.visible {
     opacity: 1;
 }
+
+.indeterminate {
+    background: #ccc; /* Gray background for indeterminate */
+    color: white;
+}

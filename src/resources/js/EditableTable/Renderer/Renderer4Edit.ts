@@ -8,9 +8,6 @@ import { Renderer4View } from './Renderer4View'
 declare let tableData: { [tableName: string]: LengthAware }
 
 export abstract class Renderer4Edit extends Renderer4View {
-    abstract control(): string
-    applyOnChangeScript(): void {}
-
     setValueToTableData(value?: TableCellType): void {
         const { tableName, rowIndex, dataIndex } = this
         const control = document.getElementById(this.controlId) as HTMLInputElement

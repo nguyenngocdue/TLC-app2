@@ -30,6 +30,5 @@ export const renderColumn4 = (
         })
     }
     const rendered = arrayOfRendered.join(`${allowOpen ? ' ' : ', '}`)
-    const tdClass = `whitespace-nowrap`
-    return { rendered, tdClass }
+    return rendered
 }

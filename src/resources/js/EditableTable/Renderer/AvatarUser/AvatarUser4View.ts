@@ -1,10 +1,11 @@
 import { getForeignObjects, Str } from '../../Functions'
 import { TableColumnAvatarUser } from '../../Type/EditableTable3ColumnType'
-import { DataSourceItem, TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
+import { DataSourceItem } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
 export class AvatarUser4View extends Renderer4View {
-    render(): TableRenderedValueObject {
+    protected tdClass: string = `text-center`
+    control() {
         const cellValue = this.cellValue as unknown as DataSourceItem
         const column = this.column as TableColumnAvatarUser
         const { maxToShow = 4 } = column.rendererAttrs || {}
@@ -44,6 +45,6 @@ export class AvatarUser4View extends Renderer4View {
                     ${moreSpan}
                 </div>
             </div>`
-        return { rendered, tdClass: 'text-center' }
+        return rendered
     }
 }

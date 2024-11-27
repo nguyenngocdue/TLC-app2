@@ -70,5 +70,5 @@ export interface TableRendererParams {
     dataLine: TableDataLine
     column: TableColumn
     rowIndex: number
-    customRenderFn?: () => TableRenderedValueObject
+    customRenderFn?: () => string
 }

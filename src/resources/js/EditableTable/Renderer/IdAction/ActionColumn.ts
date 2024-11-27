@@ -1,9 +1,9 @@
 import { onDuplicateAnItem } from '../../ControlButtonGroup/onClickDuplicateAnItem'
 import { onClickTrashAnItem } from '../../ControlButtonGroup/onClickTrashAnItem'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
 export class ActionColumn extends Renderer4View {
+    protected tdClass: string = `text-center`
     applyPostRenderScript(): void {
         const { tableParams, rowIndex } = this
         const { tableName } = tableParams
@@ -27,7 +27,7 @@ export class ActionColumn extends Renderer4View {
         }
     }
 
-    render(): TableRenderedValueObject {
+    control() {
         const { tableConfig, rowIndex } = this
         const classList = tableConfig.classList?.button
 
@@ -44,11 +44,6 @@ export class ActionColumn extends Renderer4View {
 
         const actionBox = `<div class="flex justify-center gap-0.5">${rendered}</div>`
 
-        return {
-            rendered: `${actionBox}`,
-            tdClass: `text-center`,
-
-            applyPostRenderScript: this.applyPostRenderScript.bind(this),
-        }
+        return actionBox
     }
 }

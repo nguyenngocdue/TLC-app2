@@ -19,10 +19,15 @@ export abstract class Renderer4View {
     protected controlId: string
     protected tableConfig: TableConfig
     protected tableParams: TableParams
-    protected customRenderFn: (() => TableRenderedValueObject) | undefined
+    protected customRenderFn: (() => string) | undefined
 
     protected tdClass: string
+    protected tdStyle: { [key: string]: string | number } = {}
+    protected tdTooltip: string = ''
+
     protected divClass: string
+    protected divStyle: { [key: string]: string | number } = {}
+    protected divTooltip: string = ''
 
     constructor(private params: TableRendererParams) {
         this.cellValue = this.params.cellValue
@@ -39,9 +44,23 @@ export abstract class Renderer4View {
         this.tdClass = ''
         this.divClass = ''
     }
-    abstract render(data: any): TableRenderedValueObject
+    // abstract render(data: any): TableRenderedValueObject
+    abstract control(): string
+    render(): TableRenderedValueObject {
+        return {
+            rendered: this.control(),
+            tdClass: this.tdClass,
+            divClass: this.divClass,
+            applyPostRenderScript: this.applyPostRenderScript.bind(this),
+            applyOnMouseMoveScript: this.applyOnMouseMoveScript.bind(this),
+            applyOnChangeScript: this.applyOnChangeScript.bind(this),
+        }
+    }
+
     applyPostRenderScript(): void {}
     applyOnMouseMoveScript(): void {}
+    applyOnChangeScript(): void {}
+
     protected getTableRendererParams(): TableRendererParams {
         const result: TableRendererParams = {
             controlId: this.controlId,

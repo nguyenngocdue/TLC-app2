@@ -1,16 +1,12 @@
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
 export class LineNo extends Renderer4View {
-    render(): TableRenderedValueObject {
+    protected tdClass: string = `text-center`
+    control() {
         const rowIndex = this.rowIndex
         const rendered = (rowIndex + 1).toString()
-        const divClass = this.tableConfig.orderable ? `drag-handle cursor-grab` : ``
+        this.divClass = this.tableConfig.orderable ? `drag-handle cursor-grab` : ``
 
-        return {
-            rendered,
-            divClass,
-            tdClass: `text-center`,
-        }
+        return rendered
     }
 }
