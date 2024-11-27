@@ -59,6 +59,8 @@ class Table extends Component
     private $lineIgnoreNo = 0,
     private $borderColor = 'border-gray-300',
     private $animationDelay = 0,
+    private $showButton = null,
+    private $envConfig = null,
   ) {}
 
   /**
@@ -157,6 +159,8 @@ class Table extends Component
       'rotate45Height' => $this->rotate45Height,
       'classList' => $classList,
       'animationDelay' => $this->animationDelay,
+      'showButton' => $this->showButton,
+      'envConfig' => $this->envConfig,
     ];
 
     $table2 = view("components.renderer.table", $params);

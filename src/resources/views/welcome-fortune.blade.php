@@ -69,6 +69,10 @@
         "CloneFromTemplate" => 1,
         "Recalculate" => 1,
     ];
+    $envConfig = [
+        "entityParentType" => "coc",
+        "ccc" => "ddd",
+    ];
 @endphp
 
 <x-renderer.table3
@@ -86,6 +90,7 @@
     deletable="1"
 
     :showButton="$showButton"
+    :envConfig="$envConfig"
 
     >
 </x-renderer.table>

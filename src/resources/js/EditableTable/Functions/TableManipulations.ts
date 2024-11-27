@@ -27,3 +27,9 @@ export const addTrAfterTopSpacer = (tableName: string, emptyRow: HTMLTableRowEle
     const spacerId = `#${tableName} tbody>tr#spacer-top`
     $(spacerId).after(emptyRow)
 }
+
+export const replaceDivWith = (tableName: string, groupName: string, newDiv: HTMLDivElement) => {
+    const controlButtonGroup = newDiv
+    const controlButtonGroupDiv = document.getElementById(`${tableName}__${groupName}`)
+    controlButtonGroupDiv && controlButtonGroupDiv.replaceWith(controlButtonGroup)
+}

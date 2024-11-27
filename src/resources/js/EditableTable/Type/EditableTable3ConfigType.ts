@@ -46,7 +46,6 @@ export interface TableConfig {
     duplicatable?: boolean
     deletable?: boolean
 
-    lineObjectModelPath: string
     uploadServiceEndpoint?: string
 
     showButton?: {
@@ -54,6 +53,18 @@ export interface TableConfig {
         AddFromList?: boolean
         CloneFromTemplate?: boolean
         Recalculate?: boolean
+    }
+
+    entityLineType: string
+    envConfig?: {
+        entityParentType?: string
+        entityParentId?: string
+        currentUserId?: string
+        entityProjectId?: string
+        entitySubProjectId?: string
+
+        tableNames?: { [table01Name: string]: string }
+        tableFnNames?: { [table01Name: string]: string }
     }
 
     //This will be remove as MODE is more flexible to column level

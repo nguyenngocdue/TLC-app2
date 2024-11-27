@@ -13,8 +13,10 @@ import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
 import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
 import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableColumn } from './Type/EditableTable3ColumnType'
-import { ControlButtonGroupElement } from './ControlButtonGroup/ControlButtonGroup'
+import { ControlButtonGroup } from './ControlButtonGroup/ControlButtonGroup'
 import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
+import { replaceDivWith } from './Functions/TableManipulations'
+import { EnvConfigGroup } from './EnvConfigGroup/EnvConfigGroup'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
 declare let tableColumns: { [tableName: string]: TableColumn[] }
@@ -45,7 +47,7 @@ class EditableTable3 {
 
         if (!params.tableConfig)
             params.tableConfig = {
-                lineObjectModelPath: 'unset-objectType',
+                entityLineType: 'no-entityLineType',
             }
         if (!params.tableConfig.uploadServiceEndpoint)
             params.tableConfig.uploadServiceEndpoint = this.uploadServiceEndpoint
@@ -151,6 +153,7 @@ class EditableTable3 {
             : ``
 
         const controlButtonGroup = `<div id="${tableName}__control_button_group"></div>`
+        const evnConfig = `<div id="${tableName}__env_config_group"></div>`
 
         const editableTable = `
         ${debugStrTop}
@@ -160,6 +163,7 @@ class EditableTable3 {
         ${toolbarBottom}
         ${tableFooter}
         ${controlButtonGroup}
+        ${evnConfig}
         ${debugStrBottom}
         `
 
@@ -218,12 +222,9 @@ class EditableTable3 {
                 //     applyVirtualStatic(this.params)
                 // }
 
-                //attach control button group to its div
-                const controlButtonGroup = ControlButtonGroupElement(this.params)
-                const controlButtonGroupDiv = document.getElementById(
-                    `${tableName}__control_button_group`,
-                )
-                controlButtonGroupDiv && controlButtonGroupDiv.replaceWith(controlButtonGroup)
+                replaceDivWith(tableName, 'control_button_group', ControlButtonGroup(this.params))
+
+                replaceDivWith(tableName, 'env_config_group', EnvConfigGroup(this.params))
             }
         })
     }

@@ -21,7 +21,7 @@ const createButton = (
     return button
 }
 
-export const ControlButtonGroupElement = (params: TableParams): HTMLDivElement => {
+export const ControlButtonGroup = (params: TableParams): HTMLDivElement => {
     const showButton = params.tableConfig.showButton
     if (!showButton) return document.createElement('div')
 

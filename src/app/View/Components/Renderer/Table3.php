@@ -63,6 +63,7 @@ class Table3 extends Component
     private $deletable = false,
 
     private $showButton = false,
+    private $envConfig = [],
 
     // private $numberOfEmptyLines = 0,
     // private $lineIgnoreNo = 0,
@@ -131,6 +132,7 @@ class Table3 extends Component
       'deletable' => $this->deletable,
 
       'showButton' => $this->showButton,
+      'envConfig' => $this->envConfig,
     ];
     // Log::info($params);
     return view("components.renderer.table3", $params);

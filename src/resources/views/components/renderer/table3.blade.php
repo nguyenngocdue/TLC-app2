@@ -68,8 +68,8 @@ var tableObjectIndexedColumns = {};
                 'duplicatable': {{($duplicatable??0) ? "true" : "false"}},
                 'deletable': {{($deletable??0) ? "true" : "false"}},
 
-                'lineObjectModelPath': 'an-object-type',
                 'showButton': @json($showButton),
+                'envConfig': @json($envConfig),
             },
         }
         // console.log("Initializing table {{$tableName}}", {{$tableName}})
