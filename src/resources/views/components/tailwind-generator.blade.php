@@ -11,6 +11,10 @@
 {{-- <div class="xs:hidden"></div>
 <div class="xs:block"></div> --}}
 
+<div class="lg:justify-start"></div>
+<div class="lg:justify-center"></div>
+<div class="lg:justify-end"></div>
+
 <div class="border-dotted hover:border-dotted hover:border"/>
 <div class="border-dashed hover:border-dashed "/>
 <div class="border-double hover:border-double w-fit"/>

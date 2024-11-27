@@ -69,7 +69,7 @@ export const makeTCell = (
 
     switch (true) {
         case renderer == 'doc-id':
-            rendered = `${renderer} to be implemented`
+            rendered = `FAKE-DOC-ID-${cellValue}`
             tdClass = 'whitespace-nowrap'
             break
         case renderer == 'custom_function':

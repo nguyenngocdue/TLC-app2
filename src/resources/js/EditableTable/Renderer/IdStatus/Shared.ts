@@ -34,6 +34,7 @@ export const renderColumn4 = (
 
     let arrayOfRendered: string[] = []
     arrayOfRendered = merged.map((foreignObject) => {
+        if (!foreignObject) return ''
         const statusKey = foreignObject[statusColumn] as string
 
         if (!statusKey) return ''
