@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge'
 import { getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { TableColumn } from './Type/EditableTable3ColumnType'
 
-export const makeTbodyTdEmpty = (
+export const makeEmptyTd = (
     tableName: string,
     column: TableColumn,
     rowIndex: number,

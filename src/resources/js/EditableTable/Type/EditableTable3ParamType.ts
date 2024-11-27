@@ -12,3 +12,10 @@ export interface TableParams {
     //derived from columns
     indexedColumns: { [key: string]: TableColumn }
 }
+
+export const Caller = {
+    ON_CLICK_ADD_AN_ITEM: 'onClickAddAnItem',
+    ON_CLICK_TRASH_AN_ITEM: 'onClickTrashAnItem',
+    APPLY_SORTABLE_ROW: 'applySortableRow',
+    ON_SCROLLING: 'onScrolling',
+}

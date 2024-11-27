@@ -78,6 +78,7 @@ export const applyRenderedTRow = (params: TableParams, row: TableDataLine, rowIn
 
             setTimeout(() => {
                 // if (column.dataIndex === 'user_id')
+                // console.log('applyPostRenderScript', column.renderer, applyPostRenderScript)
                 applyPostRenderScript()
                 applyOnChangeScript()
                 // applyOnMouseMoveScript()

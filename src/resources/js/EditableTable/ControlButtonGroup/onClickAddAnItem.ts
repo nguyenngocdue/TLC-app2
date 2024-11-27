@@ -2,7 +2,7 @@ import moment from 'moment'
 import { applyRenderedTRow } from '../EditableTable3ApplyRenderedTRow'
 import { TableColumn, TableColumnPickerDateTime } from '../Type/EditableTable3ColumnType'
 import { LengthAware, TableCellType, TableDataLine } from '../Type/EditableTable3DataLineType'
-import { TableParams } from '../Type/EditableTable3ParamType'
+import { Caller, TableParams } from '../Type/EditableTable3ParamType'
 import { renderOneEmptyRow } from '../VirtualScrolling/updateVirtualTableVisibleRows'
 
 declare let tableData: { [tableName: string]: LengthAware }
@@ -65,15 +65,34 @@ export const onClickAddAnItem = (params: TableParams) => {
         }
         newItem[column.dataIndex] = value
         // console.log('adding column', column)
+        newItem['NEW_INSERTED_LINE'] = true as unknown as TableCellType
     })
     // console.log('newItem', newItem)
     dataSource.data.push(newItem)
 
     const index = dataSource.data.length - 1
-    const emptyRow = renderOneEmptyRow(params, index)
+
+    const emptyRow = renderOneEmptyRow(params, index, Caller.ON_CLICK_ADD_AN_ITEM)
+    if (!emptyRow) {
+        return
+    }
     const spacerId = `#${params.tableName} tbody>tr#spacer-bottom`
     //insert emptyRow before #spacer-bottom
     $(spacerId).before(emptyRow)
 
     applyRenderedTRow(params, newItem, index)
+    //scroll table to the very bottom
+
+    const tableId = `${params.tableName}__container`
+    const table = document.getElementById(`${tableId}`)
+    if (table) {
+        console.log('scrolling to the bottom', table)
+        table.scrollTop = table.scrollHeight
+    }
+
+    const tr = document.getElementById(`${params.tableName}__${index}`)
+    if (tr) {
+        tr.classList.add('bg-green-400')
+    }
+    console.log(`end of onClickAddAnItem ${params.tableName} ${tableId}`)
 }

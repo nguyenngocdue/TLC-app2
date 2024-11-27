@@ -66,6 +66,12 @@ export class PickerDateTime4Edit extends Renderer4Edit {
 
             flatpickr(element, config)
         }
+
+        //remove the placeholder
+        const placeholder = document.getElementById(this.controlId + '__placeholder')
+        if (placeholder) {
+            placeholder.remove()
+        }
     }
 
     control() {
@@ -79,6 +85,7 @@ export class PickerDateTime4Edit extends Renderer4Edit {
             class="${tableConfig.classList?.text}" 
             placeholder="${pickerType} input"
             value="${this.cellValue}"
-        >`
+        />
+        <input id="${this.controlId}__placeholder" class="${tableConfig.classList?.text}" />`
     }
 }

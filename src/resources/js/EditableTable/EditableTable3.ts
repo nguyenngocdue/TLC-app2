@@ -135,7 +135,7 @@ class EditableTable3 {
         const classList = `table-wrp block bg-gray-100 overflow-x-auto ${borderT} border-l border-r border-b`
         const styleList = `${styleMaxH}`
 
-        const wrappingDiv = `<div class="${classList}" style="${styleList}">
+        const wrappingDiv = `<div id="${tableName}__container" class="${classList}" style="${styleList}">
             ${tableStr}
         </div>`
 

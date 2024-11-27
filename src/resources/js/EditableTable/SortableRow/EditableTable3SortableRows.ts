@@ -1,5 +1,5 @@
 import Sortable from 'sortablejs'
-import { TableParams } from '../Type/EditableTable3ParamType'
+import { Caller, TableParams } from '../Type/EditableTable3ParamType'
 import { LengthAware } from '../Type/EditableTable3DataLineType'
 import {
     lastRenderedStartIdx,
@@ -33,7 +33,8 @@ const reRenderRows = (
     const offsetStart = lastRenderedStartIdx[tableName]
     // console.log('reRenderRows start', startIdx + 1, 'end', endIdx + 1, 'offsetStart', offsetStart)
     for (let i = startIdx; i <= endIdx; i++) {
-        const emptyRow = renderOneEmptyRow(tableParams, i + offsetStart)
+        const emptyRow = renderOneEmptyRow(tableParams, i + offsetStart, Caller.APPLY_SORTABLE_ROW)
+        if (!emptyRow) continue
         // console.log(`Re-rendering row ${i}`, emptyRow, i)
         //replace the actual row with the empty row
         //skip first tr as it is spacer top: tr:nth-child is 1-based not 0-based:
