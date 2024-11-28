@@ -4,10 +4,10 @@ import { TableParams } from '../Type/EditableTable3ParamType'
 declare let tableData: { [tableName: string]: LengthAware }
 export abstract class ToolbarComponentParent {
     protected params: TableParams
-    protected lengthAware: LengthAware
+    protected dataSource: LengthAware
     constructor(params: TableParams) {
         this.params = params
-        this.lengthAware = tableData[params.tableName] as LengthAware
+        this.dataSource = tableData[params.tableName] as LengthAware
     }
     applyPostRenderScript() {}
     render() {

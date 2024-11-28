@@ -2,7 +2,7 @@ import { ToolbarComponentParent } from './ToolbarComponentParent'
 
 export class Paginator extends ToolbarComponentParent {
     generateLinks(classList: string) {
-        return this.lengthAware.links.map((link) => {
+        return this.dataSource.links.map((link) => {
             const iconPrev = `<i class="fas fa-angle-left"></i>`
             const iconNext = `<i class="fas fa-angle-right"></i>`
             if (link.url) {
@@ -27,7 +27,7 @@ export class Paginator extends ToolbarComponentParent {
     }
 
     render(): string {
-        const { current_page, last_page, first_page_url, last_page_url } = this.lengthAware
+        const { current_page, last_page, first_page_url, last_page_url } = this.dataSource
 
         const classList = `focus:shadow-outline-purple rounded border border-r-0 m-0.5 px-0.5 text-white transition-colors duration-150 focus:outline-none border-purple-600 bg-purple-600`
 

@@ -5,7 +5,7 @@ export class PerPage extends ToolbarComponentParent {
     private options = [10, 15, 20, 30, 40, 50, 100]
 
     render(): string {
-        const { per_page } = this.lengthAware
+        const { per_page } = this.dataSource
 
         // Build the `select` element as a string
         const selectHtml = `

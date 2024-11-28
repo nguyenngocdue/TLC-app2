@@ -1,5 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 import { ToolbarComponentParent } from './ToolbarComponentParent'
+import swal from 'sweetalert'
 
 export class MasterDuplicateDelete extends ToolbarComponentParent {
     applyPostRenderScript() {
@@ -9,12 +10,36 @@ export class MasterDuplicateDelete extends ToolbarComponentParent {
         $(`#${tableName}__btnMasterTrash`).on('click', this.onClickDelete.bind(this))
     }
 
+    getSelectedIds() {
+        return this.dataSource.data.filter((line) => line._checkbox_for_line_)
+    }
+
     onClickDuplicate() {
-        console.log('onClickDuplicate')
+        const listOfId = this.getSelectedIds()
+        console.log('onClickDuplicate', listOfId)
+        swal({
+            icon: 'info',
+            title: 'Duplicating',
+            text: `Are you sure you want to duplicate the ${listOfId.length} selected item${
+                listOfId.length == 1 ? '' : 's'
+            }?`,
+            buttons: ['Cancel', 'Duplicate'],
+            dangerMode: false,
+        })
     }
 
     onClickDelete() {
-        console.log('onClickDelete')
+        const listOfId = this.getSelectedIds()
+        console.log('onClickDelete', listOfId)
+        swal({
+            icon: 'warning',
+            title: 'Deleting',
+            text: `Are you sure you want to delete the ${listOfId.length} selected item${
+                listOfId.length == 1 ? '' : 's'
+            }?`,
+            buttons: ['Cancel', 'Delete'],
+            dangerMode: true,
+        })
     }
 
     render() {
