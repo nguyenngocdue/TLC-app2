@@ -4,6 +4,8 @@
 //     // bufferSize: number
 // }
 
+import { ToolbarComponents } from '../ToolbarComponents'
+
 export interface TableConfig {
     width?: number
     maxH?: number | null
@@ -17,13 +19,13 @@ export interface TableConfig {
     tableHeader?: string
     tableFooter?: string
 
-    topLeftControl?: string
-    topCenterControl?: string
-    topRightControl?: string
+    topLeftControl?: keyof typeof ToolbarComponents
+    topCenterControl?: keyof typeof ToolbarComponents
+    topRightControl?: keyof typeof ToolbarComponents
 
-    bottomLeftControl?: string
-    bottomCenterControl?: string
-    bottomRightControl?: string
+    bottomLeftControl?: keyof typeof ToolbarComponents
+    bottomCenterControl?: keyof typeof ToolbarComponents
+    bottomRightControl?: keyof typeof ToolbarComponents
 
     rotate45Width?: number
     rotate45Height?: number

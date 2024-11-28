@@ -92,6 +92,12 @@
     :showButton="$showButton"
     :envConfig="$envConfig"
 
+    showPaginationTop={{true}}
+    topLeftControl="helloWorld"
+    
+    showPaginationBottom={{true}}
+    bottomRightControl="helloWorld"
+
     >
 </x-renderer.table>
 

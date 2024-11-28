@@ -18,7 +18,6 @@ import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
 import { replaceDivWith } from './Functions/TableManipulations'
 import { EnvConfigGroup } from './EnvConfigGroup/EnvConfigGroup'
 import { registerOnClickMasterCB } from './Renderer/IdAction/MasterCheckbox'
-// import { onClickCheckboxAll } from './ControlButtonGroup/onClickCheckboxAll'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
 declare let tableColumns: { [tableName: string]: TableColumn[] }
