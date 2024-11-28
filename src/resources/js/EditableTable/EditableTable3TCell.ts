@@ -161,6 +161,7 @@ export const makeTCell = (
             result = new Checkbox4(rendererParams).render()
             break
         case renderer == 'checkbox_for_line':
+        case renderer == 'checkbox_column': //Obsolete
             result = new CheckboxForLine(rendererParams).render()
             break
         case renderer == 'picker_datetime':
