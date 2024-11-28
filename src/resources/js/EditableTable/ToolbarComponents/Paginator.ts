@@ -1,18 +1,6 @@
-import { LengthAware } from '../Type/EditableTable3DataLineType'
-import { TableParams } from '../Type/EditableTable3ParamType'
+import { ToolbarComponentParent } from './ToolbarComponentParent'
 
-declare let tableData: { [tableName: string]: LengthAware }
-
-export class Paginator {
-    private lengthAware: LengthAware
-
-    constructor(params: TableParams) {
-        const tableName = params.tableName
-        const dataSource = tableData[tableName]
-        this.lengthAware = dataSource as LengthAware
-        // console.log(this.lengthAware)
-    }
-
+export class Paginator extends ToolbarComponentParent {
     generateLinks(classList: string) {
         return this.lengthAware.links.map((link) => {
             const iconPrev = `<i class="fas fa-angle-left"></i>`

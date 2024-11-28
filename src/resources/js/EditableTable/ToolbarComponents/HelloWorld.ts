@@ -1,11 +1,7 @@
-import { TableParams } from '../Type/EditableTable3ParamType'
+import { ToolbarComponentParent } from './ToolbarComponentParent'
 
-export class HelloWorld {
-    private params: TableParams
-    constructor(params: TableParams) {
-        this.params = params
-    }
+export class HelloWorld extends ToolbarComponentParent {
     render() {
-        return `Hello World ${this.params.tableName}`
+        return `Hello World!`
     }
 }

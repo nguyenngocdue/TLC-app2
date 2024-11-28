@@ -93,9 +93,9 @@
     :envConfig="$envConfig"
 
     showPaginationTop={{true}}
-    topLeftControl="helloWorld"
     
     showPaginationBottom={{true}}
+    bottomLeftControl="masterDuplicateDelete"
     bottomRightControl="helloWorld"
 
     >

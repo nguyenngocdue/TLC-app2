@@ -52,6 +52,7 @@ const onClickMasterCB = (tableName: string, column: TableColumnCheckbox) => {
     masterCbState[key] = masterCbState[key] === undefined ? 1 : (masterCbState[key] + 1) % 3
     const masterCbId = `${tableName}__${dataIndex}__master_checkbox`
 
+    let cb: HTMLInputElement | null = null
     for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
         const cbId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
 
@@ -76,7 +77,7 @@ const onClickMasterCB = (tableName: string, column: TableColumnCheckbox) => {
         // Update the data source and checkbox state
         dataSource.data[rowIndex][dataIndex] = value as unknown as TableCellType
 
-        const cb = document.getElementById(cbId) as HTMLInputElement
+        cb = document.getElementById(cbId) as HTMLInputElement
         if (cb) cb.checked = value
         // console.log(`update ${cbId} to ${value}`)
 
@@ -84,6 +85,10 @@ const onClickMasterCB = (tableName: string, column: TableColumnCheckbox) => {
         const icon = document.getElementById(`${masterCbId}_icon`) as HTMLElement
         if (icon) icon.className = iconClass
     }
+
+    //trigger change jQuery doesn't work here
+    //trigger change for the last checkbox to show/hide the master button group
+    if (cb) cb.dispatchEvent(new Event('change'))
 }
 
 export const registerOnClickMasterCB = (tableName: string) => {

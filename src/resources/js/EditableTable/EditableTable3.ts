@@ -3,7 +3,6 @@ import { TableParams } from './Type/EditableTable3ParamType'
 import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
-import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
 import { makeUpDefaultValue } from './EditableTable3DefaultValue'
 import { ColumnNoValue, convertArrayToLengthAware } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
@@ -18,6 +17,8 @@ import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
 import { replaceDivWith } from './Functions/TableManipulations'
 import { EnvConfigGroup } from './EnvConfigGroup/EnvConfigGroup'
 import { registerOnClickMasterCB } from './Renderer/IdAction/MasterCheckbox'
+import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
+import { ToolbarComponents } from './ToolbarComponents/ToolbarComponents'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
 declare let tableColumns: { [tableName: string]: TableColumn[] }
@@ -214,6 +215,7 @@ class EditableTable3 {
         $(() => {
             //Wait sometime for the browser to finish rendering the table
             if (dataSource) {
+                ToolbarComponents.register(this.params)
                 registerOnClickMasterCB(tableName)
                 applyVirtualScrolling(this.params)
                 replaceDivWith(tableName, 'control_button_group', ControlButtonGroup(this.params))
