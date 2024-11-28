@@ -17,7 +17,7 @@ import { ControlButtonGroup } from './ControlButtonGroup/ControlButtonGroup'
 import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
 import { replaceDivWith } from './Functions/TableManipulations'
 import { EnvConfigGroup } from './EnvConfigGroup/EnvConfigGroup'
-import { onClickCheckboxAll } from './ControlButtonGroup/onClickCheckboxAll'
+// import { onClickCheckboxAll } from './ControlButtonGroup/onClickCheckboxAll'
 
 declare let tableData: { [tableName: string]: LengthAware | any[] }
 declare let tableColumns: { [tableName: string]: TableColumn[] }
@@ -214,7 +214,7 @@ class EditableTable3 {
         $(() => {
             //Wait sometime for the browser to finish rendering the table
             if (dataSource) {
-                $(`#${tableName}__checkbox_all`).on('click', () => onClickCheckboxAll(tableName))
+                // $(`#${tableName}__checkbox_all`).on('click', () => onClickCheckboxAll(tableName))
                 applyVirtualScrolling(this.params)
                 replaceDivWith(tableName, 'control_button_group', ControlButtonGroup(this.params))
                 replaceDivWith(tableName, 'env_config_group', EnvConfigGroup(this.params))

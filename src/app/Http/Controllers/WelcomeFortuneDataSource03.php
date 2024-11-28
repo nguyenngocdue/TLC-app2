@@ -11,10 +11,13 @@ class WelcomeFortuneDataSource03
     $statuses = LibStatuses::getAll();
     $columns = [
       [
-        'dataIndex' => 'id',
+        // 'dataIndex' => 'checkbox_for_line',
         // 'title' => 'CB',
-        'renderer' => 'action_checkbox.',
-        'fixed' => 'left'
+        'renderer' => 'checkbox_for_line',
+        'fixed' => 'left',
+        'rendererAttrs' => [
+          'hasMasterCheckbox' => true,
+        ],
       ],
       // ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
       [
@@ -49,7 +52,10 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'bool2',
         'renderer' => 'checkbox',
-        'subTitle' => 'Boolean View'
+        'subTitle' => 'Boolean View',
+        'rendererAttrs' => [
+          'hasMasterCheckbox' => true,
+        ],
       ],
       [
         'dataIndex' => 'number',

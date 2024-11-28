@@ -3,9 +3,15 @@ import { getTooltip } from './EditableTable3DefaultValue'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { Str } from './Functions'
 import { TableParams } from './Type/EditableTable3ParamType'
-import { TableColumn } from './Type/EditableTable3ColumnType'
+import { TableColumn, TableColumnCheckbox } from './Type/EditableTable3ColumnType'
 
 declare let tableColumns: { [tableName: string]: TableColumn[] }
+
+const renderMasterCB = (tableName: string, column: TableColumn) => {
+    const tmpCol = column as TableColumnCheckbox
+    if (!tmpCol.rendererAttrs?.hasMasterCheckbox) return ``
+    return `<input type="checkbox" id="${tableName}__${column.dataIndex}__master_checkbox" />`
+}
 
 export const makeThead = ({ tableName, tableConfig }: TableParams) => {
     const columns = tableColumns[tableName]
@@ -19,9 +25,11 @@ export const makeThead = ({ tableName, tableConfig }: TableParams) => {
 
         if (column.colspan) colspanSkipCounter = column.colspan - 1
 
-        const niceDataIndex = column.title ? column.title : Str.toHeadline(column.dataIndex)
-        const checkboxAll = `<input type="checkbox" id="${tableName}__checkbox_all" />`
-        const finalTitle = column.renderer == 'action_checkbox.' ? checkboxAll : niceDataIndex
+        const title = column.title !== undefined ? column.title : Str.toHeadline(column.dataIndex)
+        let masterCb = ``
+        if (['checkbox', 'checkbox_for_line'].includes(column.renderer)) {
+            masterCb = renderMasterCB(tableName, column)
+        }
         const tooltipStr = getTooltip(column)
         const hiddenStr = column.invisible ? 'hidden' : ''
         const widthStyle = column.width ? `width: ${column.width}px;` : ''
@@ -56,8 +64,9 @@ export const makeThead = ({ tableName, tableConfig }: TableParams) => {
             colspan="${column.colspan || ''}"
         >
             <div class="${rotateDivStr}" style="${styleDivStr}">
-                ${finalTitle}
+                <div class="">${title}</div>
                 <div class="text-xs text-gray-500">${column.subTitle || ''}</div>
+                ${masterCb}
             </div>
         </th>`
     })

@@ -92,7 +92,7 @@ export type TableColumnAction = BaseTableColumn & {
     rendererAttrs?: ControlAttributeAction
 }
 export type TableColumnActionCheckbox = BaseTableColumn & {
-    renderer: 'action_checkbox.' | 'checkbox_column'
+    renderer: 'action_checkbox.' | 'checkbox_for_line'
     rendererAttrs?: ControlAttributeActionCheckbox
 }
 export type TableColumnActionPrint = BaseTableColumn & {

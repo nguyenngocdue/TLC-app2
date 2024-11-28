@@ -14,7 +14,7 @@ import { IdLink } from './Renderer/IdAction/IdLink'
 import { LineNo } from './Renderer/IdAction/LineNo'
 import { ActionPrint } from './Renderer/IdAction/ActionPrint'
 import { ActionColumn } from './Renderer/IdAction/ActionColumn'
-import { ActionCheckbox } from './Renderer/IdAction/ActionCheckbox'
+// import { ActionCheckbox } from './Renderer/IdAction/ActionCheckbox'
 import { HyperLink4View } from './Renderer/HyperLink/HyperLink4View'
 import { Column4View } from './Renderer/Column/Column4View'
 import { ColumnLink4View } from './Renderer/Column/ColumnLink4View'
@@ -25,6 +25,7 @@ import { AggCount4View } from './Renderer/Aggregations/AggCount4View'
 import { Thumbnail4View } from './Renderer/Thumbnail/Thumbnail4View'
 import { AvatarUser4View } from './Renderer/AvatarUser/AvatarUser4View'
 import { Attachment4 } from './Renderer/Attachment/Attachment4'
+import { CheckboxForLine } from './Renderer/IdAction/CheckboxForLine'
 
 export const makeTCell = (
     params: TableParams,
@@ -100,10 +101,10 @@ export const makeTCell = (
         case renderer == 'action_column': //Obsolete
             result = new ActionColumn(rendererParams).render()
             break
-        case renderer == 'action_checkbox.':
-        case renderer == 'checkbox_column': //Obsolete
-            result = new ActionCheckbox(rendererParams).render()
-            break
+        // case renderer == 'action_checkbox.':
+        // case renderer == 'checkbox_column': //Obsolete
+        // result = new ActionCheckbox(rendererParams).render()
+        // break
         case renderer == 'hyper-link':
             result = new HyperLink4View(rendererParams).render()
             break
@@ -158,6 +159,9 @@ export const makeTCell = (
         case renderer == 'checkbox':
         case renderer == 'checkbox4': // this line will be removed for new flexible MODE
             result = new Checkbox4(rendererParams).render()
+            break
+        case renderer == 'checkbox_for_line':
+            result = new CheckboxForLine(rendererParams).render()
             break
         case renderer == 'picker_datetime':
         case renderer == 'date-time':

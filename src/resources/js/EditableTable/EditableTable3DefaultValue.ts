@@ -13,8 +13,18 @@ export const ColumnNoValue: TableColumn = {
 }
 
 export const makeUpDefaultValue = ({ tableName }: TableParams) => {
-    const columns = tableColumns[tableName]
-    return columns && columns.map((column) => ({ ...column, width: column.width || 100 }))
+    let columns = tableColumns[tableName]
+    if (columns) {
+        columns = columns.map((column) => {
+            if (column.renderer == 'checkbox_for_line') {
+                column.dataIndex = '_checkbox_for_line_'
+                column.title = ''
+                column.width = 40
+            }
+            return { ...column, width: column.width || 100 }
+        })
+    }
+    return columns
 }
 
 export const convertArrayToLengthAware = (dataSource: any[]) => {

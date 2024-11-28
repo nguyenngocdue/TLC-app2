@@ -81,7 +81,9 @@ export interface ControlAttributeDropdown {
     isMultiple?: boolean
 }
 export interface ControlAttributeToggle {}
-export interface ControlAttributeCheckbox {}
+export interface ControlAttributeCheckbox {
+    hasMasterCheckbox?: boolean
+}
 export interface ControlAttributePickerDatetime {
     pickerType?: 'date' | 'time' | 'datetime' | 'month' | 'year'
     format?: string
