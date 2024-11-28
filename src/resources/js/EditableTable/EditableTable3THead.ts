@@ -3,15 +3,10 @@ import { getTooltip } from './EditableTable3DefaultValue'
 import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { Str } from './Functions'
 import { TableParams } from './Type/EditableTable3ParamType'
-import { TableColumn, TableColumnCheckbox } from './Type/EditableTable3ColumnType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
+import { renderMasterCB } from './Renderer/IdAction/MasterCheckbox'
 
 declare let tableColumns: { [tableName: string]: TableColumn[] }
-
-const renderMasterCB = (tableName: string, column: TableColumn) => {
-    const tmpCol = column as TableColumnCheckbox
-    if (!tmpCol.rendererAttrs?.hasMasterCheckbox) return ``
-    return `<input type="checkbox" id="${tableName}__${column.dataIndex}__master_checkbox" />`
-}
 
 export const makeThead = ({ tableName, tableConfig }: TableParams) => {
     const columns = tableColumns[tableName]

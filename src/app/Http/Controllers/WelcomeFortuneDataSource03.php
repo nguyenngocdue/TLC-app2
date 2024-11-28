@@ -47,12 +47,12 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'bool',
         'renderer' => 'toggle',
-        'subTitle' => 'Boolean View'
+        'subTitle' => 'Toggle'
       ],
       [
         'dataIndex' => 'bool2',
         'renderer' => 'checkbox',
-        'subTitle' => 'Boolean View',
+        'subTitle' => 'Checkbox',
         'rendererAttrs' => [
           'hasMasterCheckbox' => true,
         ],
