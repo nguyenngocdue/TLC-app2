@@ -10,8 +10,6 @@ export interface TableConfig {
     width?: number
     maxH?: number | null
     borderColor?: string
-    showPaginationTop?: boolean
-    showPaginationBottom?: boolean
     showNo?: boolean
     tableDebug?: boolean
     tableTrueWidth?: boolean

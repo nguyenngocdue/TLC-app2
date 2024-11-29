@@ -41,7 +41,7 @@ trait TraitViewAllTableController
             } else {
                 $subProjectIds = $cu->getAllowedSubProjectIds();
                 $projectIds = Project::query()
-                    ->whereHas('getSubProjects', fn ($q) => $q->whereIn('id', $subProjectIds))
+                    ->whereHas('getSubProjects', fn($q) => $q->whereIn('id', $subProjectIds))
                     ->get()
                     ->pluck('id')
                     ->toArray();
@@ -60,7 +60,7 @@ trait TraitViewAllTableController
 
         //Beta to show true width
         // if (app()->isProduction() || app()->isLocal()) $tableTrueWidth = false;
-        return view('dashboards.pages.entity-view-all', [
+        return view('dashboards.pages.entity-view-all-list', [
             'topTitle' => CurrentRoute::getTitleOf($this->type),
             'title' => $trashed ? '(Trash)' : '',
             'perPage' => $perPage,

@@ -36,6 +36,24 @@ export class ToolbarComponents {
         }
     }
 
+    static hasAnyTopComponent(params: TableParams) {
+        const { tableConfig } = params
+        return (
+            tableConfig.topLeftControl ||
+            tableConfig.topCenterControl ||
+            tableConfig.topRightControl
+        )
+    }
+
+    static hasAnyBottomComponent(params: TableParams) {
+        const { tableConfig } = params
+        return (
+            tableConfig.bottomLeftControl ||
+            tableConfig.bottomCenterControl ||
+            tableConfig.bottomRightControl
+        )
+    }
+
     static register(params: TableParams) {
         const {
             topLeftControl: tl,

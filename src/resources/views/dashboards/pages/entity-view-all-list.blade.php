@@ -14,8 +14,15 @@
         @endif
 
         <x-renderer.view-all.view-all-type-selector type="{{ $type }}" viewType="list-view" />
-        <x-renderer.view-all.view-all-type-list :tabPane="$tabPane" type="{{ $type }}" perPage='{{ $perPage }}'
-            refreshPage="{{ $refreshPage }}" trashed="{{ $trashed }}" :columns="$columns" :dataSource="$dataSource"
-            tableTrueWidth="{{ $tableTrueWidth }}" />
+        <x-renderer.view-all.view-all-type-list 
+            :tabPane="$tabPane" 
+            type="{{ $type }}" 
+            perPage='{{ $perPage }}'
+            refreshPage="{{ $refreshPage }}" 
+            trashed="{{ $trashed }}" 
+            :columns="$columns" 
+            :dataSource="$dataSource"
+            tableTrueWidth="{{ $tableTrueWidth }}" 
+            />
     </div>
 @endsection

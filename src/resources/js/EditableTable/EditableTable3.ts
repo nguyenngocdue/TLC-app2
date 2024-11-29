@@ -25,7 +25,7 @@ declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 class EditableTable3 {
     private tableDebug = false
-    private startTime = new Date().getTime()
+    // private startTime = new Date().getTime()
     private uploadServiceEndpoint = '/upload-service-endpoint'
     private tableName: string = ''
 
@@ -81,15 +81,17 @@ class EditableTable3 {
 
         const tableDebug = tableConfig.tableDebug || false
         const borderColor = tableConfig.borderColor || `border-gray-300`
-        const borderT = tableConfig.showPaginationTop ? `border-t ${borderColor}` : 'rounded-t-lg'
+        const borderT = ToolbarComponents.hasAnyTopComponent(this.params)
+            ? `border-t ${borderColor}`
+            : 'rounded-t-lg'
 
         let tableWidth = 'width: 100%;'
         if (tableConfig.tableTrueWidth) tableWidth = `width: ${calTableTrueWidth(this.params)}px;`
 
         const styleMaxH = tableConfig.maxH ? `max-height: ${tableConfig.maxH}px;` : ''
 
-        const toolbarTop = tableConfig.showPaginationTop ? makeToolBarTop(this.params) : ``
-        const toolbarBottom = tableConfig.showPaginationBottom ? makeToolBarBottom(this.params) : ``
+        const toolbarTop = makeToolBarTop(this.params)
+        const toolbarBottom = makeToolBarBottom(this.params)
 
         const tableHeader = tableConfig.tableHeader
             ? `<div component="tableHeader">${tableConfig.tableHeader}</div>`
@@ -148,7 +150,7 @@ class EditableTable3 {
             : ``
 
         console.log('this.params.tableConfig', this.params.tableConfig)
-        const debugStrBottom = !tableDebug
+        const debugStrBottom = tableDebug
             ? `<div class="bg-red-600 text-white border font-bold">
                 ${TableConfigDiv(this.params)}
                 </div>`
@@ -208,8 +210,8 @@ class EditableTable3 {
             console.log('')
         }
 
-        const endTime00 = new Date().getTime()
-        console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
+        // const endTime00 = new Date().getTime()
+        // console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
 
         //when document is ready
         $(() => {
@@ -219,7 +221,9 @@ class EditableTable3 {
                 registerOnClickMasterCB(tableName)
                 applyVirtualScrolling(this.params)
                 replaceDivWith(tableName, 'control_button_group', ControlButtonGroup(this.params))
-                replaceDivWith(tableName, 'env_config_group', EnvConfigGroup(this.params))
+                if (this.tableDebug) {
+                    replaceDivWith(tableName, 'env_config_group', EnvConfigGroup(this.params))
+                }
                 setTimeout(() => applyTopFor2ndHeader(tableName), 100)
             }
         })
