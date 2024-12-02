@@ -7,6 +7,7 @@ use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateReport;
 use App\Utils\Support\DefaultValueReport;
 use App\Utils\Support\Report;
+use App\Utils\Support\ReportPreset;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -106,6 +107,14 @@ class InitUserSettingReport2
         return $params;
     }
 
+    private function updateAllTheTime($params) {
+        if ($params['preset_key'] === 'All The Time') {
+            $dates = ReportPreset::getAllTime($params['time_zone']);
+            $params = array_merge($params, $dates);
+        }
+        return $params;
+    }
+
     public function initParamsUserSettingRp($rp, $entityType, $rpFilterLinks, $rpFilters){
         $settings = CurrentUser::getSettings();
         
@@ -142,14 +151,18 @@ class InitUserSettingReport2
         if(!isset($params['time_zone'])){
             $params['time_zone'] = 'UTC+7';
         }
-        if(!isset($params['preset_title'])){
-            $params['preset_title'] = 'Time Range';
+        if(!isset($params['preset_key'])){
+            $params['preset_key'] = 'Time Range';
         }
         if (!isset($params['week_number'])){
             $params = $this->createDefaultValueWeekOfYear($entityType, $storedFilterKey, $params, $rpFilters);
         }
-        
-        
+
+        // set all the time
+        if(isset($params['preset_key'])) {
+            $params = $this->updateAllTheTime($params);
+        }  
+
         // set default value for Time Range
         if ($rp->has_time_range) {
             if(!isset($params['from_date']) || !isset($params['to_date']) || !$params['from_date'] || !$params['from_date'] ){

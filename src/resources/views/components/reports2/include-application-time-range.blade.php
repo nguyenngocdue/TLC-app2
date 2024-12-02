@@ -10,7 +10,7 @@
                 <input type="hidden" name='entity_type2' value="{{$reportType2}}">
                 <input type="hidden" name='report_id' value="{{$rp->id}}">
                 <input type="hidden" name='form_type' value="updateAbsoluteTimeRange">
-                <input type="hidden" name='preset_title' value="Absolute Time Range">
+                <input type="hidden" name='preset_key' value="Absolute Time Range">
             </div>
 
             @if (!$rp->disable_from_date)

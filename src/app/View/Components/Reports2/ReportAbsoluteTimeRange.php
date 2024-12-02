@@ -37,7 +37,7 @@ class ReportAbsoluteTimeRange extends Component
                 'fromDate' => $currentParams['from_date'] ?? '',
                 'toDate' => $currentParams['to_date'] ?? '',
                 'presets' => $presets,
-                'presetTitle' => $currentParams['preset_title'],
+                'presetTitle' => $currentParams['preset_key'],
                 'timezoneData' => $timezoneData,
                 'timeZone' => $currentParams['time_zone'],
                 'dateDisplayFormat' => $currentParams['date_display_format'] ?? 'y-m-d H:i:s',

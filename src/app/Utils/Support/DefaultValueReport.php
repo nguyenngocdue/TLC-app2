@@ -15,11 +15,11 @@ class DefaultValueReport
             $allPresets = PresetsTimeRange::createPresets($params);
             if (isset($allPresets[$x])) {
                 $presets = $allPresets[$x];
-                $params['preset_title'] = Report::makeTitle($x);
+                $params['preset_key'] = Report::makeTitle($x);
             }
         } else {
             $presets = ReportPreset::getDateOfPrevious3Months(null, $toDate) ;
-            $params['preset_title'] = 'The Past Three Months';
+            $params['preset_key'] = 'The Past Three Months';
         }
         $params = array_merge($params, $presets);        
         return $params;

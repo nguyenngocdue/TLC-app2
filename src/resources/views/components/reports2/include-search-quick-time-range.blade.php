@@ -32,7 +32,7 @@
             <input type="hidden" name="entity_type2" value="{{$reportType2}}">
             <input type="hidden" name="report_id" value="{{$rp->id}}">
             <input type="hidden" name="time_zone" value="{{$timeZone}}">
-            <input type="hidden" id="preset_title" name="preset_title" value="Time Range">
+            <input type="hidden" id="preset_key" name="preset_key" value="Time Range">
             <ul class="py-1 text-gray-700" id="quickRangeList">
                 @foreach($presets as $key => $preset)
                     <li name="preset_1" id="{{$key}}" class="px-2 py-1 hover:bg-gray-100 cursor-pointer" 
@@ -90,7 +90,7 @@
             // Append the hidden input to the form
             document.getElementById('quickRangeForm').appendChild(input);
             // Optionally display the selected text in the input field
-            document.getElementById('preset_title').value = this.textContent.trim();
+            document.getElementById('preset_key').value = this.textContent.trim();
             // Submit the form
             document.getElementById('quickRangeForm').submit();
             var dropdownContent = document.getElementById('dropdownContent');
