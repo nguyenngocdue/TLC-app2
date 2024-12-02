@@ -44,7 +44,7 @@ class ReportBlockTable extends Component
                                                         reportType2='{$entityType2}' 
                                                         reportId='{$reportId}' 
                                                         pageLimit='{$pageLimit}'
-                                                        routeRp='{$routeRp}'
+                                                        route='{$routeRp}'
                                         />");
                 }
                 break;
