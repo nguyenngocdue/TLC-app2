@@ -14,7 +14,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getLetterHead": {
         "name": "_getLetterHead",
@@ -31,7 +32,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getLetterFooter": {
         "name": "_getLetterFooter",
@@ -48,7 +50,26 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "true"
+        "let_user_clear": "true",
+        "let_user_open": ""
+    },
+    "_getStaticBlock": {
+        "name": "_getStaticBlock",
+        "relationship": "belongsTo",
+        "control_name": "iterator_block_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "true",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -65,7 +86,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -82,7 +104,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getBlockDetails": {
         "name": "_getBlockDetails",
@@ -99,7 +122,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_attachment_background": {
         "name": "_attachment_background",
@@ -116,6 +140,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }
