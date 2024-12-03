@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('qaqc_insp_chklst_shts', function (BlueprintExtended $table) {
             $table->id();
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->float('progress')->nullable(); //version 2
             $table->unsignedBigInteger('assignee_1')->nullable();
             $table->unsignedBigInteger('assignee_2')->nullable();
+            $table->unsignedBigInteger('assignee_3')->nullable();
             $table->orderable();
             $table->appendCommonFields();
 

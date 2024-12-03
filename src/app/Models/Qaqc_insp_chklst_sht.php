@@ -20,6 +20,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         'order_no',
         "assignee_1",
         "assignee_2",
+        "assignee_3",
     ];
 
     public static $eloquentParams = [
@@ -34,6 +35,7 @@ class Qaqc_insp_chklst_sht extends ModelExtended
 
         'getAssignee1' => ['belongsTo', User::class, 'assignee_1'],
         'getAssignee2' => ['belongsTo', User::class, 'assignee_2'],
+        'getAssignee3' => ['belongsTo', User::class, 'assignee_3'],
         //Many to many
         "getMonitors1" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_monitor_1"],
         "council_member_list" => ["belongsToMany", User::class, "ym2m_qaqc_insp_chklst_sht_user_council_member"],
@@ -52,6 +54,11 @@ class Qaqc_insp_chklst_sht extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
     public function getAssignee2()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+    public function getAssignee3()
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
