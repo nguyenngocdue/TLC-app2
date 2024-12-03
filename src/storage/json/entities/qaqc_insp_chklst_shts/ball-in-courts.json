@@ -1,32 +1,51 @@
 {
-    "in_progress": {
-        "name": "in_progress",
-        "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": ""
-    },
     "not_applicable": {
         "name": "not_applicable",
         "ball-in-court-assignee": "owner_id",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "in_progress": {
+        "name": "in_progress",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
+    },
+    "first_sign_off": {
+        "name": "first_sign_off",
+        "ball-in-court-assignee": "owner_id",
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
     },
     "reviewed": {
         "name": "reviewed",
         "ball-in-court-assignee": "assignee_1",
-        "ball-in-court-monitors": ""
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
     },
     "inspected": {
         "name": "inspected",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1"
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
     },
     "pending_audit": {
         "name": "pending_audit",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1"
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
     },
     "audited": {
         "name": "audited",
         "ball-in-court-assignee": "assignee_2",
-        "ball-in-court-monitors": "getMonitors1"
+        "ball-in-court-monitors": "getMonitors1",
+        "ball-in-court-users": "",
+        "also-send-to-users-discipline": ""
     }
 }

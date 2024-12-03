@@ -1,6 +1,7 @@
 [
     "not_applicable",
     "in_progress",
+    "first_sign_off",
     "reviewed",
     "inspected",
     "pending_audit",

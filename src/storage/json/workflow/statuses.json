@@ -111,6 +111,13 @@
         "color_index": "200",
         "icon": "<i class=\"fa-duotone fa-check\"><\/i>"
     },
+    "first_sign_off": {
+        "name": "first_sign_off",
+        "title": "Partially Signed-off",
+        "color": "rose",
+        "color_index": "200",
+        "icon": null
+    },
     "future": {
         "name": "future",
         "title": "Future",

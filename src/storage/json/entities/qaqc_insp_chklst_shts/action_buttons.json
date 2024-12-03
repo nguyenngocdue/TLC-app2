@@ -13,6 +13,13 @@
         "tooltip": "",
         "change_status_multiple": ""
     },
+    "first_sign_off": {
+        "name": "first_sign_off",
+        "status_title": "Pending Partially Sign-off",
+        "label": "Ready for Partially Signed-off",
+        "tooltip": "Waiting 3rd parties to partially sign-off",
+        "change_status_multiple": ""
+    },
     "reviewed": {
         "name": "reviewed",
         "status_title": "QC Done",
