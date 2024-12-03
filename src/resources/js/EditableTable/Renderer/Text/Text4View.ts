@@ -1,13 +1,11 @@
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 
 export class Text4View extends Renderer4View {
-    render(): TableRenderedValueObject {
+    protected tdClass: string = `whitespace-nowrap`
+    protected divClass: string = `w-40 truncate`
+
+    control() {
         const rendered = this.cellValue as unknown as string
-        return {
-            rendered,
-            tdClass: `whitespace-nowrap`,
-            divClass: `w-40 truncate`,
-        }
+        return rendered
     }
 }

@@ -123,4 +123,6 @@
 
 <script>
     k = {"statuses": @json(array_values(App\Http\Controllers\Workflow\LibStatuses::getAll()))}
+    tableData = {}
+    tableColumns = {}
 </script>

@@ -1,59 +1,74 @@
-import { TableConfig } from './Type/EditableTable3ConfigType'
 import { TableParams } from './Type/EditableTable3ParamType'
 
 import { makeThead } from './EditableTable3THead'
 import { makeTfoot } from './EditableTable3TFoot'
 import { makeToolBarTop } from './EditableTable3ToolbarTop'
-import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
-import {
-    ColumnNoValue,
-    convertArrayToLengthAware,
-    makeUpDefaultValue,
-} from './EditableTable3DefaultValue'
+import { makeUpDefaultValue } from './EditableTable3DefaultValue'
+import { ColumnNoValue, convertArrayToLengthAware } from './EditableTable3DefaultValue'
 import { calTableTrueWidth, makeColGroup } from './EditableTable3ColGroup'
 import { makeThead2nd } from './EditableTable3THead2nd'
-import { TbodyTrs } from './EditableTable3TBodyTRows'
-import { updateVisibleRows } from './VirtualScrolling/updateVirtualTableVisibleRows'
-import { tdOnMouseMove } from './VirtualScrolling/tdOnMouseMove'
+import { visibleRowIds } from './VirtualScrolling/updateVirtualTableVisibleRows'
+import { applyTopFor2ndHeader } from './FixedColumn/EditableTable3FixedColumn'
+import { applyVirtualScrolling } from './VirtualScrolling/EditableTable3VirtualScrolling'
+import { LengthAware } from './Type/EditableTable3DataLineType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
+import { ControlButtonGroup } from './ControlButtonGroup/ControlButtonGroup'
+import { TableConfigDiv } from './DebugDiv/TableConfigDiv'
+import { replaceDivWith } from './Functions/TableManipulations'
+import { EnvConfigGroup } from './EnvConfigGroup/EnvConfigGroup'
+import { registerOnClickMasterCB } from './Renderer/IdAction/MasterCheckbox'
+import { makeToolBarBottom } from './EditableTable3ToolbarBottom'
+import { ToolbarComponents } from './ToolbarComponents/ToolbarComponents'
+
+declare let tableData: { [tableName: string]: LengthAware | any[] }
+declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 class EditableTable3 {
     private tableDebug = false
-    private startTime = new Date().getTime()
-
-    private defaultConfig: TableConfig = {
-        borderColor: 'border-gray-300',
-    }
+    // private startTime = new Date().getTime()
+    private uploadServiceEndpoint = '/upload-service-endpoint'
+    private tableName: string = ''
 
     constructor(private params: TableParams) {
-        console.log('EditableTable3.constructor()')
-        this.tableDebug = this.params.tableConfig.tableDebug || false
+        // console.log('EditableTable3.constructor()')
+        this.tableDebug = params.tableConfig.tableDebug || false
+        this.tableName = params.tableName
         if (this.tableDebug)
             console.log(`┌──────────────────${params.tableName}──────────────────┐`)
 
         //Columns
-        this.params.columns = makeUpDefaultValue(params)
+        tableColumns[params.tableName] = makeUpDefaultValue(params)
+        const columns = tableColumns[params.tableName]
         // console.log(this.params.columns)
-        this.params.indexedColumns = {}
-        if (this.params.columns) {
-            this.params.columns.forEach((column, index) => {
-                this.params.indexedColumns[column.dataIndex] = column
+        params.indexedColumns = {}
+        if (columns) {
+            columns.forEach((column) => {
+                params.indexedColumns[column.dataIndex] = column
             })
         }
 
-        if (!this.params.tableConfig) this.params.tableConfig = {}
-        if (Array.isArray(params.dataSource)) {
-            this.params.dataSource = convertArrayToLengthAware(params.dataSource)
-            if (this.tableDebug) console.log('convertArrayToLengthAware', this.params.dataSource)
+        if (!params.tableConfig)
+            params.tableConfig = {
+                entityLineType: 'no-entityLineType',
+            }
+        if (!params.tableConfig.uploadServiceEndpoint)
+            params.tableConfig.uploadServiceEndpoint = this.uploadServiceEndpoint
+        if (Array.isArray(tableData[this.tableName])) {
+            const arrayOfAny = tableData[this.tableName] as any[]
+            tableData[this.tableName] = convertArrayToLengthAware(arrayOfAny)
+            if (this.tableDebug) console.log('convertArrayToLengthAware', tableData[this.tableName])
         }
-        if (this.params.tableConfig.showNo) this.params.columns.unshift(ColumnNoValue)
-        // makeUpPaginator(this.params.tableConfig, this.params.dataSource)
+        if (params.tableConfig.showNo) columns.unshift(ColumnNoValue)
+        // makeUpPaginator(params.tableConfig, params.dataSource)
 
-        if (this.tableDebug)
-            console.log('EditableTable3', { ...params, columns: this.params.columns })
+        if (this.tableDebug) console.log('EditableTable3', { ...params, columns })
+
+        visibleRowIds[params.tableName] = new Set<string>()
     }
 
     renderTable() {
-        const { tableName, tableConfig, columns } = this.params
+        const { tableName, tableConfig } = this.params
+        const columns = tableColumns[tableName]
 
         if (!columns) {
             const divId = `#${tableName}`
@@ -65,20 +80,18 @@ class EditableTable3 {
         }
 
         const tableDebug = tableConfig.tableDebug || false
-        const borderColor = tableConfig.borderColor || this.defaultConfig.borderColor
-        const borderT = tableConfig.showPaginationTop ? `border-t ${borderColor}` : 'rounded-t-lg'
+        const borderColor = tableConfig.borderColor || `border-gray-300`
+        const borderT = ToolbarComponents.hasAnyTopComponent(this.params)
+            ? `border-t ${borderColor}`
+            : 'rounded-t-lg'
 
         let tableWidth = 'width: 100%;'
         if (tableConfig.tableTrueWidth) tableWidth = `width: ${calTableTrueWidth(this.params)}px;`
 
-        //OLD maxH using REM and tailwind generator, up to 60 REM. 1 REM = 16px
-        //Can be removed if all code use px not rem
-        const styleMaxH = tableConfig.maxH
-            ? `max-height: ${tableConfig.maxH <= 60 ? tableConfig.maxH * 16 : tableConfig.maxH}px;`
-            : ''
+        const styleMaxH = tableConfig.maxH ? `max-height: ${tableConfig.maxH}px;` : ''
 
-        const toolbarTop = tableConfig.showPaginationTop ? makeToolBarTop(this.params) : ``
-        const toolbarBottom = tableConfig.showPaginationBottom ? makeToolBarBottom(this.params) : ``
+        const toolbarTop = makeToolBarTop(this.params)
+        const toolbarBottom = makeToolBarBottom(this.params)
 
         const tableHeader = tableConfig.tableHeader
             ? `<div component="tableHeader">${tableConfig.tableHeader}</div>`
@@ -88,8 +101,7 @@ class EditableTable3 {
             : ''
 
         if (this.tableDebug) console.log('Start to make Tbody')
-        const trs = new TbodyTrs(this.params).render()
-        const emptyTable = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
+        // const trs = new TbodyTrs(this.params).render()
 
         // if (this.tableDebug) console.log('Start to make Colgroup')
         const colgroupStr = makeColGroup(this.params)
@@ -129,32 +141,48 @@ class EditableTable3 {
         const classList = `table-wrp block bg-gray-100 overflow-x-auto ${borderT} border-l border-r border-b`
         const styleList = `${styleMaxH}`
 
-        const wrappingDiv = `<div class="${classList}" style="${styleList}">
+        const wrappingDiv = `<div id="${tableName}__container" class="${classList}" style="${styleList}">
             ${tableStr}
         </div>`
 
-        const debugStr = tableDebug
+        const debugStrTop = tableDebug
             ? `<div class="bg-red-600 text-white text-center border font-bold">${tableName} is in DEBUG Mode</div>`
             : ``
 
+        console.log('this.params.tableConfig', this.params.tableConfig)
+        const debugStrBottom = tableDebug
+            ? `<div class="bg-red-600 text-white border font-bold">
+                ${TableConfigDiv(this.params)}
+                </div>`
+            : ``
+
+        const controlButtonGroup = `<div id="${tableName}__control_button_group"></div>`
+        const evnConfig = `<div id="${tableName}__env_config_group"></div>`
+
         const editableTable = `
-        ${debugStr}
+        ${debugStrTop}
         ${tableHeader}
         ${toolbarTop}
         ${wrappingDiv}
         ${toolbarBottom}
         ${tableFooter}
+        ${controlButtonGroup}
+        ${evnConfig}
+        ${debugStrBottom}
         `
 
         if (this.tableDebug) console.log('madeEmptyEditableTable Body')
 
-        return { editableTable, trs, emptyTable }
+        return editableTable
     }
 
     render() {
-        const { tableName, tableConfig, columns, dataSource } = this.params
+        const { tableName } = this.params
+        const columns = tableColumns[tableName]
+        const dataSource = tableData[tableName] as LengthAware
 
-        let body = ''
+        let body = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`
+
         if (!columns) {
             body = `<div class=" text-center rounded m-1 p-2 bg-yellow-400 text-red-500">
             Columns is required
@@ -167,81 +195,36 @@ class EditableTable3 {
             </div>`
         }
 
-        let trs: HTMLTableRowElement[] = []
+        // let trs: HTMLTableRowElement[] = []
         if (columns && dataSource) {
-            const x = this.renderTable()
-            body = x.emptyTable
-            if (x.editableTable) {
-                body = x.editableTable
-                trs = x.trs
-            }
+            const tableEmptyRows = this.renderTable()
+            if (tableEmptyRows) body = tableEmptyRows
         }
 
         const divId = `#${tableName}`
         const div = document.querySelector(divId)
         div && (div.innerHTML = body)
 
-        // const tbody = document.querySelector(`${divId} tbody`)
-        // if (tbody) {
-        //     trs.forEach((tr) => tbody.appendChild(tr))
-        // }
-
         if (this.tableDebug) {
             console.log(`└──────────────────${this.params.tableName}──────────────────┘`)
             console.log('')
         }
 
-        const endTime00 = new Date().getTime()
-        console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
+        // const endTime00 = new Date().getTime()
+        // console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
 
         //when document is ready
         $(() => {
-            const virtualTable = document.querySelector(`${divId} table`) as HTMLTableElement
-            // console.log('virtualTable', divId, virtualTable)
-            if (virtualTable) {
-                const tbodyElement = virtualTable.querySelector('tbody')
-
-                if (tbodyElement) {
-                    tbodyElement.addEventListener('mousemove', (e) => tdOnMouseMove(e, this.params))
-
-                    //this make select2 lost focus
-                    // tbodyElement.addEventListener('mouseout', (e) => tdOnMouseOut(e, this.params))
+            //Wait sometime for the browser to finish rendering the table
+            if (dataSource) {
+                ToolbarComponents.register(this.params)
+                registerOnClickMasterCB(tableName)
+                applyVirtualScrolling(this.params)
+                replaceDivWith(tableName, 'control_button_group', ControlButtonGroup(this.params))
+                if (this.tableDebug) {
+                    replaceDivWith(tableName, 'env_config_group', EnvConfigGroup(this.params))
                 }
-
-                const tableContainer = virtualTable.parentElement as HTMLElement
-                tableContainer.addEventListener('scroll', () =>
-                    updateVisibleRows(
-                        virtualTable,
-                        this.params.dataSource,
-                        this.params,
-                        // this.params.tableConfig.virtualScroll,
-                    ),
-                )
-
-                // Initial render
-                updateVisibleRows(
-                    virtualTable,
-                    this.params.dataSource,
-                    this.params,
-                    // this.params.tableConfig.virtualScroll,
-                    true,
-                )
-                // } else {
-                //     if (columns && dataSource) {
-                //         applyRenderedTbody(this.params)
-                //         const endTime01 = new Date().getTime()
-                //         console.log(
-                //             'EditableTable3.applyRenderedTbody() took',
-                //             endTime01 - endTime00,
-                //             'ms',
-                //         )
-
-                //         setTimeout(() => {
-                //             //Wait sometime for the browser to finish rendering the table
-                //             applyFixedColumnWidth(tableName, this.params.columns)
-                //             applyTopFor2ndHeader(tableName)
-                //         }, 100)
-                //     }
+                setTimeout(() => applyTopFor2ndHeader(tableName), 100)
             }
         })
     }

@@ -1,7 +1,7 @@
 import { TableColumn } from './Type/EditableTable3ColumnType'
-import { TableConfig } from './Type/EditableTable3ConfigType'
-import { LengthAware } from './Type/EditableTable3DataLineType'
 import { TableParams } from './Type/EditableTable3ParamType'
+
+declare let tableColumns: { [tableName: string]: TableColumn[] }
 
 export const ColumnNoValue: TableColumn = {
     dataIndex: '_no_',
@@ -12,8 +12,19 @@ export const ColumnNoValue: TableColumn = {
     fixed: 'left',
 }
 
-export const makeUpDefaultValue = ({ columns }: TableParams) => {
-    return columns && columns.map((column) => ({ ...column, width: column.width || 100 }))
+export const makeUpDefaultValue = ({ tableName }: TableParams) => {
+    let columns = tableColumns[tableName]
+    if (columns) {
+        columns = columns.map((column) => {
+            if (column.renderer == 'checkbox_for_line') {
+                column.dataIndex = '_checkbox_for_line_'
+                column.title = ''
+                column.width = 40
+            }
+            return { ...column, width: column.width || 100 }
+        })
+    }
+    return columns
 }
 
 export const convertArrayToLengthAware = (dataSource: any[]) => {

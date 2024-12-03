@@ -25,12 +25,13 @@ var tableObjectIndexedColumns = {};
     k = {...k, "users": @json($users),}
     k_by = {}
 
+    tableData = {...tableData, "{{$tableName}}":  @json($dataSource)}
+    tableColumns = {...tableColumns, "{{$tableName}}": @json($columns)}
+
     var {{$tableName}}_Object = null;
     $(document).ready(function() {
         const params = {
             'tableName': @json($tableName),
-            'columns': @json($columns),
-            'dataSource': @json($dataSource),
             'dataHeader': @json($dataHeader),
 
             'tableConfig': {
@@ -61,14 +62,17 @@ var tableObjectIndexedColumns = {};
                 'classList': @json($classList),
                 'animationDelay': @json($animationDelay),
 
-                // 'virtualScroll': {
-                //     'rowHeight': 45,
-                //     'viewportHeight': 640,
-                // }
                 'rowHeight': @json($rowHeight),
+
+                'orderable': {{($orderable??0) ? "true" : "false"}},
+                'duplicatable': {{($duplicatable??0) ? "true" : "false"}},
+                'deletable': {{($deletable??0) ? "true" : "false"}},
+
+                'showButton': @json($showButton),
+                'envConfig': @json($envConfig),
             },
         }
-        // console.log("Initilizing table {{$tableName}}", {{$tableName}})
+        // console.log("Initializing table {{$tableName}}", {{$tableName}})
         {{$tableName}}_Object = new EditableTable3(params)
         {{$tableName}}_Object.render()
     });

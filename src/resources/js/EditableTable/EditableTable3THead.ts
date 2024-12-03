@@ -1,10 +1,15 @@
 import { twMerge } from 'tailwind-merge'
 import { getTooltip } from './EditableTable3DefaultValue'
-import { getFirstFixedRightColumnIndex, getFixedStr } from './EditableTable3FixedColumn'
+import { getFirstFixedRightColumnIndex, getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { Str } from './Functions'
 import { TableParams } from './Type/EditableTable3ParamType'
+import { TableColumn } from './Type/EditableTable3ColumnType'
+import { renderMasterCB } from './Renderer/IdAction/MasterCheckbox'
 
-export const makeThead = ({ columns, tableConfig }: TableParams) => {
+declare let tableColumns: { [tableName: string]: TableColumn[] }
+
+export const makeThead = ({ tableName, tableConfig }: TableParams) => {
+    const columns = tableColumns[tableName]
     const firstFixedRightIndex = getFirstFixedRightColumnIndex(columns)
     let colspanSkipCounter = 0
     const result = columns.map((column, index) => {
@@ -15,7 +20,11 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
 
         if (column.colspan) colspanSkipCounter = column.colspan - 1
 
-        const niceDataIndex = column.title ? column.title : Str.toHeadline(column.dataIndex)
+        const title = column.title !== undefined ? column.title : Str.toHeadline(column.dataIndex)
+        let masterCb = ``
+        if (['checkbox', 'checkbox_for_line'].includes(column.renderer)) {
+            masterCb = renderMasterCB(tableName, column)
+        }
         const tooltipStr = getTooltip(column)
         const hiddenStr = column.invisible ? 'hidden' : ''
         const widthStyle = column.width ? `width: ${column.width}px;` : ''
@@ -50,8 +59,9 @@ export const makeThead = ({ columns, tableConfig }: TableParams) => {
             colspan="${column.colspan || ''}"
         >
             <div class="${rotateDivStr}" style="${styleDivStr}">
-                ${niceDataIndex}
+                <div class="">${title}</div>
                 <div class="text-xs text-gray-500">${column.subTitle || ''}</div>
+                ${masterCb}
             </div>
         </th>`
     })

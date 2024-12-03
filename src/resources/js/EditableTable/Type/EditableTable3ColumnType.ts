@@ -21,8 +21,7 @@ import {
     ControlAttributeSearchableDialog,
     ControlAttributeStatus,
     ControlAttributeText,
-    ControlAttributeTextarea,
-    ControlAttributeThumbnail,
+    // ControlAttributeTextarea,
     ControlAttributeToggle,
 } from './EditableTable3ControlAttributeType'
 
@@ -89,11 +88,11 @@ export type TableColumnNo = BaseTableColumn & {
     rendererAttrs?: ControlAttributeNo
 }
 export type TableColumnAction = BaseTableColumn & {
-    renderer: 'action.'
+    renderer: 'action_column'
     rendererAttrs?: ControlAttributeAction
 }
 export type TableColumnActionCheckbox = BaseTableColumn & {
-    renderer: 'action_checkbox.'
+    renderer: 'checkbox_column' | 'checkbox_for_line'
     rendererAttrs?: ControlAttributeActionCheckbox
 }
 export type TableColumnActionPrint = BaseTableColumn & {
@@ -109,7 +108,7 @@ export type TableColumnDocId = BaseTableColumn & {
     rendererAttrs?: ControlAttributeDocId
 }
 export type TableColumnIdLink = BaseTableColumn & {
-    renderer: 'id_link'
+    renderer: 'id_link' | 'id'
     rendererAttrs?: ControlAttributeIdLink
 }
 export type TableColumnColumn = BaseTableColumn & {
@@ -141,9 +140,9 @@ export type TableColumnAvatarUser = BaseTableColumn & {
     renderer: 'avatar_user'
     rendererAttrs?: ControlAttributeAvatarUser
 }
-export type TableColumnThumbnail = BaseTableColumn & {
-    renderer: 'thumbnail'
-    rendererAttrs?: ControlAttributeThumbnail
+export type TableColumnAttachment = BaseTableColumn & {
+    renderer: 'thumbnail' | 'thumbnails' | 'attachment'
+    rendererAttrs?: ControlAttributeAttachment
 }
 
 export type TableColumnCustomFunction = BaseTableColumn & {
@@ -179,10 +178,6 @@ export type TableColumnDateTime = BaseTableColumn & {
     renderer: 'date-time'
     rendererAttrs?: ControlAttributePickerDatetime
 }
-export type TableColumnAttachment = BaseTableColumn & {
-    renderer: 'attachment'
-    rendererAttrs?: ControlAttributeAttachment
-}
 export type TableColumnSearchableDialog = BaseTableColumn & {
     renderer: 'searchable_dialog'
     rendererAttrs?: ControlAttributeSearchableDialog
@@ -210,7 +205,6 @@ export type TableColumn =
     | TableColumnAggCount
     | TableColumnAvatarUser
     | TableColumnDateTime
-    | TableColumnThumbnail
     | TableColumnHyperLink
     | TableColumnParentLink
     | TableColumnCustomFunction

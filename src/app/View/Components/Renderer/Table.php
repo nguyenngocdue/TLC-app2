@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Renderer;
 
+use App\Utils\ClassList;
 use App\View\Components\Renderer\Table\TableTraitColumns;
 use App\View\Components\Renderer\Table\TableTraitCommon;
 use App\View\Components\Renderer\Table\TableTraitFooter;
@@ -18,6 +19,7 @@ class Table extends Component
   use TableTraitRows;
   use TableTraitFooter;
   // public static $borderColor = 'border-gray-600';
+  public static $table11NameCounter = 11;
 
   public function __construct(
     private Request $request,
@@ -33,7 +35,8 @@ class Table extends Component
     private $groupKeepOrder = false,
     private $header = "",
     private $footer = "",
-    private $maxH = 40 * 16,
+    private $maxH = 640,
+    private $rowHeight = 45,
     // private $minH = 40,
     //Editable MODE
     private $model = null,
@@ -55,6 +58,9 @@ class Table extends Component
     private $numberOfEmptyLines = 0,
     private $lineIgnoreNo = 0,
     private $borderColor = 'border-gray-300',
+    private $animationDelay = 0,
+    private $showButton = null,
+    private $envConfig = null,
   ) {}
 
   /**
@@ -99,7 +105,21 @@ class Table extends Component
 
     // return "TABLE";
 
-    return view("components.renderer.table", [
+    $classList = [
+      'text' => ClassList::TEXT,
+      'textarea' => ClassList::TEXTAREA,
+      'dropdown' => ClassList::DROPDOWN,
+      'toggle' => ClassList::TOGGLE,
+      'button' => ClassList::BUTTON,
+      'toggle_checkbox' => ClassList::TOGGLE_CHECKBOX,
+      'dropdown_fake' => ClassList::DROPDOWN_FAKE,
+      // 'radio_checkbox' => ClassList::RADIO_CHECKBOX,
+      // 'radio_group' => ClassList::RADIO_GROUP,
+      // 'button2' => ClassList::BUTTON2,
+
+    ];
+
+    $params =  [
       'tableName' => $this->tableName,
       'columns' => $columns,
       'dataSource' => $dataSource,
@@ -129,6 +149,27 @@ class Table extends Component
       'numberOfEmptyLines' => $this->numberOfEmptyLines,
       'lineIgnoreNo' => $this->lineIgnoreNo,
       'borderColor' => $this->borderColor,
-    ]);
+
+      //For table3
+      'dataHeader' => $this->dataHeader,
+      'tableTrueWidth' => $this->tableTrueWidth,
+      'maxH' => $this->maxH,
+      'rowHeight' => $this->rowHeight,
+      'rotate45Width' => $this->rotate45Width,
+      'rotate45Height' => $this->rotate45Height,
+      'classList' => $classList,
+      'animationDelay' => $this->animationDelay,
+      'showButton' => $this->showButton,
+      'envConfig' => $this->envConfig,
+    ];
+
+    $table2 = view("components.renderer.table", $params);
+    return $table2;
+
+    $params['tableName'] = 'table' . self::$table11NameCounter++;
+    $table3 = view("components.renderer.table3", $params);
+    return $table3;
+
+    return $table2 . $table3;
   }
 }

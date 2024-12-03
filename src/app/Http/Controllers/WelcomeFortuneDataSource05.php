@@ -27,7 +27,7 @@ class WelcomeFortuneDataSource05
       [
         'dataIndex' => 'id',
         'title' => 'Action',
-        'renderer' => 'action.',
+        'renderer' => 'action_column',
         'fixed' => 'left',
         'width' => 100,
       ],
@@ -51,18 +51,27 @@ class WelcomeFortuneDataSource05
         'rendererAttrs' => [],
       ],
       [
-        'dataIndex' => 'thumbnail',
-        'renderer' => 'thumbnail',
+        'dataIndex' => 'attachment_1',
+        'renderer' => 'attachment',
         'width' => 200,
         'classList' => 'whitespace-nowrap',
-        'rendererAttrs' => [],
+        'rendererAttrs' => [
+          'maxFileCount' => 12,
+          'maxPerLine' => 1,
+          'groupId' => 1,
+        ],
       ],
       [
-        'dataIndex' => 'thumbnails',
-        'renderer' => 'thumbnail',
-        'width' => 200,
+        'dataIndex' => 'attachment_3',
+        'renderer' => 'attachment',
+        'width' => 240,
         'classList' => 'whitespace-nowrap',
-        'rendererAttrs' => [],
+        'rendererAttrs' => [
+          'maxFileCount' => 12,
+          'maxPerLine' => 5,
+          'maxToShow' => 1000,
+          'groupId' => 1,
+        ],
       ],
       [
         'dataIndex' => 'avatar_user',
@@ -83,11 +92,11 @@ class WelcomeFortuneDataSource05
     $tables = [
       [
         'name' => 'John and lots of his friends',
-        'thumbnail' => [
+        'attachment_1' => [
           'src' => asset('images/numbers/01.png'),
 
         ],
-        'thumbnails' => [
+        'attachment_3' => [
           ['src' => asset('images/numbers/01.png'),],
           ['src' => asset('images/numbers/02.png'),],
           ['src' => asset('images/numbers/03.png'),],
@@ -172,7 +181,7 @@ class WelcomeFortuneDataSource05
 
     ];
     $duplicator = [];
-    $expectedLines = 100;
+    $expectedLines = 10;
     // $expectedLines = 35000; //loaded fine but challenging to F12
     for ($i = 0; $i < $expectedLines; $i++) {
       $duplicator[] = $tables[$i % sizeof($tables)];

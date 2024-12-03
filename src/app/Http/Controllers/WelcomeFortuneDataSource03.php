@@ -10,11 +10,32 @@ class WelcomeFortuneDataSource03
   {
     $statuses = LibStatuses::getAll();
     $columns = [
-      // ['dataIndex' => 'id', 'title' => 'CB', 'renderer' => 'action_checkbox.', 'fixed' => 'left'],
+      [
+        // 'dataIndex' => 'checkbox_for_line',
+        // 'title' => 'CB',
+        'renderer' => 'checkbox_for_line',
+        'fixed' => 'left',
+        'rendererAttrs' => [
+          'hasMasterCheckbox' => true,
+        ],
+      ],
       // ['dataIndex' => 'id', 'title' => 'ID', 'renderer' => 'id_link', 'fixed' => 'left'],
-      // ['dataIndex' => 'id', 'title' => 'Action', 'renderer' => 'action.', 'fixed' => 'left'],
+      [
+        'dataIndex' => 'id',
+        'title' => 'Action',
+        'renderer' => 'action_column',
+        'fixed' => 'left',
+        'width' => 70,
+      ],
       // ['dataIndex' => 'id', 'title' => 'Print', 'renderer' => 'action_print.', 'fixed' => 'left'],
       ['dataIndex' => 'hidden_column', 'invisible' => true, 'fixed' => 'left'],
+      [
+        'dataIndex' => 'order_no',
+        'renderer' => 'text',
+        'invisible' => !true,
+        'fixed' => 'left',
+        'width' => 60,
+      ],
       [
         'dataIndex' => 'name',
         'renderer' => 'text',
@@ -26,12 +47,15 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'bool',
         'renderer' => 'toggle',
-        'subTitle' => 'Boolean View'
+        'subTitle' => 'Toggle'
       ],
       [
         'dataIndex' => 'bool2',
         'renderer' => 'checkbox',
-        'subTitle' => 'Boolean View'
+        'subTitle' => 'Checkbox',
+        'rendererAttrs' => [
+          'hasMasterCheckbox' => true,
+        ],
       ],
       [
         'dataIndex' => 'number',
@@ -73,14 +97,14 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date01',
         'title' => 'Date Time',
-        'width' => 120,
+        'width' => 140,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [],
       ],
       [
         'dataIndex' => 'date02',
         'title' => 'Date',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'date',
@@ -89,7 +113,7 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date03',
         'title' => 'Time',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'time',
@@ -98,7 +122,7 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date04',
         'title' => 'Month',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'month',
@@ -107,7 +131,7 @@ class WelcomeFortuneDataSource03
       [
         'dataIndex' => 'date05',
         'title' => 'Year',
-        'width' => 120,
+        // 'width' => 120,
         'renderer' => 'picker_datetime',
         'rendererAttrs' => [
           'pickerType' => 'year',
@@ -119,12 +143,12 @@ class WelcomeFortuneDataSource03
 
     $tables = [
       [
-        'name' => 'John and lots of his friends',
+        'name' => 'Alice',
         'status' => 'active',
         'text' => 'a string',
-        'date01' => '2021-01-01T00:00:00Z',
+        'date01' => '2021-01-01 06:00:00',
         'date02' => '2021-02-01',
-        'date03' => '2021-03-01 12:00:00',
+        'date03' => '06:00:00',
         'date04' => '2021-04-01',
         'date05' => '2021-05-01',
         'bool' => true,
@@ -134,12 +158,12 @@ class WelcomeFortuneDataSource03
         'user_employeeid' => null,
       ],
       [
-        'name' => 'Doe',
+        'name' => 'Bob',
         'status' => 'new',
         'text' => 'another string',
-        'date01' => '2021-01-01T12:00:00Z',
+        'date01' => '2021-01-01 08:00:00',
         'date02' => '2021-02-02',
-        'date03' => '2021-03-03 12:00:00',
+        'date03' => '08:00:00',
         'date04' => '2021-04-04',
         'date05' => '2021-05-05',
         'bool' => false,
@@ -149,12 +173,12 @@ class WelcomeFortuneDataSource03
         'user_employeeid' => 'TLCM01069',
       ],
       [
-        'name' => 'Doe',
+        'name' => 'Ceasar',
         'status' => 'new',
         'text' => 'another string',
-        'date01' => '2021-01-01T24:00:00Z',
+        'date01' => '2021-01-01 23:00:00',
         'date02' => '2022-02-02',
-        'date03' => '2023-03-03 12:00:00',
+        'date03' => '23:00:00',
         'date04' => '2024-04-04',
         'date05' => '2025-05-05',
         'bool' => false,
@@ -165,14 +189,14 @@ class WelcomeFortuneDataSource03
       ],
     ];
     $duplicator = [];
-    $expectedLines = 100;
+    $expectedLines = 25;
     // $expectedLines = 35000; //loaded fine but challenging to F12
     for ($i = 0; $i < $expectedLines; $i++) {
       $duplicator[] = $tables[$i % 3];
     }
 
     foreach ($duplicator as $key => $row) {
-      $duplicator[$key]['name'] .= " " . $key;
+      $duplicator[$key]['name'] .= " " . ($key + 1);
     }
 
     return  [

@@ -34,6 +34,7 @@ export const renderColumn4 = (
 
     let arrayOfRendered: string[] = []
     arrayOfRendered = merged.map((foreignObject) => {
+        if (!foreignObject) return ''
         const statusKey = foreignObject[statusColumn] as string
 
         if (!statusKey) return ''
@@ -44,6 +45,5 @@ export const renderColumn4 = (
         return `<a href="${href}" target="_blank">${rendered}</a>`
     })
     const rendered = arrayOfRendered.join(` `)
-    const tdClass = `whitespace-nowrap`
-    return { rendered, tdClass }
+    return rendered
 }

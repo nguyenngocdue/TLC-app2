@@ -3,12 +3,11 @@ import { DataFormat } from 'select2'
 import { Str, getDataSource } from '../../Functions'
 import { TableColumnDropdown } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 
 export class Dropdown4Edit extends Renderer4Edit {
     protected tableDebug = false
 
-    static getOptionsExpensive = (column: TableColumnDropdown) => {
+    getOptionsExpensive = (column: TableColumnDropdown) => {
         const { rendererAttrs = {} } = column
         const cbbDataSource = getDataSource(column)
 
@@ -16,12 +15,12 @@ export class Dropdown4Edit extends Renderer4Edit {
             valueField = 'id',
             labelField = 'name',
             // descriptionField = 'description',
-            tooltipField = '',
+            // tooltipField = '',
         } = rendererAttrs
 
         const options = Object.keys(cbbDataSource).map((key) => {
             const item = cbbDataSource[key]
-            const tooltip = item[tooltipField] || Str.makeId(item[valueField])
+            // const tooltip = item[tooltipField] || Str.makeId(item[valueField])
 
             const option: DataFormat = {
                 id: item[valueField],
@@ -51,9 +50,29 @@ export class Dropdown4Edit extends Renderer4Edit {
         if (!selectedItem) return ``
         const item = cbbDataSource[selectedItem[valueField]]
         const tooltip = item[tooltipField] || Str.makeId(item[valueField])
-        return `<option value="${item[valueField]}" title="${tooltip}">
+        // const fakeOption = `<option value="-1" title="Fake Option">-1</option>`
+        const realOption = `<option value="${item[valueField]}" title="${tooltip}">
             ${item[labelField]}
         </option>`
+        return realOption
+    }
+
+    applyOnChangeScript(): void {
+        $('#' + this.controlId).on('change', () => this.setValueToTableData())
+    }
+
+    applyOnMouseMoveScript(): void {
+        // console.log('Dropdown4Edit.applyOnMouseMoveScript()')
+        const dropdown = $('#' + this.controlId)
+        if (!dropdown.data('select2')) {
+            const column = this.column as TableColumnDropdown
+            const options = this.getOptionsExpensive(column)
+
+            dropdown.select2({ data: options })
+            this.applyOnChangeScript()
+        } else {
+            // console.log('Dropdown4Edit.applyOnMouseMoveScript() - select2 already initialized')
+        }
     }
 
     control() {
@@ -67,39 +86,10 @@ export class Dropdown4Edit extends Renderer4Edit {
 
         // <option class="text-gray-300" value="" disabled selected>Select an option</option>
         return `<select 
-            id="${this.controlId}" 
-            name="${this.controlName}" 
+            id="${this.controlId}"             
             class="${classList} no-arrow"
             >
             ${optionsStr}
         </select>`
-    }
-
-    // applyPostScript = () => {
-    //     // console.log('Dropdown4Edit.applyPostScript()', this)
-    //     const column = this.column as TableColumnDropdown
-    //     const { rendererAttrs = {}, dataIndex } = column
-    //     const {
-    //         allowClear,
-    //         allowChooseWhenOneItem,
-    //         allowOpen,
-    //         valueField = 'id',
-    //         labelField = 'name',
-    //         // descriptionField = 'description',
-    //         tooltipField = '',
-    //     } = rendererAttrs
-    //     // $(`#${this.controlId}`).select2({
-    //     //     placeholder: 'Select an option',
-    //     //     allowClear,
-    //     // })
-    // }
-
-    render(): TableRenderedValueObject {
-        let result = this.control()
-
-        return {
-            rendered: result,
-            // applyPostScript: this.applyPostScript,
-        }
     }
 }

@@ -1,10 +1,12 @@
 import { twMerge } from 'tailwind-merge'
-import { TableRenderedValueObject } from '../../Type/EditableTable3DataLineType'
 import { Renderer4View } from '../Renderer4View'
 import { TableColumnHyperLink } from '../../Type/EditableTable3ColumnType'
 
 export class HyperLink4View extends Renderer4View {
-    render(): TableRenderedValueObject {
+    protected tdClass: string = `text-center`
+
+    protected divStyle: { [key: string]: string | number } = { width: '60px' }
+    control() {
         const { cellValue, tableConfig } = this
         const column = this.column as TableColumnHyperLink
         const rendererAttrs = column.rendererAttrs || {}
@@ -18,6 +20,6 @@ export class HyperLink4View extends Renderer4View {
         const value = cellValue
             ? `<a href="${cellValue}" target="${target}" ><button class="${classList}">Open</button></a>`
             : ``
-        return { rendered: value, tdClass: 'text-center', divStyle: { width: '60px' } }
+        return value
     }
 }

@@ -10,6 +10,8 @@
     tableDebug={{$tableDebug}} 
     editable="{{$editable?1:0}}"
     tableTrueWidth=1
+
+    tableDebug=1
     />
 
 <div class="flex justify-between">

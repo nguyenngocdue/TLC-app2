@@ -28,15 +28,25 @@ class WelcomeFortuneController extends Controller
         return $table;
     }
 
+    public function store(Request $request)
+    {
+        dump("In STORE");
+        return $this->index($request);
+    }
+
     public function index(Request $request)
     {
-        dump($request->all());
+
+        if (sizeof($request->all())) {
+            dump("Submitted table data:", $request->input());
+        }
         $table01 = $this->dataSource01->getDataSource();
         $table02 = $this->dataSource02->getDataSource();
         $table03 = $this->dataSource03->getDataSource();
         $table03a = $this->makeEditable($table03);
         $table04 = $this->dataSource04->getDataSource();
         $table05 = $this->dataSource05->getDataSource();
+        $table05a = $this->makeEditable($table05);
 
         return view("welcome-fortune", [
             'table01' => $table01,
@@ -45,6 +55,7 @@ class WelcomeFortuneController extends Controller
             'table03a' => $table03a,
             'table04' => $table04,
             'table05' => $table05,
+            'table05a' => $table05a,
         ]);
     }
 }

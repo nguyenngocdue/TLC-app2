@@ -4,15 +4,20 @@
 <label class='peer-checked:bg-gray-300 peer-checked:text-gray-700'></label>
 <label class='peer-checked:bg-orange-300 peer-checked:text-orange-700'></label>
 
-<div class="table-cell"></div>
-<div class="table-row"></div>
+<div class="table-cell cursor-grab"></div>
+<div class="table-row cursor-grabbing"></div>
 
+<div class="top-1/4 left-1/4 translate-x-1/4 -translate-y-1/4"></div>
 {{-- <div class="xs:hidden"></div>
 <div class="xs:block"></div> --}}
 
+<div class="lg:justify-start"></div>
+<div class="lg:justify-center"></div>
+<div class="lg:justify-end"></div>
+
 <div class="border-dotted hover:border-dotted hover:border"/>
 <div class="border-dashed hover:border-dashed "/>
-<div class="border-double hover:border-double"/>
+<div class="border-double hover:border-double w-fit"/>
 
 {{-- editable select --}}
 <div class="focus-visible:border-none" ></div> 

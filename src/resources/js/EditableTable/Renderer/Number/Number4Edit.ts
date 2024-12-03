@@ -3,8 +3,12 @@ import { TableColumnNumber } from '../../Type/EditableTable3ColumnType'
 import { Renderer4Edit } from '../Renderer4Edit'
 
 export class Number4Edit extends Renderer4Edit {
+    applyOnChangeScript(): void {
+        const control = document.getElementById(this.controlId) as HTMLInputElement
+        control && control.addEventListener('change', () => this.setValueToTableData())
+    }
     control() {
-        const { cellValue, controlName, controlId, tableConfig } = this
+        const { cellValue, controlId, tableConfig } = this
         const column = this.column as TableColumnNumber
         const { decimalPlaces = 0 } = column.rendererAttrs || {}
         const classList = twMerge(`text-right`, tableConfig.classList?.text)
@@ -15,15 +19,12 @@ export class Number4Edit extends Renderer4Edit {
 
         const html = `<input 
             component="text4edit" 
-            name="${controlName}"
             id="${controlId}"
             class="${classList}" 
             value="${value}" 
             type="number" 
             step="${step}" 
             />`
-        return `
-        ${html}
-        `
+        return html
     }
 }

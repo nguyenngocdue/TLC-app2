@@ -28,7 +28,7 @@ class ViewAllTypeList extends Component
     function removeStatusColumnIfStatusless()
     {
         $isStatusless = (Str::modelPathFrom($this->type))::isStatusless();
-        if ($isStatusless) $this->columns = array_filter($this->columns, fn ($c) => $c['dataIndex'] !== 'status');
+        if ($isStatusless) $this->columns = array_filter($this->columns, fn($c) => $c['dataIndex'] !== 'status');
         // dump($this->columns);
     }
 

@@ -38,7 +38,7 @@ export interface LengthAware {
     from: number
     last_page: number
     last_page_url: string
-    links: string[]
+    links: Array<{ url: string | null; label: string; active: boolean }>
     next_page_url: string | null
     path: string
     per_page: number
@@ -52,20 +52,23 @@ export interface TableRenderedValueObject {
     tdClass?: string
     tdStyle?: { [key: string]: string | number }
     tdTooltip?: string
+
     divClass?: string
     divStyle?: { [key: string]: string | number }
     divTooltip?: string
 
-    applyPostScript?: () => void
+    applyOnMouseMoveScript?: () => void
+    applyPostRenderScript?: () => void
+    applyOnChangeScript?: () => void
 }
 
 export interface TableRendererParams {
-    controlName: string
+    // controlName: string
     controlId: string
     cellValue: TableCellType
     params: TableParams
     dataLine: TableDataLine
     column: TableColumn
     rowIndex: number
-    customRenderFn?: () => TableRenderedValueObject
+    customRenderFn?: () => string
 }

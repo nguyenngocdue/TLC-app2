@@ -1,4 +1,4 @@
-import { TableColumn } from './Type/EditableTable3ColumnType'
+import { TableColumn } from '../Type/EditableTable3ColumnType'
 
 const getFirstRowHeight = (tableId: string) => {
     const table = document.getElementById(tableId)

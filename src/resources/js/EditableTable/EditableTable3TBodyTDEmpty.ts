@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge'
-import { getFixedStr } from './EditableTable3FixedColumn'
+import { getFixedStr } from './FixedColumn/EditableTable3FixedColumn'
 import { TableColumn } from './Type/EditableTable3ColumnType'
 
-export const makeTbodyTdEmpty = (
+export const makeEmptyTd = (
     tableName: string,
     column: TableColumn,
     rowIndex: number,
@@ -14,18 +14,18 @@ export const makeTbodyTdEmpty = (
     const { dataIndex, renderer } = column
     const fixedStr = getFixedStr(column.fixed, columnIndex, 'td')
     const textStr = `text-sm text-sm-vw`
-    const borderL = columnIndex == firstFixedRightIndex ? 'border-l' : ''
+    const borderL = columnIndex == firstFixedRightIndex ? 'border-l xxx' : ''
     const borderStr = `border-b border-r border-gray-300 ${borderL}`
     const classList = twMerge(`${hiddenStr} ${alignStr} ${fixedStr} ${borderStr} ${textStr}`)
 
     const widthStr = column.width ? `width: ${column.width}px;` : ''
     const styleList = `${widthStr}`
-    const cellId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
-    return `<td id="${cellId}__td" class="${classList}" style="${styleList}" 
+    const controlId = `${tableName}__${dataIndex}__${renderer}__${rowIndex}`
+    return `<td id="${controlId}__td" class="${classList}" style="${styleList}" 
                 data-row="${rowIndex}" 
                 data-col="${columnIndex}"
                 data-column-key="${dataIndex}"
                 >
-                <div id="${cellId}__div" class="min-h-5 fade-in"></div>
+                <div id="${controlId}__div" class="min-h-5 fade-in"></div>
             </td>`
 }

@@ -4,12 +4,12 @@
 //     // bufferSize: number
 // }
 
+import { ToolbarComponentList } from '../ToolbarComponents/ToolbarComponents'
+
 export interface TableConfig {
     width?: number
     maxH?: number | null
     borderColor?: string
-    showPaginationTop?: boolean
-    showPaginationBottom?: boolean
     showNo?: boolean
     tableDebug?: boolean
     tableTrueWidth?: boolean
@@ -17,13 +17,13 @@ export interface TableConfig {
     tableHeader?: string
     tableFooter?: string
 
-    topLeftControl?: string
-    topCenterControl?: string
-    topRightControl?: string
+    topLeftControl?: keyof typeof ToolbarComponentList
+    topCenterControl?: keyof typeof ToolbarComponentList
+    topRightControl?: keyof typeof ToolbarComponentList
 
-    bottomLeftControl?: string
-    bottomCenterControl?: string
-    bottomRightControl?: string
+    bottomLeftControl?: keyof typeof ToolbarComponentList
+    bottomCenterControl?: keyof typeof ToolbarComponentList
+    bottomRightControl?: keyof typeof ToolbarComponentList
 
     rotate45Width?: number
     rotate45Height?: number
@@ -41,6 +41,31 @@ export interface TableConfig {
     // virtualScroll?: VirtualScrollParams
     animationDelay?: number
     rowHeight?: number
+
+    orderable?: boolean
+    duplicatable?: boolean
+    deletable?: boolean
+
+    uploadServiceEndpoint?: string
+
+    showButton?: {
+        AddAnItem?: boolean
+        AddFromList?: boolean
+        CloneFromTemplate?: boolean
+        Recalculate?: boolean
+    }
+
+    entityLineType: string
+    envConfig?: {
+        entityParentType?: string
+        entityParentId?: string
+        currentUserId?: string
+        entityProjectId?: string
+        entitySubProjectId?: string
+
+        tableNames?: { [table01Name: string]: string }
+        tableFnNames?: { [table01Name: string]: string }
+    }
 
     //This will be remove as MODE is more flexible to column level
     // editable?: boolean

@@ -1,77 +1,64 @@
-export interface ControlAttributeNo {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeAction {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeActionCheckbox {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeActionPrint {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeQrCode {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeDocId {
-    // align?: 'left' | 'center' | 'right'
-}
+export interface ControlAttributeNo {}
+export interface ControlAttributeAction {}
+export interface ControlAttributeActionCheckbox {}
+export interface ControlAttributeActionPrint {}
+export interface ControlAttributeQrCode {}
+export interface ControlAttributeDocId {}
 export interface ControlAttributeIdLink {
-    // align?: 'left' | 'center' | 'right'
     entityName: string
 }
-export interface ControlAttributeStatus {
-    // align?: 'left' | 'center' | 'right'
-}
+export interface ControlAttributeStatus {}
 export interface ControlAttributeIdStatus {
     statusColumn?: string
     nameColumn?: string
 }
 
-export interface ControlAttributeParentLink {
-    // align?: 'left' | 'center' | 'right'
-}
+export interface ControlAttributeParentLink {}
 export interface ControlAttributeColumn {
-    // align?: 'left' | 'center' | 'right'
     columnToLoad?: string
 }
 
 export interface ControlAttributeHyperLink {
-    // align?: 'left' | 'center' | 'right'
     target?: '_blank' | '_self' | '_parent' | '_top'
 }
 export interface ControlAttributeAggCount {
-    // align?: 'left' | 'center' | 'right'
     unit?: string
     columnToLoad?: string
 }
-export interface ControlAttributeAggCount {
-    // align?: 'left' | 'center' | 'right'
-}
+export interface ControlAttributeAggCount {}
 
 export interface ControlAttributeAvatarUser {
-    // align?: 'left' | 'center' | 'right'
     maxToShow?: number
 }
-export interface ControlAttributeThumbnail {
-    // align?: 'left' | 'center' | 'right'
+export interface ControlAttributeAttachment {
     maxToShow?: number
+    maxPerLine?: number
+
+    fileType?: string
+    maxFileCount?: number
+    maxFileSize?: number
+
+    // categoryId?: number
+    // subCategoryId?: number
+    fieldName?: string
+    groupId?: number
+
+    // objectType: string
+    // objectId: number | string
+    // uploadServiceEndpoint?: string
+
+    uploadable?: boolean
+    deletable?: boolean
+    // showUploader?: boolean
+    // showUploadDate?: boolean
 }
-export interface ControlAttributeThumbnails {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeCustomFunction {
-    // align?: 'left' | 'center' | 'right'
-}
-export interface ControlAttributeText {
-    // align?: 'left' | 'center' | 'right'
-}
+
+export interface ControlAttributeCustomFunction {}
+export interface ControlAttributeText {}
 export interface ControlAttributeTextarea {
-    // align?: 'left' | 'center' | 'right'
     rowCount?: number
 }
 export interface ControlAttributeNumber {
-    // align?: 'left' | 'center' | 'right'
     decimalPlaces?: number
 }
 export interface ControlAttributeDropdown {
@@ -94,17 +81,14 @@ export interface ControlAttributeDropdown {
     isMultiple?: boolean
 }
 export interface ControlAttributeToggle {}
-export interface ControlAttributeCheckbox {}
+export interface ControlAttributeCheckbox {
+    hasMasterCheckbox?: boolean
+}
 export interface ControlAttributePickerDatetime {
-    align?: 'left' | 'center' | 'right'
     pickerType?: 'date' | 'time' | 'datetime' | 'month' | 'year'
     format?: string
     minDate?: string
     maxDate?: string
-}
-
-export interface ControlAttributeAttachment {
-    fileType?: string
 }
 
 export interface ControlAttributeSearchableDialog {
