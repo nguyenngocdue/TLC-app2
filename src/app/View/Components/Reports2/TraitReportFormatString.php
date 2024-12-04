@@ -2,11 +2,13 @@
 
 namespace App\View\Components\Reports2;
 
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 trait TraitReportFormatString
 {
-    function evaluateAGG($expression) {
+    function evaluateAGG($expression)
+    {
         // Regex to extract all AGG(...) patterns
         $pattern = '/AGG\((.*?)\)/';
         // Use preg_replace_callback to replace each AGG(...) with evaluated result
@@ -20,8 +22,9 @@ trait TraitReportFormatString
         }, $expression);
         return $result;
     }
-    
-    function evaluateMathExpression($expression) {
+
+    function evaluateMathExpression($expression)
+    {
         $expression = trim($expression);
         // Split the expression into tokens (numbers, strings, operators)
         $tokens = preg_split('/([\+\-\*\/])/', $expression, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -52,8 +55,13 @@ trait TraitReportFormatString
 
     function parseVariables($sqlStr)
     {
-        preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $sqlStr, $parsedVariables);
-        return $parsedVariables;
+        Log::info($sqlStr);
+        try {
+            preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $sqlStr, $parsedVariables);
+            return $parsedVariables;
+        } catch (\Exception $e) {
+            dd("Error parsing variables in SQL string: ", $sqlStr);
+        }
     }
 
     function formatReportHref($string, $dataLine)
@@ -61,7 +69,7 @@ trait TraitReportFormatString
         $parsedVariables = $this->parseVariables($string);
         foreach (last($parsedVariables) as $key => $value) {
             $value = trim(str_replace('$', '', $value));
-            if(!is_array($dataLine)) $dataLine = (array)$dataLine;
+            if (!is_array($dataLine)) $dataLine = (array)$dataLine;
             if (isset($dataLine[$value])) {
                 $valueParam =  $dataLine[$value];
                 if (is_array($valueParam)) {

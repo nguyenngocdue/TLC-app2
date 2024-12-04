@@ -94,7 +94,7 @@
     "_iterator_block_id": {
         "name": "_iterator_block_id",
         "column_name": "iterator_block_id",
-        "column_type": "bigint",
+        "column_type": "bigint unsigned",
         "label": "Iterator Block Id",
         "control": "dropdown",
         "align": "",

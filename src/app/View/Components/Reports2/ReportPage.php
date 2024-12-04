@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class ReportPage extends Component
 {
     use TraitReportFilter;
+    use TraitReportQueriedData;
 
     public function __construct(
         private $page,
@@ -29,6 +30,8 @@ class ReportPage extends Component
         // dump($style);
         return $style;
     }
+
+
 
     public function render()
     {

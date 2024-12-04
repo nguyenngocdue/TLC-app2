@@ -9,10 +9,16 @@
 <div class="p-2 bg-gray-100 dark:bg-gray-800">
     @foreach ($pages as $key => $page)
         @if(!$page->is_active) @continue @endif
-        <x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams"/>
+        @if ($page->iterator_block_id)
+            <x-reports2.report-dynamic-page :page="$page" :report="$report" :currentParams="$currentParams"/>
+        @else
+            <x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams"/>
+        @endif 
+
         @if(($key + 1) != count($pages))            
         <x-renderer.page-break />
-        @endif            
+        @endif      
+
     @endforeach
 </div>
     
