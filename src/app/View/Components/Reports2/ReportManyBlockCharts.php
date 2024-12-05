@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Utils\Support\Report;
 use Illuminate\View\Component;
 
 class ReportManyBlockCharts extends Component
@@ -17,21 +18,22 @@ class ReportManyBlockCharts extends Component
 
     ) {}
 
+    private function updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, $isRow = false) {
+        $arrayOptions = json_decode(json_encode($jsonOptions), true);
+        $arrayOptions["xAxis"]["data"] = $isRow ? [$xAxisValue] : $xAxisValue;
+        $arrayOptions["series"][0]["data"] = $isRow ? [$seriesValue] : $seriesValue;
+        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+        return json_decode(json_encode($arrayOptions));
+    }
+    
     private function updateJsonOptionsRow($jsonOptions, $xAxisValue, $seriesValue, $setting) {
-        $arrayOptions = json_decode(json_encode($jsonOptions), true);
-        $arrayOptions["xAxis"]["data"] = [$xAxisValue];
-        $arrayOptions["series"][0]["data"] = [$seriesValue];
-        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-        return json_decode(json_encode($arrayOptions));
+        return $this->updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, true);
     }
-
+    
     private function updateJsonOptionsCol($jsonOptions, $xAxisValue, $seriesValue, $setting) {
-        $arrayOptions = json_decode(json_encode($jsonOptions), true);
-        $arrayOptions["xAxis"]["data"] = $xAxisValue;
-        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-        $arrayOptions["series"][0]["data"] = $seriesValue;
-        return json_decode(json_encode($arrayOptions));
+        return $this->updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, false);
     }
+    
 
     public function render()
     {
@@ -44,25 +46,30 @@ class ReportManyBlockCharts extends Component
 
         if (isset($jsonOptions->multipleChart)) {
             $mulChartConfig = $jsonOptions->multipleChart;
-
+            $descriptions = $mulChartConfig->descriptions;
             $direction = $mulChartConfig->direction;
             $settings = $mulChartConfig->settings;
             $xAxisData = $mulChartConfig->xAxisData;
             switch ($direction) {
                 case 'row':
                         foreach ($queriedData as $key => $value) {
+                            $opts = [];
                             foreach ($settings as $setting) {
                                 $seriesValue = $value->{$setting->dataIndex};
                                 $xAxisValue = $xAxisData[$key];
                                 $newOptions = $this->updateJsonOptionsRow($jsonOptions, $xAxisValue,$seriesValue, $setting);
-                                $chartOptions[]= $newOptions;
+                                $opts[]= $newOptions;
+
                             }
+                            $chartOptions[$key]["descriptions"]["text"]  = Report::makeTitle($descriptions?->title) .': '.$value->{$descriptions->dataIndex};
+                            $chartOptions[$key]["option_chart"]  = $opts;
                         }
                     break;
                 case 'column':
                         foreach ($settings as $setting) {
                             $seriesValue = $queriedData->pluck($setting->dataIndex);
                             $newOptions = $this->updateJsonOptionsCol($jsonOptions, $xAxisData,$seriesValue, $setting);
+                            
                             $chartOptions[]= $newOptions;
                         }
                     break;
