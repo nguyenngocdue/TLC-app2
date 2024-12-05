@@ -9,10 +9,13 @@
 <div class="p-2 bg-gray-100 dark:bg-gray-800">
     @foreach ($pages as $key => $page)
         @if(!$page->is_active) @continue @endif
+        @php
+            $hasIteratorBlock = $page->iterator_block_id ? true : false;
+        @endphp
         @if ($page->iterator_block_id)
-            <x-reports2.report-dynamic-page :page="$page" :report="$report" :currentParams="$currentParams"/>
+            <x-reports2.report-dynamic-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
         @else
-            <x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams"/>
+            <x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
         @endif 
 
         @if(($key + 1) != count($pages))            

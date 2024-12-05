@@ -16,6 +16,7 @@ class ReportPage extends Component
         private $pageScaleFactor = 0.75,
         private $w = 1000,
         private $h = 1410,
+        private $hasIteratorBlock= null,
     ) {}
 
     private function createLayoutStyle($isLandscape, $width, $height, $isFullWidth, $pageBackgroundPath)
@@ -62,7 +63,8 @@ class ReportPage extends Component
             'content' => $pageItem,
             'blockDetails' => $blockDetails,
             'pageBackgroundPath' => $pageBackgroundPath ?? '',
-            'currentParams' => $this->currentParams
+            'currentParams' => $this->currentParams,
+            'hasIteratorBlock' => $this->hasIteratorBlock,
 
         ]);
     }

@@ -17,6 +17,7 @@ class ReportBlock extends Component
         private $report,
         private $blockDetails = [],
         private $currentParams = [],
+        private $hasIteratorBlock = false,
     ) {
         // $this->entity_type = $this->report->entity_type;
     }
@@ -48,6 +49,7 @@ class ReportBlock extends Component
             'reportId' => $this->report->id,
             'currentParams' => $currentParams,
             'currentFormattedParams' => $currentFormattedParams,
+            'hasIteratorBlock' => $this->hasIteratorBlock,
         ]);
     }
 }

@@ -27,7 +27,7 @@
             $divClass = $block['div_class'] ?? '';
         @endphp
         <div title="{{ $block->name }}"
-            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }} {{$divClass}}"
+            class="col-span-{{ $colSpan }} {{ $backgroundPath ? '' : '' }} {{$divClass}} "
             @if ($backgroundPath) style="background-image: url('{{ $backgroundPath }}');" @endif>
             <x-renderer.report2.title-description-block :block="$block" />
             @switch($rendererType)
@@ -35,14 +35,22 @@
                     @php
                         $transformedFields = $blockItem['transformedFields'];
                     @endphp
-                    <x-reports2.report-block-chart 
-                        :block="$block" 
-                        reportId="{{$reportId}}" 
-                        :queriedData="$queriedData"
-                        :transformedFields="$transformedFields"
-                        :headerCols="$headerCols"
-                        :currentParams="$currentParams"
-                        />
+                        @if($hasIteratorBlock)
+                             <x-reports2.report-many-block-charts 
+                                :block="$block" 
+                                reportId="{{$reportId}}" 
+                                :queriedData="$queriedData"
+                             />
+                        @else
+                            <x-reports2.report-block-chart 
+                                :block="$block" 
+                                reportId="{{$reportId}}" 
+                                :queriedData="$queriedData"
+                                :transformedFields="$transformedFields"
+                                :headerCols="$headerCols"
+                                :currentParams="$currentParams"
+                                />
+                        @endif
                     @break
 
                 @case($PARAGRAPH_TYPE_ID)

@@ -16,23 +16,14 @@ class ReportDynamicPage extends Component
     public function __construct(
         private $page = null,
         private $report = null,
-        private $currentParams = []
+        private $currentParams = [],
+        private $hasIteratorBlock = false,
     ) {}
 
 
 
-    private function paginateDataSource($dataSource, $hasPagination, $perPage)
+    private function createIteratorPages($page)
     {
-        $page = $_GET['page'] ?? 1;
-        if ($hasPagination) {
-            $dataSource = (new LengthAwarePaginator($dataSource->forPage($page, $perPage), $dataSource->count(), $perPage, $page));
-        }
-
-        return $dataSource;
-    }
-
-
-    private function createIteratorPages($page){
         $iteratorBlock = $page->getIteratorBlock;
         $sqlString = $iteratorBlock->sql_string;
         $iteratorBlockData = $this->getDataSQLString($sqlString);
@@ -40,36 +31,29 @@ class ReportDynamicPage extends Component
     }
 
 
-    private function getDataPerPage($page, $currentParams) {
-        $blockDetails = $page->getBlockDetails->sortBy('order_no');
+    private function getDataPerPage($page, $currentParams)
+    {
         $iteratorPages = $this->createIteratorPages($page);
-        
         $dataPerPage = [];
-        foreach($iteratorPages as $key => $line) {
+        foreach ($iteratorPages as $key => $line) {
             $updatedParams = array_merge($currentParams, (array)$line);
-            $blockDetailData = $this->getBlockDataSource($blockDetails, $updatedParams);
-            foreach(array_values($blockDetailData) as $values ) {
-                $block = $values['block'];
-                $mark = ($x = $block->renderer_type) ? $x : $block->id;
-                $dataPerPage["page_". $key+1][$mark] =  $blockDetailData[$block->id];
-            }
+            $dataPerPage["page_" . $key + 1] = [
+                'updatedParams' => $updatedParams,
+                'page' => $page,
+            ];
         }
         return $dataPerPage;
     }
 
     public function render()
     {
-       $page = $this->page;
-       $currentParams = $this->currentParams;
-
-       $dataPerPage = $this->getDataPerPage($page, $currentParams);
-
-       $currentFormattedParams = $this->formatFromAndToDate($currentParams);
+        $page = $this->page;
+        $currentParams = $this->currentParams;
+        $dataPerPage = $this->getDataPerPage($page, $currentParams);
         return view('components.reports2.report-dynamic-page', [
             'dataPerPage' => $dataPerPage,
             'report' => $this->report,
-            'currentParams' => $this->currentParams,
-            'currentFormattedParams' => $currentFormattedParams,
+            'hasIteratorBlock' => $this->hasIteratorBlock
         ]);
     }
 }

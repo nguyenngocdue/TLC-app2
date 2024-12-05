@@ -9,6 +9,10 @@ trait TraitReportDetectVariableChanges
     use TraitReportTermNames;
     use TraitReportFormatString;
 
+    protected $CHART_TYPE_ID = 642;
+    protected $PARAGRAPH_TYPE_ID = 643;
+    protected $DESCRIPTION_TYPE_ID = 644;
+
     function formatStrByRendererType($valueInData, $rendererType){
         $formattedValue = '';
         switch($rendererType){

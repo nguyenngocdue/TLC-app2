@@ -39,22 +39,22 @@
                 {{-- Blocks --}}
                 <div class="{{-- container mx-auto --}}" title="{{ $content['name'] ?? null }}">
                     <div class="grid grid-cols-12 gap-4 px-8 pb-8">
-                        <x-reports2.report-block :blockDetails="$blockDetails" :report="$report" :currentParams="$currentParams" />
+                        <x-reports2.report-block :blockDetails="$blockDetails" :report="$report" :currentParams="$currentParams" hasIteratorBlock="{{$hasIteratorBlock}}"/>
                     </div>
                 </div>
 
             </div>
             <!-- Footer section with a border -->
             {{-- TOFIX --}}
-            <div>
+            <div class="w-full items-center">
                 @switch($letterFooterId)
                     @case (1)
-                        <div class="w-full border-2 border-gray-300 p-2">
+                        <div class="w-full">
                             <x-reports2.report-letter-footer-type1 />
                         </div>
                     @break
                     @case (2)
-                         <div class="w-full border-2 border-gray-300 p-2">
+                         <div class="w-full">
                             <x-reports2.report-letter-footer-type2 />
                         </div>
                     @break
