@@ -9,6 +9,7 @@ services:
     tty: true
     ports:
       - "28002:8001"
+      - "28802:80"
     environment:
       - NGINX_APP_HOST=${APP_DOMAIN_NAME}
     volumes:

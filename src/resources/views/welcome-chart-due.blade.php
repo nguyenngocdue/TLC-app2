@@ -165,72 +165,77 @@
 
 <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
-<!-- Thẻ div để chứa biểu đồ -->
-<div id="main" style="width: 600px; height: 400px;"></div>
 
-<script type="text/javascript">
-    // Khởi tạo một instance của echarts dựa trên thẻ div đã chuẩn bị
-    var myChart2 = echarts.init(document.getElementById('main'));
+@foreach([1,2,3] as $k)
+    @php
+        $key = hash('sha256', $k);
+    @endphp
+    <!-- Thẻ div để chứa biểu đồ -->
+    <div id="{{$key}}" style="width: 600px; height: 400px;"></div>
 
-    // Cấu hình và dữ liệu cho biểu đồ
-    var option = {
-        title: {
-            text: 'ECharts Example with Toolbox'
-        },
-        tooltip: {},
-        legend: {
-            data: ['sales']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                saveAsImage: {
-                    show: true, // Cho phép lưu biểu đồ dưới dạng hình ảnh
-                    title: 'Save as Image'
-                },
-                dataView: {
-                    show: true,
-                    readOnly: false, // Cho phép người dùng xem và chỉnh sửa dữ liệu
-                    title: 'Data View'
-                },
-                restore: {
-                    show: true, // Cho phép khôi phục lại biểu đồ
-                    title: 'Restore'
-                },
-                magicType: {
-                    show: true, // Cho phép thay đổi loại biểu đồ
-                    type: ['line', 'bar'], // Các loại biểu đồ có thể chuyển đổi
-                    title: {
-                        line: 'Switch to Line Chart',
-                        bar: 'Switch to Bar Chart'
-                    }
-                },
-                dataZoom: {
-                    show: true, // Cho phép phóng to/thu nhỏ
-                    title: {
-                        zoom: 'Zoom In',
-                        back: 'Zoom Out'
+    <script type="text/javascript">
+        var key = {!! json_encode($key) !!} ; 
+        var myChart2 = echarts.init(document.getElementById(key));
+
+        // Cấu hình và dữ liệu cho biểu đồ
+        var option = {
+            title: {
+                text: 'ECharts Example with Toolbox'
+            },
+            tooltip: {},
+            legend: {
+                data: ['sales']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    saveAsImage: {
+                        show: true, // Cho phép lưu biểu đồ dưới dạng hình ảnh
+                        title: 'Save as Image'
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false, // Cho phép người dùng xem và chỉnh sửa dữ liệu
+                        title: 'Data View'
+                    },
+                    restore: {
+                        show: true, // Cho phép khôi phục lại biểu đồ
+                        title: 'Restore'
+                    },
+                    magicType: {
+                        show: true, // Cho phép thay đổi loại biểu đồ
+                        type: ['line', 'bar'], // Các loại biểu đồ có thể chuyển đổi
+                        title: {
+                            line: 'Switch to Line Chart',
+                            bar: 'Switch to Bar Chart'
+                        }
+                    },
+                    dataZoom: {
+                        show: true, // Cho phép phóng to/thu nhỏ
+                        title: {
+                            zoom: 'Zoom In',
+                            back: 'Zoom Out'
+                        }
                     }
                 }
-            }
-        },
-        xAxis: {
-            data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
-        },
-        yAxis: {},
-        series: [
-            {
-                name: 'sales',
-                type: 'bar',  // Biểu đồ dạng bar
-                data: [5, 20, 36, 10, 10, 20] // Dữ liệu bán hàng
-            }
-        ]
-    };
+            },
+            xAxis: {
+                data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: 'sales',
+                    type: 'bar',  // Biểu đồ dạng bar
+                    data: [5, 20, 36, 10, 10, 20] // Dữ liệu bán hàng
+                }
+            ]
+        };
 
-    // Hiển thị biểu đồ bằng cấu hình đã chỉ định
-    myChart2.setOption(option);
-</script>
-
+        // Hiển thị biểu đồ bằng cấu hình đã chỉ định
+        myChart2.setOption(option);
+    </script>
+@endforeach[1,2,3] as $k
 
 
 

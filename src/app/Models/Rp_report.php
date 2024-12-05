@@ -38,6 +38,7 @@ class Rp_report extends ModelExtended
             ->where('id', $this->id)
             ->with(["getPages" => function ($q) {
                 $q->with("getLetterHead")
+                    ->with("getIteratorBlock")
                     ->with('attachment_background')
                     ->with("getLetterFooter")
                     ->with(["getBlockDetails" => function ($q1) {

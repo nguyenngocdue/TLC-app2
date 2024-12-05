@@ -4,7 +4,7 @@
             <p>&copy; 2024 Your Company Name. All rights reserved.</p>
         </div>
         <div class="flex items-center space-x-4">
-            <a href="mailto:contact@yourcompany.com" class="hover:text-gray-300">Contact Us</a>
+            <a href="mailto:contact@yourcompany.com" class="hover:text-gray-300">...</a>
             <a href="https://twitter.com/yourcompany" class="hover:text-gray-300">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <!-- Twitter icon SVG -->

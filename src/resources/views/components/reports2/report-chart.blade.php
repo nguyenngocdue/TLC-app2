@@ -4,7 +4,7 @@
     $dimensions = $jsonOptions->dimension ?? null;
     $align = $dimensions ? $dimensions->align : 'flex justify-center'; 
 @endphp
-<div class="relative border-2 border-gray-600 p-4 {{$class}} {{$align}}">
+<div class="relative {{$divClass}} {{$align}}">
     @if (isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'chartjs')
         @once
             <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
@@ -12,19 +12,22 @@
 
             <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"></script>
-
         @endonce
+
         <canvas id="{{ $key }}" height={{$height}} width={{$width ? $with.'px' : '100%'}}></canvas>
     @elseif(isset($jsonOptions->libraryType) &&  strtolower($jsonOptions->libraryType) === 'echart')
+
         @once
             <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
         @endonce
+
         @php
             // Deprecated: This code may be removed in future updates.
             $width = $dimensions?->width ? ($width ? $width.'px' : '100%'): '100%';
             $height = ($dimensions?->height ?? $height).'px';
         @endphp
-        <div id="main" style="width: {{$width}}; height: {{$height}};"></div>
+        <div id="{{$key}}" style="width: {{$width}}; height: {{$height}};"></div>
+
     @else
         @once
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -76,7 +79,7 @@
 
     } 
     else if (optionCons?.libraryType?.toLowerCase() === 'echart'){
-        var main = document.getElementById('main');
+        var main = document.getElementById(key);
         var myChart2 = echarts.init(main, '');
         myChart2.setOption(optionCons);
     } 
