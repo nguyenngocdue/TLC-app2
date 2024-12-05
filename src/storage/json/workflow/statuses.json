@@ -116,7 +116,7 @@
         "title": "Partially Signed-off",
         "color": "rose",
         "color_index": "200",
-        "icon": null
+        "icon": "<i class=\"fa-solid fa-user-check\"><\/i>"
     },
     "future": {
         "name": "future",
