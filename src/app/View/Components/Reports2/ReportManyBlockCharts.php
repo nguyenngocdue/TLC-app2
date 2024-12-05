@@ -62,16 +62,18 @@ class ReportManyBlockCharts extends Component
 
                             }
                             $chartOptions[$key]["descriptions"]["text"]  = Report::makeTitle($descriptions?->title) .': '.$value->{$descriptions->dataIndex};
-                            $chartOptions[$key]["option_chart"]  = $opts;
+                            $chartOptions[$key]["chart_option"]  = $opts;
                         }
                     break;
                 case 'column':
-                        foreach ($settings as $setting) {
+                        $opts = [];
+                        foreach ($settings as $key => $setting) {
                             $seriesValue = $queriedData->pluck($setting->dataIndex);
                             $newOptions = $this->updateJsonOptionsCol($jsonOptions, $xAxisData,$seriesValue, $setting);
-                            
-                            $chartOptions[]= $newOptions;
+                            $opts[]= $newOptions;
                         }
+                        $chartOptions[$key]["chart_option"]= $opts;
+                        $chartOptions[$key]["descriptions"]["text"]= Report::makeTitle($descriptions?->title);
                     break;
                 default:
                     // define it in the future

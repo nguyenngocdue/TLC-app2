@@ -1,6 +1,6 @@
     @foreach ($chartOptions as $chartOption)
         @php
-            $opts = $chartOption['option_chart'];
+            $opts = $chartOption['chart_option'];
             $des = $chartOption['descriptions'];
         @endphp
         <x-renderer.heading class="py-6 text-left font-bold " level=4>{{$des['text']}}</x-renderer.heading>
