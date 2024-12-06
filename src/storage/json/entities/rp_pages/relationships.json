@@ -68,7 +68,7 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": "",
+        "let_user_clear": "true",
         "let_user_open": ""
     },
     "_getOwner": {

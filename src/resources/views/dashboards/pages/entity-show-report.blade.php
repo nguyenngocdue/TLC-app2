@@ -13,6 +13,9 @@
             $hasIteratorBlock = $page->iterator_block_id ? true : false;
         @endphp
         @if ($page->iterator_block_id)
+            
+            {{-- //$block = app\model\Rp_block::find($page->iterator_block_id)->pluck('name');    
+            //@dd($page->iterator_block_id); --}}
             <x-reports2.report-dynamic-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
         @else
             <x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
