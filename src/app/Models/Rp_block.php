@@ -17,6 +17,7 @@ class Rp_block extends ModelExtended
         "transformed_data_string",
         "table_true_width",
         "max_h",
+        "header_top",
         "showNo",
         "rotate_45_width",
         "rotate_45_height",

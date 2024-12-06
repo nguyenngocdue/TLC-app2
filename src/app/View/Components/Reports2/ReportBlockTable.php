@@ -119,9 +119,7 @@ class ReportBlockTable extends Component
         if ($block->is_transformed_data) {
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
-
-
-
+        $headerTop = $block->header_top;
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
@@ -136,6 +134,7 @@ class ReportBlockTable extends Component
             "rotate45Width" => $block->rotate_45_width,
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
+            "headerTop" => $headerTop,
 
             "legendEntityType" => $block->legend_entity_type ? $block->legend_entity_type : null,
 

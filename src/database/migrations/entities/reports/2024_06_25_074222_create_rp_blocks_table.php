@@ -29,7 +29,8 @@ return new class extends Migration
             $table->text('transformed_data_string')->nullable();
             $table->boolean('table_true_width')->nullable();
             $table->unsignedInteger('show_no')->nullable();
-            $table->boolean('max_h')->nullable();
+            $table->unsignedInteger('max_h')->nullable();
+            $table->unsignedInteger('header_top')->nullable();
             $table->unsignedInteger('rotate_45_width')->nullable();
             $table->unsignedInteger('rotate_45_height')->nullable();
             $table->unsignedBigInteger('renderer_type')->nullable();
