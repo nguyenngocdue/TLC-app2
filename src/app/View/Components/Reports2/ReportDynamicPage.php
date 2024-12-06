@@ -22,10 +22,11 @@ class ReportDynamicPage extends Component
 
 
 
-    private function createIteratorPages($page)
+    private function createIteratorPages($page, $currentParams)
     {
         $iteratorBlock = $page->getIteratorBlock;
         $sqlString = $iteratorBlock->sql_string;
+        $sqlString = $this->getSql($sqlString, $currentParams);
         $iteratorBlockData = $this->getDataSQLString($sqlString);
         return $iteratorBlockData;
     }
@@ -33,7 +34,7 @@ class ReportDynamicPage extends Component
 
     private function getDataPerPage($page, $currentParams)
     {
-        $iteratorPages = $this->createIteratorPages($page);
+        $iteratorPages = $this->createIteratorPages($page, $currentParams);
         $dataPerPage = [];
         foreach ($iteratorPages as $key => $line) {
             $updatedParams = array_merge($currentParams, (array)$line);
