@@ -49,8 +49,8 @@
             <div class="w-full items-center">
                 @switch($letterFooterId)
                     @case (1)
-                        <div class="w-full">
-                            <x-reports2.report-letter-footer-type1 />
+                         <div class="w-full">
+                            <x-reports2.report-letter-footer-type1 />  
                         </div>
                     @break
                     @case (2)

@@ -10,7 +10,7 @@
     @foreach ($pages as $key => $page)
         @if(!$page->is_active) @continue @endif
         @php
-            $hasIteratorBlock = $page->iterator_block_id ? true : false;
+            $hasIteratorBlock = $page->iterator_block_id && $page->iterator_block_id != 1 ? true : false;
         @endphp
         @if ($page->iterator_block_id)
             <x-reports2.report-dynamic-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
