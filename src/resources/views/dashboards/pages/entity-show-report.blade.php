@@ -12,7 +12,7 @@
         @php
             $hasIteratorBlock = $page->iterator_block_id && $page->iterator_block_id != 1 ? true : false;
         @endphp
-        @if ($page->iterator_block_id)
+        @if ($hasIteratorBlock)
             <x-reports2.report-dynamic-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
         @else
             <x-reports2.report-page :page="$page" :report="$report" :currentParams="$currentParams" hasIteratorBlock={{$hasIteratorBlock}}/>
