@@ -6,20 +6,33 @@ use App\Models\Hse_insp_chklst_line;
 use App\Models\Pj_module;
 use App\Models\Prod_order;
 use App\Models\Qaqc_insp_chklst_line;
+use Illuminate\Support\Facades\Log;
 
 class LoadManyCheckpointService
 {
+    private static $roomList = [];
+
     public static function getAttachmentGroups($sheet)
     {
-        $isAttachmentGrouped = $sheet->getTmplSheet->is_attachment_grouped ?? false;
-        $groups = null;
-        if ($isAttachmentGrouped) {
+        // Log::info($sheet);
+
+        if (!isset(static::$roomList[$sheet->id])) {
             $roomList = $sheet->getChklst->getProdOrder->{Prod_order::class}->getPjType->getRoomList;
-            //This line used when eager loading turned off
-            // $roomList = $sheet->getChklst->getProdOrder->getMeta->getPjType->getRoomList;
-            $groups = $roomList->pluck('name', 'id');
+            static::$roomList[$sheet->id] = $roomList->pluck('name', 'id');
         }
-        return $groups;
+
+        // $isAttachmentGrouped = $sheet->getTmplSheet->is_attachment_grouped ?? false;
+        // $groups = null;
+        // if ($isAttachmentGrouped) {
+        //     $roomList = $sheet->getChklst->getProdOrder->{Prod_order::class}->getPjType->getRoomList;
+        //     //This line used when eager loading turned off
+        //     // $roomList = $sheet->getChklst->getProdOrder->getMeta->getPjType->getRoomList;
+        //     $groups = $roomList->pluck('name', 'id');
+        // }
+
+        $result = static::$roomList[$sheet->id];
+        // Log::info($result);
+        return $result;
     }
 
     public function getCheckpointDataSource($paginatedDataSource, $lineModelPath)

@@ -6,6 +6,7 @@ use App\Http\Controllers\Workflow\LibDashboards;
 use App\Http\Services\LoadManyCheckpointService;
 use App\Utils\Support\CurrentUser;
 use App\Utils\Support\Json\Properties;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class CheckPoint2 extends Component
@@ -35,7 +36,8 @@ class CheckPoint2 extends Component
     {
         $destroyable = !CurrentUser::get()->isExternal();
         $sheet = $this->line->getSheet;
-        $groups = LoadManyCheckpointService::getAttachmentGroups($sheet);
+        $attachment_is_grouped = $this->line->attachment_is_grouped ?? false;
+        $groups = $attachment_is_grouped ? LoadManyCheckpointService::getAttachmentGroups($sheet) : null;
         $dashboardConfig = LibDashboards::getAll()[CurrentUser::get()->discipline] ?? null;
 
         $checkPointReadOnly = $this->readOnly;

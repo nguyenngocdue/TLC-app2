@@ -30,6 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('qaqc_insp_control_group_id');
             $table->unsignedInteger('col_span')->nullable()->default(12);
             $table->unsignedInteger('checkpoint_level')->nullable()->default(12);
+            $table->boolean('attachment_is_grouped')->default(false);
 
             $table->unsignedBigInteger('inspector_id')->nullable();
 

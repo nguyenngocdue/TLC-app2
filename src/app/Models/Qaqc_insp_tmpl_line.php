@@ -17,6 +17,7 @@ class Qaqc_insp_tmpl_line extends ModelExtended
         "qaqc_insp_tmpl_sht_id",
         "col_span",
         "checkpoint_level",
+        "attachment_is_grouped",
 
         "order_no",
     ];
@@ -64,8 +65,9 @@ class Qaqc_insp_tmpl_line extends ModelExtended
             // ['dataIndex' => 'description'],
             ['dataIndex' => 'control_type_id', 'cloneable' => true],
             ['dataIndex' => 'qaqc_insp_control_group_id', 'cloneable' => true],
-            ['dataIndex' => 'col_span', 'cloneable' => true],
-            ['dataIndex' => 'checkpoint_level', 'cloneable' => true],
+            // ['dataIndex' => 'col_span', 'cloneable' => true],
+            // ['dataIndex' => 'checkpoint_level', 'cloneable' => true],
+            ['dataIndex' => 'attachment_is_grouped', 'cloneable' => true],
         ];
     }
 }

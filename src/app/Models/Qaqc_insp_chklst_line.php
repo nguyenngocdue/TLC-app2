@@ -21,6 +21,7 @@ class Qaqc_insp_chklst_line extends ModelExtended
         "owner_id",
         "col_span",
         "checkpoint_level",
+        "attachment_is_grouped",
 
         "inspector_id"
     ];
@@ -140,7 +141,9 @@ class Qaqc_insp_chklst_line extends ModelExtended
             ['dataIndex' => 'qaqc_insp_control_value_id',],
             ['dataIndex' => 'value'],
             ['dataIndex' => 'value_on_hold'],
-            // ['dataIndex' => 'col_span']
+            // ['dataIndex' => 'col_span'],
+            // ['dataIndex' => 'checkpoint_level'],
+            ['dataIndex' => 'attachment_is_grouped'],
         ];
     }
 }

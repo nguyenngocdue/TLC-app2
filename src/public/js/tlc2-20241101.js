@@ -1,7 +1,13 @@
 //Setup for any Ajax requests need to login
 $.ajaxSetup({
-    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //HTTPONLY cookie is not accessible by javascript
+        // Authorization: 'Bearer ' + getCookie('tlc_token'),
+        //If same domain name, it will send the tlc_token cookie
+    },
 })
+
 const callApiStoreEmpty = (url, data, meta, callback = null) => {
     // console.log(url, data, meta);
     $.ajax({

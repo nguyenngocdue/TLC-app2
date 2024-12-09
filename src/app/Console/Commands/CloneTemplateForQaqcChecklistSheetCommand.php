@@ -88,7 +88,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
             ]);
 
             $defaultMonitors = $default_getMonitors1 ? explode(",", $default_getMonitors1) : [];
-            $defaultMonitors = array_map(fn ($i) => $i * 1, $defaultMonitors);
+            $defaultMonitors = array_map(fn($i) => $i * 1, $defaultMonitors);
             // Log::info($defaultMonitors);
             $uid = CurrentUser::id();
             $newSheet->getMonitors1()->syncWithPivotValues($defaultMonitors, ['owner_id' => $uid]);
@@ -99,16 +99,15 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
 
             $lines = $inspTmplSht->getLines;
             foreach ($lines as $qaqcInspTmplLine) {
-                Qaqc_insp_chklst_line::create([
-                    'name' => $qaqcInspTmplLine->name,
-                    'description' => $qaqcInspTmplLine->description,
-                    'control_type_id' => $qaqcInspTmplLine->control_type_id,
-                    'qaqc_insp_group_id' => $qaqcInspTmplLine->qaqc_insp_group_id,
-                    'qaqc_insp_control_group_id' => $qaqcInspTmplLine->qaqc_insp_control_group_id,
-                    'qaqc_insp_chklst_sht_id' => $newSheet->id,
-                    'order_no' => $qaqcInspTmplLine->order_no,
-                    'owner_id' => $ownerId,
-                ]);
+                $line = $qaqcInspTmplLine->getAttributes();
+                $line['qaqc_insp_chklst_sht_id'] = $newSheet->id;
+                $line['owner_id'] = $ownerId;
+
+                unset($line['col_span']);
+                unset($line['checkpoint_level']);
+
+                // Log::info($line);
+                Qaqc_insp_chklst_line::create($line);
             }
             //<<This id will be use to redirect, please don't add more text into it.
             $this->info($newSheet->id);
