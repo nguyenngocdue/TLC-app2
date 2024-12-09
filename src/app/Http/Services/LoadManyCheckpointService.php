@@ -15,6 +15,10 @@ class LoadManyCheckpointService
     public static function getAttachmentGroups($sheet)
     {
         // Log::info($sheet);
+        //
+        if (is_null($sheet->getChklst)) {
+            return null;
+        }
 
         if (!isset(static::$roomList[$sheet->id])) {
             $roomList = $sheet->getChklst->getProdOrder->{Prod_order::class}->getPjType->getRoomList;
