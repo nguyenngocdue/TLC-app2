@@ -40,12 +40,14 @@ class MailUtility
 
         $subject .= " - " . env("APP_NAME");
 
-        return [
+        $result = [
             'subject' => $subject,
-
-            'Project' => $project ? $project->name : null,
-            'Sub Project' => $subProject ? $subProject->name : null,
-            'WIR Description' => $wirDescription ? $wirDescription->name : null,
         ];
+
+        if ($project) $result['Project'] = $project->name;
+        if ($subProject) $result['Sub Project'] = $subProject->name;
+        if ($wirDescription) $result['WIR Description'] = $wirDescription->name;
+
+        return $result;
     }
 }
