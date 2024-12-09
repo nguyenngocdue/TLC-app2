@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomFunction4View.js","sourceRoot":"","sources":["../../../src/Renderer/CustomFunction/CustomFunction4View.ts"],"names":[],"mappings":";;;AAAA,oDAAgD;AAEhD,MAAa,mBAAoB,SAAQ,6BAAa;IAClD,OAAO;QACH,MAAM,EAAE,cAAc,EAAE,GAAG,IAAI,CAAA;QAC/B,IAAI,cAAc,EAAE,CAAC;YACjB,OAAO,cAAc,EAAE,CAAA;QAC3B,CAAC;QACD,OAAO,uCAAuC,CAAA;IAClD,CAAC;CACJ;AARD,kDAQC"}

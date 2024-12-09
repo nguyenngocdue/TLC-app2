@@ -1,0 +1,1 @@
+{"version":3,"file":"IdLink.d.ts","sourceRoot":"","sources":["../../../src/Renderer/IdAction/IdLink.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAA;AAEhD,qBAAa,MAAO,SAAQ,aAAa;IACrC,SAAS,CAAC,OAAO,EAAE,MAAM,CAAgB;IACzC,SAAS,CAAC,QAAQ,EAAE;QAAE,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM,GAAG,MAAM,CAAA;KAAE,CAAoB;IAE1E,OAAO;CAqBV"}

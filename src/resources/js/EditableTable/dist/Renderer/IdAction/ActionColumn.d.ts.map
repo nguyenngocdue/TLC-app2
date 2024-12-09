@@ -1,0 +1,1 @@
+{"version":3,"file":"ActionColumn.d.ts","sourceRoot":"","sources":["../../../src/Renderer/IdAction/ActionColumn.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAA;AAEhD,qBAAa,YAAa,SAAQ,aAAa;IAC3C,SAAS,CAAC,OAAO,EAAE,MAAM,CAAgB;IACzC,qBAAqB,IAAI,IAAI;IAuB7B,OAAO;CAmBV"}

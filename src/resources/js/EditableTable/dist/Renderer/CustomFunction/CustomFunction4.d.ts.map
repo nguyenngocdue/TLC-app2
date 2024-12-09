@@ -1,0 +1,1 @@
+{"version":3,"file":"CustomFunction4.d.ts","sourceRoot":"","sources":["../../../src/Renderer/CustomFunction/CustomFunction4.ts"],"names":[],"mappings":"AAAA,OAAO,EACH,wBAAwB,EACxB,mBAAmB,EACtB,MAAM,uCAAuC,CAAA;AAI9C,qBAAa,eAAe;IACZ,OAAO,CAAC,MAAM;gBAAN,MAAM,EAAE,mBAAmB;IAC/C,MAAM,IAAI,wBAAwB;CASrC"}

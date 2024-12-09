@@ -1,0 +1,1 @@
+{"version":3,"file":"Text4View.d.ts","sourceRoot":"","sources":["../../../src/Renderer/Text/Text4View.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,aAAa,EAAE,MAAM,kBAAkB,CAAA;AAEhD,qBAAa,SAAU,SAAQ,aAAa;IACxC,SAAS,CAAC,OAAO,EAAE,MAAM,CAAsB;IAC/C,SAAS,CAAC,QAAQ,EAAE,MAAM,CAAkB;IAE5C,OAAO;CAIV"}

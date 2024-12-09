@@ -1,0 +1,1 @@
+{"version":3,"file":"Renderer4Edit.d.ts","sourceRoot":"","sources":["../../src/Renderer/Renderer4Edit.ts"],"names":[],"mappings":"AAAA,OAAO,EAEH,aAAa,EACb,wBAAwB,EAC3B,MAAM,oCAAoC,CAAA;AAC3C,OAAO,EAAE,aAAa,EAAE,MAAM,iBAAiB,CAAA;AAI/C,8BAAsB,aAAc,SAAQ,aAAa;IACrD,mBAAmB,CAAC,KAAK,CAAC,EAAE,aAAa,GAAG,IAAI;IAShD,MAAM,IAAI,wBAAwB;CAUrC"}

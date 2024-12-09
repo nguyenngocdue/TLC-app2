@@ -1,0 +1,29 @@
+{
+    "name": "@tchvan/editable-table-3",
+    "version": "1.0.2",
+    "description": "TS editable table, pure TS/JS, use real DOM.",
+    "main": "dist/EditableTable3.js",
+    "private": false,
+    "types": "dist/EditableTable3.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "flatpickr": "^4.6.13",
+        "moment": "^2.30.1",
+        "select2": "^4.1.0-rc.0",
+        "sortablejs": "^1.15.3",
+        "sweetalert": "^2.1.2",
+        "tailwind-merge": "^2.5.4"
+    },
+    "devDependencies": {
+        "@types/flatpickr": "^3.1.4",
+        "@types/select2": "^4.0.63",
+        "@types/sortablejs": "^1.15.8",
+        "@types/sweetalert": "^2.0.4",
+        "typescript": "^5.7.2"
+    }
+}
