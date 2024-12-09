@@ -53,8 +53,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : null;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
-        $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
-        $this->prodOrder = $this->prodOrder ? $this->prodOrder : [];
+        $this->prodRoutingLink = $this->prodRoutingLink ? array_filter($this->prodRoutingLink) : [];
+        $this->prodOrder = $this->prodOrder ? array_filter($this->prodOrder) : [];
         // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
         $this->cacheUnit();
@@ -91,18 +91,25 @@ class ProdSequences extends ViewAllTypeMatrixParent
     {
         $yAxis = $this->yAxis::query()
             ->where('sub_project_id', $this->subProject)
-            ->where('prod_routing_id', $this->prodRouting)
-            ->whereIn('id', $this->prodOrder)
-            ->with([
-                'getRoomType' => fn($q) => $q,
-                'getMeta' => function ($q) {
-                    $q->with([
-                        'getDrawingStrType',
-                        'getDrawingArcType',
-                        'getDrawingMepfType',
-                    ]);
-                },
-            ])
+            ->where('prod_routing_id', $this->prodRouting);
+
+        Log::info($this->prodOrder);
+        if (sizeof($this->prodOrder) > 0) {
+            $yAxis = $yAxis->whereIn('id', $this->prodOrder);
+            Log::info("Load by Prod Order");
+        } else {
+            Log::info("Load by Prod Order is empty");
+        }
+        $yAxis = $yAxis->with([
+            'getRoomType' => fn($q) => $q,
+            'getMeta' => function ($q) {
+                $q->with([
+                    'getDrawingStrType',
+                    'getDrawingArcType',
+                    'getDrawingMepfType',
+                ]);
+            },
+        ])
             ->orderBy('name')
             ->get();
         // dump($yAxis);
