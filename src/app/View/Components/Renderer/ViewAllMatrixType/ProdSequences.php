@@ -93,7 +93,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting);
 
-        Log::info($this->prodOrder);
+        // Log::info($this->prodOrder);
         if (sizeof($this->prodOrder) > 0) {
             $yAxis = $yAxis->whereIn('id', $this->prodOrder);
             Log::info("Load by Prod Order");
