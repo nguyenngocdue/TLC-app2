@@ -23,6 +23,7 @@ class ReportManyBlockCharts extends Component
         $arrayOptions = json_decode(json_encode($jsonOptions), true);
         $arrayOptions["xAxis"]["data"] = $isRow ? [$xAxisValue] : $xAxisValue;
         $arrayOptions["series"][0]["data"] = $isRow ? [$seriesValue] : $seriesValue;
+        $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
         $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
         return json_decode(json_encode($arrayOptions));
     }
