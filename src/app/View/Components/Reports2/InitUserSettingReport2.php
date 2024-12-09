@@ -167,10 +167,12 @@ class InitUserSettingReport2
         if ($rp->has_time_range) {
             if(!isset($params['from_date']) || !isset($params['to_date']) || !$params['from_date'] || !$params['from_date'] ){
                 $params = DefaultValueReport::updateDefaultValueFromDateToDate($params, $rp);
-                $settings[$entityType][$this->reportType2][$storedFilterKey] = $params;
-                self::updateUserSettingRp($settings);
-
             }
+            if (!isset($params['year'])){
+                $params['year'] = substr($params['to_date'], 0, 4);
+            }
+            $settings[$entityType][$this->reportType2][$storedFilterKey] = $params;
+            self::updateUserSettingRp($settings);
         }
         return  $params;
     }
