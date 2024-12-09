@@ -3,7 +3,6 @@
 namespace App\View\Components\Reports2;
 
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class ReportBlock extends Component
