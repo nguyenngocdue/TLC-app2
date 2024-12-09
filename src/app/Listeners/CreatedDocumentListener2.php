@@ -40,6 +40,7 @@ class CreatedDocumentListener2 implements ShouldQueue
         $mail = new MailCreateNew([
             'name' => $creator->name,
             'url' => route(Str::plural($type) . ".edit", $id),
+            'meta' => $meta,
         ]);
         $mail->subject($subject);
 
