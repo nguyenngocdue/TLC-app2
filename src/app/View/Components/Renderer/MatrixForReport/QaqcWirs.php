@@ -11,6 +11,7 @@ class QaqcWirs extends MatrixForReportParent
 {
     protected $dataIndexX = "wir_description_id";
     protected $dataIndexY = "prod_order_id";
+    protected $headerTop = 300;
 
     function __construct(
         private $prodRoutingId = 49,
