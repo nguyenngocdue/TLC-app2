@@ -208,6 +208,39 @@
         "not_applicable": "true",
         "rework": "true"
     },
+    "_getProdRunsSubCon": {
+        "name": "_getProdRunsSubCon",
+        "column_name": "getProdRunsSubCon",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true",
+        "rework": "true"
+    },
+    "_sep04": {
+        "name": "_sep04",
+        "column_name": "sep04",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true",
+        "rework": "true"
+    },
+    "_heading04": {
+        "name": "_heading04",
+        "column_name": "heading04",
+        "new": "true",
+        "in_progress": "true",
+        "finished": "true",
+        "on_hold": "true",
+        "cancelled": "true",
+        "not_applicable": "true",
+        "rework": "true"
+    },
     "_start_date_0": {
         "name": "_start_date_0",
         "column_name": "start_date_0",

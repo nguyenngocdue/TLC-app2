@@ -14,7 +14,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingLinks": {
         "name": "_getProdRoutingLinks",
@@ -31,7 +32,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUomId": {
         "name": "_getUomId",
@@ -48,7 +50,8 @@
         "filter_values": "140",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingDetail": {
         "name": "_getProdRoutingDetail",
@@ -65,7 +68,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getSubProject": {
         "name": "_getSubProject",
@@ -82,7 +86,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRouting": {
         "name": "_getProdRouting",
@@ -99,7 +104,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdDiscipline": {
         "name": "_getProdDiscipline",
@@ -116,7 +122,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -133,7 +140,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -146,11 +154,12 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
-        "filter_operator": "=",
+        "filter_operator": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRuns": {
         "name": "_getProdRuns",
@@ -167,7 +176,8 @@
         "filter_values": "0",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRunsRework1": {
         "name": "_getProdRunsRework1",
@@ -184,7 +194,8 @@
         "filter_values": "1",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRunsRework2": {
         "name": "_getProdRunsRework2",
@@ -201,7 +212,26 @@
         "filter_values": "2",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getProdRunsSubCon": {
+        "name": "_getProdRunsSubCon",
+        "relationship": "hasMany",
+        "control_name": "getProdRunsSubCon",
+        "renderer_view_all": "agg_count",
+        "renderer_view_all_param": "",
+        "renderer_view_all_unit": "line",
+        "renderer_edit": "many_lines",
+        "renderer_edit_param": "getManyLineParamsSubCon",
+        "control": "relationship_renderer",
+        "filter_columns": "is_rework",
+        "filter_operator": "=",
+        "filter_values": "10",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getProdRoutingDetails": {
         "name": "_getProdRoutingDetails",
@@ -218,7 +248,8 @@
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_comment_on_hold_reason": {
         "name": "_comment_on_hold_reason",
@@ -231,11 +262,12 @@
         "renderer_edit_param": "",
         "control": "comment",
         "filter_columns": "",
-        "filter_operator": "=",
+        "filter_operator": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_comment_cancel_reason": {
         "name": "_comment_cancel_reason",
@@ -248,11 +280,12 @@
         "renderer_edit_param": "",
         "control": "comment",
         "filter_columns": "",
-        "filter_operator": "=",
+        "filter_operator": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_comment_na_reason": {
         "name": "_comment_na_reason",
@@ -265,10 +298,11 @@
         "renderer_edit_param": "",
         "control": "comment",
         "filter_columns": "",
-        "filter_operator": "=",
+        "filter_operator": "",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

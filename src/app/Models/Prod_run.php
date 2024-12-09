@@ -109,12 +109,34 @@ class Prod_run extends ModelExtended
     {
         $columns = $this->getManyLineParams($parentItem);
 
-        foreach ($columns as $key => &$column) {
+        foreach ($columns as &$column) {
             // dump($key, $column);
             if ($column['dataIndex'] == 'remark') {
                 $column['required'] = true;
             }
         }
         return $columns;
+    }
+
+    public function getManyLineParamsSubCon($parentItem)
+    {
+        // $columns = $this->getManyLineParams($parentItem);
+        $result = [
+            ['dataIndex' => 'id', 'invisible' => true,],
+            ['dataIndex' => 'prod_sequence_id', 'value_as_parent_id' => true, 'invisible' => true,],
+            ['dataIndex' => 'date', 'footer' => 'agg_none'],
+            ['dataIndex' => 'start',],
+            // ['dataIndex' => 'end',],
+            // ['dataIndex' => 'total_hours', 'footer' => 'agg_sum',],
+            // ['dataIndex' => 'worker_number_input',],
+            // ['dataIndex' => 'worker_number_count', 'invisible' => true,],
+            // ['dataIndex' => 'worker_number', 'no_print' => true,],
+            // ['dataIndex' => 'total_man_hours', 'footer' => 'agg_sum',],
+            ['dataIndex' => 'production_output',  'footer' => 'agg_sum',],
+            // ['dataIndex' => 'prod_discipline_id', 'invisible' => !$show_team_column],
+            ['dataIndex' => 'remark', 'required' => true],
+            ['dataIndex' => 'is_rework', "invisible" => true],
+        ];
+        return $result;
     }
 }

@@ -38,7 +38,12 @@ const getDefaultValueOfSetTableColumnListener = () => {
 }
 
 const addANewLine = (params) => {
-    const { tableId, valuesOfOrigin = {}, isDuplicatedOrAddFromList = false, batchLength = 1 } = params
+    const {
+        tableId,
+        valuesOfOrigin = {},
+        isDuplicatedOrAddFromList = false,
+        batchLength = 1,
+    } = params
     const { tableName, dateTimeControls = [] } = tableObject[tableId]
     // console.log(params, tableName,)
     const orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
@@ -65,6 +70,9 @@ const addANewLine = (params) => {
             }
             if (b === 'getProdRunsRework2') {
                 valuesOfOrigin['is_rework'] = 2
+            }
+            if (b === 'getProdRunsSubCon') {
+                valuesOfOrigin['is_rework'] = 10
             }
         }
     }
@@ -124,7 +132,13 @@ const addANewLine = (params) => {
                 // console.log(dateTimeControls)
                 for (let i = 0; i < batchLength; i++) {
                     const valuesOfOrigin = response['hits'][i]
-                    addANewLineFull({ tableId, valuesOfOrigin, isDuplicatedOrAddFromList, batchLength, tableName })
+                    addANewLineFull({
+                        tableId,
+                        valuesOfOrigin,
+                        isDuplicatedOrAddFromList,
+                        batchLength,
+                        tableName,
+                    })
                 }
                 getEById(btnAddANewLineId).show()
                 getEById(btnAddFromAListId).show()
@@ -200,10 +214,20 @@ const addANewLineFull = (params) => {
 
             const destroyName = tableId + '[DESTROY_THIS_LINE][' + newRowIndex + ']'
             const destroyInput =
-                '<input readonly class="w-10 bg-gray-300" name="' + destroyName + '" type=' + (tableDebugJs ? 'text' : 'hidden') + ' />'
+                '<input readonly class="w-10 bg-gray-300" name="' +
+                destroyName +
+                '" type=' +
+                (tableDebugJs ? 'text' : 'hidden') +
+                ' />'
 
             const paramString =
-                "{tableId: '" + tableId + "', control: this, fingerPrint:" + fingerPrint + ', nameIndex:' + newRowIndex + '}'
+                "{tableId: '" +
+                tableId +
+                "', control: this, fingerPrint:" +
+                fingerPrint +
+                ', nameIndex:' +
+                newRowIndex +
+                '}'
 
             const btnUp = `<button value="${tableId}" onClick="moveUpEditableTable(${paramString})" type="button" class="px-1.5 py-1 border-2 border-gray-200 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-up"></i></button>`
             const btnDown = `<button value="${tableId}" onClick="moveDownEditableTable(${paramString})" type="button" class="px-1.5 py-1 border-2 border-gray-200 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-gray-200 text-gray-700 shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none active:bg-gray-400 active:shadow-lg" ><i class="fa fa-arrow-down"></i></button>`
@@ -211,7 +235,9 @@ const addANewLineFull = (params) => {
             const btnTrash = `<button value="${tableId}" onClick="trashEditableTable(${paramString})" type="button" class="px-1.5 py-1 border-2 border-red-600 inline-block font-medium text-xs leading-tight uppercase rounded focus:ring-0 transition duration-150 ease-in-out bg-red-600 text-white shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none active:bg-red-800 active:shadow-lg" ><i class="fa fa-trash"></i></button>`
             renderer = `${fingerPrintInput} ${destroyInput}`
             renderer += `<div class="whitespace-nowrap flex justify-center">
-                ${isOrderable ? btnUp : ''} ${isOrderable ? btnDown : ''} ${btnDuplicate} ${btnTrash}
+                ${isOrderable ? btnUp : ''} ${
+                isOrderable ? btnDown : ''
+            } ${btnDuplicate} ${btnTrash}
             </div>`
         } else {
             // console.log("Rendering", column)
@@ -226,13 +252,25 @@ const addANewLineFull = (params) => {
 
             const onChangeDropdown4Fn = 'onChangeDropdown4(' + onChangeParams + ');'
             const makeOnChangeAdvanced = (moreCodeAfter) =>
-                '' + '$("[id=\'' + id + "']\").on('change', function(e, dropdownParams){" + moreCodeAfter + '})'
+                '' +
+                '$("[id=\'' +
+                id +
+                "']\").on('change', function(e, dropdownParams){" +
+                moreCodeAfter +
+                '})'
             const readOnlyStr = column['readOnly'] ? ' readonly ' : ''
             switch (column['renderer']) {
                 case 'read-only-text4':
                     if (column['dataIndex'] === 'id') {
                         if (insertedId) {
-                            renderer = "<input id='" + id + "' name='" + id + "' value='" + insertedId + "' type='hidden' />"
+                            renderer =
+                                "<input id='" +
+                                id +
+                                "' name='" +
+                                id +
+                                "' value='" +
+                                insertedId +
+                                "' type='hidden' />"
                             renderer +=
                                 "<div class='text-center'>" +
                                 "<a target='_blank' class='text-blue-500' href='" +
@@ -243,7 +281,8 @@ const addANewLineFull = (params) => {
                                 makeId(insertedId) +
                                 '</a>' +
                                 '</div>'
-                            renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
+                            renderer +=
+                                '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn) + '</script>'
                         } else {
                             renderer = "<input id='" + id + "' name='" + id + "' type='hidden' />"
                         }
@@ -253,22 +292,50 @@ const addANewLineFull = (params) => {
                     break
                 case 'dropdown':
                     if (['status'].includes(column['dataIndex'])) {
-                        renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
+                        renderer =
+                            "<select id='" +
+                            id +
+                            "' name='" +
+                            id +
+                            "' class='" +
+                            column['classList'] +
+                            "'>"
                         for (let i = 0; i < column['cbbDataSource'].length; i++) {
                             const status = column['cbbDataSource'][i]
                             statusObject = column['cbbDataSourceObject'][status]
                             const selected = i === 0 ? 'selected' : ''
-                            renderer += "<option value='" + status + "' " + selected + '>' + statusObject?.title + '</option>'
+                            renderer +=
+                                "<option value='" +
+                                status +
+                                "' " +
+                                selected +
+                                '>' +
+                                statusObject?.title +
+                                '</option>'
                         }
                         renderer += '</select>'
                     } else if (['entity_type'].includes(column['dataIndex'])) {
-                        renderer = "<select id='" + id + "' name='" + id + "' class='" + column['classList'] + "'>"
+                        renderer =
+                            "<select id='" +
+                            id +
+                            "' name='" +
+                            id +
+                            "' class='" +
+                            column['classList'] +
+                            "'>"
                         console.log(column)
                         for (let i = 0; i < column['cbbDataSource'].length; i++) {
                             const status = column['cbbDataSource'][i]
                             statusObject = column['cbbDataSourceObject'][i]
                             const selected = i === 0 ? 'selected' : ''
-                            renderer += "<option value='" + status + "' " + selected + '>' + statusObject + '</option>'
+                            renderer +=
+                                "<option value='" +
+                                status +
+                                "' " +
+                                selected +
+                                '>' +
+                                statusObject +
+                                '</option>'
                         }
                         renderer += '</select>'
                     } else {
@@ -279,7 +346,8 @@ const addANewLineFull = (params) => {
                     multipleStr = column?.multiple ? 'multiple' : ''
                     bracket = column?.multiple ? '[]' : ''
                     if (column['readOnly'] && column['deaf']) {
-                        renderer = "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
+                        renderer =
+                            "<input id='" + id + "' name='" + id + bracket + "' type='hidden' >"
                         renderer += "<div id='" + id + "_label' class='px-2'></div>"
                     } else {
                         renderer = `<select id='${id}' name='${id} ${bracket}' ${multipleStr} ${readOnlyStr} class='${column['classList']}'></select>`
@@ -299,17 +367,31 @@ const addANewLineFull = (params) => {
                     const { numericScale = 0 } = column
                     renderer = `<input id='${id}' name='${id}' component='editable/number4' ${readOnlyStr} class='${column['classList']} ${readOnlyStr}' />`
                     if (column['dataIndex'] === 'order_no') {
-                        orderNoValue = getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
-                        const reRenderFn = 'reRenderTableBaseOnNewOrder("' + tableId + '", dropdownParams)'
+                        orderNoValue =
+                            getMaxValueOfAColumn(tableId, '[order_no]') + table_order_no_step
+                        const reRenderFn =
+                            'reRenderTableBaseOnNewOrder("' + tableId + '", dropdownParams)'
                         renderer += '<script>' + makeOnChangeAdvanced(reRenderFn) + '</script>'
                     } else {
                         // onChange = "onChangeDropdown4(" + onChangeParams + ");changeBgColor(this,\"" + tableId + "\")"
                         const changeBgColorFn = 'changeBgColor(this,"' + tableId + '");'
                         const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
-                        const parseNumber4 = 'parseNumber2("' + id + '", getEById("' + id + '").val(), ' + numericScale + ');'
+                        const parseNumber4 =
+                            'parseNumber2("' +
+                            id +
+                            '", getEById("' +
+                            id +
+                            '").val(), ' +
+                            numericScale +
+                            ');'
                         renderer +=
                             '<script>' +
-                            makeOnChangeAdvanced(onChangeDropdown4Fn + changeBgColorFn + changeFooterValue + parseNumber4) +
+                            makeOnChangeAdvanced(
+                                onChangeDropdown4Fn +
+                                    changeBgColorFn +
+                                    changeFooterValue +
+                                    parseNumber4,
+                            ) +
                             '</script>'
                     }
                     break
@@ -335,7 +417,10 @@ const addANewLineFull = (params) => {
                     //This line will cause save problem on SQBTS
                     // renderer += "<input type='hidden1' name='"+id+"' id='hidden_"+id+"'>"
                     const changeFooterValue = 'changeFooterValue(this,"' + tableId + '");'
-                    renderer += '<script>' + makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) + '</script>'
+                    renderer +=
+                        '<script>' +
+                        makeOnChangeAdvanced(onChangeDropdown4Fn + changeFooterValue) +
+                        '</script>'
 
                     break
                 case 'attachment4':
@@ -402,10 +487,20 @@ const addANewLineFull = (params) => {
 
                     const label = dataSource[selected]?.name
                     getEById(id + '_label').html(label)
-                    toDoAfterAddedDropdown4ReadOnly.push({ id, dataSource: k[column['tableName']], tableId, selected })
+                    toDoAfterAddedDropdown4ReadOnly.push({
+                        id,
+                        dataSource: k[column['tableName']],
+                        tableId,
+                        selected,
+                    })
                     // getEById(id).trigger('change')
                 } else {
-                    toDoAfterAddedDropdown4.push({ id, dataSource: k[column['tableName']], tableId, selected })
+                    toDoAfterAddedDropdown4.push({
+                        id,
+                        dataSource: k[column['tableName']],
+                        tableId,
+                        selected,
+                    })
                 }
                 // console.log("DDDDDD4", column)
                 break
@@ -421,7 +516,10 @@ const addANewLineFull = (params) => {
                 break
             default:
                 const value = valuesOfOrigin[column['dataIndex']]
-                const picker4config = tableName == 'prod_runs' ? { minDate: moment().subtract(4, 'days').format('YYYY-MM-DD') } : {}
+                const picker4config =
+                    tableName == 'prod_runs'
+                        ? { minDate: moment().subtract(4, 'days').format('YYYY-MM-DD') }
+                        : {}
                 // console.log(picker4config)
                 // console.log("DDDDDD5", column, value)
                 if (column['value_as_parent_type']) {

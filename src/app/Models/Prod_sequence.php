@@ -73,6 +73,8 @@ class Prod_sequence extends ModelExtended
         "getProdRuns" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRunsRework1" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRunsRework2" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRunsSubCon" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
         "getProdRoutingDetail" => ['belongsTo', Prod_routing_detail::class, "prod_routing_id", "prod_routing_id"],
 
@@ -137,6 +139,12 @@ class Prod_sequence extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 2);
+    }
+
+    public function getProdRunsSubCon()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 10);
     }
 
     // public function getProdRoutingDetails()
