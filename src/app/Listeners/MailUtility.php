@@ -45,8 +45,12 @@ class MailUtility
             'subject' => $subject,
         ];
 
-        if ($project) $result['Project'] = $project->name;
-        if ($subProject) $result['Sub Project'] = $subProject->name;
+        $array = [];
+        if ($project) $array[] = $project->name;
+        if ($subProject) $array[] = $subProject->name;
+
+        if (sizeof($array) > 0) $result['Project'] = join(" / ", $array);
+
         if ($wirDescription) $result['WIR Description'] = $wirDescription->name;
         if ($prodOrder) $result['Production Order'] = $prodOrder->name . " - " . $prodOrder->production_name . "(" . $prodOrder->compliance_name . ")";
 
