@@ -24,6 +24,7 @@ class MailUtility
         $subProject = (method_exists($item, 'getSubProject')) ? $item->getSubProject : null;
         $project = (method_exists($item, 'getProject')) ? $item->getProject : null;
         $wirDescription = (method_exists($item, 'getWirDescription')) ? $item->getWirDescription : null;
+        $prodOrder = (method_exists($item, 'getProdOrder')) ? $item->getProdOrder : null;
 
         switch (true) {
             case $subProject:
@@ -47,6 +48,7 @@ class MailUtility
         if ($project) $result['Project'] = $project->name;
         if ($subProject) $result['Sub Project'] = $subProject->name;
         if ($wirDescription) $result['WIR Description'] = $wirDescription->name;
+        if ($prodOrder) $result['Production Order'] = $prodOrder->name . " - " . $prodOrder->production_name . "(" . $prodOrder->compliance_name . ")";
 
         return $result;
     }
