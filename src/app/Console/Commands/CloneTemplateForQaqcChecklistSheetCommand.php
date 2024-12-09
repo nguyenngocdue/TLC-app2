@@ -105,6 +105,7 @@ class CloneTemplateForQaqcChecklistSheetCommand extends Command
 
                 unset($line['col_span']);
                 unset($line['checkpoint_level']);
+                unset($line['id']);
 
                 // Log::info($line);
                 Qaqc_insp_chklst_line::create($line);
