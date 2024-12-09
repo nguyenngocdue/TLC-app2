@@ -21,9 +21,9 @@ class MailUtility
         $modelPath = Str::modelPathFrom(Str::plural($type));
         $item = $modelPath::find($id);
 
-        if (method_exists($item, 'getSubProject')) $subProject = $item->getSubProject;
-        if (method_exists($item, 'getProject')) $project = $item->getProject;
-        if (method_exists($item, 'getWirDescription')) $wirDescription = $item->getWirDescription;
+        $subProject = (method_exists($item, 'getSubProject')) ? $item->getSubProject : null;
+        $project = (method_exists($item, 'getProject')) ? $item->getProject : null;
+        $wirDescription = (method_exists($item, 'getWirDescription')) ? $item->getWirDescription : null;
 
         switch (true) {
             case $subProject:
