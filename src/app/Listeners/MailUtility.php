@@ -21,19 +21,31 @@ class MailUtility
         $modelPath = Str::modelPathFrom(Str::plural($type));
         $item = $modelPath::find($id);
 
-        if (method_exists($item, 'getSubProject')) {
-            $subProject = $item->getSubProject;
-            $subject .= " - (" . $subProject->name . ")";
-        } else {
-            if (method_exists($item, 'getProject')) {
-                $project = $item->getProject;
+        if (method_exists($item, 'getSubProject')) $subProject = $item->getSubProject;
+        if (method_exists($item, 'getProject')) $project = $item->getProject;
+        if (method_exists($item, 'getWirDescription')) $wirDescription = $item->getWirDescription;
+
+        switch (true) {
+            case $subProject:
+                $subject .= " - (" . $subProject->name . ")";
+                break;
+            case $project:
                 $subject .= " - (" . $project->name . ")";
-            }
+                break;
+                // case $wirDescription:
+                //     $subject .= " - (" . $wirDescription->name . ")";
+                //     break;
         }
         if ($mailTitle) $subject .= " - $mailTitle";
 
         $subject .= " - " . env("APP_NAME");
 
-        return $subject;
+        return [
+            'subject' => $subject,
+
+            'Project' => $project ? $project->name : null,
+            'Sub Project' => $subProject ? $subProject->name : null,
+            'WIR Description' => $wirDescription ? $wirDescription->name : null,
+        ];
     }
 }

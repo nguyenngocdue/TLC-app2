@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Log;
 
 class MailUpdatedDocument extends Mailable
 {
-    use Queueable, SerializesModels;
+    // use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -39,6 +40,8 @@ class MailUpdatedDocument extends Mailable
             'previousValue' => $this->data['previousValue'],
             'currentValue' => $this->data['currentValue'],
             'diff' => $this->data['diff'],
+
+            'meta' => $this->data['meta'],
         ]);
     }
 }

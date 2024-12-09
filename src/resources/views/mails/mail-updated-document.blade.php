@@ -25,6 +25,16 @@ This document change monitors from
 @endforeach
 <br>
 @endif
+
+<ul>
+    @foreach($meta as $label => $value)
+    <li>
+        <span>{{$label}}:</span>
+        <b>{{$value}}</b>
+    </li>
+    @endforeach
+</ul>
+
 <x-mail::button :url="$action">
     View Document
 </x-mail::button>

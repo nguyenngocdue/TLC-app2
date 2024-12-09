@@ -1,0 +1,18 @@
+Install supervisor on the host machine (not the container)
+    sudo apt install supervisor -y
+
+Copy the conf to supervisor
+    cp .supervisor/cron_?.conf /etc/supervisor/conf.d
+    cp .supervisor/horizon_?.conf /etc/supervisor/conf.d
+
+Re-load supervisor
+    sudo supervisorctl reread
+    sudo supervisorctl update
+
+Check status:
+    supervisorctl status
+    supervisord // to debug
+
+Reload when change Listener / service:
+    sudo supervisorctl restart all
+    sudo supervisorctl reload

@@ -83,8 +83,8 @@ class UpdatedDocumentListener2 implements ShouldQueue
             'bic_assignee_name' => $bic_id ? User::findFromCache($bic_id)->name : "Unknown User Name",
 
             'bic_monitors' => $bic_monitors,
-            'bic_monitors_uids' => array_map(fn ($i) => $i * 1, $monitor_ids),
-            'bic_monitors_names' => array_map(fn ($i) => User::findFromCache($i * 1)->name, $monitor_ids),
+            'bic_monitors_uids' => array_map(fn($i) => $i * 1, $monitor_ids),
+            'bic_monitors_names' => array_map(fn($i) => User::findFromCache($i * 1)->name, $monitor_ids),
         ];
 
         return $result;
@@ -114,7 +114,9 @@ class UpdatedDocumentListener2 implements ShouldQueue
         // $nickname = strtoupper($app['nickname']);
         // $appTitle = $app['title'];
         // $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
-        $subject = MailUtility::getMailTitle($type, $id);
+        $meta = MailUtility::getMailTitle($type, $id);
+        $subject = $meta['subject'];
+        unset($meta['subject']);
 
         $receiver = User::find($currentValue['bic_assignee_uid']);
         if ($receiver) {
@@ -125,14 +127,17 @@ class UpdatedDocumentListener2 implements ShouldQueue
 
                 'action' => route(Str::plural($type) . '.edit', $id),
                 'name' => $receiver->name,
+                'meta' => $meta,
             ]);
             $mail->subject($subject);
 
             $cc = array_unique([
-                $previousValue['bic_assignee_uid'], ...$previousValue['bic_monitors_uids'],
-                ...$currentValue['bic_monitors_uids'], ...$ids
+                $previousValue['bic_assignee_uid'],
+                ...$previousValue['bic_monitors_uids'],
+                ...$currentValue['bic_monitors_uids'],
+                ...$ids
             ]);
-            $cc = array_map(fn ($i) => User::findFromCache($i), $cc);
+            $cc = array_map(fn($i) => User::findFromCache($i), $cc);
 
             Mail::to($receiver)
                 ->cc($cc)

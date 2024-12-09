@@ -32,7 +32,9 @@ class CreatedDocumentListener2 implements ShouldQueue
         // $appTitle = $app['title'];
         // $subject = "[$nickname/$id] - $appTitle - " . env("APP_NAME");
 
-        $subject = MailUtility::getMailTitle($type, $id);
+        $meta = MailUtility::getMailTitle($type, $id);
+        $subject = $meta['subject'];
+        unset($meta['subject']);
 
         $creator = $item->getOwner;
         $mail = new MailCreateNew([

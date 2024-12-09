@@ -44,7 +44,9 @@ class SignOffSubmittedListener implements ShouldQueue
             $mail = new MailSignOffSubmitted($param);
 
             // $subject = "[ICS/$signableId] - Request Sign Off - " . env("APP_NAME");
-            $subject = MailUtility::getMailTitle($tableName, $signableId, 'Request Sign Off');
+            $meta = MailUtility::getMailTitle($tableName, $signableId, 'Request Sign Off');
+            $subject = $meta['subject'];
+            unset($meta['subject']);
 
             $mail->subject($subject);
             Mail::to($monitors)
