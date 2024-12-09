@@ -96,9 +96,9 @@ class ProdSequences extends ViewAllTypeMatrixParent
         // Log::info($this->prodOrder);
         if (sizeof($this->prodOrder) > 0) {
             $yAxis = $yAxis->whereIn('id', $this->prodOrder);
-            Log::info("Load by Prod Order");
-        } else {
-            Log::info("Load by Prod Order is empty");
+            // Log::info("Load by Prod Order");
+            // } else {
+            //     Log::info("Load by Prod Order is empty");
         }
         $yAxis = $yAxis->with([
             'getRoomType' => fn($q) => $q,
