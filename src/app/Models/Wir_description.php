@@ -7,8 +7,12 @@ use App\BigThink\ModelExtended;
 class Wir_description extends ModelExtended
 {
     protected $fillable = [
-        "name", "description", "short_desc", "slug",
-        "prod_discipline_id", "def_assignee", "owner_id",
+        "name",
+        "description",
+        "slug",
+        "prod_discipline_id",
+        "def_assignee",
+        "owner_id",
         "wir_weight",
     ];
     public static $statusless = true;

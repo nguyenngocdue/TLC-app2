@@ -15,13 +15,12 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('wir_descriptions', function (BlueprintExtended $table) {
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->text('short_desc')->nullable();
             $table->string('slug')->unique();
             $table->unsignedBigInteger('prod_discipline_id')->nullable();
             $table->unsignedInteger('wir_weight');

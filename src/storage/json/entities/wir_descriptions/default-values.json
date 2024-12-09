@@ -25,19 +25,6 @@
         "control_extra": "",
         "textarea_rows": ""
     },
-    "_short_desc": {
-        "name": "_short_desc",
-        "column_name": "short_desc",
-        "label": "",
-        "validation": "",
-        "validation_regex": "",
-        "formula": "",
-        "default_value": "",
-        "label_extra": "",
-        "placeholder": "",
-        "control_extra": "",
-        "textarea_rows": ""
-    },
     "_description": {
         "name": "_description",
         "column_name": "description",
