@@ -52,7 +52,7 @@ class MailUtility
         if (sizeof($array) > 0) $result['Project'] = join(" / ", $array);
 
         if ($wirDescription) $result['WIR Description'] = $wirDescription->name;
-        if ($prodOrder) $result['Production Order'] = $prodOrder->name . " - " . $prodOrder->production_name . "(" . $prodOrder->compliance_name . ")";
+        if ($prodOrder) $result['Production Order'] = $prodOrder->name . " (" . $prodOrder->compliance_name . ")";
 
         return $result;
     }
