@@ -17,7 +17,10 @@ class CheckPoint2Print extends Component
     {
         // dump($this->checkpoint);
         $controlType = $this->checkpoint->getControlType->slug;
-        $attachmentGroups = LoadManyCheckpointService::getAttachmentGroups($this->checkpoint->getSheet);
+        $attachment_is_grouped = $this->checkpoint->attachment_is_grouped ?? false;
+        $attachmentGroups = $attachment_is_grouped ? LoadManyCheckpointService::getAttachmentGroups($this->checkpoint->getSheet) : null;
+
+        // $attachmentGroups = LoadManyCheckpointService::getAttachmentGroups($this->checkpoint->getSheet);
 
         switch ($controlType) {
             case 'radio':
