@@ -20,6 +20,7 @@ class MailCreateNew extends Mailable
     public function __construct(public $data)
     {
         //
+        Log::info($this->data);
     }
 
     /**
