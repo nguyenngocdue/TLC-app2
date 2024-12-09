@@ -18,11 +18,22 @@ class ReportManyBlockCharts extends Component
 
     ) {}
 
-    private function updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, $isRow = false)
+
+    private function updateJsonOptionsRowCell($jsonOptions, $xAxisValue, $seriesValue, $setting)
     {
         $arrayOptions = json_decode(json_encode($jsonOptions), true);
-        $arrayOptions["xAxis"]["data"] = $isRow ? [$xAxisValue] : $xAxisValue;
-        $arrayOptions["series"][0]["data"] = $isRow ? [$seriesValue] : $seriesValue;
+        $arrayOptions["xAxis"]["data"] =  [$xAxisValue];
+        $arrayOptions["series"][0]["data"] = [$seriesValue];
+        $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
+        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+        return json_decode(json_encode($arrayOptions));
+    }
+
+    private function updateJsonOptionsCol($jsonOptions, $xAxisValue, $seriesValue, $setting)
+    {
+        $arrayOptions = json_decode(json_encode($jsonOptions), true);
+        $arrayOptions["xAxis"]["data"] =  $xAxisValue;
+        $arrayOptions["series"][0]["data"] = $seriesValue;
         $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
         $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
         return json_decode(json_encode($arrayOptions));
@@ -30,15 +41,35 @@ class ReportManyBlockCharts extends Component
 
     private function updateJsonOptionsRow($jsonOptions, $xAxisValue, $seriesValue, $setting)
     {
-        return $this->updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, true);
+        $arrayOptions = json_decode(json_encode($jsonOptions), true);
+        $arrayOptions["xAxis"]["data"] =  $xAxisValue;
+        $arrayOptions["series"][0]["data"] = $seriesValue;
+        $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
+        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+        return json_decode(json_encode($arrayOptions));
     }
 
-    private function updateJsonOptionsCol($jsonOptions, $xAxisValue, $seriesValue, $setting)
-    {
-        return $this->updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, false);
-    }
 
     private function generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData)
+    {
+        $chartOptions = [];
+        foreach ($queriedData as $key => $value) {
+            $opts = [];
+            $seriesValues = [];
+            $xAxisValues = [];
+            foreach ($settings as $setting) {
+                $seriesValues[] = $value->{$setting->dataIndex};
+                $xAxisValues[] = $setting->title ?? $setting->dataIndex;
+            }
+            $opts[$key] = $this->updateJsonOptionsRow($jsonOptions, $xAxisValues, $seriesValues, $settings[0]);
+            $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title) . ': ' . $value->{$mulChartConfig->descriptions->dataIndex};
+            $chartOptions[$key]["chart_option"] = $opts;
+        }
+        return $chartOptions;
+    }
+
+
+    private function generateRowCellCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData)
     {
         $chartOptions = [];
         foreach ($queriedData as $key => $value) {
@@ -46,13 +77,15 @@ class ReportManyBlockCharts extends Component
             foreach ($settings as $setting) {
                 $seriesValue = $value->{$setting->dataIndex};
                 $xAxisValue = $xAxisData[$key];
-                $opts[] = $this->updateJsonOptionsRow($jsonOptions, $xAxisValue, $seriesValue, $setting);
+                $opts[] = $this->updateJsonOptionsRowCell($jsonOptions, $xAxisValue, $seriesValue, $setting);
             }
             $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title) . ': ' . $value->{$mulChartConfig->descriptions->dataIndex};
             $chartOptions[$key]["chart_option"] = $opts;
         }
         return $chartOptions;
     }
+
+
 
     private function generateColumnCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData)
     {
@@ -79,6 +112,9 @@ class ReportManyBlockCharts extends Component
         switch ($mulChartConfig->direction) {
             case 'row':
                 $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+                break;
+            case 'row_cell':
+                $chartOptions = $this->generateRowCellCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
                 break;
             case 'column':
                 $chartOptions = $this->generateColumnCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
