@@ -53,6 +53,7 @@ class MailUtility
 
         if ($wirDescription) $result['WIR Description'] = $wirDescription->name;
         if ($prodOrder) $result['Production Order'] = $prodOrder->name . " (" . $prodOrder->compliance_name . ")";
+        if (isset($item->name)) $result['Document Name'] = $item->name;
 
         return $result;
     }
