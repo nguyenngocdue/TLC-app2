@@ -47,16 +47,26 @@
                     />
             </div>
             <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
-                Production Routing Link
+                Production Routing Links
                 <x-renderer.view-all-matrix-filter.ProdRoutingLinkFilter 
                     tableName="prod_routing_links" 
                     name="prod_routing_link_id[]" 
-                    {{-- name="getRoutingLinks()[]"  --}}
-                    {{-- Just Been here --}}
                     id="getRoutingLinks" 
                     typeToLoadListener="listener_config" 
                     allowClear="true"
                     :selected="$viewportParams['prod_routing_link_id']"
+                    multiple="true"
+                    />
+            </div>
+            <div class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2">
+                Production Orders
+                <x-renderer.view-all-matrix-filter.ProdOrderFilter 
+                    tableName="prod_orders" 
+                    name="prod_order_id[]" 
+                    id="prod_order_id" 
+                    typeToLoadListener="listener_config" 
+                    allowClear="true"
+                    :selected="$viewportParams['prod_order_id']"
                     multiple="true"
                     />
             </div>

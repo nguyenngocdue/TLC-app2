@@ -19,7 +19,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
 {
     // use TraitYAxisDiscipline;
 
-    private $project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline;
+    private $project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline, $prodOrder;
     // protected $viewportMode = null;
 
     // protected $xAxis = Prod_routing_link::class;
@@ -42,11 +42,19 @@ class ProdSequences extends ViewAllTypeMatrixParent
     public function __construct()
     {
         parent::__construct();
-        [$this->project, $this->subProject, $this->prodRouting, $this->prodRoutingLink, $this->prodDiscipline] = $this->getUserSettings();
+        [
+            $this->project,
+            $this->subProject,
+            $this->prodRouting,
+            $this->prodRoutingLink,
+            $this->prodDiscipline,
+            $this->prodOrder,
+        ] = $this->getUserSettings();
         $this->project = $this->project ? $this->project : 5;
         $this->subProject = $this->subProject ? $this->subProject : null;
         $this->prodRouting = $this->prodRouting ? $this->prodRouting : null;
         $this->prodRoutingLink = $this->prodRoutingLink ? $this->prodRoutingLink : [];
+        $this->prodOrder = $this->prodOrder ? $this->prodOrder : [];
         // $this->prodDiscipline = $this->prodDiscipline ? $this->prodDiscipline : 2;
         // dump($this->project, $this->subProject, $this->prodRouting);
         $this->cacheUnit();
@@ -73,7 +81,8 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $prodRouting = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_id'] ?? null;
         $prodRoutingLink = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_routing_link_id'] ?? null;
         $prodDiscipline = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_discipline_id'] ?? null;
-        $result = [$project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline];
+        $prodOrder = $settings[$type][Constant::VIEW_ALL]['matrix']['prod_order_id'] ?? [];
+        $result = [$project, $subProject, $prodRouting, $prodRoutingLink, $prodDiscipline, $prodOrder];
         // Log::info($result);
         return $result;
     }
@@ -83,6 +92,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $yAxis = $this->yAxis::query()
             ->where('sub_project_id', $this->subProject)
             ->where('prod_routing_id', $this->prodRouting)
+            ->whereIn('id', $this->prodOrder)
             ->with([
                 'getRoomType' => fn($q) => $q,
                 'getMeta' => function ($q) {
@@ -180,6 +190,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             ->where('prod_routing_id', $this->prodRouting);
         if ($this->prodDiscipline) $lines = $lines->where('prod_discipline_id', $this->prodDiscipline);
         if ($this->prodRoutingLink) $lines = $lines->whereIn('prod_routing_link_id', $this->prodRoutingLink);
+        if ($this->prodOrder) $lines = $lines->whereIn('prod_order_id', $this->prodOrder);
         return $lines->get();
     }
 
@@ -191,6 +202,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
             'prod_routing_id' => $this->prodRouting,
             'prod_routing_link_id' => $this->prodRoutingLink,
             'prod_discipline_id' => $this->prodDiscipline,
+            'prod_order_id' => $this->prodOrder,
         ];
     }
 
@@ -203,6 +215,7 @@ class ProdSequences extends ViewAllTypeMatrixParent
         $params['prod_routing_id'] =  $this->prodRouting;
 
         $params['prod_discipline_id'] =  $x['prod_discipline_id'];
+
         return $params;
     }
 
