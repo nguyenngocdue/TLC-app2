@@ -133,6 +133,7 @@ class ReportManyBlockCharts extends Component
         $queriedData = $this->queriedData;
         if ($queriedData->isEmpty()) {
             return Blade::render("
+            <x-renderer.heading class='text-lg text-lg-vw leading-tight text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4 mb-2' level=4>Render Chart</x-renderer.heading>
             <div class='max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 text-center'>
                 <!-- Icon -->
                 <div class='text-red-500 mb-4'>
