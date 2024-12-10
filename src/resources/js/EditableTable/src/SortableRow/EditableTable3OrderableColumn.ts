@@ -12,6 +12,10 @@ export const reValueOrderNoColumn = (params: TableParams) => {
             dataLine.order_no = (index + 1) as unknown as TableCellType
             // table11__order_no__text__14
             $(`#${tableName}__order_no__text__${index}`).val(index + 1)
+            // const element = document.getElementById(
+            //     `${tableName}__order_no__text__${index}`,
+            // ) as HTMLInputElement
+            // element && (element.value = (index + 1).toString())
         })
     }
 }

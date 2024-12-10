@@ -14,10 +14,10 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 mix.js('resources/js/app.js', 'public/js')
     .vue()
-    // .postCss('resources/css/app.css', 'public/css', [
-    //     require('tailwindcss'),
-    //     require('autoprefixer'),
-    // ])
+    .postCss('resources/css/app.css', 'public/css', [
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ])
     .webpackConfig({
         plugins: [
             new TerserPlugin({
@@ -43,4 +43,4 @@ mix.js('resources/js/lightgallery.js', 'public/js').postCss(
     'public/css',
 )
 
-mix.ts('resources/js/EditableTable/EditableTable3.ts', 'public/js').sourceMaps().version()
+mix.ts('resources/js/EditableTable/src/EditableTable3.ts', 'public/js').sourceMaps().version()

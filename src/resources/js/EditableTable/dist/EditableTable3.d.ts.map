@@ -1,1 +1,1 @@
-{"version":3,"file":"EditableTable3.d.ts","sourceRoot":"","sources":["../src/EditableTable3.ts"],"names":[],"mappings":""}
+{"version":3,"file":"EditableTable3.d.ts","sourceRoot":"","sources":["../src/EditableTable3.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,WAAW,EAAE,MAAM,gCAAgC,CAAA;AAyB5D,cAAM,cAAc;IAMJ,OAAO,CAAC,MAAM;IAL1B,OAAO,CAAC,UAAU,CAAQ;IAE1B,OAAO,CAAC,qBAAqB,CAA6B;IAC1D,OAAO,CAAC,SAAS,CAAa;gBAEV,MAAM,EAAE,WAAW;IA0CvC,WAAW;IA8GX,MAAM;CAsDT;AAED,eAAe,cAAc,CAG5B"}

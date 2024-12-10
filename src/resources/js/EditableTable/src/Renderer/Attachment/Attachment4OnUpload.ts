@@ -20,9 +20,12 @@ export const addOnUploadListener = (
                 const emptyBox = Thumbnail4View.renderThumbnailBox(`${controlId}__${i}`).outerHTML
                 const div = `<div id="${imgContainerId}">${emptyBox}</div>`
                 $(`#${controlId}_thumbnail_div`).append(div)
+                // const parentElement = document.getElementById(`${controlId}_thumbnail_div`)
+                // parentElement && parentElement.insertAdjacentHTML('beforeend', div)
                 const onProgress = (percent: number) => {
                     const id = `#${controlId}__${i}__progress_bar`
                     $(id).css('width', `${percent}%`)
+                    // document.getElementById(id).style.width = `${percent}%`
                     // console.log(id, percent)
                     // console.log('Upload progress:', file.name, percent)
                 }
@@ -40,7 +43,9 @@ export const addOnUploadListener = (
                     if (id && id.parentElement) {
                         id.parentElement.append(Thumbnail4View.renderThumbnailBox(item))
                         //remove the img_container
-                        $(`#${imgContainerId}`).remove()
+                        // $(`#${imgContainerId}`).remove()
+                        const element = document.getElementById(imgContainerId)
+                        element && element.remove()
                     }
                 }
 

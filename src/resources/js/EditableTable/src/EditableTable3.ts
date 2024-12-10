@@ -64,6 +64,11 @@ class EditableTable3 {
         if (this.tableDebug) console.log('EditableTable3', { ...params, columns })
 
         visibleRowIds[params.tableName] = new Set<string>()
+
+        const { tableName } = this.params
+        const divId = `#${tableName}`
+        const div = document.querySelector(divId)
+        if (!div) console.error(`EditableTable3: <div id="${tableName}"></div> is not found`)
     }
 
     renderTable() {
@@ -178,6 +183,10 @@ class EditableTable3 {
 
     render() {
         const { tableName } = this.params
+        const divId = `#${tableName}`
+        const div = document.querySelector(divId)
+        if (!div) return ''
+
         const columns = tableColumns[tableName]
         const dataSource = tableData[tableName] as LengthAware
 
@@ -201,8 +210,6 @@ class EditableTable3 {
             if (tableEmptyRows) body = tableEmptyRows
         }
 
-        const divId = `#${tableName}`
-        const div = document.querySelector(divId)
         div && (div.innerHTML = body)
 
         if (this.tableDebug) {
@@ -214,7 +221,7 @@ class EditableTable3 {
         // console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
 
         //when document is ready
-        $(() => {
+        document.addEventListener('DOMContentLoaded', () => {
             //Wait sometime for the browser to finish rendering the table
             if (dataSource) {
                 ToolbarComponents.register(this.params)
@@ -229,6 +236,8 @@ class EditableTable3 {
         })
     }
 }
+
+export default EditableTable3
 
 // Expose EditableTable3 to the global window object
 ;(window as any).EditableTable3 = EditableTable3

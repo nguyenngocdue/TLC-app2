@@ -1,6 +1,6 @@
 {
     "name": "@tchvan/editable-table-3",
-    "version": "1.0.2",
+    "version": "1.0.6",
     "description": "TS editable table, pure TS/JS, use real DOM.",
     "main": "dist/EditableTable3.js",
     "private": false,

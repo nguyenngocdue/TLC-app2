@@ -16,6 +16,7 @@ export class Attachment4Edit extends Renderer4Edit {
         }
         const thumbnailDiv = new Thumbnail4View(params).render().rendered
         $(`#${this.controlId}_thumbnail_div_view`).html(thumbnailDiv)
+        // document.getElementById(`${this.controlId}_thumbnail_div_view`).innerHTML = thumbnailDiv
     }
 
     applyPostRenderScript(): void {

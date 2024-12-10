@@ -21,11 +21,23 @@ export const addClassToTr = (tableName: string, rowIndex: number, classList: str
 export const addTrBeforeBtmSpacer = (tableName: string, emptyRow: HTMLTableRowElement | string) => {
     const spacerId = `#${tableName} tbody>tr#spacer-bottom`
     $(spacerId).before(emptyRow)
+    // const spacerElement = document.getElementById(spacerId) // Get the target element
+    // if (typeof emptyRow === 'string') {
+    //     spacerElement.insertAdjacentHTML('beforebegin', emptyRow)
+    // } else {
+    //     spacerElement.insertAdjacentElement('beforebegin', emptyRow)
+    // }
 }
 
 export const addTrAfterTopSpacer = (tableName: string, emptyRow: HTMLTableRowElement | string) => {
     const spacerId = `#${tableName} tbody>tr#spacer-top`
     $(spacerId).after(emptyRow)
+    // const spacerElement = document.getElementById(spacerId) // Get the target element
+    // if (typeof emptyRow === 'string') {
+    //     spacerElement.insertAdjacentHTML('afterend', emptyRow)
+    // } else {
+    //     spacerElement.insertAdjacentElement('afterend', emptyRow)
+    // }
 }
 
 export const replaceDivWith = (tableName: string, groupName: string, newDiv: HTMLDivElement) => {

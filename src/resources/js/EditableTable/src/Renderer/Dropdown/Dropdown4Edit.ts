@@ -59,6 +59,9 @@ export class Dropdown4Edit extends Renderer4Edit {
 
     applyOnChangeScript(): void {
         $('#' + this.controlId).on('change', () => this.setValueToTableData())
+        // document
+        //     .getElementById(this.controlId)
+        //     .addEventListener('change', () => this.setValueToTableData())
     }
 
     applyOnMouseMoveScript(): void {

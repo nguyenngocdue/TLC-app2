@@ -57,6 +57,11 @@ class EditableTable3 {
         if (this.tableDebug)
             console.log('EditableTable3', Object.assign(Object.assign({}, params), { columns }));
         updateVirtualTableVisibleRows_1.visibleRowIds[params.tableName] = new Set();
+        const { tableName } = this.params;
+        const divId = `#${tableName}`;
+        const div = document.querySelector(divId);
+        if (!div)
+            console.error(`EditableTable3: <div id="${tableName}"></div> is not found`);
     }
     renderTable() {
         const { tableName, tableConfig } = this.params;
@@ -155,6 +160,10 @@ class EditableTable3 {
     }
     render() {
         const { tableName } = this.params;
+        const divId = `#${tableName}`;
+        const div = document.querySelector(divId);
+        if (!div)
+            return '';
         const columns = tableColumns[tableName];
         const dataSource = tableData[tableName];
         let body = `<tr><td class='text-center h-40 text-gray-500 border' colspan='100%'>No Data</td></tr>`;
@@ -174,8 +183,6 @@ class EditableTable3 {
             if (tableEmptyRows)
                 body = tableEmptyRows;
         }
-        const divId = `#${tableName}`;
-        const div = document.querySelector(divId);
         div && (div.innerHTML = body);
         if (this.tableDebug) {
             console.log(`└──────────────────${this.params.tableName}──────────────────┘`);
@@ -184,7 +191,7 @@ class EditableTable3 {
         // const endTime00 = new Date().getTime()
         // console.log('EditableTable3.render() took', endTime00 - this.startTime, 'ms')
         //when document is ready
-        $(() => {
+        document.addEventListener('DOMContentLoaded', () => {
             //Wait sometime for the browser to finish rendering the table
             if (dataSource) {
                 ToolbarComponents_1.ToolbarComponents.register(this.params);
@@ -199,7 +206,6 @@ class EditableTable3 {
         });
     }
 }
-// Expose EditableTable3 to the global window object
-;
+exports.default = EditableTable3;
 window.EditableTable3 = EditableTable3;
 //# sourceMappingURL=EditableTable3.js.map
