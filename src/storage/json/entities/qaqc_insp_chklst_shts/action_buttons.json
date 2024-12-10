@@ -15,9 +15,9 @@
     },
     "first_sign_off": {
         "name": "first_sign_off",
-        "status_title": "Pending Partially Sign-off",
-        "label": "Ready for Partially Signed-off",
-        "tooltip": "Waiting 3rd parties to partially sign-off",
+        "status_title": "Pending Pre-Signoff",
+        "label": "Ready for Pre-Signoff",
+        "tooltip": "Waiting 3rd parties to Pre-Signoff",
         "change_status_multiple": ""
     },
     "reviewed": {

@@ -18,7 +18,6 @@
 
 @endphp
 
-
 <div class='pt-4'>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <table
@@ -100,8 +99,8 @@
                 data: JSON.stringify({
                     "FromDate": firstDay,
                     "ToDate": lastDay,
-                    "CompanyCode": "TLCM",
-                    "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,WS"
+                    "CompanyCode": "TLCM,TLCE",
+                    "WorkplaceCode": "HO,TF1,TF2,TF3,NZ,1HO,1TF1,1TF2,1TF3,1NZ"
                 }),
                 success: function(response) {
                     if (Array.isArray(response)) {

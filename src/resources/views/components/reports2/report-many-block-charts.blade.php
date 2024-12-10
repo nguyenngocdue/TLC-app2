@@ -1,3 +1,4 @@
+@if($chartOptions)
     @foreach ($chartOptions as $chartOption)
         @php
             $opts = $chartOption['chart_option'];
@@ -18,3 +19,4 @@
             @endforeach 
         </div>
     @endforeach
+@endif

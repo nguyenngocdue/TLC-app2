@@ -3,11 +3,8 @@
 namespace App\Listeners\Diginet;
 
 use App\Http\Controllers\DiginetHR\TraitUpdateDiginetData;
-use App\Utils\Support\CurrentUser;
 use App\Utils\Support\DateFormat;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Route;
 
 class TransferDiginetDataListener
 {
@@ -18,8 +15,8 @@ class TransferDiginetDataListener
         $params = [
             'FromDate' => $periodDate['first_date'],
             'ToDate' =>  $periodDate['last_date'],
-            'CompanyCode' => 'TLCM',
-            'WorkplaceCode' => 'HO,TF1,TF2,TF3,NZ,WS',
+            'CompanyCode' => 'TLCM,TLCE',
+            'WorkplaceCode' => 'HO,TF1,TF2,TF3,NZ,1HO,1TF1,1TF2,1TF3,1NZ',
         ];
         $info = "Data fetching time: {$params['FromDate']} - {$params['ToDate']}\nCompany Code: {$params["CompanyCode"]}\nWorkplace Code: {$params["WorkplaceCode"]}";
         Log::info("TransferDiginetDataListener: " . $info);

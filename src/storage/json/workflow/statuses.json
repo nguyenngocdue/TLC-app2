@@ -113,7 +113,7 @@
     },
     "first_sign_off": {
         "name": "first_sign_off",
-        "title": "Partially Signed-off",
+        "title": "Pre-Signoff",
         "color": "rose",
         "color_index": "200",
         "icon": "<i class=\"fa-solid fa-user-check\"><\/i>"
