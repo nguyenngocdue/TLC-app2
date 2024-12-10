@@ -3,6 +3,7 @@
 namespace App\View\Components\Reports2;
 
 use App\Utils\Support\Report;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
 
 class ReportManyBlockCharts extends Component
@@ -129,13 +130,26 @@ class ReportManyBlockCharts extends Component
 
     public function render()
     {
+        $queriedData = $this->queriedData;
+        if ($queriedData->isEmpty()) {
+            return Blade::render("
+            <div class='max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 text-center'>
+                <!-- Icon -->
+                <div class='text-red-500 mb-4'>
+                    <svg class='w-16 h-16 mx-auto' fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                        <path stroke-linecap='round' stroke-linejoin='round' d='M9.172 9.172a4 4 0 015.656 0l5.657 5.657a4 4 0 01-5.656 5.656L9.172 14.83a4 4 0 010-5.656zm-1.415 1.415a6 6 0 118.486 8.486'></path>
+                    </svg>
+                </div>
+                <!-- Text -->
+                <h1 class='text-2xl font-semibold text-gray-800 mb-2'>No Data Available</h1>
+                <p class='text-gray-600'>The data source is empty. Please check again later.</p>
+            </div>");
+        }
+        
         $block = $this->block;
         $optionStr =  $block->chart_json;
         $jsonOptions = $this->changeToJsonOptions($optionStr, $this->queriedData);
-        $queriedData = $this->queriedData;
-
         $chartOptions = $this->generateChartOptions($jsonOptions, $queriedData);
-        
         $divClass = ($d = $block->div_class) ? $d : ' w-full h-full p-4 border border-gray-200';
         return view(
             'components.reports2.report-many-block-charts',
