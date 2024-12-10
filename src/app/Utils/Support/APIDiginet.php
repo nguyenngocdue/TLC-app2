@@ -14,8 +14,8 @@ class APIDiginet
         $data = empty($data) ? [
             "FromDate" => "2023-11-01",
             "ToDate" => "2023-11-30",
-            "CompanyCode" => "TLCM",
-            "WorkplaceCode" => "HO,TF1,TF2,TF3,NZ,WS"
+            "CompanyCode" => "TLCM,TLCE",
+            "WorkplaceCode" => "HO,TF1,TF2,TF3,NZ,1HO,1TF1,1TF2,1TF3,1NZ"
         ] : $data;
         $token = CurrentUser::getTokenForApi();
         $response = Http::withHeaders([
