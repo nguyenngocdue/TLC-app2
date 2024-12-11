@@ -42,6 +42,7 @@ class CheckPoint2 extends Component
 
         $checkPointReadOnly = $this->readOnly;
         $allowToUpload = $allowToComment = !$this->readOnly;
+        $checkPointSignable = !$this->readOnly;
         if ($dashboardConfig) {
             // dump($dashboardConfig);
             $checkPointReadOnly = $this->readOnly || !isset($dashboardConfig['be_able_to_change_checkpoint_value']);
