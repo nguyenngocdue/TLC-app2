@@ -104,8 +104,8 @@ trait TraitEntityEditableTable
                             }
                             // Log::info($eloquentFnName);
                             $updatedId = $controller->update($fakeRequest, $line['id'], $getManyLineParams1);
-                            Log::info($line['id']);
-                            Log::info($fakeRequest);
+                            // Log::info($line['id']);
+                            // Log::info($fakeRequest);
                             // Log::info($getManyLineParams1);
                             if (is_numeric($updatedId)) {
                                 session()->push('editableTablesTransactions.' . $table01Name, ["result" => 1, "msg" => "Updated", 'id' => 1 * $line['id'],]);
