@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Qaqc_insp_chklst_line;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -36,6 +37,10 @@ class WelcomeFortuneController extends Controller
 
     public function index(Request $request)
     {
+
+        $line = Qaqc_insp_chklst_line::find(214121);
+        $line->update(['value' => 'new value']);
+        dd("DONE");
 
         if (sizeof($request->all())) {
             dump("Submitted table data:", $request->input());
