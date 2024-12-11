@@ -118,7 +118,7 @@
         "name": "_assignee_3",
         "column_name": "assignee_3",
         "column_type": "bigint unsigned",
-        "label": "Partially Sign-off Consultant",
+        "label": "Consultant Pre-sign off",
         "control": "dropdown",
         "align": "",
         "col_span": "",
