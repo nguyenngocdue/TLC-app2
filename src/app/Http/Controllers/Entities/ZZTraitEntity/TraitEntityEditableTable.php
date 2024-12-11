@@ -41,7 +41,7 @@ trait TraitEntityEditableTable
 
     private function handleEditableTables(Request $request, $props, $getManyLineParams, $parentId)
     {
-        // dd($request->input());
+        dd($request->input());
         $toastrResult = [];
         $lineResult = [];
         $table01Names = $request['tableNames'];
