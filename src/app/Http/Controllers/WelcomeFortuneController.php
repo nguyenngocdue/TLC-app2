@@ -38,9 +38,9 @@ class WelcomeFortuneController extends Controller
     public function index(Request $request)
     {
 
-        $line = Qaqc_insp_chklst_line::find(214121);
-        $line->update(['value' => 'new value']);
-        dd("DONE");
+        // $line = Qaqc_insp_chklst_line::find(214121);
+        // $line->update(['value' => 'new value']);
+        // dd("DONE");
 
         if (sizeof($request->all())) {
             dump("Submitted table data:", $request->input());
