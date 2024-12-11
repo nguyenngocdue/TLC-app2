@@ -32,7 +32,7 @@
                     </div>
                 @break
                 @case ("signature")
-                    <x-controls.insp_chklst.check-point-signature readOnly="{{$readOnly}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
+                    <x-controls.insp_chklst.check-point-signature readOnly="{{!$checkPointSignable}}" :line="$line" :table01Name="$table01Name" :rowIndex="$rowIndex" :debug="$debug" />
                 @break
                 @default
                     <div class="border bg-pink-400 p-2 rounded w-full text-center font-bold">

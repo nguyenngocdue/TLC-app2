@@ -29,7 +29,8 @@
         "be_able_to_upload_photo_checkpoint": "true",
         "show_column_progress": "true",
         "show_all_ics_by_sub_project_client_box": "true",
-        "show_some_routings_per_user": "true"
+        "show_some_routings_per_user": "true",
+        "be_able_to_sign_checkpoint": "true"
     },
     "185": {
         "name": "185",

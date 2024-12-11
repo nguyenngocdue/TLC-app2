@@ -98,6 +98,13 @@ class ManageDashboardsController extends AbstractManageLibController
                 'width' => 50,
             ],
             [
+                "dataIndex" => "be_able_to_sign_checkpoint",
+                'renderer' => 'checkbox',
+                'editable' => true,
+                'align' => 'center',
+                'width' => 50,
+            ],
+            [
                 "dataIndex" => "be_able_to_upload_photo_checkpoint",
                 'renderer' => 'checkbox',
                 'editable' => true,

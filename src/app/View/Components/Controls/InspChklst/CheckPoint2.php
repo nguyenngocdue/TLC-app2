@@ -43,7 +43,9 @@ class CheckPoint2 extends Component
         $checkPointReadOnly = $this->readOnly;
         $allowToUpload = $allowToComment = !$this->readOnly;
         if ($dashboardConfig) {
+            // dump($dashboardConfig);
             $checkPointReadOnly = $this->readOnly || !isset($dashboardConfig['be_able_to_change_checkpoint_value']);
+            $checkPointSignable = !$this->readOnly || isset($dashboardConfig['be_able_to_sign_checkpoint']);
             $allowToUpload = !$this->readOnly || isset($dashboardConfig['be_able_to_upload_photo_checkpoint']);
             $allowToComment = !$this->readOnly || isset($dashboardConfig['be_able_to_comment_checkpoint']);
         }
@@ -58,6 +60,7 @@ class CheckPoint2 extends Component
             'type' => $this->type,
             'attachmentProperties' => Properties::getFor('attachment', "_insp_photos"),
             'readOnly' => $checkPointReadOnly,
+            'checkPointSignable' => $checkPointSignable,
             'index' => $this->index,
             'destroyable' => $destroyable,
             'groups' => $groups,
