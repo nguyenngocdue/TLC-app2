@@ -5,6 +5,7 @@ namespace App\View\Components\Reports2;
 use App\Utils\Support\Report;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Component;
+use InvalidArgumentException;
 
 class ReportManyBlockCharts extends Component
 {
@@ -19,34 +20,58 @@ class ReportManyBlockCharts extends Component
 
     ) {}
 
+    // private function updateJsonOptionsRowCell($jsonOptions, $xAxisValue, $seriesValue, $setting)
+    // {
+    //     $arrayOptions = json_decode(json_encode($jsonOptions), true);
+    //     $arrayOptions["xAxis"]["data"] =  [$xAxisValue];
+    //     $arrayOptions["series"][0]["data"] = [$seriesValue];
+    //     $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
+    //     $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+    //     return json_decode(json_encode($arrayOptions));
+    // }
 
-    private function updateJsonOptionsRowCell($jsonOptions, $xAxisValue, $seriesValue, $setting)
+    // private function updateJsonOptionsCol($jsonOptions, $xAxisValue, $seriesValue, $setting)
+    // {
+    //     $arrayOptions = json_decode(json_encode($jsonOptions), true);
+    //     $arrayOptions["xAxis"]["data"] =  $xAxisValue;
+    //     $arrayOptions["series"][0]["data"] = $seriesValue;
+    //     $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
+    //     $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+    //     return json_decode(json_encode($arrayOptions));
+    // }
+
+    // private function updateJsonOptionsRow($jsonOptions, $xAxisValue, $seriesValue, $setting)
+    // {
+    //     $arrayOptions = json_decode(json_encode($jsonOptions), true);
+    //     $arrayOptions["xAxis"]["data"] =  $xAxisValue;
+    //     $arrayOptions["series"][0]["data"] = $seriesValue;
+    //     $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
+    //     $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+    //     return json_decode(json_encode($arrayOptions));
+    // }
+
+    private function updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, $direction)
     {
         $arrayOptions = json_decode(json_encode($jsonOptions), true);
-        $arrayOptions["xAxis"]["data"] =  [$xAxisValue];
-        $arrayOptions["series"][0]["data"] = [$seriesValue];
-        $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
-        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-        return json_decode(json_encode($arrayOptions));
-    }
 
-    private function updateJsonOptionsCol($jsonOptions, $xAxisValue, $seriesValue, $setting)
-    {
-        $arrayOptions = json_decode(json_encode($jsonOptions), true);
-        $arrayOptions["xAxis"]["data"] =  $xAxisValue;
-        $arrayOptions["series"][0]["data"] = $seriesValue;
-        $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
-        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-        return json_decode(json_encode($arrayOptions));
-    }
+        switch ($direction) {
+            case 'row_cell':
+                $arrayOptions["xAxis"]["data"] = [$xAxisValue];
+                $arrayOptions["series"][0]["data"] = [$seriesValue];
+                break;
+            case 'column':
+            case 'row':
+                $arrayOptions["xAxis"]["data"] = $xAxisValue;
+                $arrayOptions["series"][0]["data"] = $seriesValue;
+                break;
+            default:
+                // Handle invalid direction or add default behavior
+                throw new InvalidArgumentException("Unsupported direction: $direction");
+        }
 
-    private function updateJsonOptionsRow($jsonOptions, $xAxisValue, $seriesValue, $setting)
-    {
-        $arrayOptions = json_decode(json_encode($jsonOptions), true);
-        $arrayOptions["xAxis"]["data"] =  $xAxisValue;
-        $arrayOptions["series"][0]["data"] = $seriesValue;
         $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
         $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+
         return json_decode(json_encode($arrayOptions));
     }
 
@@ -62,7 +87,7 @@ class ReportManyBlockCharts extends Component
                 $seriesValues[] = $value->{$setting->dataIndex};
                 $xAxisValues[] = $setting->title ?? $setting->dataIndex;
             }
-            $opts[$key] = $this->updateJsonOptionsRow($jsonOptions, $xAxisValues, $seriesValues, $settings[0]);
+            $opts[$key] = $this->updateJsonOptions($jsonOptions, $xAxisValues, $seriesValues, $settings[0], 'row');
             $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title) . ': ' . $value->{$mulChartConfig->descriptions->dataIndex};
             $chartOptions[$key]["chart_option"] = $opts;
         }
@@ -78,7 +103,7 @@ class ReportManyBlockCharts extends Component
             foreach ($settings as $setting) {
                 $seriesValue = $value->{$setting->dataIndex};
                 $xAxisValue = $xAxisData[$key];
-                $opts[] = $this->updateJsonOptionsRowCell($jsonOptions, $xAxisValue, $seriesValue, $setting);
+                $opts[] = $this->updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, 'row_cell');
             }
             $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title) . ': ' . $value->{$mulChartConfig->descriptions->dataIndex};
             $chartOptions[$key]["chart_option"] = $opts;
@@ -94,7 +119,7 @@ class ReportManyBlockCharts extends Component
         $opts = [];
         foreach ($settings as $key => $setting) {
             $seriesValue = $queriedData->pluck($setting->dataIndex);
-            $opts[] = $this->updateJsonOptionsCol($jsonOptions, $xAxisData, $seriesValue, $setting);
+            $opts[] = $this->updateJsonOptions($jsonOptions, $xAxisData, $seriesValue, $setting, 'column');
         }
         $chartOptions[$key]["chart_option"] = $opts;
         $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title);
@@ -110,18 +135,33 @@ class ReportManyBlockCharts extends Component
         $mulChartConfig = $jsonOptions->multipleChart;
         $settings = $mulChartConfig->settings;
         $xAxisData = $mulChartConfig->xAxisData;
+        // switch ($mulChartConfig->direction) {
+        //     case 'row':
+        //         $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+        //         break;
+        //     case 'row_cell':
+        //         $chartOptions = $this->generateRowCellCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+        //         break;
+        //     case 'column':
+        //         $chartOptions = $this->generateColumnCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+        //         break;
+        //     default:
+        //         // Placeholder for future directions
+        // }
         switch ($mulChartConfig->direction) {
             case 'row':
-                $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
-                break;
             case 'row_cell':
-                $chartOptions = $this->generateRowCellCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
-                break;
             case 'column':
-                $chartOptions = $this->generateColumnCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+                $chartOptions = $this->updateJsonOptions(
+                    $jsonOptions,
+                    $xAxisData,
+                    $queriedData,
+                    $settings,
+                    $mulChartConfig->direction
+                );
                 break;
             default:
-                // Placeholder for future directions
+                throw new InvalidArgumentException("Unsupported direction: $mulChartConfig->direction");
         }
         return $chartOptions;
     }
@@ -146,7 +186,7 @@ class ReportManyBlockCharts extends Component
                 <p class='text-gray-600'>The data source is empty. Please check again later.</p>
             </div>");
         }
-        
+
         $block = $this->block;
         $optionStr =  $block->chart_json;
         $jsonOptions = $this->changeToJsonOptions($optionStr, $this->queriedData);
