@@ -48,7 +48,7 @@ class ManageUserSettingReportsController extends Controller
         return $rpKeyInUsers;
     }
 
-    private function makeDatasourceFromReportJson($data)
+    private function makeDatasourceFromReportJson($data, $status)
     {
         $result = [];
         foreach ($data as $values) {
@@ -58,7 +58,7 @@ class ManageUserSettingReportsController extends Controller
                 'title' => $values['title'],
                 'package_tab' => $values['package_tab'],
                 'rp_type' => $rpType,
-                'status' => '<p class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 cursor-none">Already hidden in Report 1.</p>'
+                'status' => "<p class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 cursor-none'>{$status}</p>"
             ];
         }
         return $result;
@@ -180,8 +180,8 @@ class ManageUserSettingReportsController extends Controller
         $usersNeedToCheck = self::getUsersNeedToCheck($hiddenRps, $processedData);
 
         // make data to render table
-        $openingRpData = self::makeDatasourceFromReportJson($openingRps);
-        $hiddenRpData = self::makeDatasourceFromReportJson($hiddenRps);
+        $openingRpData = self::makeDatasourceFromReportJson($openingRps, 'Not yet hidden in Report 1.');
+        $hiddenRpData = self::makeDatasourceFromReportJson($hiddenRps,'Already hidden in Report 1.');
         $queriedUsers = self::requireDataSource($usersNeedToCheck);
 
         $dataSource = [
