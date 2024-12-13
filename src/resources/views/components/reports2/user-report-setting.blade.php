@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('topTitle', "")
-@section('title', "User Report Configuration")
+@section('title', "User Report Settings")
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
  <div class="px-4">
