@@ -11,30 +11,28 @@
                 $tableDataSource = $value['tableDataSource'];
                 $tableColumns = $value['tableColumns'];
                 $title = $value['title'];
-
             @endphp
-
-                        <div class={{$key=='queriedUsers' ? 'col-span-12' : 'col-span-6'}}>
-                            <x-renderer.heading level=3 class='text-center py-4 font-bold'>{{$title}}</x-renderer.heading>
-                            @if($key=='queriedUsers')
-                                @php
-                                    $usersNeedToCheck = json_encode($value['usersNeedToCheck']);
-                                @endphp
-                            <div class="mb-2">
-                                <x-renderer.button htmlType="submit" click="updateRpInUserSetting({{$usersNeedToCheck}}, '{{$routeUpdate}}', '{{$token}}')" type="secondary"><i
-                                        class="fa-sharp fa-solid fa-circle-x pr-1"></i>Update User Setting</x-renderer.button>
-                            </div>
-                            @endif
-                            <x-renderer.table 
-                                showNo={{ true }}  
-                                :columns="$tableColumns" 
-                                :dataSource="$tableDataSource"
-                                maxH="480"
-                                tableTrueWidth={{false}} 
-                                page-limit="10000" 
-                                showPaginationTop="true"
-                            />
-                        </div>
+                <div class={{$key=='queriedUsers' ? 'col-span-12' : 'col-span-6'}}>
+                    <x-renderer.heading level=3 class='text-center py-4 font-bold'>{{$title}}</x-renderer.heading>
+                    @if($key=='queriedUsers')
+                        @php
+                            $usersNeedToCheck = json_encode($value['usersNeedToCheck']);
+                        @endphp
+                    <div class="mb-2">
+                        <x-renderer.button htmlType="submit" click="updateRpInUserSetting({{$usersNeedToCheck}}, '{{$routeUpdate}}', '{{$token}}')" type="secondary"><i
+                                class="fa-sharp fa-solid fa-circle-x pr-1"></i>Update User Setting</x-renderer.button>
+                    </div>
+                    @endif
+                    <x-renderer.table 
+                        showNo={{ true }}  
+                        :columns="$tableColumns" 
+                        :dataSource="$tableDataSource"
+                        maxH="480"
+                        tableTrueWidth={{false}} 
+                        page-limit="10000" 
+                        showPaginationTop="true"
+                    />
+                </div>
             @endforeach
         </div>
     </div>
