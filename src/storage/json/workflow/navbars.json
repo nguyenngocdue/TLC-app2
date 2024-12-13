@@ -70,6 +70,13 @@
         "href": "\/utils\/createThumbnail",
         "icon_fa": "fa-sharp fa-light fa-image"
     },
+    "report-user-setting": {
+        "name": "report-user-setting",
+        "group": "dev_tools",
+        "title": "Report User Settings",
+        "href": "\/reports\/manageReports",
+        "icon_fa": "fa-solid fa-wrench"
+    },
     "min_io": {
         "name": "min_io",
         "group": "external",
