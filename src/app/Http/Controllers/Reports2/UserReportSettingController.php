@@ -8,7 +8,7 @@ use App\Utils\Support\CurrentUser;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class ManageUserSettingReportsController extends Controller
+class UserReportSettingController extends Controller
 {
     protected $statuses_path = "";
 
@@ -186,17 +186,17 @@ class ManageUserSettingReportsController extends Controller
 
         $dataSource = [
             'openingRpData' => [
-                'title' => 'Statistics of reports hidden in Report v1.',
+                'title' => 'Statistics of reports <span class="text-orange-400">hidden </span> in Report v1.',
                 'tableDataSource' => $hiddenRpData,
                 'tableColumns' => self::getColumnDataSource1()
             ],
             'hiddenRpData' => [
-                'title' => 'Statistics of reports not yet hidden in Report v1.',
+                'title' => 'Statistics of reports <span class="text-orange-400">not yet hidden </span> in Report v1.',
                 'tableDataSource' => $openingRpData,
                 'tableColumns' => self::getColumnDataSource1()
             ],
             'queriedUsers' => [
-                'title' => 'Data of reports not yet deleted in UserSetting <br/> when you have already set them to hidden in Report v1.',
+                'title' => 'Data of reports <span class="text-orange-400">not yet deleted</span> in UserSetting <br/> when you have already set them to hidden in Report v1.',
                 'tableDataSource' => $queriedUsers,
                 'tableColumns' => self::getColumnDataSource2(),
                 'usersNeedToCheck' => $usersNeedToCheck
@@ -205,7 +205,7 @@ class ManageUserSettingReportsController extends Controller
         $routeUpdate = route('rp_reset_user_setting');
         $token = CurrentUser::getTokenForApi();
         
-        return view('components.reports2.manage-user-setting-report', [
+        return view('components.reports2.user-report-setting', [
             'data' => $dataSource,
             'routeUpdate' => $routeUpdate,
             'token' => $token

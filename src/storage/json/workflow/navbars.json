@@ -70,10 +70,10 @@
         "href": "\/utils\/createThumbnail",
         "icon_fa": "fa-sharp fa-light fa-image"
     },
-    "report-user-setting": {
-        "name": "report-user-setting",
+    "user-report-setting": {
+        "name": "user-report-setting",
         "group": "dev_tools",
-        "title": "Report User Settings",
+        "title": "User Report Settings",
         "href": "\/reports\/manageReports",
         "icon_fa": "fa-solid fa-wrench"
     },
