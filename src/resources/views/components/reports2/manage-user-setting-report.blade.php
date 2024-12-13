@@ -42,7 +42,6 @@
         alert('Action canceled.');
         return;
     }
-    alert('Processing update...');
 
     $.ajax({
         url: urlAPI,
@@ -55,10 +54,10 @@
         data: JSON.stringify({ users: usersNeedToCheck }),
         success: function(response) {
             alert('Reports updated successfully!');
-            console.log(response);
+            location.reload();
         },
         error: function(xhr) {
-            alert('Failed to update reports.');
+            location.reload();
             console.error('Error:', xhr.responseText);
         }
     });

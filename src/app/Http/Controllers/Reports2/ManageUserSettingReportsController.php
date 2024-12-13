@@ -245,8 +245,7 @@ class ManageUserSettingReportsController extends Controller
                 }
             }
         }
-        response()->json(['message' => 'Users updated successfully.']);
-        return redirect()->route('rp_manage_reports');
+        return response()->json(['message' => 'Users updated successfully.']);
     }
     
     
