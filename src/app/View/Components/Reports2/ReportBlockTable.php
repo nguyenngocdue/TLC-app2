@@ -107,7 +107,6 @@ class ReportBlockTable extends Component
 
         $reportTableRow = ReportTableRow::getInstance();
         $tableDataSource = $reportTableRow->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block, $currentParams);
-        // dd($queriedData->first(), $tableDataSource);
 
         // render default table
         if (!$configuredCols) {

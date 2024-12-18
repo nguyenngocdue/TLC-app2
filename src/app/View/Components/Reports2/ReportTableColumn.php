@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Reports2;
 
-use App\Utils\Support\Report;
+use Illuminate\Support\Facades\DB;
 
 class ReportTableColumn
 {
@@ -25,7 +25,7 @@ class ReportTableColumn
         return array_unique(array_keys((array)$collection->first()));
     }
 
-    function defaultColumnsOnEmptyQuery($block,$currentParams)
+    private function defaultColumnsOnEmptyQuery($block,$currentParams)
     {
         // $title = $this->createHeaderTitle($line->title ?? $line->name, $line->icon, $line->icon_position, $currentParams);
         $cols = $block->getLines->where('is_active', true)
@@ -42,6 +42,38 @@ class ReportTableColumn
         return $cols;
     }
 
+    private function create2ndHeaderCols($headerCols, $block) {
+        $configs = $block->transformed_data_string;
+        $transformedOpt = json_decode($configs, true);
+        if (isset($transformedOpt['grouping_to_matrix'])) {
+            $groupingToMatrix = $transformedOpt['grouping_to_matrix'];
+            if (isset($groupingToMatrix['second_header_col'])) {
+
+                $secondHeaderConfigs = $groupingToMatrix['second_header_col'];
+                $fieldToGetVal = $secondHeaderConfigs['field_get'];
+                $fieldToCheckVal = $secondHeaderConfigs['field_check'];
+                $sqlStr = $secondHeaderConfigs['sql_check'];
+                $cssClassField = $secondHeaderConfigs['css_class'] ?? '';
+            
+                $data = collect(DB::select($sqlStr));
+                $xAxis2ndHeading = $data->pluck($fieldToGetVal, $fieldToCheckVal);
+                $cssData = $data->pluck($cssClassField, $fieldToCheckVal);
+            
+                return collect($headerCols)->mapWithKeys(function ($col) use ($xAxis2ndHeading, $cssData) {
+                    $dataIndex = $col['dataIndex'];
+                    $cssClass = $cssData[$col['dataIndex']]?? null;
+
+                    return [$dataIndex => (object) [
+                        'value' =>$xAxis2ndHeading->get($dataIndex, ''),
+                        'cell_class' => $cssClass,
+                    ]];
+                })->toArray();
+            }  
+        }
+        return [];
+    }
+
+
     public function getColData($block, $queriedData, $transformedFields, $currentParams)
     {
         if ($queriedData->isEmpty()) {
@@ -52,7 +84,7 @@ class ReportTableColumn
         $uniqueFields = $this->getAllUniqueFields($queriedData);
         // config from admin
         $columns = $block->getLines->sortby('order_no');
-        $secondHeaderCols = $this->get2ndCols($block);
+        $xAxes2ndHeaders = $this->get2ndCols($block);
         $headerCols = [];
 
         $fields = [];
@@ -78,9 +110,9 @@ class ReportTableColumn
             $transformedOpt = $this->sortData($x, true);
             $transformedCols = $this->getTransformedDataCols($fields, $transformedOpt, $transformedFields);
             $headerCols = array_merge($headerCols, $transformedCols);
+            $xAxes2ndHeaders = $this->create2ndHeaderCols($headerCols, $block);
         }
-        // dd($headerCols);
-        return [$headerCols, $secondHeaderCols];
+        return [$headerCols, $xAxes2ndHeaders];
     }
 
     private function get2ndCols($block)

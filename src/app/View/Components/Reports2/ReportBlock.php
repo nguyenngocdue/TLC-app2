@@ -36,7 +36,7 @@ class ReportBlock extends Component
     {
         $blockDetails = $this->blockDetails;
         $currentParams = $this->currentParams;
-        $perPage = $currentParams['per_page'] ?? 10;
+        // $perPage = $currentParams['per_page'] ?? 10;
 
         $blockDataSource = $this->getBlockDataSource($blockDetails, $currentParams);
 

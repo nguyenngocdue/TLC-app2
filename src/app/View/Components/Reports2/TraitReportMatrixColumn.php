@@ -177,11 +177,13 @@ trait TraitReportMatrixColumn
                 $rowData = $this->makeValueForEachRow($configs, $rowData, $cellValue, $col, $valueToSet);
             }
         }
-
+        
         $groupedByRow = Report::groupArrayByKey($data, $row);
         // dd($groupedByRow['TLCM00009']);
         $mergedData = array_map(fn($item) => array_merge(...$item), $groupedByRow);
+        
         array_walk($mergedData, fn(&$value) => $this->fillMissingFields($value, $transformedFields, $valueToSet));
+
         if ($customCols) {
             foreach ($customCols as $col) {
                 try {
@@ -244,7 +246,7 @@ trait TraitReportMatrixColumn
             }
         }
         $mergedData = $this->makeAggProgressCols($mergedData, $transformedFields, $configs);
-        sort($transformedFields);
+        // sort($transformedFields);
         return [array_values($mergedData), $transformedFields];
     }
 }

@@ -38,7 +38,6 @@ trait TraitReportBlockDataSource
             }
             $rpTableCols = ReportTableColumn::getInstance();
             [$headerCols, $secondHeaderCols] = $rpTableCols->getColData($block, $queriedData, $transformedFields, $currentParams);
-
             $blockItem = [
                 'colSpan' => $item->col_span,
                 'block' => $block,
