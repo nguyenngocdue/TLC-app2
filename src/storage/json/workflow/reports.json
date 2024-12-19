@@ -90,7 +90,8 @@
         "package": "project_management",
         "breadcrumb-group": "production",
         "top_title": "Target vs. Actual",
-        "title": "4. Target vs. Actual"
+        "title": "4. Target vs. Actual",
+        "hidden": "true"
     },
     "document-prod_sequence_020": {
         "name": "document-prod_sequence_020",
