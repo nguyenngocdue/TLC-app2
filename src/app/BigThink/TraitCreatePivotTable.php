@@ -17,7 +17,7 @@ trait TraitCreatePivotTable
         $relationshipKey = $this->relationshipKey;
 
         if ($table1Plural > $table2Plural) {
-            Log::info("$table1Plural > $table2Plural");
+            // Log::info("$table1Plural > $table2Plural");
             $temp = $table1Plural;
             $table1Plural = $table2Plural;
             $table2Plural = $temp;
