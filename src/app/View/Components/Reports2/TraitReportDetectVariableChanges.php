@@ -52,5 +52,20 @@ trait TraitReportDetectVariableChanges
         return $string;
     }
 
+    function detectVariablesNoBlock($string, $currentParams)
+    {
+        $parsedVariables = $this->parseVariables($string);
+        foreach (last($parsedVariables) as $key => $value) {
+            $variable = trim(str_replace('$', '', $value));
+            $firstMatches = reset($parsedVariables);
+            $keyInOptions = $firstMatches[$key];
+                $changedVal = isset($currentParams[$variable]) ? $currentParams[$variable] : 'null';
+                $string = str_replace($keyInOptions, $changedVal, $string);
+            $string = $this->evaluateAGG($string);
+        }
+        // dd($string);
+        return $string;
+    }
+
 }
 

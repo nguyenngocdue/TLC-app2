@@ -9,6 +9,8 @@ class ReportTableColumn
     use TraitReportTermNames;
     use TraitReportTableContent;
     use TraitReportTransformedData;
+    use TraitReportDetectVariableChanges;
+
 
     private static $instance = null;
 
@@ -42,27 +44,35 @@ class ReportTableColumn
         return $cols;
     }
 
-    private function create2ndHeaderCols($headerCols, $block) {
+    private function  makeDataByConfig($secondHeaderConfig, $currentParams){
+        $sqlStr = $secondHeaderConfig['sql_check'];
+        $sqlStr = $this->detectVariablesNoBlock($sqlStr, $currentParams);
+        $data = collect(DB::select($sqlStr));
+        return $data;
+    }
+
+
+
+    private function create2ndHeaderCols($headerCols, $block, $currentParams) {
         $configs = $block->transformed_data_string;
         $transformedOpt = json_decode($configs, true);
         if (isset($transformedOpt['grouping_to_matrix'])) {
             $groupingToMatrix = $transformedOpt['grouping_to_matrix'];
             if (isset($groupingToMatrix['second_header_col'])) {
 
-                $secondHeaderConfigs = $groupingToMatrix['second_header_col'];
-                $fieldToGetVal = $secondHeaderConfigs['field_get'];
-                $fieldToCheckVal = $secondHeaderConfigs['field_check'];
-                $sqlStr = $secondHeaderConfigs['sql_check'];
-                $cssClassField = $secondHeaderConfigs['css_class'] ?? '';
-            
-                $data = collect(DB::select($sqlStr));
+                $secondHeaderConfig = $groupingToMatrix['second_header_col'];
+                $fieldToGetVal = $secondHeaderConfig['field_get'];
+                $fieldToCheckVal = $secondHeaderConfig['field_check'];
+                $cssClassField = $secondHeaderConfig['css_class'] ?? '';
+                
+                $data = $this->makeDataByConfig($secondHeaderConfig, $currentParams);
+
                 $xAxis2ndHeading = $data->pluck($fieldToGetVal, $fieldToCheckVal);
                 $cssData = $data->pluck($cssClassField, $fieldToCheckVal);
-            
+                
                 return collect($headerCols)->mapWithKeys(function ($col) use ($xAxis2ndHeading, $cssData) {
                     $dataIndex = $col['dataIndex'];
                     $cssClass = $cssData[$col['dataIndex']]?? null;
-
                     return [$dataIndex => (object) [
                         'value' =>$xAxis2ndHeading->get($dataIndex, ''),
                         'cell_class' => $cssClass,
@@ -110,7 +120,7 @@ class ReportTableColumn
             $transformedOpt = $this->sortData($x, true);
             $transformedCols = $this->getTransformedDataCols($fields, $transformedOpt, $transformedFields);
             $headerCols = array_merge($headerCols, $transformedCols);
-            $xAxes2ndHeaders = $this->create2ndHeaderCols($headerCols, $block);
+            $xAxes2ndHeaders = $this->create2ndHeaderCols($headerCols, $block, $currentParams);
         }
         return [$headerCols, $xAxes2ndHeaders];
     }
