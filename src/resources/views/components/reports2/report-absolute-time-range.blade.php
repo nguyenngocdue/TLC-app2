@@ -15,12 +15,17 @@
                         $timeTitle = "<strong>$fromDate</strong>"." <i class='text-blue-600 fa-solid fa-arrow-right'></i> "."<strong>$toDate</strong>"." (".$timeZone. ")";
                     }
                     break;
+                #case $rp->disable_from_date:
+                #        $timeTitle = "<strong>$toDate</strong>"." (".$timeZone. ")";
+                #    break;
                 default:
                     $timeTitle = '<strong>Time Range</strong>';
                     break;
              }
+             if ($rp->disable_from_date) {
+                $timeTitle = "<strong>$toDate</strong>"." (".$timeZone. ")";
+             }
         @endphp
-
         <span id="timeRangeShow" class="ml-2">{!!$timeTitle!!}</span>
         <i class="px-2 fa-solid fa-solid fa-chevron-down "></i>
 
