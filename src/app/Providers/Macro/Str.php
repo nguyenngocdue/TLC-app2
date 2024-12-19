@@ -138,5 +138,7 @@ Str::macro('getExtFromMime', function ($mime) {
             return "mp4";
         case "video/quicktime":
             return "mov";
+        case "image/svg+xml":
+            return "svg";
     }
 });
