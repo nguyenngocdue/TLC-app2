@@ -29,7 +29,7 @@ trait TraitReportMatrixColumn
 
     private function prepareContent($finishedCount, $total, $percent)
     {
-        return "<strong> {$finishedCount}/{$total} </br> ({$percent}%) </strong>";
+        return "<span> {$finishedCount}/{$total} </br> {$percent}% </span>";
     }
 
     // Helper to calculate sum
@@ -57,7 +57,7 @@ trait TraitReportMatrixColumn
             // Prepare content for display
             $percent = $this->calculatePercentage($finishedCount, $total);
             $content = $isNA
-            ? '<strong>NA</strong>'
+            ? '<span>NA</span>'
             : $this->prepareContent($finishedCount, $total, $percent);
             
             // Add CSS class if defined
