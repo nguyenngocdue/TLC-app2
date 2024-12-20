@@ -107,7 +107,7 @@ class ReportBlockTable extends Component
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
 
         $reportTableRow = ReportTableRow::getInstance();
-        $drawData = $this->tableDataSource->items();
+        $drawData = method_exists($this->tableDataSource, 'items') ? $this->tableDataSource->items() : $this->tableDataSource;
         $tableDataSource = $reportTableRow->createTableDataSourceForRows(
             $drawData,
             $configuredCols,
