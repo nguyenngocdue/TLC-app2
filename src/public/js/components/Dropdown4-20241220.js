@@ -14,7 +14,8 @@ const dumbIncludes4 = (item, array) => {
         // console.log("IMPLEMENT ME", item, array)
     }
 }
-const makeIdFrom = (table01Name, fieldName, rowIndex) => table01Name + '[' + fieldName + '][' + rowIndex + ']'
+const makeIdFrom = (table01Name, fieldName, rowIndex) =>
+    table01Name + '[' + fieldName + '][' + rowIndex + ']'
 const smartFilter4 = (dataSource, column, operator, value) => {
     return dataSource.filter((row) => {
         let result = null
@@ -60,7 +61,13 @@ const filterDropdown4 = (id, dataSource, table01Name) => {
             const value = filter_values[i]
             dataSource.forEach((row) => {
                 if (row[column] === undefined) {
-                    console.error('Column', column, ' in filter_columns not found in', column_name, '(Relationships Screen)')
+                    console.error(
+                        'Column',
+                        column,
+                        ' in filter_columns not found in',
+                        column_name,
+                        '(Relationships Screen)',
+                    )
                     // } else {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
@@ -79,16 +86,20 @@ const onChangeDropdown4Reduce = (listener, table01Name, rowIndex, lineType) => {
     let dataSource = k[table_name]
     if (debugListener) console.log('dataSource in k', dataSource)
 
-    const constraintsValues = triggers.map((trigger) => getEById(makeIdFrom(table01Name, trigger, rowIndex)).val())
+    const constraintsValues = triggers.map((trigger) =>
+        getEById(makeIdFrom(table01Name, trigger, rowIndex)).val(),
+    )
     if (debugListener) console.log(triggers, constraintsValues)
 
     for (let i = 0; i < triggers.length; i++) {
         const value = constraintsValues[i]
         // console.log("value", value)
         const column = listen_to_attrs[i]
-        if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
+        if (column === undefined)
+            console.log('The column to look up [', column, '] is not found in ...')
         if (!value) continue
-        if (debugListener) console.log('Applying', column, value, 'to', table_name, 'by column', column)
+        if (debugListener)
+            console.log('Applying', column, value, 'to', table_name, 'by column', column)
         dataSource = smartFilter4(dataSource, column, '=', value)
     }
 
@@ -131,7 +142,8 @@ const onChangeDropdown4Assign = (listener, table01Name, rowIndex, dropdownParams
     }
 
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
-    if (debugListener) console.log('Selected Object:', selectedObject, ' - listen_to_attr:', listen_to_attr)
+    if (debugListener)
+        console.log('Selected Object:', selectedObject, ' - listen_to_attr:', listen_to_attr)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         const id = makeIdFrom(table01Name, column_name, rowIndex)
@@ -218,7 +230,22 @@ const onChangeDropdown4Expression = (listener, table01Name, rowIndex, batchLengt
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        if (['Math', 'abs', 'floor', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
+        if (
+            [
+                'Math',
+                'abs',
+                'floor',
+                'round',
+                'ceil',
+                'trunc',
+                'toDateString',
+                'toFixed',
+                'min',
+                'max',
+                'Infinity',
+            ].includes(varName)
+        )
+            continue
         const varNameFull = makeIdFrom(table01Name, varName, rowIndex)
         let varValue = (getEById(varNameFull).val() || 0) + '' //<< toString
         varValue = convertStrToNumber(varValue)
@@ -258,7 +285,12 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
     if (debugListener) console.log('AjaxRequestScalar', listener)
     // console.log(batchLength)
     const { triggers, expression: url } = listener
-    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } = listener
+    const {
+        ajax_response_attribute,
+        ajax_form_attributes,
+        ajax_item_attributes,
+        ajax_default_values,
+    } = listener
 
     let enoughParams = true
     const data0 = {}
@@ -307,7 +339,11 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
                             const form_att = ajax_form_attributes[i]
                             const item_att = ajax_item_attributes[i]
                             const defaultValue = ajax_default_values[i]
-                            const id = makeIdFrom(table01Name, form_att, batchLength == 1 ? rowIndex : rowIndexCache[lineIndex])
+                            const id = makeIdFrom(
+                                table01Name,
+                                form_att,
+                                batchLength == 1 ? rowIndex : rowIndexCache[lineIndex],
+                            )
                             // console.log(id)
                             // console.log(hit, form_att, item_att)
                             if (hit[item_att] == undefined) {
@@ -334,7 +370,8 @@ const onChangeDropdown4AjaxRequestScalar = (listener, table01Name, rowIndex, bat
             })
         }
     } else {
-        if (debugListener) console.log('Sending AjaxRequest cancelled as not enough parameters', missingParams)
+        if (debugListener)
+            console.log('Sending AjaxRequest cancelled as not enough parameters', missingParams)
     }
 }
 
@@ -343,13 +380,20 @@ const triggerChangeQueue = {}
 //<< If only one line is updated, this will trigger a change request to all lines except the updated line.
 //<< If multiple lines are updated, this will trigger a change request to all lines.
 //<<The change will carry out next action, usually an ajax request
-const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex, batchLength = 1, exceptCurrent = false) => {
+const onChangeDropdown4TriggerChangeAllLines = (
+    listener,
+    table01Name,
+    rowIndex,
+    batchLength = 1,
+    exceptCurrent = false,
+) => {
     // const debugListener = true
     if (debugListener) console.log('TriggerChangeAllLines', listener)
     const { column_name } = listener
 
     if (triggerChangeQueue[column_name] == undefined) triggerChangeQueue[column_name] = {}
-    if (triggerChangeQueue[column_name]['data'] == undefined) triggerChangeQueue[column_name]['data'] = []
+    if (triggerChangeQueue[column_name]['data'] == undefined)
+        triggerChangeQueue[column_name]['data'] = []
     triggerChangeQueue[column_name]['data'].push(1)
 
     const data = triggerChangeQueue[column_name]['data']
@@ -379,13 +423,31 @@ const onChangeDropdown4TriggerChangeAllLines = (listener, table01Name, rowIndex,
     }
 }
 
-const onChangeDropdown4TriggerChangeAllLinesExceptCurrent = (listener, table01Name, rowIndex, batchLength = 1) => {
-    return onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex, batchLength, true)
+const onChangeDropdown4TriggerChangeAllLinesExceptCurrent = (
+    listener,
+    table01Name,
+    rowIndex,
+    batchLength = 1,
+) => {
+    return onChangeDropdown4TriggerChangeAllLines(
+        listener,
+        table01Name,
+        rowIndex,
+        batchLength,
+        true,
+    )
 }
 
 const ajaxQueueUpdate = {}
 
-const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange, dropdownParams = {} }) => {
+const onChangeDropdown4 = ({
+    name,
+    table01Name,
+    rowIndex,
+    lineType,
+    saveOnChange,
+    dropdownParams = {},
+}) => {
     // console.log("onChangeDropdown4", name, table01Name, rowIndex, saveOnChange, lineType)
     // console.log("listenersOfDropdown4s", listenersOfDropdown4s, table01Name)
     const { batchLength = 1 } = dropdownParams
@@ -404,8 +466,10 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
 
         if (ajaxQueueUpdate[url] == undefined) ajaxQueueUpdate[url] = {}
         if (ajaxQueueUpdate[url][fieldName] == undefined) ajaxQueueUpdate[url][fieldName] = {}
-        if (ajaxQueueUpdate[url][fieldName]['data'] == undefined) ajaxQueueUpdate[url][fieldName]['data'] = []
-        if (ajaxQueueUpdate[url][fieldName]['rowIndex'] == undefined) ajaxQueueUpdate[url][fieldName]['rowIndex'] = []
+        if (ajaxQueueUpdate[url][fieldName]['data'] == undefined)
+            ajaxQueueUpdate[url][fieldName]['data'] = []
+        if (ajaxQueueUpdate[url][fieldName]['rowIndex'] == undefined)
+            ajaxQueueUpdate[url][fieldName]['rowIndex'] = []
         ajaxQueueUpdate[url][fieldName]['data'].push(data0)
         ajaxQueueUpdate[url][fieldName]['rowIndex'].push(rowIndex)
     }
@@ -426,7 +490,14 @@ const onChangeDropdown4 = ({ name, table01Name, rowIndex, lineType, saveOnChange
                     // console.log("Execute listeners")
                     // const hits = response['hits']
                     for (let i = 0; i < rowIndexes.length; i++) {
-                        onChangeFull({ fieldName, table01Name, rowIndex: rowIndexes[i], lineType, dropdownParams, name })
+                        onChangeFull({
+                            fieldName,
+                            table01Name,
+                            rowIndex: rowIndexes[i],
+                            lineType,
+                            dropdownParams,
+                            name,
+                        })
                     }
                 },
                 error: (response) => showErrorMessage(response),
@@ -445,7 +516,13 @@ const onChangeDropdown4EmitChain = (listener, table01Name, rowIndex, batchLength
     getEById(id).trigger('change', { batchLength })
 }
 
-const onChangeDropdown4CountSelectedValues = (listener, table01Name, rowIndex, batchLength, fieldName) => {
+const onChangeDropdown4CountSelectedValues = (
+    listener,
+    table01Name,
+    rowIndex,
+    batchLength,
+    fieldName,
+) => {
     const { column_name } = listener
     const idSource = makeIdFrom(table01Name, fieldName, rowIndex, batchLength)
     const count = getEById(idSource).val().length
@@ -468,7 +545,15 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
         // console.log(listen_action, triggers, fieldName)
         if (triggers.includes(fieldName)) {
             // console.log("listen_action", listen_action)
-            if (debugFlow) console.log(name, '-->', column_name, listen_action, table01Name + '_' + rowIndex, batchLength)
+            if (debugFlow)
+                console.log(
+                    name,
+                    '-->',
+                    column_name,
+                    listen_action,
+                    table01Name + '_' + rowIndex,
+                    batchLength,
+                )
             switch (listen_action) {
                 case 'reduce':
                     onChangeDropdown4Reduce(listener, table01Name, rowIndex, lineType)
@@ -489,16 +574,32 @@ const onChangeFull = ({ fieldName, table01Name, rowIndex, lineType, dropdownPara
                     onChangeDropdown4AjaxRequestScalar(listener, table01Name, rowIndex, batchLength)
                     break
                 case 'trigger_change_all_lines':
-                    onChangeDropdown4TriggerChangeAllLines(listener, table01Name, rowIndex, batchLength)
+                    onChangeDropdown4TriggerChangeAllLines(
+                        listener,
+                        table01Name,
+                        rowIndex,
+                        batchLength,
+                    )
                     break
                 case 'trigger_change_all_lines_except_current':
-                    onChangeDropdown4TriggerChangeAllLinesExceptCurrent(listener, table01Name, rowIndex, batchLength)
+                    onChangeDropdown4TriggerChangeAllLinesExceptCurrent(
+                        listener,
+                        table01Name,
+                        rowIndex,
+                        batchLength,
+                    )
                     break
                 case 'emit_chain':
                     onChangeDropdown4EmitChain(listener, table01Name, rowIndex, batchLength)
                     break
                 case 'count_selected_values':
-                    onChangeDropdown4CountSelectedValues(listener, table01Name, rowIndex, batchLength, fieldName)
+                    onChangeDropdown4CountSelectedValues(
+                        listener,
+                        table01Name,
+                        rowIndex,
+                        batchLength,
+                        fieldName,
+                    )
                     break
                 default:
                     console.error('Unknown listen_action', listen_action, 'of', name)
@@ -559,7 +660,12 @@ const reloadDataToDropdown4 = (id, dataSource, table01Name, selected) => {
 
     for (let i = 0; i < dataSource.length; i++) {
         let item = dataSource[i]
-        selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes4(item.id, selected) ? 'selected' : ''
+        selectedStr =
+            dataSource.length === 1
+                ? 'selected'
+                : dumbIncludes4(item.id, selected)
+                ? 'selected'
+                : ''
         // console.log("During making option list", item.id, item.name, "================================", selectedStr)
         const title = item.description || makeId(item.id)
         option = `<option value='${item.id}' title='${handleStr(title)}' ${selectedStr}>`
@@ -600,7 +706,10 @@ const documentReadyDropdown4 = ({ id, table01Name, selectedJson, table, batchLen
     $(document).ready(() => {
         listenersOfDropdown4s[table01Name].forEach((listener) => {
             const fieldName = getFieldNameInTable01FormatJS(id, table01Name)
-            if (listener.triggers.includes(fieldName) && ['reduce', 'reduce_union'].includes(listener.listen_action)) {
+            if (
+                listener.triggers.includes(fieldName) &&
+                ['reduce', 'reduce_union'].includes(listener.listen_action)
+            ) {
                 // console.log("I am a trigger of reduce, I have to trigger myself when form load ", id)
                 getEById(id).trigger('change', { batchLength, onLoad: true })
             }

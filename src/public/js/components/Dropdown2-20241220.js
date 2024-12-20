@@ -43,7 +43,11 @@ const smartFilter2 = (dataSource, column, operator, value) => {
                         result = dumbIncludes2(row[column], value)
                     }
                 } else {
-                    console.error('REDUCE_INTERSECT is only for array, but ', column, 'is not an array')
+                    console.error(
+                        'REDUCE_INTERSECT is only for array, but ',
+                        column,
+                        'is not an array',
+                    )
                 }
                 return result
             default:
@@ -63,7 +67,13 @@ const filterDropdown2 = (column_name, dataSource) => {
             const value = filter_values[i]
             dataSource.forEach((row) => {
                 if (row[column] === undefined) {
-                    console.error('Column [', column, '] in filter_columns not found in', column_name, '(Relationships Screen)')
+                    console.error(
+                        'Column [',
+                        column,
+                        '] in filter_columns not found in',
+                        column_name,
+                        '(Relationships Screen)',
+                    )
                     // } else {
                     //     console.log("Column [", column, "] in filter_columns found in", column_name, "(Relationships Screen)");
                 }
@@ -91,8 +101,10 @@ const onChangeDropdown2Reduce = (listener, is_union) => {
 
         // console.log(triggers[i], Array.isArray(selectedValue) ? 'Array' : 'Not Array')
         const column = listen_to_attrs[i]
-        if (column === undefined) console.log('The column to look up [', column, '] is not found in ...')
-        if (debugListener) console.log('Applying', column, selectedValue, 'to', table_name, dataSource)
+        if (column === undefined)
+            console.log('The column to look up [', column, '] is not found in ...')
+        if (debugListener)
+            console.log('Applying', column, selectedValue, 'to', table_name, dataSource)
 
         if (Array.isArray(selectedValue)) {
             if (is_union) {
@@ -117,7 +129,14 @@ const onChangeDropdown2Reduce = (listener, is_union) => {
     const allowClear = getAllowClear(column_name)
     const letUserChooseWhenOneItem = getLetUserChooseWhenOneItem(column_name)
     // console.log(column_name, allowClear, false)
-    reloadDataToDropdown2(column_name, attrs_to_compare, dataSource, lastSelected, letUserChooseWhenOneItem, allowClear)
+    reloadDataToDropdown2(
+        column_name,
+        attrs_to_compare,
+        dataSource,
+        lastSelected,
+        letUserChooseWhenOneItem,
+        allowClear,
+    )
 }
 const onChangeGetSelectedObject2 = (listener) => {
     const { listen_to_fields, listen_to_tables } = listener
@@ -161,7 +180,8 @@ const onChangeDropdown2Assign = (listener, onLoad) => {
     }
 
     // const listen_to_attr = removeParenthesis(listen_to_attrs[0])
-    if (debugListener) console.log('Selected Object:', selectedObject, ' - listen_to_attr:', listen_to_attr)
+    if (debugListener)
+        console.log('Selected Object:', selectedObject, ' - listen_to_attr:', listen_to_attr)
     if (selectedObject !== undefined) {
         const theValue = selectedObject[listen_to_attr]
         if (theValue !== undefined) {
@@ -171,7 +191,13 @@ const onChangeDropdown2Assign = (listener, onLoad) => {
             setValueOfEById(column_name, theValue)
             getEById(column_name).trigger('change')
         } else {
-            console.error('Column', listen_to_attr, 'not found in', column_name, '(Listeners Screen)')
+            console.error(
+                'Column',
+                listen_to_attr,
+                'not found in',
+                column_name,
+                '(Listeners Screen)',
+            )
         }
     }
 }
@@ -236,7 +262,7 @@ const onChangeDropdown2DateOffset = (listener) => {
 }
 
 const onChangeDropdown2Expression = (listener) => {
-    // const debugListener = true
+    const debugListener = true
     if (debugListener) console.log('Expression', listener)
     const { expression, column_name } = listener
     let expression1 = expression
@@ -244,7 +270,22 @@ const onChangeDropdown2Expression = (listener) => {
     const vars = getAllVariablesFromExpression(expression)
     for (let i = 0; i < vars.length; i++) {
         const varName = vars[i]
-        if (['Math', 'abs', 'floor', 'round', 'ceil', 'trunc', 'toDateString', 'toFixed', 'min', 'max'].includes(varName)) continue
+        if (
+            [
+                'Math',
+                'abs',
+                'floor',
+                'round',
+                'ceil',
+                'trunc',
+                'toDateString',
+                'toFixed',
+                'min',
+                'max',
+                'Infinity',
+            ].includes(varName)
+        )
+            continue
         let varValue = (getEById(varName).val() || 0) + '' //<< toString
         varValue = convertStrToNumber(varValue)
 
@@ -261,7 +302,12 @@ const onChangeDropdown2Expression = (listener) => {
                 newFlatPickrDate(column_name).setDate(new Date(result * 1000))
                 break
             default:
-                console.log('Unsupport datetime control', datetime_controls[column_name], 'for', column_name)
+                console.log(
+                    'Unsupport datetime control',
+                    datetime_controls[column_name],
+                    'for',
+                    column_name,
+                )
                 break
         }
     } else {
@@ -273,7 +319,12 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
     // const debugListener = true
     if (debugListener) console.log('AjaxRequestScalar', listener)
     const { triggers, expression: url } = listener
-    const { ajax_response_attribute, ajax_form_attributes, ajax_item_attributes, ajax_default_values } = listener
+    const {
+        ajax_response_attribute,
+        ajax_form_attributes,
+        ajax_item_attributes,
+        ajax_default_values,
+    } = listener
 
     let enoughParams = true
     const data = {}
@@ -299,7 +350,12 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
                     if (hits_0 === undefined) {
                         value = ajax_default_values[i]
                         if (debugListener)
-                            console.log('Response empty', ajax_response_attribute, '- assigning default value', ajax_default_values[i])
+                            console.log(
+                                'Response empty',
+                                ajax_response_attribute,
+                                '- assigning default value',
+                                ajax_default_values[i],
+                            )
                     } else if (hits_0[ajax_item_attributes[i]] === undefined) {
                         value = ajax_default_values[i]
                         if (debugListener)
@@ -321,7 +377,8 @@ const onChangeDropdown2AjaxRequestScalar = (listener) => {
             error: (response) => console.error(response),
         })
     } else {
-        if (debugListener) console.log('Sending AjaxRequest cancelled as not enough parameters', missingParams)
+        if (debugListener)
+            console.log('Sending AjaxRequest cancelled as not enough parameters', missingParams)
     }
 }
 
@@ -441,11 +498,19 @@ const onChangeDropdown2 = ({ name, dropdownParams = {} }) => {
     }
 }
 
-const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected, letUserChooseWhenOneItem = false, allowClear = false) => {
+const reloadDataToDropdown2 = (
+    id,
+    attr_to_compare = 'id',
+    dataSource,
+    selected,
+    letUserChooseWhenOneItem = false,
+    allowClear = false,
+) => {
     // const debugListener = true
     const control_type = getControlTypeOfE(id)
     if (debugListener) console.log(id, attr_to_compare)
-    if (debugListener) console.log('reloadDataToDropdown2', id, control_type, dataSource.length, selected)
+    if (debugListener)
+        console.log('reloadDataToDropdown2', id, control_type, dataSource.length, selected)
     if (dataSource === undefined) return
     getEById(id).empty()
 
@@ -472,7 +537,8 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
         })
     }
 
-    if (debugListener) console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
+    if (debugListener)
+        console.log('Loading dataSource after filterDropdown2', id, selected, dataSource.length)
     // console.log(selected)
 
     if (control_type === 'dropdown') {
@@ -481,7 +547,12 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             if (letUserChooseWhenOneItem) {
                 selectedStr = dumbIncludes2(selected, item.id) ? 'selected' : ''
             } else {
-                selectedStr = dataSource.length === 1 ? 'selected' : dumbIncludes2(selected, item.id) ? 'selected' : ''
+                selectedStr =
+                    dataSource.length === 1
+                        ? 'selected'
+                        : dumbIncludes2(selected, item.id)
+                        ? 'selected'
+                        : ''
             }
             // console.log(id, selected, item.id, selectedStr)
             const title = item.employeeid || item.description || '' //  || (isNaN(item.id) ? item.id : makeId(item.id))
@@ -524,7 +595,12 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             if (letUserChooseWhenOneItem) {
                 selectedStr = dumbIncludes2(selected, item.id) ? 'checked' : ''
             } else {
-                selectedStr = dataSource.length === 1 ? 'checked' : dumbIncludes2(selected, item.id) ? 'checked' : ''
+                selectedStr =
+                    dataSource.length === 1
+                        ? 'checked'
+                        : dumbIncludes2(selected, item.id)
+                        ? 'checked'
+                        : ''
             }
             readonly = readOnly ? 'onclick="return false;"' : ''
             disabled = item['disabled'] ? 'disabled' : ''
@@ -535,7 +611,9 @@ const reloadDataToDropdown2 = (id, attr_to_compare = 'id', dataSource, selected,
             const inputBg = item['disabled'] ? 'bg-gray-300' : ''
             const classNames2 = `truncate px-1 ${cursor} rounded-md hover:bg-gray-100 w-full h-full`
             const classNames3 = `w-3.5 h-3.5 mr-1 mt-0.5 ${inputBg} ${cursor}`
-            const avatar = item['avatar'] ? `<img class="w-10 h-10 mr-1 rounded" src="${item['avatar']}" />` : ''
+            const avatar = item['avatar']
+                ? `<img class="w-10 h-10 mr-1 rounded" src="${item['avatar']}" />`
+                : ''
             const subtitle = item['subtitle'] ? `<br/>${item['subtitle']}` : ''
 
             option = `<div class="${classNames1}" item_name="${item['name']}" item_description="${item['description']}">
@@ -609,12 +687,22 @@ const documentReadyDropdown2 = (params) => {
     dataSourceDropdown = k[table]
     if (dataSourceDropdown === undefined) console.error('key ' + table + ' not found in k[]')
     let attr_to_compare = 'id'
-    reloadDataToDropdown2(id, attr_to_compare, dataSourceDropdown, selectedArray, letUserChooseWhenOneItem, allowClear)
+    reloadDataToDropdown2(
+        id,
+        attr_to_compare,
+        dataSourceDropdown,
+        selectedArray,
+        letUserChooseWhenOneItem,
+        allowClear,
+    )
 
     $(document).ready(() => {
         if (Array.isArray(listenersOfDropdown2)) {
             listenersOfDropdown2.forEach((listener) => {
-                const list = action === 'create' ? ['reduce', 'reduce_union', 'assign'] : ['reduce', 'reduce_union' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
+                const list =
+                    action === 'create'
+                        ? ['reduce', 'reduce_union', 'assign']
+                        : ['reduce', 'reduce_union' /* 'assign'*/] //<< without assign, keep value from DB, otherwise it will be overwritten every time the form is loaded
                 if (listener.triggers.includes(id) && list.includes(listener.listen_action)) {
                     // console.log("I am a trigger of ", listener.listen_action, ", I have to trigger myself when form load [", id, "]",)
                     getEById(id).trigger('change', { onLoad: true })

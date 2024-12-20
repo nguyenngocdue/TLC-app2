@@ -27,30 +27,37 @@ return new class extends Migration
 
             $table->integer('priority')->nullable();
 
-            $table->double('total_hours_0')->nullable();
-            $table->double('total_hours_1')->nullable();
-            $table->double('total_hours_2')->nullable();
-            $table->double('total_hours')->nullable();
+            $table->float('total_hours_0')->nullable();
+            $table->float('total_hours_1')->nullable();
+            $table->float('total_hours_2')->nullable();
+            $table->float('total_hours_11')->nullable();
+            $table->double('total_hours', 8, 2)->nullable();
 
-            $table->double('worker_number_0', 8, 2)->nullable();
-            $table->double('worker_number_1', 8, 2)->nullable();
-            $table->double('worker_number_2', 8, 2)->nullable();
+            $table->float('worker_number_0')->nullable();
+            $table->float('worker_number_1')->nullable();
+            $table->float('worker_number_2')->nullable();
+            $table->float('worker_number_11')->nullable();
             $table->double('worker_number', 8, 2)->nullable();
 
-            $table->double('total_man_hours_0')->nullable();
-            $table->double('total_man_hours_1')->nullable();
-            $table->double('total_man_hours_2')->nullable();
-            $table->double('total_man_hours')->nullable();
+            $table->float('total_man_hours_0')->nullable();
+            $table->float('total_man_hours_1')->nullable();
+            $table->float('total_man_hours_2')->nullable();
+            $table->float('total_man_hours_11')->nullable();
+            $table->double('total_man_hours', 8, 2)->nullable();
 
-            $table->dateTime('start_date_0')->nullable();
-            $table->dateTime('start_date_1')->nullable();
-            $table->dateTime('start_date_2')->nullable();
-            $table->dateTime('start_date')->nullable();
+            $table->date('start_date_0')->nullable();
+            $table->date('start_date_1')->nullable();
+            $table->date('start_date_2')->nullable();
+            $table->date('start_date_10')->nullable();
+            $table->date('start_date_11')->nullable();
+            $table->date('start_date')->nullable();
 
-            $table->dateTime('end_date_0')->nullable();
-            $table->dateTime('end_date_1')->nullable();
-            $table->dateTime('end_date_2')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->date('end_date_0')->nullable();
+            $table->date('end_date_1')->nullable();
+            $table->date('end_date_2')->nullable();
+            $table->date('end_date_10')->nullable();
+            $table->date('end_date_11')->nullable();
+            $table->date('end_date')->nullable();
 
             $table->dateTime('expected_start_at')->nullable();
             $table->dateTime('expected_finish_at')->nullable();
@@ -60,6 +67,8 @@ return new class extends Migration
             $table->float('uom_agg_0')->nullable();
             $table->float('uom_agg_1')->nullable();
             $table->float('uom_agg_2')->nullable();
+            $table->float('uom_agg_10')->nullable();
+            $table->float('uom_agg_11')->nullable();
             $table->float('uom_agg')->nullable();
 
             $table->float('total_uom')->nullable();

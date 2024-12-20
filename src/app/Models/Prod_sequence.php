@@ -28,31 +28,40 @@ class Prod_sequence extends ModelExtended
         "start_date_0",
         "start_date_1",
         "start_date_2",
+        "start_date_10",
+        "start_date_11",
         "start_date",
 
         "end_date_0",
         "end_date_1",
         "end_date_2",
+        "end_date_10",
+        "end_date_11",
         "end_date",
 
         "uom_agg_0",
         "uom_agg_1",
         "uom_agg_2",
+        "uom_agg_10",
+        "uom_agg_11",
         "uom_agg",
 
         "total_hours_0",
         "total_hours_1",
         "total_hours_2",
+        "total_hours_11",
         "total_hours",
 
         "worker_number_0",
         "worker_number_1",
         "worker_number_2",
+        "worker_number_11",
         "worker_number",
 
         "total_man_hours_0",
         "total_man_hours_1",
         "total_man_hours_2",
+        "total_man_hours_11",
         "total_man_hours",
 
         "total_calendar_days",
@@ -74,6 +83,7 @@ class Prod_sequence extends ModelExtended
         "getProdRunsRework1" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRunsRework2" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
         "getProdRunsSubCon" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
+        "getProdRunsSubConPartTime" => ['hasMany', Prod_run::class, 'prod_sequence_id'],
 
         "getProdRoutingDetails" => ['hasMany', Prod_routing_detail::class, "prod_routing_link_id", "prod_routing_link_id"],
         "getProdRoutingDetail" => ['belongsTo', Prod_routing_detail::class, "prod_routing_id", "prod_routing_id"],
@@ -145,6 +155,12 @@ class Prod_sequence extends ModelExtended
     {
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 10);
+    }
+
+    public function getProdRunsSubConPartTime()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2])->where('is_rework', 11);
     }
 
     // public function getProdRoutingDetails()

@@ -62,18 +62,11 @@ const addANewLine = (params) => {
         const a = tableObject[tableId].tableName
         const b = tableObject[tableId].eloquentFn
         if (a === 'prod_runs') {
-            if (b === 'getProdRuns') {
-                valuesOfOrigin['is_rework'] = 0
-            }
-            if (b === 'getProdRunsRework1') {
-                valuesOfOrigin['is_rework'] = 1
-            }
-            if (b === 'getProdRunsRework2') {
-                valuesOfOrigin['is_rework'] = 2
-            }
-            if (b === 'getProdRunsSubCon') {
-                valuesOfOrigin['is_rework'] = 10
-            }
+            if (b === 'getProdRuns') valuesOfOrigin['is_rework'] = 0
+            if (b === 'getProdRunsRework1') valuesOfOrigin['is_rework'] = 1
+            if (b === 'getProdRunsRework2') valuesOfOrigin['is_rework'] = 2
+            if (b === 'getProdRunsSubCon') valuesOfOrigin['is_rework'] = 10
+            if (b === 'getProdRunsSubConPartTime') valuesOfOrigin['is_rework'] = 11
         }
     }
 

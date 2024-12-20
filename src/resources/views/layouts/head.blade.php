@@ -64,13 +64,13 @@
     <script src="{{ asset('js/components/RadioOrCheckbox2-20230731.js') }}"></script>
     <script src="{{ asset('js/components/Number4.js') }}"></script>
     <script src="{{ asset('js/components/Dropdown0-20241105.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown2-20240926.js') }}"></script>
-    <script src="{{ asset('js/components/Dropdown4-20240926.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown2-20241220.js') }}"></script>
+    <script src="{{ asset('js/components/Dropdown4-20241220.js') }}"></script>
     <script src="{{ asset('js/components/ModalSearchableDialog.js') }}"></script>
     <script src="{{ asset('js/components/ModalSearchableDialogCreateNew.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231229.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine2-20241209.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine2-20241220.js') }}"></script>
     <script src="{{ asset('js/components/Footer4-20231219.js') }}"></script>
     
     <script src="{{ mix('js/EditableTable3.js') }}"></script>
