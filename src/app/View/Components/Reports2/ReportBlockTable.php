@@ -71,20 +71,21 @@ class ReportBlockTable extends Component
         }
     }
 
-    function updateTimezone($queriedData, $currentParams, $columns){
+    function updateTimezone($queriedData, $currentParams, $columns)
+    {
         $datetimeCols = array_values(array_filter($columns->toArray(), fn($item) => $item['row_renderer'] === $this->ROW_RENDERER_DATETIME_ID));
-        foreach($queriedData as &$value) {
+        foreach ($queriedData as &$value) {
             if ($datetimeCols) {
                 foreach ($datetimeCols as $datetimeCol) {
                     $dataIndex = isset($datetimeCol['data_index']) ?  $datetimeCol['data_index'] : null;
                     if ($dataIndex) {
                         $val = $value->{$dataIndex};
                         $updatedVal = DateFormat::getValueDatetimeByCurrentUser($val);
-                        if (isset($datetimeCol['row_renderer_params'])){
+                        if (isset($datetimeCol['row_renderer_params'])) {
                             $rowParam = $datetimeCol['row_renderer_params'];
                             $updatedVal = DateFormat::formatDateTime($updatedVal, $rowParam, 'Y-m-d H:i:s');
                         }
-                        $value->{$dataIndex} = $updatedVal;                        
+                        $value->{$dataIndex} = $updatedVal;
                     }
                 }
             }
@@ -106,19 +107,34 @@ class ReportBlockTable extends Component
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
 
         $reportTableRow = ReportTableRow::getInstance();
-        $tableDataSource = $reportTableRow->createTableDataSourceForRows($this->tableDataSource, $configuredCols, $block, $currentParams);
+        $drawData = $this->tableDataSource->items();
+        $tableDataSource = $reportTableRow->createTableDataSourceForRows(
+            $drawData,
+            $configuredCols,
+            $block,
+            $currentParams
+        );
 
-        // render default table
+        if ($block->has_pagination) {
+            $tableDataSource = $this->tableDataSource->setCollection(collect($tableDataSource));
+        }
+        // columns were not created 
         if (!$configuredCols) {
             $tableDataSource = $this->queriedData;
+            // has pagination, columns were not created 
+            if ($block->has_pagination) {
+                $tableDataSource = $this->tableDataSource->setCollection(collect($drawData));
+            }
             $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
         }
+
 
         //Transformed Data Option
         if ($block->is_transformed_data) {
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
         $headerTop = $block->header_top;
+
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,

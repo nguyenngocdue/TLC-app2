@@ -52,6 +52,7 @@ class ReportTableRow
     public function createTableDataSourceForRows($queriedData, $configuredCols, $block, $currentParams)
     {
         // Data retrieved from SQL query
+        $queriedData = collect($queriedData);
         foreach ($queriedData as $k1 => &$dataLine) {
             $re = (object)[];
             foreach ($dataLine as $k2 => $value) {
