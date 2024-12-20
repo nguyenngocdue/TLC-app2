@@ -44,22 +44,22 @@ trait TraitReportMatrixColumn
         return array_unique($items) === ['NA'];
     }
 
-    function processColumns(array $cols, array &$progresses, array $config)
+    function processOtherColumns(array $cols, array &$progresses, array $config)
     {
         foreach ($cols as $key => $value) {
             // Calculate basic values
             $finishedCount = $this->getSum($value['item_finished'] ?? []);
             $total = $this->getSum($value['item_total'] ?? []);
-
+            
             // Check if all values are 'NA'
             $isNA = $this->isAllNA($value['item_total'] ?? []);
-
+            
             // Prepare content for display
             $percent = $this->calculatePercentage($finishedCount, $total);
             $content = $isNA
-                ? '<strong>NA</strong>'
-                : $this->prepareContent($finishedCount, $total, $percent);
-
+            ? '<strong>NA</strong>'
+            : $this->prepareContent($finishedCount, $total, $percent);
+            
             // Add CSS class if defined
             $cellClass = $config['cell_class'] ?? '';
 
@@ -69,7 +69,7 @@ trait TraitReportMatrixColumn
     }
 
 
-    function processOtherColumns($addedCols, &$progresses, $config)
+    function getAdvancedAggColConfig($addedCols, &$progresses, $config)
     {
         foreach ($addedCols as $key => $value) {
             $total = isset($value['total']) ? $value['total'] : 0;
@@ -182,9 +182,9 @@ trait TraitReportMatrixColumn
 
                 $progresses = [];
                 // Process transformed data columns
-                $this->processColumns($transformedCols, $progresses, $config);
+                $this->processOtherColumns($transformedCols, $progresses, $config);
                 // Process non-transformed (added) columns
-                $this->processOtherColumns($otherCols, $progresses, $config);
+                $this->getAdvancedAggColConfig($otherCols, $progresses, $config);
                 $firstData = reset($mergedData);
                 $lackFields = array_fill_keys(array_diff(array_keys($firstData), $transformedFields), null);
                 $mergedData = array_merge($mergedData, ['progress_row' => array_merge($lackFields, $progresses)]);
