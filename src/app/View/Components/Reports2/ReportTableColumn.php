@@ -52,7 +52,6 @@ class ReportTableColumn
     }
 
 
-
     private function create2ndHeaderCols($headerCols, $block, $currentParams) {
         $configs = $block->transformed_data_string;
         $transformedOpt = json_decode($configs, true);

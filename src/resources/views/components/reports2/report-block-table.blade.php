@@ -1,6 +1,6 @@
 <x-renderer.table 
     headerTop={{$headerTop}}
-    showNo=true 
+    showNo={{true}} 
     :columns="$tableColumns" :dataSource="$tableDataSource" :dataHeader="$secondHeaderCols"
     tableTrueWidth="{{ $tableTrueWidth }}" maxH="{{ $maxHeight }}"
     showPaginationTop="{{true }}"
