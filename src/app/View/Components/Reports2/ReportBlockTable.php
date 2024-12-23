@@ -116,7 +116,7 @@ class ReportBlockTable extends Component
         );
 
         if ($block->has_pagination) {
-            $tableDataSource = $this->tableDataSource->setCollection(collect($tableDataSource));
+            $tableDataSource = method_exists(($x = $this->tableDataSource), 'setCollection') ?  $x->setCollection($tableDataSource) : $x;
         }
         // columns were not created 
         if (!$configuredCols) {
