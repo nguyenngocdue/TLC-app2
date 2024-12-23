@@ -66,6 +66,9 @@ class TimeSheetOfficerController extends TimesheetController
         $collectionMerge = $collectionMerge->merge($la);
 
         $initialDate = $hrTimesheetOfficer->week;
-        return ['hits' => new HrTsLineCollection($collectionMerge), 'meta' => $initialDate,];
+        $hits = new HrTsLineCollection($collectionMerge);
+
+        // Log::info($hits);
+        return ['hits' => $hits, 'meta' => $initialDate,];
     }
 }

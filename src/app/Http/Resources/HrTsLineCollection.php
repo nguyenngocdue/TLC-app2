@@ -122,6 +122,9 @@ class HrTsLineCollection extends ResourceCollection
 
                 switch (true) {
                     case ($item instanceof Public_holiday):
+                        if ($item->workplace_id == 5) { //NZ Office has TZ 13, if TZ >12 then need to sub 1 day
+                            $item->ph_date = Carbon::parse($item->ph_date)->subDay()->format('Y-m-d');
+                        }
                         $item1['id'] = '';
                         $item1['is_ph_or_la'] = true;
                         $item1['day_count'] = 1;
