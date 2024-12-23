@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('qaqc_insp_tmpl_shts', function (BlueprintExtended $table) {
             $table->id();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->unsignedBigInteger('qaqc_insp_tmpl_id');
             $table->unsignedBigInteger('prod_discipline_id');
-            $table->boolean('is_attachment_grouped')->nullable();
+            // $table->boolean('is_attachment_grouped')->nullable();
             $table->orderable();
             $table->appendCommonFields();
         });
