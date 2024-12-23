@@ -4,7 +4,8 @@
 $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
 // dump($signatureId);
 @endphp 
-<div style="width:210px; aspect-ratio:210/105;">
+<div style="width:288px; aspect-ratio:288/144;">
+{{-- <div style="width:210px; aspect-ratio:210/105;"> --}}
 {{-- <div style="width:90%; aspect-ratio:210/105;"> --}}
     @if(!$readOnly)
     <div title="{{$title}}">Signature here:</div>
@@ -17,7 +18,7 @@ $canvasBg = $readOnly ? 'bg-gray-200' : 'bg-white';
         @endif
         
         <canvas 
-                width="210" height="105" 
+                width="288" height="144" 
                 id="canvas_{{$id}}" 
                 class="{{$canvasBg}} rounded w-full"
                 style="touch-action: none; user-select: none;" ></canvas>

@@ -3,7 +3,7 @@
 @endphp
 <div class="flex justify-center">
      <div>
-          <div style="width:212px;" class="mx-auto">
+          <div style="width:290px;" class="mx-auto">
                <x-controls.signature.signature2a
                     name="{{$table01Name}}[value][{{$rowIndex}}]"  
                     value="{{$line->value}}"
