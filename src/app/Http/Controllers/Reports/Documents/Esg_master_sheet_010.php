@@ -147,14 +147,16 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
         ];
     }
 
-    private function groupDataWorkplaces($data)
+    private function groupDataWorkplaces($data, $params)
     {
+        $minMonth =  min($this->createValuesForDateParam2($params)[1]);
+        $maxMonth =  max($this->createValuesForDateParam2($params)[1]);
         $results = [];
         foreach ($data as $key => $value) {
             $value = reset($value);
             $x1 = [number_format($value['total_all_months'], 2)];
             $x12 = [];
-            foreach (range(1, 12) as $num) {
+            foreach (range($minMonth, $maxMonth) as $num) {
                 if (isset($value[str_pad($num, 2, '0', STR_PAD_LEFT)])) {
                     $x12[] = number_format($value[str_pad($num, 2, '0', STR_PAD_LEFT)], 2);
                 } else {
@@ -183,13 +185,15 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
         return $results;
     }
 
-    private function calculateMonthlyTotals($data)
+    private function calculateMonthlyTotals($data, $params)
     {
         $monthlyTotals = ['total_all_months' => 0];
+        $minMonth =  min($this->createValuesForDateParam2($params)[1]);
+        $maxMonth =  max($this->createValuesForDateParam2($params)[1]);
         foreach ($data as $group) {
             foreach ($group as $item) {
                 $monthlyTotals['total_all_months'] += $item['total_all_months'];
-                for ($month = 1; $month <= 12; $month++) {
+                for ($month = $minMonth; $month <= $maxMonth; $month++) {
                     $monthKey = sprintf('%02d', $month); // Formats the month to a two-digit number
                     if (isset($item[$monthKey])) {
                         if (!isset($monthlyTotals[$monthKey])) {
@@ -307,8 +311,8 @@ class Esg_master_sheet_010 extends Report_ParentDocument2Controller
                 $rowspanMetricType = count($item) + 1;
                 $rowspanChildren = $rowspanMetricType + 1;
                 $numOfLines += count($item) + 1;
-                $calculatedNumbers = $this->groupDataWorkplaces($grWorkplaceIds);
-                $totalPerMonth = array_values($this->calculateMonthlyTotals($grWorkplaceIds));
+                $calculatedNumbers = $this->groupDataWorkplaces($grWorkplaceIds, $params);
+                $totalPerMonth = array_values($this->calculateMonthlyTotals($grWorkplaceIds, $params));
                 $results[$tmplId]["array_metric_type"][] = [
                     "mark_parent" => $firstItem['mark_parent'],
                     "mark_heading" => $firstItem['mark_heading'],
