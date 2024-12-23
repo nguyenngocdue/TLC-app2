@@ -20,6 +20,7 @@ class Workplace extends ModelExtended
         "weekend_days",
         "remind_timesheet_day",
         "remind_timesheet_time",
+        "timezone",
     ];
 
     public static $statusless = true;

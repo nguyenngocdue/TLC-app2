@@ -32,6 +32,7 @@ return new class extends Migration
 
             $table->unsignedInteger('remind_timesheet_day')->nullable();
             $table->time('remind_timesheet_time')->nullable();
+            $table->float('timezone')->nullable();
 
             $table->string('slug')->unique();
             $table->appendCommonFields();
