@@ -2,15 +2,22 @@ if (!year) yearNow()
 renderHtmlCalendar()
 function increase(num) {
     year += num
-    window.location.replace(`?view_type=calendar&action=updateViewAllCalendar&_entity=${typeEntity}&year=${year}`)
+    window.location.replace(
+        `?view_type=calendar&action=updateViewAllCalendar&_entity=${typeEntity}&year=${year}`,
+    )
 }
 function decrease(num) {
     year -= num
-    window.location.replace(`?view_type=calendar&action=updateViewAllCalendar&_entity=${typeEntity}&year=${year}`)
+    window.location.replace(
+        `?view_type=calendar&action=updateViewAllCalendar&_entity=${typeEntity}&year=${year}`,
+    )
 }
 function days_of_month() {
     all = (year) => {
-        return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0)
+        return (
+            (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) ||
+            (year % 100 === 0 && year % 400 === 0)
+        )
     }
     feb = (year) => {
         return all(year) ? 29 : 28
@@ -121,13 +128,28 @@ function renderHtmlCalendar() {
             const valueWeek = weeks[i][j]
             htmlWeekContentAll = ''
             // const needToDivide = valueWeek.includes(25) && valueWeek.indexOf(25) < valueWeek.length - 1
-            const needToDivide = useTsForPayroll ? valueWeek.includes(25) && valueWeek.indexOf(25) < valueWeek.length - 1 : false
+            const needToDivide = useTsForPayroll
+                ? valueWeek.includes(25) && valueWeek.indexOf(25) < valueWeek.length - 1
+                : false
             if (needToDivide) {
                 let index = valueWeek.indexOf(25)
                 let valueWeek_1 = valueWeek.slice(0, index + 1)
                 let valueWeek_2 = valueWeek.slice(index + 1)
-                htmlWeekContent_1 = renderHtmlContentWeekForArrayDivide(valueWeek_1, month, yearCurrent, routeCreate, allTimesheet, true)
-                htmlWeekContent_2 = renderHtmlContentWeekForArrayDivide(valueWeek_2, month, yearCurrent, routeCreate, allTimesheet)
+                htmlWeekContent_1 = renderHtmlContentWeekForArrayDivide(
+                    valueWeek_1,
+                    month,
+                    yearCurrent,
+                    routeCreate,
+                    allTimesheet,
+                    true,
+                )
+                htmlWeekContent_2 = renderHtmlContentWeekForArrayDivide(
+                    valueWeek_2,
+                    month,
+                    yearCurrent,
+                    routeCreate,
+                    allTimesheet,
+                )
                 htmlWeekContentAll += `<div class="grid grid-cols-7 gap-0 font-semibold">
                                             ${htmlWeekContent_1}
                                             ${htmlWeekContent_2}
@@ -135,15 +157,23 @@ function renderHtmlCalendar() {
             } else {
                 htmlContentWeek = ''
                 var dataCreate = genDataCreate(valueWeek, yearCurrent, getIndexMonth(i))
-                ;[url, classHover, id, bg_color, text_color, count_duplicate] = transformDataByTimeSheet(
-                    allTimesheet,
+                ;[url, classHover, id, bg_color, text_color, count_duplicate] =
+                    transformDataByTimeSheet(
+                        allTimesheet,
+                        valueWeek,
+                        getIndexMonth(i),
+                        yearCurrent,
+                        routeCreate,
+                    )
+                htmlContentWeek = renderHtmlContentWeek(
+                    htmlContentWeek,
                     valueWeek,
                     getIndexMonth(i),
-                    yearCurrent,
-                    routeCreate,
                 )
-                htmlContentWeek = renderHtmlContentWeek(htmlContentWeek, valueWeek, getIndexMonth(i))
-                var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : ''
+                var htmlCountDuplicate =
+                    count_duplicate > 1
+                        ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>`
+                        : ''
                 htmlWeekContentAll += url
                     ? `<div class="grid grid-cols-7 gap-0 font-semibold">
                                                 <a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-7 focus:outline-none bg-${bg_color} hover:bg-${text_color} text-${text_color} hover:text-${bg_color} focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p1y-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
@@ -179,13 +209,27 @@ function renderHtmlCalendar() {
         calendarContainer.innerHTML += htmlRender
     }
 }
-function renderHtmlContentWeekForArrayDivide(array, month, year, routeCreate, allTimesheet, marginLeft = false) {
+function renderHtmlContentWeekForArrayDivide(
+    array,
+    month,
+    year,
+    routeCreate,
+    allTimesheet,
+    marginLeft = false,
+) {
     const lengthArr = array.length
     let htmlDays = ''
     htmlDays = renderHtmlContentWeek(htmlDays, array, month)
     var dataCreate = genDataCreate(array, year, month)
-    ;[url, classHover, id, bg_color, text_color, count_duplicate] = transformDataByTimeSheet(allTimesheet, array, month, year, routeCreate)
-    var htmlCountDuplicate = count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : ''
+    ;[url, classHover, id, bg_color, text_color, count_duplicate] = transformDataByTimeSheet(
+        allTimesheet,
+        array,
+        month,
+        year,
+        routeCreate,
+    )
+    var htmlCountDuplicate =
+        count_duplicate > 1 ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>` : ''
     margin = marginLeft ? 'mr-1' : ''
     let result = url
         ? `<a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-${lengthArr} focus:outline-none text-${text_color} hover:text-${bg_color} bg-${bg_color} hover:bg-${text_color} focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p2y-2 mb-2 ${margin} dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
@@ -214,10 +258,14 @@ function renderHtmlContentWeek(html, array, month) {
                 case isToday:
                     html += `<p class='text-gray-100 bg-gray-500 rounded-lg items-center justify-center'>${day}</p>`
                     break
-                case leaveDates.some((item) => item.month == month && item.date == day && item.year == year):
+                case leaveDates.some(
+                    (item) => item.month == month && item.date == day && item.year == year,
+                ):
                     html += `<p class='text-yellow-600 bg-yellow-300 rounded-lg items-center justify-center'>${day}</p>`
                     break
-                case publicHolidays.some((item) => item.month == month && item.date == day && item.year == year):
+                case publicHolidays.some(
+                    (item) => item.month == month && item.date == day && item.year == year,
+                ):
                     html += `<p class='text-red-600 bg-red-300 rounded-lg items-center justify-center'>${day}</p>`
                     break
                 default:
@@ -241,7 +289,9 @@ function genDataCreate(valueWeek, yearCurrent, month) {
     } else {
         for (let day of valueWeek) {
             if (typeof day == 'number') {
-                dayIsoWeek = moment(`${yearCurrent}-${month}-${day}`).startOf('isoWeek').format('YYYY-MM-DD')
+                dayIsoWeek = moment(`${yearCurrent}-${month}-${day}`)
+                    .startOf('isoWeek')
+                    .format('YYYY-MM-DD')
                 data = dayIsoWeek
             }
         }
@@ -287,12 +337,26 @@ function getValueUrlByDay(timesheet, yearCurrent, month, day) {
         classHover = `hover-${week}-${yearCurrent}`
         if (day == 26) {
             if (dateTime == timesheet.week) {
-                return [timesheet.url, classHover, timesheet.id, timesheet.bg_color, timesheet.text_color, timesheet.count_duplicate]
+                return [
+                    timesheet.url,
+                    classHover,
+                    timesheet.id,
+                    timesheet.bg_color,
+                    timesheet.text_color,
+                    timesheet.count_duplicate,
+                ]
             }
             return null
         } else {
             if (timesheet.week == startOfWeek) {
-                return [timesheet.url, classHover, timesheet.id, timesheet.bg_color, timesheet.text_color, timesheet.count_duplicate]
+                return [
+                    timesheet.url,
+                    classHover,
+                    timesheet.id,
+                    timesheet.bg_color,
+                    timesheet.text_color,
+                    timesheet.count_duplicate,
+                ]
             }
             return null
         }
