@@ -241,7 +241,7 @@
         "renderer_view_all_param": "",
         "renderer_view_all_unit": "line",
         "renderer_edit": "many_lines",
-        "renderer_edit_param": "getManyLineParams",
+        "renderer_edit_param": "getManyLineParamsSubConPartTime",
         "control": "relationship_renderer",
         "filter_columns": "is_rework",
         "filter_operator": "=",

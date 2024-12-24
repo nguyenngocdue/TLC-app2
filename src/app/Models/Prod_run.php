@@ -139,4 +139,17 @@ class Prod_run extends ModelExtended
         ];
         return $result;
     }
+
+    public function getManyLineParamsSubConPartTime($parentItem)
+    {
+        $columns = $this->getManyLineParams($parentItem);
+
+        foreach ($columns as &$column) {
+            // dump($key, $column);
+            if ($column['dataIndex'] == 'remark') {
+                $column['required'] = true;
+            }
+        }
+        return $columns;
+    }
 }
