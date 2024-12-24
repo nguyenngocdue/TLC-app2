@@ -160,7 +160,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "NCR\/DR Monthly Report",
-        "title": "NCR\/DR Monthly Report"
+        "title": "NCR\/DR Monthly Report",
+        "hidden": "true"
     },
     "document-qaqc_wir_010": {
         "name": "document-qaqc_wir_010",
@@ -168,7 +169,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "Routing Acceptance Report",
-        "title": "Routing  Acceptance Report"
+        "title": "Routing  Acceptance Report",
+        "hidden": "true"
     },
     "document-qaqc_wir_020": {
         "name": "document-qaqc_wir_020",
