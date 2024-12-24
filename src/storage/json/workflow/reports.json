@@ -178,7 +178,8 @@
         "package": "project_management",
         "breadcrumb-group": null,
         "top_title": "All Projects Acceptance Report",
-        "title": "All Projects Acceptance Report"
+        "title": "All Projects Acceptance Report",
+        "hidden": "true"
     },
     "register-prod_sequence_010": {
         "name": "register-prod_sequence_010",
