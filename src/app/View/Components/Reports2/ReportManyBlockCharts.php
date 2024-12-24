@@ -50,7 +50,7 @@ class ReportManyBlockCharts extends Component
     //     return json_decode(json_encode($arrayOptions));
     // }
 
-    private function updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, $direction)
+    private function updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $settings, $direction)
     {
         $arrayOptions = json_decode(json_encode($jsonOptions), true);
 
@@ -68,9 +68,12 @@ class ReportManyBlockCharts extends Component
                 // Handle invalid direction or add default behavior
                 throw new InvalidArgumentException("Unsupported direction: $direction");
         }
+        // $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
+        // $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
 
-        $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
-        $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
+        $arrayOptions["series"][0]["name"] = "";
+        $arrayOptions["title"]["text"] = "";
+
 
         return json_decode(json_encode($arrayOptions));
     }
@@ -135,34 +138,34 @@ class ReportManyBlockCharts extends Component
         $mulChartConfig = $jsonOptions->multipleChart;
         $settings = $mulChartConfig->settings;
         $xAxisData = $mulChartConfig->xAxisData;
-        // switch ($mulChartConfig->direction) {
-        //     case 'row':
-        //         $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
-        //         break;
-        //     case 'row_cell':
-        //         $chartOptions = $this->generateRowCellCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
-        //         break;
-        //     case 'column':
-        //         $chartOptions = $this->generateColumnCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
-        //         break;
-        //     default:
-        //         // Placeholder for future directions
-        // }
         switch ($mulChartConfig->direction) {
             case 'row':
+                $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+                break;
             case 'row_cell':
+                $chartOptions = $this->generateRowCellCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
+                break;
             case 'column':
-                $chartOptions = $this->updateJsonOptions(
-                    $jsonOptions,
-                    $xAxisData,
-                    $queriedData,
-                    $settings,
-                    $mulChartConfig->direction
-                );
+                $chartOptions = $this->generateColumnCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
                 break;
             default:
-                throw new InvalidArgumentException("Unsupported direction: $mulChartConfig->direction");
+                // Placeholder for future directions
         }
+        // switch ($mulChartConfig->direction) {
+        //     case 'row':
+        //     case 'row_cell':
+        //     case 'column':
+        //         $chartOptions = $this->updateJsonOptions(
+        //             $jsonOptions,
+        //             $xAxisData,
+        //             $queriedData,
+        //             $settings,
+        //             $mulChartConfig->direction
+        //         );
+        //         break;
+        //     default:
+        //         throw new InvalidArgumentException("Unsupported direction: $mulChartConfig->direction");
+        // }
         return $chartOptions;
     }
 
