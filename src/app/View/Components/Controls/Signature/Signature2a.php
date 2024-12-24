@@ -34,6 +34,8 @@ class Signature2a extends Component
     ) {
         static::$count++;
         $this->debug = !!$debug;
+        // $this->debug = true;
+        // dump($this->debug);
     }
 
     /**

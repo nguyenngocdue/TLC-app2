@@ -12,9 +12,15 @@
     @if($debug) Line ID @endif
     <input class="w-28" type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[id][{{$line->id}}]" 
     value="{{$line->id}}">
-    @if($debug) Inspector ID @endif
-    <input class="w-28" type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[inspector_id][{{$line->id}}]" id="inspector_id_{{$line->id}}"
-        value="{{$line->inspector_id}}"/>
+
+    {{-- //Signature has it own inspector_id --}}
+    @if($line->getControlType->slug !== 'signature') 
+        @if($debug) Inspector ID @endif
+        <input class="w-28" type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[inspector_id][{{$line->id}}]" id="inspector_id_{{$line->id}}"
+            value="{{$line->inspector_id}}"/>
+    @endif
+    
+
     @if($debug) Attachment Is Group @endif
     <input class="w-28" type="{{$debug?"text":"hidden"}}" name="{{$table01Name}}[attachment_is_grouped][{{$line->id}}]"
         value="{{$line->attachment_is_grouped}}"/>

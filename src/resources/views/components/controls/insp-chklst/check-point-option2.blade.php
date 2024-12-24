@@ -23,20 +23,24 @@
                 @disabled($readOnly)
                 value="{{$optionId}}"
                 data-behavior-id="{{$option->behavior_of}}"
-                onclick="
-                    reRenderCheckpoint2({{$line->id}}, {{$optionId}}, {{$option->behavior_of}});
-                    updateProgressBar2('{{$table01Name}}');
-                "
+                @if(!$readOnly)
+                    onclick="
+                        reRenderCheckpoint2({{$line->id}}, {{$optionId}}, {{$option->behavior_of}});
+                        updateProgressBar2('{{$table01Name}}');
+                    "
+                @endif
             />
 
             <label for="radio_{{$line->id}}_{{$optionId}}" 
                 class="{{$class}} {{$cursor}} block select-none rounded-xl p-2 text-center peer-checked:font-bold"
                 title="#{{$optionId}}"
-                onclick="
-                    uncheckMe2({{$line->id}}, {{$optionId}});
-                    uncheckOther2(@json($idArray), {{$line->id}}, {{$optionId}});
-                    updateInspectorId2({{$line->id}}, {{$cuid}});
-                "
+                @if(!$readOnly)
+                    onclick="
+                        uncheckMe2({{$line->id}}, {{$optionId}});
+                        uncheckOther2(@json($idArray), {{$line->id}}, {{$optionId}});
+                        updateInspectorId2({{$line->id}}, {{$cuid}});
+                    "
+                @endif
                 >
                 {{$option->name}}
             </label>
