@@ -37,6 +37,7 @@ class DashboardInspMatrixController extends Controller
             $tabs[] = ['title' => 'Production Progress', 'active' => $tab == 'sqbts', 'href' => "?tab=sqbts"];
         }
         $tabs[] = ['title' => 'QAQC Progress', 'active' => $tab == 'ics', 'href' => "?tab=ics"];
+        $tabs[] = ['title' => 'Sign-Off Request', 'active' => $tab == 'sign-off', 'href' => "?tab=sign-off"];
 
         return view("dashboards.dashboard-insp-matrix", [
             'controller' => $controller,

@@ -10,11 +10,23 @@
     <x-renderer.tab-pane class="" :tabs="$tabs" activeBgColor="gray" activeTextColor="blue">      
         <div class="grid grid-cols-12 gap-3 pt-2 mx-4 mb-4">
             <div class="col-span-12">
-                @if($tab == 'ics')
+                @switch($tab)
+                @case('ics')
                     <x-renderer.view-all-matrix-type.QaqcInspChklstShtsDashboard controller="{{$controller}}" />
-                @elseif($tab == 'sqbts')
+                    @break
+                @case('sqbts')
                     <x-renderer.matrix-for-report.ProdSequencesDashboard controller="{{$controller}}" />
-                @endif
+                    @break
+                @case('sign-off')
+                    <div class="flex gap-1">
+                        <x-dashboards.pre-sign-off-request />
+                        <x-dashboards.sign-off-request />
+                    </div>
+                    @break
+                @default
+                    Need to implement tab content for {{$tab}}
+                @break
+                @endswitch
             </div>
         </div>
     </x-renderer.tab-pane>
