@@ -186,17 +186,17 @@ class UserReportSettingController extends Controller
 
         $dataSource = [
             'openingRpData' => [
-                'title' => 'Statistics of reports <span class="text-orange-400">hidden </span> in Report v1.',
+                'title' => 'Statistics of reports that are <span class="text-orange-400">hidden</span> in Report v1.',
                 'tableDataSource' => $hiddenRpData,
                 'tableColumns' => self::getColumnDataSource1()
             ],
             'hiddenRpData' => [
-                'title' => 'Statistics of reports <span class="text-orange-400">not yet hidden </span> in Report v1.',
+                'title' => 'Statistics of reports that are <span class="text-orange-400">not yet hidden</span> in Report v1.',
                 'tableDataSource' => $openingRpData,
                 'tableColumns' => self::getColumnDataSource1()
             ],
             'queriedUsers' => [
-                'title' => 'Data of reports <span class="text-orange-400">not yet deleted</span> in UserSetting <br/> when you have already set them to hidden in Report v1.',
+                'title' => 'Data of reports <span class="text-orange-400">that have not yet been deleted</span> in UserSetting <br/>, despite already being set to hidden in Report v1.',
                 'tableDataSource' => $queriedUsers,
                 'tableColumns' => self::getColumnDataSource2(),
                 'usersNeedToCheck' => $usersNeedToCheck
