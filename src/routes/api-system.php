@@ -15,6 +15,7 @@ Route::group([
     Route::post('options', [Options::class, 'setByKeyValues']);
 
     Route::get('getStatuses/{entityType}', [LibStatuses::class, 'getFor']);
+    Route::get('getStatuses', [LibStatuses::class, 'getAll']);
     Route::get('getApps', [LibApps::class, 'getAll']);
 });
 
