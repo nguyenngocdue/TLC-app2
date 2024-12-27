@@ -2,7 +2,7 @@
     $beginMonth = 5;
     $beginYear = 2024;
     $currentMonth = (int) date('m');
-    $currentYear = (int) date('Y');
+    $currentYear = (int) date('Y') + 1;
 
     $currentDay = (int) date('d');
     if ($currentDay > 25 && $currentDay <= 31) {
