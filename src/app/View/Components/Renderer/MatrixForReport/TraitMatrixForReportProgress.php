@@ -39,20 +39,17 @@ trait TraitMatrixForReportProgress
 
     function prod_sequences($xAxis, $yAxis, $dataSource)
     {
-        $result = [];
-        foreach ($dataSource as $id => $line) {
-            $result[$id]['progress'] = 0;
-            foreach ($line as $cell) {
-                if (in_array($cell->status, $this->finishedArray)) {
-                    $result[$id]['progress'] += 1;
-                }
-            }
+        $prod_sequence_progress = [];
+        foreach ($yAxis as $prodOrder) {
+            $prod_sequence_progress[$prodOrder['id']] = $prodOrder->prod_sequence_progress;
         }
+        // dump($prod_sequence_progress);
 
+        $result = [];
         foreach ($dataSource as $id => &$line) {
+            $result[$id]['progress'] = $prod_sequence_progress[$id];
             $line['progress'] = (object)[
-
-                'value' => '69%',
+                'value' => number_format($result[$id]['progress'], 2) . '%',
                 'cell_class' => 'text-right',
             ];
         }
