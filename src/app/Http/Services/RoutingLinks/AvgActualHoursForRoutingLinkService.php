@@ -8,6 +8,28 @@ use Illuminate\Support\Facades\Log;
 
 class AvgActualHoursForRoutingLinkService
 {
+    function getEstimateErrorFactor($routing_details)
+    {
+        $errorFactor = [];
+        foreach ($routing_details as $routing_detail) {
+            switch (true) {
+                    //User has not estimated yet
+                case $routing_detail->target_hours == 0 && $routing_detail->avg_actual_hours > 0:
+                    //Users has estimated but no actual work committed
+                case $routing_detail->target_hours > 0 && $routing_detail->avg_actual_hours == 0:
+                    //do nothing
+                    break;
+                    //User has estimated 
+                case $routing_detail->target_hours > 0 && $routing_detail->avg_actual_hours > 0:
+                    $errorFactor[] = $routing_detail->avg_actual_hours / $routing_detail->target_hours;
+                    break;
+            }
+        }
+
+        // dump($errorFactor);
+        return round(array_sum($errorFactor) / count($errorFactor), 3);
+    }
+
     function handle(Request $request)
     {
         $routing_id = $request->input('routing_id');
@@ -18,7 +40,9 @@ class AvgActualHoursForRoutingLinkService
 
         $routing_details = Prod_routing_detail::query()
             ->where('prod_routing_id', $routing_id)
-            ->with(['getProdSequences'])
+            ->with(['getProdSequences' => function ($query) {
+                $query->with(['getProdRunsSubCon']);
+            }])
             ->get();
 
         $routingDetailWithNoSheetYet = [];
@@ -58,26 +82,59 @@ class AvgActualHoursForRoutingLinkService
 
 
         // dump($totalHourArray);
-        $avg_of_known_sequence = round(array_sum($totalHourValue) / $countOfKnownSequence, 3);
+
         // dump($avg_of_known_sequence);
 
-        //Total hours of known + unknown sequences to calculate weight
-        $totalHoursToMakeAnProdOrder = array_sum($totalHourValue) + $avg_of_known_sequence * count($routingDetailWithNoSheetYet);
-        dump(array_sum($totalHourValue));
-        dump($avg_of_known_sequence * count($routingDetailWithNoSheetYet));
-        dump($totalHoursToMakeAnProdOrder);
+
+        // dump(array_sum($totalHourValue));
+        // dump($avg_of_known_sequence * count($routingDetailWithNoSheetYet));
+        // dump($totalHoursToMakeAnProdOrder);
 
         foreach ($totalHourArray as $obj) {
             $routing_detail = $obj['obj'];
             $routing_detail->avg_actual_hours = $obj['value'];
-            $routing_detail->actual_hours_weight = round(100 * $obj['value'] / $totalHoursToMakeAnProdOrder, 3);
+            // $routing_detail->actual_hours_weight = round(100 * $obj['value'] / $totalHoursToMakeAnProdOrder, 3);
             $routing_detail->save();
         }
 
         // dump($routingDetailWithNoSheetYet[0]);
         foreach ($routingDetailWithNoSheetYet as $routing_detail) {
-            $routing_detail->avg_actual_hours = $avg_of_known_sequence;
-            $routing_detail->actual_hours_weight = round(100 * $avg_of_known_sequence / $totalHoursToMakeAnProdOrder, 3);
+            $routing_detail->avg_actual_hours = 0; //$avg_of_known_sequence;
+            // $routing_detail->actual_hours_weight = 0; //round(100 * $avg_of_known_sequence / $totalHoursToMakeAnProdOrder, 3);
+            $routing_detail->save();
+        }
+
+        $estimationErrorFactor = $this->getEstimateErrorFactor($routing_details);
+        dump("Error Factor: " . $estimationErrorFactor);
+
+        $autoEstimatedHours = [];
+        foreach ($routingDetailWithNoSheetYet as $routing_detail) {
+            $value =  round($routing_detail->target_hours * $estimationErrorFactor, 3);
+            $autoEstimatedHours[] = $value;
+            $routing_detail->avg_actual_hours = $value;
+            $routing_detail->save();
+        }
+
+        //Total hours of known + estimated hours but no sheets yet
+        $totalHoursToMakeAnProdOrder = array_sum($totalHourValue) + array_sum($autoEstimatedHours);
+        $totalCount = $countOfKnownSequence + count($autoEstimatedHours);
+
+        $avg_of_known_sequence = round($totalHoursToMakeAnProdOrder / $totalCount, 3);
+        dump("Avg of known sequence: (hours) " . $avg_of_known_sequence);
+
+        $count_makeup = 0;
+        foreach ($routingDetailWithNoSheetYet as $routing_detail) {
+            if ($routing_detail->avg_actual_hours == 0) {
+                $routing_detail->avg_actual_hours = $avg_of_known_sequence;
+                $count_makeup++;
+                $routing_detail->save();
+            }
+        }
+
+        $totalHoursToMakeAnProdOrder += $count_makeup * $avg_of_known_sequence;
+        //Update weight
+        foreach ($routing_details as $routing_detail) {
+            $routing_detail->actual_hours_weight = round(100 * $routing_detail->avg_actual_hours / $totalHoursToMakeAnProdOrder, 3);
             $routing_detail->save();
         }
     }
