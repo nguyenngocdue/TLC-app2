@@ -20,6 +20,7 @@ class Prod_routing_detail extends ModelExtended
         "target_man_hours",
         "target_min_uom",
         "avg_actual_hours",
+        "actual_hours_weight",
     ];
     public static $nameless = true;
     public static $statusless = true;
@@ -76,6 +77,7 @@ class Prod_routing_detail extends ModelExtended
             ["dataIndex" => 'target_man_hours'],
             ["dataIndex" => 'target_min_uom'],
             ["dataIndex" => 'avg_actual_hours'],
+            ["dataIndex" => 'actual_hours_weight'],
 
             ['dataIndex' => 'wir_description_id',],
         ];
