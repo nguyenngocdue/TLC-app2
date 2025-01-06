@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 
 abstract class MatrixForReportParent extends Component
 {
+    use TraitMatrixForReportProgress;
+
     protected $dataIndexX = "wir_description_id";
     protected $dataIndexY = "prod_order_id";
     protected $rotate45Width = 400;
@@ -184,37 +186,6 @@ abstract class MatrixForReportParent extends Component
     {
         foreach ($line as $cell) if (in_array($cell->status, $this->naArray)) unset($wa[$cell->{$this->dataIndexX}]);
         return $wa;
-    }
-
-    function calculateProgressForRows($xAxis, $yAxis, $dataSource)
-    {
-        $weightArray = $this->getWeightArray($xAxis, $yAxis, $dataSource);
-
-        $result = [];
-        // dump($dataSource);
-        // dump(array_pop($dataSource));
-        foreach ($dataSource as $id => $line) {
-            $wa = $this->removeWeightOfNA($weightArray, $line);
-            $totalWa = array_sum($wa);
-            // dump($wa);
-            $result[$id]['progress'] = 0;
-            // dump($line);
-            foreach ($line as $cell) {
-                if (in_array($cell->status, $this->finishedArray)) {
-                    $value = $wa[$cell->{$this->dataIndexX}] ?? 0;
-                    $result[$id]['progress'] += 100 * $value / $totalWa;
-                }
-            }
-        }
-
-        // dump($dataSource);
-        foreach ($dataSource as $id => &$line) {
-            $line['progress'] = (object)[
-                'value' => number_format($result[$id]['progress'], 2) . '%',
-                'cell_class' => 'text-right',
-            ];
-        }
-        return $dataSource;
     }
 
     function calculateProgressForColumns($xAxis, $yAxis, $dataSource, $leftColumns)
