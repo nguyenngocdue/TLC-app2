@@ -20,18 +20,20 @@ class ProdSequenceToProdOrderService
             ->find($id);
     }
 
-    private function getProdSequenceProgress($allProdSequences)
-    {
-        $finishedCount = 0;
-        $total = 0;
-        foreach ($allProdSequences as $prodSequence) {
-            $status = $prodSequence->status;
-            if (in_array($status, LibStatuses::$finishedArray)) $finishedCount++;
-            if (!in_array($status, LibStatuses::$naArray)) $total++;
-        }
+    // private function getProdSequenceProgress($allProdSequences)
+    // {
+    //     $finishedCount = 0;
+    //     $total = 0;
+    //     foreach ($allProdSequences as $prodSequence) {
+    //         $status = $prodSequence->status;
+    //         if (in_array($status, LibStatuses::$finishedArray)) $finishedCount++;
+    //         if (!in_array($status, LibStatuses::$naArray)) $total++;
+    //     }
 
-        return round(100 * $finishedCount / $total, 2);
-    }
+    //     return round(100 * $finishedCount / $total, 2);
+    // }
+
+    private function getProdSequenceProgress($allProdSequences) {}
 
     public function update($id)
     {

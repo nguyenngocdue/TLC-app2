@@ -13,6 +13,7 @@ use App\Http\Controllers\Utils\TestFunction\SendEmail;
 use App\Http\Controllers\Utils\TestFunction\TestEmailOnLdapServer;
 use App\Http\Services\CleanOrphanAttachment\ListFileService;
 use App\Http\Services\CleanOrphanAttachment\ListFolderService;
+use App\Http\Services\RoutingLinks\AvgActualHoursForRoutingLinkService;
 use App\Jobs\TestLogToFileJob;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,7 @@ class TestCronJobController extends Controller
     function __construct(
         private ListFolderService $listFolderService,
         private ListFileService $listFileService,
+        private AvgActualHoursForRoutingLinkService $avgActualHoursForRoutingLinkService,
     ) {}
 
     public function getType()
@@ -73,6 +75,9 @@ class TestCronJobController extends Controller
                 case "refresh_attachment_orphan":
                     $this->listFolderService->handle();
                     $this->listFileService->handle();
+                    break;
+                case "recalculate_avg_actual_hours":
+                    $this->avgActualHoursForRoutingLinkService->handle($request);
                     break;
                 default:
                     dump($case  . " is not found.");

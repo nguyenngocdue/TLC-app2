@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('prod_routing_details', function (BlueprintExtended $table) {
             $table->id();
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->double('target_man_power')->nullable();
             $table->double('target_man_hours')->nullable();
             $table->double('target_min_uom')->nullable();
+            $table->double('avg_actual_hours')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();

@@ -22,6 +22,12 @@
         <x-renderer.button href="?case=test_email_on_ldap_server">Test Email On LDAP Server</x-renderer.button>
         <x-renderer.button href="?case=refresh_attachment_orphan">Refresh Attachment Orphan</x-renderer.button>
     </div>
+
+    Operations
+    <div class="grid grid-cols-6 gap-4 w-3/4 mx-auto justify-center items-center">
+        <x-renderer.button href="?case=recalculate_avg_actual_hours">Recalculate Actual Hours for Routing Links</x-renderer.button>
+    </div>
+
 </div>
 
 @endsection
