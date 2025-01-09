@@ -70,9 +70,8 @@ class ReportManyBlockCharts extends Component
         }
         // $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
         // $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-
         $arrayOptions["series"][0]["name"] = "";
-        $arrayOptions["title"]["text"] = "";
+        // $arrayOptions["title"]["text"] = "";
 
 
         return json_decode(json_encode($arrayOptions));
@@ -95,6 +94,7 @@ class ReportManyBlockCharts extends Component
             $chartOptions[$key]["descriptions"]["cssClass"] = $mulChartConfig->descriptions->cssClass ?? 'text-lg text-lg-vw leading-tight text-gray-800 font-bold dark:bg-gray-700 dark:text-gray-400 p-4 mb-2';
             $chartOptions[$key]["chart_option"] = $opts;
         }
+
         return $chartOptions;
     }
 
@@ -132,6 +132,23 @@ class ReportManyBlockCharts extends Component
         return $chartOptions;
     }
 
+    private function addChartTitle($chartOptions, $chartTitleStr) {
+        $trimmedText = trim($chartTitleStr, "[]");
+        $chartTitles = $chartTitleStr ?  explode(',', $trimmedText) : '';
+        if (!empty($chartTitles)) {
+            foreach ($chartOptions as &$values){
+                $configs = $values["chart_option"];
+                foreach ($configs as $k2 => &$val) {
+                    if (isset($val->title->text)) {
+                        $val->title->text =  isset($chartTitles[$k2]) ?  trim($chartTitles[$k2]) : '';
+                    }
+                }
+                $values["chart_option"] = $configs;
+            }
+        }
+        return  $chartOptions;
+    }
+
     private function generateChartOptions($jsonOptions, $queriedData)
     {
         $chartOptions = [];
@@ -141,6 +158,7 @@ class ReportManyBlockCharts extends Component
         $mulChartConfig = $jsonOptions->multipleChart;
         $settings = $mulChartConfig->settings;
         $xAxisData = $mulChartConfig->xAxisData;
+        $chartTitleStr = $jsonOptions->title->text;
         switch ($mulChartConfig->direction) {
             case 'row':
                 $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
@@ -169,6 +187,8 @@ class ReportManyBlockCharts extends Component
         //     default:
         //         throw new InvalidArgumentException("Unsupported direction: $mulChartConfig->direction");
         // }
+
+        $chartOptions = $this->addChartTitle($chartOptions, $chartTitleStr);
         return $chartOptions;
     }
 
