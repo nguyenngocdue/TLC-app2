@@ -158,7 +158,7 @@ class ReportManyBlockCharts extends Component
         $mulChartConfig = $jsonOptions->multipleChart;
         $settings = $mulChartConfig->settings;
         $xAxisData = $mulChartConfig->xAxisData;
-        $chartTitleStr = $jsonOptions->title->text;
+        $chartTitleStr = $jsonOptions?->title?->text ?? "";
         switch ($mulChartConfig->direction) {
             case 'row':
                 $chartOptions = $this->generateRowCharts($queriedData, $mulChartConfig, $jsonOptions, $settings, $xAxisData);
