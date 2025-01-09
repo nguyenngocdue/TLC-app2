@@ -92,6 +92,7 @@ class ReportManyBlockCharts extends Component
             }
             $opts[$key] = $this->updateJsonOptions($jsonOptions, $xAxisValues, $seriesValues, $settings[0], 'row');
             $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title) . ': ' . $value->{$mulChartConfig->descriptions->dataIndex};
+            $chartOptions[$key]["descriptions"]["cssClass"] = $mulChartConfig->descriptions->cssClass ?? 'text-lg text-lg-vw leading-tight text-gray-800 font-bold dark:bg-gray-700 dark:text-gray-400 p-4 mb-2';
             $chartOptions[$key]["chart_option"] = $opts;
         }
         return $chartOptions;
@@ -109,6 +110,7 @@ class ReportManyBlockCharts extends Component
                 $opts[] = $this->updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $setting, 'row_cell');
             }
             $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title) . ': ' . $value->{$mulChartConfig->descriptions->dataIndex};
+            $chartOptions[$key]["descriptions"]["cssClass"] = $mulChartConfig->descriptions->cssClass ?? 'text-lg text-lg-vw leading-tight text-gray-800 font-bold dark:bg-gray-700 dark:text-gray-400 p-4 mb-2';
             $chartOptions[$key]["chart_option"] = $opts;
         }
         return $chartOptions;
@@ -126,6 +128,7 @@ class ReportManyBlockCharts extends Component
         }
         $chartOptions[$key]["chart_option"] = $opts;
         $chartOptions[$key]["descriptions"]["text"] = Report::makeTitle($mulChartConfig->descriptions?->title);
+        $chartOptions[$key]["descriptions"]["cssClass"] = $mulChartConfig->descriptions->cssClass ?? 'text-lg text-lg-vw leading-tight text-gray-800 font-bold dark:bg-gray-700 dark:text-gray-400 p-4 mb-2';
         return $chartOptions;
     }
 
@@ -174,9 +177,15 @@ class ReportManyBlockCharts extends Component
     public function render()
     {
         $queriedData = $this->queriedData;
+
+        $block = $this->block;
+        $optionStr =  $block->chart_json;
+        $jsonOptions = $this->changeToJsonOptions($optionStr, $this->queriedData);
+
         if ($queriedData->isEmpty()) {
+            $title = $jsonOptions?->multipleChart?->descriptions?->title . ': (Empty Data)' ?? "Render Title of Description";
             return Blade::render("
-            <x-renderer.heading class='text-lg text-lg-vw leading-tight text-blue-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4 mb-2' level=4>Render Chart</x-renderer.heading>
+            <x-renderer.heading class='text-lg text-lg-vw leading-tight text-gray-800 font-bold bg-gray-50 dark:bg-gray-700 dark:text-gray-400 p-4 mb-2' level=4>{$title}</x-renderer.heading>
             <div class='max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 text-center'>
                 <!-- Icon -->
                 <div class='text-red-500 mb-4'>
@@ -190,9 +199,6 @@ class ReportManyBlockCharts extends Component
             </div>");
         }
 
-        $block = $this->block;
-        $optionStr =  $block->chart_json;
-        $jsonOptions = $this->changeToJsonOptions($optionStr, $this->queriedData);
         $chartOptions = $this->generateChartOptions($jsonOptions, $queriedData);
         $divClass = ($d = $block->div_class) ? $d : ' w-full h-full p-4 border border-gray-200';
         return view(
