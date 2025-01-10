@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports;
 
 use App\View\Components\Reports2\TraitReportFormatString;
+use Illuminate\Support\Facades\Log;
 
 trait TraitCreateSQLReport2
 {
@@ -11,6 +12,7 @@ trait TraitCreateSQLReport2
 
     public function replaceVariableStrs($sqlStr, $params)
     {
+        // Log::info($sqlStr, $params);
         $parsedVariables = $this->parseVariables($sqlStr);
         foreach (last($parsedVariables) as $key => $value) {
             $value = trim(str_replace('$', '', $value));

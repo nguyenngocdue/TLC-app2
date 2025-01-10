@@ -59,6 +59,8 @@ class ReportTableRow
                 if (array_key_exists($k2, $configuredCols)) {
                     $column = $configuredCols[$k2];
                     $entityType = $column->entity_type;
+                    
+                    $value = is_object($value) && isset($value->value) ? $value->value : $value;
                     $content = $this->createContentInRowCell($value, $column);
                     $cellClass = $column->row_cell_class;
                     $cellDivClass =  $column->row_cell_div_class;
@@ -93,21 +95,19 @@ class ReportTableRow
                             break;
                     }
                     $newValue = $this->makeCellValue($value,$value, $content, $cellClass,$href, $cellDivClass, $cellTitle);
-                    // $newValue = (object)[
-                    //     'original_value' => $value, // to export excel
-                    //     'value' => $content,
-                    //     'cell_href' => $href,
-                    //     'cell_class' => $cellClass,
-                    //     'cell_div_class' => $cellDivClass,
-                    // ];
-                    $re->$k2 = $newValue;
+                    // TO DEBUG
+                    // if($k1 == 98 && $k2 === "progress") {
+                    //     dd($dataLine, $re, $newValue, $k2, $value,$value, $content, $cellClass,$href, $cellDivClass, $cellTitle);
+                    // }
+                        $re->$k2 = $newValue;
+                    }
+                    elseif ($block->is_transformed_data) {
+                        $re->$k2 = $value;
+                    }
                 }
-                elseif ($block->is_transformed_data) {
-                    $re->$k2 = $value;
-                }
-            }
             $dataLine = $re;
             $queriedData->put($k1, $dataLine);
+           
         }
         // dd($queriedData);
         return $queriedData;

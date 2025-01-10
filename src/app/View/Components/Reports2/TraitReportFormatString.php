@@ -55,7 +55,6 @@ trait TraitReportFormatString
 
     function parseVariables($sqlStr)
     {
-        // Log::info($sqlStr);
         try {
             preg_match_all('/(?<!\\\)\{%\\s*([^}]*)\s*\%}/', $sqlStr, $parsedVariables);
             return $parsedVariables;

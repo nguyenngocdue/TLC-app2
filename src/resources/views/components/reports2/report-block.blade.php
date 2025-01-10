@@ -73,7 +73,6 @@
                         @dump($sqlString)
                         @dump($queriedData)
                     @endif
-                    
                     <x-reports2.report-block-table 
                         reportId="{{ $reportId }}" 
                         :block="$block"

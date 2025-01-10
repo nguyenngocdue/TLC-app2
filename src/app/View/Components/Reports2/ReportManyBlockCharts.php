@@ -20,36 +20,6 @@ class ReportManyBlockCharts extends Component
 
     ) {}
 
-    // private function updateJsonOptionsRowCell($jsonOptions, $xAxisValue, $seriesValue, $setting)
-    // {
-    //     $arrayOptions = json_decode(json_encode($jsonOptions), true);
-    //     $arrayOptions["xAxis"]["data"] =  [$xAxisValue];
-    //     $arrayOptions["series"][0]["data"] = [$seriesValue];
-    //     $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
-    //     $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-    //     return json_decode(json_encode($arrayOptions));
-    // }
-
-    // private function updateJsonOptionsCol($jsonOptions, $xAxisValue, $seriesValue, $setting)
-    // {
-    //     $arrayOptions = json_decode(json_encode($jsonOptions), true);
-    //     $arrayOptions["xAxis"]["data"] =  $xAxisValue;
-    //     $arrayOptions["series"][0]["data"] = $seriesValue;
-    //     $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
-    //     $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-    //     return json_decode(json_encode($arrayOptions));
-    // }
-
-    // private function updateJsonOptionsRow($jsonOptions, $xAxisValue, $seriesValue, $setting)
-    // {
-    //     $arrayOptions = json_decode(json_encode($jsonOptions), true);
-    //     $arrayOptions["xAxis"]["data"] =  $xAxisValue;
-    //     $arrayOptions["series"][0]["data"] = $seriesValue;
-    //     $arrayOptions["series"][0]["name"] = $setting->title ?? $setting->dataIndex;
-    //     $arrayOptions["title"]["text"] = $setting->title ?? $setting->dataIndex;
-    //     return json_decode(json_encode($arrayOptions));
-    // }
-
     private function updateJsonOptions($jsonOptions, $xAxisValue, $seriesValue, $settings, $direction)
     {
         $arrayOptions = json_decode(json_encode($jsonOptions), true);
@@ -172,21 +142,7 @@ class ReportManyBlockCharts extends Component
             default:
                 // Placeholder for future directions
         }
-        // switch ($mulChartConfig->direction) {
-        //     case 'row':
-        //     case 'row_cell':
-        //     case 'column':
-        //         $chartOptions = $this->updateJsonOptions(
-        //             $jsonOptions,
-        //             $xAxisData,
-        //             $queriedData,
-        //             $settings,
-        //             $mulChartConfig->direction
-        //         );
-        //         break;
-        //     default:
-        //         throw new InvalidArgumentException("Unsupported direction: $mulChartConfig->direction");
-        // }
+       
 
         $chartOptions = $this->addChartTitle($chartOptions, $chartTitleStr);
         return $chartOptions;

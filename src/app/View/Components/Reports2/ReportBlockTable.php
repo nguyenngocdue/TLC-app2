@@ -95,6 +95,7 @@ class ReportBlockTable extends Component
 
     public function render()
     {
+        
         $block = $this->block;
         $columns = $this->block->getLines->sortby('order_no');
         $headerCols = $this->headerCols;
@@ -102,10 +103,10 @@ class ReportBlockTable extends Component
         $queriedData = $this->queriedData;
         $currentParams = $this->currentParams;
         $queriedData = $this->updateTimezone($queriedData, $currentParams, $columns);
-
+        
         $reportTableColumn = ReportTableColumn::getInstance();
         $configuredCols = $reportTableColumn->getConfiguredCols($columns, $dataIndexToRender);
-
+        
         $reportTableRow = ReportTableRow::getInstance();
         $drawData = method_exists($this->tableDataSource, 'items') ? $this->tableDataSource->items() : $this->tableDataSource;
         $tableDataSource = $reportTableRow->createTableDataSourceForRows(
@@ -114,7 +115,7 @@ class ReportBlockTable extends Component
             $block,
             $currentParams
         );
-
+        
         if ($block->has_pagination) {
             $tableDataSource = method_exists(($x = $this->tableDataSource), 'setCollection') ?  $x->setCollection($tableDataSource) : $x;
         }
@@ -127,14 +128,13 @@ class ReportBlockTable extends Component
             }
             $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
         }
-
-
+        
+        
         //Transformed Data Option
         if ($block->is_transformed_data) {
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
         $headerTop = $block->header_top;
-
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
