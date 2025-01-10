@@ -27,7 +27,10 @@ class TimeSheetOfficerController extends TimesheetController
 
         $ownerId = $hrTimesheetOfficer->owner_id ?? CurrentUser::id();
         $workplaceId = User::findFromCache($ownerId)->workplace;
-        $publicHoliday = Public_holiday::where('year', $year)->where('workplace_id', $workplaceId)->get();
+        $publicHoliday = Public_holiday::query()
+            ->whereIn('year', [$year, $year + 1])
+            ->where('workplace_id', $workplaceId)
+            ->get();
         return $publicHoliday;
     }
 
