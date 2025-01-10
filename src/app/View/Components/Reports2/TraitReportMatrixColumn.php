@@ -140,17 +140,33 @@ trait TraitReportMatrixColumn
         }
     }
 
+
     private function processAddedParts($item, $addedParts, &$otherCols)
     {
         foreach ($addedParts as $partKey) {
             if (isset($item[$partKey])) {
-                $otherCols[$partKey]['total'] = $otherCols[$partKey]['total'] ?? 0;
+                if (!isset($otherCols[$partKey])) {
+                    $otherCols[$partKey]['total'] = 0;
+                    $otherCols[$partKey]['counted'] = 0;
+                } 
+                $otherCols[$partKey]['total'] += $item[$partKey];
                 $otherCols[$partKey]['counted'] = $otherCols[$partKey]['counted'] ?? 0;
                 if (isset($item[$partKey]->original_value)) $otherCols[$partKey]['total'] += $item[$partKey]->original_value;
                 $otherCols[$partKey]['counted'] += 1;
             }
         }
     }
+    // private function processAddedParts($item, $addedParts, &$otherCols)
+    // {
+    //     foreach ($addedParts as $partKey) {
+    //         if (isset($item[$partKey])) {
+    //             $otherCols[$partKey]['total'] = $otherCols[$partKey]['total'] ?? 0;
+    //             $otherCols[$partKey]['counted'] = $otherCols[$partKey]['counted'] ?? 0;
+    //             if (isset($item[$partKey]->original_value)) $otherCols[$partKey]['total'] += $item[$partKey]->original_value;
+    //             $otherCols[$partKey]['counted'] += 1;
+    //         }
+    //     }
+    // }
     private function processData($mergedData, $transformedFields, $excludedParts, $includedParts, $addedParts)
     {
         $cols = [];
@@ -188,6 +204,7 @@ trait TraitReportMatrixColumn
                 $firstData = reset($mergedData);
                 $lackFields = array_fill_keys(array_diff(array_keys($firstData), $transformedFields), null);
                 $mergedData = array_merge($mergedData, ['progress_row' => array_merge($lackFields, $progresses)]);
+                // dd($mergedData['progress_row'], $progresses);
                 return $mergedData;
             default:
                 return $mergedData;

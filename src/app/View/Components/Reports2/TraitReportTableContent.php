@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Reports2;
 
+use Illuminate\Support\Facades\Log;
 
 trait TraitReportTableContent
 {
@@ -33,8 +34,10 @@ trait TraitReportTableContent
                     return $icon . ' ' . $content;
             }
         }
-        $parsedVariables = $this->parseVariables($content);
-        if ($parsedVariables[0]) {
+        if(!is_object($content)){
+            $parsedVariables = $this->parseVariables($content);
+        }
+        if (isset($parsedVariables[0]) && $parsedVariables[0]) {
             $content = $this->formatReportHref($content, $currentParams);
         } 
         return $content;
