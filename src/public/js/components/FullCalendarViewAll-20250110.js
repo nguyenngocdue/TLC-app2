@@ -174,6 +174,9 @@ function renderHtmlCalendar() {
                     count_duplicate > 1
                         ? `<x-renderer.badge>${count_duplicate}</x-renderer.badge>`
                         : ''
+
+                console.log('url', url)
+
                 htmlWeekContentAll += url
                     ? `<div class="grid grid-cols-7 gap-0 font-semibold">
                                                 <a href="${url}" title="#${id}" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')" class="relative ${classHover} col-span-7 focus:outline-none bg-${bg_color} hover:bg-${text_color} text-${text_color} hover:text-${bg_color} focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p1y-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
@@ -183,7 +186,7 @@ function renderHtmlCalendar() {
                                                     ${htmlCountDuplicate}
                                                 </a>
                                             </div>`
-                    : `<div title="Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p1y-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
+                    : `<div title="111 Create new timesheet" onmouseover="onHover('${classHover}','${bg_color}','${text_color}')"  class="focus:outline-none text-white bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:ring-green-300 font-medium rounded text-sm p1y-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 text-xs" style="height:17px;">
                                                 <a href="javascript:callApiStoreEmpty('${routeCreate}',[{week: '${dataCreate}',owner_id:${ownerId},current_workplace_id: ${currentWorkplaceId}}], {caller: 'view-all-calendar'})" onclick="$(this).addClass('disabled');" class="${classHover} w-full grid grid-cols-7 gap-1 font-semibold text-center text-gray-800" >
                                                         ${htmlContentWeek}
                                                 </a>
@@ -299,6 +302,14 @@ function genDataCreate(valueWeek, yearCurrent, month) {
     return data
 }
 function transformDataByTimeSheet(allTimesheet, days, month, yearCurrent, routeCreate) {
+    const tmp0 = allTimesheet[yearCurrent - 1] ? Object.values(allTimesheet[yearCurrent - 1]) : []
+    const tmp1 = allTimesheet[yearCurrent] ? Object.values(allTimesheet[yearCurrent]) : []
+    console.log('tmp0', tmp0)
+    console.log('tmp1', tmp1)
+
+    allTimesheet[yearCurrent] = [...tmp0, ...tmp1]
+    console.log('allTimesheet', allTimesheet)
+
     if (allTimesheet[yearCurrent]) {
         for (let timesheet of allTimesheet[yearCurrent]) {
             if (typeof days[0] == 'number') {

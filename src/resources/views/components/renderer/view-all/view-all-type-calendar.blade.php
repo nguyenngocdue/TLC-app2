@@ -102,4 +102,4 @@
     const useTsForPayroll = @json($useTsForPayroll);
 
 </script>
-<script src="{{ asset('js/components/FullCalendarViewAll-20240912.js') }}"></script>
+<script src="{{ asset('js/components/FullCalendarViewAll-20250110.js') }}"></script>

@@ -65,14 +65,22 @@ trait TraitViewAllFunctions
 
     private function getDataSourceForViewCalendar($filter)
     {
-        $startDate = isset($filter['start_date']) ? $filter['start_date'] : Carbon::now()->startOfYear()->toDateString();
+        // Log::info($filter);
+        //Need to load the last week of the previous year
+        //Otherwise, the first week of the year will be CREATE NEW --> DUPLICATE
+        $startDate = isset($filter['start_date']) ? Carbon::parse($filter['start_date'])->subDays(7)->toDateString() : Carbon::now()->startOfYear()->subDays(7)->toDateString();
         $endDate = isset($filter['end_date']) ? $filter['end_date'] : Carbon::now()->endOfYear()->toDateString();
         $ownerId = isset($filter['owner_id']) ? $filter['owner_id'] : [CurrentUser::id()];
 
-        return ($this->typeModel)::query()
+        $result = ($this->typeModel)::query()
             ->whereIn('owner_id', $ownerId)
             ->whereDate('week', '>=', $startDate)
             ->whereDate('week', '<=',  $endDate);
+
+        // Log::info($startDate . " " . $endDate);
+
+        // Log::info($result->get());
+        return $result;
         // if ($filter) {
         //     if(!isset($filter['start_date'])) {
         //         $filter['start_date'] =  Carbon::now();
