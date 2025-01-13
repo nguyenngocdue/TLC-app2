@@ -3,8 +3,6 @@
 use App\BigThink\Options;
 use App\Http\Controllers\Api\v1\System\NotificationsController;
 use App\Http\Controllers\Api\v1\System\VersionController;
-use App\Http\Controllers\Workflow\LibApps;
-use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Facades\Route;
 use Firebase\JWT\JWT;
 
@@ -13,10 +11,6 @@ Route::group([
 ], function () {
     Route::get('options', [Options::class, 'getByKeys']);
     Route::post('options', [Options::class, 'setByKeyValues']);
-
-    Route::get('getStatuses/{entityType}', [LibStatuses::class, 'getFor']);
-    Route::get('getStatuses', [LibStatuses::class, 'getAll']);
-    Route::get('getApps', [LibApps::class, 'getAll']);
 });
 
 Route::group([
