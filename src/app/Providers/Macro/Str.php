@@ -120,6 +120,8 @@ Str::macro('getExtFromMime', function ($mime) {
     switch ($mime) {
         case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
             return "docx";
+        case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            return "xlsx";
         case "application/x-zip-compressed":
             return "zip";
         case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":

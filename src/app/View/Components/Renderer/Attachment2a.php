@@ -28,14 +28,14 @@ class Attachment2a extends Component
             // "string" => "video/* image/*";
         ],
         "only_non_media" => [
-            "title" => "Only Non-Media (CSV, PDF, ZIP, DOCX)",
-            "array" => ["csv", "pdf", "zip", "docx"],
-            "string" => "csv,pdf,zip,docx",
+            "title" => "Only Non-Media (CSV, PDF, ZIP, DOCX, XLSX)",
+            "array" => ["csv", "pdf", "zip", "docx", "xlsx"],
+            "string" => "csv,pdf,zip,docx,xlsx",
         ],
         "all_supported" => [
-            "title" => "All supported formats (JPG, JPEG, PNG, GIF, MP4, CSV, PDF, ZIP, DOCX)",
-            "array" => ["jpeg", "png", "jpg", "gif", "mp4", "csv", "pdf", "zip", "docx"],
-            "string" => "jpeg,png,jpg,gif,mp4,csv,pdf,zip,docx",
+            "title" => "All supported formats (JPG, JPEG, PNG, GIF, MP4, CSV, PDF, ZIP, DOCX, XLSX)",
+            "array" => ["jpeg", "png", "jpg", "gif", "mp4", "csv", "pdf", "zip", "docx", "xlsx"],
+            "string" => "jpeg,png,jpg,gif,mp4,csv,pdf,zip,docx,xlsx",
         ],
     ];
 
