@@ -191,9 +191,11 @@ abstract class MatrixForReportParent extends Component
     function calculateProgressForColumns($xAxis, $yAxis, $dataSource, $leftColumns)
     {
         $result = [];
+        $in_progress = [];
         $count = [];
         foreach ($xAxis as $x) {
             $result[$x->id] = 0;
+            $in_progress[$x->id] = 0;
             $count[$x->id] = 0;
         }
         $totalProgress = 0;
@@ -205,7 +207,7 @@ abstract class MatrixForReportParent extends Component
                     }
                     if (in_array($cell->status, ['in_progress'])) {
                         $progress = $cell->progress ?: 0;
-                        $result[$cell->{$this->dataIndexX}] += $progress / 100;
+                        $in_progress[$cell->{$this->dataIndexX}] += $progress / 100;
                     }
                     if (in_array($cell->status, $this->naArray)) {
                         $count[$cell->{$this->dataIndexX}]++;
@@ -222,14 +224,14 @@ abstract class MatrixForReportParent extends Component
             $tu = $line;
             $mau = $totalRows - $count[$xId];
             if ($mau > 0) {
-                $percent = 100 * $line / $mau;
+                $percent = 100 * ($line + $in_progress[$xId]) / $mau;
                 if ($percent == 100) {
                     $percent = '100%';
                 } else {
                     $percent = number_format($percent, 1) . '%';
                 }
                 $line = (object)[
-                    'value' =>  round($tu) . '/' . $mau . ' <br/>' . $percent . "",
+                    'value' =>  $tu . '/' . $mau . ' <br/>' . "<span title='in_progress included'>$percent</span>" . "",
                     'cell_class' => "text-center text-xs",
                 ];
             } else {
