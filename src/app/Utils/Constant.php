@@ -43,11 +43,4 @@ class Constant
     const COLOR_PUBLIC_HOLIDAY2 = ["#5eead4", "#67e8f9", "#fde047", "#93c5fd", "#f9a8d4", "#c4b5fd", "#86efac"];
 
     const EXTENSIONS_OF_FILE_GALLERY = ['mp4', 'mov', 'png', 'jpeg', 'gif', 'jpg', 'pdf'];
-    // const ONLY_VIDEOS = "mp4,mov";
-    // const ARRAY_ONLY_IMAGES = ["jpeg", "png", "jpg", "gif"];
-    // const ONLY_IMAGES = "png,jpeg,gif,jpg";
-    // // const ONLY_IMAGES = join(",", self::ARRAY_ONLY_IMAGES);
-    // const ARRAY_ONLY_NONE_MEDIA = ["csv", "pdf", "zip", "docx"];
-    // const ONLY_NONE_MEDIA = "csv,pdf,zip,docx";
-    // // const ONLY_NONE_MEDIA = join(",", self::ARRAY_ONLY_NONE_MEDIA);
 }

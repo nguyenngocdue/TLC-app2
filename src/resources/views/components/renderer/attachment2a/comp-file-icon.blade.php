@@ -11,6 +11,9 @@
 @case("docx")
     <i class="fa-file-word {{$class}}"></i>
     @break
+@case("xlsx")
+    <i class="fa-file-excel {{$class}}"></i>
+    @break
 @case("csv")
     <i class="fa-file-csv {{$class}}"></i>
     @break

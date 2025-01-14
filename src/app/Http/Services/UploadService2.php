@@ -73,7 +73,8 @@ class UploadService2
                 $isGrouped = array_keys($files)[0] != 0; // If no grouped, the keys will be 0, 1, 2, ...
                 foreach ($files as $groupId => $groupItems) {
                     $property = Properties::getFor('attachment', '_' . $fieldName);
-                    $nameValidate = $fieldName . '.toBeUploaded.' . $groupId;
+                    //For some reason, . $groupId will make .xlsx file not uploaded, keep saying work file type.
+                    $nameValidate = $fieldName . '.toBeUploaded.'; //.'; //. $groupId;
                     $maxFileSize = ($property['max_file_size'] == "" ? 10 : $property['max_file_size']) * 1024;
                     $maxFileCount = ($property['max_file_count'] == "" ? 10 : $property['max_file_count']);
                     $fileUploadCount = $this->countFileUploadByCondition($fieldName, $request->input('id'));
@@ -81,15 +82,15 @@ class UploadService2
                     $allowedFileTypes = $property['allowed_file_types'];
                     $allowedFileTypes = $this->getAllowedFileTypes($allowedFileTypes);
 
-                    $validator = [
-                        $nameValidate => 'array|max:' . $fileUploadRemainingCount,
-                        $nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,
-                    ];
+                    $validator0 = [$nameValidate => 'array|max:' . $fileUploadRemainingCount,];
+                    $messages0 = [$nameValidate . '.max' => 'The ' . $fieldName . ' must have at most ' . $maxFileCount . ' items.',];
+                    $request->validate($validator0, $messages0);
+                    // Log::info("validate 0");
 
-                    $request->validate($validator, [
-                        $nameValidate . '.max' => 'The ' . $fieldName . ' must have at most ' . $maxFileCount . ' items.',
-                        $nameValidate . '.*.max' => 'The ' . $fieldName . ' must not more than ' . round($maxFileSize / 1024, 1) . ' MB.',
-                    ]);
+                    $validator1 = [$nameValidate . '.*' => 'file|' . $allowedFileTypes . '|max:' . $maxFileSize,];
+                    $messages1 = [$nameValidate . '.*.max' => 'The ' . $fieldName . ' must not more than ' . round($maxFileSize / 1024, 1) . ' MB.',];
+                    $request->validate($validator1, $messages1);
+                    // Log::info("validate 1");
 
                     // Log::info($groupItems);
                     foreach ($groupItems as $file) {
