@@ -91,6 +91,10 @@
         <x-renderer.card title="Missing DataSource">
             <x-renderer.table :columns="$tableColumns" />
         </x-renderer.card>
+        <br />
+        <x-renderer.card title="Colspan and Rowspan">
+            <x-renderer.table :columns="$tableSpanColumns" :dataSource="$tableSpanDataSource" />
+        </x-renderer.card>
     </x-renderer.card>
     <x-renderer.card title="Tables 2">
         <x-renderer.card title="Table with Data and No.(Most Right) and GroupBy (Case Insensitive)">

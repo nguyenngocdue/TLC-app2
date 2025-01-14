@@ -48,7 +48,7 @@ trait TableTraitRows
         return [$cellClassList, $cellTitle, $cellHref, $cellOnClick, $value];
     }
 
-    private function makeTd($columns, $dataLineObj, $start, $no, $dataLineIndex, $batchLength, $tableDebug)
+    private function makeTds($columns, $dataLineObj, $start, $no, $dataLineIndex, $batchLength, $tableDebug)
     {
         $no += $start;
         $tds = [];
@@ -81,6 +81,7 @@ trait TableTraitRows
                     //     $rawData = method_exists($dataLineObj, $fn) ? $dataLineObj->$fn() : "?";
                     // } else {
                     $rawData = $dataLineObj->$dataIndex ?? "";
+                    if ($rawData === "hidden_due_to_span") continue 2;
                     // }
                     // $rawData = is_array($rawData) ? count($rawData) . " items" : $rawData;
                     $isArrayOfValueObject = false;
@@ -125,7 +126,7 @@ trait TableTraitRows
                         $cellDivClass = "p-2 flex justify-evenly";
                     }
                     $rendered = $renderer
-                        // ? "A" 
+                        // ? "A"
                         // : "B";
                         ? $this->applyRender($name, $renderer, $rawData, $column, $dataLineObj, $dataLineIndex, $batchLength)
                         : ($dataIndex === 'action'
@@ -152,6 +153,8 @@ trait TableTraitRows
             $td = "<td class='dark:border-gray-600 border-b $fixedLeft $fixedRight $bgWhite $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderLeft $borderGray $align $nowrap'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
+            if ($rawData->rowspan ?? false) $td .= " rowspan=" . $rawData->rowspan;
+            if ($rawData->colspan ?? false) $td .= " colspan=" . $rawData->colspan;
             $td .= ">";
             if ($cellHref) $td .= "<a href='$cellHref' onclick='$cellOnClick'>";
             $td .= $rendered;
@@ -191,11 +194,35 @@ trait TableTraitRows
             });
         }
 
+        foreach ($dataSource as $dataLineIndex => $dataLine) {
+            foreach ($columns as $columnIndex => $column) {
+                if (in_array($column['dataIndex'], ['auto.no.', 'status'])) continue;
+                $cell = $dataLine[$column['dataIndex']];
+                // echo "$dataLineIndex $columnIndex ";
+                if (is_object($cell)) {
+                    // echo $cell->value;
+                    $rowspan = $cell->rowspan ?? 1;
+                    $colspan = $cell->colspan ?? 1;
+
+                    for ($i = $dataLineIndex; $i < $dataLineIndex + $rowspan; $i++) {
+                        for ($j = $columnIndex; $j < $columnIndex + $colspan; $j++) {
+                            if ($i != $dataLineIndex || $j != $columnIndex) {
+                                // echo "hide ($i, $j) ";
+                                $dataSource[$i][$columns[$j]['dataIndex']] = "hidden_due_to_span";
+                            }
+                        }
+                    }
+                }
+                // echo " | ";
+            }
+            // echo "<br/>";
+        }
+
         $lastIndex = -1;
         $lineNo = 0;
         foreach ($dataSource as $dataLineIndex => $dataLine) {
             $dataLineObj = is_object($dataLine) ? $dataLine : (object)$dataLine;
-            $tds = $this->makeTd($columns, $dataLineObj, $start, $lineNo++ + 1, $dataLineIndex, sizeof($dataSource), $tableDebug);
+            $tds = $this->makeTds($columns, $dataLineObj, $start, $lineNo++ + 1, $dataLineIndex, sizeof($dataSource), $tableDebug);
             $readOnlyStr = ($dataLineObj->readOnly ?? false) ? "readonly" : "";
             if ($this->groupBy) {
                 $groupBy = $this->groupBy;

@@ -14,6 +14,7 @@ class ComponentDemo
     use TraitDemoTagData;
     use TraitDemoTabData;
     use TraitDemoProgressBar;
+    use TraitDemoSpanTable;
     // use TraitDemoModeControl;
     // use TraitDemoPivotTable;
 
@@ -74,6 +75,8 @@ class ComponentDemo
             'tableDataSourceForRegister' => $this->getDataSourceForRegister(),
             'tableColumnsForRegister' => $this->getColumnsForRegister(),
             'dataSourceProgressBar' => $this->getDataSourceProgressBar(),
+            'tableSpanColumns' => $this->getTableSpanColumns(),
+            'tableSpanDataSource' => $this->getTableSpanDataSource(),
         ]);
     }
 }

@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ComponentDemo;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-
-class WelcomeFortuneController extends Controller
+trait TraitDemoSpanTable
 {
-    function __construct() {}
-
-    function getType()
+    public function getTableSpanColumns()
     {
-        return "dashboard";
-    }
-
-    public function index(Request $request)
-    {
-        $columns = [
+        return  [
             [
                 'title' => 'Name',
                 'dataIndex' => 'name',
@@ -43,8 +33,11 @@ class WelcomeFortuneController extends Controller
                 'headerFilter' => 'input',
             ],
         ];
+    }
 
-        $dataSource = [
+    public function getTableSpanDataSource()
+    {
+        return  [
             [
                 'name' => (object)[
                     'rowspan' => 2,
@@ -91,10 +84,5 @@ class WelcomeFortuneController extends Controller
                 'lucky_number' => 9,
             ],
         ];
-
-        return view("welcome-fortune", [
-            'columns' => $columns,
-            'dataSource' => $dataSource,
-        ]);
     }
 }

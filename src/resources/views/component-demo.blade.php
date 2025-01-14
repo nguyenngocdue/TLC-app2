@@ -24,6 +24,9 @@ $activeClass = "bg-white border-t border-r border-l -mb-px";
                     :tableDataHeader="$tableDataHeader"
                     :tableDataSourceForRegister="$tableDataSourceForRegister"
                     :tableColumnsForRegister="$tableColumnsForRegister"
+
+                    :tableSpanColumns="$tableSpanColumns"
+                    :tableSpanDataSource="$tableSpanDataSource"
                     />
         </div>
         <div id="data_entry" class="bg-white p-4 hidden">
