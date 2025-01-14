@@ -187,7 +187,7 @@
         "name": "_target_min_uom",
         "column_name": "target_min_uom",
         "column_type": "double",
-        "label": "Target min\/UoM",
+        "label": "Target min/UoM",
         "control": "number",
         "align": "",
         "col_span": "6",
@@ -229,11 +229,11 @@
         "frozen_right": "",
         "nowrap_view_all": ""
     },
-    "_actual_hours_weight": {
-        "name": "_actual_hours_weight",
-        "column_name": "actual_hours_weight",
+    "_trustability": {
+        "name": "_trustability",
+        "column_name": "trustability",
         "column_type": "double",
-        "label": "Actual Hours Weight",
+        "label": "Trustability",
         "control": "number",
         "align": "",
         "col_span": "6",

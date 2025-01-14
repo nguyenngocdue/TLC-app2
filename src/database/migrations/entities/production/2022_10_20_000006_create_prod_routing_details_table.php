@@ -30,7 +30,7 @@ return new class extends Migration
             $table->double('target_man_hours')->nullable();
             $table->double('target_min_uom')->nullable();
             $table->double('avg_actual_hours')->nullable();
-            $table->double('actual_hours_weight')->nullable();
+            $table->double('trustability')->nullable();
 
             $table->orderable();
             $table->appendCommonFields();

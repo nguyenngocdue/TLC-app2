@@ -8,7 +8,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
 
-class UpdatedProdSequenceListener implements ShouldQueue
+class UpdatedProdSequenceListener //implements ShouldQueue
 {
     public function __construct(
         protected ProdSequenceService $prodSequenceService,

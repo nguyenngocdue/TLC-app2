@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\RoutingLinks;
 
+use App\Http\Controllers\Workflow\LibStatuses;
 use App\Models\Prod_routing_detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -49,13 +50,20 @@ class AvgActualHoursForRoutingLinkService
         $totalHourArray = [];
         $totalHourValue = [];
         $countOfKnownSequence = 0;
+        $finishedArray = LibStatuses::$finishedArray;
+        $naArray = LibStatuses::$naArray;
+
         foreach ($routing_details as $routing_detail) {
             $allSequences = $routing_detail->getProdSequences;
             $totalHours = 0;
             $count = 0;
+            $countTrust = 0;
+            $countOfNotNA = 0;
             foreach ($allSequences as $sequence) {
+                if (!in_array($sequence->status, $naArray)) $countOfNotNA++;
                 //Remove the sheet that has not been done
-                if ($sequence->status != 'finished') continue;
+                if (!in_array($sequence->status, $finishedArray)) continue;
+                $countTrust++;
                 //Remove the sheet that involves sub-contract (is_rework = 10)
                 if (count($sequence->getProdRunsSubCon) > 0) continue;
                 //It is OK to accumulate the total hours
@@ -66,7 +74,8 @@ class AvgActualHoursForRoutingLinkService
             if ($count > 0) {
                 $totalHourArray[] = [
                     'obj' => $routing_detail,
-                    'value' => round($totalHours / $count, 3)
+                    'value' => round($totalHours / $count, 3),
+                    'count' => 100 * round($countTrust / $countOfNotNA, 3),
                 ];
                 $totalHourValue[] = round($totalHours / $count, 3);
                 $countOfKnownSequence++;
@@ -82,9 +91,7 @@ class AvgActualHoursForRoutingLinkService
 
 
         // dump($totalHourArray);
-
         // dump($avg_of_known_sequence);
-
 
         // dump(array_sum($totalHourValue));
         // dump($avg_of_known_sequence * count($routingDetailWithNoSheetYet));
@@ -93,14 +100,14 @@ class AvgActualHoursForRoutingLinkService
         foreach ($totalHourArray as $obj) {
             $routing_detail = $obj['obj'];
             $routing_detail->avg_actual_hours = $obj['value'];
-            // $routing_detail->actual_hours_weight = round(100 * $obj['value'] / $totalHoursToMakeAnProdOrder, 3);
+            $routing_detail->trustability = $obj['count']; //round(100 * $obj['value'] / $totalHoursToMakeAnProdOrder, 3);
             $routing_detail->save();
         }
 
         // dump($routingDetailWithNoSheetYet[0]);
         foreach ($routingDetailWithNoSheetYet as $routing_detail) {
             $routing_detail->avg_actual_hours = 0; //$avg_of_known_sequence;
-            // $routing_detail->actual_hours_weight = 0; //round(100 * $avg_of_known_sequence / $totalHoursToMakeAnProdOrder, 3);
+            $routing_detail->trustability = 0; //round(100 * $avg_of_known_sequence / $totalHoursToMakeAnProdOrder, 3);
             $routing_detail->save();
         }
 
@@ -122,20 +129,11 @@ class AvgActualHoursForRoutingLinkService
         $avg_of_known_sequence = round($totalHoursToMakeAnProdOrder / $totalCount, 3);
         dump("Avg of known sequence: (hours) " . $avg_of_known_sequence);
 
-        $count_makeup = 0;
         foreach ($routingDetailWithNoSheetYet as $routing_detail) {
             if ($routing_detail->avg_actual_hours == 0) {
                 $routing_detail->avg_actual_hours = $avg_of_known_sequence;
-                $count_makeup++;
                 $routing_detail->save();
             }
-        }
-
-        $totalHoursToMakeAnProdOrder += $count_makeup * $avg_of_known_sequence;
-        //Update weight
-        foreach ($routing_details as $routing_detail) {
-            $routing_detail->actual_hours_weight = round(100 * $routing_detail->avg_actual_hours / $totalHoursToMakeAnProdOrder, 3);
-            $routing_detail->save();
         }
     }
 }
