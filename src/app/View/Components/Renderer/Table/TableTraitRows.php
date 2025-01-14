@@ -153,8 +153,10 @@ trait TableTraitRows
             $td = "<td class='dark:border-gray-600 border-b $fixedLeft $fixedRight $bgWhite $borderColor $tinyText $breakWords $cellClassList $hidden $borderRight $borderLeft $borderGray $align $nowrap'";
             $td .= $styleStr;
             $td .= $cellTitle ? "title='$cellTitle'" : "";
-            if ($rawData->rowspan ?? false) $td .= " rowspan=" . $rawData->rowspan;
-            if ($rawData->colspan ?? false) $td .= " colspan=" . $rawData->colspan;
+            if (is_object($rawData) && !is_iterable($rawData)) {
+                if ($rawData->rowspan ?? false) $td .= " rowspan=" . $rawData->rowspan;
+                if ($rawData->colspan ?? false) $td .= " colspan=" . $rawData->colspan;
+            }
             $td .= ">";
             if ($cellHref) $td .= "<a href='$cellHref' onclick='$cellOnClick'>";
             $td .= $rendered;
@@ -199,7 +201,7 @@ trait TableTraitRows
                 if (in_array($column['dataIndex'], ['auto.no.', 'status'])) continue;
                 $cell = $dataLine[$column['dataIndex']];
                 // echo "$dataLineIndex $columnIndex ";
-                if (is_object($cell)) {
+                if (is_object($cell) && !is_iterable($cell)) {
                     // echo $cell->value;
                     $rowspan = $cell->rowspan ?? 1;
                     $colspan = $cell->colspan ?? 1;
