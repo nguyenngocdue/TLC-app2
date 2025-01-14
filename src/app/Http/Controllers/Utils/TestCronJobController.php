@@ -13,9 +13,12 @@ use App\Http\Controllers\Utils\TestFunction\SendEmail;
 use App\Http\Controllers\Utils\TestFunction\TestEmailOnLdapServer;
 use App\Http\Services\CleanOrphanAttachment\ListFileService;
 use App\Http\Services\CleanOrphanAttachment\ListFolderService;
+use App\Http\Services\ProdOrderProgressService;
 use App\Http\Services\RoutingLinks\AvgActualHoursForRoutingLinkService;
 use App\Jobs\TestLogToFileJob;
+use App\Models\Prod_order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TestCronJobController extends Controller
 {
@@ -23,6 +26,7 @@ class TestCronJobController extends Controller
         private ListFolderService $listFolderService,
         private ListFileService $listFileService,
         private AvgActualHoursForRoutingLinkService $avgActualHoursForRoutingLinkService,
+        private ProdOrderProgressService $prodOrderProgressService,
     ) {}
 
     public function getType()
@@ -78,6 +82,24 @@ class TestCronJobController extends Controller
                     break;
                 case "recalculate_avg_actual_hours":
                     $this->avgActualHoursForRoutingLinkService->handle($request);
+                    break;
+                case "recalculate_matrix_progress":
+                    $routingId = $request->input('routing_id');
+                    if (!$routingId) {
+                        dump("routing_id is required for ProdOrderProgressService.");
+                        return;
+                    }
+
+                    $allProdOrdersOfARouting = Prod_order::query()
+                        ->where('prod_routing_id', $routingId)
+                        ->with('getProdSequences')
+                        ->get();
+
+                    foreach ($allProdOrdersOfARouting as $prodOrder) {
+                        $sequenceId = $prodOrder->getProdSequences->pluck('id')->first();
+                        // Log::info("Updating prod_order_progress for sequence_id: " . $sequenceId . " of prod_order_id: " . $prodOrder->id);
+                        $this->prodOrderProgressService->update($sequenceId);
+                    }
                     break;
                 default:
                     dump($case  . " is not found.");

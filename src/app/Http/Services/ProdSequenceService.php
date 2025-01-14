@@ -6,15 +6,16 @@ class ProdSequenceService
 {
     function __construct(
         protected ProdSequenceToProdOrderService $prodSequenceToProdOrderService,
+        protected ProdOrderProgressService $prodOrderProgressService,
         protected ProdSequenceToProdRoutingLinkService $prodSequenceToProdRoutingLinkService,
         protected ProdSequenceToItselfService $prodSequenceToItselfService,
-    ) {
-    }
+    ) {}
 
-    public function update($id)
+    public function update($sequenceId)
     {
-        $this->prodSequenceToItselfService->update($id);
-        $this->prodSequenceToProdOrderService->update($id);
-        $this->prodSequenceToProdRoutingLinkService->update($id);
+        $this->prodSequenceToItselfService->update($sequenceId);
+        $this->prodSequenceToProdOrderService->update($sequenceId);
+        $this->prodOrderProgressService->update($sequenceId);
+        $this->prodSequenceToProdRoutingLinkService->update($sequenceId);
     }
 }

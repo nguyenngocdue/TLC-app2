@@ -26,6 +26,7 @@
     Operations
     <div class="grid grid-cols-6 gap-4 w-3/4 mx-auto justify-center items-center">
         <x-renderer.button href="?case=recalculate_avg_actual_hours">Recalculate Actual Hours for Routing Links</x-renderer.button>
+        <x-renderer.button href="?case=recalculate_matrix_progress">Recalculate Matrix Progress</x-renderer.button>
     </div>
 
 </div>
