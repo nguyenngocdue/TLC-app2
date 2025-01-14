@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProdOrderProgressService
 {
-    private function getProdSequence($id)
+    private function getProdSequence($sequenceId)
     {
         return Prod_sequence::query()
             ->with(['getProdOrder' => function ($query) {
@@ -17,7 +17,7 @@ class ProdOrderProgressService
                     $query->with(['getProdRuns']);
                 }]);
             }])
-            ->find($id);
+            ->find($sequenceId);
     }
 
     private function getProdSequenceProgress($allProdSequences, $routingId)
@@ -62,12 +62,17 @@ class ProdOrderProgressService
         $allProdSequences = $prodOrder->getProdSequences;
         $routingId = $prodOrder->prod_routing_id;
 
+        $before = $prodOrder->prod_sequence_progress;
         // Log::info("Before " . $prodOrder->prod_sequence_progress);
         // Log::info($allProdSequences->count());//103
         // Log::info($routingId);//123
         $dataUpdated['prod_sequence_progress'] = $this->getProdSequenceProgress($allProdSequences, $routingId);
         // Log::info("After " . $dataUpdated['prod_sequence_progress']);
+        $after = $dataUpdated['prod_sequence_progress'];
 
         $prodOrder->update($dataUpdated);
+        if ($before != $after) {
+            // dump("ProdOrderProgressService updated: #" . $prodOrder->id . " from " . $before . " to " . $after);
+        }
     }
 }

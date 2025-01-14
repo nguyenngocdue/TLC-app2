@@ -77,7 +77,7 @@ class Prod_routing_detail extends ModelExtended
             ["dataIndex" => 'target_man_hours'],
             ["dataIndex" => 'target_min_uom'],
             ["dataIndex" => 'avg_actual_hours'],
-            ["dataIndex" => 'trustability'],
+            ["dataIndex" => 'trustability', 'title' => 'AVG Actual Hours Trustability', 'subTitle' => "(%)"],
 
             ['dataIndex' => 'wir_description_id',],
         ];

@@ -24,6 +24,7 @@ class Prod_sequence extends ModelExtended
         "total_uom",
         "uom_input",
         "erp_prod_order_name",
+        "progress",
 
         "start_date_0",
         "start_date_1",

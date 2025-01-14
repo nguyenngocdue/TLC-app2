@@ -203,6 +203,10 @@ abstract class MatrixForReportParent extends Component
                     if (in_array($cell->status, $this->finishedArray)) {
                         $result[$cell->{$this->dataIndexX}]++;
                     }
+                    if (in_array($cell->status, ['in_progress'])) {
+                        $progress = $cell->progress ?: 0;
+                        $result[$cell->{$this->dataIndexX}] += round($progress / 100, 2);
+                    }
                     if (in_array($cell->status, $this->naArray)) {
                         $count[$cell->{$this->dataIndexX}]++;
                     }

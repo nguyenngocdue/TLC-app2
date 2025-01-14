@@ -73,6 +73,7 @@ return new class extends Migration
 
             $table->float('total_uom')->nullable();
             $table->string('erp_prod_order_name')->nullable();
+            $table->float('progress')->nullable();
 
             // $table->unsignedInteger('sheet_count')->nullable();
             $table->unsignedInteger('total_calendar_days')->nullable();

@@ -100,6 +100,7 @@ class TestCronJobController extends Controller
                         // Log::info("Updating prod_order_progress for sequence_id: " . $sequenceId . " of prod_order_id: " . $prodOrder->id);
                         $this->prodOrderProgressService->update($sequenceId);
                     }
+                    dump("Updated all ProdOrder Progress.");
                     break;
                 default:
                     dump($case  . " is not found.");

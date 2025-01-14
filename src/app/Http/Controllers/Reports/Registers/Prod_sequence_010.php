@@ -12,7 +12,6 @@ use App\Http\Controllers\Workflow\LibStatuses;
 use App\Utils\Support\DateReport;
 
 class Prod_sequence_010 extends Report_ParentRegister2Controller
-
 {
     use TraitDynamicColumnsTableReport;
     use TraitModifyDataToExcelReport;
@@ -20,9 +19,9 @@ class Prod_sequence_010 extends Report_ParentRegister2Controller
     use HasStatus;
     use TraitLegendReport;
     protected $rotate45Width = 300;
-    protected  $project_id = 8;
-    protected  $sub_project_id = 107;
-    protected  $prod_routing_id = 49;
+    protected $project_id = 8;
+    protected $sub_project_id = 107;
+    protected $prod_routing_id = 49;
     protected $mode = '010';
     protected $maxH = 45 * 16;
     protected $viewName = "register-prod-sequence-010";
