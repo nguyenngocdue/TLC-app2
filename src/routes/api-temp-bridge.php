@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Workflow\LibApps;
+use App\Http\Controllers\Workflow\LibNavbars;
 use App\Http\Controllers\Workflow\LibStatuses;
 use Illuminate\Support\Facades\Route;
 
@@ -10,4 +11,5 @@ Route::group([
     Route::get('getStatuses/{entityType}', [LibStatuses::class, 'getFor']);
     Route::get('getStatuses', [LibStatuses::class, 'getAll']);
     Route::get('getApps', [LibApps::class, 'getAll']);
+    Route::get('getProfileMenu', [LibNavbars::class, 'getUserMenu']);
 });

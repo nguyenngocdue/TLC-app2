@@ -79,6 +79,7 @@ class LibApps extends AbstractLib
                 if (is_null($app['icon'] ?? null)) {
                     $app['icon'] = '<i class="fa-duotone fa-file"></i>';
                 }
+                $app['click_count'] = mt_rand(0, 1000);
             }
             static::$singleton = $result;
         }

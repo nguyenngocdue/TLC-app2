@@ -6,13 +6,6 @@
         "href": "http:\/\/{phpMyAdmin}\/",
         "icon_fa": "fa-duotone fa-database"
     },
-    "php_admin_table": {
-        "name": "php_admin_table",
-        "group": "data_admin",
-        "title": "PhpMyAdmin -> Table",
-        "href": "http:\/\/{phpMyAdminTable}\/",
-        "icon_fa": "fa-duotone fa-database"
-    },
     "component": {
         "name": "component",
         "group": "dev_tools",
@@ -20,7 +13,6 @@
         "href": "\/components",
         "icon_fa": "fa-brands fa-elementor"
     },
-  
     "database_summary": {
         "name": "database_summary",
         "group": "data_admin",
@@ -127,13 +119,12 @@
         "icon_fa": "fa-duotone fa-font-awesome"
     },
     "clean_attachment_orphan": {
-        "name": "clean_many_to_many_orphan",
+        "name": "clean_attachment_orphan",
         "group": "internal",
         "title": "Clean Orphan-Attachment",
         "href": "\/orphan\/attachment",
         "icon_fa": "fa-duotone fa-gauge"
     },
-   
     "permission_matrix": {
         "name": "permission_matrix",
         "group": "internal",
@@ -159,14 +150,14 @@
         "name": "apex-chart",
         "group": "third_party",
         "title": "ApexChart (Prototype)",
-        "href": "https://apexcharts.com/",
+        "href": "https:\/\/apexcharts.com\/",
         "icon_fa": "fa-solid fa-asterisk"
     },
     "chart-js": {
         "name": "chart-js",
         "group": "third_party",
         "title": "ChartJS (v4.4.6)",
-        "href": "https://www.chartjs.org/docs/4.4.6/",
+        "href": "https:\/\/www.chartjs.org\/docs\/4.4.6\/",
         "icon_fa": "fa-solid fa-circle-half-stroke"
     }
 }
