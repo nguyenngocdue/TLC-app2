@@ -11,5 +11,5 @@ Route::group([
     Route::get('getStatuses/{entityType}', [LibStatuses::class, 'getFor']);
     Route::get('getStatuses', [LibStatuses::class, 'getAll']);
     Route::get('getApps', [LibApps::class, 'getAll']);
-    Route::get('getProfileMenu', [LibNavbars::class, 'getUserMenu']);
+    Route::get('getAdminMenu', [LibNavbars::class, 'getUserMenu']);
 });
