@@ -199,6 +199,12 @@ trait TableTraitRows
         foreach ($dataSource as $dataLineIndex => $dataLine) {
             foreach ($columns as $columnIndex => $column) {
                 if (in_array($column['dataIndex'], ['auto.no.', 'status'])) continue;
+                //Sometime data line doesn't have the requested column
+                if (!isset($dataLine[$column['dataIndex']])) {
+                    // dump($dataLine);
+                    // dd($column);
+                    continue;
+                }
                 $cell = $dataLine[$column['dataIndex']];
                 // echo "$dataLineIndex $columnIndex ";
                 if (is_object($cell) && !is_iterable($cell)) {
