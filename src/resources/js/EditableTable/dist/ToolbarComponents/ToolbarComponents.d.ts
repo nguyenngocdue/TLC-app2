@@ -18,7 +18,7 @@ export declare const ToolbarComponentList: {
 export declare class ToolbarComponents {
     private params;
     constructor(params: TableParams);
-    getRealClass(componentName: keyof typeof ToolbarComponentList): HelloWorld | MasterDuplicateDelete | Paginator | PerPage | TotalItems | TotalItems_Paginator | TotalItems_Paginator_PerPage;
+    getRealClass(componentName: keyof typeof ToolbarComponentList): HelloWorld | MasterDuplicateDelete | TotalItems_Paginator_PerPage | TotalItems_Paginator | PerPage | TotalItems | Paginator;
     static hasAnyTopComponent(params: TableParams): "helloWorld" | "masterDuplicateDelete" | "totalItems_Paginator_PerPage" | "totalItems_Paginator" | "perPage" | "totalItems" | "paginator";
     static hasAnyBottomComponent(params: TableParams): "helloWorld" | "masterDuplicateDelete" | "totalItems_Paginator_PerPage" | "totalItems_Paginator" | "perPage" | "totalItems" | "paginator";
     static register(params: TableParams): void;

@@ -1,4 +1,4 @@
-export declare const defaultWidth: (pickerType: string) => 50 | 100 | 120 | 80 | 60;
+export declare const defaultWidth: (pickerType: string) => 100 | 50 | 120 | 80 | 60;
 export declare const getConfigFormat: (pickerType: string) => "YYYY-MM-DD HH:mm:ss" | "YYYY-MM-DD" | "HH:mm:ss";
 export declare const getConfigJson: (pickerType: string) => {
     enableTime: boolean;

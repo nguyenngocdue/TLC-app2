@@ -56,6 +56,16 @@
                 manufacturedYear="{{$manufactured_year}}" plotNumber="{{$plot_number}}"
             />
             @break
+            @case(797)
+            <x-qr-plate-style.style-3 
+                clientName="{!! $clientName !!}" red="{!! $red !!}" 
+                projectName="{{$projectName}}" :item="$item" route="{{$route}}" 
+                comLogo="{{$com_logo}}" comWebsite="{{$com_website}}" comName="{{$com_name}}"
+                length="{{$length}}" width="{{$width}}" height="{{$height}}" weight="{{$weight}}" 
+                manufacturedYear="{{$manufactured_year}}" plotNumber="{{$plot_number}}"
+            />
+            @break
+
             @default
             @case(531)
             <x-qr-plate-style.style-1 
@@ -66,6 +76,8 @@
                 manufacturedYear="{{$manufactured_year}}" plotNumber="{{$plot_number}}"
             />
             @break
+
+
             @endswitch
         </div>
         {!! (($index + 1) % 4 ===0 && $index < sizeof($dataSource)-1 ) ? "<div class='pagebreak col-span-12'>----Please Print in lanscape mode Scale 80% with no margin to have 4 items in a page------</div>" : "" !!}
