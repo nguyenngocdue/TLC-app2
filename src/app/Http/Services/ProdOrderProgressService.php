@@ -37,7 +37,8 @@ class ProdOrderProgressService
             if (in_array($status, ["in_progress"])) {
                 $tmp = $prodSequence->total_hours;
                 if ($tmp > $avg) $tmp = $avg;
-                $inProgressTotalHours[] = 0.8 * $tmp;
+                // 0.625 is 1/1.6, 1.6 is Error Factor
+                $inProgressTotalHours[] = 0.625 * $tmp;
             }
         }
 

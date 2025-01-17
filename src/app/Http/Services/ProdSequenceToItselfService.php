@@ -29,7 +29,8 @@ class ProdSequenceToItselfService
                 $avg_actual_hours = $detail->avg_actual_hours ?? -1;
                 if ($totalHours > $avg_actual_hours) $totalHours = $avg_actual_hours;
 
-                $progress = round(0.8 * $totalHours / $avg_actual_hours * 100, 3);
+                // 0.625 is 1/1.6, 1.6 is Error Factor
+                $progress = round(0.625 * $totalHours / $avg_actual_hours * 100, 3);
                 // Log::info($totalHours . " / " . $avg_actual_hours);
                 break;
             case 'finished':
