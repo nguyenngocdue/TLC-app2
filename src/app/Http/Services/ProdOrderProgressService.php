@@ -34,17 +34,26 @@ class ProdOrderProgressService
             $status = $prodSequence->status;
             $avg = $avgActualHours[$prodSequence->prod_routing_link_id];
             if (in_array($status, LibStatuses::$finishedArray)) $finishedTotalHours[] = $avg;
-            // if (in_array($status, ["in_progress"])) {
-            //     $tmp = $prodSequence->total_hours;
-            //     if ($tmp > $avg) $tmp = $avg;
-            //     $inProgressTotalHours[] = 0.8 * $tmp;
-            // }
-            if (!in_array($status, LibStatuses::$naArray)) $totalHours[] = $avg;
+            if (in_array($status, ["in_progress"])) {
+                $tmp = $prodSequence->total_hours;
+                if ($tmp > $avg) $tmp = $avg;
+                $inProgressTotalHours[] = 0.8 * $tmp;
+            }
+        }
+
+        $routing_detail_indexed = $routing_detail->keyBy('prod_routing_link_id')->pluck('avg_actual_hours', 'prod_routing_link_id');
+        // Log::info($routing_detail_indexed);
+        $sequence_indexed = $allProdSequences->keyBy('prod_routing_link_id')->pluck('status', 'prod_routing_link_id');
+        // Log::info($sequence_indexed);
+
+        foreach ($routing_detail_indexed as $routingLinkId => $avg_actual_hours) {
+            $status = $sequence_indexed[$routingLinkId] ?? '';
+            if (!in_array($status, LibStatuses::$naArray)) $totalHours[] = $avg_actual_hours;
         }
 
         // Log::info($finishedTotalHours);
-        // Log::info($totalHours);
         // Log::info($inProgressTotalHours);
+        // Log::info($totalHours);
 
         $tu = array_sum($finishedTotalHours) + array_sum($inProgressTotalHours);
         $mau = array_sum($totalHours);
@@ -62,17 +71,17 @@ class ProdOrderProgressService
         $allProdSequences = $prodOrder->getProdSequences;
         $routingId = $prodOrder->prod_routing_id;
 
-        $before = $prodOrder->prod_sequence_progress;
+        $currentProgress = $prodOrder->prod_sequence_progress;
         // Log::info("Before " . $prodOrder->prod_sequence_progress);
         // Log::info($allProdSequences->count());//103
         // Log::info($routingId);//123
-        $dataUpdated['prod_sequence_progress'] = $this->getProdSequenceProgress($allProdSequences, $routingId);
-        // Log::info("After " . $dataUpdated['prod_sequence_progress']);
-        $after = $dataUpdated['prod_sequence_progress'];
+        $newProgress = $this->getProdSequenceProgress($allProdSequences, $routingId);
 
-        $prodOrder->update($dataUpdated);
-        if ($before != $after) {
-            // dump("ProdOrderProgressService updated: #" . $prodOrder->id . " from " . $before . " to " . $after);
+        //Only update when new progress is greater than current progress
+        //Sometime algorithm change and pull new progress down, we dont want that happen in client reports.
+        if ($newProgress > $currentProgress) {
+            $dataUpdated['prod_sequence_progress'] = $this->getProdSequenceProgress($allProdSequences, $routingId);
+            $prodOrder->update($dataUpdated);
         }
     }
 }

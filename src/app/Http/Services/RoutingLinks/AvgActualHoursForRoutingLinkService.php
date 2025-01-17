@@ -27,8 +27,10 @@ class AvgActualHoursForRoutingLinkService
             }
         }
 
+        $mau = count($errorFactor);
+        if ($mau == 0) return 1;
         // dump($errorFactor);
-        return round(array_sum($errorFactor) / count($errorFactor), 3);
+        return round(array_sum($errorFactor) / $mau, 3);
     }
 
     function handle(Request $request)
