@@ -7,6 +7,7 @@ namespace App\Console;
 
 use App\Events\CleanUpTrashEvent;
 use App\Events\InspectionSignoff\SignOffRemindEvent;
+use App\Events\Production\UpdateRoutingAvgActualHourEvent;
 use App\Events\StaffTimesheet\EndOfWeekRemindEvent;
 use App\Events\StaffTimesheet\StartOfWeekRemindEvent;
 use App\Events\TransferDiginetDataEvent;
@@ -78,6 +79,12 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             event(new EndOfWeekRemindEvent());
         })->hourly();
+
+        $schedule->call(function () {
+            event(new UpdateRoutingAvgActualHourEvent());
+        })->dailyAt('21:00')
+            ->timezone("Asia/Ho_Chi_Minh")
+            ->description("Daily at 21:00 Ho_Chi_Minh Time: Update Routing AVG Actual Hours.");;
     }
 
     /**`

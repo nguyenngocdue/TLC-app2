@@ -107,6 +107,11 @@ class Prod_routing extends ModelExtended
         return $this->{$p[0]}($p[1], $p[2]);
     }
 
+    public function getLatestProdSequences()
+    {
+        return $this->hasOne(Prod_sequence::class)->latestOfMany('updated_at');
+    }
+
     public function getManyLineParams()
     {
         return [

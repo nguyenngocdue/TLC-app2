@@ -9,7 +9,7 @@ use App\Events\InspectionSignoff\SignOffRemindEvent;
 use App\Events\InspectionSignoff\SignOffRequestEvent;
 use App\Events\InspectionSignoff\SignOffSubmittedEvent;
 use App\Events\OpenedDocumentEvent;
-
+use App\Events\Production\UpdateRoutingAvgActualHourEvent;
 use App\Events\StaffTimesheet\EndOfWeekRemindEvent;
 use App\Events\StaffTimesheet\StartOfWeekRemindEvent;
 use App\Events\TransferDiginetDataEvent;
@@ -29,6 +29,7 @@ use App\Listeners\InspectionSignoff\SignOffRemindListener;
 use App\Listeners\InspectionSignoff\SignOffRequestListener;
 use App\Listeners\InspectionSignoff\SignOffSubmittedListener;
 use App\Listeners\OpenedDocumentListener;
+use App\Listeners\Production\UpdateRoutingAvgActualHourListener;
 use App\Listeners\StaffTimesheet\EndOfWeekRemindListener;
 use App\Listeners\StaffTimesheet\StartOfWeekRemindListener;
 use App\Listeners\UpdatedDocumentListener2;
@@ -89,7 +90,11 @@ class EventServiceProvider extends ServiceProvider
         //Diginet
         TransferDiginetDataEvent::class => [TransferDiginetDataListener::class],
 
+        //Clean up trash
         CleanUpTrashEvent::class => [CleanUpTrashListener::class],
+
+        //Production 
+        UpdateRoutingAvgActualHourEvent::class => [UpdateRoutingAvgActualHourListener::class],
     ];
 
     /**

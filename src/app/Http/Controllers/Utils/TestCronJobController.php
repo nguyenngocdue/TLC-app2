@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Utils;
 
 use App\Events\CleanUpTrashEvent;
 use App\Events\InspectionSignoff\SignOffRemindEvent;
+use App\Events\Production\UpdateRoutingAvgActualHourEvent;
 use App\Events\StaffTimesheet\EndOfWeekRemindEvent;
 use App\Events\StaffTimesheet\StartOfWeekRemindEvent;
 use App\Events\TransferDiginetDataEvent;
@@ -14,7 +15,6 @@ use App\Http\Controllers\Utils\TestFunction\TestEmailOnLdapServer;
 use App\Http\Services\CleanOrphanAttachment\ListFileService;
 use App\Http\Services\CleanOrphanAttachment\ListFolderService;
 use App\Http\Services\ProdOrderProgressService;
-use App\Http\Services\RoutingLinks\AvgActualHoursForRoutingLinkService;
 use App\Jobs\TestLogToFileJob;
 use App\Models\Prod_order;
 use Illuminate\Http\Request;
@@ -25,7 +25,6 @@ class TestCronJobController extends Controller
     function __construct(
         private ListFolderService $listFolderService,
         private ListFileService $listFileService,
-        private AvgActualHoursForRoutingLinkService $avgActualHoursForRoutingLinkService,
         private ProdOrderProgressService $prodOrderProgressService,
     ) {}
 
@@ -81,7 +80,7 @@ class TestCronJobController extends Controller
                     $this->listFileService->handle();
                     break;
                 case "recalculate_avg_actual_hours":
-                    $this->avgActualHoursForRoutingLinkService->handle($request);
+                    event(new UpdateRoutingAvgActualHourEvent());
                     break;
                 case "recalculate_matrix_progress":
                     $routingId = $request->input('routing_id');
