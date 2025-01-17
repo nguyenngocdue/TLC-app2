@@ -171,18 +171,23 @@ class DateReport
 
     public static function getMonthsByQuarter($quarter)
     {
-        switch ($quarter) {
-            case 1:
-                return ['01', '02', '03'];
-            case 2:
-                return ['04', '05', '06'];
-            case 3:
-                return ['07', '08', '09'];
-            case 4:
-                return ['10', '11', '12'];
-            default:
-                return "invalid";
-        }
+        $quarters = [
+            1 => ['01', '02', '03'],
+            2 => ['04', '05', '06'],
+            3 => ['07', '08', '09'],
+            4 => ['10', '11', '12']
+        ];
+        $currentMonth = date('m');
+        $currentQuarter = ceil($currentMonth / 3);
+        return $quarters[$quarter] ?? $quarters[$currentQuarter];
+    }
+
+    public static function createQuarters() {
+        $numbers = range(1, 4);
+        $dataSource = array_map(function ($number) {
+            return ['id' => $number, 'name' => 'QTR'.$number];
+        }, $numbers);
+        return $dataSource;
     }
 
     public static function getMonthAbbreviation2($monthNumber)
