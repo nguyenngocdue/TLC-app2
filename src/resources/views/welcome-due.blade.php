@@ -14,13 +14,10 @@ $fromDate = $fromDate->format('Y-m-d');
 $entityType = '1a';
 @endphp
 
-    <iframe 
-        src="{{ url('/dashboard/rp_reports/65') }}" 
-        style="width:100%; height: 800px; border:none;"
-        title="Embedded Report Page">
-    </iframe>
+        <x-renderer.card title="Colspan and Rowspan">
+            <x-renderer.table :columns="$tableSpanColumns" :dataSource="$tableSpanDataSource" />
+        </x-renderer.card>
 
 
-
-                
+         
 @endsection
