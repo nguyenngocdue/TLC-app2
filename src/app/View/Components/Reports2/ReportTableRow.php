@@ -34,7 +34,7 @@ class ReportTableRow
         return $content;
     }
 
-    private function createHref($href, $dataLine, $currentParams) {
+    public function createHref($href, $dataLine, $currentParams) {
         if ($href) {
             $parsedVariables = $this->parseVariables($href);
             foreach (last($parsedVariables) as $key => $value) {

@@ -131,18 +131,36 @@ class ReportBlockTable extends Component
             foreach($columns as $col) {
                 if (!$col['is_active']) continue;
                 $dataIndex = $col['data_index'];
-                
                 if (!isset($row->{$dataIndex})) continue;
                 $rowSpan = $dataIndex.'_row_span';
                 $rowSpanValue = isset($row->{$rowSpan}) ? $row->{$rowSpan} : 1;
+                $cellValue = $row->{$dataIndex};
+                $href = $col['row_renderer_params'];
+
+                // Create Link for dynamic columns
+                if (isset($row->{$dataIndex.'_link'}) && $href && $row->{$dataIndex.'_link'}) {
+                    $cellDivClass = $col["cell_div_class"] ?? 'text-blue-600';
+                    $currentParams['id'] = $row->{$dataIndex.'_link'};
+                    $reportTableRow = ReportTableRow::getInstance();
+                    // https://app2.tlcmodular.com/dashboard/ghg_sheets/{%id%}/edit
+                    $href = $reportTableRow->createHref($href,$row, $currentParams);
+                    $cellValue =
+                    "<a class='{$cellDivClass}' href='{$href}' target='blank'>
+                        <span>{$cellValue}</span>
+                    </a>"; 
+                }
+
+
                 $att = array_merge([
-                    'value' => $row->{$dataIndex},
+                    'value' => $cellValue,
                     'rowspan' => $rowSpanValue,
                 ], $this->makeRowValue($col));
+                
                 if ($colSetting && isset($colSetting->{$dataIndex})) {
                     $att = array_merge($att, (array)$colSetting->{$dataIndex});
                 }
                 $configs[$dataIndex] = (object)$att;
+                // dd($row, $configs);
             }
             $tableSpanDataSource[] = $configs;
         }
