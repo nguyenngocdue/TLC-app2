@@ -138,16 +138,18 @@ class ReportBlockTable extends Component
                 $href = $col['row_renderer_params'];
 
                 // Create Link for dynamic columns
-                if (isset($row->{$dataIndex.'_link'}) && $href && $row->{$dataIndex.'_link'}) {
-                    $cellDivClass = $col["cell_div_class"] ?? 'text-blue-600';
-                    $currentParams['id'] = $row->{$dataIndex.'_link'};
-                    $reportTableRow = ReportTableRow::getInstance();
-                    // https://app2.tlcmodular.com/dashboard/ghg_sheets/{%id%}/edit
-                    $href = $reportTableRow->createHref($href,$row, $currentParams);
-                    $cellValue =
-                    "<a class='{$cellDivClass}' href='{$href}' target='blank'>
-                        <span>{$cellValue}</span>
-                    </a>"; 
+                if ($col["row_renderer"] == $this->ROW_RENDERER_LINK_ID) {
+                    if (isset($row->{$dataIndex.'_link'}) && $href && $row->{$dataIndex.'_link'}) {
+                        $cellDivClass = $col["cell_div_class"] ?? 'text-blue-600';
+                        $currentParams['id'] = $row->{$dataIndex.'_link'};
+                        $reportTableRow = ReportTableRow::getInstance();
+                        // https://app2.tlcmodular.com/dashboard/ghg_sheets/{%id%}/edit
+                        $href = $reportTableRow->createHref($href,$row, $currentParams);
+                        $cellValue =
+                        "<a class='{$cellDivClass}' href='{$href}' target='blank'>
+                            <span>{$cellValue}</span>
+                        </a>"; 
+                    }
                 }
 
 
