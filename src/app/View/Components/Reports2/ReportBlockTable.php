@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Models\Rp_block;
 use App\Models\Rp_report;
 use App\Utils\Support\DateFormat;
 use Illuminate\View\Component;
@@ -93,9 +94,64 @@ class ReportBlockTable extends Component
         return $queriedData;
     }
 
+    public function getDynamicColumns($iteratorBlock, $originalLine, $currentParams)
+    {
+        $SqlStr = $iteratorBlock->sql_string;
+        $SqlStr = $this->getSql($SqlStr, $currentParams);
+        $data = $this->getDataSQLString($SqlStr);
+        $cols = [];
+        foreach ($data as $iterator) {
+            $dataIndex = $iterator->dataIndex;
+            $originalLine['data_index'] = $dataIndex;
+            $arr = $originalLine->toArray();
+            $cols[] = collect($arr);
+        }
+        return $cols;
+    }
+
+    public function getDeepColumns($columns, $currentParams) {
+        $queriedCols = [];
+        foreach($columns as $col) {
+            $queriedCols[] = $col;
+            if ($col['iterator_block_id']) {
+                $iteratorBlock = Rp_block::find($col['iterator_block_id']);
+                $cols = $this->getDynamicColumns($iteratorBlock, $col, $currentParams);
+                $queriedCols = array_merge($queriedCols, $cols);
+            }
+        }
+        return $queriedCols;
+    }
+
+    public function getTableSpanDataSource($data, $queriedData, $columns, $currentParams) {
+        $columns = $this->getDeepColumns($columns, $currentParams);
+        $tableSpanDataSource = [];
+        foreach($queriedData as $key => $row) {
+            $colSetting = isset($data[$key]) ? $data[$key] : null;
+            $configs = [];
+            foreach($columns as $col) {
+                if (!$col['is_active']) continue;
+                $dataIndex = $col['data_index'];
+                
+                if (!isset($row->{$dataIndex})) continue;
+                $rowSpan = $dataIndex.'_row_span';
+                $rowSpanValue = isset($row->{$rowSpan}) ? $row->{$rowSpan} : 1;
+                $att = array_merge([
+                    'value' => $row->{$dataIndex},
+                    'rowspan' => $rowSpanValue,
+                ], $this->makeRowValue($col));
+                if ($colSetting && isset($colSetting->{$dataIndex})) {
+                    $att = array_merge($att, (array)$colSetting->{$dataIndex});
+                }
+                $configs[$dataIndex] = (object)$att;
+            }
+            $tableSpanDataSource[] = $configs;
+        }
+        return $tableSpanDataSource;
+    }
+
     public function render()
     {
-        
+     
         $block = $this->block;
         $columns = $this->block->getLines->sortby('order_no');
         $headerCols = $this->headerCols;
@@ -135,6 +191,9 @@ class ReportBlockTable extends Component
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
         $headerTop = $block->header_top;
+
+        $tableDataSource = $this->getTableSpanDataSource($tableDataSource,$queriedData, $columns, $currentParams);
+
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
@@ -150,7 +209,6 @@ class ReportBlockTable extends Component
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
             "headerTop" => $headerTop,
-
             "legendEntityType" => $block->legend_entity_type ? $block->legend_entity_type : null,
 
             "topLeftControl" => $this->getControls($block->top_left_control, $queriedData, $configuredCols, "justify-start"),

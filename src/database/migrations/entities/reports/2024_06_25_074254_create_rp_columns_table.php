@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string("title")->nullable();
             $table->string('name')->nullable();
+            $table->unsignedBigInteger("iterator_block_id")->nullable();
             $table->unsignedBigInteger('block_id')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->boolean('is_active')->nullable();

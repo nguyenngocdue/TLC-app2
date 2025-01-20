@@ -7,7 +7,7 @@ use App\BigThink\ModelExtended;
 class Rp_column extends ModelExtended
 {
     protected $fillable = [
-        "id", "name", "title", "block_id", "parent_id", "is_active", "data_index",
+        "id", "name", "title", "iterator_block_id", "block_id", "parent_id", "is_active", "data_index",
         "col_span", "fixed", "row_span",
         "order_no", "name", "width", "cell_div_class_agg_footer", "cell_div_class",
         "cell_class", "icon", "icon_position", "row_cell_div_class", "row_cell_class",
@@ -21,6 +21,7 @@ class Rp_column extends ModelExtended
         'getRowRenderer' => ['belongsTo', Term::class, 'row_renderer'],
         'getAggFooter' => ['belongsTo', Term::class, 'agg_footer'],
         "getBlock" => ['belongsTo', Rp_block::class, 'block_id'],
+        "getIteratorBlock" => ['belongsTo', Rp_block::class, 'iterator_block_id'],
         "getParent" => ['belongsTo', Rp_column::class, 'parent_id'],
         "getFixedCol" => ['belongsTo', Term::class, 'fixed'],
     ];
@@ -60,11 +61,18 @@ class Rp_column extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getIteratorBlock()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
+
     public function getManyLineParams()
     {
         return [
             ["dataIndex" => 'id'],
             ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'iterator_block_id'],
             ["dataIndex" => 'block_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'title'],
             ["dataIndex" => 'name'],
@@ -94,6 +102,7 @@ class Rp_column extends ModelExtended
         return [
             ["dataIndex" => 'id'],
             ["dataIndex" => 'order_no', 'invisible' => true,],
+            ["dataIndex" => 'iterator_block_id', ],
             ["dataIndex" => 'block_id', 'value_as_parent_id' => true, 'invisible' => true,],
             ["dataIndex" => 'parent_id',],
             ["dataIndex" => 'title'],

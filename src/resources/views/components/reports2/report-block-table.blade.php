@@ -1,7 +1,7 @@
 {{-- @dd($tableDataSource[98]) --}}
 <x-renderer.table 
     headerTop={{$headerTop}}
-    showNo={{true}} 
+    showNo={{$showNo}} 
     :columns="$tableColumns" :dataSource="$tableDataSource" :dataHeader="$secondHeaderCols"
     tableTrueWidth="{{ $tableTrueWidth }}" maxH="{{ $maxHeight }}"
     showPaginationTop="{{true }}"

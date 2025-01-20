@@ -5,6 +5,16 @@ namespace App\View\Components\Reports2;
 
 trait TraitReportTableCell
 {
+    public function makeRowValue($col){
+        return [
+            'cell_class' => $col['cell_class'] ?? null,
+            'cell_div_class' => $col['cell_div_class'] ?? null,
+            'cell_href' => $col['cell_href'] ?? null,
+            'cell_title'=> $col['cell_title'] ?? null,
+            'row_cell_div_class' => $col['row_cell_div_class'] ?? null,
+            'row_cell_class' => $col['row_cell_class'] ?? null,
+        ];
+    }
     public function makeCellValue($values,$originalValue, $content, $cellClass = '',$href ='', $cellDivClass='', $cellTitle='') {
         $values = (object)[
             'original_value' => $originalValue, // to export excel

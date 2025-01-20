@@ -2,6 +2,8 @@
 
 namespace App\View\Components\Reports2;
 
+use App\Http\Controllers\Reports\TraitCreateSQLReport2;
+use App\Models\Rp_block;
 use Illuminate\Support\Facades\DB;
 
 class ReportTableColumn
@@ -10,6 +12,8 @@ class ReportTableColumn
     use TraitReportTableContent;
     use TraitReportTransformedData;
     use TraitReportDetectVariableChanges;
+    use TraitCreateSQLReport2;
+    use TraitReportQueriedData;
 
 
     private static $instance = null;
@@ -27,12 +31,12 @@ class ReportTableColumn
         return array_unique(array_keys((array)$collection->first()));
     }
 
-    private function defaultColumnsOnEmptyQuery($block,$currentParams)
+    private function defaultColumnsOnEmptyQuery($block, $currentParams)
     {
         // $title = $this->createHeaderTitle($line->title ?? $line->name, $line->icon, $line->icon_position, $currentParams);
         $cols = $block->getLines->where('is_active', true)
-        ->select('title', 'data_index')
-            ->map(function ($item) use($currentParams) {
+            ->select('title', 'data_index')
+            ->map(function ($item) use ($currentParams) {
                 $title = $item['title'] ?? $item['data_index'];
                 $title = $this->formatReportHref($title, $currentParams);
                 return [
@@ -44,7 +48,8 @@ class ReportTableColumn
         return $cols;
     }
 
-    private function  makeDataByConfig($secondHeaderConfig, $currentParams){
+    private function  makeDataByConfig($secondHeaderConfig, $currentParams)
+    {
         $sqlStr = $secondHeaderConfig['sql_check'];
         $sqlStr = $this->detectVariablesNoBlock($sqlStr, $currentParams);
         $data = collect(DB::select($sqlStr));
@@ -52,7 +57,8 @@ class ReportTableColumn
     }
 
 
-    private function create2ndHeaderCols($headerCols, $block, $currentParams) {
+    private function create2ndHeaderCols($headerCols, $block, $currentParams)
+    {
         $configs = $block->transformed_data_string;
         $transformedOpt = json_decode($configs, true);
         if (isset($transformedOpt['grouping_to_matrix'])) {
@@ -63,23 +69,49 @@ class ReportTableColumn
                 $fieldToGetVal = $secondHeaderConfig['field_get'];
                 $fieldToCheckVal = $secondHeaderConfig['field_check'];
                 $cssClassField = $secondHeaderConfig['css_class'] ?? '';
-                
+
                 $data = $this->makeDataByConfig($secondHeaderConfig, $currentParams);
 
                 $xAxis2ndHeading = $data->pluck($fieldToGetVal, $fieldToCheckVal);
                 $cssData = $data->pluck($cssClassField, $fieldToCheckVal);
-                
+
                 return collect($headerCols)->mapWithKeys(function ($col) use ($xAxis2ndHeading, $cssData) {
                     $dataIndex = $col['dataIndex'];
-                    $cssClass = $cssData[$col['dataIndex']]?? null;
+                    $cssClass = $cssData[$col['dataIndex']] ?? null;
                     return [$dataIndex => (object) [
-                        'value' =>$xAxis2ndHeading->get($dataIndex, ''),
+                        'value' => $xAxis2ndHeading->get($dataIndex, ''),
                         'cell_class' => $cssClass,
                     ]];
                 })->toArray();
-            }  
+            }
         }
         return [];
+    }
+
+    public function getHeaderDynamicColumns($iteratorBlock, $originalLine, $currentParams)
+    {
+        $SqlStr = $iteratorBlock->sql_string;
+        $SqlStr = $this->getSql($SqlStr, $currentParams);
+        $data = $this->getDataSQLString($SqlStr);
+        $headerCols = [];
+        
+        foreach ($data as $iterator) {
+            $refKey = $originalLine->data_index;
+            if (!isset($iterator->{$refKey}) or  !isset($iterator->title)) {
+                dd("Please verify the column data index and iterator in the SQL or configuration table.");
+            }
+            $dataIndex = $iterator->{$refKey};
+
+            $headerCols[] = [
+                'title' => $iterator->title ?? $dataIndex,
+                'dataIndex' => $dataIndex,
+                'width' => $originalLine->width,
+                'colspan' => $originalLine->col_span,
+                'fixed' => strtolower($this->getTermName($originalLine->fixed)) ?? null,
+                'footer' => $this->getAggName($originalLine->agg_footer),
+            ];
+        }
+        return $headerCols;
     }
 
 
@@ -97,12 +129,21 @@ class ReportTableColumn
         $headerCols = [];
 
         $fields = [];
-
         foreach ($columns as $line) {
             $dataIndex = $line->data_index;
             $isActive = $line->is_active;
             $fields[] = $dataIndex;
+
+            if (!$isActive) continue;
+            if ($line->iterator_block_id) {
+                $iteratorBlockId = $line->iterator_block_id;
+                $iteratorBlock = Rp_block::find($iteratorBlockId);
+                $headerDynamicCols = $this->getHeaderDynamicColumns($iteratorBlock, $line, $currentParams);
+                $headerCols = array_merge($headerCols, $headerDynamicCols);
+            }
+
             if ($isActive && in_array($dataIndex, $uniqueFields)) {
+
                 $aggFooter = $this->getAggName($line->agg_footer);
                 $title = $this->createHeaderTitle($line->title ?? $line->name, $line->icon, $line->icon_position, $currentParams);
                 $headerCols[] = [

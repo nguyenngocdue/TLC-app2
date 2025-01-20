@@ -69,6 +69,20 @@
         "control_extra": "",
         "textarea_rows": ""
     },
+    "_iterator_block_id": {
+        "name": "_iterator_block_id",
+        "column_name": "iterator_block_id",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
     "_parent_id": {
         "name": "_parent_id",
         "column_name": "parent_id",
@@ -128,6 +142,20 @@
     "_row_span": {
         "name": "_row_span",
         "column_name": "row_span",
+        "label": "",
+        "validation": "",
+        "validation_regex": "",
+        "formula": "",
+        "default_value": "",
+        "cannot_be_readonly_during_create": "",
+        "label_extra": "",
+        "placeholder": "",
+        "control_extra": "",
+        "textarea_rows": ""
+    },
+    "_row_span_data_index": {
+        "name": "_row_span_data_index",
+        "column_name": "row_span_data_index",
         "label": "",
         "validation": "",
         "validation_regex": "",
