@@ -31,9 +31,9 @@ class Kernel extends ConsoleKernel
                 Log::channel('schedule_heartbeat_channel')
                     ->info("Executed at " . date(Constant::FORMAT_DATETIME_ASIAN));
             })
-            ->everySixHours()
+            ->hourly()
             // ->appendOutputTo(storage_path("logs/schedule_test_minute.log"))
-            ->description("Every 6 hours: Heartbeat at: " . date(Constant::FORMAT_DATETIME_ASIAN));
+            ->description("Hourly: Heartbeat at: " . date(Constant::FORMAT_DATETIME_ASIAN));
 
         $schedule
             ->call(function () {
@@ -70,19 +70,22 @@ class Kernel extends ConsoleKernel
             // ->appendOutputTo(storage_path("logs/schedule_clean_up_trash.log"))
             ->description("Daily at 21:00 Ho_Chi_Minh Time: Clean Up Trash.");;
 
-        $schedule->call(function () {
-            event(new StartOfWeekRemindEvent());
-        })->cron('0 8 * * 1')
+        $schedule
+            ->call(function () {
+                event(new StartOfWeekRemindEvent());
+            })->cron('0 8 * * 1')
             ->timezone("Asia/Ho_Chi_Minh")
             ->description("Every Monday at 08:00 Ho_Chi_Minh Time: send timesheet reminder to managers.");
 
-        $schedule->call(function () {
-            event(new EndOfWeekRemindEvent());
-        })->hourly();
+        $schedule
+            ->call(function () {
+                event(new EndOfWeekRemindEvent());
+            })->hourly();
 
-        $schedule->call(function () {
-            event(new UpdateRoutingAvgActualHourEvent());
-        })->dailyAt('21:00')
+        $schedule
+            ->call(function () {
+                event(new UpdateRoutingAvgActualHourEvent());
+            })->dailyAt('21:00')
             ->timezone("Asia/Ho_Chi_Minh")
             ->description("Daily at 21:00 Ho_Chi_Minh Time: Update Routing AVG Actual Hours.");;
     }

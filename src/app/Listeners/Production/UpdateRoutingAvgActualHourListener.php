@@ -31,9 +31,10 @@ class UpdateRoutingAvgActualHourListener
                 if ($sequence->updated_at->isToday()) {
                     // Log::info($routing);
                     $request = request()->merge(['routing_id' => $routing->id]);
-                    dump("Updating avg actual hours for routing #" . $routing->id . ": " . $routing->name);
+                    Log::channel('schedule_update_routing_avg_actual')
+                        ->info("Updating avg actual hours for routing #" . $routing->id . ": " . $routing->name);
                     $this->avgActualHoursForRoutingLinkService->handle($request);
-                    dump("--");
+                    // dump("--");
                 }
             }
         }

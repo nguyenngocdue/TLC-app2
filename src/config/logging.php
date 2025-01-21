@@ -159,5 +159,11 @@ return [
             'level' => 'debug', // Define the log level
             'days' => 30, // Number of days log files should be retained
         ],
+        'schedule_update_routing_avg_actual' => [
+            'driver' => 'daily', // or 'single' for a single log file
+            'path' => storage_path('logs/schedule/routing_avg_actual/schedule.log'), // Define the log storage location
+            'level' => 'debug', // Define the log level
+            'days' => 30, // Number of days log files should be retained
+        ],
     ],
 ];
