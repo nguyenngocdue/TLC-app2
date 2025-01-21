@@ -11,6 +11,7 @@ docker exec -it laravel202_php php artisan event:clear
 docker exec -it laravel202_php php artisan route:clear
 docker exec -it laravel202_php php artisan route:cache
 
+supervisorctl restart cron_beta2
 supervisorctl restart horizon_beta2
 #supervisorctl restart queue_worker_beta2
 
