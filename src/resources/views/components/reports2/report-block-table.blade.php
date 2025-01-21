@@ -1,4 +1,3 @@
-{{-- @dd($tableDataSource[98]) --}}
 <x-renderer.table 
     headerTop={{$headerTop}}
     showNo={{$showNo}} 

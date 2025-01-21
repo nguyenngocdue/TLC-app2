@@ -212,7 +212,7 @@ class ReportBlockTable extends Component
         }
         $headerTop = $block->header_top;
 
-        $tableDataSource = $this->getTableSpanDataSource($tableDataSource,$queriedData, $columns, $currentParams);
+        // $tableDataSource = $this->getTableSpanDataSource($tableDataSource,$queriedData, $columns, $currentParams);
 
         return view('components.reports2.report-block-table', [
             'block' => $block,
