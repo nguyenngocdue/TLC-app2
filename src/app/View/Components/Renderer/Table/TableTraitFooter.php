@@ -37,6 +37,10 @@ trait TableTraitFooter
         $tz = DateTimeConcern::getTz();
 
         // $items = $dataSource->map(fn ($item) => is_object($item[$fieldName]) ? $item[$fieldName]->value : $item[$fieldName]);
+        if (is_array($dataSource)) {
+            $dataSource = collect($dataSource);
+        }
+
         $items = $dataSource->map(function ($item) use ($fieldName) {
             if (is_object($item)) {
                 return is_object($item->$fieldName) ? $item->$fieldName->value : $item->$fieldName;
@@ -46,6 +50,7 @@ trait TableTraitFooter
             }
             return "-111111";
         });
+
 
         $result['agg_none'] = '';
         $result['agg_count_all'] = $items->count();
