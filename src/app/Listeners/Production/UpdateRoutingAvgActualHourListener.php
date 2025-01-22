@@ -26,6 +26,8 @@ class UpdateRoutingAvgActualHourListener
             ->with(['getLatestProdSequences'])
             ->get();
         $nothing_is_updated = true;
+        Log::channel('schedule_update_routing_avg_actual')
+            ->info("Event called (for debug 5 called)");
         foreach ($routings as $routing) {
             if ($routing->getLatestProdSequences) {
                 $sequence = $routing->getLatestProdSequences;
