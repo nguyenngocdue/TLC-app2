@@ -13,10 +13,25 @@ Route::group([
     Route::get('getStatuses', [LibStatuses::class, 'getAll']);
     Route::get('getApps', [LibApps::class, 'getAll']);
     Route::get('getAdminMenu', [LibNavbars::class, 'getUserMenu']);
+    Route::get('getCurrentUser', function () {
+        return [
+            "profile" => [
+                "name" => "Administrator 0",
+                "description" => "System Admin",
+                "avatarSrc" => "https://minio.tlcmodular.com/tlc-app/avatars/admin avatar-150x150.png",
+            ],
+            "selectedGlobalProjectId" => 15,
+        ];
+    });
     Route::get('getProjects', function () {
         return Project::query()
 
-            ->where('status', ['manufacturing', 'construction_site', 'design'])
+            ->whereIn('status', [
+                'manufacturing',
+                'construction_site',
+                'design',
+                // 'concept',
+            ])
             ->with(['getAvatar' => function ($q) {
                 $q->select('id', 'url_thumbnail', 'attachments.object_type', 'attachments.object_id');
             }])
