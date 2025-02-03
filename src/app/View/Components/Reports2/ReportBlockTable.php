@@ -195,7 +195,7 @@ class ReportBlockTable extends Component
         if ($block->has_pagination) {
             $tableDataSource = method_exists(($x = $this->tableDataSource), 'setCollection') ?  $x->setCollection($tableDataSource) : $x;
         }
-        // columns were not created 
+        // Columns were not created 
         if (!$configuredCols) {
             $tableDataSource = $this->queriedData;
             // has pagination, columns were not created 
@@ -205,15 +205,16 @@ class ReportBlockTable extends Component
             $headerCols = $reportTableColumn->createColsWhenNotFoundRenderType($this->queriedData);
         }
         
-        
-        //Transformed Data Option
+        //Transformed data option
         if ($block->is_transformed_data) {
             $configuredCols = $reportTableColumn->updateConfiguredCols($headerCols);
         }
-        $headerTop = $block->header_top;
-
-        // $tableDataSource = $this->getTableSpanDataSource($tableDataSource,$queriedData, $columns, $currentParams);
-
+        
+        //Dynamic columns
+        if ($columns->pluck('iterator_block_id')->filter()->toArray()) {
+            $tableDataSource = $this->getTableSpanDataSource($tableDataSource, $queriedData, $columns, $currentParams);
+        }
+        
         return view('components.reports2.report-block-table', [
             'block' => $block,
             "name" => $block->name,
@@ -228,7 +229,7 @@ class ReportBlockTable extends Component
             "rotate45Width" => $block->rotate_45_width,
             "rotate45Height" => $block->rotate_45_height,
             "hasPagination" => $block->has_pagination,
-            "headerTop" => $headerTop,
+            "headerTop" => $block->header_top,
             "legendEntityType" => $block->legend_entity_type ? $block->legend_entity_type : null,
 
             "topLeftControl" => $this->getControls($block->top_left_control, $queriedData, $configuredCols, "justify-start"),

@@ -190,6 +190,19 @@ class DateReport
         return $dataSource;
     }
 
+    public static function createHalfYears() {
+        return  [
+            [ 
+                'id' => 'start_half_year',
+                'name' =>  'Jan to Jun'
+            ],
+            [ 
+                'id' => 'end_half_year',
+                'name' => 'Jul to Dec',
+            ] 
+        ];
+    }
+
     public static function getMonthAbbreviation2($monthNumber)
     {
         $months = [
