@@ -30,6 +30,7 @@ class ReportFilterItem extends Component
     protected $YEAR_TYPE_ID = 634;
     protected $WEEK_OF_YEAR_TYPE_ID = 635;
     protected $QUARTER_OF_YEAR_ID = 798; #636;
+    protected $HALF_YEAR_ID = 799; #637;
 
     protected $DEFECT_ROOT_CAUSE_TYPE_ID = 117;
     protected $DEFECT_REPORT_TYPE_ID = 142;
@@ -103,6 +104,8 @@ class ReportFilterItem extends Component
                 return $months;
             case $this->QUARTER_OF_YEAR_ID:
                 return DateReport::createQuarters();
+            case $this->HALF_YEAR_ID:
+                return DateReport::createHalfYears();
             default:
                 return [];
         }
