@@ -70,7 +70,7 @@
     <script src="{{ asset('js/components/ModalSearchableDialogCreateNew.js') }}"></script>
 
     <script src="{{ asset('js/components/EditableTable2-20231229.js') }}"></script>
-    <script src="{{ asset('js/components/EditableTableAddNewLine2-20241220.js') }}"></script>
+    <script src="{{ asset('js/components/EditableTableAddNewLine2-20250203.js') }}"></script>
     <script src="{{ asset('js/components/Footer4-20231219.js') }}"></script>
     
     <script src="{{ mix('js/EditableTable3.js') }}"></script>

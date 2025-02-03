@@ -262,7 +262,7 @@ const onChangeDropdown2DateOffset = (listener) => {
 }
 
 const onChangeDropdown2Expression = (listener) => {
-    const debugListener = true
+    const debugListener = !true
     if (debugListener) console.log('Expression', listener)
     const { expression, column_name } = listener
     let expression1 = expression

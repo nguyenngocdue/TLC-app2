@@ -51,7 +51,8 @@ class PickerAll4 extends Component
         // dump($this->table01Name);
         $minDate = null;
         if ('prod_sequences.edit' === CurrentRoute::getName()) {
-            $minDate = Carbon::now()->subDays(4)->format(Constant::FORMAT_DATE_MYSQL);
+            $allowedDateOffset = config('production.prod_sequences.allowed_date_offset', 7);
+            $minDate = Carbon::now()->subDays($allowedDateOffset)->format(Constant::FORMAT_DATE_MYSQL);
         }
         // dump($minDate);
 

@@ -509,11 +509,13 @@ const addANewLineFull = (params) => {
                 break
             default:
                 const value = valuesOfOrigin[column['dataIndex']]
+                const allowed_date_offset = 15
+                // const allowed_date_offset = 4
                 const picker4config =
                     tableName == 'prod_runs'
-                        ? { minDate: moment().subtract(4, 'days').format('YYYY-MM-DD') }
+                        ? { minDate: moment().subtract(allowed_date_offset, 'days').format('YYYY-MM-DD') }
                         : {}
-                // console.log(picker4config)
+                console.log(picker4config, allowed_date_offset)
                 // console.log("DDDDDD5", column, value)
                 if (column['value_as_parent_type']) {
                     getEById(id).val($('#entityParentType').val())

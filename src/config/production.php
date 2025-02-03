@@ -35,4 +35,8 @@ return [
         "place_holder" => 364,
         "report_toc" => 365,
     ],
+    "prod_sequences" => [
+        "allowed_date_offset" => 15,
+        // "allowed_date_offset" => 4,
+    ],
 ];
