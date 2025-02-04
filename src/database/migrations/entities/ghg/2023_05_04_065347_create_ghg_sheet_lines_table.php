@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         $schema = DB::connection()->getSchemaBuilder();
-        $schema->blueprintResolver(fn ($table, $callback) => new BlueprintExtended($table, $callback));
+        $schema->blueprintResolver(fn($table, $callback) => new BlueprintExtended($table, $callback));
 
         $schema->create('ghg_sheet_lines', function (BlueprintExtended $table) {
             $table->id();
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->decimal('factor', 10, 4)->nullable();
             $table->double('value')->nullable();
             $table->double('total')->nullable();
+            $table->unsignedBigInteger('workplace_id')->nullable();
             $table->text('remark')->nullable();
             $table->orderable();
             $table->appendCommonFields();

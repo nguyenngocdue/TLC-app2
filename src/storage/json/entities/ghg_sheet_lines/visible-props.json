@@ -49,6 +49,11 @@
         "column_name": "total",
         "new": "true"
     },
+    "_workplace_id": {
+        "name": "_workplace_id",
+        "column_name": "workplace_id",
+        "new": "true"
+    },
     "_remark": {
         "name": "_remark",
         "column_name": "remark",

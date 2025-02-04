@@ -10,10 +10,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getGhgTmpl": {
         "name": "_getGhgTmpl",
@@ -26,10 +28,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getGhgMetricType": {
         "name": "_getGhgMetricType",
@@ -42,10 +46,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getGhgMetricType1": {
         "name": "_getGhgMetricType1",
@@ -58,10 +64,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getGhgMetricType2": {
         "name": "_getGhgMetricType2",
@@ -74,10 +82,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getUnit": {
         "name": "_getUnit",
@@ -90,10 +100,30 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "field_id",
+        "filter_operator": "=",
         "filter_values": "184",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
+    },
+    "_getWorkplace": {
+        "name": "_getWorkplace",
+        "relationship": "belongsTo",
+        "control_name": "workplace_id",
+        "renderer_view_all": "column",
+        "renderer_view_all_param": "name",
+        "renderer_view_all_unit": "",
+        "renderer_edit": "",
+        "renderer_edit_param": "",
+        "control": "dropdown",
+        "filter_columns": "",
+        "filter_operator": "=",
+        "filter_values": "",
+        "radio_checkbox_colspan": "",
+        "let_user_choose_when_one_item": "",
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getOwner": {
         "name": "_getOwner",
@@ -106,10 +136,12 @@
         "renderer_edit_param": "",
         "control": "dropdown",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     },
     "_getDeletedBy": {
         "name": "_getDeletedBy",
@@ -122,9 +154,11 @@
         "renderer_edit_param": "",
         "control": "",
         "filter_columns": "",
+        "filter_operator": "=",
         "filter_values": "",
         "radio_checkbox_colspan": "",
         "let_user_choose_when_one_item": "",
-        "let_user_clear": ""
+        "let_user_clear": "",
+        "let_user_open": ""
     }
 }

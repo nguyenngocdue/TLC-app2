@@ -7,10 +7,21 @@ use App\BigThink\ModelExtended;
 class Ghg_sheet_line extends ModelExtended
 {
     protected $fillable = [
-        "id",  "owner_id", "order_no", "ghg_tmpl_id",
-        "ghg_metric_type_id", "ghg_metric_type_1_id", "ghg_metric_type_2_id",
-        "unit", "factor", "ghg_sheet_id", "value", "total",
-        "remark", "status",
+        "id",
+        "ghg_sheet_id",
+        "status",
+        "owner_id",
+        "order_no",
+        "ghg_tmpl_id",
+        "ghg_metric_type_id",
+        "ghg_metric_type_1_id",
+        "ghg_metric_type_2_id",
+        "value",
+        "unit",
+        "total",
+        "factor",
+        "workplace_id",
+        "remark",
     ];
     public static $nameless = true;
 
@@ -21,6 +32,7 @@ class Ghg_sheet_line extends ModelExtended
         "getGhgMetricType1" => ['belongsTo', Ghg_metric_type_1::class, 'ghg_metric_type_1_id'],
         "getGhgMetricType2" => ['belongsTo', Ghg_metric_type_2::class, 'ghg_metric_type_2_id'],
         "getUnit" => ['belongsTo', Term::class, 'unit'],
+        "getWorkplace" => ['belongsTo', Workplace::class, 'workplace_id'],
     ];
     public function getGhgSheet()
     {
@@ -52,6 +64,11 @@ class Ghg_sheet_line extends ModelExtended
         $p = static::$eloquentParams[__FUNCTION__];
         return $this->{$p[0]}($p[1], $p[2]);
     }
+    public function getWorkplace()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getManyLineParams()
     {
@@ -70,6 +87,7 @@ class Ghg_sheet_line extends ModelExtended
             ['dataIndex' => 'value'],
             ['dataIndex' => 'unit'],
             ['dataIndex' => 'total', 'footer' => "agg_sum",],
+            ['dataIndex' => 'workplace_id',],
 
             ['dataIndex' => 'remark', 'cloneable' => true],
             ['dataIndex' => 'status', 'cloneable' => true, 'no_print' => true, 'invisible' => true],
