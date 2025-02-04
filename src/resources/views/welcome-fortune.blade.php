@@ -7,10 +7,6 @@
     @csrf
     @method('POST')
 
-<x-renderer.table
-    :columns="$columns"
-    :dataSource="$dataSource"
-    />
 
 </form>
 

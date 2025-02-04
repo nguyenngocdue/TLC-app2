@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->text("description")->nullable();
 
-            $table->unsignedBigInteger("department_id")->nullable();
+            $table->string("type")->nullable();
+            $table->unsignedBigInteger("parent_id")->nullable();
             $table->unsignedBigInteger("version_id")->nullable();
             $table->unsignedBigInteger("notify_to")->nullable();
             $table->unsignedBigInteger("notify_schedule")->nullable();
