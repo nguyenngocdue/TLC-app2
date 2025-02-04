@@ -31,78 +31,6 @@
         "top_title": null,
         "title": "CO2 Emission Comparison Report"
     },
-    "document-ghg_sheet_040": {
-        "name": "document-ghg_sheet_040",
-        "package_tab": "report",
-        "package": "compliance",
-        "breadcrumb-group": null,
-        "top_title": "GHGRP Basin Production & Emission",
-        "title": "GHGRP Basin Production & Emission",
-        "hidden": "true"
-    },
-    "document-ghg_sheet_050": {
-        "name": "document-ghg_sheet_050",
-        "package_tab": "report",
-        "package": "compliance",
-        "breadcrumb-group": null,
-        "top_title": "ECO Report Detail",
-        "title": "ECO Report Detail",
-        "hidden": "true"
-    },
-    "document-ghg_sheet_060": {
-        "name": "document-ghg_sheet_060",
-        "package_tab": "report",
-        "package": "compliance",
-        "breadcrumb-group": null,
-        "top_title": "ECO Report Detail - Remove Metric 0 1 2",
-        "title": "ECO Report Detail - Remove Metric 0 1 2",
-        "hidden": "true"
-    },
-    "document-ghg_sheet_070": {
-        "name": "document-ghg_sheet_070",
-        "package_tab": "report",
-        "package": "compliance",
-        "breadcrumb-group": null,
-        "top_title": "CO2 Emission Comparison by Metric 2 Report",
-        "title": "CO2 Emission Comparison by Metric 2 Report",
-        "hidden": "true"
-    },
-    "document-ghg_sheet_080": {
-        "name": "document-ghg_sheet_080",
-        "package_tab": "report",
-        "package": null,
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": null,
-        "hidden": "true"
-    },
-    "document-prod_sequence_010": {
-        "name": "document-prod_sequence_010",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": "production",
-        "top_title": "Target vs. Actual",
-        "title": "4. Target vs. Actual",
-        "hidden": "true"
-    },
-    "document-prod_sequence_020": {
-        "name": "document-prod_sequence_020",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": "Process Analysis for Production Order",
-        "title": "(OBSOLETE) Process Analysis by Production Order",
-        "hidden": "true"
-    },
-    "document-prod_sequence_030": {
-        "name": "document-prod_sequence_030",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": "production",
-        "top_title": "Work Completion Percentage",
-        "title": "(OBSOLETE) Work Completion Percentage",
-        "hidden": "true"
-    },
     "document-prod_sequence_050": {
         "name": "document-prod_sequence_050",
         "package_tab": "report",
@@ -110,42 +38,6 @@
         "breadcrumb-group": "production",
         "top_title": "PPR Daily Progress",
         "title": "1. PPR Daily Progress"
-    },
-    "document-prod_sequence_060": {
-        "name": "document-prod_sequence_060",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": null,
-        "title": null,
-        "hidden": "true"
-    },
-    "document-qaqc_ncr_010": {
-        "name": "document-qaqc_ncr_010",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": "NCR\/DR Report in Chart",
-        "title": "NCR\/DR Report in Chart",
-        "hidden": "true"
-    },
-    "document-qaqc_ncr_020": {
-        "name": "document-qaqc_ncr_020",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": "NCR\/DR Report in Chart of Grafana",
-        "title": "NCR\/DR Report in Chart of Grafana",
-        "hidden": "true"
-    },
-    "document-qaqc_ncr_030": {
-        "name": "document-qaqc_ncr_030",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": "NCR\/DR Monthly Report",
-        "title": "NCR\/DR Monthly Report",
-        "hidden": "true"
     },
     "register-prod_sequence_010": {
         "name": "register-prod_sequence_010",
