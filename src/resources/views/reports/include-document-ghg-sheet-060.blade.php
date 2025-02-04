@@ -13,13 +13,10 @@
 .tg td a {
     color: blue;
 }
-
 </style>
-
 @php
 	$class1 = "bg-white border-gray-600 border-l border-b";
 	$class2 =" bg-gray-100 px-4 py-3 border-gray-600 ";
-
 	$complexSettingTable = $tableDataSource['tableSetting'];
 	$tableDataSource = $tableDataSource['tableDataSource'];
     $totalSpan = $complexSettingTable['total_line'];
@@ -28,8 +25,6 @@
     $rowSpanScope3 = $complexSettingTable[337]['scope_rowspan_lv1'];
 	$months = array_keys($tableDataSource['totalEmissionMetricTypeEachMonth']);
 @endphp
-
-
 <div class="rounded-lg border-gray-950 border-2 overflow-hidden w-full">
     <table class="tg whitespace-no-wrap w-full text-sm overflow-hidden border-gray-900">
 			<thead>
