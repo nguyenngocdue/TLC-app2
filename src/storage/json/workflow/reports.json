@@ -1,12 +1,4 @@
 {
-    "document-eco_sheet_010": {
-        "name": "document-eco_sheet_010",
-        "package_tab": "report",
-        "package": "project_management",
-        "breadcrumb-group": null,
-        "top_title": "ECO Summary Report",
-        "title": "ECO Summary Report"
-    },
     "document-esg_master_sheet_010": {
         "name": "document-esg_master_sheet_010",
         "package_tab": "report",
