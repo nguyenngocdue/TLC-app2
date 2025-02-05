@@ -2,7 +2,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
 <div class="grid grid-cols-12 gap-2">
-    <div class="col-span-3 border rounded p-2 mt-2 overflow-x-auto">
+    <div class="col-span-3 border rounded p-2 mt-2 overflow-x-auto bg-gray-100">
         @if($showSearch)
             <div class="flex border rounded">                
                 <input id="txt-search-box" class="p-2 w-full" placeholder="Search Tree"/>
@@ -11,7 +11,7 @@
         @endif
         <div id="json_tree_1"></div>
     </div>
-    <div class="col-span-9 border rounded p-2 mt-2 overflow-x-auto" >
+    <div class="col-span-9 border rounded p-2 mt-2 overflow-x-auto bg-gray-100" >
         <div id="tree_explorer_1" style="height: 100%;"></div>
     </div>
 </div>
