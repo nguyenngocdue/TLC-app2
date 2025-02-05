@@ -2191,8 +2191,8 @@
         "hidden": "true",
         "hidden_navbar": "true"
     },
-    "pp_procedure_policy": {
-        "name": "pp_procedure_policy",
+    "pp_doc": {
+        "name": "pp_doc",
         "package_tab": "application",
         "package": "compliance",
         "sub_package": "procedure_policy",
@@ -2203,7 +2203,25 @@
         "doc_id_format_column": null,
         "status": null,
         "edit_renderer": null,
-        "show_renderer": null
+        "show_renderer": null,
+        "do_not_send_notification_mails": "true"
+    },
+    "pp_folder": {
+        "name": "pp_folder",
+        "package_tab": "application",
+        "package": "compliance",
+        "sub_package": "procedure_policy",
+        "title": "Pp Folders",
+        "nickname": null,
+        "tutorial_link": null,
+        "icon": "<i class=\"fa-duotone fa-file\"><\/i>",
+        "doc_id_format_column": null,
+        "status": null,
+        "edit_renderer": null,
+        "show_renderer": null,
+        "hidden": "true",
+        "hidden_navbar": "true",
+        "do_not_send_notification_mails": "true"
     },
     "priority": {
         "name": "priority",

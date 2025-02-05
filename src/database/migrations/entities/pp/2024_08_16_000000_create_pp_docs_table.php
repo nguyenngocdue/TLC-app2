@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger("parent_id")->nullable();
 
             $table->unsignedBigInteger("version_id")->nullable();
-            $table->unsignedBigInteger("notify_to")->nullable();
+            $table->unsignedBigInteger("notify_to")->default(765); //765: None
             $table->unsignedBigInteger("notify_schedule")->nullable();
 
             // $table->boolean("opened")->default(0);
