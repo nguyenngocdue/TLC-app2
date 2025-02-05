@@ -1,0 +1,48 @@
+
+INSERT INTO `pp_folders` (`id`, `name`, `opened`, `parent_type`, `parent_id`) VALUES
+(1100, 'Cooperate Policies', 1, null, null),
+(1110, 'The TLC Charter', 1, 'App\\Models\\Pp_folder', 1100),
+
+(1200, 'ISO Policies & Procedures', 1, null, null),
+(1210, 'Policy Manuals', 1, 'App\\Models\\Pp_folder', 1200),
+(1220, 'Procedures', 1, 'App\\Models\\Pp_folder', 1200),
+(1230, 'Policy Statements', 1, 'App\\Models\\Pp_folder', 1200),
+
+(1300, 'Department Procedures', 1, null, null)
+;
+
+
+INSERT INTO `pp_docs` (`name`, `parent_type`, `parent_id`) VALUES
+('00. Policy Templates', 'App\\Models\\Pp_folder', 1110),
+('01. Fraud Prevention', 'App\\Models\\Pp_folder', 1110),
+('02. Gifts and Entertainment', 'App\\Models\\Pp_folder', 1110),
+('03. ESG', 'App\\Models\\Pp_folder', 1110),
+('04. AML', 'App\\Models\\Pp_folder', 1110),
+('05. Conflict of Interest', 'App\\Models\\Pp_folder', 1110),
+('06. Code of Conduct', 'App\\Models\\Pp_folder', 1110),
+('07. Risk Management', 'App\\Models\\Pp_folder', 1110),
+('08. Whistle Blowing', 'App\\Models\\Pp_folder', 1110),
+('09. IT Security', 'App\\Models\\Pp_folder', 1110),
+('10. Retrenchment Policy', 'App\\Models\\Pp_folder', 1110),
+('11. Grievance Handling Procedure', 'App\\Models\\Pp_folder', 1110),
+('12. BCP', 'App\\Models\\Pp_folder', 1110),
+('13. Energy Management Policy', 'App\\Models\\Pp_folder', 1110),
+('14. Climate Vulnerability', 'App\\Models\\Pp_folder', 1110),
+('15. ESMS', 'App\\Models\\Pp_folder', 1110),
+('16. Water Management Policy', 'App\\Models\\Pp_folder', 1110),
+
+('Policy Manuals', 'App\\Models\\Pp_folder', 1210),
+('Procedures', 'App\\Models\\Pp_folder', 1220),
+
+
+('01. EHS', 'App\\Models\\Pp_folder', 1230),
+('02. Drug and Alcohol', 'App\\Models\\Pp_folder', 1230),
+('03. Smoke Free Workplace', 'App\\Models\\Pp_folder', 1230),
+('04. Injury Management', 'App\\Models\\Pp_folder', 1230),
+('05. Quality Assurance', 'App\\Models\\Pp_folder', 1230),
+('06. Equal Opportunity Employment', 'App\\Models\\Pp_folder', 1230),
+('07. Fitness for Work', 'App\\Models\\Pp_folder', 1230),
+('08. Our Safety Values', 'App\\Models\\Pp_folder', 1230),
+('09. Labour Ethics Compliance', 'App\\Models\\Pp_folder', 1230),
+('10. Environmental Mission', 'App\\Models\\Pp_folder', 1230)
+;
