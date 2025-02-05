@@ -28,7 +28,14 @@ class Department extends ModelExtended
         "getMembers" => ['hasMany', User::class, 'department'],
         "getMembers2" => ['hasMany', User::class, 'department'],
         "getSkillsOfDepartment" => ['belongsToMany', Department_skill::class, 'ym2m_department_skill_department'],
+        "getPpDocs" => ['morphMany', Pp_doc::class, 'parent', 'parent_type', 'parent_id'],
     ];
+
+    public function getPpDocs()
+    {
+        $p = static::$eloquentParams[__FUNCTION__];
+        return $this->{$p[0]}($p[1], $p[2]);
+    }
 
     public function getHOD()
     {

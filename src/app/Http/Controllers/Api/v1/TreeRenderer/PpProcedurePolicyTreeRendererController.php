@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\TreeRenderer;
 
-use App\Models\Pp_procedure_policy;
+use App\Models\Pp_doc;
 use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +12,7 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
     function render(Request $request)
     {
         $ppId = $request->input('treeBodyObjectId');
-        $pp = Pp_procedure_policy::find($ppId);
+        $pp = Pp_doc::find($ppId);
         $notifyToId = $pp->notify_to ?? 756;
         $versionId = $pp->version_id;
         $notifyToOptionList = Term::query()->where('field_id', 318)->get();
@@ -27,11 +27,11 @@ class PpProcedurePolicyTreeRendererController extends _TreeRendererController
             'versionId' => $versionId,
             'loadDynamicPublishedVersion' => route("pp_procedure_policy_published_version"),
 
-            'editPPRoute' => route("pp_procedure_policies.edit", $ppId),
-            'updatePPRoute' => route("pp_procedure_policies.updateShortSingle"),
+            'editPPRoute' => route("pp_docs.edit", $ppId),
+            'updatePPRoute' => route("pp_docs.updateShortSingle"),
 
-            'uploadFilePPRoute' => route("pp_procedure_policies.uploadFileShortSingle"),
-            'deleteFilePPRoute' => route("pp_procedure_policies.deleteFileShortSingle"),
+            'uploadFilePPRoute' => route("pp_docs.uploadFileShortSingle"),
+            'deleteFilePPRoute' => route("pp_docs.deleteFileShortSingle"),
         ]);
     }
 }

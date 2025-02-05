@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v1\TreeRenderer;
 
 use App\Models\Department;
-use App\Models\Pp_procedure_policy;
+use App\Models\Pp_doc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -42,6 +42,7 @@ class PpProcedurePolicyNotifyToTreeRendererController //extends _TreeRendererCon
             ]
         ];
         foreach ($departments as $department) {
+            if (is_null($department->getHOD)) continue;
             $avatar = $department->getHOD->getAvatar?->url_thumbnail ?? '/images/avatar.jpg';
             $src = "<img class='rounded-full ml-6 mr-2' heigh=24 width=24 src='" . app()->pathMinio() . $avatar . "' />";
             $tree[] = [
@@ -92,7 +93,7 @@ class PpProcedurePolicyNotifyToTreeRendererController //extends _TreeRendererCon
 
     private function getNotifyToId($ppId)
     {
-        $procedure = Pp_procedure_policy::query()->where('id', $ppId)->first();
+        $procedure = Pp_doc::query()->where('id', $ppId)->first();
         return [
             $procedure->getNotifyToHodExcluded->pluck('id')->toArray(),
             $procedure->getNotifyToMemberExcluded->pluck('id')->toArray(),

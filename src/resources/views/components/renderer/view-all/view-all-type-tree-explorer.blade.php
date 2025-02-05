@@ -141,13 +141,15 @@
         }
 
         $('#json_tree_1').on("changed.jstree", function (e, data) {
-            // console.log(data.selected);
             if(Array.isArray(data.selected)){
                 // console.log(data.selected);
                 const treeBodyObjectId = data.selected[0]
                 //Dispatch API call if the selected node is a number
-                if(!isNaN(treeBodyObjectId) && (!isNaN(parseFloat(treeBodyObjectId))) )loadRenderer(treeBodyObjectId)
-                else console.log("Selected ID is Not a number:", treeBodyObjectId)
+                // loadRenderer(1)
+                if(!isNaN(treeBodyObjectId) && (!isNaN(parseFloat(treeBodyObjectId))) )
+                    loadRenderer(treeBodyObjectId)
+                else 
+                    console.log("Selected ID is Not a number:", treeBodyObjectId)
             }
         });
 

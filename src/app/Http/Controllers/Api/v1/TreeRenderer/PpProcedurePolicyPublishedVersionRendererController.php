@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1\TreeRenderer;
 
-use App\Models\Pp_procedure_policy;
+use App\Models\Pp_doc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -10,7 +10,7 @@ class PpProcedurePolicyPublishedVersionRendererController //extends _TreeRendere
 {
     private function getPP($ppId)
     {
-        return Pp_procedure_policy::query()
+        return Pp_doc::query()
             ->where('id', $ppId)
             ->with([
                 'attachment_procedure_policy' => function ($q) {
@@ -22,7 +22,7 @@ class PpProcedurePolicyPublishedVersionRendererController //extends _TreeRendere
             ->first();
     }
 
-    private function getVersions(Pp_procedure_policy $pp)
+    private function getVersions(Pp_doc $pp)
     {
         $attachments = $pp->attachment_procedure_policy;
         return $attachments

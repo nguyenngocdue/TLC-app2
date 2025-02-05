@@ -428,8 +428,8 @@
     "posts": {
         "name": "posts"
     },
-    "pp_procedure_policies": {
-        "name": "pp_procedure_policies",
+    "pp_docs": {
+        "name": "pp_docs",
         "createNewShort": "true",
         "updateShortSingle": "true",
         "uploadFileShortSingle": "true",

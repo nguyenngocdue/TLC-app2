@@ -22,7 +22,7 @@
                         {{-- type="{{$type}}" --}}
                         />
                 @break
-        @case('pp_procedure_policies')
+        @case('pp_docs')
                 <x-renderer.view-all-tree-type.PpProcedurePolicy 
                         type="{{$type}}"
                         />

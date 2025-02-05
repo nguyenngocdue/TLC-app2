@@ -1,14 +1,14 @@
 
 INSERT INTO `pp_folders` (`id`, `name`, `opened`, `parent_type`, `parent_id`) VALUES
-(1100, 'Cooperate Policies', 1, null, null),
-(1110, 'The TLC Charter', 1, 'App\\Models\\Pp_folder', 1100),
+(1100, '01. Cooperate Policies', 1, null, null),
+(1110, 'The TLC Charter', 0, 'App\\Models\\Pp_folder', 1100),
 
-(1200, 'ISO Policies & Procedures', 1, null, null),
-(1210, 'Policy Manuals', 1, 'App\\Models\\Pp_folder', 1200),
-(1220, 'Procedures', 1, 'App\\Models\\Pp_folder', 1200),
-(1230, 'Policy Statements', 1, 'App\\Models\\Pp_folder', 1200),
+(1200, '02. ISO Policies & Procedures', 1, null, null),
+(1210, '01. Policy Manuals', 0, 'App\\Models\\Pp_folder', 1200),
+(1220, '02. Procedures', 0, 'App\\Models\\Pp_folder', 1200),
+(1230, '03. Policy Statements', 0, 'App\\Models\\Pp_folder', 1200),
 
-(1300, 'Department Procedures', 1, null, null)
+(1300, '03. Department Procedures', 1, null, null)
 ;
 
 
