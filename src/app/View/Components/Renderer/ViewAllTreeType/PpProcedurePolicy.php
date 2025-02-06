@@ -60,7 +60,7 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
         }
 
         $departments = Department::query()
-            // ->where('hide_in_pp', 0)
+            ->where('hide_in_pp', 0)
             ->with(['getHOD' => fn($q) => $q->with(["getAvatar"])])
             ->orderBy('name')
             ->get();

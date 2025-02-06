@@ -125,12 +125,14 @@
                 check_callback: function(operation, node, parent, position, more) {
                     // Control Draggable and Droppable in a unified way
                     if (operation === "move_node") {
+                        console.log("Start to check...")
                         // Check if the node itself is draggable
                         if (node.data && node.data.draggable == false) return false; // Disable dragging for non-draggable nodes
                         // Check if the target parent is droppable
                         if (parent && parent.data && parent.data.droppable == false) return false; // Disable dropping on non-droppable nodes
                         if (parent.id === "#") return false; // Prevent dropping at the root level                    
                     }
+                    console.log("OK",operation, node, parent, position, more);
                     return true; // Allow all other operations
                 },
                 // sort: function(a, b) {
