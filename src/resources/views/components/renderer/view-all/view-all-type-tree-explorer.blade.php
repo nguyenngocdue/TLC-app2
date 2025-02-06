@@ -166,20 +166,20 @@
                                     "label": "Rename Folder",
                                     "action": (obj) => tree.edit(node),
                                 },
-                                "Delete": {
-                                    "label": "Delete Folder",
-                                    "action": (obj) => {
-                                        // console.log("Delete", node);
-                                        Swal.fire(actionConfirmObject([node.text], "DELETE"))
-                                        .then((result) => {
-                                            if (result.isConfirmed) tree.delete_node(node);
-                                        });
-                                    },
-                                    "_disabled": function(node) {
-                                        // Disable delete for root nodes
-                                        return node.parent == "#"; 
-                                    }
-                                }
+                                // "Delete": {
+                                //     "label": "Delete Folder",
+                                //     "action": (obj) => {
+                                //         // console.log("Delete", node);
+                                //         Swal.fire(actionConfirmObject([node.text], "DELETE"))
+                                //         .then((result) => {
+                                //             if (result.isConfirmed) tree.delete_node(node);
+                                //         });
+                                //     },
+                                //     "_disabled": function(node) {
+                                //         // Disable delete for root nodes
+                                //         return node.parent == "#"; 
+                                //     }
+                                // }
                             }
                         break;
                         case "pp_doc":
