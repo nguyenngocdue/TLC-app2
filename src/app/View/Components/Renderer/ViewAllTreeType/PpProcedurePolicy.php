@@ -23,6 +23,9 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
 
     private function getShortName($modelPath)
     {
+        // if (!isset($this->mapping[$modelPath])) {
+        //     dd("Model path not found in mapping: [" . $modelPath . "]");
+        // }
         return $this->mapping[$modelPath];
     }
 
@@ -48,6 +51,8 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
             $item['data'] = [
                 'draggable' => $folder->draggable,
                 'droppable' => $folder->droppable,
+                "parent_id" => $folder->id,
+                "parent_type" => "App\\Models\\Pp_folder",
                 "my_type" => "pp_folder",
                 "my_id" => $folder->id,
             ];

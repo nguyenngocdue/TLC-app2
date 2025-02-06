@@ -45,6 +45,7 @@
             },
             success: (res) => {
                 const newNode = tree.create_node(node, {
+                    id: res.hits.id,
                     data: {
                         my_id: res.hits.id,
                         my_type: "pp_doc",
