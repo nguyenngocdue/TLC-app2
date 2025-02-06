@@ -45,7 +45,10 @@
             },
             success: (res) => {
                 const newNode = tree.create_node(node, {
-                    data: {my_id: res.hits.id},
+                    data: {
+                        my_id: res.hits.id,
+                        my_type: "pp_doc",
+                    },
                     text: "New Procedure #" + res.hits.id,
                     icon: "fa-regular fa-file text-blue-400"
                 })
@@ -67,6 +70,18 @@
         })
     }
 
+    function ajaxRenameFolder(nodeId, newName){
+        $.ajax({
+            url: "{{$updateFolderRoute}}",
+            method: "POST",
+            data: {
+                id: nodeId,
+                name: newName,
+            },          
+            error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
+        })
+    }
+
     function ajaxDeleteDoc(nodeId, owner_id){
         $.ajax({
             url: "{{$updateDocRoute}}",
@@ -76,7 +91,21 @@
                 deleted_by: owner_id,
                 deleted_at: new Date().toISOString(),
             },
-            success: (res) => toastr.success("The Document has been Deleted."),
+            success: (res) => toastr.success("The Document has been deleted."),
+            error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
+        })
+    }
+
+    function ajaxDeleteFolder(nodeId, owner_id){
+        $.ajax({
+            url: "{{$updateFolderRoute}}",
+            method: "POST",
+            data: {
+                id: nodeId,
+                deleted_by: owner_id,
+                deleted_at: new Date().toISOString(),
+            },
+            success: (res) => toastr.success("The Folder has been deleted."),
             error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
         })
     }
@@ -136,7 +165,13 @@
                                 },
                                 "Delete": {
                                     "label": "Delete Folder",
-                                    "action": (obj) => tree.delete_node(node),                            
+                                    "action": (obj) => {
+                                        // console.log("Delete", node);
+                                        Swal.fire(actionConfirmObject([node.text], "DELETE"))
+                                        .then((result) => {
+                                            if (result.isConfirmed) tree.delete_node(node);
+                                        });
+                                    },
                                     "_disabled": function(node) {
                                         // Disable delete for root nodes
                                         return node.parent == "#"; 
@@ -157,7 +192,7 @@
                                 "Delete": {
                                     "label": "Delete",
                                     "action": (obj) => {
-                                        console.log("Delete", node);
+                                        // console.log("Delete", node);
                                         Swal.fire(actionConfirmObject([node.text], "DELETE"))
                                         .then((result) => {
                                             if (result.isConfirmed) tree.delete_node(node);
@@ -210,10 +245,19 @@
         $('#json_tree_1').on('rename_node.jstree', function(e, data) {
             var newName = data.text; // New name after renaming
             var docId = data.node?.data?.my_id
-            console.log("Renaming", data, newName);
-            if(docId) {
-                ajaxRenameDoc(docId, newName);
-                // $('#json_tree_1').jstree(true).refresh_node(data.node.parent);
+            var myType = data.node?.data?.my_type
+            // console.log("Renaming", newName, docId, myType);
+
+            switch(myType){
+                case "pp_doc":
+                    if(docId) ajaxRenameDoc(docId, newName);
+                    break;
+                case "pp_folder":
+                    if(docId) ajaxRenameFolder(docId, newName);
+                    break;
+                default:
+                    console.log("Unknown how to Rename", myType);
+                    break;
             }
         });
 
@@ -223,9 +267,19 @@
 
         $('#json_tree_1').on('delete_node.jstree', function(e, data) {
             const id = data.node?.data?.my_id
-            console.log("deleting",id);
-            if(id) ajaxDeleteDoc(id, owner_id);
-            console.log("Deleted", id);
+            var myType = data.node?.data?.my_type
+            // console.log("Deleting",id);
+            switch(myType){
+                case "pp_doc":
+                    if(id) ajaxDeleteDoc(id, owner_id);
+                    break;
+                case "pp_folder":
+                    if(id) ajaxDeleteFolder(id, owner_id);
+                    break;
+                default:
+                    console.log("Unknown how to Delete", myType);
+                    break;
+            }
         });
     });
 </script>

@@ -49,6 +49,7 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
                 'draggable' => $folder->draggable,
                 'droppable' => $folder->droppable,
                 "my_type" => "pp_folder",
+                "my_id" => $folder->id,
             ];
             $items[] = $item;
         }

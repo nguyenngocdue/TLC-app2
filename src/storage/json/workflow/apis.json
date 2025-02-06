@@ -381,6 +381,12 @@
     "loggers": {
         "name": "loggers"
     },
+    "mec_books": {
+        "name": "mec_books"
+    },
+    "pdf_files": {
+        "name": "pdf_files"
+    },
     "pj_drawing_arc_types": {
         "name": "pj_drawing_arc_types"
     },
@@ -434,6 +440,11 @@
         "updateShortSingle": "true",
         "uploadFileShortSingle": "true",
         "deleteFileShortSingle": "true"
+    },
+    "pp_folders": {
+        "name": "pp_folders",
+        "createNewShort": "true",
+        "updateShortSingle": "true"
     },
     "priorities": {
         "name": "priorities"

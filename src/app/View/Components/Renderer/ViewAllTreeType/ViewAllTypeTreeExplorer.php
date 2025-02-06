@@ -24,6 +24,7 @@ abstract class ViewAllTypeTreeExplorer extends Component
             'type' => $this->type,
             'createNewDocShortRoute' => Route::has($this->type . ".createNewShort") ? route($this->type . ".createNewShort") : null,
             'updateDocRoute' => Route::has($this->type . ".updateShortSingle") ? route($this->type . ".updateShortSingle") : null,
+            'updateFolderRoute' => route("pp_folders.updateShortSingle"),
             'ownerId' => CurrentUser::id(),
             'showSearch' => $this->showSearch,
         ]);
