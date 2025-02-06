@@ -22,8 +22,8 @@ abstract class ViewAllTypeTreeExplorer extends Component
             'tree' => $this->getTree(),
             'route' => $this->getApiRoute(),
             'type' => $this->type,
-            'createNewShortRoute' => Route::has($this->type . ".createNewShort") ? route($this->type . ".createNewShort") : null,
-            'updateRoute' => Route::has($this->type . ".updateShortSingle") ? route($this->type . ".updateShortSingle") : null,
+            'createNewDocShortRoute' => Route::has($this->type . ".createNewShort") ? route($this->type . ".createNewShort") : null,
+            'updateDocRoute' => Route::has($this->type . ".updateShortSingle") ? route($this->type . ".updateShortSingle") : null,
             'ownerId' => CurrentUser::id(),
             'showSearch' => $this->showSearch,
         ]);

@@ -33,19 +33,21 @@
 </script>
 
 <script>
-    function ajaxCreateNewItem(tree, node, owner_id){
+    function ajaxCreateNewDoc(tree, node, owner_id){
         $.ajax({
-            url: "{{$createNewShortRoute}}",
+            url: "{{$createNewDocShortRoute}}",
             method: "POST",
-            data: {
-                department_id: node.data.item_id,
+            data: {                
+                parent_type: node.data.parent_type,
+                parent_id: node.data.parent_id,
                 name: "New Procedure",
                 owner_id,
             },
             success: (res) => {
                 const newNode = tree.create_node(node, {
-                    data: {item_id: res.hits.id},
-                    text: "New Procedure",
+                    data: {my_id: res.hits.id},
+                    text: "New Procedure #" + res.hits.id,
+                    icon: "fa-regular fa-file text-blue-400"
                 })
                 tree.edit(newNode)
             },
@@ -53,27 +55,28 @@
         })
     }
 
-    function ajaxRenameItem(nodeId, newName){
+    function ajaxRenameDoc(nodeId, newName){
         $.ajax({
-            url: "{{$updateRoute}}",
+            url: "{{$updateDocRoute}}",
             method: "POST",
             data: {
                 id: nodeId,
                 name: newName,
-            },
+            },          
             error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
         })
     }
 
-    function ajaxDeleteItem(nodeId, owner_id){
+    function ajaxDeleteDoc(nodeId, owner_id){
         $.ajax({
-            url: "{{$updateRoute}}",
+            url: "{{$updateDocRoute}}",
             method: "POST",
             data: {
                 id: nodeId,
                 deleted_by: owner_id,
                 deleted_at: new Date().toISOString(),
             },
+            success: (res) => toastr.success("The Document has been Deleted."),
             error: (jqXHR) => toastr.error(jqXHR.responseJSON.message),
         })
     }
@@ -84,7 +87,7 @@
     const owner_id = {{$ownerId}};
     const showSearch = {{$showSearch}} ? 1 : 0;
     $(function () { 
-        const plugins = ["contextmenu", "wholerow",/* "dnd" */]
+        const plugins = ["sort", "contextmenu", "wholerow",/* "dnd" */]
         if(showSearch) plugins.push("search")
         $('#json_tree_1').jstree({ 
             core : {
@@ -100,31 +103,82 @@
                     }
                     return true; // Allow all other operations
                 },
+                // sort: function(a, b) {
+                //     console.log(a, b);
+                //     return this.get_text(a).toLowerCase() > this.get_text(b).toLowerCase() ? 1 : -1;
+                // }
             },
             plugins,
             contextmenu: {
                 items: function(node) {
                     var tree = $("#json_tree_1").jstree(true);
                     // const menu = {}
-                    
-                    return {
-                        "Create": {
-                            "label": "Create New",
-                            "action": (obj) => ajaxCreateNewItem(tree, node, owner_id),                            
-                        },
-                        "Rename": {
-                            "label": "Rename",
-                            "action": (obj) => tree.edit(node),
-                        },
-                        "Delete": {
-                            "label": "Delete",
-                            "action": (obj) => tree.delete_node(node),                            
-                            "_disabled": function(node) {
-                                // Disable delete for root nodes
-                                return node.parent == "#"; 
+                    console.log(node);
+                    switch( node.data.my_type)
+                    {
+                        case "department":  
+                            return {
+                                "Create": {
+                                    "label": "Create New Procedure",
+                                    "action": (obj) => ajaxCreateNewDoc(tree, node, owner_id),
+                                },                                
                             }
-                        }
-                    }
+                        break;
+                        case "pp_folder":
+                            return {
+                                "Create": {
+                                    "label": "Create New Procedure",
+                                    "action": (obj) => ajaxCreateNewDoc(tree, node, owner_id),
+                                },
+                                "Rename": {
+                                    "label": "Rename Folder",
+                                    "action": (obj) => tree.edit(node),
+                                },
+                                "Delete": {
+                                    "label": "Delete Folder",
+                                    "action": (obj) => tree.delete_node(node),                            
+                                    "_disabled": function(node) {
+                                        // Disable delete for root nodes
+                                        return node.parent == "#"; 
+                                    }
+                                }
+                            }
+                        break;
+                        case "pp_doc":
+                            return {
+                                // "Create": {
+                                //     "label": "Create New Document",
+                                //     "action": (obj) => ajaxCreateNewDoc(tree, node, owner_id),                            
+                                // },
+                                "Rename": {
+                                    "label": "Rename",
+                                    "action": (obj) => tree.edit(node),
+                                },
+                                "Delete": {
+                                    "label": "Delete",
+                                    "action": (obj) => {
+                                        console.log("Delete", node);
+                                        Swal.fire(actionConfirmObject([node.text], "DELETE"))
+                                        .then((result) => {
+                                            if (result.isConfirmed) tree.delete_node(node);
+                                        });
+                                    },
+                                    "_disabled": function(node) {
+                                        // Disable delete for root nodes
+                                        return node.parent == "#"; 
+                                    }
+                                }
+                            }
+                        break;
+                        default:
+                            return {
+                                "Create": {
+                                    "label": "No menu for [" + node.data.my_type + "]",
+                                    "action": (obj) => ajaxCreateNewDoc(tree, node, owner_id),                            
+                                },
+                            }
+                            break;
+                    }                    
                 }
             }
         });
@@ -155,7 +209,12 @@
 
         $('#json_tree_1').on('rename_node.jstree', function(e, data) {
             var newName = data.text; // New name after renaming
-            if(data.node?.data?.item_id) ajaxRenameItem(data.node.data.item_id, newName);
+            var docId = data.node?.data?.my_id
+            console.log("Renaming", data, newName);
+            if(docId) {
+                ajaxRenameDoc(docId, newName);
+                // $('#json_tree_1').jstree(true).refresh_node(data.node.parent);
+            }
         });
 
         $('#json_tree_1').on('move_node.jstree', function(e, data) {
@@ -163,9 +222,9 @@
         });
 
         $('#json_tree_1').on('delete_node.jstree', function(e, data) {
-            const id = data.node?.data?.item_id
+            const id = data.node?.data?.my_id
             console.log("deleting",id);
-            if(id) ajaxDeleteItem(id, owner_id);
+            if(id) ajaxDeleteDoc(id, owner_id);
             console.log("Deleted", id);
         });
     });

@@ -45,7 +45,11 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
                 $item['parent'] = '#';
             }
             $item['state'] = ['opened' => $folder->opened];
-            $item['data'] = ['draggable' => $folder->draggable, 'droppable' => $folder->droppable];
+            $item['data'] = [
+                'draggable' => $folder->draggable,
+                'droppable' => $folder->droppable,
+                "my_type" => "pp_folder",
+            ];
             $items[] = $item;
         }
 
@@ -61,12 +65,14 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
             $avatar =  $url ? app()->pathMinio() . $url : '/images/avatar.jpg';
             $src = "<img class='rounded-full ml-2 mr-2' heigh=24 width=24 src='" . $avatar . "' />";
             $item['id'] = $type . "|||" . $department->id;
-            $item['text'] = "<span class='flex'>" . $src . $department->name . "</span>";
+            // $item['text'] = $department->name;
+            $item['text'] = "<span class='flex' nameForSort='" . $department->name . "'>" . $src . $department->name . "</span>";
             $item['parent'] = 'pp_folder|||1300';
             $item['data'] = [
-                "item_id" => $department->id,
-                "parent_01" => 'department',
+                "parent_id" => $department->id,
+                "parent_type" => "App\\Models\\Department",
                 "draggable" => false,
+                "my_type" => "department",
             ];
             $item['icon'] = false;
             $items[] = $item;
@@ -80,6 +86,7 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
     protected function getDocs()
     {
         $docs = Pp_doc::query()
+            ->orderBy('name')
             ->get();
 
         $items = [];
@@ -89,6 +96,10 @@ class PpProcedurePolicy extends ViewAllTypeTreeExplorer
             $item['text'] = $doc->name;
             $item['parent'] = $parent_type . '|||' . $doc->parent_id;
             $item['icon'] = "fa-regular fa-file text-blue-400";
+            $item['data'] = [
+                "my_type" => "pp_doc",
+                "my_id" => $doc->id,
+            ];
             $items[] = $item;
         }
 
