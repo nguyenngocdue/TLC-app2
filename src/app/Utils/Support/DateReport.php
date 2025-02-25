@@ -55,7 +55,7 @@ class DateReport
     {
         $currentYear = date('Y');
         $currentMonth = date('m');
-        return $separate ?
+        return $separate ? 
             array('year' => $currentYear, 'month' => $currentMonth) :
             $currentYear . '-' . $currentMonth;
     }
