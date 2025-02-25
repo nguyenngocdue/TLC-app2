@@ -2,4 +2,4 @@
 /.vscode
 /mysql
 /src
-/.docker
+#/.docker
